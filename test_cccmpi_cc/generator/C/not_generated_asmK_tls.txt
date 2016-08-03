@@ -1,0 +1,479 @@
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL)
+int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
+               void *attribute_val_out, int *flag)
+{return 0;}
+#endif
+
+void wrapper_user_function(void* invec, void* inoutvec, int* len,R_MPI_Datatype* type)
+{
+    A_MPI_Datatype datatype_tmp;
+    datatype_conv_r2a( &datatype_tmp,type);
+
+    (ptr_user_func)(invec, inoutvec, len, &datatype_tmp);
+}
+
+static void wrapper_comm_handler_function(R_MPI_Comm* comm, int* err, ...)
+{
+    A_MPI_Comm comm_tmp;
+    comm_conv_r2a_static(&comm_tmp,comm);
+
+    (ptr_comm_fn_handler)(&comm_tmp, err, "", NULL);
+}
+
+static void wrapper_handler_function(R_MPI_Comm* comm, int* err, ...)
+{
+    A_MPI_Handler_function *hf;
+    A_MPI_Comm comm_tmp;
+    comm_conv_r2a_static(&comm_tmp,comm);
+    communicator_fn_translation_get(comm_tmp, &hf);
+
+    hf(&comm_tmp, err, "", NULL);
+}
+int print(FILE* stream, const char* format, ...)
+{
+    int ret_status = 0;
+#ifdef DEBUG
+    va_list args;
+    va_start(args,format);
+    ret_status = fprintf(stream, format, args);
+    va_end(args);
+#endif 
+    return ret_status;
+}
+
+typedef struct {
+    A_MPI_Copy_function* cp_function;
+    A_MPI_Delete_function* del_function;
+} myKeyval_functions_t;
+
+typedef struct {
+    int keyval;
+    myKeyval_functions_t* functions;
+    UT_hash_handle hh;
+} myKeyval_translation_t;
+
+typedef struct {
+    myKeyval_translation_t* table;
+    pthread_mutex_t lock;
+} myKeyval_translation_table_t;
+
+static myKeyval_translation_table_t myKeyval_table = { NULL,
+    PTHREAD_MUTEX_INITIALIZER
+};
+
+static myKeyval_translation_table_t* get_myKeyval_table() {
+    return &myKeyval_table;
+}
+
+static inline void myKeyval_read_lock() {
+    pthread_mutex_lock(&get_myKeyval_table()->lock);
+}
+
+static inline void myKeyval_read_unlock() {
+    pthread_mutex_unlock(&get_myKeyval_table()->lock);
+}
+
+static inline void myKeyval_write_lock() {
+    pthread_mutex_lock(&get_myKeyval_table()->lock);
+}
+
+static inline void myKeyval_write_unlock() {
+    pthread_mutex_unlock(&get_myKeyval_table()->lock);
+}
+static void myKeyval_translation_add(int keyval,
+        myKeyval_functions_t* functions)
+{
+    myKeyval_translation_t* conv;
+    conv = malloc(sizeof(myKeyval_translation_t));
+    conv->keyval = keyval;
+    conv->functions = functions;
+    myKeyval_write_lock();
+    HASH_ADD_INT(get_myKeyval_table()->table, keyval, conv);
+    HASH_FIND_INT(get_myKeyval_table()->table, &keyval, conv);
+    assert(conv != NULL);
+    print(stderr, "\t\tREGISTER keyval %d -> (%p, %p)\n", keyval,
+            functions->cp_function, functions->del_function);
+    myKeyval_write_unlock();
+}
+
+static myKeyval_functions_t* myKeyval_translation_get(int keyval)
+{
+    myKeyval_functions_t* functions;
+    myKeyval_translation_t* conv;
+    myKeyval_read_lock();
+    HASH_FIND_INT(get_myKeyval_table()->table, &keyval, conv);
+    if (conv != NULL)
+    {
+        functions = conv->functions;
+        print(stderr, "\t\tkeyval %d -> (%p, %p)\n", keyval, functions->cp_function,
+                functions->del_function);
+    }
+    else
+    {
+        return NULL;
+    }
+    myKeyval_read_unlock();
+    return functions;
+}
+
+static void myKeyval_translation_del(int keyval)
+{
+    myKeyval_translation_t* conv;
+    myKeyval_write_lock();
+    HASH_FIND_INT(get_myKeyval_table()->table, &keyval, conv);
+    assert(conv != NULL);
+    HASH_DEL(get_myKeyval_table()->table, conv);
+    print(stderr, "\t\tDELETE keyval %d\n", keyval);
+    myKeyval_write_unlock();
+    free(conv);
+}
+static int wrapper_copy_function(R_MPI_Comm comm, int keyval, void* extra_state,
+        void* attribute_val_in, void* attribute_val_out, int* flag)
+{
+    A_MPI_Comm comm_tmp;
+    comm_conv_r2a(&comm_tmp, &comm);
+    A_MPI_Copy_function* ptr_copy_func = myKeyval_translation_get(keyval)->cp_function;
+    int res = (ptr_copy_func)(comm_tmp, keyval, extra_state, attribute_val_in,attribute_val_out, flag);
+    ptr_copy_func = NULL;
+    return  error_code_conv_r2a(res);
+}
+
+
+static int wrapper_delete_function(R_MPI_Comm comm, int keyval,
+        void* attribute_val, void* extra_state)
+{
+    A_MPI_Comm comm_tmp;
+    comm_conv_r2a(&comm_tmp, &comm);
+    A_MPI_Delete_function* ptr_delete_func=myKeyval_translation_get(keyval)->del_function;
+    int res = (ptr_delete_func)(comm_tmp, keyval, attribute_val, extra_state);
+    ptr_delete_func = NULL;
+    return error_code_conv_r2a(res);
+}
+
+__asm__(
+".global PMPI_Comm_create_keyval\n"
+".weak MPI_Comm_create_keyval\n"
+".set MPI_Comm_create_keyval,PMPI_Comm_create_keyval\n"
+".extern in_w\n"
+".extern A_MPI_Comm_create_keyval\n"
+".extern R_MPI_Comm_create_keyval\n"
+".type PMPI_Comm_create_keyval,@function\n"
+".text\n"
+"PMPI_Comm_create_keyval:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x20, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+"mov %rdx, -0x18(%rbp)\n"
+"mov %rcx, -0x20(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"mov -0x18(%rbp), %rdx\n"
+"mov -0x20(%rbp), %rcx\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Comm_create_keyval\n"
+"jmp *A_MPI_Comm_create_keyval@GOTPCREL(%rip)\n"
+"inwrap_MPI_Comm_create_keyval:\n"
+"jmp *R_MPI_Comm_create_keyval@GOTPCREL(%rip)\n"
+".size PMPI_Comm_create_keyval,.-PMPI_Comm_create_keyval\n"
+);
+
+
+
+int (*LOCAL_MPI_Comm_create_keyval)(R_MPI_Comm_copy_attr_function *,R_MPI_Delete_function *,int *,void * );
+
+int A_MPI_Comm_create_keyval(A_MPI_Comm_copy_attr_function * copy_fn,A_MPI_Comm_delete_attr_function * delete_fn,int * keyval,void * extra_state)
+{     
+#ifdef DEBUG
+    printf("entre : A_MPI_Comm_create_keyval\n");
+#endif
+    myKeyval_functions_t* functions = NULL;
+    R_MPI_Copy_function * copy_fn_tmp;
+    R_MPI_Delete_function* delete_fn_tmp;
+    if ((void*)copy_fn == (void*)A_MPI_NULL_COPY_FN)
+    { 
+        copy_fn_tmp = R_MPI_NULL_COPY_FN;
+    }
+    else if((void*) copy_fn == A_MPI_COMM_DUP_FN)
+    { 
+        copy_fn_tmp = R_MPI_COMM_DUP_FN;
+    }
+    else
+    { 
+        copy_fn_tmp = wrapper_copy_function;
+    }
+    if(delete_fn == ((A_MPI_Delete_function*) A_MPI_NULL_DELETE_FN)) {
+        delete_fn_tmp = R_MPI_NULL_DELETE_FN;
+    }
+    else
+    { 
+        delete_fn_tmp = wrapper_delete_function;
+    }
+
+    int ret_tmp= LOCAL_MPI_Comm_create_keyval( copy_fn_tmp, delete_fn_tmp, keyval, extra_state);
+
+    functions = (myKeyval_functions_t*) malloc(sizeof(myKeyval_functions_t));
+    functions->cp_function = copy_fn;
+    functions->del_function = delete_fn;
+    myKeyval_translation_add(*keyval, functions);
+#ifdef DEBUG
+    printf("sort : A_MPI_Comm_create_keyval\n");
+#endif
+
+    return error_code_conv_r2a(ret_tmp);
+}
+
+int R_MPI_Comm_create_keyval(R_MPI_Copy_function * copy_fn,R_MPI_Delete_function * delete_fn,int * keyval,void * extra_state)
+{
+#ifdef DEBUF
+ printf("entre : R_MPI_Comm_create_keyval\n");
+#endif
+ int ret_tmp = LOCAL_MPI_Comm_create_keyval( copy_fn, delete_fn, keyval, extra_state);
+#ifdef DEBUG
+ printf("sort : R_MPI_Comm_create_keyval\n");
+#endif
+ return ret_tmp;
+}
+
+__asm__(
+".global PMPI_Keyval_create\n"
+".weak MPI_Keyval_create\n"
+".set MPI_Keyval_create,PMPI_Keyval_create\n"
+".extern in_w\n"
+".extern A_MPI_Keyval_create\n"
+".extern R_MPI_Keyval_create\n"
+".type PMPI_Keyval_create,@function\n"
+".text\n"
+"PMPI_Keyval_create:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x20, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+"mov %rdx, -0x18(%rbp)\n"
+"mov %rcx, -0x20(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"mov -0x18(%rbp), %rdx\n"
+"mov -0x20(%rbp), %rcx\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Keyval_create\n"
+"jmp *A_MPI_Keyval_create@GOTPCREL(%rip)\n"
+"inwrap_MPI_Keyval_create:\n"
+"jmp *R_MPI_Keyval_create@GOTPCREL(%rip)\n"
+".size PMPI_Keyval_create,.-PMPI_Keyval_create\n"
+);
+
+
+int (*LOCAL_MPI_Keyval_create)(R_MPI_Copy_function *,R_MPI_Delete_function *,int *,void *);
+
+int A_MPI_Keyval_create(A_MPI_Copy_function * copy_fn,A_MPI_Delete_function * delete_fn,int * keyval,void * extra_state)
+{   
+#ifdef DEBUG
+    printf("entre : A_MPI_Keyva_create\n");
+#endif
+    myKeyval_functions_t* functions = NULL;
+    R_MPI_Copy_function * copy_fn_tmp;
+    R_MPI_Delete_function* delete_fn_tmp;
+    if ((void*)copy_fn == (void*)A_MPI_NULL_COPY_FN)
+    { 
+        copy_fn_tmp = R_MPI_NULL_COPY_FN;
+    }
+    else if((void*) copy_fn == A_MPI_COMM_DUP_FN)
+    { 
+        copy_fn_tmp = R_MPI_COMM_DUP_FN;
+    }
+    else
+    { 
+        copy_fn_tmp = wrapper_copy_function;
+    }
+    if(delete_fn == ((A_MPI_Delete_function*) A_MPI_NULL_DELETE_FN)) {
+        delete_fn_tmp = R_MPI_NULL_DELETE_FN;
+    }
+    else
+    { 
+        delete_fn_tmp = wrapper_delete_function;
+    }
+
+    int ret_tmp= LOCAL_MPI_Keyval_create( copy_fn_tmp, delete_fn_tmp, keyval, extra_state);
+
+    functions = (myKeyval_functions_t*) malloc(sizeof(myKeyval_functions_t));
+    functions->cp_function = copy_fn;
+    functions->del_function = delete_fn;
+    myKeyval_translation_add(*keyval, functions);
+#ifdef DEBUG
+    printf("sort : A_MPI_Keyval_create\n");
+#endif
+
+    return error_code_conv_r2a(ret_tmp);
+}
+
+int R_MPI_Keyval_create(R_MPI_Copy_function * copy_fn,R_MPI_Delete_function * delete_fn,int * keyval,void * extra_state)
+{
+#ifdef DEBUG
+    printf("entre : R_MPI_create_keyval\n");
+#endif
+    int ret_tmp = LOCAL_MPI_Keyval_create(copy_fn, delete_fn, keyval, extra_state);
+#ifdef DEBUG    
+    printf("sort: R_MPI_create_keyval\n");
+#endif
+    return ret_tmp;
+}
+
+
+__asm__(
+".global PMPI_Comm_free_keyval\n"
+".weak MPI_Comm_free_keyval\n"
+".set MPI_Comm_free_keyval,PMPI_Comm_free_keyval\n"
+".extern in_w\n"
+".extern A_MPI_Comm_free_keyval\n"
+".extern R_MPI_Comm_free_keyval\n"
+".type PMPI_Comm_free_keyval,@function\n"
+".text\n"
+"PMPI_Comm_free_keyval:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x08, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Comm_free_keyval\n"
+"jmp *A_MPI_Comm_free_keyval@GOTPCREL(%rip)\n"
+"inwrap_MPI_Comm_free_keyval:\n"
+"jmp *R_MPI_Comm_free_keyval@GOTPCREL(%rip)\n"
+".size PMPI_Comm_free_keyval,.-PMPI_Comm_free_keyval\n"
+);
+
+
+int (*LOCAL_MPI_Comm_free_keyval)(int *);
+
+int A_MPI_Comm_free_keyval(int * comm_keyval)
+{
+#ifdef DEBUG
+    printf("entre : A_MPI_Comm_free_keyval\n");
+#endif
+
+    int ret_tmp = LOCAL_MPI_Comm_free_keyval(comm_keyval);
+
+    *comm_keyval=A_MPI_KEYVAL_INVALID;
+#ifdef DEBUG
+    printf("sort : A_MPI_Comm_free_keyval\n");
+#endif      
+    return error_code_conv_r2a(ret_tmp);
+}
+
+int R_MPI_Comm_free_keyval(int * comm_keyval)
+{
+#ifdef DEBUG
+     printf("entre : R_MPI_Comm_free_keyval\n");
+#endif
+     int ret_tmp = LOCAL_MPI_Comm_free_keyval(comm_keyval);
+#ifdef DEBUG
+     printf("sort : R_MPI_Comm_free_keyval\n");
+#endif
+     return ret_tmp;
+}
+
+__asm__(
+".global PMPI_Keyval_free\n"
+".weak MPI_Keyval_free\n"
+".set MPI_Keyval_free,PMPI_Keyval_free\n"
+".extern in_w\n"
+".extern A_MPI_Keyval_free\n"
+".extern R_MPI_Keyval_free\n"
+".type PMPI_Keyval_free,@function\n"
+".text\n"
+"PMPI_Keyval_free:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x08, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Keyval_free\n"
+"jmp *A_MPI_Keyval_free@GOTPCREL(%rip)\n"
+"inwrap_MPI_Keyval_free:\n"
+"jmp *R_MPI_Keyval_free@GOTPCREL(%rip)\n"
+".size PMPI_Keyval_free,.-PMPI_Keyval_free\n"
+);
+
+int (*LOCAL_MPI_Keyval_free)(int *);
+
+int A_MPI_Keyval_free(int * keyval)
+{
+#ifdef DEBUG
+    printf("entre : A_MPI_Keyval_free\n");
+#endif
+    int ret_tmp =  LOCAL_MPI_Keyval_free(keyval);
+    *keyval=A_MPI_KEYVAL_INVALID;
+#ifdef DEBUG
+    printf("entre : A_MPI_Keyval_free\n");
+#endif
+    return error_code_conv_r2a(ret_tmp);
+}
+
+int R_MPI_Keyval_free(int * keyval)
+{
+#ifdef DEBUG
+      printf("entre : R_MPI_Keyval_free\n");
+#endif      
+      int ret_tmp = LOCAL_MPI_Keyval_free(keyval);
+#ifdef DEBUG      
+      printf("sort : R_MPI_Keyval_free\n");
+#endif      
+      return ret_tmp;
+}
+int wrapper_datarep_read_conversion_fn(void * userbuf, R_MPI_Datatype datatype, int count, void *filebuf,
+        R_MPI_Offset position, void *extra_state)
+{
+    A_MPI_Datatype datatype_tmp;
+    datatype_conv_r2a(&datatype_tmp,&datatype);
+
+    A_MPI_Offset offset_tmp = (A_MPI_Offset) position;
+    int ret_tmp = (ptr_read_conversion_fn)(userbuf, datatype_tmp, count, filebuf, offset_tmp, extra_state);
+    return ret_tmp;
+}
+
+int wrapper_datarep_write_conversion_fn(void * userbuf, R_MPI_Datatype datatype, int count, void *filebuf,
+        R_MPI_Offset position, void *extra_state)
+{
+    A_MPI_Datatype datatype_tmp;
+    datatype_conv_r2a(&datatype_tmp,&datatype);
+    A_MPI_Offset offset_tmp = (A_MPI_Offset) position;
+    int ret_tmp = (ptr_write_conversion_fn)(userbuf, datatype_tmp, count, filebuf, offset_tmp, extra_state);
+    return ret_tmp;
+}
+
+int wrapper_datarep_extent_fn(R_MPI_Datatype datatype, R_MPI_Aint *file_extent, void* extra_state)
+{
+    A_MPI_Datatype datatype_tmp;
+    datatype_conv_r2a(&datatype_tmp,&datatype);
+    A_MPI_Aint *file_extent_tmp = (A_MPI_Aint*) file_extent;
+    int ret_tmp = (ptr_extent_fn)(datatype_tmp, file_extent_tmp, extra_state);
+    return ret_tmp;
+}

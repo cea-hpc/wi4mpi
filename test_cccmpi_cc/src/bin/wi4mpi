@@ -1,0 +1,214 @@
+#!/bin/sh
+
+############################# Wi4MPI License ###########################
+# `04/04/2016`                                                         #
+# Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
+#                                                                      #
+# IDDN.FR.001.210022.001.S.P.2014.000.10800                            #
+# This file is part of the Wi4MPI library.                             #
+#                                                                      #
+# This software is governed by the CeCILL-C license under French law   #
+# and abiding by the rules of distribution of free software. You can   #
+# use, modify and/ or redistribute the software under the terms of     #
+# the CeCILL-C license as circulated by CEA, CNRS and INRIA at the     #
+# following URL http://www.cecill.info.                                #
+#                                                                      #
+# The fact that you are presently reading this means that you have     #
+# had knowledge of the CeCILL-C license and that you accept its        #
+# terms.                                                               #
+#                                                                      #
+# Authors:                                                             #
+#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
+#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#                                                                      #
+########################################################################
+
+
+# TODO: CXX language
+usage() {
+
+    cat <<EOF
+Usage: [MPIRUN] [MPIRUN_OPTION]... wi4mpi [option].. PROGRAM [PROGRAM_OPTION]...
+
+Dynamically substitute in PROGRAM 
+all MPI calls from the MPI implementation "FROM" 
+with their corresponding call in the "TARGET" MPI implementation.
+
+Option:
+    -h           the help message
+    -f FROM      the MPI implentation from which PROGRAM was compiled with
+    -t TARGET    the MPI implentation to which PROGRAM will be run
+    -l LANGUAGE  the PROGRAM's Language
+    -v           controls the verbosity
+
+Supported values:
+    FROM         bullxmpi,openmpi,intelmpi  (no default value)
+    TARGET       bullxmpi,openmpi,intelmpi  (no default value)
+    LANGUAGE     C,C++,FORTRAN              (default value is "C")
+
+Influential environment variables:
+
+  OPENMPI_ROOT
+  INTELMPI_ROOT
+  BULLXMPI_ROOT
+  MPICH_ROOT  
+
+EOF
+
+}
+
+VERBOSE=""
+LANGUAGE="C"
+WI4MPI_LIBEXEC=$( readlink -e $(dirname $0)/../libexec/wi4mpi )
+WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
+WI4MPI_UCONFIG="~/.wi4mpi.cfg"
+
+[[ -f $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
+[[ -f $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
+
+OPENMPI_ROOT=${OPENMPI_ROOT:-${OPENMPI_DEFAULT_ROOT}}
+INTELMPI_ROOT=${INTELMPI_ROOT:-${INTELMPI_DEFAULT_ROOT}}
+BULLXMPI_ROOT=${BULLXMPI_ROOT:-${BULLXMPI_DEFAULT_ROOT}}
+MPICH_ROOT=${MPICH_ROOT:-${MPICH_DEFAULT_ROOT}}
+
+while getopts "f:t:hv" Option; do
+  case "$Option" in
+    h ) usage; exit 0 ;;
+    v ) VERBOSE="1" ;;
+    f ) FROM=$OPTARG ;;
+    t ) TARGET=$OPTARG ;;
+    * ) echo "$0: unrecognised option -${Option}." >&2 
+      usage
+      exit 1 ;;
+  esac
+done
+shift $(($OPTIND - 1))
+
+# No argument print help and exit
+[[ $# -eq 0 ]] && usage && exit 0 
+
+#echo 'FROM:'; echo $FROM
+#echo 'TARGET:'; echo $TARGET
+
+case $FROM in
+    bullxmpi) FROM_FAMILY="OMPI" ;;
+    openmpi)  FROM_FAMILY="OMPI" ;;
+    intelmpi) FROM_FAMILY="INTEL" ;;
+    mpich)    FROM_FAMILY="INTEL" ;;
+    *) echo "Error: Unsupported Origin MPI stack." >&2 ; exit 1;
+esac
+
+case $TARGET in
+    bullxmpi) 
+	TARGET_FAMILY="OMPI" 
+	TRUE_MPI_LIB=$BULLXMPI_ROOT/lib/libmpi.so 
+	TRUE_MPI_F_LIB=$BULLXMPI_ROOT/lib/libmpi_f77.so
+	;;
+    openmpi)  
+	TARGET_FAMILY="OMPI" 
+	TRUE_MPI_LIB=$OPENMPI_ROOT/lib/libmpi.so 
+	TRUE_MPI_F_LIB=$OPENMPI_ROOT/lib/libmpi_mpifh.so
+	;;
+    intelmpi) 
+	TARGET_FAMILY="INTEL"
+	TRUE_MPI_LIB=$INTELMPI_ROOT/lib64/libmpi.so
+	TRUE_MPI_F_LIB=$INTELMPI_ROOT/lib64/libmpifort.so
+	;;
+    mpich)    
+	TARGET_FAMILY="INTEL"
+	TRUE_MPI_LIB=$MPICH_ROOT/lib64/libmpi.so 
+	TRUE_MPI_F_LIB=$MPICH_ROOT/lib64/libmpifort.so
+	;;
+    *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
+esac
+
+
+echo "Wrapping the calls from $FROM to $TARGET ."
+libwi4mpi=${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so
+[[ ! -f $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
+[[ ! -f ${TRUE_MPI_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
+[[ ! -f ${TRUE_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+
+export TRUE_MPI_F_LIB
+export TRUE_MPI_LIB
+export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${TRUE_MPI_F_LIB} ${TRUE_MPI_LIB}"
+
+if [[ -n "$VERBOSE" ]]; then
+    echo "export TRUE_MPI_F_LIB=${TRUE_MPI_F_LIB}"
+    echo "export TRUE_MPI_LIB=${TRUE_MPI_LIB}"
+    echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+fi
+
+# replacing libs cxx link to the binary file by empty libs from fakelibCXX in order to avoid conflicts (segfault)
+libfakedir_cxx=${WI4MPI_LIBEXEC}/fakelibCXX/
+[[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; } 
+export LD_LIBRARY_PATH=${libfakedir_cxx}:$LD_LIBRARY_PATH
+# replacing libs link to the binary file which are not defined by the target MPI lib by an empty library from fakelib_${FROM_FAMILY}
+if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
+    libfakedir=${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/
+    [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdir." >&2 ; exit 1; } 
+          export LD_LIBRARY_PATH=${libfakedir}:$LD_LIBRARY_PATH
+fi
+
+[[ -n "$VERBOSE" ]] && echo "C :export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+
+#LANGUAGE="${LANGUAGE^^}"  # convert to uppercase
+#echo "Wrapping the calls from $FROM to $TARGET for the $LANGUAGE LANGUAGE."
+#case $LANGUAGE in
+#    C | C++ )
+#	libwi4mpi=${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so
+#	[[ ! -f $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
+#	[[ ! -f ${TRUE_MPI_LIB} ]] && { echo "Error: could not find the target mpi library." >&2 ; exit 1; }
+#	
+#	export TRUE_MPI_F_LIB
+#   export TRUE_MPI_LIB
+#	export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${TRUE_MPI_F_LIB} ${TRUE_MPI_LIB}"
+#
+#	if [[ -n "$VERBOSE" ]]; then
+#	    echo "export TRUE_MPI_F_LIB=${TRUE_MPI_F_LIB}"
+#	    echo "export TRUE_MPI_LIB=${TRUE_MPI_LIB}"
+#	    echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+#	fi
+#
+#	# replace the libmpi.so/libmpi.so.12 by an empty library from fakelib_${FROM_FAMILY}
+#	if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
+#	    libfakedir=${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/
+#	    [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdir." >&2 ; exit 1; } 
+#            export LD_LIBRARY_PATH=${libfakedir}:$LD_LIBRARY_PATH
+#	    [[ -n "$VERBOSE" ]] && echo "C :export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+#	fi
+#	
+#   #
+#   if [[ $LANGUAGE == C++ ]]; then
+#      libfakedir_cxx=${WI4MPI_LIBEXEC}/fakelibCXX/
+#       [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; } 
+#            export LD_LIBRARY_PATH=${libfakedir_cxx}:$LD_LIBRARY_PATH
+#	    [[ -n "$VERBOSE" ]] && echo "C++ :export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+#	fi
+#	;;
+#    FORTRAN )
+#    	libwi4mpi=${WI4MPI_LIBEXEC}/libwi4mpi_f_${FROM_FAMILY}_${TARGET_FAMILY}.so
+#
+#	[[ ! -f $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; }
+#	[[ ! -f ${TRUE_MPI_LIB} ]] && { echo "Error: could not find the target mpi library." >&2 ; exit 1; }
+#	[[ ! -f ${TRUE_MPI_FLIB} ]] && { echo "Error: could not find the target mpi fortran library." >&2 ; exit 1; }
+#
+#	export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${TRUE_MPI_FLIB} ${TRUE_MPI_LIB}"
+#   
+#	# replace the libmpi_f77.so.1 && libmpi_f90.so.1/libmpifort.so.12 by an empty library from fakelib_${FROM_FAMILY}
+#	if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
+#	    libfakedir=${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/
+#	    [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdiri(FORTRAN)." >&2 ; exit 1; } 
+#            export LD_LIBRARY_PATH=${libfakedir}:$LD_LIBRARY_PATH
+#	    [[ -n "$VERBOSE" ]] && echo "FORTRAN :export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+#	fi
+#
+#	if [[ -n "$VERBOSE" ]]; then
+#	    echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+#	fi
+#	;;
+#    *) echo "Error: Unsupported Language." >&2 ; exit 1 ;;
+#esac
+
+# Execute PROGRAM
+exec "$@"

@@ -1,0 +1,633 @@
+{
+   "order2_converter":{
+    "local_alloc": 0,
+    "init_alloc" : "0",
+    "a2r": "order2_conv_a2r",
+    "type": "int",
+    "r2a": "order2_conv_r2a"
+  },
+   "order_converter":{
+    "local_alloc": 0,
+    "init_alloc" : "0",
+    "a2r": "order_conv_a2r",
+    "type": "int",
+    "r2a": "order_conv_r2a"
+  },
+  "amode_converter":{
+    "local_alloc": 0,
+    "init_alloc" : "0",
+    "a2r": "amode_conv_a2r",
+    "type": "int",
+    "r2a": "amode_conv_r2a"
+  },
+  "amode_ptr_converter":{
+    "local_alloc": 1,
+    "a2r": "amode_conv_a2r",
+    "type": "int *",
+    "r2a": "amode_conv_r2a"
+  },
+  "void_ptr_converter":{
+    "local_alloc" : 1,
+    "a2r": "useless_a2r",
+    "type": "void *",
+    "r2a": "useless_r2a",
+    "no_map": "TRUE"
+  },
+  "Request_ptr_delete":{
+   "local_alloc" : 0,
+   "a2r": "request_ptr_delete",
+   "type": "void *",
+   "r2a": "request_ptr_delete"
+  },
+  "Request_cancel_converter":{
+    "local_alloc" : 1,
+    "a2r": "request_cancel_a2r",
+    "type": "MPI_Request *",
+    "r2a": "request_cancel_r2a"
+  },
+  "Request_pers_ptr_converter":{
+    "local_alloc" : 1,
+    "a2r": "request_pers_ptr_conv_a2r",
+    "type": "MPI_Request *",
+    "r2a": "request_pers_ptr_conv_r2a"
+  },
+  "Request_tab_converter":{
+    "local_alloc" : 0,
+    "a2r": "request_tab_conv_a2r",
+    "type": "MPI_Request",
+    "r2a": "request_tab_conv_r2a"
+  },
+  "Status_tab_converter":{
+    "local_alloc" : 0,
+    "a2r": "status_tab_conv_a2r",
+    "type": "MPI_Status",
+    "r2a": "status_tab_conv_r2a"
+  },
+  "topo_status_converter":{
+    "local_alloc" : 1,
+    "a2r": "topo_status_conv_a2r",
+    "type": "int *",
+    "r2a": "topo_status_mapper"
+  },
+  "dest_converter":{
+    "local_alloc" : 0,
+    "a2r": "dest_conv_a2r",
+    "type": "int",
+    "r2a": "dest_conv_r2a"
+  },
+  "Aint_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "aint_converter_a2r", 
+    "type": "MPI_Aint *", 
+    "r2a": "aint_converter_r2a",
+    "assign": "TRUE"
+  }, 
+  "source_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "source_conv_a2r", 
+    "type": "int *", 
+    "r2a": "source_conv_r2a"
+  }, 
+  "message_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "message_ptr_conv_a2r", 
+    "type": "MPI_Message *", 
+    "r2a": "message_ptr_conv_r2a"
+  }, 
+  "op_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "op_conv_a2r", 
+    "type": "MPI_Op *", 
+    "r2a": "op_conv_r2a"
+  }, 
+  "const_buffer_mapper": {
+    "local_alloc": 0, 
+    "a2r": "const_buffer_conv_a2r", 
+    "type": "void *", 
+    "r2a": "const_buffer_conv_r2a"
+  }, 
+  "fint_converter": {
+    "local_alloc": 0, 
+    "a2r": "fint_conv_a2r", 
+    "type": "MPI_Fint", 
+    "r2a": "fint_conv_r2a",
+    "assign": "TRUE"
+  }, 
+  "Comm_str_converter": {
+    "local_alloc": 1, 
+    "a2r": "comm_conv_a2r", 
+    "type": "MPI_Comm *", 
+    "r2a": "comm_conv_r2a"
+  }, 
+  "op_converter": {
+    "local_alloc": 0, 
+    "a2r": "op_conv_a2r", 
+    "type": "MPI_Op", 
+    "r2a": "op_conv_r2a"
+  }, 
+  "int_ptr_mapper": {
+    "local_alloc": 0, 
+    "a2r": "int_ptr_conv_a2r", 
+    "type": "int *", 
+    "r2a": "int_ptr_conv_r2a",
+    "no_map": "TRUE"
+  }, 
+  "Status_converter": {
+    "local_alloc": 0, 
+    "a2r": "status_conv_a2r", 
+    "type": "MPI_Status", 
+    "r2a": "status_conv_r2a"
+  }, 
+  "count_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "count_ptr_conv_a2r", 
+    "type": "MPI_Count *", 
+    "r2a": "count_ptr_conv_r2a"
+  }, 
+  "t_pvar_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_pvar_ptr_conv_a2r", 
+    "type": "MPI_T_pvar_session *", 
+    "r2a": "t_pvar_ptr_conv_r2a"
+  }, 
+  "errhandler_mapper": {
+    "local_alloc": 0, 
+    "a2r": "errhandler_conv_a2r", 
+    "type": "MPI_Errhandler", 
+    "r2a": "errhandler_conv_r2a"
+  }, 
+  "offset_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "offset_ptr_conv_a2r", 
+    "type": "MPI_Offset *", 
+    "r2a": "offset_ptr_conv_r2a",
+    "assign":"TRUE"
+  }, 
+  "Comm_converter": {
+    "local_alloc": 0, 
+    "a2r": "comm_conv_a2r", 
+    "type": "MPI_Comm", 
+    "r2a": "comm_conv_r2a"
+  }, 
+  "t_pvar_session_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_pvar_session_conv_a2r", 
+    "type": "MPI_T_pvar_session", 
+    "r2a": "t_pvar_session_conv_r2a"
+  }, 
+  "win_cpy_attr_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "win_cpy_attr_ptr_conv_a2r", 
+    "type": "MPI_Win_copy_attr_function *", 
+    "r2a": "win_cpy_attr_ptr_conv_r2a"
+  }, 
+  "Request_converter": {
+    "local_alloc": 0, 
+    "a2r": "request_conv_a2r", 
+    "type": "MPI_Request", 
+    "r2a": "request_conv_r2a"
+  }, 
+  "const_char_converter": {
+    "local_alloc": 0, 
+    "a2r": "char_conv_a2r", 
+    "type": "char", 
+    "r2a": "char_conv_r2a",
+    "no_map" : "TRUE"
+  }, 
+  "comm_del_attr_fct_ptr": {
+    "local_alloc": 0, 
+    "a2r": "comm_del_attr_fct_ptr_conv_a2r", 
+    "type": "MPI_Comm_delete_attr_function *", 
+    "r2a": "comm_del_attr_fct_ptr_conv_r2a"
+  }, 
+  "Datatype_converter": {
+    "local_alloc": 0, 
+    "a2r": "datatype_conv_a2r", 
+    "type": "MPI_Datatype", 
+    "r2a": "datatype_conv_r2a"
+  }, 
+  "t_pvar_handle_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_pvar_handle_ptr_conv_a2r", 
+    "type": "MPI_T_pvar_handle *", 
+    "r2a": "t_pvar_handle_ptr_conv_r2a"
+  }, 
+  "const_int_converter": {
+    "local_alloc": 0, 
+    "a2r": "const_int_conv_a2r", 
+    "type": "int", 
+    "r2a": "const_int_conv_r2a",
+    "no_map": "TRUE"
+  }, 
+  "char_ppp_converter": {
+    "local_alloc": 0, 
+    "a2r": "char_ppp_conv_a2r", 
+    "type": "char ***", 
+    "r2a": "char_ppp_conv_r2a",
+    "no_map": "TRUE"
+  }, 
+  "int_mapper": {
+    "local_alloc": 0, 
+    "a2r": "int_conv_a2r", 
+    "type": "int", 
+    "r2a": "int_conv_r2a",
+    "no_map": "TRUE"
+  }, 
+  "Aint_converter": {
+    "local_alloc": 0, 
+    "a2r": "aint_conv_a2r", 
+    "type": "MPI_Aint", 
+    "r2a": "aint_conv_r2a",
+    "assign": "TRUE"
+  }, 
+  "file_converter": {
+    "local_alloc": 0, 
+    "a2r": "file_conv_a2r", 
+    "type": "MPI_File", 
+    "r2a": "file_conv_r2a"
+  }, 
+  "Info_converter": {
+    "local_alloc": 0, 
+    "a2r": "info_conv_a2r", 
+    "type": "MPI_Info", 
+    "r2a": "info_conv_r2a"
+  }, 
+  "t_cvar_handle_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_cvar_handle_ptr_conv_a2r", 
+    "type": "MPI_T_cvar_handle *", 
+    "r2a": "t_cvar_handle_ptr_conv_r2a"
+  }, 
+  "datarep_extent_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "datarep_extent_ptr_conv_a2r", 
+    "type": "MPI_Datarep_extent_function *", 
+    "r2a": "datarep_extent_ptr_conv_r2a",
+    "wrap": "ptr_extent_fn",
+    "wrapped": "wrapper_datarep_extent_fn"
+  }, 
+  "t_pvar_handle_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_pvar_handle_conv_a2r", 
+    "type": "MPI_T_pvar_handle", 
+    "r2a": "t_pvar_handle_conv_r2a"
+  }, 
+  "group_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "group_conv_a2r", 
+    "type": "MPI_Group *", 
+    "r2a": "group_conv_r2a"
+  }, 
+  "t_enum_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_enum_conv_a2r", 
+    "type": "MPI_T_enum", 
+    "r2a": "t_enum_conv_r2a"
+  }, 
+  "double_converter": {
+    "local_alloc": 0, 
+    "a2r": "double_conv_a2r", 
+    "type": "double", 
+    "r2a": "double_conv_r2a",
+    "no_map": "TRUE"
+  }, 
+  "count_converter": {
+    "local_alloc": 0, 
+    "a2r": "count_conv_a2r", 
+    "type": "MPI_Count", 
+    "r2a": "count_conv_r2a"
+  }, 
+  "Request_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "request_ptr_conv_a2r", 
+    "type": "MPI_Request *", 
+    "r2a": "request_ptr_conv_r2a"
+  }, 
+  "type_cpy_attr_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "type_cpy_attr_ptr_conv_a2r", 
+    "type": "MPI_Type_copy_attr_function *", 
+    "r2a": "type_cpy_attr_ptr_conv_r2a"
+  }, 
+  "file_errh_fct_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "file_errh_fct_ptr_conv_a2r", 
+    "type": "MPI_File_errhandler_function *", 
+    "r2a": "file_errh_fct_ptr_conv_r2a"
+  }, 
+  "Delete_ptr_conv": {
+    "local_alloc": 0, 
+    "a2r": "delete_ptr_converter_a2r", 
+    "type": "MPI_Delete_function *", 
+    "r2a": "delete_ptr_converter_r2a"
+  }, 
+  "request_array_converter": {
+    "local_alloc": 0, 
+    "arg_dep": "", 
+    "a2r": "request_array_conv_a2r", 
+    "type": "MPI_Request", 
+    "r2a": "request_array_conv_r2a"
+  }, 
+  "win_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "win_ptr_conv_a2r", 
+    "type": "MPI_Win *", 
+    "r2a": "win_ptr_conv_r2a"
+  }, 
+  "Datatype_const_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "datatype_const_ptr_converter_a2r", 
+    "type": "MPI_Datatype *", 
+    "r2a": "datatype_const_ptr_converter_r2a"
+  }, 
+  "message_converter": {
+    "local_alloc": 0, 
+    "a2r": "message_conv_a2r", 
+    "type": "MPI_Message", 
+    "r2a": "message_ptr_conv_r2a"
+  }, 
+  "greq_query_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "greq_query_ptr_conv_a2r", 
+    "type": "MPI_Grequest_query_function *", 
+    "r2a": "greq_query_ptr_conv_r2a"
+  }, 
+  "f08_status_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "f08_status_ptr_conv_a2r", 
+    "type": "MPI_F08_status *", 
+    "r2a": "f08_status_ptr_conv_r2a"
+  }, 
+  "const_f08_status_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "const_f08_status_ptr_conv_a2r", 
+    "type": "const MPI_F08_status *", 
+    "r2a": "const_f08_status_ptr_conv_r2a"
+  }, 
+  "error_converter": {
+    "local_alloc": 0, 
+    "a2r": "error_code_conv_a2r", 
+    "type": "int", 
+    "r2a": "error_code_conv_r2a"
+  }, 
+  "error_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "error_ptr_conv_a2r", 
+    "type": "int *", 
+    "r2a": "*errorclass = error_code_conv_r2a(*errorclass);",
+    "set": "true"
+
+  }, 
+  "const_aint_converter": {
+    "local_alloc": 0, 
+    "a2r": "const_aint_conv_a2r", 
+    "type": "MPI_Aint", 
+    "r2a": "const_aint_conv_r2a",
+    "assign": "TRUE"
+  }, 
+  "source_converter": {
+    "local_alloc": 0, 
+    "a2r": "source_conv_a2r", 
+    "type": "int", 
+    "r2a": "source_conv_r2a"
+  }, 
+  "datarep_conversion_re_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "datarep_conversion_ptr_conv_a2r", 
+    "type": "MPI_Datarep_conversion_function *", 
+    "r2a": "datarep_conversion_ptr_conv_r2a",
+    "wrap": "ptr_read_conversion_fn",
+    "wrapped": "wrapper_datarep_read_conversion_fn"
+  }, 
+  "datarep_conversion_wr_ptr_converter": {
+    "local_alloc": 0,
+    "a2r": "datarep_conversion_ptr_conv_a2r",
+    "type": "MPI_Datarep_conversion_function *",
+    "r2a": "datarep_conversion_ptr_conv_r2a",
+    "wrap": "ptr_write_conversion_fn",
+    "wrapped": "wrapper_datarep_write_conversion_fn"
+  },
+  "greq_cancel_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "greq_cancel_ptr_conv_a2r", 
+    "type": "MPI_Grequest_cancel_function *", 
+    "r2a": "greq_cancel_ptr_conv_r2a"
+  }, 
+  "User_fct_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "user_fct_ptr_conv_a2r", 
+    "type": "MPI_User_function *", 
+    "r2a": "user_fct_ptr_conv_r2a",
+    "wrap": "ptr_user_func",
+    "wrapped": "wrapper_user_function" 
+  }, 
+  "const_info_converter": {
+    "local_alloc": 0, 
+    "a2r": "const_info_conv_a2r", 
+    "type": "MPI_Info", 
+    "r2a": "const_info_conv_r2a"
+  }, 
+  "Aint_const_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "const_aint_ptr_conv_a2r", 
+    "type": "MPI_Aint *", 
+    "r2a": "const_aint_ptr_conv_r2a",
+    "assign": "TRUE"
+  }, 
+  "fint_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "fint_ptr_conv_a2r", 
+    "type": "MPI_Fint *", 
+    "r2a": "fint_ptr_conv_r2a",
+    "assign": "TRUE"
+  }, 
+  "handler_fct_ptr_mapper": {
+    "local_alloc": 0, 
+    "a2r": "handler_fct_ptr_conv_a2r", 
+    "type": "MPI_Handler_function *", 
+    "r2a": "handler_fct_ptr_conv_r2a",
+    "wrap": "ptr_handler_fn",
+    "wrapped": "wrapper_handler_function"
+  }, 
+  "const_fint_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "const_fint_ptr_conv_a2r", 
+    "type": "const MPI_Fint *", 
+    "r2a": "const_fint_ptr_conv_r2a",
+    "assign": "TRUE"
+  }, 
+  "win_errh_fct_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "win_errh_fct_ptr_conv_a2r", 
+    "type": "MPI_Win_errhandler_function *", 
+    "r2a": "win_errh_fct_ptr_conv_r2a"
+  }, 
+  "t_cvar_handle_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_cvar_handle_conv_a2r", 
+    "type": "MPI_T_cvar_handle", 
+    "r2a": "t_cvar_handle_conv_r2a"
+  }, 
+  "char_ptr_mapper": {
+    "local_alloc": 0, 
+    "a2r": "char_ptr_conv_a2r", 
+    "type": "char *", 
+    "r2a": "char_ptr_conv_r2a",
+    "no_map": "TRUE"
+  }, 
+  "Status_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "status_prt_conv_a2r", 
+    "type": "MPI_Status *", 
+    "r2a": "status_prt_conv_r2a"
+  }, 
+  "com_errhadler_fct_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "com_errhadler_fct_ptr_conv_a2r", 
+    "type": "MPI_Comm_errhandler_function *", 
+    "r2a": "com_errhadler_fct_ptr_conv_r2a",
+    "wrap": "ptr_comm_fn_handler",
+    "wrapped": "wrapper_comm_handler_function"
+  }, 
+  "type_del_attr_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "type_del_attr_ptr_conv_a2r", 
+    "type": "MPI_Type_delete_attr_function *", 
+    "r2a": "type_del_attr_ptr_conv_r2a"
+  }, 
+  "file_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "file_conv_a2r", 
+    "type": "MPI_File *", 
+    "r2a": "file_conv_r2a"
+  }, 
+  "tag_converter": {
+    "local_alloc": 0, 
+    "a2r": "tag_conv_a2r", 
+    "type": "int", 
+    "r2a": "tag_conv_r2a"
+  }, 
+  "const_datatype_converter": {
+    "local_alloc": 0, 
+    "a2r": "datatype_conv_a2r", 
+    "type": "MPI_Datatype", 
+    "r2a": "datatype_conv_r2a"
+  }, 
+  "no_args_converter": {
+    "local_alloc": 0, 
+    "a2r": "no_args_conv_a2r", 
+    "type": "", 
+    "r2a": "no_args_conv_r2a"
+  }, 
+  "buffer_mapper": {
+    "local_alloc": 0, 
+    "a2r": "buffer_conv_a2r", 
+    "type": "void *", 
+    "r2a": "buffer_conv_r2a"
+  }, 
+  "cont_int_ptr_mapper": {
+    "local_alloc": 0, 
+    "a2r": "const_int_ptr_conv_a2r", 
+    "type": "int *", 
+    "r2a": "const_int_ptr_conv_r2a",
+    "no_map" : "TRUE"
+  }, 
+  "t_enum_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "t_enum_ptr_conv_a2r", 
+    "type": "MPI_T_enum *", 
+    "r2a": "t_enum_ptr_conv_r2a"
+  }, 
+  "info_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "info_conv_a2r", 
+    "type": "MPI_Info *", 
+    "r2a": "info_conv_r2a"
+  }, 
+  "Datatype_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "datatype_conv_a2r", 
+    "type": "MPI_Datatype *", 
+    "r2a": "datatype_conv_r2a"
+  }, 
+  "offset_converter": {
+    "local_alloc": 0, 
+    "a2r": "offset_conv_a2r", 
+    "type": "MPI_Offset", 
+    "r2a": "offset_conv_r2a",
+    "assign": "TRUE"
+  }, 
+  "group_converter": {
+    "local_alloc": 0, 
+    "a2r": "group_conv_a2r", 
+    "type": "MPI_Group", 
+    "r2a": "group_conv_r2a"
+  }, 
+  "comm_cpy_attr_fct_ptr": {
+    "local_alloc": 0, 
+    "a2r": "comm_cpy_attr_fct_ptr_conv_a2r", 
+    "type": "MPI_Comm_copy_attr_function *", 
+    "r2a": "comm_cpy_attr_fct_ptr_conv_r2a"
+  }, 
+  "io_request_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "io_request_ptr_conv_a2r", 
+    "type": "MPIO_Request *", 
+    "r2a": "io_request_ptr_conv_r2a"
+  }, 
+  "win_converter": {
+    "local_alloc": 0, 
+    "a2r": "win_conv_a2r", 
+    "type": "MPI_Win", 
+    "r2a": "win_conv_r2a"
+  }, 
+  "win_del_attr_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "win_del_attr_ptr_conv_a2r", 
+    "type": "MPI_Win_delete_attr_function *", 
+    "r2a": "win_del_attr_ptr_conv_r2a"
+  }, 
+  "Copy_ptr_conv": {
+    "local_alloc": 0, 
+    "a2r": "copy_ptr_converter_a2r", 
+    "type": "MPI_Copy_function *", 
+    "r2a": "copy_ptr_converter_r2a"
+  }, 
+  "errhandler_ptr_mapper": {
+    "local_alloc": 1, 
+    "a2r": "errhandler_conv_a2r", 
+    "type": "MPI_Errhandler *", 
+    "r2a": "errhandler_ptr_conv_r2a"
+  },
+  "comm_errhandler_ptr_mapper":{
+  "local_alloc": 1,
+  "a2r": "errhandler_conv_a2r",
+  "type": "MPI_Errhandler *",
+  "r2a": "errhandler_ptr_conv_r2a"
+  },
+  "char_ptr_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "char_ptr_ptr_conv_a2r", 
+    "type": "char **", 
+    "r2a": "char_ptr_ptr_conv_r2a"
+  }, 
+  "Status_const_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "status_ptr_conv_a2r", 
+    "type": "MPI_Status *", 
+    "r2a": "status_ptr_conv_r2a"
+  }, 
+  "const_char_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "const_char_ptr_conv_a2r", 
+    "type": "char *", 
+    "r2a": "const_char_ptr_conv_r2a",
+    "no_map": "True"
+  }, 
+  "greq_free_ptr_converter": {
+    "local_alloc": 0, 
+    "a2r": "greq_free_ptr_conv_a2r", 
+    "type": "MPI_Grequest_free_function *", 
+    "r2a": "greq_free_ptr_conv_r2a"
+  }
+}

@@ -1,0 +1,2 @@
+#!/bin/bash
+${CCC_MPIFC} -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi $@

@@ -1,0 +1,2 @@
+#!/bin/bash
+ifort -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi $@

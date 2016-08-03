@@ -1,0 +1,32 @@
+//MPI_File_c2f
+//MPI_Op_c2f
+//MPI_File_c2f
+//MPI_Info_c2f
+//MPI_Errhandler_c2f
+//MPI_Group_c2f
+//MPI_File_f2c
+//MPI_Op_f2c
+//MPI_Info_f2c
+//MPI_Errhandler_f2c
+//MPI_Group_f2c
+
+
+A_MPI_Op MPI_Op_f2c(A_MPI_Fint op)
+{
+   A_MPI_Op ret;
+   R_MPI_Fint op_tmp;
+   type_f_a2r(&op,&op_tmp)
+   ret_tmp=LOCAL_MPI_Op_f2c(op_tmp);
+   type_c_r2a(&ret,&ret_tmp);
+   return ret;
+}
+
+A_MPI_Fint MPI_Op_c2f(A_MPI_Op op)
+{
+   A_MPI_Fint ret;
+   R_MPI_Op op_tmp;
+   type_c_a2r(&op,&op_tmp)
+   ret_tmp=LOCAL_MPI_Op_c2f(op_tmp);
+   type_f_r2a(&ret,&ret_tmp);
+   return ret;
+}
