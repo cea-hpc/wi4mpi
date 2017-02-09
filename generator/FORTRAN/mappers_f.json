@@ -1,4 +1,25 @@
 {
+  "weight_converter":{
+    "local_alloc": 0,
+    "init_alloc" : "0",
+    "a2r": "weight_a2r",
+    "type": "int ",
+    "r2a": "weight_a2r"
+  },
+  "lock_converter":{
+    "local_alloc": 0,
+    "init_alloc" : "0",
+    "a2r": "win_lock_a2r",
+    "type": "int ",
+    "r2a": "win_lock_r2a"
+  },
+  "assert_converter":{
+    "local_alloc": 0,
+    "init_alloc" : "0",
+    "a2r": "win_assert_mode_a2r",
+    "type": "int ",
+    "r2a": "win_assert_mode_r2a"
+  },
    "order2_converter":{
     "local_alloc": 0,
     "init_alloc" : "0",
@@ -28,9 +49,9 @@
   }, 
   "message_ptr_converter": {
     "local_alloc": 0, 
-    "a2r": "message_ptr_conv_a2r", 
-    "type": "MPI_Message *", 
-    "r2a": "message_ptr_conv_r2a"
+    "a2r": "message_a2r", 
+    "type": "int ", 
+    "r2a": "message_r2a"
   }, 
   "op_ptr_converter": {
     "local_alloc": 0, 
@@ -92,7 +113,8 @@
     "local_alloc": 0, 
     "a2r": "count_ptr_conv_a2r", 
     "type": "int ",
-    "r2a": "count_ptr_conv_r2a"
+    "r2a": "count_ptr_conv_r2a",
+    "nomap":"true" 
   }, 
   "t_pvar_ptr_converter": {
     "local_alloc": 0, 
@@ -240,8 +262,9 @@
   "count_converter": {
     "local_alloc": 0, 
     "a2r": "count_conv_a2r", 
-    "type": "MPI_Count", 
-    "r2a": "count_conv_r2a"
+    "type": "int ", 
+    "r2a": "count_conv_r2a",
+    "nomap":"true"
   }, 
   "Request_ptr_converter": {
     "local_alloc": 0, 
@@ -518,9 +541,9 @@
   }, 
   "win_converter": {
     "local_alloc": 0, 
-    "a2r": "win_conv_a2r", 
-    "type": "MPI_Win", 
-    "r2a": "win_conv_r2a"
+    "a2r": "fwin_a2r", 
+    "type": "int ", 
+    "r2a": "fwin_r2a"
   }, 
   "win_del_attr_ptr_converter": {
     "local_alloc": 0, 

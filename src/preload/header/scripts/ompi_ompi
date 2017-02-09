@@ -1,0 +1,7 @@
+app :
+
+sed 's/MPI_/A_MPI_/g' app_mpi_2.h | sed 's/OA_MPI_/OMPI_/g' | sed 's/OMPI_OFFSET_DATATYPE/A_OMPI_OFFSET_DATATYPE/g' | sed 's/#    include "mpi_portable_platform.h"/\/\/#    include "mpi_portable_platform.h"/g' | sed 's/ompi_status_public_t/a_ompi_status_public_t/g' | sed 's/OMPI_C_A_MPI_/OMPI_C_MPI_/g' | sed 's/const //g' | sed 's/PA_MPI_/A_PMPI_/g' > test.h
+
+run :
+
+sed 's/MPI_/R_MPI_/g' ompi_mpi.h | sed 's/OR_MPI_/OMPI_/g' | sed 's/OMPI_OFFSET_DATATYPE/R_OMPI_OFFSET_DATATYPE/g' | sed 's/#    include "mpi_portable_platform.h"/\/\/#    include "mpi_portable_platform.h"/g' | sed 's/ompi_status_public_t/r_ompi_status_public_t/g' | sed 's/OMPI_C_R_MPI_/OMPI_C_MPI_/g' | sed 's/const //g' | sed 's/PR_MPI_/R_PMPI_/g' | sed 's/MPIO_/R_MPIO_/g' > run_mpi_2.h

@@ -3,7 +3,7 @@
 # `04/04/2016`                                                         #
 # Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
 #                                                                      #
-# IDDN.FR.001.210022.001.S.P.2014.000.10800                            #
+# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #
 # This file is part of the Wi4MPI library.                             #
 #                                                                      #
 # This software is governed by the CeCILL-C license under French law   #
@@ -34,7 +34,7 @@ print '//############################# Wi4MPI License ##########################
 print '//# `04/04/2016`                                                         #'
 print '//# Copyright or (C) or Copr. Commissariat a l\'Energie Atomique         #'
 print '//#                                                                      #'
-print '//# IDDN.FR.001.210022.001.S.P.2014.000.10800                            #'
+print '//# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #'
 print '//# This file is part of the Wi4MPI library.                             #'
 print '//#                                                                      #'
 print '//# This software is governed by the CeCILL-C license under French law   #'
@@ -93,10 +93,10 @@ with open('./FORTRAN/utils/lists') as aa:
                 else:
                     tab[rr[-1]]=['']
                     tab[rr[-1]].append(rr[0])
-       # pprint (tab)
+#        pprint (tab)
         
-        a2r='void '+r[0]+'_a2r('+r[1]+'*ca,'+r[1]+'*cr){\n'  
-        r2a='void '+r[0]+'_r2a('+r[1]+'*ca,'+r[1]+'*cr){\n' 
+        a2r='static inline void '+r[0]+'_a2r('+r[1]+'*ca,'+r[1]+'*cr){\n'  
+        r2a='static inline void '+r[0]+'_r2a('+r[1]+'*ca,'+r[1]+'*cr){\n' 
         ii=0    
         jj=0    
         rnv={}  
@@ -123,9 +123,9 @@ with open('./FORTRAN/utils/lists') as aa:
         #pprint(rnv)
         #pprint(cnv)
         for i in tab:           
-         #   print tab[i][0],tab[i][1]
+        #    print tab[i][0],tab[i][1]
             if(tab[i][0]==''):
-            #    print cnv[tab[i][1]]
+        #        print cnv[tab[i][1]]
                 a2r=a2r+'if(R_f_'+tab[i][1]+'==*ca)\n'+'*cr=('+r[1]+')A_f_'+rnv[cnv[tab[i][1]]]+';\nelse\n'
                 r2a=r2a+'if(A_f_'+rnv[cnv[tab[i][1]]]+'==*cr)\n'+'*ca=('+r[1]+')R_f_'+tab[i][1]+';\nelse\n'
         a2r=a2r+'*cr=*ca;\n'

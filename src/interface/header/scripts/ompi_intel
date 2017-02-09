@@ -1,0 +1,9 @@
+app :
+
+from OMPI_INTEL
+cp ../OMPI_OMPI/app_mpi_2.h ./
+
+run:
+
+from OMPI_INTEL
+cp ../../../preload/header/OMPI_INTEL/run_mpi_2.h ./

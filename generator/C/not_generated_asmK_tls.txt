@@ -1,8 +1,60 @@
+//#if defined(INTEL_OMPI) || defined(OMPI_INTEL)
+//int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
+//               void *attribute_val_out, int *flag)
+//{return 0;}
+//#endif
+
 #if defined(INTEL_OMPI) || defined(OMPI_INTEL)
-int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
-               void *attribute_val_out, int *flag)
-{return 0;}
+int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
+
+int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag)
+{
+return local_MPIR_Dup_fn(oldcomm,keyval,extra_state,attribute_val_in,attribute_val_out,flag);
+}
 #endif
+
+void wrapper_win_copy_function(R_MPI_Win oldwin, int win_keyval, void *extra_state, 
+                               void *attribute_val_in, void *attribute_val_out, int *flag)
+{
+   A_MPI_Win win_tmp;
+   win_conv_r2a(&win_tmp,&oldwin);
+
+   (ptr_win_copy_fn)(win_tmp, win_keyval, extra_state, attribute_val_in, attribute_val_out, flag);  
+}
+
+void wrapper_win_delete_function(R_MPI_Win win, int win_keyval,void *attribute_val, void *extra_state)
+{
+   A_MPI_Win win_tmp;
+   win_conv_r2a(&win_tmp,&win);
+
+   (ptr_win_dlt_fn)(win_tmp, win_keyval, attribute_val, extra_state);  
+}
+
+void wrapper_grequest_query_function(void *extra_state, R_MPI_Status *status)
+{
+   A_MPI_Status status_ltmp;
+   A_MPI_Status *status_tmp=&status_ltmp;
+   status_prt_conv_r2a(&status_tmp,&status);
+
+   (ptr_grq_query_fn)(extra_state, status_tmp);  
+}
+
+void wrapper_type_copy_attr_fn(R_MPI_Datatype oldtype,int type_keyval, void *extra_state, 
+                               void *attribute_val_in,void *attribute_val_out, int *flag)
+{
+    A_MPI_Datatype datatype_tmp;
+    datatype_conv_r2a( &datatype_tmp,&oldtype);
+
+    (ptr_type_cpy_attr_fn)(datatype_tmp, type_keyval, extra_state, attribute_val_in, attribute_val_out, flag);
+}
+
+void wrapper_type_delete_attr_fn(R_MPI_Datatype datatype,int type_keyval, void *attribute_val, void *extra_state)
+{
+    A_MPI_Datatype datatype_tmp;
+    datatype_conv_r2a( &datatype_tmp, &datatype);
+
+    (ptr_type_dlt_attr_fn)(datatype_tmp, type_keyval, attribute_val, extra_state);
+}
 
 void wrapper_user_function(void* invec, void* inoutvec, int* len,R_MPI_Datatype* type)
 {
@@ -15,17 +67,19 @@ void wrapper_user_function(void* invec, void* inoutvec, int* len,R_MPI_Datatype*
 static void wrapper_comm_handler_function(R_MPI_Comm* comm, int* err, ...)
 {
     A_MPI_Comm comm_tmp;
-    comm_conv_r2a(&comm_tmp,comm);
+    comm_conv_r2a_static(&comm_tmp,comm);
 
     (ptr_comm_fn_handler)(&comm_tmp, err, "", NULL);
 }
 
 static void wrapper_handler_function(R_MPI_Comm* comm, int* err, ...)
 {
+    A_MPI_Handler_function *hf;
     A_MPI_Comm comm_tmp;
-    comm_conv_a2r(&comm_tmp,comm);
+    comm_conv_r2a_static(&comm_tmp,comm);
+    communicator_fn_translation_get(comm_tmp, &hf);
 
-    (ptr_handler_fn)(&comm_tmp, err, "", NULL);
+    hf(&comm_tmp, err, "", NULL);
 }
 int print(FILE* stream, const char* format, ...)
 {
@@ -188,7 +242,8 @@ __asm__(
 int (*LOCAL_MPI_Comm_create_keyval)(R_MPI_Comm_copy_attr_function *,R_MPI_Delete_function *,int *,void * );
 
 int A_MPI_Comm_create_keyval(A_MPI_Comm_copy_attr_function * copy_fn,A_MPI_Comm_delete_attr_function * delete_fn,int * keyval,void * extra_state)
-{     
+{
+in_w = 1;     
 #ifdef DEBUG
     printf("entre : A_MPI_Comm_create_keyval\n");
 #endif
@@ -224,7 +279,7 @@ int A_MPI_Comm_create_keyval(A_MPI_Comm_copy_attr_function * copy_fn,A_MPI_Comm_
 #ifdef DEBUG
     printf("sort : A_MPI_Comm_create_keyval\n");
 #endif
-
+in_w=0;
     return error_code_conv_r2a(ret_tmp);
 }
 
@@ -279,7 +334,8 @@ __asm__(
 int (*LOCAL_MPI_Keyval_create)(R_MPI_Copy_function *,R_MPI_Delete_function *,int *,void *);
 
 int A_MPI_Keyval_create(A_MPI_Copy_function * copy_fn,A_MPI_Delete_function * delete_fn,int * keyval,void * extra_state)
-{   
+{
+in_w=1;   
 #ifdef DEBUG
     printf("entre : A_MPI_Keyva_create\n");
 #endif
@@ -315,7 +371,7 @@ int A_MPI_Keyval_create(A_MPI_Copy_function * copy_fn,A_MPI_Delete_function * de
 #ifdef DEBUG
     printf("sort : A_MPI_Keyval_create\n");
 #endif
-
+in_w=0;
     return error_code_conv_r2a(ret_tmp);
 }
 
@@ -366,6 +422,7 @@ int (*LOCAL_MPI_Comm_free_keyval)(int *);
 
 int A_MPI_Comm_free_keyval(int * comm_keyval)
 {
+in_w=1;
 #ifdef DEBUG
     printf("entre : A_MPI_Comm_free_keyval\n");
 #endif
@@ -376,6 +433,7 @@ int A_MPI_Comm_free_keyval(int * comm_keyval)
 #ifdef DEBUG
     printf("sort : A_MPI_Comm_free_keyval\n");
 #endif      
+in_w=0;
     return error_code_conv_r2a(ret_tmp);
 }
 
@@ -424,6 +482,7 @@ int (*LOCAL_MPI_Keyval_free)(int *);
 
 int A_MPI_Keyval_free(int * keyval)
 {
+in_w=1;
 #ifdef DEBUG
     printf("entre : A_MPI_Keyval_free\n");
 #endif
@@ -432,6 +491,7 @@ int A_MPI_Keyval_free(int * keyval)
 #ifdef DEBUG
     printf("entre : A_MPI_Keyval_free\n");
 #endif
+in_w=0;
     return error_code_conv_r2a(ret_tmp);
 }
 
@@ -474,4 +534,165 @@ int wrapper_datarep_extent_fn(R_MPI_Datatype datatype, R_MPI_Aint *file_extent, 
     A_MPI_Aint *file_extent_tmp = (A_MPI_Aint*) file_extent;
     int ret_tmp = (ptr_extent_fn)(datatype_tmp, file_extent_tmp, extra_state);
     return ret_tmp;
+}
+int MPI_Win_get_attr(A_MPI_Win win,int win_keyval,void * attribute_val,int * flag);
+int (*LOCAL_MPI_Win_get_attr)(R_MPI_Win,int,void *,int *);
+
+__asm__(
+".global PMPI_Win_get_attr\n"
+".weak MPI_Win_get_attr\n"
+".set MPI_Win_get_attr,PMPI_Win_get_attr\n"
+".extern in_w\n"
+".extern A_MPI_Win_get_attr\n"
+".extern R_MPI_Win_get_attr\n"
+".type PMPI_Win_get_attr,@function\n"
+".text\n"
+"PMPI_Win_get_attr:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x20, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+"mov %rdx, -0x18(%rbp)\n"
+"mov %rcx, -0x20(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"mov -0x18(%rbp), %rdx\n"
+"mov -0x20(%rbp), %rcx\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Win_get_attr\n"
+"jmp *A_MPI_Win_get_attr@GOTPCREL(%rip)\n"
+"inwrap_MPI_Win_get_attr:\n"
+"jmp *R_MPI_Win_get_attr@GOTPCREL(%rip)\n"
+".size PMPI_Win_get_attr,.-PMPI_Win_get_attr\n"
+);
+
+int A_MPI_Win_get_attr(A_MPI_Win win,int win_keyval,void * attribute_val,int * flag)
+{
+#ifdef DEBUG
+printf("entre : A_MPI_Win_get_attr\n");
+#endif
+in_w=1;
+
+R_MPI_Win win_tmp;
+win_conv_a2r(&win,&win_tmp);
+int win_keyval_tmp;
+my_keyval_a2r(&win_keyval,&win_keyval_tmp);
+long attribute_val_ltmp;
+void *attribute_val_tmp=&attribute_val_ltmp;
+int ret_tmp= LOCAL_MPI_Win_get_attr( win_tmp, win_keyval_tmp, attribute_val_tmp, flag);
+switch(win_keyval_tmp)
+{
+   case R_MPI_WIN_BASE: //void*
+      buffer_conv_r2a(&attribute_val,&attribute_val_tmp);
+   case R_MPI_WIN_SIZE: //MPI_Aint
+      (A_MPI_Aint *) attribute_val = (A_MPI_Aint *) attribute_val_tmp;
+   case R_MPI_WIN_DISP_UNIT :
+      win_attr_flavor_conv_r2a(attribute_val,attribute_val_tmp);
+   case R_MPI_WIN_CREATE_FLAVOR ://int*
+      win_attr_flavor_conv_r2a(attribute_val,attribute_val_tmp);
+   case R_MPI_WIN_MODEL:
+      win_attr_model_conv_r2a(attribute_val,attribute_val_tmp);
+}
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_MPI_Win_get_attr\n");
+#endif
+return error_code_conv_r2a(ret_tmp);
+}
+int R_MPI_Win_get_attr(R_MPI_Win win,int win_keyval,void * attribute_val,int * flag)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Win_get_attr\n");
+#endif
+int ret_tmp= LOCAL_MPI_Win_get_attr( win, win_keyval, attribute_val, flag);
+#ifdef DEBUG
+printf("sort : R_MPI_Win_get_attr\n");
+#endif
+return ret_tmp;
+}
+int MPI_Win_set_attr(A_MPI_Win win,int win_keyval,void * attribute_val);
+int (*LOCAL_MPI_Win_set_attr)(R_MPI_Win,int,void *);
+__asm__(
+".global PMPI_Win_set_attr\n"
+".weak MPI_Win_set_attr\n"
+".set MPI_Win_set_attr,PMPI_Win_set_attr\n"
+".extern in_w\n"
+".extern A_MPI_Win_set_attr\n"
+".extern R_MPI_Win_set_attr\n"
+".type PMPI_Win_set_attr,@function\n"
+".text\n"
+"PMPI_Win_set_attr:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x20, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+"mov %rdx, -0x18(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"mov -0x18(%rbp), %rdx\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Win_set_attr\n"
+"jmp *A_MPI_Win_set_attr@GOTPCREL(%rip)\n"
+"inwrap_MPI_Win_set_attr:\n"
+"jmp *R_MPI_Win_set_attr@GOTPCREL(%rip)\n"
+".size PMPI_Win_set_attr,.-PMPI_Win_set_attr\n"
+
+);
+int A_MPI_Win_set_attr(A_MPI_Win win,int win_keyval,void * attribute_val)
+{
+#ifdef DEBUG
+printf("entre : A_MPI_Win_set_attr\n");
+#endif
+in_w=1;
+
+R_MPI_Win win_tmp;
+win_conv_a2r(&win,&win_tmp);
+int win_keyval_tmp;
+my_keyval_a2r(&win_keyval,&win_keyval_tmp);
+void *attribute_val_tmp;
+switch(win_keyval_tmp)
+{
+   case R_MPI_WIN_BASE: //void*
+      buffer_conv_a2r(&attribute_val,&attribute_val_tmp);
+   case R_MPI_WIN_SIZE: //MPI_Aint
+      (R_MPI_Aint *) attribute_val = (R_MPI_Aint *) attribute_val_tmp;
+   case R_MPI_WIN_DISP_UNIT :
+      win_attr_flavor_conv_a2r(attribute_val,attribute_val_tmp);
+   case R_MPI_WIN_CREATE_FLAVOR : 
+      win_attr_flavor_conv_a2r(attribute_val,attribute_val_tmp);
+   case R_MPI_WIN_MODEL://int*
+      win_attr_model_conv_a2r(attribute_val,attribute_val_tmp);
+}
+int ret_tmp= LOCAL_MPI_Win_set_attr( win_tmp, win_keyval_tmp, attribute_val_tmp);
+win_conv_r2a(&win,&win_tmp);
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_MPI_Win_set_attr\n");
+#endif
+return error_code_conv_r2a(ret_tmp);
+}
+int R_MPI_Win_set_attr(R_MPI_Win win,int win_keyval,void * attribute_val)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Win_set_attr\n");
+#endif
+int ret_tmp= LOCAL_MPI_Win_set_attr( win, win_keyval, attribute_val);
+#ifdef DEBUG
+printf("sort : R_MPI_Win_set_attr\n");
+#endif
+return ret_tmp;
 }

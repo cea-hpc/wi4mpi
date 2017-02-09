@@ -1,0 +1,227 @@
+############################# Wi4MPI License ###########################
+# `04/04/2016`                                                         #
+# Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
+#                                                                      #
+# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #
+# This file is part of the Wi4MPI library.                             #
+#                                                                      #
+# This software is governed by the CeCILL-C license under French law   #
+# and abiding by the rules of distribution of free software. You can   #
+# use, modify and/ or redistribute the software under the terms of     #
+# the CeCILL-C license as circulated by CEA, CNRS and INRIA at the     #
+# following URL http://www.cecill.info.                                #
+#                                                                      #
+# The fact that you are presently reading this means that you have     #
+# had knowledge of the CeCILL-C license and that you accept its        #
+# terms.                                                               #
+#                                                                      #
+# Authors:                                                             #
+#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
+#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#                                                                      #
+########################################################################
+
+
+
+:Authors:
+    Tony Delforge (tony.deflforge.tgcc@cea.fr)
+    Vincent Ducrot (vincent.ducrot.tgcc@cea.fr)
+
+Documentation développeur
+=========================
+
+Sommaire:
+---------
+
+1. Introduction
+2. Installation
+3. Utilisation
+   1. Lanceur wi4mpi
+   2. Module wi4mpi
+
+------------
+
+INTRODUCTION
+============
+
+MPI est une norme permettant de tirer parti des clusters de calcul haute performance. Il existe plusieurs implémentations (OpenMPI, BullxMPI, MPT, IntelMPI ...) impliquant une ABI (Application Binary Interface) différente pour une même application compilée avec deux souches MPI différentes.
+
+C'est ici qu'intervient la bibliothèque WI4MPI, en faisant de la traduction d'ABI, un binaire compilé avec une souche MPI A peut être exécuté avec une souche MPI B différente.
+
+INSTALLATION
+============
+
+L'installation consiste en un simple make clean all.
+
+Version preload:
+----------------
+Il y a deux différentes installation de wi4mpi car le logiciel peut être utilisé de deux manière différentes (cf : Utilisation):
+   - La version preload
+   - La version interface
+
+Avant de lancer l'installation, il faut s'assurer que la souche MPI chargée dans l'environnement est bien Bullxmpi/OpenMPI pour la raison suivante:
+
+- Pour une conversion INTEL_OMPI, on a besoin de compiler la bibliothèque WI4MPI avec BullxMPI/OpenMPI afin de linker la bibliothèque "libmpi.so.1" qui contient les constantes (ompi_mpi_char, ompi_mpi_wchar, ...). Ce besoin se fait ressentir du fait que le binaire lancé à l'exécution n'est pas linké avec cette dernière, déclenchant ainsi l'erreur "undefined symbol: ompi_mpi_char" malgré le fait que la souche MPI d'exécution soit BullxMPI/OpenMPI.
+
+Pour procéder à l'installation du produit, il faut se rendre dans le répertoire "src", puis exécuter les commandes sivantes:
+
+- make clean
+- make preload
+- make install (Attention, le programme est installé dans usr/local/)
+
+Pour modifier le repertoire d'installation:
+
+- make prefix=/repertoire/installation install
+
+Le dossier d'installation doit maintenant contenir:
+
+- bin/wi4mpi **binaire permettant la configuration de l'environnement d'exécution**
+- etc/wi4mpi.cfg **fichier de configuration contenant les chemin menant à l'installation des différentes souches MPI**
+- libexec/wi4mpi/ **dossier contenant les différentes bibliothèques qui correspondent aux différentes conversions supportées par la bibliothèque WI4MPI C/Fortran**
+- libexec/wi4mpi/fakelibINTEL/ **contient les bibliothèques vides appelées lors de la conversion INTEL_OMPI**
+- libexec/wi4mpi/fakelibOMPI/ **contient la bibliothèque vide appelée lors de la conversion OMPI_INTEL**
+- libexec/wi4mpi/fakelibCXX/ **contient la bibliothèque vide appelée dans le cas ou le binaire exécuté a été compilé avec mpicxx**
+
+Version interface:
+------------------
+
+Afin de compiler l'interface, il faut se rendre dans le répertoire src, puis lancer les commandes suivantes:
+
+- make clean
+- make interface
+- make install ( Attention, par défault le programme est installé ans /usr/local)
+
+Afin de changer le répertoire d'installation :
+
+- make prefix=... install
+
+Le répertoire d'installation devrait maintenant contenir les fichiers suivants:
+
+ - bin : contient tout les wrapper MPI (mpicc, mpirun, mpif77, ...)
+ - include : contient toutes les includes nécessaire afin de compiler une application MPI
+ - lib : contient les librairies avec lesquelles une application MPI peut être linké
+ - lib_IMPI : contient la librairie qui s'occupe de la traduire notre ABI vers l'ABI d'IntelMPI
+ - lib_OMPI : contient la librairie qui s'occupe de la traduire notre ABI vers l'ABI d'OpenMPI
+
+"""Les deux versions peuvent êtres compilées au même instant, et êtres installées dans le même répertoire""":
+   
+   - Se rendre dans le répertoire src
+   -  make clean all && make prefix=... install
+
+UTILISATION
+===========
+
+Comme dit dans la section précédente, il y a deux différentes manières d'utiliser wi4mpi.
+
+La version preload permet l'exécution d'une application MPI A avec une souche MPI B différente de celle utilisée pour la compilation sans avoir de re-compiler.
+Nous supportons pour le moment 4 conversions:
+   - OpenMPI --> OpenMPI
+   - OpenMPI --> IntelMPI
+   - IntelMPI --> IntelMPI
+   - IntelMPI --> OpenMPI
+Pour chacune des conversions, la première implémentation MPI est celle utilisée pour la compilation, et la seconde est celle utilisée pour l'exécution.
+
+Pour se faire, certaines variables d'environnement doivent être mise en place.
+Légende:
+   - MPI_ROOT : Variable d'environnement désignant le répertoire d'installation de la souche MPI d'exécution.
+
+Commun:
+
+   export WI4MPI_INTERNAL_INCLUDES="path_to_install/INTERNAL/include"
+
+- OpenMPI --> OpenMPI :
+   
+   export TRUE_MPI_LIB="$env(MPI_ROOT)/lib/libmpi.so"
+   export TRUE_MPI_F_LIB="$env(MPI_ROOT)/lib/libmpi_mpifh.so"   
+   export LD_PRELOAD="path_to_wi4mpi_install/libexec/libwi4mpi_OMPI_OMPI.so $TRUE_MPI_F_LIB $TRUE_MPI_LIB"
+   export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
+   export WI4MPI_APP_INCLUDES="path_to_wi4mpi_install/INTERNAL/preload/include/OMPI_OMPI"
+   export WI4MPI_COMPILE_OPT "-Dompi_mpich -DOMPI_OMPI"
+
+- OpenMPI --> IntelMPI
+
+   export TRUE_MPI_LIB="$env(MPI_ROOT)/lib64/libmpi.so"
+   export TRUE_MPI_F_LIB="$env(MPI_ROOT)/lib64/libmpifort.so"
+   export LD_PRELOAD="path_to_wi4mpi_install/libexec/libwi4mpi_OMPI_INTEL.so $TRUE_MPI_F_LIB $TRUE_MPI_LIB"
+   export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakelibOMPI:$LD_LIBRARY_PATH"
+   export WI4MPI_APP_INCLUDES "path_to_wi4mpi_install/preload/include/OMPI_INTEL"
+   export WI4MPI_COMPILE_OPT "-Dompi_mpich -DOMPI_INTEL"
+
+
+- IntelMPI --> IntelMPI
+   
+   export TRUE_MPI_LIB="$env(MPI_ROOT)/lib64/libmpi.so"
+   export TRUE_MPI_F_LIB="$env(MPI_ROOT)/lib64/libmpifort.so"
+   export LD_PRELOAD="path_to_wi4mpi_install/libexec/libwi4mpi_INTEL_INTEL.so $TRUE_MPI_F_LIB $TRUE_MPI_LIB"
+   export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
+   export WI4MPI_APP_INCLUDES "path_to_wi4mpi_install/preload/include/INTEL_INTEL"
+   export WI4MPI_COMPILE_OPT "-Dmpich_mpich -DINTEL_INTEL"
+
+
+- IntelMPI --> OpenMPI
+
+   export TRUE_MPI_LIB="$env(MPI_ROOT)/lib/libmpi.so"
+   export TRUE_MPI_F_LIB="$env(MPI_ROOT)/lib/libmpi_mpifh.so"
+   export LD_PRELOAD="path_to_wi4mpi_install/libexec/libwi4mpi_OMPI_INTEL.so $TRUE_MPI_F_LIB $TRUE_MPI_LIB"
+   export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakelibINTEL:$LD_LIBRARY_PATH"
+   export WI4MPI_APP_INCLUDES "path_to_wi4mpi_install/preload/include/INTEL_OMPI"
+   export WI4MPI_COMPILE_OPT "-Dmpich_ompi -DINTEL_OMPI"
+
+
+Au TGCC (Très Grand Centre de Calcul du CEA) nous utilisons un environnement module avec un système de flavor permettant une manière simple et intuitif de changer de conversion.
+
+Le protocol est le suivant:
+   - module load wi4mpi: on charge le module par defaut de wi4mpi ainsi que les deux flavors (from et to) indiquant la conversion :
+         - flavor/wi4mpi/from/openmpi
+         - flavor/wi4mpi/to/openmpi
+   
+   Dans ce cas précis, la flavor "from" indique la souche MPI avec laquelle a été compilé l'application, tandis que la flavor "to" indique la souche avec laquelle on désire exécuter l'application. L'utilisation des flavors permet une gestion dynamique du chargement des modules MPI sous-jacent.
+Ainsi lors de l'exécution la conversion effectuée sera OpenMPI ---> IntelMPI.
+
+La seconde façon d'utiliser wi4mpi est de passer par l'interface. Le but de cette interface est de compiler l'application une bonne fois pour toute avec, puis de choisir la souche MPI du runtime, et ensuite de laisser wi4mpi s'occuper de la traduction d'ABI.
+Cette version à l'echelle d'un centre de calcul permet le changement d'une souche MPI pour tout les produits qui en dépandent sans aucunes recompilation. Ce scénario est utile lorsqu'un doute se présente sur les performances d'une souche MPI.
+Pour ce faire, les variables suivantes doivent êtres configurées:
+
+ - export WI4MPI_INTERNAL_INCLUDES="path_to_install/INTERNAL/include"
+ - export CCC_LIBMPI_ROOT="/path_to_wi4mpi_install_root"
+ - export CCC_LIBMPICC=icc
+ - export CCC_MPIFC=ifort
+ - export CCC_MPICXX=icpc
+ 
+ - CCC --> IntelMPI
+   
+   setenv TRUE_MPI_LIB $env(MPI_ROOT)/lib64/libmpi.so
+   setenv TRUE_MPI_F_LIB $env(MPI_ROOT)/lib64/libmpifort.so
+   setenv WRAPPER_WI4MPI $env(CCC_LIBMPI_ROOT)/lib_IMPI/libwi4mpi_CCC_INTEL.so
+   setenv WI4MPI_APP_INCLUDES="path_to_install/interface/include/OMPI_OMPI"
+   setenv WI4MPI_COMPILE_OPT="-Dompi_ompi -DOMPI_OMPI"
+
+   
+
+ - CCC --> OpenMPI
+
+   setenv TRUE_MPI_LIB $env(MPI_ROOT)/lib/libmpi.so
+   setenv TRUE_MPI_F_LIB $env(MPI_ROOT)/lib/libmpi_mpifh.so
+   setenv WRAPPER_WI4MPI $env(CCC_LIBMPI_ROOT)/lib_OMPI/libwi4mpi_CCC_OMPI.so
+   setenv WI4MPI_APP_INCLUDES="path_to_install/interface/include/OMPI_INTEL"
+   setenv WI4MPI_COMPILE_OPT="-Dompi_ompi -DOMPI_INTEL"
+
+Comme pour la version preload, l'interface a été mise en place au TGCC avec un environnement module.
+   - module load wi4mpi: on charge le module par defaut de wi4mpi ainsi que les deux flavors (from et to) indiquant la conversion :
+         - flavor/wi4mpi/from/interface   (par defaut)  
+         - flavor/wi4mpi/to/openmpi     (par defaut)  
+
+Les différentes flavors sont les suivantes:
+   - flavor/wi4mpi/from/interface 
+   - flavor/wi4mpi/from/openmpi 
+   - flavor/wi4mpi/from/intelmpi
+   - flavor/wi4mpi/to/openmpi 
+   - flavor/wi4mpi/to/intelmpi
+
+L'avantage de ce système de flavor est la gestion dynamique et automatique de l'environnement MPI. En effet, en changeant de flavor ( ex : module switch flavor/wi4mpi/from/interface flavor/wi4mpi/from/openmpi), non seulement wi4mpi passe du mode interface a preload, mais l'environnement MPI est à jour.
+
+Quelques mots:
+--------------
+
+Merci d'utiliser wi4mpi. Ce logiciel est toujours en développement, donc certains bug doivent toujours être présents.
+N'hésitez pas a contacter les auteurs en cas de bug, et donc de participer a la robustesse de wi4mpi.

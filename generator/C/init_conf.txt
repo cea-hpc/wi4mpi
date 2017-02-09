@@ -6,6 +6,12 @@ group_translation_init();
 errhandler_translation_init();
 file_translation_init();
 info_translation_init();
+win_translation_init();
+message_translation_init();
+t_enum_translation_init();
+cvar_handle_translation_init();
+pvar_handle_translation_init();
+//pvar_session_translation_init();
 //DATATYPE
 datatype_translation_add_const(A_MPI_DATATYPE_NULL, R_MPI_DATATYPE_NULL);
 datatype_translation_add_const(A_MPI_CHAR, R_MPI_CHAR);
@@ -41,6 +47,28 @@ datatype_translation_add_const(A_MPI_COMPLEX, R_MPI_COMPLEX);
 datatype_translation_add_const(A_MPI_INTEGER, R_MPI_INTEGER);
 datatype_translation_add_const(A_MPI_REAL, R_MPI_REAL);
 datatype_translation_add_const(A_MPI_DOUBLE_PRECISION,R_MPI_DOUBLE_PRECISION);
+/*New datatypes from the MPI 2.2 standard*/
+datatype_translation_add_const(A_MPI_INT8_T               ,R_MPI_INT8_T               );
+datatype_translation_add_const(A_MPI_UINT8_T              ,R_MPI_UINT8_T              );
+datatype_translation_add_const(A_MPI_INT16_T              ,R_MPI_INT16_T              );
+datatype_translation_add_const(A_MPI_UINT16_T             ,R_MPI_UINT16_T             );
+datatype_translation_add_const(A_MPI_INT32_T              ,R_MPI_INT32_T              );
+datatype_translation_add_const(A_MPI_UINT32_T             ,R_MPI_UINT32_T             );
+datatype_translation_add_const(A_MPI_INT64_T              ,R_MPI_INT64_T              );
+datatype_translation_add_const(A_MPI_UINT64_T             ,R_MPI_UINT64_T             );
+datatype_translation_add_const(A_MPI_AINT                 ,R_MPI_AINT                 );
+datatype_translation_add_const(A_MPI_OFFSET               ,R_MPI_OFFSET               );
+datatype_translation_add_const(A_MPI_C_BOOL               ,R_MPI_C_BOOL               );
+datatype_translation_add_const(A_MPI_C_COMPLEX            ,R_MPI_C_COMPLEX            );
+datatype_translation_add_const(A_MPI_C_FLOAT_COMPLEX      ,R_MPI_C_FLOAT_COMPLEX      );
+datatype_translation_add_const(A_MPI_C_DOUBLE_COMPLEX     ,R_MPI_C_DOUBLE_COMPLEX     );
+datatype_translation_add_const(A_MPI_C_LONG_DOUBLE_COMPLEX,R_MPI_C_LONG_DOUBLE_COMPLEX);
+datatype_translation_add_const(A_MPI_CXX_BOOL             ,R_MPI_CXX_BOOL             );
+datatype_translation_add_const(A_MPI_CXX_FLOAT_COMPLEX    ,R_MPI_CXX_FLOAT_COMPLEX    );
+datatype_translation_add_const(A_MPI_CXX_DOUBLE_COMPLEX   ,R_MPI_CXX_DOUBLE_COMPLEX   );
+datatype_translation_add_const(A_MPI_CXX_LONG_DOUBLE_COMPLEX,R_MPI_CXX_LONG_DOUBLE_COMPLEX);
+/*New datatypes from the 3.0 standard*/
+//datatype_translation_add_const(A_MPI_COUNT,R_MPI_COUNT);
 //COMM
 communicator_translation_add_const(A_MPI_COMM_WORLD, R_MPI_COMM_WORLD);
 communicator_translation_add_const(A_MPI_COMM_SELF, R_MPI_COMM_SELF);
@@ -74,5 +102,15 @@ errhandler_translation_add_const(A_MPI_ERRORS_RETURN, R_MPI_ERRORS_RETURN);
 file_translation_add_const(A_MPI_FILE_NULL, R_MPI_FILE_NULL);
 //INFO
 info_translation_add_const(A_MPI_INFO_NULL, R_MPI_INFO_NULL);
-
+//WIN
+win_translation_add_const(A_MPI_WIN_NULL, R_MPI_WIN_NULL);
+//MESSAGE
+message_translation_add_const(A_MPI_MESSAGE_NULL,R_MPI_MESSAGE_NULL);
+message_translation_add_const(A_MPI_MESSAGE_NO_PROC,R_MPI_MESSAGE_NO_PROC);
+//MPI_T
+t_enum_translation_add_const(A_MPI_T_ENUM_NULL,R_MPI_T_ENUM_NULL);
+cvar_handle_translation_add_const(A_MPI_T_CVAR_HANDLE_NULL,R_MPI_T_CVAR_HANDLE_NULL);
+pvar_handle_translation_add_const(A_MPI_T_PVAR_HANDLE_NULL,R_MPI_T_PVAR_HANDLE_NULL);
+//pvar_session_translation_add_const(A_MPI_T_PVAR_SESSION_NULL,R_MPI_T_PVAR_SESSION_NULL);
+wrapper_init_f();
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+modarg=''
+for arg in "$@"; do
+modarg+=`echo "x$arg" | sed -e 's/^x//' -e 's/"/\\\"/g' -e s,\',%@%\',g -e 's/%@%/\\\/g' -e 's/ /\\\ /g' -e 's#(#\\\(#g' -e 's#)#\\\)#g'`
+modarg+=' ' 
+done
+${CCC_LIBMPICC} -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi $modarg
+exit $?

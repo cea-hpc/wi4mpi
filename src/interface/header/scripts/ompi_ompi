@@ -1,0 +1,62 @@
+app:
+
+sed 's/MPI_/A_MPI_/g' ompi_mpi.h | sed 's/PA_MPI_/A_PMPI_/g' | sed '1 i #ifndef CCC_MPI\n#define CCC_MPI\n\n#ifndef __MPI__COMPILE__\n#define A_MPI_ MPI_\n#define A_PMPI_ PMPI_\n#endif\ntypedef unsigned long size_t;' | sed '9,326 d' | sed '9,10 d' | sed '8,28 s/typedef .*A_/typedef size_t A_/g' | sed '15 d' | sed '16 d' | sed '27 a typedef int A_MPI_Fint;' | sed '32 s/ompi_status_public_t/CCC_mpi_status_struct/g' | sed 's/typedef struct ompi_status_public_t ompi_status_public_t;/typedef struct CCC_mpi_status_struct A_MPI_Status;/g' | sed 's/OA_MPI_DECLSPEC//g' | sed 's/const //g' | sed 's/A_MPI_MAX_PROCESSOR_NAME OPAL_MAX_PROCESSOR_NAME/OPAL_MAX_PROCESSOR_NAME 512/g' | sed 's/A_MPI_MAX_ERROR_STRING   OPAL_MAX_ERROR_STRING/OPAL_MAX_ERROR_STRING  2048/g' | sed 's/A_MPI_MAX_OBJECT_NAME    OPAL_MAX_OBJECT_NAME/OPAL_MAX_OBJECT_NAME   1024/g' | sed 's/A_MPI_MAX_INFO_KEY         OPAL_MAX_INFO_KEY/A_MPI_MAX_INFO_KEY 256/g' | sed 's/A_MPI_MAX_INFO_VAL         OPAL_MAX_INFO_VAL/A_MPI_MAX_INFO_VAL 512/g' | sed 's/A_MPI_MAX_PORT_NAME        OPAL_MAX_PORT_NAME/A_MPI_MAX_PORT_NAME 512/g' | sed 's/A_MPI_MAX_DATAREP_STRING OPAL_MAX_DATAREP_STRING/A_MPI_MAX_DATAREP_STRING 512/g' | sed '437 d' | sed '438 d' | sed '429,438 s/\(\w*_NULL\).*)/\1 0x0/g' | sed '445,446 s/\(\w*_IGNORE\).*)/\1 0x0/g' | sed '455,469 d' | sed '456 d' | sed '480 d' | sed '456,470 s/\(\w*_FN \).*$/\1 0x0/g' | sed '481,550 d' | sed 's/A_MPI_COMM_WORLD OA_MPI_PREDEFINED_GLOBAL( A_MPI_Comm, ompi_mpi_comm_world)/A_MPI_COMM_WORLD 0x1/g' | sed 's/A_MPI_COMM_SELF OA_MPI_PREDEFINED_GLOBAL(A_MPI_Comm, ompi_mpi_comm_self)/A_MPI_COMM_SELF 0x2/g' | sed 's/#define A_MPI_GROUP_EMPTY OA_MPI_PREDEFINED_GLOBAL(A_MPI_Group, ompi_mpi_group_empty)/#define A_MPI_GROUP_EMPTY 0x1/g' | sed 's/A_MPI_MESSAGE_NO_PROC OA_MPI_PREDEFINED_GLOBAL(A_MPI_Message, ompi_message_no_proc)/A_MPI_MESSAGE_NO_PROC 0x1/g' > app_mpi_2.h
+
+sed 's/MPI_/A_MPI_/g' ompi_mpi.h | sed 's/PA_MPI_/A_PMPI_/g' | sed '1 i #ifndef CCC_MPI\n#define CCC_MPI\n\n#ifndef __MPI__COMPILE__\n#define A_MPI_ MPI_\n#define A_PMPI_ PMPI_\n#endif\ntypedef unsigned long size_t;' | sed '9,326 d' | sed '9,10 d' | sed '8,28 s/typedef .*A_/typedef size_t A_/g' | sed '15 d' | sed '16 d' | sed '27 a typedef int A_MPI_Fint;' | sed '32 s/ompi_status_public_t/CCC_mpi_status_struct/g' | sed 's/typedef struct ompi_status_public_t ompi_status_public_t;/typedef struct CCC_mpi_status_struct A_MPI_Status;/g' | sed 's/OA_MPI_DECLSPEC//g' | sed 's/const //g' | sed 's/A_MPI_MAX_PROCESSOR_NAME OPAL_MAX_PROCESSOR_NAME/OPAL_MAX_PROCESSOR_NAME 512/g' | sed 's/A_MPI_MAX_ERROR_STRING   OPAL_MAX_ERROR_STRING/OPAL_MAX_ERROR_STRING  2048/g' | sed 's/A_MPI_MAX_OBJECT_NAME    OPAL_MAX_OBJECT_NAME/OPAL_MAX_OBJECT_NAME   1024/g' | sed 's/A_MPI_MAX_INFO_KEY         OPAL_MAX_INFO_KEY/A_MPI_MAX_INFO_KEY 256/g' | sed 's/A_MPI_MAX_INFO_VAL         OPAL_MAX_INFO_VAL/A_MPI_MAX_INFO_VAL 512/g' | sed 's/A_MPI_MAX_PORT_NAME        OPAL_MAX_PORT_NAME/A_MPI_MAX_PORT_NAME 512/g' | sed 's/A_MPI_MAX_DATAREP_STRING OPAL_MAX_DATAREP_STRING/A_MPI_MAX_DATAREP_STRING 512/g' | sed '437 d' | sed '438 d' | sed '429,438 s/\(\w*_NULL\).*)/\1 0x0/g' | sed '445,446 s/\(\w*_IGNORE\).*)/\1 0x0/g' | sed '455,469 d' | sed '456 d' | sed '480 d' | sed '456,470 s/\(\w*_FN \).*$/\1 0x0/g' | sed '481,550 d' | sed 's/A_MPI_COMM_WORLD OA_MPI_PREDEFINED_GLOBAL( A_MPI_Comm, ompi_mpi_comm_world)/A_MPI_COMM_WORLD 0x1/g' | sed 's/A_MPI_COMM_SELF OA_MPI_PREDEFINED_GLOBAL(A_MPI_Comm, ompi_mpi_comm_self)/A_MPI_COMM_SELF 0x2/g' | sed 's/#define A_MPI_GROUP_EMPTY OA_MPI_PREDEFINED_GLOBAL(A_MPI_Group, ompi_mpi_group_empty)/#define A_MPI_GROUP_EMPTY 0x1/g' | sed 's/A_MPI_MESSAGE_NO_PROC OA_MPI_PREDEFINED_GLOBAL(A_MPI_Message, ompi_message_no_proc)/A_MPI_MESSAGE_NO_PROC 0x1/g' > test.c
+
+for i in `seq 1 14`; do sed "$((625+$i)) s/OA_MPI_PREDEFINED_GLOBAL.*)/$i/g" test.c > app_mpi_2.h ; cp app_mpi_2.h test.c ;done
+sed '666 d' test.c > app_mpi_2.h
+cp app_mpi_2.h test.c
+sed '669 d' test.c > app_mpi_2.h
+cp app_mpi_2.h test.c
+for i in `seq 0 28`; do sed "$((642+$i)) s/OA_MPI_PREDEFINED_GLOBAL.*)/$i/g" test.c > app_mpi_2.h ; cp app_mpi_2.h test.c ;done
+sed '673,754 s/^\(#if\|#endif\).*$//g' test.c > app_mpi_2.h
+cp app_mpi_2.h test.c
+delete the empty lines within the range 673-757 in app_mpi_2.h then do the cp app_mpi_2.h test.c
+for i in `seq 0 24`; do sed "$((673+$i)) s/OA_MPI_PREDEFINED_GLOBAL.*)/$(($i+29))/g" test.c > app_mpi_2.h ; cp app_mpi_2.h test.c ;done
+for i in `seq 0 19`; do sed "$((700+$i)) s/OA_MPI_PREDEFINED_GLOBAL.*)/$(($i+54))/g" test.c > app_mpi_2.h ; cp app_mpi_2.h test.c ;done
+#define A_MPI_COUNT 73 
+#define A_MPI_ERRORS_ARE_FATAL 1 
+#define A_MPI_ERRORS_RETURN 2 
+delete the extern from 480 up to the last one except extern struct ompi_predefined_datatype_t ompi_mpi_cxx_cplex;
+vim -O app_mpi_1.h app_mpi_2.h
+at line 55 and next (user_fcts) correct app_mpi_2.h to app_mpi_1.h
+2065 2089 app_mpi_2.h : delete
+from line 755 delete all if and endif
+2 ifndef endif at the end
+
+patching:
+---------
+line 21 to be commented
+line 63 replace Comm by File
+delete all _mpi_interface_deprecated__("*******") and don't forget the ;
+
+
+run:
+sed 's/MPI_/R_MPI_/g' ompi_mpi.h | sed 's/OR_MPI_/OMPI_/g' | sed 's/PR_MPI_/R_PMPI_/g' | sed 's/#define OMPI_OFFSET_DATATYPE R_MPI_LONG_LONG/#define R_OMPI_OFFSET_DATATYPE R_MPI_LONG_LONG/g' | sed 's/#    include "mpi_portable_platform.h"/\/\/#    include "mpi_portable_platform.h"/g' | sed '29,294 s/MPIO/R_MPIO/g' | sed '308 s/&(global)/(ccc_##global)/g' | sed '311 a #if OMPI_LOAD_SYM\n#define OMPI_PREDEFINED_GLOBAL(type, global) global\n#endif' | sed '338,361 s/ompi_status_public_t/r_ompi_status_public_t/g' | sed -e '790,792 s/\(OMPI_C\)_R\(.*$\)/(\*ccc_\1\2)/g' -e '800 s/\(OMPI_C\)_R\(.*$\)/(\*ccc_\1\2)/g' | sed '794,804 s/\(OMPI_C\)_R\(.*$\)/\1\2/g' | sed -e '816 i /\*' -e '877 i \*/'> run_mpi_2.h
+
+in run_mpi_2.h at line 880 add this
+int (*ccc_OMPI_C_MPI_NULL_DELETE_FN)( R_MPI_Comm comm, int comm_keyval,
+                                           void* attribute_val_out,    
+                                           void* extra_state );        
+int (*ccc_OMPI_C_MPI_DUP_FN)( R_MPI_Comm comm, int comm_keyval,        
+                                   void* extra_state,                  
+                                   void* attribute_val_in,             
+                                   void* attribute_val_out,            
+                                   int* flag );                        
+int (*ccc_OMPI_C_MPI_NULL_COPY_FN)( R_MPI_Comm comm, int comm_keyval,  
+                                         void* extra_state,            
+                                         void* attribute_val_in,       
+                                         void* attribute_val_out,      
+                                         int* flag );                  
+int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,   
+                                        void* extra_state,             
+                                        void* attribute_val_in,        
+                                        void* attribute_val_out,       
+                                        int* flag );                   
+
+cp run_mpi_2.h test_2.c
+sed '907 i #if !allocate_global\n#define ccc_linkage extern\n#else\n#define ccc_linkage\n#endif' test_2.c | sed '912,1041  s/^.* ompi/ccc_linkage void *ccc_ompi/g' | sed 's/__mpi_interface_deprecated__("R_MPI_LB is deprecated in MPI-2.0");/;/g' | sed 's/__mpi_interface_deprecated__("R_MPI_UB is deprecated in MPI-2.0");/;/g' | sed -e '1043 d' -e '1044 d' | sed 's/const //g' > run_mpi_2.h 
+[delfot4c@curie70 OMPI_OMPI]$ vim -d run_mpi_1.h run_mpi_2.h
+
+patching:

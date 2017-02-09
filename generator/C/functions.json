@@ -1833,7 +1833,7 @@
       {
         "var": "datatype", 
         "arg_dep": "", 
-        "Out": 0, 
+        "Out": 1, 
         "name": "Datatype_ptr_converter", 
         "In": 1
       }
@@ -2665,7 +2665,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "In": 1
       }, 
       {
@@ -2673,7 +2673,7 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "buffer_mapper", 
-        "In": 0
+        "In": 1 
       }, 
       {
         "var": "count", 
@@ -2780,7 +2780,7 @@
         "var": "user_fn", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "User_fct_ptr_converter", 
+        "name": "reduce_user_fn_converter", 
         "In": 1
       }, 
       {
@@ -3631,7 +3631,7 @@
       {
         "var": "comm", 
         "arg_dep": "", 
-        "Out": 1, 
+        "Out": 0, 
         "name": "Comm_converter", 
         "In": 1
       }, 
@@ -3639,7 +3639,7 @@
         "var": "keyval", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "In": 1
       }, 
       {
@@ -3672,7 +3672,7 @@
         "var": "keyval", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "In": 1
       }, 
       {
@@ -3704,7 +3704,7 @@
       {
         "var": "comm", 
         "arg_dep": "", 
-        "Out": 1, 
+        "Out": 0, 
         "name": "Comm_converter", 
         "In": 1
       }, 
@@ -3712,7 +3712,7 @@
         "var": "keyval", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "In": 1
       }
     ], 
@@ -4559,7 +4559,7 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -4580,7 +4580,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -4633,9 +4633,9 @@
       {
         "var": "origin_addr", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
-        "Out": 1
+        "Out": 0 
       }, 
       {
         "var": "origin_count", 
@@ -4655,7 +4655,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -4669,7 +4669,7 @@
         "var": "target_count", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -4702,7 +4702,7 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -4723,7 +4723,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -4843,7 +4843,7 @@
         "var": "assert", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "assert_mapper", 
         "Out": 0
       }, 
       {
@@ -4914,21 +4914,21 @@
         "var": "lock_type", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "lock_mapper", 
         "Out": 0
       }, 
       {
         "var": "rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
         "var": "assert", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "assert_mapper", 
         "Out": 0
       }, 
       {
@@ -4961,7 +4961,7 @@
         "var": "assert", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "assert_mapper", 
         "Out": 0
       }, 
       {
@@ -4994,7 +4994,7 @@
         "var": "assert", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "assert_mapper", 
         "Out": 0
       }, 
       {
@@ -5046,7 +5046,7 @@
         "var": "rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -5118,7 +5118,7 @@
       {
         "var": "baseptr", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -5172,7 +5172,7 @@
       {
         "var": "baseptr", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -5206,7 +5206,7 @@
         "var": "rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -5319,7 +5319,7 @@
         "var": "base", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }
     ], 
@@ -5390,7 +5390,7 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -5410,7 +5410,7 @@
       {
         "var": "result_addr", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -5432,7 +5432,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -5486,13 +5486,13 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
         "var": "result_addr", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -5507,7 +5507,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -5547,14 +5547,14 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
         "var": "compare_addr", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -5575,7 +5575,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -5608,7 +5608,7 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "In": 1
       }, 
       {
@@ -5629,7 +5629,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "In": 1
       }, 
       {
@@ -5665,7 +5665,8 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "Request_ptr_converter", 
-        "In": 0
+        "In": 0,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Rput", 
@@ -5684,7 +5685,7 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "buffer_mapper", 
-        "In": 0
+        "In": 1
       }, 
       {
         "var": "origin_count", 
@@ -5704,7 +5705,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "In": 1
       }, 
       {
@@ -5740,7 +5741,8 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "Request_ptr_converter", 
-        "In": 0
+        "In": 0,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Rget", 
@@ -5758,7 +5760,7 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "In": 1
       }, 
       {
@@ -5779,7 +5781,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "In": 1
       }, 
       {
@@ -5822,7 +5824,8 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "Request_ptr_converter", 
-        "In": 0
+        "In": 0,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Raccumulate", 
@@ -5840,7 +5843,7 @@
         "var": "origin_addr", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -5860,7 +5863,7 @@
       {
         "var": "result_addr", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -5882,7 +5885,7 @@
         "var": "target_rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -5925,7 +5928,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Rget_accumulate", 
@@ -5943,7 +5947,7 @@
         "var": "assert", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "assert_mapper", 
         "Out": 0
       }, 
       {
@@ -5988,7 +5992,7 @@
         "var": "rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -6033,7 +6037,7 @@
         "var": "rank", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "source_converter", 
         "Out": 0
       }, 
       {
@@ -6123,7 +6127,7 @@
         "var": "errorcode", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "error_ptr_converter", 
+        "name": "error_ptr_converter_2", 
         "Out": 1
       }
     ], 
@@ -6142,7 +6146,7 @@
         "var": "errorcode", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "error_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -6235,7 +6239,7 @@
         "arg_dep": "", 
         "In": 1, 
         "name": "Comm_converter", 
-        "Out": 1
+        "Out": 0 
       }, 
       {
         "var": "comm_keyval", 
@@ -6286,7 +6290,7 @@
         "var": "comm_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "Out": 0
       }, 
       {
@@ -6353,7 +6357,7 @@
         "arg_dep": "", 
         "In": 1, 
         "name": "Comm_converter", 
-        "Out": 1
+        "Out": 0 
       }, 
       {
         "var": "comm_keyval", 
@@ -6437,7 +6441,7 @@
         "var": "request", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "Request_converter", 
+        "name": "Request_tab_converter", 
         "Out": 1
       }
     ], 
@@ -6456,7 +6460,7 @@
         "var": "query_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "greq_query_ptr_converter", 
+        "name": "grequest_query_fn_converter", 
         "Out": 0
       }, 
       {
@@ -6485,7 +6489,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Grequest_start", 
@@ -6640,14 +6645,14 @@
         "var": "type_copy_attr_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "type_cpy_attr_ptr_converter", 
+        "name": "type_copy_attr_fn_converter", 
         "Out": 0
       }, 
       {
         "var": "type_delete_attr_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "type_del_attr_ptr_converter", 
+        "name": "type_delete_attr_fn_converter", 
         "Out": 0
       }, 
       {
@@ -6687,7 +6692,7 @@
         "var": "type_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "Out": 0
       }
     ], 
@@ -6732,7 +6737,7 @@
         "var": "type_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_ptr_mapper", 
+        "name": "keyval_ptr_mapper", 
         "Out": 1
       }
     ], 
@@ -6758,7 +6763,7 @@
         "var": "type_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "Out": 0
       }, 
       {
@@ -6878,7 +6883,7 @@
         "var": "type_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "Out": 0
       }, 
       {
@@ -6930,7 +6935,7 @@
         "var": "typeclass", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "typeclass_mapper", 
         "Out": 0
       }, 
       {
@@ -6989,14 +6994,14 @@
         "var": "win_copy_attr_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "win_cpy_attr_ptr_converter", 
+        "name": "win_copy_attr_converter", 
         "Out": 0
       }, 
       {
         "var": "win_delete_attr_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "win_del_attr_ptr_converter", 
+        "name": "win_delete_attr_converter", 
         "Out": 0
       }, 
       {
@@ -7036,7 +7041,7 @@
         "var": "win_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "tag_converter", 
+        "name": "keyval_mapper", 
         "Out": 0
       }
     ], 
@@ -7055,7 +7060,7 @@
         "var": "win_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_ptr_mapper", 
+        "name": "keyval_ptr_mapper", 
         "Out": 1
       }
     ], 
@@ -7081,14 +7086,14 @@
         "var": "win_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "tag_converter", 
+        "name": "keyval_mapper", 
         "Out": 0
       }, 
       {
         "var": "attribute_val", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "buffer_mapper", 
+        "name": "win_attr_mapper", 
         "Out": 1
       }, 
       {
@@ -7154,14 +7159,14 @@
         "var": "win_keyval", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "keyval_mapper", 
         "Out": 0
       }, 
       {
         "var": "attribute_val", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "buffer_mapper", 
+        "name": "win_attr_mapper", 
         "Out": 0
       }
     ], 
@@ -7187,7 +7192,7 @@
         "var": "win_name", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_char_ptr_converter", 
+        "name": "char_ptr_mapper", 
         "Out": 0
       }
     ], 
@@ -7219,7 +7224,7 @@
       {
         "var": "baseptr", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }
@@ -7436,7 +7441,7 @@
         "var": "location", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -8087,7 +8092,7 @@
         "var": "inbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -8160,7 +8165,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -8389,7 +8394,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Imrecv", 
@@ -8453,7 +8459,7 @@
       {
         "var": "buf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -8516,7 +8522,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Comm_idup", 
@@ -8542,7 +8549,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ibarrier", 
@@ -8596,7 +8604,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ibcast", 
@@ -8614,7 +8623,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -8634,7 +8643,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -8671,7 +8680,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Igather", 
@@ -8689,7 +8699,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -8709,7 +8719,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -8746,7 +8756,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Iscatter", 
@@ -8764,7 +8775,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -8784,7 +8795,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -8814,7 +8825,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Iallgather", 
@@ -8832,7 +8844,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -8852,7 +8864,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -8882,7 +8894,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ialltoall", 
@@ -8906,7 +8919,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -8950,7 +8963,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ireduce", 
@@ -8974,7 +8988,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -9011,7 +9025,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Iallreduce", 
@@ -9035,7 +9050,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -9043,7 +9058,7 @@
         "var": "recvcount", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "tag_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -9072,7 +9087,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ireduce_scatter_block", 
@@ -9096,7 +9112,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -9133,7 +9149,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Iscan", 
@@ -9157,7 +9174,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -9194,7 +9211,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Iexscan", 
@@ -9262,7 +9280,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ineighbor_allgather", 
@@ -9300,7 +9319,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -9330,7 +9349,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ineighbor_alltoall", 
@@ -9348,7 +9368,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -9368,7 +9388,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -9409,7 +9429,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -9429,7 +9449,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -9477,7 +9497,7 @@
         "var": "split_type", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "split_mapper", 
         "Out": 0
       }, 
       {
@@ -9517,7 +9537,7 @@
         "var": "status", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "Status_const_ptr_converter", 
+        "name": "Status_ptr_converter", 
         "Out": 0
       }, 
       {
@@ -9741,7 +9761,7 @@
         "var": "enumtype", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "t_enum_converter", 
+        "name": "t_enum_mapper", 
         "Out": 0
       }, 
       {
@@ -9781,7 +9801,7 @@
         "var": "enumtype", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "t_enum_converter", 
+        "name": "t_enum_mapper", 
         "Out": 0
       }, 
       {
@@ -9882,7 +9902,7 @@
         "var": "enumtype", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "t_enum_ptr_converter", 
+        "name": "t_enum_ptr_mapper", 
         "Out": 1
       }, 
       {
@@ -9943,7 +9963,7 @@
         "var": "handle", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "t_cvar_handle_ptr_converter", 
+        "name": "cvar_handle_ptr_mapper", 
         "Out": 1
       }, 
       {
@@ -9969,7 +9989,7 @@
         "var": "handle", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "t_cvar_handle_ptr_converter", 
+        "name": "cvar_handle_ptr_mapper", 
         "Out": 1
       }
     ], 
@@ -9988,7 +10008,7 @@
         "var": "handle", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "t_cvar_handle_converter", 
+        "name": "cvar_handle_mapper", 
         "Out": 0
       }, 
       {
@@ -10014,7 +10034,7 @@
         "var": "handle", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "t_cvar_handle_converter", 
+        "name": "cvar_handle_mapper", 
         "Out": 0
       }, 
       {
@@ -10101,7 +10121,7 @@
         "var": "enumtype", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "t_enum_ptr_converter", 
+        "name": "t_enum_ptr_mapper", 
         "Out": 1
       }, 
       {
@@ -10221,7 +10241,7 @@
         "var": "handle", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "t_pvar_handle_ptr_converter", 
+        "name": "pvar_handle_ptr_mapper", 
         "Out": 1
       }, 
       {
@@ -10254,7 +10274,7 @@
         "var": "handle", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "t_pvar_handle_ptr_converter", 
+        "name": "pvar_handle_ptr_mapper", 
         "Out": 1
       }
     ], 
@@ -10541,7 +10561,7 @@
         "Out": 1
       }
     ], 
-    "name": "MPI_T_category_changed", 
+    "name": "PI_T_category_changed", 
     "ret": {
       "var": "ret", 
       "arg_dep": "", 
@@ -13041,7 +13061,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -13055,7 +13075,7 @@
         "var": "recvcounts[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -13871,9 +13891,9 @@
       }, 
       {
         "var": "array_of_info[]", 
-        "arg_dep": "", 
+        "arg_dep": "count", 
         "Out": 0, 
-        "name": "const_info_converter", 
+        "name": "Info_converter", 
         "In": 1
       }, 
       {
@@ -13946,7 +13966,7 @@
       }, 
       {
         "var": "array_of_integers[]", 
-        "arg_dep": "max_integers", 
+        "arg_dep": "", 
         "Out": 1, 
         "name": "int_mapper", 
         "In": 0
@@ -14022,7 +14042,7 @@
       {
         "var": "position", 
         "arg_dep": "", 
-        "In": 1, 
+        "In": 0, 
         "name": "Aint_ptr_converter", 
         "Out": 1
       }
@@ -14169,16 +14189,16 @@
       }, 
       {
         "var": "array_of_blocklengths[]", 
-        "arg_dep": "count", 
+        "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
         "var": "array_of_displacements[]", 
         "arg_dep": "count", 
         "In": 1, 
-        "name": "const_aint_converter", 
+        "name": "Aint_converter", 
         "Out": 0
       }, 
       {
@@ -14225,7 +14245,7 @@
         "var": "array_of_displacements[]", 
         "arg_dep": "count", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -14272,7 +14292,7 @@
         "var": "array_of_displacements[]", 
         "arg_dep": "count", 
         "In": 1, 
-        "name": "const_aint_converter", 
+        "name": "Aint_converter", 
         "Out": 0
       }, 
       {
@@ -14433,14 +14453,14 @@
       {
         "var": "position", 
         "arg_dep": "", 
-        "In": 1, 
+        "In": 0, 
         "name": "Aint_ptr_converter", 
         "Out": 1
       }, 
       {
         "var": "outbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -14492,10 +14512,10 @@
         "Out": 0
       }, 
       {
-        "var": "sourceweights[]", 
-        "arg_dep": "indegree", 
+        "var": "sourceweights", 
+        "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "weight_mapper", 
         "Out": 0
       }, 
       {
@@ -14513,10 +14533,10 @@
         "Out": 0
       }, 
       {
-        "var": "destweights[]", 
-        "arg_dep": "outdegree", 
+        "var": "destweights", 
+        "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "weight_mapper", 
         "Out": 0
       }, 
       {
@@ -14588,10 +14608,10 @@
         "Out": 0
       }, 
       {
-        "var": "weights[]", 
-        "arg_dep": "n", 
+        "var": "weights", 
+        "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "weight_mapper", 
         "Out": 0
       }, 
       {
@@ -14649,10 +14669,10 @@
         "Out": 1
       }, 
       {
-        "var": "sourceweights[]", 
-        "arg_dep": "maxindegree", 
+        "var": "sourceweights", 
+        "arg_dep": "", 
         "In": 0, 
-        "name": "int_mapper", 
+        "name": "weight_mapper", 
         "Out": 1
       }, 
       {
@@ -14670,10 +14690,10 @@
         "Out": 1
       }, 
       {
-        "var": "destweights[]", 
-        "arg_dep": "maxoutdegree", 
+        "var": "destweights", 
+        "arg_dep": "", 
         "In": 0, 
-        "name": "int_mapper", 
+        "name": "weight_mapper", 
         "Out": 1
       }
     ], 
@@ -14692,7 +14712,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -14712,7 +14732,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -14720,14 +14740,14 @@
         "var": "recvcounts[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
         "var": "displs[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -14756,7 +14776,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Igatherv", 
@@ -14774,21 +14795,21 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
         "var": "sendcounts[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
-        "var": "displs[]", 
+        "var": "displs", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "const_int_converter", 
+        "name": "cont_int_ptr_mapper", 
         "Out": 0
       }, 
       {
@@ -14801,7 +14822,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -14838,7 +14859,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Iscatterv", 
@@ -14856,7 +14878,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -14876,7 +14898,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -14884,14 +14906,14 @@
         "var": "recvcounts[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
         "var": "displs[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -14913,7 +14935,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Iallgatherv", 
@@ -14931,21 +14954,21 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 1
       }, 
       {
-        "var": "sendcounts[]", 
+        "var": "sendcounts", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "const_int_converter", 
+        "name": "cont_int_ptr_mapper", 
         "Out": 0
       }, 
       {
-        "var": "sdispls[]", 
+        "var": "sdispls", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "cont_int_ptr_mapper", 
         "Out": 0
       }, 
       {
@@ -14958,22 +14981,22 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
       {
-        "var": "recvcounts[]", 
+        "var": "recvcounts", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "cont_int_ptr_mapper", 
         "Out": 0
       }, 
       {
-        "var": "rdispls[]", 
+        "var": "rdispls", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "cont_int_ptr_mapper", 
         "Out": 0
       }, 
       {
@@ -14995,7 +15018,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ialltoallv", 
@@ -15032,7 +15056,7 @@
       }, 
       {
         "var": "sendtypes[]", 
-        "arg_dep": "", 
+        "arg_dep": "Comm_size", 
         "In": 1, 
         "name": "const_datatype_converter", 
         "Out": 0
@@ -15040,7 +15064,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -15060,7 +15084,7 @@
       }, 
       {
         "var": "recvtypes[]", 
-        "arg_dep": "", 
+        "arg_dep": "Comm_size", 
         "In": 1, 
         "name": "const_datatype_converter", 
         "Out": 0
@@ -15077,7 +15101,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ialltoallw", 
@@ -15101,7 +15126,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -15138,7 +15163,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ireduce_scatter", 
@@ -15176,7 +15202,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -15213,7 +15239,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ineighbor_allgatherv", 
@@ -15258,7 +15285,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -15295,7 +15322,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ineighbor_alltoallv", 
@@ -15318,21 +15346,21 @@
       }, 
       {
         "var": "sendcounts[]", 
-        "arg_dep": "", 
+        "arg_dep": "outdegree", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "sdispls[]", 
-        "arg_dep": "", 
+        "arg_dep": "outdegree", 
         "In": 1, 
         "name": "const_aint_converter", 
         "Out": 0
       }, 
       {
         "var": "sendtypes[]", 
-        "arg_dep": "", 
+        "arg_dep": "outdegree", 
         "In": 1, 
         "name": "const_datatype_converter", 
         "Out": 0
@@ -15340,27 +15368,27 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
       {
         "var": "recvcounts[]", 
-        "arg_dep": "", 
+        "arg_dep": "indegree", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "rdispls[]", 
-        "arg_dep": "", 
+        "arg_dep": "indegree", 
         "In": 1, 
         "name": "const_aint_converter", 
         "Out": 0
       }, 
       {
         "var": "recvtypes[]", 
-        "arg_dep": "", 
+        "arg_dep": "indegree", 
         "In": 1, 
         "name": "const_datatype_converter", 
         "Out": 0
@@ -15377,7 +15405,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_Ineighbor_alltoallw", 
@@ -15395,7 +15424,7 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
@@ -15415,7 +15444,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -15423,14 +15452,14 @@
         "var": "recvcounts[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
         "var": "displs[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -15463,21 +15492,21 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "Out": 0
       }, 
       {
         "var": "sendcounts[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
         "var": "sdispls[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -15490,7 +15519,7 @@
       {
         "var": "recvbuf", 
         "arg_dep": "", 
-        "In": 0, 
+        "In": 1, 
         "name": "buffer_mapper", 
         "Out": 1
       }, 
@@ -15498,14 +15527,14 @@
         "var": "recvcounts[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
         "var": "rdispls[]", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -15538,28 +15567,28 @@
         "var": "sendbuf", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "const_buffer_mapper", 
+        "name": "buffer_mapper", 
         "In": 1
       }, 
       {
         "var": "sendcounts[]", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "In": 1
       }, 
       {
         "var": "sdispls[]", 
-        "arg_dep": "", 
+        "arg_dep": "outdegree", 
         "Out": 0, 
-        "name": "const_aint_converter", 
+        "name": "Aint_converter", 
         "In": 1
       }, 
       {
         "var": "sendtypes[]", 
-        "arg_dep": "", 
+        "arg_dep": "outdegree", 
         "Out": 0, 
-        "name": "const_datatype_converter", 
+        "name": "Datatype_converter", 
         "In": 1
       }, 
       {
@@ -15567,27 +15596,27 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "buffer_mapper", 
-        "In": 0
+        "In": 1 
       }, 
       {
         "var": "recvcounts[]", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "const_int_converter", 
+        "name": "int_mapper", 
         "In": 1
       }, 
       {
         "var": "rdispls[]", 
-        "arg_dep": "", 
+        "arg_dep": "indegree", 
         "Out": 0, 
-        "name": "const_aint_converter", 
+        "name": "Aint_converter", 
         "In": 1
       }, 
       {
         "var": "recvtypes[]", 
-        "arg_dep": "", 
+        "arg_dep": "indegree",
         "Out": 0, 
-        "name": "const_datatype_converter", 
+        "name": "Datatype_converter", 
         "In": 1
       }, 
       {
@@ -15741,7 +15770,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_File_iwrite_all", 
@@ -15795,7 +15825,8 @@
         "arg_dep": "", 
         "In": 0, 
         "name": "Request_ptr_converter", 
-        "Out": 1
+        "Out": 1,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_File_iwrite_at_all", 
@@ -16258,7 +16289,7 @@
       "var": "ret", 
       "arg_dep": "", 
       "In": 0, 
-      "name": "error_converter", 
+      "name": "Datatype_converter", 
       "Out": 1
     }
   }, 
@@ -16847,7 +16878,7 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "buffer_mapper", 
-        "In": 0
+        "In": 1
       }, 
       {
         "var": "count", 
@@ -16868,7 +16899,8 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "Request_ptr_converter", 
-        "In": 0
+        "In": 0,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_File_iread_all", 
@@ -16901,7 +16933,7 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "buffer_mapper", 
-        "In": 0
+        "In": 1
       }, 
       {
         "var": "count", 
@@ -16922,10 +16954,30 @@
         "arg_dep": "", 
         "Out": 1, 
         "name": "Request_ptr_converter", 
-        "In": 0
+        "In": 0,
+        "if": "R_MPI_SUCCESS"
       }
     ], 
     "name": "MPI_File_iread_at_all", 
+    "ret": {
+      "var": "ret", 
+      "arg_dep": "", 
+      "Out": 1, 
+      "name": "error_converter", 
+      "In": 0
+    }
+  },
+  {
+    "args": [
+      {
+        "var": "stamp", 
+        "arg_dep": "", 
+        "Out": 1, 
+        "name": "int_ptr_mapper", 
+        "In": 0
+      } 
+    ], 
+    "name": "MPI_T_category_changed", 
     "ret": {
       "var": "ret", 
       "arg_dep": "", 

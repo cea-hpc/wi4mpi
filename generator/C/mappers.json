@@ -1,4 +1,146 @@
 {
+   "reduce_user_fn_converter": {
+    "local_alloc": 0, 
+    "a2r": "reduce_user_fn_a2r", 
+    "type": "MPI_User_function *", 
+    "r2a": "reduce_user_fn_r2a"
+  },
+   "type_delete_attr_fn_converter": {
+    "local_alloc": 0, 
+    "a2r": "type_delete_attr_fn_conv_a2r", 
+    "type": "MPI_Type_delete_attr_function *", 
+    "r2a": "type_delete_attr_fn_conv_r2a",
+    "wrap": "ptr_type_dlt_attr_fn",
+    "wrapped": "wrapper_type_delete_attr_fn" 
+  },
+  "type_copy_attr_fn_converter": {
+    "local_alloc": 0, 
+    "a2r": "type_copy_attr_fn_conv_a2r", 
+    "type": "MPI_Type_copy_attr_function *", 
+    "r2a": "type_copy_attr_fn_conv_r2a",
+    "wrap": "ptr_type_cpy_attr_fn",
+    "wrapped": "wrapper_type_copy_attr_fn" 
+  },
+  "grequest_query_fn_converter": {
+    "local_alloc": 0, 
+    "a2r": "grequest_query_fn_conv_a2r", 
+    "type": "MPI_Grequest_query_function *", 
+    "r2a": "grequest_query_fn_conv_r2a",
+    "wrap": "ptr_grq_query_fn",
+    "wrapped": "wrapper_grequest_query_function" 
+  },
+  "win_copy_attr_converter": {
+    "local_alloc": 0, 
+    "a2r": "win_copy_fn_conv_a2r", 
+    "type": "MPI_Win_copy_attr_function *", 
+    "r2a": "win_copy_fn_conv_r2a",
+    "wrap": "ptr_win_copy_fn",
+    "wrapped": "wrapper_win_copy_function" 
+  },
+  "win_delete_attr_converter": {
+    "local_alloc": 0, 
+    "a2r": "win_delete_fn_conv_a2r", 
+    "type": "MPI_Win_delete_attr_function *", 
+    "r2a": "win_delete_fn_conv_r2a",
+    "wrap": "ptr_win_dlt_fn",
+    "wrapped": "wrapper_win_delete_function" 
+  },
+ "pvar_session_ptr_mapper": {
+    "local_alloc": 1, 
+    "a2r": "pvar_session_conv_a2r", 
+    "type": "MPI_T_pvar_session *", 
+    "r2a": "pvar_session_conv_r2a"
+  },
+ "pvar_session_mapper": {
+    "local_alloc": 0, 
+    "a2r": "pvar_session_conv_a2r", 
+    "type": "MPI_T_pvar_session", 
+    "r2a": "pvar_session_conv_r2a"
+  },
+ "pvar_handle_ptr_mapper": {
+    "local_alloc": 1, 
+    "a2r": "pvar_handle_conv_a2r", 
+    "type": "MPI_T_pvar_handle *", 
+    "r2a": "pvar_handle_conv_r2a"
+  },
+ "pvar_handle_mapper": {
+    "local_alloc": 0, 
+    "a2r": "pvar_handle_conv_a2r", 
+    "type": "MPI_T_pvar_handle", 
+    "r2a": "pvar_handle_conv_r2a"
+  },
+ "cvar_handle_ptr_mapper": {
+    "local_alloc": 1, 
+    "a2r": "cvar_handle_conv_a2r", 
+    "type": "MPI_T_cvar_handle *", 
+    "r2a": "cvar_handle_conv_r2a"
+  },
+ "cvar_handle_mapper": {
+    "local_alloc": 0, 
+    "a2r": "cvar_handle_conv_a2r", 
+    "type": "MPI_T_cvar_handle", 
+    "r2a": "cvar_handle_conv_r2a"
+  },
+ "t_enum_mapper": {
+    "local_alloc": 0, 
+    "a2r": "t_enum_conv_a2r", 
+    "type": "MPI_T_enum", 
+    "r2a": "t_enum_conv_r2a"
+  },
+ "t_enum_ptr_mapper": {
+    "local_alloc": 1, 
+    "a2r": "t_enum_conv_a2r", 
+    "type": "MPI_T_enum *", 
+    "r2a": "t_enum_conv_r2a"
+  },
+ "typeclass_mapper": {
+    "local_alloc": 0, 
+    "a2r": "typeclass_conv_a2r", 
+    "type": "int", 
+    "r2a": "typeclass_conv_r2a"
+  },
+  "split_mapper": {
+    "local_alloc": 0, 
+    "a2r": "splittype_conv_a2r", 
+    "type": "int", 
+    "r2a": "splittype_conv_r2a"
+  },
+  "weight_mapper": {
+    "local_alloc": 0, 
+    "a2r": "weight_conv_a2r", 
+    "type": "int *", 
+    "r2a": "weight_conv_r2a"
+  },
+  "lock_mapper": {
+    "local_alloc": 0, 
+    "a2r": "lock_conv_a2r", 
+    "type": "int", 
+    "r2a": "lock_conv_r2a"
+  },
+    "win_attr_mapper": {
+    "local_alloc": 0, 
+    "a2r": "win_attr_conv_a2r", 
+    "type": "void *", 
+    "r2a": "win_attr_conv_r2a"
+  },
+   "assert_mapper": {
+    "local_alloc": 0, 
+    "a2r": "assert_mode_a2r", 
+    "type": "int", 
+    "r2a": "assert_mode_r2a"
+  },
+   "keyval_mapper": {
+    "local_alloc": 0, 
+    "a2r": "my_keyval_a2r", 
+    "type": "int", 
+    "r2a": "my_keyval_r2a"
+  },
+   "keyval_ptr_mapper": {
+    "local_alloc": 1, 
+    "a2r": "my_keyval_a2r", 
+    "type": "int *", 
+    "r2a": "my_keyval_r2a"
+  },
    "order2_converter":{
     "local_alloc": 0,
     "init_alloc" : "0",
@@ -88,12 +230,6 @@
     "type": "int *", 
     "r2a": "source_conv_r2a"
   }, 
-  "message_ptr_converter": {
-    "local_alloc": 0, 
-    "a2r": "message_ptr_conv_a2r", 
-    "type": "MPI_Message *", 
-    "r2a": "message_ptr_conv_r2a"
-  }, 
   "op_ptr_converter": {
     "local_alloc": 1, 
     "a2r": "op_conv_a2r", 
@@ -142,7 +278,8 @@
     "local_alloc": 0, 
     "a2r": "count_ptr_conv_a2r", 
     "type": "MPI_Count *", 
-    "r2a": "count_ptr_conv_r2a"
+    "r2a": "count_ptr_conv_r2a",
+    "no_map": "TRUE" 
   }, 
   "t_pvar_ptr_converter": {
     "local_alloc": 0, 
@@ -282,7 +419,8 @@
     "local_alloc": 0, 
     "a2r": "t_enum_conv_a2r", 
     "type": "MPI_T_enum", 
-    "r2a": "t_enum_conv_r2a"
+    "r2a": "t_enum_conv_r2a",
+    "no_map": "TRUE"
   }, 
   "double_converter": {
     "local_alloc": 0, 
@@ -295,7 +433,8 @@
     "local_alloc": 0, 
     "a2r": "count_conv_a2r", 
     "type": "MPI_Count", 
-    "r2a": "count_conv_r2a"
+    "r2a": "count_conv_r2a",
+    "no_map": "TRUE"
   }, 
   "Request_ptr_converter": {
     "local_alloc": 1, 
@@ -329,10 +468,10 @@
     "r2a": "request_array_conv_r2a"
   }, 
   "win_ptr_converter": {
-    "local_alloc": 0, 
-    "a2r": "win_ptr_conv_a2r", 
+    "local_alloc": 1, 
+    "a2r": "win_conv_a2r", 
     "type": "MPI_Win *", 
-    "r2a": "win_ptr_conv_r2a"
+    "r2a": "win_conv_r2a"
   }, 
   "Datatype_const_ptr_converter": {
     "local_alloc": 0, 
@@ -344,8 +483,14 @@
     "local_alloc": 0, 
     "a2r": "message_conv_a2r", 
     "type": "MPI_Message", 
-    "r2a": "message_ptr_conv_r2a"
+    "r2a": "message_conv_r2a"
   }, 
+   "message_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "message_conv_a2r", 
+    "type": "MPI_Message *", 
+    "r2a": "message_conv_r2a"
+  },
   "greq_query_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "greq_query_ptr_conv_a2r", 
@@ -378,6 +523,14 @@
     "set": "true"
 
   }, 
+   "error_ptr_converter_2": {
+    "local_alloc": 0, 
+    "a2r": "error_ptr_conv_a2r", 
+    "type": "int *", 
+    "r2a": "*errorcode = error_code_conv_r2a(*errorcode);",
+    "set": "true"
+
+  },
   "const_aint_converter": {
     "local_alloc": 0, 
     "a2r": "const_aint_conv_a2r", 
@@ -411,7 +564,8 @@
     "local_alloc": 0, 
     "a2r": "greq_cancel_ptr_conv_a2r", 
     "type": "MPI_Grequest_cancel_function *", 
-    "r2a": "greq_cancel_ptr_conv_r2a"
+    "r2a": "greq_cancel_ptr_conv_r2a",
+    "no_map": "True"
   }, 
   "User_fct_ptr_converter": {
     "local_alloc": 0, 
@@ -536,7 +690,8 @@
     "local_alloc": 0, 
     "a2r": "t_enum_ptr_conv_a2r", 
     "type": "MPI_T_enum *", 
-    "r2a": "t_enum_ptr_conv_r2a"
+    "r2a": "t_enum_ptr_conv_r2a",
+    "no_map" : "TRUE"
   }, 
   "info_ptr_converter": {
     "local_alloc": 1, 
@@ -609,7 +764,8 @@
     "local_alloc": 0, 
     "a2r": "char_ptr_ptr_conv_a2r", 
     "type": "char **", 
-    "r2a": "char_ptr_ptr_conv_r2a"
+    "r2a": "char_ptr_ptr_conv_r2a",
+    "no_map": "True"
   }, 
   "Status_const_ptr_converter": {
     "local_alloc": 0, 
@@ -628,6 +784,7 @@
     "local_alloc": 0, 
     "a2r": "greq_free_ptr_conv_a2r", 
     "type": "MPI_Grequest_free_function *", 
-    "r2a": "greq_free_ptr_conv_r2a"
+    "r2a": "greq_free_ptr_conv_r2a",
+    "no_map": "True"
   }
 }

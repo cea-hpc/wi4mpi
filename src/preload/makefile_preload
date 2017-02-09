@@ -1,0 +1,178 @@
+############################# Wi4MPI License ###########################
+# `04/04/2016`                                                         #
+# Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
+#                                                                      #
+# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #
+# This file is part of the Wi4MPI library.                             #
+#                                                                      #
+# This software is governed by the CeCILL-C license under French law   #
+# and abiding by the rules of distribution of free software. You can   #
+# use, modify and/ or redistribute the software under the terms of     #
+# the CeCILL-C license as circulated by CEA, CNRS and INRIA at the     #
+# following URL http://www.cecill.info.                                #
+#                                                                      #
+# The fact that you are presently reading this means that you have     #
+# had knowledge of the CeCILL-C license and that you accept its        #
+# terms.                                                               #
+#                                                                      #
+# Authors:                                                             #
+#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
+#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#                                                                      #
+########################################################################
+
+
+CC=icc
+FC=ifort
+
+prefix=/usr/local
+exec_prefix=$(prefix)
+bindir=$(exec_prefix)/bin
+libexecdir=$(exec_prefix)
+sysconfdir=$(exec_prefix)/etc
+
+MPICC=mpicc
+CFLAGS = -g -O3 -fPIC -shared -pthread
+#CFLAGS += -DDEBUG
+SOURCES = ../common/new_utils.c ../common/new_utils_fn.c gen/test_generation_wrapper.c gen/wrapper.c gen/c2f_f2c.c ../common/func_char_fort.c 
+empty_lib_src = gen/lib_empty.c 
+INSTALL = install
+
+OMPI_OMPI_OBJS=$(subst .c,_OMPI_OMPI.o,$(SOURCES) )
+OMPI_INTEL_OBJS=$(subst .c,_OMPI_INTEL.o,$(SOURCES) )
+INTEL_OMPI_OBJS=$(subst .c,_INTEL_OMPI.o,$(SOURCES) )
+INTEL_INTEL_OBJS=$(subst .c,_INTEL_INTEL.o,$(SOURCES) )
+
+WI4MPI_LIBEXECDIR=libexec/wi4mpi
+OMPI_FAKE_LIBDIR=$(WI4MPI_LIBEXECDIR)/fakelibOMPI
+INTEL_FAKE_LIBDIR=$(WI4MPI_LIBEXECDIR)/fakelibINTEL
+CXX_FAKE_LIBDIR=$(WI4MPI_LIBEXECDIR)/fakelibCXX
+
+OMPI_OMPI_LIBS=$(WI4MPI_LIBEXECDIR)/libwi4mpi_OMPI_OMPI.so
+OMPI_INTEL_LIBS=$(WI4MPI_LIBEXECDIR)/libwi4mpi_OMPI_INTEL.so
+INTEL_OMPI_LIBS=$(WI4MPI_LIBEXECDIR)/libwi4mpi_INTEL_OMPI.so
+INTEL_INTEL_LIBS=$(WI4MPI_LIBEXECDIR)/libwi4mpi_INTEL_INTEL.so
+
+INTEL_FAKE_LIBS=$(INTEL_FAKE_LIBDIR)/libmpifort.so.12 $(INTEL_FAKE_LIBDIR)/libmpi.so.12 
+OMPI_FAKE_LIBS=$(OMPI_FAKE_LIBDIR)/libmpi.so.1 $(OMPI_FAKE_LIBDIR)/libmpi_f77.so.1  $(OMPI_FAKE_LIBDIR)/libmpi_f90.so.1  $(OMPI_FAKE_LIBDIR)/libmpi_mpifh.so.2
+CXX_FAKE_LIBS=$(CXX_FAKE_LIBDIR)/libmpi_cxx.so.1 $(CXX_FAKE_LIBDIR)/libmpicxx.so.12
+
+LIBS= $(OMPI_OMPI_LIBS) $(OMPI_OMPI_LIBS) $(OMPI_INTEL_LIBS) $(INTEL_INTEL_LIBS) 
+
+.PHONY: OMPI_OMPI OMPI_INTEL INTEL_OMPI INTEL_INTEL all clean install 
+all: OMPI_OMPI OMPI_INTEL INTEL_OMPI INTEL_INTEL
+
+OMPI_OMPI: $(OMPI_OMPI_LIBS)   $(CXX_FAKE_LIBS)
+INTEL_OMPI: $(INTEL_OMPI_LIBS) $(INTEL_FAKE_LIBS) $(CXX_FAKE_LIBS)
+OMPI_INTEL: $(OMPI_INTEL_LIBS) $(OMPI_FAKE_LIBS)  $(CXX_FAKE_LIBS)
+INTEL_INTEL: $(INTEL_INTEL_LIBS) $(CXX_FAKE_LIBS)
+
+gen/test_generation_wrapper_OMPI_OMPI.o: DEFINES=-DOMPI_OMPI -Iheader/OMPI_OMPI      -I../common 
+gen/test_generation_wrapper_OMPI_INTEL.o: DEFINES=-DOMPI_INTEL -Iheader/OMPI_INTEL	 -I../common	
+gen/test_generation_wrapper_INTEL_OMPI.o: DEFINES=-DINTEL_OMPI -Iheader/INTEL_OMPI   -I../common
+gen/test_generation_wrapper_INTEL_INTEL.o: DEFINES=-DINTEL_INTEL -Iheader/INTEL_INTEL -I../common
+
+gen/wrapper_OMPI_OMPI.o: DEFINES=-std=c99 -D_GNU_SOURCE -DIFORT_CALL -Dompi_ompi -I../common -I./header/OMPI_OMPI
+gen/wrapper_OMPI_INTEL.o: DEFINES=-std=c99 -D_GNU_SOURCE -DIFORT_CALL -Dompi_mpich -I../common -I./header/OMPI_INTEL
+gen/wrapper_INTEL_OMPI.o: DEFINES=-std=c99 -D_GNU_SOURCE -DIFORT_CALL -Dmpich_ompi -I../common -I./header/INTEL_OMPI
+gen/wrapper_INTEL_INTEL.o: DEFINES=-std=c99 -D_GNU_SOURCE -DIFORT_CALL -Dmpich_mpich -I../common -I./header/INTEL_INTEL
+
+../common/new_utils_OMPI_OMPI.o:DEFINES=-Iheader/OMPI_OMPI
+../common/new_utils_OMPI_INTEL.o:DEFINES=-Iheader/OMPI_INTEL
+../common/new_utils_INTEL_OMPI.o:DEFINES=-Iheader/INTEL_OMPI
+../common/new_utils_INTEL_INTEL.o:DEFINES=-Iheader/INTEL_INTEL
+
+../common/new_utils_fn_OMPI_OMPI.o:DEFINES=-Iheader/OMPI_OMPI
+../common/new_utils_fn_OMPI_INTEL.o:DEFINES=-Iheader/OMPI_INTEL
+../common/new_utils_fn_INTEL_OMPI.o:DEFINES=-Iheader/INTEL_OMPI
+../common/new_utils_fn_INTEL_INTEL.o:DEFINES=-Iheader/INTEL_INTEL
+
+../common/new_utils_fn_fort_OMPI_OMPI.o:DEFINES=-I../common -I./header/OMPI_OMPI
+../common/new_utils_fn_fort_OMPI_INTEL.o:DEFINES=-I../common -I./header/OMPI_INTEL
+../common/new_utils_fn_fort_INTEL_OMPI.o:DEFINES=-I../common -I./header/INTEL_OMPI
+../common/new_utils_fn_fort_INTEL_INTEL.o:DEFINES=-I../common -I./header/INTEL_INTEL
+
+../common/func_char_fort_OMPI_OMPI.o:DEFINES=-Dompi_ompi -I../common -Iheader/OMPI_OMPI
+../common/func_char_fort_OMPI_INTEL.o:DEFINES=-Dompi_mpich -I../common -Iheader/OMPI_INTEL
+../common/func_char_fort_INTEL_OMPI.o:DEFINES=-Dmpich_ompi -I../common -Iheader/INTEL_OMPI
+../common/func_char_fort_INTEL_INTEL.o:DEFINES=-Dmpich_mpich -I../common -Iheader/INTEL_INTEL
+
+
+gen/c2f_f2c_OMPI_OMPI.o:DEFINES=-I../common -I./header/OMPI_OMPI -Dompi_ompi -DOMPI_OMPI 
+gen/c2f_f2c_OMPI_INTEL.o:DEFINES=-I../common -I./header/OMPI_INTEL -Dompi_mpich -DOMPI_INTEL
+gen/c2f_f2c_INTEL_OMPI.o:DEFINES=-I../common -I./header/INTEL_OMPI -Dmpich_ompi -DINTEL_OMPI 
+gen/c2f_f2c_INTEL_INTEL.o:DEFINES=-I../common -I./header/INTEL_INTEL -Dmpich_mpich -DINTEL_INTEL 
+
+$(OMPI_OMPI_LIBS): $(OMPI_OMPI_OBJS)  | $(WI4MPI_LIBEXECDIR)
+	$(CC) $(CFLAGS) -o $@ $^ 
+$(OMPI_INTEL_LIBS): $(OMPI_INTEL_OBJS) |  $(WI4MPI_LIBEXECDIR)
+	$(CC) $(CFLAGS) -o $@ $^ 
+$(INTEL_OMPI_LIBS): $(INTEL_OMPI_OBJS)  | $(WI4MPI_LIBEXECDIR)
+	$(MPICC) $(CFLAGS) -o $@ $^ 
+$(INTEL_INTEL_LIBS): $(INTEL_INTEL_OBJS) | $(WI4MPI_LIBEXECDIR)
+	$(CC) $(CFLAGS) -o $@ $^ 
+
+$(INTEL_FAKE_LIBS): gen/lib_empty.o | $(INTEL_FAKE_LIBDIR)
+	$(CC) -shared -fPIC -o $@ $<
+
+$(OMPI_FAKE_LIBS): gen/lib_empty.o | $(OMPI_FAKE_LIBDIR)
+	$(CC) -shared -fPIC -o $@ $<
+
+$(CXX_FAKE_LIBS): gen/lib_empty.o | $(CXX_FAKE_LIBDIR)
+	$(CC) -shared -fPIC -o $@ $<
+
+$(INTEL_FAKE_LIBDIR) $(OMPI_FAKE_LIBDIR) \
+$(CXX_FAKE_LIBDIR) $(WI4MPI_LIBEXECDIR) :
+	$(INSTALL) -d $@
+
+%_OMPI_OMPI.o:%.c
+	$(CC) $(CFLAGS) $(DEFINES)  -o $@ -c $<
+
+%_OMPI_INTEL.o:%.c
+	$(CC) $(CFLAGS) $(DEFINES)  -o $@ -c $<
+
+%_INTEL_OMPI.o:%.c
+	$(CC) $(CFLAGS) $(DEFINES)  -o $@ -c $<
+
+%_INTEL_INTEL.o:%.c
+	$(CC) $(CFLAGS) $(DEFINES)  -o $@ -c $<
+
+%.o:%.c
+	$(CC) -o $@ -c $<
+
+
+
+clean:
+	$(RM) gen/*.o gen/*.so gen/*.so.12 gen/*.so.1
+	$(RM) ../common/*.o
+	$(RM) libexec/wi4mpi/*.so libexec/wi4mpi/*.so.12 libexec/wi4mpi/*.so.1
+	$(RM) libexec/wi4mpi/fakelibOMPI/*.so libexec/wi4mpi/fakelibOMPI/*.so.12 libexec/wi4mpi/fakelibOMPI/*.so.1 libexec/wi4mpi/fakelibOMPI/*.so.2
+	$(RM) libexec/wi4mpi/fakelibINTEL/*.so libexec/wi4mpi/fakelibINTEL/*.so.12 libexec/wi4mpi/fakelibINTEL/*.so.1
+	$(RM) libexec/wi4mpi/fakelibCXX/*.so libexec/wi4mpi/fakelibCXX/*.so.12 libexec/wi4mpi/fakelibCXX/*.so.1
+
+# $(INSTALL) -D $(bindir) 
+install:
+	$(INSTALL) -D bin/wi4mpi $(bindir)/wi4mpi
+	$(INSTALL) -D etc/wi4mpi.cfg $(sysconfdir)/wi4mpi.cfg
+	$(INSTALL) -D $(OMPI_OMPI_LIBS) $(libexecdir)/$(OMPI_OMPI_LIBS)
+	$(INSTALL) -D $(OMPI_INTEL_LIBS) $(libexecdir)/$(OMPI_INTEL_LIBS)
+	$(INSTALL) -D $(INTEL_OMPI_LIBS) $(libexecdir)/$(INTEL_OMPI_LIBS)
+	$(INSTALL) -D $(INTEL_INTEL_LIBS) $(libexecdir)/$(INTEL_INTEL_LIBS)
+	$(INSTALL) -D $(INTEL_FAKE_LIBDIR)/libmpifort.so.12 $(libexecdir)/$(INTEL_FAKE_LIBDIR)/libmpifort.so.12
+	$(INSTALL) -D $(INTEL_FAKE_LIBDIR)/libmpi.so.12 $(libexecdir)/$(INTEL_FAKE_LIBDIR)/libmpi.so.12
+	$(INSTALL) -D $(OMPI_FAKE_LIBDIR)/libmpi.so.1 $(libexecdir)/$(OMPI_FAKE_LIBDIR)/libmpi.so.1
+	$(INSTALL) -D $(OMPI_FAKE_LIBDIR)/libmpi_f90.so.1 $(libexecdir)/$(OMPI_FAKE_LIBDIR)/libmpi_f90.so.1
+	$(INSTALL) -D $(OMPI_FAKE_LIBDIR)/libmpi_f77.so.1 $(libexecdir)/$(OMPI_FAKE_LIBDIR)/libmpi_f77.so.1
+	$(INSTALL) -D $(OMPI_FAKE_LIBDIR)/libmpi_mpifh.so.2 $(libexecdir)/$(OMPI_FAKE_LIBDIR)/libmpi_mpifh.so.2
+	$(INSTALL) -D $(CXX_FAKE_LIBDIR)/libmpi_cxx.so.1 $(libexecdir)/$(CXX_FAKE_LIBDIR)/libmpi_cxx.so.1
+	$(INSTALL) -D $(CXX_FAKE_LIBDIR)/libmpicxx.so.12 $(libexecdir)/$(CXX_FAKE_LIBDIR)/libmpicxx.so.12
+	mkdir -p $(exec_prefix)/INTERNAL/include 
+	mkdir -p $(exec_prefix)/INTERNAL/preload/include/OMPI_OMPI
+	mkdir -p $(exec_prefix)/INTERNAL/preload/include/OMPI_INTEL
+	mkdir -p $(exec_prefix)/INTERNAL/preload/include/INTEL_OMPI
+	mkdir -p $(exec_prefix)/INTERNAL/preload/include/INTEL_INTEL
+	$(INSTALL) -D ../common/*.h $(exec_prefix)/INTERNAL/include/.
+	$(INSTALL) -D header/OMPI_OMPI/{app_mpi.h,run_mpi.h,wrapper_f.h} $(exec_prefix)/INTERNAL/preload/include/OMPI_OMPI/.
+	$(INSTALL) -D header/OMPI_INTEL/{app_mpi.h,run_mpi.h,run_mpio.h,wrapper_f.h} $(exec_prefix)/INTERNAL/preload/include/OMPI_INTEL/.
+	$(INSTALL) -D header/INTEL_INTEL/{app_mpi.h,app_mpio.h,run_mpi.h,run_mpio.h,wrapper_f.h} $(exec_prefix)/INTERNAL/preload/include/INTEL_INTEL/.
+	$(INSTALL) -D header/INTEL_INTEL/{app_mpi.h,app_mpio.h,run_mpi.h,wrapper_f.h} $(exec_prefix)/INTERNAL/preload/include/INTEL_OMPI/.

@@ -1,0 +1,38 @@
+#!/bin/bash
+usage() {
+
+    cat <<EOF
+Usage: mpic++ [MPIC++_OPTION]... SOURCE...
+
+Option:
+    -h           the help message
+    -show        show the 
+
+EOF
+
+}
+
+showme() {
+
+cat <<EOF
+
+${CCC_MPIFC} -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi
+
+EOF
+
+}
+arg=$@
+while [[ $# -ge 1 ]]
+do
+key=$1
+
+case $key in
+      -h | --help)
+      usage; exit 0;;
+      -show )
+      showme; exit 0;;
+esac
+shift
+done
+${CCC_MPIFC} -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi $arg
+exit $?
