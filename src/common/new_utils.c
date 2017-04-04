@@ -509,11 +509,13 @@ void request_translation_del(A_MPI_Request * a_mpi_request) {
     HASH_FIND(hh, request_table_non_blocking, a_mpi_request, sizeof(A_MPI_Request), conv);
     if(conv != NULL) {
         HASH_DELETE(hh, request_table_non_blocking, conv);
+				free(conv);
     } else {
         HASH_FIND(hh, request_table_persist_request, a_mpi_request, sizeof(A_MPI_Request), conv);
 
         if(conv != NULL) {
             HASH_DELETE(hh, request_table_persist_request, conv);
+						free(conv);
         }
     }
     unlock(request_Lock);
