@@ -79,6 +79,7 @@ void name##_fn_translation_del(keytype key) { \
    if(conv != NULL)  \
     /*lock(name##_fn_Lock);*/ \
     HASH_DELETE(hh, name##_fn_table, conv); \
+		free(conv); \
     /*unlock(name##_fn_Lock);*/ \
 } \
  \

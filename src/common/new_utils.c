@@ -219,6 +219,7 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     HASH_FIND(hh, varname##_table, a_mpi_##varname, sizeof(A_##type), conv);  \
     if(conv != NULL) {  \
         HASH_DELETE(hh, varname##_table, conv);  \
+				free(conv); \
     }  \
     unlock(varname##_Lock);\
 }  \
