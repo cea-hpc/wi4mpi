@@ -206,7 +206,7 @@ class generator:
 ###									 ###	
 # print_symbol_fortran #
 ###									 ###
-	def print_symbol_fortran(self,func_dict,type_prefix='',prefix='',postfix='',name_arg=False,retval_name=False,app_side=False,name_arg_postfix='',call=False,func_ptr=False,lower=False,direct =False):
+	def print_symbol_f(self,func_dict,type_prefix='',prefix='',postfix='',name_arg=False,retval_name=False,app_side=False,name_arg_postfix='',call=False,func_ptr=False,lower=False,direct =False):
 		arg_len=0; 
 		if ('as_ret' in func_dict['ret'] and not retval_name):
 		    if app_side : 
@@ -272,10 +272,10 @@ class generator:
 		        str=str+'void'
 		str=str+')'
 		return str
-###                 ###
-#print_temporary_decl #
-###									###
-	def print_temporary_decl(self,arg,prefix=''):
+###                 	###
+#print_temporary_decl_c #
+###										###
+	def print_temporary_decl_c(self,arg,prefix=''):
 		str=''
 		if 'no_map' in self.mappers[arg['name']] or 'wrap' in self.mappers[arg['name']] or 'set' in self.mappers[arg['name']] :
 		      str=''
@@ -300,10 +300,39 @@ class generator:
 		            str=self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp;'
 		return str
 
-###							 ###
-# affect_temp_conv #
-###              ###
-	def affect_temp_conv(self,arg,count_loop):
+###										 ###
+#	print_temporary_decl_f #
+###										 ###
+	def print_temporary_decl_f(self, arg, prefix=''):
+		str=''
+		size='1'
+		if 'status_size' in self.mappers[arg['name']]:
+			size='(R_f_MPI_STATUS_SIZE+1)'
+			if 'arg_dep' in arg and arg['arg_dep']!='':
+				str=self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+arg['var']+'==A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:('+self.mappers[arg['name']]['type']+'*) malloc((*'+arg['arg_dep']+')*'+size+'*sizeof('+self.mappers[arg['name']]['type']+')));'
+			else:
+				str=self.mappers[arg['name']]['type']+arg['var']+'_tmp1'
+				str=str+'[R_f_MPI_STATUS_SIZE+1]'
+				str=str+';'
+				str=str+'\n'+self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+arg['var']+'==A_f_MPI_STATUS_IGNORE?R_f_MPI_STATUS_IGNORE:'+arg['var']+'_tmp1);'
+		else:
+			if 'arg_dep' in arg and arg['arg_dep']!='':
+				str=self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+self.mappers[arg['name']]['type']+'*) malloc((*'+arg['arg_dep']+')*'+size+'*sizeof('+self.mappers[arg['name']]['type']+'));'
+			else:
+				if self.mappers[arg['name']]['type'] != 'void ':
+					if arg['name'] == 'weight_converter':
+						str='int *'+arg['var']+'_tmp='+arg['var']+';'
+					else:
+						str=self.mappers[arg['name']]['type']+arg['var']+'_tmp'
+						str=str+';'
+				else:
+					str='void *'+arg['var']+'_tmp='+arg['var']+';'
+		return str
+
+###							 	 ###
+# affect_temp_conv_c #
+###              	 ###
+	def affect_temp_conv_c(self,arg,count_loop):
 		#no need to convert
 		if 'no_map' in self.mappers[arg['name']]:
 			str=''
@@ -338,10 +367,39 @@ class generator:
 					else:
 						str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
 		return str
-###             ###
-# affect_val_conv #
-###             ###
-	def affect_val_conv(self,arg,count_loop,name_func):
+
+###								 ###
+#	affect_temp_conv_f #
+###								 ###
+
+	def affect_temp_conv_f(self,arg):
+		if 'nomap' in self.mappers[arg['name']]:
+			str=arg['var']+'_tmp=*'+arg['var']+';'
+		else:
+			if arg['arg_dep'] !='':
+				mula='1'
+				mulr='1'
+				if 'status_size' in self.mappers[arg['name']]:
+					mula='A_f_MPI_STATUS_SIZE'
+					mulr='R_f_MPI_STATUS_SIZE'
+				str= 'for(int i=0;i<*'+arg['arg_dep']+';i++)\n' + self.mappers[arg['name']]['a2r']+'(&'+arg['var']+'[i*'+mula+'],&'+arg['var']+'_tmp[i*'+mulr+']);'
+			else:
+				if 'status_size' in self.mappers[arg['name']]:
+					str= self.mappers[arg['name']]['a2r']+'('+arg['var']+','+arg['var']+'_tmp);'
+				else:
+					if self.mappers[arg['name']]['type']!= 'void ':
+						if arg['name'] == 'weight_converter':
+							str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
+						else:
+							str= self.mappers[arg['name']]['a2r']+'('+arg['var']+',&'+arg['var']+'_tmp);'
+					else:
+						str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
+		return str
+
+###             	###
+# affect_val_conv_c #
+###             	###
+	def affect_val_conv_c(self,arg,count_loop,name_func):
 		str=''
 		if 'no_map' in self.mappers[arg['name']]:
 			str=''
@@ -435,6 +493,59 @@ class generator:
 					str= self.mappers[arg['name']]['r2a']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
 		return str
 
+###             	###
+# affect_val_conv_f #
+###             	###
+	def affect_val_conv_f(self,arg):
+		str=''
+		mula='1'
+		mulr='1'
+		if arg['arg_dep'] !='':
+			if 'status_size' in self.mappers[arg['name']]:
+				mula='A_f_MPI_STATUS_SIZE'
+				mulr='R_f_MPI_STATUS_SIZE'
+				str='if ('+arg['var']+'!=A_f_MPI_STATUSES_IGNORE)\n'
+			str=str+ 'for(int i=0;i<*'+arg['arg_dep']+';i++)\n' + self.mappers[arg['name']]['r2a']+'(&'+arg['var']+'[i*'+mula+'],&'+arg['var']+'_tmp[i*'+mulr+']);'
+		else:
+			if 'status_size' in self.mappers[arg['name']]:
+				str=str+'if ('+arg['var']+'!=A_f_MPI_STATUS_IGNORE)\n'+ self.mappers[arg['name']]['r2a']+'('+arg['var']+','+arg['var']+'_tmp);'
+			else:
+				if self.mappers[arg['name']]['type']!= 'void ':
+					if arg['name'] == 'weight_converter':
+						str= self.mappers[arg['name']]['r2a']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
+					else:
+						str= self.mappers[arg['name']]['r2a']+'('+arg['var']+',&'+arg['var']+'_tmp);'
+				else:
+					str= self.mappers[arg['name']]['r2a']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
+		return str
+
+###
+# affect_temp_conv
+###		
+
+	def affect_temp_conv(self,arg):
+		if 'nomap' in self.mappers[arg['name']]:
+			str=arg['var']+'_tmp=*'+arg['var']+';'
+		else:
+			if arg['arg_dep'] !='':
+				mula='1'
+				mulr='1'
+				if 'status_size' in self.mappers[arg['name']]:
+					mula='A_f_MPI_STATUS_SIZE'
+					mulr='R_f_MPI_STATUS_SIZE'
+				str= 'for(int i=0;i<*'+arg['arg_dep']+';i++)\n' + self.mappers[arg['name']]['a2r']+'(&'+arg['var']+'[i*'+mula+'],&'+arg['var']+'_tmp[i*'+mulr+']);'
+			else:
+				if 'status_size' in self.mappers[arg['name']]:
+					str= self.mappers[arg['name']]['a2r']+'('+arg['var']+','+arg['var']+'_tmp);'
+				else:
+					if self.mappers[arg['name']]['type']!= 'void ':
+						if arg['name'] == 'weight_converter':
+							str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
+						else:
+							str= self.mappers[arg['name']]['a2r']+'('+arg['var']+',&'+arg['var']+'_tmp);'
+					else:
+						str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
+		return str
 ###					  ###
 # generate_func #
 ###           ###
@@ -452,17 +563,17 @@ class generator:
 					str=str+'R_MPI_Comm comm_tmp1;\ncomm_conv_a2r(&comm,&comm_tmp1);\nint indegree, outdegree, weighted;\nLOCAL_MPI_Dist_graph_neighbors_count(comm_tmp1, &indegree,&outdegree, &weighted);'
 				for arg in func_dict['args']:
 					if arg['In'] or arg['Out']:
-						str=str+'\n'+self.print_temporary_decl(arg,'R_')
+						str=str+'\n'+self.print_temporary_decl_c(arg,'R_')
 					if arg['In']:
 						if arg["arg_dep"] != '':
 							count_loop=count_loop+1
-						str=str+'\n'+self.affect_temp_conv(arg,count_loop)
+						str=str+'\n'+self.affect_temp_conv_c(arg,count_loop)
 				str=str+'\n'+self.print_symbol_c(func_dict,prefix='LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True, type_prefix='R_')+';'
 				for arg in func_dict['args']:
 					if arg['Out']:
 						if arg["arg_dep"] != '':
 							count_loop=count_loop+1
-						str=str+'\n'+self.affect_val_conv(arg,count_loop,func_dict['name'])
+						str=str+'\n'+self.affect_val_conv_c(arg,count_loop,func_dict['name'])
 				for arg in func_dict['args']:
 					if arg['arg_dep'] and "no_map" not in self.mappers[arg['name']]:
 						if arg['var'].split('[')[0] == 'array_of_statuses':
@@ -487,7 +598,7 @@ class generator:
 #	generate_func_f #
 ###							###
 	def generate_func_f(self,func_dict):
-		string=self.print_symbol(func_dict,prefix='A_f_',name_arg=True,retval_name=False,app_side=True)
+		string=self.print_symbol_f(func_dict,prefix='A_f_',name_arg=True,retval_name=False,app_side=True)
 		string=string+self.header_func(func_dict)
 		string=string+self.mappers[func_dict['ret']['name']]['type']+' ret_tmp=0;\n'
 		if func_dict['name'] == "MPI_Alltoallw" or func_dict['name'] == "MPI_Ialltoallw":
@@ -496,10 +607,10 @@ class generator:
 			string=string+'int comm_tmp1;\ncomm_a2r(comm,&comm_tmp1);\nint *indegree, *outdegree, *weighted, ierr;\n_LOCAL_MPI_Dist_graph_neighbors_count(&comm_tmp1, indegree,outdegree, weighted, &ierr);'
 		for arg in func_dict['args']:
 			if (arg['In'] or arg['Out']) and not 'nomap' in self.mappers[arg['name']]:
-				string=string+'\n'+self.print_temporary_decl(arg,'R_')
+				string=string+'\n'+self.print_temporary_decl_f(arg,'R_')
 			for arg in func_dict['args']:
 				if arg['In'] and not 'nomap' in self.mappers[arg['name']]:
-					string=string+'\n'+self.affect_temp_conv(arg)
+					string=string+'\n'+self.affect_temp_conv_f(arg)
 			if 'assoc' in func_dict:
 				for assoc in func_dict['assoc']:
 					if  assoc['func'].find('_del')!=-1:
@@ -508,7 +619,7 @@ class generator:
 						if 'value' in assoc:
 							string=string+','+assoc['value']
 						string=string+');'
-			string=string+'\n'+self.print_symbol(func_dict,prefix='_LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True)+';'
+			string=string+'\n'+self.print_symbol_f(func_dict,prefix='_LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True)+';'
 			for arg in func_dict['args']:
 				if arg['Out'] and not 'nomap' in self.mappers[arg['name']] or arg['Out'] and func_dict['name'] == 'MPI_Keyval_free':
 					if not 'nomap' in self.mappers[arg['name']]:
@@ -518,9 +629,9 @@ class generator:
 							string=string+'errhandler_converter_r2a(errhandler,&errhandler_tmp);\n'
 							string=string+'}'
 						elif func_dict['name']=='MPI_Error_class':
-							string=string+'\n'+self.affect_val_conv(arg)
+							string=string+'\n'+self.affect_val_conv_f(arg)
 						else:
-							string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)'+self.affect_val_conv(arg)
+							string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)'+self.affect_val_conv_f(arg)
 					else:
 						string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)\n'
 						string=string+'{\n'
@@ -714,8 +825,21 @@ class generator:
 			return 'return '+self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+'_tmp);'
 		else:
 			return 'return '+func_dict['ret']['var']+'_tmp;'
+
+#print_return_conv fortran
+#str=''
+#        if not 'nomap' in  self.mappers[func_dict['ret']['name']]:
+#            if 'as_ret' in func_dict['ret'] :
+#                str=self.mappers[func_dict['ret']['name']]['type'] +' '+func_dict['ret']['var']+';\n'
+#            str=str+ self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+',&'+func_dict['ret']['var']+'_tmp);\n'
+#        if 'as_ret' in func_dict['ret']:
+#            str=str+'return '+func_dict['ret']['var'];
+#        return str
 ###         ###
 # load_symbol #
 ###         ###
-	def load_symbol(self,func_dict,handle_name):
-		return 'LOCAL_'+func_dict['name']+'=dlsym('+handle_name+',"P'+func_dict['name']+'");'
+	def load_symbol(self,func_dict,handle_name,postfix=''):
+		if self.name=='Wrapper_Preload_C' or self.name=='Wrapper_Interface_C' or self.name=='Interface_C':
+			return 'LOCAL_'+func_dict['name']+'=dlsym('+handle_name+',"P'+func_dict['name']+'");'
+		else:
+			return '_LOCAL_'+func_dict['name']+'=dlsym('+handle_name+',"p'+func_dict['name'].lower()+'_'+postfix+'");'

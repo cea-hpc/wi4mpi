@@ -109,6 +109,136 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+'}'
 	return string
 
+def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
+	string=header_license_file()
+	#overiding json dictionary
+	for idx,j in enumerate(data_f):
+		for i in data_f_overide:
+			if i['name'] == j['name']:
+				data_f[idx]=i
+	string=string+' #include <stdlib.h>'+'\n'
+	string=string+' #include <stdio.h>'+'\n'
+	string=string+'#include <dlfcn.h>'
+	string=string+'#include "wrapper_f.h"'
+	string=string+'extern __thread int in_w;'
+	for i in data_f:
+		for j in def_list_f:
+			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='_',type_prefix='R_',lower=True)+';\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='__',type_prefix='R_',lower=True)+';\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='__',type_prefix='R_',lower=True)+';\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n'
+				if wrapper:
+					string=string+'#define A_f_'+i['name'] +' _P'+i['name']
+				else:
+					string=string+'//#define A_f_'+i['name'] +' _P'+i['name']
+				string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']
+				string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']
+				string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n'
+				string=string+object_gen.generate_func_f(i)
+	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {'
+	if not wrapper:
+		string=string+'void *lib_handle_f=dlopen(getenv(\"TRUE_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);'
+	for i in data_f:
+		for j in def_list_f:
+			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
+				if wrapper:
+					string=string+object_gen.load_symbol(i,'RTLD_NEXT')
+				else:
+					string=string+object_gen.load_symbol(i,'lib_handle_f')
+	if wrapper:
+		string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_File_open'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_delete'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_nthkey'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_valuelen'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_set'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Win_get_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Win_set_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'RTLD_NEXT')
+		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Close_port'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Get_library_version'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Open_port'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Publish_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Unpublish_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Lookup_name'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'RTLD_NEXT')
+	else:
+		string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_File_open'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_delete'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_nthkey'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_valuelen'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Info_set'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Win_get_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Win_set_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'lib_handle_f')
+		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Close_port'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Get_library_version'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Open_port'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Publish_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Unpublish_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Lookup_name'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'lib_handle_f')
+
+		string=string+'#ifdef ompi_ompi'
+		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpi_fortran_bottom_");'
+		string=string+'ccc_mpi_fortran_in_place_=dlsym(lib_handle_f,"mpi_fortran_in_place_");'
+		string=string+'ccc_mpi_fortran_argv_null_=dlsym(lib_handle_f,"mpi_fortran_argv_null_");'
+		string=string+'ccc_mpi_fortran_argvs_null_=dlsym(lib_handle_f,"mpi_fortran_argvs_null_");'
+		string=string+'ccc_mpi_fortran_errcodes_ignore_=dlsym(lib_handle_f,"mpi_fortran_errcodes_ignore_");'
+		string=string+'ccc_mpi_fortran_status_ignore_=dlsym(lib_handle_f,"mpi_fortran_status_ignore_");'
+		string=string+'ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpi_fortran_statuses_ignore_");'
+		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpi_fortran_unweighted_");'
+		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");'
+		string=string+'////mpi_null_delete_fn_;'
+		string=string+'////mpi_null_copy_fn_;'
+		string=string+'////mpi_null_delete_fn_;'
+		string=string+'#endif'
+		string=string+'#ifdef ompi_mpich'
+		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");'
+		string=string+'ccc_mpi_fortran_in_place_=((int *)dlsym(lib_handle_f,"mpipriv1_")+1);'
+		string=string+'ccc_mpi_fortran_argv_null_=((int*)dlsym(lib_handle_f,"mpiprivc_")+1);'
+		string=string+'ccc_mpi_fortran_argvs_null_=dlsym(lib_handle_f,"mpiprivc_");'
+		string=string+'ccc_mpi_fortran_errcodes_ignore_=((int *)dlsym(lib_handle_f,"mpipriv2_")+1);'
+		string=string+'ccc_mpi_fortran_status_ignore_=((int *)dlsym(lib_handle_f,"mpipriv1_")+2);'
+		string=string+'ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpipriv2_");'
+		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpifcmb5_");'
+		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpifcmb9_");'
+		string=string+'#endif'
+		string=string+'//local_mpi_null_delete_fn_=dlsym(lib_handle_f,"mpi_null_delete_fn_");'
+		string=string+'//local_mpi_null_copy_fn_=dlsym(lib_handle_f,"mpi_null_copy_fn_");'
+		string=string+'//local_mpi_dup_fn_=dlsym(lib_handle_f,"mpi_dup_fn_");'
+	string=string+'}'
+	return string
 	
 
 if __name__ == '__main__':
@@ -166,12 +296,23 @@ if __name__ == '__main__':
 	preload_wrapper_c.write(string)
 	preload_wrapper_c.close()
 	fl.close()
-	fl_f.close()
 	not_generated.close()
 	print "        Done."
 	os.chdir(root)
-	#print " >>>>> Generating preload/gen/wrapper.c"
+   
+	print " >>>>> Generating preload/gen/wrapper.c"
+	with open('./FORTRAN/functions_fort_overide.json') as data_file:
+		data_f_overide = json.load(data_file)
+
 	wrapper_preload_fortran=generator("Wrapper_Preload_Fortran",mappers_f,data_f)
+	os.chdir(preload_directory)
+	preload_wrapper_f= open("wrapper.c","w")
+	string=generate_wrapper_f(wrapper_preload_fortran, data_f, data_f_overide,wrapper)
+	preload_wrapper_f.write(string)
+	preload_wrapper_f.close()
+	fl_f.close()
+	print "        Done."
+	os.chdir(root)
 
 	#Generating Interface file
 	print " >>>>> Generating interface/gen/test_generation_wrapper.c"
@@ -187,7 +328,7 @@ if __name__ == '__main__':
 
 	ompi_const.seek(0,0)
 	init_conf.seek(0,0)
- 	not_generated_ptr.seek(0,0)
+	not_generated_ptr.seek(0,0)
 	wrapper_interface_c=generator("Wrapper_Interface_C", mappers_c,data_c)
 	os.chdir(interface_directory)
 	interface_wrapper_c =open("test_generation_wrapper.c", "w")
@@ -218,8 +359,6 @@ if __name__ == '__main__':
 #	with open(F_file) as fl_f:
 #	      def_list_f=fl_f.read().splitlines()
 #	
-#	with open('./FORTRAN/functions_fort_overide.json') as data_file:
-#	      data2 = json.load(data_file)
 #	#File containing all pre-requisites in __attribute__((constructor)) void wrapper_init()
 #	init_conf =  open('./C/init_conf.txt','r')
 #	#File containing all the functions not generated (included code chooser asm)
