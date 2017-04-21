@@ -82,12 +82,15 @@ class generator:
 		string=string+'\n#endif\n'
 		if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C':
 			if app_side:
-				string=string+self.print_return_conv(func_dict)
+				string=string+self.print_return_conv_c(func_dict)
 			else:
 				string=string+'return '+func_dict['ret']['var']+'_tmp;'
 		elif self.name == 'Interface_C':
 				string=string+'return '+func_dict['ret']['var']+'_tmp;'
-		string=string+'\n}'
+		if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
+			string=string+'\n}'
+		else:
+			string=string+'}'
 		return string
 
 ###				  ###
@@ -608,52 +611,52 @@ class generator:
 		for arg in func_dict['args']:
 			if (arg['In'] or arg['Out']) and not 'nomap' in self.mappers[arg['name']]:
 				string=string+'\n'+self.print_temporary_decl_f(arg,'R_')
-			for arg in func_dict['args']:
-				if arg['In'] and not 'nomap' in self.mappers[arg['name']]:
-					string=string+'\n'+self.affect_temp_conv_f(arg)
-			if 'assoc' in func_dict:
-				for assoc in func_dict['assoc']:
-					if  assoc['func'].find('_del')!=-1:
-						string=string+'\n'+assoc['func']+'('
-						string=string+assoc['key']
-						if 'value' in assoc:
-							string=string+','+assoc['value']
-						string=string+');'
-			string=string+'\n'+self.print_symbol_f(func_dict,prefix='_LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True)+';'
-			for arg in func_dict['args']:
-				if arg['Out'] and not 'nomap' in self.mappers[arg['name']] or arg['Out'] and func_dict['name'] == 'MPI_Keyval_free':
-					if not 'nomap' in self.mappers[arg['name']]:
-						if func_dict['name']=='MPI_Errhandler_free':
-							string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS){\n'
-							string=string+'errhandler_f_fn_translation_del(errhandler_tmp);\n'
-							string=string+'errhandler_converter_r2a(errhandler,&errhandler_tmp);\n'
-							string=string+'}'
-						elif func_dict['name']=='MPI_Error_class':
-							string=string+'\n'+self.affect_val_conv_f(arg)
-						else:
-							string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)'+self.affect_val_conv_f(arg)
+		for arg in func_dict['args']:
+			if arg['In'] and not 'nomap' in self.mappers[arg['name']]:
+				string=string+'\n'+self.affect_temp_conv_f(arg)
+		if 'assoc' in func_dict:
+			for assoc in func_dict['assoc']:
+				if  assoc['func'].find('_del')!=-1:
+					string=string+'\n'+assoc['func']+'('
+					string=string+assoc['key']
+					if 'value' in assoc:
+						string=string+','+assoc['value']
+					string=string+');'
+		string=string+'\n'+self.print_symbol_f(func_dict,prefix='_LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True)+';'
+		for arg in func_dict['args']:
+			if arg['Out'] and not 'nomap' in self.mappers[arg['name']] or arg['Out'] and func_dict['name'] == 'MPI_Keyval_free':
+				if not 'nomap' in self.mappers[arg['name']]:
+					if func_dict['name']=='MPI_Errhandler_free':
+						string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS){\n'
+						string=string+'errhandler_f_fn_translation_del(errhandler_tmp);\n'
+						string=string+'errhandler_converter_r2a(errhandler,&errhandler_tmp);\n'
+						string=string+'}'
+					elif func_dict['name']=='MPI_Error_class':
+						string=string+'\n'+self.affect_val_conv_f(arg)
 					else:
-						string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)\n'
-						string=string+'{\n'
-						string=string+'\t*keyval=A_MPI_KEYVAL_INVALID;\n'
-						string=string+'}\n'
-				if 'arg_dep' in arg and arg['arg_dep']!='' and (arg['In'] or arg['Out'])  and not 'nomap' in self.mappers[arg['name']]:
-					if arg['var'] == 'array_of_statuses':
-						string=string+'\nif (array_of_statuses!=A_f_MPI_STATUSES_IGNORE)'
-						string=string+'\n'+' free('+arg['var']+'_tmp);'
-					else:
-						string=string+'\n'+' free('+arg['var']+'_tmp);'
-			if 'assoc' in func_dict:
-				for assoc in func_dict['assoc']:
-					if  assoc['func'].find('_del')==-1:
-						string=string+'\n'+assoc['func']+'('
-						string=string+assoc['key']
-						if 'value' in assoc:
-							string=string+','+assoc['value']
-						string=string+');'
-			string=string+'\n'+self.print_return_conv(func_dict)
-			string=string+self.footer_func(func_dict)
-			return string
+						string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)'+self.affect_val_conv_f(arg)
+				else:
+					string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)\n'
+					string=string+'{\n'
+					string=string+'\t*keyval=A_MPI_KEYVAL_INVALID;\n'
+					string=string+'}\n'
+			if 'arg_dep' in arg and arg['arg_dep']!='' and (arg['In'] or arg['Out'])  and not 'nomap' in self.mappers[arg['name']]:
+				if arg['var'] == 'array_of_statuses':
+					string=string+'\nif (array_of_statuses!=A_f_MPI_STATUSES_IGNORE)'
+					string=string+'\n'+' free('+arg['var']+'_tmp);'
+				else:
+					string=string+'\n'+' free('+arg['var']+'_tmp);'
+		if 'assoc' in func_dict:
+			for assoc in func_dict['assoc']:
+				if  assoc['func'].find('_del')==-1:
+					string=string+'\n'+assoc['func']+'('
+					string=string+assoc['key']
+					if 'value' in assoc:
+						string=string+','+assoc['value']
+					string=string+');'
+		string=string+'\n'+self.print_return_conv_f(func_dict)
+		string=string+self.footer_func(func_dict)
+		return string
 	
 ###										 ###
 #	generate_func_asmK_tls #
@@ -815,26 +818,30 @@ class generator:
 		str=str+'\n);\n'
 		return str
 
-###							  ###
-#	print_return_conv #
-### 							###
-	def print_return_conv(self,func_dict):
+###							    ###
+#	print_return_conv_c #
+### 							  ###
+	def print_return_conv_c(self,func_dict):
 		if self.mappers[func_dict['ret']['name']]['r2a'] == 'fint_conv_r2a' or self.mappers[func_dict['ret']['name']]['r2a'] == 'aint_conv_r2a' :
 			return 'return (A_'+self.mappers[func_dict['ret']['name']]['type']+')'+func_dict['ret']['var']+'_tmp;'
 		elif self.mappers[func_dict['ret']['name']]['r2a'] != 'double_conv_r2a':
 			return 'return '+self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+'_tmp);'
 		else:
 			return 'return '+func_dict['ret']['var']+'_tmp;'
+###								  ###
+# print_return_conv_f #
+###									###
 
-#print_return_conv fortran
-#str=''
-#        if not 'nomap' in  self.mappers[func_dict['ret']['name']]:
-#            if 'as_ret' in func_dict['ret'] :
-#                str=self.mappers[func_dict['ret']['name']]['type'] +' '+func_dict['ret']['var']+';\n'
-#            str=str+ self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+',&'+func_dict['ret']['var']+'_tmp);\n'
-#        if 'as_ret' in func_dict['ret']:
-#            str=str+'return '+func_dict['ret']['var'];
-#        return str
+	def print_return_conv_f(self,func_dict):
+		str=''
+		if not 'nomap' in  self.mappers[func_dict['ret']['name']]:
+			if 'as_ret' in func_dict['ret'] :
+				str=self.mappers[func_dict['ret']['name']]['type'] +' '+func_dict['ret']['var']+';\n'
+			str=str+ self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+',&'+func_dict['ret']['var']+'_tmp);\n'
+		if 'as_ret' in func_dict['ret']:
+			str=str+'return '+func_dict['ret']['var'];
+		return str
+
 ###         ###
 # load_symbol #
 ###         ###

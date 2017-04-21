@@ -118,96 +118,96 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 				data_f[idx]=i
 	string=string+' #include <stdlib.h>'+'\n'
 	string=string+' #include <stdio.h>'+'\n'
-	string=string+'#include <dlfcn.h>'
-	string=string+'#include "wrapper_f.h"'
-	string=string+'extern __thread int in_w;'
+	string=string+'#include <dlfcn.h>'+'\n'
+	string=string+'#include "wrapper_f.h"'+'\n'
+	string=string+'extern __thread int in_w;'+'\n'
 	for i in data_f:
 		for j in def_list_f:
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='_',type_prefix='R_',lower=True)+';\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='__',type_prefix='R_',lower=True)+';\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='__',type_prefix='R_',lower=True)+';\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='_',type_prefix='R_',lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='__',type_prefix='R_',lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='__',type_prefix='R_',lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n\n'
 				if wrapper:
-					string=string+'#define A_f_'+i['name'] +' _P'+i['name']
+					string=string+'#define A_f_'+i['name'] +' _P'+i['name']+'\n'
 				else:
-					string=string+'//#define A_f_'+i['name'] +' _P'+i['name']
-				string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']
-				string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']
-				string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n'
-				string=string+object_gen.generate_func_f(i)
-	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {'
+					string=string+'//#define A_f_'+i['name'] +' _P'+i['name']+'\n'
+				string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
+				string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
+				string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
+				string=string+object_gen.generate_func_f(i)+'\n'
+	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
 	if not wrapper:
 		string=string+'void *lib_handle_f=dlopen(getenv(\"TRUE_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);'
 	for i in data_f:
 		for j in def_list_f:
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
 				if wrapper:
-					string=string+object_gen.load_symbol(i,'RTLD_NEXT')
+					string=string+object_gen.load_symbol(i,'RTLD_NEXT')+'\n'
 				else:
-					string=string+object_gen.load_symbol(i,'lib_handle_f')
+					string=string+object_gen.load_symbol(i,'lib_handle_f')+'\n'
 	if wrapper:
-		string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_File_open'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_delete'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_get'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_get_nthkey'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_get_valuelen'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_set'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Win_get_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Win_set_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'RTLD_NEXT')
-		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Close_port'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Get_library_version'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Open_port'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Publish_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Unpublish_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Lookup_name'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Pack_external'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'RTLD_NEXT')
-		string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'RTLD_NEXT')
+		string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_open'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_delete'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_nthkey'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_valuelen'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_set'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Win_get_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Win_set_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'RTLD_NEXT')+'\n'
+		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Close_port'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Get_library_version'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Open_port'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Publish_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Unpublish_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Lookup_name'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'RTLD_NEXT')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'RTLD_NEXT')+'\n'
 	else:
-		string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_File_open'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_delete'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_get'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_get_nthkey'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_get_valuelen'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Info_set'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Win_get_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Win_set_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'lib_handle_f')
-		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Close_port'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Get_library_version'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Open_port'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Publish_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Unpublish_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Lookup_name'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Pack_external'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'lib_handle_f')
-		string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'lib_handle_f')
+		string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_open'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_delete'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_nthkey'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_get_valuelen'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Info_set'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Win_get_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Win_set_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'lib_handle_f')+'\n'
+		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Close_port'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Get_library_version'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Open_port'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Publish_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Unpublish_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Lookup_name'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'lib_handle_f')+'\n'
+		string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'lib_handle_f')+'\n'
 
 		string=string+'#ifdef ompi_ompi'
 		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpi_fortran_bottom_");'
