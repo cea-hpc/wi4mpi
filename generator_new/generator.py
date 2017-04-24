@@ -78,19 +78,19 @@ class generator:
 		elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
 			string=string+'\nprintf(\"sort : A_f_'+func_dict['name']+'\\n\");'
 		elif self.name == 'Interface_C':
-			string=string+'\nprintf(\"sort : P'+func_dict['name']+' (interface) \\n\");'
-		string=string+'\n#endif\n'
+			string=string+'\nprintf(\"sort : P'+func_dict['name']+' (interface)\\n\");'
+		string=string+'\n#endif'
 		if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C':
 			if app_side:
-				string=string+self.print_return_conv_c(func_dict)
+				string=string+'\n'+self.print_return_conv_c(func_dict)
 			else:
-				string=string+'return '+func_dict['ret']['var']+'_tmp;'
+				string=string+'\nreturn '+func_dict['ret']['var']+'_tmp;'
 		elif self.name == 'Interface_C':
-				string=string+'return '+func_dict['ret']['var']+'_tmp;'
+				string=string+'\nreturn '+func_dict['ret']['var']+'_tmp;'
 		if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
 			string=string+'\n}'
 		else:
-			string=string+'}'
+			string=string+'\n}'
 		return string
 
 ###				  ###

@@ -140,7 +140,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 				string=string+object_gen.generate_func_f(i)+'\n'
 	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
 	if not wrapper:
-		string=string+'void *lib_handle_f=dlopen(getenv(\"TRUE_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);'
+		string=string+'void *lib_handle_f=dlopen(getenv(\"TRUE_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
 	for i in data_f:
 		for j in def_list_f:
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
@@ -209,39 +209,81 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 		string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'lib_handle_f')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'lib_handle_f')+'\n'
 
-		string=string+'#ifdef ompi_ompi'
-		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpi_fortran_bottom_");'
-		string=string+'ccc_mpi_fortran_in_place_=dlsym(lib_handle_f,"mpi_fortran_in_place_");'
-		string=string+'ccc_mpi_fortran_argv_null_=dlsym(lib_handle_f,"mpi_fortran_argv_null_");'
-		string=string+'ccc_mpi_fortran_argvs_null_=dlsym(lib_handle_f,"mpi_fortran_argvs_null_");'
-		string=string+'ccc_mpi_fortran_errcodes_ignore_=dlsym(lib_handle_f,"mpi_fortran_errcodes_ignore_");'
-		string=string+'ccc_mpi_fortran_status_ignore_=dlsym(lib_handle_f,"mpi_fortran_status_ignore_");'
-		string=string+'ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpi_fortran_statuses_ignore_");'
-		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpi_fortran_unweighted_");'
-		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");'
-		string=string+'////mpi_null_delete_fn_;'
-		string=string+'////mpi_null_copy_fn_;'
-		string=string+'////mpi_null_delete_fn_;'
-		string=string+'#endif'
-		string=string+'#ifdef ompi_mpich'
-		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");'
-		string=string+'ccc_mpi_fortran_in_place_=((int *)dlsym(lib_handle_f,"mpipriv1_")+1);'
-		string=string+'ccc_mpi_fortran_argv_null_=((int*)dlsym(lib_handle_f,"mpiprivc_")+1);'
-		string=string+'ccc_mpi_fortran_argvs_null_=dlsym(lib_handle_f,"mpiprivc_");'
-		string=string+'ccc_mpi_fortran_errcodes_ignore_=((int *)dlsym(lib_handle_f,"mpipriv2_")+1);'
-		string=string+'ccc_mpi_fortran_status_ignore_=((int *)dlsym(lib_handle_f,"mpipriv1_")+2);'
-		string=string+'ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpipriv2_");'
-		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpifcmb5_");'
-		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpifcmb9_");'
-		string=string+'#endif'
-		string=string+'//local_mpi_null_delete_fn_=dlsym(lib_handle_f,"mpi_null_delete_fn_");'
-		string=string+'//local_mpi_null_copy_fn_=dlsym(lib_handle_f,"mpi_null_copy_fn_");'
-		string=string+'//local_mpi_dup_fn_=dlsym(lib_handle_f,"mpi_dup_fn_");'
-	string=string+'}'
+		string=string+'#ifdef ompi_ompi\n'
+		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpi_fortran_bottom_");'+'\n'
+		string=string+'ccc_mpi_fortran_in_place_=dlsym(lib_handle_f,"mpi_fortran_in_place_");'+'\n'
+		string=string+'ccc_mpi_fortran_argv_null_=dlsym(lib_handle_f,"mpi_fortran_argv_null_");'+'\n'
+		string=string+'ccc_mpi_fortran_argvs_null_=dlsym(lib_handle_f,"mpi_fortran_argvs_null_");'+'\n'
+		string=string+'ccc_mpi_fortran_errcodes_ignore_=dlsym(lib_handle_f,"mpi_fortran_errcodes_ignore_");'+'\n'
+		string=string+'ccc_mpi_fortran_status_ignore_=dlsym(lib_handle_f,"mpi_fortran_status_ignore_");'+'\n'
+		string=string+'ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpi_fortran_statuses_ignore_");'+'\n'
+		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpi_fortran_unweighted_");'+'\n'
+		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");'+'\n'
+		string=string+'////mpi_null_delete_fn_;'+'\n'
+		string=string+'////mpi_null_copy_fn_;'+'\n'
+		string=string+'////mpi_null_delete_fn_;'+'\n'
+		string=string+'#endif\n'
+		string=string+'#ifdef ompi_mpich\n'
+		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");'+'\n'
+		string=string+'ccc_mpi_fortran_in_place_=((int *)dlsym(lib_handle_f,"mpipriv1_")+1);'+'\n'
+		string=string+'ccc_mpi_fortran_argv_null_=((int*)dlsym(lib_handle_f,"mpiprivc_")+1);'+'\n'
+		string=string+'ccc_mpi_fortran_argvs_null_=dlsym(lib_handle_f,"mpiprivc_");'+'\n'
+		string=string+'ccc_mpi_fortran_errcodes_ignore_=((int *)dlsym(lib_handle_f,"mpipriv2_")+1);'+'\n'
+		string=string+'ccc_mpi_fortran_status_ignore_=((int *)dlsym(lib_handle_f,"mpipriv1_")+2);'+'\n'
+		string=string+'ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpipriv2_");'+'\n'
+		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpifcmb5_");'+'\n'
+		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpifcmb9_");'+'\n'
+		string=string+'#endif\n'
+		string=string+'//local_mpi_null_delete_fn_=dlsym(lib_handle_f,"mpi_null_delete_fn_");'+'\n'
+		string=string+'//local_mpi_null_copy_fn_=dlsym(lib_handle_f,"mpi_null_copy_fn_");'+'\n'
+		string=string+'//local_mpi_dup_fn_=dlsym(lib_handle_f,"mpi_dup_fn_");'+'\n'
+	string=string+'}\n'
 	return string
 	
+def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list):
+	string=header_license_file()
+	string=string+'#define _GNU_SOURCE\n'
+	string=string+'#include <stdio.h>\n' 
+	string=string+'#include <dlfcn.h>\n' 
+	string=string+'#include \"mpi.h\"\n' 
+	string=string+"/*ompi constante*/\n" 
+	for i in interface_key_gen:
+		string=string+i
+	for i in data:
+		if i['name'] in def_list:
+			string=string+'\n'+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='',interface=True)+';\n' 
+			string=string+'#define '+i['name']+' P'+i['name']+'\n'
+			string=string+'#pragma weak '+i['name']+'=P'+i['name']+'\n'
+			string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='INTERFACE_LOCAL_',type_prefix='',interface=True)+';\n'
+			string=string+'\n'+object_gen.print_symbol_c(i,prefix='P',name_arg=True,retval_name=False,app_side=False,run_side=False,inter_side=True)
+			string=string+object_gen.header_func(i,app_side=False)+'\n'
+			string=string+object_gen.print_symbol_c(i,prefix='INTERFACE_LOCAL_',name_arg=True,retval_name=True,app_side=False,call=True, r_func=False,type_prefix='',interface=True)+';\n'
+			string=string+object_gen.footer_func(i,app_side=False)
+	string=string+'\n__attribute__((constructor)) void wrapper_interface(void) {\n'                     
+	string=string+'void *interface_handle=dlopen(getenv(\"WRAPPER_WI4MPI\"),RTLD_NOW|RTLD_GLOBAL);\n' 
+	string=string+'if(!interface_handle)\n'                                                           
+	string=string+'{\n'                                                                               
+	string=string+'printf("no true IC lib defined\\nerror :%s\\n",dlerror());\n'                      
+	string=string+'exit(1);\n'                                                                        
+	string=string+'}\n'
+	string=string+'INTERFACE_LOCAL_MPI_Keyval_create=dlsym(interface_handle,"CCMPI_Keyval_create");\n'          
+	string=string+'INTERFACE_LOCAL_MPI_Keyval_free=dlsym(interface_handle,"CCMPI_Keyval_free");\n'              
+	string=string+'INTERFACE_LOCAL_MPI_Comm_create_keyval=dlsym(interface_handle,"CCMPI_Comm_create_keyval");\n'
+	string=string+'INTERFACE_LOCAL_MPI_Comm_free_keyval=dlsym(interface_handle,"CCMPI_Comm_free_keyval");\n'    
+	string=string+'INTERFACE_LOCAL_MPI_Win_get_attr=dlsym(interface_handle,"CCMPI_Win_get_attr");\n'            
+	string=string+'INTERFACE_LOCAL_MPI_Win_set_attr=dlsym(interface_handle,"CCMPI_Win_set_attr");\n'            
+	for i in data:                                                                         
+		if i['name'] in def_list or i['name'] in c2f_list:                                  
+			string=string+'INTERFACE_LOCAL_'+i['name']+'=dlsym(interface_handle,\"CC'+i['name']+'\");\n'
+	string=string+'}\n'                                                                              
+	return string
+
+
+
 
 if __name__ == '__main__':
+#Set generation directories
+#--------------------------
 	interface_directory="./interface/gen"
 	if not os.path.exists(interface_directory):
 		os.makedirs(interface_directory)
@@ -250,9 +292,9 @@ if __name__ == '__main__':
 	if not os.path.exists(preload_directory):
 		os.makedirs(preload_directory)
 
-	root = os.getcwd()	
+	root = os.getcwd()
 
-	#Common
+# Set Common file among the different generation
 	#Opening C and Fortran function dictionary
 	#-----------------------------------------
 	with open('./C/functions.json') as data_file:
@@ -267,16 +309,20 @@ if __name__ == '__main__':
 	      mappers_f=json.load(mapper_f_file)
 	
 	#File containing all pre-requisites in __attribute__((constructor)) void wrapper_init()
+	#--------------------------------------------------------------------------------------
 	init_conf =  open('./C/init_conf.txt','r')
 	
 	not_generated_ptr = open('./C/not_generated_pointer.txt','r')
 	ompi_const=open('./C/ompi_const_set.txt','r')
 
 	#File containing the list of pre_requisites for interop C-Fortran
+	#----------------------------------------------------------------
 	with open('./C/c2f_f2c_list.txt') as c2f:
 		c2f_list=c2f.read().splitlines()
 
+# Sequence generating file
 	#Generating Preload file
+	#-----------------------
 	#File containing all the functions not generated (included code chooser asm)
 	print " >>>>> Generating preload/gen/test_generation_wrapper.c"
 	wrapper=True
@@ -315,6 +361,7 @@ if __name__ == '__main__':
 	os.chdir(root)
 
 	#Generating Interface file
+	#-------------------------
 	print " >>>>> Generating interface/gen/test_generation_wrapper.c"
 	wrapper=False
 	not_generated = open('./C/not_generated_asmK_tls_updated_for_interface.txt','r')
@@ -336,15 +383,44 @@ if __name__ == '__main__':
 	interface_wrapper_c.write(string)
 	interface_wrapper_c.close()
 	fl.close()
-	fl_f.close()
 	not_generated.close()
 	print "        Done."
 	os.chdir(root)
 	
-	#print " >>>>> Generating preload/gen/wrapper.c"
-	#wrapper_preload_fortran=generator("Wrapper_Preload_Fortran",mappers_f,data_f)
+	print " >>>>> Generating interface/gen/wrapper.c"
+	wrapper_interface_fortran=generator("Wrapper_Interface_Fortran",mappers_f,data_f)
+	os.chdir(interface_directory)
+	interface_wrapper_fortran = open("wrapper.c","w")
+	string=generate_wrapper_f(wrapper_interface_fortran, data_f, data_f_overide, wrapper)
+	interface_wrapper_fortran.write(string)
+	interface_wrapper_fortran.close()
+	data_file.close()
+	fl_f.close()
+	print "        Done."
+	os.chdir(root)
 
 
+	print " >>>>> Generating interface/gen/interface_test.c"
+	interface_key_gen=open('./C/not_generated_interface_KEYVAL.txt','r')
+	with open('./C/c2f_f2c_list.txt') as c2f:
+		c2f_list=c2f.read().splitlines()
+
+	C_file='C/func_list_interface_c_interface.txt'
+	F_file='FORTRAN/func_list_interface_interface.text'
+	with open(C_file) as fl:
+		def_list_c=fl.read().splitlines()
+	with open(F_file) as fl_f:
+		def_list_f=fl_f.read().splitlines()
+
+	c_interface=generator("Interface_C", mappers_c,data_c)
+	os.chdir(interface_directory)
+	interface_c= open("interface_test.c","w")
+	string=generate_interface(c_interface, interface_key_gen, data_c, def_list_c, c2f_list)
+	interface_c.write(string)
+	interface_c.close()
+	fl.close()
+	print "        Done."
+	os.chdir(root)
 
 
 
