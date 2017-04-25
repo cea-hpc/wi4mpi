@@ -522,9 +522,9 @@ class generator:
 					str= self.mappers[arg['name']]['r2a']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
 		return str
 
-###
-# affect_temp_conv
-###		
+###							 ###
+# affect_temp_conv #
+###							 ###
 
 	def affect_temp_conv(self,arg):
 		if 'nomap' in self.mappers[arg['name']]:
@@ -549,9 +549,9 @@ class generator:
 					else:
 						str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
 		return str
-###					  ###
-# generate_func #
-###           ###
+###					    ###
+# generate_func_c #
+###             ###
 #Generate C interface, wrapper_preload_c, wrapper_interface_c
 	def generate_func_c(self,func_dict, init_conf, app_side=True):
 		count_loop=0

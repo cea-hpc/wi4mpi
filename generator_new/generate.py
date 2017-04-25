@@ -1,8 +1,26 @@
+#!/bin/python
 import json
 import string
 import os, sys
 from pprint import pprint
 from generator import generator
+
+#Wrapper_Preload_C Wrapper_Preload_Fortran 
+#Wrapper_Interface_C Wrapper_Interface_Fortran
+#Interface_C Interface_Fortran
+
+def usage():
+	print 'python generate.py [options]'
+	print 'This script generate by default the preload and interface file in ./preload/gen and ./interface/gen'
+	print 'Options:'
+	print '\t --help \t print this message'
+	print '\t --only \t generate only the provided file:'
+	print '\t\t\t\t Wrapper_Preload_C'
+	print '\t\t\t\t Wrapper_Preload_Fortran'
+	print '\t\t\t\t Wrapper_Interface_C'
+	print '\t\t\t\t Wrapper_Interface_Fortran'
+	print '\t\t\t\t Interface_C'
+	print '\t\t\t\t Interface_Fortran'
 
 def header_license_file():
 	string='//############################# Wi4MPI License ###########################'+'\n'
@@ -278,10 +296,91 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list):
 	string=string+'}\n'                                                                              
 	return string
 
-
+def generate_interface_f(object_gen, data2,data_f,def_list_f):
+	string=header_license_file()
+	for idx,j in enumerate(data_f): 
+		for i in data2:              
+			if i['name'] == j['name']:
+				data_f[idx]=i         
+	string=string+'#define _GNU_SOURCE\n'
+	string=string+'#include <stdio.h>\n'
+	string=string+'#include <dlfcn.h>\n'
+	string=string+'#include \"manual_interface.h\"\n'
+	string=string+'void *mpi_comm_null_copy_fn_=NULL;\n'
+	string=string+'void *mpi_win_dup_fn_=NULL;\n'
+	string=string+'void *mpi_null_copy_fn_=NULL;\n'
+	string=string+'void *mpi_comm_null_delete_fn_=NULL;\n'
+	string=string+'void *mpi_comm_dup_fn_=NULL;\n'
+	string=string+'void *mpi_type_null_copy_fn_=NULL;\n'
+	string=string+'void *mpi_null_delete_fn_=NULL;\n'
+	string=string+'void *mpi_dup_fn_=NULL;\n'
+	string=string+'void *mpi_conversion_fn_null_=NULL;\n'
+	string=string+'void *mpi_win_null_delete_fn_=NULL;\n'
+	string=string+'void *mpi_type_null_delete_fn_=NULL;\n'
+	string=string+'void *mpi_type_dup_fn_=NULL;\n'
+	string=string+'void *mpi_win_null_copy_fn_=NULL;\n'
+	string=string+"/*ompi constante*/\n"
+	for i in data_f:
+		for j in def_list_f: 
+			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
+				string=string+'void '+object_gen.print_symbol_f(i,name_arg=True,postfix='_',retval_name=False,type_prefix='',lower=True)+';\n'
+				string=string+'#pragma weak '+i['name'].lower()+'_=p'+i['name'].lower()+'_\n'
+				string=string+'void '+object_gen.print_symbol_f(i,func_ptr=True,prefix='INTERFACE_F_LOCAL_',type_prefix='')+';\n\n'
+				string=string+'void p'+object_gen.print_symbol_f(i,name_arg=True,retval_name=False,type_prefix='',lower=True,postfix='_').lstrip()+'{\n\n'
+				string=string+'return '+object_gen.print_symbol_f(i,prefix='INTERFACE_F_LOCAL_',type_prefix='',call=True,name_arg=True,direct=True)+';\n}\n\n'
+	string=string+'__attribute__((constructor)) void wrapper_interface_f(void) {\n'
+	string=string+'void *interface_handle_f=dlopen(getenv(\"WRAPPER_WI4MPI\"),RTLD_NOW|RTLD_GLOBAL);\n'
+	string=string+'if(!interface_handle_f)\n' 
+	string=string+'{\n'                                    
+	string=string+'printf("no true if lib defined\\nerror :%s\\n",dlerror());\n'
+	string=string+'exit(1);\n'
+	string=string+'}\n'                                                   
+	for i in data_f:
+		for j in def_list_f: 
+			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
+				string=string+'INTERFACE_F_LOCAL_'+i['name']+'=dlsym(interface_handle_f,\"A_f_'+i['name']+'\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Error_string=dlsym(interface_handle_f, \"A_f_MPI_Error_string\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Get_processor_name=dlsym(interface_handle_f, \"A_f_MPI_Get_processor_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_File_open=dlsym(interface_handle_f, \"A_f_MPI_File_open\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_File_set_view=dlsym(interface_handle_f, \"A_f_MPI_File_set_view\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_File_get_view=dlsym(interface_handle_f, \"A_f_MPI_File_get_view\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_File_delete=dlsym(interface_handle_f, \"A_f_MPI_File_delete\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Info_delete=dlsym(interface_handle_f, \"A_f_MPI_Info_delete\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Info_get=dlsym(interface_handle_f, \"A_f_MPI_Info_get\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Info_get_nthkey=dlsym(interface_handle_f, \"A_f_MPI_Info_get_nthkey\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Info_get_valuelen=dlsym(interface_handle_f, \"A_f_MPI_Info_get_valuelen\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Info_set=dlsym(interface_handle_f, \"A_f_MPI_Info_set\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Win_get_name=dlsym(interface_handle_f, \"A_f_MPI_Win_get_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Win_set_name=dlsym(interface_handle_f, \"A_f_MPI_Win_set_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Comm_get_name=dlsym(interface_handle_f, \"A_f_MPI_Comm_get_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Comm_set_name=dlsym(interface_handle_f, \"A_f_MPI_Comm_set_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Comm_spawn=dlsym(interface_handle_f, \"A_f_MPI_Comm_spawn\");\n'
+	#string=string+'INTERFACE_F_LOCAL_MPI_Comm_spawn_multiple=dlsym(interface_handle_f, \"A_f_MPI_Comm_spawn_multiple\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Type_get_name=dlsym(interface_handle_f, \"A_f_MPI_Type_get_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Type_set_name=dlsym(interface_handle_f, \"A_f_MPI_Type_set_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Add_error_string=dlsym(interface_handle_f, \"A_f_MPI_Add_error_string\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Close_port=dlsym(interface_handle_f, \"A_f_MPI_Close_port\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Get_library_version=dlsym(interface_handle_f, \"A_f_MPI_Get_library_version\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Open_port=dlsym(interface_handle_f, \"A_f_MPI_Open_port\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Publish_name=dlsym(interface_handle_f, \"A_f_MPI_Publish_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Unpublish_name=dlsym(interface_handle_f, \"A_f_MPI_Unpublish_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Lookup_name=dlsym(interface_handle_f, \"A_f_MPI_Lookup_name\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Pack_external=dlsym(interface_handle_f, \"A_f_MPI_Pack_external\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Pack_external_size=dlsym(interface_handle_f, \"A_f_MPI_Pack_external_size\");\n'
+	string=string+'INTERFACE_F_LOCAL_MPI_Unpack_external=dlsym(interface_handle_f, \"A_f_MPI_Unpack_external\");\n'
+	string=string+'}\n'
+	return string
 
 
 if __name__ == '__main__':
+#
+	  #if len(sys.argv) > 1:
+	  #	for i in sys.argv:
+	  #		if i == '--help':
+	  #				usage()
+	  #				sys.exit(1)
+	  #		elif i == '--only':
+	  #			sys.argv[0]
 #Set generation directories
 #--------------------------
 	interface_directory="./interface/gen"
@@ -422,26 +521,13 @@ if __name__ == '__main__':
 	print "        Done."
 	os.chdir(root)
 
-
-
-
-
-
-
-#	#Opening C and Fortran function list
-#	#-----------------------------------  
-#	with open(C_file) as fl:
-#	      def_list_c=fl.read().splitlines()
-#	with open(F_file) as fl_f:
-#	      def_list_f=fl_f.read().splitlines()
-#	
-#	#File containing all pre-requisites in __attribute__((constructor)) void wrapper_init()
-#	init_conf =  open('./C/init_conf.txt','r')
-#	#File containing all the functions not generated (included code chooser asm)
-#	#File containing the list of not_generated function
-#	not_generated_ptr = open('./C/not_generated_pointer.txt','r')
-#	#File containing the list of pre_requisites for interop C-Fortran
-#	with open('./C/c2f_f2c_list.txt') as c2f:
-#	      c2f_list=c2f.read().splitlines()
-#	
-#	interface_key_gen=open('./C/not_generated_interface_KEYVAL.txt','r')	
+	print " >>>>> Generating interface/gen/interface_fort.c"
+	f_interface=generator("Interface_Fortran",mappers_f,data_f)
+	#data_f_overide
+	os.chdir(interface_directory)
+	interface_f=open("interface_fort.c","w")
+	string=generate_interface_f(f_interface, data_f_overide, data_f,def_list_f)
+	interface_f.write(string)
+	interface_f.close()
+	fl_f.close()
+	os.chdir(root)
