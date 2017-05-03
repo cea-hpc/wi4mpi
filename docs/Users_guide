@@ -46,7 +46,7 @@ INTRODUCTION
 ============
 
 MPI is a standard in HPC community which allows a simple use of clusters. Nowoaday, there are several implementation (OpenMPI, BullxMPI, MPT, IntelMPI,MPC, ...) each of which involves a specific ABI (Application Binary Interface) for an application compiled with a specific MPI implementation.
-With wi4mpi the ABI doesn't matter anymore. In fact, wi4mpi is a software allowing an ABI translation from an MPI implementation MPI1 to a MPI implementation MPI2, meaning that an application compiled with an MPI1 MPI implementation can now be run with a MPI2 implementation without re-compliation.
+With wi4mpi, an application compiled with an alpha MPI implementation can be run under a beta MPI implementation without any compilation protocol and any concern about the ABI.
 
 INSTALL
 =======
