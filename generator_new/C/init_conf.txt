@@ -1,0 +1,116 @@
+datatype_translation_init();
+communicator_translation_init();
+request_translation_init();
+operation_translation_init();
+group_translation_init();
+errhandler_translation_init();
+file_translation_init();
+info_translation_init();
+win_translation_init();
+message_translation_init();
+t_enum_translation_init();
+cvar_handle_translation_init();
+pvar_handle_translation_init();
+//pvar_session_translation_init();
+//DATATYPE
+datatype_translation_add_const(A_MPI_DATATYPE_NULL, R_MPI_DATATYPE_NULL);
+datatype_translation_add_const(A_MPI_CHAR, R_MPI_CHAR);
+datatype_translation_add_const(A_MPI_SIGNED_CHAR, R_MPI_SIGNED_CHAR);
+datatype_translation_add_const(A_MPI_UNSIGNED_CHAR, R_MPI_UNSIGNED_CHAR);
+datatype_translation_add_const(A_MPI_BYTE, R_MPI_BYTE);
+datatype_translation_add_const(A_MPI_WCHAR, R_MPI_WCHAR);
+datatype_translation_add_const(A_MPI_SHORT, R_MPI_SHORT);
+datatype_translation_add_const(A_MPI_UNSIGNED_SHORT, R_MPI_UNSIGNED_SHORT);
+datatype_translation_add_const(A_MPI_INT, R_MPI_INT);
+datatype_translation_add_const(A_MPI_UNSIGNED, R_MPI_UNSIGNED);
+datatype_translation_add_const(A_MPI_LONG, R_MPI_LONG);
+datatype_translation_add_const(A_MPI_UNSIGNED_LONG, R_MPI_UNSIGNED_LONG);
+datatype_translation_add_const(A_MPI_FLOAT, R_MPI_FLOAT);
+datatype_translation_add_const(A_MPI_DOUBLE, R_MPI_DOUBLE);
+datatype_translation_add_const(A_MPI_LONG_DOUBLE, R_MPI_LONG_DOUBLE);
+datatype_translation_add_const(A_MPI_LONG_LONG_INT, R_MPI_LONG_LONG_INT);
+datatype_translation_add_const(A_MPI_UNSIGNED_LONG_LONG, R_MPI_UNSIGNED_LONG_LONG);
+datatype_translation_add_const(A_MPI_LONG_LONG, R_MPI_LONG_LONG);
+datatype_translation_add_const(A_MPI_UB, R_MPI_UB);
+datatype_translation_add_const(A_MPI_LB, R_MPI_LB);
+datatype_translation_add_const(A_MPI_PACKED, R_MPI_PACKED);
+datatype_translation_add_const(A_MPI_2INT, R_MPI_2INT);
+datatype_translation_add_const(A_MPI_LONG_INT, R_MPI_LONG_INT);
+datatype_translation_add_const(A_MPI_SHORT_INT, R_MPI_SHORT_INT);
+datatype_translation_add_const(A_MPI_DOUBLE_INT, R_MPI_DOUBLE_INT);
+datatype_translation_add_const(A_MPI_FLOAT_INT, R_MPI_FLOAT_INT);
+datatype_translation_add_const(A_MPI_LONG_DOUBLE_INT, R_MPI_LONG_DOUBLE_INT);
+datatype_translation_add_const(A_MPI_CHARACTER, R_MPI_CHARACTER);
+datatype_translation_add_const(A_MPI_LOGICAL, R_MPI_LOGICAL);
+datatype_translation_add_const(A_MPI_DOUBLE_COMPLEX, R_MPI_DOUBLE_COMPLEX);
+datatype_translation_add_const(A_MPI_COMPLEX, R_MPI_COMPLEX);
+datatype_translation_add_const(A_MPI_INTEGER, R_MPI_INTEGER);
+datatype_translation_add_const(A_MPI_REAL, R_MPI_REAL);
+datatype_translation_add_const(A_MPI_DOUBLE_PRECISION,R_MPI_DOUBLE_PRECISION);
+/*New datatypes from the MPI 2.2 standard*/
+datatype_translation_add_const(A_MPI_INT8_T               ,R_MPI_INT8_T               );
+datatype_translation_add_const(A_MPI_UINT8_T              ,R_MPI_UINT8_T              );
+datatype_translation_add_const(A_MPI_INT16_T              ,R_MPI_INT16_T              );
+datatype_translation_add_const(A_MPI_UINT16_T             ,R_MPI_UINT16_T             );
+datatype_translation_add_const(A_MPI_INT32_T              ,R_MPI_INT32_T              );
+datatype_translation_add_const(A_MPI_UINT32_T             ,R_MPI_UINT32_T             );
+datatype_translation_add_const(A_MPI_INT64_T              ,R_MPI_INT64_T              );
+datatype_translation_add_const(A_MPI_UINT64_T             ,R_MPI_UINT64_T             );
+datatype_translation_add_const(A_MPI_AINT                 ,R_MPI_AINT                 );
+datatype_translation_add_const(A_MPI_OFFSET               ,R_MPI_OFFSET               );
+datatype_translation_add_const(A_MPI_C_BOOL               ,R_MPI_C_BOOL               );
+datatype_translation_add_const(A_MPI_C_COMPLEX            ,R_MPI_C_COMPLEX            );
+datatype_translation_add_const(A_MPI_C_FLOAT_COMPLEX      ,R_MPI_C_FLOAT_COMPLEX      );
+datatype_translation_add_const(A_MPI_C_DOUBLE_COMPLEX     ,R_MPI_C_DOUBLE_COMPLEX     );
+datatype_translation_add_const(A_MPI_C_LONG_DOUBLE_COMPLEX,R_MPI_C_LONG_DOUBLE_COMPLEX);
+datatype_translation_add_const(A_MPI_CXX_BOOL             ,R_MPI_CXX_BOOL             );
+datatype_translation_add_const(A_MPI_CXX_FLOAT_COMPLEX    ,R_MPI_CXX_FLOAT_COMPLEX    );
+datatype_translation_add_const(A_MPI_CXX_DOUBLE_COMPLEX   ,R_MPI_CXX_DOUBLE_COMPLEX   );
+datatype_translation_add_const(A_MPI_CXX_LONG_DOUBLE_COMPLEX,R_MPI_CXX_LONG_DOUBLE_COMPLEX);
+/*New datatypes from the 3.0 standard*/
+//datatype_translation_add_const(A_MPI_COUNT,R_MPI_COUNT);
+//COMM
+communicator_translation_add_const(A_MPI_COMM_WORLD, R_MPI_COMM_WORLD);
+communicator_translation_add_const(A_MPI_COMM_SELF, R_MPI_COMM_SELF);
+communicator_translation_add_const(A_MPI_COMM_NULL, R_MPI_COMM_NULL);
+//REQUEST
+request_translation_add_const(A_MPI_REQUEST_NULL, R_MPI_REQUEST_NULL);
+//OP
+operation_translation_add_const(A_MPI_OP_NULL, R_MPI_OP_NULL);
+operation_translation_add_const(A_MPI_MAX, R_MPI_MAX);
+operation_translation_add_const(A_MPI_MIN, R_MPI_MIN);
+operation_translation_add_const(A_MPI_SUM, R_MPI_SUM);
+operation_translation_add_const(A_MPI_PROD, R_MPI_PROD);
+operation_translation_add_const(A_MPI_MAXLOC, R_MPI_MAXLOC);
+operation_translation_add_const(A_MPI_MINLOC, R_MPI_MINLOC);
+operation_translation_add_const(A_MPI_BAND, R_MPI_BAND);
+operation_translation_add_const(A_MPI_BOR, R_MPI_BOR);
+operation_translation_add_const(A_MPI_BXOR, R_MPI_BXOR);
+operation_translation_add_const(A_MPI_LAND, R_MPI_LAND);
+operation_translation_add_const(A_MPI_LOR, R_MPI_LOR);
+operation_translation_add_const(A_MPI_LXOR, R_MPI_LXOR);
+operation_translation_add_const(A_MPI_REPLACE, R_MPI_REPLACE);
+//operation_translation_add_const(A_MPI_SAME_MODE, R_MPI_SAME_MODE);
+//GROUP
+group_translation_add_const(A_MPI_GROUP_NULL, R_MPI_GROUP_NULL);
+group_translation_add_const(A_MPI_GROUP_EMPTY, R_MPI_GROUP_EMPTY);
+//ERRHANDLER
+errhandler_translation_add_const(A_MPI_ERRHANDLER_NULL,R_MPI_ERRHANDLER_NULL);
+errhandler_translation_add_const(A_MPI_ERRORS_ARE_FATAL,R_MPI_ERRORS_ARE_FATAL);
+errhandler_translation_add_const(A_MPI_ERRORS_RETURN, R_MPI_ERRORS_RETURN);
+//FILE
+file_translation_add_const(A_MPI_FILE_NULL, R_MPI_FILE_NULL);
+//INFO
+info_translation_add_const(A_MPI_INFO_NULL, R_MPI_INFO_NULL);
+//WIN
+win_translation_add_const(A_MPI_WIN_NULL, R_MPI_WIN_NULL);
+//MESSAGE
+message_translation_add_const(A_MPI_MESSAGE_NULL,R_MPI_MESSAGE_NULL);
+message_translation_add_const(A_MPI_MESSAGE_NO_PROC,R_MPI_MESSAGE_NO_PROC);
+//MPI_T
+t_enum_translation_add_const(A_MPI_T_ENUM_NULL,R_MPI_T_ENUM_NULL);
+cvar_handle_translation_add_const(A_MPI_T_CVAR_HANDLE_NULL,R_MPI_T_CVAR_HANDLE_NULL);
+pvar_handle_translation_add_const(A_MPI_T_PVAR_HANDLE_NULL,R_MPI_T_PVAR_HANDLE_NULL);
+//pvar_session_translation_add_const(A_MPI_T_PVAR_SESSION_NULL,R_MPI_T_PVAR_SESSION_NULL);
+wrapper_init_f();
+

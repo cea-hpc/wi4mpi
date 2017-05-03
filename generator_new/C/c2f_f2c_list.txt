@@ -1,0 +1,11 @@
+//MPI_File_c2f
+//MPI_Op_c2f
+//MPI_File_c2f
+//MPI_Info_c2f
+//MPI_Errhandler_c2f
+//MPI_Group_c2f
+//MPI_File_f2c
+//MPI_Op_f2c
+//MPI_Info_f2c
+//MPI_Errhandler_f2c
+//MPI_Group_f2c
