@@ -167,6 +167,58 @@ target_link_libraries(wi4mpi_INTEL_OMPI ${MPI_C_LIBRARIES})
 # Installation specs
 #-------------------
 
+# Listing headers to be installed
+#COMMON
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/func_char_fort.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/manual_wrapper.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/mappers.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/new_utils_fn.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/new_utils.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/optimisation.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/thread_safety.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/uthash.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/utils.h")
+
+install(FILES ${LIST_INTERNAL_COMMON_HEADER} DESTINATION INTERNAL/include)
+#INTERFACE
+	#OMPI_OMPI
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/OMPI_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/OMPI_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/OMPI_OMPI/run_mpi.h")
+	#OMPI_INTEL
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/OMPI_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/OMPI_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/OMPI_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/OMPI_INTEL/run_mpio.h")
+
+install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_O} DESTINATION INTERNAL/interface/include/OMPI_OMPI)
+install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_I} DESTINATION INTERNAL/interface/include/OMPI_INTEL)
+#PRELOAD
+	#OMPI_OMPI
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_OMPI/run_mpi.h")
+	#OMPI_INTEL
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/run_mpio.h")
+	#INTEL_OMPI
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/run_mpi.h")
+	#INTEL_INTEL
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpio.h")
+				
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_O} DESTINATION INTERNAL/preload/include/OMPI_OMPI) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_I} DESTINATION INTERNAL/preload/include/OMPI_INTEL) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_I_O} DESTINATION INTERNAL/preload/include/INTEL_OMPI) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_I_I} DESTINATION INTERNAL/preload/include/INTEL_INTEL) 
 #Preload libraries
 #-----------------
 install(TARGETS 
@@ -177,26 +229,32 @@ install(TARGETS
         LIBRARY DESTINATION libexec/wi4mpi)
 
 #fakelibCXX
-install(TARGETS
-        mpi_cxx.so.1
-        mpi_cxx.so.12
-        LIBRARY DESTINATION libexec/wi4mpi/fakelibCXX)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.1.so DESTINATION libexec/wi4mpi/fakelibCXX
+				RENAME libmpi_cxx.so.1)
+
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.12.so DESTINATION libexec/wi4mpi/fakelibCXX
+				RENAME libmpi_cxx.so.12)
 
 #fakelibINTEL
-install(TARGETS
-        mpi.so.12
-        mpi.so.1
-        mpigf.so.4
-        mpi_mt.so.4
-        LIBRARY DESTINATION libexec/wi4mpi/fakelibINTEL)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpigf.so.4.so DESTINATION libexec/wi4mpi/fakelibINTEL
+				RENAME libmpigf.so.4)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_mt.so.4.so DESTINATION libexec/wi4mpi/fakelibINTEL
+				RENAME libmpi_mt.so.4)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.12.so DESTINATION libexec/wi4mpi/fakelibINTEL
+				RENAME libmpi.so.12)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.1.so DESTINATION libexec/wi4mpi/fakelibINTEL
+				RENAME libmpifort.so.12)
 
 #fakelibOMPI
-install(TARGETS
-        mpi_f77.so.1
-        mpi_f90.so.1
-        mpi_mpifh.so.2
-        mpi.so.1
-        LIBRARY DESTINATION libexec/wi4mpi/fakelibOMPI)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f77.so.1.so	 DESTINATION libexec/wi4mpi/fakelibOMPI
+				RENAME libmpi_f77.so.1)	
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f90.so.1.so	 DESTINATION libexec/wi4mpi/fakelibOMPI
+				RENAME	libmpi_f90.so.1)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_mpifh.so.2.so DESTINATION libexec/wi4mpi/fakelibOMPI
+				RENAME	libmpi_mpifh.so.2)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.1.so			 DESTINATION libexec/wi4mpi/fakelibOMPI
+				RENAME	libmpi.so.1)
+				
 
 #Interface libraries
 #-------------------
@@ -248,4 +306,12 @@ install(FILES
 install(FILES
         preload/bin/wi4mpi DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_WRITE GROUP_WRITE
+)
+
+#Wi4mpi config
+#-------------
+
+install(FILES
+				preload/etc/wi4mpi.cfg DESTINATION etc
+				PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_WRITE GROUP_WRITE
 )
