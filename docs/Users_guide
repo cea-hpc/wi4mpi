@@ -50,7 +50,8 @@ INTRODUCTION
 ============
 
 MPI is a standard in HPC community which allows a simple use of clusters. Nowoaday, there are several implementation (OpenMPI, BullxMPI, MPT, IntelMPI, MPC, ...) each of which involves a specific ABI (Application Binary Interface) for an application compiled with a specific MPI implementation.
-With wi4mpi, an application compiled with an alpha MPI implementation can be run under a beta MPI implementation without any compilation protocol and any concern about the ABI.
+With wi4mpi, an application compiled with an alpha MPI implementation can be run under a beta MPI implementation without any compilation protocol and any concern about the ABI (Preload version).
+WI4MPI can also be seen as a dedicated MPI implementation; This time, the application is compiled against the wi4mpi library (libmpi.so) whith the dedicated wrapper (mpicc,mpif90...) meant for that purpose, and can be run under any other MPI implementation (Interface Version).
 
 Building WI4MPI with CMake
 ==========================
@@ -71,7 +72,7 @@ The installation procedureis simply consists of a cmake make install sequence.
 		 CMake check if the required elements are presents before any attempt to build WI4MPI
 
 	3. Build WI4MPI: make
-	4. Install WI4MPI: cmake -DCMAKE_INSTALL_PREFIX=/path/wi4mpi-%version /path/to/wi4mpi/source/root && make install
+	4. Install WI4MPI: cmake -DCMAKE_INSTALL_PREFIX=/path-install/wi4mpi-%version /path/to/wi4mpi/source/root && make install
 
 WI4MPI specific variables
 -------------------------
@@ -82,21 +83,139 @@ WI4MPI specific variables
 
 - WI4MPI_REALEASE
 
-	Indicate the WI4MPI state set for the installationi:
+	Indicate the WI4MPI state set for the installation:
 		- DEBUG: -DDEBUG is provided to activate some debug information. Useful for WI4MPI and apllications developer
 		- NORMAL: -g is provided
 		- REALEASE: -g is not provided
 
 
-Both version (interface and preload) of wi4mpi are compiled into the CMAKE_INSTALL_PREFIX directory provided during the cmake initialisation.
+Both version (interface and preload) of wi4mpi are compiled and installed into the CMAKE_INSTALL_PREFIX directory provided during the cmake initialisation.
 
 
 WI4MPI usage:
 =============
 
+As said in the introduction WI4MPI can be use with two different modes:
+	- INTERFACE: The application is compiled using the mpi wrapper available within WI4MPI
+	- PRELOAD: The application is compiled using the mpi wrapper available within common MPI Implementation
+Six conversions can be performed by wi4mpi:
+	-	OpenMPI	-> OpenMPI
+	- OpenMPI -> IntelMPI/MPICH/MVAPICH
+	-	IntelMPI/MPICH/MVAPICH -> OpenMPI
+	-	IntelMPI/MPICH/MVAPICH -> IntelMPI/MPICH/MVAPICH
+	- Interface -> IntelMPI/MPICH/MVAPICH
+	- Interface -> OpenMPI
+
 1. Quick start
+
+WI4MPI dedicated launcher available in /path-install/wi4mpi-%version/bin/wi4mpi allow an easy use of the library. To work, users only have to set the path to the different MPI implementation installation in /path-install/wi4mpi-%version/etc/wi4mpi.cfg configuration file. 
+
+	Usage: [MPIRUN] [MPIRUN_OPTION]... wi4mpi [option].. PROGRAM [PROGRAM_OPTION]...
+	Option:
+    -f FROM      the MPI implentation from which PROGRAM was compiled with
+    -t TARGET    the MPI implentation to which PROGRAM will be run
+
+The -f FROM option is optionnal. If not provided, the interface mode is choosen.
+
+Exemple:
+	
+	mpirun -np 4 wi4mpi -f openmpi -t intelmpi mpi_hello.exe 
+
+In this exemple wi4mpi understand that mpi_hello.exe is a binary file compiled with OpenMPI, which is run under IntelMPI/MPICH/MVAPICH.
+
 2. TGCC integration
-2. Environment settings
+
+WI4MPI is available on the TGCC via its module environment. All the environment settings detailed in the next section is hide by a system of flavor and features specific to the center.
+The flavor indicates the kind of the installation choosen by the users, on the other hand, the features are used to set one of the choosen conversion we highlight in the previous section. 
+
+(Flavors et features are modulefiles)
+Concerning the flavors:
+	
+	- flavor/wi4mpi/{installation_type} : {installation_type} can be debug or standard
+
+Concerning the features:
+
+	- feature/wi4mpi/to/{MPI}/{version} : indicates the desired MPI version for the runtime ({MPI} can take two value OpenMPI or IntelMPI).
+	- feature/wi4mpi/from/{MPI}/{version} : indicates the MPI version used to compiled the binary ELF file ({MPI} can take two value OpenMPI or IntelMPI). This features is not prerequisites, if not loaded (which is the default behaviour), the user is using WI4MPI in the interface.
+
+Default behavior example:
+
+	$ module load mpi/wi4mpi/%version																									
+	load module flavor/wi4mpi/standard (wi4mpi flavor)																	#Default installation is standard
+	load module feature/wi4mpi/to/openmpi/1.8.8 (WI4MPI feature to openmpi 1.8.8)				#Default conversion is Interface -> OpenMPI/1.8.8 (since no module feature/wi4mpi/from is loaded, the wi4mpi mode is interface)
+	load module feature/wi4mpi/compiler/intel (Wi4MPI compiler feature)									#Default compilator use by mpi wrapper (mpicc,mpicxx,mpif90,...) within WI4MPI are Intel compilers
+	load module wi4mpi/3.0.6 (Wi4MPI with openmpi/1.8.8)
+		
+	In this example, WI4MPI assume that the application is compiled with its own library libmpi.so
+	
+	To simply change the conversion "module switch feature/wi4mpi/to/intelmpi/2017"
+
+To activate the preload mode example:
+
+	$ module load mpi/wi4mpi/%version
+	$ module load feature/wi4mpi/from/intelmpi/2017
+	load module feature/wi4mpi/from/intelmpi/2017 (WI4MPI feature from intelmpi 2017)
+
+3. Environment settings
+
+All variable used by WI4MPI to configure the library according to the different modes and conversions:
+	
+New variables:				 |	Old variables:                                                                                                    		
+	WI4MPI_ROOT					 |		CCC_LIBMPI_ROOT				: reference to root wi4mpi installation                                                  	
+	WI4MPI_CC						 |		CCC_LIBMPICC	 				: reference C compiler used by wi4mpi                                                    			
+	WI4MPI_FC						 |		CCC_MPIFC							: reference Fortran compiler used by wi4mpi
+	WI4MPI_CXX					 |		CCC_MPICXX						: reference C++ compiler used by wi4mpi                                                   		
+	WI4MPI_RUN_MPI_LIB	 |		TRUE_MPI_LIB					: reference the path to the underlying run MPI implementation path C library              	
+	WI4MPI_RUN_MPI_F_LIB |		TRUE_MPI_F_LIB				: reference the path to the underlying run MPI implementation path Fortran library
+	WI4MPI_WRAPPER_LIB	 |		WRAPPER_WI4MPI				: reference the path to the wrapper library call by the interface
+	WI4MPI_APP_INCLUDES	 |		WI4MPI_APP_INCLUDES 	: reference the path to the internal include used by the jit trick to handle user function
+	WI4MPI_COMPILE_OPT	 |		WI4MPI_COMPILE_OPT 		: reference the option passed during jit compilation
+	WI4MPI_INTERNAL_INCLUDE | WI4MPI_INTERNAL_INCLUDE : reference the path to the internal include necessary to jit
+	LD_PRELOAD					 |		LD_PRELOAD						: see man 
+	LD_LIBRARY_PATH			 |		LD_LIBRARY_PATH				:	see man
+
+
+Preload settings:
+
+{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen conversion
+
+export TRUE_MPI_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
+export TRUE_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
+export LD_PRELOAD="path_to_wi4mpi_install/libexec/libwi4mpi_{FROM}_{TO}.so $TRUE_MPI_F_LIB $TRUE_MPI_LIB"
+export WI4MPI_APP_INCLUDES="/path/to/wi4mpi/INTERNAL/preload/include/{FROM}_{TO}"
+if OpenMPI --> OpenMPI
+	export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
+	WI4MPI_COMPILE_OPT "-Dompi_ompi -DOMPI_OMPI"
+else if OpenMPI --> IntelMPI
+	export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakelibOMPI:$LD_LIBRARY_PATH"
+	WI4MPI_COMPILE_OPT "-Dompi_mpich -DOMPI_INTEL"
+else if IntelMPI --> IntelMPI
+	export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
+	WI4MPI_COMPILE_OPT "-Dmpich_mpich -DINTEL_INTEL"
+else if IntelMPI --> OpenMPI
+	export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakelibINTEL:$LD_LIBRARY_PATH"
+	WI4MPI_COMPILE_OPT "-Dmpich_ompi -DINTEL_OMPI"
+
+Interface settings:
+
+{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen conversion
+
+export WI4MPI_INTERNAL_INCLUDES="path_to_install/INTERNAL/include"
+export CCC_LIBMPI_ROOT="/path_to_wi4mpi_install_root"
+export CCC_LIBMPICC=icc
+export CCC_MPIFC=ifort
+export TRUE_MPI_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
+export TRUE_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
+export WRAPPER_WI4MPI="path_to_wi4mpi_install/lib_IMPI/libwi4mpi_CCC_{TO}.so"
+export WI4MPI_APP_INCLUDES="path_to_install/interface/include/{FROM}_{TO}"
+if CCC --> IntelMPI
+	export WI4MPI_COMPILE_OPT="-Dompi_ompi -DOMPI_OMPI"
+else if CCC --> OpenMPI
+	export WI4MPI_COMPILE_OPT="-Dompi_mpich -DOMPI_INTEL"                       
+
+4. WI4MPI features
+
+	
 
 
 
@@ -106,4 +225,6 @@ Developers words
 
 First of all thanks a lot for using the wi4mpi software. Nevertheless be aware that this software is still under development and that some bugs may remain. If you encounter one of them, don't hesitate to contact one of the authors and so to participate to the software robustness.
 Second, wi4mpi is compatible with the 3.1 MPI norm. Don't hesitate to participate :-)
+
+https://github.com/cea-hpc/wi4mpi
 
