@@ -93,6 +93,10 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+'#endif\n'
 	string=string+'__attribute__((constructor)) void wrapper_init(void) {\n'
 	string=string+'void *lib_handle=dlopen(getenv(\"TRUE_MPI_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
+	if wrapper:
+		string=string+"fprintf(stdout,\"You are using Wi4MPI with the mode preload From %s To %s\", getenv(\"WI4MPI_FROM\"), getenv(\"WI4MPI_TO\"));"
+	else:
+		string=string+"fprintf(stdout,\"You are using Wi4MPI with the mode interface From Interface To %s\",getenv(\"WI4MPI_TO\"));"
 	for i in not_generated_ptr:
 		string=string+i
 	for i in data:

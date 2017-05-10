@@ -171,6 +171,8 @@ New variables:				 |	Old variables:
 	WI4MPI_APP_INCLUDES	 |		WI4MPI_APP_INCLUDES 	: reference the path to the internal include used by the jit trick to handle user function
 	WI4MPI_COMPILE_OPT	 |		WI4MPI_COMPILE_OPT 		: reference the option passed during jit compilation
 	WI4MPI_INTERNAL_INCLUDE | WI4MPI_INTERNAL_INCLUDE : reference the path to the internal include necessary to jit
+	WI4MPI_FROM																			: reference FROM which MPI implementation the application has been compiled
+	WI4MPI_TO																				: reference the desired Runtime MPI implementation 
 	LD_PRELOAD					 |		LD_PRELOAD						: see man 
 	LD_LIBRARY_PATH			 |		LD_LIBRARY_PATH				:	see man
 
