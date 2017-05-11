@@ -908,6 +908,15 @@ static inline void request_pers_array_delete(A_MPI_Request *request, R_MPI_Reque
   *request = A_MPI_REQUEST_NULL;
 }
 
+#include <sys/mman.h>
+extern int user_func_resolved(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
+/*
+{
+    A_MPI_Datatype tmp;
+   datatype_conv_r2a(&tmp,d);
+   pf(a,b,c,&tmp);
+}*/
+extern void user_fn_wrapper_template(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
 static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_function **fr)
 {
   void *fh;
@@ -917,6 +926,7 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
     char func_name[512];
     char **func_name2;
     int rank;
+#ifdef _WI4MPI_GCC_JIT
     R_MPI_Comm_rank(R_MPI_COMM_WORLD,&rank);
     sprintf(fname,"/tmp/.jit.user_func.%p_%d.c",*fa,rank);
     sprintf(soname,"/tmp/.jit.user_func.%p_%d.so",*fa,rank);
@@ -938,6 +948,18 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
    {
       fprintf(stderr,"error in loading wrapped user function %s \n",func_name);
    }
+#else
+    
+    void* ptr = mmap(0, 1024,
+                   PROT_READ | PROT_WRITE | PROT_EXEC,
+                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    memcpy(((char *)ptr+0x10),user_fn_wrapper_template,0x100);
+
+    ((void **)ptr)[0]=*fa;
+    
+    ((void **)ptr)[1]=user_func_resolved;
+    *fr=ptr+0x10;
+#endif
 
 }
 /* OP converter a2r - r2a */

@@ -16,6 +16,7 @@ file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
     common/new_utils.c      
     common/new_utils_fn.c 
     common/func_char_fort.c
+		common/asm_jit.c
     interface/manual/dlsym_global.c
 )
 #mpi.mod
@@ -34,6 +35,7 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     common/new_utils.c
     common/new_utils_fn.c
     common/func_char_fort.c
+		common/asm_jit.c
 )
 
 #empty
