@@ -83,6 +83,10 @@ if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
     endif()
 endif()
 
+find_package(Threads)
+if(NOT CMAKE_THREAD_LIBS_INIT)
+	message(FATAL_ERROR "Be sure to have Pthread available on you system")
+endif()
 
 #Source subdirectory
 add_subdirectory(src)

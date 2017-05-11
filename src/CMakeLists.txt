@@ -84,6 +84,12 @@ set_target_properties(wi4mpi_CCC_INTEL
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -DOMPI_INTEL -D_GNU_SOURCE -Dompi_mpich"
                      )
 
+#Link options
+#------------
+
+target_link_libraries(wi4mpi_CCC_OMPI ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_CCC_INTEL ${CMAKE_THREAD_LIBS_INIT})
+
 #############
 ## PRELOAD ##
 #############
@@ -164,7 +170,10 @@ PROPERTIES COMPILE_FLAGS "-shared -fPIC")
 # Link options
 #-------------
 
-target_link_libraries(wi4mpi_INTEL_OMPI ${MPI_C_LIBRARIES})
+target_link_libraries(wi4mpi_INTEL_OMPI ${MPI_C_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_INTEL_INTEL ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_OMPI_OMPI ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_OMPI_INTEL ${CMAKE_THREAD_LIBS_INIT})
 
 # Installation specs
 #-------------------
