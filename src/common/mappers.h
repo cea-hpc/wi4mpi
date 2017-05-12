@@ -916,7 +916,9 @@ extern int user_func_resolved(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf
    datatype_conv_r2a(&tmp,d);
    pf(a,b,c,&tmp);
 }*/
+#if !defined (_WI4MPI_GCC_JIT)
 extern void user_fn_wrapper_template(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
+#endif
 static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_function **fr)
 {
   void *fh;
@@ -926,7 +928,7 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
     char func_name[512];
     char **func_name2;
     int rank;
-#ifdef _WI4MPI_GCC_JIT
+#if defined (_WI4MPI_GCC_JIT)
     R_MPI_Comm_rank(R_MPI_COMM_WORLD,&rank);
     sprintf(fname,"/tmp/.jit.user_func.%p_%d.c",*fa,rank);
     sprintf(soname,"/tmp/.jit.user_func.%p_%d.so",*fa,rank);
@@ -948,7 +950,7 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
    {
       fprintf(stderr,"error in loading wrapped user function %s \n",func_name);
    }
-#else
+#elif !defined(_WI4MPI_GCC_JIT)
     
     void* ptr = mmap(0, 1024,
                    PROT_READ | PROT_WRITE | PROT_EXEC,
