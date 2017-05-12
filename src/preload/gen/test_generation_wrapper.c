@@ -8239,6 +8239,9 @@ in_w=1;
 
 
 int ret_tmp= LOCAL_MPI_Init( argc, argv);
+R_MPI_Comm_rank(R_MPI_COMM_WORLD,&wi4mpi_rank);
+if(wi4mpi_rank==0)
+	fprintf(stdout,"You are using Wi4MPI-%s with the mode preload From %s To %s\n", getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Init\n");
@@ -29375,7 +29378,7 @@ return ret;
 #endif
 __attribute__((constructor)) void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("TRUE_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
-fprintf(stdout,"You are using Wi4MPI with the mode preload From %s To %s", getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
+//fprintf(stdout,"You are using Wi4MPI-%s with the mode preload From %s To %s\n", getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
