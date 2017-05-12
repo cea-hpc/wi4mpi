@@ -43,30 +43,30 @@ int user_func_resolved(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void 
    datatype_conv_r2a(&tmp,d);
    pf(a,b,c,&tmp);
 }
-__thread size_t internal_cur_size;
-__thread size_t max_internal_size;
-__thread char wi4mpi_tmp_buff[1024*1024];
-void *wi4mpi_internal_allocator(size_t size)
-{
-    if((internal_cur_size+size+sizeof(size_t))<max_internal_size)
-    {
-        void *ptr=wi4mpi_tmp_buff+internal_cur_size;
-        ((size_t*)ptr)[0]=size;
-        internal_cur_size+=size+sizeof(size_t);
-        
-        return ptr+sizeof(size_t);
-    }
-    else
-        return malloc(size);
-}
-
-void wi4mpi_internal_free(void *ptr)
-{
-    if((ptr-(void*)wi4mpi_tmp_buff)<max_internal_size)
-    {
-        internal_cur_size-=((size_t*)ptr)[-1];
-        ((size_t*)ptr)[-1]=0;
-    }
-    else
-        free(ptr);
-}
+//__thread size_t internal_cur_size;
+//__thread size_t max_internal_size;
+//__thread char wi4mpi_tmp_buff[1024*1024];
+//void *wi4mpi_internal_allocator(size_t size)
+//{
+//    if((internal_cur_size+size+sizeof(size_t))<max_internal_size)
+//    {
+//        void *ptr=wi4mpi_tmp_buff+internal_cur_size;
+//        ((size_t*)ptr)[0]=size;
+//        internal_cur_size+=size+sizeof(size_t);
+//        
+//        return ptr+sizeof(size_t);
+//    }
+//    else
+//        return malloc(size);
+//}
+//
+//void wi4mpi_internal_free(void *ptr)
+//{
+//    if((ptr-(void*)wi4mpi_tmp_buff)<max_internal_size)
+//    {
+//        internal_cur_size-=((size_t*)ptr)[-1];
+//        ((size_t*)ptr)[-1]=0;
+//    }
+//    else
+//        free(ptr);
+//}
