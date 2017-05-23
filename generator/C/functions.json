@@ -6460,7 +6460,7 @@
         "var": "query_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "grequest_query_fn_converter", 
+        "name": "grequest_query_fn", 
         "Out": 0
       }, 
       {
@@ -12488,21 +12488,21 @@
         "var": "read_conversion_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "datarep_conversion_re_ptr_converter", 
+        "name": "datarep_conversion_function", 
         "Out": 0
       }, 
       {
         "var": "write_conversion_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "datarep_conversion_wr_ptr_converter", 
+        "name": "datarep_conversion_function", 
         "Out": 0
       }, 
       {
         "var": "dtype_file_extent_fn", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "datarep_extent_ptr_converter", 
+        "name": "datarep_extent_converter", 
         "Out": 0
       }, 
       {

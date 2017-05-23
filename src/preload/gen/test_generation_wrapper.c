@@ -23,7 +23,9 @@
 /*
  * This code is full generated
  */
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <stdio.h>
 #include <dlfcn.h>
 /*ompi constante*/
@@ -12370,8 +12372,9 @@ printf("entre : A_MPI_Grequest_start\n");
 #endif
 in_w=1;
 
-
-ptr_grq_query_fn=(A_MPI_Grequest_query_function *)query_fn;
+R_MPI_Grequest_query_function query_fn_ltmp;
+R_MPI_Grequest_query_function *query_fn_tmp=&query_fn_ltmp;
+grequest_query_fn_a2r(&query_fn, &query_fn_tmp);
 
 
 
@@ -12380,7 +12383,7 @@ void * extra_state_tmp;
 buffer_conv_a2r(&extra_state,&extra_state_tmp);
 R_MPI_Request  request_ltmp;
 R_MPI_Request * request_tmp=&request_ltmp;
-int ret_tmp= LOCAL_MPI_Grequest_start( (R_MPI_Grequest_query_function *)wrapper_grequest_query_function, free_fn, cancel_fn, extra_state_tmp, request_tmp);
+int ret_tmp= LOCAL_MPI_Grequest_start( query_fn_tmp, free_fn, cancel_fn, extra_state_tmp, request_tmp);
 if(ret_tmp == R_MPI_SUCCESS){
 request_ptr_conv_r2a(&request,&request_tmp);
 }
@@ -22459,17 +22462,22 @@ printf("entre : A_MPI_Register_datarep\n");
 #endif
 in_w=1;
 
+R_MPI_Datarep_conversion_function read_conversion_fn_ltmp;
+R_MPI_Datarep_conversion_function *read_conversion_fn_tmp=&read_conversion_fn_ltmp;
+datarep_conversion_function_converter_a2r(&read_conversion_fn, &read_conversion_fn_tmp);
+
+R_MPI_Datarep_conversion_function write_conversion_fn_ltmp;
+R_MPI_Datarep_conversion_function *write_conversion_fn_tmp=&write_conversion_fn_ltmp;
+datarep_conversion_function_converter_a2r(&write_conversion_fn, &write_conversion_fn_tmp);
+
+R_MPI_Datarep_extent_function     dtype_file_extent_fn_ltmp;
+R_MPI_Datarep_extent_function			*dtype_file_extent_fn_tmp=&dtype_file_extent_fn_ltmp;
+datarep_extent_function_converter_a2r(&dtype_file_extent_fn, &dtype_file_extent_fn_tmp);
 
 
-
-ptr_read_conversion_fn=(A_MPI_Datarep_conversion_function *)read_conversion_fn;
-
-ptr_write_conversion_fn=(A_MPI_Datarep_conversion_function *)write_conversion_fn;
-
-ptr_extent_fn=(A_MPI_Datarep_extent_function *)dtype_file_extent_fn;
 void * extra_state_tmp;
 buffer_conv_a2r(&extra_state,&extra_state_tmp);
-int ret_tmp= LOCAL_MPI_Register_datarep( datarep, (R_MPI_Datarep_conversion_function *)wrapper_datarep_read_conversion_fn, (R_MPI_Datarep_conversion_function *)wrapper_datarep_write_conversion_fn, (R_MPI_Datarep_extent_function *)wrapper_datarep_extent_fn, extra_state_tmp);
+int ret_tmp= LOCAL_MPI_Register_datarep( datarep, read_conversion_fn_tmp, write_conversion_fn_tmp, dtype_file_extent_fn_tmp, extra_state_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Register_datarep\n");

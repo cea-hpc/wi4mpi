@@ -362,7 +362,7 @@ class generator:
 				str=str+self.mappers[arg['name']]['a2r']+'(&'+arg['var'].split('[')[0]+'[i'+count_loop.__str__()+'],&'+arg['var'].split('[')[0]+'_tmp[i'+count_loop.__str__()+']);\n}'
 			else:
 				str_cmp= self.mappers[arg['name']]['type']
-				if len(str_cmp.split('*')) > 1 and self.mappers[arg['name']]['a2r'] != "status_prt_conv_a2r" and self.mappers[arg['name']]['a2r'] != "const_buffer_conv_a2r" and self.mappers[arg['name']]['a2r'] != "buffer_conv_a2r" and self.mappers[arg['name']]['a2r'] != "request_ptr_conv_a2r" and self.mappers[arg['name']]['a2r'] != "request_pers_ptr_conv_a2r" and self.mappers[arg['name']]['a2r'] !=  "weight_conv_a2r" and self.mappers[arg['name']]['a2r'] !=  "reduce_user_fn_a2r":
+				if len(str_cmp.split('*')) > 1 and self.mappers[arg['name']]['a2r'] != "status_prt_conv_a2r" and self.mappers[arg['name']]['a2r'] != "const_buffer_conv_a2r" and self.mappers[arg['name']]['a2r'] != "buffer_conv_a2r" and self.mappers[arg['name']]['a2r'] != "request_ptr_conv_a2r" and self.mappers[arg['name']]['a2r'] != "request_pers_ptr_conv_a2r" and self.mappers[arg['name']]['a2r'] !=  "weight_conv_a2r" and self.mappers[arg['name']]['a2r'] !=  "reduce_user_fn_a2r" and self.mappers[arg['name']]['a2r'] != "datarep_conversion_function_a2r" and self.mappers[arg['name']]['a2r'] != "datarep_extent_function_converter_a2r" and self.mappers[arg['name']]['a2r'] != "grequest_query_fn_a2r":
 					str= self.mappers[arg['name']]['a2r']+'('+arg['var']+','+arg['var']+'_tmp);'
 				else:
 					if self.mappers[arg['name']]['a2r'] == 'error_code_conv_a2r':
@@ -572,6 +572,14 @@ class generator:
 							count_loop=count_loop+1
 						str=str+'\n'+self.affect_temp_conv_c(arg,count_loop)
 				str=str+'\n'+self.print_symbol_c(func_dict,prefix='LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True, type_prefix='R_')+';'
+				if func_dict['name'] == 'MPI_Init':
+					str=str+"\nint wi4mpi_rank;\n"
+					str=str+"R_MPI_Comm_rank(R_MPI_COMM_WORLD,&wi4mpi_rank);\n"
+					str=str+"if(wi4mpi_rank==0)\n"
+					if self.name == 'Wrapper_Interface_C':
+						str=str+"\tprintf(stdout,\"You are using Wi4MPI-%s with the mode interface From Interface To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_TO\"));"
+					else:
+						str=str+"\tprintf(stdout,\"You are using Wi4MPI-%s with the mode preload From %s To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_FROM\"), getenv(\"WI4MPI_TO\"));"
 				for arg in func_dict['args']:
 					if arg['Out']:
 						if arg["arg_dep"] != '':

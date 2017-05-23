@@ -53,7 +53,9 @@ def header_license_file():
 
 def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list, data, init_conf,not_generated_ptr):
 	string=header_license_file()
+	string=string+'#ifndef _GNU_SOURCE'+'\n'
 	string=string+'#define _GNU_SOURCE'+'\n'
+	string=string+'#endif\n'
 	string=string+'#include <stdio.h>'+'\n'
 	string=string+'#include <dlfcn.h>'+'\n'
 	string=string+"/*ompi constante*/"+'\n'
@@ -92,11 +94,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 			string=string+object_gen.generate_func_r(list_other)
 	string=string+'#endif\n'
 	string=string+'__attribute__((constructor)) void wrapper_init(void) {\n'
-	string=string+'void *lib_handle=dlopen(getenv(\"TRUE_MPI_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
-	if wrapper:
-		string=string+"fprintf(stdout,\"You are using Wi4MPI with the mode preload From %s To %s\", getenv(\"WI4MPI_FROM\"), getenv(\"WI4MPI_TO\"));"
-	else:
-		string=string+"fprintf(stdout,\"You are using Wi4MPI with the mode interface From Interface To %s\",getenv(\"WI4MPI_TO\"));"
+	string=string+'void *lib_handle=dlopen(getenv(\"TRUE_MPI_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'	
 	for i in not_generated_ptr:
 		string=string+i
 	for i in data:
