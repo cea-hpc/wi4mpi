@@ -12372,8 +12372,7 @@ printf("entre : A_MPI_Grequest_start\n");
 #endif
 in_w=1;
 
-R_MPI_Grequest_query_function query_fn_ltmp;
-R_MPI_Grequest_query_function *query_fn_tmp=&query_fn_ltmp;
+R_MPI_Grequest_query_function *query_fn_tmp;
 grequest_query_fn_a2r(&query_fn, &query_fn_tmp);
 
 
@@ -22462,16 +22461,13 @@ printf("entre : A_MPI_Register_datarep\n");
 #endif
 in_w=1;
 
-R_MPI_Datarep_conversion_function read_conversion_fn_ltmp;
-R_MPI_Datarep_conversion_function *read_conversion_fn_tmp=&read_conversion_fn_ltmp;
-datarep_conversion_function_converter_a2r(&read_conversion_fn, &read_conversion_fn_tmp);
+R_MPI_Datarep_conversion_function *read_conversion_fn_tmp;
+datarep_conversion_function_a2r(&read_conversion_fn, &read_conversion_fn_tmp);
 
-R_MPI_Datarep_conversion_function write_conversion_fn_ltmp;
-R_MPI_Datarep_conversion_function *write_conversion_fn_tmp=&write_conversion_fn_ltmp;
-datarep_conversion_function_converter_a2r(&write_conversion_fn, &write_conversion_fn_tmp);
+R_MPI_Datarep_conversion_function *write_conversion_fn_tmp;
+datarep_conversion_function_a2r(&write_conversion_fn, &write_conversion_fn_tmp);
 
-R_MPI_Datarep_extent_function     dtype_file_extent_fn_ltmp;
-R_MPI_Datarep_extent_function			*dtype_file_extent_fn_tmp=&dtype_file_extent_fn_ltmp;
+R_MPI_Datarep_extent_function			*dtype_file_extent_fn_tmp;
 datarep_extent_function_converter_a2r(&dtype_file_extent_fn, &dtype_file_extent_fn_tmp);
 
 

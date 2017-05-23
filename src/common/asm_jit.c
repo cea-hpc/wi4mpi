@@ -133,7 +133,7 @@ int datarep_extent_func_resolved(R_MPI_Datatype a, R_MPI_Aint *b, void *c, int (
 }
 //int (MPI_Datarep_conversion_function)(void *, MPI_Datatype, int, void *, MPI_Offset, void *);
 __asm__(
-".global user_datarep_connversion_function_template\n"
+".global user_datarep_conversion_function_template\n"
 "nop\n"
 "nop\n"
 "nop\n"
