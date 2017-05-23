@@ -209,7 +209,8 @@ export CCC_MPIFC=ifort
 export TRUE_MPI_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
 export TRUE_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
 export WRAPPER_WI4MPI="path_to_wi4mpi_install/lib_IMPI/libwi4mpi_CCC_{TO}.so"
-export WI4MPI_APP_INCLUDES="path_to_install/interface/include/{FROM}_{TO}"
+export WI4MPI_APP_INCLUDES="path_to_install/INTERNAL/interface/include/{FROM}_{TO}"
+export LD_LIBRARY_PATH="path_to_install/lib:$LD_LIBRARY_PATH"
 if CCC --> IntelMPI
 	export WI4MPI_COMPILE_OPT="-Dompi_ompi -DOMPI_OMPI"
 else if CCC --> OpenMPI
