@@ -22,7 +22,9 @@
 //########################################################################
 #include "wrapper_f.h"
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <stdio.h>
 #include <dlfcn.h>
 #include "mappers.h"
@@ -690,16 +692,18 @@ A_MPI_Request A_MPI_Request_f2c(A_MPI_Fint op)
 printf("entre : A_MPI_Request_f2c\n");
 #endif
 in_w=1;
-A_MPI_Request ret;
+A_MPI_Request lret;
+A_MPI_Request *ret=&lret;
 R_MPI_Fint op_tmp;
 request_a2r(&op,&op_tmp);
 R_MPI_Request ret_tmp=LOCAL_MPI_Request_f2c(op_tmp);
-request_ptr_conv_r2a(&ret,&ret_tmp);
+R_MPI_Request *ret_tmpp=&ret_tmp;
+request_ptr_conv_r2a(&ret,&ret_tmpp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Request_f2c\n");
 #endif
-return ret;
+return *ret;
 }
 
 
@@ -753,9 +757,11 @@ printf("entre : A_MPI_Request_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
-R_MPI_Request op_tmp;
-request_ptr_conv_a2r(&op,&op_tmp);
-R_MPI_Fint ret_tmp=LOCAL_MPI_Request_c2f(op_tmp);
+R_MPI_Request op_ltmp;
+R_MPI_Request *op_tmp=&op_ltmp;
+A_MPI_Request *opp=&op;
+request_ptr_conv_a2r(&opp,&op_tmp);
+R_MPI_Fint ret_tmp=LOCAL_MPI_Request_c2f(*op_tmp);
 request_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG

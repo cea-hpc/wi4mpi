@@ -219,6 +219,7 @@ int varname##_translation_is_const(A_##type a_mpi_##varname); \
 void varname##_translation_get(A_##type a_mpi_##varname, R_##type* mpi_##varname); \
 void varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname); \
 void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname); \
+void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname); \
 void varname##_translation_del(A_##type * a_mpi_##varname); \
 void varname##_translation_free_all(); \
 void varname##_translation_init();\

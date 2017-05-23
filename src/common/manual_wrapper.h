@@ -25,7 +25,9 @@
 #ifndef MANUAL_WRAPPER_H
 #define MANUAL_WRAPPER_H
 
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <dlfcn.h>
 #include <stdarg.h>
 #include <unistd.h>
@@ -34,7 +36,9 @@
 #include "func_char_fort.h"
 extern __thread int in_w;
 
+#ifndef IFORT_CALL
 #define IFORT_CALL
+#endif
 static inline void status_a2r(int *ca,int *cr){
     source_a2r(&ca[A_f_MPI_SOURCE-1],&cr[R_f_MPI_SOURCE-1]);
     cr[R_f_MPI_TAG-1]=ca[A_f_MPI_TAG-1];
