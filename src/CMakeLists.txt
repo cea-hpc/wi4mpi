@@ -323,7 +323,8 @@ install(FILES
         interface/lib_cccmpi/include/mpif-io-handles.h
         interface/lib_cccmpi/include/mpif-externals.h
         interface/lib_cccmpi/include/mpif-sentinels.h
-        interface/lib_cccmpi/include/mpif-sizeof.h
+        interface/lib_cccmpi/include/gnu/mpif-sizeof.h
+        interface/lib_cccmpi/include/intel/mpif-sizeof.h
         ${CMAKE_BINARY_DIR}/src/mpi.mod	 		 
         ${CMAKE_BINARY_DIR}/src/mpi_base.mod	 
         ${CMAKE_BINARY_DIR}/src/mpi_constants.mod
