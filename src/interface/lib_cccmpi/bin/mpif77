@@ -2,11 +2,11 @@
 usage() {
 
     cat <<EOF
-Usage: mpic++ [MPIC++_OPTION]... SOURCE...
+Usage: mpif77 [MPIF77_OPTION]... SOURCE...
 
 Option:
     -h           the help message
-    -show        show the 
+    -show        show the compilations options
 
 EOF
 
@@ -16,11 +16,18 @@ showme() {
 
 cat <<EOF
 
-ifort -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi
+${CCC_MPIFC} -I${CCC_LIBMPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${CCC_LIBMPI_ROOT}/lib -lmpi
 
 EOF
 
 }
+
+if [[ "$CCC_MPIFC" == "gfortran" ]]; then
+	SIZEOF_INCLUDE=${CCC_LIBMPI_ROOT}/include/gnu
+else
+	SIZEOF_INCLUDE=${CCC_LIBMPI_ROOT}/include/intel
+fi
+
 arg=$@
 while [[ $# -ge 1 ]]
 do
@@ -34,5 +41,5 @@ case $key in
 esac
 shift
 done
-ifort -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi $arg
+${CCC_MPIFC} -I${CCC_LIBMPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${CCC_LIBMPI_ROOT}/lib -lmpi $arg
 exit $?

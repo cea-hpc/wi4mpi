@@ -6,7 +6,7 @@ Usage: mpicc [MPICC_OPTION]... SOURCE...
 
 Option:
     -h           the help message
-    -show        show the 
+    -show        show the compilations options 
 
 EOF
 
