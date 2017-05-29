@@ -160,21 +160,21 @@ To activate the preload mode example:
 
 All variable used by WI4MPI to configure the library according to the different modes and conversions:
 	
-New variables:				 |	Old variables:                                                                                                    		
-	WI4MPI_ROOT					 |		CCC_LIBMPI_ROOT				: reference to root wi4mpi installation                                                  	
-	WI4MPI_CC						 |		CCC_LIBMPICC	 				: reference C compiler used by wi4mpi                                                    			
-	WI4MPI_FC						 |		CCC_MPIFC							: reference Fortran compiler used by wi4mpi
-	WI4MPI_CXX					 |		CCC_MPICXX						: reference C++ compiler used by wi4mpi                                                   		
-	WI4MPI_RUN_MPI_LIB	 |		TRUE_MPI_LIB					: reference the path to the underlying run MPI implementation path C library              	
-	WI4MPI_RUN_MPI_F_LIB |		TRUE_MPI_F_LIB				: reference the path to the underlying run MPI implementation path Fortran library
-	WI4MPI_WRAPPER_LIB	 |		WRAPPER_WI4MPI				: reference the path to the wrapper library call by the interface
-	WI4MPI_APP_INCLUDES	 |		WI4MPI_APP_INCLUDES 	: reference the path to the internal include used by the jit trick to handle user function
-	WI4MPI_COMPILE_OPT	 |		WI4MPI_COMPILE_OPT 		: reference the option passed during jit compilation
+New variables:				 		|	Old variables:                                                                                                    		
+	WI4MPI_ROOT					 		|		CCC_LIBMPI_ROOT				: reference to root wi4mpi installation                                                  	
+	WI4MPI_CC						 		|		CCC_LIBMPICC	 				: reference C compiler used by wi4mpi                                                    			
+	WI4MPI_FC						 		|		CCC_MPIFC							: reference Fortran compiler used by wi4mpi
+	WI4MPI_CXX					 		|		CCC_MPICXX						: reference C++ compiler used by wi4mpi                                                   		
+	WI4MPI_RUN_MPI_C_LIB 		|		TRUE_MPI_LIB					: reference the path to the underlying run MPI implementation path C library              	
+	WI4MPI_RUN_MPI_F_LIB 		|		TRUE_MPI_F_LIB				: reference the path to the underlying run MPI implementation path Fortran library
+	WI4MPI_WRAPPER_LIB	 		|		WRAPPER_WI4MPI				: reference the path to the wrapper library call by the interface
+	WI4MPI_APP_INCLUDES	 		|		WI4MPI_APP_INCLUDES 	: reference the path to the internal include used by the jit trick to handle user function
+	WI4MPI_COMPILE_OPT	 		|		WI4MPI_COMPILE_OPT 		: reference the option passed during jit compilation
 	WI4MPI_INTERNAL_INCLUDE | WI4MPI_INTERNAL_INCLUDE : reference the path to the internal include necessary to jit
-	WI4MPI_FROM																			: reference FROM which MPI implementation the application has been compiled
-	WI4MPI_TO																				: reference the desired Runtime MPI implementation 
-	LD_PRELOAD					 |		LD_PRELOAD						: see man 
-	LD_LIBRARY_PATH			 |		LD_LIBRARY_PATH				:	see man
+	WI4MPI_FROM																				: reference FROM which MPI implementation the application has been compiled
+	WI4MPI_TO																					: reference the desired Runtime MPI implementation 
+	LD_PRELOAD					 		|		LD_PRELOAD						: see man 
+	LD_LIBRARY_PATH			 		|		LD_LIBRARY_PATH				:	see man
 
 
 Preload settings:
@@ -217,10 +217,6 @@ else if CCC --> OpenMPI
 	export WI4MPI_COMPILE_OPT="-Dompi_mpich -DOMPI_INTEL"                       
 
 4. WI4MPI features
-
-	
-
-
 
 
 Developers words
