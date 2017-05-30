@@ -323,13 +323,16 @@ install(FILES
         interface/lib_cccmpi/include/mpif-io-handles.h
         interface/lib_cccmpi/include/mpif-externals.h
         interface/lib_cccmpi/include/mpif-sentinels.h
-        interface/lib_cccmpi/include/gnu/mpif-sizeof.h
-        interface/lib_cccmpi/include/intel/mpif-sizeof.h
         ${CMAKE_BINARY_DIR}/src/mpi.mod	 		 
         ${CMAKE_BINARY_DIR}/src/mpi_base.mod	 
         ${CMAKE_BINARY_DIR}/src/mpi_constants.mod
         ${CMAKE_BINARY_DIR}/src/mpi_sizeofs.mod DESTINATION include
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+
+install(DIRECTORY
+        interface/lib_cccmpi/include/gnu
+        interface/lib_cccmpi/include/intel DESTINATION include
 )
 
 #Bin
