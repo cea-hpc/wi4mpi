@@ -94,7 +94,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 			string=string+object_gen.generate_func_r(list_other)
 	string=string+'#endif\n'
 	string=string+'__attribute__((constructor)) void wrapper_init(void) {\n'
-	string=string+'void *lib_handle=dlopen(getenv(\"TRUE_MPI_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'	
+	string=string+'void *lib_handle=dlopen(getenv(\"WI4MPI_RUN_MPI_C_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'	
 	for i in not_generated_ptr:
 		string=string+i
 	for i in data:
@@ -160,7 +160,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 				string=string+object_gen.generate_func_f(i)+'\n'
 	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
 	if not wrapper:
-		string=string+'void *lib_handle_f=dlopen(getenv(\"TRUE_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
+		string=string+'void *lib_handle_f=dlopen(getenv(\"WI4MPI_RUN_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
 	for i in data_f:
 		for j in def_list_f:
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
@@ -280,7 +280,7 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list):
 			string=string+object_gen.print_symbol_c(i,prefix='INTERFACE_LOCAL_',name_arg=True,retval_name=True,app_side=False,call=True, r_func=False,type_prefix='',interface=True)+';\n'
 			string=string+object_gen.footer_func(i,app_side=False)
 	string=string+'\n__attribute__((constructor)) void wrapper_interface(void) {\n'                     
-	string=string+'void *interface_handle=dlopen(getenv(\"WRAPPER_WI4MPI\"),RTLD_NOW|RTLD_GLOBAL);\n' 
+	string=string+'void *interface_handle=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n' 
 	string=string+'if(!interface_handle)\n'                                                           
 	string=string+'{\n'                                                                               
 	string=string+'printf("no true IC lib defined\\nerror :%s\\n",dlerror());\n'                      
@@ -331,7 +331,7 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f):
 				string=string+'void p'+object_gen.print_symbol_f(i,name_arg=True,retval_name=False,type_prefix='',lower=True,postfix='_').lstrip()+'{\n\n'
 				string=string+'return '+object_gen.print_symbol_f(i,prefix='INTERFACE_F_LOCAL_',type_prefix='',call=True,name_arg=True,direct=True)+';\n}\n\n'
 	string=string+'__attribute__((constructor)) void wrapper_interface_f(void) {\n'
-	string=string+'void *interface_handle_f=dlopen(getenv(\"WRAPPER_WI4MPI\"),RTLD_NOW|RTLD_GLOBAL);\n'
+	string=string+'void *interface_handle_f=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
 	string=string+'if(!interface_handle_f)\n' 
 	string=string+'{\n'                                    
 	string=string+'printf("no true if lib defined\\nerror :%s\\n",dlerror());\n'

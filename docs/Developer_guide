@@ -89,7 +89,7 @@ The library is set during its loading time, when the program start. All runtime 
 void __attribute__((constructor)) wrapper_init
 {
 
-	void (*)lib_handle=dlopen(getenv("TRUE_MPI_LIB"),RTLD_NOW); 
+	void (*)lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW); 
 	LOCAL_MPI_Function=dlsym(lib_handle,"PMPI_Function") 
 	....
 }
@@ -318,7 +318,7 @@ All the previously section are still relevent for the interface, the only things
                     | Lib_IMPI | ----------- > | IntelMPI |
               dlopen|----------|               |----------|
 
-The files interface_test.c and interface_fort.c, deal with the overload symbol mechanism see earlier for respectively the C and Fortran API, then according the conversion a dlopen is made to the appropriate library (WRAPPER_WI4MPI) responsible for the traduction (ASM code chooser + A_MPI_Function + R_MPI_Function).
+The files interface_test.c and interface_fort.c, deal with the overload symbol mechanism see earlier for respectively the C and Fortran API, then according the conversion a dlopen is made to the appropriate library (WI4MPI_WRAPPER_LIB) responsible for the traduction (ASM code chooser + A_MPI_Function + R_MPI_Function).
 
 MPI_Init example:
 
@@ -339,7 +339,7 @@ printf("sort : PMPI_Init (interface)\n");
 return ret_tmp;
 }
 __attribute__((constructor)) void wrapper_interface(void) {
-void *interface_handle=dlopen(getenv("WRAPPER_WI4MPI"),RTLD_NOW|RTLD_GLOBAL);
+void *interface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
 if(!interface_handle)
 {
     printf("no true IC lib defined\nerror :%s\n",dlerror());

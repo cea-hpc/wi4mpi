@@ -6655,7 +6655,7 @@ return ret_tmp;
 }
 
 __attribute__((constructor)) void wrapper_interface(void) {
-void *interface_handle=dlopen(getenv("WRAPPER_WI4MPI"),RTLD_NOW|RTLD_GLOBAL);
+void *interface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
 if(!interface_handle)
 {
     printf("no true IC lib defined\nerror :%s\n",dlerror());

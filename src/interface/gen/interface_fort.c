@@ -3061,7 +3061,7 @@ return  INTERFACE_F_LOCAL_MPI_Comm_spawn_multiple( count,command, argv, maxprocs
 
 
 __attribute__((constructor)) void wrapper_interface_f(void) {
-void *interface_handle_f=dlopen(getenv("WRAPPER_WI4MPI"),RTLD_NOW|RTLD_GLOBAL);
+void *interface_handle_f=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
 if(!interface_handle_f)
 {
 printf("no true if lib defined\nerror :%s\n",dlerror());

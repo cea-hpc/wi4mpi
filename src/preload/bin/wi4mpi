@@ -92,35 +92,35 @@ if [[ -z $FROM ]]; then
   	  openmpi)  
 		TARGET_FAMILY="OMPI"
 		WI4MPI_FAMILY=${WI4MPI_OMPI}
-		TRUE_MPI_LIB=$OPENMPI_ROOT/lib/libmpi.so 
-		TRUE_MPI_F_LIB=$OPENMPI_ROOT/lib/libmpi_mpifh.so
+		WI4MPI_RUN_MPI_C_LIB=$OPENMPI_ROOT/lib/libmpi.so 
+		WI4MPI_RUN_MPI_F_LIB=$OPENMPI_ROOT/lib/libmpi_mpifh.so
 		;;
   	  intelmpi) 
 		TARGET_FAMILY="INTEL"
 		WI4MPI_FAMILY=${WI4MPI_IMPI}
-		TRUE_MPI_LIB=$INTELMPI_ROOT/lib64/libmpi.so
-		TRUE_MPI_F_LIB=$INTELMPI_ROOT/lib64/libmpifort.so
+		WI4MPI_RUN_MPI_C_LIB=$INTELMPI_ROOT/lib64/libmpi.so
+		WI4MPI_RUN_MPI_F_LIB=$INTELMPI_ROOT/lib64/libmpifort.so
 		;;
   	  *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
 	esac
 	WI4MPI_FROM="INTERFACE"
 	WI4MPI_TO=${TARGET_FAMILY}
-	WRAPPER_WI4MPI=${WI4MPI_FAMILY}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so
+	WI4MPI_WRAPPER_LIB=${WI4MPI_FAMILY}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so
 	export LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
 	if [[ -n "$VERBOSE" ]]; then
-		echo ${WRAPPER_WI4MPI}
-		echo ${TRUE_MPI_LIB}
-		echo ${TRUE_MPI_F_LIB}
+		echo ${WI4MPI_WRAPPER_LIB}
+		echo ${WI4MPI_RUN_MPI_C_LIB}
+		echo ${WI4MPI_RUN_MPI_F_LIB}
 		echo $LD_LIBRARY_PATH
 	fi
-	[[ ! -f ${WRAPPER_WI4MPI} ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
-	[[ ! -f ${TRUE_MPI_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
-	[[ ! -f ${TRUE_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+	[[ ! -f ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
+	[[ ! -f ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
+	[[ ! -f ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
 	export WI4MPI_FROM
 	export WI4MPI_TO
-	export WRAPPER_WI4MPI
-	export TRUE_MPI_LIB
-	export TRUE_MPI_F_LIB	
+	export WI4MPI_WRAPPER_LIB
+	export WI4MPI_RUN_MPI_C_LIB
+	export WI4MPI_RUN_MPI_F_LIB	
 #PRELOAD	
 else
 	if [[ -n "$VERBOSE" ]]; then
@@ -135,13 +135,13 @@ else
 	case $TARGET in
   	  openmpi)  
 		TARGET_FAMILY="OMPI" 
-		TRUE_MPI_LIB=$OPENMPI_ROOT/lib/libmpi.so 
-		TRUE_MPI_F_LIB=$OPENMPI_ROOT/lib/libmpi_mpifh.so
+		WI4MPI_RUN_MPI_C_LIB=$OPENMPI_ROOT/lib/libmpi.so 
+		WI4MPI_RUN_MPI_F_LIB=$OPENMPI_ROOT/lib/libmpi_mpifh.so
 		;;
   	  intelmpi) 
 		TARGET_FAMILY="INTEL"
-		TRUE_MPI_LIB=$INTELMPI_ROOT/lib64/libmpi.so
-		TRUE_MPI_F_LIB=$INTELMPI_ROOT/lib64/libmpifort.so
+		WI4MPI_RUN_MPI_C_LIB=$INTELMPI_ROOT/lib64/libmpi.so
+		WI4MPI_RUN_MPI_F_LIB=$INTELMPI_ROOT/lib64/libmpifort.so
 		;;
   	  *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
 	esac
@@ -149,16 +149,16 @@ else
 	WI4MPI_TO=$TARGET_FAMILY
 	libwi4mpi=${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so
 	[[ ! -f $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
-	[[ ! -f ${TRUE_MPI_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
-	[[ ! -f ${TRUE_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+	[[ ! -f ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
+	[[ ! -f ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
 	export WI4MPI_FROM
 	export WI4MPI_TO
-	export TRUE_MPI_F_LIB
-	export TRUE_MPI_LIB
-	export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${TRUE_MPI_F_LIB} ${TRUE_MPI_LIB}"
+	export WI4MPI_RUN_MPI_F_LIB
+	export WI4MPI_RUN_MPI_C_LIB
+	export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
 	if [[ -n "$VERBOSE" ]]; then
-	    echo "export TRUE_MPI_F_LIB=${TRUE_MPI_F_LIB}"
-	    echo "export TRUE_MPI_LIB=${TRUE_MPI_LIB}"
+	    echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
+	    echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
 	    echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
 	fi
 	libfakedir_cxx=${WI4MPI_LIBEXEC}/fakelibCXX/

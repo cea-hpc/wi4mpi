@@ -1203,7 +1203,7 @@ return ret;
 }
 #endif
 __attribute__((constructor)) void wrapper_init(void) {
-void *lib_handle=dlopen(getenv("TRUE_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");

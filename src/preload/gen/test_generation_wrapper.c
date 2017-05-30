@@ -29382,7 +29382,7 @@ return ret;
 #ifdef OMPI_OMPI
 #endif
 __attribute__((constructor)) void wrapper_init(void) {
-void *lib_handle=dlopen(getenv("TRUE_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
 //fprintf(stdout,"You are using Wi4MPI-%s with the mode preload From %s To %s\n", getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");

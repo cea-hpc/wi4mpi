@@ -1039,7 +1039,7 @@ return ret;
 
 
 __attribute__((constructor)) void wrapper_init_c2ff2c(void) {
-void *lib_handle_c2ff2c=dlopen(getenv("TRUE_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *lib_handle_c2ff2c=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
 LOCAL_MPI_File_f2c=dlsym(lib_handle_c2ff2c,"PMPI_File_f2c");
 LOCAL_MPI_File_c2f=dlsym(lib_handle_c2ff2c,"PMPI_File_c2f");
 LOCAL_MPI_Op_f2c=dlsym(lib_handle_c2ff2c,"PMPI_Op_f2c");

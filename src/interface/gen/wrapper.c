@@ -12664,7 +12664,7 @@ printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 #endif
 }
 __attribute__((constructor)) void wrapper_init_f(void) {
-void *lib_handle_f=dlopen(getenv("TRUE_MPI_F_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *lib_handle_f=dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"),RTLD_NOW|RTLD_GLOBAL);
 _LOCAL_MPI_Win_free_keyval=dlsym(lib_handle_f,"pmpi_win_free_keyval_");
 _LOCAL_MPI_Win_delete_attr=dlsym(lib_handle_f,"pmpi_win_delete_attr_");
 _LOCAL_MPI_Win_get_attr=dlsym(lib_handle_f,"pmpi_win_get_attr_");
