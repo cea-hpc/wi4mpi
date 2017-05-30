@@ -16,16 +16,16 @@ showme() {
 
 cat <<EOF
 
-${CCC_MPIFC} -I${CCC_LIBMPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${CCC_LIBMPI_ROOT}/lib -lmpi
+${WI4MPI_FC} -I${WI4MPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${WI4MPI_ROOT}/lib -lmpi
 
 EOF
 
 }
 
-if [[ "$CCC_MPIFC" == "gfortran" ]]; then
-	SIZEOF_INCLUDE=${CCC_LIBMPI_ROOT}/include/gnu
+if [[ "$WI4MPI_FC" == "gfortran" ]]; then
+	SIZEOF_INCLUDE=${WI4MPI_ROOT}/include/gnu
 else
-	SIZEOF_INCLUDE=${CCC_LIBMPI_ROOT}/include/intel
+	SIZEOF_INCLUDE=${WI4MPI_ROOT}/include/intel
 fi
 
 arg=$@
@@ -41,5 +41,5 @@ case $key in
 esac
 shift
 done
-${CCC_MPIFC} -I${CCC_LIBMPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${CCC_LIBMPI_ROOT}/lib -lmpi $arg
+${WI4MPI_FC} -I${WI4MPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${WI4MPI_ROOT}/lib -lmpi $arg
 exit $?

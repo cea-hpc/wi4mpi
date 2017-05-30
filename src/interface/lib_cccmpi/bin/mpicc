@@ -16,7 +16,7 @@ showme() {
 
 cat <<EOF
 
-${CCC_LIBMPICC} -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi
+${WI4MPI_CC} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi
 
 EOF
 
@@ -34,5 +34,5 @@ case $key in
 esac
 shift
 done
-${CCC_LIBMPICC} -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi $arg
+${WI4MPI_CC} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi $arg
 exit $?
