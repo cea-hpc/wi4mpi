@@ -5,9 +5,20 @@ usage() {
 Usage: mpif90 [MPIF90_OPTION]... SOURCE...
 
 Option:
-    -h           the help message
-    -show        show the compilations options
-
+    -h                          the help message
+    -show                       show the compilations options
+    -wi4mpi_default_run_path    set a default MPI conversion
+                                for the user application.
+                                accepted values :
+                                  - OMPI
+                                  - IMPI
+Influencable variables:
+  - WI4MPI_FC                   Fortran compiler
+  - WI4MPI_ROOT                 WI4MPI installation root
+  - WI4MPI_RUN_MPI_C_LIB        C MPI implementation library 
+                                used at runtime
+  - WI4MPI_RUN_MPI_F_LIB        Fortran MPI implementation 
+                                library used at runtime
 EOF
 
 }
@@ -22,6 +33,20 @@ EOF
 
 }
 
+default_mode() {
+	
+	#cat << EOF > wi4mpi_libs_default_paths.c
+	
+	echo "char wi4mpi_mode[]=\"$wi4mpi_mode\";"	> wi4mpi_libs_default_paths.c
+	echo "char wi4mpi_mode_f[]=\"$wi4mpi_mode_f\";"	>> wi4mpi_libs_default_paths.c
+	echo "char wi4mpi_run_c_library[]=\"$wi4mpi_run_c_library\";"	>>wi4mpi_libs_default_paths.c
+	echo "char wi4mpi_run_f_library[]=\"$wi4mpi_run_f_library\";"	>>wi4mpi_libs_default_paths.c
+
+	#EOF
+		
+}
+
+#Choosing the right include path according to the Fortran compiler 
 if [[ "$WI4MPI_FC" == "gfortran" ]]; then
 	SIZEOF_INCLUDE=${WI4MPI_ROOT}/include/gnu
 else
@@ -29,6 +54,12 @@ else
 fi
 
 arg=$@
+default_mode_activated=0
+wi4mpi_mode=$WI4MPI_WRAPPER_LIB
+wi4mpi_mode_f=$WI4MPI_WRAPPER_LIB
+wi4mpi_run_c_library=$WI4MPI_RUN_MPI_C_LIB;  
+wi4mpi_run_f_library=$WI4MPI_RUN_MPI_F_LIB;  
+
 while [[ $# -ge 1 ]]
 do
 key=$1
@@ -38,8 +69,44 @@ case $key in
       usage; exit 0;;
       -show )
       showme; exit 0;;
+			-wi4mpi_default_run_path )
+				#echo "default mode"
+				if [[ $default_mode_activated -eq 0 ]]; then
+					default_mode_activated=1
+					#exclude -wi4mpi_default_run_path from arg list passed to WI4MPI_FC
+					arg=`echo $arg | sed "s/-wi4mpi_default_run_path//g"`
+					#Testing the argument after the option -wi4mpi_default_run_path
+					#echo "Default mode choosen : $2"
+					if [[ "$2" == "OMPI" ]]; then
+						#echo "OMPI"
+						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_OMPI.so
+						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_OMPI.so
+					elif [[ "$2" == "IMPI" ]]; then
+						#echo "IMPI"
+						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_IMPI.so
+						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_IMPI.so
+					else
+						usage; exit 0;
+					fi
+					arg=`echo $arg | sed "s/\b$2\b//g"`
+					#echo $arg
+				fi
+				;;
+			-shared )
+				default_mode_activated=-1;;
+			-c )
+				default_mode_activated=-1;;
+			-static )
+				default_mode_activated=-1;;
 esac
 shift
 done
-${WI4MPI_FC} -I${WI4MPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${WI4MPI_ROOT}/lib -lmpi $arg
+extra_arg=""
+if [[ default_mode_activated -eq 1 ]];then
+	default_mode
+	${WI4MPI_CC} -c wi4mpi_libs_default_paths.c -o wi4mpi_libs_default_paths.o
+	extra_arg=wi4mpi_libs_default_paths.o
+fi
+
+${WI4MPI_FC} -I${WI4MPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${WI4MPI_ROOT}/lib -lmpi $arg $extra_arg
 exit $?

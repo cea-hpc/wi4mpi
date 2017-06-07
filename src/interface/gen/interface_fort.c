@@ -41,6 +41,9 @@ void *mpi_type_null_delete_fn_=NULL;
 void *mpi_type_dup_fn_=NULL;
 void *mpi_win_null_copy_fn_=NULL;
 /*ompi constante*/
+
+char wi4mpi_mode_f[]="";
+
 void  mpi_send_(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * ret);
 #pragma weak mpi_send_=pmpi_send_
 void  (*INTERFACE_F_LOCAL_MPI_Send)(void *,int *,int *,int *,int *,int *,int *);
@@ -3061,12 +3064,29 @@ return  INTERFACE_F_LOCAL_MPI_Comm_spawn_multiple( count,command, argv, maxprocs
 
 
 __attribute__((constructor)) void wrapper_interface_f(void) {
-void *interface_handle_f=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *interface_handle_f;
+if(getenv("WI4MPI_WRAPPER_LIB") != NULL)
+{
+	interface_handle_f=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
+}
+else
+{
+	if(strcmp(wi4mpi_mode_f,"") != 0)
+	{
+		interface_handle_f=dlopen(wi4mpi_mode_f,RTLD_NOW|RTLD_GLOBAL);
+	}
+	else
+	{
+		fprintf(stderr,"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\n");
+		exit(1);
+	}
+}
 if(!interface_handle_f)
 {
-printf("no true if lib defined\nerror :%s\n",dlerror());
-exit(1);
+	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
+	exit(1);
 }
+
 INTERFACE_F_LOCAL_MPI_Pcontrol=dlsym(interface_handle_f,"A_f_MPI_Pcontrol");
 INTERFACE_F_LOCAL_MPI_Register_datarep=dlsym(interface_handle_f,"A_f_MPI_Register_datarep");
 INTERFACE_F_LOCAL_MPI_Comm_spawn_multiple=dlsym(interface_handle_f,"A_f_MPI_Comm_spawn_multiple");

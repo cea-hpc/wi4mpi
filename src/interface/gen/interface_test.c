@@ -27,6 +27,9 @@
 #include <stdio.h>
 #include <dlfcn.h>
 #include "mpi.h"
+
+char wi4mpi_mode[]="";
+
 /*ompi constante*/
 int MPI_Comm_create_keyval
 (MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state);
@@ -6655,12 +6658,29 @@ return ret_tmp;
 }
 
 __attribute__((constructor)) void wrapper_interface(void) {
-void *interface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *interface_handle;
+if(getenv("WI4MPI_WRAPPER_LIB") != NULL)
+{
+	interface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
+}
+else
+{
+	if(strcmp(wi4mpi_mode,"") != 0)
+	{
+		interface_handle=dlopen(wi4mpi_mode,RTLD_NOW|RTLD_GLOBAL);
+	}
+	else
+	{
+		fprintf(stderr,"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\n");
+		exit(1);
+	}
+}
 if(!interface_handle)
 {
-    printf("no true IC lib defined\nerror :%s\n",dlerror());
-    exit(1);
+	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
+	exit(1);
 }
+
 INTERFACE_LOCAL_MPI_Errhandler_c2f=dlsym(interface_handle,"CCMPI_Errhandler_c2f");
 INTERFACE_LOCAL_MPI_Errhandler_f2c=dlsym(interface_handle,"CCMPI_Errhandler_f2c");
 INTERFACE_LOCAL_MPI_Keyval_create=dlsym(interface_handle,"CCMPI_Keyval_create");

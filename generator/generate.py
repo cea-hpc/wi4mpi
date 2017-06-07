@@ -266,6 +266,7 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list):
 	string=string+'#include <stdio.h>\n' 
 	string=string+'#include <dlfcn.h>\n' 
 	string=string+'#include \"mpi.h\"\n' 
+	string=string+"\nchar wi4mpi_mode[]=\"\";\n\n"
 	string=string+"/*ompi constante*/\n" 
 	for i in interface_key_gen:
 		string=string+i
@@ -280,12 +281,29 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list):
 			string=string+object_gen.print_symbol_c(i,prefix='INTERFACE_LOCAL_',name_arg=True,retval_name=True,app_side=False,call=True, r_func=False,type_prefix='',interface=True)+';\n'
 			string=string+object_gen.footer_func(i,app_side=False)
 	string=string+'\n__attribute__((constructor)) void wrapper_interface(void) {\n'                     
-	string=string+'void *interface_handle=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n' 
-	string=string+'if(!interface_handle)\n'                                                           
-	string=string+'{\n'                                                                               
-	string=string+'printf("no true IC lib defined\\nerror :%s\\n",dlerror());\n'                      
-	string=string+'exit(1);\n'                                                                        
+	#string=string+'void *interface_handle=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n' 
+	#string=string+'if(!interface_handle)\n'                                                           
+	#string=string+'{\n'                                                                               
+	#string=string+'printf("no true IC lib defined\\nerror :%s\\n",dlerror());\n'                      
+	#string=string+'exit(1);\n'                                                                        
+	#string=string+'}\n'
+	string=string+'void *interface_handle;\n'
+	string=string+'if(getenv(\"WI4MPI_WRAPPER_LIB\") != NULL)\n'
+	string=string+'{\n'
+	string=string+'\tinterface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);\n'
 	string=string+'}\n'
+	string=string+'else\n'
+	string=string+'{\n'
+	string=string+'\tif(strcmp(wi4mpi_mode,\"\") != 0)\n'
+	string=string+'\t{\n'
+	string=string+'\t\tinterface_handle=dlopen(wi4mpi_mode,RTLD_NOW|RTLD_GLOBAL);\n'
+	string=string+'\t}\n'
+	string=string+'\telse\n'
+	string=string+'\t{\n'
+	string=string+'\t\tfprintf(stderr,\"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\\n\");\n'
+	string=string+'\t\texit(1);\n'
+	string=string+'\t}\n'
+	string=string+'}\n\n'
 	string=string+'INTERFACE_LOCAL_MPI_Keyval_create=dlsym(interface_handle,"CCMPI_Keyval_create");\n'          
 	string=string+'INTERFACE_LOCAL_MPI_Keyval_free=dlsym(interface_handle,"CCMPI_Keyval_free");\n'              
 	string=string+'INTERFACE_LOCAL_MPI_Comm_create_keyval=dlsym(interface_handle,"CCMPI_Comm_create_keyval");\n'
@@ -322,6 +340,7 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f):
 	string=string+'void *mpi_type_dup_fn_=NULL;\n'
 	string=string+'void *mpi_win_null_copy_fn_=NULL;\n'
 	string=string+"/*ompi constante*/\n"
+	string=string+"\nchar wi4mpi_mode_f[]=\"\";\n\n"
 	for i in data_f:
 		for j in def_list_f: 
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
@@ -331,12 +350,29 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f):
 				string=string+'void p'+object_gen.print_symbol_f(i,name_arg=True,retval_name=False,type_prefix='',lower=True,postfix='_').lstrip()+'{\n\n'
 				string=string+'return '+object_gen.print_symbol_f(i,prefix='INTERFACE_F_LOCAL_',type_prefix='',call=True,name_arg=True,direct=True)+';\n}\n\n'
 	string=string+'__attribute__((constructor)) void wrapper_interface_f(void) {\n'
-	string=string+'void *interface_handle_f=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
-	string=string+'if(!interface_handle_f)\n' 
-	string=string+'{\n'                                    
-	string=string+'printf("no true if lib defined\\nerror :%s\\n",dlerror());\n'
-	string=string+'exit(1);\n'
-	string=string+'}\n'                                                   
+	#string=string+'void *interface_handle_f=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
+	#string=string+'if(!interface_handle_f)\n' 
+	#string=string+'{\n'                                    
+	#string=string+'printf("no true if lib defined\\nerror :%s\\n",dlerror());\n'
+	#string=string+'exit(1);\n'
+	#string=string+'}\n'                                                   
+	string=string+'void *interface_handle_f;\n'
+	string=string+'if(getenv(\"WI4MPI_WRAPPER_LIB\") != NULL)\n'
+	string=string+'{\n'
+	string=string+'\tinterface_handle_f=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);\n'
+	string=string+'}\n'
+	string=string+'else\n'
+	string=string+'{\n'
+	string=string+'\tif(strcmp(wi4mpi_mode_f,\"\") != 0)\n'
+	string=string+'\t{\n'
+	string=string+'\t\tinterface_handle_f=dlopen(wi4mpi_mode_f,RTLD_NOW|RTLD_GLOBAL);\n'
+	string=string+'\t}\n'
+	string=string+'\telse\n'
+	string=string+'\t{\n'
+	string=string+'\t\tfprintf(stderr,\"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\\n\");\n'
+	string=string+'\t\texit(1);\n'
+	string=string+'\t}\n'
+	string=string+'}\n\n'
 	for i in data_f:
 		for j in def_list_f: 
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
