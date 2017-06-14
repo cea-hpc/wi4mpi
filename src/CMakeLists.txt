@@ -13,7 +13,8 @@ file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
     interface/gen/test_generation_wrapper.c
     interface/gen/wrapper.c
     interface/gen/c2f_f2c.c
-    common/new_utils.c      
+#    common/new_utils.c      
+    common/new_utils_vcd.c      
     common/new_utils_fn.c 
     common/func_char_fort.c
 		common/asm_jit.c
@@ -32,7 +33,8 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     preload/gen/test_generation_wrapper.c
     preload/gen/wrapper.c
     preload/gen/c2f_f2c.c
-    common/new_utils.c
+#    common/new_utils.c
+		common/new_utils_vcd.c
     common/new_utils_fn.c
     common/func_char_fort.c
 		common/asm_jit.c
