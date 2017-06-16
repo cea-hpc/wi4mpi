@@ -46,6 +46,112 @@ static void dump(void * src, size_t size) {
 
 
 /*   True hashtables  */
+#if defined(OMPI_INTEL)
+extern char *ompi_mpi_comm_null;
+extern char *ompi_mpi_comm_self;
+extern char *ompi_mpi_comm_world;
+extern char *ompi_mpi_2cplex;
+extern char *ompi_mpi_2dblcplex;
+extern char *ompi_mpi_2dblprec;
+extern char *ompi_mpi_2int;
+extern char *ompi_mpi_2integer;
+extern char *ompi_mpi_2real;
+extern char *ompi_mpi_aint;
+extern char *ompi_mpi_byte;
+extern char *ompi_mpi_c_bool;
+extern char *ompi_mpi_c_complex;
+extern char *ompi_mpi_c_double_complex;
+extern char *ompi_mpi_c_float_complex;
+extern char *ompi_mpi_c_long_double_complex;
+extern char *ompi_mpi_char;
+extern char *ompi_mpi_character;
+extern char *ompi_mpi_complex16;
+extern char *ompi_mpi_complex32;
+extern char *ompi_mpi_complex8;
+extern char *ompi_mpi_cplex;
+extern char *ompi_mpi_cxx_bool;
+extern char *ompi_mpi_cxx_cplex;
+extern char *ompi_mpi_cxx_dblcplex;
+extern char *ompi_mpi_cxx_ldblcplex;
+extern char *ompi_mpi_datatype_null;
+extern char *ompi_mpi_dblcplex;
+extern char *ompi_mpi_dblprec;
+extern char *ompi_mpi_double;
+extern char *ompi_mpi_double_int;
+extern char *ompi_mpi_float;
+extern char *ompi_mpi_float_int;
+extern char *ompi_mpi_int16_t;
+extern char *ompi_mpi_int32_t;
+extern char *ompi_mpi_int64_t;
+extern char *ompi_mpi_int8_t;
+extern char *ompi_mpi_int;
+extern char *ompi_mpi_integer16;
+extern char *ompi_mpi_integer1;
+extern char *ompi_mpi_integer2;
+extern char *ompi_mpi_integer4;
+extern char *ompi_mpi_integer8;
+extern char *ompi_mpi_integer;
+extern char *ompi_mpi_lb;
+extern char *ompi_mpi_ldblcplex;
+extern char *ompi_mpi_logical1;
+extern char *ompi_mpi_logical2;
+extern char *ompi_mpi_logical4;
+extern char *ompi_mpi_logical8;
+extern char *ompi_mpi_logical;
+extern char *ompi_mpi_long;
+extern char *ompi_mpi_long_double;
+extern char *ompi_mpi_long_int;
+extern char *ompi_mpi_long_long_int;
+extern char *ompi_mpi_longdbl_int;
+extern char *ompi_mpi_offset;
+extern char *ompi_mpi_count;
+extern char *ompi_message_null;
+extern char *ompi_mpi_packed;
+extern char *ompi_mpi_real16;
+extern char *ompi_mpi_real2;
+extern char *ompi_mpi_real4;
+extern char *ompi_mpi_real8;
+extern char *ompi_mpi_real;
+extern char *ompi_mpi_short;
+extern char *ompi_mpi_short_int;
+extern char *ompi_mpi_signed_char;
+extern char *ompi_mpi_ub;
+extern char *ompi_mpi_uint16_t;
+extern char *ompi_mpi_uint32_t;
+extern char *ompi_mpi_uint64_t;
+extern char *ompi_mpi_uint8_t;
+extern char *ompi_mpi_unsigned;
+extern char *ompi_mpi_unsigned_char;
+extern char *ompi_mpi_unsigned_long;
+extern char *ompi_mpi_unsigned_long_long;
+extern char *ompi_mpi_unsigned_short;
+extern char *ompi_mpi_wchar;
+extern char *ompi_mpi_errhandler_null;
+extern char *ompi_mpi_errors_are_fatal;
+extern char *ompi_mpi_errors_return;
+extern char *ompi_mpi_file_null;
+extern char *ompi_mpi_group_empty;
+extern char *ompi_mpi_group_null;
+extern char *ompi_mpi_info_null;
+extern char *ompi_mpi_op_band;
+extern char *ompi_mpi_op_bor;
+extern char *ompi_mpi_op_bxor;
+extern char *ompi_mpi_op_land;
+extern char *ompi_mpi_op_lor;
+extern char *ompi_mpi_op_lxor;
+extern char *ompi_mpi_op_max;
+extern char *ompi_mpi_op_maxloc;
+extern char *ompi_mpi_op_min;
+extern char *ompi_mpi_op_minloc;
+extern char *ompi_mpi_op_null;
+extern char *ompi_mpi_op_prod;
+extern char *ompi_mpi_op_replace;
+extern char *ompi_mpi_op_sum;
+extern char *ompi_request_null;
+extern char *ompi_mpi_win_null;
+extern char *ompi_message_no_proc;
+#endif
+
 int cmp(const void *a,const void *b)
 {
     return ((long long)a)<((long long )b);
@@ -68,97 +174,29 @@ int  varname##cte_list_size;\
 /*  lock_init  */  \
 void varname##_translation_init(void) {\
       int i;\
+        char *envvar;\
+        char varname1[256],varname2[256];\
+        strcat(varname1,"WI4");\
+        strcat(varname1,#type);\
+        strcpy(varname2,varname1);\
+        strcat(varname1,"_OFFSET");\
+        strcat(varname2,"_TABLE_SIZE");\
+if(envvar=getenv(varname1))\
+    f##varname=strtol(envvar,NULL,10);\
+if(envvar=getenv(varname2))\
+     varname##_size=strtol(envvar,NULL,10);\
+    else\
+        varname##_size=1024*1024;\
         lock_init(varname##_Lock);\
-    varname##_table=(type##_container *)malloc(1024*1024*sizeof(type##_container));\
-    counter_##varname=(int*)malloc(1024*1024*sizeof(int));\
-    p_##varname=counter_##varname+1024*1024-1;\
-    for(i=0;i<1024*1024;i++) {\
-        counter_##varname[i]=1024*1024-i-1;\
+    varname##_table=(type##_container *)malloc(varname##_size*sizeof(type##_container));\
+    counter_##varname=(int*)malloc(varname##_size*sizeof(int));\
+    p_##varname=counter_##varname+varname##_size-1;\
+    for(i=0;i<varname##_size;i++) {\
+        counter_##varname[i]=varname##_size-i-1;\
     }\
-    varname##_size=1024*1024;\
-varname##cte_list=malloc(1024*1024*sizeof(void*));\
+/*varname##cte_list=malloc(1024*1024*sizeof(void*));\
 varname##cte_list_size=0;\
-}  \
-/*void varname##_commit_const()\
-{int i; \
-int inter_inf=0,inter_sup=0,inter_size=0,tmp=0;\
-qsort(varname##cte_list,varname##cte_list_size,sizeof(void*),cmp);\
-for(i=0;i<varname##cte_list_size;i++){\
-    if((varname##cte_list[i]-tmp-2)>inter_size){\
-        inter_size=varname##cte_list[i]-tmp-2;\
-        inter_inf=tmp+1;inter_sup=varname##cte_list[i]-1;\
-}\
-tmp=varname##cte_list[i];\
-}\
-if((2^31-tmp-2)>inter_size){\
-        inter_size=2^31-tmp-2;\
-        inter_inf=tmp+1;inter_sup=2^31-1;\
-}\
-f##varname=inter_inf;\
-l##varname=inter_sup;\
-max##varname=inter_size;\
-if((-varname##cte_list[0]+varname##cte_list[varname##cte_list_size-1])<2*cte_list_size)\
-{\
-const_##varname##_table=malloc(2*(-varname##cte_list[0]+varname##cte_list[cte_list_size-1]+1)*sizeof(type##_container));\
-const_##varname##_offset=varname##cte_list[0];\
-varname##cte_list_size*=-1;\
-}\
-else\
-if(varname##cte_list_size<8)\
-{\
-    const_##varname##_table=malloc(varname##cte_list_size*sizeof(type##_container));\
-}else \
-varname##cte_list_size=0;\
-free(varname##cte_list);varname##cte_list=NULL;\
-}\
-R_##type C_get_cte_a2r(A_##type a_mpi_##varname) {\
-if(varname##cte_list_size>0){\
-int i;\
-for(i=0;i<varname##cte_list_size;i++)\
-if(const_##varname##_table[i].idx==(int)(a_mpi_##varname)){\
-    return const_##varname##_table[i].C;\
-}\
-}else if(varname##cte_list_size<0){\
-return const_##varname##_table[(int)(a_mpi_##varname)-const_##varname##_offset].C;\
-}else {\
- varname##_translation_t *conv;\
- HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
-return conv->r_##varname##_value;\
-}\
-}\
-int Fort_get_cte_a2r(int a_mpi_##varname) {\
-if(varname##cte_list_size>0){\
-int i;\
-for(i=0;i<varname##cte_list_size;i++)\
-if(const_##varname##_table[i].idx==(int)(a_mpi_##varname)){\
-    return const_##varname##_table[i].C;\
-}\
-}else if(varname##cte_list_size<0){\
-return const_##varname##_table[(int)(a_mpi_##varname)-const_##varname##_offset].C;\
-}else {\
- varname##_translation_t *conv;\
- HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
-return local_MPI_##type_##c2f(conv->r_##varname##_value);\
-}\
-}\
-int Fort_get_cte_r2a(int mpi_##varname) {\
-if(varname##cte_list_size>0){\
-int i;\
-for(i=0;i<abs(varname##cte_list_size);i++)\
-if(const_##varname##_table[i].Fort==(int)(mpi_##varname)){\
-    return const_##varname##_table[i].idx;\
-}\
-else {\
-    varname##_translation_t* conv;  \
-        \
-    for (conv = varname##_const_table; conv != NULL; conv = conv->hh.next) {  \
-        if (conv->r_##varname##_value == mpi_##varname) {  \
-            return conv->value;  \
-        }  \
-return (conv->r_##varname##_value);\
-}\
-}\
-*/\
+*/}  \
 /*  ADD  */  \
 void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname) {  \
    /* Hashtable */  \
@@ -179,7 +217,8 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
       int i,id;\
     varname##_translation_t* conv;  \
     HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
-    if(conv != NULL) { /*printf("ababa\n");*/\
+/* if(get_##type##_cte_a2r(&a_mpi_##varname,mpi_##varname)) return;*/\
+   if(conv != NULL) { \
         /*memcpy(mpi_##varname,&(conv->r_##varname##_value), sizeof(R_##type));*/*mpi_##varname=(conv->r_##varname##_value);  \
     } else { /* Not a constant */  \
         /* In an hashtable */   \
@@ -210,10 +249,11 @@ varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_
 }\
 /* DEL */  \
 void varname##_translation_del(A_##type * a_mpi_##varname) {  \
-    int id;varname##_translation_t* conv;  \
+    int id;varname##_translation_t* conv;R_##type mpi_##varname;  \
     HASH_FIND(hh, varname##_const_table, a_mpi_##varname, sizeof(A_##type), conv);  \
-    if(conv != NULL) { /* constant */  \
-        /* Nothing to delete */  \
+ /*if(get_##type##_cte_a2r(&a_mpi_##varname,mpi_##varname)) return;*/\
+   if(conv != NULL) {    \
+          \
         return;  \
     }  \
     /* Hashtable */  \
@@ -221,23 +261,14 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     id=(*((int*)a_mpi_##varname))-f##varname;\
     (*p_##varname)=id;\
     p_##varname++;\
-    \
+    a_mpi_##varname=(mpi_null);\
     unlock(varname##_Lock);\
 }  \
   \
-/*int varname##_fort_set(R_##type * r_mpi_##varname) {  \
-    int ret;\
-    lock(varname##_Lock);\
-    int id=*p_##varname;\
-    p_##varname--;\
-    ret=id+f##varname;\
-    memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
-    unlock(varname##_Lock);\
-return ret;\
-} */ \
 void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
     varname##_translation_t* conv =NULL;\
     varname##_translation_t* conv_cte =NULL;\
+/*if(get_##type##_cte_r2a(a_mpi_##varname,&mpi_##varname)) return;*/\
     if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return;\
@@ -248,16 +279,61 @@ void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##var
     memset(a_mpi_##varname,0,sizeof(A_##type));\
     (*((int *)a_mpi_##varname))=id+f##varname;\
     memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
+    varname##_table[id].fort=local_##type##_f2c(mpi_##varname);\
+    unlock(varname##_Lock);\
+}  \
+void varname##_translation_update_f(int * a_mpi_##varname, int mpi_##varname) {  \
+    varname##_translation_t* conv =NULL;\
+    varname##_translation_t* conv_cte =NULL;\
+    R_##type tmp;\
+/*if(get_##type##_cte_r2a(a_mpi_##varname,&mpi_##varname)) return;*/\
+    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
+    return;\
+    }\
+    lock(varname##_Lock);\
+    int id=*p_##varname;\
+    p_##varname--;\
+    memset(a_mpi_##varname,0,sizeof(int));\
+    (*((int *)a_mpi_##varname))=id+f##varname;\
+    tmp=local_##type##_c2f(mpi_##varname);\
+    memcpy(&(varname##_table[id].C),& tmp,sizeof( R_##type));\
+    varname##_table[id].fort=mpi_##varname;\
+    unlock(varname##_Lock);\
+}  \
+void varname##_translation_update_alloc_f(int * a_mpi_##varname, int mpi_##varname) {  \
+    varname##_translation_t* conv =NULL;\
+    varname##_translation_t* conv_cte =NULL;\
+    R_##type tmp;\
+/*if(get_##type_cte_r2a(a_mpi_##varname,&mpi_##varname)) return;*/\
+    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
+    return;\
+    }\
+    lock(varname##_Lock);\
+    int id=*p_##varname;\
+    p_##varname--;\
+    memset(a_mpi_##varname,0,sizeof(int));\
+    (*((int *)a_mpi_##varname))=id+f##varname;\
+    tmp=local_##type##_c2f(mpi_##varname);\
+    memcpy(&(varname##_table[id].C),& tmp,sizeof( R_##type));\
+    varname##_table[id].fort=mpi_##varname;\
     unlock(varname##_Lock);\
 }  \
 void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
     /* Hashtable */  \
+    varname##_translation_t* conv_cte =NULL;\
     lock(varname##_Lock);\
     int id=*p_##varname;\
+    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
+    return;\
+    }\
     p_##varname--;\
     memset(a_mpi_##varname,0,sizeof(A_##type));\
     (*((int *)a_mpi_##varname))=id+f##varname;\
     memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
+    varname##_table[id].fort=local_##type##_f2c(mpi_##varname);\
     unlock(varname##_Lock);\
 }  \
   \
@@ -355,29 +431,35 @@ static void dump_hashtable(request_translation_t* conv) {
 void request_translation_init()
 {
     int i;
-      lock_init(request_Lock);
-      request_table = ( __WI4MPI_req_container*) calloc(1024*1024,sizeof(__WI4MPI_req_container));
-      counter_request=(int *)malloc((1024*1024)*sizeof(int));
-      p_req=counter_request+1024*1024-1;
-      for( i =0;i<1024*1024;i++)
-       {
-            counter_request[i]=1024*1024-i-1;
-       }
+    char *envvar;
+    if(envvar=getenv("WI4MPI_REQUEST_OFFSET"))
+            fnb=strtol(envvar,NULL,10);
+    if(envvar=getenv("WI4MPI_REQUEST_TABLE_SIZE"))
+            req_size=strtol(envvar,NULL,10);
+    else
     req_size=1024*1024;
+      lock_init(request_Lock);
+      request_table = ( __WI4MPI_req_container*) calloc(req_size,sizeof(__WI4MPI_req_container));
+      counter_request=(int *)malloc((req_size)*sizeof(int));
+      p_req=counter_request+req_size-1;
+      for( i =0;i<req_size;i++)
+       {
+            counter_request[i]=req_size-i-1;
+       }
 }
 /*  GET  */
 void request_translation_get(A_MPI_Request a_mpi_request, R_MPI_Request *mpi_request, int* non_blocking) {
     int id=(int)a_mpi_request;
-   if(id<fnb)
+   if((id<fnb)||(id>(fnb+req_size)))
     {// const request        
          request_translation_t* conv;
-     HASH_FIND(hh,request_const_table, &a_mpi_request, sizeof(A_MPI_Request), conv);
+     /*HASH_FIND(hh,request_const_table, &a_mpi_request, sizeof(A_MPI_Request), conv);
     
     if  (conv != NULL)
          memcpy( mpi_request,&(conv->r_request_value), sizeof(R_MPI_Request));
 
-        return;
-    if(a_mpi_request==0)
+        return;*/
+    if(a_mpi_request==A_MPI_REQUEST_NULL)
     {
         *mpi_request=R_MPI_REQUEST_NULL;
         return;
@@ -408,7 +490,7 @@ int request_translation_get_key_from_const(R_MPI_Request mpi_request, A_MPI_Requ
 /* DEL */
 void request_translation_del(A_MPI_Request * a_mpi_request) {
     int id=*((int*)(a_mpi_request));
-   if(id<fnb)
+   if(id<fnb||id>fnb+req_size)
     {// const request        
 
         return;
@@ -424,13 +506,13 @@ void request_translation_del(A_MPI_Request * a_mpi_request) {
 
 /* UPDATE */
 void request_translation_update(A_MPI_Request * a_mpi_request, R_MPI_Request mpi_request, int non_blocking) {
-//    if(mpi_request==R_MPI_REQUEST_NULL)
-//    {    *a_mpi_request=A_MPI_REQUEST_NULL;
-//        return;
-//    }
-    if(request_translation_get_key_from_const( mpi_request, a_mpi_request))
+    if(mpi_request==R_MPI_REQUEST_NULL)
+    {    *a_mpi_request=A_MPI_REQUEST_NULL;
         return;
-    memset(a_mpi_request,0,sizeof(A_MPI_Request));
+    }
+/*    if(request_translation_get_key_from_const( mpi_request, a_mpi_request))
+        return;
+ */   memset(a_mpi_request,0,sizeof(A_MPI_Request));
     lock(request_Lock);
             int id=*p_req;
             p_req--;
