@@ -156,6 +156,148 @@ int cmp(const void *a,const void *b)
 {
     return ((long long)a)<((long long )b);
 }
+#define HASHTABLE_NO_OPT_NO_FORTRAN(type,varname,mpi_null)  \
+typedef struct {R_##type C;int idx;} type##_container;\
+static type##_container * varname##_table = NULL;  \
+static type##_container * const_##varname##_table = NULL;  \
+static varname##_translation_t* varname##_const_table = NULL;  \
+int *counter_##varname=NULL;\
+int f##varname=100000;\
+int *p_##varname;\
+int l##varname;\
+int max##varname;\
+int varname##_size;\
+pthread_spinlock_t varname##_vLock=1;\
+table_lock_t varname##_Lock=&varname##_vLock;\
+size_t *varname##cte_list;\
+int  varname##cte_list_size;\
+/*  lock_init  */  \
+void varname##_translation_init(void) {\
+      int i;\
+        char *envvar;\
+        char varname1[256],varname2[256];\
+        strcat(varname1,"WI4");\
+        strcat(varname1,#type);\
+        strcpy(varname2,varname1);\
+        strcat(varname1,"_OFFSET");\
+        strcat(varname2,"_TABLE_SIZE");\
+if(envvar=getenv(varname1))\
+    f##varname=strtol(envvar,NULL,10);\
+if(envvar=getenv(varname2))\
+     varname##_size=strtol(envvar,NULL,10);\
+    else\
+        varname##_size=1024*1024;\
+        lock_init(varname##_Lock);\
+    varname##_table=(type##_container *)malloc(varname##_size*sizeof(type##_container));\
+    counter_##varname=(int*)malloc(varname##_size*sizeof(int));\
+    p_##varname=counter_##varname+varname##_size-1;\
+printf("alloc %p %p\n",counter_##varname,p_##varname);\
+    for(i=0;i<varname##_size;i++) {\
+        counter_##varname[i]=varname##_size-i-1;\
+    }\
+}  \
+/*  ADD  */  \
+void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname) {  \
+    varname##_translation_t* conv = (varname##_translation_t*) malloc(sizeof(varname##_translation_t));  \
+    memcpy(&(conv->a_##varname##_key), &a_mpi_##varname, sizeof(A_##type));  \
+    memcpy(&(conv->r_##varname##_value), &mpi_##varname, sizeof(R_##type)); \
+    HASH_ADD(hh, varname##_const_table, a_##varname##_key, sizeof(A_##type), conv);  \
+}  \
+  \
+int varname##_translation_is_const(A_##type a_mpi_##varname) { \
+    varname##_translation_t* conv;  \
+    HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
+    return (conv != NULL); \
+} \
+ \
+/*  GET  */  \
+void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname) {  \
+      int i,id;\
+    varname##_translation_t* conv;  \
+    HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
+   if(conv != NULL) { \
+        *mpi_##varname=(conv->r_##varname##_value);  \
+    } else { \
+        id=((int)a_mpi_##varname)-f##varname;\
+        memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
+    }  \
+}  \
+/*  GET_KEY */  \
+varname##_translation_t* varname##_translation_get_key_from_const(R_##type mpi_##varname, A_##type *a_mpi_##varname) {  \
+    varname##_translation_t* conv;  \
+    for (conv = varname##_const_table; conv != NULL; conv = conv->hh.next) {  \
+        if (conv->r_##varname##_value == mpi_##varname) {  \
+            return conv;  \
+        }  \
+    }  \
+    return NULL;  \
+}  \
+  \
+varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname) {  \
+    varname##_translation_t* conv;  \
+ for (conv = varname##_const_table; conv != NULL; conv = conv->hh.next) {  \
+        if (conv->r_##varname##_value == mpi_##varname) {  \
+            return conv;  \
+        }  \
+    }  \
+    return NULL;  \
+}\
+/* DEL */  \
+void varname##_translation_del(A_##type * a_mpi_##varname) {  \
+    int id;varname##_translation_t* conv;R_##type mpi_##varname;  \
+    HASH_FIND(hh, varname##_const_table, a_mpi_##varname, sizeof(A_##type), conv);  \
+   if(conv != NULL) {    \
+          \
+        return;  \
+    }  \
+    lock(varname##_Lock);\
+    id=(*((int*)a_mpi_##varname))-f##varname;\
+    (*p_##varname)=id;\
+    p_##varname++;\
+    \
+    unlock(varname##_Lock);\
+}  \
+  \
+void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
+    varname##_translation_t* conv =NULL;\
+    varname##_translation_t* conv_cte =NULL;\
+    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
+    return;\
+    }\
+    lock(varname##_Lock);\
+    int id=*p_##varname;\
+    p_##varname--;\
+    memset(a_mpi_##varname,0,sizeof(A_##type));\
+    (*((int *)a_mpi_##varname))=id+f##varname;\
+    memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
+    unlock(varname##_Lock);\
+}  \
+void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
+    lock(varname##_Lock);\
+    int id=*p_##varname;\
+    p_##varname--;\
+    memset(a_mpi_##varname,0,sizeof(A_##type));\
+    (*((int *)a_mpi_##varname))=id+f##varname;\
+    memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
+    unlock(varname##_Lock);\
+}  \
+  \
+int varname##_translation_get_size() {  \
+    return varname##_size;  \
+}  \
+  \
+void varname##_translation_free_all() {  \
+    HASH_CLEAR(hh, varname##_const_table);   \
+    lock(varname##_Lock);\
+    free( varname##_table);   \
+    free( counter_##varname);   \
+    unlock(varname##_Lock);\
+} \
+
+
+
+
 #define HASHTABLE_NO_OPTI(type, varname, mpi_null)   \
 typedef struct {int fort;R_##type C;int idx;} type##_container;\
 static type##_container * varname##_table = NULL;  \
@@ -218,12 +360,25 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
     varname##_translation_t* conv;  \
     HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
 /* if(get_##type##_cte_a2r(&a_mpi_##varname,mpi_##varname)) return;*/\
-   if(conv != NULL) { \
+   if(conv != NULL) { /*printf("ababa\n");*/\
         /*memcpy(mpi_##varname,&(conv->r_##varname##_value), sizeof(R_##type));*/*mpi_##varname=(conv->r_##varname##_value);  \
     } else { /* Not a constant */  \
         /* In an hashtable */   \
         id=((int)a_mpi_##varname)-f##varname;\
         memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
+    }  \
+}  \
+void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
+      int i,id;\
+ /*   varname##_translation_t* conv;  \
+    HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
+/* if(get_##type##_cte_a2r(&a_mpi_##varname,mpi_##varname)) return;*/\
+  /* if(conv != NULL) { printf("ababa\n");*/\
+        /*memcpy(mpi_##varname,&(conv->r_##varname##_value), sizeof(R_##type));*mpi_##varname=(conv->r_##varname##_value);  \
+ */ /*  } else */{ /* Not a constant */  \
+        /* In an hashtable */   \
+        id=((int)a_mpi_##varname)-f##varname;\
+        memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
     }  \
 }  \
 /*  GET_KEY */  \
@@ -279,7 +434,7 @@ void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##var
     memset(a_mpi_##varname,0,sizeof(A_##type));\
     (*((int *)a_mpi_##varname))=id+f##varname;\
     memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
-    varname##_table[id].fort=local_##type##_f2c(mpi_##varname);\
+    /*varname##_table[id].fort=R_##type##_f2c(mpi_##varname);*/\
     unlock(varname##_Lock);\
 }  \
 void varname##_translation_update_f(int * a_mpi_##varname, int mpi_##varname) {  \
@@ -296,12 +451,12 @@ void varname##_translation_update_f(int * a_mpi_##varname, int mpi_##varname) { 
     p_##varname--;\
     memset(a_mpi_##varname,0,sizeof(int));\
     (*((int *)a_mpi_##varname))=id+f##varname;\
-    tmp=local_##type##_c2f(mpi_##varname);\
+    /*tmp=R_##type##_c2f(mpi_##varname);*/\
     memcpy(&(varname##_table[id].C),& tmp,sizeof( R_##type));\
     varname##_table[id].fort=mpi_##varname;\
     unlock(varname##_Lock);\
 }  \
-void varname##_translation_update_alloc_f(int * a_mpi_##varname, int mpi_##varname) {  \
+void varname##_translation_update_alloc_f(int mpi_##varname,int * a_mpi_##varname) {  \
     varname##_translation_t* conv =NULL;\
     varname##_translation_t* conv_cte =NULL;\
     R_##type tmp;\
@@ -315,8 +470,8 @@ void varname##_translation_update_alloc_f(int * a_mpi_##varname, int mpi_##varna
     p_##varname--;\
     memset(a_mpi_##varname,0,sizeof(int));\
     (*((int *)a_mpi_##varname))=id+f##varname;\
-    tmp=local_##type##_c2f(mpi_##varname);\
-    memcpy(&(varname##_table[id].C),& tmp,sizeof( R_##type));\
+    /*tmp=R_##type##_c2f(mpi_##varname);*/\
+    /*memcpy(&(varname##_table[id].C),& tmp,sizeof( R_##type));*/\
     varname##_table[id].fort=mpi_##varname;\
     unlock(varname##_Lock);\
 }  \
@@ -327,13 +482,13 @@ void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi
     int id=*p_##varname;\
     if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
-    return;\
-    }\
+    return; \
+		} \
     p_##varname--;\
     memset(a_mpi_##varname,0,sizeof(A_##type));\
     (*((int *)a_mpi_##varname))=id+f##varname;\
     memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
-    varname##_table[id].fort=local_##type##_f2c(mpi_##varname);\
+/*    varname##_table[id].fort=R_##type##_f2c(mpi_##varname);*/\
     unlock(varname##_Lock);\
 }  \
   \
@@ -349,11 +504,51 @@ void varname##_translation_free_all() {  \
     unlock(varname##_Lock);\
 }\
 
+#define NO_TABLE_NO_OPTI(type, varname, mpi_null)   \
+void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname) {  \
+} \
+void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname) {  \
+*mpi_##varname=a_mpi_##varname;\
+}  \
+void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
+*mpi_##varname=a_mpi_##varname;\
+}  \
+void varname##_translation_del(A_##type * a_mpi_##varname) {  \
+}  \
+  \
+void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
+*a_mpi_##varname=mpi_##varname;\
+}  \
+void varname##_translation_update_f(int mpi_##varname,int * a_mpi_##varname ) {  \
+*a_mpi_##varname=mpi_##varname;\
+}  \
+void varname##_translation_update_alloc_f(int mpi_##varname,int * a_mpi_##varname)  {  \
+*a_mpi_##varname=mpi_##varname;\
+}  \
+void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
+*a_mpi_##varname=mpi_##varname;\
+}  \
+  \
+int varname##_translation_get_size() {  \
+    return 0; \
+}  \
+  \
+void varname##_translation_free_all() {  \
+}
+typedef int A_MPI_Keyval;
+typedef int R_MPI_Keyval;
+typedef int A_MPI_Error;
+typedef int R_MPI_Error;
+NO_TABLE_NO_OPTI(MPI_Error,error,MPI_SUCCESS);
+NO_TABLE_NO_OPTI(MPI_Keyval,keyval,0);
+/* Communicator */
 /* Communicator */
 HASHTABLE_NO_OPTI(MPI_Comm,communicator, R_MPI_COMM_NULL);
 
 /* Datatype */
-HASHTABLE_NO_OPTI(MPI_Datatype,datatype, R_MPI_DATATYPE_NULL);
+typedef R_MPI_Datatype R_MPI_Type;
+typedef A_MPI_Datatype A_MPI_Type;
+HASHTABLE_NO_OPTI(MPI_Type,datatype, R_MPI_DATATYPE_NULL);
 
 /* Errhandler */
 HASHTABLE_NO_OPTI(MPI_Errhandler,errhandler, R_MPI_ERRHANDLER_NULL);
@@ -371,13 +566,13 @@ HASHTABLE_NO_OPTI(MPI_Win,win, R_MPI_WIN_NULL);
 HASHTABLE_NO_OPTI(MPI_Message,message, R_MPI_MESSAGE_NULL);
 
 /* MPI_T_enum */
-HASHTABLE_NO_OPTI(MPI_T_enum, t_enum, R_MPI_T_ENUM_NULL);
+HASHTABLE_NO_OPT_NO_FORTRAN(MPI_T_enum, t_enum, R_MPI_T_ENUM_NULL);
 
 /* MPI_T_cvar_handle */
-HASHTABLE_NO_OPTI(MPI_T_cvar_handle, cvar_handle, R_MPI_T_CVAR_HANDLE_NULL);
+HASHTABLE_NO_OPT_NO_FORTRAN(MPI_T_cvar_handle, cvar_handle, R_MPI_T_CVAR_HANDLE_NULL);
 
 /* MPI_T_pvar_handle */
-HASHTABLE_NO_OPTI(MPI_T_pvar_handle, pvar_handle, R_MPI_T_PVAR_HANDLE_NULL);
+HASHTABLE_NO_OPT_NO_FORTRAN(MPI_T_pvar_handle, pvar_handle, R_MPI_T_PVAR_HANDLE_NULL);
 
 /*  MPI_T_pvar_session*/
 //#if HASHTABLE_OPTI_SESSION
@@ -448,6 +643,23 @@ void request_translation_init()
        }
 }
 /*  GET  */
+void request_translation_get_f(int a_mpi_request, int *mpi_request) {
+    int id=(int)a_mpi_request;
+   if(id<fnb)
+    return;
+    if(a_mpi_request==0)
+     {   *mpi_request=0;
+        return;
+    } else { /* Not a constant */
+        /* In a table */
+                {
+                   memcpy(mpi_request,&request_table[id-fnb].Freq,sizeof(int));
+                 //  *non_blocking=request_table[id-fnb].nb;
+               // printf("persist %d %p %p\n",id,*mpi_request,a_mpi_request);
+                }
+        }
+    
+}
 void request_translation_get(A_MPI_Request a_mpi_request, R_MPI_Request *mpi_request, int* non_blocking) {
     int id=(int)a_mpi_request;
    if((id<fnb)||(id>(fnb+req_size)))
@@ -504,6 +716,47 @@ void request_translation_del(A_MPI_Request * a_mpi_request) {
     unlock(request_Lock);
 }
 
+void request_translation_update_f(int mpi_request,int * a_mpi_request) {
+    if(mpi_request==R_MPI_REQUEST_NULL)
+    {   
+    A_MPI_Request tmp=(A_MPI_Request)*a_mpi_request; 
+request_translation_del(&tmp);
+*a_mpi_request=0;
+        return;
+    }
+    lock(request_Lock);
+            int id=*p_req;
+            p_req--;
+             (*((int *)a_mpi_request))=id+fnb;
+            
+            memcpy(&(request_table[id].Freq),&mpi_request,sizeof(int));
+            request_table[id].nb=1;
+            //    printf("non block %d %p %p %p %p\n",id,mpi_request,*a_mpi_request,request_table_non_blocking[id-fnb],request_table_non_blocking);
+
+              //  printf("persist %d %p %p\n",id,mpi_request,*a_mpi_request);
+        
+    
+    unlock(request_Lock);
+}
+void request_translation_update_alloc_f(int mpi_request,int * a_mpi_request ) {
+//    if(mpi_request==R_MPI_REQUEST_NULL)
+//    {    *a_mpi_request=A_MPI_REQUEST_NULL;
+//        return;
+//    }
+    lock(request_Lock);
+            int id=*p_req;
+            p_req--;
+             (*((int *)a_mpi_request))=id+fnb;
+            
+            memcpy(&(request_table[id].Freq),&mpi_request,sizeof(int));
+            request_table[id].nb=1;
+            //    printf("non block %d %p %p %p %p\n",id,mpi_request,*a_mpi_request,request_table_non_blocking[id-fnb],request_table_non_blocking);
+
+              //  printf("persist %d %p %p\n",id,mpi_request,*a_mpi_request);
+        
+    
+    unlock(request_Lock);
+}
 /* UPDATE */
 void request_translation_update(A_MPI_Request * a_mpi_request, R_MPI_Request mpi_request, int non_blocking) {
     if(mpi_request==R_MPI_REQUEST_NULL)
@@ -512,7 +765,7 @@ void request_translation_update(A_MPI_Request * a_mpi_request, R_MPI_Request mpi
     }
 /*    if(request_translation_get_key_from_const( mpi_request, a_mpi_request))
         return;
- */   memset(a_mpi_request,0,sizeof(A_MPI_Request));
+*/    memset(a_mpi_request,0,sizeof(A_MPI_Request));
     lock(request_Lock);
             int id=*p_req;
             p_req--;
