@@ -83,7 +83,7 @@ else
 if(A_f_MPI_COMM_NULL==*ca){
 *cr=(int )R_f_MPI_COMM_NULL;return;}
 else
-*cr=*ca;
+communicator_translation_get_f(*ca,cr);
 }
 
 static inline void comm_r2a(int *ca,int *cr){
@@ -96,7 +96,20 @@ else
 if(R_f_MPI_COMM_NULL==*cr){
 *ca=(int )A_f_MPI_COMM_NULL;return;}
 else
-*ca=*cr;
+communicator_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void comm_r2au(int *ca,int *cr){
+if(R_f_MPI_COMM_SELF==*cr){
+*ca=(int )A_f_MPI_COMM_SELF;communicator_translation_del(*ca);return;}
+else
+if(R_f_MPI_COMM_WORLD==*cr){
+*ca=(int )A_f_MPI_COMM_WORLD;communicator_translation_del(*ca);return;}
+else
+if(R_f_MPI_COMM_NULL==*cr){
+*ca=(int )A_f_MPI_COMM_NULL;communicator_translation_del(*ca);return;}
+else
+communicator_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_ERR_NO_SUCH_FILE 42
@@ -478,7 +491,7 @@ else
 if(A_f_MPI_ERR_SPAWN==*ca){
 *cr=(int )R_f_MPI_ERR_SPAWN;return;}
 else
-*cr=*ca;
+error_translation_get_f(*ca,cr);
 }
 
 static inline void error_r2a(int *ca,int *cr){
@@ -644,7 +657,173 @@ else
 if(R_f_MPI_ERR_SPAWN==*cr){
 *ca=(int )A_f_MPI_ERR_SPAWN;return;}
 else
-*ca=*cr;
+error_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void error_r2au(int *ca,int *cr){
+if(R_f_MPI_ERR_NO_SUCH_FILE==*cr){
+*ca=(int )A_f_MPI_ERR_NO_SUCH_FILE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_PORT==*cr){
+*ca=(int )A_f_MPI_ERR_PORT;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_SIZE==*cr){
+*ca=(int )A_f_MPI_ERR_SIZE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_UNSUPPORTED_OPERATION==*cr){
+*ca=(int )A_f_MPI_ERR_UNSUPPORTED_OPERATION;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_WIN==*cr){
+*ca=(int )A_f_MPI_ERR_WIN;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_BASE==*cr){
+*ca=(int )A_f_MPI_ERR_BASE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_CONVERSION==*cr){
+*ca=(int )A_f_MPI_ERR_CONVERSION;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_DISP==*cr){
+*ca=(int )A_f_MPI_ERR_DISP;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_DUP_DATAREP==*cr){
+*ca=(int )A_f_MPI_ERR_DUP_DATAREP;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_ACCESS==*cr){
+*ca=(int )A_f_MPI_ERR_ACCESS;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_AMODE==*cr){
+*ca=(int )A_f_MPI_ERR_AMODE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_ASSERT==*cr){
+*ca=(int )A_f_MPI_ERR_ASSERT;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_BAD_FILE==*cr){
+*ca=(int )A_f_MPI_ERR_BAD_FILE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_RMA_CONFLICT==*cr){
+*ca=(int )A_f_MPI_ERR_RMA_CONFLICT;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_RMA_SYNC==*cr){
+*ca=(int )A_f_MPI_ERR_RMA_SYNC;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_QUOTA==*cr){
+*ca=(int )A_f_MPI_ERR_QUOTA;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_READ_ONLY==*cr){
+*ca=(int )A_f_MPI_ERR_READ_ONLY;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_FILE_EXISTS==*cr){
+*ca=(int )A_f_MPI_ERR_FILE_EXISTS;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_FILE_IN_USE==*cr){
+*ca=(int )A_f_MPI_ERR_FILE_IN_USE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_NOT_SAME==*cr){
+*ca=(int )A_f_MPI_ERR_NOT_SAME;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_NO_SPACE==*cr){
+*ca=(int )A_f_MPI_ERR_NO_SPACE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_BUFFER==*cr){
+*ca=(int )A_f_MPI_ERR_BUFFER;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_SUCCESS==*cr){
+*ca=(int )A_f_MPI_SUCCESS;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_TYPE==*cr){
+*ca=(int )A_f_MPI_ERR_TYPE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_COUNT==*cr){
+*ca=(int )A_f_MPI_ERR_COUNT;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_COMM==*cr){
+*ca=(int )A_f_MPI_ERR_COMM;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_TAG==*cr){
+*ca=(int )A_f_MPI_ERR_TAG;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_REQUEST==*cr){
+*ca=(int )A_f_MPI_ERR_REQUEST;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_RANK==*cr){
+*ca=(int )A_f_MPI_ERR_RANK;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_GROUP==*cr){
+*ca=(int )A_f_MPI_ERR_GROUP;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_ROOT==*cr){
+*ca=(int )A_f_MPI_ERR_ROOT;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_UNSUPPORTED_DATAREP==*cr){
+*ca=(int )A_f_MPI_ERR_UNSUPPORTED_DATAREP;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_NO_MEM==*cr){
+*ca=(int )A_f_MPI_ERR_NO_MEM;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_NAME==*cr){
+*ca=(int )A_f_MPI_ERR_NAME;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_LASTCODE==*cr){
+*ca=(int )A_f_MPI_ERR_LASTCODE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_TOPOLOGY==*cr){
+*ca=(int )A_f_MPI_ERR_TOPOLOGY;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_OP==*cr){
+*ca=(int )A_f_MPI_ERR_OP;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_ARG==*cr){
+*ca=(int )A_f_MPI_ERR_ARG;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_DIMS==*cr){
+*ca=(int )A_f_MPI_ERR_DIMS;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_TRUNCATE==*cr){
+*ca=(int )A_f_MPI_ERR_TRUNCATE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_UNKNOWN==*cr){
+*ca=(int )A_f_MPI_ERR_UNKNOWN;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_INTERN==*cr){
+*ca=(int )A_f_MPI_ERR_INTERN;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_OTHER==*cr){
+*ca=(int )A_f_MPI_ERR_OTHER;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_PENDING==*cr){
+*ca=(int )A_f_MPI_ERR_PENDING;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_IN_STATUS==*cr){
+*ca=(int )A_f_MPI_ERR_IN_STATUS;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_INFO_KEY==*cr){
+*ca=(int )A_f_MPI_ERR_INFO_KEY;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_FILE==*cr){
+*ca=(int )A_f_MPI_ERR_FILE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_LOCKTYPE==*cr){
+*ca=(int )A_f_MPI_ERR_LOCKTYPE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_KEYVAL==*cr){
+*ca=(int )A_f_MPI_ERR_KEYVAL;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_IO==*cr){
+*ca=(int )A_f_MPI_ERR_IO;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_INFO==*cr){
+*ca=(int )A_f_MPI_ERR_INFO;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_INFO_VALUE==*cr){
+*ca=(int )A_f_MPI_ERR_INFO_VALUE;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_INFO_NOKEY==*cr){
+*ca=(int )A_f_MPI_ERR_INFO_NOKEY;error_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERR_SPAWN==*cr){
+*ca=(int )A_f_MPI_ERR_SPAWN;error_translation_del(*ca);return;}
+else
+error_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_2DOUBLE_PRECISION 24
@@ -788,7 +967,7 @@ else
 if(A_f_MPI_INTEGER4==*ca){
 *cr=(int )R_f_MPI_INTEGER4;return;}
 else
-*cr=*ca;
+datatype_translation_get_f(*ca,cr);
 }
 
 static inline void datatype_r2a(int *ca,int *cr){
@@ -852,7 +1031,71 @@ else
 if(R_f_MPI_INTEGER4==*cr){
 *ca=(int )A_f_MPI_INTEGER4;return;}
 else
-*ca=*cr;
+datatype_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void datatype_r2au(int *ca,int *cr){
+if(R_f_MPI_2DOUBLE_PRECISION==*cr){
+*ca=(int )A_f_MPI_2DOUBLE_PRECISION;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_2INTEGER==*cr){
+*ca=(int )A_f_MPI_2INTEGER;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_REAL==*cr){
+*ca=(int )A_f_MPI_REAL;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_REAL8==*cr){
+*ca=(int )A_f_MPI_REAL8;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_DOUBLE_COMPLEX==*cr){
+*ca=(int )A_f_MPI_DOUBLE_COMPLEX;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_DOUBLE_PRECISION==*cr){
+*ca=(int )A_f_MPI_DOUBLE_PRECISION;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_2REAL==*cr){
+*ca=(int )A_f_MPI_2REAL;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_COMPLEX==*cr){
+*ca=(int )A_f_MPI_COMPLEX;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_BYTE==*cr){
+*ca=(int )A_f_MPI_BYTE;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_DATATYPE_NULL==*cr){
+*ca=(int )A_f_MPI_DATATYPE_NULL;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_UB==*cr){
+*ca=(int )A_f_MPI_UB;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_PACKED==*cr){
+*ca=(int )A_f_MPI_PACKED;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_CHARACTER==*cr){
+*ca=(int )A_f_MPI_CHARACTER;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_LB==*cr){
+*ca=(int )A_f_MPI_LB;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_INTEGER==*cr){
+*ca=(int )A_f_MPI_INTEGER;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_LOGICAL==*cr){
+*ca=(int )A_f_MPI_LOGICAL;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_INTEGER2==*cr){
+*ca=(int )A_f_MPI_INTEGER2;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_INTEGER1==*cr){
+*ca=(int )A_f_MPI_INTEGER1;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_REAL4==*cr){
+*ca=(int )A_f_MPI_REAL4;datatype_translation_del(*ca);return;}
+else
+if(R_f_MPI_INTEGER4==*cr){
+*ca=(int )A_f_MPI_INTEGER4;datatype_translation_del(*ca);return;}
+else
+datatype_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_MAXLOC 11
@@ -947,7 +1190,7 @@ else
 if(A_f_MPI_BOR==*ca){
 *cr=(int )R_f_MPI_BOR;return;}
 else
-*cr=*ca;
+operation_translation_get_f(*ca,cr);
 User_fct_g_ptr=get_user_fct(*cr);
 }
 
@@ -991,8 +1234,51 @@ else
 if(R_f_MPI_BOR==*cr){
 *ca=(int )A_f_MPI_BOR;return;}
 else
-*ca=*cr;
+operation_translation_update_alloc_f(*cr,ca);
 add_user_fct(*cr);
+
+}
+static inline void operator_r2au(int *ca,int *cr){
+if(R_f_MPI_MAXLOC==*cr){
+*ca=(int )A_f_MPI_MAXLOC;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_BXOR==*cr){
+*ca=(int )A_f_MPI_BXOR;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_MINLOC==*cr){
+*ca=(int )A_f_MPI_MINLOC;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_MAX==*cr){
+*ca=(int )A_f_MPI_MAX;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_OP_NULL==*cr){
+*ca=(int )A_f_MPI_OP_NULL;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_SUM==*cr){
+*ca=(int )A_f_MPI_SUM;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_MIN==*cr){
+*ca=(int )A_f_MPI_MIN;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_LAND==*cr){
+*ca=(int )A_f_MPI_LAND;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_PROD==*cr){
+*ca=(int )A_f_MPI_PROD;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_LOR==*cr){
+*ca=(int )A_f_MPI_LOR;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_BAND==*cr){
+*ca=(int )A_f_MPI_BAND;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_LXOR==*cr){
+*ca=(int )A_f_MPI_LXOR;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_BOR==*cr){
+*ca=(int )A_f_MPI_BOR;operation_translation_del(*ca);return;}
+else
+operation_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_ANY_SOURCE -1
@@ -1049,14 +1335,21 @@ static inline void request_a2r(int *ca,int *cr){
 if(A_f_MPI_REQUEST_NULL==*ca){
 *cr=(int )R_f_MPI_REQUEST_NULL;return;}
 else
-*cr=*ca;
+request_translation_get_f(*ca,cr);
 }
 
 static inline void request_r2a(int *ca,int *cr){
 if(R_f_MPI_REQUEST_NULL==*cr){
 *ca=(int )A_f_MPI_REQUEST_NULL;return;}
 else
-*ca=*cr;
+request_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void request_r2au(int *ca,int *cr){
+if(R_f_MPI_REQUEST_NULL==*cr){
+*ca=(int )A_f_MPI_REQUEST_NULL;request_translation_del(*ca);return;}
+else
+request_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_GROUP_EMPTY 1
@@ -1074,7 +1367,7 @@ else
 if(A_f_MPI_GROUP_NULL==*ca){
 *cr=(int )R_f_MPI_GROUP_NULL;return;}
 else
-*cr=*ca;
+group_translation_get_f(*ca,cr);
 }
 
 static inline void group_r2a(int *ca,int *cr){
@@ -1084,7 +1377,17 @@ else
 if(R_f_MPI_GROUP_NULL==*cr){
 *ca=(int )A_f_MPI_GROUP_NULL;return;}
 else
-*ca=*cr;
+group_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void group_r2au(int *ca,int *cr){
+if(R_f_MPI_GROUP_EMPTY==*cr){
+*ca=(int )A_f_MPI_GROUP_EMPTY;group_translation_del(*ca);return;}
+else
+if(R_f_MPI_GROUP_NULL==*cr){
+*ca=(int )A_f_MPI_GROUP_NULL;group_translation_del(*ca);return;}
+else
+group_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_ERRORS_ARE_FATAL 1
@@ -1109,7 +1412,7 @@ else
 if(A_f_MPI_ERRORS_RETURN==*ca){
 *cr=(int )R_f_MPI_ERRORS_RETURN;return;}
 else
-*cr=*ca;
+errhandler_translation_get_f(*ca,cr);
 }
 
 static inline void err_handler_r2a(int *ca,int *cr){
@@ -1122,7 +1425,20 @@ else
 if(R_f_MPI_ERRORS_RETURN==*cr){
 *ca=(int )A_f_MPI_ERRORS_RETURN;return;}
 else
-*ca=*cr;
+errhandler_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void err_handler_r2au(int *ca,int *cr){
+if(R_f_MPI_ERRORS_ARE_FATAL==*cr){
+*ca=(int )A_f_MPI_ERRORS_ARE_FATAL;errhandler_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERRHANDLER_NULL==*cr){
+*ca=(int )A_f_MPI_ERRHANDLER_NULL;errhandler_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERRORS_RETURN==*cr){
+*ca=(int )A_f_MPI_ERRORS_RETURN;errhandler_translation_del(*ca);return;}
+else
+errhandler_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_CART 1
@@ -1255,7 +1571,7 @@ else
 if(A_f_MPI_BOR==*ca){
 *cr=(int )R_f_MPI_BOR;return;}
 else
-*cr=*ca;
+operation_translation_get_f(*ca,cr);
 del_usr_fct(*cr);
 }
 
@@ -1299,7 +1615,50 @@ else
 if(R_f_MPI_BOR==*cr){
 *ca=(int )A_f_MPI_BOR;return;}
 else
-*ca=*cr;
+operation_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void operator_del_r2au(int *ca,int *cr){
+if(R_f_MPI_MAXLOC==*cr){
+*ca=(int )A_f_MPI_MAXLOC;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_BXOR==*cr){
+*ca=(int )A_f_MPI_BXOR;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_MINLOC==*cr){
+*ca=(int )A_f_MPI_MINLOC;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_MAX==*cr){
+*ca=(int )A_f_MPI_MAX;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_OP_NULL==*cr){
+*ca=(int )A_f_MPI_OP_NULL;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_SUM==*cr){
+*ca=(int )A_f_MPI_SUM;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_MIN==*cr){
+*ca=(int )A_f_MPI_MIN;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_LAND==*cr){
+*ca=(int )A_f_MPI_LAND;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_PROD==*cr){
+*ca=(int )A_f_MPI_PROD;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_LOR==*cr){
+*ca=(int )A_f_MPI_LOR;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_BAND==*cr){
+*ca=(int )A_f_MPI_BAND;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_LXOR==*cr){
+*ca=(int )A_f_MPI_LXOR;operation_translation_del(*ca);return;}
+else
+if(R_f_MPI_BOR==*cr){
+*ca=(int )A_f_MPI_BOR;operation_translation_del(*ca);return;}
+else
+operation_translation_update_f(*cr,ca);
 
 }
 static inline void delete_ptr_converter_a2r(void **ca,void **cr){
@@ -1332,7 +1691,7 @@ else
 if(A_f_MPI_ERRORS_RETURN==*ca){
 *cr=(int )R_f_MPI_ERRORS_RETURN;return;}
 else
-*cr=*ca;
+errhandler_translation_get_f(*ca,cr);
 }
 
 static inline void errhandler_converter_r2a(int *ca,int *cr){
@@ -1345,7 +1704,20 @@ else
 if(R_f_MPI_ERRORS_RETURN==*cr){
 *ca=(int )A_f_MPI_ERRORS_RETURN;return;}
 else
-*ca=*cr;
+errhandler_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void errhandler_converter_r2au(int *ca,int *cr){
+if(R_f_MPI_ERRORS_ARE_FATAL==*cr){
+*ca=(int )A_f_MPI_ERRORS_ARE_FATAL;errhandler_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERRHANDLER_NULL==*cr){
+*ca=(int )A_f_MPI_ERRHANDLER_NULL;errhandler_translation_del(*ca);return;}
+else
+if(R_f_MPI_ERRORS_RETURN==*cr){
+*ca=(int )A_f_MPI_ERRORS_RETURN;errhandler_translation_del(*ca);return;}
+else
+errhandler_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_HOST 1
@@ -1426,7 +1798,7 @@ else
 if(A_f_MPI_WIN_SIZE==*ca){
 *cr=(int )R_f_MPI_WIN_SIZE;return;}
 else
-*cr=*ca;
+keyval_translation_get_f(*ca,cr);
 }
 
 static inline void keyval_r2a(int *ca,int *cr){
@@ -1463,7 +1835,44 @@ else
 if(R_f_MPI_WIN_SIZE==*cr){
 *ca=(int )A_f_MPI_WIN_SIZE;return;}
 else
-*ca=*cr;
+keyval_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void keyval_r2au(int *ca,int *cr){
+if(R_f_MPI_HOST==*cr){
+*ca=(int )A_f_MPI_HOST;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_TAG_UB==*cr){
+*ca=(int )A_f_MPI_TAG_UB;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_WTIME_IS_GLOBAL==*cr){
+*ca=(int )A_f_MPI_WTIME_IS_GLOBAL;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_IO==*cr){
+*ca=(int )A_f_MPI_IO;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_KEYVAL_INVALID==*cr){
+*ca=(int )A_f_MPI_KEYVAL_INVALID;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_APPNUM==*cr){
+*ca=(int )A_f_MPI_APPNUM;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_WIN_BASE==*cr){
+*ca=(int )A_f_MPI_WIN_BASE;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_UNIVERSE_SIZE==*cr){
+*ca=(int )A_f_MPI_UNIVERSE_SIZE;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_WIN_DISP_UNIT==*cr){
+*ca=(int )A_f_MPI_WIN_DISP_UNIT;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_LASTUSEDCODE==*cr){
+*ca=(int )A_f_MPI_LASTUSEDCODE;keyval_translation_del(*ca);return;}
+else
+if(R_f_MPI_WIN_SIZE==*cr){
+*ca=(int )A_f_MPI_WIN_SIZE;keyval_translation_del(*ca);return;}
+else
+keyval_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_ANY_SOURCE -1
@@ -1502,14 +1911,21 @@ static inline void info_a2r(int *ca,int *cr){
 if(A_f_MPI_INFO_NULL==*ca){
 *cr=(int )R_f_MPI_INFO_NULL;return;}
 else
-*cr=*ca;
+info_translation_get_f(*ca,cr);
 }
 
 static inline void info_r2a(int *ca,int *cr){
 if(R_f_MPI_INFO_NULL==*cr){
 *ca=(int )A_f_MPI_INFO_NULL;return;}
 else
-*ca=*cr;
+info_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void info_r2au(int *ca,int *cr){
+if(R_f_MPI_INFO_NULL==*cr){
+*ca=(int )A_f_MPI_INFO_NULL;info_translation_del(*ca);return;}
+else
+info_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_ORDER_FORTRAN 1
@@ -1624,14 +2040,21 @@ static inline void fwin_a2r(int *ca,int *cr){
 if(A_f_MPI_WIN_NULL==*ca){
 *cr=(int )R_f_MPI_WIN_NULL;return;}
 else
-*cr=*ca;
+win_translation_get_f(*ca,cr);
 }
 
 static inline void fwin_r2a(int *ca,int *cr){
 if(R_f_MPI_WIN_NULL==*cr){
 *ca=(int )A_f_MPI_WIN_NULL;return;}
 else
-*ca=*cr;
+win_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void fwin_r2au(int *ca,int *cr){
+if(R_f_MPI_WIN_NULL==*cr){
+*ca=(int )A_f_MPI_WIN_NULL;win_translation_del(*ca);return;}
+else
+win_translation_update_f(*cr,ca);
 
 }
 #define A_f_MPI_MESSAGE_NO_PROC 1
@@ -1649,7 +2072,7 @@ else
 if(A_f_MPI_MESSAGE_NULL==*ca){
 *cr=(int )R_f_MPI_MESSAGE_NULL;return;}
 else
-*cr=*ca;
+message_translation_get_f(*ca,cr);
 }
 
 static inline void message_r2a(int *ca,int *cr){
@@ -1659,7 +2082,42 @@ else
 if(R_f_MPI_MESSAGE_NULL==*cr){
 *ca=(int )A_f_MPI_MESSAGE_NULL;return;}
 else
-*ca=*cr;
+message_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void message_r2au(int *ca,int *cr){
+if(R_f_MPI_MESSAGE_NO_PROC==*cr){
+*ca=(int )A_f_MPI_MESSAGE_NO_PROC;message_translation_del(*ca);return;}
+else
+if(R_f_MPI_MESSAGE_NULL==*cr){
+*ca=(int )A_f_MPI_MESSAGE_NULL;message_translation_del(*ca);return;}
+else
+message_translation_update_f(*cr,ca);
+
+}
+#define A_f_MPI_FILE_NULL 0
+
+#define R_f_MPI_FILE_NULL 0
+
+static inline void file_a2r(int *ca,int *cr){
+if(A_f_MPI_FILE_NULL==*ca){
+*cr=(int )R_f_MPI_FILE_NULL;return;}
+else
+file_translation_get_f(*ca,cr);
+}
+
+static inline void file_r2a(int *ca,int *cr){
+if(R_f_MPI_FILE_NULL==*cr){
+*ca=(int )A_f_MPI_FILE_NULL;return;}
+else
+file_translation_update_alloc_f(*cr,ca);
+
+}
+static inline void file_r2au(int *ca,int *cr){
+if(R_f_MPI_FILE_NULL==*cr){
+*ca=(int )A_f_MPI_FILE_NULL;file_translation_del(*ca);return;}
+else
+file_translation_update_f(*cr,ca);
 
 }
  #define A_f_MPI_STATUS_SIZE           6

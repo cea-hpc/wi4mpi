@@ -43,7 +43,7 @@ def generate_header_f(mpi_root1,mpi_root2,header_path,fd_output):
 		for r in vals:
 			out=open('test.f90','w')
 			out.write('\t\tprogram test\ninclude \'mpif.h\'\n')
-			for i in range(4,len(r)):
+			for i in range(5,len(r)):
 				out.write('\t\tprint *,\''+r[i]+' \','+r[i]+'\n')
 			out.write('\t\tend program')
 			out.close()
@@ -70,14 +70,17 @@ def generate_header_f(mpi_root1,mpi_root2,header_path,fd_output):
 					else:
 						tab[rr[-1]]=['']
 						tab[rr[-1]].append(rr[0])
-			
+			#pprint (tab)
+			r2au='static inline void '+r[0]+'_r2au('+r[1]+'*ca,'+r[1]+'*cr){\n'
 			a2r='static inline void '+r[0]+'_a2r('+r[1]+'*ca,'+r[1]+'*cr){\n'  
 			r2a='static inline void '+r[0]+'_r2a('+r[1]+'*ca,'+r[1]+'*cr){\n' 
 			ii=0    
 			jj=0    
 			rnv={}  
 			cnv={}  
+			#pprint (r) 
 			for i in tab: 
+				#print i
 				if(tab[i][0]!=''):
 					if (r[1].split(' ')[1]!="*"):
 						print '#define A_f_'+tab[i][0]+' '+i+'\n'
@@ -85,30 +88,46 @@ def generate_header_f(mpi_root1,mpi_root2,header_path,fd_output):
 				if tab[i][1]=='':
 					rnv[ii]=tab[i][0]
 					ii=ii+1
-				else:   
+				else:
 					if tab[i][0]=='':
 						cnv[tab[i][1]]=jj
 						jj=jj+1
-				
 				if(tab[i][1]!=''):
 					if (r[1].split(' ')[1]!="*"):
 						print '#define R_f_'+tab[i][1]+' '+i+'\n'
 					r2a=r2a+'if(R_f_'+tab[i][1]+'==*cr){\n'+'*ca=('+r[1]+')A_f_'+tab[i][1]+';return;}\nelse\n'
-			for i in tab:           
-				if(tab[i][0]==''):
-					a2r=a2r+'if(R_f_'+tab[i][1]+'==*ca)\n'+'*cr=('+r[1]+')A_f_'+rnv[cnv[tab[i][1]]]+';\nelse\n'
-					r2a=r2a+'if(A_f_'+rnv[cnv[tab[i][1]]]+'==*cr)\n'+'*ca=('+r[1]+')R_f_'+tab[i][1]+';\nelse\n'
-			a2r=a2r+'*cr=*ca;\n'
+					r2au=r2au+'if(R_f_'+tab[i][1]+'==*cr){\n'+'*ca=('+r[1]+')A_f_'+tab[i][1]+';'+r[4]+'_translation_del(*ca);return;}\nelse\n'
+			#pprint(rnv)
+			#pprint(cnv)
+			#for i in tab:           
+			#    print tab[i][0],tab[i][1]
+			#    if(tab[i][0]==''):
+			#        print cnv[tab[i][1]]
+			#        a2r=a2r+'if(R_f_'+tab[i][1]+'==*ca)\n'+'*cr=('+r[1]+')A_f_'+rnv[cnv[tab[i][1]]]+';\nelse\n'
+			#        r2a=r2a+'if(A_f_'+rnv[cnv[tab[i][1]]]+'==*cr)\n'+'*ca=('+r[1]+')R_f_'+tab[i][1]+';\nelse\n'
+			#        r2au=r2au+'if(A_f_'+rnv[cnv[tab[i][1]]]+'==*cr)\n'+'*ca=('+r[1]+')R_f_'+tab[i][1]+';\nelse\n'
+			if len(r[4]):
+				a2r=a2r+r[4]+'_translation_get_f(*ca,cr);\n'
+			else:
+				a2r=a2r+'*cr=*ca;\n'
 			if r[2]!='':
 				a2r=a2r+r[2]+'(*cr);\n'
 			a2r=a2r+'}\n'
-			r2a=r2a+'*ca=*cr;\n'
+			if len(r[4]):
+				r2a=r2a+r[4]+'_translation_update_alloc_f(*cr,ca);\n'
+				r2au=r2au+r[4]+'_translation_update_f(*cr,ca);\n'
+			else:
+				r2a=r2a+'*ca=*cr;\n'
+				r2au=r2au+'*ca=*cr;\n'
 			if r[3]!='':
 				r2a=r2a+r[3]+'(*cr);\n'
 			r2a=r2a+'\n}'
+			r2au=r2au+'\n}'
 			
 			print a2r
 			print r2a
+			if len(r[4]):
+				print r2au
 	out=open('test.f90','w')
 	out.write('program test\ninclude \'mpif.h\'\n')
 	out.write('print *,\'#define A_f_MPI_STATUS_SIZE\',MPI_STATUS_SIZE\n')

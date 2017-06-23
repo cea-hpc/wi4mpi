@@ -42,7 +42,6 @@ static void dump(void * src, size_t size) {
 */
 
 /*  Memcpy if application structure is large enough */
-
 #define HASHTABLE_OPTI(type, varname)   \
 static varname##_translation_t* varname##_const_table = NULL;  \
   \
