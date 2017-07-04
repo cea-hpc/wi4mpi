@@ -43,7 +43,14 @@ static void dump(void * src, size_t size) {
 */
 
 /*  Memcpy if application structure is large enough */
-
+void *wi4mpi_alloc(size_t size)
+{
+    return malloc(size);
+}
+void wi4mpi_free(void *ptr)
+{
+    return free(ptr);
+}
 
 /*   True hashtables  */
 #if defined(OMPI_INTEL)

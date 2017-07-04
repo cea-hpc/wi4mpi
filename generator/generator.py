@@ -293,12 +293,12 @@ class generator:
 		            if str_test_out == '*outcount':
 		                  str_test_out='incount'
 		            if len(str_test.split('*')) > 1:
-		               str='R_'+str_test.split('*')[0]+' *'+arg['var'].split('[')[0]+'_tmp = malloc(sizeof(R_'+str_test.split('*')[0]+')*'+str_test_out+');'
+		               str='R_'+str_test.split('*')[0]+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof(R_'+str_test.split('*')[0]+')*'+str_test_out+');'
 		            else:
 		               if str_test == 'MPI_Status': #special case: where MPI_STATUSES_IGNORE is use as an argument for array_of_statuses in MPI_Waitall/Waitsome and MPI_Testall/Testsome
-		                  str='R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) malloc(sizeof(R_'+self.mappers[arg['name']]['type']+')*'+str_test_out+'));'
+		                  str='R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_'+self.mappers[arg['name']]['type']+')*'+str_test_out+'));'
 		               else:
-		                  str='R_'+str_test+' *'+arg['var'].split('[')[0]+'_tmp = malloc(sizeof(R_'+self.mappers[arg['name']]['type']+')*'+str_test_out+');'
+		                  str='R_'+str_test+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof(R_'+self.mappers[arg['name']]['type']+')*'+str_test_out+');'
 		      else:
 		            str=self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp;'
 		return str
@@ -312,7 +312,7 @@ class generator:
 		if 'status_size' in self.mappers[arg['name']]:
 			size='(R_f_MPI_STATUS_SIZE+1)'
 			if 'arg_dep' in arg and arg['arg_dep']!='':
-				str=self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+arg['var']+'==A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:('+self.mappers[arg['name']]['type']+'*) malloc((*'+arg['arg_dep']+')*'+size+'*sizeof('+self.mappers[arg['name']]['type']+')));'
+				str=self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+arg['var']+'==A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:('+self.mappers[arg['name']]['type']+'*) wi4mpi_alloc((*'+arg['arg_dep']+')*'+size+'*sizeof('+self.mappers[arg['name']]['type']+')));'
 			else:
 				str=self.mappers[arg['name']]['type']+arg['var']+'_tmp1'
 				str=str+'[R_f_MPI_STATUS_SIZE+1]'
@@ -320,7 +320,7 @@ class generator:
 				str=str+'\n'+self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+arg['var']+'==A_f_MPI_STATUS_IGNORE?R_f_MPI_STATUS_IGNORE:'+arg['var']+'_tmp1);'
 		else:
 			if 'arg_dep' in arg and arg['arg_dep']!='':
-				str=self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+self.mappers[arg['name']]['type']+'*) malloc((*'+arg['arg_dep']+')*'+size+'*sizeof('+self.mappers[arg['name']]['type']+'));'
+				str=self.mappers[arg['name']]['type']+'*'+arg['var']+'_tmp=('+self.mappers[arg['name']]['type']+'*) wi4mpi_alloc((*'+arg['arg_dep']+')*'+size+'*sizeof('+self.mappers[arg['name']]['type']+'));'
 			else:
 				if self.mappers[arg['name']]['type'] != 'void ':
 					if arg['name'] == 'weight_converter':
@@ -589,9 +589,9 @@ class generator:
 					if arg['arg_dep'] and "no_map" not in self.mappers[arg['name']]:
 						if arg['var'].split('[')[0] == 'array_of_statuses':
 							str=str+'\nif (array_of_statuses!=A_MPI_STATUSES_IGNORE)'
-							str=str+'\n'+'free('+arg['var'].split('[')[0]+'_tmp'+');'
+							str=str+'\n'+'wi4mpi_free('+arg['var'].split('[')[0]+'_tmp'+');'
 						else:
-							str=str+'\n'+'free('+arg['var'].split('[')[0]+'_tmp'+');'
+							str=str+'\n'+'wi4mpi_free('+arg['var'].split('[')[0]+'_tmp'+');'
 				str=str+self.footer_func(func_dict, app_side=True)
 			else :#Generate wrapped function on the run side
 				str=self.print_symbol_c(func_dict,prefix='R_',name_arg=True,retval_name=False,app_side=False,run_side=True)
@@ -651,9 +651,9 @@ class generator:
 			if 'arg_dep' in arg and arg['arg_dep']!='' and (arg['In'] or arg['Out'])  and not 'nomap' in self.mappers[arg['name']]:
 				if arg['var'] == 'array_of_statuses':
 					string=string+'\nif (array_of_statuses!=A_f_MPI_STATUSES_IGNORE)'
-					string=string+'\n'+' free('+arg['var']+'_tmp);'
+					string=string+'\n'+' wi4mpi_free('+arg['var']+'_tmp);'
 				else:
-					string=string+'\n'+' free('+arg['var']+'_tmp);'
+					string=string+'\n'+' wi4mpi_free('+arg['var']+'_tmp);'
 		if 'assoc' in func_dict:
 			for assoc in func_dict['assoc']:
 				if  assoc['func'].find('_del')==-1:
