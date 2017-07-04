@@ -1,4 +1,8 @@
 #!/bin/bash
+
+WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
+WI4MPI_UCONFIG="~/.wi4mpi.cfg"
+
 usage() {
 
     cat <<EOF
@@ -39,13 +43,26 @@ default_mode() {
 	
 	echo "char wi4mpi_mode[]=\"$wi4mpi_mode\";"	> wi4mpi_libs_default_paths.c
 	echo "char wi4mpi_mode_f[]=\"$wi4mpi_mode_f\";"	>> wi4mpi_libs_default_paths.c
-	echo "char wi4mpi_run_c_library[]=\"$wi4mpi_run_c_library\";"	>>wi4mpi_libs_default_paths.c
-	echo "char wi4mpi_run_f_library[]=\"$wi4mpi_run_f_library\";"	>>wi4mpi_libs_default_paths.c
 
 	#EOF
 		
 }
 
+source_default_mode() {
+	
+	echo "export WI4MPI_RUN_MPI_C_LIB=\"$WI4MPI_RUN_MPI_C_LIB\"" > run_settings.sh
+  echo "export WI4MPI_RUN_MPI_F_LIB=\"$WI4MPI_RUN_MPI_F_LIB\"" >> run_settings.sh
+	echo $LD_LIBRARY_PATH
+	echo "export OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH"					>> run_settings.sh
+	echo "export LD_LIBRARY_PATH=$WI4MPI_ROOT/lib:$LD_LIBRARY_PATH" >> run_settings.sh
+
+	echo "Please source run_settings.sh to export WI4MPI_RUN_MPI_C_LIB, WI4MPI_RUN_MPI_F_LIB and LD_LIBRARY_PATH ;)"
+	echo "To retrieve an healthy environment:"
+	echo "unset WI4MPI_RUN_MPI_C_LIB"
+	echo "unset WI4MPI_RUN_MPI_F_LIB"
+	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+
+}
 #Choosing the right include path according to the Fortran compiler 
 if [[ "$WI4MPI_FC" == "gfortran" ]]; then
 	SIZEOF_INCLUDE=${WI4MPI_ROOT}/include/gnu
@@ -55,8 +72,10 @@ fi
 
 arg=$@
 default_mode_activated=0
-wi4mpi_mode=$WI4MPI_WRAPPER_LIB
-wi4mpi_mode_f=$WI4MPI_WRAPPER_LIB
+[[ -f $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
+[[ -f $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
+
+#wi4mpi_mode and wi4mpi_mode_f are set by WI4MPI_ROOT/etc/wi4mpi.cfg
 wi4mpi_run_c_library=$WI4MPI_RUN_MPI_C_LIB;  
 wi4mpi_run_f_library=$WI4MPI_RUN_MPI_F_LIB;  
 
@@ -81,10 +100,14 @@ case $key in
 						#echo "OMPI"
 						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_OMPI.so
 						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_OMPI.so
+						WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${OPENMPI_DEFAULT_ROOT}/lib/libmpi.so}
+						WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${OPENMPI_DEFAULT_ROOT}/lib/libmpi_mpifh.so}
 					elif [[ "$2" == "IMPI" ]]; then
 						#echo "IMPI"
 						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_IMPI.so
 						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_CCC_IMPI.so
+						WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpi.so}
+						WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpifort.so}
 					else
 						usage; exit 0;
 					fi
@@ -106,7 +129,7 @@ if [[ default_mode_activated -eq 1 ]];then
 	default_mode
 	${WI4MPI_CC} -c wi4mpi_libs_default_paths.c -o wi4mpi_libs_default_paths.o
 	extra_arg=wi4mpi_libs_default_paths.o
+	source_default_mode
 fi
-
 ${WI4MPI_FC} -I${WI4MPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${WI4MPI_ROOT}/lib -lmpi $arg $extra_arg
 exit $?
