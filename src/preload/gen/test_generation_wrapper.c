@@ -3378,7 +3378,7 @@ in_w=1;
 
 
 
-R_MPI_Aint  *array_of_displacements_tmp = malloc(sizeof(R_MPI_Aint )*count);
+R_MPI_Aint  *array_of_displacements_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint )*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 array_of_displacements_tmp[i1]= (R_MPI_Aint )array_of_displacements[i1];
@@ -3389,7 +3389,7 @@ R_MPI_Datatype  newtype_ltmp;
 R_MPI_Datatype * newtype_tmp=&newtype_ltmp;
 int ret_tmp= LOCAL_MPI_Type_hindexed( count, array_of_blocklengths, array_of_displacements_tmp, oldtype_tmp, newtype_tmp);
 datatype_conv_r2a(newtype,newtype_tmp);
-free(array_of_displacements_tmp);
+wi4mpi_free(array_of_displacements_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Type_hindexed\n");
@@ -3459,12 +3459,12 @@ in_w=1;
 
 
 
-R_MPI_Aint  *array_of_displacements_tmp = malloc(sizeof(R_MPI_Aint )*count);
+R_MPI_Aint  *array_of_displacements_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint )*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 array_of_displacements_tmp[i1]= (R_MPI_Aint )array_of_displacements[i1];
 }
-R_MPI_Datatype *array_of_types_tmp = malloc(sizeof(R_MPI_Datatype)*count);
+R_MPI_Datatype *array_of_types_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*count);
 int i2;
 for(i2=0; i2 < count;i2++){
 datatype_conv_a2r(&array_of_types[i2],&array_of_types_tmp[i2]);
@@ -3473,8 +3473,8 @@ R_MPI_Datatype  newtype_ltmp;
 R_MPI_Datatype * newtype_tmp=&newtype_ltmp;
 int ret_tmp= LOCAL_MPI_Type_struct( count, array_of_blocklengths, array_of_displacements_tmp, array_of_types_tmp, newtype_tmp);
 datatype_conv_r2a(newtype,newtype_tmp);
-free(array_of_displacements_tmp);
-free(array_of_types_tmp);
+wi4mpi_free(array_of_displacements_tmp);
+wi4mpi_free(array_of_types_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Type_struct\n");
@@ -12372,8 +12372,8 @@ printf("entre : A_MPI_Grequest_start\n");
 #endif
 in_w=1;
 
-R_MPI_Grequest_query_function *query_fn_tmp;
-grequest_query_fn_a2r(&query_fn, &query_fn_tmp);
+R_MPI_Grequest_query_function * query_fn_tmp;
+grequest_query_fn_a2r(&query_fn,&query_fn_tmp);
 
 
 
@@ -22461,16 +22461,14 @@ printf("entre : A_MPI_Register_datarep\n");
 #endif
 in_w=1;
 
-R_MPI_Datarep_conversion_function *read_conversion_fn_tmp;
-datarep_conversion_function_a2r(&read_conversion_fn, &read_conversion_fn_tmp);
-
-R_MPI_Datarep_conversion_function *write_conversion_fn_tmp;
-datarep_conversion_function_a2r(&write_conversion_fn, &write_conversion_fn_tmp);
-
-R_MPI_Datarep_extent_function			*dtype_file_extent_fn_tmp;
-datarep_extent_function_converter_a2r(&dtype_file_extent_fn, &dtype_file_extent_fn_tmp);
 
 
+R_MPI_Datarep_conversion_function * read_conversion_fn_tmp;
+datarep_conversion_function_a2r(&read_conversion_fn,&read_conversion_fn_tmp);
+R_MPI_Datarep_conversion_function * write_conversion_fn_tmp;
+datarep_conversion_function_a2r(&write_conversion_fn,&write_conversion_fn_tmp);
+R_MPI_Datarep_extent_function * dtype_file_extent_fn_tmp;
+datarep_extent_function_converter_a2r(&dtype_file_extent_fn,&dtype_file_extent_fn_tmp);
 void * extra_state_tmp;
 buffer_conv_a2r(&extra_state,&extra_state_tmp);
 int ret_tmp= LOCAL_MPI_Register_datarep( datarep, read_conversion_fn_tmp, write_conversion_fn_tmp, dtype_file_extent_fn_tmp, extra_state_tmp);
@@ -22949,7 +22947,7 @@ in_w=1;
 
 
 
-R_MPI_Request *array_of_requests_tmp = malloc(sizeof(R_MPI_Request)*count);
+R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
@@ -22965,7 +22963,7 @@ request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
 }
 
 status_prt_conv_r2a(&status,&status_tmp);
-free(array_of_requests_tmp);
+wi4mpi_free(array_of_requests_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Waitany\n");
@@ -23033,7 +23031,7 @@ in_w=1;
 
 
 
-R_MPI_Request *array_of_requests_tmp = malloc(sizeof(R_MPI_Request)*count);
+R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
@@ -23052,7 +23050,7 @@ request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
 
 
 status_prt_conv_r2a(&status,&status_tmp);
-free(array_of_requests_tmp);
+wi4mpi_free(array_of_requests_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Testany\n");
@@ -23116,12 +23114,12 @@ in_w=1;
 
 
 
-R_MPI_Request *array_of_requests_tmp = malloc(sizeof(R_MPI_Request)*count);
+R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
 }
-R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) malloc(sizeof(R_MPI_Status)*count));
+R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_MPI_Status)*count));
 int ret_tmp= LOCAL_MPI_Waitall( count, array_of_requests_tmp, array_of_statuses_tmp);
 int i2;
 if(ret_tmp == R_MPI_SUCCESS){
@@ -23138,9 +23136,9 @@ for(i3=0; i3 < count;i3++){
 status_tab_conv_r2a(&array_of_statuses[i3],&array_of_statuses_tmp[i3]);
 }
 }
-free(array_of_requests_tmp);
+wi4mpi_free(array_of_requests_tmp);
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
-free(array_of_statuses_tmp);
+wi4mpi_free(array_of_statuses_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Waitall\n");
@@ -23206,13 +23204,13 @@ in_w=1;
 
 
 
-R_MPI_Request *array_of_requests_tmp = malloc(sizeof(R_MPI_Request)*count);
+R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
 }
 
-R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) malloc(sizeof(R_MPI_Status)*count));
+R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_MPI_Status)*count));
 int ret_tmp= LOCAL_MPI_Testall( count, array_of_requests_tmp, flag, array_of_statuses_tmp);
 int i2;
 if(ret_tmp == R_MPI_SUCCESS){
@@ -23231,9 +23229,9 @@ for(i3=0; i3 < count;i3++){
 status_tab_conv_r2a(&array_of_statuses[i3],&array_of_statuses_tmp[i3]);
 }
 }
-free(array_of_requests_tmp);
+wi4mpi_free(array_of_requests_tmp);
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
-free(array_of_statuses_tmp);
+wi4mpi_free(array_of_statuses_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Testall\n");
@@ -23301,14 +23299,14 @@ in_w=1;
 
 
 
-R_MPI_Request *array_of_requests_tmp = malloc(sizeof(R_MPI_Request)*incount);
+R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*incount);
 int i1;
 for(i1=0; i1 < incount;i1++){
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
 }
 
 
-R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) malloc(sizeof(R_MPI_Status)*incount));
+R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_MPI_Status)*incount));
 int ret_tmp= LOCAL_MPI_Waitsome( incount, array_of_requests_tmp, outcount, array_of_indices, array_of_statuses_tmp);
 int i2;
 if(ret_tmp == R_MPI_SUCCESS){
@@ -23327,9 +23325,9 @@ for(i4=0; i4 < *outcount;i4++){
 status_tab_conv_r2a(&array_of_statuses[i4],&array_of_statuses_tmp[i4]);
 }
 }
-free(array_of_requests_tmp);
+wi4mpi_free(array_of_requests_tmp);
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
-free(array_of_statuses_tmp);
+wi4mpi_free(array_of_statuses_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Waitsome\n");
@@ -23397,14 +23395,14 @@ in_w=1;
 
 
 
-R_MPI_Request *array_of_requests_tmp = malloc(sizeof(R_MPI_Request)*incount);
+R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*incount);
 int i1;
 for(i1=0; i1 < incount;i1++){
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
 }
 
 
-R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) malloc(sizeof(R_MPI_Status)*incount));
+R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_MPI_Status)*incount));
 int ret_tmp= LOCAL_MPI_Testsome( incount, array_of_requests_tmp, outcount, array_of_indices, array_of_statuses_tmp);
 int i2;
 if(ret_tmp == R_MPI_SUCCESS){
@@ -23423,9 +23421,9 @@ for(i4=0; i4 < *outcount;i4++){
 status_tab_conv_r2a(&array_of_statuses[i4],&array_of_statuses_tmp[i4]);
 }
 }
-free(array_of_requests_tmp);
+wi4mpi_free(array_of_requests_tmp);
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
-free(array_of_statuses_tmp);
+wi4mpi_free(array_of_statuses_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Testsome\n");
@@ -23487,13 +23485,13 @@ in_w=1;
 
 
 
-R_MPI_Request *array_of_requests_tmp = malloc(sizeof(R_MPI_Request)*count);
+R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
 }
 int ret_tmp= LOCAL_MPI_Startall( count, array_of_requests_tmp);
-free(array_of_requests_tmp);
+wi4mpi_free(array_of_requests_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Startall\n");
@@ -23570,7 +23568,7 @@ const_buffer_conv_a2r(&sendbuf,&sendbuf_tmp);
 
 
 
-R_MPI_Datatype *sendtypes_tmp = malloc(sizeof(R_MPI_Datatype)*Comm_size);
+R_MPI_Datatype *sendtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*Comm_size);
 int i1;
 for(i1=0; i1 < Comm_size;i1++){
 datatype_conv_a2r(&sendtypes[i1],&sendtypes_tmp[i1]);
@@ -23581,7 +23579,7 @@ buffer_conv_a2r(&recvbuf,&recvbuf_tmp);
 
 
 
-R_MPI_Datatype *recvtypes_tmp = malloc(sizeof(R_MPI_Datatype)*Comm_size);
+R_MPI_Datatype *recvtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*Comm_size);
 int i2;
 for(i2=0; i2 < Comm_size;i2++){
 datatype_conv_a2r(&recvtypes[i2],&recvtypes_tmp[i2]);
@@ -23590,8 +23588,8 @@ R_MPI_Comm comm_tmp;
 comm_conv_a2r(&comm,&comm_tmp);
 int ret_tmp= LOCAL_MPI_Alltoallw( sendbuf_tmp, sendcounts, sdispls, sendtypes_tmp, recvbuf_tmp, recvcounts, rdispls, recvtypes_tmp, comm_tmp);
 buffer_conv_r2a(&recvbuf,&recvbuf_tmp);
-free(sendtypes_tmp);
-free(recvtypes_tmp);
+wi4mpi_free(sendtypes_tmp);
+wi4mpi_free(recvtypes_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Alltoallw\n");
@@ -25017,7 +25015,7 @@ in_w=1;
 
 
 
-R_MPI_Info *array_of_info_tmp = malloc(sizeof(R_MPI_Info)*count);
+R_MPI_Info *array_of_info_tmp = wi4mpi_alloc(sizeof(R_MPI_Info)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 info_conv_a2r(&array_of_info[i1],&array_of_info_tmp[i1]);
@@ -25032,7 +25030,7 @@ R_MPI_Comm * intercomm_tmp=&intercomm_ltmp;
 int ret_tmp= LOCAL_MPI_Comm_spawn_multiple( count, array_of_commands, array_of_argv, array_of_maxprocs, array_of_info_tmp, root, comm_tmp, intercomm_tmp, array_of_errcodes);
 comm_conv_r2a(intercomm,intercomm_tmp);
 
-free(array_of_info_tmp);
+wi4mpi_free(array_of_info_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Comm_spawn_multiple\n");
@@ -25109,8 +25107,8 @@ datatype_conv_a2r(&datatype,&datatype_tmp);
 
 
 
-R_MPI_Aint *array_of_addresses_tmp = malloc(sizeof(R_MPI_Aint)*max_addresses);
-R_MPI_Datatype *array_of_datatypes_tmp = malloc(sizeof(R_MPI_Datatype)*max_datatypes);
+R_MPI_Aint *array_of_addresses_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*max_addresses);
+R_MPI_Datatype *array_of_datatypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*max_datatypes);
 int ret_tmp= LOCAL_MPI_Type_get_contents( datatype_tmp, max_integers, max_addresses, max_datatypes, array_of_integers, array_of_addresses_tmp, array_of_datatypes_tmp);
 
 int i1;
@@ -25121,8 +25119,8 @@ int i2;
 for(i2=0; i2 < max_datatypes;i2++){
 datatype_conv_r2a(&array_of_datatypes[i2],&array_of_datatypes_tmp[i2]);
 }
-free(array_of_addresses_tmp);
-free(array_of_datatypes_tmp);
+wi4mpi_free(array_of_addresses_tmp);
+wi4mpi_free(array_of_datatypes_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Type_get_contents\n");
@@ -25437,7 +25435,7 @@ in_w=1;
 
 
 
-R_MPI_Aint *array_of_displacements_tmp = malloc(sizeof(R_MPI_Aint)*count);
+R_MPI_Aint *array_of_displacements_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 array_of_displacements_tmp[i1]= (R_MPI_Aint)array_of_displacements[i1];
@@ -25448,7 +25446,7 @@ R_MPI_Datatype  newtype_ltmp;
 R_MPI_Datatype * newtype_tmp=&newtype_ltmp;
 int ret_tmp= LOCAL_MPI_Type_create_hindexed( count, array_of_blocklengths, array_of_displacements_tmp, oldtype_tmp, newtype_tmp);
 datatype_conv_r2a(newtype,newtype_tmp);
-free(array_of_displacements_tmp);
+wi4mpi_free(array_of_displacements_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Type_create_hindexed\n");
@@ -25596,7 +25594,7 @@ in_w=1;
 
 
 
-R_MPI_Aint *array_of_displacements_tmp = malloc(sizeof(R_MPI_Aint)*count);
+R_MPI_Aint *array_of_displacements_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*count);
 int i1;
 for(i1=0; i1 < count;i1++){
 array_of_displacements_tmp[i1]= (R_MPI_Aint)array_of_displacements[i1];
@@ -25607,7 +25605,7 @@ R_MPI_Datatype  newtype_ltmp;
 R_MPI_Datatype * newtype_tmp=&newtype_ltmp;
 int ret_tmp= LOCAL_MPI_Type_create_hindexed_block( count, blocklength, array_of_displacements_tmp, oldtype_tmp, newtype_tmp);
 datatype_conv_r2a(newtype,newtype_tmp);
-free(array_of_displacements_tmp);
+wi4mpi_free(array_of_displacements_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Type_create_hindexed_block\n");
@@ -25677,12 +25675,12 @@ in_w=1;
 
 
 
-R_MPI_Aint *array_of_displacements_tmp = malloc(sizeof(R_MPI_Aint)*count);
+R_MPI_Aint *array_of_displacements_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*count);
 int i2;
 for(i2=0; i2 < count;i2++){
 array_of_displacements_tmp[i2]= (R_MPI_Aint)array_of_displacements[i2];
 }
-R_MPI_Datatype *array_of_types_tmp = malloc(sizeof(R_MPI_Datatype)*count);
+R_MPI_Datatype *array_of_types_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*count);
 int i3;
 for(i3=0; i3 < count;i3++){
 datatype_conv_a2r(&array_of_types[i3],&array_of_types_tmp[i3]);
@@ -25691,8 +25689,8 @@ R_MPI_Datatype  newtype_ltmp;
 R_MPI_Datatype * newtype_tmp=&newtype_ltmp;
 int ret_tmp= LOCAL_MPI_Type_create_struct( count, array_of_blocklengths, array_of_displacements_tmp, array_of_types_tmp, newtype_tmp);
 datatype_conv_r2a(newtype,newtype_tmp);
-free(array_of_displacements_tmp);
-free(array_of_types_tmp);
+wi4mpi_free(array_of_displacements_tmp);
+wi4mpi_free(array_of_types_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Type_create_struct\n");
@@ -26557,7 +26555,7 @@ const_buffer_conv_a2r(&sendbuf,&sendbuf_tmp);
 
 
 
-R_MPI_Datatype *sendtypes_tmp = malloc(sizeof(R_MPI_Datatype)*Comm_size);
+R_MPI_Datatype *sendtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*Comm_size);
 int i1;
 for(i1=0; i1 < Comm_size;i1++){
 datatype_conv_a2r(&sendtypes[i1],&sendtypes_tmp[i1]);
@@ -26568,7 +26566,7 @@ buffer_conv_a2r(&recvbuf,&recvbuf_tmp);
 
 
 
-R_MPI_Datatype *recvtypes_tmp = malloc(sizeof(R_MPI_Datatype)*Comm_size);
+R_MPI_Datatype *recvtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*Comm_size);
 int i2;
 for(i2=0; i2 < Comm_size;i2++){
 datatype_conv_a2r(&recvtypes[i2],&recvtypes_tmp[i2]);
@@ -26582,8 +26580,8 @@ buffer_conv_r2a(&recvbuf,&recvbuf_tmp);
 if(ret_tmp == R_MPI_SUCCESS){
 request_ptr_conv_r2a(&request,&request_tmp);
 }
-free(sendtypes_tmp);
-free(recvtypes_tmp);
+wi4mpi_free(sendtypes_tmp);
+wi4mpi_free(recvtypes_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Ialltoallw\n");
@@ -26926,12 +26924,12 @@ void * sendbuf_tmp;
 const_buffer_conv_a2r(&sendbuf,&sendbuf_tmp);
 
 
-R_MPI_Aint *sdispls_tmp = malloc(sizeof(R_MPI_Aint)*outdegree);
+R_MPI_Aint *sdispls_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*outdegree);
 int i2;
 for(i2=0; i2 < outdegree;i2++){
 sdispls_tmp[i2]= (R_MPI_Aint)sdispls[i2];
 }
-R_MPI_Datatype *sendtypes_tmp = malloc(sizeof(R_MPI_Datatype)*outdegree);
+R_MPI_Datatype *sendtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*outdegree);
 int i3;
 for(i3=0; i3 < outdegree;i3++){
 datatype_conv_a2r(&sendtypes[i3],&sendtypes_tmp[i3]);
@@ -26940,12 +26938,12 @@ void * recvbuf_tmp;
 buffer_conv_a2r(&recvbuf,&recvbuf_tmp);
 
 
-R_MPI_Aint *rdispls_tmp = malloc(sizeof(R_MPI_Aint)*indegree);
+R_MPI_Aint *rdispls_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*indegree);
 int i5;
 for(i5=0; i5 < indegree;i5++){
 rdispls_tmp[i5]= (R_MPI_Aint)rdispls[i5];
 }
-R_MPI_Datatype *recvtypes_tmp = malloc(sizeof(R_MPI_Datatype)*indegree);
+R_MPI_Datatype *recvtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*indegree);
 int i6;
 for(i6=0; i6 < indegree;i6++){
 datatype_conv_a2r(&recvtypes[i6],&recvtypes_tmp[i6]);
@@ -26959,10 +26957,10 @@ buffer_conv_r2a(&recvbuf,&recvbuf_tmp);
 if(ret_tmp == R_MPI_SUCCESS){
 request_ptr_conv_r2a(&request,&request_tmp);
 }
-free(sdispls_tmp);
-free(sendtypes_tmp);
-free(rdispls_tmp);
-free(recvtypes_tmp);
+wi4mpi_free(sdispls_tmp);
+wi4mpi_free(sendtypes_tmp);
+wi4mpi_free(rdispls_tmp);
+wi4mpi_free(recvtypes_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Ineighbor_alltoallw\n");
@@ -27209,12 +27207,12 @@ void * sendbuf_tmp;
 buffer_conv_a2r(&sendbuf,&sendbuf_tmp);
 
 
-R_MPI_Aint *sdispls_tmp = malloc(sizeof(R_MPI_Aint)*outdegree);
+R_MPI_Aint *sdispls_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*outdegree);
 int i1;
 for(i1=0; i1 < outdegree;i1++){
 sdispls_tmp[i1]= (R_MPI_Aint)sdispls[i1];
 }
-R_MPI_Datatype *sendtypes_tmp = malloc(sizeof(R_MPI_Datatype)*outdegree);
+R_MPI_Datatype *sendtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*outdegree);
 int i2;
 for(i2=0; i2 < outdegree;i2++){
 datatype_conv_a2r(&sendtypes[i2],&sendtypes_tmp[i2]);
@@ -27223,12 +27221,12 @@ void * recvbuf_tmp;
 buffer_conv_a2r(&recvbuf,&recvbuf_tmp);
 
 
-R_MPI_Aint *rdispls_tmp = malloc(sizeof(R_MPI_Aint)*indegree);
+R_MPI_Aint *rdispls_tmp = wi4mpi_alloc(sizeof(R_MPI_Aint)*indegree);
 int i3;
 for(i3=0; i3 < indegree;i3++){
 rdispls_tmp[i3]= (R_MPI_Aint)rdispls[i3];
 }
-R_MPI_Datatype *recvtypes_tmp = malloc(sizeof(R_MPI_Datatype)*indegree);
+R_MPI_Datatype *recvtypes_tmp = wi4mpi_alloc(sizeof(R_MPI_Datatype)*indegree);
 int i4;
 for(i4=0; i4 < indegree;i4++){
 datatype_conv_a2r(&recvtypes[i4],&recvtypes_tmp[i4]);
@@ -27237,10 +27235,10 @@ R_MPI_Comm comm_tmp;
 comm_conv_a2r(&comm,&comm_tmp);
 int ret_tmp= LOCAL_MPI_Neighbor_alltoallw( sendbuf_tmp, sendcounts, sdispls_tmp, sendtypes_tmp, recvbuf_tmp, recvcounts, rdispls_tmp, recvtypes_tmp, comm_tmp);
 buffer_conv_r2a(&recvbuf,&recvbuf_tmp);
-free(sdispls_tmp);
-free(sendtypes_tmp);
-free(rdispls_tmp);
-free(recvtypes_tmp);
+wi4mpi_free(sdispls_tmp);
+wi4mpi_free(sendtypes_tmp);
+wi4mpi_free(rdispls_tmp);
+wi4mpi_free(recvtypes_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Neighbor_alltoallw\n");
@@ -29383,7 +29381,6 @@ return ret;
 #endif
 __attribute__((constructor)) void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
-//fprintf(stdout,"You are using Wi4MPI-%s with the mode preload From %s To %s\n", getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");

@@ -577,9 +577,9 @@ class generator:
 					str=str+"R_MPI_Comm_rank(R_MPI_COMM_WORLD,&wi4mpi_rank);\n"
 					str=str+"if(wi4mpi_rank==0)\n"
 					if self.name == 'Wrapper_Interface_C':
-						str=str+"\tprintf(stdout,\"You are using Wi4MPI-%s with the mode interface From Interface To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_TO\"));"
+						str=str+"\tfprintf(stdout,\"You are using Wi4MPI-%s with the mode interface From Interface To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_TO\"));"
 					else:
-						str=str+"\tprintf(stdout,\"You are using Wi4MPI-%s with the mode preload From %s To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_FROM\"), getenv(\"WI4MPI_TO\"));"
+						str=str+"\tfprintf(stdout,\"You are using Wi4MPI-%s with the mode preload From %s To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_FROM\"), getenv(\"WI4MPI_TO\"));"
 				for arg in func_dict['args']:
 					if arg['Out']:
 						if arg["arg_dep"] != '':
