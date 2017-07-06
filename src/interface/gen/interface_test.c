@@ -3584,6 +3584,22 @@ printf("sort : PMPI_Op_commutative (interface)\n");
 #endif
 return ret_tmp;
 }
+int MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
+#define MPI_Reduce_scatter_block PMPI_Reduce_scatter_block
+#pragma weak MPI_Reduce_scatter_block=PMPI_Reduce_scatter_block
+int (*INTERFACE_LOCAL_MPI_Reduce_scatter_block)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm);
+
+int PMPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm)
+{
+#ifdef DEBUG
+printf("entre : PMPI_Reduce_scatter_block (interface) \n");
+#endif
+int ret_tmp= INTERFACE_LOCAL_MPI_Reduce_scatter_block( sendbuf, recvbuf, recvcount, datatype, op, comm);
+#ifdef DEBUG
+printf("sort : PMPI_Reduce_scatter_block (interface)\n");
+#endif
+return ret_tmp;
+}
 int MPI_Dist_graph_neighbors_count(MPI_Comm comm,int * indegree,int * outdegree,int * weighted);
 #define MPI_Dist_graph_neighbors_count PMPI_Dist_graph_neighbors_count
 #pragma weak MPI_Dist_graph_neighbors_count=PMPI_Dist_graph_neighbors_count
@@ -3597,6 +3613,38 @@ printf("entre : PMPI_Dist_graph_neighbors_count (interface) \n");
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_neighbors_count( comm, indegree, outdegree, weighted);
 #ifdef DEBUG
 printf("sort : PMPI_Dist_graph_neighbors_count (interface)\n");
+#endif
+return ret_tmp;
+}
+int MPI_Status_c2f(MPI_Status * c_status,MPI_Fint * f_status);
+#define MPI_Status_c2f PMPI_Status_c2f
+#pragma weak MPI_Status_c2f=PMPI_Status_c2f
+int (*INTERFACE_LOCAL_MPI_Status_c2f)(MPI_Status *,MPI_Fint *);
+
+int PMPI_Status_c2f(MPI_Status * c_status,MPI_Fint * f_status)
+{
+#ifdef DEBUG
+printf("entre : PMPI_Status_c2f (interface) \n");
+#endif
+int ret_tmp= INTERFACE_LOCAL_MPI_Status_c2f( c_status, f_status);
+#ifdef DEBUG
+printf("sort : PMPI_Status_c2f (interface)\n");
+#endif
+return ret_tmp;
+}
+int MPI_Status_f2c(const MPI_Fint * f_status,MPI_Status * c_status);
+#define MPI_Status_f2c PMPI_Status_f2c
+#pragma weak MPI_Status_f2c=PMPI_Status_f2c
+int (*INTERFACE_LOCAL_MPI_Status_f2c)(const MPI_Fint *,MPI_Status *);
+
+int PMPI_Status_f2c(const MPI_Fint * f_status,MPI_Status * c_status)
+{
+#ifdef DEBUG
+printf("entre : PMPI_Status_f2c (interface) \n");
+#endif
+int ret_tmp= INTERFACE_LOCAL_MPI_Status_f2c( f_status, c_status);
+#ifdef DEBUG
+printf("sort : PMPI_Status_f2c (interface)\n");
 #endif
 return ret_tmp;
 }
@@ -6272,6 +6320,38 @@ printf("sort : PMPI_Info_f2c (interface)\n");
 #endif
 return ret_tmp;
 }
+MPI_Fint MPI_Errhandler_c2f(MPI_Errhandler errhandler);
+#define MPI_Errhandler_c2f PMPI_Errhandler_c2f
+#pragma weak MPI_Errhandler_c2f=PMPI_Errhandler_c2f
+MPI_Fint (*INTERFACE_LOCAL_MPI_Errhandler_c2f)(MPI_Errhandler);
+
+MPI_Fint PMPI_Errhandler_c2f(MPI_Errhandler errhandler)
+{
+#ifdef DEBUG
+printf("entre : PMPI_Errhandler_c2f (interface) \n");
+#endif
+MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_c2f( errhandler);
+#ifdef DEBUG
+printf("sort : PMPI_Errhandler_c2f (interface)\n");
+#endif
+return ret_tmp;
+}
+MPI_Errhandler MPI_Errhandler_f2c(MPI_Fint errhandler);
+#define MPI_Errhandler_f2c PMPI_Errhandler_f2c
+#pragma weak MPI_Errhandler_f2c=PMPI_Errhandler_f2c
+MPI_Errhandler (*INTERFACE_LOCAL_MPI_Errhandler_f2c)(MPI_Fint);
+
+MPI_Errhandler PMPI_Errhandler_f2c(MPI_Fint errhandler)
+{
+#ifdef DEBUG
+printf("entre : PMPI_Errhandler_f2c (interface) \n");
+#endif
+MPI_Errhandler ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_f2c( errhandler);
+#ifdef DEBUG
+printf("sort : PMPI_Errhandler_f2c (interface)\n");
+#endif
+return ret_tmp;
+}
 MPI_Fint MPI_Message_c2f(MPI_Message message);
 #define MPI_Message_c2f PMPI_Message_c2f
 #pragma weak MPI_Message_c2f=PMPI_Message_c2f
@@ -6624,39 +6704,6 @@ printf("sort : PMPI_T_category_changed (interface)\n");
 #endif
 return ret_tmp;
 }
-MPI_Fint MPI_Errhandler_c2f(MPI_Errhandler errhandler); 
-#define MPI_Errhandler_c2f PMPI_Errhandler_c2f 
-#pragma weak MPI_Errhandler_c2f=PMPI_Errhandler_c2f 
-MPI_Fint (*INTERFACE_LOCAL_MPI_Errhandler_c2f)(MPI_Errhandler); 
- 
-MPI_Fint PMPI_Errhandler_c2f(MPI_Errhandler errhandler) 
-{ 
-#ifdef DEBUG 
-printf("entre : PMPI_Errhandler_c2f (interface) \n"); 
-#endif 
-MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_c2f( errhandler); 
-#ifdef DEBUG 
-printf("sort : PMPI_Errhandler_c2f (interface)\n"); 
-#endif 
-return ret_tmp; 
-} 
-MPI_Errhandler MPI_Errhandler_f2c(MPI_Fint errhandler); 
-#define MPI_Errhandler_f2c PMPI_Errhandler_f2c 
-#pragma weak MPI_Errhandler_f2c=PMPI_Errhandler_f2c 
-MPI_Errhandler (*INTERFACE_LOCAL_MPI_Errhandler_f2c)(MPI_Fint); 
- 
-MPI_Errhandler PMPI_Errhandler_f2c(MPI_Fint errhandler) 
-{ 
-#ifdef DEBUG 
-printf("entre : PMPI_Errhandler_f2c (interface) \n"); 
-#endif 
-MPI_Errhandler ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_f2c( errhandler); 
-#ifdef DEBUG 
-printf("sort : PMPI_Errhandler_f2c (interface)\n"); 
-#endif 
-return ret_tmp; 
-}
-
 __attribute__((constructor)) void wrapper_interface(void) {
 void *interface_handle;
 if(getenv("WI4MPI_WRAPPER_LIB") != NULL)
@@ -6680,9 +6727,6 @@ if(!interface_handle)
 	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
 	exit(1);
 }
-
-INTERFACE_LOCAL_MPI_Errhandler_c2f=dlsym(interface_handle,"CCMPI_Errhandler_c2f");
-INTERFACE_LOCAL_MPI_Errhandler_f2c=dlsym(interface_handle,"CCMPI_Errhandler_f2c");
 INTERFACE_LOCAL_MPI_Keyval_create=dlsym(interface_handle,"CCMPI_Keyval_create");
 INTERFACE_LOCAL_MPI_Keyval_free=dlsym(interface_handle,"CCMPI_Keyval_free");
 INTERFACE_LOCAL_MPI_Comm_create_keyval=dlsym(interface_handle,"CCMPI_Comm_create_keyval");
@@ -6905,7 +6949,10 @@ INTERFACE_LOCAL_MPI_Type_create_f90_real=dlsym(interface_handle,"CCMPI_Type_crea
 INTERFACE_LOCAL_MPI_Type_create_f90_complex=dlsym(interface_handle,"CCMPI_Type_create_f90_complex");
 INTERFACE_LOCAL_MPI_Reduce_local=dlsym(interface_handle,"CCMPI_Reduce_local");
 INTERFACE_LOCAL_MPI_Op_commutative=dlsym(interface_handle,"CCMPI_Op_commutative");
+INTERFACE_LOCAL_MPI_Reduce_scatter_block=dlsym(interface_handle,"CCMPI_Reduce_scatter_block");
 INTERFACE_LOCAL_MPI_Dist_graph_neighbors_count=dlsym(interface_handle,"CCMPI_Dist_graph_neighbors_count");
+INTERFACE_LOCAL_MPI_Status_c2f=dlsym(interface_handle,"CCMPI_Status_c2f");
+INTERFACE_LOCAL_MPI_Status_f2c=dlsym(interface_handle,"CCMPI_Status_f2c");
 INTERFACE_LOCAL_MPI_Improbe=dlsym(interface_handle,"CCMPI_Improbe");
 INTERFACE_LOCAL_MPI_Imrecv=dlsym(interface_handle,"CCMPI_Imrecv");
 INTERFACE_LOCAL_MPI_Mprobe=dlsym(interface_handle,"CCMPI_Mprobe");
@@ -7073,6 +7120,8 @@ INTERFACE_LOCAL_MPI_Group_c2f=dlsym(interface_handle,"CCMPI_Group_c2f");
 INTERFACE_LOCAL_MPI_Group_f2c=dlsym(interface_handle,"CCMPI_Group_f2c");
 INTERFACE_LOCAL_MPI_Info_c2f=dlsym(interface_handle,"CCMPI_Info_c2f");
 INTERFACE_LOCAL_MPI_Info_f2c=dlsym(interface_handle,"CCMPI_Info_f2c");
+INTERFACE_LOCAL_MPI_Errhandler_c2f=dlsym(interface_handle,"CCMPI_Errhandler_c2f");
+INTERFACE_LOCAL_MPI_Errhandler_f2c=dlsym(interface_handle,"CCMPI_Errhandler_f2c");
 INTERFACE_LOCAL_MPI_Message_c2f=dlsym(interface_handle,"CCMPI_Message_c2f");
 INTERFACE_LOCAL_MPI_Message_f2c=dlsym(interface_handle,"CCMPI_Message_f2c");
 INTERFACE_LOCAL_MPI_Op_c2f=dlsym(interface_handle,"CCMPI_Op_c2f");

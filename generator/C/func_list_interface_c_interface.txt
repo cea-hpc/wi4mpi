@@ -528,3 +528,5 @@ MPI_Win_f2c
 MPI_Win_c2f
 MPI_Message_c2f
 MPI_Message_f2c
+MPI_Status_c2f
+MPI_Status_f2c
