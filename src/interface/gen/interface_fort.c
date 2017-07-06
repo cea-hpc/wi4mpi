@@ -44,6 +44,15 @@ void *mpi_win_null_copy_fn_=NULL;
 
 char wi4mpi_mode_f[]="";
 
+void  mpi_pcontrol_(int * level,int * ret);
+#pragma weak mpi_pcontrol_=pmpi_pcontrol_
+void  (*INTERFACE_F_LOCAL_MPI_Pcontrol)(int *,int *);
+
+void pmpi_pcontrol_(int * level,int * ret){
+
+return  INTERFACE_F_LOCAL_MPI_Pcontrol( level, ret);
+}
+
 void  mpi_send_(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * ret);
 #pragma weak mpi_send_=pmpi_send_
 void  (*INTERFACE_F_LOCAL_MPI_Send)(void *,int *,int *,int *,int *,int *,int *);
@@ -1853,6 +1862,15 @@ void pmpi_op_commutative_(int * op,int * commute,int * ret){
 return  INTERFACE_F_LOCAL_MPI_Op_commutative(op, commute, ret);
 }
 
+void  mpi_reduce_scatter_block_(void * sendbuf,void * recvbuf,int * recvcount,int * datatype,int * op,int * comm,int * ret);
+#pragma weak mpi_reduce_scatter_block_=pmpi_reduce_scatter_block_
+void  (*INTERFACE_F_LOCAL_MPI_Reduce_scatter_block)(void *,void *,int *,int *,int *,int *,int *);
+
+void pmpi_reduce_scatter_block_(void * sendbuf,void * recvbuf,int * recvcount,int * datatype,int * op,int * comm,int * ret){
+
+return  INTERFACE_F_LOCAL_MPI_Reduce_scatter_block(sendbuf,recvbuf, recvcount,datatype,op,comm, ret);
+}
+
 void  mpi_dist_graph_neighbors_count_(int * comm,int * indegree,int * outdegree,int * weighted,int * ret);
 #pragma weak mpi_dist_graph_neighbors_count_=pmpi_dist_graph_neighbors_count_
 void  (*INTERFACE_F_LOCAL_MPI_Dist_graph_neighbors_count)(int *,int *,int *,int *,int *);
@@ -3031,15 +3049,6 @@ void pmpi_file_iread_at_all_(int * fh,int* offset,void * buf,int * count,int * d
 
 return  INTERFACE_F_LOCAL_MPI_File_iread_at_all( fh, offset,buf, count,datatype,request, ret);
 }
-void  mpi_pcontrol_(int * level,int * ret);
-#pragma weak mpi_pcontrol_=pmpi_pcontrol_
-void  (*INTERFACE_F_LOCAL_MPI_Pcontrol)(int *,int *);
-
-void pmpi_pcontrol_(int * level,int * ret){
-
-return  INTERFACE_F_LOCAL_MPI_Pcontrol( level, ret);
-}
-
 void  mpi_register_datarep_(char *datarep, void *read_conversion_fn, void *write_conversion_fn,
                             void *dtype_file_extent_fn, void *extra_state, int * ret);
 #pragma weak mpi_register_datarep_=pmpi_register_datarep_
@@ -3291,6 +3300,7 @@ INTERFACE_F_LOCAL_MPI_Type_create_f90_real=dlsym(interface_handle_f,"A_f_MPI_Typ
 INTERFACE_F_LOCAL_MPI_Type_create_f90_complex=dlsym(interface_handle_f,"A_f_MPI_Type_create_f90_complex");
 INTERFACE_F_LOCAL_MPI_Reduce_local=dlsym(interface_handle_f,"A_f_MPI_Reduce_local");
 INTERFACE_F_LOCAL_MPI_Op_commutative=dlsym(interface_handle_f,"A_f_MPI_Op_commutative");
+INTERFACE_F_LOCAL_MPI_Reduce_scatter_block=dlsym(interface_handle_f,"A_f_MPI_Reduce_scatter_block");
 INTERFACE_F_LOCAL_MPI_Dist_graph_neighbors_count=dlsym(interface_handle_f,"A_f_MPI_Dist_graph_neighbors_count");
 INTERFACE_F_LOCAL_MPI_Improbe=dlsym(interface_handle_f,"A_f_MPI_Improbe");
 INTERFACE_F_LOCAL_MPI_Imrecv=dlsym(interface_handle_f,"A_f_MPI_Imrecv");

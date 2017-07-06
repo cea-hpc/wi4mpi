@@ -303,7 +303,12 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list):
 	string=string+'\t\tfprintf(stderr,\"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\\n\");\n'
 	string=string+'\t\texit(1);\n'
 	string=string+'\t}\n'
-	string=string+'}\n\n'
+	string=string+'}\n'
+	string=string+'if(!interface_handle)\n'
+	string=string+'{\n'                                                     
+	string=string+'\tprintf("Dlopen failed to open WI4MPI librarie.\\nerror :%s\\n",dlerror());\n'
+	string=string+'\texit(1);\n'
+	string=string+'}\n' 
 	string=string+'INTERFACE_LOCAL_MPI_Keyval_create=dlsym(interface_handle,"CCMPI_Keyval_create");\n'          
 	string=string+'INTERFACE_LOCAL_MPI_Keyval_free=dlsym(interface_handle,"CCMPI_Keyval_free");\n'              
 	string=string+'INTERFACE_LOCAL_MPI_Comm_create_keyval=dlsym(interface_handle,"CCMPI_Comm_create_keyval");\n'
@@ -372,7 +377,12 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f):
 	string=string+'\t\tfprintf(stderr,\"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\\n\");\n'
 	string=string+'\t\texit(1);\n'
 	string=string+'\t}\n'
-	string=string+'}\n\n'
+	string=string+'}\n'
+	string=string+'if(!interface_handle_f)\n'
+	string=string+'{\n'                                                     
+	string=string+'\tprintf("Dlopen failed to open WI4MPI librarie.\\nerror :%s\\n",dlerror());\n'
+	string=string+'\texit(1);\n'
+	string=string+'}\n' 
 	for i in data_f:
 		for j in def_list_f: 
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():

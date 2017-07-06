@@ -15704,6 +15704,86 @@ printf("sort : R_MPI_Op_commutative\n");
 #endif
 return ret_tmp;
 }
+int MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm);
+int (*LOCAL_MPI_Reduce_scatter_block)(void *,void *,int,R_MPI_Datatype,R_MPI_Op,R_MPI_Comm);
+
+__asm__(
+".global PMPI_Reduce_scatter_block\n"
+".weak MPI_Reduce_scatter_block\n"
+".set MPI_Reduce_scatter_block,PMPI_Reduce_scatter_block\n"
+".extern in_w\n"
+".extern A_MPI_Reduce_scatter_block\n"
+".extern R_MPI_Reduce_scatter_block\n"
+".type PMPI_Reduce_scatter_block,@function\n"
+".text\n"
+"PMPI_Reduce_scatter_block:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x30, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+"mov %rdx, -0x18(%rbp)\n"
+"mov %rcx, -0x20(%rbp)\n"
+"mov %r8, -0x28(%rbp)\n"
+"mov %r9, -0x30(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"mov -0x18(%rbp), %rdx\n"
+"mov -0x20(%rbp), %rcx\n"
+"mov -0x28(%rbp), %r8\n"
+"mov -0x30(%rbp), %r9\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Reduce_scatter_block\n"
+"jmp *A_MPI_Reduce_scatter_block@GOTPCREL(%rip)\n"
+"inwrap_MPI_Reduce_scatter_block:\n"
+"jmp *R_MPI_Reduce_scatter_block@GOTPCREL(%rip)\n"
+".size PMPI_Reduce_scatter_block,.-PMPI_Reduce_scatter_block\n"
+
+);
+
+int A_MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm)
+{
+#ifdef DEBUG
+printf("entre : A_MPI_Reduce_scatter_block\n");
+#endif
+in_w=1;
+
+void * sendbuf_tmp;
+buffer_conv_a2r(&sendbuf,&sendbuf_tmp);
+void * recvbuf_tmp;
+
+
+R_MPI_Datatype datatype_tmp;
+datatype_conv_a2r(&datatype,&datatype_tmp);
+R_MPI_Op op_tmp;
+op_conv_a2r(&op,&op_tmp);
+R_MPI_Comm comm_tmp;
+comm_conv_a2r(&comm,&comm_tmp);
+int ret_tmp= LOCAL_MPI_Reduce_scatter_block( sendbuf_tmp, recvbuf_tmp, recvcount, datatype_tmp, op_tmp, comm_tmp);
+buffer_conv_r2a(&recvbuf,&recvbuf_tmp);
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_MPI_Reduce_scatter_block\n");
+#endif
+return error_code_conv_r2a(ret_tmp);
+}
+int R_MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Reduce_scatter_block\n");
+#endif
+int ret_tmp= LOCAL_MPI_Reduce_scatter_block( sendbuf, recvbuf, recvcount, datatype, op, comm);
+#ifdef DEBUG
+printf("sort : R_MPI_Reduce_scatter_block\n");
+#endif
+return ret_tmp;
+}
 int MPI_Dist_graph_neighbors_count(A_MPI_Comm comm,int * indegree,int * outdegree,int * weighted);
 int (*LOCAL_MPI_Dist_graph_neighbors_count)(R_MPI_Comm,int *,int *,int *);
 
@@ -29619,6 +29699,7 @@ LOCAL_MPI_Type_create_f90_real=dlsym(lib_handle,"PMPI_Type_create_f90_real");
 LOCAL_MPI_Type_create_f90_complex=dlsym(lib_handle,"PMPI_Type_create_f90_complex");
 LOCAL_MPI_Reduce_local=dlsym(lib_handle,"PMPI_Reduce_local");
 LOCAL_MPI_Op_commutative=dlsym(lib_handle,"PMPI_Op_commutative");
+LOCAL_MPI_Reduce_scatter_block=dlsym(lib_handle,"PMPI_Reduce_scatter_block");
 LOCAL_MPI_Dist_graph_neighbors_count=dlsym(lib_handle,"PMPI_Dist_graph_neighbors_count");
 LOCAL_MPI_Improbe=dlsym(lib_handle,"PMPI_Improbe");
 LOCAL_MPI_Imrecv=dlsym(lib_handle,"PMPI_Imrecv");

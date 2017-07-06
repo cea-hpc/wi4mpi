@@ -6978,6 +6978,48 @@ in_w=0;
 printf("sort : A_f_MPI_Op_commutative\n");
 #endif
 }
+void  mpi_reduce_scatter_block_(void *,void *,int *,int *,int *,int *,int *);
+
+void  mpi_reduce_scatter_block__(void *,void *,int *,int *,int *,int *,int *);
+
+void  pmpi_reduce_scatter_block_(void *,void *,int *,int *,int *,int *,int *);
+
+void  pmpi_reduce_scatter_block__(void *,void *,int *,int *,int *,int *,int *);
+
+void  pmpi_reduce_scatter_block_(void *,void *,int *,int *,int *,int *,int *);
+
+//#define A_f_MPI_Reduce_scatter_block _PMPI_Reduce_scatter_block
+#pragma weak mpi_reduce_scatter_block_=_PMPI_Reduce_scatter_block
+#pragma weak mpi_reduce_scatter_block__=_PMPI_Reduce_scatter_block
+#pragma weak pmpi_reduce_scatter_block__=_PMPI_Reduce_scatter_block
+void  (*_LOCAL_MPI_Reduce_scatter_block)(void *,void *,int *,int *,int *,int *,int *);
+
+void  A_f_MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int * recvcount,int * datatype,int * op,int * comm,int * ret)
+{
+#ifdef DEBUG
+printf("entre : A_f_MPI_Reduce_scatter_block\n");
+#endif
+in_w=1;
+int  ret_tmp=0;
+
+void *sendbuf_tmp=sendbuf;
+void *recvbuf_tmp=recvbuf;
+int datatype_tmp;
+int op_tmp;
+int comm_tmp;
+buffer_a2r(&sendbuf,&sendbuf_tmp);
+datatype_a2r(datatype,&datatype_tmp);
+operator_a2r(op,&op_tmp);
+comm_a2r(comm,&comm_tmp);
+ _LOCAL_MPI_Reduce_scatter_block(sendbuf_tmp,recvbuf_tmp, recvcount, &datatype_tmp, &op_tmp, &comm_tmp, &ret_tmp);
+if(ret_tmp==R_f_MPI_SUCCESS)buffer_r2a(&recvbuf,&recvbuf_tmp);
+error_r2a(ret,&ret_tmp);
+
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_f_MPI_Reduce_scatter_block\n");
+#endif
+}
 void  mpi_dist_graph_neighbors_count_(int *,int *,int *,int *,int *);
 
 void  mpi_dist_graph_neighbors_count__(int *,int *,int *,int *,int *);
@@ -12869,6 +12911,7 @@ _LOCAL_MPI_Type_create_f90_real=dlsym(lib_handle_f,"pmpi_type_create_f90_real_")
 _LOCAL_MPI_Type_create_f90_complex=dlsym(lib_handle_f,"pmpi_type_create_f90_complex_");
 _LOCAL_MPI_Reduce_local=dlsym(lib_handle_f,"pmpi_reduce_local_");
 _LOCAL_MPI_Op_commutative=dlsym(lib_handle_f,"pmpi_op_commutative_");
+_LOCAL_MPI_Reduce_scatter_block=dlsym(lib_handle_f,"pmpi_reduce_scatter_block_");
 _LOCAL_MPI_Dist_graph_neighbors_count=dlsym(lib_handle_f,"pmpi_dist_graph_neighbors_count_");
 _LOCAL_MPI_Improbe=dlsym(lib_handle_f,"pmpi_improbe_");
 _LOCAL_MPI_Imrecv=dlsym(lib_handle_f,"pmpi_imrecv_");
