@@ -156,14 +156,14 @@ int  A_MPI_Info_c2f(A_MPI_Info op){
 if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
 return (int )(op);
 }
-int MPI_Status_f2c(const A_MPI_Fint *f_status, A_MPI_Status *c_status)
+int A_MPI_Status_f2c(const A_MPI_Fint *f_status, A_MPI_Status *c_status)
 {
 	if(f_status==A_f_MPI_STATUS_IGNORE||f_status==A_f_MPI_STATUSES_IGNORE)
 		return -1;
 	memcpy(c_status,f_status,A_f_MPI_STATUS_SIZE*sizeof(int));	
 	return A_MPI_SUCCESS;
 }
-int MPI_Status_c2f(A_MPI_Status *c_status,const A_MPI_Fint *f_status)
+int A_MPI_Status_c2f(A_MPI_Status *c_status,const A_MPI_Fint *f_status)
 {
 	if(f_status==A_MPI_STATUS_IGNORE||f_status==A_MPI_STATUSES_IGNORE)
 		return -1;
