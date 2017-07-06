@@ -22,7 +22,8 @@
 //########################################################################
 #ifndef __A_C2FF2C__h__
 #define __A_C2FF2C__h__
-
+#include "mappers.h"
+#include "manual_wrapper.h"
 A_MPI_Comm A_MPI_Comm_f2c(int  op){
 if(A_f_MPI_COMM_WORLD==op){return A_MPI_COMM_WORLD;}
 if(A_f_MPI_COMM_SELF==op){return A_MPI_COMM_SELF;}
@@ -154,5 +155,19 @@ return (A_MPI_Info)(op);
 int  A_MPI_Info_c2f(A_MPI_Info op){
 if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
 return (int )(op);
+}
+int MPI_Status_f2c(const A_MPI_Fint *f_status, A_MPI_Status *c_status)
+{
+	if(f_status==A_f_MPI_STATUS_IGNORE||f_status==A_f_MPI_STATUSES_IGNORE)
+		return -1;
+	memcpy(c_status,f_status,A_f_MPI_STATUS_SIZE*sizeof(int));	
+	return A_MPI_SUCCESS;
+}
+int MPI_Status_c2f(A_MPI_Status *c_status,const A_MPI_Fint *f_status)
+{
+	if(f_status==A_MPI_STATUS_IGNORE||f_status==A_MPI_STATUSES_IGNORE)
+		return -1;
+	memcpy(f_status,c_status,A_f_MPI_STATUS_SIZE*sizeof(int));	
+	return A_MPI_SUCCESS;
 }
 #endif

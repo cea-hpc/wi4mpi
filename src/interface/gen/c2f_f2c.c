@@ -1075,6 +1075,9 @@ int R_MPI_Win_c2f(R_MPI_Win op)
 {
 	return LOCAL_MPI_Win_c2f(op);
 }
+int (*LOCAL_MPI_Status_f2c)(R_MPI_Fint*,R_MPI_Status*);
+int (*LOCAL_MPI_Status_c2f)(R_MPI_Status* ,R_MPI_Fint*);
+
 __attribute__((constructor)) void wrapper_init_c2ff2c(void) {
 void *lib_handle_c2ff2c=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
 LOCAL_MPI_File_f2c=dlsym(lib_handle_c2ff2c,"PMPI_File_f2c");
@@ -1097,6 +1100,95 @@ LOCAL_MPI_Win_f2c=dlsym(lib_handle_c2ff2c,"PMPI_Win_f2c");
 LOCAL_MPI_Win_c2f=dlsym(lib_handle_c2ff2c,"PMPI_Win_c2f");
 LOCAL_MPI_Message_f2c=dlsym(lib_handle_c2ff2c,"PMPI_Message_f2c");
 LOCAL_MPI_Message_c2f=dlsym(lib_handle_c2ff2c,"PMPI_Message_c2f");
+LOCAL_MPI_Status_f2c=dlsym(lib_handle_c2ff2c,"PMPI_Status_f2c");
+LOCAL_MPI_Status_c2f=dlsym(lib_handle_c2ff2c,"PMPI_Status_c2f");
+}
+
+__asm__(
+".global CCMPI_Status_c2f\n"
+".weak MPI_Status_c2f\n"
+".set MPI_Status_c2f,CCMPI_Status_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Status_c2f\n"
+".extern R_MPI_Status_c2f\n"
+".type CCMPI_Status_c2f,@function\n"
+".text\n"
+"CCMPI_Status_c2f:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Status_c2f\n"
+"jmp *A_MPI_Status_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Status_c2f:\n"
+"jmp *R_MPI_Status_c2f@GOTPCREL(%rip)\n"
+
+);
+int R_MPI_Status_c2f(R_MPI_Status *in,R_MPI_Fint *op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Status_c2f\n");
+#endif
+in_w=1;
+int ret=LOCAL_MPI_Status_c2f(in,op);
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Status_c2f\n");
+#endif
+return ret;
+}
+__asm__(
+".global CCMPI_Status_f2c\n"
+".weak MPI_Status_f2c\n"
+".set MPI_Status_f2c,CCMPI_Status_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Status_f2c\n"
+".extern R_MPI_Status_f2c\n"
+".type CCMPI_Status_f2c,@function\n"
+".text\n"
+"CCMPI_Status_f2c:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Status_f2c\n"
+"jmp *A_MPI_Status_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Status_f2c:\n"
+"jmp *R_MPI_Status_f2c@GOTPCREL(%rip)\n"
+
+);
+int R_MPI_Status_f2c(R_MPI_Fint *in,R_MPI_Status *op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Status_f2c\n");
+#endif
+in_w=1;
+int ret=LOCAL_MPI_Status_f2c(in,op);
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Status_f2c\n");
+#endif
+return ret;
 }
 #elif defined(OMPI_INTEL)
 //char ompi_mpi_comm_null[1024];
@@ -2162,10 +2254,104 @@ printf("sort : R_MPI_File_c2f\n");
 #endif
 return ret;
 }
+
+
+int (*LOCAL_MPI_Status_f2c)(R_MPI_Fint*,R_MPI_Status*);
+int (*LOCAL_MPI_Status_c2f)(R_MPI_Status* ,R_MPI_Fint*);
+
 __attribute__((constructor)) void wrapper_init_c2ff2c(void) {
 void *lib_handle_c2ff2c=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
 LOCAL_MPI_File_f2c=dlsym(lib_handle_c2ff2c,"PMPI_File_f2c");
 LOCAL_MPI_File_c2f=dlsym(lib_handle_c2ff2c,"PMPI_File_c2f");
+
+LOCAL_MPI_Status_f2c=dlsym(lib_handle_c2ff2c,"PMPI_Status_f2c");
+LOCAL_MPI_Status_c2f=dlsym(lib_handle_c2ff2c,"PMPI_Status_c2f");
 }
 
+__asm__(
+".global CCMPI_Status_c2f\n"
+".weak MPI_Status_c2f\n"
+".set MPI_Status_c2f,CCMPI_Status_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Status_c2f\n"
+".extern R_MPI_Status_c2f\n"
+".type CCMPI_Status_c2f,@function\n"
+".text\n"
+"CCMPI_Status_c2f:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Status_c2f\n"
+"jmp *A_MPI_Status_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Status_c2f:\n"
+"jmp *R__MPI_Status_c2f@GOTPCREL(%rip)\n"
+
+);
+int R__MPI_Status_c2f(R_MPI_Status *in,R_MPI_Fint *op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Status_c2f\n");
+#endif
+in_w=1;
+int ret=LOCAL_MPI_Status_c2f(in,op);
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Status_c2f\n");
+#endif
+return ret;
+}
+__asm__(
+".global CCMPI_Status_f2c\n"
+".weak MPI_Status_f2c\n"
+".set MPI_Status_f2c,CCMPI_Status_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Status_f2c\n"
+".extern R_MPI_Status_f2c\n"
+".type CCMPI_Status_f2c,@function\n"
+".text\n"
+"CCMPI_Status_f2c:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+"mov %rsi, -0x10(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"mov -0x10(%rbp), %rsi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Status_f2c\n"
+"jmp *A_MPI_Status_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Status_f2c:\n"
+"jmp *R__MPI_Status_f2c@GOTPCREL(%rip)\n"
+
+);
+int R__MPI_Status_f2c(R_MPI_Fint *in,R_MPI_Status *op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Status_f2c\n");
+#endif
+in_w=1;
+int ret=LOCAL_MPI_Status_f2c(in,op);
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Status_f2c\n");
+#endif
+return ret;
+}
 #endif
