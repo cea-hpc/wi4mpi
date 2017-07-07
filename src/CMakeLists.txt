@@ -45,6 +45,45 @@ file(GLOB SOURCE_WI4MPI_EMPTY
     preload/gen/lib_empty.c
 )
 
+#wi4mpi_preload_profiling
+file(GLOB SOURCE_WI4MPI_PROFILING
+		common/wi4mpi_debugger.c
+)
+
+
+####################
+# WI4MPI_PROFILING #
+####################
+
+add_library(wi4mpi_profiling_CCC_OMPI SHARED ${SOURCE_WI4MPI_PROFILING})
+add_library(wi4mpi_profiling_CCC_IMPI SHARED ${SOURCE_WI4MPI_PROFILING})
+
+target_include_directories(wi4mpi_profiling_CCC_OMPI 
+													 PRIVATE common
+													 PRIVATE interface/header/OMPI_OMPI)
+target_include_directories(wi4mpi_profiling_CCC_IMPI
+													 PRIVATE common
+													 PRIVATE interface/header/OMPI_INTEL)
+
+set_target_properties(wi4mpi_profiling_CCC_OMPI 
+											PROPERTIES
+											COMPILE_FLAGS "${WI4MPI_FLAGS}")
+set_target_properties(wi4mpi_profiling_CCC_IMPI 
+											PROPERTIES
+											COMPILE_FLAGS "${WI4MPI_FLAGS}")
+
+
+install(TARGETS 
+        wi4mpi_profiling_CCC_OMPI
+        LIBRARY DESTINATION lib
+        PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(TARGETS 
+        wi4mpi_profiling_CCC_IMPI
+        LIBRARY DESTINATION lib
+        PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+
 ###############
 ## INTERFACE ## 
 ###############
