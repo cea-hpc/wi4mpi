@@ -12,7 +12,7 @@ file(GLOB SOURCE_WI4MPI_SO
 file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
     interface/gen/test_generation_wrapper.c
     interface/gen/wrapper.c
-    interface/gen/c2f_f2c.c
+#    interface/gen/c2f_f2c.c
 #    common/new_utils.c      
     common/new_utils_vcd.c      
     common/new_utils_fn.c 
