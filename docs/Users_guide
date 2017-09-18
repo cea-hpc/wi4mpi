@@ -238,6 +238,14 @@ The runtime MPI library used is the ones referenced in the etc/wi4mpi.cfg file, 
 
 When the environment is set, the default conversion is not taken in account.
  
+Static Mode
+-----------
+
+There is a static mode in wi4mpi : this mode need to use the interface header and link to libmpi.a. All conversion are embedded and two environement variable specify the conversion type : WI4MPI_STATIC_TARGET_TYPE_F for fortran conversion and WI4MPI_STATIC_TARGET_TYPE for C/C++ conversion; supported value are : OMPI and INTEL.
+Use is the following :
+    set WI4MPI_RUN_MPI_C_LIB,WI4MPI_RUN_MPI_F_LIB to respective target library
+    set WI4MPI_STATIC_TARGET_TYPE,WI4MPI_STATIC_TARGET_TYPE_F to conversion typeaccording to target library.
+    run executable. 
 
 Developers words
 ================

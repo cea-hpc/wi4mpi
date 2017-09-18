@@ -347,7 +347,10 @@ if(!interface_handle)
 }
 INTERFACE_LOCAL_MPI_Init=dlsym(interface_handle,"CCMPI_MPI_Init");
 }
-
+Le mode static
+--------------
+une librairie statique permettant de construire un executable intégrant directement les traductions est aussi fournie : elle est basée sur le même principe que le mode interface mais pour eviter les conflits de symbole les differents symbole et constantes interne sont renomée sous la forme : INTERF2_{TARGET}_{Symbol_name}. L'initialisation ne s'appuie plus sur un dlopen mais sur un choix de pointeur de fonction en fonction de 2 variables d'environnement : WI4MPI_STATIC_TARGET_TYPE_F et WI4MPI_STATIC_TARGET_TYPE. Les valeurs acceptées sont pour le moment : OMPI et INTEL.
+Les parties spécifiques au mode statique(ou classique) sont discréminés par un #if(n)def WI4MPI_STATIC / #endif
 Les fichiers
 ------------
 
