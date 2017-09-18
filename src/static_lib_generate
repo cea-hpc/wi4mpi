@@ -1,5 +1,5 @@
 #!/bin/bash
-cd lib_static/interface/gen
+cd interface/gen
 ./build_lib.sh OMPI ompi &&   ./build_lib.sh INTEL mpich
 ar x wi4mpi2_INTEL.a
 ar x wi4mpi2_OMPI.a 

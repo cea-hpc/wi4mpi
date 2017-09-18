@@ -1,4 +1,5 @@
 #include "mappers.h"
+#include "wrapper_f.h"
 extern __thread int in_w;
 
 /*** JIT Users typedefs***/
@@ -81,6 +82,52 @@ int user_func_resolved(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void 
 {
    A_MPI_Datatype tmp;
    datatype_conv_r2a(&tmp,d);
+	 in_w=0;
+   pf(a,b,c,&tmp);
+	 in_w=1;
+}
+__asm__(
+".global user_fn_wrapper_template_fort\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"nop\n"
+"user_fn_wrapper_template_fort:\n"
+"  call peip_user_fn_fort\n"
+"peip_user_fn_fort:\n"
+"  pop %rax\n"
+"  sub $0x15,%rax\n"
+"  mov %rax,%r9\n"
+"  mov %rdi,%rax\n"
+"  push   %rbp\n"
+"  mov    %rsp,%rbp\n"
+"  sub    $0x30,%rsp\n"
+"  mov    %rdi,-0x18(%rbp)\n"
+"  mov    %rsi,-0x20(%rbp)\n"
+"  mov    %edx,-0x24(%rbp)\n"
+"  mov    %rcx,-0x30(%rbp)\n"
+"  movq   $0x0,-0x8(%rbp)\n"
+"  movq   0x0(%r9),%r8\n"
+"  callq  *0x8(%r9)\n"
+"  leaveq \n"
+"  retq \n"
+);     
+int user_func_resolved_fort(void *a,void *b,int *c,int *d,void (*pf)(void *in,void *out,int *len,int *data_type))
+{
+   int tmp;
+   datatype_r2a(&tmp,d);
 	 in_w=0;
    pf(a,b,c,&tmp);
 	 in_w=1;

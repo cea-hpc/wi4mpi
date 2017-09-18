@@ -22,25 +22,28 @@
 //########################################################################
 
 
+//#ifdef OMPI_OMPI
+//#include "ompi_ext_decl.h"
+//#endif
 
+/*#ifdef FORTRAN
+#include <mpif_app.h>
+#endif*/
 /*
- *  This file contains all functions used for hastables.
- *  2 versions are possible :
- *     * Application side structures are large enough to
- *       directly contain corresponding OpenMPI data
- *     * Application side structures are not enough large
- *       A hashtable is created where keys are truncated
- *       structure adresses : OPTI
- *       (e.g. : key = (A_MPI_Comm) a_comm, where a_comm
- *       is a pointer to MPI_Comm in the application)
- *       and values are OpenMPI corresponding data :
- *       NO_OPTI
- *  This method works because MPI structure internal
- *  behavior is masked to MPI user.
- */
+static void dump(void * src, size_t size) {
+    unsigned char * tab = (unsigned char*) malloc(size);
+    memcpy(tab, src, size);
+    size_t i=0;
+    for(;i<size;i++)
+      fprintf(stderr, "%02X ", tab[i]);
+    fprintf(stderr, "\n");
+    free(tab);
+}
+*/
 
 #ifndef NEW_UTILS_H
 #define NEW_UTILS_H
+#include "thread_safety.h"
 //#include <mpi.h>
 //#include <mpi_app.h>
 #include "run_mpi.h"
@@ -53,380 +56,351 @@
 #include <limits.h>
 #include <string.h>
 #include "uthash.h"
-#include "thread_safety.h"
-//#include <config.h>
+#if defined(OMPI_INTEL)
+extern char ompi_mpi_comm_null[];
+extern char ompi_mpi_comm_self[];
+extern char ompi_mpi_comm_world[];
+extern char ompi_mpi_2cplex[];
+extern char ompi_mpi_2dblcplex[];
+extern char ompi_mpi_2dblprec[];
+extern char ompi_mpi_2int[];
+extern char ompi_mpi_2integer[];
+extern char ompi_mpi_2real[];
+extern char ompi_mpi_aint[];
+extern char ompi_mpi_byte[];
+extern char ompi_mpi_c_bool[];
+extern char ompi_mpi_c_complex[];
+extern char ompi_mpi_c_double_complex[];
+extern char ompi_mpi_c_float_complex[];
+extern char ompi_mpi_c_long_double_complex[];
+extern char ompi_mpi_char[];
+extern char ompi_mpi_character[];
+extern char ompi_mpi_complex16[];
+extern char ompi_mpi_complex32[];
+extern char ompi_mpi_complex8[];
+extern char ompi_mpi_cplex[];
+extern char ompi_mpi_cxx_bool[];
+extern char ompi_mpi_cxx_cplex[];
+extern char ompi_mpi_cxx_dblcplex[];
+extern char ompi_mpi_cxx_ldblcplex[];
+extern char ompi_mpi_datatype_null[];
+extern char ompi_mpi_dblcplex[];
+extern char ompi_mpi_dblprec[];
+extern char ompi_mpi_double[];
+extern char ompi_mpi_double_int[];
+extern char ompi_mpi_float[];
+extern char ompi_mpi_float_int[];
+extern char ompi_mpi_int16_t[];
+extern char ompi_mpi_int32_t[];
+extern char ompi_mpi_int64_t[];
+extern char ompi_mpi_int8_t[];
+extern char ompi_mpi_int[];
+extern char ompi_mpi_integer16[];
+extern char ompi_mpi_integer1[];
+extern char ompi_mpi_integer2[];
+extern char ompi_mpi_integer4[];
+extern char ompi_mpi_integer8[];
+extern char ompi_mpi_integer[];
+extern char ompi_mpi_lb[];
+extern char ompi_mpi_ldblcplex[];
+extern char ompi_mpi_logical1[];
+extern char ompi_mpi_logical2[];
+extern char ompi_mpi_logical4[];
+extern char ompi_mpi_logical8[];
+extern char ompi_mpi_logical[];
+extern char ompi_mpi_long[];
+extern char ompi_mpi_long_double[];
+extern char ompi_mpi_long_int[];
+extern char ompi_mpi_long_long_int[];
+extern char ompi_mpi_longdbl_int[];
+extern char ompi_mpi_offset[];
+extern char ompi_mpi_count[];
+extern char ompi_message_null[];
+extern char ompi_mpi_packed[];
+extern char ompi_mpi_real16[];
+extern char ompi_mpi_real2[];
+extern char ompi_mpi_real4[];
+extern char ompi_mpi_real8[];
+extern char ompi_mpi_real[];
+extern char ompi_mpi_short[];
+extern char ompi_mpi_short_int[];
+extern char ompi_mpi_signed_char[];
+extern char ompi_mpi_ub[];
+extern char ompi_mpi_uint16_t[];
+extern char ompi_mpi_uint32_t[];
+extern char ompi_mpi_uint64_t[];
+extern char ompi_mpi_uint8_t[];
+extern char ompi_mpi_unsigned[];
+extern char ompi_mpi_unsigned_char[];
+extern char ompi_mpi_unsigned_long[];
+extern char ompi_mpi_unsigned_long_long[];
+extern char ompi_mpi_unsigned_short[];
+extern char ompi_mpi_wchar[];
+extern char ompi_mpi_errhandler_null[];
+extern char ompi_mpi_errors_are_fatal[];
+extern char ompi_mpi_errors_return[];
+extern char ompi_mpi_file_null[];
+extern char ompi_mpi_group_empty[];
+extern char ompi_mpi_group_null[];
+extern char ompi_mpi_info_null[];
+extern char ompi_mpi_op_band[];
+extern char ompi_mpi_op_bor[];
+extern char ompi_mpi_op_bxor[];
+extern char ompi_mpi_op_land[];
+extern char ompi_mpi_op_lor[];
+extern char ompi_mpi_op_lxor[];
+extern char ompi_mpi_op_max[];
+extern char ompi_mpi_op_maxloc[];
+extern char ompi_mpi_op_min[];
+extern char ompi_mpi_op_minloc[];
+extern char ompi_mpi_op_null[];
+extern char ompi_mpi_op_prod[];
+extern char ompi_mpi_op_replace[];
+extern char ompi_mpi_op_sum[];
+extern char ompi_request_null[];
+extern char ompi_mpi_win_null[];
+extern char ompi_message_no_proc[];
+#include "run_mpio.h"
+#endif
+/*  Memcpy if application structure is large enough */
+void *wi4mpi_alloc(size_t size);
+void wi4mpi_free(void *ptr);
 
-/*
- *  Function prototypes are the same between the 2
- *  versions, so that functions calls are the same.
- *
- *  These functions are :
- *      varname##_translation_add_const :
- *      Args :
- *        A_##type a_mpi_##varname : Application side
- *        corresponding constant (input)
- *        type mpi_##varname : OpenMPI corresponding
- *        constant (input)
- *      Returns : void
- *      Add a MPI constant in a hashtable. This hashtable
- *      exists in the two versions and will allow to detect
- *      if the structure is a MPI constant such as
- *      MPI_COMM_WORLD.
- *      This function should be called at MPI_Init
- *
- *      varname##_translation_is_const :
- *      Args :
- *        A_##type a_mpi##varname : Application side
- *        variable (input)
- *      Returns : boolean : 1 if variable is a
- *      constant, 0 if not.
- *      This function will search in the MPI constant
- *      hashtable if the variable is present.
- *
- *      varname##_translation_get :
- *      Args :
- *        A_##type a_mpi_##varname : Application side
- *        variable (input)
- *        type *mpi_##varname : Pointer to OpenMPI side
- *        corresponding value (output)
- *      Returns : void, will assert if not found.
- *      In the OPTI case, this function will simply perform
- *      a memcpy from application side to OpenMPI side
- *      In the NO_OPTI case, this function will search the
- *      corresponding entry in the hashtables. If it is not
- *      found, function will assert. Value will be set in
- *      the mpi_##varname via memcpy.
- *      This function should be used when a MPI structure is
- *      set as an input of the function (e.g. : MPI_Comm in
- *      function MPI_Comm_size)
- *
- *      varname##_translation_get_key_from_value :
- *      Args :
- *        type mpi_##varname : OpenMPI side variable (input)
- *        A_##type *a_mpi_##varname : Pointer to application
- *        side corresponding key (output)
- *      Returns : void, assert if not found
- *      This function will give the corresponding key for
- *      a OpenMPI value. This function may give strange
- *      results when used with another value than a constant
- *      (as we don't know internal behavior of a structure in
- *      the application side)
- *      In the NO_OPTI case, function will assert if the value
- *      is not found in the hashtables.
- *      This function should be used when using a user function
- *      (e.g. : when MPI user creates a
- *      MPI_Comm_copy_attr_function, wrapper will instead give
- *      an internal function to OpenMPI, and when this function
- *      is called, application side MPI variable are retieved
- *      via this function, and the actual call to the user
- *      function can be performed).
- *
- *      varname##_translation_update :
- *      Args :
- *        A_##type *a_mpi_varname : Pointer to application side
- *        variable to update (input/output)
- *        type mpi_##varname : OpenMPI corresponding value (input)
- *      Returns : void
- *      Depending if OPTI or NO_OPTI, this function has different
- *      behaviors :
- *          OPTI :
- *          Function will check if OpenMPI variable is a constant.
- *          If it is the case, a memcpy is done to set application
- *          variable to application corresponding constant.
- *          Else, a memcpy is done to store OpenMPI data in this
- *          application structure.
- *          NO_OPTI :
- *          Function will check if OpenMPI variable is a constant.
- *          If it is the case, a memcpy is done to set application
- *          variable to application corresponding constant.
- *          Else, if an entry corresponding to this variable
- *          already exists in the hashtable, value is changed in
- *          the hashtable into the OpenMPI given argument.
- *          If no entry exists for this application variable, a
- *          new entry is created. Key is a truncated value of the
- *          application structure adress, value is the given
- *          OpenMPI corresponding value argument.
- *      This function should be called when the MPI variable is an
- *      output (e.g. : Argument MPI_Datatype *newtype of
- *      MPI_Type_create_struct function)
- *
- *
- *      varname##_translation_del :
- *      Args:
- *         A_##type *a_mpi_##varname : Pointer to application side
- *         variable to delete
- *      Returns : void
- *      In the OPTI case, this function will do nothing as only
- *      one hashtable exists, for constants, and we don't want to
- *      delete entries in this hashtable until application
- *      completion.
- *      In the NO_OPTI case, this function will search an entry
- *      corresponding to that value :
- *        First in constant hashtable : if entry is found, function
- *        does nothing as we don't want to delete entries in this
- *        hashtable until application completion, and function
- *        returns.
- *        Second in other hashtable : if entry is found, function
- *        simply deletes it.
- *      This function should be called when a MPI variable is
- *      deleted (e.g. : Argument MPI_Comm *comm of MPI_Comm_free)
- *
- *      varname##_translation_free_all:
- *      No arg, returns void
- *      Simply free constant hashtable and other hashtable in the
- *      NO_OPTI case.
- *      This function should be called at MPI_Finalize
- *
- *      varname##_get_size:
- *      No arg
- *      Returns : int, size of the hashtable
- *      This function returns number of entries of other hashtable
- *      In the OPTI case, always returns 0 because there is only
- *      one hashtable for constant variables and this hashtable is
- *      not count in this function.
- *      This function may be called at MPI_Finalize to check
- *      memory leaks in the hashtable.
- *
- */
-
-
-#define HASHTABLE_OPTI_HEADER(type, varname)   \
- \
+#define HASHTABLE_NO_OPT_NO_FORTRAN_DECL(type,varname,mpi_null)  \
 typedef struct { \
   A_##type a_##varname##_key; \
   R_##type r_##varname##_value; \
   UT_hash_handle hh; \
 } varname##_translation_t; \
  \
-void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname); \
-int varname##_translation_is_const(A_##type a_mpi_##varname); \
-void varname##_translation_get(A_##type a_mpi_##varname, R_##type* mpi_##varname); \
-void varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname); \
-void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname); \
-void varname##_translation_free_all(); \
-int varname##_translation_get_size();
+typedef struct {R_##type C;int idx;} type##_container;\
+void varname##_translation_init(void) ;\
+/*  ADD  */  \
+void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname)   ;\
+  \
+int varname##_translation_is_const(A_##type a_mpi_##varname)  ;\
+ \
+/*  GET  */  \
+void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname) ;  \
+/*  GET_KEY */  \
+varname##_translation_t* varname##_translation_get_key_from_const(R_##type mpi_##varname, A_##type *a_mpi_##varname);  \
+  \
+varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname);  \
+\
+/* DEL */  \
+void varname##_translation_del(A_##type * a_mpi_##varname)  ; \
+void varname##_translation_del_f(int a_mpi_##varname)  ; \
+  \
+void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) ;  \
+void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) ; \
+  \
+int varname##_translation_get_size()   ;\
+  \
+void varname##_translation_free_all();  
 
-#define HASHTABLE_NO_OPTI_HEADER(type, varname)   \
+
+
+
+#define HASHTABLE_NO_OPTI_DECL(type, varname, mpi_null)   \
 typedef struct { \
   A_##type a_##varname##_key; \
   R_##type r_##varname##_value; \
   UT_hash_handle hh; \
 } varname##_translation_t; \
  \
-void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname); \
-int varname##_translation_is_const(A_##type a_mpi_##varname); \
-void varname##_translation_get(A_##type a_mpi_##varname, R_##type* mpi_##varname); \
-void varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname); \
-void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname); \
-void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname); \
-void varname##_translation_del(A_##type * a_mpi_##varname); \
-void varname##_translation_free_all(); \
-void varname##_translation_init();\
-int varname##_translation_get_size();
+typedef struct {int fort;R_##type C;int idx;} type##_container;\
+void varname##_translation_init(void) ;\
+/*  ADD  */  \
+void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname) ;  \
+int varname##_translation_is_const(A_##type a_mpi_##varname)  ;\
+/*  GET  */  \
+void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname);   \
+void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) ; \
+/*  GET_KEY */  \
+varname##_translation_t* varname##_translation_get_key_from_const(R_##type mpi_##varname, A_##type *a_mpi_##varname) ; \
+  \
+varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname) ;  \
+/* DEL */  \
+void varname##_translation_del(A_##type * a_mpi_##varname) ;  \
+void varname##_translation_del_f(int a_mpi_##varname) ;  \
+  \
+void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) ;  \
+void varname##_translation_update_f(int mpi_##varname, int *a_mpi_##varname) ;  \
+void varname##_translation_update_alloc_f(int mpi_##varname,int * a_mpi_##varname) ;\
+void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) ;  \
+int varname##_translation_get_size() ;  \
+void varname##_translation_free_all() ;  
+
+#define HASHTABLE_NO_OPT_NO_FORTRAN_FUNC_DECL(type,varname,mpi_null)  \
+typedef struct { \
+  A_##type a_##varname##_key; \
+  R_##type r_##varname##_value; \
+  UT_hash_handle hh; \
+} varname##_translation_t; \
+ \
+typedef struct {R_##type C;int idx;void *func_ptr} type##_container;\
+/*  lock_init  */  \
+void varname##_translation_init(void) ;\
+/*  ADD  */  \
+void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname) ; \
+  \
+int varname##_translation_is_const(A_##type a_mpi_##varname) ; \
+ \
+/*  GET  */  \
+void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname) ; \
+/*  GET_KEY */  \
+varname##_translation_t* varname##_translation_get_key_from_const(R_##type mpi_##varname, A_##type *a_mpi_##varname) ;  \
+  \
+varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname) ;  \
+void varname##_translation_add_funtion_ref(A_##type a_mpi_##varname,void *fn);\
+/* DEL */  \
+void varname##_translation_del(A_##type * a_mpi_##varname) ; \
+void varname##_translation_del_f(int a_mpi_##varname) ;  \
+  \
+void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) ;  \
+void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) ;  \
+  \
+int varname##_translation_get_size() ;  \
+  \
+void varname##_translation_free_all() ;  
 
 
+
+
+#define HASHTABLE_NO_OPTI_FUNC_DECL(type, varname, mpi_null)   \
+typedef struct { \
+  A_##type a_##varname##_key; \
+  R_##type r_##varname##_value; \
+  UT_hash_handle hh; \
+} varname##_translation_t; \
+typedef struct {int fort;R_##type C;int idx;void *func_ptr} type##_container;\
+void varname##_translation_init(void) ;\
+/*  ADD  */  \
+void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname) ; \
+  \
+int varname##_translation_is_const(A_##type a_mpi_##varname) ; \
+ \
+/*  GET  */  \
+void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname) ; \
+void varname##_translation_add_funtion_ref(A_##type a_mpi_##varname,void *fn);\
+void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) ;  \
+/*  GET_KEY */  \
+varname##_translation_t* varname##_translation_get_key_from_const(R_##type mpi_##varname, A_##type *a_mpi_##varname) ;  \
+  \
+varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname) ;  \
+/* DEL */  \
+void varname##_translation_del(A_##type * a_mpi_##varname) ; \
+void varname##_translation_del_f(int a_mpi_##varname) ;  \
+void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) ;  \
+void varname##_translation_update_f(int mpi_##varname, int *a_mpi_##varname) ; \
+void varname##_translation_update_alloc_f(int mpi_##varname,int * a_mpi_##varname) ; \
+void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) ;  \
+int varname##_translation_get_size() ; \
+void varname##_translation_free_all() ;  \
+
+#define NO_TABLE_NO_OPTI_DECL(type, varname, mpi_null)   \
+void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##varname) ;  \
+void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) ; \
+void varname##_translation_del(A_##type * a_mpi_##varname)  ;\
+void varname##_translation_del_f(int a_mpi_##varname) ;  \
+void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) ; \
+void varname##_translation_update_f(int mpi_##varname,int * a_mpi_##varname ) ;  \
+void varname##_translation_update_alloc_f(int mpi_##varname,int * a_mpi_##varname)  ; \
+int varname##_translation_get_size();  \
+void varname##_translation_free_all() ; \
+
+typedef int A_MPI_Keyval;
+typedef int R_MPI_Keyval;
+typedef int A_MPI_Error;
+typedef int R_MPI_Error;
+NO_TABLE_NO_OPTI_DECL(MPI_Error,error,MPI_SUCCESS);
+NO_TABLE_NO_OPTI_DECL(MPI_Keyval,keyval,0);
 /* Communicator */
-#if HASHTABLE_OPTI_COMMUNICATOR
-HASHTABLE_OPTI_HEADER(MPI_Comm,communicator)
-#define communicator_translation_del(a_mpi_type)
-#define communicator_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Comm,communicator)
-#endif
+/* Communicator */
+HASHTABLE_NO_OPTI_DECL(MPI_Comm,communicator, R_MPI_COMM_NULL);
 
 /* Datatype */
-#if HASHTABLE_OPTI_DATATYPE
-HASHTABLE_OPTI_HEADER(MPI_Datatype,datatype)
-#define datatype_translation_del(a_mpi_type)
-#define datatype_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Datatype,datatype)
-#endif
+typedef R_MPI_Datatype R_MPI_Type;
+typedef A_MPI_Datatype A_MPI_Type;
+HASHTABLE_NO_OPTI_DECL(MPI_Type,datatype, R_MPI_DATATYPE_NULL);
 
-/* Datatype */
-#if HASHTABLE_OPTI_ERRHANDLER
-HASHTABLE_OPTI_HEADER(MPI_Errhandler,errhandler)
-#define errhandler_translation_del(a_mpi_type)
-#define errhandler_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Errhandler,errhandler)
-#endif
+/* Errhandler */
+HASHTABLE_NO_OPTI_DECL(MPI_Errhandler,errhandler, R_MPI_ERRHANDLER_NULL);
 
 /* Op */
-#if HASHTABLE_OPTI_OP
-HASHTABLE_OPTI_HEADER(MPI_Op,operation)
-#define operation_translation_del(a_mpi_type)
-#define operation_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Op,operation)
-#endif
+HASHTABLE_NO_OPTI_DECL(MPI_Op,operation, R_MPI_OP_NULL);
 
 /* Group */
-#if HASHTABLE_OPTI_GROUP
-HASHTABLE_OPTI_HEADER(MPI_Group,group)
-#define group_translation_del(a_mpi_type)
-#define group_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Group,group)
-#endif
-
-/* Info */
-#if HASHTABLE_OPTI_INFO
-HASHTABLE_OPTI_HEADER(MPI_Info,info)
-#define info_translation_del(a_mpi_type)
-#define info_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Info,info)
-#endif
-
-/* File */
-#if HASHTABLE_OPTI_FILE
-HASHTABLE_OPTI_HEADER(MPI_File,file)
-#define file_translation_del(a_mpi_type)
-#define file_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_File,file)
-#endif
+HASHTABLE_NO_OPTI_DECL(MPI_Group,group, R_MPI_GROUP_NULL);
 
 /* Win */
-#if HASHTABLE_OPTI_WIN
-HASHTABLE_OPTI_HEADER(MPI_Win,win)
-#define win_translation_del(a_mpi_type)
-#define win_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Win,win)
-#endif
+HASHTABLE_NO_OPTI_DECL(MPI_Win,win, R_MPI_WIN_NULL);
 
-/* Message  */
-#if HASHTABLE_OPTI_MESSAGE
-HASHTABLE_OPTI_HEADER(MPI_Message,message)
-#define message_translation_del(a_mpi_type)
-#define message_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_Message,message)
-#endif
+/* Message */
+HASHTABLE_NO_OPTI_DECL(MPI_Message,message, R_MPI_MESSAGE_NULL);
 
 /* MPI_T_enum */
-#if HASHTABLE_OPTI_ENUM
-HASHTABLE_OPTI_HEADER(MPI_T_enum, t_enum)
-#define t_enum_translation_del(a_mpi_type)
-#define t_enum_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_T_enum, t_enum)
-#endif
+HASHTABLE_NO_OPT_NO_FORTRAN_DECL(MPI_T_enum, t_enum, R_MPI_T_ENUM_NULL);
 
 /* MPI_T_cvar_handle */
-#if HASHTABLE_OPTI_CVAR
-HASHTABLE_OPTI_HEADER(MPI_T_cvar_handle, cvar_handle)
-#define cvar_handle_translation_del(a_mpi_type)
-#define cvar_handle_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_T_cvar_handle, cvar_handle)
-#endif
+HASHTABLE_NO_OPT_NO_FORTRAN_DECL(MPI_T_cvar_handle, cvar_handle, R_MPI_T_CVAR_HANDLE_NULL);
 
 /* MPI_T_pvar_handle */
-#if HASHTABLE_OPTI_PVAR
-HASHTABLE_OPTI_HEADER(MPI_T_pvar_handle, pvar_handle)
-#define pvar_handle_translation_del(a_mpi_type)
-#define pvar_handle_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_T_pvar_handle, pvar_handle)
-#endif
+HASHTABLE_NO_OPT_NO_FORTRAN_DECL(MPI_T_pvar_handle, pvar_handle, R_MPI_T_PVAR_HANDLE_NULL);
 
-/* MPI_T_pvar_session */
+/*  MPI_T_pvar_session*/
 //#if HASHTABLE_OPTI_SESSION
-//HASHTABLE_OPTI_HEADER(MPI_T_pvar_session, pvar_session)
-//#define pvar_session_translation_del(a_mpi_type)
-//#define pvar_session_translation_get_size() 0
+//HASHTABLE_OPTI(MPI_T_pvar_session, pvar_session);
 //#else
-//HASHTABLE_NO_OPTI_HEADER(MPI_T_pvar_session, pvar_session)
+//HASHTABLE_NO_OPTI(MPI_T_pvar_session, pvar_session, R_MPI_T_PVAR_SESSION_NULL);
 //#endif
-
-//A_MPI_T_enum;
-//A_MPI_T_cvar_handle;
-//A_MPI_T_pvar_handle;
-//A_MPI_T_pvar_session;
-
-
-/*
- * Following functions for MPI_Request structures are
- * a bit different from other hashtables.
- * In MPI specification, MPI_Request is used for
- * non-blocking communications (e.g. : MPI_IRecv) and
- * persitent requests. Depending on which case user
- * uses this MPI_Request, variable should or not be
- * freed at end of some functions.
- * Instead, for NO_OPTI case three hashtables are
- * created : One for constant variables, a second for
- * MPI_Request used in non-blocking case, a third for
- * MPI_Request used in a persistent request.
- * Function behaviors are nearly the same, but a third
- * argument is used for get function and update function.
- *
- * In get function and NO_OPTI case, third argument
- * int *non_blocking will be set to 1 if variable
- * corresponds to a non-blocking communication, 0 if
- * variable corresponds to a persistent request, and a
- * negative value if variable is a constant.
- * In get function and OPTI case, this variable will
- * always be set to a negative value.
- *
- * In update function and NO_OPTI case, if third argument
- * int non_blocking is set to 1, variable will be set in
- * non-blocking MPI_Request hashtable if it should. If
- * third argument int non_blocking is set to 0, variable
- * will be set in persistent request MPI_Request hashtable
- * if it should.
- * If OPTI case, this argument will not be read.
- *
- */
-
 
 /* Request */
 
+/*  ADD  */
 typedef struct {
     A_MPI_Request a_request_key;
     R_MPI_Request r_request_value;
     UT_hash_handle hh;
 } request_translation_t;
+void request_translation_add_const(A_MPI_Request a_mpi_request, R_MPI_Request mpi_request) ;
+/*   True hashtables  */
+typedef struct {
+    R_MPI_Request Creq;
+    int           Freq;
+    int           nb;
+}__WI4MPI_req_container;
+void request_translation_init();
+/*  GET  */
+void request_translation_get_f(int a_mpi_request, int *mpi_request) ;
+void request_translation_get(A_MPI_Request a_mpi_request, R_MPI_Request *mpi_request, int* non_blocking) ;
 
-void request_translation_add_const(A_MPI_Request a_mpi_request, R_MPI_Request mpi_request);
-int request_translation_is_const(A_MPI_Request a_mpi_request);
-void request_translation_get(A_MPI_Request a_mpi_request, R_MPI_Request* mpi_request, int* non_blocking);
-void request_translation_get_key_from_value(R_MPI_Request mpi_request, A_MPI_Request *a_mpi_request);
-void request_translation_update(A_MPI_Request * a_mpi_request, R_MPI_Request mpi_request, int non_blocking);
-void request_translation_free_all();
+int request_translation_get_key_from_const(R_MPI_Request mpi_request, A_MPI_Request *a_mpi_request) ;
+/* DEL */
+void request_translation_del(A_MPI_Request * a_mpi_request) ;
+void request_translation_del_f(int a_mpi_request) ;  \
+void request_translation_update_f(int mpi_request,int * a_mpi_request) ;
+/* UPDATE */
+void request_translation_update(A_MPI_Request * a_mpi_request, R_MPI_Request mpi_request, int non_blocking) ;
+void request_translation_update_alloc_f(int mpi_request,int * a_mpi_request) ;
 
-#if HASHTABLE_OPTI_REQUEST
-#define request_translation_del(a_mpi_type)
-#define request_translation_get_size() 0
+int request_translation_get_size() ;
+void request_translation_free_all() ;
+
+//#if WRAPPER_MPI_VERSION > 21
+/* File */
+#if HASHTABLE_OPTI_FILE
+HASHTABLE_OPTI_DECL(MPI_File,file);
 #else
-void request_translation_del(A_MPI_Request * a_mpi_request);
-int request_translation_get_size();
+HASHTABLE_NO_OPTI_DECL(MPI_File,file, R_MPI_FILE_NULL);
 #endif
 
-/* MPI IO */
-//#if WRAPPER_MPI_VERSION > 21
-
-/* File */
-/*#if HASHTABLE_OPTI_FILE
-HASHTABLE_OPTI_HEADER(MPI_File,file)
-#define file_translation_del(a_mpi_type)
-#define file_translation_get_size() 0
-#else
-HASHTABLE_NO_OPTI_HEADER(MPI_File,file)
-#endif*/
-
 /* Info */
-/*#if HASHTABLE_OPTI_INFO
-HASHTABLE_OPTI_HEADER(MPI_Info,info)
-#define info_translation_del(a_mpi_type)
-#define info_translation_get_size() 0
+#if HASHTABLE_OPTI_INFO
+HASHTABLE_OPTI_DECL(MPI_Info,info);
 #else
-HASHTABLE_NO_OPTI_HEADER(MPI_Info,info)
-#endif*/
-
+HASHTABLE_NO_OPTI_DECL(MPI_Info,info, R_MPI_INFO_NULL);
+#endif
 
 //#endif
-
 #endif

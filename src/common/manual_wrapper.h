@@ -159,6 +159,13 @@ static inline void errhandler_set_func(int comm,int errhandler)
        communicator_f_fn_translation_update(comm,func);
 }
 }
+#if !defined (_WI4MPI_GCC_JIT)
+ #include <sys/mman.h>
+
+extern int user_func_resolved_fort(void *a,void *b,int *c,int *d,void (*pf)(void *in,void *out,int *len,int *data_type));
+extern void user_fn_wrapper_template_fort(void *a,void *b,int *c,int *d,void (*pf)(void *in,void *out,int *len,int *data_type));
+#endif
+
 static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 {
   // User_fct_g_ptr=*fct;
@@ -170,6 +177,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
   char func_name[512];
   char **func_name2;
   int rank;
+#if defined (_WI4MPI_GCC_JIT)
   R_MPI_Comm_rank(R_MPI_COMM_WORLD,&rank);
   sprintf(fname,"/tmp/.jit.user_func.%p_%d.c",*fa,rank);
   sprintf(soname,"/tmp/.jit.user_func.%p_%d.so",*fa,rank);
@@ -191,6 +199,20 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
         printf("%s\n",dlerror());
     }
     *fr=dlsym(fh,func_name);
+
+    
+#elif !defined(_WI4MPI_GCC_JIT)
+    
+    void* ptr = mmap(0, 1024,
+                   PROT_READ | PROT_WRITE | PROT_EXEC,
+                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    memcpy(((char *)ptr+0x10),user_fn_wrapper_template_fort,0x100);
+
+    ((void **)ptr)[0]=*fa;
+    
+    ((void **)ptr)[1]=user_func_resolved_fort;
+    *fr=ptr+0x10;
+#endif
 }
 
 #ifdef ompi_ompi

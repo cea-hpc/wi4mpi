@@ -21,11 +21,11 @@
 //#                                                                      #
 //########################################################################
 
-
-#ifndef THREAD_SAFETY_H
-#define THREAD_SAFETY_H
-
 #include <pthread.h>
+
+#ifndef WI4MPI_THREAD_SAFETY_H
+#define  WI4MPI_THREAD_SAFETY_H
+
 
 #define lock_dest(a) pthread_spin_destroy(a)
 #define lock_init(a) pthread_spin_init(a,PTHREAD_PROCESS_PRIVATE)

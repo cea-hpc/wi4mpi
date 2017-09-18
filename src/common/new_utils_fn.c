@@ -50,9 +50,12 @@ static name##_fn_translation_t* name##_fn_table = NULL; \
 void name##_fn_translation_get(keytype key, valuetype* value) { \
     name##_fn_translation_t* conv;  \
     HASH_FIND(hh,name##_fn_table, &key, sizeof(keytype), conv);  \
-    assert(conv != NULL); \
-    /*lock(name##_fn_Lock);*/ \
-    memcpy(value,&(conv->value), sizeof(valuetype)); \
+    /*assert(conv != NULL);*/ \
+    /*lock(name##_fn_Lock);*/\
+    if(conv) \
+    memcpy(value,&(conv->value), sizeof(valuetype));\
+    else \
+     *value=(valuetype)0;\
     /*unlock(name##_fn_Lock);*/ \
 } \
  \
