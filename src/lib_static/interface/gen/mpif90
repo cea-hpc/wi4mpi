@@ -1,0 +1,2 @@
+#!/bin/bash
+ifort $* -I/ccc/cont000/home/asplus/ducrov4c/wi4mpi_git/src/interface/lib_cccmpi/include -L/ccc/cont000/home/asplus/ducrov4c/wi4mpi_git/src/lib_static/interface/gen -lmpi -lpthread -I/ccc/cont000/home/asplus/ducrov4c/wi4mpi_git/src/interface/lib_cccmpi/include/intel -ldl

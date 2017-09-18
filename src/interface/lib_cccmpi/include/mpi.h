@@ -441,19 +441,19 @@ enum {
 
 #define MPI_NULL_DELETE_FN  ((size_t)0x0)
 #define MPI_NULL_COPY_FN  ((size_t)0x0)
-#define MPI_DUP_FN  ((size_t)0x0)
+#define MPI_DUP_FN  ((void*)0x1)
 
 #define MPI_TYPE_NULL_DELETE_FN  ((size_t)0x0)
 #define MPI_TYPE_NULL_COPY_FN  ((size_t)0x0)
-#define MPI_TYPE_DUP_FN  ((size_t)0x0)
+#define MPI_TYPE_DUP_FN  ((void *)0x1)
 
 #define MPI_COMM_NULL_DELETE_FN  ((size_t)0x0)
 #define MPI_COMM_NULL_COPY_FN  ((size_t)0x0)
-#define MPI_COMM_DUP_FN  ((size_t)0x0)
+#define MPI_COMM_DUP_FN  ((void *)0x1)
 
 #define MPI_WIN_NULL_DELETE_FN  ((size_t)0x0)
 #define MPI_WIN_NULL_COPY_FN  ((size_t)0x0)
-#define MPI_WIN_DUP_FN  ((size_t)0x0)
+#define MPI_WIN_DUP_FN  ((void *)0x1)
 
 /* MPI_CONVERSION_FN_NULL is a sentinel value, but it has to be large
    enough to be the same size as a valid function pointer.  It

@@ -36,6 +36,7 @@ def generate_header_f(mpi_root1,mpi_root2,header_path,fd_output):
 	lisence_header()
 	print '#ifndef __wrapper__h__\n#define __wrapper__h__\n'
 	print '#include "utils.h"\n'
+	print '#include "new_utils.h"\n'
 	p = sub.call(['./FORTRAN/utils/gen_common.sh',mpi_root1,'A_f_'],stdout=fd_output)
 	pp = sub.call(['./FORTRAN/utils/gen_common.sh',mpi_root2,'R_f_'],stdout=fd_output)
 	with open('./FORTRAN/utils/lists') as aa:
@@ -96,7 +97,7 @@ def generate_header_f(mpi_root1,mpi_root2,header_path,fd_output):
 					if (r[1].split(' ')[1]!="*"):
 						print '#define R_f_'+tab[i][1]+' '+i+'\n'
 					r2a=r2a+'if(R_f_'+tab[i][1]+'==*cr){\n'+'*ca=('+r[1]+')A_f_'+tab[i][1]+';return;}\nelse\n'
-					r2au=r2au+'if(R_f_'+tab[i][1]+'==*cr){\n'+'*ca=('+r[1]+')A_f_'+tab[i][1]+';'+r[4]+'_translation_del(*ca);return;}\nelse\n'
+					r2au=r2au+'if(R_f_'+tab[i][1]+'==*cr){\n'+r[4]+'_translation_del_f(*ca);*ca=('+r[1]+')A_f_'+tab[i][1]+';return;}\nelse\n'
 			#pprint(rnv)
 			#pprint(cnv)
 			#for i in tab:           

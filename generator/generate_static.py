@@ -51,7 +51,7 @@ def header_license_file():
 	string=string+' */'+'\n'
 	return string
 
-def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list, data, init_conf,not_generated_ptr):
+def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list, data, init_conf,not_generated_ptr,target_prefix):
 	string=header_license_file()
 	string=string+'#ifndef _GNU_SOURCE'+'\n'
 	string=string+'#define _GNU_SOURCE'+'\n'
@@ -77,7 +77,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	for i in data:
 		if i['name'] in def_list:
 			string=string+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='A_')+';\n'
-			string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n\n'
+			string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='LOCAL_',type_prefix=target_prefix)+';\n\n'
 			if wrapper:
 				string=string+object_gen.generate_func_asmK_tls(i)+'\n'
 			else:
@@ -88,7 +88,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	for list_other in data:
 		if list_other['name'] in c2f_list:
 			string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
-			string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
+			string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix=target_prefix)+';\n'
 			string=string+object_gen.generate_func_asmK_tls(list_other)
 			string=string+object_gen.generate_func(list_other,init_conf)
 			string=string+object_gen.generate_func_r(list_other)
@@ -129,7 +129,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+'}'
 	return string
 
-def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
+def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper,target_prefix='R_'):
 	string=header_license_file()
 	#overiding json dictionary
 	for idx,j in enumerate(data_f):
@@ -144,19 +144,19 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 	for i in data_f:
 		for j in def_list_f:
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='_',type_prefix='R_',lower=True)+';\n\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='__',type_prefix='R_',lower=True)+';\n\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='__',type_prefix='R_',lower=True)+';\n\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='_',type_prefix=target_prefix,lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='__',type_prefix=target_prefix,lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix=target_prefix,lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='__',type_prefix=target_prefix,lower=True)+';\n\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix=target_prefix,lower=True)+';\n\n'
 				if wrapper:
 					string=string+'#define A_f_'+i['name'] +' _P'+i['name']+'\n'
-					string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
-					string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
-					string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
 				else:
 					string=string+'//#define A_f_'+i['name'] +' _P'+i['name']+'\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
+				string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
+				string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
+				string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
+				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix=target_prefix)+';\n\n'
 				string=string+object_gen.generate_func_f(i)+'\n'
 	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
 	if not wrapper:
@@ -485,7 +485,7 @@ if __name__ == '__main__':
 	wrapper_preload_c=generator("Wrapper_Preload_C",mappers_c,data_c)
 	os.chdir(preload_directory)
 	preload_wrapper_c = open("test_generation_wrapper.c", "w")
-	string=generate_wrapper_c(wrapper_preload_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr)
+	string=generate_wrapper_c(wrapper_preload_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr,'R_')
 	preload_wrapper_c.write(string)
 	preload_wrapper_c.close()
 	fl.close()
@@ -526,7 +526,7 @@ if __name__ == '__main__':
 	wrapper_interface_c=generator("Wrapper_Interface_C", mappers_c,data_c)
 	os.chdir(interface_directory)
 	interface_wrapper_c =open("test_generation_wrapper.c", "w")
-	string=generate_wrapper_c(wrapper_interface_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr)
+	string=generate_wrapper_c(wrapper_interface_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr,target_prefix='R_')
 	interface_wrapper_c.write(string)
 	interface_wrapper_c.close()
 	fl.close()
