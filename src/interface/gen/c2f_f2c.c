@@ -1475,7 +1475,7 @@ __asm__(
 "jne inwrap_MPI_File_c2f\n"
 "jmp *A_MPI_File_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_c2f:\n"
-"jmp *R_MPI__File_c2f@GOTPCREL(%rip)\n"
+"jmp *R__MPI_File_c2f@GOTPCREL(%rip)\n"
 
 );
 
