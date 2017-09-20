@@ -199,6 +199,8 @@ extern R_MPI_Group (*LOCAL_MPI_Group_f2c)(int);
 extern R_MPI_Info (*LOCAL_MPI_Info_f2c)(int);
 extern R_MPI_Comm (*LOCAL_MPI_Comm_f2c)(int);
 extern R_MPI_Op (*LOCAL_MPI_Op_f2c)(int);
+extern int (*LOCAL_MPI_Status_f2c)(int *,R_MPI_Status* );
+extern int (*LOCAL_MPI_Status_c2f)(R_MPI_Status*,int*);
 
 extern  int  (*LOCAL_MPI_Win_c2f)(R_MPI_Win     );
 extern  int  (*LOCAL_MPI_Message_c2f)(R_MPI_Message );
@@ -207,6 +209,14 @@ extern  int  (*LOCAL_MPI_Group_c2f)(R_MPI_Group   );
 extern  int  (*LOCAL_MPI_Info_c2f)(R_MPI_Info    );
 extern  int  (*LOCAL_MPI_Comm_c2f)(R_MPI_Comm    );
 extern  int  (*LOCAL_MPI_Op_c2f)(R_MPI_Op      );
+int R_MPI_Status_f2c(int *a,R_MPI_Status *b )
+{
+    return LOCAL_MPI_Status_f2c(a,b);
+}
+int R_MPI_Status_c2f(R_MPI_Status *a,int*b)
+{
+    return LOCAL_MPI_Status_c2f(a,b);
+}
 R_MPI_Win R_MPI_Win_f2c(int a)
 {
     return LOCAL_MPI_Win_f2c(a);
