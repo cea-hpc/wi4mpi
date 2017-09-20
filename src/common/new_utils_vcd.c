@@ -478,7 +478,7 @@ void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##var
     memset(a_mpi_##varname,0,sizeof(A_##type));\
     (*((int *)a_mpi_##varname))=id+f##varname;\
     memcpy(&(varname##_table[id].C),& mpi_##varname,sizeof( R_##type));\
-    varname##_table[id].fort=R_##type##_c2f(mpi_##varname);\
+/*    varname##_table[id].fort=R_##type##_c2f(mpi_##varname);*/\
     unlock(varname##_Lock);\
 }  \
 void varname##_translation_update_f(int mpi_##varname, int *a_mpi_##varname) {  \
