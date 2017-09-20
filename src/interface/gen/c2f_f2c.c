@@ -21,7 +21,7 @@
 //#                                                                      #
 //########################################################################
 #include "wrapper_f.h"
-#include "c2f.h"
+//#include "c2f.h"
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
@@ -1415,7 +1415,7 @@ __asm__(
 "jne inwrap_MPI_File_f2c\n"
 "jmp *A_MPI_File_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_f2c:\n"
-"jmp *R_MPI_File_f2c@GOTPCREL(%rip)\n"
+"jmp *R__MPI_File_f2c@GOTPCREL(%rip)\n"
 
 );
 
@@ -1437,7 +1437,7 @@ return ret;
 }
 */
 
-R_MPI_File R_MPI_File_f2c(R_MPI_Fint op)
+R_MPI_File R__MPI_File_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
 printf("entre : R_MPI_File_f2c\n");
@@ -1475,7 +1475,7 @@ __asm__(
 "jne inwrap_MPI_File_c2f\n"
 "jmp *A_MPI_File_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_c2f:\n"
-"jmp *R_MPI_File_c2f@GOTPCREL(%rip)\n"
+"jmp *R_MPI__File_c2f@GOTPCREL(%rip)\n"
 
 );
 
@@ -1498,7 +1498,7 @@ return ret;
 }*/
 
 
-R_MPI_Fint R_MPI_File_c2f(R_MPI_File op)
+R_MPI_Fint R__MPI_File_c2f(R_MPI_File op)
 {
 #ifdef DEBUG
 printf("entre : R_MPI_File_c2f\n");
