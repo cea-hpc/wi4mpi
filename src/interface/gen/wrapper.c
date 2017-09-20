@@ -112,7 +112,7 @@ datatype_a2r(datatype,&datatype_tmp);
 source_a2r(source,&source_tmp);
 tag_a2r(tag,&tag_tmp);
 comm_a2r(comm,&comm_tmp);
-printf("%d\n",tag_tmp);
+//printf("%d\n",tag_tmp);
  _LOCAL_MPI_Recv(buf_tmp, count, &datatype_tmp, &source_tmp, &tag_tmp, &comm_tmp,status_tmp, &ret_tmp);
 if(ret_tmp==R_f_MPI_SUCCESS)buffer_r2a(&buf,&buf_tmp);
 if(ret_tmp==R_f_MPI_SUCCESS)if (status!=A_f_MPI_STATUS_IGNORE)

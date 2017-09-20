@@ -209,6 +209,30 @@ extern  int  (*LOCAL_MPI_Group_c2f)(R_MPI_Group   );
 extern  int  (*LOCAL_MPI_Info_c2f)(R_MPI_Info    );
 extern  int  (*LOCAL_MPI_Comm_c2f)(R_MPI_Comm    );
 extern  int  (*LOCAL_MPI_Op_c2f)(R_MPI_Op      );
+
+extern R_MPI_Request (*LOCAL_MPI_Request_f2c)(int);
+extern  int  (*LOCAL_MPI_Request_c2f)(R_MPI_Request      );
+R_MPI_Request R_MPI_Request_f2c(int a)
+{
+    return LOCAL_MPI_Request_f2c(a);
+}
+int R_MPI_Request_c2f(R_MPI_Request a)
+{
+    return LOCAL_MPI_Request_c2f(a);
+}
+
+extern  int  (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler      );
+extern R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
+extern  int  (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler      );
+R_MPI_Errhandler R_MPI_Errhandler_f2c(int a)
+{
+    return LOCAL_MPI_Errhandler_f2c(a);
+}
+int R_MPI_Errhandler_c2f(R_MPI_Errhandler a)
+{
+    return LOCAL_MPI_Errhandler_c2f(a);
+}
+
 int R_MPI_Status_f2c(int *a,R_MPI_Status *b )
 {
     return LOCAL_MPI_Status_f2c(a,b);
