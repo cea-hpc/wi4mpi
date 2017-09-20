@@ -220,8 +220,7 @@ int R_MPI_Request_c2f(R_MPI_Request a)
 {
     return LOCAL_MPI_Request_c2f(a);
 }
-
-extern  int  (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler      );
+/*
 extern R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 extern  int  (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler      );
 R_MPI_Errhandler R_MPI_Errhandler_f2c(int a)
@@ -232,7 +231,7 @@ int R_MPI_Errhandler_c2f(R_MPI_Errhandler a)
 {
     return LOCAL_MPI_Errhandler_c2f(a);
 }
-
+*/
 int R_MPI_Status_f2c(int *a,R_MPI_Status *b )
 {
     return LOCAL_MPI_Status_f2c(a,b);
