@@ -29228,7 +29228,12 @@ return op;
 #endif
 #ifdef OMPI_OMPI
 #endif
-/*__attribute__((constructor)) */void wrapper_init(void) {
+#ifdef WI4MPI_STATIC
+#define WATTR
+#else
+#define WATTR __attribute__((constructor)) 
+#endif
+WATTR void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");

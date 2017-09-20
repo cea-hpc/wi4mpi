@@ -24,19 +24,19 @@
 #define __A_C2FF2C__h__
 #include "mappers.h"
 #include "manual_wrapper.h"
-  A_MPI_Comm CCMPI_Comm_f2c(int  op){
+  A_MPI_Comm A_MPI_Comm_f2c(int  op){
 if(A_f_MPI_COMM_WORLD==op){return A_MPI_COMM_WORLD;}
 if(A_f_MPI_COMM_SELF==op){return A_MPI_COMM_SELF;}
 if(A_f_MPI_COMM_NULL==op){return A_MPI_COMM_NULL;}
 return (A_MPI_Comm)(op);
 }
-  int  CCMPI_Comm_c2f(A_MPI_Comm op){
+  int  A_MPI_Comm_c2f(A_MPI_Comm op){
 if(A_MPI_COMM_WORLD==op){return A_f_MPI_COMM_WORLD;}
 if(A_MPI_COMM_SELF==op){return A_f_MPI_COMM_SELF;}
 if(A_MPI_COMM_NULL==op){return A_f_MPI_COMM_NULL;}
 return (int )(op);
 }
-  A_MPI_Datatype CCMPI_Type_f2c(int  op){
+  A_MPI_Datatype A_MPI_Type_f2c(int  op){
 if(A_f_MPI_INTEGER==op){return A_MPI_INTEGER;}
 if(A_f_MPI_REAL==op){return A_MPI_REAL;}
 if(A_f_MPI_DOUBLE_PRECISION==op){return A_MPI_DOUBLE_PRECISION;}
@@ -59,7 +59,7 @@ if(A_f_MPI_LB==op){return A_MPI_LB;}
 if(A_f_MPI_DATATYPE_NULL==op){return A_MPI_DATATYPE_NULL;}
 return (A_MPI_Datatype)(op);
 }
-  int  CCMPI_Type_c2f(A_MPI_Datatype op){
+  int  A_MPI_Type_c2f(A_MPI_Datatype op){
 if(A_MPI_INTEGER==op){return A_f_MPI_INTEGER;}
 if(A_MPI_REAL==op){return A_f_MPI_REAL;}
 if(A_MPI_DOUBLE_PRECISION==op){return A_f_MPI_DOUBLE_PRECISION;}
@@ -82,7 +82,7 @@ if(A_MPI_LB==op){return A_f_MPI_LB;}
 if(A_MPI_DATATYPE_NULL==op){return A_f_MPI_DATATYPE_NULL;}
 return (int )(op);
 }
-  A_MPI_Op CCMPI_Op_f2c(int  op){
+  A_MPI_Op A_MPI_Op_f2c(int  op){
 if(A_f_MPI_MAX==op){return A_MPI_MAX;}
 if(A_f_MPI_MIN==op){return A_MPI_MIN;}
 if(A_f_MPI_SUM==op){return A_MPI_SUM;}
@@ -98,7 +98,7 @@ if(A_f_MPI_LXOR==op){return A_MPI_LXOR;}
 if(A_f_MPI_OP_NULL==op){return A_MPI_OP_NULL;}
 return (A_MPI_Op)(op);
 }
-  int  CCMPI_Op_c2f(A_MPI_Op op){
+  int  A_MPI_Op_c2f(A_MPI_Op op){
 if(A_MPI_MAX==op){return A_f_MPI_MAX;}
 if(A_MPI_MIN==op){return A_f_MPI_MIN;}
 if(A_MPI_SUM==op){return A_f_MPI_SUM;}
@@ -114,53 +114,53 @@ if(A_MPI_LXOR==op){return A_f_MPI_LXOR;}
 if(A_MPI_OP_NULL==op){return A_f_MPI_OP_NULL;}
 return (int )(op);
 }
-  A_MPI_Request CCMPI_Request_f2c(int  op){
+  A_MPI_Request A_MPI_Request_f2c(int  op){
 if(A_f_MPI_REQUEST_NULL==op){return A_MPI_REQUEST_NULL;}
 return (A_MPI_Request)(op);
 }
-  int  CCMPI_Request_c2f(A_MPI_Request op){
+  int  A_MPI_Request_c2f(A_MPI_Request op){
 if(A_MPI_REQUEST_NULL==op){return A_f_MPI_REQUEST_NULL;}
 return (int )(op);
 }
-  A_MPI_Group CCMPI_Group_f2c(int  op){
+  A_MPI_Group A_MPI_Group_f2c(int  op){
 if(A_f_MPI_GROUP_NULL==op){return A_MPI_GROUP_NULL;}
 if(A_f_MPI_GROUP_EMPTY==op){return A_MPI_GROUP_EMPTY;}
 return (A_MPI_Group)(op);
 }
-  int  CCMPI_Group_c2f(A_MPI_Group op){
+  int  A_MPI_Group_c2f(A_MPI_Group op){
 if(A_MPI_GROUP_NULL==op){return A_f_MPI_GROUP_NULL;}
 if(A_MPI_GROUP_EMPTY==op){return A_f_MPI_GROUP_EMPTY;}
 return (int )(op);
 }
-  A_MPI_Win CCMPI_Win_f2c(int  op){
+  A_MPI_Win A_MPI_Win_f2c(int  op){
 if(A_f_MPI_WIN_NULL==op){return A_MPI_WIN_NULL;}
 return (A_MPI_Win)(op);
 }
-  int  CCMPI_Win_c2f(A_MPI_Win op){
+  int  A_MPI_Win_c2f(A_MPI_Win op){
 if(A_MPI_WIN_NULL==op){return A_f_MPI_WIN_NULL;}
 return (int )(op);
 }
-  A_MPI_File CCMPI_File_f2c(int  op){
+  A_MPI_File A_MPI_File_f2c(int  op){
 if(A_f_MPI_FILE_NULL==op){return A_MPI_FILE_NULL;}
 return (A_MPI_File)(op);
 }
-  int  CCMPI_File_c2f(A_MPI_File op){
+  int  A_MPI_File_c2f(A_MPI_File op){
 if(A_MPI_FILE_NULL==op){return A_f_MPI_FILE_NULL;}
 return (int )(op);
 }
-  A_MPI_Info CCMPI_Info_f2c(int  op){
+  A_MPI_Info A_MPI_Info_f2c(int  op){
 if(A_f_MPI_INFO_NULL==op){return A_MPI_INFO_NULL;}
 return (A_MPI_Info)(op);
 }
-  int  CCMPI_Info_c2f(A_MPI_Info op){
+  int  A_MPI_Info_c2f(A_MPI_Info op){
 if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
 return (int )(op);
 }
-  A_MPI_Message CCMPI_Message_f2c(int  op){
+  A_MPI_Message A_MPI_Message_f2c(int  op){
 if(A_f_MPI_INFO_NULL==op){return A_MPI_INFO_NULL;}
 return (A_MPI_Message)(op);
 }
-  int  CCMPI_Message_c2f(A_MPI_Message op){
+  int  A_MPI_Message_c2f(A_MPI_Message op){
 if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
 return (int )(op);
 }
@@ -174,14 +174,14 @@ if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
 return (int )(op);
 }
 #endif
-int CCMPI_Status_f2c(const A_MPI_Fint *f_status, A_MPI_Status *c_status)
+int A_MPI_Status_f2c(const A_MPI_Fint *f_status, A_MPI_Status *c_status)
 {
 	if(f_status==A_f_MPI_STATUS_IGNORE||f_status==A_f_MPI_STATUSES_IGNORE)
 		return -1;
 	memcpy(c_status,f_status,A_f_MPI_STATUS_SIZE*sizeof(int));	
 	return A_MPI_SUCCESS;
 }
-int CCMPI_Status_c2f(A_MPI_Status *c_status,const A_MPI_Fint *f_status)
+int A_MPI_Status_c2f(A_MPI_Status *c_status,const A_MPI_Fint *f_status)
 {
 	if(f_status==A_MPI_STATUS_IGNORE||f_status==A_MPI_STATUSES_IGNORE)
 		return -1;

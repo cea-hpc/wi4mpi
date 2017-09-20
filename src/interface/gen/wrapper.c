@@ -11891,7 +11891,12 @@ in_w=0;
 printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 #endif
 }
-/*__attribute__((constructor))*/ void wrapper_init_f(void) {
+#ifdef WI4MPI_STATIC
+#define WATTR
+#else
+#define WATTR __attribute__((constructor)) 
+#endif
+WATTR void wrapper_init_f(void) {
 dlopen(getenv("WI4MPI_RUN_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
 void *lib_handle_f=dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"),RTLD_NOW|RTLD_GLOBAL);
 if(!lib_handle_f)
