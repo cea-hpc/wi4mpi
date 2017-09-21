@@ -29,6 +29,7 @@
 #define allocate_global 1
 #include <stdio.h>
 #include <dlfcn.h>
+#include "wrapper_f.h"
 /*ompi constante*/
 int WI4MPI_errhandler_key;
 #if defined(OMPI_OMPI)

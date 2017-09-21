@@ -97,6 +97,9 @@ add_library(wi4mpi_CCC_OMPI SHARED ${SOURCE_WI4MPI_INTERFACE})
 add_library(wi4mpi_CCC_INTEL SHARED  ${SOURCE_WI4MPI_INTERFACE})
 add_library(mpi_mod MODULE ${SOURCE_WI4MPI_MODULE})
 
+add_library(mpi_a STATIC ${SOURCE_WI4MPI_SO})
+add_library(wi4mpi_CCC_OMPI_a STATIC ${SOURCE_WI4MPI_INTERFACE}) 
+add_library(wi4mpi_CCC_INTEL_a STATIC  ${SOURCE_WI4MPI_INTERFACE})
 #Headers
 #-------
 
@@ -131,6 +134,58 @@ set_target_properties(wi4mpi_CCC_INTEL
 
 target_link_libraries(wi4mpi_CCC_OMPI ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_CCC_INTEL ${CMAKE_THREAD_LIBS_INIT})
+
+target_include_directories(mpi_a PRIVATE interface/manual)
+target_include_directories(wi4mpi_CCC_OMPI_a
+                           PRIVATE common
+                           PRIVATE interface/header/OMPI_OMPI
+                          )
+target_include_directories(wi4mpi_CCC_INTEL_a
+                           PRIVATE common
+                           PRIVATE interface/header/OMPI_INTEL
+                          )
+
+#Flags
+#-----
+add_dependencies(mpi_a wi4mpi_CCC_INTEL_a)
+add_dependencies(mpi_a wi4mpi_CCC_OMPI_a)
+set_target_properties(mpi_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_CCC_OMPI_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -DOMPI_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -Dompi_ompi -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_CCC_INTEL_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -DOMPI_INTEL -D_GNU_SOURCE -Dompi_mpich -DWI4MPI_STATIC"
+                     )
+
+add_custom_command(TARGET wi4mpi_CCC_INTEL_a 
+                    POST_BUILD
+                   COMMAND  ${CMAKE_SOURCE_DIR}/rename_sym.sh libwi4mpi_CCC_INTEL_a.a "INTEL"
+                   #WORKING_DIRECTORY ${CMAKE_BUILD_FILES_DIRECTORY}
+                    )
+message(status ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_command(TARGET wi4mpi_CCC_OMPI_a 
+                    POST_BUILD
+                  COMMAND  ${CMAKE_SOURCE_DIR}/rename_sym.sh libwi4mpi_CCC_OMPI_a.a "OMPI"
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+
+                )
+add_custom_command(TARGET mpi_a 
+                POST_BUILD
+                COMMAND ${CMAKE_SOURCE_DIR}/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_CCC_INTEL_a.a libwi4mpi_CCC_OMPI_a.a
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+
+                )
+
+#Link options
+#------------
+
+target_link_libraries(wi4mpi_CCC_OMPI_a ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_CCC_INTEL_a ${CMAKE_THREAD_LIBS_INIT})
 
 #############
 ## PRELOAD ##

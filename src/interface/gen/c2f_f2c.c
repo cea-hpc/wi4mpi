@@ -30,6 +30,125 @@
 #include <dlfcn.h>
 #include "mappers.h"
 extern __thread int in_w;
+
+__asm__(
+".global CCMPI_Win_f2c\n"
+".weak MPI_Win_f2c\n"
+".set MPI_Win_f2c,CCMPI_Win_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Win_f2c\n"
+".extern R_MPI_Win_f2c\n"
+".type CCMPI_Win_f2c,@function\n"
+".text\n"
+"CCMPI_Win_f2c:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Win_f2c\n"
+"jmp *A_MPI_Win_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Win_f2c:\n"
+"jmp *R_MPI_Win_f2c@GOTPCREL(%rip)\n"
+
+);
+
+
+__asm__(
+".global CCMPI_Win_c2f\n"
+".weak MPI_Win_c2f\n"
+".set MPI_Win_c2f,CCMPI_Win_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Win_c2f\n"
+".extern R_MPI_Win_c2f\n"
+".type CCMPI_Win_c2f,@function\n"
+".text\n"
+"CCMPI_Win_c2f:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Win_c2f\n"
+"jmp *A_MPI_Win_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Win_c2f:\n"
+"jmp *R_MPI_Win_c2f@GOTPCREL(%rip)\n"
+
+);
+
+
+__asm__(
+".global CCMPI_Message_f2c\n"
+".weak MPI_Message_f2c\n"
+".set MPI_Message_f2c,CCMPI_Message_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Message_f2c\n"
+".extern R_MPI_Message_f2c\n"
+".type CCMPI_Message_f2c,@function\n"
+".text\n"
+"CCMPI_Message_f2c:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Message_f2c\n"
+"jmp *A_MPI_Message_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Message_f2c:\n"
+"jmp *R_MPI_Message_f2c@GOTPCREL(%rip)\n"
+
+);
+
+
+__asm__(
+".global CCMPI_Message_c2f\n"
+".weak MPI_Message_c2f\n"
+".set MPI_Message_c2f,CCMPI_Message_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Message_c2f\n"
+".extern R_MPI_Message_c2f\n"
+".type CCMPI_Message_c2f,@function\n"
+".text\n"
+"CCMPI_Message_c2f:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Message_c2f\n"
+"jmp *A_MPI_Message_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Message_c2f:\n"
+"jmp *R_MPI_Message_c2f@GOTPCREL(%rip)\n"
+
+);
 __asm__(
 ".global CCMPI_File_f2c\n"
 ".weak MPI_File_f2c\n"
@@ -622,7 +741,171 @@ __asm__(
 #include "mappers.h"
 extern __thread int in_w;
 
+__asm__(
+".global CCMPI_Win_f2c\n"
+".weak MPI_Win_f2c\n"
+".set MPI_Win_f2c,CCMPI_Win_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Win_f2c\n"
+".extern R_MPI_Win_f2c\n"
+".type CCMPI_Win_f2c,@function\n"
+".text\n"
+"CCMPI_Win_f2c:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Win_f2c\n"
+"jmp *A_MPI_Win_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Win_f2c:\n"
+"jmp *R__MPI_Win_f2c@GOTPCREL(%rip)\n"
 
+);
+
+R_MPI_Win R__MPI_Win_f2c(R_MPI_Fint op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Win_f2c\n");
+#endif
+#ifdef DEBUG
+printf("sort : R_MPI_Win_f2c\n");
+#endif
+return op;
+}
+
+
+__asm__(
+".global CCMPI_Win_c2f\n"
+".weak MPI_Win_c2f\n"
+".set MPI_Win_c2f,CCMPI_Win_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Win_c2f\n"
+".extern R_MPI_Win_c2f\n"
+".type CCMPI_Win_c2f,@function\n"
+".text\n"
+"CCMPI_Win_c2f:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Win_c2f\n"
+"jmp *A_MPI_Win_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Win_c2f:\n"
+"jmp *R__MPI_Win_c2f@GOTPCREL(%rip)\n"
+
+);
+
+int R__MPI_Win_c2f(R_MPI_Win op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Win_c2f\n");
+#endif
+in_w=1;
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Win_c2f\n");
+#endif
+return op;
+}
+
+__asm__(
+".global CCMPI_Message_f2c\n"
+".weak MPI_Message_f2c\n"
+".set MPI_Message_f2c,CCMPI_Message_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Message_f2c\n"
+".extern R_MPI_Message_f2c\n"
+".type CCMPI_Message_f2c,@function\n"
+".text\n"
+"CCMPI_Message_f2c:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Message_f2c\n"
+"jmp *A_MPI_Message_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Message_f2c:\n"
+"jmp *R__MPI_Message_f2c@GOTPCREL(%rip)\n"
+
+);
+
+R_MPI_Message R__MPI_Message_f2c(R_MPI_Fint op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Message_f2c\n");
+#endif
+#ifdef DEBUG
+printf("sort : R_MPI_Message_f2c\n");
+#endif
+return op;
+}
+
+
+__asm__(
+".global CCMPI_Message_c2f\n"
+".weak MPI_Message_c2f\n"
+".set MPI_Message_c2f,CCMPI_Message_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Message_c2f\n"
+".extern R_MPI_Message_c2f\n"
+".type CCMPI_Message_c2f,@function\n"
+".text\n"
+"CCMPI_Message_c2f:\n"
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Message_c2f\n"
+"jmp *A_MPI_Message_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Message_c2f:\n"
+"jmp *R__MPI_Message_c2f@GOTPCREL(%rip)\n"
+
+);
+
+int R__MPI_Message_c2f(R_MPI_Message op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Message_c2f\n");
+#endif
+in_w=1;
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Message_c2f\n");
+#endif
+return op;
+}
 __asm__(
 ".global CCMPI_Op_f2c\n"
 ".weak MPI_Op_f2c\n"
@@ -1032,7 +1315,7 @@ return op;
 }
 
 
-/*__asm__(
+__asm__(
 ".global CCMPI_Request_f2c\n"
 ".weak MPI_Request_f2c\n"
 ".set MPI_Request_f2c,CCMPI_Request_f2c\n"
@@ -1055,13 +1338,13 @@ return op;
 "leave\n"
 "cmpl $0x0, 0x0(%rax)\n"
 "jne inwrap_MPI_Request_f2c\n"
-"jmp *A__MPI_Request_f2c@GOTPCREL(%rip)\n"
+"jmp *A_MPI_Request_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_f2c:\n"
 "jmp *R__MPI_Request_f2c@GOTPCREL(%rip)\n"
 
 );
 
-A_MPI_Request A__MPI_Request_f2c(A_MPI_Fint op)
+/*A_MPI_Request A__MPI_Request_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
 printf("entre : A_MPI_Request_f2c\n");
@@ -1077,7 +1360,7 @@ printf("sort : A_MPI_Request_f2c\n");
 #endif
 return op_ret;
 }
-
+*/
 
 R_MPI_Request R__MPI_Request_f2c(R_MPI_Fint op)
 {
@@ -1114,12 +1397,12 @@ __asm__(
 "leave\n"
 "cmpl $0x0, 0x0(%rax)\n"
 "jne inwrap_MPI_Request_c2f\n"
-"jmp *A__MPI_Request_c2f@GOTPCREL(%rip)\n"
+"jmp *A_MPI_Request_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_c2f:\n"
 "jmp *R__MPI_Request_c2f@GOTPCREL(%rip)\n"
 
 );
-
+/*
 int A__MPI_Request_c2f(A_MPI_Request op)
 {
 #ifdef DEBUG
@@ -1136,7 +1419,7 @@ printf("sort : A_MPI_Request_c2f\n");
 #endif
 return ret;
 }
-
+*/
 
 int R__MPI_Request_c2f(R_MPI_Request op)
 {
@@ -1150,7 +1433,7 @@ printf("sort : R_MPI_Request_c2f\n");
 #endif
 return op;
 }
-*/
+
 
 __asm__(
 ".global CCMPI_Type_f2c\n"
@@ -1456,7 +1739,7 @@ __asm__(
 ".set MPI_File_c2f,CCMPI_File_c2f\n"
 ".extern in_w\n"
 ".extern A_MPI_File_c2f\n"
-".extern R_MPI_File_c2f\n"
+".extern R__MPI_File_c2f\n"
 ".type CCMPI_File_c2f,@function\n"
 ".text\n"
 "CCMPI_File_c2f:\n"
