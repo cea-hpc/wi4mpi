@@ -3009,7 +3009,7 @@ int wrapper_copy_function_f(R_MPI_Comm comm, int keyval, void* extra_state,
     comm_conv_r2a_static(&comm_tmp, &comm);
     A_F_MPI_Copy_function* ptr_copy_func = myKeyval_translation_get(keyval)->cp_function;
     myKeyval_translation_get(keyval)->ref++;
-    printf("duped %d %p %d %p\n", keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
+    //printf("duped %d %p %d %p\n", keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
     if(ptr_copy_func==A_MPI_NULL_COPY_FN||ptr_copy_func==A_MPI_COMM_NULL_DELETE_FN ||ptr_copy_func==&mpi_null_copy_fn_)
         {
             *flag=0;
@@ -3021,7 +3021,7 @@ int wrapper_copy_function_f(R_MPI_Comm comm, int keyval, void* extra_state,
             *flag=1;
             return R_MPI_SUCCESS;
         }
-    int comm_tmpf=MPI_Comm_c2f(comm_tmp);
+    int comm_tmpf=A_MPI_Comm_c2f(comm_tmp);
     int res ; (ptr_copy_func)(&comm_tmpf, &keyval, extra_state, &attribute_val_in,attribute_val_out, flag,&res);
 //    ptr_copy_func = NULL;
     return  error_code_conv_r2a(res);
@@ -3034,13 +3034,14 @@ int wrapper_delete_function_f(R_MPI_Comm comm, int keyval,
     A_MPI_Comm comm_tmp;
     int res;
     comm_conv_r2a_static(&comm_tmp, &comm);
+    int ct=A_MPI_Comm_c2f(comm_tmp);
     A_F_MPI_Delete_function* ptr_delete_func=myKeyval_translation_get(keyval)->del_function;
     if( ptr_delete_func!=A_MPI_NULL_DELETE_FN&&ptr_delete_func!=&mpi_null_delete_fn_)
-        (ptr_delete_func)(comm_tmp, keyval, attribute_val, extra_state,&res);
+        (ptr_delete_func)(ct, keyval, attribute_val, extra_state,&res);
     else
         res=R_MPI_SUCCESS;
     myKeyval_translation_get(keyval)->ref--;
-    printf("deleted %d %p %d\n", keyval,comm,myKeyval_translation_get(keyval)->ref);
+    //printf("deleted %d %p %d\n", keyval,comm,myKeyval_translation_get(keyval)->ref);
     if(myKeyval_translation_get(keyval)->ref==0)
         myKeyval_translation_del(keyval);
     //ptr_delete_func = NULL;
@@ -3137,7 +3138,7 @@ void  A_f_MPI_Attr_put(int * comm,int * keyval,int * attribute_val,int * ret)
 #ifdef DEBUG
 printf("entre : A_f_MPI_Attr_put\n");
 #endif
-in_w=1;
+//in_w=1;
 int  ret_tmp=0;
 
 int comm_tmp;
@@ -3150,7 +3151,7 @@ size_t tv=*(attribute_val);
 ret_tmp=A_MPI_Attr_put(ct,*keyval,tv);
 error_r2a(ret,&ret_tmp);
 
-in_w=0;
+//in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Attr_put\n");
 #endif
@@ -3184,12 +3185,12 @@ int keyval_tmp=*keyval;//=(*keyval==R_F_MPI_INVALID?A_F_MPI_INVALID:*keyval);
 A_MPI_Comm ct=MPI_Comm_f2c(*comm);
 long kt=0;
 *attribute_val=0;
-printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
+//printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
     ret_tmp=A_MPI_Attr_get(ct,*keyval,&kt,flag);
 if(kt>>32)
     kt=(1<<31)-1;
 *attribute_val=(int)kt;
-printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
+//printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
 error_r2a(ret,&ret_tmp);
 //in_w=0;
 #ifdef DEBUG
@@ -3509,7 +3510,7 @@ error_r2a(ret,&ret_tmp);
 in_w=0;
 */
 A_MPI_Comm ct=MPI_Comm_f2c(*comm);
-printf("%d\n",ct);
+//printf("%d\n",ct);
 A_MPI_Errhandler ht=(A_MPI_Errhandler)(*errhandler);
 *ret=A_MPI_Errhandler_set(ct,ht);
 #ifdef DEBUG

@@ -88,5 +88,30 @@ if(!LOCAL_MPI_Request_c2f) exit(1);
 LOCAL_MPI_Request_f2c=dlsym(lib_handle,"PMPI_Request_f2c");
 if(!LOCAL_MPI_Request_f2c) exit(1);
 #endif
+
+#ifndef R_MPI_Type_c2f
+LOCAL_MPI_Type_c2f=dlsym(lib_handle,"PMPI_Type_c2f");
+if(!LOCAL_MPI_Type_c2f) exit(1);
+#endif
+#ifndef R_MPI_Type_f2c
+LOCAL_MPI_Type_f2c=dlsym(lib_handle,"PMPI_Type_f2c");
+if(!LOCAL_MPI_Type_f2c) exit(1);
+#endif
+#ifndef R_MPI_Op_c2f
+LOCAL_MPI_Op_c2f=dlsym(lib_handle,"PMPI_Op_c2f");
+if(!LOCAL_MPI_Op_c2f) exit(1);
+#endif
+#ifndef R_MPI_Op_f2c
+LOCAL_MPI_Op_f2c=dlsym(lib_handle,"PMPI_Op_f2c");
+if(!LOCAL_MPI_Op_f2c) exit(1);
+#endif
+#ifndef R_MPI_Status_c2f
+LOCAL_MPI_Status_c2f=dlsym(lib_handle,"PMPI_Status_c2f");
+if(!LOCAL_MPI_Status_c2f) exit(1);
+#endif
+#ifndef R_MPI_Status_f2c
+LOCAL_MPI_Status_f2c=dlsym(lib_handle,"PMPI_Status_f2c");
+if(!LOCAL_MPI_Status_f2c) exit(1);
+#endif
 }
 

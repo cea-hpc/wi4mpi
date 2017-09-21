@@ -420,7 +420,7 @@ void myKeyval_translation_del(int keyval)
     HASH_FIND_INT(get_myKeyval_table()->table, &keyval, conv);
     assert(conv != NULL);
     HASH_DEL(get_myKeyval_table()->table, conv);
-    print(stderr, "\t\tDELETE keyval %d\n", keyval);
+   // print(stderr, "\t\tDELETE keyval %d\n", keyval);
     myKeyval_write_unlock();
     free(conv);
 }
@@ -431,7 +431,7 @@ int wrapper_copy_function(R_MPI_Comm comm, int keyval, void* extra_state,
     comm_conv_r2a_static(&comm_tmp, &comm);
     A_MPI_Copy_function* ptr_copy_func = myKeyval_translation_get(keyval)->cp_function;
     myKeyval_translation_get(keyval)->ref++;
-    printf("duped %d %p %d %p\n", keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
+//    printf("duped %d %p %d %p\n", keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
     if(ptr_copy_func==A_MPI_NULL_COPY_FN||ptr_copy_func==A_MPI_COMM_NULL_DELETE_FN )
         {
             *flag=0;
@@ -461,7 +461,7 @@ int wrapper_delete_function(R_MPI_Comm comm, int keyval,
     else
         res=R_MPI_SUCCESS;
     myKeyval_translation_get(keyval)->ref--;
-    printf("deleted %d %p %d\n", keyval,comm,myKeyval_translation_get(keyval)->ref);
+//    printf("deleted %d %p %d\n", keyval,comm,myKeyval_translation_get(keyval)->ref);
     if(myKeyval_translation_get(keyval)->ref==0)
         myKeyval_translation_del(keyval);
     //ptr_delete_func = NULL;
@@ -602,7 +602,7 @@ in_w=1;
     functions->del_function = delete_fn;
     functions->ref=1;
     myKeyval_translation_add(*keyval, functions);
-    printf("created keyval%d\n",*keyval);
+//    printf("created keyval%d\n",*keyval);
 #ifdef DEBUG
     printf("sort : A_MPI_Keyval_create\n");
 #endif
@@ -726,7 +726,7 @@ in_w=1;
 #endif
     
     int keyval_tmp=(*keyval!=A_MPI_KEYVAL_INVALID?*keyval:R_MPI_KEYVAL_INVALID);
-printf("keyfree %d\n",keyval_tmp);
+//printf("keyfree %d\n",keyval_tmp);
     int ret_tmp =  LOCAL_MPI_Keyval_free(&keyval_tmp);
     if(*keyval!=A_MPI_KEYVAL_INVALID)
     {
@@ -6336,7 +6336,7 @@ in_w=0;
 /*A_MPI_Errhandler_get(comm,&errh);
 */in_w=1;
 int ret_tmp= LOCAL_MPI_Comm_dup( comm_tmp, newcomm_tmp);
-printf("comm dup %p %p\n",comm_tmp,*newcomm_tmp);
+//printf("comm dup %p %p\n",comm_tmp,*newcomm_tmp);
 comm_conv_r2a(newcomm,newcomm_tmp);
 /*if(!errhandler_translation_is_const(errh)){
     printf("add errh %p\n",*newcomm);
@@ -7093,7 +7093,7 @@ int keyval_tmp;
 my_keyval_a2r(&keyval,&keyval_tmp);
 int ret_tmp= LOCAL_MPI_Attr_get( comm_tmp, keyval_tmp, attribute_val, flag);
 
-printf("attr_get %p %d %ld\n",comm_tmp,keyval_tmp,*(long*)attribute_val);
+//printf("attr_get %p %d %ld\n",comm_tmp,keyval_tmp,*(long*)attribute_val);
 
 in_w=0;
 #ifdef DEBUG
@@ -7802,6 +7802,12 @@ int interndel_fn(R_MPI_Comm c,int k,void *v,void *e)
 {
     return R_MPI_SUCCESS;
 }
+int interndup_fn(R_MPI_Comm c,int k,void *e,void *vi,void *vo,int *flag)
+{
+    *flag=1;
+    *((void **)vo)=vi;
+    return R_MPI_SUCCESS;
+}
 int A_MPI_Errhandler_set(A_MPI_Comm comm,A_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -7825,7 +7831,7 @@ if(!errhandler_translation_is_const(errhandler)){
 //A_MPI_Handler_function* ptr_errhandler_func;
 if(WI4MPI_errhandler_key==R_MPI_KEYVAL_INVALID)
 {
-    R_MPI_Comm_create_keyval(R_MPI_COMM_DUP_FN,&interndel_fn,&WI4MPI_errhandler_key,NULL); 
+    R_MPI_Comm_create_keyval(&interndup_fn,&interndel_fn,&WI4MPI_errhandler_key,NULL); 
 }
 errhandler_fn_translation_get(errhandler, &ptr_errhandler_func);
 //communicator_fn_translation_update(comm, ptr_errhandler_func);
