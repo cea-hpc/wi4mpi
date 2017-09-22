@@ -157,23 +157,26 @@ if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
 return (int )(op);
 }
   A_MPI_Message A_MPI_Message_f2c(int  op){
-if(A_f_MPI_INFO_NULL==op){return A_MPI_INFO_NULL;}
+if(A_f_MPI_MESSAGE_NULL==op){return A_MPI_MESSAGE_NULL;}
 return (A_MPI_Message)(op);
 }
   int  A_MPI_Message_c2f(A_MPI_Message op){
-if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
+if(A_MPI_MESSAGE_NULL==op){return A_f_MPI_MESSAGE_NULL;}
 return (int )(op);
 }
-#ifdef OMPI_INTEL
 A_MPI_Errhandler A_MPI_Errhandler_f2c(int  op){
-if(A_f_MPI_INFO_NULL==op){return A_MPI_INFO_NULL;}
+if(A_f_MPI_ERRORS_ARE_FATAL==op){return A_MPI_ERRORS_ARE_FATAL;}
+if(A_f_MPI_ERRORS_RETURN==op){return A_MPI_ERRORS_RETURN;}
+if(A_f_MPI_ERRHANDLER_NULL==op){return A_MPI_ERRHANDLER_NULL;}
 return (A_MPI_Errhandler)(op);
 }
 int  A_MPI_Errhandler_c2f(A_MPI_Errhandler op){
-if(A_MPI_INFO_NULL==op){return A_f_MPI_INFO_NULL;}
+if(A_MPI_ERRORS_ARE_FATAL==op){return A_f_MPI_ERRORS_ARE_FATAL;}
+if(A_MPI_ERRORS_RETURN==op){return A_f_MPI_ERRORS_RETURN;}
+
+if(A_MPI_ERRHANDLER_NULL==op){return A_f_MPI_ERRHANDLER_NULL;}
 return (int )(op);
 }
-#endif
 int A_MPI_Status_f2c(const A_MPI_Fint *f_status, A_MPI_Status *c_status)
 {
 	if(f_status==A_f_MPI_STATUS_IGNORE||f_status==A_f_MPI_STATUSES_IGNORE)
@@ -220,7 +223,7 @@ int R_MPI_Request_c2f(R_MPI_Request a)
 {
     return LOCAL_MPI_Request_c2f(a);
 }
-/*
+
 extern R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 extern  int  (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler      );
 R_MPI_Errhandler R_MPI_Errhandler_f2c(int a)
@@ -231,7 +234,7 @@ int R_MPI_Errhandler_c2f(R_MPI_Errhandler a)
 {
     return LOCAL_MPI_Errhandler_c2f(a);
 }
-*/
+
 int R_MPI_Status_f2c(int *a,R_MPI_Status *b )
 {
     return LOCAL_MPI_Status_f2c(a,b);

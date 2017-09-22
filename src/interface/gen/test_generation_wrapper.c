@@ -456,16 +456,18 @@ int wrapper_delete_function(R_MPI_Comm comm, int keyval,
     A_MPI_Comm comm_tmp;
     int res;
     comm_conv_r2a_static(&comm_tmp, &comm);
-    A_MPI_Delete_function* ptr_delete_func=myKeyval_translation_get(keyval)->del_function;
+		myKeyval_functions_t *fns=myKeyval_translation_get(keyval);
+    A_MPI_Delete_function* ptr_delete_func=fns==NULL?A_MPI_NULL_DELETE_FN:fns->del_function;
     if( ptr_delete_func!=A_MPI_NULL_DELETE_FN)
         res = (ptr_delete_func)(comm_tmp, keyval, attribute_val, extra_state);
     else
         res=R_MPI_SUCCESS;
-    myKeyval_translation_get(keyval)->ref--;
+if(fns)
+  {  myKeyval_translation_get(keyval)->ref--;
 //    printf("deleted %d %p %d\n", keyval,comm,myKeyval_translation_get(keyval)->ref);
     if(myKeyval_translation_get(keyval)->ref==0)
         myKeyval_translation_del(keyval);
-    //ptr_delete_func = NULL;
+   } //ptr_delete_func = NULL;
     return error_code_conv_r2a(res);
 }
 
@@ -28999,7 +29001,9 @@ return ret_tmp;
 }
 
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
-__asm__(
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
+R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
+/*__asm__(
 ".global CCMPI_Errhandler_f2c\n"
 ".weak MPI_Errhandler_f2c\n"
 ".set MPI_Errhandler_f2c,CCMPI_Errhandler_f2c\n"
@@ -29028,7 +29032,6 @@ __asm__(
 
 );
 
-R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 A_MPI_Errhandler A_MPI_Errhandler_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
@@ -29086,7 +29089,6 @@ __asm__(
 
 );
 
-R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 A_MPI_Fint A_MPI_Errhandler_c2f(A_MPI_Errhandler op)
 {
 #ifdef DEBUG
@@ -29115,9 +29117,11 @@ in_w=0;
 printf("sort : R_MPI_Errhandler_c2f\n");
 #endif
 return ret;
-}
+}*/
 #elif defined(OMPI_INTEL)
-__asm__(
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
+R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
+/*__asm__(
 ".global CCMPI_Errhandler_f2c\n"
 ".weak MPI_Errhandler_f2c\n"
 ".set MPI_Errhandler_f2c,CCMPI_Errhandler_f2c\n"
@@ -29231,7 +29235,7 @@ in_w=0;
 printf("sort : R_MPI_Errhandler_c2f\n");
 #endif
 return op;
-}
+}*/
 #endif
 #ifdef OMPI_OMPI
 #endif

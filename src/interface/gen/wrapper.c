@@ -3468,7 +3468,8 @@ R_MPI_Errhandler  errhandler_ltmp;
 R_MPI_Errhandler * errhandler_tmp=&errhandler_ltmp;                                                                  
 int ret_tmp= LOCAL_MPI_Errhandler_create( (R_MPI_Handler_function *)&wrapper_handler_function_f, errhandler_tmp);       
 errhandler_ptr_conv_r2a(&(paerrhandler),&errhandler_tmp);
-*errhandler=(int)aerrhandler;
+//*errhandler=(int)aerrhandler;
+*errhandler=A_MPI_Errhandler_c2f(aerrhandler);
 in_w=0;                                                                                                              
 
 /*A_MPI_Errhandler errhandler_tmp;
@@ -3509,9 +3510,9 @@ error_r2a(ret,&ret_tmp);
 
 in_w=0;
 */
-A_MPI_Comm ct=MPI_Comm_f2c(*comm);
+A_MPI_Comm ct=A_MPI_Comm_f2c(*comm);
 //printf("%d\n",ct);
-A_MPI_Errhandler ht=(A_MPI_Errhandler)(*errhandler);
+A_MPI_Errhandler ht=A_MPI_Errhandler_f2c(*errhandler);
 *ret=A_MPI_Errhandler_set(ct,ht);
 #ifdef DEBUG
 printf("sort : A_f_MPI_Errhandler_set\n %d",*errhandler);
@@ -3548,10 +3549,10 @@ error_r2a(ret,&ret_tmp);
 in_w=0;
 */
 
-A_MPI_Comm ct=MPI_Comm_f2c(*comm);
+A_MPI_Comm ct=A_MPI_Comm_f2c(*comm);
 A_MPI_Errhandler ht=(A_MPI_Errhandler)*errhandler;
 *ret=A_MPI_Errhandler_get(ct,&ht);
-*errhandler=(int)(ht);
+*errhandler=A_MPI_Errhandler_c2f(ht);
 #ifdef DEBUG
 printf("sort : A_f_MPI_Errhandler_get\n");
 #endif
