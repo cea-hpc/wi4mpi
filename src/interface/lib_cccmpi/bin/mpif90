@@ -37,6 +37,16 @@ EOF
 
 }
 
+showme_static() {
+
+cat <<EOF
+
+${WI4MPI_FC} -I${WI4MPI_ROOT}/include ${WI4MPI_ROOT}/lib/libmpi.a
+
+EOF
+
+}
+
 default_mode() {
 	
 	#cat << EOF > wi4mpi_libs_default_paths.c
@@ -72,6 +82,7 @@ fi
 
 arg=$@
 default_mode_activated=0
+static_compilation=0
 [[ -f $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
 [[ -f $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
 
@@ -88,6 +99,8 @@ case $key in
       usage; exit 0;;
       -show )
       showme; exit 0;;
+			-show_static )
+			showme_static; exit 0;;
 			-wi4mpi_default_run_path )
 				#echo "default mode"
 				if [[ $default_mode_activated -eq 0 ]]; then
@@ -121,6 +134,10 @@ case $key in
 				default_mode_activated=-1;;
 			-static )
 				default_mode_activated=-1;;
+			-wi4mpi_static )
+				arg=`echo $arg | sed "s/-wi4mpi_static//g"`
+				default_mode_activated=-1
+				static_compilation=1;;
 esac
 shift
 done
@@ -131,5 +148,9 @@ if [[ default_mode_activated -eq 1 ]];then
 	extra_arg=wi4mpi_libs_default_paths.o
 	source_default_mode
 fi
+if [[ static_compilation -eq 0 ]];then
 ${WI4MPI_FC} -I${WI4MPI_ROOT}/include -I${SIZEOF_INCLUDE} -L${WI4MPI_ROOT}/lib -lmpi $arg $extra_arg
+else
+${WI4MPI_FC} -I${WI4MPI_ROOT}/include $arg $extra_arg ${WI4MPI_ROOT}/lib/libmpi.a 
+fi
 exit $?
