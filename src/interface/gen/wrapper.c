@@ -3445,7 +3445,7 @@ static void wrapper_handler_function_f(R_MPI_Comm* comm, int* err, ...)
     //communicator_fn_translation_get(comm_tmp, &hf);
     R_MPI_Comm_get_attr(*comm,WI4MPI_errhandler_key,&hf,&flags);
     printf("coucou errhandler %d %p\n",comm_tmp,comm);
-    ct=MPI_Comm_c2f(comm_tmp);
+    ct=A_MPI_Comm_c2f(comm_tmp);
 if(hf)
     (*hf)(&ct, err, "", NULL);
 }
