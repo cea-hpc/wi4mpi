@@ -3551,6 +3551,7 @@ in_w=0;
 
 A_MPI_Comm ct=A_MPI_Comm_f2c(*comm);
 A_MPI_Errhandler ht=(A_MPI_Errhandler)*errhandler;
+printf("errhandler_get %d %d\n",ct,ht);
 *ret=A_MPI_Errhandler_get(ct,&ht);
 *errhandler=A_MPI_Errhandler_c2f(ht);
 #ifdef DEBUG
@@ -5872,7 +5873,7 @@ void  (*_LOCAL_MPI_Comm_create_errhandler)(void *,int *,int *);
 
 void  A_f_MPI_Comm_create_errhandler(void * comm_errhandler_fn,int * errhandler,int * ret)
 {
-#ifdef DEBUG
+/*#ifdef DEBUG
 printf("entre : A_f_MPI_Comm_create_errhandler\n");
 #endif
 in_w=1;
@@ -5890,6 +5891,8 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Comm_create_errhandler\n");
 #endif
+*/
+    return A_f_MPI_Errhandler_create( comm_errhandler_fn,errhandler,ret);
 }
 void  mpi_comm_get_errhandler_(int *,int *,int *);
 
@@ -5909,7 +5912,7 @@ void  A_f_MPI_Comm_get_errhandler(int * comm,int * errhandler,int * ret)
 #ifdef DEBUG
 printf("entre : A_f_MPI_Comm_get_errhandler\n");
 #endif
-in_w=1;
+/*in_w=1;
 int  ret_tmp=0;
 
 int comm_tmp;
@@ -5923,6 +5926,8 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Comm_get_errhandler\n");
 #endif
+*/
+    return A_f_MPI_Errhandler_get(comm,errhandler,ret); 
 }
 void  mpi_comm_set_errhandler_(int *,int *,int *);
 
@@ -5939,7 +5944,7 @@ void  (*_LOCAL_MPI_Comm_set_errhandler)(int *,int *,int *);
 
 void  A_f_MPI_Comm_set_errhandler(int * comm,int * errhandler,int * ret)
 {
-#ifdef DEBUG
+/*#ifdef DEBUG
 printf("entre : A_f_MPI_Comm_set_errhandler\n");
 #endif
 in_w=1;
@@ -5957,6 +5962,9 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Comm_set_errhandler\n");
 #endif
+*/
+ return A_f_MPI_Errhandler_set(comm,errhandler,ret);
+
 }
 void  mpi_file_get_errhandler_(int *,int *,int *);
 
