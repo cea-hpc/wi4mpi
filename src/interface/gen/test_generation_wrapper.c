@@ -13862,11 +13862,11 @@ int ret_tmp= LOCAL_MPI_Comm_create_errhandler( (R_MPI_Comm_errhandler_function *
 errhandler_ptr_conv_r2a(&errhandler,&errhandler_tmp);
 in_w=0;
 */
-retrun A_MPI_Errhandler_create(comm_errhandler_fn,errhandler);
+return A_MPI_Errhandler_create(comm_errhandler_fn,errhandler);
 #ifdef DEBUG
 printf("sort : A_MPI_Comm_create_errhandler\n");
 #endif
-return error_code_conv_r2a(ret_tmp);
+//return error_code_conv_r2a(ret_tmp);
 }
 int R_MPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function * comm_errhandler_fn,R_MPI_Errhandler * errhandler)
 {
