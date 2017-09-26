@@ -131,6 +131,10 @@ case $key in
 				arg=`echo $arg | sed "s/-wi4mpi_static//g"`
 				default_mode_activated=-1
 				static_compilation=1;;
+			-showme:compile | -showme:link | showme )
+				showme; exit 0
+				;;
+
 esac
 shift
 done
