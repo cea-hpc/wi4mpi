@@ -1135,7 +1135,7 @@ static inline void errhandler_ptr_conv_r2a(A_MPI_Errhandler **errhandler, R_MPI_
 
     }
   errhandler_translation_update(*errhandler, **errhandler_tmp);
-//  errhandler_fn_translation_update(**errhandler, ptr_handler_fn);
+  errhandler_fn_translation_update(**errhandler, ptr_handler_fn);
 }
 //dell
 static inline void errhandler_del(A_MPI_Errhandler *errhandler, R_MPI_Errhandler *errhandler_tmp)

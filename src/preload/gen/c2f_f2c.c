@@ -21,7 +21,9 @@
 //#                                                                      #
 //########################################################################
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <stdio.h>
 #include <dlfcn.h>
 #include "wrapper_f.h"
@@ -1326,7 +1328,9 @@ printf("sort : R_MPI_Status_f2c\n");
 return ret;
 }
 #elif defined(OMPI_INTEL)
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <stdio.h>
 #include <dlfcn.h>
 //char ompi_mpi_comm_null[1024];

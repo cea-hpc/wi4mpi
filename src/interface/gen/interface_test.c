@@ -132,16 +132,16 @@ return ret_tmp;
 }
 
 
-int MPI_Pcontrol(int level);
+int MPI_Pcontrol(int level,...);
 #define MPI_Pcontrol PMPI_Pcontrol
 #pragma weak MPI_Pcontrol=PMPI_Pcontrol
-int (*INTERFACE_LOCAL_MPI_Pcontrol)(int);
+int (*INTERFACE_LOCAL_MPI_Pcontrol)(int,...);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Pcontrol(int);
-extern int INTERF_2_INTEL_CCMPI_Pcontrol(int);
+extern int INTERF_2_OMPI_CCMPI_Pcontrol(int,...);
+extern int INTERF_2_INTEL_CCMPI_Pcontrol(int,...);
 #endif /*WI4MPI_STATIC*/
 
-int PMPI_Pcontrol(int level)
+int PMPI_Pcontrol(int level,...)
 {/*
 #ifdef DEBUG
 printf("entre : PMPI_Pcontrol (interface) \n");
@@ -817,8 +817,8 @@ int MPI_Type_struct(int count,int * array_of_blocklengths,MPI_Aint * array_of_di
 #pragma weak MPI_Type_struct=PMPI_Type_struct
 int (*INTERFACE_LOCAL_MPI_Type_struct)(int,int *,MPI_Aint *,MPI_Datatype *,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_struct(int,int *,MPI_Aint *,MPI_Datatype,MPI_Datatype *);
-extern int INTERF_2_INTEL_CCMPI_Type_struct(int,int *,MPI_Aint *,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_OMPI_CCMPI_Type_struct(int,int *,MPI_Aint *,MPI_Datatype*,MPI_Datatype *);
+extern int INTERF_2_INTEL_CCMPI_Type_struct(int,int *,MPI_Aint *,MPI_Datatype*,MPI_Datatype *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_struct(int count,int * array_of_blocklengths,MPI_Aint * array_of_displacements,MPI_Datatype array_of_types[],MPI_Datatype * newtype)
@@ -4512,16 +4512,16 @@ printf("sort : PMPI_Status_c2f (interface)\n");
 #endif
 return ret_tmp;
 }
-int MPI_Status_f2c(const MPI_Fint * f_status,MPI_Status * c_status);
+int MPI_Status_f2c(MPI_Fint * f_status,MPI_Status * c_status);
 #define MPI_Status_f2c PMPI_Status_f2c
 #pragma weak MPI_Status_f2c=PMPI_Status_f2c
-int (*INTERFACE_LOCAL_MPI_Status_f2c)(const MPI_Fint *,MPI_Status *);
+int (*INTERFACE_LOCAL_MPI_Status_f2c)(MPI_Fint *,MPI_Status *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Status_f2c(const MPI_Fint *,MPI_Status *);
-extern int INTERF_2_INTEL_CCMPI_Status_f2c(const MPI_Fint *,MPI_Status *);
+extern int INTERF_2_OMPI_CCMPI_Status_f2c(MPI_Fint *,MPI_Status *);
+extern int INTERF_2_INTEL_CCMPI_Status_f2c(MPI_Fint *,MPI_Status *);
 #endif /*WI4MPI_STATIC*/
 
-int PMPI_Status_f2c(const MPI_Fint * f_status,MPI_Status * c_status)
+int PMPI_Status_f2c(MPI_Fint * f_status,MPI_Status * c_status)
 {
 #ifdef DEBUG
 printf("entre : PMPI_Status_f2c (interface) \n");
@@ -6657,8 +6657,8 @@ int MPI_Waitany(int count,MPI_Request array_of_requests[],int * indx,MPI_Status 
 #pragma weak MPI_Waitany=PMPI_Waitany
 int (*INTERFACE_LOCAL_MPI_Waitany)(int,MPI_Request *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Waitany(int,MPI_Request,int *,MPI_Status *);
-extern int INTERF_2_INTEL_CCMPI_Waitany(int,MPI_Request,int *,MPI_Status *);
+extern int INTERF_2_OMPI_CCMPI_Waitany(int,MPI_Request*,int *,MPI_Status *);
+extern int INTERF_2_INTEL_CCMPI_Waitany(int,MPI_Request*,int *,MPI_Status *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Waitany(int count,MPI_Request array_of_requests[],int * indx,MPI_Status * status)
@@ -6677,8 +6677,8 @@ int MPI_Testany(int count,MPI_Request array_of_requests[],int * indx,int * flag,
 #pragma weak MPI_Testany=PMPI_Testany
 int (*INTERFACE_LOCAL_MPI_Testany)(int,MPI_Request *,int *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Testany(int,MPI_Request,int *,int *,MPI_Status *);
-extern int INTERF_2_INTEL_CCMPI_Testany(int,MPI_Request,int *,int *,MPI_Status *);
+extern int INTERF_2_OMPI_CCMPI_Testany(int,MPI_Request*,int *,int *,MPI_Status *);
+extern int INTERF_2_INTEL_CCMPI_Testany(int,MPI_Request*,int *,int *,MPI_Status *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Testany(int count,MPI_Request array_of_requests[],int * indx,int * flag,MPI_Status * status)
@@ -6697,8 +6697,8 @@ int MPI_Waitall(int count,MPI_Request array_of_requests[],MPI_Status array_of_st
 #pragma weak MPI_Waitall=PMPI_Waitall
 int (*INTERFACE_LOCAL_MPI_Waitall)(int,MPI_Request *,MPI_Status *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Waitall(int,MPI_Request,MPI_Status);
-extern int INTERF_2_INTEL_CCMPI_Waitall(int,MPI_Request,MPI_Status);
+extern int INTERF_2_OMPI_CCMPI_Waitall(int,MPI_Request*,MPI_Status*);
+extern int INTERF_2_INTEL_CCMPI_Waitall(int,MPI_Request*,MPI_Status*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Waitall(int count,MPI_Request array_of_requests[],MPI_Status array_of_statuses[])
@@ -6717,8 +6717,8 @@ int MPI_Testall(int count,MPI_Request array_of_requests[],int * flag,MPI_Status 
 #pragma weak MPI_Testall=PMPI_Testall
 int (*INTERFACE_LOCAL_MPI_Testall)(int,MPI_Request *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Testall(int,MPI_Request,int *,MPI_Status);
-extern int INTERF_2_INTEL_CCMPI_Testall(int,MPI_Request,int *,MPI_Status);
+extern int INTERF_2_OMPI_CCMPI_Testall(int,MPI_Request*,int *,MPI_Status*);
+extern int INTERF_2_INTEL_CCMPI_Testall(int,MPI_Request*,int *,MPI_Status*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Testall(int count,MPI_Request array_of_requests[],int * flag,MPI_Status array_of_statuses[])
@@ -6737,8 +6737,8 @@ int MPI_Waitsome(int incount,MPI_Request array_of_requests[],int * outcount,int 
 #pragma weak MPI_Waitsome=PMPI_Waitsome
 int (*INTERFACE_LOCAL_MPI_Waitsome)(int,MPI_Request *,int *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Waitsome(int,MPI_Request,int *,int,MPI_Status);
-extern int INTERF_2_INTEL_CCMPI_Waitsome(int,MPI_Request,int *,int,MPI_Status);
+extern int INTERF_2_OMPI_CCMPI_Waitsome(int,MPI_Request*,int *,int*,MPI_Status*);
+extern int INTERF_2_INTEL_CCMPI_Waitsome(int,MPI_Request*,int *,int*,MPI_Status*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Waitsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[])
@@ -6757,8 +6757,8 @@ int MPI_Testsome(int incount,MPI_Request array_of_requests[],int * outcount,int 
 #pragma weak MPI_Testsome=PMPI_Testsome
 int (*INTERFACE_LOCAL_MPI_Testsome)(int,MPI_Request *,int *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Testsome(int,MPI_Request,int *,int,MPI_Status);
-extern int INTERF_2_INTEL_CCMPI_Testsome(int,MPI_Request,int *,int,MPI_Status);
+extern int INTERF_2_OMPI_CCMPI_Testsome(int,MPI_Request*,int *,int*,MPI_Status*);
+extern int INTERF_2_INTEL_CCMPI_Testsome(int,MPI_Request*,int *,int*,MPI_Status*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Testsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[])
@@ -6777,8 +6777,8 @@ int MPI_Startall(int count,MPI_Request array_of_requests[]);
 #pragma weak MPI_Startall=PMPI_Startall
 int (*INTERFACE_LOCAL_MPI_Startall)(int,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Startall(int,MPI_Request);
-extern int INTERF_2_INTEL_CCMPI_Startall(int,MPI_Request);
+extern int INTERF_2_OMPI_CCMPI_Startall(int,MPI_Request*);
+extern int INTERF_2_INTEL_CCMPI_Startall(int,MPI_Request*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Startall(int count,MPI_Request array_of_requests[])
@@ -6797,8 +6797,8 @@ int MPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sen
 #pragma weak MPI_Alltoallw=PMPI_Alltoallw
 int (*INTERFACE_LOCAL_MPI_Alltoallw)(void *,int *,int *,MPI_Datatype *,void *,int *,int *,MPI_Datatype *,MPI_Comm);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Alltoallw(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm);
-extern int INTERF_2_INTEL_CCMPI_Alltoallw(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm);
+extern int INTERF_2_OMPI_CCMPI_Alltoallw(void *,int*,int*,MPI_Datatype*,void *,int*,int*,MPI_Datatype*,MPI_Comm);
+extern int INTERF_2_INTEL_CCMPI_Alltoallw(void *,int*,int*,MPI_Datatype*,void *,int*,int*,MPI_Datatype*,MPI_Comm);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm)
@@ -6817,8 +6817,8 @@ int MPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Dataty
 #pragma weak MPI_Reduce_scatter=PMPI_Reduce_scatter
 int (*INTERFACE_LOCAL_MPI_Reduce_scatter)(void *,void *,int *,MPI_Datatype,MPI_Op,MPI_Comm);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Reduce_scatter(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm);
-extern int INTERF_2_INTEL_CCMPI_Reduce_scatter(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm);
+extern int INTERF_2_OMPI_CCMPI_Reduce_scatter(void *,void *,int*,MPI_Datatype,MPI_Op,MPI_Comm);
+extern int INTERF_2_INTEL_CCMPI_Reduce_scatter(void *,void *,int*,MPI_Datatype,MPI_Op,MPI_Comm);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm)
@@ -6837,8 +6837,8 @@ int MPI_Group_translate_ranks(MPI_Group group1,int n,int ranks1[],MPI_Group grou
 #pragma weak MPI_Group_translate_ranks=PMPI_Group_translate_ranks
 int (*INTERFACE_LOCAL_MPI_Group_translate_ranks)(MPI_Group,int,int *,MPI_Group,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Group_translate_ranks(MPI_Group,int,int,MPI_Group,int);
-extern int INTERF_2_INTEL_CCMPI_Group_translate_ranks(MPI_Group,int,int,MPI_Group,int);
+extern int INTERF_2_OMPI_CCMPI_Group_translate_ranks(MPI_Group,int,int*,MPI_Group,int*);
+extern int INTERF_2_INTEL_CCMPI_Group_translate_ranks(MPI_Group,int,int*,MPI_Group,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Group_translate_ranks(MPI_Group group1,int n,int ranks1[],MPI_Group group2,int ranks2[])
@@ -6857,8 +6857,8 @@ int MPI_Group_incl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup);
 #pragma weak MPI_Group_incl=PMPI_Group_incl
 int (*INTERFACE_LOCAL_MPI_Group_incl)(MPI_Group,int,int *,MPI_Group *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Group_incl(MPI_Group,int,int,MPI_Group *);
-extern int INTERF_2_INTEL_CCMPI_Group_incl(MPI_Group,int,int,MPI_Group *);
+extern int INTERF_2_OMPI_CCMPI_Group_incl(MPI_Group,int,int*,MPI_Group *);
+extern int INTERF_2_INTEL_CCMPI_Group_incl(MPI_Group,int,int*,MPI_Group *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Group_incl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup)
@@ -6877,8 +6877,8 @@ int MPI_Group_excl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup);
 #pragma weak MPI_Group_excl=PMPI_Group_excl
 int (*INTERFACE_LOCAL_MPI_Group_excl)(MPI_Group,int,int *,MPI_Group *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Group_excl(MPI_Group,int,int,MPI_Group *);
-extern int INTERF_2_INTEL_CCMPI_Group_excl(MPI_Group,int,int,MPI_Group *);
+extern int INTERF_2_OMPI_CCMPI_Group_excl(MPI_Group,int,int*,MPI_Group *);
+extern int INTERF_2_INTEL_CCMPI_Group_excl(MPI_Group,int,int*,MPI_Group *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Group_excl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup)
@@ -6897,8 +6897,8 @@ int MPI_Group_range_incl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgr
 #pragma weak MPI_Group_range_incl=PMPI_Group_range_incl
 int (*INTERFACE_LOCAL_MPI_Group_range_incl)(MPI_Group,int,int[][3],MPI_Group *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Group_range_incl(MPI_Group,int,int,MPI_Group *);
-extern int INTERF_2_INTEL_CCMPI_Group_range_incl(MPI_Group,int,int,MPI_Group *);
+extern int INTERF_2_OMPI_CCMPI_Group_range_incl(MPI_Group,int,int[][3],MPI_Group *);
+extern int INTERF_2_INTEL_CCMPI_Group_range_incl(MPI_Group,int,int[][3],MPI_Group *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Group_range_incl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup)
@@ -6917,8 +6917,8 @@ int MPI_Group_range_excl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgr
 #pragma weak MPI_Group_range_excl=PMPI_Group_range_excl
 int (*INTERFACE_LOCAL_MPI_Group_range_excl)(MPI_Group,int,int[][3],MPI_Group *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Group_range_excl(MPI_Group,int,int,MPI_Group *);
-extern int INTERF_2_INTEL_CCMPI_Group_range_excl(MPI_Group,int,int,MPI_Group *);
+extern int INTERF_2_OMPI_CCMPI_Group_range_excl(MPI_Group,int,int[][3],MPI_Group *);
+extern int INTERF_2_INTEL_CCMPI_Group_range_excl(MPI_Group,int,int[][3],MPI_Group *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Group_range_excl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup)
@@ -6937,8 +6937,8 @@ int MPI_Cart_create(MPI_Comm comm_old,int ndims,int dims[],int periods[],int reo
 #pragma weak MPI_Cart_create=PMPI_Cart_create
 int (*INTERFACE_LOCAL_MPI_Cart_create)(MPI_Comm,int,int *,int *,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Cart_create(MPI_Comm,int,int,int,int,MPI_Comm *);
-extern int INTERF_2_INTEL_CCMPI_Cart_create(MPI_Comm,int,int,int,int,MPI_Comm *);
+extern int INTERF_2_OMPI_CCMPI_Cart_create(MPI_Comm,int,int*,int*,int,MPI_Comm *);
+extern int INTERF_2_INTEL_CCMPI_Cart_create(MPI_Comm,int,int*,int*,int,MPI_Comm *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Cart_create(MPI_Comm comm_old,int ndims,int dims[],int periods[],int reorder,MPI_Comm * comm_cart)
@@ -6957,8 +6957,8 @@ int MPI_Dims_create(int nnodes,int ndims,int dims[]);
 #pragma weak MPI_Dims_create=PMPI_Dims_create
 int (*INTERFACE_LOCAL_MPI_Dims_create)(int,int,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Dims_create(int,int,int);
-extern int INTERF_2_INTEL_CCMPI_Dims_create(int,int,int);
+extern int INTERF_2_OMPI_CCMPI_Dims_create(int,int,int*);
+extern int INTERF_2_INTEL_CCMPI_Dims_create(int,int,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Dims_create(int nnodes,int ndims,int dims[])
@@ -6977,8 +6977,8 @@ int MPI_Graph_create(MPI_Comm comm_old,int nnodes,int indx[],int edges[],int reo
 #pragma weak MPI_Graph_create=PMPI_Graph_create
 int (*INTERFACE_LOCAL_MPI_Graph_create)(MPI_Comm,int,int *,int *,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Graph_create(MPI_Comm,int,int,int,int,MPI_Comm *);
-extern int INTERF_2_INTEL_CCMPI_Graph_create(MPI_Comm,int,int,int,int,MPI_Comm *);
+extern int INTERF_2_OMPI_CCMPI_Graph_create(MPI_Comm,int,int*,int*,int,MPI_Comm *);
+extern int INTERF_2_INTEL_CCMPI_Graph_create(MPI_Comm,int,int*,int*,int,MPI_Comm *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Graph_create(MPI_Comm comm_old,int nnodes,int indx[],int edges[],int reorder,MPI_Comm * comm_graph)
@@ -6997,8 +6997,8 @@ int MPI_Graph_get(MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[]
 #pragma weak MPI_Graph_get=PMPI_Graph_get
 int (*INTERFACE_LOCAL_MPI_Graph_get)(MPI_Comm,int,int,int *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Graph_get(MPI_Comm,int,int,int,int);
-extern int INTERF_2_INTEL_CCMPI_Graph_get(MPI_Comm,int,int,int,int);
+extern int INTERF_2_OMPI_CCMPI_Graph_get(MPI_Comm,int,int,int*,int*);
+extern int INTERF_2_INTEL_CCMPI_Graph_get(MPI_Comm,int,int,int*,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Graph_get(MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[])
@@ -7017,8 +7017,8 @@ int MPI_Cart_get(MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[]
 #pragma weak MPI_Cart_get=PMPI_Cart_get
 int (*INTERFACE_LOCAL_MPI_Cart_get)(MPI_Comm,int,int *,int *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Cart_get(MPI_Comm,int,int,int,int);
-extern int INTERF_2_INTEL_CCMPI_Cart_get(MPI_Comm,int,int,int,int);
+extern int INTERF_2_OMPI_CCMPI_Cart_get(MPI_Comm,int,int*,int*,int*);
+extern int INTERF_2_INTEL_CCMPI_Cart_get(MPI_Comm,int,int*,int*,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Cart_get(MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[])
@@ -7037,8 +7037,8 @@ int MPI_Cart_rank(MPI_Comm comm,int coords[],int * rank);
 #pragma weak MPI_Cart_rank=PMPI_Cart_rank
 int (*INTERFACE_LOCAL_MPI_Cart_rank)(MPI_Comm,int *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Cart_rank(MPI_Comm,int,int *);
-extern int INTERF_2_INTEL_CCMPI_Cart_rank(MPI_Comm,int,int *);
+extern int INTERF_2_OMPI_CCMPI_Cart_rank(MPI_Comm,int*,int *);
+extern int INTERF_2_INTEL_CCMPI_Cart_rank(MPI_Comm,int*,int *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Cart_rank(MPI_Comm comm,int coords[],int * rank)
@@ -7057,8 +7057,8 @@ int MPI_Cart_coords(MPI_Comm comm,int rank,int maxdims,int coords[]);
 #pragma weak MPI_Cart_coords=PMPI_Cart_coords
 int (*INTERFACE_LOCAL_MPI_Cart_coords)(MPI_Comm,int,int,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Cart_coords(MPI_Comm,int,int,int);
-extern int INTERF_2_INTEL_CCMPI_Cart_coords(MPI_Comm,int,int,int);
+extern int INTERF_2_OMPI_CCMPI_Cart_coords(MPI_Comm,int,int,int*);
+extern int INTERF_2_INTEL_CCMPI_Cart_coords(MPI_Comm,int,int,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Cart_coords(MPI_Comm comm,int rank,int maxdims,int coords[])
@@ -7077,8 +7077,8 @@ int MPI_Graph_neighbors(MPI_Comm comm,int rank,int maxneighbors,int neighbors[])
 #pragma weak MPI_Graph_neighbors=PMPI_Graph_neighbors
 int (*INTERFACE_LOCAL_MPI_Graph_neighbors)(MPI_Comm,int,int,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Graph_neighbors(MPI_Comm,int,int,int);
-extern int INTERF_2_INTEL_CCMPI_Graph_neighbors(MPI_Comm,int,int,int);
+extern int INTERF_2_OMPI_CCMPI_Graph_neighbors(MPI_Comm,int,int,int*);
+extern int INTERF_2_INTEL_CCMPI_Graph_neighbors(MPI_Comm,int,int,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Graph_neighbors(MPI_Comm comm,int rank,int maxneighbors,int neighbors[])
@@ -7097,8 +7097,8 @@ int MPI_Cart_sub(MPI_Comm comm,int remain_dims[],MPI_Comm * newcomm);
 #pragma weak MPI_Cart_sub=PMPI_Cart_sub
 int (*INTERFACE_LOCAL_MPI_Cart_sub)(MPI_Comm,int *,MPI_Comm *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Cart_sub(MPI_Comm,int,MPI_Comm *);
-extern int INTERF_2_INTEL_CCMPI_Cart_sub(MPI_Comm,int,MPI_Comm *);
+extern int INTERF_2_OMPI_CCMPI_Cart_sub(MPI_Comm,int*,MPI_Comm *);
+extern int INTERF_2_INTEL_CCMPI_Cart_sub(MPI_Comm,int*,MPI_Comm *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Cart_sub(MPI_Comm comm,int remain_dims[],MPI_Comm * newcomm)
@@ -7117,8 +7117,8 @@ int MPI_Cart_map(MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank)
 #pragma weak MPI_Cart_map=PMPI_Cart_map
 int (*INTERFACE_LOCAL_MPI_Cart_map)(MPI_Comm,int,int *,int *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Cart_map(MPI_Comm,int,int,int,int *);
-extern int INTERF_2_INTEL_CCMPI_Cart_map(MPI_Comm,int,int,int,int *);
+extern int INTERF_2_OMPI_CCMPI_Cart_map(MPI_Comm,int,int*,int*,int *);
+extern int INTERF_2_INTEL_CCMPI_Cart_map(MPI_Comm,int,int*,int*,int *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Cart_map(MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank)
@@ -7137,8 +7137,8 @@ int MPI_Graph_map(MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank)
 #pragma weak MPI_Graph_map=PMPI_Graph_map
 int (*INTERFACE_LOCAL_MPI_Graph_map)(MPI_Comm,int,int *,int *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Graph_map(MPI_Comm,int,int,int,int *);
-extern int INTERF_2_INTEL_CCMPI_Graph_map(MPI_Comm,int,int,int,int *);
+extern int INTERF_2_OMPI_CCMPI_Graph_map(MPI_Comm,int,int*,int*,int *);
+extern int INTERF_2_INTEL_CCMPI_Graph_map(MPI_Comm,int,int*,int*,int *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Graph_map(MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank)
@@ -7157,8 +7157,8 @@ int MPI_Comm_spawn(char * command,char * argv[],int maxprocs,MPI_Info info,int r
 #pragma weak MPI_Comm_spawn=PMPI_Comm_spawn
 int (*INTERFACE_LOCAL_MPI_Comm_spawn)(char *,char * *,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Comm_spawn(char *,char *,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int);
-extern int INTERF_2_INTEL_CCMPI_Comm_spawn(char *,char *,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int);
+extern int INTERF_2_OMPI_CCMPI_Comm_spawn(char *,char **,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int*);
+extern int INTERF_2_INTEL_CCMPI_Comm_spawn(char *,char **,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Comm_spawn(char * command,char * argv[],int maxprocs,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[])
@@ -7177,8 +7177,8 @@ int MPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_o
 #pragma weak MPI_Comm_spawn_multiple=PMPI_Comm_spawn_multiple
 int (*INTERFACE_LOCAL_MPI_Comm_spawn_multiple)(int,char * *,char ** *,int *,MPI_Info *,int,MPI_Comm,MPI_Comm *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Comm_spawn_multiple(int,char *,char **,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int);
-extern int INTERF_2_INTEL_CCMPI_Comm_spawn_multiple(int,char *,char **,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int);
+extern int INTERF_2_OMPI_CCMPI_Comm_spawn_multiple(int,char **,char ***,int*,MPI_Info*,int,MPI_Comm,MPI_Comm *,int*);
+extern int INTERF_2_INTEL_CCMPI_Comm_spawn_multiple(int,char **,char ***,int*,MPI_Info*,int,MPI_Comm,MPI_Comm *,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_of_argv[],int array_of_maxprocs[],MPI_Info array_of_info[],int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[])
@@ -7197,8 +7197,8 @@ int MPI_Type_get_contents(MPI_Datatype datatype,int max_integers,int max_address
 #pragma weak MPI_Type_get_contents=PMPI_Type_get_contents
 int (*INTERFACE_LOCAL_MPI_Type_get_contents)(MPI_Datatype,int,int,int,int *,MPI_Aint *,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_get_contents(MPI_Datatype,int,int,int,int,MPI_Aint,MPI_Datatype);
-extern int INTERF_2_INTEL_CCMPI_Type_get_contents(MPI_Datatype,int,int,int,int,MPI_Aint,MPI_Datatype);
+extern int INTERF_2_OMPI_CCMPI_Type_get_contents(MPI_Datatype,int,int,int,int*,MPI_Aint*,MPI_Datatype*);
+extern int INTERF_2_INTEL_CCMPI_Type_get_contents(MPI_Datatype,int,int,int,int*,MPI_Aint*,MPI_Datatype*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_get_contents(MPI_Datatype datatype,int max_integers,int max_addresses,int max_datatypes,int array_of_integers[],MPI_Aint array_of_addresses[],MPI_Datatype array_of_datatypes[])
@@ -7217,8 +7217,8 @@ int MPI_Pack_external(char datarep[],void * inbuf,int incount,MPI_Datatype datat
 #pragma weak MPI_Pack_external=PMPI_Pack_external
 int (*INTERFACE_LOCAL_MPI_Pack_external)(char *,void *,int,MPI_Datatype,void *,MPI_Aint,MPI_Aint *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Pack_external(char,void *,int,MPI_Datatype,void *,MPI_Aint,MPI_Aint *);
-extern int INTERF_2_INTEL_CCMPI_Pack_external(char,void *,int,MPI_Datatype,void *,MPI_Aint,MPI_Aint *);
+extern int INTERF_2_OMPI_CCMPI_Pack_external(char*,void *,int,MPI_Datatype,void *,MPI_Aint,MPI_Aint *);
+extern int INTERF_2_INTEL_CCMPI_Pack_external(char*,void *,int,MPI_Datatype,void *,MPI_Aint,MPI_Aint *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Pack_external(char datarep[],void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,MPI_Aint outsize,MPI_Aint * position)
@@ -7237,8 +7237,8 @@ int MPI_Pack_external_size(char datarep[],int incount,MPI_Datatype datatype,MPI_
 #pragma weak MPI_Pack_external_size=PMPI_Pack_external_size
 int (*INTERFACE_LOCAL_MPI_Pack_external_size)(char *,int,MPI_Datatype,MPI_Aint *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Pack_external_size(char,int,MPI_Datatype,MPI_Aint *);
-extern int INTERF_2_INTEL_CCMPI_Pack_external_size(char,int,MPI_Datatype,MPI_Aint *);
+extern int INTERF_2_OMPI_CCMPI_Pack_external_size(char*,int,MPI_Datatype,MPI_Aint *);
+extern int INTERF_2_INTEL_CCMPI_Pack_external_size(char*,int,MPI_Datatype,MPI_Aint *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Pack_external_size(char datarep[],int incount,MPI_Datatype datatype,MPI_Aint * size)
@@ -7257,8 +7257,8 @@ int MPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],int
 #pragma weak MPI_Type_create_darray=PMPI_Type_create_darray
 int (*INTERFACE_LOCAL_MPI_Type_create_darray)(int,int,int,int *,int *,int *,int *,int,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_create_darray(int,int,int,int,int,int,int,int,MPI_Datatype,MPI_Datatype *);
-extern int INTERF_2_INTEL_CCMPI_Type_create_darray(int,int,int,int,int,int,int,int,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_OMPI_CCMPI_Type_create_darray(int,int,int,int*,int*,int*,int*,int,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_INTEL_CCMPI_Type_create_darray(int,int,int,int*,int*,int*,int*,int,MPI_Datatype,MPI_Datatype *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],int array_of_distribs[],int array_of_dargs[],int array_of_psizes[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype)
@@ -7277,8 +7277,8 @@ int MPI_Type_create_hindexed(int count,int array_of_blocklengths[],MPI_Aint arra
 #pragma weak MPI_Type_create_hindexed=PMPI_Type_create_hindexed
 int (*INTERFACE_LOCAL_MPI_Type_create_hindexed)(int,int *,MPI_Aint *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_create_hindexed(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
-extern int INTERF_2_INTEL_CCMPI_Type_create_hindexed(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_OMPI_CCMPI_Type_create_hindexed(int,int*,MPI_Aint*,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_INTEL_CCMPI_Type_create_hindexed(int,int*,MPI_Aint*,MPI_Datatype,MPI_Datatype *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_create_hindexed(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype)
@@ -7297,8 +7297,8 @@ int MPI_Type_create_indexed_block(int count,int blocklength,int array_of_displac
 #pragma weak MPI_Type_create_indexed_block=PMPI_Type_create_indexed_block
 int (*INTERFACE_LOCAL_MPI_Type_create_indexed_block)(int,int,int *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_create_indexed_block(int,int,int,MPI_Datatype,MPI_Datatype *);
-extern int INTERF_2_INTEL_CCMPI_Type_create_indexed_block(int,int,int,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_OMPI_CCMPI_Type_create_indexed_block(int,int,int*,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_INTEL_CCMPI_Type_create_indexed_block(int,int,int*,MPI_Datatype,MPI_Datatype *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_create_indexed_block(int count,int blocklength,int array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype)
@@ -7317,8 +7317,8 @@ int MPI_Type_create_hindexed_block(int count,int blocklength,MPI_Aint array_of_d
 #pragma weak MPI_Type_create_hindexed_block=PMPI_Type_create_hindexed_block
 int (*INTERFACE_LOCAL_MPI_Type_create_hindexed_block)(int,int,MPI_Aint *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_create_hindexed_block(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
-extern int INTERF_2_INTEL_CCMPI_Type_create_hindexed_block(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_OMPI_CCMPI_Type_create_hindexed_block(int,int,MPI_Aint*,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_INTEL_CCMPI_Type_create_hindexed_block(int,int,MPI_Aint*,MPI_Datatype,MPI_Datatype *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_create_hindexed_block(int count,int blocklength,MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype)
@@ -7337,8 +7337,8 @@ int MPI_Type_create_struct(int count,int array_of_blocklengths[],MPI_Aint array_
 #pragma weak MPI_Type_create_struct=PMPI_Type_create_struct
 int (*INTERFACE_LOCAL_MPI_Type_create_struct)(int,int *,MPI_Aint *,MPI_Datatype *,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_create_struct(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
-extern int INTERF_2_INTEL_CCMPI_Type_create_struct(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_OMPI_CCMPI_Type_create_struct(int,int*,MPI_Aint*,MPI_Datatype*,MPI_Datatype *);
+extern int INTERF_2_INTEL_CCMPI_Type_create_struct(int,int*,MPI_Aint*,MPI_Datatype*,MPI_Datatype *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_create_struct(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype array_of_types[],MPI_Datatype * newtype)
@@ -7357,8 +7357,8 @@ int MPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsize
 #pragma weak MPI_Type_create_subarray=PMPI_Type_create_subarray
 int (*INTERFACE_LOCAL_MPI_Type_create_subarray)(int,int *,int *,int *,int,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Type_create_subarray(int,int,int,int,int,MPI_Datatype,MPI_Datatype *);
-extern int INTERF_2_INTEL_CCMPI_Type_create_subarray(int,int,int,int,int,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_OMPI_CCMPI_Type_create_subarray(int,int*,int*,int*,int,MPI_Datatype,MPI_Datatype *);
+extern int INTERF_2_INTEL_CCMPI_Type_create_subarray(int,int*,int*,int*,int,MPI_Datatype,MPI_Datatype *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsizes[],int array_of_starts[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype)
@@ -7377,8 +7377,8 @@ int MPI_Unpack_external(char datarep[],void * inbuf,MPI_Aint insize,MPI_Aint * p
 #pragma weak MPI_Unpack_external=PMPI_Unpack_external
 int (*INTERFACE_LOCAL_MPI_Unpack_external)(char *,void *,MPI_Aint,MPI_Aint *,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Unpack_external(char,void *,MPI_Aint,MPI_Aint *,void *,int,MPI_Datatype);
-extern int INTERF_2_INTEL_CCMPI_Unpack_external(char,void *,MPI_Aint,MPI_Aint *,void *,int,MPI_Datatype);
+extern int INTERF_2_OMPI_CCMPI_Unpack_external(char*,void *,MPI_Aint,MPI_Aint *,void *,int,MPI_Datatype);
+extern int INTERF_2_INTEL_CCMPI_Unpack_external(char*,void *,MPI_Aint,MPI_Aint *,void *,int,MPI_Datatype);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Unpack_external(char datarep[],void * inbuf,MPI_Aint insize,MPI_Aint * position,void * outbuf,int outcount,MPI_Datatype datatype)
@@ -7397,8 +7397,8 @@ int MPI_Dist_graph_create_adjacent(MPI_Comm comm_old,int indegree,int sources[],
 #pragma weak MPI_Dist_graph_create_adjacent=PMPI_Dist_graph_create_adjacent
 int (*INTERFACE_LOCAL_MPI_Dist_graph_create_adjacent)(MPI_Comm,int,int *,int *,int,int *,int *,MPI_Info,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Dist_graph_create_adjacent(MPI_Comm,int,int,int *,int,int,int *,MPI_Info,int,MPI_Comm *);
-extern int INTERF_2_INTEL_CCMPI_Dist_graph_create_adjacent(MPI_Comm,int,int,int *,int,int,int *,MPI_Info,int,MPI_Comm *);
+extern int INTERF_2_OMPI_CCMPI_Dist_graph_create_adjacent(MPI_Comm,int,int*,int *,int,int*,int *,MPI_Info,int,MPI_Comm *);
+extern int INTERF_2_INTEL_CCMPI_Dist_graph_create_adjacent(MPI_Comm,int,int*,int *,int,int*,int *,MPI_Info,int,MPI_Comm *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Dist_graph_create_adjacent(MPI_Comm comm_old,int indegree,int sources[],int * sourceweights,int outdegree,int destinations[],int * destweights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph)
@@ -7417,8 +7417,8 @@ int MPI_Dist_graph_create(MPI_Comm comm_old,int n,int sources[],int degrees[],in
 #pragma weak MPI_Dist_graph_create=PMPI_Dist_graph_create
 int (*INTERFACE_LOCAL_MPI_Dist_graph_create)(MPI_Comm,int,int *,int *,int *,int *,MPI_Info,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Dist_graph_create(MPI_Comm,int,int,int,int,int *,MPI_Info,int,MPI_Comm *);
-extern int INTERF_2_INTEL_CCMPI_Dist_graph_create(MPI_Comm,int,int,int,int,int *,MPI_Info,int,MPI_Comm *);
+extern int INTERF_2_OMPI_CCMPI_Dist_graph_create(MPI_Comm,int,int*,int*,int*,int *,MPI_Info,int,MPI_Comm *);
+extern int INTERF_2_INTEL_CCMPI_Dist_graph_create(MPI_Comm,int,int*,int*,int*,int *,MPI_Info,int,MPI_Comm *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Dist_graph_create(MPI_Comm comm_old,int n,int sources[],int degrees[],int destinations[],int * weights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph)
@@ -7437,8 +7437,8 @@ int MPI_Dist_graph_neighbors(MPI_Comm comm,int maxindegree,int sources[],int * s
 #pragma weak MPI_Dist_graph_neighbors=PMPI_Dist_graph_neighbors
 int (*INTERFACE_LOCAL_MPI_Dist_graph_neighbors)(MPI_Comm,int,int *,int *,int,int *,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Dist_graph_neighbors(MPI_Comm,int,int,int *,int,int,int *);
-extern int INTERF_2_INTEL_CCMPI_Dist_graph_neighbors(MPI_Comm,int,int,int *,int,int,int *);
+extern int INTERF_2_OMPI_CCMPI_Dist_graph_neighbors(MPI_Comm,int,int*,int *,int,int*,int *);
+extern int INTERF_2_INTEL_CCMPI_Dist_graph_neighbors(MPI_Comm,int,int*,int *,int,int*,int *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Dist_graph_neighbors(MPI_Comm comm,int maxindegree,int sources[],int * sourceweights,int maxoutdegree,int destinations[],int * destweights)
@@ -7457,8 +7457,8 @@ int MPI_Igatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvb
 #pragma weak MPI_Igatherv=PMPI_Igatherv
 int (*INTERFACE_LOCAL_MPI_Igatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Igatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Igatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Igatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,int,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Igatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Igatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request)
@@ -7477,8 +7477,8 @@ int MPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,MPI_Datatype send
 #pragma weak MPI_Iscatterv=PMPI_Iscatterv
 int (*INTERFACE_LOCAL_MPI_Iscatterv)(void *,int *,int *,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Iscatterv(void *,int,int *,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Iscatterv(void *,int,int *,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Iscatterv(void *,int*,int *,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Iscatterv(void *,int*,int *,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request)
@@ -7497,8 +7497,8 @@ int MPI_Iallgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * re
 #pragma weak MPI_Iallgatherv=PMPI_Iallgatherv
 int (*INTERFACE_LOCAL_MPI_Iallgatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Iallgatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Iallgatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Iallgatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Iallgatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Iallgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
@@ -7537,8 +7537,8 @@ int MPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype se
 #pragma weak MPI_Ialltoallw=PMPI_Ialltoallw
 int (*INTERFACE_LOCAL_MPI_Ialltoallw)(void *,int *,int *,MPI_Datatype *,void *,int *,int *,MPI_Datatype *,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Ialltoallw(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Ialltoallw(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Ialltoallw(void *,int *,int*,MPI_Datatype*,void *,int*,int*,MPI_Datatype*,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Ialltoallw(void *,int *,int*,MPI_Datatype*,void *,int*,int*,MPI_Datatype*,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request)
@@ -7557,8 +7557,8 @@ int MPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datat
 #pragma weak MPI_Ireduce_scatter=PMPI_Ireduce_scatter
 int (*INTERFACE_LOCAL_MPI_Ireduce_scatter)(void *,void *,int *,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Ireduce_scatter(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Ireduce_scatter(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Ireduce_scatter(void *,void *,int*,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Ireduce_scatter(void *,void *,int*,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request)
@@ -7577,8 +7577,8 @@ int MPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,
 #pragma weak MPI_Ineighbor_allgatherv=PMPI_Ineighbor_allgatherv
 int (*INTERFACE_LOCAL_MPI_Ineighbor_allgatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Ineighbor_allgatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Ineighbor_allgatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Ineighbor_allgatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Ineighbor_allgatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
@@ -7597,8 +7597,8 @@ int MPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Da
 #pragma weak MPI_Ineighbor_alltoallv=PMPI_Ineighbor_alltoallv
 int (*INTERFACE_LOCAL_MPI_Ineighbor_alltoallv)(void *,int *,int *,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Ineighbor_alltoallv(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Ineighbor_alltoallv(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Ineighbor_alltoallv(void *,int*,int*,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Ineighbor_alltoallv(void *,int*,int*,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
@@ -7617,8 +7617,8 @@ int MPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],M
 #pragma weak MPI_Ineighbor_alltoallw=PMPI_Ineighbor_alltoallw
 int (*INTERFACE_LOCAL_MPI_Ineighbor_alltoallw)(void *,int *,MPI_Aint *,MPI_Datatype *,void *,int *,MPI_Aint *,MPI_Datatype *,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Ineighbor_alltoallw(void *,int,MPI_Aint,MPI_Datatype,void *,int,MPI_Aint,MPI_Datatype,MPI_Comm,MPI_Request *);
-extern int INTERF_2_INTEL_CCMPI_Ineighbor_alltoallw(void *,int,MPI_Aint,MPI_Datatype,void *,int,MPI_Aint,MPI_Datatype,MPI_Comm,MPI_Request *);
+extern int INTERF_2_OMPI_CCMPI_Ineighbor_alltoallw(void *,int*,MPI_Aint*,MPI_Datatype*,void *,int*,MPI_Aint*,MPI_Datatype*,MPI_Comm,MPI_Request *);
+extern int INTERF_2_INTEL_CCMPI_Ineighbor_alltoallw(void *,int*,MPI_Aint*,MPI_Datatype*,void *,int*,MPI_Aint*,MPI_Datatype*,MPI_Comm,MPI_Request *);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request)
@@ -7637,8 +7637,8 @@ int MPI_Neighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,v
 #pragma weak MPI_Neighbor_allgatherv=PMPI_Neighbor_allgatherv
 int (*INTERFACE_LOCAL_MPI_Neighbor_allgatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Neighbor_allgatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm);
-extern int INTERF_2_INTEL_CCMPI_Neighbor_allgatherv(void *,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm);
+extern int INTERF_2_OMPI_CCMPI_Neighbor_allgatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm);
+extern int INTERF_2_INTEL_CCMPI_Neighbor_allgatherv(void *,int,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Neighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm)
@@ -7657,8 +7657,8 @@ int MPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Dat
 #pragma weak MPI_Neighbor_alltoallv=PMPI_Neighbor_alltoallv
 int (*INTERFACE_LOCAL_MPI_Neighbor_alltoallv)(void *,int *,int *,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Neighbor_alltoallv(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm);
-extern int INTERF_2_INTEL_CCMPI_Neighbor_alltoallv(void *,int,int,MPI_Datatype,void *,int,int,MPI_Datatype,MPI_Comm);
+extern int INTERF_2_OMPI_CCMPI_Neighbor_alltoallv(void *,int*,int*,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm);
+extern int INTERF_2_INTEL_CCMPI_Neighbor_alltoallv(void *,int*,int*,MPI_Datatype,void *,int*,int*,MPI_Datatype,MPI_Comm);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm)
@@ -7677,8 +7677,8 @@ int MPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MP
 #pragma weak MPI_Neighbor_alltoallw=PMPI_Neighbor_alltoallw
 int (*INTERFACE_LOCAL_MPI_Neighbor_alltoallw)(void *,int *,MPI_Aint *,MPI_Datatype *,void *,int *,MPI_Aint *,MPI_Datatype *,MPI_Comm);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Neighbor_alltoallw(void *,int,MPI_Aint,MPI_Datatype,void *,int,MPI_Aint,MPI_Datatype,MPI_Comm);
-extern int INTERF_2_INTEL_CCMPI_Neighbor_alltoallw(void *,int,MPI_Aint,MPI_Datatype,void *,int,MPI_Aint,MPI_Datatype,MPI_Comm);
+extern int INTERF_2_OMPI_CCMPI_Neighbor_alltoallw(void *,int*,MPI_Aint*,MPI_Datatype*,void *,int*,MPI_Aint*,MPI_Datatype*,MPI_Comm);
+extern int INTERF_2_INTEL_CCMPI_Neighbor_alltoallw(void *,int*,MPI_Aint*,MPI_Datatype*,void *,int*,MPI_Aint*,MPI_Datatype*,MPI_Comm);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm)
@@ -7697,8 +7697,8 @@ int MPI_T_category_get_cvars(int cat_index,int len,int indices[]);
 #pragma weak MPI_T_category_get_cvars=PMPI_T_category_get_cvars
 int (*INTERFACE_LOCAL_MPI_T_category_get_cvars)(int,int,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_T_category_get_cvars(int,int,int);
-extern int INTERF_2_INTEL_CCMPI_T_category_get_cvars(int,int,int);
+extern int INTERF_2_OMPI_CCMPI_T_category_get_cvars(int,int,int*);
+extern int INTERF_2_INTEL_CCMPI_T_category_get_cvars(int,int,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_T_category_get_cvars(int cat_index,int len,int indices[])
@@ -7717,8 +7717,8 @@ int MPI_T_category_get_pvars(int cat_index,int len,int indices[]);
 #pragma weak MPI_T_category_get_pvars=PMPI_T_category_get_pvars
 int (*INTERFACE_LOCAL_MPI_T_category_get_pvars)(int,int,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_T_category_get_pvars(int,int,int);
-extern int INTERF_2_INTEL_CCMPI_T_category_get_pvars(int,int,int);
+extern int INTERF_2_OMPI_CCMPI_T_category_get_pvars(int,int,int*);
+extern int INTERF_2_INTEL_CCMPI_T_category_get_pvars(int,int,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_T_category_get_pvars(int cat_index,int len,int indices[])
@@ -7737,8 +7737,8 @@ int MPI_T_category_get_categories(int cat_index,int len,int indices[]);
 #pragma weak MPI_T_category_get_categories=PMPI_T_category_get_categories
 int (*INTERFACE_LOCAL_MPI_T_category_get_categories)(int,int,int *);
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_T_category_get_categories(int,int,int);
-extern int INTERF_2_INTEL_CCMPI_T_category_get_categories(int,int,int);
+extern int INTERF_2_OMPI_CCMPI_T_category_get_categories(int,int,int*);
+extern int INTERF_2_INTEL_CCMPI_T_category_get_categories(int,int,int*);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_T_category_get_categories(int cat_index,int len,int indices[])
@@ -8353,16 +8353,18 @@ printf("sort : PMPI_T_category_changed (interface)\n");
 return ret_tmp;
 }
 #ifdef WI4MPI_STATIC
-extern int INTERF_2_OMPI_CCMPI_Keyval_create(void);extern int INTERF_2_OMPI_CCMPI_Keyval_free(void);
-extern int INTERF_2_OMPI_CCMPI_Comm_create_keyval(void);
-extern int INTERF_2_OMPI_CCMPI_Comm_free_keyval(void);
-extern int INTERF_2_OMPI_CCMPI_Win_get_attr(void);
-extern int INTERF_2_OMPI_CCMPI_Win_set_attr(void);
-extern int INTERF_2_INTEL_CCMPI_Keyval_create(void);extern int INTERF_2_INTEL_CCMPI_Keyval_free(void);
-extern int INTERF_2_INTEL_CCMPI_Comm_create_keyval(void);
-extern int INTERF_2_INTEL_CCMPI_Comm_free_keyval(void);
-extern int INTERF_2_INTEL_CCMPI_Win_get_attr(void);
-extern int INTERF_2_INTEL_CCMPI_Win_set_attr(void);
+extern int INTERF_2_OMPI_CCMPI_Keyval_create(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state);
+extern int INTERF_2_OMPI_CCMPI_Keyval_free(int*);
+extern int INTERF_2_OMPI_CCMPI_Comm_create_keyval(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state);
+extern int INTERF_2_OMPI_CCMPI_Comm_free_keyval(int*);
+extern int INTERF_2_OMPI_CCMPI_Win_get_attr(MPI_Win,int, void *, int *);
+extern int INTERF_2_OMPI_CCMPI_Win_set_attr(MPI_Win,int, void *);
+extern int INTERF_2_INTEL_CCMPI_Keyval_create(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state);
+extern int INTERF_2_INTEL_CCMPI_Keyval_free(int*);
+extern int INTERF_2_INTEL_CCMPI_Comm_create_keyval(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state);
+extern int INTERF_2_INTEL_CCMPI_Comm_free_keyval(int*);
+extern int INTERF_2_INTEL_CCMPI_Win_get_attr(MPI_Win,int, void *, int *);
+extern int INTERF_2_INTEL_CCMPI_Win_set_attr(MPI_Win,int, void *);
 #endif /*WI4MPI_STATIC*/
 int wi4mpi__init__C=0;
 extern int wi4mpi__init__F;

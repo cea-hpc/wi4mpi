@@ -322,7 +322,7 @@ void wrapper_handler_function(R_MPI_Comm* comm, int* err, ...)
     comm_conv_r2a_static(&comm_tmp,comm);
     //communicator_fn_translation_get(comm_tmp, &hf);
     R_MPI_Comm_get_attr(*comm,WI4MPI_errhandler_key,&hf,&flags);
-    printf("coucou errhandler %p\n",comm_tmp);
+    //printf("coucou errhandler %p\n",comm_tmp);
 if(hf)
     (*hf)(&comm_tmp, err, "", NULL);
 }
@@ -445,17 +445,17 @@ int wrapper_copy_function(R_MPI_Comm comm, int keyval, void* extra_state,
     comm_conv_r2a_static(&comm_tmp, &comm);
     myKeyval_functions_t *fns=myKeyval_translation_get(keyval);
    
-        A_MPI_Copy_function* ptr_copy_func =(fns?myKeyval_translation_get(keyval)->cp_function:A_MPI_COMM_DUP_FN);
+        A_MPI_Copy_function* ptr_copy_func =(fns?myKeyval_translation_get(keyval)->cp_function:( A_MPI_Copy_function*)A_MPI_COMM_DUP_FN);
     if(fns)
         myKeyval_translation_get(keyval)->ref++;
 //    printf("duped %d %p %d %p\n", keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
-    if(ptr_copy_func==A_MPI_NULL_COPY_FN||ptr_copy_func==A_MPI_COMM_NULL_DELETE_FN )
+    if(ptr_copy_func== (A_MPI_Copy_function*)A_MPI_NULL_COPY_FN||ptr_copy_func== (A_MPI_Copy_function*)A_MPI_COMM_NULL_DELETE_FN )
         {
             *flag=0;
     errhandler_locks_re();
             return R_MPI_SUCCESS;
         }else
-    if(ptr_copy_func==A_MPI_COMM_DUP_FN)
+    if(ptr_copy_func== (A_MPI_Copy_function*)A_MPI_COMM_DUP_FN)
         {
             *((void**) attribute_val_out) = attribute_val_in;
             *flag=1;
@@ -7841,18 +7841,19 @@ printf("entre : A_MPI_Errhandler_set\n");
 #endif
 in_w=1;
 
-    errhandler_locks_ac();
+errhandler_locks_ac();
 R_MPI_Comm comm_tmp;
-void *ptr_errhandler_func;
 comm_conv_a2r(&comm,&comm_tmp);
+A_MPI_Handler_function *ptr_errhandler_func;
 R_MPI_Errhandler errhandler_tmp;
+
 if(errhandler==A_MPI_ERRORS_ARE_FATAL)
     errhandler_tmp=R_MPI_ERRORS_ARE_FATAL;
-else
-    if(errhandler==A_MPI_ERRORS_RETURN)
-        errhandler_tmp=R_MPI_ERRORS_RETURN;
+else if(errhandler==A_MPI_ERRORS_RETURN)
+    errhandler_tmp=R_MPI_ERRORS_RETURN;
 else
     errhandler_conv_a2r(&errhandler,&errhandler_tmp);
+
 int ret_tmp= LOCAL_MPI_Errhandler_set( comm_tmp, errhandler_tmp);
 if(!errhandler_translation_is_const(errhandler)){
 //A_MPI_Handler_function* ptr_errhandler_func;
@@ -7861,6 +7862,7 @@ if(WI4MPI_errhandler_key==R_MPI_KEYVAL_INVALID)
     R_MPI_Comm_create_keyval(&interndup_fn,&interndel_fn,&WI4MPI_errhandler_key,NULL); 
 }
 errhandler_fn_translation_get(errhandler, &ptr_errhandler_func);
+//printf("coucou %p %p\n",errhandler,ptr_errhandler_func);
 //communicator_fn_translation_update(comm, ptr_errhandler_func);
 R_MPI_Comm_set_attr(comm_tmp,WI4MPI_errhandler_key,ptr_errhandler_func);
 }
@@ -7935,7 +7937,8 @@ if(errhandler_ltmp!=R_MPI_ERRORS_ARE_FATAL&&errhandler_ltmp!=R_MPI_ERRORS_RETURN
 int flg;
 R_MPI_Comm_get_attr(comm_tmp,WI4MPI_errhandler_key,&ptr_handler_fn,&flg);
 errhandler_ptr_conv_r2a(&errhandler,&errhandler_tmp);
-}
+}else
+    *errhandler=(errhandler_ltmp!=R_MPI_ERRORS_ARE_FATAL?A_MPI_ERRORS_RETURN:A_MPI_ERRORS_ARE_FATAL);
 }else
 *errhandler=A_MPI_ERRHANDLER_NULL;
 in_w=0;
@@ -29272,6 +29275,10 @@ printf("sort : R_MPI_Errhandler_c2f\n");
 return op;
 }*/
 #endif
+void init_global(void *);
+
+void init_f2c(void *);
+void wrapper_init_f(void);
 #ifdef OMPI_OMPI
 #endif
 #ifdef WI4MPI_STATIC

@@ -304,6 +304,9 @@
  * checking (because we *do* have the full type definitions available
  * when building OMPI).
  */
+#ifdef OMPI_PREDEFINED_GLOBAL
+#undef OMPI_PREDEFINED_GLOBAL
+#endif
 #if !OMPI_BUILDING
 #define OMPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) (ccc_##global)))
 #else

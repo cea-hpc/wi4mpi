@@ -28253,8 +28253,8 @@ printf("sort : R_MPI_T_category_changed\n");
 #endif
 return ret_tmp;
 }
-int MPI_Pcontrol(int level);
-int (*LOCAL_MPI_Pcontrol)(int);
+int MPI_Pcontrol(int level,...);
+int (*LOCAL_MPI_Pcontrol)(int,...);
 
 __asm__(
 ".global PMPI_Pcontrol\n"
@@ -28286,7 +28286,7 @@ __asm__(
 
 );
 
-int A_MPI_Pcontrol(int level)
+int A_MPI_Pcontrol(int level,...)
 {
 #ifdef DEBUG
 printf("entre : A_MPI_Pcontrol\n");
@@ -28301,12 +28301,12 @@ printf("sort : A_MPI_Pcontrol\n");
 //return error_code_conv_r2a(ret_tmp);
 return A_MPI_SUCCESS;
 }
-int R_MPI_Pcontrol(int level)
+int R_MPI_Pcontrol(int level,...)
 {
 #ifdef DEBUG
 printf("entre : R_MPI_Pcontrol\n");
 #endif
-int ret_tmp= LOCAL_MPI_Pcontrol( level);
+int ret_tmp= LOCAL_MPI_Pcontrol( level,"",NULL);
 #ifdef DEBUG
 printf("sort : R_MPI_Pcontrol\n");
 #endif
@@ -29265,10 +29265,10 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Errhandler_f2c\n");
 #endif
-return ret_tmp;
+return A_MPI_ERRHANDLER_NULL;
 }
 
-
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 R_MPI_Errhandler R_MPI_Errhandler_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
@@ -29326,7 +29326,7 @@ printf("sort : A_MPI_Errhandler_c2f\n");
 return ret_tmp;
 }
 
-
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 R_MPI_Fint R_MPI_Errhandler_c2f(R_MPI_Errhandler op)
 {
 #ifdef DEBUG
@@ -29384,6 +29384,8 @@ printf("sort : A_MPI_Errhandler_f2c\n");
 #endif
 return ret_tmp;
 }
+R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 
 
 R_MPI_Errhandler R__MPI_Errhandler_f2c(R_MPI_Fint op)
@@ -29457,6 +29459,7 @@ printf("sort : R_MPI_Errhandler_c2f\n");
 return ret;
 }
 #endif
+void wrapper_init_f(void);
 #ifdef OMPI_OMPI
 #endif
 __attribute__((constructor)) void wrapper_init(void) {

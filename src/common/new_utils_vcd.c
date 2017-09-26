@@ -219,7 +219,7 @@ void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##va
 int varname##_translation_is_const(A_##type a_mpi_##varname) { \
     varname##_translation_t* conv;  \
     HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
-    return (conv != NULL); \
+    return (int)(conv != NULL); \
 } \
  \
 /*  GET  */  \
@@ -243,8 +243,8 @@ varname##_translation_t* varname##_translation_get_key_from_const(R_##type mpi_#
         }  \
     }  \
     type##_container *tmp=varname##_table;\
-    while(tmp!=(varname##_table+varname##_size)) if(!memcmp(&mpi_##varname,&(tmp->C),sizeof(R_##type))) return (tmp-varname##_table)+f##varname;\
-    return NULL;  \
+    /*while(tmp!=(varname##_table+varname##_size)) if(!memcmp(&mpi_##varname,&(tmp->C),sizeof(R_##type))) return (tmp-varname##_table)+f##varname;*/\
+    return (varname##_translation_t* )NULL;  \
 }  \
   \
 varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_##varname, A_##type *a_mpi_##varname) {  \
@@ -254,7 +254,7 @@ varname##_translation_t*  varname##_translation_get_key_from_value(R_##type mpi_
             return conv;  \
         }  \
     }  \
-    return NULL;  \
+    return (varname##_translation_t* )NULL;  \
 }\
 \
 /* DEL */  \
@@ -453,7 +453,7 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     }  /*printf("%s %d delete\n",#varname,*a_mpi_##varname);*/\
     /* Hashtable */  \
     id=(*((int*)a_mpi_##varname))-f##varname;\
-    printf("%d\n",id);if(id<0||id>=max##varname)\
+    /*printf("%d\n",id);*/if(id<0||id>=max##varname)\
         return;\
     lock(varname##_Lock);\
     varname##_table[id].C=R_##mpi_null;\
@@ -608,7 +608,7 @@ void varname##_translation_add_const(A_##type a_mpi_##varname, R_##type mpi_##va
 int varname##_translation_is_const(A_##type a_mpi_##varname) { \
     varname##_translation_t* conv;  \
     HASH_FIND(hh,varname##_const_table, &a_mpi_##varname, sizeof(A_##type), conv);  \
-    return (conv != NULL); \
+    return (int)(conv != NULL); \
 } \
  \
 /*  GET  */  \
@@ -854,7 +854,7 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     }  /*printf("%s %d delete\n",#varname,*a_mpi_##varname);*/\
     /* Hashtable */  \
     id=(*((int*)a_mpi_##varname))-f##varname;\
-    printf("%d\n",id);if(id<0||id>=max##varname)\
+    /*printf("%d\n",id);*/if(id<0||id>=max##varname)\
         return;\
     lock(varname##_Lock);\
     varname##_table[id].C=R_##mpi_null;\
@@ -1187,7 +1187,7 @@ void request_translation_del(A_MPI_Request * a_mpi_request) {
 }
 
 void request_translation_update_f(int mpi_request,int * a_mpi_request) {
-    if(mpi_request==R_MPI_REQUEST_NULL)
+    if(mpi_request==R_f_MPI_REQUEST_NULL)
     {   
     A_MPI_Request tmp=(A_MPI_Request)*a_mpi_request; 
 request_translation_del(&tmp);
