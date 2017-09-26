@@ -342,14 +342,23 @@ INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_hindexed
 
-SUBROUTINE MPI_Type_struct(count,array_of_blocklengths,array_of_displacements,array_of_types,newtype,ierror)
-INTEGER:: count
-INTEGER:: array_of_blocklengths(*)
-INTEGER:: array_of_displacements(*)
-INTEGER:: array_of_types(*)
-INTEGER:: newtype
-INTEGER:: ierror
-END SUBROUTINE MPI_Type_struct
+!SUBROUTINE MPI_Type_struct(count,array_of_blocklengths,array_of_displacements,array_of_types,newtype,ierror)
+!USE MPI_CONSTANTS 
+!INTEGER, INTENT(IN) :: count,array_of_blocklengths(count),array_of_displacements(count)
+!INTEGER(KIND=MPI_ADDRESS_KIND),INTENT(IN):: array_of_types(count)
+!INTEGER:: newtype
+!INTEGER:: ierror
+!END SUBROUTINE MPI_Type_struct
+
+!Bug Abinit:
+!SUBROUTINE MPI_Type_struct(count,array_of_blocklengths,array_of_displacements,array_of_types,newtype,ierror)
+!INTEGER:: count
+!INTEGER:: array_of_blocklengths(*)
+!INTEGER:: array_of_displacements(*)
+!INTEGER:: array_of_types(*)
+!INTEGER:: newtype
+!INTEGER:: ierror
+!END SUBROUTINE MPI_Type_struct
 
 !SUBROUTINE MPI_Address(location,address,ierror)
 !EXTERNAL:: location
@@ -2514,12 +2523,21 @@ INTEGER:: neighbors(*)
 INTEGER:: ierror
 END SUBROUTINE MPI_Graph_neighbors
 
-SUBROUTINE MPI_Cart_sub(comm,remain_dims,newcomm,ierror)
-INTEGER:: comm
-INTEGER:: remain_dims
-INTEGER:: newcomm
-INTEGER:: ierror
-END SUBROUTINE MPI_Cart_sub
+!SUBROUTINE MPI_Cart_sub(comm,remain_dims,newcomm,ierror)
+!INTEGER:: comm
+!INTEGER:: remain_dims
+!INTEGER:: newcomm
+!INTEGER:: ierror
+!END SUBROUTINE MPI_Cart_sub
+
+
+ 
+!subroutine MPI_Cart_sub(comm, remain_dims, new_comm, ierror)
+!  integer, intent(in) :: comm
+!  logical, dimension(*), intent(in) :: remain_dims
+!  integer, intent(out) :: new_comm
+!  integer, intent(out) :: ierror
+!end subroutine MPI_Cart_sub 
 
 SUBROUTINE MPI_Cart_map(comm,ndims,dims,periods,newrank,ierror)
 INTEGER:: comm

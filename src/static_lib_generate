@@ -1,0 +1,9 @@
+#!/bin/bash
+cd interface/gen
+./build_lib.sh OMPI ompi &&   ./build_lib.sh INTEL mpich
+ar x wi4mpi2_INTEL.a
+ar x wi4mpi2_OMPI.a 
+icc -c interface_test.c -I../../../interface/lib_cccmpi/include -DWI4MPI_STATIC -I../../../interface/manual/ -DIFORT_CALL -g -std=c99
+icc -c interface_fort.c -I../../../interface/lib_cccmpi/include -DWI4MPI_STATIC -I../../../interface/manual/ -DIFORT_CALL -g -std=c99
+ar cr libmpi.a *.o
+cd ..

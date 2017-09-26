@@ -42,7 +42,6 @@ static void dump(void * src, size_t size) {
 */
 
 /*  Memcpy if application structure is large enough */
-
 #define HASHTABLE_OPTI(type, varname)   \
 static varname##_translation_t* varname##_const_table = NULL;  \
   \
@@ -219,6 +218,7 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     HASH_FIND(hh, varname##_table, a_mpi_##varname, sizeof(A_##type), conv);  \
     if(conv != NULL) {  \
         HASH_DELETE(hh, varname##_table, conv);  \
+				free(conv); \
     }  \
     unlock(varname##_Lock);\
 }  \
@@ -509,11 +509,13 @@ void request_translation_del(A_MPI_Request * a_mpi_request) {
     HASH_FIND(hh, request_table_non_blocking, a_mpi_request, sizeof(A_MPI_Request), conv);
     if(conv != NULL) {
         HASH_DELETE(hh, request_table_non_blocking, conv);
+				free(conv);
     } else {
         HASH_FIND(hh, request_table_persist_request, a_mpi_request, sizeof(A_MPI_Request), conv);
 
         if(conv != NULL) {
             HASH_DELETE(hh, request_table_persist_request, conv);
+						free(conv);
         }
     }
     unlock(request_Lock);

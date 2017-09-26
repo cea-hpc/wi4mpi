@@ -1,0 +1,22 @@
+[
+  {
+    "FROM": "/ccc/products/openmpi-1.8.8/default",
+    "TO": "/ccc/products/openmpi-1.8.8/default",
+		"CONVERSION": "OMPI_OMPI"
+  },
+	{
+    "FROM": "/ccc/products/openmpi-1.8.8/default",
+    "TO": "/ccc/products/intelmpi-2017/default/intel64",
+    "CONVERSION": "OMPI_INTEL"
+  },
+	{
+    "FROM": "/ccc/products/intelmpi-2017/default/intel64",
+    "TO": "/ccc/products/openmpi-1.8.8/default",
+    "CONVERSION": "INTEL_OMPI"
+  },
+  {
+    "FROM": "/ccc/products/intelmpi-2017/default/intel64",
+    "TO": "/ccc/products/intelmpi-2017/default/intel64",
+    "CONVERSION": "INTEL_INTEL"
+  }
+]

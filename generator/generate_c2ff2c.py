@@ -539,7 +539,7 @@ else:
    
    count = 0
    print '__attribute__((constructor)) void wrapper_init_c2ff2c(void) {'
-   print 'void *lib_handle_c2ff2c=dlopen(getenv(\"TRUE_MPI_LIB\"),RTLD_NOW|RTLD_GLOBAL);'
+   print 'void *lib_handle_c2ff2c=dlopen(getenv(\"WI4MPI_RUN_MPI_C_LIB\"),RTLD_NOW|RTLD_GLOBAL);'
    for i in c2ff2c:
       print 'LOCAL_'+i+'_f2c=dlsym(lib_handle_c2ff2c,\"P'+i+'_f2c\");' 
       print 'LOCAL_'+i+'_c2f=dlsym(lib_handle_c2ff2c,\"P'+i+'_c2f\");' 

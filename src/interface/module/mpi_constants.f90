@@ -6,6 +6,20 @@
       parameter (OMPI_MAJOR_VERSION=1)
       parameter (OMPI_MINOR_VERSION=8)
       parameter (OMPI_RELEASE_VERSION=8)
+      
+      integer MPI_BOTTOM
+      integer MPI_IN_PLACE
+       
+      common/mpi_fortran_bottom/MPI_BOTTOM
+      common/mpi_fortran_in_place/MPI_IN_PLACE
+      !common/mpi_fortran_argv_null/MPI_ARGV_NULL
+      !common/mpi_fortran_argvs_null/MPI_ARGVS_NULL
+      !common/mpi_fortran_errcodes_ignore/MPI_ERRCODES_IGNORE
+      !common/mpi_fortran_status_ignore/MPI_STATUS_IGNORE
+      !common/mpi_fortran_statuses_ignore/MPI_STATUSES_IGNORE
+      !common/mpi_fortran_unweighted/MPI_UNWEIGHTED
+      !common/mpi_fortran_weights_empty/MPI_WEIGHTS_EMPTY
+
       integer MPI_OFFSET_KIND, MPI_ADDRESS_KIND, MPI_INTEGER_KIND
       integer MPI_COUNT_KIND
       parameter (MPI_INTEGER_KIND=4)

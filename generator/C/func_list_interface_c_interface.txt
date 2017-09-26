@@ -324,7 +324,7 @@ MPI_Dist_graph_neighbors_count
 #- Collective -# bug !! fix me
 ################
 MPI_Reduce_local
-MPI_Reduce_scatter_bloc
+MPI_Reduce_scatter_block
 MPI_Exscan
 MPI_Iallgather
 MPI_Iallgatherv
@@ -528,3 +528,5 @@ MPI_Win_f2c
 MPI_Win_c2f
 MPI_Message_c2f
 MPI_Message_f2c
+MPI_Status_c2f
+MPI_Status_f2c

@@ -70,6 +70,7 @@ void name##_fn_translation_del(keytype key) { \
     /*printf("name##fn del\n%d\n%d\n",key,conv);*/\
     if(conv != NULL) \
     HASH_DELETE(hh, name##_fn_table, conv); \
+		free(conv); \
 } \
  \
 void name##_fn_translation_free_all() { \

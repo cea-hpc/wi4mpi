@@ -97,6 +97,7 @@
 typedef struct { \
   keytype key; \
   valuetype value; \
+  int ref;  \
   UT_hash_handle hh; \
 } name##_fn_translation_t; \
   \

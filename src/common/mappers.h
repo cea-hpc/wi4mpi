@@ -26,116 +26,118 @@
 #ifndef MAPPERS_HEADERS
 #define MAPPERS_HEADERS
 
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <dlfcn.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
 #ifndef EXTERN_ALLOCATED
 #if defined(OMPI_INTEL)
-extern char *ompi_mpi_comm_null;
-extern char *ompi_mpi_comm_self;
-extern char *ompi_mpi_comm_world;
-extern char *ompi_mpi_2cplex;
-extern char *ompi_mpi_2dblcplex;
-extern char *ompi_mpi_2dblprec;
-extern char *ompi_mpi_2int;
-extern char *ompi_mpi_2integer;
-extern char *ompi_mpi_2real;
-extern char *ompi_mpi_aint;
-extern char *ompi_mpi_byte;
-extern char *ompi_mpi_c_bool;
-extern char *ompi_mpi_c_complex;
-extern char *ompi_mpi_c_double_complex;
-extern char *ompi_mpi_c_float_complex;
-extern char *ompi_mpi_c_long_double_complex;
-extern char *ompi_mpi_char;
-extern char *ompi_mpi_character;
-extern char *ompi_mpi_complex16;
-extern char *ompi_mpi_complex32;
-extern char *ompi_mpi_complex8;
-extern char *ompi_mpi_cplex;
-extern char *ompi_mpi_cxx_bool;
-extern char *ompi_mpi_cxx_cplex;
-extern char *ompi_mpi_cxx_dblcplex;
-extern char *ompi_mpi_cxx_ldblcplex;
-extern char *ompi_mpi_datatype_null;
-extern char *ompi_mpi_dblcplex;
-extern char *ompi_mpi_dblprec;
-extern char *ompi_mpi_double;
-extern char *ompi_mpi_double_int;
-extern char *ompi_mpi_float;
-extern char *ompi_mpi_float_int;
-extern char *ompi_mpi_int16_t;
-extern char *ompi_mpi_int32_t;
-extern char *ompi_mpi_int64_t;
-extern char *ompi_mpi_int8_t;
-extern char *ompi_mpi_int;
-extern char *ompi_mpi_integer16;
-extern char *ompi_mpi_integer1;
-extern char *ompi_mpi_integer2;
-extern char *ompi_mpi_integer4;
-extern char *ompi_mpi_integer8;
-extern char *ompi_mpi_integer;
-extern char *ompi_mpi_lb;
-extern char *ompi_mpi_ldblcplex;
-extern char *ompi_mpi_logical1;
-extern char *ompi_mpi_logical2;
-extern char *ompi_mpi_logical4;
-extern char *ompi_mpi_logical8;
-extern char *ompi_mpi_logical;
-extern char *ompi_mpi_long;
-extern char *ompi_mpi_long_double;
-extern char *ompi_mpi_long_int;
-extern char *ompi_mpi_long_long_int;
-extern char *ompi_mpi_longdbl_int;
-extern char *ompi_mpi_offset;
-extern char *ompi_mpi_count;
-extern char *ompi_message_null;
-extern char *ompi_mpi_packed;
-extern char *ompi_mpi_real16;
-extern char *ompi_mpi_real2;
-extern char *ompi_mpi_real4;
-extern char *ompi_mpi_real8;
-extern char *ompi_mpi_real;
-extern char *ompi_mpi_short;
-extern char *ompi_mpi_short_int;
-extern char *ompi_mpi_signed_char;
-extern char *ompi_mpi_ub;
-extern char *ompi_mpi_uint16_t;
-extern char *ompi_mpi_uint32_t;
-extern char *ompi_mpi_uint64_t;
-extern char *ompi_mpi_uint8_t;
-extern char *ompi_mpi_unsigned;
-extern char *ompi_mpi_unsigned_char;
-extern char *ompi_mpi_unsigned_long;
-extern char *ompi_mpi_unsigned_long_long;
-extern char *ompi_mpi_unsigned_short;
-extern char *ompi_mpi_wchar;
-extern char *ompi_mpi_errhandler_null;
-extern char *ompi_mpi_errors_are_fatal;
-extern char *ompi_mpi_errors_return;
-extern char *ompi_mpi_file_null;
-extern char *ompi_mpi_group_empty;
-extern char *ompi_mpi_group_null;
-extern char *ompi_mpi_info_null;
-extern char *ompi_mpi_op_band;
-extern char *ompi_mpi_op_bor;
-extern char *ompi_mpi_op_bxor;
-extern char *ompi_mpi_op_land;
-extern char *ompi_mpi_op_lor;
-extern char *ompi_mpi_op_lxor;
-extern char *ompi_mpi_op_max;
-extern char *ompi_mpi_op_maxloc;
-extern char *ompi_mpi_op_min;
-extern char *ompi_mpi_op_minloc;
-extern char *ompi_mpi_op_null;
-extern char *ompi_mpi_op_prod;
-extern char *ompi_mpi_op_replace;
-extern char *ompi_mpi_op_sum;
-extern char *ompi_request_null;
-extern char *ompi_mpi_win_null;
-extern char *ompi_message_no_proc;
+extern char ompi_mpi_comm_null[];
+extern char ompi_mpi_comm_self[];
+extern char ompi_mpi_comm_world[];
+extern char ompi_mpi_2cplex[];
+extern char ompi_mpi_2dblcplex[];
+extern char ompi_mpi_2dblprec[];
+extern char ompi_mpi_2int[];
+extern char ompi_mpi_2integer[];
+extern char ompi_mpi_2real[];
+extern char ompi_mpi_aint[];
+extern char ompi_mpi_byte[];
+extern char ompi_mpi_c_bool[];
+extern char ompi_mpi_c_complex[];
+extern char ompi_mpi_c_double_complex[];
+extern char ompi_mpi_c_float_complex[];
+extern char ompi_mpi_c_long_double_complex[];
+extern char ompi_mpi_char[];
+extern char ompi_mpi_character[];
+extern char ompi_mpi_complex16[];
+extern char ompi_mpi_complex32[];
+extern char ompi_mpi_complex8[];
+extern char ompi_mpi_cplex[];
+extern char ompi_mpi_cxx_bool[];
+extern char ompi_mpi_cxx_cplex[];
+extern char ompi_mpi_cxx_dblcplex[];
+extern char ompi_mpi_cxx_ldblcplex[];
+extern char ompi_mpi_datatype_null[];
+extern char ompi_mpi_dblcplex[];
+extern char ompi_mpi_dblprec[];
+extern char ompi_mpi_double[];
+extern char ompi_mpi_double_int[];
+extern char ompi_mpi_float[];
+extern char ompi_mpi_float_int[];
+extern char ompi_mpi_int16_t[];
+extern char ompi_mpi_int32_t[];
+extern char ompi_mpi_int64_t[];
+extern char ompi_mpi_int8_t[];
+extern char ompi_mpi_int[];
+extern char ompi_mpi_integer16[];
+extern char ompi_mpi_integer1[];
+extern char ompi_mpi_integer2[];
+extern char ompi_mpi_integer4[];
+extern char ompi_mpi_integer8[];
+extern char ompi_mpi_integer[];
+extern char ompi_mpi_lb[];
+extern char ompi_mpi_ldblcplex[];
+extern char ompi_mpi_logical1[];
+extern char ompi_mpi_logical2[];
+extern char ompi_mpi_logical4[];
+extern char ompi_mpi_logical8[];
+extern char ompi_mpi_logical[];
+extern char ompi_mpi_long[];
+extern char ompi_mpi_long_double[];
+extern char ompi_mpi_long_int[];
+extern char ompi_mpi_long_long_int[];
+extern char ompi_mpi_longdbl_int[];
+extern char ompi_mpi_offset[];
+extern char ompi_mpi_count[];
+extern char ompi_message_null[];
+extern char ompi_mpi_packed[];
+extern char ompi_mpi_real16[];
+extern char ompi_mpi_real2[];
+extern char ompi_mpi_real4[];
+extern char ompi_mpi_real8[];
+extern char ompi_mpi_real[];
+extern char ompi_mpi_short[];
+extern char ompi_mpi_short_int[];
+extern char ompi_mpi_signed_char[];
+extern char ompi_mpi_ub[];
+extern char ompi_mpi_uint16_t[];
+extern char ompi_mpi_uint32_t[];
+extern char ompi_mpi_uint64_t[];
+extern char ompi_mpi_uint8_t[];
+extern char ompi_mpi_unsigned[];
+extern char ompi_mpi_unsigned_char[];
+extern char ompi_mpi_unsigned_long[];
+extern char ompi_mpi_unsigned_long_long[];
+extern char ompi_mpi_unsigned_short[];
+extern char ompi_mpi_wchar[];
+extern char ompi_mpi_errhandler_null[];
+extern char ompi_mpi_errors_are_fatal[];
+extern char ompi_mpi_errors_return[];
+extern char ompi_mpi_file_null[];
+extern char ompi_mpi_group_empty[];
+extern char ompi_mpi_group_null[];
+extern char ompi_mpi_info_null[];
+extern char ompi_mpi_op_band[];
+extern char ompi_mpi_op_bor[];
+extern char ompi_mpi_op_bxor[];
+extern char ompi_mpi_op_land[];
+extern char ompi_mpi_op_lor[];
+extern char ompi_mpi_op_lxor[];
+extern char ompi_mpi_op_max[];
+extern char ompi_mpi_op_maxloc[];
+extern char ompi_mpi_op_min[];
+extern char ompi_mpi_op_minloc[];
+extern char ompi_mpi_op_null[];
+extern char ompi_mpi_op_prod[];
+extern char ompi_mpi_op_replace[];
+extern char ompi_mpi_op_sum[];
+extern char ompi_request_null[];
+extern char ompi_mpi_win_null[];
+extern char ompi_message_no_proc[];
 #endif
 #endif
 //#include <pthread.h>
@@ -546,12 +548,12 @@ static inline void status_prt_conv_a2r(A_MPI_Status **status_tmp, R_MPI_Status *
     (*status)->st_count = (*status_tmp)->st_count;
   #elif INTEL_OMPI
 		(*status)->_ucount = ((((size_t)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
-					   + ((size_t)(*status_tmp)->count_lo);
+					   + ((unsigned int)(*status_tmp)->count_lo);
 		(*status)->_cancelled = ((*status_tmp)->count_hi_and_cancelled) & 1;
  	#elif OMPI_INTEL
     /* Decoupage de count */
 
-		(*status)->count_lo = ((*status_tmp)->_ucount) & ~(((size_t)-1) << 31);
+		(*status)->count_lo = ((*status_tmp)->_ucount) & ~(((size_t)-1) << 32);
 		(*status)->count_hi_and_cancelled &= 1;
 		(*status)->count_hi_and_cancelled |= (int) (((*status_tmp)->_ucount) >> sizeof(int)*8 << 1);
 		
@@ -585,7 +587,7 @@ static inline void status_prt_conv_a2r(A_MPI_Status **status_tmp, R_MPI_Status *
   #elif HPMPI_INTEL
     /* Decoupage de count */
 
-		(*status)->count_lo = ((*status_tmp)->st_count) & ~(((long long)-1) << 31);
+		(*status)->count_lo = ((*status_tmp)->st_count) & ~(((long long)-1) << 32);
 		(*status)->count_hi_and_cancelled &= 1;
 		(*status)->count_hi_and_cancelled |= (int) (((*status_tmp)->st_count) >> sizeof(int)*8 << 1);
 		
@@ -636,7 +638,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
    #elif INTEL_OMPI
 	  /* Découpage de cout*/
 
-	    (*status)->count_lo = ((*status_tmp)->_ucount) & ~(((size_t)-1) << 31);
+	    (*status)->count_lo = ((*status_tmp)->_ucount) & ~(((size_t)-1) << 32);
 	    (*status)->count_hi_and_cancelled &= 1;
 	    (*status)->count_hi_and_cancelled |= (int) (((*status_tmp)->_ucount) >> sizeof(int)*8 << 1);
 	  
@@ -645,7 +647,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
 	    (*status)->count_hi_and_cancelled |= (*status_tmp)->_cancelled;
     #elif OMPI_INTEL
       (*status)->_ucount = (((((size_t)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
-	  				+ ((size_t)((*status_tmp)->count_lo)));
+	  				+ ((unsigned int)((*status_tmp)->count_lo)));
 	    (*status)->_cancelled = ((*status_tmp)->count_hi_and_cancelled) & 1;
     #elif INTEL_MPC
       (*status)->count_lo = (*status_tmp)->size;
@@ -656,7 +658,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
       (*status)->count_hi_and_cancelled |= (*status_tmp)->cancelled;
     #elif MPC_INTEL
       (*status)->size = ((((size_t)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8)
-                       + ((size_t)(*status_tmp)->count_lo);
+                       + ((unsigned int)(*status_tmp)->count_lo);
       (*status)->cancelled = ((*status_tmp)->count_hi_and_cancelled) & 1;
     #elif OMPI_MPC
       (*status)->_ucount = (*status_tmp)->size;
@@ -673,7 +675,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
       (*status)->count_hi_and_cancelled |= (*status_tmp)->st_cancel; 
     #elif HPMPI_INTEL
       (*status)->st_count = (((((long long)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
-	  				+ ((size_t)((*status_tmp)->count_lo)));
+	  				+ ((unsigned int)((*status_tmp)->count_lo)));
 	    (*status)->st_cancel = ((*status_tmp)->count_hi_and_cancelled) & 1;
     #elif OMPI_HPMPI
       (*status)->_ucount = (size_t)((*status_tmp)->st_count);
@@ -717,7 +719,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
       (status)->st_count = (status_tmp)->st_count;
     #elif INTEL_OMPI
 
-      (status)->count_lo = ((status_tmp)->_ucount) & ~(((size_t)-1) << 31);
+      (status)->count_lo = ((status_tmp)->_ucount) & ~(((size_t)-1) << 32);
       (status)->count_hi_and_cancelled &= 1;
       (status)->count_hi_and_cancelled |= (int) (((status_tmp)->_ucount) >> sizeof(int)*8 << 1);
       /* Set de cancelled*/
@@ -725,7 +727,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
       (status)->count_hi_and_cancelled |= (status_tmp)->_cancelled;
     #elif OMPI_INTEL
         (status)->_ucount = (((((size_t)((status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8)
-                    + ((size_t)((status_tmp)->count_lo)));
+                    + ((unsigned int)((status_tmp)->count_lo)));
         (status)->_cancelled = ((status_tmp)->count_hi_and_cancelled) & 1;
     #elif INTEL_MPC
       (status)->count_lo = (status_tmp)->size;
@@ -736,7 +738,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
       (status)->count_hi_and_cancelled |= (status_tmp)->cancelled;
     #elif MPC_INTEL
       (status)->size = ((((size_t)((status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8)
-                      + ((size_t)(status_tmp)->count_lo);
+                      + ((unsigned int)(status_tmp)->count_lo);
       (status)->cancelled = ((status_tmp)->count_hi_and_cancelled) & 1;
     #elif OMPI_MPC
       (status)->_ucount = (status_tmp)->size;
@@ -753,7 +755,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
       (status)->count_hi_and_cancelled |= (status_tmp)->st_cancel; 
     #elif HPMPI_INTEL
       (status)->st_count = (((((long long)((status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
-	  	 		+ ((size_t)((status_tmp)->count_lo)));
+	  	 		+ ((unsigned int)((*status_tmp)->count_lo)));
 	    (status)->st_cancel = ((status_tmp)->count_hi_and_cancelled) & 1;
     #elif OMPI_HPMPI
       (status)->_ucount = (size_t)((status_tmp)->st_count);
@@ -908,6 +910,11 @@ static inline void request_pers_array_delete(A_MPI_Request *request, R_MPI_Reque
   *request = A_MPI_REQUEST_NULL;
 }
 
+#include <sys/mman.h>
+#if !defined (_WI4MPI_GCC_JIT)
+extern int user_func_resolved(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
+extern void user_fn_wrapper_template(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
+#endif
 static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_function **fr)
 {
   void *fh;
@@ -917,6 +924,7 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
     char func_name[512];
     char **func_name2;
     int rank;
+#if defined (_WI4MPI_GCC_JIT)
     R_MPI_Comm_rank(R_MPI_COMM_WORLD,&rank);
     sprintf(fname,"/tmp/.jit.user_func.%p_%d.c",*fa,rank);
     sprintf(soname,"/tmp/.jit.user_func.%p_%d.so",*fa,rank);
@@ -938,8 +946,70 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
    {
       fprintf(stderr,"error in loading wrapped user function %s \n",func_name);
    }
+#elif !defined(_WI4MPI_GCC_JIT)
+    
+    void* ptr = mmap(0, 1024,
+                   PROT_READ | PROT_WRITE | PROT_EXEC,
+                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    memcpy(((char *)ptr+0x10),user_fn_wrapper_template,0x100);
 
+    ((void **)ptr)[0]=*fa;
+    
+    ((void **)ptr)[1]=user_func_resolved;
+    *fr=ptr+0x10;
+#endif
 }
+
+#if !defined(_WI4MPI_GCC_JIT)
+extern int datarep_extent_func_resolved(R_MPI_Datatype a, R_MPI_Aint *b, void *c, int (*pf)(A_MPI_Datatype data_type, A_MPI_Aint *file_extent, void *extra_state));
+extern void user_datarep_extent_function_template(R_MPI_Datatype a, R_MPI_Aint *b, void *c, int (*pf)(A_MPI_Datatype data_type, A_MPI_Aint *file_extent, void *extra_state));
+
+static inline void datarep_extent_function_converter_a2r(A_MPI_Datarep_extent_function **fa, R_MPI_Datarep_extent_function **fr)
+{
+	void* ptr = mmap(0, 1024,
+                   PROT_READ | PROT_WRITE | PROT_EXEC,
+                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    memcpy(((char *)ptr+0x10),user_datarep_extent_function_template,0x100);
+
+    ((void **)ptr)[0]=*fa;
+
+    ((void **)ptr)[1]=datarep_extent_func_resolved;
+    *fr=ptr+0x10;
+}
+
+extern int datarep_conversion_func_resolved(void *a, R_MPI_Datatype b, int c, void *d, R_MPI_Offset e, void *f, int (*pf)(void *userbuf, A_MPI_Datatype datatype, int count, void *filebuf, A_MPI_Offset posistion, void *extra_state));
+extern void user_datarep_conversion_function_template(void *a, R_MPI_Datatype b, int c, void *d, R_MPI_Offset e, void *f, int (*pf)(void *userbuf, A_MPI_Datatype datatype, int count, void *filebuf, A_MPI_Offset posistion, void *extra_state));
+
+static inline void datarep_conversion_function_a2r(A_MPI_Datarep_conversion_function **fa,R_MPI_Datarep_conversion_function **fr)
+{
+	void* ptr = mmap(0, 1024,
+                   PROT_READ | PROT_WRITE | PROT_EXEC,
+                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    memcpy(((char *)ptr+0x10),user_datarep_conversion_function_template,0x100);
+
+    ((void **)ptr)[0]=*fa;
+
+    ((void **)ptr)[1]=datarep_conversion_func_resolved;
+    *fr=ptr+0x10;
+}
+
+extern int user_qrequest_query_function_template(void *a, R_MPI_Status *b, int (*pf)(void *extra_state, A_MPI_Status *status));
+extern int qrequest_query_func_resolved(void *a, R_MPI_Status *b, int (*pf)(void *extra_state, A_MPI_Status *status));
+
+static inline void grequest_query_fn_a2r(A_MPI_Grequest_query_function **fa, R_MPI_Grequest_query_function **fr)
+{
+  void* ptr = mmap(0, 1024,
+                   PROT_READ | PROT_WRITE | PROT_EXEC,
+                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    memcpy(((char *)ptr+0x10),user_qrequest_query_function_template,0x100);
+
+    ((void **)ptr)[0]=*fa;
+
+    ((void **)ptr)[1]=qrequest_query_func_resolved;
+    *fr=ptr+0x10;
+}
+
+#endif
 /* OP converter a2r - r2a */
 
 static A_MPI_User_function* ptr_user_func = NULL;
@@ -1046,6 +1116,24 @@ static inline void errhandler_comm_ptr_conv_r2a(A_MPI_Errhandler **errhandler, R
 //deprecated one
 static inline void errhandler_ptr_conv_r2a(A_MPI_Errhandler **errhandler, R_MPI_Errhandler **errhandler_tmp)
 {
+    if(**errhandler_tmp==R_MPI_ERRORS_ARE_FATAL)
+    {
+        **errhandler=A_MPI_ERRORS_ARE_FATAL;
+        return;
+
+    }
+    if(**errhandler_tmp==R_MPI_ERRORS_RETURN)
+    {
+        **errhandler=A_MPI_ERRORS_RETURN;
+        return;
+
+    }
+    if(**errhandler_tmp==R_MPI_ERRHANDLER_NULL)
+    {
+        **errhandler=A_MPI_ERRHANDLER_NULL;
+        return;
+
+    }
   errhandler_translation_update(*errhandler, **errhandler_tmp);
   errhandler_fn_translation_update(**errhandler, ptr_handler_fn);
 }

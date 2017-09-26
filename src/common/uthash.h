@@ -571,7 +571,7 @@ do {                                                                            
  else out=NULL;                                                                  \
  while (out) {                                                                   \
     if (out->hh.keylen == keylen_in) {                                           \
-        if ((HASH_KEYCMP(out->hh.key,keyptr,keylen_in)) == 0) break;             \
+        if ((HASH_KEYCMP(out->hh.key,(void*)keyptr,keylen_in)) == 0) break;             \
     }                                                                            \
     if (out->hh.hh_next) DECLTYPE_ASSIGN(out,ELMT_FROM_HH(tbl,out->hh.hh_next)); \
     else out = NULL;                                                             \

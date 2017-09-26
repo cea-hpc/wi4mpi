@@ -29,6 +29,12 @@
     "wrap": "ptr_grq_query_fn",
     "wrapped": "wrapper_grequest_query_function" 
   },
+	"grequest_query_fn": {
+    "local_alloc": 0, 
+    "a2r": "grequest_query_fn_a2r", 
+    "type": "MPI_Grequest_query_function *", 
+    "r2a": "grequest_query_fn_r2a"
+  },
   "win_copy_attr_converter": {
     "local_alloc": 0, 
     "a2r": "win_copy_fn_conv_a2r", 
@@ -403,6 +409,12 @@
     "wrap": "ptr_extent_fn",
     "wrapped": "wrapper_datarep_extent_fn"
   }, 
+	"datarep_extent_converter": {
+		"local_alloc": 0,
+		"a2r": "datarep_extent_function_converter_a2r",
+		"type": "MPI_Datarep_extent_function *",
+		"r2a": "datarep_extent_function_converter_r2a"
+	},
   "t_pvar_handle_converter": {
     "local_alloc": 0, 
     "a2r": "t_pvar_handle_conv_a2r", 
@@ -559,6 +571,12 @@
     "r2a": "datarep_conversion_ptr_conv_r2a",
     "wrap": "ptr_write_conversion_fn",
     "wrapped": "wrapper_datarep_write_conversion_fn"
+  },
+	"datarep_conversion_function": {
+    "local_alloc": 0,
+    "a2r": "datarep_conversion_function_a2r",
+    "type": "MPI_Datarep_conversion_function *",
+    "r2a": "datarep_conversion_function_r2a"
   },
   "greq_cancel_ptr_converter": {
     "local_alloc": 0, 
