@@ -28,15 +28,16 @@ usage() {
     cat <<EOF
 Usage: [MPIRUN] [MPIRUN_OPTION]... wi4mpi [option].. PROGRAM [PROGRAM_OPTION]...
 
-Dynamically substitute in PROGRAM 
-all MPI calls from the MPI implementation "FROM" 
+Dynamically substitute in PROGRAM all MPI calls from the MPI implementation "FROM" 
 with their corresponding call in the "TARGET" MPI implementation.
 
 Option:
     -h           the help message
-    -f FROM      the MPI implentation from which PROGRAM was compiled with
-    -t TARGET    the MPI implentation to which PROGRAM will be run
+    -f FROM      the MPI implementation the PROGRAM was compiled with
+    -t TARGET    the MPI implementation you want the PROGRAM to be run on
     -v           controls the verbosity
+
+The -f option (FROM) is optional. If not provided, the interface mode is chosen.
 
 Supported values:
     FROM         openmpi,intelmpi  (no default value)
