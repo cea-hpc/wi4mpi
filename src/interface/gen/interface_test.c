@@ -24,7 +24,6 @@
  * This code is full generated
  */
 #include <stdlib.h>
-
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <dlfcn.h>
@@ -131,7 +130,6 @@ printf("sort : PMPI_Win_set_attr (interface)\n");
 return ret_tmp;
 }
 
-
 int MPI_Pcontrol(int level,...);
 #define MPI_Pcontrol PMPI_Pcontrol
 #pragma weak MPI_Pcontrol=PMPI_Pcontrol
@@ -142,15 +140,8 @@ extern int INTERF_2_INTEL_CCMPI_Pcontrol(int,...);
 #endif /*WI4MPI_STATIC*/
 
 int PMPI_Pcontrol(int level,...)
-{/*
-#ifdef DEBUG
-printf("entre : PMPI_Pcontrol (interface) \n");
-#endif
-int ret_tmp= INTERFACE_LOCAL_MPI_Pcontrol( level);
-#ifdef DEBUG
-printf("sort : PMPI_Pcontrol (interface)\n");
-#endif*/
-return MPI_SUCCESS;
+{
+	return MPI_SUCCESS;
 }
 int MPI_Send(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
 #define MPI_Send PMPI_Send

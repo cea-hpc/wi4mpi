@@ -624,7 +624,7 @@
   "const_fint_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "const_fint_ptr_conv_a2r", 
-    "type": "const MPI_Fint *", 
+    "type": "MPI_Fint *", 
     "r2a": "const_fint_ptr_conv_r2a",
     "assign": "TRUE"
   }, 

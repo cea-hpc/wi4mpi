@@ -112,7 +112,8 @@ class generator:
 ##.First generate the return type of the function
 ##.Second print the name
 ##.Third print all different arguments of the function with or without the type according if it's a function call or if it's a declaration function 
-	def print_symbol_c(self,func_dict,type_prefix='',prefix='',name_arg=False,retval_name=False,app_side=False,run_side=False,name_arg_postfix='',call=False,func_ptr=False,r_func=False,interface=False,inter_side=False):
+#object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='',interface=True)
+	def print_symbol_c(self,func_dict,type_prefix='',prefix='',name_arg=False,retval_name=False,app_side=False,run_side=False,name_arg_postfix='',call=False,func_ptr=False,r_func=False,interface=False,inter_side=False,interF=False):
 		#Set type function
 		if app_side or run_side:
 		      str=self.add_prefix(self.mappers[func_dict['ret']['name']]['type'],prefix)
@@ -129,79 +130,82 @@ class generator:
 		#Loop on the arguments of the function set the appropriate prefix to the type 
 		for arg in func_dict['args']:
 					#Testing if the arguments are in a called function or a declaration function ( in other word if the type of the argument needs to be printed
-		      if retval_name== False: 
-		            if app_side or run_side or inter_side: 
-		                  if prefix == "ASM_":
-		                        prefix_use="A_"
-		                  else:
-		                        #Testing which prefix to use for the MPI type:(R_ for generate_func_r ; A_ for generate_func, or none)
-		                        if app_side:
-		                              prefix_use="A_"
-		                        elif run_side:
-		                              prefix_use="R_"
-		                        else:
-		                              prefix_use=""
-		                  str=str+self.add_prefix(self.mappers[arg['name']]['type'],prefix_use)
-		            else:
-		                  #Testing the kind of arguments for function pointer: example (MPI_Status array_of_statuses[] -> MPI_Status * )
-		                  str_test=arg['var']
-		                  str_type=self.mappers[arg['name']]['type']
-		                  if len(str_test.split('[')) > 1 and len(str_type.split('MPI_')) > 1: #MPI_args
-		                     if interface: #if else toujours en test: voir si repercution sur la generation de test_generation_wrapper
-		                        if func_ptr:
-		                           str=str+''+self.mappers[arg['name']]['type']+' *'
-		                        else:
-		                           str=str+''+self.mappers[arg['name']]['type']
-		                     else:
-		                        str=str+'R_'+self.mappers[arg['name']]['type']+' *'
-		                  elif len(str_test.split('[')) > 1 and len(str_test.split('[][3]')) == 1:
-		                        if func_ptr:
-		                           str=str+self.mappers[arg['name']]['type']+' *'
-		                        else:
-		                           str=str+self.mappers[arg['name']]['type']
-		                  else:
-		                        if func_ptr:
-		                              if len(str_test.split('[][3]')) > 1:
-		                                    str=str+self.mappers[arg['name']]['type']+'[][3]'
-		                              else:
-		                                    str=str+self.add_prefix(self.mappers[arg['name']]['type'],type_prefix)
-		                        else:
-		                              str=str+self.add_prefix(self.mappers[arg['name']]['type'],type_prefix)
-		      #If the argument name needs to be print (Example in declaration function or function call) 
-		      if name_arg:
-		            #If function call
-		            if call:
-		                  if arg['In'] or arg['Out']:
-		                        if interface: # if still in test
-		                           str_test=arg['var']
-		                           if len(str_test.split('[')) > 1:
-		                                 str=str+' '+arg['var'].split('[')[0]+name_arg_postfix
-		                           else:
-		                                 str=str+' '+arg['var']+name_arg_postfix
-		                        else:
-		                           if 'no_map' in self.mappers[arg['name']] or 'set' in self.mappers[arg['name']]:
-		                                 str_test=arg['var']
-		                                 if len(str_test.split('[')) > 1:
-		                                       str=str+' '+arg['var'].split('[')[0]
-		                                 else:
-		                                       str=str+' '+arg['var']
-		                           elif 'wrapped' in self.mappers[arg['name']]:
-		                                 if not r_func:
-		                                       str=str+' '+'(R_'+self.mappers[arg['name']]['type']+')'+self.mappers[arg['name']]['wrapped']
-		                                 else:
-		                                       str=str+' '+arg['var']
-		                           else:
-		                                 str_test=arg['var']
-		                                 if len(str_test.split('[')) > 1:
-		                                       str=str+' '+arg['var'].split('[')[0]+name_arg_postfix
-		                                 else:
-		                                       str=str+' '+arg['var']+name_arg_postfix
-		                  else:
-		                        str=str+' '+arg['var']
-		            #If function declaration
-		            else:
-		                  str=str+' '+arg['var']+name_arg_postfix
-		      str=str+','
+			if retval_name== False: 
+				if app_side or run_side or inter_side: 
+					if prefix == "ASM_":
+						prefix_use="A_"
+					else:
+						#Testing which prefix to use for the MPI type:(R_ for generate_func_r ; A_ for generate_func, or none)
+						if app_side:
+							prefix_use="A_"
+						elif run_side:
+							prefix_use="R_"
+						else:
+							prefix_use=""
+					str_type_tmp=self.mappers[arg['name']]['type']
+					str_type=str_type_tmp.split('const ')[-1]
+					str=str+self.add_prefix(str_type,prefix_use)
+				else:
+					#Testing the kind of arguments for function pointer: example (MPI_Status array_of_statuses[] -> MPI_Status * )
+					str_test=arg['var']
+					str_type_tmp=self.mappers[arg['name']]['type']
+					str_type=str_type_tmp.split('const ')[-1]
+					if len(str_test.split('[')) > 1 and len(str_type.split('MPI_')) > 1: #MPI_args []
+						if interface: #if else toujours en test: voir si repercution sur la generation de test_generation_wrapper
+							if func_ptr or interF:
+								str=str+''+self.mappers[arg['name']]['type']+' *'
+							else:
+								str=str+''+self.mappers[arg['name']]['type']
+						else:
+							str=str+'R_'+self.mappers[arg['name']]['type']+' *'
+					elif len(str_test.split('[')) > 1 and len(str_test.split('[][3]')) == 1: #Non MPI_Args with []
+						if func_ptr or interF:
+							str=str+self.mappers[arg['name']]['type']+' *'
+						else:
+							str=str+self.mappers[arg['name']]['type']
+					else:
+						if func_ptr or interF:
+							if len(str_test.split('[][3]')) > 1: #args with [][3]
+								str=str+self.mappers[arg['name']]['type']+'[][3]'
+							else:
+								str=str+self.add_prefix(self.mappers[arg['name']]['type'],type_prefix)
+						else:
+							str=str+self.add_prefix(self.mappers[arg['name']]['type'],type_prefix)
+			#If the argument name needs to be print (Example in declaration function or function call) 
+			if name_arg:
+				#If function call
+				if call:
+					if arg['In'] or arg['Out']:
+						if interface: # if still in test
+							str_test=arg['var']
+							if len(str_test.split('[')) > 1:
+								str=str+' '+arg['var'].split('[')[0]+name_arg_postfix
+							else:
+								str=str+' '+arg['var']+name_arg_postfix
+						else:
+							if 'no_map' in self.mappers[arg['name']] or 'set' in self.mappers[arg['name']]:
+								str_test=arg['var']
+								if len(str_test.split('[')) > 1:
+									str=str+' '+arg['var'].split('[')[0]
+								else:
+									str=str+' '+arg['var']
+							elif 'wrapped' in self.mappers[arg['name']]:
+								if not r_func:
+									str=str+' '+'(R_'+self.mappers[arg['name']]['type']+')'+self.mappers[arg['name']]['wrapped']
+								else:
+									str=str+' '+arg['var']
+							else:
+								str_test=arg['var']
+								if len(str_test.split('[')) > 1:
+									str=str+' '+arg['var'].split('[')[0]+name_arg_postfix
+								else:
+									str=str+' '+arg['var']+name_arg_postfix
+					else:
+						str=str+' '+arg['var']
+				#If function declaration
+				else:
+					str=str+' '+arg['var']+name_arg_postfix
+			str=str+','
 		str=str[:-1]
 		str=str+')'
 		return str

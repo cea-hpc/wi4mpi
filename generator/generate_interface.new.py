@@ -262,38 +262,55 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 	
 def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,static_list=["OMPI","INTEL"]):
 	string=header_license_file()
+	string=string+'#include <stdlib.h>\n'
 	string=string+'#define _GNU_SOURCE\n'
 	string=string+'#include <stdio.h>\n' 
 	string=string+'#include <dlfcn.h>\n' 
 	string=string+'#include \"mpi.h\"\n' 
 	string=string+"\nchar wi4mpi_mode[]=\"\";\n\n"
+	string=string+"__thread int in_w;\n"
 	string=string+"/*ompi constante*/\n" 
 	for i in interface_key_gen:
 		string=string+i
 	for i in data:
 		if i['name'] in def_list:
-			string=string+'\n'+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='',interface=True)+';\n' 
+			if i['name'] == 'MPI_Pcontrol':
+				string=string+'int MPI_Pcontrol(int level,...);\n'
+			else:
+				string=string+'\n'+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='',interface=True)+';\n' 
 			string=string+'#define '+i['name']+' P'+i['name']+'\n'
 			string=string+'#pragma weak '+i['name']+'=P'+i['name']+'\n'
-			string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='INTERFACE_LOCAL_',type_prefix='',interface=True)+';\n'
+			if i['name'] == 'MPI_Pcontrol':
+				string=string+'int (*INTERFACE_LOCAL_MPI_Pcontrol)(int,...);\n'
+			else:
+				string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='INTERFACE_LOCAL_',type_prefix='',interface=True)+';\n'
 			string=string+'#ifdef WI4MPI_STATIC\n'
 			for j in static_list:
-				string=string+'extern '+object_gen.print_symbol_c(i,func_ptr=False,prefix='INTERF_2_'+j+'_A_',type_prefix='',interface=True)+';\n'
+				if i['name'] == 'MPI_Pcontrol':
+					string=string+'extern int INTERF_2_'+j+'_CCMPI_Pcontrol(int,...);\n'
+				else:
+					string=string+'extern '+object_gen.print_symbol_c(i,func_ptr=False,prefix='INTERF_2_'+j+'_CC',type_prefix='',interface=True,interF=True)+';\n'
 			string=string+'#endif /*WI4MPI_STATIC*/\n'
-			string=string+'\n'+object_gen.print_symbol_c(i,prefix='P',name_arg=True,retval_name=False,app_side=False,run_side=False,inter_side=True)
-			string=string+object_gen.header_func(i,app_side=False)+'\n'
-			string=string+object_gen.print_symbol_c(i,prefix='INTERFACE_LOCAL_',name_arg=True,retval_name=True,app_side=False,call=True, r_func=False,type_prefix='',interface=True)+';\n'
-			string=string+object_gen.footer_func(i,app_side=False)
+			if i['name'] == 'MPI_Pcontrol':
+				string=string+'\nint PMPI_Pcontrol(int level,...)\n{\n\treturn MPI_SUCCESS;\n}'
+			else :
+				string=string+'\n'+object_gen.print_symbol_c(i,prefix='P',name_arg=True,retval_name=False,app_side=False,run_side=False,inter_side=True)
+				string=string+object_gen.header_func(i,app_side=False)+'\n'
+				string=string+object_gen.print_symbol_c(i,prefix='INTERFACE_LOCAL_',name_arg=True,retval_name=True,app_side=False,call=True, r_func=False,type_prefix='',interface=True)+';\n'
+				string=string+object_gen.footer_func(i,app_side=False)
 	string=string+'\n#ifdef WI4MPI_STATIC\n'
 	for j in static_list:
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Keyval_create(void);'
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Keyval_free(void);\n'        
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Comm_create_keyval(void);\n'
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Comm_free_keyval(void);\n'   
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Win_get_attr(void);\n'       
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Win_set_attr(void);\n'       
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Keyval_create(MPI_Copy_function *copy_fn,MPI_Delete_function *delete_fn,int *keyval, void *extra_state);\n'
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Keyval_free(int *);\n'        
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Comm_create_keyval(MPI_Copy_function *copy_fn,MPI_Delete_function *delete_fn,int *keyval, void *extra_state);\n'
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Comm_free_keyval(int *);\n'   
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Win_get_attr(MPI_Win, int, void *, int *);\n'       
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Win_set_attr(MPI_Win, int, void *);\n'       
 	string=string+'#endif /*WI4MPI_STATIC*/\n'
+	string=string+'int wi4mpi__init__C = 0;'
+	string=string+'extern int wi4mpi__init__F;'
 	string=string+'\n__attribute__((constructor)) void wrapper_interface(void) {\n'                     
+	string=string+'if (wi4mpi__init__C != 0)\t\treturn;\nelse\n\t\twi4mpi__init__C = 1;\nif (wi4mpi__init__F == 0)\n\t\twrapper_interface_f();\n'
 	#string=string+'void *interface_handle=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n' 
 	#string=string+'if(!interface_handle)\n'                                                           
 	#string=string+'{\n'                                                                               
@@ -336,29 +353,32 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
 	string=string+'handle_loader(MPI_Comm_free_keyval);\n'    
 	string=string+'handle_loader(MPI_Win_get_attr);\n'            
 	string=string+'handle_loader(MPI_Win_set_attr);\n'            
-	for i in data:                                                                         
-		if i['name'] in def_list or i['name'] in c2f_list:                                  
-			string=string+'handle_loader('+i['name']+');\n'
+	for a in data:                                                                         
+		if a['name'] in def_list or a['name'] in c2f_list:
+			string=string+'handle_loader('+a['name']+');\n'
 	
 	string=string+'\n'
 	string=string+'#else\n' 
-	string=string+'char *target=getenv(\"WI4MPI_STATIC_TARGET_TYPE\");\n'
+	string=string+'char *target_inter=getenv(\"WI4MPI_STATIC_TARGET_TYPE\");\n'
 	for j in static_list:
-		string=string+'if(!strcmp(target,\"'+j+'\")){\n'
-		string=string+'handle_loader(MPI_Keyval_create,INTERF_2_'+j+'_A_);' 
-		string=string+'handle_loader(MPI_Keyval_free,INTERF_2_'+j+'_A_);\n'                                             
-		string=string+'handle_loader(MPI_Comm_create_keyval,INTERF_2_'+j+'_A_);\n'
-		string=string+'handle_loader(MPI_Comm_free_keyval,INTERF_2_'+j+'_A_);\n'
-		string=string+'handle_loader(MPI_Win_get_attr,INTERF_2_'+j+'_A_);\n'
-		string=string+'handle_loader(MPI_Win_set_attr,INTERF_2_'+j+'_A_);\n'
+		string=string+'if(target_inter && !strcmp(target_inter,\"'+j+'\")){\n'
+		string=string+'handle_loader(MPI_Keyval_create,INTERF_2_'+j+'_CC);' 
+		string=string+'handle_loader(MPI_Keyval_free,INTERF_2_'+j+'_CC);\n'                                             
+		string=string+'handle_loader(MPI_Comm_create_keyval,INTERF_2_'+j+'_CC);\n'
+		string=string+'handle_loader(MPI_Comm_free_keyval,INTERF_2_'+j+'_CC);\n'
+		string=string+'handle_loader(MPI_Win_get_attr,INTERF_2_'+j+'_CC);\n'
+		string=string+'handle_loader(MPI_Win_set_attr,INTERF_2_'+j+'_CC);\n'
 		for i in data:                                                                         
 			if i['name'] in def_list or i['name'] in c2f_list:                                  
-				string=string+'handle_loader('+i['name']+',INTERF_2_'+j+'_A_);\n'
+				string=string+'handle_loader('+i['name']+',INTERF_2_'+j+'_CC);\n'
+		string=string+'INTERF_2_'+j+'_wrapper_init();'
+		string=string+'INTERF_2_'+j+'_wrapper_init_f();'
 		string=string+'}else{\n'
 	string=string+'printf(\"no target library defined conversion cannot be choosen\\n\" );\nexit(1);\n\n'
 	for j in static_list:
 		string=string+'}\n'
 	string=string+'#endif\n'
+	string=string+'wrapper_interface_f();'
 	string=string+'}\n'                                                                              
 	return string
 
