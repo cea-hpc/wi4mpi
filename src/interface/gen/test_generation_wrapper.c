@@ -6355,19 +6355,8 @@ R_MPI_Comm comm_tmp;
 comm_conv_a2r(&comm,&comm_tmp);
 R_MPI_Comm  newcomm_ltmp;
 R_MPI_Comm * newcomm_tmp=&newcomm_ltmp;
-A_MPI_Errhandler errh;
-in_w=0;
-/*A_MPI_Errhandler_get(comm,&errh);
-*/in_w=1;
 int ret_tmp= LOCAL_MPI_Comm_dup( comm_tmp, newcomm_tmp);
-//printf("comm dup %p %p\n",comm_tmp,*newcomm_tmp);
 comm_conv_r2a(newcomm,newcomm_tmp);
-/*if(!errhandler_translation_is_const(errh)){
-    printf("add errh %p\n",*newcomm);
-   A_MPI_Handler_function* ptr_errhandler_func;
-errhandler_fn_translation_get(errh, &ptr_errhandler_func);
-communicator_fn_translation_update(*newcomm, ptr_errhandler_func);
-}*/
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Comm_dup\n");
@@ -7041,9 +7030,9 @@ in_w=1;
 R_MPI_Comm comm_tmp;
 comm_conv_a2r(&comm,&comm_tmp);
 int keyval_tmp;
+my_keyval_a2r(&keyval,&keyval_tmp);
 
 myKeyval_functions_t *tt;
-my_keyval_a2r(&keyval,&keyval_tmp);
 if(tt=myKeyval_translation_get(keyval)) tt->ref++;
 int ret_tmp= LOCAL_MPI_Attr_put( comm_tmp, keyval_tmp, attribute_val);
 in_w=0;
@@ -7057,7 +7046,6 @@ int R_MPI_Attr_put(R_MPI_Comm comm,int keyval,void * attribute_val)
 #ifdef DEBUG
 printf("entre : R_MPI_Attr_put\n");
 #endif
-
 int ret_tmp= LOCAL_MPI_Attr_put( comm, keyval, attribute_val);
 #ifdef DEBUG
 printf("sort : R_MPI_Attr_put\n");
@@ -7112,12 +7100,9 @@ in_w=1;
 R_MPI_Comm comm_tmp;
 comm_conv_a2r(&comm,&comm_tmp);
 int keyval_tmp;
-
-
 my_keyval_a2r(&keyval,&keyval_tmp);
-int ret_tmp= LOCAL_MPI_Attr_get( comm_tmp, keyval_tmp, attribute_val, flag);
 
-//printf("attr_get %p %d %ld\n",comm_tmp,keyval_tmp,*(long*)attribute_val);
+int ret_tmp= LOCAL_MPI_Attr_get( comm_tmp, keyval_tmp, attribute_val, flag);
 
 in_w=0;
 #ifdef DEBUG
@@ -7765,19 +7750,18 @@ int A_MPI_Errhandler_create(A_MPI_Handler_function * function,A_MPI_Errhandler *
 printf("entre : A_MPI_Errhandler_create\n");
 #endif
 in_w=1;
-
-
     errhandler_locks_ac();
+
 ptr_handler_fn=(A_MPI_Handler_function *)function;
 R_MPI_Errhandler  errhandler_ltmp;
 R_MPI_Errhandler * errhandler_tmp=&errhandler_ltmp;
 int ret_tmp= LOCAL_MPI_Errhandler_create( (R_MPI_Handler_function *)wrapper_handler_function, errhandler_tmp);
 errhandler_ptr_conv_r2a(&errhandler,&errhandler_tmp);
+    errhandler_locks_re();
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Errhandler_create\n");
 #endif
-    errhandler_locks_re();
 return error_code_conv_r2a(ret_tmp);
 }
 int R_MPI_Errhandler_create(R_MPI_Handler_function * function,R_MPI_Errhandler * errhandler)
@@ -29276,11 +29260,8 @@ return op;
 }*/
 #endif
 void init_global(void *);
-
 void init_f2c(void *);
 void wrapper_init_f(void);
-#ifdef OMPI_OMPI
-#endif
 #ifdef WI4MPI_STATIC
 #define WATTR
 #else

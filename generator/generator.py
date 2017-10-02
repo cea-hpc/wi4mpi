@@ -568,6 +568,8 @@ class generator:
 					str=str+'R_MPI_Comm comm_tmp1;\ncomm_conv_a2r(&comm,&comm_tmp1);\nint Comm_size;\nLOCAL_MPI_Comm_size(comm_tmp1, &Comm_size);'
 				elif func_dict['name'] == "MPI_Ineighbor_alltoallw" or func_dict['name'] == "MPI_Neighbor_alltoallw":
 					str=str+'R_MPI_Comm comm_tmp1;\ncomm_conv_a2r(&comm,&comm_tmp1);\nint indegree, outdegree, weighted;\nLOCAL_MPI_Dist_graph_neighbors_count(comm_tmp1, &indegree,&outdegree, &weighted);'
+				elif func_dict['name'] == 'MPI_Errhandler_create' and self.name == 'Wrapper_Interface_C':
+					str=str+'errhandler_locks_ac();'
 				for arg in func_dict['args']:
 					if arg['In'] or arg['Out']:
 						str=str+'\n'+self.print_temporary_decl_c(arg,'R_')
@@ -575,6 +577,8 @@ class generator:
 						if arg["arg_dep"] != '':
 							count_loop=count_loop+1
 						str=str+'\n'+self.affect_temp_conv_c(arg,count_loop)
+				if func_dict['name'] == 'MPI_Attr_put' and self.name == 'Wrapper_Interface_C':
+					str=str+'myKeyval_functions_t *tt;\nif(tt=myKeyval_translation_get(keyval)) tt->ref++;'
 				str=str+'\n'+self.print_symbol_c(func_dict,prefix='LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True, type_prefix='R_')+';'
 				if func_dict['name'] == 'MPI_Init':
 					str=str+"\nint wi4mpi_rank;\n"
@@ -596,7 +600,9 @@ class generator:
 							str=str+'\n'+'wi4mpi_free('+arg['var'].split('[')[0]+'_tmp'+');'
 						else:
 							str=str+'\n'+'wi4mpi_free('+arg['var'].split('[')[0]+'_tmp'+');'
-				str=str+self.footer_func(func_dict, app_side=True)
+				if func_dict['name'] == 'MPI_Errhandler_create' and self.name == 'Wrapper_Interface_C':
+					str=str+'errhandler_locks_re();'
+				str=str+self.footer_func(func_dict, app_side=True)	
 			else :#Generate wrapped function on the run side
 				str=self.print_symbol_c(func_dict,prefix='R_',name_arg=True,retval_name=False,app_side=False,run_side=True)
 				str=str+self.header_func(func_dict, app_side=False)

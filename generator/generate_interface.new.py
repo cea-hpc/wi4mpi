@@ -56,9 +56,14 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+'#ifndef _GNU_SOURCE'+'\n'
 	string=string+'#define _GNU_SOURCE'+'\n'
 	string=string+'#endif\n'
+	if not wrapper:
+		string=string+'#define allocate_global 1\n'
+		string=string+'#include \"wrapper_f.h\"\n'
 	string=string+'#include <stdio.h>'+'\n'
 	string=string+'#include <dlfcn.h>'+'\n'
 	string=string+"/*ompi constante*/"+'\n'
+	if not wrapper:
+		string=string+'int WI4MPI_errhandler_key;\n'
 	if not wrapper:
 		string=string+ '#if defined(OMPI_OMPI)'+'\n'
 		for i in ompi_const:
@@ -71,7 +76,11 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+ '#endif'+'\n\n'
 	string=string+ '#define EXTERN_ALLOCATED 1\n'
 	string=string+ '#include "mappers.h"\n\n'
-	string=string+ '__thread int in_w=0;\n'
+	if not wrapper:
+		string=string+'#include \"c2f.h\"\n'
+		string=string+ 'extern __thread int in_w;\n'
+	else:
+		string=string+ '__thread int in_w=0;\n'
 	for i in not_generated:
 		string=string+ i
 	for i in data:
@@ -84,16 +93,29 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 				string=string+object_gen.generate_func_asmK_tls_updated_for_interface(i)+'\n'
 			string=string+object_gen.generate_func_c(i, init_conf, app_side=True)+'\n'
 			string=string+object_gen.generate_func_c(i, init_conf, app_side=False)+'\n'
-	string=string+'#ifdef OMPI_OMPI\n'	
-	for list_other in data:
-		if list_other['name'] in c2f_list:
-			string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
-			string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
-			string=string+object_gen.generate_func_asmK_tls(list_other)
-			string=string+object_gen.generate_func(list_other,init_conf)
-			string=string+object_gen.generate_func_r(list_other)
-	string=string+'#endif\n'
-	string=string+'__attribute__((constructor)) void wrapper_init(void) {\n'
+	if not wrapper:
+		string=string+'#ifdef OMPI_OMPI\n'	
+		for list_other in data:
+			if list_other['name'] in c2f_list:
+				string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
+				string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
+				string=string+object_gen.generate_func_asmK_tls(list_other)
+				string=string+object_gen.generate_func(list_other,init_conf)
+				string=string+object_gen.generate_func_r(list_other)	
+		string=string+'#endif\n'
+	if not wrapper:
+		string=string+'void init_global(void *);\n' 
+		string=string+'void init_f2c(void *);\n'                
+		string=string+'void wrapper_init_f(void);\n'
+		string=string+'#ifdef WI4MPI_STATIC\n'
+		string=string+'#define WATTR\n'                     
+		string=string+'#else\n'                            
+		string=string+'#define WATTR __attribute__((constructor))\n'
+		string=string+'#endif\n'
+	if not wrapper:
+		string=string+'WATTR void wrapper_init(void) {\n'
+	else:
+		string=string+'__attribute__((constructor)) void wrapper_init(void) {\n'
 	string=string+'void *lib_handle=dlopen(getenv(\"WI4MPI_RUN_MPI_C_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'	
 	for i in not_generated_ptr:
 		string=string+i
