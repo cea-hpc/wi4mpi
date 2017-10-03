@@ -428,8 +428,8 @@ enum {
  */
 #define MPI_INFO_ENV ((size_t)0x0) 
 
-#define MPI_STATUS_IGNORE ((size_t)0x0)
-#define MPI_STATUSES_IGNORE ((size_t)0x0)
+#define MPI_STATUS_IGNORE ((MPI_Status*)0x0)
+#define MPI_STATUSES_IGNORE ((MPI_Status**)0x0)
 
 /*
  * Special MPI_T handles
