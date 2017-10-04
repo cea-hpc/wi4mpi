@@ -151,8 +151,11 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+'}'
 	return string
 
-def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
+def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_not_gen=['MPI_Keyval_create','MPI_Keyval_free','MPI_Attr_put','MPI_Attr_get','MPI_Attr_delete','MPI_Errhandler_create','MPI_Errhandler_set','MPI_Errhandler_get','MPI_Errhandler_free','MPI_Comm_create_errhandler','MPI_Comm_get_errhandler','MPI_Comm_set_errhandler','MPI_Info_free']):
 	string=header_license_file()
+	if not wrapper:
+		string=string+'#include \"mappers.h\"\n'
+		string=string+'#include \"run_mpi.h\"\n'
 	#overiding json dictionary
 	for idx,j in enumerate(data_f):
 		for i in data_f_overide:
@@ -162,6 +165,20 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 	string=string+' #include <stdio.h>'+'\n'
 	string=string+'#include <dlfcn.h>'+'\n'
 	string=string+'#include "wrapper_f.h"'+'\n'
+	if not wrapper:
+		string=string+'typedef void (A_F_MPI_Copy_function) (int *,int *,void*,void *,void *,int *,int *);\n'
+		string=string+'typedef void (A_F_MPI_Delete_function) (int *,int *,void*,void *,int *);\n'
+		string=string+'typedef struct {\n'
+		string=string+'\tA_F_MPI_Copy_function* cp_function;\n'
+		string=string+'\tA_F_MPI_Delete_function* del_function;\n'
+		string=string+'\tint ref;\n'
+		string=string+'} myKeyval_functions_t;\n'
+		string=string+'extern myKeyval_functions_t *myKeyval_translation_get(int);\n'
+		string=string+'extern void myKeyval_translation_del(int);\n'
+		string=string+'extern void myKeyval_translation_add(int,myKeyval_functions_t *);\n'
+		string=string+'#ifdef OMPI_INTEL\n'
+		string=string+'int *MPI_UNWEIGHTED = NULL;\n'
+		string=string+'#endif\n'
 	string=string+'extern __thread int in_w;'+'\n'
 	for i in data_f:
 		for j in def_list_f:
@@ -175,14 +192,30 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 					string=string+'#define A_f_'+i['name'] +' _P'+i['name']+'\n'
 				else:
 					string=string+'//#define A_f_'+i['name'] +' _P'+i['name']+'\n'
-				string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
-				string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
-				string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
-				string=string+object_gen.generate_func_f(i)+'\n'
-	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
+				if wrapper:
+					string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
+					string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
+					string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
+				if not wrapper:
+					if i['name'] in list_not_gen:
+						string_file=root+'/FORTRAN/'+i['name']
+						file_to_open = open(string_file,'r')
+						for not_gen_func in file_to_open:
+							string=string+not_gen_func 
+					else: 
+						string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
+						string=string+object_gen.generate_func_f(i)+'\n'
+				else:
+					string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
+					string=string+object_gen.generate_func_f(i)+'\n'
 	if not wrapper:
+		string=string+'#ifdef WI4MPI_STATIC\n#define WATTR\n#else\n#define WATTR __attribute__((constructor))\n#endif\n'
+		string=string+'WATTR void wrapper_init_f(void) {\n'
+		string=string+'dlopen(getenv(\"WI4MPI_RUN_MPI_LIB\"), RTLD_NOW | RTLD_GLOBAL);\n'
 		string=string+'void *lib_handle_f=dlopen(getenv(\"WI4MPI_RUN_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
+		string=string+'if (!lib_handle_f) {\n\tprintf("%s not loaded \\nerror : %s\\n", getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());\n\texit(1);\n}'
+	else:
+		string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
 	for i in data_f:
 		for j in def_list_f:
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
@@ -766,7 +799,7 @@ if __name__ == '__main__':
 	wrapper_preload_fortran=generator("Wrapper_Preload_Fortran",mappers_f,data_f)
 	os.chdir(preload_directory)
 	preload_wrapper_f= open("wrapper.c","w")
-	string=generate_wrapper_f(wrapper_preload_fortran, data_f, data_f_overide,wrapper)
+	string=generate_wrapper_f(wrapper_preload_fortran, data_f, data_f_overide,wrapper,root)
 	preload_wrapper_f.write(string)
 	preload_wrapper_f.close()
 	fl_f.close()
@@ -804,7 +837,7 @@ if __name__ == '__main__':
 	wrapper_interface_fortran=generator("Wrapper_Interface_Fortran",mappers_f,data_f)
 	os.chdir(interface_directory)
 	interface_wrapper_fortran = open("wrapper.c","w")
-	string=generate_wrapper_f(wrapper_interface_fortran, data_f, data_f_overide, wrapper)
+	string=generate_wrapper_f(wrapper_interface_fortran, data_f, data_f_overide, wrapper, root)
 	interface_wrapper_fortran.write(string)
 	interface_wrapper_fortran.close()
 	data_file.close()

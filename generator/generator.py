@@ -652,7 +652,10 @@ class generator:
 					elif func_dict['name']=='MPI_Error_class':
 						string=string+'\n'+self.affect_val_conv_f(arg)
 					else:
-						string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)'+self.affect_val_conv_f(arg)
+						if self.name=='Wrapper_Interface_Fortran' and func_dict['name']=='MPI_Comm_free':
+							string=string+'if (ret_tmp == R_f_MPI_SUCCESS)\n\tcomm_r2au(comm, &comm_tmp);'
+						else:
+							string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)'+self.affect_val_conv_f(arg)
 				else:
 					string=string+'\nif(ret_tmp==R_f_MPI_SUCCESS)\n'
 					string=string+'{\n'
