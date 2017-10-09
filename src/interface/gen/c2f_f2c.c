@@ -778,7 +778,7 @@ printf("entre : R_MPI_Win_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Win_f2c\n");
 #endif
-return op;
+return R_MPI_Win_f2c(op);
 }
 
 
@@ -821,7 +821,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Win_c2f\n");
 #endif
-return op;
+return R_MPI_Win_c2f(op);
 }
 
 __asm__(
@@ -861,7 +861,7 @@ printf("entre : R_MPI_Message_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Message_f2c\n");
 #endif
-return op;
+return R_MPI_Message_f2c(op);
 }
 
 
@@ -904,7 +904,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Message_c2f\n");
 #endif
-return op;
+return R_MPI_Message_c2f(op);
 }
 __asm__(
 ".global CCMPI_Op_f2c\n"
@@ -943,7 +943,7 @@ printf("entre : R_MPI_Op_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Op_f2c\n");
 #endif
-return op;
+return R_MPI_Op_f2c(op);
 }
 
 
@@ -986,7 +986,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Op_c2f\n");
 #endif
-return op;
+return R_MPI_Op_c2f(op);
 }
 
 
@@ -1028,7 +1028,7 @@ printf("entre : R_MPI_Info_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Info_f2c\n");
 #endif
-return op;
+return R_MPI_Info_f2c(op);
 }
 
 
@@ -1071,7 +1071,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Info_c2f\n");
 #endif
-return op;
+return R_MPI_Info_c2f(op);
 }
 
 
@@ -1250,7 +1250,7 @@ printf("entre : R_MPI_Group_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Group_f2c\n");
 #endif
-return op;
+return R_MPI_Group_f2c(op);
 }
 
 
@@ -1311,7 +1311,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Group_c2f\n");
 #endif
-return op;
+return R_MPI_Group_c2f(op);
 }
 
 
@@ -1370,7 +1370,7 @@ printf("entre : R_MPI_Request_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Request_f2c\n");
 #endif
-return op;
+return R_MPI_Request_f2c(op);
 }
 
 
@@ -1431,7 +1431,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Request_c2f\n");
 #endif
-return op;
+return R_MPI_Request_c2f(op);
 }
 
 
@@ -1490,7 +1490,7 @@ printf("entre : R_MPI_Type_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Type_f2c\n");
 #endif
-return op;
+return R_MPI_Type_f2c(op);
 }
 
 
@@ -1551,7 +1551,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Type_c2f\n");
 #endif
-return op;
+return R_MPI_Type_c2f(op);
 }
 
 
@@ -1610,7 +1610,7 @@ printf("entre : R_MPI_Comm_f2c\n");
 #ifdef DEBUG
 printf("sort : R_MPI_Comm_f2c\n");
 #endif
-return op;
+return R_MPI_Comm_f2c(op);
 }
 
 
@@ -1671,7 +1671,7 @@ in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Comm_c2f\n");
 #endif
-return op;
+return R_MPI_Comm_c2f(op);
 }
 __asm__(
 ".global CCMPI_File_f2c\n"
