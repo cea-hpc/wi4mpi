@@ -22848,13 +22848,25 @@ in_w=1;
 
 
 R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
-int i1;
-for(i1=0; i1 < count;i1++){
-request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
-}
-
+int i1,test;
 R_MPI_Status  status_ltmp;
 R_MPI_Status * status_tmp=&status_ltmp;
+for(i1=0; i1 < count;i1++){
+test=0;
+request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
+int ret=R_MPI_Test(&array_of_requests_tmp[i1],&test,status_tmp);
+    if(ret==R_MPI_SUCCESS&&test)
+    {
+        *indx=i1;
+        status_prt_conv_r2a(&status,&status_tmp);
+        request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
+
+wi4mpi_free(array_of_requests_tmp);
+    in_w=0;
+return A_MPI_SUCCESS;    
+}
+}
+
 int ret_tmp= LOCAL_MPI_Waitany( count, array_of_requests_tmp, indx, status_tmp);
 if(ret_tmp == R_MPI_SUCCESS){
  if(array_of_requests_tmp[*indx] == R_MPI_REQUEST_NULL){
@@ -22927,35 +22939,39 @@ int A_MPI_Testany(int count,A_MPI_Request array_of_requests[],int * indx,int * f
 printf("entre : A_MPI_Testany\n");
 #endif
 in_w=1;
-
-
-
-R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
-int i1;
+int i1,test;
 for(i1=0; i1 < count;i1++){
-request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
-}
+R_MPI_Request rt;
+R_MPI_Status st;
+R_MPI_Status *pst=&st;
+request_tab_conv_a2r(&array_of_requests[i1],&rt);
+if(array_of_requests[i1]!=A_MPI_REQUEST_NULL)
+{
+int ret=R_MPI_Test(&rt,&test,&st);
+    if(ret==R_MPI_SUCCESS)
+    {if(test)
+    {
+        *indx=i1;
+        *flag=1;
+        status_prt_conv_r2a(&status,&pst);
+        request_array_delete(&array_of_requests[*indx],&rt);
 
-
-R_MPI_Status  status_ltmp;
-R_MPI_Status * status_tmp=&status_ltmp;
-int ret_tmp= LOCAL_MPI_Testany( count, array_of_requests_tmp, indx, flag, status_tmp);
-if(ret_tmp == R_MPI_SUCCESS){
-if(*flag)
- if(array_of_requests_tmp[*indx] == R_MPI_REQUEST_NULL){
-request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
-}
-}
-
-
-status_prt_conv_r2a(&status,&status_tmp);
-wi4mpi_free(array_of_requests_tmp);
+    in_w=0;
+return A_MPI_SUCCESS;    
+    }}
+    else
+{
 in_w=0;
-#ifdef DEBUG
-printf("sort : A_MPI_Testany\n");
-#endif
-return error_code_conv_r2a(ret_tmp);
+return error_code_conv_r2a(ret);
+}       
 }
+}
+in_w=0;
+return A_MPI_SUCCESS;
+
+}
+
+
 int R_MPI_Testany(int count,R_MPI_Request array_of_requests[],int * indx,int * flag,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -23013,17 +23029,31 @@ in_w=1;
 
 
 R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
-int i1;
-for(i1=0; i1 < count;i1++){
-request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
-}
 R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_MPI_Status)*count));
-int ret_tmp= LOCAL_MPI_Waitall( count, array_of_requests_tmp, array_of_statuses_tmp);
+int *offset_tmp = wi4mpi_alloc(sizeof(int)*count);
+int i1,i33;
+i33=0;
+for(i1=0; i1 < count;i1++){
+R_MPI_Request req_tmp;
+int test,ret;
+request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i33]);
+if(array_of_statuses==A_MPI_STATUSES_IGNORE)
+    ret=LOCAL_MPI_Test(&array_of_requests_tmp[i33],&test,R_MPI_STATUS_IGNORE);
+else
+    ret=LOCAL_MPI_Test(&array_of_requests_tmp[i33],&test,&array_of_statuses_tmp[i1]);
+if(ret!=R_MPI_SUCCESS||!test)
+   {
+        offset_tmp[i33]=i1;
+     i33++;
+    }
+}
+
+int ret_tmp= (count ? LOCAL_MPI_Waitall( i33, array_of_requests_tmp, array_of_statuses_tmp):R_MPI_SUCCESS);
 int i2;
 if(ret_tmp == R_MPI_SUCCESS){
-for(i2 = 0; i2 < count; i2++){
+for(i2 = 0; i2 < i33; i2++){
 if(array_of_requests_tmp[i2]==R_MPI_REQUEST_NULL){
-request_array_delete(&array_of_requests[i2],&array_of_requests_tmp[i2]);
+request_array_delete(&array_of_requests[offset_tmp[i2]],&array_of_requests_tmp[i2]);
 }
 }
 }
@@ -23037,6 +23067,7 @@ status_tab_conv_r2a(&array_of_statuses[i3],&array_of_statuses_tmp[i3]);
 wi4mpi_free(array_of_requests_tmp);
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
 wi4mpi_free(array_of_statuses_tmp);
+wi4mpi_free(offset_tmp );
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Waitall\n");
