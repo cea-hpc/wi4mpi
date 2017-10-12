@@ -6,7 +6,7 @@
 //# This file is part of the Wi4MPI library.                             #
 //#                                                                      #
 //# This software is governed by the CeCILL-C license under French law   #
-///# and abiding by the rules of distribution of free software. You can   #
+//# and abiding by the rules of distribution of free software. You can   #
 //# use, modify and/ or redistribute the software under the terms of     #
 //# the CeCILL-C license as circulated by CEA, CNRS and INRIA at the     #
 //# following URL http://www.cecill.info.                                #
@@ -7808,6 +7808,7 @@ __asm__(
 "jmp *R_MPI_Errhandler_set@GOTPCREL(%rip)\n"
 
 );
+
 int interndel_fn(R_MPI_Comm c,int k,void *v,void *e)
 {
     return R_MPI_SUCCESS;
@@ -7857,6 +7858,7 @@ printf("sort : A_MPI_Errhandler_set\n");
     errhandler_locks_re();
 return error_code_conv_r2a(ret_tmp);
 }
+
 int R_MPI_Errhandler_set(R_MPI_Comm comm,R_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -7996,6 +7998,7 @@ printf("sort : A_MPI_Errhandler_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+
 int R_MPI_Errhandler_free(R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -13838,17 +13841,6 @@ int A_MPI_Comm_create_errhandler(A_MPI_Comm_errhandler_function * comm_errhandle
 #ifdef DEBUG
 printf("entre : A_MPI_Comm_create_errhandler\n");
 #endif
-/*
- in_w=1;
-
-
-ptr_comm_fn_handler=(A_MPI_Comm_errhandler_function *)comm_errhandler_fn;
-R_MPI_Errhandler  errhandler_ltmp;
-R_MPI_Errhandler * errhandler_tmp=&errhandler_ltmp;
-int ret_tmp= LOCAL_MPI_Comm_create_errhandler( (R_MPI_Comm_errhandler_function *)wrapper_comm_handler_function, errhandler_tmp);
-errhandler_ptr_conv_r2a(&errhandler,&errhandler_tmp);
-in_w=0;
-*/
 return A_MPI_Errhandler_create(comm_errhandler_fn,errhandler);
 #ifdef DEBUG
 printf("sort : A_MPI_Comm_create_errhandler\n");
@@ -13905,24 +13897,6 @@ int A_MPI_Comm_get_errhandler(A_MPI_Comm comm,A_MPI_Errhandler * errhandler)
 #ifdef DEBUG
 printf("entre : A_MPI_Comm_get_errhandler\n");
 #endif
-/*in_w=1;
-
-R_MPI_Comm comm_tmp;
-comm_conv_a2r(&comm,&comm_tmp);
-R_MPI_Errhandler  errhandler_ltmp;
-R_MPI_Errhandler * errhandler_tmp=&errhandler_ltmp;
-int ret_tmp= LOCAL_MPI_Comm_get_errhandler( comm_tmp, errhandler_tmp);
-if(ret_tmp == R_MPI_SUCCESS){
-A_MPI_Comm_errhandler_fn* ptr_err_handler_func;
-communicator_fn_translation_get(comm, &ptr_err_handler_func);
-errhandler_fn_translation_update(*errhandler, ptr_err_handler_func);
-}
-in_w=0;
-#ifdef DEBUG
-printf("sort : A_MPI_Comm_get_errhandler\n");
-#endif
-return error_code_conv_r2a(ret_tmp);
-*/
 return A_MPI_Errhandler_get(comm,errhandler);
 }
 int R_MPI_Comm_get_errhandler(R_MPI_Comm comm,R_MPI_Errhandler * errhandler)
@@ -13975,24 +13949,6 @@ int A_MPI_Comm_set_errhandler(A_MPI_Comm comm,A_MPI_Errhandler errhandler)
 #ifdef DEBUG
 printf("entre : A_MPI_Comm_set_errhandler\n");
 #endif
-/*
-in_w=1;
-
-R_MPI_Comm comm_tmp;
-comm_conv_a2r(&comm,&comm_tmp);
-R_MPI_Errhandler errhandler_tmp;
-errhandler_conv_a2r(&errhandler,&errhandler_tmp);
-int ret_tmp= LOCAL_MPI_Comm_set_errhandler( comm_tmp, errhandler_tmp);
-if(!errhandler_translation_is_const(errhandler)){
-A_MPI_Comm_errhandler_fn* ptr_errhandler_func;
-errhandler_fn_translation_get(errhandler, &ptr_errhandler_func);
-communicator_fn_translation_update(comm, ptr_errhandler_func);
-}
-in_w=0;
-#ifdef DEBUG
-printf("sort : A_MPI_Comm_set_errhandler\n");
-#endif
-return error_code_conv_r2a(ret_tmp);*/
 return  A_MPI_Errhandler_set(comm,errhandler);
 }
 int R_MPI_Comm_set_errhandler(R_MPI_Comm comm,R_MPI_Errhandler errhandler)

@@ -51,7 +51,7 @@ def header_license_file():
 	string=string+' */'+'\n'
 	return string
 
-def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list, data, init_conf,not_generated_ptr):
+def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list, data, init_conf,not_generated_ptr, root, list_not_gen=['MPI_Errhandler_set','MPI_Errhandler_get','MPI_Errhandler_free','MPI_Comm_create_errhandler','MPI_Comm_get_errhandler','MPI_Comm_set_errhandler']):
 	string=header_license_file()
 	string=string+'#ifndef _GNU_SOURCE'+'\n'
 	string=string+'#define _GNU_SOURCE'+'\n'
@@ -91,18 +91,28 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 				string=string+object_gen.generate_func_asmK_tls(i)+'\n'
 			else:
 				string=string+object_gen.generate_func_asmK_tls_updated_for_interface(i)+'\n'
-			string=string+object_gen.generate_func_c(i, init_conf, app_side=True)+'\n'
-			string=string+object_gen.generate_func_c(i, init_conf, app_side=False)+'\n'
-	if not wrapper:
-		string=string+'#ifdef OMPI_OMPI\n'	
-		for list_other in data:
-			if list_other['name'] in c2f_list:
-				string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
-				string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
-				string=string+object_gen.generate_func_asmK_tls(list_other)
-				string=string+object_gen.generate_func(list_other,init_conf)
-				string=string+object_gen.generate_func_r(list_other)	
-		string=string+'#endif\n'
+			if not wrapper:
+				if i['name'] in list_not_gen:
+					string_file=root+'/C/'+i['name']
+					file_to_open = open(string_file,'r')
+					for not_gen_func in file_to_open:
+						string=string+not_gen_func
+				else:
+					string=string+object_gen.generate_func_c(i, init_conf, app_side=True)+'\n'
+					string=string+object_gen.generate_func_c(i, init_conf, app_side=False)+'\n'
+			else:
+				string=string+object_gen.generate_func_c(i, init_conf, app_side=True)+'\n'
+				string=string+object_gen.generate_func_c(i, init_conf, app_side=False)+'\n'
+	#if not wrapper:
+	#	string=string+'#ifdef OMPI_OMPI\n'	
+	#	for list_other in data:
+	#		if list_other['name'] in c2f_list:
+	#			string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
+	#			string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
+	#			string=string+object_gen.generate_func_asmK_tls(list_other)
+	#			string=string+object_gen.generate_func(list_other,init_conf)
+	#			string=string+object_gen.generate_func_r(list_other)	
+	#	string=string+'#endif\n'
 	if not wrapper:
 		string=string+'void init_global(void *);\n' 
 		string=string+'void init_f2c(void *);\n'                
@@ -784,7 +794,7 @@ if __name__ == '__main__':
 	wrapper_preload_c=generator("Wrapper_Preload_C",mappers_c,data_c)
 	os.chdir(preload_directory)
 	preload_wrapper_c = open("test_generation_wrapper.c", "w")
-	string=generate_wrapper_c(wrapper_preload_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr)
+	string=generate_wrapper_c(wrapper_preload_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr, root)
 	preload_wrapper_c.write(string)
 	preload_wrapper_c.close()
 	fl.close()
@@ -825,7 +835,7 @@ if __name__ == '__main__':
 	wrapper_interface_c=generator("Wrapper_Interface_C", mappers_c,data_c)
 	os.chdir(interface_directory)
 	interface_wrapper_c =open("test_generation_wrapper.c", "w")
-	string=generate_wrapper_c(wrapper_interface_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr)
+	string=generate_wrapper_c(wrapper_interface_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr,root)
 	interface_wrapper_c.write(string)
 	interface_wrapper_c.close()
 	fl.close()
