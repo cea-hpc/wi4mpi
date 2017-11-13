@@ -263,8 +263,8 @@ void varname##_translation_del_f(int a_mpi_##varname) {  \
    lock(varname##_Lock);\
     id=a_mpi_##varname-f##varname;\
     if(id>=f##varname&&id<f##varname+varname##_size-1)\
-    {(*p_##varname)=id;\
-    p_##varname++;}\
+    {p_##varname++;(*p_##varname)=id;\
+    }\
     unlock(varname##_Lock);\
 }  \
 void varname##_translation_del(A_##type * a_mpi_##varname) {  \
@@ -276,8 +276,8 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     }  \
     lock(varname##_Lock);\
     id=(*((int*)a_mpi_##varname))-f##varname;\
-    (*p_##varname)=id;\
     p_##varname++;\
+    (*p_##varname)=id;\
     unlock(varname##_Lock);\
 }  \
   \
@@ -391,8 +391,8 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
     } else { /* Not a constant */  \
         /* In an hashtable */   \
         id=((int)a_mpi_##varname)-f##varname;\
-        if(id>=0&&id< max##varname) *mpi_##varname=R_##mpi_null;\
-        else memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
+    /*    if(id<0||id>=varname##_size) *mpi_##varname=R_##mpi_null;\
+        else*/ memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
     }  \
 }  \
 void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
@@ -405,8 +405,8 @@ void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
  */ /*  } else */{ /* Not a constant */  \
         /* In an hashtable */   \
         id=((int)a_mpi_##varname)-f##varname;\
-        if(id>=0&&id< max##varname) *mpi_##varname=R_##type##_c2f(R_##mpi_null);\
-        else memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
+     /*   if(id<0||id>= varname##_size) *mpi_##varname=R_##type##_c2f(R_##mpi_null);\
+        else*/ memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
         /*printf ("%s gf %d %d\n",#varname,a_mpi_##varname,*mpi_##varname);\
     */}  \
 }  \
@@ -438,9 +438,9 @@ void varname##_translation_del_f(int a_mpi_##varname) {  \
     int id;\
     lock(varname##_Lock);\
     id=a_mpi_##varname-f##varname;\
-    if(id>=f##varname&&id<f##varname+varname##_size-1)\
-    {(*p_##varname)=id;\
-    p_##varname++;}\
+    if(id>=0&&id<=varname##_size-1)\
+    {p_##varname++;(*p_##varname)=id;\
+    }\
     unlock(varname##_Lock);\
 }  \
 void varname##_translation_del(A_##type * a_mpi_##varname) {  \
@@ -453,13 +453,13 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     }  /*printf("%s %d delete\n",#varname,*a_mpi_##varname);*/\
     /* Hashtable */  \
     id=(*((int*)a_mpi_##varname))-f##varname;\
-    /*printf("%d\n",id);*/if(id<0||id>=max##varname)\
+    /*printf("%d\n",id);*/if(id<0||id>=varname##_size)\
         return;\
     lock(varname##_Lock);\
     varname##_table[id].C=R_##mpi_null;\
     varname##_table[id].fort=R_f_##mpi_null;\
-    (*p_##varname)=id;\
     p_##varname++;\
+    (*p_##varname)=id;\
     *(a_mpi_##varname)=A_##mpi_null;\
     unlock(varname##_Lock);\
 }  \
@@ -655,9 +655,9 @@ void varname##_translation_del_f(int a_mpi_##varname) {  \
     int id;\
     lock(varname##_Lock);\
     id=a_mpi_##varname-f##varname;\
-    if(id>=f##varname&&id<f##varname+varname##_size-1)\
-    {(*p_##varname)=id;\
-    p_##varname++;}\
+    if(id>=0&&id<=varname##_size-1)\
+    {p_##varname++;(*p_##varname)=id;\
+    }\
     unlock(varname##_Lock);\
 }  \
 void varname##_translation_del(A_##type * a_mpi_##varname) {  \
@@ -669,8 +669,8 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     }  \
     lock(varname##_Lock);\
     id=(*((int*)a_mpi_##varname))-f##varname;\
-    (*p_##varname)=id;\
     p_##varname++;\
+    (*p_##varname)=id;\
     munmap(varname##_table[id].fn,func_page_size);\
     unlock(varname##_Lock);\
 }  \
@@ -785,8 +785,8 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
     } else { /* Not a constant */  \
         /* In an hashtable */   \
         id=((int)a_mpi_##varname)-f##varname;\
-        if(id>=0&&id< max##varname) *mpi_##varname=R_##mpi_null;\
-        else memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
+      /* if(id<0||id>= varname##_size) *mpi_##varname=R_##mpi_null;*/ \
+       /* else*/ memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
     }  \
 }  \
 void varname##_translation_add_funtion_ref(A_##type a_mpi_##varname,void *fn){\
@@ -806,8 +806,8 @@ void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
  */ /*  } else */{ /* Not a constant */  \
         /* In an hashtable */   \
         id=((int)a_mpi_##varname)-f##varname;\
-        if(id>=0&&id< max##varname) *mpi_##varname=R_##type##_c2f(R_##mpi_null);\
-        else memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
+      /*  if(id<0||id>=varname##_size) *mpi_##varname=R_##type##_c2f(R_##mpi_null);\
+        else*/ memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
         /*printf ("%s gf %d %d\n",#varname,a_mpi_##varname,*mpi_##varname);\
     */}  \
 }  \
@@ -839,9 +839,9 @@ void varname##_translation_del_f(int a_mpi_##varname) {  \
     int id;\
     lock(varname##_Lock);\
     id=a_mpi_##varname-f##varname;\
-    if(id>=f##varname&&id<f##varname+varname##_size-1)\
-    {(*p_##varname)=id;\
-    p_##varname++;}\
+    if(id>=0&&id<=varname##_size-1)\
+    {p_##varname++;(*p_##varname)=id;\
+    }\
     unlock(varname##_Lock);\
 }  \
 void varname##_translation_del(A_##type * a_mpi_##varname) {  \
@@ -854,13 +854,13 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
     }  /*printf("%s %d delete\n",#varname,*a_mpi_##varname);*/\
     /* Hashtable */  \
     id=(*((int*)a_mpi_##varname))-f##varname;\
-    /*printf("%d\n",id);*/if(id<0||id>=max##varname)\
+    /*printf("%d\n",id);*/if(id<0||id>=varname##_size)\
         return;\
     lock(varname##_Lock);\
     varname##_table[id].C=R_##mpi_null;\
     /*varname##_table[id].fort=R_##type##_c2f(mpi_null);*/\
-    (*p_##varname)=id;\
     p_##varname++;\
+    (*p_##varname)=id;\
     *(a_mpi_##varname)=(A_##mpi_null);\
     munmap(varname##_table[id].fn,func_page_size);\
     unlock(varname##_Lock);\

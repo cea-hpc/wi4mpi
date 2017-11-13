@@ -56,9 +56,14 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+'#ifndef _GNU_SOURCE'+'\n'
 	string=string+'#define _GNU_SOURCE'+'\n'
 	string=string+'#endif\n'
+	if not wrapper:
+		string=string+'#define allocate_global 1\n'
+		string=string+'#include \"wrapper_f.h\"\n'
 	string=string+'#include <stdio.h>'+'\n'
 	string=string+'#include <dlfcn.h>'+'\n'
 	string=string+"/*ompi constante*/"+'\n'
+	if not wrapper:
+		string=string+'int WI4MPI_errhandler_key;\n'
 	if not wrapper:
 		string=string+ '#if defined(OMPI_OMPI)'+'\n'
 		for i in ompi_const:
@@ -71,7 +76,11 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+ '#endif'+'\n\n'
 	string=string+ '#define EXTERN_ALLOCATED 1\n'
 	string=string+ '#include "mappers.h"\n\n'
-	string=string+ '__thread int in_w=0;\n'
+	if not wrapper:
+		string=string+'#include \"c2f.h\"\n'
+		string=string+ 'extern __thread int in_w;\n'
+	else:
+		string=string+ '__thread int in_w=0;\n'
 	for i in not_generated:
 		string=string+ i
 	for i in data:
@@ -84,16 +93,29 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 				string=string+object_gen.generate_func_asmK_tls_updated_for_interface(i)+'\n'
 			string=string+object_gen.generate_func_c(i, init_conf, app_side=True)+'\n'
 			string=string+object_gen.generate_func_c(i, init_conf, app_side=False)+'\n'
-	string=string+'#ifdef OMPI_OMPI\n'	
-	for list_other in data:
-		if list_other['name'] in c2f_list:
-			string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
-			string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
-			string=string+object_gen.generate_func_asmK_tls(list_other)
-			string=string+object_gen.generate_func(list_other,init_conf)
-			string=string+object_gen.generate_func_r(list_other)
-	string=string+'#endif\n'
-	string=string+'__attribute__((constructor)) void wrapper_init(void) {\n'
+	if not wrapper:
+		string=string+'#ifdef OMPI_OMPI\n'	
+		for list_other in data:
+			if list_other['name'] in c2f_list:
+				string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
+				string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
+				string=string+object_gen.generate_func_asmK_tls(list_other)
+				string=string+object_gen.generate_func(list_other,init_conf)
+				string=string+object_gen.generate_func_r(list_other)	
+		string=string+'#endif\n'
+	if not wrapper:
+		string=string+'void init_global(void *);\n' 
+		string=string+'void init_f2c(void *);\n'                
+		string=string+'void wrapper_init_f(void);\n'
+		string=string+'#ifdef WI4MPI_STATIC\n'
+		string=string+'#define WATTR\n'                     
+		string=string+'#else\n'                            
+		string=string+'#define WATTR __attribute__((constructor))\n'
+		string=string+'#endif\n'
+	if not wrapper:
+		string=string+'WATTR void wrapper_init(void) {\n'
+	else:
+		string=string+'__attribute__((constructor)) void wrapper_init(void) {\n'
 	string=string+'void *lib_handle=dlopen(getenv(\"WI4MPI_RUN_MPI_C_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'	
 	for i in not_generated_ptr:
 		string=string+i
@@ -129,8 +151,11 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 	string=string+'}'
 	return string
 
-def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
+def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_not_gen=['MPI_Keyval_create','MPI_Keyval_free','MPI_Attr_put','MPI_Attr_get','MPI_Attr_delete','MPI_Errhandler_create','MPI_Errhandler_set','MPI_Errhandler_get','MPI_Errhandler_free','MPI_Comm_create_errhandler','MPI_Comm_get_errhandler','MPI_Comm_set_errhandler','MPI_Info_free']):
 	string=header_license_file()
+	if not wrapper:
+		string=string+'#include \"mappers.h\"\n'
+		string=string+'#include \"run_mpi.h\"\n'
 	#overiding json dictionary
 	for idx,j in enumerate(data_f):
 		for i in data_f_overide:
@@ -140,6 +165,20 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 	string=string+' #include <stdio.h>'+'\n'
 	string=string+'#include <dlfcn.h>'+'\n'
 	string=string+'#include "wrapper_f.h"'+'\n'
+	if not wrapper:
+		string=string+'typedef void (A_F_MPI_Copy_function) (int *,int *,void*,void *,void *,int *,int *);\n'
+		string=string+'typedef void (A_F_MPI_Delete_function) (int *,int *,void*,void *,int *);\n'
+		string=string+'typedef struct {\n'
+		string=string+'\tA_F_MPI_Copy_function* cp_function;\n'
+		string=string+'\tA_F_MPI_Delete_function* del_function;\n'
+		string=string+'\tint ref;\n'
+		string=string+'} myKeyval_functions_t;\n'
+		string=string+'extern myKeyval_functions_t *myKeyval_translation_get(int);\n'
+		string=string+'extern void myKeyval_translation_del(int);\n'
+		string=string+'extern void myKeyval_translation_add(int,myKeyval_functions_t *);\n'
+		string=string+'#ifdef OMPI_INTEL\n'
+		string=string+'int *MPI_UNWEIGHTED = NULL;\n'
+		string=string+'#endif\n'
 	string=string+'extern __thread int in_w;'+'\n'
 	for i in data_f:
 		for j in def_list_f:
@@ -153,14 +192,30 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 					string=string+'#define A_f_'+i['name'] +' _P'+i['name']+'\n'
 				else:
 					string=string+'//#define A_f_'+i['name'] +' _P'+i['name']+'\n'
-				string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
-				string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
-				string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
-				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
-				string=string+object_gen.generate_func_f(i)+'\n'
-	string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
+				if wrapper:
+					string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
+					string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
+					string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
+				if not wrapper:
+					if i['name'] in list_not_gen:
+						string_file=root+'/FORTRAN/'+i['name']
+						file_to_open = open(string_file,'r')
+						for not_gen_func in file_to_open:
+							string=string+not_gen_func 
+					else: 
+						string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
+						string=string+object_gen.generate_func_f(i)+'\n'
+				else:
+					string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
+					string=string+object_gen.generate_func_f(i)+'\n'
 	if not wrapper:
+		string=string+'#ifdef WI4MPI_STATIC\n#define WATTR\n#else\n#define WATTR __attribute__((constructor))\n#endif\n'
+		string=string+'WATTR void wrapper_init_f(void) {\n'
+		string=string+'dlopen(getenv(\"WI4MPI_RUN_MPI_LIB\"), RTLD_NOW | RTLD_GLOBAL);\n'
 		string=string+'void *lib_handle_f=dlopen(getenv(\"WI4MPI_RUN_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
+		string=string+'if (!lib_handle_f) {\n\tprintf("%s not loaded \\nerror : %s\\n", getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());\n\texit(1);\n}'
+	else:
+		string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
 	for i in data_f:
 		for j in def_list_f:
 			if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
@@ -262,38 +317,55 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper):
 	
 def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,static_list=["OMPI","INTEL"]):
 	string=header_license_file()
+	string=string+'#include <stdlib.h>\n'
 	string=string+'#define _GNU_SOURCE\n'
 	string=string+'#include <stdio.h>\n' 
 	string=string+'#include <dlfcn.h>\n' 
 	string=string+'#include \"mpi.h\"\n' 
 	string=string+"\nchar wi4mpi_mode[]=\"\";\n\n"
+	string=string+"__thread int in_w;\n"
 	string=string+"/*ompi constante*/\n" 
 	for i in interface_key_gen:
 		string=string+i
 	for i in data:
 		if i['name'] in def_list:
-			string=string+'\n'+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='',interface=True)+';\n' 
+			if i['name'] == 'MPI_Pcontrol':
+				string=string+'int MPI_Pcontrol(int level,...);\n'
+			else:
+				string=string+'\n'+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='',interface=True)+';\n' 
 			string=string+'#define '+i['name']+' P'+i['name']+'\n'
 			string=string+'#pragma weak '+i['name']+'=P'+i['name']+'\n'
-			string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='INTERFACE_LOCAL_',type_prefix='',interface=True)+';\n'
+			if i['name'] == 'MPI_Pcontrol':
+				string=string+'int (*INTERFACE_LOCAL_MPI_Pcontrol)(int,...);\n'
+			else:
+				string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='INTERFACE_LOCAL_',type_prefix='',interface=True)+';\n'
 			string=string+'#ifdef WI4MPI_STATIC\n'
 			for j in static_list:
-				string=string+'extern '+object_gen.print_symbol_c(i,func_ptr=False,prefix='INTERF_2_'+j+'_A_',type_prefix='',interface=True)+';\n'
+				if i['name'] == 'MPI_Pcontrol':
+					string=string+'extern int INTERF_2_'+j+'_CCMPI_Pcontrol(int,...);\n'
+				else:
+					string=string+'extern '+object_gen.print_symbol_c(i,func_ptr=False,prefix='INTERF_2_'+j+'_CC',type_prefix='',interface=True,interF=True)+';\n'
 			string=string+'#endif /*WI4MPI_STATIC*/\n'
-			string=string+'\n'+object_gen.print_symbol_c(i,prefix='P',name_arg=True,retval_name=False,app_side=False,run_side=False,inter_side=True)
-			string=string+object_gen.header_func(i,app_side=False)+'\n'
-			string=string+object_gen.print_symbol_c(i,prefix='INTERFACE_LOCAL_',name_arg=True,retval_name=True,app_side=False,call=True, r_func=False,type_prefix='',interface=True)+';\n'
-			string=string+object_gen.footer_func(i,app_side=False)
+			if i['name'] == 'MPI_Pcontrol':
+				string=string+'\nint PMPI_Pcontrol(int level,...)\n{\n\treturn MPI_SUCCESS;\n}'
+			else :
+				string=string+'\n'+object_gen.print_symbol_c(i,prefix='P',name_arg=True,retval_name=False,app_side=False,run_side=False,inter_side=True)
+				string=string+object_gen.header_func(i,app_side=False)+'\n'
+				string=string+object_gen.print_symbol_c(i,prefix='INTERFACE_LOCAL_',name_arg=True,retval_name=True,app_side=False,call=True, r_func=False,type_prefix='',interface=True)+';\n'
+				string=string+object_gen.footer_func(i,app_side=False)
 	string=string+'\n#ifdef WI4MPI_STATIC\n'
 	for j in static_list:
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Keyval_create(void);'
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Keyval_free(void);\n'        
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Comm_create_keyval(void);\n'
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Comm_free_keyval(void);\n'   
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Win_get_attr(void);\n'       
-		string=string+'extern int INTERF_2_'+j+'_A_MPI_Win_set_attr(void);\n'       
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Keyval_create(MPI_Copy_function *copy_fn,MPI_Delete_function *delete_fn,int *keyval, void *extra_state);\n'
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Keyval_free(int *);\n'        
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Comm_create_keyval(MPI_Copy_function *copy_fn,MPI_Delete_function *delete_fn,int *keyval, void *extra_state);\n'
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Comm_free_keyval(int *);\n'   
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Win_get_attr(MPI_Win, int, void *, int *);\n'       
+		string=string+'extern int INTERF_2_'+j+'_CCMPI_Win_set_attr(MPI_Win, int, void *);\n'       
 	string=string+'#endif /*WI4MPI_STATIC*/\n'
+	string=string+'int wi4mpi__init__C = 0;'
+	string=string+'extern int wi4mpi__init__F;'
 	string=string+'\n__attribute__((constructor)) void wrapper_interface(void) {\n'                     
+	string=string+'if (wi4mpi__init__C != 0)\t\treturn;\nelse\n\t\twi4mpi__init__C = 1;\nif (wi4mpi__init__F == 0)\n\t\twrapper_interface_f();\n'
 	#string=string+'void *interface_handle=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n' 
 	#string=string+'if(!interface_handle)\n'                                                           
 	#string=string+'{\n'                                                                               
@@ -336,29 +408,32 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
 	string=string+'handle_loader(MPI_Comm_free_keyval);\n'    
 	string=string+'handle_loader(MPI_Win_get_attr);\n'            
 	string=string+'handle_loader(MPI_Win_set_attr);\n'            
-	for i in data:                                                                         
-		if i['name'] in def_list or i['name'] in c2f_list:                                  
-			string=string+'handle_loader('+i['name']+');\n'
+	for a in data:                                                                         
+		if a['name'] in def_list or a['name'] in c2f_list:
+			string=string+'handle_loader('+a['name']+');\n'
 	
 	string=string+'\n'
 	string=string+'#else\n' 
-	string=string+'char *target=getenv(\"WI4MPI_STATIC_TARGET_TYPE\");\n'
+	string=string+'char *target_inter=getenv(\"WI4MPI_STATIC_TARGET_TYPE\");\n'
 	for j in static_list:
-		string=string+'if(!strcmp(target,\"'+j+'\")){\n'
-		string=string+'handle_loader(MPI_Keyval_create,INTERF_2_'+j+'_A_);' 
-		string=string+'handle_loader(MPI_Keyval_free,INTERF_2_'+j+'_A_);\n'                                             
-		string=string+'handle_loader(MPI_Comm_create_keyval,INTERF_2_'+j+'_A_);\n'
-		string=string+'handle_loader(MPI_Comm_free_keyval,INTERF_2_'+j+'_A_);\n'
-		string=string+'handle_loader(MPI_Win_get_attr,INTERF_2_'+j+'_A_);\n'
-		string=string+'handle_loader(MPI_Win_set_attr,INTERF_2_'+j+'_A_);\n'
+		string=string+'if(target_inter && !strcmp(target_inter,\"'+j+'\")){\n'
+		string=string+'handle_loader(MPI_Keyval_create,INTERF_2_'+j+'_CC);' 
+		string=string+'handle_loader(MPI_Keyval_free,INTERF_2_'+j+'_CC);\n'                                             
+		string=string+'handle_loader(MPI_Comm_create_keyval,INTERF_2_'+j+'_CC);\n'
+		string=string+'handle_loader(MPI_Comm_free_keyval,INTERF_2_'+j+'_CC);\n'
+		string=string+'handle_loader(MPI_Win_get_attr,INTERF_2_'+j+'_CC);\n'
+		string=string+'handle_loader(MPI_Win_set_attr,INTERF_2_'+j+'_CC);\n'
 		for i in data:                                                                         
 			if i['name'] in def_list or i['name'] in c2f_list:                                  
-				string=string+'handle_loader('+i['name']+',INTERF_2_'+j+'_A_);\n'
+				string=string+'handle_loader('+i['name']+',INTERF_2_'+j+'_CC);\n'
+		string=string+'INTERF_2_'+j+'_wrapper_init();'
+		string=string+'INTERF_2_'+j+'_wrapper_init_f();'
 		string=string+'}else{\n'
 	string=string+'printf(\"no target library defined conversion cannot be choosen\\n\" );\nexit(1);\n\n'
 	for j in static_list:
 		string=string+'}\n'
 	string=string+'#endif\n'
+	string=string+'wrapper_interface_f();'
 	string=string+'}\n'                                                                              
 	return string
 
@@ -368,6 +443,7 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 		for i in data2:              
 			if i['name'] == j['name']:
 				data_f[idx]=i         
+	string=string+'#include <stdlib.h>\n'
 	string=string+'#define _GNU_SOURCE\n'
 	string=string+'#include <stdio.h>\n'
 	string=string+'#include <dlfcn.h>\n'
@@ -397,42 +473,136 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 				string=string+'return '+object_gen.print_symbol_f(i,prefix='INTERFACE_F_LOCAL_',type_prefix='',call=True,name_arg=True,direct=True)+';\n}\n\n'
 				string=string+'#ifdef WI4MPI_STATIC\n'
 				for j in static_list:
-					string=string+'extern '+object_gen.print_symbol_f(i,func_ptr=True,prefix='INTERF_2_'+j+'_A_f_',type_prefix='')+';\n'
+					string=string+'extern void'+object_gen.print_symbol_f(i,func_ptr=True,prefix='INTERF_2_'+j+'_A_f_',type_prefix='')+';\n'
 				string=string+'#endif /*WI4MPI_STATIC*/\n'
 	string=string+'#ifdef WI4MPI_STATIC\n'
-	for j in static_list:
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Error_string)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Get_processor_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_File_open)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_File_set_view)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_File_get_view)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_File_delete)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Info_delete)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Info_get)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Info_get_nthkey)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Info_get_valuelen)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Info_set)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Win_get_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Win_set_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Comm_spawn)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Comm_get_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Comm_set_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Type_get_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Type_set_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Add_error_string)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Close_port)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Get_library_version)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Open_port)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Publish_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Unpublish_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Lookup_name)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Pack_external)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Pack_external_size)(void);\n'
-	    string=string+'extern void (INTERF_2_'+j+'_A_f_MPI_Unpack_external)(void);\n'
-		
+	string=string+'#ifdef IFORT_CALL\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Error_string)(int *, char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Get_processor_name)(char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_open)(int *, char *, int *, int *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_set_view)(int *, int *, int *, int *, char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_get_view)(int *, int *, int *, int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_delete)(char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_delete)(int *, char *, int *, int);\n'                        
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_get)(int *, char *, int *, char *, int *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_get_nthkey)(int *, int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_get_valuelen)(int *, char *, int *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_set)(int *, char *, char *, int *, int, int);\n' 
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Win_get_name)(int *, char *, int *, int *, int);\n'           
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Win_set_name)(int *, char *, int *, int);\n'             
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Comm_spawn)(char *, char *, int *, int *, int *, int *, int *, int *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Comm_get_name)(int *, char *, int *, int *, int);\n'       
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Comm_set_name)(int *, char *, int *, int);\n'    
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Type_get_name)(int *, char *, int *, int *, int);\n'      
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Type_set_name)(int *, char *, int *, int);\n'             
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Add_error_string)(int *, char *, int *, int);\n'          
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Close_port)(char *, int *, int);\n'                       
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Get_library_version)(char *, int *, int *, int);\n'       
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Open_port)(int *, char *, int *, int);\n'                  
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Publish_name)(char *, int *, char *, int *, int, int);\n'  
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Unpublish_name)(char *, int *, char *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Lookup_name)(char *, int *, char *, int *, int, int);\n'   
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Pack_external)(char *, void *, int, int *, void *, size_t, size_t *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, int);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Error_string)(int *, char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Get_processor_name)(char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_open)(int *, char *, int *, int *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_set_view)(int *, int *, int *, int *, char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_get_view)(int *, int *, int *, int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_delete)(char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_delete)(int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_get)(int *, char *, int *, char *, int *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_get_nthkey)(int *, int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_get_valuelen)(int *, char *, int *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_set)(int *, char *, char *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Win_get_name)(int *, char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Win_set_name)(int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Comm_spawn)(char *, char *, int *, int *, int *, int *, int *, int *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Comm_get_name)(int *, char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Comm_set_name)(int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Type_get_name)(int *, char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Type_set_name)(int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Add_error_string)(int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Close_port)(char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Get_library_version)(char *, int *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Open_port)(int *, char *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Publish_name)(char *, int *, char *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Unpublish_name)(char *, int *, char *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Lookup_name)(char *, int *, char *, int *, int, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Pack_external)(char *, void *, int, int *, void *, size_t, size_t *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, int);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);\n'
+	string=string+'#else\n'	
+	string=string+'#ifdef GFORT_CALL\n'	
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Error_string)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Get_processor_name)(char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_open)(int *, char *,int, int *, int *, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_set_view)(int *, int *, int *, int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_get_view)(int *, int *, int *, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_delete)(char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_delete)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_get)(int *, char *,int, int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_get_nthkey)(int *, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_get_valuelen)(int *, char *,int, int *, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Info_set)(int *, char *,int, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Win_get_name)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Win_set_name)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Comm_spawn)(char *,int, char *,int, int *, int *, int *, int *, int *, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Comm_get_name)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Comm_set_name)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Type_get_name)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Type_set_name)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Add_error_string)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Close_port)(char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Get_library_version)(char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Open_port)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Publish_name)(char *,int, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Unpublish_name)(char *,int, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Lookup_name)(char *,int, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Pack_external)(char *,int, void *, int, int *, void *, size_t, size_t *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Pack_external_size)(char *,int, int, int *, size_t *, int *);\n'
+	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Unpack_external)(char *,int, void *, size_t, size_t *, void *, int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Error_string)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Get_processor_name)(char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_open)(int *, char *,int, int *, int *, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_set_view)(int *, int *, int *, int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_get_view)(int *, int *, int *, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_File_delete)(char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_delete)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_get)(int *, char *,int, int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_get_nthkey)(int *, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_get_valuelen)(int *, char *,int, int *, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Info_set)(int *, char *,int, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Win_get_name)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Win_set_name)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Comm_spawn)(char *,int, char *,int, int *, int *, int *, int *, int *, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Comm_get_name)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Comm_set_name)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Type_get_name)(int *, char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Type_set_name)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Add_error_string)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Close_port)(char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Get_library_version)(char *,int, int *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Open_port)(int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Publish_name)(char *,int, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Unpublish_name)(char *,int, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Lookup_name)(char *,int, int *, char *,int, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Pack_external)(char *,int, void *, int, int *, void *, size_t, size_t *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Pack_external_size)(char *,int, int, int *, size_t *, int *);\n'
+	string=string+'extern void (INTERF_2_INTEL_A_f_MPI_Unpack_external)(char *,int, void *, size_t, size_t *, void *, int, int *, int *);\n'
+	string=string+'#endif\n'
+	string=string+'#endif\n'
 	string=string+'#endif /*WI4MPI_STATIC*/\n'
-
+	string=string+'extern int wi4mpi__init__C;\n'
+	string=string+'int wi4mpi__init__F=0;\n'
 	string=string+'__attribute__((constructor)) void wrapper_interface_f(void) {\n'
+	string=string+'if(wi4mpi__init__F!=0)\n'
+	string=string+'\t\treturn;\n'
+	string=string+'else\n'                    
+	string=string+'\t\twi4mpi__init__F=1;\n'
+	string=string+'if(wi4mpi__init__C==0)\n' 
+	string=string+'\t\twrapper_interface();\n'
 	#string=string+'void *interface_handle_f=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
 	#string=string+'if(!interface_handle_f)\n' 
 	#string=string+'{\n'                                    
@@ -508,7 +678,7 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 	string=string+'#else\n'
 	string=string+'char *target=getenv(\"WI4MPI_STATIC_TARGET_TYPE\");\n'
 	for k in  static_list:
-		string=string+'if(!strcmp(target,\"'+k+'\")){\n'
+		string=string+'if(target&&!strcmp(target,\"'+k+'\")){\n'
 		for i in data_f:
 			for j in def_list_f: 
 				if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
@@ -629,7 +799,7 @@ if __name__ == '__main__':
 	wrapper_preload_fortran=generator("Wrapper_Preload_Fortran",mappers_f,data_f)
 	os.chdir(preload_directory)
 	preload_wrapper_f= open("wrapper.c","w")
-	string=generate_wrapper_f(wrapper_preload_fortran, data_f, data_f_overide,wrapper)
+	string=generate_wrapper_f(wrapper_preload_fortran, data_f, data_f_overide,wrapper,root)
 	preload_wrapper_f.write(string)
 	preload_wrapper_f.close()
 	fl_f.close()
@@ -667,7 +837,7 @@ if __name__ == '__main__':
 	wrapper_interface_fortran=generator("Wrapper_Interface_Fortran",mappers_f,data_f)
 	os.chdir(interface_directory)
 	interface_wrapper_fortran = open("wrapper.c","w")
-	string=generate_wrapper_f(wrapper_interface_fortran, data_f, data_f_overide, wrapper)
+	string=generate_wrapper_f(wrapper_interface_fortran, data_f, data_f_overide, wrapper, root)
 	interface_wrapper_fortran.write(string)
 	interface_wrapper_fortran.close()
 	data_file.close()

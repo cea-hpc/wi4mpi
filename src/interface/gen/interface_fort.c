@@ -4417,7 +4417,6 @@ extern void (INTERF_2_OMPI_A_f_MPI_Lookup_name)(char *, int *, char *, int *, in
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external)(char *, void *, int, int *, void *, size_t, size_t *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);
-
 extern void (INTERF_2_INTEL_A_f_MPI_Error_string)(int *, char *, int *, int *, int);
 extern void (INTERF_2_INTEL_A_f_MPI_Get_processor_name)(char *, int *, int *, int);
 extern void (INTERF_2_INTEL_A_f_MPI_File_open)(int *, char *, int *, int *, int *, int *, int);
@@ -4448,7 +4447,6 @@ extern void (INTERF_2_INTEL_A_f_MPI_Pack_external_size)(char *, int, int *, size
 extern void (INTERF_2_INTEL_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);
 #else
 #ifdef GFORT_CALL
-
 extern void (INTERF_2_OMPI_A_f_MPI_Error_string)(int *, char *,int, int *, int *);
 extern void (INTERF_2_OMPI_A_f_MPI_Get_processor_name)(char *,int, int *, int *);
 extern void (INTERF_2_OMPI_A_f_MPI_File_open)(int *, char *,int, int *, int *, int *, int *);
@@ -4477,7 +4475,6 @@ extern void (INTERF_2_OMPI_A_f_MPI_Lookup_name)(char *,int, int *, char *,int, i
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external)(char *,int, void *, int, int *, void *, size_t, size_t *, int *);
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external_size)(char *,int, int, int *, size_t *, int *);
 extern void (INTERF_2_OMPI_A_f_MPI_Unpack_external)(char *,int, void *, size_t, size_t *, void *, int, int *, int *);
-
 extern void (INTERF_2_INTEL_A_f_MPI_Error_string)(int *, char *,int, int *, int *);
 extern void (INTERF_2_INTEL_A_f_MPI_Get_processor_name)(char *,int, int *, int *);
 extern void (INTERF_2_INTEL_A_f_MPI_File_open)(int *, char *,int, int *, int *, int *, int *);
@@ -4513,11 +4510,11 @@ extern int wi4mpi__init__C;
 int wi4mpi__init__F=0;
 __attribute__((constructor)) void wrapper_interface_f(void) {
 if(wi4mpi__init__F!=0)
-    return;
+		return;
 else
-    wi4mpi__init__F=1;
+		wi4mpi__init__F=1;
 if(wi4mpi__init__C==0)
-    wrapper_interface();
+		wrapper_interface();
 #ifndef WI4MPI_STATIC
 #define to_string(name) #name
 #define handle_loader(name)\
