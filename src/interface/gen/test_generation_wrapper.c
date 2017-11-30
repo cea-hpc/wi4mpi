@@ -23040,15 +23040,20 @@ request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i33]);
 if(array_of_statuses==A_MPI_STATUSES_IGNORE)
     ret=LOCAL_MPI_Test(&array_of_requests_tmp[i33],&test,R_MPI_STATUS_IGNORE);
 else
-    ret=LOCAL_MPI_Test(&array_of_requests_tmp[i33],&test,&array_of_statuses_tmp[i1]);
+    ret=LOCAL_MPI_Test(&array_of_requests_tmp[i33],&test,&array_of_statuses_tmp[i33]);
 if(ret!=R_MPI_SUCCESS||!test)
    {
         offset_tmp[i33]=i1;
      i33++;
     }
+	else
+	{
+		
+		status_tab_conv_r2a(&array_of_statuses[i1],&array_of_statuses_tmp[i33]);
+	}
 }
 
-int ret_tmp= (count ? LOCAL_MPI_Waitall( i33, array_of_requests_tmp, array_of_statuses_tmp):R_MPI_SUCCESS);
+int ret_tmp= (i33 ? LOCAL_MPI_Waitall( i33, array_of_requests_tmp, array_of_statuses_tmp):R_MPI_SUCCESS);
 int i2;
 if(ret_tmp == R_MPI_SUCCESS){
 for(i2 = 0; i2 < i33; i2++){
@@ -23060,8 +23065,8 @@ request_array_delete(&array_of_requests[offset_tmp[i2]],&array_of_requests_tmp[i
 int i3;
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
 {
-for(i3=0; i3 < count;i3++){
-status_tab_conv_r2a(&array_of_statuses[i3],&array_of_statuses_tmp[i3]);
+for(i3=0; i3 < i33;i3++){
+status_tab_conv_r2a(&array_of_statuses[offset_tmp[i3]],&array_of_statuses_tmp[i3]);
 }
 }
 wi4mpi_free(array_of_requests_tmp);
