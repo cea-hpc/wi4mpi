@@ -164,19 +164,19 @@ set_target_properties(wi4mpi_CCC_INTEL_a
 
 add_custom_command(TARGET wi4mpi_CCC_INTEL_a 
                     POST_BUILD
-                   COMMAND  ${CMAKE_SOURCE_DIR}/rename_sym.sh libwi4mpi_CCC_INTEL_a.a "INTEL"
+                   COMMAND  ${CMAKE_SOURCE_DIR}/scripts/rename_sym.sh libwi4mpi_CCC_INTEL_a.a "INTEL"
                    #WORKING_DIRECTORY ${CMAKE_BUILD_FILES_DIRECTORY}
                     )
 message(status ${CMAKE_CURRENT_BINARY_DIR})
 add_custom_command(TARGET wi4mpi_CCC_OMPI_a 
                     POST_BUILD
-                  COMMAND  ${CMAKE_SOURCE_DIR}/rename_sym.sh libwi4mpi_CCC_OMPI_a.a "OMPI"
+                  COMMAND  ${CMAKE_SOURCE_DIR}/scripts/rename_sym.sh libwi4mpi_CCC_OMPI_a.a "OMPI"
                     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 
                 )
 add_custom_command(TARGET mpi_a 
                 POST_BUILD
-                COMMAND ${CMAKE_SOURCE_DIR}/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_CCC_INTEL_a.a libwi4mpi_CCC_OMPI_a.a
+                COMMAND ${CMAKE_SOURCE_DIR}/scripts/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_CCC_INTEL_a.a libwi4mpi_CCC_OMPI_a.a
                     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 
                 )
