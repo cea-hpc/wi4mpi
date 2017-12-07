@@ -57,7 +57,7 @@ extern int mpi_fortran_weights_empty_;
 
 #include "utils.h"
 
-#include "new_utils.h"
+#include "engine.h"
 
 #define R_f_MPI_COMM_SELF 1
 

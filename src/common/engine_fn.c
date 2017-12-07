@@ -22,8 +22,8 @@
 //########################################################################
 
 
-#include "new_utils_fn.h"
-#include "new_utils.h"
+#include "engine_fn.h"
+#include "engine.h"
 #include <stdio.h>
 
 static void dump(void * src, size_t size) {
@@ -40,20 +40,31 @@ static void dump(void * src, size_t size) {
 #define HASHTABLE_OPTI_FN(keytype, valuetype, name) \
  \
 static name##_fn_translation_t* name##_fn_table = NULL; \
+/*table_lock_t*/ /*pthread_spinlock_t*/ volatile int * name##_fn_Lock;\
  \
+ /*  lock_init  */  \
+ /*void name##_translation_fn_init(void) {*/\
+       /*lock_init(name##_fn_Lock);*/\
+/*}*/  \
+   \
 void name##_fn_translation_get(keytype key, valuetype* value) { \
     name##_fn_translation_t* conv;  \
-    /*printf("name##fn get\n");*/\
     HASH_FIND(hh,name##_fn_table, &key, sizeof(keytype), conv);  \
-    assert(conv != NULL); \
-    memcpy(value,&(conv->value), sizeof(valuetype)); \
+    /*assert(conv != NULL);*/ \
+    /*lock(name##_fn_Lock);*/\
+    if(conv) \
+    memcpy(value,&(conv->value), sizeof(valuetype));\
+    else \
+     *value=(valuetype)0;\
+    /*unlock(name##_fn_Lock);*/ \
 } \
  \
  \
 void name##_fn_translation_update(keytype key, valuetype value) { \
     name##_fn_translation_t* conv;  \
-    /*printf("name##fn update\n");*/\
-    HASH_FIND(hh,name##_fn_table, &key, sizeof(keytype), conv);  \
+    keytype key_tmp=key;\
+    HASH_FIND(hh,name##_fn_table, &key_tmp, sizeof(keytype), conv);  \
+    /*lock(name##_fn_Lock);*/ \
     if (conv == NULL) { /* New value in hashtable */ \
         conv = (name##_fn_translation_t*) malloc(sizeof(name##_fn_translation_t)); \
         memcpy(&(conv->key), &key, sizeof(keytype)); \
@@ -62,30 +73,37 @@ void name##_fn_translation_update(keytype key, valuetype value) { \
     } else { \
         memcpy(&(conv->value), &value, sizeof(valuetype)); \
     } \
+    /*unlock(name##_fn_Lock); */\
 } \
  \
 void name##_fn_translation_del(keytype key) { \
     name##_fn_translation_t* conv;  \
     HASH_FIND(hh,name##_fn_table, &key, sizeof(keytype), conv);  \
-    /*printf("name##fn del\n%d\n%d\n",key,conv);*/\
-    if(conv != NULL) \
+   if(conv != NULL)  \
+    /*lock(name##_fn_Lock);*/ \
     HASH_DELETE(hh, name##_fn_table, conv); \
 		free(conv); \
+    /*unlock(name##_fn_Lock);*/ \
 } \
  \
 void name##_fn_translation_free_all() { \
+    /*lock(name##_fn_Lock);*/ \
     HASH_CLEAR(hh, name##_fn_table); \
-}
-//HASHTABLE_OPTI_FN_HEADER(int, void*, operator)
+    /*nlock(name##_fn_Lock);*/ \
+} \
+
 HASHTABLE_OPTI_FN(int, void*, errhandler_f)
 HASHTABLE_OPTI_FN(int, void*, operator)
 HASHTABLE_OPTI_FN(int, void*, communicator_f)
-/*#if WRAPPER_MPI_VERSION > 21
+
+HASHTABLE_OPTI_FN(A_MPI_Errhandler, A_MPI_Handler_function*, errhandler)
+HASHTABLE_OPTI_FN(A_MPI_Op, A_MPI_User_function*, operation)
+#if WRAPPER_MPI_VERSION > 21
 HASHTABLE_OPTI_FN(A_MPI_Comm, A_MPI_Comm_errhandler_fn*, communicator)
 #else
 HASHTABLE_OPTI_FN(A_MPI_Comm, A_MPI_Handler_function*, communicator)
 #endif
 
-#if WRAPPER_MPI_VERSION > 21
+//#if WRAPPER_MPI_VERSION > 21
 HASHTABLE_OPTI_FN(A_MPI_File, A_MPI_File_errhandler_fn*, file)
-#endif*/
+//#endif

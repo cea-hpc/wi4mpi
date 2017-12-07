@@ -14,9 +14,8 @@ file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
     interface/gen/wrapper.c
     interface/gen/c2f_f2c.c
     interface/gen/init_f2c.c
-#    common/new_utils.c      
-    common/new_utils_vcd.c      
-    common/new_utils_fn.c 
+    common/engine.c      
+    common/engine_fn.c 
     common/func_char_fort.c
 		common/asm_jit.c
     interface/manual/dlsym_global.c
@@ -34,9 +33,8 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     preload/gen/test_generation_wrapper.c
     preload/gen/wrapper.c
     preload/gen/c2f_f2c.c
-#    common/new_utils.c
-		common/new_utils_vcd.c
-    common/new_utils_fn.c
+		common/engine.c
+    common/engine_fn.c
     common/func_char_fort.c
 		common/asm_jit.c
 )
@@ -280,8 +278,8 @@ target_link_libraries(wi4mpi_OMPI_INTEL ${CMAKE_THREAD_LIBS_INIT})
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/func_char_fort.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/manual_wrapper.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/mappers.h")
-list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/new_utils_fn.h")
-list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/new_utils.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/engine_fn.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/engine.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/optimisation.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/thread_safety.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/uthash.h")

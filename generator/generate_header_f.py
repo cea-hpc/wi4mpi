@@ -36,7 +36,7 @@ def generate_header_f(mpi_root1,mpi_root2,header_path,fd_output):
 	lisence_header()
 	print '#ifndef __wrapper__h__\n#define __wrapper__h__\n'
 	print '#include "utils.h"\n'
-	print '#include "new_utils.h"\n'
+	print '#include "engine.h"\n'
 	p = sub.call(['./FORTRAN/utils/gen_common.sh',mpi_root1,'A_f_'],stdout=fd_output)
 	pp = sub.call(['./FORTRAN/utils/gen_common.sh',mpi_root2,'R_f_'],stdout=fd_output)
 	with open('./FORTRAN/utils/lists') as aa:
