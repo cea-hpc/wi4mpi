@@ -21,7 +21,6 @@
 //#                                                                      #
 //########################################################################
 #include "wrapper_f.h"
-//#include "c2f.h"
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI)
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE

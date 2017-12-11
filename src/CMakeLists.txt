@@ -5,18 +5,17 @@ set(CMAKE_Fortran_COMPILER ${FC})
 #------------
 #libmpi.so (wi4mpi side)
 file(GLOB SOURCE_WI4MPI_SO
-     interface/gen/interface_test.c
+     interface/gen/interface_c.c
      interface/gen/interface_fort.c
     )  
 #libwi4mpi_CCC_*.so
 file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
-    interface/gen/test_generation_wrapper.c
-    interface/gen/wrapper.c
+    interface/gen/mpi_translation_c.c
+    interface/gen/mpi_translation_fort.c
     interface/gen/c2f_f2c.c
-    interface/gen/init_f2c.c
-#    common/new_utils.c      
-    common/new_utils_vcd.c      
-    common/new_utils_fn.c 
+    interface/gen/mpi_translation_c2f_f2c_init.c
+    common/engine.c      
+    common/engine_fn.c 
     common/func_char_fort.c
 		common/asm_jit.c
     interface/manual/dlsym_global.c
@@ -26,17 +25,16 @@ file(GLOB_RECURSE SOURCE_WI4MPI_MODULE
      interface/module/mpi.f90
      interface/module/mpi_constants.f90
      interface/module/mpi_sizeof.f90
-     interface/module/test_bk.f90
+     interface/module/mpi_base.f90
 )
 
 #libwi4mpi_FROM_TO.so
 file(GLOB SOURCE_WI4MPI_PRELOAD
-    preload/gen/test_generation_wrapper.c
-    preload/gen/wrapper.c
+    preload/gen/mpi_translation_c.c
+    preload/gen/mpi_translation_fort.c
     preload/gen/c2f_f2c.c
-#    common/new_utils.c
-		common/new_utils_vcd.c
-    common/new_utils_fn.c
+		common/engine.c
+    common/engine_fn.c
     common/func_char_fort.c
 		common/asm_jit.c
 )
@@ -164,19 +162,19 @@ set_target_properties(wi4mpi_CCC_INTEL_a
 
 add_custom_command(TARGET wi4mpi_CCC_INTEL_a 
                     POST_BUILD
-                   COMMAND  ${CMAKE_SOURCE_DIR}/rename_sym.sh libwi4mpi_CCC_INTEL_a.a "INTEL"
+                   COMMAND  ${CMAKE_SOURCE_DIR}/scripts/rename_sym.sh libwi4mpi_CCC_INTEL_a.a "INTEL"
                    #WORKING_DIRECTORY ${CMAKE_BUILD_FILES_DIRECTORY}
                     )
 message(status ${CMAKE_CURRENT_BINARY_DIR})
 add_custom_command(TARGET wi4mpi_CCC_OMPI_a 
                     POST_BUILD
-                  COMMAND  ${CMAKE_SOURCE_DIR}/rename_sym.sh libwi4mpi_CCC_OMPI_a.a "OMPI"
+                  COMMAND  ${CMAKE_SOURCE_DIR}/scripts/rename_sym.sh libwi4mpi_CCC_OMPI_a.a "OMPI"
                     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 
                 )
 add_custom_command(TARGET mpi_a 
                 POST_BUILD
-                COMMAND ${CMAKE_SOURCE_DIR}/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_CCC_INTEL_a.a libwi4mpi_CCC_OMPI_a.a
+                COMMAND ${CMAKE_SOURCE_DIR}/scripts/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_CCC_INTEL_a.a libwi4mpi_CCC_OMPI_a.a
                     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 
                 )
@@ -280,8 +278,8 @@ target_link_libraries(wi4mpi_OMPI_INTEL ${CMAKE_THREAD_LIBS_INIT})
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/func_char_fort.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/manual_wrapper.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/mappers.h")
-list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/new_utils_fn.h")
-list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/new_utils.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/engine_fn.h")
+list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/engine.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/optimisation.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/thread_safety.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/uthash.h")
@@ -419,17 +417,17 @@ install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.a
 #-------
 
 install(FILES 
-        interface/lib_cccmpi/include/mpi.h
-        interface/lib_cccmpi/include/mpif-common.h	 
-        interface/lib_cccmpi/include/mpif-config.h	 
-        interface/lib_cccmpi/include/mpif-mpi-io.h	 
-        interface/lib_cccmpi/include/mpif.h       	 
-        interface/lib_cccmpi/include/mpif-handles.h 
-        interface/lib_cccmpi/include/mpif-constants.h
-        interface/lib_cccmpi/include/mpif-io-constants.h
-        interface/lib_cccmpi/include/mpif-io-handles.h
-        interface/lib_cccmpi/include/mpif-externals.h
-        interface/lib_cccmpi/include/mpif-sentinels.h
+        interface/interface_utils/include/mpi.h
+        interface/interface_utils/include/mpif-common.h	 
+        interface/interface_utils/include/mpif-config.h	 
+        interface/interface_utils/include/mpif-mpi-io.h	 
+        interface/interface_utils/include/mpif.h       	 
+        interface/interface_utils/include/mpif-handles.h 
+        interface/interface_utils/include/mpif-constants.h
+        interface/interface_utils/include/mpif-io-constants.h
+        interface/interface_utils/include/mpif-io-handles.h
+        interface/interface_utils/include/mpif-externals.h
+        interface/interface_utils/include/mpif-sentinels.h
         ${CMAKE_BINARY_DIR}/src/mpi.mod	 		 
         ${CMAKE_BINARY_DIR}/src/mpi_base.mod	 
         ${CMAKE_BINARY_DIR}/src/mpi_constants.mod
@@ -438,19 +436,19 @@ install(FILES
 )
 
 install(DIRECTORY
-        interface/lib_cccmpi/include/gnu
-        interface/lib_cccmpi/include/intel DESTINATION include
+        interface/interface_utils/include/gnu
+        interface/interface_utils/include/intel DESTINATION include
 )
 
 #Bin
 #---
 install(FILES 
-        interface/lib_cccmpi/bin/mpicc
-        interface/lib_cccmpi/bin/mpicxx
-        interface/lib_cccmpi/bin/mpic++
-        interface/lib_cccmpi/bin/mpif77
-        interface/lib_cccmpi/bin/mpif90
-        interface/lib_cccmpi/bin/mpirun DESTINATION bin
+        interface/interface_utils/bin/mpicc
+        interface/interface_utils/bin/mpicxx
+        interface/interface_utils/bin/mpic++
+        interface/interface_utils/bin/mpif77
+        interface/interface_utils/bin/mpif90
+        interface/interface_utils/bin/mpirun DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 

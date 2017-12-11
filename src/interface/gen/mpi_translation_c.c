@@ -6,7 +6,7 @@
 //# This file is part of the Wi4MPI library.                             #
 //#                                                                      #
 //# This software is governed by the CeCILL-C license under French law   #
-///# and abiding by the rules of distribution of free software. You can   #
+//# and abiding by the rules of distribution of free software. You can   #
 //# use, modify and/ or redistribute the software under the terms of     #
 //# the CeCILL-C license as circulated by CEA, CNRS and INRIA at the     #
 //# following URL http://www.cecill.info.                                #
@@ -246,7 +246,7 @@ char ompi_message_no_proc[512];
 #define EXTERN_ALLOCATED 1
 #include "mappers.h"
 
-#include "c2f.h"
+#include "c2f_f2c.h"
 extern __thread int in_w;
 #if defined(INTEL_OMPI) || defined(OMPI_INTEL)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
@@ -7808,6 +7808,7 @@ __asm__(
 "jmp *R_MPI_Errhandler_set@GOTPCREL(%rip)\n"
 
 );
+
 int interndel_fn(R_MPI_Comm c,int k,void *v,void *e)
 {
     return R_MPI_SUCCESS;
@@ -7857,6 +7858,7 @@ printf("sort : A_MPI_Errhandler_set\n");
     errhandler_locks_re();
 return error_code_conv_r2a(ret_tmp);
 }
+
 int R_MPI_Errhandler_set(R_MPI_Comm comm,R_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -7996,6 +7998,7 @@ printf("sort : A_MPI_Errhandler_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+
 int R_MPI_Errhandler_free(R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -13838,17 +13841,6 @@ int A_MPI_Comm_create_errhandler(A_MPI_Comm_errhandler_function * comm_errhandle
 #ifdef DEBUG
 printf("entre : A_MPI_Comm_create_errhandler\n");
 #endif
-/*
- in_w=1;
-
-
-ptr_comm_fn_handler=(A_MPI_Comm_errhandler_function *)comm_errhandler_fn;
-R_MPI_Errhandler  errhandler_ltmp;
-R_MPI_Errhandler * errhandler_tmp=&errhandler_ltmp;
-int ret_tmp= LOCAL_MPI_Comm_create_errhandler( (R_MPI_Comm_errhandler_function *)wrapper_comm_handler_function, errhandler_tmp);
-errhandler_ptr_conv_r2a(&errhandler,&errhandler_tmp);
-in_w=0;
-*/
 return A_MPI_Errhandler_create(comm_errhandler_fn,errhandler);
 #ifdef DEBUG
 printf("sort : A_MPI_Comm_create_errhandler\n");
@@ -13905,24 +13897,6 @@ int A_MPI_Comm_get_errhandler(A_MPI_Comm comm,A_MPI_Errhandler * errhandler)
 #ifdef DEBUG
 printf("entre : A_MPI_Comm_get_errhandler\n");
 #endif
-/*in_w=1;
-
-R_MPI_Comm comm_tmp;
-comm_conv_a2r(&comm,&comm_tmp);
-R_MPI_Errhandler  errhandler_ltmp;
-R_MPI_Errhandler * errhandler_tmp=&errhandler_ltmp;
-int ret_tmp= LOCAL_MPI_Comm_get_errhandler( comm_tmp, errhandler_tmp);
-if(ret_tmp == R_MPI_SUCCESS){
-A_MPI_Comm_errhandler_fn* ptr_err_handler_func;
-communicator_fn_translation_get(comm, &ptr_err_handler_func);
-errhandler_fn_translation_update(*errhandler, ptr_err_handler_func);
-}
-in_w=0;
-#ifdef DEBUG
-printf("sort : A_MPI_Comm_get_errhandler\n");
-#endif
-return error_code_conv_r2a(ret_tmp);
-*/
 return A_MPI_Errhandler_get(comm,errhandler);
 }
 int R_MPI_Comm_get_errhandler(R_MPI_Comm comm,R_MPI_Errhandler * errhandler)
@@ -13975,24 +13949,6 @@ int A_MPI_Comm_set_errhandler(A_MPI_Comm comm,A_MPI_Errhandler errhandler)
 #ifdef DEBUG
 printf("entre : A_MPI_Comm_set_errhandler\n");
 #endif
-/*
-in_w=1;
-
-R_MPI_Comm comm_tmp;
-comm_conv_a2r(&comm,&comm_tmp);
-R_MPI_Errhandler errhandler_tmp;
-errhandler_conv_a2r(&errhandler,&errhandler_tmp);
-int ret_tmp= LOCAL_MPI_Comm_set_errhandler( comm_tmp, errhandler_tmp);
-if(!errhandler_translation_is_const(errhandler)){
-A_MPI_Comm_errhandler_fn* ptr_errhandler_func;
-errhandler_fn_translation_get(errhandler, &ptr_errhandler_func);
-communicator_fn_translation_update(comm, ptr_errhandler_func);
-}
-in_w=0;
-#ifdef DEBUG
-printf("sort : A_MPI_Comm_set_errhandler\n");
-#endif
-return error_code_conv_r2a(ret_tmp);*/
 return  A_MPI_Errhandler_set(comm,errhandler);
 }
 int R_MPI_Comm_set_errhandler(R_MPI_Comm comm,R_MPI_Errhandler errhandler)
@@ -22892,13 +22848,25 @@ in_w=1;
 
 
 R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
-int i1;
-for(i1=0; i1 < count;i1++){
-request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
-}
-
+int i1,test;
 R_MPI_Status  status_ltmp;
 R_MPI_Status * status_tmp=&status_ltmp;
+for(i1=0; i1 < count;i1++){
+test=0;
+request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
+int ret=R_MPI_Test(&array_of_requests_tmp[i1],&test,status_tmp);
+    if(ret==R_MPI_SUCCESS&&test)
+    {
+        *indx=i1;
+        status_prt_conv_r2a(&status,&status_tmp);
+        request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
+
+wi4mpi_free(array_of_requests_tmp);
+    in_w=0;
+return A_MPI_SUCCESS;    
+}
+}
+
 int ret_tmp= LOCAL_MPI_Waitany( count, array_of_requests_tmp, indx, status_tmp);
 if(ret_tmp == R_MPI_SUCCESS){
  if(array_of_requests_tmp[*indx] == R_MPI_REQUEST_NULL){
@@ -22971,35 +22939,39 @@ int A_MPI_Testany(int count,A_MPI_Request array_of_requests[],int * indx,int * f
 printf("entre : A_MPI_Testany\n");
 #endif
 in_w=1;
-
-
-
-R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
-int i1;
+int i1,test;
 for(i1=0; i1 < count;i1++){
-request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
-}
+R_MPI_Request rt;
+R_MPI_Status st;
+R_MPI_Status *pst=&st;
+request_tab_conv_a2r(&array_of_requests[i1],&rt);
+if(array_of_requests[i1]!=A_MPI_REQUEST_NULL)
+{
+int ret=R_MPI_Test(&rt,&test,&st);
+    if(ret==R_MPI_SUCCESS)
+    {if(test)
+    {
+        *indx=i1;
+        *flag=1;
+        status_prt_conv_r2a(&status,&pst);
+        request_array_delete(&array_of_requests[*indx],&rt);
 
-
-R_MPI_Status  status_ltmp;
-R_MPI_Status * status_tmp=&status_ltmp;
-int ret_tmp= LOCAL_MPI_Testany( count, array_of_requests_tmp, indx, flag, status_tmp);
-if(ret_tmp == R_MPI_SUCCESS){
-if(*flag)
- if(array_of_requests_tmp[*indx] == R_MPI_REQUEST_NULL){
-request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
-}
-}
-
-
-status_prt_conv_r2a(&status,&status_tmp);
-wi4mpi_free(array_of_requests_tmp);
+    in_w=0;
+return A_MPI_SUCCESS;    
+    }}
+    else
+{
 in_w=0;
-#ifdef DEBUG
-printf("sort : A_MPI_Testany\n");
-#endif
-return error_code_conv_r2a(ret_tmp);
+return error_code_conv_r2a(ret);
+}       
 }
+}
+in_w=0;
+return A_MPI_SUCCESS;
+
+}
+
+
 int R_MPI_Testany(int count,R_MPI_Request array_of_requests[],int * indx,int * flag,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -23057,30 +23029,50 @@ in_w=1;
 
 
 R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
-int i1;
-for(i1=0; i1 < count;i1++){
-request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
-}
 R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_MPI_Status)*count));
-int ret_tmp= LOCAL_MPI_Waitall( count, array_of_requests_tmp, array_of_statuses_tmp);
+int *offset_tmp = wi4mpi_alloc(sizeof(int)*count);
+int i1,i33;
+i33=0;
+for(i1=0; i1 < count;i1++){
+R_MPI_Request req_tmp;
+int test,ret;
+request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i33]);
+if(array_of_statuses==A_MPI_STATUSES_IGNORE)
+    ret=LOCAL_MPI_Test(&array_of_requests_tmp[i33],&test,R_MPI_STATUS_IGNORE);
+else
+    ret=LOCAL_MPI_Test(&array_of_requests_tmp[i33],&test,&array_of_statuses_tmp[i33]);
+if(ret!=R_MPI_SUCCESS||!test)
+   {
+        offset_tmp[i33]=i1;
+     i33++;
+    }
+	else
+	{
+		
+		status_tab_conv_r2a(&array_of_statuses[i1],&array_of_statuses_tmp[i33]);
+	}
+}
+
+int ret_tmp= (i33 ? LOCAL_MPI_Waitall( i33, array_of_requests_tmp, array_of_statuses_tmp):R_MPI_SUCCESS);
 int i2;
 if(ret_tmp == R_MPI_SUCCESS){
-for(i2 = 0; i2 < count; i2++){
+for(i2 = 0; i2 < i33; i2++){
 if(array_of_requests_tmp[i2]==R_MPI_REQUEST_NULL){
-request_array_delete(&array_of_requests[i2],&array_of_requests_tmp[i2]);
+request_array_delete(&array_of_requests[offset_tmp[i2]],&array_of_requests_tmp[i2]);
 }
 }
 }
 int i3;
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
 {
-for(i3=0; i3 < count;i3++){
-status_tab_conv_r2a(&array_of_statuses[i3],&array_of_statuses_tmp[i3]);
+for(i3=0; i3 < i33;i3++){
+status_tab_conv_r2a(&array_of_statuses[offset_tmp[i3]],&array_of_statuses_tmp[i3]);
 }
 }
 wi4mpi_free(array_of_requests_tmp);
 if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
 wi4mpi_free(array_of_statuses_tmp);
+wi4mpi_free(offset_tmp );
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_MPI_Waitall\n");
