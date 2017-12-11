@@ -25,7 +25,7 @@ file(GLOB_RECURSE SOURCE_WI4MPI_MODULE
      interface/module/mpi.f90
      interface/module/mpi_constants.f90
      interface/module/mpi_sizeof.f90
-     interface/module/test_bk.f90
+     interface/module/mpi_base.f90
 )
 
 #libwi4mpi_FROM_TO.so
@@ -417,17 +417,17 @@ install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.a
 #-------
 
 install(FILES 
-        interface/lib_cccmpi/include/mpi.h
-        interface/lib_cccmpi/include/mpif-common.h	 
-        interface/lib_cccmpi/include/mpif-config.h	 
-        interface/lib_cccmpi/include/mpif-mpi-io.h	 
-        interface/lib_cccmpi/include/mpif.h       	 
-        interface/lib_cccmpi/include/mpif-handles.h 
-        interface/lib_cccmpi/include/mpif-constants.h
-        interface/lib_cccmpi/include/mpif-io-constants.h
-        interface/lib_cccmpi/include/mpif-io-handles.h
-        interface/lib_cccmpi/include/mpif-externals.h
-        interface/lib_cccmpi/include/mpif-sentinels.h
+        interface/interface_utils/include/mpi.h
+        interface/interface_utils/include/mpif-common.h	 
+        interface/interface_utils/include/mpif-config.h	 
+        interface/interface_utils/include/mpif-mpi-io.h	 
+        interface/interface_utils/include/mpif.h       	 
+        interface/interface_utils/include/mpif-handles.h 
+        interface/interface_utils/include/mpif-constants.h
+        interface/interface_utils/include/mpif-io-constants.h
+        interface/interface_utils/include/mpif-io-handles.h
+        interface/interface_utils/include/mpif-externals.h
+        interface/interface_utils/include/mpif-sentinels.h
         ${CMAKE_BINARY_DIR}/src/mpi.mod	 		 
         ${CMAKE_BINARY_DIR}/src/mpi_base.mod	 
         ${CMAKE_BINARY_DIR}/src/mpi_constants.mod
@@ -436,19 +436,19 @@ install(FILES
 )
 
 install(DIRECTORY
-        interface/lib_cccmpi/include/gnu
-        interface/lib_cccmpi/include/intel DESTINATION include
+        interface/interface_utils/include/gnu
+        interface/interface_utils/include/intel DESTINATION include
 )
 
 #Bin
 #---
 install(FILES 
-        interface/lib_cccmpi/bin/mpicc
-        interface/lib_cccmpi/bin/mpicxx
-        interface/lib_cccmpi/bin/mpic++
-        interface/lib_cccmpi/bin/mpif77
-        interface/lib_cccmpi/bin/mpif90
-        interface/lib_cccmpi/bin/mpirun DESTINATION bin
+        interface/interface_utils/bin/mpicc
+        interface/interface_utils/bin/mpicxx
+        interface/interface_utils/bin/mpic++
+        interface/interface_utils/bin/mpif77
+        interface/interface_utils/bin/mpif90
+        interface/interface_utils/bin/mpirun DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 
