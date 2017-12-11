@@ -246,7 +246,7 @@ char ompi_message_no_proc[512];
 #define EXTERN_ALLOCATED 1
 #include "mappers.h"
 
-#include "c2f.h"
+#include "c2f_f2c.h"
 extern __thread int in_w;
 #if defined(INTEL_OMPI) || defined(OMPI_INTEL)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);

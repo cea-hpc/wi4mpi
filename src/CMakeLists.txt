@@ -5,15 +5,15 @@ set(CMAKE_Fortran_COMPILER ${FC})
 #------------
 #libmpi.so (wi4mpi side)
 file(GLOB SOURCE_WI4MPI_SO
-     interface/gen/interface_test.c
+     interface/gen/interface_c.c
      interface/gen/interface_fort.c
     )  
 #libwi4mpi_CCC_*.so
 file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
-    interface/gen/test_generation_wrapper.c
-    interface/gen/wrapper.c
+    interface/gen/mpi_translation_c.c
+    interface/gen/mpi_translation_fort.c
     interface/gen/c2f_f2c.c
-    interface/gen/init_f2c.c
+    interface/gen/mpi_translation_c2f_f2c_init.c
     common/engine.c      
     common/engine_fn.c 
     common/func_char_fort.c
