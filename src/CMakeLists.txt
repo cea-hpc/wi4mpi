@@ -30,8 +30,8 @@ file(GLOB_RECURSE SOURCE_WI4MPI_MODULE
 
 #libwi4mpi_FROM_TO.so
 file(GLOB SOURCE_WI4MPI_PRELOAD
-    preload/gen/test_generation_wrapper.c
-    preload/gen/wrapper.c
+    preload/gen/mpi_translation_c.c
+    preload/gen/mpi_translation_fort.c
     preload/gen/c2f_f2c.c
 		common/engine.c
     common/engine_fn.c
