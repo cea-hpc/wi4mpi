@@ -1351,6 +1351,19 @@ if __name__ == '__main__':
          print '#include <stdio.h>'
          print '#include <dlfcn.h>'
          print '#include \"manual_interface.h\"'
+         print 'void *mpi_comm_null_copy_fn_=NULL;'
+         print 'void *mpi_win_dup_fn_=NULL;'
+         print 'void *mpi_null_copy_fn_=NULL;'
+         print 'void *mpi_comm_null_delete_fn_=NULL;'
+         print 'void *mpi_comm_dup_fn_=NULL;'
+         print 'void *mpi_type_null_copy_fn_=NULL;'
+         print 'void *mpi_null_delete_fn_=NULL;'
+         print 'void *mpi_dup_fn_=NULL;'
+         print 'void *mpi_conversion_fn_null_=NULL;'
+         print 'void *mpi_win_null_delete_fn_=NULL;'
+         print 'void *mpi_type_null_delete_fn_=NULL;'
+         print 'void *mpi_type_dup_fn_=NULL;'
+         print 'void *mpi_win_null_copy_fn_=NULL;'
          print "/*ompi constante*/"
          for i in data_f:
             for j in def_list_f: 

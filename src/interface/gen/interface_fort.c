@@ -27,6 +27,19 @@
 #include <stdio.h>
 #include <dlfcn.h>
 #include "manual_interface.h"
+void *mpi_comm_null_copy_fn_=NULL;
+void *mpi_win_dup_fn_=NULL;
+void *mpi_null_copy_fn_=NULL;
+void *mpi_comm_null_delete_fn_=NULL;
+void *mpi_comm_dup_fn_=NULL;
+void *mpi_type_null_copy_fn_=NULL;
+void *mpi_null_delete_fn_=NULL;
+void *mpi_dup_fn_=NULL;
+void *mpi_conversion_fn_null_=NULL;
+void *mpi_win_null_delete_fn_=NULL;
+void *mpi_type_null_delete_fn_=NULL;
+void *mpi_type_dup_fn_=NULL;
+void *mpi_win_null_copy_fn_=NULL;
 /*ompi constante*/
 void  mpi_send_(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * ret);
 #pragma weak mpi_send_=pmpi_send_

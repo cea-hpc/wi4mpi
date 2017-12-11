@@ -62,6 +62,7 @@ void (*_LOCAL_MPI_Get_processor_name)(char *,int,int *,int *i);
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 127
 #endif
+int (*LOCAL_MPI_Get_processor_name)(char *,int *);
 #ifdef IFORT_CALL
 void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen)
 #elif GFORT_CALL
@@ -76,16 +77,19 @@ in_w=1;
 int  ret_tmp=0;
 char tmp_name[R_f_MPI_MAX_PROCESSOR_NAME+2];
 //printf("MPI_Get_processor_name\n");
-#ifdef IFORT_CALL
-_LOCAL_MPI_Get_processor_name(tmp_name,resultlen,&ret_tmp,R_f_MPI_MAX_PROCESSOR_NAME);
-#elif GFORT_CALL
-_LOCAL_MPI_Get_processor_name(tmp_name,R_f_MPI_MAX_PROCESSOR_NAME,resultlen,&ret_tmp);
-#endif
-//printf("before conv MPI_Get_processor_name %d %d\n",*ret,ret_tmp);
-tmp_name[*resultlen]='\0';
-strncpy(name,tmp_name,A_f_MPI_MAX_PROCESSOR_NAME);
+//#ifdef IFORT_CALL
+//_LOCAL_MPI_Get_processor_name(tmp_name,resultlen,&ret_tmp,R_f_MPI_MAX_PROCESSOR_NAME);
+//#elif GFORT_CALL
+//_LOCAL_MPI_Get_processor_name(tmp_name,R_f_MPI_MAX_PROCESSOR_NAME,resultlen,&ret_tmp);
+//#endif
+////printf("before conv MPI_Get_processor_name %d %d\n",*ret,ret_tmp);
+//tmp_name[*resultlen]='\0';
+//strncpy(name,tmp_name,A_f_MPI_MAX_PROCESSOR_NAME);
+//error_r2a(ret,&ret_tmp);
+ret_tmp=LOCAL_MPI_Get_processor_name(tmp_name,resultlen);
+*resultlen=*resultlen<A_f_MPI_MAX_PROCESSOR_NAME?*resultlen:A_f_MPI_MAX_PROCESSOR_NAME;
+memcpy(name, tmp_name,*resultlen*sizeof(char));
 error_r2a(ret,&ret_tmp);
-
 //printf("end MPI_Get_processor_name %d %d\n",*ret,ret_tmp);
 in_w=0;
 #ifdef DEBUG
