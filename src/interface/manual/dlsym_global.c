@@ -1,4 +1,4 @@
-#ifdef OMPI_OMPI
+#if defined(OMPI_OMPI) || defined(_OMPI)
 #define allocate_global 1
 #define OMPI_LOAD_SYM 1
 #include "run_mpi.h"

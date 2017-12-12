@@ -20,7 +20,7 @@
 //#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 //#                                                                      #
 //########################################################################
-#if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
@@ -1327,7 +1327,7 @@ printf("sort : R_MPI_Status_f2c\n");
 #endif
 return ret;
 }
-#elif defined(OMPI_INTEL)
+#elif defined(OMPI_INTEL) || defined(_INTEL)
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif

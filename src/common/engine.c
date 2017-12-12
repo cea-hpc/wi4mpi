@@ -22,13 +22,6 @@
 //########################################################################
 
 
-//#ifdef OMPI_OMPI
-//#include "ompi_ext_decl.h"
-//#endif
-
-/*#ifdef FORTRAN
-#include <mpif_app.h>
-#endif*/
 #include <pthread.h>
 
 #include <stdio.h>
@@ -57,7 +50,7 @@ void wi4mpi_free(void *ptr)
 }
 
 /*   True hashtables  */
-#if defined(OMPI_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL)
 extern char ompi_mpi_comm_null[];
 extern char ompi_mpi_comm_self[];
 extern char ompi_mpi_comm_world[];

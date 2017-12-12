@@ -22,41 +22,17 @@
 //########################################################################
 
 
-//#ifdef OMPI_OMPI
-//#include "ompi_ext_decl.h"
-//#endif
-
-/*#ifdef FORTRAN
-#include <mpif_app.h>
-#endif*/
-/*
-static void dump(void * src, size_t size) {
-    unsigned char * tab = (unsigned char*) malloc(size);
-    memcpy(tab, src, size);
-    size_t i=0;
-    for(;i<size;i++)
-      fprintf(stderr, "%02X ", tab[i]);
-    fprintf(stderr, "\n");
-    free(tab);
-}
-*/
-
 #ifndef NEW_UTILS_H
 #define NEW_UTILS_H
 #include "thread_safety.h"
-//#include <mpi.h>
-//#include <mpi_app.h>
 #include "run_mpi.h"
 #include "app_mpi.h"
 #include "optimisation.h"
-/*#ifdef FORTRAN
-#include <mpif_app.h>
-#endif*/
 #include <assert.h>
 #include <limits.h>
 #include <string.h>
 #include "uthash.h"
-#if defined(OMPI_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL)
 extern char ompi_mpi_comm_null[];
 extern char ompi_mpi_comm_self[];
 extern char ompi_mpi_comm_world[];

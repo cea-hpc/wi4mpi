@@ -137,11 +137,11 @@ set_target_properties(mpi
                      )
 set_target_properties(wi4mpi_CCC_OMPI
                       PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -DOMPI_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
                      )
 set_target_properties(wi4mpi_CCC_INTEL
                       PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -DOMPI_INTEL -D_GNU_SOURCE"
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
                      )
 
 set_target_properties(mpi_a
@@ -150,11 +150,11 @@ set_target_properties(mpi_a
                      )
 set_target_properties(wi4mpi_CCC_OMPI_a
                       PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -DOMPI_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
 set_target_properties(wi4mpi_CCC_INTEL_a
                       PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -DOMPI_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
 
 #Link options

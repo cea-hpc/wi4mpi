@@ -48,12 +48,12 @@ static inline void status_a2r(int *ca,int *cr){
     cr[1]=ca[1];
     
 #endif
-#ifdef OMPI_OMPI
+#if defined(OMPI_OMPI) || defined(_OMPI)
     cr[3]=ca[3];
     cr[4]=ca[4];
     cr[5]=ca[5];
 #endif
-#ifdef OMPI_INTEL
+#if defined(OMPI_INTEL) || defined(_INTEL)
     cr[0]=(ca[3]<<1)+ca[5];
     cr[1]=ca[4];
     
@@ -76,7 +76,7 @@ static inline void status_r2a(int *ca,int *cr){
     ca[1]=cr[1];
     
 #endif
-#ifdef OMPI_OMPI
+#if defined(OMPI_OMPI) || defined(_OMPI)
     ca[3]=cr[3];
     ca[4]=cr[4];
     ca[5]=cr[5];
@@ -85,7 +85,7 @@ static inline void status_r2a(int *ca,int *cr){
     ca[1]=cr[4];
     ca[0]=(cr[3]<<1)+cr[5];
 #endif
-#ifdef OMPI_INTEL
+#if defined(OMPI_INTEL) || defined(_INTEL)
     ca[3]=(cr[0]>>1);
     ca[4]=cr[1];
     ca[5]=(cr[0]&1);
@@ -215,7 +215,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #endif
 }
 
-#ifdef OMPI_OMPI
+#if defined(OMPI_OMPI) || defined(_OMPI)
 #define A_f_MPI_MODE_NOCHECK     1
 #define A_f_MPI_MODE_NOPRECEDE   2
 #define A_f_MPI_MODE_NOPUT       4
@@ -227,7 +227,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #define R_f_MPI_MODE_NOPUT       4
 #define R_f_MPI_MODE_NOSTORE     8
 #define R_f_MPI_MODE_NOSUCCEED   16
-#elif OMPI_INTEL
+#elif defined(OMPI_INTEL) || defined(_INTEL)
 #define A_f_MPI_MODE_NOCHECK     1
 #define A_f_MPI_MODE_NOPRECEDE   2
 #define A_f_MPI_MODE_NOPUT       4
