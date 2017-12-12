@@ -504,7 +504,7 @@ typedef int R_MPI_Errhandler;
 /* MPI 1 names */
 #define R_MPI_NULL_COPY_FN   ((R_MPI_Copy_function *)0)
 #define R_MPI_NULL_DELETE_FN ((R_MPI_Delete_function *)0)
-#define R_MPI_DUP_FN         MPIR_Dup_fn
+//#define R_MPI_DUP_FN         MPIR_Dup_fn
 /* MPI 2 names */
 #define R_MPI_COMM_NULL_COPY_FN ((R_MPI_Comm_copy_attr_function*)0)
 #define R_MPI_COMM_NULL_DELETE_FN ((R_MPI_Comm_delete_attr_function*)0)
