@@ -39,7 +39,7 @@ typedef struct {
 extern myKeyval_functions_t *myKeyval_translation_get(int);
 extern void myKeyval_translation_del(int);
 extern void myKeyval_translation_add(int,myKeyval_functions_t *);
-#ifdef OMPI_INTEL
+#if defined(OMPI_INTEL) || defined(_INTEL)
 int *MPI_UNWEIGHTED=NULL;
 #endif
 extern __thread int in_w;
@@ -12260,7 +12260,7 @@ _LOCAL_MPI_Lookup_name=dlsym(lib_handle_f,"pmpi_lookup_name_");
 _LOCAL_MPI_Pack_external=dlsym(lib_handle_f,"pmpi_pack_external_");
 _LOCAL_MPI_Pack_external_size=dlsym(lib_handle_f,"pmpi_pack_external_size_");
 _LOCAL_MPI_Unpack_external=dlsym(lib_handle_f,"pmpi_unpack_external_");
-#ifdef ompi_ompi
+#if defined(OMPI_OMPI) || defined(_OMPI)
 ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpi_fortran_bottom_");
 ccc_mpi_fortran_in_place_=dlsym(lib_handle_f,"mpi_fortran_in_place_");
 ccc_mpi_fortran_argv_null_=dlsym(lib_handle_f,"mpi_fortran_argv_null_");
@@ -12274,7 +12274,7 @@ ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");
 ////mpi_null_copy_fn_;
 ////mpi_null_delete_fn_;
 #endif
-#ifdef ompi_mpich
+#if defined(OMPI_INTEL) || defined(_INTEL)
 ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");
 ccc_mpi_fortran_in_place_=((int *)dlsym(lib_handle_f,"mpipriv1_")+1);
 ccc_mpi_fortran_argv_null_=((int*)dlsym(lib_handle_f,"mpiprivc_")+1);

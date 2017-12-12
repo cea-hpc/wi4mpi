@@ -22,13 +22,6 @@
 //########################################################################
 
 
-//#ifdef OMPI_OMPI
-//#include "ompi_ext_decl.h"
-//#endif
-
-/*#ifdef FORTRAN
-#include <mpif_app.h>
-#endif*/
 #include "engine.h"
 /*
 static void dump(void * src, size_t size) {

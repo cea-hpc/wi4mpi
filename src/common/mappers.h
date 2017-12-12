@@ -34,7 +34,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #ifndef EXTERN_ALLOCATED
-#if defined(OMPI_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL)
 extern char ompi_mpi_comm_null[];
 extern char ompi_mpi_comm_self[];
 extern char ompi_mpi_comm_world[];
@@ -150,7 +150,7 @@ extern char ompi_message_no_proc[];
       #include "app_mpio.h" // mpi.h from intel implementation doesn't contain MPI-IO routines.
 #elif INTEL_OMPI
       #include "app_mpio.h"
-#elif OMPI_INTEL
+#elif defined(OMPI_INTEL) || defined(_INTEL)
       #include "run_mpio.h"
 #endif
 
@@ -168,16 +168,6 @@ extern char ompi_message_no_proc[];
 #define MAX(a,b) ((a>b)? a : b)
 
 #define const 
-//#ifdef OMPI_INTEL
-//	#define A_OMPI 1
-//	#define R_INTEL 1
-//#elif INTEL_OMPI
-//	#define A_INTEL 1
-//	#define R_OMPI 1
-//#elif OMPI_OMPI
-//	#define A_OMPI 1
-//	#define R_OMPI 1
-//#endif
 
 #define gen_hash_conv(NAME,TYPE,NAME2) \
 static inline void  NAME##_conv_a2r(A_##TYPE *ca,R_##TYPE *cr)\
@@ -534,7 +524,7 @@ static inline void status_prt_conv_a2r(A_MPI_Status **status_tmp, R_MPI_Status *
 	tag_conv_a2r(&((**status_tmp).A_MPI_TAG),&((**status).R_MPI_TAG));
 	(*status)->R_MPI_ERROR = error_code_conv_a2r(((**status_tmp).A_MPI_ERROR));
 
-	#ifdef OMPI_OMPI 
+	#if defined(OMPI_OMPI) || defined(_OMPI)
 		(*status)->_ucount = (*status_tmp)->_ucount;
 		(*status)->_cancelled = (*status_tmp)->_cancelled;
   #elif INTEL_INTEL
@@ -550,7 +540,7 @@ static inline void status_prt_conv_a2r(A_MPI_Status **status_tmp, R_MPI_Status *
 		(*status)->_ucount = ((((size_t)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
 					   + ((unsigned int)(*status_tmp)->count_lo);
 		(*status)->_cancelled = ((*status_tmp)->count_hi_and_cancelled) & 1;
- 	#elif OMPI_INTEL
+ 	#elif defined(OMPI_INTEL) || defined(_INTEL)
     /* Decoupage de count */
 
 		(*status)->count_lo = ((*status_tmp)->_ucount) & ~(((size_t)-1) << 32);
@@ -574,7 +564,7 @@ static inline void status_prt_conv_a2r(A_MPI_Status **status_tmp, R_MPI_Status *
     /* Set de cancelled*/
     (*status)->count_hi_and_cancelled &= ~1; 
     (*status)->count_hi_and_cancelled |= (*status_tmp)->cancelled;
-  #elif OMPI_MPC
+  #elif defined(OMPI_MPC) || defined(_MPC)
     (*status)->size = (*status_tmp)->_ucount;
     (*status)->cancelled = (*status_tmp)->_cancelled;
   #elif MPC_OMPI
@@ -594,7 +584,7 @@ static inline void status_prt_conv_a2r(A_MPI_Status **status_tmp, R_MPI_Status *
     /* Set de cancelled*/
 		(*status)->count_hi_and_cancelled &= ~1; 
 		(*status)->count_hi_and_cancelled |= (*status_tmp)->st_cancel;
-  #elif OMPI_HPMPI
+  #elif defined(OMPI_HPMPI) || defined(_HPMPI)
     (*status)->st_count= (long long)((*status_tmp)->_ucount);
     (*status)->st_cancelled = (*status_tmp)->_cancelled;
   #elif HPMPI_OMPI
@@ -623,7 +613,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
     tag_conv_r2a(&((**status).A_MPI_TAG), &((**status_tmp).R_MPI_TAG));
     (**status).A_MPI_ERROR = error_code_conv_r2a(((**status_tmp).R_MPI_ERROR));
    
-    #ifdef OMPI_OMPI 
+    #if defined(OMPI_OMPI) || defined(_OMPI)
         (*status)->_ucount = (*status_tmp)->_ucount;
 	      (*status)->_cancelled = (*status_tmp)->_cancelled;
     #elif INTEL_INTEL
@@ -645,7 +635,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
     /* Set de cancelled*/
 	    (*status)->count_hi_and_cancelled &= ~1; 
 	    (*status)->count_hi_and_cancelled |= (*status_tmp)->_cancelled;
-    #elif OMPI_INTEL
+    #elif defined(OMPI_INTEL) || (_INTEL)
       (*status)->_ucount = (((((size_t)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
 	  				+ ((unsigned int)((*status_tmp)->count_lo)));
 	    (*status)->_cancelled = ((*status_tmp)->count_hi_and_cancelled) & 1;
@@ -660,7 +650,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
       (*status)->size = ((((size_t)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8)
                        + ((unsigned int)(*status_tmp)->count_lo);
       (*status)->cancelled = ((*status_tmp)->count_hi_and_cancelled) & 1;
-    #elif OMPI_MPC
+    #elif defined(OMPI_MPC) || defined(_MPC)
       (*status)->_ucount = (*status_tmp)->size;
       (*status)->_cancelled = (*status_tmp)->cancelled;
     #elif MPC_OMPI
@@ -677,7 +667,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
       (*status)->st_count = (((((long long)((*status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
 	  				+ ((unsigned int)((*status_tmp)->count_lo)));
 	    (*status)->st_cancel = ((*status_tmp)->count_hi_and_cancelled) & 1;
-    #elif OMPI_HPMPI
+    #elif defined(OMPI_HPMPI) || defined(_HPMPI)
       (*status)->_ucount = (size_t)((*status_tmp)->st_count);
       (*status)->_cancelled = (*status_tmp)->st_cancel;
     #elif HPMPI_OMPI
@@ -705,7 +695,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
     tag_conv_r2a(&((*status).A_MPI_TAG), &((*status_tmp).R_MPI_TAG));
     (*status).A_MPI_ERROR = error_code_conv_r2a(((*status_tmp).R_MPI_ERROR));
    
-    #ifdef OMPI_OMPI 
+    #if defined(OMPI_OMPI) || defined(_OMPI)
       (status)->_ucount = (status_tmp)->_ucount;
       (status)->_cancelled = (status_tmp)->_cancelled;
     #elif INTEL_INTEL
@@ -725,7 +715,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
       /* Set de cancelled*/
       (status)->count_hi_and_cancelled &= ~1; 
       (status)->count_hi_and_cancelled |= (status_tmp)->_cancelled;
-    #elif OMPI_INTEL
+    #elif defined(OMPI_INTEL) || defined(_INTEL)
         (status)->_ucount = (((((size_t)((status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8)
                     + ((unsigned int)((status_tmp)->count_lo)));
         (status)->_cancelled = ((status_tmp)->count_hi_and_cancelled) & 1;
@@ -740,7 +730,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
       (status)->size = ((((size_t)((status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8)
                       + ((unsigned int)(status_tmp)->count_lo);
       (status)->cancelled = ((status_tmp)->count_hi_and_cancelled) & 1;
-    #elif OMPI_MPC
+    #elif defined(OMPI_MPC) || defined(_MPC)
       (status)->_ucount = (status_tmp)->size;
       (status)->_cancelled = (status_tmp)->cancelled;
     #elif MPC_OMPI
@@ -757,7 +747,7 @@ static inline void status_tab_conv_r2a(A_MPI_Status *status, R_MPI_Status *statu
       (status)->st_count = (((((long long)((status_tmp)->count_hi_and_cancelled)) >> 1) << sizeof(int)*8) 
 	  	 		+ ((unsigned int)((*status_tmp)->count_lo)));
 	    (status)->st_cancel = ((status_tmp)->count_hi_and_cancelled) & 1;
-    #elif OMPI_HPMPI
+    #elif defined(OMPI_HPMPI) || defined(_HPMPI)
       (status)->_ucount = (size_t)((status_tmp)->st_count);
       (status)->_cancelled = (status_tmp)->st_cancel;
     #elif HPMPI_OMPI

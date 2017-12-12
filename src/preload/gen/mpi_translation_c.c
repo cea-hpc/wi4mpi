@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <dlfcn.h>
 /*ompi constante*/
-#if defined(OMPI_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL)
 char ompi_mpi_comm_null[1024];
 char ompi_mpi_comm_self[1024];
 char ompi_mpi_comm_world[1024];
@@ -139,13 +139,8 @@ char ompi_message_no_proc[512];
 #include "mappers.h"
 
 __thread int in_w=0;
-//#if defined(INTEL_OMPI) || defined(OMPI_INTEL)
-//int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
-//               void *attribute_val_out, int *flag)
-//{return 0;}
-//#endif
 
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
 
 int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag)
@@ -29222,7 +29217,7 @@ printf("sort : R_MPI_T_pvar_handle_free\n");
 return ret_tmp;
 }
 
-#if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
 __asm__(
 ".global PMPI_Errhandler_f2c\n"
 ".weak MPI_Errhandler_f2c\n"
@@ -29340,7 +29335,7 @@ printf("sort : R_MPI_Errhandler_c2f\n");
 #endif
 return ret;
 }
-#elif defined(OMPI_INTEL)
+#elif defined(OMPI_INTEL) || defined(_INTEL)
 __asm__(
 ".global PMPI_Errhandler_f2c\n"
 ".weak MPI_Errhandler_f2c\n"
@@ -29460,11 +29455,11 @@ return ret;
 }
 #endif
 void wrapper_init_f(void);
-#ifdef OMPI_OMPI
+#if defined(OMPI_OMPI) || defined(_OMPI)
 #endif
 __attribute__((constructor)) void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
-#if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
 #endif
@@ -29865,10 +29860,10 @@ LOCAL_MPI_Aint_diff=dlsym(lib_handle,"PMPI_Aint_diff");
 LOCAL_MPI_File_iread_all=dlsym(lib_handle,"PMPI_File_iread_all");
 LOCAL_MPI_File_iread_at_all=dlsym(lib_handle,"PMPI_File_iread_at_all");
 LOCAL_MPI_T_category_changed=dlsym(lib_handle,"PMPI_T_category_changed");
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
 local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");
 #endif
-#if defined(INTEL_INTEL) || defined(OMPI_INTEL)
+#if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)
 R_MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");
 R_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");
 #endif
@@ -29876,9 +29871,7 @@ R_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");
 A_MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");
 A_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");
 #endif
-//#ifdef OMPI_OMPI
-//init_global(lib_handle);
-//#endif
+
 datatype_translation_init();
 communicator_translation_init();
 request_translation_init();
