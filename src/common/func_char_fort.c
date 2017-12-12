@@ -45,20 +45,20 @@ void (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,int);
 void (*_LOCAL_MPI_Get_processor_name)(char *,int,int *,int *i);
 #endif
 
-#ifdef ompi_mpich
+#ifdef OMPI_INTEL
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 255
 #endif
 
-#ifdef mpich_mpich
+#ifdef INTEL_INTEL
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 127
 #endif
-#ifdef ompi_ompi
+#ifdef OMPI_OMPI
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 255
 #endif
-#ifdef mpich_ompi
+#ifdef INTEL_OMPI
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 127
 #endif
@@ -106,20 +106,20 @@ void  pmpi_error_string_(int *,char *,int *,int *);
 void  pmpi_error_string__(int *,char *,int *,int *);
 
 void  pmpi_error_string_(int *,char *,int *,int *);
-#ifdef ompi_mpich
+#ifdef OMPI_INTEL
 #define R_f_MPI_MAX_ERROR_STRING 2048
 #define A_f_MPI_MAX_ERROR_STRING 255
 #endif
 
-#ifdef mpich_mpich
+#ifdef INTEL_INTEL
 #define R_f_MPI_MAX_ERROR_STRING 2048
 #define A_f_MPI_MAX_ERROR_STRING 511
 #endif
-#ifdef ompi_ompi
+#ifdef OMPI_OMPI
 #define R_f_MPI_MAX_ERROR_STRING 2048
 #define A_f_MPI_MAX_ERROR_STRING 255
 #endif
-#ifdef mpich_ompi
+#ifdef INTEL_OMPI
 #define R_f_MPI_MAX_ERROR_STRING 2048
 #define A_f_MPI_MAX_ERROR_STRING 511
 #endif

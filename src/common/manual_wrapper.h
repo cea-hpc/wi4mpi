@@ -43,22 +43,22 @@ static inline void status_a2r(int *ca,int *cr){
     source_a2r(&ca[A_f_MPI_SOURCE-1],&cr[R_f_MPI_SOURCE-1]);
     cr[R_f_MPI_TAG-1]=ca[A_f_MPI_TAG-1];
     error_a2r(&ca[R_f_MPI_ERROR-1],&cr[A_f_MPI_ERROR-1]);
-#ifdef mpich_mpich 
+#ifdef INTEL_INTEL 
     cr[0]=ca[0];
     cr[1]=ca[1];
     
 #endif
-#ifdef ompi_ompi
+#ifdef OMPI_OMPI
     cr[3]=ca[3];
     cr[4]=ca[4];
     cr[5]=ca[5];
 #endif
-#ifdef ompi_mpich
+#ifdef OMPI_INTEL
     cr[0]=(ca[3]<<1)+ca[5];
     cr[1]=ca[4];
     
 #endif
-#ifdef mpich_ompi 
+#ifdef INTEL_OMPI 
     cr[3]=(ca[0]>>1);
     cr[4]=ca[1];
     cr[5]=(ca[0]&1);
@@ -71,21 +71,21 @@ static inline void status_r2a(int *ca,int *cr){
     ca[A_f_MPI_TAG-1]=   cr[R_f_MPI_TAG-1];
     error_r2a(&ca[A_f_MPI_ERROR-1],&cr[R_f_MPI_ERROR-1]);
 //    printf("%d %d %d %d %d\n",ca[0],ca[1],ca[2],ca[3],ca[4]);    
-#ifdef mpich_mpich 
+#ifdef INTEL_INTEL 
     ca[0]=cr[0];
     ca[1]=cr[1];
     
 #endif
-#ifdef ompi_ompi
+#ifdef OMPI_OMPI
     ca[3]=cr[3];
     ca[4]=cr[4];
     ca[5]=cr[5];
 #endif
-#ifdef mpich_ompi 
+#ifdef INTEL_OMPI 
     ca[1]=cr[4];
     ca[0]=(cr[3]<<1)+cr[5];
 #endif
-#ifdef ompi_mpich
+#ifdef OMPI_INTEL
     ca[3]=(cr[0]>>1);
     ca[4]=cr[1];
     ca[5]=(cr[0]&1);
@@ -215,7 +215,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #endif
 }
 
-#ifdef ompi_ompi
+#ifdef OMPI_OMPI
 #define A_f_MPI_MODE_NOCHECK     1
 #define A_f_MPI_MODE_NOPRECEDE   2
 #define A_f_MPI_MODE_NOPUT       4
@@ -227,7 +227,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #define R_f_MPI_MODE_NOPUT       4
 #define R_f_MPI_MODE_NOSTORE     8
 #define R_f_MPI_MODE_NOSUCCEED   16
-#elif ompi_mpich
+#elif OMPI_INTEL
 #define A_f_MPI_MODE_NOCHECK     1
 #define A_f_MPI_MODE_NOPRECEDE   2
 #define A_f_MPI_MODE_NOPUT       4
@@ -239,7 +239,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #define R_f_MPI_MODE_NOPUT       4096
 #define R_f_MPI_MODE_NOSTORE     8192
 #define R_f_MPI_MODE_NOSUCCEED   16384
-#elif mpich_mpich
+#elif INTEL_INTEL
 #define A_f_MPI_MODE_NOCHECK     1024
 #define A_f_MPI_MODE_NOPRECEDE   2048
 #define A_f_MPI_MODE_NOPUT       4096
@@ -251,7 +251,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #define R_f_MPI_MODE_NOPUT       4096
 #define R_f_MPI_MODE_NOSTORE     8192
 #define R_f_MPI_MODE_NOSUCCEED   16384
-#elif mpich_ompi
+#elif INTEL_OMPI
 #define A_f_MPI_MODE_NOCHECK     1024
 #define A_f_MPI_MODE_NOPRECEDE   2048
 #define A_f_MPI_MODE_NOPUT       4096
