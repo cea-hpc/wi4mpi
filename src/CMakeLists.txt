@@ -59,10 +59,10 @@ add_library(wi4mpi_profiling_CCC_IMPI SHARED ${SOURCE_WI4MPI_PROFILING})
 
 target_include_directories(wi4mpi_profiling_CCC_OMPI 
 													 PRIVATE common
-													 PRIVATE interface/header/OMPI_OMPI)
+													 PRIVATE interface/header/_OMPI)
 target_include_directories(wi4mpi_profiling_CCC_IMPI
 													 PRIVATE common
-													 PRIVATE interface/header/OMPI_INTEL)
+													 PRIVATE interface/header/_INTEL)
 
 set_target_properties(wi4mpi_profiling_CCC_OMPI 
 											PROPERTIES
@@ -104,11 +104,11 @@ add_library(wi4mpi_CCC_INTEL_a STATIC  ${SOURCE_WI4MPI_INTERFACE})
 target_include_directories(mpi PRIVATE interface/manual)
 target_include_directories(wi4mpi_CCC_OMPI
                            PRIVATE common
-                           PRIVATE interface/header/OMPI_OMPI
+                           PRIVATE interface/header/_OMPI
                           )
 target_include_directories(wi4mpi_CCC_INTEL
                            PRIVATE common
-                           PRIVATE interface/header/OMPI_INTEL
+                           PRIVATE interface/header/_INTEL
                           )
 
 #Flags
@@ -136,11 +136,11 @@ target_link_libraries(wi4mpi_CCC_INTEL ${CMAKE_THREAD_LIBS_INIT})
 target_include_directories(mpi_a PRIVATE interface/manual)
 target_include_directories(wi4mpi_CCC_OMPI_a
                            PRIVATE common
-                           PRIVATE interface/header/OMPI_OMPI
+                           PRIVATE interface/header/_OMPI
                           )
 target_include_directories(wi4mpi_CCC_INTEL_a
                            PRIVATE common
-                           PRIVATE interface/header/OMPI_INTEL
+                           PRIVATE interface/header/_INTEL
                           )
 
 #Flags
