@@ -1374,7 +1374,7 @@ printf("entre : f_MPI_Pack_external (interface) \n");
 #ifdef IFORT_CALL
 INTERFACE_F_LOCAL_MPI_Pack_external(datarep, inbuf, count, datatype, outbuf, outsize, position, ret, datarep_len);
 #elif GFORT_CALL
-INTERFACE_F_Pack_external(datarep, datarep_len, inbuf, count, datatype, outbuf, outsize, position, ret);
+INTERFACE_F_LOCAL_MPI_Pack_external(datarep, datarep_len, inbuf, count, datatype, outbuf, outsize, position, ret);
 #endif
 #ifdef DEBUG
 printf("sort : f_MPI_Pack_external (interface) \n");
