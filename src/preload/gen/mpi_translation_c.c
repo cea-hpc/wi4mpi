@@ -728,7 +728,7 @@ switch(win_keyval_tmp)
    case R_MPI_WIN_BASE: //void*
       buffer_conv_r2a(&attribute_val,&attribute_val_tmp);
    case R_MPI_WIN_SIZE: //MPI_Aint
-      (A_MPI_Aint *) attribute_val = (A_MPI_Aint *) attribute_val_tmp;
+      /**(A_MPI_Aint *)*/ attribute_val = (A_MPI_Aint *) attribute_val_tmp;
    case R_MPI_WIN_DISP_UNIT :
       win_attr_flavor_conv_r2a(attribute_val,attribute_val_tmp);
    case R_MPI_WIN_CREATE_FLAVOR ://int*
@@ -805,7 +805,7 @@ switch(win_keyval_tmp)
    case R_MPI_WIN_BASE: //void*
       buffer_conv_a2r(&attribute_val,&attribute_val_tmp);
    case R_MPI_WIN_SIZE: //MPI_Aint
-      (R_MPI_Aint *) attribute_val = (R_MPI_Aint *) attribute_val_tmp;
+      /**(R_MPI_Aint *)*/ attribute_val = (R_MPI_Aint *) attribute_val_tmp;
    case R_MPI_WIN_DISP_UNIT :
       win_attr_flavor_conv_a2r(attribute_val,attribute_val_tmp);
    case R_MPI_WIN_CREATE_FLAVOR : 

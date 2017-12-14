@@ -35,10 +35,10 @@ void  pmpi_get_processor_name__(char *,int *,int *,int);
 void  pmpi_get_processor_name_(char *,int *,int *,int);
 
 //#define A_f_MPI_Get_processor_name _PMPI_Get_processor_name
-#pragma weak mpi_get_processor_name_=_PMPI_Get_processor_name
-#pragma weak mpi_get_processor_name__=_PMPI_Get_processor_name
-#pragma weak pmpi_get_processor_name__=_PMPI_Get_processor_name
-void  (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,int);
+//#pragma weak mpi_get_processor_name_=_PMPI_Get_processor_name
+//#pragma weak mpi_get_processor_name__=_PMPI_Get_processor_name
+//#pragma weak pmpi_get_processor_name__=_PMPI_Get_processor_name
+//void  (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,int);
 #ifdef IFORT_CALL
 void (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,int);
 #elif GFORT_CALL
@@ -124,9 +124,9 @@ void  pmpi_error_string_(int *,char *,int *,int *);
 #define A_f_MPI_MAX_ERROR_STRING 511
 #endif
 //#define A_f_MPI_Error_string _PMPI_Error_string
-#pragma weak mpi_error_string_=_PMPI_Error_string
-#pragma weak mpi_error_string__=_PMPI_Error_string
-#pragma weak pmpi_error_string__=_PMPI_Error_string
+//#pragma weak mpi_error_string_=_PMPI_Error_string
+//#pragma weak mpi_error_string__=_PMPI_Error_string
+//#pragma weak pmpi_error_string__=_PMPI_Error_string
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Error_string)(int * errorcode,char * string,int * resultlen,int * ret,int reslen);
 #elif GFORT_CALL
@@ -198,10 +198,10 @@ void  pmpi_file_open__(int*, char *,int *,int *,int*,int);
 void  pmpi_file_open_(int*, char *,int *,int *,int*,int);
 
 //#define A_f_MPI_File_open _PMPI_File_open
-#pragma weak mpi_file_open_=_PMPI_File_open
-#pragma weak mpi_file_open__=_PMPI_File_open
-#pragma weak pmpi_file_open__=_PMPI_File_open
-void  (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*, int*,int);
+//#pragma weak mpi_file_open_=_PMPI_File_open
+//#pragma weak mpi_file_open__=_PMPI_File_open
+//#pragma weak pmpi_file_open__=_PMPI_File_open
+//void  (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*, int*,int);
 #ifdef IFORT_CALL
 void (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, int);
 #elif GFORT_CALL
@@ -251,10 +251,9 @@ void  pmpi_file_set_view__(int *,int*,int *,int *,char **,int *,int *);
 void  pmpi_file_set_view_(int *,int*,int *,int *,char **,int *,int *);
 
 //#define A_f_MPI_File_set_view _PMPI_File_set_view
-#pragma weak mpi_file_set_view_=_PMPI_File_set_view
-#pragma weak mpi_file_set_view__=_PMPI_File_set_view
-#pragma weak pmpi_file_set_view__=_PMPI_File_set_view
-void  (*_LOCAL_MPI_File_set_view)(int *,int*,int *,int *,char *,int *,int *,int);
+//#pragma weak mpi_file_set_view_=_PMPI_File_set_view
+//#pragma weak mpi_file_set_view__=_PMPI_File_set_view
+//#pragma weak pmpi_file_set_view__=_PMPI_File_set_view
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_File_set_view)(int *,int*,int *,int *,char *,int *,int *,int);
 #elif GFORT_CALL
@@ -304,10 +303,9 @@ void  pmpi_file_get_view__(int *,int*,int *,int *,char *,int*,int );
 void  pmpi_file_get_view_(int *,int*,int *,int *,char *,int*,int );
 
 //#define A_f_MPI_File_get_view _PMPI_File_get_view
-#pragma weak mpi_file_get_view_=_PMPI_File_get_view
-#pragma weak mpi_file_get_view__=_PMPI_File_get_view
-#pragma weak pmpi_file_get_view__=_PMPI_File_get_view
-void  (*_LOCAL_MPI_File_get_view)(int *,int*,int *,int *,char *,int*,int );
+//#pragma weak mpi_file_get_view_=_PMPI_File_get_view
+//#pragma weak mpi_file_get_view__=_PMPI_File_get_view
+//#pragma weak pmpi_file_get_view__=_PMPI_File_get_view
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_File_get_view)(int *,int*,int *,int *,char *,int*,int );
 #elif GFORT_CALL
@@ -355,10 +353,9 @@ void  pmpi_file_delete__(char*,int *,int *);
 void  pmpi_file_delete_(char *,int *,int *);
 
 //#define A_f_MPI_File_delete _PMPI_File_delete
-#pragma weak mpi_file_delete_=_PMPI_File_delete
-#pragma weak mpi_file_delete__=_PMPI_File_delete
-#pragma weak pmpi_file_delete__=_PMPI_File_delete
-void  (*_LOCAL_MPI_File_delete)(char *,int *,int *,int);
+//#pragma weak mpi_file_delete_=_PMPI_File_delete
+//#pragma weak mpi_file_delete__=_PMPI_File_delete
+//#pragma weak pmpi_file_delete__=_PMPI_File_delete
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_File_delete)(char *,int *,int *,int);
 #elif GFORT_CALL
@@ -404,10 +401,9 @@ void  pmpi_info_delete__(int *,char *,int *);
 void  pmpi_info_delete_(int *,char *,int *);
 
 //#define A_f_MPI_Info_delete _PMPI_Info_delete
-#pragma weak mpi_info_delete_=_PMPI_Info_delete
-#pragma weak mpi_info_delete__=_PMPI_Info_delete
-#pragma weak pmpi_info_delete__=_PMPI_Info_delete
-void  (*_LOCAL_MPI_Info_delete)(int *,char *,int *,int);
+//#pragma weak mpi_info_delete_=_PMPI_Info_delete
+//#pragma weak mpi_info_delete__=_PMPI_Info_delete
+//#pragma weak pmpi_info_delete__=_PMPI_Info_delete
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Info_delete)(int *,char *,int *,int);
 #elif GFORT_CALL
@@ -452,10 +448,9 @@ void  pmpi_info_get__(int *,char *,int *,char *,int *,int *);
 void  pmpi_info_get_(int *,char *,int *,char *,int *,int *);
 
 //#define A_f_MPI_Info_get _PMPI_Info_get
-#pragma weak mpi_info_get_=_PMPI_Info_get
-#pragma weak mpi_info_get__=_PMPI_Info_get
-#pragma weak pmpi_info_get__=_PMPI_Info_get
-void  (*_LOCAL_MPI_Info_get)(int *,char *,int *,char *,int *,int *,int,int);
+//#pragma weak mpi_info_get_=_PMPI_Info_get
+//#pragma weak mpi_info_get__=_PMPI_Info_get
+//#pragma weak pmpi_info_get__=_PMPI_Info_get
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Info_get)(int *,char *,int *,char *,int *,int *,int,int);
 #elif GFORT_CALL
@@ -501,10 +496,9 @@ void  pmpi_info_get_nthkey__(int *,int *,char *,int *);
 void  pmpi_info_get_nthkey_(int *,int *,char *,int *);
 
 //#define A_f_MPI_Info_get_nthkey _PMPI_Info_get_nthkey
-#pragma weak mpi_info_get_nthkey_=_PMPI_Info_get_nthkey
-#pragma weak mpi_info_get_nthkey__=_PMPI_Info_get_nthkey
-#pragma weak pmpi_info_get_nthkey__=_PMPI_Info_get_nthkey
-void  (*_LOCAL_MPI_Info_get_nthkey)(int *,int *,char *,int *,int);
+//#pragma weak mpi_info_get_nthkey_=_PMPI_Info_get_nthkey
+//#pragma weak mpi_info_get_nthkey__=_PMPI_Info_get_nthkey
+//#pragma weak pmpi_info_get_nthkey__=_PMPI_Info_get_nthkey
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Info_get_nthkey)(int *,int *,char *,int *,int);
 #elif GFORT_CALL
@@ -551,10 +545,9 @@ void  pmpi_info_get_valuelen__(int *,char *,int *,int *,int *);
 void  pmpi_info_get_valuelen_(int *,char *,int *,int *,int *);
 
 //#define A_f_MPI_Info_get_valuelen _PMPI_Info_get_valuelen
-#pragma weak mpi_info_get_valuelen_=_PMPI_Info_get_valuelen
-#pragma weak mpi_info_get_valuelen__=_PMPI_Info_get_valuelen
-#pragma weak pmpi_info_get_valuelen__=_PMPI_Info_get_valuelen
-void  (*_LOCAL_MPI_Info_get_valuelen)(int *,char *,int *,int *,int *,int);
+//#pragma weak mpi_info_get_valuelen_=_PMPI_Info_get_valuelen
+//#pragma weak mpi_info_get_valuelen__=_PMPI_Info_get_valuelen
+//#pragma weak pmpi_info_get_valuelen__=_PMPI_Info_get_valuelen
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Info_get_valuelen)(int *,char *,int *,int *,int *,int);
 #elif GFORT_CALL
@@ -600,10 +593,9 @@ void  pmpi_info_set__(int *,char *,char *,int *);
 void  pmpi_info_set_(int *,char *,char *,int *);
 
 //#define A_f_MPI_Info_set _PMPI_Info_set
-#pragma weak mpi_info_set_=_PMPI_Info_set
-#pragma weak mpi_info_set__=_PMPI_Info_set
-#pragma weak pmpi_info_set__=_PMPI_Info_set
-void  (*_LOCAL_MPI_Info_set)(int *,char *,char *,int *,int, int);
+//#pragma weak mpi_info_set_=_PMPI_Info_set
+//#pragma weak mpi_info_set__=_PMPI_Info_set
+//#pragma weak pmpi_info_set__=_PMPI_Info_set
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Info_set)(int *,char *,char *,int *,int,int);
 #elif GFORT_CALL
@@ -648,10 +640,9 @@ void  pmpi_win_get_name__(int *,char *,int*,int *);
 void  pmpi_win_get_name_(int *,char *,int*,int *);
 
 //#define A_f_MPI_Win_get_name _PMPI_Win_get_name
-#pragma weak mpi_win_get_name_=_PMPI_Win_get_name
-#pragma weak mpi_win_get_name__=_PMPI_Win_get_name
-#pragma weak pmpi_win_get_name__=_PMPI_Win_get_name
-void  (*_LOCAL_MPI_Win_get_name)(int *,char *,int *,int*,int );
+//#pragma weak mpi_win_get_name_=_PMPI_Win_get_name
+//#pragma weak mpi_win_get_name__=_PMPI_Win_get_name
+//#pragma weak pmpi_win_get_name__=_PMPI_Win_get_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Win_get_name)(int *,char *,int *,int*,int);
 #elif GFORT_CALL
@@ -697,10 +688,9 @@ void  pmpi_comm_get_name__(int *,char *,int*,int *);
 void  pmpi_comm_get_name_(int *,char *,int*,int *);
 
 //#define A_f_MPI_Comm_get_name _PMPI_Comm_get_name
-#pragma weak mpi_comm_get_name_=_PMPI_Comm_get_name
-#pragma weak mpi_comm_get_name__=_PMPI_Comm_get_name
-#pragma weak pmpi_comm_get_name__=_PMPI_Comm_get_name
-void  (*_LOCAL_MPI_Comm_get_name)(int *,char *,int *,int*,int );
+//#pragma weak mpi_comm_get_name_=_PMPI_Comm_get_name
+//#pragma weak mpi_comm_get_name__=_PMPI_Comm_get_name
+//#pragma weak pmpi_comm_get_name__=_PMPI_Comm_get_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Comm_get_name)(int *,char *,int *,int*,int);
 #elif GFORT_CALL
@@ -746,10 +736,9 @@ void  pmpi_comm_set_name__(int *,char *,int*);
 void  pmpi_comm_set_name_(int *,char *,int* );
 
 //#define A_f_MPI_Comm_set_name _PMPI_Comm_set_name
-#pragma weak mpi_comm_set_name_=_PMPI_Comm_set_name
-#pragma weak mpi_comm_set_name__=_PMPI_Comm_set_name
-#pragma weak pmpi_comm_set_name__=_PMPI_Comm_set_name
-void  (*_LOCAL_MPI_Comm_set_name)(int *,char *,int *,int);
+//#pragma weak mpi_comm_set_name_=_PMPI_Comm_set_name
+//#pragma weak mpi_comm_set_name__=_PMPI_Comm_set_name
+//#pragma weak pmpi_comm_set_name__=_PMPI_Comm_set_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Comm_set_name)(int *,char *,int *,int);
 #elif GFORT_CALL
@@ -796,10 +785,9 @@ void  pmpi_comm_spawn__(char *, char *, int *, int *, int *, int *, int *, int*,
 void  pmpi_comm_spawn_(char *, char *, int *, int *, int *, int *, int *, int*, int*);
 
 //#define A_f_MPI_Comm_spawn _PMPI_Comm_spawn
-#pragma weak mpi_comm_spawn_=_PMPI_Comm_spawn
-#pragma weak mpi_comm_spawn__=_PMPI_Comm_spawn
-#pragma weak pmpi_comm_spawn__=_PMPI_Comm_spawn
-void  (*_LOCAL_MPI_Comm_spawn)(char *, char *, int *, int *, int *, int *, int *, int*, int*, int, int);
+//#pragma weak mpi_comm_spawn_=_PMPI_Comm_spawn
+//#pragma weak mpi_comm_spawn__=_PMPI_Comm_spawn
+//#pragma weak pmpi_comm_spawn__=_PMPI_Comm_spawn
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Comm_spawn)(char *, char *, int *, int *, int *, int *, int *, int*, int*, int, int);
 #elif GFORT_CALL
@@ -852,10 +840,9 @@ void  pmpi_type_get_name__(int *,char *,int*,int *);
 void  pmpi_type_get_name_(int *,char *,int*,int *);
 
 //#define A_f_MPI_Type_get_name _PMPI_Type_get_name
-#pragma weak mpi_type_get_name_=_PMPI_Type_get_name
-#pragma weak mpi_type_get_name__=_PMPI_Type_get_name
-#pragma weak pmpi_type_get_name__=_PMPI_Type_get_name
-void  (*_LOCAL_MPI_Type_get_name)(int *,char *,int *,int*,int );
+//#pragma weak mpi_type_get_name_=_PMPI_Type_get_name
+//#pragma weak mpi_type_get_name__=_PMPI_Type_get_name
+//#pragma weak pmpi_type_get_name__=_PMPI_Type_get_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Type_get_name)(int *,char *,int *,int*,int);
 #elif GFORT_CALL
@@ -901,10 +888,9 @@ void  pmpi_type_set_name__(int *,char *,int*);
 void  pmpi_type_set_name_(int *,char *,int*);
 
 //#define A_f_MPI_Type_set_name _PMPI_Type_set_name
-#pragma weak mpi_type_set_name_=_PMPI_Type_set_name
-#pragma weak mpi_type_set_name__=_PMPI_Type_set_name
-#pragma weak pmpi_type_set_name__=_PMPI_Type_set_name
-void  (*_LOCAL_MPI_Type_set_name)(int *,char *,int*,int );
+//#pragma weak mpi_type_set_name_=_PMPI_Type_set_name
+//#pragma weak mpi_type_set_name__=_PMPI_Type_set_name
+//#pragma weak pmpi_type_set_name__=_PMPI_Type_set_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Type_set_name)(int *,char *,int*,int);
 #elif GFORT_CALL
@@ -949,10 +935,9 @@ void  pmpi_add_error_string__(int *,char *,int*);
 void  pmpi_add_error_string_(int *,char *,int*);
 
 //#define A_f_MPI_Add_error_string _PMPI_Add_error_string
-#pragma weak mpi_add_error_string_=_PMPI_Add_error_string
-#pragma weak mpi_add_error_string__=_PMPI_Add_error_string
-#pragma weak pmpi_add_error_string__=_PMPI_Add_error_string
-void  (*_LOCAL_MPI_Add_error_string)(int *,char *,int*,int );
+//#pragma weak mpi_add_error_string_=_PMPI_Add_error_string
+//#pragma weak mpi_add_error_string__=_PMPI_Add_error_string
+//#pragma weak pmpi_add_error_string__=_PMPI_Add_error_string
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Add_error_string)(int *,char *,int*,int);
 #elif GFORT_CALL
@@ -998,10 +983,9 @@ void  pmpi_close_port__(char *,int*);
 void  pmpi_close_port_(char *,int*);
 
 //#define A_f_MPI_Close_port _PMPI_Close_port
-#pragma weak mpi_close_port_=_PMPI_Close_port
-#pragma weak mpi_close_port__=_PMPI_Close_port
-#pragma weak pmpi_close_port__=_PMPI_Close_port
-void  (*_LOCAL_MPI_Close_port)(char *,int*,int);
+///#pragma weak mpi_close_port_=_PMPI_Close_port
+///#pragma weak mpi_close_port__=_PMPI_Close_port
+///#pragma weak pmpi_close_port__=_PMPI_Close_port
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Close_port)(char *,int*,int);
 #elif GFORT_CALL
@@ -1045,10 +1029,9 @@ void  pmpi_get_library_version__(char *,int*,int*);
 void  pmpi_get_library_version_(char * ,int*,int*);
 
 //#define A_f_MPI_Get_library_version _PMPI_Get_library_version
-#pragma weak mpi_get_library_version_=_PMPI_Get_library_version
-#pragma weak mpi_get_library_version__=_PMPI_Get_library_version
-#pragma weak pmpi_get_library_version__=_PMPI_Get_library_version
-void  (*_LOCAL_MPI_Get_library_version)(char *,int*, int*,int);
+//#pragma weak mpi_get_library_version_=_PMPI_Get_library_version
+//#pragma weak mpi_get_library_version__=_PMPI_Get_library_version
+//#pragma weak pmpi_get_library_version__=_PMPI_Get_library_version
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Get_library_version)(char *,int*,int*,int);
 #elif GFORT_CALL
@@ -1092,10 +1075,9 @@ void  pmpi_open_port__(int *,char*,int*);
 void  pmpi_open_port_(int * ,char*,int*);
 
 //#define A_f_MPI_Open_port _PMPI_Open_port
-#pragma weak mpi_open_port_=_PMPI_Open_port
-#pragma weak mpi_open_port__=_PMPI_Open_port
-#pragma weak pmpi_open_port__=_PMPI_Open_port
-void  (*_LOCAL_MPI_Open_port)(int *,char*, int*,int);
+//#pragma weak mpi_open_port_=_PMPI_Open_port
+//#pragma weak mpi_open_port__=_PMPI_Open_port
+//#pragma weak pmpi_open_port__=_PMPI_Open_port
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Open_port)(int *,char*, int*,int);
 #elif GFORT_CALL
@@ -1141,10 +1123,9 @@ void  pmpi_publish_name__(char*,int*,char*,int*);
 void  pmpi_publish_name_(char*,int*,char*,int*);
 
 //#define A_f_MPI_Publish_name _PMPI_Publish_name
-#pragma weak mpi_publish_name_=_PMPI_Publish_name
-#pragma weak mpi_publish_name__=_PMPI_Publish_name
-#pragma weak pmpi_publish_name__=_PMPI_Publish_name
-void  (*_LOCAL_MPI_Publish_name)(char *,int*, char*,int*,int,int);
+//#pragma weak mpi_publish_name_=_PMPI_Publish_name
+//#pragma weak mpi_publish_name__=_PMPI_Publish_name
+//#pragma weak pmpi_publish_name__=_PMPI_Publish_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Publish_name)(char *,int*, char*,int*,int,int);
 #elif GFORT_CALL
@@ -1190,10 +1171,9 @@ void  pmpi_unpublish_name__(char*,int*,char*,int*);
 void  pmpi_unpublish_name_(char*,int*,char*,int*);
 
 //#define A_f_MPI_Unpublish_name _PMPI_Unpublish_name
-#pragma weak mpi_unpublish_name_=_PMPI_Unpublish_name
-#pragma weak mpi_unpublish_name__=_PMPI_Unpublish_name
-#pragma weak pmpi_unpublish_name__=_PMPI_Unpublish_name
-void  (*_LOCAL_MPI_Unpublish_name)(char *,int*, char*,int*,int,int);
+//#pragma weak mpi_unpublish_name_=_PMPI_Unpublish_name
+//#pragma weak mpi_unpublish_name__=_PMPI_Unpublish_name
+//#pragma weak pmpi_unpublish_name__=_PMPI_Unpublish_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Unpublish_name)(char *,int*, char*,int*,int,int);
 #elif GFORT_CALL
@@ -1239,10 +1219,9 @@ void  pmpi_win_set_name__(int *, char *, int*);
 void  pmpi_win_set_name_(int *, char *, int*);
 
 //#define A_f_MPI_Win_set_name _PMPI_Win_set_name
-#pragma weak mpi_win_set_name_=_PMPI_Win_set_name
-#pragma weak mpi_win_set_name__=_PMPI_Win_set_name
-#pragma weak pmpi_win_set_name__=_PMPI_Win_set_name
-void  (*_LOCAL_MPI_Win_set_name)(int *, char *, int*, int);
+//#pragma weak mpi_win_set_name_=_PMPI_Win_set_name
+//#pragma weak mpi_win_set_name__=_PMPI_Win_set_name
+//#pragma weak pmpi_win_set_name__=_PMPI_Win_set_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Win_set_name)(int *, char *, int*, int);
 #elif GFORT_CALL
@@ -1288,10 +1267,9 @@ void  pmpi_lookup_name__(char *, int*, char *, int*);
 void  pmpi_lookup_name_(char *, int*, char *, int*);
 
 //#define A_f_MPI_Lookup_name _PMPI_Lookup_name
-#pragma weak mpi_lookup_name_=_PMPI_Lookup_name
-#pragma weak mpi_lookup_name__=_PMPI_Lookup_name
-#pragma weak pmpi_lookup_name__=_PMPI_Lookup_name
-void  (*_LOCAL_MPI_Lookup_name)(char*, int*, char *, int*, int, int);
+//#pragma weak mpi_lookup_name_=_PMPI_Lookup_name
+//#pragma weak mpi_lookup_name__=_PMPI_Lookup_name
+//#pragma weak pmpi_lookup_name__=_PMPI_Lookup_name
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Lookup_name)(char*, int*, char *, int*, int, int);
 #elif GFORT_CALL
@@ -1336,10 +1314,9 @@ void  pmpi_pack_external__(char *, void*, int, int*, void*, size_t, size_t *, in
 void  pmpi_pack_external_(char *, void*, int, int*, void*, size_t, size_t *, int*);
 
 //#define A_f_MPI_Pack_external _PMPI_Pack_external
-#pragma weak mpi_pack_external_=_PMPI_Pack_external
-#pragma weak mpi_pack_external__=_PMPI_Pack_external
-#pragma weak pmpi_pack_external__=_PMPI_Pack_external
-void  (*_LOCAL_MPI_Pack_external)(char *, void*, int, int*, void*, size_t, size_t *, int *, int);
+//#pragma weak mpi_pack_external_=_PMPI_Pack_external
+//#pragma weak mpi_pack_external__=_PMPI_Pack_external
+//#pragma weak pmpi_pack_external__=_PMPI_Pack_external
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Pack_external)(char *, void*, int, int*, void*, size_t, size_t *, int *, int);
 #elif GFORT_CALL
@@ -1384,10 +1361,9 @@ void  pmpi_pack_external_size__(char *, int, int *, size_t *, int *);
 void  pmpi_pack_external_size_(char *, int, int *, size_t *, int *);
 
 //#define A_f_MPI_Pack_external_size _PMPI_Pack_external_size
-#pragma weak mpi_pack_external_size_=_PMPI_Pack_external_size
-#pragma weak mpi_pack_external_size__=_PMPI_Pack_external_size
-#pragma weak pmpi_pack_external_size__=_PMPI_Pack_external_size
-void  (*_LOCAL_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, int);
+//#pragma weak mpi_pack_external_size_=_PMPI_Pack_external_size
+//#pragma weak mpi_pack_external_size__=_PMPI_Pack_external_size
+//#pragma weak pmpi_pack_external_size__=_PMPI_Pack_external_size
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, int);
 #elif GFORT_CALL
@@ -1432,10 +1408,9 @@ void  pmpi_unpack_external__(char *, void *, size_t, size_t *, void *, int, int 
 void  pmpi_unpack_external_(char *, void *, size_t, size_t *, void *, int, int *, int *);
 
 //#define A_f_MPI_Unpack_external _PMPI_Unpack_external
-#pragma weak mpi_unpack_external_=_PMPI_Unpack_external
-#pragma weak mpi_unpack_external__=_PMPI_Unpack_external
-#pragma weak pmpi_unpack_external__=_PMPI_Unpack_external
-void  (*_LOCAL_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);
+//#pragma weak mpi_unpack_external_=_PMPI_Unpack_external
+//#pragma weak mpi_unpack_external__=_PMPI_Unpack_external
+//#pragma weak pmpi_unpack_external__=_PMPI_Unpack_external
 #ifdef IFORT_CALL
 void  (*_LOCAL_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);
 #elif GFORT_CALL

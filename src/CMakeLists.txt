@@ -157,6 +157,13 @@ set_target_properties(wi4mpi_INTEL_a
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
 
+if(FC MATCHES gfortran) 
+set_target_properties(mpi_mod
+                      PROPERTIES
+                      COMPILE_FLAGS "-ffree-line-length-0"
+                     )
+endif()
+
 #Link options
 #------------
 
