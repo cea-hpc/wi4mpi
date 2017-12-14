@@ -215,49 +215,48 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #endif
 }
 
-#if defined(OMPI_OMPI) || defined(_OMPI)
+#if defined(OMPI_OMPI) || defined(OMPI_MPC) || defined(_OMPI) || defined(_MPC)
 #define A_f_MPI_MODE_NOCHECK     1
 #define A_f_MPI_MODE_NOPRECEDE   2
 #define A_f_MPI_MODE_NOPUT       4
 #define A_f_MPI_MODE_NOSTORE     8
 #define A_f_MPI_MODE_NOSUCCEED   16
-
 #define R_f_MPI_MODE_NOCHECK     1
 #define R_f_MPI_MODE_NOPRECEDE   2
 #define R_f_MPI_MODE_NOPUT       4
 #define R_f_MPI_MODE_NOSTORE     8
 #define R_f_MPI_MODE_NOSUCCEED   16
-#elif defined(OMPI_INTEL) || defined(_INTEL)
+
+#elif defined(OMPI_INTEL) || defined(MPC_INTEL) || defined(_INTEL)
 #define A_f_MPI_MODE_NOCHECK     1
 #define A_f_MPI_MODE_NOPRECEDE   2
 #define A_f_MPI_MODE_NOPUT       4
 #define A_f_MPI_MODE_NOSTORE     8
 #define A_f_MPI_MODE_NOSUCCEED   16
-
 #define R_f_MPI_MODE_NOCHECK     1024
 #define R_f_MPI_MODE_NOPRECEDE   2048
 #define R_f_MPI_MODE_NOPUT       4096
 #define R_f_MPI_MODE_NOSTORE     8192
 #define R_f_MPI_MODE_NOSUCCEED   16384
+
 #elif INTEL_INTEL
 #define A_f_MPI_MODE_NOCHECK     1024
 #define A_f_MPI_MODE_NOPRECEDE   2048
 #define A_f_MPI_MODE_NOPUT       4096
 #define A_f_MPI_MODE_NOSTORE     8192
 #define A_f_MPI_MODE_NOSUCCEED   16384
-
 #define R_f_MPI_MODE_NOCHECK     1024
 #define R_f_MPI_MODE_NOPRECEDE   2048
 #define R_f_MPI_MODE_NOPUT       4096
 #define R_f_MPI_MODE_NOSTORE     8192
 #define R_f_MPI_MODE_NOSUCCEED   16384
-#elif INTEL_OMPI
+
+#elif defined(INTEL_OMPI) || defined(INTEL_MPC)
 #define A_f_MPI_MODE_NOCHECK     1024
 #define A_f_MPI_MODE_NOPRECEDE   2048
 #define A_f_MPI_MODE_NOPUT       4096
 #define A_f_MPI_MODE_NOSTORE     8192
 #define A_f_MPI_MODE_NOSUCCEED   16384
-
 #define R_f_MPI_MODE_NOCHECK     1
 #define R_f_MPI_MODE_NOPRECEDE   2
 #define R_f_MPI_MODE_NOPUT       4
