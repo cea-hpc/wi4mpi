@@ -113,5 +113,13 @@ if(!LOCAL_MPI_Status_c2f) exit(1);
 LOCAL_MPI_Status_f2c=dlsym(lib_handle,"PMPI_Status_f2c");
 if(!LOCAL_MPI_Status_f2c) exit(1);
 #endif
+#ifndef R_MPI_Win_c2f
+LOCAL_MPI_Win_c2f=dlsym(lib_handle,"PMPI_Win_c2f");
+if(!LOCAL_MPI_Win_c2f) exit(1);
+#endif
+#ifndef R_MPI_Win_f2c
+LOCAL_MPI_Win_f2c=dlsym(lib_handle,"PMPI_Win_f2c");
+if(!LOCAL_MPI_Win_f2c) exit(1);
+#endif
 }
 
