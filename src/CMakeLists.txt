@@ -162,6 +162,7 @@ set_target_properties(mpi_mod
                       PROPERTIES
                       COMPILE_FLAGS "-ffree-line-length-0"
                      )
+endif()
 
 #Link options
 #------------
