@@ -93,11 +93,13 @@ install(TARGETS
 add_library(mpi SHARED ${SOURCE_WI4MPI_SO})
 add_library(wi4mpi_OMPI SHARED ${SOURCE_WI4MPI_INTERFACE}) 
 add_library(wi4mpi_INTEL SHARED  ${SOURCE_WI4MPI_INTERFACE})
+add_library(wi4mpi_MPC SHARED  ${SOURCE_WI4MPI_INTERFACE})
 add_library(mpi_mod MODULE ${SOURCE_WI4MPI_MODULE})
 
 add_library(mpi_a STATIC ${SOURCE_WI4MPI_SO})
 add_library(wi4mpi_OMPI_a STATIC ${SOURCE_WI4MPI_INTERFACE}) 
 add_library(wi4mpi_INTEL_a STATIC  ${SOURCE_WI4MPI_INTERFACE})
+add_library(wi4mpi_MPC_a STATIC  ${SOURCE_WI4MPI_INTERFACE})
 
 #dependencies
 #-----------
@@ -117,6 +119,10 @@ target_include_directories(wi4mpi_INTEL
                            PRIVATE common
                            PRIVATE interface/header/_INTEL
                           )
+target_include_directories(wi4mpi_MPC
+                           PRIVATE common
+                           PRIVATE interface/header/_MPC
+                          )
 
 target_include_directories(mpi_a PRIVATE interface/manual)
 target_include_directories(wi4mpi_OMPI_a
@@ -126,6 +132,10 @@ target_include_directories(wi4mpi_OMPI_a
 target_include_directories(wi4mpi_INTEL_a
                            PRIVATE common
                            PRIVATE interface/header/_INTEL
+                          )
+target_include_directories(wi4mpi_MPC_a
+                           PRIVATE common
+                           PRIVATE interface/header/_MPC
                           )
 
 #Flags
@@ -143,6 +153,10 @@ set_target_properties(wi4mpi_INTEL
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
                      )
+set_target_properties(wi4mpi_MPC
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE"
+                     )
 
 set_target_properties(mpi_a
                       PROPERTIES
@@ -155,6 +169,10 @@ set_target_properties(wi4mpi_OMPI_a
 set_target_properties(wi4mpi_INTEL_a
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_MPC_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
 
 if(FC MATCHES gfortran) 
@@ -169,8 +187,10 @@ endif()
 
 target_link_libraries(wi4mpi_OMPI ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_INTEL ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_MPC ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_OMPI_a ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_INTEL_a ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_MPC_a ${CMAKE_THREAD_LIBS_INIT})
 
 #Custom command
 #--------------
@@ -187,13 +207,18 @@ add_custom_command(TARGET wi4mpi_OMPI_a
                     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 
                 )
-add_custom_command(TARGET mpi_a 
-                POST_BUILD
-                COMMAND ${CMAKE_SOURCE_DIR}/scripts/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_INTEL_a.a libwi4mpi_OMPI_a.a
+message(status ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_command(TARGET wi4mpi_MPC_a 
+                    POST_BUILD
+                  COMMAND  ${CMAKE_SOURCE_DIR}/scripts/rename_sym.sh libwi4mpi_MPC_a.a "MPC"
                     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 
                 )
-
+add_custom_command(TARGET mpi_a 
+                POST_BUILD
+                COMMAND ${CMAKE_SOURCE_DIR}/scripts/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_INTEL_a.a libwi4mpi_OMPI_a.a libwi4mpi_MPC_a.a
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                )
 
 
 #############
