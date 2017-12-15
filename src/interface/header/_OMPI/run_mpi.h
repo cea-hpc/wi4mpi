@@ -73,7 +73,7 @@
 #define OPAL_MAX_DATAREP_STRING 128
 
 /* Maximum length of error strings (default is 256) */
-//#define OPAL_MAX_ERROR_STRING 256
+#define OPAL_MAX_ERROR_STRING 256
 
 /* Maximum length of info keys (default is 36) */
 #define OPAL_MAX_INFO_KEY 36
