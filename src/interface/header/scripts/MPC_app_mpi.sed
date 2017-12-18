@@ -7,6 +7,6 @@
 ######################################################
 
 # Replace missing MPI_ERR_RMA_XXX values by A_MPI_ERR_UNKNOWN
-s/\(#define.*A_MPI_ERR_RMA_RANGE\).*/\1             A_MPI_ERR_UNKNOWN/
-s/\(#define.*A_MPI_ERR_RMA_ATTACH\).*/\1            A_MPI_ERR_UNKNOWN/
-s/\(#define.*A_MPI_ERR_RMA_SHARED\).*/\1            A_MPI_ERR_UNKNOWN/
+s/\(#define.*A_MPI_ERR_RMA_RANGE\).*/\1             74/
+s/\(#define.*A_MPI_ERR_RMA_ATTACH\).*/\1            75/
+s/\(#define.*A_MPI_ERR_RMA_SHARED\).*/\1            76/

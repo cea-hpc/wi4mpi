@@ -365,12 +365,9 @@ static inline int error_code_conv_r2a(int ret_tmp)
        case_R_A(ERR_SPAWN);
        case_R_A(ERR_WIN);
        //case_R_A(ERR_LASTCODE);
-#if !defined(_MPC) && !defined(OMPI_MPC) && !defined(INTEL_MPC) && !defined(MPC_MPC)
-/* MPC-3.2.0 doesn't support RANGE, ATTACH and SHARED */
        case_A_R(ERR_RMA_RANGE);
        case_A_R(ERR_RMA_ATTACH);
        case_A_R(ERR_RMA_SHARED);
-#endif
        case_R_A(ERR_RMA_FLAVOR);
 	
 	  default:
@@ -421,12 +418,9 @@ static inline int error_code_conv_a2r(int ret_tmp)
        case_A_R(ERR_SPAWN);
        case_A_R(ERR_WIN);
        //case_A_R(ERR_LASTCODE);
-#if !defined(_MPC) && !defined(OMPI_MPC) && !defined(INTEL_MPC) && !defined(MPC_MPC)
-/* MPC-3.2.0 doesn't support RANGE, ATTACH and SHARED */
        case_A_R(ERR_RMA_RANGE);
        case_A_R(ERR_RMA_ATTACH);	
        case_A_R(ERR_RMA_SHARED); 
-#endif
        case_A_R(ERR_RMA_FLAVOR);        
      default:
          return ret_tmp;

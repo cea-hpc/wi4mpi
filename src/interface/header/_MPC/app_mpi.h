@@ -266,10 +266,10 @@ enum {
 #define A_MPI_T_ERR_PVAR_NO_STARTSTOP   65
 #define A_MPI_T_ERR_PVAR_NO_WRITE       66
 #define A_MPI_T_ERR_PVAR_NO_ATOMIC      67
-#define A_MPI_ERR_RMA_RANGE             A_MPI_ERR_UNKNOWN
-#define A_MPI_ERR_RMA_ATTACH            A_MPI_ERR_UNKNOWN
+#define A_MPI_ERR_RMA_RANGE             74
+#define A_MPI_ERR_RMA_ATTACH            75
 #define A_MPI_ERR_RMA_FLAVOR            70
-#define A_MPI_ERR_RMA_SHARED            A_MPI_ERR_UNKNOWN
+#define A_MPI_ERR_RMA_SHARED            76
 
 /* for 1.8 these intentially overlap other error codes because A_MPI_ERR_LASTCODE
    can not be changed in a release series*/
@@ -279,7 +279,7 @@ enum {
 /* Per MPI-3 p349 47, A_MPI_ERR_LASTCODE must be >= the last predefined
    A_MPI_ERR_<foo> code.  So just set it equal to the last code --
    A_MPI_ERR_RMA_SHARED, in this case. */
-#define A_MPI_ERR_LASTCODE              A_MPI_ERR_RMA_SHARED            A_MPI_ERR_UNKNOWN
+#define A_MPI_ERR_LASTCODE              A_MPI_ERR_RMA_SHARED            76
 
 #define A_MPI_ERR_SYSRESOURCE          -2
 

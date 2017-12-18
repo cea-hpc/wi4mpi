@@ -8,9 +8,9 @@
 
 # Add missing MPI_ERR_RMA
 /#define R_MPI_ERR_RMA_CONFLICT/{
-    i#define R_MPI_ERR_RMA_RANGE MPC_ERR_UNKNOWN
-    i#define R_MPI_ERR_RMA_ATTACH MPC_ERR_UNKNOWN
-    i#define R_MPI_ERR_RMA_SHARED MPC_ERR_UNKNOWN
+    i#define R_MPI_ERR_RMA_RANGE 74
+    i#define R_MPI_ERR_RMA_ATTACH 75
+    i#define R_MPI_ERR_RMA_SHARED 76
 }
 
 # Add include "run_mpio.h" at the end of file
