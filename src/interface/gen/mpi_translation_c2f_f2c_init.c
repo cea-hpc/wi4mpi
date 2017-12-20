@@ -55,6 +55,8 @@ if(!LOCAL_MPI_Comm_c2f) exit(1);
 LOCAL_MPI_Comm_f2c=dlsym(lib_handle,"PMPI_Comm_f2c");
 if(!LOCAL_MPI_Comm_f2c) exit(1);
 #endif
+
+#if !defined(_MPC) /// Unsupported by MPC-3.2.0
 #ifndef R_MPI_File_c2f
 LOCAL_MPI_File_c2f=dlsym(lib_handle,"PMPI_File_c2f");
 if(!LOCAL_MPI_File_c2f) exit(1);
@@ -63,7 +65,9 @@ if(!LOCAL_MPI_File_c2f) exit(1);
 LOCAL_MPI_File_f2c=dlsym(lib_handle,"PMPI_File_f2c");
 if(!LOCAL_MPI_File_f2c) exit(1);
 #endif
+#endif ///
 
+#if !defined(_MPC) /// Unsupported by MPC-3.2.0
 #ifndef R_MPI_Message_c2f
 LOCAL_MPI_Message_c2f=dlsym(lib_handle,"PMPI_Message_c2f");
 if(!LOCAL_MPI_Message_c2f) exit(1);
@@ -72,6 +76,8 @@ if(!LOCAL_MPI_Message_c2f) exit(1);
 LOCAL_MPI_Message_f2c=dlsym(lib_handle,"PMPI_Message_f2c");
 if(!LOCAL_MPI_Message_f2c) exit(1);
 #endif
+#endif ///
+
 #ifndef R_MPI_Group_c2f
 LOCAL_MPI_Group_c2f=dlsym(lib_handle,"PMPI_Group_c2f");
 if(!LOCAL_MPI_Group_c2f) exit(1);
@@ -105,6 +111,8 @@ if(!LOCAL_MPI_Op_c2f) exit(1);
 LOCAL_MPI_Op_f2c=dlsym(lib_handle,"PMPI_Op_f2c");
 if(!LOCAL_MPI_Op_f2c) exit(1);
 #endif
+
+#if !defined(_MPC) /// Unsupported by MPC-3.2.0 
 #ifndef R_MPI_Status_c2f
 LOCAL_MPI_Status_c2f=dlsym(lib_handle,"PMPI_Status_c2f");
 if(!LOCAL_MPI_Status_c2f) exit(1);
@@ -113,6 +121,8 @@ if(!LOCAL_MPI_Status_c2f) exit(1);
 LOCAL_MPI_Status_f2c=dlsym(lib_handle,"PMPI_Status_f2c");
 if(!LOCAL_MPI_Status_f2c) exit(1);
 #endif
+#endif ///
+
 #ifndef R_MPI_Win_c2f
 LOCAL_MPI_Win_c2f=dlsym(lib_handle,"PMPI_Win_c2f");
 if(!LOCAL_MPI_Win_c2f) exit(1);

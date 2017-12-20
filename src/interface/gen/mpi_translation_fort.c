@@ -39,7 +39,7 @@ typedef struct {
 extern myKeyval_functions_t *myKeyval_translation_get(int);
 extern void myKeyval_translation_del(int);
 extern void myKeyval_translation_add(int,myKeyval_functions_t *);
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int *MPI_UNWEIGHTED=NULL;
 #endif
 extern __thread int in_w;
@@ -11913,8 +11913,10 @@ printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 WATTR void wrapper_init_f(void) {
 dlopen(getenv("WI4MPI_RUN_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
 void *lib_handle_f=dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"),RTLD_NOW|RTLD_GLOBAL);
-if(!lib_handle_f)
-   { printf("%s not loaded \nerror : %s\n",getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());exit(1);}
+
+#if !defined(_MPC)
+if(!lib_handle_f) {printf("%s not loaded \nerror : %s\n",getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());exit(1);}
+#endif
 _LOCAL_MPI_Send=dlsym(lib_handle_f,"pmpi_send_");
 _LOCAL_MPI_Recv=dlsym(lib_handle_f,"pmpi_recv_");
 _LOCAL_MPI_Get_count=dlsym(lib_handle_f,"pmpi_get_count_");
@@ -12274,7 +12276,7 @@ ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");
 ////mpi_null_copy_fn_;
 ////mpi_null_delete_fn_;
 #endif
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");
 ccc_mpi_fortran_in_place_=((int *)dlsym(lib_handle_f,"mpipriv1_")+1);
 ccc_mpi_fortran_argv_null_=((int*)dlsym(lib_handle_f,"mpiprivc_")+1);

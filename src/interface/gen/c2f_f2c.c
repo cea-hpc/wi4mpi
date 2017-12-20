@@ -21,7 +21,7 @@
 //#                                                                      #
 //########################################################################
 #include "wrapper_f.h"
-#if defined(INTEL_OMPI) || defined (OMPI_OMPI) || defined(_OMPI)
+#if defined(INTEL_OMPI) || defined (OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif

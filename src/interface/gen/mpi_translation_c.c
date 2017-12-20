@@ -137,7 +137,7 @@ extern char ompi_request_null;
 extern char ompi_mpi_win_null;
 extern char ompi_message_no_proc;
 #endif
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 char ompi_mpi_comm_null[1024];
 char ompi_mpi_comm_self[1024];
 char ompi_mpi_comm_world[1024];
@@ -248,7 +248,7 @@ char ompi_message_no_proc[512];
 
 #include "c2f_f2c.h"
 extern __thread int in_w;
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
 
 int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag)
@@ -29014,7 +29014,7 @@ printf("sort : R_MPI_T_pvar_handle_free\n");
 return ret_tmp;
 }
 
-#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 /*__asm__(
@@ -29132,7 +29132,7 @@ printf("sort : R_MPI_Errhandler_c2f\n");
 #endif
 return ret;
 }*/
-#elif defined(OMPI_INTEL) || defined(_INTEL)
+#elif defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 /*__asm__(
@@ -29261,7 +29261,7 @@ void wrapper_init_f(void);
 #endif
 WATTR void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
-#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
 #endif
