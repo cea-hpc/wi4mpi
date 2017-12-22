@@ -40,7 +40,7 @@ Option:
 
 Supported values:
     FROM         openmpi,intelmpi  (no default value)
-    TARGET       openmpi,intelmpi  (no default value)
+    TARGET       openmpi,intelmpi,mpc  (no default value)
 
 Influential environment variables:
 
@@ -53,17 +53,19 @@ EOF
 
 VERBOSE=""
 WI4MPI_LIBEXEC=$( readlink -e $(dirname $0)/../libexec/wi4mpi )
-WI4MPI_IMPI=$( readlink -e $(dirname $0)/../lib_IMPI )
+WI4MPI_INTEL=$( readlink -e $(dirname $0)/../lib_INTEL )
 WI4MPI_OMPI=$( readlink -e $(dirname $0)/../lib_OMPI )
+WI4MPI_MPC=$( readlink -e $(dirname $0)/../lib_MPC )
 WI4MPI_INTERFACE=$( readlink -e $(dirname $0)/../lib )
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
 WI4MPI_UCONFIG="~/.wi4mpi.cfg"
 
-[[ -f $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
-[[ -f $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
+[[ -e $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
+[[ -e $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
 
 OPENMPI_ROOT=${OPENMPI_ROOT:-${OPENMPI_DEFAULT_ROOT}}
 INTELMPI_ROOT=${INTELMPI_ROOT:-${INTELMPI_DEFAULT_ROOT}}
+MPC_ROOT=${MPC_ROOT:-${MPC_DEFAULT_ROOT}}
 export WI4MPI_VERSION
 
 while getopts "f:t:hv" Option; do
@@ -97,30 +99,44 @@ if [[ -z $FROM ]]; then
 		;;
   	  intelmpi) 
 		TARGET_FAMILY="INTEL"
-		WI4MPI_FAMILY=${WI4MPI_IMPI}
+		WI4MPI_FAMILY=${WI4MPI_INTEL}
 		WI4MPI_RUN_MPI_C_LIB=$INTELMPI_ROOT/lib64/libmpi.so
 		WI4MPI_RUN_MPI_F_LIB=$INTELMPI_ROOT/lib64/libmpifort.so
+		;;
+  	  mpc) 
+		TARGET_FAMILY="MPC"
+		WI4MPI_FAMILY=${WI4MPI_MPC}
+		WI4MPI_RUN_MPI_C_LIB=$MPC_ROOT/lib/libmpc_framework.so
+		WI4MPI_RUN_MPI_F_LIB=$MPC_ROOT/lib/libmpc_frameworkf.so
+        MPC_HOOK_MAIN_LIB=$MPC_ROOT/lib/libmpc_hookmain.so
 		;;
   	  *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
 	esac
 	WI4MPI_FROM="INTERFACE"
 	WI4MPI_TO=${TARGET_FAMILY}
 	WI4MPI_WRAPPER_LIB=${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so
-	export LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
+	LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
+    LD_PRELOAD="${WI4MPI_WRAPPER_LIB} ${WI4MPI_INTERFACE}/libmpi.so ${WI4MPI_RUN_MPI_C_LIB} ${MPC_HOOK_MAIN_LIB}"
 	if [[ -n "$VERBOSE" ]]; then
 		echo ${WI4MPI_WRAPPER_LIB}
 		echo ${WI4MPI_RUN_MPI_C_LIB}
 		echo ${WI4MPI_RUN_MPI_F_LIB}
+        echo $MPC_HOOK_MAIN_LIB
 		echo $LD_LIBRARY_PATH
+        echo $LD_PRELOAD
 	fi
-	[[ ! -f ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
-	[[ ! -f ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
-	[[ ! -f ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+	[[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
+	[[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
+	[[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+	[[ ! -e ${MPC_HOOK_MAIN_LIB} ]] && { echo "Error: could not find the HOOK_MAIN library for MPC support." >&2 ; exit 1; }
+    export LD_LIBRARY_PATH
 	export WI4MPI_FROM
 	export WI4MPI_TO
 	export WI4MPI_WRAPPER_LIB
 	export WI4MPI_RUN_MPI_C_LIB
-	export WI4MPI_RUN_MPI_F_LIB	
+	export WI4MPI_RUN_MPI_F_LIB
+    export MPC_HOOK_MAIN_LIB
+    export LD_PRELOAD
 #PRELOAD	
 else
 	if [[ -n "$VERBOSE" ]]; then
@@ -148,9 +164,9 @@ else
 	WI4MPI_FROM=$FROM_FAMILY
 	WI4MPI_TO=$TARGET_FAMILY
 	libwi4mpi=${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so
-	[[ ! -f $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
-	[[ ! -f ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
-	[[ ! -f ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+	[[ ! -e $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
+	[[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
+	[[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
 	export WI4MPI_FROM
 	export WI4MPI_TO
 	export WI4MPI_RUN_MPI_F_LIB
