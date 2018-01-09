@@ -136,6 +136,9 @@ extern char ompi_mpi_op_sum;
 extern char ompi_request_null;
 extern char ompi_mpi_win_null;
 extern char ompi_message_no_proc;
+int  __svml_irem16_b3;
+int  __svml_irem4;
+int  __svml_irem8_l9;
 #endif
 #if defined(OMPI_INTEL) || defined(_INTEL)
 char ompi_mpi_comm_null[1024];
