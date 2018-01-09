@@ -4388,7 +4388,7 @@ extern void (*INTERF_2_OMPI_A_f_MPI_File_iread_at_all)(int *,int*,void *,int *,i
 extern void (*INTERF_2_INTEL_A_f_MPI_File_iread_at_all)(int *,int*,void *,int *,int *,int *,int *);
 #endif /*WI4MPI_STATIC*/
 #ifdef WI4MPI_STATIC
-#ifdef IFORT_CALL
+#if defined(IFORT_CALL) || defined(PGI_CALL)
 extern void (INTERF_2_OMPI_A_f_MPI_Error_string)(int *, char *, int *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Get_processor_name)(char *, int *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_File_open)(int *, char *, int *, int *, int *, int *, int);
