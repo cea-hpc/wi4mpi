@@ -207,6 +207,29 @@ set_target_properties(wi4mpi_INTEL_a
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
 endif()
+if(CMAKE_C_COMPILER STREQUAL "clang") 
+set_target_properties(wi4mpi_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
+                     )
+set_target_properties(wi4mpi_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
+                     )
+
+set_target_properties(mpi_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_OMPI_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_INTEL_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+endif()
 
 if(CMAKE_Fortran_COMPILER STREQUAL gfortran) 
 set_target_properties(mpi_mod
