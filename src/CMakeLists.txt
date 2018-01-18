@@ -261,6 +261,7 @@ set_target_properties(wi4mpi_MPC_a
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
+endif()
 
 if(CMAKE_Fortran_COMPILER STREQUAL gfortran) 
 set_target_properties(mpi_mod
