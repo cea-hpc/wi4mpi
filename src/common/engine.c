@@ -186,9 +186,9 @@ void varname##_translation_init(void) {\
         strcpy(varname2,varname1);\
         strcat(varname1,"_OFFSET");\
         strcat(varname2,"_TABLE_SIZE");\
-if(envvar=getenv(varname1))\
+if((envvar=getenv(varname1)))\
     f##varname=strtol(envvar,NULL,10);\
-if(envvar=getenv(varname2))\
+if((envvar=getenv(varname2)))\
      varname##_size=strtol(envvar,NULL,10);\
     else\
         varname##_size=1024*1024;\
@@ -277,7 +277,7 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
 void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
     varname##_translation_t* conv =NULL;\
     varname##_translation_t* conv_cte =NULL;\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return;\
     }\
@@ -342,9 +342,9 @@ void varname##_translation_init(void) {\
         strcpy(varname2,varname1);\
         strcat(varname1,"_OFFSET");\
         strcat(varname2,"_TABLE_SIZE");\
-if(envvar=getenv(varname1))\
+if((envvar=getenv(varname1)))\
     f##varname=strtol(envvar,NULL,10);\
-if(envvar=getenv(varname2))\
+if((envvar=getenv(varname2)))\
      varname##_size=strtol(envvar,NULL,10);\
     else\
         varname##_size=1024*1024;\
@@ -461,7 +461,7 @@ void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##var
     varname##_translation_t* conv =NULL;\
     varname##_translation_t* conv_cte =NULL;\
 /*if(get_##type##_cte_r2a(a_mpi_##varname,&mpi_##varname)) return;*/\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return;\
     }\
@@ -520,13 +520,13 @@ void varname##_translation_update_alloc_f(int mpi_##varname,int * a_mpi_##varnam
 void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
     /* Hashtable */  \
     varname##_translation_t* conv_cte =NULL;\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return;\
     }\
     lock(varname##_Lock);\
     int id=*p_##varname;\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return; \
 		} \
@@ -575,9 +575,9 @@ void varname##_translation_init(void) {\
         strcpy(varname2,varname1);\
         strcat(varname1,"_OFFSET");\
         strcat(varname2,"_TABLE_SIZE");\
-if(envvar=getenv(varname1))\
+if((envvar=getenv(varname1)))\
     f##varname=strtol(envvar,NULL,10);\
-if(envvar=getenv(varname2))\
+if((envvar=getenv(varname2)))\
      varname##_size=strtol(envvar,NULL,10);\
     else\
         varname##_size=1024*1024;\
@@ -671,7 +671,7 @@ void varname##_translation_del(A_##type * a_mpi_##varname) {  \
 void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
     varname##_translation_t* conv =NULL;\
     varname##_translation_t* conv_cte =NULL;\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return;\
     }\
@@ -736,9 +736,9 @@ void varname##_translation_init(void) {\
         strcpy(varname2,varname1);\
         strcat(varname1,"_OFFSET");\
         strcat(varname2,"_TABLE_SIZE");\
-if(envvar=getenv(varname1))\
+if((envvar=getenv(varname1)))\
     f##varname=strtol(envvar,NULL,10);\
-if(envvar=getenv(varname2))\
+if((envvar=getenv(varname2)))\
      varname##_size=strtol(envvar,NULL,10);\
     else\
         varname##_size=1024*1024;\
@@ -863,7 +863,7 @@ void varname##_translation_update(A_##type * a_mpi_##varname, R_##type mpi_##var
     varname##_translation_t* conv =NULL;\
     varname##_translation_t* conv_cte =NULL;\
 /*if(get_##type##_cte_r2a(a_mpi_##varname,&mpi_##varname)) return;*/\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return;\
     }\
@@ -922,13 +922,13 @@ void varname##_translation_update_alloc_f(int mpi_##varname,int * a_mpi_##varnam
 void varname##_translation_update_alloc(A_##type * a_mpi_##varname, R_##type mpi_##varname) {  \
     /* Hashtable */  \
     varname##_translation_t* conv_cte =NULL;\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return;\
     }\
     lock(varname##_Lock);\
     int id=*p_##varname;\
-    if(conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname)){\
+    if((conv_cte=varname##_translation_get_key_from_const(mpi_##varname, a_mpi_##varname))){\
     memcpy(a_mpi_##varname,&(conv_cte->a_##varname##_key),  sizeof(A_##type)); \
     return; \
 		} \
@@ -1075,9 +1075,9 @@ void request_translation_init()
 {
     int i;
     char *envvar;
-    if(envvar=getenv("WI4MPI_REQUEST_OFFSET"))
+    if((envvar=getenv("WI4MPI_REQUEST_OFFSET")))
             fnb=strtol(envvar,NULL,10);
-    if(envvar=getenv("WI4MPI_REQUEST_TABLE_SIZE"))
+    if((envvar=getenv("WI4MPI_REQUEST_TABLE_SIZE")))
             req_size=strtol(envvar,NULL,10);
     else
     req_size=1024*1024;
@@ -1149,7 +1149,7 @@ int request_translation_get_key_from_const(R_MPI_Request mpi_request, A_MPI_Requ
 
 /* DEL */
 void request_translation_del_f(int a_mpi_request) {
-    int id=*((int*)(a_mpi_request));
+    int id=((int)(a_mpi_request));
    if(id<fnb||id>fnb+req_size)
     {// const request        
 
@@ -1164,7 +1164,7 @@ void request_translation_del_f(int a_mpi_request) {
     unlock(request_Lock);
 }
 void request_translation_del(A_MPI_Request * a_mpi_request) {
-    int id=*((int*)(a_mpi_request));
+    int id=((int)(*a_mpi_request));
    if(id<fnb||id>fnb+req_size)
     {// const request        
 
@@ -1182,7 +1182,7 @@ void request_translation_del(A_MPI_Request * a_mpi_request) {
 void request_translation_update_f(int mpi_request,int * a_mpi_request) {
     if(mpi_request==R_f_MPI_REQUEST_NULL)
     {   
-    A_MPI_Request tmp=(A_MPI_Request)*a_mpi_request; 
+    A_MPI_Request tmp=(A_MPI_Request)(*a_mpi_request); 
 request_translation_del(&tmp);
 *a_mpi_request=0;
         return;

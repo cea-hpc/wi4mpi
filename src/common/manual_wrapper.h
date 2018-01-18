@@ -240,7 +240,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #define R_f_MPI_MODE_NOPUT       4096
 #define R_f_MPI_MODE_NOSTORE     8192
 #define R_f_MPI_MODE_NOSUCCEED   16384
-#elif INTEL_INTEL
+#elif defined(INTEL_INTEL)
 #define A_f_MPI_MODE_NOCHECK     1024
 #define A_f_MPI_MODE_NOPRECEDE   2048
 #define A_f_MPI_MODE_NOPUT       4096
@@ -252,7 +252,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
 #define R_f_MPI_MODE_NOPUT       4096
 #define R_f_MPI_MODE_NOSTORE     8192
 #define R_f_MPI_MODE_NOSUCCEED   16384
-#elif INTEL_OMPI
+#elif defined(INTEL_OMPI)
 #define A_f_MPI_MODE_NOCHECK     1024
 #define A_f_MPI_MODE_NOPRECEDE   2048
 #define A_f_MPI_MODE_NOPUT       4096
