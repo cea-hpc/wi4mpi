@@ -35,7 +35,6 @@ __thread int in_w;
 /*ompi constante*/
 int MPI_Comm_create_keyval
 (MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state);
-#define MPI_Comm_create_keyval PMPI_Comm_create_keyval
 #pragma weak MPI_Comm_create_keyval=PMPI_Comm_create_keyval
 int (*INTERFACE_LOCAL_MPI_Comm_create_keyval)(MPI_Copy_function *,MPI_Delete_function *,int *,void *);
 int PMPI_Comm_create_keyval(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state)
@@ -51,7 +50,6 @@ int PMPI_Comm_create_keyval(MPI_Copy_function * copy_fn,MPI_Delete_function * de
 }
 
 int MPI_Keyval_create(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state);
-#define MPI_Keyval_create PMPI_Keyval_create
 #pragma weak MPI_Keyval_create=PMPI_Keyval_create
 int (*INTERFACE_LOCAL_MPI_Keyval_create)(MPI_Copy_function *,MPI_Delete_function *,int *,void *);
 int PMPI_Keyval_create(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_fn,int * keyval,void * extra_state)
@@ -67,7 +65,6 @@ int PMPI_Keyval_create(MPI_Copy_function * copy_fn,MPI_Delete_function * delete_
 }
 
 int MPI_Comm_free_keyval(int *comm_keyval);
-#define MPI_Comm_free_keyval PMPI_Comm_free_keyval
 #pragma weak MPI_Comm_free_keyval=PMPI_Comm_free_keyval
 int (*INTERFACE_LOCAL_MPI_Comm_free_keyval)(int *);
 int PMPI_Comm_free_keyval(int * comm_keyval)
@@ -83,7 +80,6 @@ int PMPI_Comm_free_keyval(int * comm_keyval)
 }
 
 int MPI_Keyval_free(int *keyval);
-#define MPI_Keyval_free PMPI_Keyval_free
 #pragma weak MPI_Keyval_free=PMPI_Keyval_free
 int (*INTERFACE_LOCAL_MPI_Keyval_free)(int *);
 int PMPI_Keyval_free(int * keyval)
@@ -98,7 +94,6 @@ int PMPI_Keyval_free(int * keyval)
       return ret_tmp;
 }
 int MPI_Win_get_attr(MPI_Win win,int win_keyval,void * attribute_val,int * flag);
-#define MPI_Win_get_attr PMPI_Win_get_attr
 #pragma weak MPI_Win_get_attr=PMPI_Win_get_attr
 int (*INTERFACE_LOCAL_MPI_Win_get_attr)(MPI_Win,int,void *,int *);
 
@@ -114,7 +109,6 @@ printf("sort : PMPI_Win_get_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_set_attr(MPI_Win win,int win_keyval,void * attribute_val);
-#define MPI_Win_set_attr PMPI_Win_set_attr
 #pragma weak MPI_Win_set_attr=PMPI_Win_set_attr
 int (*INTERFACE_LOCAL_MPI_Win_set_attr)(MPI_Win,int,void *);
 
@@ -131,7 +125,6 @@ return ret_tmp;
 }
 
 int MPI_Pcontrol(int level,...);
-#define MPI_Pcontrol PMPI_Pcontrol
 #pragma weak MPI_Pcontrol=PMPI_Pcontrol
 int (*INTERFACE_LOCAL_MPI_Pcontrol)(int,...);
 #ifdef WI4MPI_STATIC
@@ -144,7 +137,6 @@ int PMPI_Pcontrol(int level,...)
 	return MPI_SUCCESS;
 }
 int MPI_Send(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
-#define MPI_Send PMPI_Send
 #pragma weak MPI_Send=PMPI_Send
 int (*INTERFACE_LOCAL_MPI_Send)(void *,int,MPI_Datatype,int,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -164,7 +156,6 @@ printf("sort : PMPI_Send (interface)\n");
 return ret_tmp;
 }
 int MPI_Recv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Status * status);
-#define MPI_Recv PMPI_Recv
 #pragma weak MPI_Recv=PMPI_Recv
 int (*INTERFACE_LOCAL_MPI_Recv)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -184,7 +175,6 @@ printf("sort : PMPI_Recv (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_count(MPI_Status * status,MPI_Datatype datatype,int * count);
-#define MPI_Get_count PMPI_Get_count
 #pragma weak MPI_Get_count=PMPI_Get_count
 int (*INTERFACE_LOCAL_MPI_Get_count)(MPI_Status *,MPI_Datatype,int *);
 #ifdef WI4MPI_STATIC
@@ -204,7 +194,6 @@ printf("sort : PMPI_Get_count (interface)\n");
 return ret_tmp;
 }
 int MPI_Bsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
-#define MPI_Bsend PMPI_Bsend
 #pragma weak MPI_Bsend=PMPI_Bsend
 int (*INTERFACE_LOCAL_MPI_Bsend)(void *,int,MPI_Datatype,int,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -224,7 +213,6 @@ printf("sort : PMPI_Bsend (interface)\n");
 return ret_tmp;
 }
 int MPI_Ssend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
-#define MPI_Ssend PMPI_Ssend
 #pragma weak MPI_Ssend=PMPI_Ssend
 int (*INTERFACE_LOCAL_MPI_Ssend)(void *,int,MPI_Datatype,int,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -244,7 +232,6 @@ printf("sort : PMPI_Ssend (interface)\n");
 return ret_tmp;
 }
 int MPI_Rsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
-#define MPI_Rsend PMPI_Rsend
 #pragma weak MPI_Rsend=PMPI_Rsend
 int (*INTERFACE_LOCAL_MPI_Rsend)(void *,int,MPI_Datatype,int,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -264,7 +251,6 @@ printf("sort : PMPI_Rsend (interface)\n");
 return ret_tmp;
 }
 int MPI_Buffer_attach(void * buffer,int size);
-#define MPI_Buffer_attach PMPI_Buffer_attach
 #pragma weak MPI_Buffer_attach=PMPI_Buffer_attach
 int (*INTERFACE_LOCAL_MPI_Buffer_attach)(void *,int);
 #ifdef WI4MPI_STATIC
@@ -284,7 +270,6 @@ printf("sort : PMPI_Buffer_attach (interface)\n");
 return ret_tmp;
 }
 int MPI_Buffer_detach(void * buffer_addr,int * size);
-#define MPI_Buffer_detach PMPI_Buffer_detach
 #pragma weak MPI_Buffer_detach=PMPI_Buffer_detach
 int (*INTERFACE_LOCAL_MPI_Buffer_detach)(void *,int *);
 #ifdef WI4MPI_STATIC
@@ -304,7 +289,6 @@ printf("sort : PMPI_Buffer_detach (interface)\n");
 return ret_tmp;
 }
 int MPI_Isend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Isend PMPI_Isend
 #pragma weak MPI_Isend=PMPI_Isend
 int (*INTERFACE_LOCAL_MPI_Isend)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -324,7 +308,6 @@ printf("sort : PMPI_Isend (interface)\n");
 return ret_tmp;
 }
 int MPI_Ibsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ibsend PMPI_Ibsend
 #pragma weak MPI_Ibsend=PMPI_Ibsend
 int (*INTERFACE_LOCAL_MPI_Ibsend)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -344,7 +327,6 @@ printf("sort : PMPI_Ibsend (interface)\n");
 return ret_tmp;
 }
 int MPI_Issend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Issend PMPI_Issend
 #pragma weak MPI_Issend=PMPI_Issend
 int (*INTERFACE_LOCAL_MPI_Issend)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -364,7 +346,6 @@ printf("sort : PMPI_Issend (interface)\n");
 return ret_tmp;
 }
 int MPI_Irsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Irsend PMPI_Irsend
 #pragma weak MPI_Irsend=PMPI_Irsend
 int (*INTERFACE_LOCAL_MPI_Irsend)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -384,7 +365,6 @@ printf("sort : PMPI_Irsend (interface)\n");
 return ret_tmp;
 }
 int MPI_Irecv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Irecv PMPI_Irecv
 #pragma weak MPI_Irecv=PMPI_Irecv
 int (*INTERFACE_LOCAL_MPI_Irecv)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -404,7 +384,6 @@ printf("sort : PMPI_Irecv (interface)\n");
 return ret_tmp;
 }
 int MPI_Wait(MPI_Request * request,MPI_Status * status);
-#define MPI_Wait PMPI_Wait
 #pragma weak MPI_Wait=PMPI_Wait
 int (*INTERFACE_LOCAL_MPI_Wait)(MPI_Request *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -424,7 +403,6 @@ printf("sort : PMPI_Wait (interface)\n");
 return ret_tmp;
 }
 int MPI_Test(MPI_Request * request,int * flag,MPI_Status * status);
-#define MPI_Test PMPI_Test
 #pragma weak MPI_Test=PMPI_Test
 int (*INTERFACE_LOCAL_MPI_Test)(MPI_Request *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -444,7 +422,6 @@ printf("sort : PMPI_Test (interface)\n");
 return ret_tmp;
 }
 int MPI_Request_free(MPI_Request * request);
-#define MPI_Request_free PMPI_Request_free
 #pragma weak MPI_Request_free=PMPI_Request_free
 int (*INTERFACE_LOCAL_MPI_Request_free)(MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -464,7 +441,6 @@ printf("sort : PMPI_Request_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Iprobe(int source,int tag,MPI_Comm comm,int * flag,MPI_Status * status);
-#define MPI_Iprobe PMPI_Iprobe
 #pragma weak MPI_Iprobe=PMPI_Iprobe
 int (*INTERFACE_LOCAL_MPI_Iprobe)(int,int,MPI_Comm,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -484,7 +460,6 @@ printf("sort : PMPI_Iprobe (interface)\n");
 return ret_tmp;
 }
 int MPI_Probe(int source,int tag,MPI_Comm comm,MPI_Status * status);
-#define MPI_Probe PMPI_Probe
 #pragma weak MPI_Probe=PMPI_Probe
 int (*INTERFACE_LOCAL_MPI_Probe)(int,int,MPI_Comm,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -504,7 +479,6 @@ printf("sort : PMPI_Probe (interface)\n");
 return ret_tmp;
 }
 int MPI_Cancel(MPI_Request * request);
-#define MPI_Cancel PMPI_Cancel
 #pragma weak MPI_Cancel=PMPI_Cancel
 int (*INTERFACE_LOCAL_MPI_Cancel)(MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -524,7 +498,6 @@ printf("sort : PMPI_Cancel (interface)\n");
 return ret_tmp;
 }
 int MPI_Test_cancelled(MPI_Status * status,int * flag);
-#define MPI_Test_cancelled PMPI_Test_cancelled
 #pragma weak MPI_Test_cancelled=PMPI_Test_cancelled
 int (*INTERFACE_LOCAL_MPI_Test_cancelled)(MPI_Status *,int *);
 #ifdef WI4MPI_STATIC
@@ -544,7 +517,6 @@ printf("sort : PMPI_Test_cancelled (interface)\n");
 return ret_tmp;
 }
 int MPI_Send_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Send_init PMPI_Send_init
 #pragma weak MPI_Send_init=PMPI_Send_init
 int (*INTERFACE_LOCAL_MPI_Send_init)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -564,7 +536,6 @@ printf("sort : PMPI_Send_init (interface)\n");
 return ret_tmp;
 }
 int MPI_Bsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Bsend_init PMPI_Bsend_init
 #pragma weak MPI_Bsend_init=PMPI_Bsend_init
 int (*INTERFACE_LOCAL_MPI_Bsend_init)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -584,7 +555,6 @@ printf("sort : PMPI_Bsend_init (interface)\n");
 return ret_tmp;
 }
 int MPI_Ssend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ssend_init PMPI_Ssend_init
 #pragma weak MPI_Ssend_init=PMPI_Ssend_init
 int (*INTERFACE_LOCAL_MPI_Ssend_init)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -604,7 +574,6 @@ printf("sort : PMPI_Ssend_init (interface)\n");
 return ret_tmp;
 }
 int MPI_Rsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Rsend_init PMPI_Rsend_init
 #pragma weak MPI_Rsend_init=PMPI_Rsend_init
 int (*INTERFACE_LOCAL_MPI_Rsend_init)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -624,7 +593,6 @@ printf("sort : PMPI_Rsend_init (interface)\n");
 return ret_tmp;
 }
 int MPI_Recv_init(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Request * request);
-#define MPI_Recv_init PMPI_Recv_init
 #pragma weak MPI_Recv_init=PMPI_Recv_init
 int (*INTERFACE_LOCAL_MPI_Recv_init)(void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -644,7 +612,6 @@ printf("sort : PMPI_Recv_init (interface)\n");
 return ret_tmp;
 }
 int MPI_Start(MPI_Request * request);
-#define MPI_Start PMPI_Start
 #pragma weak MPI_Start=PMPI_Start
 int (*INTERFACE_LOCAL_MPI_Start)(MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -664,7 +631,6 @@ printf("sort : PMPI_Start (interface)\n");
 return ret_tmp;
 }
 int MPI_Sendrecv(void * sendbuf,int sendcount,MPI_Datatype sendtype,int dest,int sendtag,void * recvbuf,int recvcount,MPI_Datatype recvtype,int source,int recvtag,MPI_Comm comm,MPI_Status * status);
-#define MPI_Sendrecv PMPI_Sendrecv
 #pragma weak MPI_Sendrecv=PMPI_Sendrecv
 int (*INTERFACE_LOCAL_MPI_Sendrecv)(void *,int,MPI_Datatype,int,int,void *,int,MPI_Datatype,int,int,MPI_Comm,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -684,7 +650,6 @@ printf("sort : PMPI_Sendrecv (interface)\n");
 return ret_tmp;
 }
 int MPI_Sendrecv_replace(void * buf,int count,MPI_Datatype datatype,int dest,int sendtag,int source,int recvtag,MPI_Comm comm,MPI_Status * status);
-#define MPI_Sendrecv_replace PMPI_Sendrecv_replace
 #pragma weak MPI_Sendrecv_replace=PMPI_Sendrecv_replace
 int (*INTERFACE_LOCAL_MPI_Sendrecv_replace)(void *,int,MPI_Datatype,int,int,int,int,MPI_Comm,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -704,7 +669,6 @@ printf("sort : PMPI_Sendrecv_replace (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_contiguous(int count,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_contiguous PMPI_Type_contiguous
 #pragma weak MPI_Type_contiguous=PMPI_Type_contiguous
 int (*INTERFACE_LOCAL_MPI_Type_contiguous)(int,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -724,7 +688,6 @@ printf("sort : PMPI_Type_contiguous (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_vector(int count,int blocklength,int stride,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_vector PMPI_Type_vector
 #pragma weak MPI_Type_vector=PMPI_Type_vector
 int (*INTERFACE_LOCAL_MPI_Type_vector)(int,int,int,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -744,7 +707,6 @@ printf("sort : PMPI_Type_vector (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_hvector PMPI_Type_hvector
 #pragma weak MPI_Type_hvector=PMPI_Type_hvector
 int (*INTERFACE_LOCAL_MPI_Type_hvector)(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -764,7 +726,6 @@ printf("sort : PMPI_Type_hvector (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_indexed(int count,int * array_of_blocklengths,int * array_of_displacements,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_indexed PMPI_Type_indexed
 #pragma weak MPI_Type_indexed=PMPI_Type_indexed
 int (*INTERFACE_LOCAL_MPI_Type_indexed)(int,int *,int *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -784,7 +745,6 @@ printf("sort : PMPI_Type_indexed (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_hindexed(int count,int * array_of_blocklengths,MPI_Aint * array_of_displacements,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_hindexed PMPI_Type_hindexed
 #pragma weak MPI_Type_hindexed=PMPI_Type_hindexed
 int (*INTERFACE_LOCAL_MPI_Type_hindexed)(int,int *,MPI_Aint *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -804,7 +764,6 @@ printf("sort : PMPI_Type_hindexed (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_struct(int count,int * array_of_blocklengths,MPI_Aint * array_of_displacements,MPI_Datatype array_of_types[],MPI_Datatype * newtype);
-#define MPI_Type_struct PMPI_Type_struct
 #pragma weak MPI_Type_struct=PMPI_Type_struct
 int (*INTERFACE_LOCAL_MPI_Type_struct)(int,int *,MPI_Aint *,MPI_Datatype *,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -824,7 +783,6 @@ printf("sort : PMPI_Type_struct (interface)\n");
 return ret_tmp;
 }
 int MPI_Address(void * location,MPI_Aint * address);
-#define MPI_Address PMPI_Address
 #pragma weak MPI_Address=PMPI_Address
 int (*INTERFACE_LOCAL_MPI_Address)(void *,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -844,7 +802,6 @@ printf("sort : PMPI_Address (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_extent(MPI_Datatype datatype,MPI_Aint * extent);
-#define MPI_Type_extent PMPI_Type_extent
 #pragma weak MPI_Type_extent=PMPI_Type_extent
 int (*INTERFACE_LOCAL_MPI_Type_extent)(MPI_Datatype,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -864,7 +821,6 @@ printf("sort : PMPI_Type_extent (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_size(MPI_Datatype datatype,int * size);
-#define MPI_Type_size PMPI_Type_size
 #pragma weak MPI_Type_size=PMPI_Type_size
 int (*INTERFACE_LOCAL_MPI_Type_size)(MPI_Datatype,int *);
 #ifdef WI4MPI_STATIC
@@ -884,7 +840,6 @@ printf("sort : PMPI_Type_size (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_lb(MPI_Datatype datatype,MPI_Aint * displacement);
-#define MPI_Type_lb PMPI_Type_lb
 #pragma weak MPI_Type_lb=PMPI_Type_lb
 int (*INTERFACE_LOCAL_MPI_Type_lb)(MPI_Datatype,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -904,7 +859,6 @@ printf("sort : PMPI_Type_lb (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_ub(MPI_Datatype datatype,MPI_Aint * displacement);
-#define MPI_Type_ub PMPI_Type_ub
 #pragma weak MPI_Type_ub=PMPI_Type_ub
 int (*INTERFACE_LOCAL_MPI_Type_ub)(MPI_Datatype,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -924,7 +878,6 @@ printf("sort : PMPI_Type_ub (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_commit(MPI_Datatype * datatype);
-#define MPI_Type_commit PMPI_Type_commit
 #pragma weak MPI_Type_commit=PMPI_Type_commit
 int (*INTERFACE_LOCAL_MPI_Type_commit)(MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -944,7 +897,6 @@ printf("sort : PMPI_Type_commit (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_free(MPI_Datatype * datatype);
-#define MPI_Type_free PMPI_Type_free
 #pragma weak MPI_Type_free=PMPI_Type_free
 int (*INTERFACE_LOCAL_MPI_Type_free)(MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -964,7 +916,6 @@ printf("sort : PMPI_Type_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_elements(MPI_Status * status,MPI_Datatype datatype,int * count);
-#define MPI_Get_elements PMPI_Get_elements
 #pragma weak MPI_Get_elements=PMPI_Get_elements
 int (*INTERFACE_LOCAL_MPI_Get_elements)(MPI_Status *,MPI_Datatype,int *);
 #ifdef WI4MPI_STATIC
@@ -984,7 +935,6 @@ printf("sort : PMPI_Get_elements (interface)\n");
 return ret_tmp;
 }
 int MPI_Pack(void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,int outsize,int * position,MPI_Comm comm);
-#define MPI_Pack PMPI_Pack
 #pragma weak MPI_Pack=PMPI_Pack
 int (*INTERFACE_LOCAL_MPI_Pack)(void *,int,MPI_Datatype,void *,int,int *,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1004,7 +954,6 @@ printf("sort : PMPI_Pack (interface)\n");
 return ret_tmp;
 }
 int MPI_Unpack(void * inbuf,int insize,int * position,void * outbuf,int outcount,MPI_Datatype datatype,MPI_Comm comm);
-#define MPI_Unpack PMPI_Unpack
 #pragma weak MPI_Unpack=PMPI_Unpack
 int (*INTERFACE_LOCAL_MPI_Unpack)(void *,int,int *,void *,int,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1024,7 +973,6 @@ printf("sort : PMPI_Unpack (interface)\n");
 return ret_tmp;
 }
 int MPI_Pack_size(int incount,MPI_Datatype datatype,MPI_Comm comm,int * size);
-#define MPI_Pack_size PMPI_Pack_size
 #pragma weak MPI_Pack_size=PMPI_Pack_size
 int (*INTERFACE_LOCAL_MPI_Pack_size)(int,MPI_Datatype,MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1044,7 +992,6 @@ printf("sort : PMPI_Pack_size (interface)\n");
 return ret_tmp;
 }
 int MPI_Barrier(MPI_Comm comm);
-#define MPI_Barrier PMPI_Barrier
 #pragma weak MPI_Barrier=PMPI_Barrier
 int (*INTERFACE_LOCAL_MPI_Barrier)(MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1064,7 +1011,6 @@ printf("sort : PMPI_Barrier (interface)\n");
 return ret_tmp;
 }
 int MPI_Bcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm comm);
-#define MPI_Bcast PMPI_Bcast
 #pragma weak MPI_Bcast=PMPI_Bcast
 int (*INTERFACE_LOCAL_MPI_Bcast)(void *,int,MPI_Datatype,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1084,7 +1030,6 @@ printf("sort : PMPI_Bcast (interface)\n");
 return ret_tmp;
 }
 int MPI_Gather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm);
-#define MPI_Gather PMPI_Gather
 #pragma weak MPI_Gather=PMPI_Gather
 int (*INTERFACE_LOCAL_MPI_Gather)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1104,7 +1049,6 @@ printf("sort : PMPI_Gather (interface)\n");
 return ret_tmp;
 }
 int MPI_Gatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,MPI_Datatype recvtype,int root,MPI_Comm comm);
-#define MPI_Gatherv PMPI_Gatherv
 #pragma weak MPI_Gatherv=PMPI_Gatherv
 int (*INTERFACE_LOCAL_MPI_Gatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1124,7 +1068,6 @@ printf("sort : PMPI_Gatherv (interface)\n");
 return ret_tmp;
 }
 int MPI_Scatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm);
-#define MPI_Scatter PMPI_Scatter
 #pragma weak MPI_Scatter=PMPI_Scatter
 int (*INTERFACE_LOCAL_MPI_Scatter)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1144,7 +1087,6 @@ printf("sort : PMPI_Scatter (interface)\n");
 return ret_tmp;
 }
 int MPI_Scatterv(void * sendbuf,int * sendcounts,int * displs,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm);
-#define MPI_Scatterv PMPI_Scatterv
 #pragma weak MPI_Scatterv=PMPI_Scatterv
 int (*INTERFACE_LOCAL_MPI_Scatterv)(void *,int *,int *,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1164,7 +1106,6 @@ printf("sort : PMPI_Scatterv (interface)\n");
 return ret_tmp;
 }
 int MPI_Allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Allgather PMPI_Allgather
 #pragma weak MPI_Allgather=PMPI_Allgather
 int (*INTERFACE_LOCAL_MPI_Allgather)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1184,7 +1125,6 @@ printf("sort : PMPI_Allgather (interface)\n");
 return ret_tmp;
 }
 int MPI_Allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Allgatherv PMPI_Allgatherv
 #pragma weak MPI_Allgatherv=PMPI_Allgatherv
 int (*INTERFACE_LOCAL_MPI_Allgatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1204,7 +1144,6 @@ printf("sort : PMPI_Allgatherv (interface)\n");
 return ret_tmp;
 }
 int MPI_Alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Alltoall PMPI_Alltoall
 #pragma weak MPI_Alltoall=PMPI_Alltoall
 int (*INTERFACE_LOCAL_MPI_Alltoall)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1224,7 +1163,6 @@ printf("sort : PMPI_Alltoall (interface)\n");
 return ret_tmp;
 }
 int MPI_Alltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Alltoallv PMPI_Alltoallv
 #pragma weak MPI_Alltoallv=PMPI_Alltoallv
 int (*INTERFACE_LOCAL_MPI_Alltoallv)(void *,int *,int *,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1244,7 +1182,6 @@ printf("sort : PMPI_Alltoallv (interface)\n");
 return ret_tmp;
 }
 int MPI_Exscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
-#define MPI_Exscan PMPI_Exscan
 #pragma weak MPI_Exscan=PMPI_Exscan
 int (*INTERFACE_LOCAL_MPI_Exscan)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1264,7 +1201,6 @@ printf("sort : PMPI_Exscan (interface)\n");
 return ret_tmp;
 }
 int MPI_Reduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,int root,MPI_Comm comm);
-#define MPI_Reduce PMPI_Reduce
 #pragma weak MPI_Reduce=PMPI_Reduce
 int (*INTERFACE_LOCAL_MPI_Reduce)(void *,void *,int,MPI_Datatype,MPI_Op,int,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1284,7 +1220,6 @@ printf("sort : PMPI_Reduce (interface)\n");
 return ret_tmp;
 }
 int MPI_Op_create(MPI_User_function * user_fn,int commute,MPI_Op * op);
-#define MPI_Op_create PMPI_Op_create
 #pragma weak MPI_Op_create=PMPI_Op_create
 int (*INTERFACE_LOCAL_MPI_Op_create)(MPI_User_function *,int,MPI_Op *);
 #ifdef WI4MPI_STATIC
@@ -1304,7 +1239,6 @@ printf("sort : PMPI_Op_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Op_free(MPI_Op * op);
-#define MPI_Op_free PMPI_Op_free
 #pragma weak MPI_Op_free=PMPI_Op_free
 int (*INTERFACE_LOCAL_MPI_Op_free)(MPI_Op *);
 #ifdef WI4MPI_STATIC
@@ -1324,7 +1258,6 @@ printf("sort : PMPI_Op_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Allreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
-#define MPI_Allreduce PMPI_Allreduce
 #pragma weak MPI_Allreduce=PMPI_Allreduce
 int (*INTERFACE_LOCAL_MPI_Allreduce)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1344,7 +1277,6 @@ printf("sort : PMPI_Allreduce (interface)\n");
 return ret_tmp;
 }
 int MPI_Scan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
-#define MPI_Scan PMPI_Scan
 #pragma weak MPI_Scan=PMPI_Scan
 int (*INTERFACE_LOCAL_MPI_Scan)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -1364,7 +1296,6 @@ printf("sort : PMPI_Scan (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_size(MPI_Group group,int * size);
-#define MPI_Group_size PMPI_Group_size
 #pragma weak MPI_Group_size=PMPI_Group_size
 int (*INTERFACE_LOCAL_MPI_Group_size)(MPI_Group,int *);
 #ifdef WI4MPI_STATIC
@@ -1384,7 +1315,6 @@ printf("sort : PMPI_Group_size (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_rank(MPI_Group group,int * rank);
-#define MPI_Group_rank PMPI_Group_rank
 #pragma weak MPI_Group_rank=PMPI_Group_rank
 int (*INTERFACE_LOCAL_MPI_Group_rank)(MPI_Group,int *);
 #ifdef WI4MPI_STATIC
@@ -1404,7 +1334,6 @@ printf("sort : PMPI_Group_rank (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_compare(MPI_Group group1,MPI_Group group2,int * result);
-#define MPI_Group_compare PMPI_Group_compare
 #pragma weak MPI_Group_compare=PMPI_Group_compare
 int (*INTERFACE_LOCAL_MPI_Group_compare)(MPI_Group,MPI_Group,int *);
 #ifdef WI4MPI_STATIC
@@ -1424,7 +1353,6 @@ printf("sort : PMPI_Group_compare (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_group(MPI_Comm comm,MPI_Group * group);
-#define MPI_Comm_group PMPI_Comm_group
 #pragma weak MPI_Comm_group=PMPI_Comm_group
 int (*INTERFACE_LOCAL_MPI_Comm_group)(MPI_Comm,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -1444,7 +1372,6 @@ printf("sort : PMPI_Comm_group (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_union(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup);
-#define MPI_Group_union PMPI_Group_union
 #pragma weak MPI_Group_union=PMPI_Group_union
 int (*INTERFACE_LOCAL_MPI_Group_union)(MPI_Group,MPI_Group,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -1464,7 +1391,6 @@ printf("sort : PMPI_Group_union (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_intersection(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup);
-#define MPI_Group_intersection PMPI_Group_intersection
 #pragma weak MPI_Group_intersection=PMPI_Group_intersection
 int (*INTERFACE_LOCAL_MPI_Group_intersection)(MPI_Group,MPI_Group,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -1484,7 +1410,6 @@ printf("sort : PMPI_Group_intersection (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_difference(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup);
-#define MPI_Group_difference PMPI_Group_difference
 #pragma weak MPI_Group_difference=PMPI_Group_difference
 int (*INTERFACE_LOCAL_MPI_Group_difference)(MPI_Group,MPI_Group,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -1504,7 +1429,6 @@ printf("sort : PMPI_Group_difference (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_free(MPI_Group * group);
-#define MPI_Group_free PMPI_Group_free
 #pragma weak MPI_Group_free=PMPI_Group_free
 int (*INTERFACE_LOCAL_MPI_Group_free)(MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -1524,7 +1448,6 @@ printf("sort : PMPI_Group_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_size(MPI_Comm comm,int * size);
-#define MPI_Comm_size PMPI_Comm_size
 #pragma weak MPI_Comm_size=PMPI_Comm_size
 int (*INTERFACE_LOCAL_MPI_Comm_size)(MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1544,7 +1467,6 @@ printf("sort : PMPI_Comm_size (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_rank(MPI_Comm comm,int * rank);
-#define MPI_Comm_rank PMPI_Comm_rank
 #pragma weak MPI_Comm_rank=PMPI_Comm_rank
 int (*INTERFACE_LOCAL_MPI_Comm_rank)(MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1564,7 +1486,6 @@ printf("sort : PMPI_Comm_rank (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_compare(MPI_Comm comm1,MPI_Comm comm2,int * result);
-#define MPI_Comm_compare PMPI_Comm_compare
 #pragma weak MPI_Comm_compare=PMPI_Comm_compare
 int (*INTERFACE_LOCAL_MPI_Comm_compare)(MPI_Comm,MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1584,7 +1505,6 @@ printf("sort : PMPI_Comm_compare (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_dup(MPI_Comm comm,MPI_Comm * newcomm);
-#define MPI_Comm_dup PMPI_Comm_dup
 #pragma weak MPI_Comm_dup=PMPI_Comm_dup
 int (*INTERFACE_LOCAL_MPI_Comm_dup)(MPI_Comm,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -1604,7 +1524,6 @@ printf("sort : PMPI_Comm_dup (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_dup_with_info(MPI_Comm comm,MPI_Info info,MPI_Comm * newcomm);
-#define MPI_Comm_dup_with_info PMPI_Comm_dup_with_info
 #pragma weak MPI_Comm_dup_with_info=PMPI_Comm_dup_with_info
 int (*INTERFACE_LOCAL_MPI_Comm_dup_with_info)(MPI_Comm,MPI_Info,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -1624,7 +1543,6 @@ printf("sort : PMPI_Comm_dup_with_info (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_create(MPI_Comm comm,MPI_Group group,MPI_Comm * newcomm);
-#define MPI_Comm_create PMPI_Comm_create
 #pragma weak MPI_Comm_create=PMPI_Comm_create
 int (*INTERFACE_LOCAL_MPI_Comm_create)(MPI_Comm,MPI_Group,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -1644,7 +1562,6 @@ printf("sort : PMPI_Comm_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_split(MPI_Comm comm,int color,int key,MPI_Comm * newcomm);
-#define MPI_Comm_split PMPI_Comm_split
 #pragma weak MPI_Comm_split=PMPI_Comm_split
 int (*INTERFACE_LOCAL_MPI_Comm_split)(MPI_Comm,int,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -1664,7 +1581,6 @@ printf("sort : PMPI_Comm_split (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_free(MPI_Comm * comm);
-#define MPI_Comm_free PMPI_Comm_free
 #pragma weak MPI_Comm_free=PMPI_Comm_free
 int (*INTERFACE_LOCAL_MPI_Comm_free)(MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -1684,7 +1600,6 @@ printf("sort : PMPI_Comm_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_test_inter(MPI_Comm comm,int * flag);
-#define MPI_Comm_test_inter PMPI_Comm_test_inter
 #pragma weak MPI_Comm_test_inter=PMPI_Comm_test_inter
 int (*INTERFACE_LOCAL_MPI_Comm_test_inter)(MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1704,7 +1619,6 @@ printf("sort : PMPI_Comm_test_inter (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_remote_size(MPI_Comm comm,int * size);
-#define MPI_Comm_remote_size PMPI_Comm_remote_size
 #pragma weak MPI_Comm_remote_size=PMPI_Comm_remote_size
 int (*INTERFACE_LOCAL_MPI_Comm_remote_size)(MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1724,7 +1638,6 @@ printf("sort : PMPI_Comm_remote_size (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_remote_group(MPI_Comm comm,MPI_Group * group);
-#define MPI_Comm_remote_group PMPI_Comm_remote_group
 #pragma weak MPI_Comm_remote_group=PMPI_Comm_remote_group
 int (*INTERFACE_LOCAL_MPI_Comm_remote_group)(MPI_Comm,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -1744,7 +1657,6 @@ printf("sort : PMPI_Comm_remote_group (interface)\n");
 return ret_tmp;
 }
 int MPI_Intercomm_create(MPI_Comm local_comm,int local_leader,MPI_Comm peer_comm,int remote_leader,int tag,MPI_Comm * newintercomm);
-#define MPI_Intercomm_create PMPI_Intercomm_create
 #pragma weak MPI_Intercomm_create=PMPI_Intercomm_create
 int (*INTERFACE_LOCAL_MPI_Intercomm_create)(MPI_Comm,int,MPI_Comm,int,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -1764,7 +1676,6 @@ printf("sort : PMPI_Intercomm_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Intercomm_merge(MPI_Comm intercomm,int high,MPI_Comm * newintracomm);
-#define MPI_Intercomm_merge PMPI_Intercomm_merge
 #pragma weak MPI_Intercomm_merge=PMPI_Intercomm_merge
 int (*INTERFACE_LOCAL_MPI_Intercomm_merge)(MPI_Comm,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -1784,7 +1695,6 @@ printf("sort : PMPI_Intercomm_merge (interface)\n");
 return ret_tmp;
 }
 int MPI_Attr_put(MPI_Comm comm,int keyval,void * attribute_val);
-#define MPI_Attr_put PMPI_Attr_put
 #pragma weak MPI_Attr_put=PMPI_Attr_put
 int (*INTERFACE_LOCAL_MPI_Attr_put)(MPI_Comm,int,void *);
 #ifdef WI4MPI_STATIC
@@ -1804,7 +1714,6 @@ printf("sort : PMPI_Attr_put (interface)\n");
 return ret_tmp;
 }
 int MPI_Attr_get(MPI_Comm comm,int keyval,void * attribute_val,int * flag);
-#define MPI_Attr_get PMPI_Attr_get
 #pragma weak MPI_Attr_get=PMPI_Attr_get
 int (*INTERFACE_LOCAL_MPI_Attr_get)(MPI_Comm,int,void *,int *);
 #ifdef WI4MPI_STATIC
@@ -1824,7 +1733,6 @@ printf("sort : PMPI_Attr_get (interface)\n");
 return ret_tmp;
 }
 int MPI_Attr_delete(MPI_Comm comm,int keyval);
-#define MPI_Attr_delete PMPI_Attr_delete
 #pragma weak MPI_Attr_delete=PMPI_Attr_delete
 int (*INTERFACE_LOCAL_MPI_Attr_delete)(MPI_Comm,int);
 #ifdef WI4MPI_STATIC
@@ -1844,7 +1752,6 @@ printf("sort : PMPI_Attr_delete (interface)\n");
 return ret_tmp;
 }
 int MPI_Topo_test(MPI_Comm comm,int * status);
-#define MPI_Topo_test PMPI_Topo_test
 #pragma weak MPI_Topo_test=PMPI_Topo_test
 int (*INTERFACE_LOCAL_MPI_Topo_test)(MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1864,7 +1771,6 @@ printf("sort : PMPI_Topo_test (interface)\n");
 return ret_tmp;
 }
 int MPI_Graphdims_get(MPI_Comm comm,int * nnodes,int * nedges);
-#define MPI_Graphdims_get PMPI_Graphdims_get
 #pragma weak MPI_Graphdims_get=PMPI_Graphdims_get
 int (*INTERFACE_LOCAL_MPI_Graphdims_get)(MPI_Comm,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -1884,7 +1790,6 @@ printf("sort : PMPI_Graphdims_get (interface)\n");
 return ret_tmp;
 }
 int MPI_Cartdim_get(MPI_Comm comm,int * ndims);
-#define MPI_Cartdim_get PMPI_Cartdim_get
 #pragma weak MPI_Cartdim_get=PMPI_Cartdim_get
 int (*INTERFACE_LOCAL_MPI_Cartdim_get)(MPI_Comm,int *);
 #ifdef WI4MPI_STATIC
@@ -1904,7 +1809,6 @@ printf("sort : PMPI_Cartdim_get (interface)\n");
 return ret_tmp;
 }
 int MPI_Graph_neighbors_count(MPI_Comm comm,int rank,int * nneighbors);
-#define MPI_Graph_neighbors_count PMPI_Graph_neighbors_count
 #pragma weak MPI_Graph_neighbors_count=PMPI_Graph_neighbors_count
 int (*INTERFACE_LOCAL_MPI_Graph_neighbors_count)(MPI_Comm,int,int *);
 #ifdef WI4MPI_STATIC
@@ -1924,7 +1828,6 @@ printf("sort : PMPI_Graph_neighbors_count (interface)\n");
 return ret_tmp;
 }
 int MPI_Cart_shift(MPI_Comm comm,int direction,int disp,int * rank_source,int * rank_dest);
-#define MPI_Cart_shift PMPI_Cart_shift
 #pragma weak MPI_Cart_shift=PMPI_Cart_shift
 int (*INTERFACE_LOCAL_MPI_Cart_shift)(MPI_Comm,int,int,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -1944,7 +1847,6 @@ printf("sort : PMPI_Cart_shift (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_processor_name(char * name,int * resultlen);
-#define MPI_Get_processor_name PMPI_Get_processor_name
 #pragma weak MPI_Get_processor_name=PMPI_Get_processor_name
 int (*INTERFACE_LOCAL_MPI_Get_processor_name)(char *,int *);
 #ifdef WI4MPI_STATIC
@@ -1964,7 +1866,6 @@ printf("sort : PMPI_Get_processor_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_version(int * version,int * subversion);
-#define MPI_Get_version PMPI_Get_version
 #pragma weak MPI_Get_version=PMPI_Get_version
 int (*INTERFACE_LOCAL_MPI_Get_version)(int *,int *);
 #ifdef WI4MPI_STATIC
@@ -1984,7 +1885,6 @@ printf("sort : PMPI_Get_version (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_library_version(char * version,int * resultlen);
-#define MPI_Get_library_version PMPI_Get_library_version
 #pragma weak MPI_Get_library_version=PMPI_Get_library_version
 int (*INTERFACE_LOCAL_MPI_Get_library_version)(char *,int *);
 #ifdef WI4MPI_STATIC
@@ -2004,7 +1904,6 @@ printf("sort : PMPI_Get_library_version (interface)\n");
 return ret_tmp;
 }
 int MPI_Errhandler_create(MPI_Handler_function * function,MPI_Errhandler * errhandler);
-#define MPI_Errhandler_create PMPI_Errhandler_create
 #pragma weak MPI_Errhandler_create=PMPI_Errhandler_create
 int (*INTERFACE_LOCAL_MPI_Errhandler_create)(MPI_Handler_function *,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -2024,7 +1923,6 @@ printf("sort : PMPI_Errhandler_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Errhandler_set(MPI_Comm comm,MPI_Errhandler errhandler);
-#define MPI_Errhandler_set PMPI_Errhandler_set
 #pragma weak MPI_Errhandler_set=PMPI_Errhandler_set
 int (*INTERFACE_LOCAL_MPI_Errhandler_set)(MPI_Comm,MPI_Errhandler);
 #ifdef WI4MPI_STATIC
@@ -2044,7 +1942,6 @@ printf("sort : PMPI_Errhandler_set (interface)\n");
 return ret_tmp;
 }
 int MPI_Errhandler_get(MPI_Comm comm,MPI_Errhandler * errhandler);
-#define MPI_Errhandler_get PMPI_Errhandler_get
 #pragma weak MPI_Errhandler_get=PMPI_Errhandler_get
 int (*INTERFACE_LOCAL_MPI_Errhandler_get)(MPI_Comm,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -2064,7 +1961,6 @@ printf("sort : PMPI_Errhandler_get (interface)\n");
 return ret_tmp;
 }
 int MPI_Errhandler_free(MPI_Errhandler * errhandler);
-#define MPI_Errhandler_free PMPI_Errhandler_free
 #pragma weak MPI_Errhandler_free=PMPI_Errhandler_free
 int (*INTERFACE_LOCAL_MPI_Errhandler_free)(MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -2084,7 +1980,6 @@ printf("sort : PMPI_Errhandler_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Error_string(int errorcode,char * string,int * resultlen);
-#define MPI_Error_string PMPI_Error_string
 #pragma weak MPI_Error_string=PMPI_Error_string
 int (*INTERFACE_LOCAL_MPI_Error_string)(int,char *,int *);
 #ifdef WI4MPI_STATIC
@@ -2104,7 +1999,6 @@ printf("sort : PMPI_Error_string (interface)\n");
 return ret_tmp;
 }
 int MPI_Error_class(int errorcode,int * errorclass);
-#define MPI_Error_class PMPI_Error_class
 #pragma weak MPI_Error_class=PMPI_Error_class
 int (*INTERFACE_LOCAL_MPI_Error_class)(int,int *);
 #ifdef WI4MPI_STATIC
@@ -2124,7 +2018,6 @@ printf("sort : PMPI_Error_class (interface)\n");
 return ret_tmp;
 }
 int MPI_Initialized(int * flag);
-#define MPI_Initialized PMPI_Initialized
 #pragma weak MPI_Initialized=PMPI_Initialized
 int (*INTERFACE_LOCAL_MPI_Initialized)(int *);
 #ifdef WI4MPI_STATIC
@@ -2144,7 +2037,6 @@ printf("sort : PMPI_Initialized (interface)\n");
 return ret_tmp;
 }
 int MPI_Abort(MPI_Comm comm,int errorcode);
-#define MPI_Abort PMPI_Abort
 #pragma weak MPI_Abort=PMPI_Abort
 int (*INTERFACE_LOCAL_MPI_Abort)(MPI_Comm,int);
 #ifdef WI4MPI_STATIC
@@ -2164,7 +2056,6 @@ printf("sort : PMPI_Abort (interface)\n");
 return ret_tmp;
 }
 int MPI_Init(int * argc,char *** argv);
-#define MPI_Init PMPI_Init
 #pragma weak MPI_Init=PMPI_Init
 int (*INTERFACE_LOCAL_MPI_Init)(int *,char ***);
 #ifdef WI4MPI_STATIC
@@ -2184,7 +2075,6 @@ printf("sort : PMPI_Init (interface)\n");
 return ret_tmp;
 }
 int MPI_Close_port(char * port_name);
-#define MPI_Close_port PMPI_Close_port
 #pragma weak MPI_Close_port=PMPI_Close_port
 int (*INTERFACE_LOCAL_MPI_Close_port)(char *);
 #ifdef WI4MPI_STATIC
@@ -2204,7 +2094,6 @@ printf("sort : PMPI_Close_port (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_accept(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * newcomm);
-#define MPI_Comm_accept PMPI_Comm_accept
 #pragma weak MPI_Comm_accept=PMPI_Comm_accept
 int (*INTERFACE_LOCAL_MPI_Comm_accept)(char *,MPI_Info,int,MPI_Comm,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -2224,7 +2113,6 @@ printf("sort : PMPI_Comm_accept (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_connect(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * newcomm);
-#define MPI_Comm_connect PMPI_Comm_connect
 #pragma weak MPI_Comm_connect=PMPI_Comm_connect
 int (*INTERFACE_LOCAL_MPI_Comm_connect)(char *,MPI_Info,int,MPI_Comm,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -2244,7 +2132,6 @@ printf("sort : PMPI_Comm_connect (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_disconnect(MPI_Comm * comm);
-#define MPI_Comm_disconnect PMPI_Comm_disconnect
 #pragma weak MPI_Comm_disconnect=PMPI_Comm_disconnect
 int (*INTERFACE_LOCAL_MPI_Comm_disconnect)(MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -2264,7 +2151,6 @@ printf("sort : PMPI_Comm_disconnect (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_get_parent(MPI_Comm * parent);
-#define MPI_Comm_get_parent PMPI_Comm_get_parent
 #pragma weak MPI_Comm_get_parent=PMPI_Comm_get_parent
 int (*INTERFACE_LOCAL_MPI_Comm_get_parent)(MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -2284,7 +2170,6 @@ printf("sort : PMPI_Comm_get_parent (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_join(int fd,MPI_Comm * intercomm);
-#define MPI_Comm_join PMPI_Comm_join
 #pragma weak MPI_Comm_join=PMPI_Comm_join
 int (*INTERFACE_LOCAL_MPI_Comm_join)(int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -2304,7 +2189,6 @@ printf("sort : PMPI_Comm_join (interface)\n");
 return ret_tmp;
 }
 int MPI_Lookup_name(char * service_name,MPI_Info info,char * port_name);
-#define MPI_Lookup_name PMPI_Lookup_name
 #pragma weak MPI_Lookup_name=PMPI_Lookup_name
 int (*INTERFACE_LOCAL_MPI_Lookup_name)(char *,MPI_Info,char *);
 #ifdef WI4MPI_STATIC
@@ -2324,7 +2208,6 @@ printf("sort : PMPI_Lookup_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Open_port(MPI_Info info,char * port_name);
-#define MPI_Open_port PMPI_Open_port
 #pragma weak MPI_Open_port=PMPI_Open_port
 int (*INTERFACE_LOCAL_MPI_Open_port)(MPI_Info,char *);
 #ifdef WI4MPI_STATIC
@@ -2344,7 +2227,6 @@ printf("sort : PMPI_Open_port (interface)\n");
 return ret_tmp;
 }
 int MPI_Publish_name(char * service_name,MPI_Info info,char * port_name);
-#define MPI_Publish_name PMPI_Publish_name
 #pragma weak MPI_Publish_name=PMPI_Publish_name
 int (*INTERFACE_LOCAL_MPI_Publish_name)(char *,MPI_Info,char *);
 #ifdef WI4MPI_STATIC
@@ -2364,7 +2246,6 @@ printf("sort : PMPI_Publish_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Unpublish_name(char * service_name,MPI_Info info,char * port_name);
-#define MPI_Unpublish_name PMPI_Unpublish_name
 #pragma weak MPI_Unpublish_name=PMPI_Unpublish_name
 int (*INTERFACE_LOCAL_MPI_Unpublish_name)(char *,MPI_Info,char *);
 #ifdef WI4MPI_STATIC
@@ -2384,7 +2265,6 @@ printf("sort : PMPI_Unpublish_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_set_info(MPI_Comm comm,MPI_Info info);
-#define MPI_Comm_set_info PMPI_Comm_set_info
 #pragma weak MPI_Comm_set_info=PMPI_Comm_set_info
 int (*INTERFACE_LOCAL_MPI_Comm_set_info)(MPI_Comm,MPI_Info);
 #ifdef WI4MPI_STATIC
@@ -2404,7 +2284,6 @@ printf("sort : PMPI_Comm_set_info (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_get_info(MPI_Comm comm,MPI_Info * info);
-#define MPI_Comm_get_info PMPI_Comm_get_info
 #pragma weak MPI_Comm_get_info=PMPI_Comm_get_info
 int (*INTERFACE_LOCAL_MPI_Comm_get_info)(MPI_Comm,MPI_Info *);
 #ifdef WI4MPI_STATIC
@@ -2424,7 +2303,6 @@ printf("sort : PMPI_Comm_get_info (interface)\n");
 return ret_tmp;
 }
 int MPI_Accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win);
-#define MPI_Accumulate PMPI_Accumulate
 #pragma weak MPI_Accumulate=PMPI_Accumulate
 int (*INTERFACE_LOCAL_MPI_Accumulate)(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Op,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2444,7 +2322,6 @@ printf("sort : PMPI_Accumulate (interface)\n");
 return ret_tmp;
 }
 int MPI_Get(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win);
-#define MPI_Get PMPI_Get
 #pragma weak MPI_Get=PMPI_Get
 int (*INTERFACE_LOCAL_MPI_Get)(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2464,7 +2341,6 @@ printf("sort : PMPI_Get (interface)\n");
 return ret_tmp;
 }
 int MPI_Put(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win);
-#define MPI_Put PMPI_Put
 #pragma weak MPI_Put=PMPI_Put
 int (*INTERFACE_LOCAL_MPI_Put)(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2484,7 +2360,6 @@ printf("sort : PMPI_Put (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_complete(MPI_Win win);
-#define MPI_Win_complete PMPI_Win_complete
 #pragma weak MPI_Win_complete=PMPI_Win_complete
 int (*INTERFACE_LOCAL_MPI_Win_complete)(MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2504,7 +2379,6 @@ printf("sort : PMPI_Win_complete (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_create(void * base,MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,MPI_Win * win);
-#define MPI_Win_create PMPI_Win_create
 #pragma weak MPI_Win_create=PMPI_Win_create
 int (*INTERFACE_LOCAL_MPI_Win_create)(void *,MPI_Aint,int,MPI_Info,MPI_Comm,MPI_Win *);
 #ifdef WI4MPI_STATIC
@@ -2524,7 +2398,6 @@ printf("sort : PMPI_Win_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_fence(int assert,MPI_Win win);
-#define MPI_Win_fence PMPI_Win_fence
 #pragma weak MPI_Win_fence=PMPI_Win_fence
 int (*INTERFACE_LOCAL_MPI_Win_fence)(int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2544,7 +2417,6 @@ printf("sort : PMPI_Win_fence (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_free(MPI_Win * win);
-#define MPI_Win_free PMPI_Win_free
 #pragma weak MPI_Win_free=PMPI_Win_free
 int (*INTERFACE_LOCAL_MPI_Win_free)(MPI_Win *);
 #ifdef WI4MPI_STATIC
@@ -2564,7 +2436,6 @@ printf("sort : PMPI_Win_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_get_group(MPI_Win win,MPI_Group * group);
-#define MPI_Win_get_group PMPI_Win_get_group
 #pragma weak MPI_Win_get_group=PMPI_Win_get_group
 int (*INTERFACE_LOCAL_MPI_Win_get_group)(MPI_Win,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -2584,7 +2455,6 @@ printf("sort : PMPI_Win_get_group (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_lock(int lock_type,int rank,int assert,MPI_Win win);
-#define MPI_Win_lock PMPI_Win_lock
 #pragma weak MPI_Win_lock=PMPI_Win_lock
 int (*INTERFACE_LOCAL_MPI_Win_lock)(int,int,int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2604,7 +2474,6 @@ printf("sort : PMPI_Win_lock (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_post(MPI_Group group,int assert,MPI_Win win);
-#define MPI_Win_post PMPI_Win_post
 #pragma weak MPI_Win_post=PMPI_Win_post
 int (*INTERFACE_LOCAL_MPI_Win_post)(MPI_Group,int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2624,7 +2493,6 @@ printf("sort : PMPI_Win_post (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_start(MPI_Group group,int assert,MPI_Win win);
-#define MPI_Win_start PMPI_Win_start
 #pragma weak MPI_Win_start=PMPI_Win_start
 int (*INTERFACE_LOCAL_MPI_Win_start)(MPI_Group,int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2644,7 +2512,6 @@ printf("sort : PMPI_Win_start (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_test(MPI_Win win,int * flag);
-#define MPI_Win_test PMPI_Win_test
 #pragma weak MPI_Win_test=PMPI_Win_test
 int (*INTERFACE_LOCAL_MPI_Win_test)(MPI_Win,int *);
 #ifdef WI4MPI_STATIC
@@ -2664,7 +2531,6 @@ printf("sort : PMPI_Win_test (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_unlock(int rank,MPI_Win win);
-#define MPI_Win_unlock PMPI_Win_unlock
 #pragma weak MPI_Win_unlock=PMPI_Win_unlock
 int (*INTERFACE_LOCAL_MPI_Win_unlock)(int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2684,7 +2550,6 @@ printf("sort : PMPI_Win_unlock (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_wait(MPI_Win win);
-#define MPI_Win_wait PMPI_Win_wait
 #pragma weak MPI_Win_wait=PMPI_Win_wait
 int (*INTERFACE_LOCAL_MPI_Win_wait)(MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2704,7 +2569,6 @@ printf("sort : PMPI_Win_wait (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_allocate(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,void * baseptr,MPI_Win * win);
-#define MPI_Win_allocate PMPI_Win_allocate
 #pragma weak MPI_Win_allocate=PMPI_Win_allocate
 int (*INTERFACE_LOCAL_MPI_Win_allocate)(MPI_Aint,int,MPI_Info,MPI_Comm,void *,MPI_Win *);
 #ifdef WI4MPI_STATIC
@@ -2724,7 +2588,6 @@ printf("sort : PMPI_Win_allocate (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_allocate_shared(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,void * baseptr,MPI_Win * win);
-#define MPI_Win_allocate_shared PMPI_Win_allocate_shared
 #pragma weak MPI_Win_allocate_shared=PMPI_Win_allocate_shared
 int (*INTERFACE_LOCAL_MPI_Win_allocate_shared)(MPI_Aint,int,MPI_Info,MPI_Comm,void *,MPI_Win *);
 #ifdef WI4MPI_STATIC
@@ -2744,7 +2607,6 @@ printf("sort : PMPI_Win_allocate_shared (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_shared_query(MPI_Win win,int rank,MPI_Aint * size,int * disp_unit,void * baseptr);
-#define MPI_Win_shared_query PMPI_Win_shared_query
 #pragma weak MPI_Win_shared_query=PMPI_Win_shared_query
 int (*INTERFACE_LOCAL_MPI_Win_shared_query)(MPI_Win,int,MPI_Aint *,int *,void *);
 #ifdef WI4MPI_STATIC
@@ -2764,7 +2626,6 @@ printf("sort : PMPI_Win_shared_query (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_create_dynamic(MPI_Info info,MPI_Comm comm,MPI_Win * win);
-#define MPI_Win_create_dynamic PMPI_Win_create_dynamic
 #pragma weak MPI_Win_create_dynamic=PMPI_Win_create_dynamic
 int (*INTERFACE_LOCAL_MPI_Win_create_dynamic)(MPI_Info,MPI_Comm,MPI_Win *);
 #ifdef WI4MPI_STATIC
@@ -2784,7 +2645,6 @@ printf("sort : PMPI_Win_create_dynamic (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_attach(MPI_Win win,void * base,MPI_Aint size);
-#define MPI_Win_attach PMPI_Win_attach
 #pragma weak MPI_Win_attach=PMPI_Win_attach
 int (*INTERFACE_LOCAL_MPI_Win_attach)(MPI_Win,void *,MPI_Aint);
 #ifdef WI4MPI_STATIC
@@ -2804,7 +2664,6 @@ printf("sort : PMPI_Win_attach (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_detach(MPI_Win win,void * base);
-#define MPI_Win_detach PMPI_Win_detach
 #pragma weak MPI_Win_detach=PMPI_Win_detach
 int (*INTERFACE_LOCAL_MPI_Win_detach)(MPI_Win,void *);
 #ifdef WI4MPI_STATIC
@@ -2824,7 +2683,6 @@ printf("sort : PMPI_Win_detach (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_get_info(MPI_Win win,MPI_Info * info_used);
-#define MPI_Win_get_info PMPI_Win_get_info
 #pragma weak MPI_Win_get_info=PMPI_Win_get_info
 int (*INTERFACE_LOCAL_MPI_Win_get_info)(MPI_Win,MPI_Info *);
 #ifdef WI4MPI_STATIC
@@ -2844,7 +2702,6 @@ printf("sort : PMPI_Win_get_info (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_set_info(MPI_Win win,MPI_Info info);
-#define MPI_Win_set_info PMPI_Win_set_info
 #pragma weak MPI_Win_set_info=PMPI_Win_set_info
 int (*INTERFACE_LOCAL_MPI_Win_set_info)(MPI_Win,MPI_Info);
 #ifdef WI4MPI_STATIC
@@ -2864,7 +2721,6 @@ printf("sort : PMPI_Win_set_info (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,void * result_addr,int result_count,MPI_Datatype result_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win);
-#define MPI_Get_accumulate PMPI_Get_accumulate
 #pragma weak MPI_Get_accumulate=PMPI_Get_accumulate
 int (*INTERFACE_LOCAL_MPI_Get_accumulate)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Op,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2884,7 +2740,6 @@ printf("sort : PMPI_Get_accumulate (interface)\n");
 return ret_tmp;
 }
 int MPI_Fetch_and_op(void * origin_addr,void * result_addr,MPI_Datatype datatype,int target_rank,MPI_Aint target_disp,MPI_Op op,MPI_Win win);
-#define MPI_Fetch_and_op PMPI_Fetch_and_op
 #pragma weak MPI_Fetch_and_op=PMPI_Fetch_and_op
 int (*INTERFACE_LOCAL_MPI_Fetch_and_op)(void *,void *,MPI_Datatype,int,MPI_Aint,MPI_Op,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2904,7 +2759,6 @@ printf("sort : PMPI_Fetch_and_op (interface)\n");
 return ret_tmp;
 }
 int MPI_Compare_and_swap(void * origin_addr,void * compare_addr,void * result_addr,MPI_Datatype datatype,int target_rank,MPI_Aint target_disp,MPI_Win win);
-#define MPI_Compare_and_swap PMPI_Compare_and_swap
 #pragma weak MPI_Compare_and_swap=PMPI_Compare_and_swap
 int (*INTERFACE_LOCAL_MPI_Compare_and_swap)(void *,void *,void *,MPI_Datatype,int,MPI_Aint,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -2924,7 +2778,6 @@ printf("sort : PMPI_Compare_and_swap (interface)\n");
 return ret_tmp;
 }
 int MPI_Rput(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win,MPI_Request * request);
-#define MPI_Rput PMPI_Rput
 #pragma weak MPI_Rput=PMPI_Rput
 int (*INTERFACE_LOCAL_MPI_Rput)(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Win,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -2944,7 +2797,6 @@ printf("sort : PMPI_Rput (interface)\n");
 return ret_tmp;
 }
 int MPI_Rget(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win,MPI_Request * request);
-#define MPI_Rget PMPI_Rget
 #pragma weak MPI_Rget=PMPI_Rget
 int (*INTERFACE_LOCAL_MPI_Rget)(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Win,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -2964,7 +2816,6 @@ printf("sort : PMPI_Rget (interface)\n");
 return ret_tmp;
 }
 int MPI_Raccumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win,MPI_Request * request);
-#define MPI_Raccumulate PMPI_Raccumulate
 #pragma weak MPI_Raccumulate=PMPI_Raccumulate
 int (*INTERFACE_LOCAL_MPI_Raccumulate)(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Op,MPI_Win,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -2984,7 +2835,6 @@ printf("sort : PMPI_Raccumulate (interface)\n");
 return ret_tmp;
 }
 int MPI_Rget_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,void * result_addr,int result_count,MPI_Datatype result_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win,MPI_Request * request);
-#define MPI_Rget_accumulate PMPI_Rget_accumulate
 #pragma weak MPI_Rget_accumulate=PMPI_Rget_accumulate
 int (*INTERFACE_LOCAL_MPI_Rget_accumulate)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Aint,int,MPI_Datatype,MPI_Op,MPI_Win,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -3004,7 +2854,6 @@ printf("sort : PMPI_Rget_accumulate (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_lock_all(int assert,MPI_Win win);
-#define MPI_Win_lock_all PMPI_Win_lock_all
 #pragma weak MPI_Win_lock_all=PMPI_Win_lock_all
 int (*INTERFACE_LOCAL_MPI_Win_lock_all)(int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -3024,7 +2873,6 @@ printf("sort : PMPI_Win_lock_all (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_unlock_all(MPI_Win win);
-#define MPI_Win_unlock_all PMPI_Win_unlock_all
 #pragma weak MPI_Win_unlock_all=PMPI_Win_unlock_all
 int (*INTERFACE_LOCAL_MPI_Win_unlock_all)(MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -3044,7 +2892,6 @@ printf("sort : PMPI_Win_unlock_all (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_flush(int rank,MPI_Win win);
-#define MPI_Win_flush PMPI_Win_flush
 #pragma weak MPI_Win_flush=PMPI_Win_flush
 int (*INTERFACE_LOCAL_MPI_Win_flush)(int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -3064,7 +2911,6 @@ printf("sort : PMPI_Win_flush (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_flush_all(MPI_Win win);
-#define MPI_Win_flush_all PMPI_Win_flush_all
 #pragma weak MPI_Win_flush_all=PMPI_Win_flush_all
 int (*INTERFACE_LOCAL_MPI_Win_flush_all)(MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -3084,7 +2930,6 @@ printf("sort : PMPI_Win_flush_all (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_flush_local(int rank,MPI_Win win);
-#define MPI_Win_flush_local PMPI_Win_flush_local
 #pragma weak MPI_Win_flush_local=PMPI_Win_flush_local
 int (*INTERFACE_LOCAL_MPI_Win_flush_local)(int,MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -3104,7 +2949,6 @@ printf("sort : PMPI_Win_flush_local (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_flush_local_all(MPI_Win win);
-#define MPI_Win_flush_local_all PMPI_Win_flush_local_all
 #pragma weak MPI_Win_flush_local_all=PMPI_Win_flush_local_all
 int (*INTERFACE_LOCAL_MPI_Win_flush_local_all)(MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -3124,7 +2968,6 @@ printf("sort : PMPI_Win_flush_local_all (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_sync(MPI_Win win);
-#define MPI_Win_sync PMPI_Win_sync
 #pragma weak MPI_Win_sync=PMPI_Win_sync
 int (*INTERFACE_LOCAL_MPI_Win_sync)(MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -3144,7 +2987,6 @@ printf("sort : PMPI_Win_sync (interface)\n");
 return ret_tmp;
 }
 int MPI_Add_error_class(int * errorclass);
-#define MPI_Add_error_class PMPI_Add_error_class
 #pragma weak MPI_Add_error_class=PMPI_Add_error_class
 int (*INTERFACE_LOCAL_MPI_Add_error_class)(int *);
 #ifdef WI4MPI_STATIC
@@ -3164,7 +3006,6 @@ printf("sort : PMPI_Add_error_class (interface)\n");
 return ret_tmp;
 }
 int MPI_Add_error_code(int errorclass,int * errorcode);
-#define MPI_Add_error_code PMPI_Add_error_code
 #pragma weak MPI_Add_error_code=PMPI_Add_error_code
 int (*INTERFACE_LOCAL_MPI_Add_error_code)(int,int *);
 #ifdef WI4MPI_STATIC
@@ -3184,7 +3025,6 @@ printf("sort : PMPI_Add_error_code (interface)\n");
 return ret_tmp;
 }
 int MPI_Add_error_string(int errorcode,char * string);
-#define MPI_Add_error_string PMPI_Add_error_string
 #pragma weak MPI_Add_error_string=PMPI_Add_error_string
 int (*INTERFACE_LOCAL_MPI_Add_error_string)(int,char *);
 #ifdef WI4MPI_STATIC
@@ -3204,7 +3044,6 @@ printf("sort : PMPI_Add_error_string (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_call_errhandler(MPI_Comm comm,int errorcode);
-#define MPI_Comm_call_errhandler PMPI_Comm_call_errhandler
 #pragma weak MPI_Comm_call_errhandler=PMPI_Comm_call_errhandler
 int (*INTERFACE_LOCAL_MPI_Comm_call_errhandler)(MPI_Comm,int);
 #ifdef WI4MPI_STATIC
@@ -3224,7 +3063,6 @@ printf("sort : PMPI_Comm_call_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_delete_attr(MPI_Comm comm,int comm_keyval);
-#define MPI_Comm_delete_attr PMPI_Comm_delete_attr
 #pragma weak MPI_Comm_delete_attr=PMPI_Comm_delete_attr
 int (*INTERFACE_LOCAL_MPI_Comm_delete_attr)(MPI_Comm,int);
 #ifdef WI4MPI_STATIC
@@ -3244,7 +3082,6 @@ printf("sort : PMPI_Comm_delete_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_get_attr(MPI_Comm comm,int comm_keyval,void * attribute_val,int * flag);
-#define MPI_Comm_get_attr PMPI_Comm_get_attr
 #pragma weak MPI_Comm_get_attr=PMPI_Comm_get_attr
 int (*INTERFACE_LOCAL_MPI_Comm_get_attr)(MPI_Comm,int,void *,int *);
 #ifdef WI4MPI_STATIC
@@ -3264,7 +3101,6 @@ printf("sort : PMPI_Comm_get_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_get_name(MPI_Comm comm,char * comm_name,int * resultlen);
-#define MPI_Comm_get_name PMPI_Comm_get_name
 #pragma weak MPI_Comm_get_name=PMPI_Comm_get_name
 int (*INTERFACE_LOCAL_MPI_Comm_get_name)(MPI_Comm,char *,int *);
 #ifdef WI4MPI_STATIC
@@ -3284,7 +3120,6 @@ printf("sort : PMPI_Comm_get_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_set_attr(MPI_Comm comm,int comm_keyval,void * attribute_val);
-#define MPI_Comm_set_attr PMPI_Comm_set_attr
 #pragma weak MPI_Comm_set_attr=PMPI_Comm_set_attr
 int (*INTERFACE_LOCAL_MPI_Comm_set_attr)(MPI_Comm,int,void *);
 #ifdef WI4MPI_STATIC
@@ -3304,7 +3139,6 @@ printf("sort : PMPI_Comm_set_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_set_name(MPI_Comm comm,char * comm_name);
-#define MPI_Comm_set_name PMPI_Comm_set_name
 #pragma weak MPI_Comm_set_name=PMPI_Comm_set_name
 int (*INTERFACE_LOCAL_MPI_Comm_set_name)(MPI_Comm,char *);
 #ifdef WI4MPI_STATIC
@@ -3324,7 +3158,6 @@ printf("sort : PMPI_Comm_set_name (interface)\n");
 return ret_tmp;
 }
 int MPI_File_call_errhandler(MPI_File fh,int errorcode);
-#define MPI_File_call_errhandler PMPI_File_call_errhandler
 #pragma weak MPI_File_call_errhandler=PMPI_File_call_errhandler
 int (*INTERFACE_LOCAL_MPI_File_call_errhandler)(MPI_File,int);
 #ifdef WI4MPI_STATIC
@@ -3344,7 +3177,6 @@ printf("sort : PMPI_File_call_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Grequest_complete(MPI_Request request);
-#define MPI_Grequest_complete PMPI_Grequest_complete
 #pragma weak MPI_Grequest_complete=PMPI_Grequest_complete
 int (*INTERFACE_LOCAL_MPI_Grequest_complete)(MPI_Request);
 #ifdef WI4MPI_STATIC
@@ -3364,7 +3196,6 @@ printf("sort : PMPI_Grequest_complete (interface)\n");
 return ret_tmp;
 }
 int MPI_Grequest_start(MPI_Grequest_query_function * query_fn,MPI_Grequest_free_function * free_fn,MPI_Grequest_cancel_function * cancel_fn,void * extra_state,MPI_Request * request);
-#define MPI_Grequest_start PMPI_Grequest_start
 #pragma weak MPI_Grequest_start=PMPI_Grequest_start
 int (*INTERFACE_LOCAL_MPI_Grequest_start)(MPI_Grequest_query_function *,MPI_Grequest_free_function *,MPI_Grequest_cancel_function *,void *,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -3384,7 +3215,6 @@ printf("sort : PMPI_Grequest_start (interface)\n");
 return ret_tmp;
 }
 int MPI_Init_thread(int * argc,char *** argv,int required,int * provided);
-#define MPI_Init_thread PMPI_Init_thread
 #pragma weak MPI_Init_thread=PMPI_Init_thread
 int (*INTERFACE_LOCAL_MPI_Init_thread)(int *,char ***,int,int *);
 #ifdef WI4MPI_STATIC
@@ -3404,7 +3234,6 @@ printf("sort : PMPI_Init_thread (interface)\n");
 return ret_tmp;
 }
 int MPI_Is_thread_main(int * flag);
-#define MPI_Is_thread_main PMPI_Is_thread_main
 #pragma weak MPI_Is_thread_main=PMPI_Is_thread_main
 int (*INTERFACE_LOCAL_MPI_Is_thread_main)(int *);
 #ifdef WI4MPI_STATIC
@@ -3424,7 +3253,6 @@ printf("sort : PMPI_Is_thread_main (interface)\n");
 return ret_tmp;
 }
 int MPI_Query_thread(int * provided);
-#define MPI_Query_thread PMPI_Query_thread
 #pragma weak MPI_Query_thread=PMPI_Query_thread
 int (*INTERFACE_LOCAL_MPI_Query_thread)(int *);
 #ifdef WI4MPI_STATIC
@@ -3444,7 +3272,6 @@ printf("sort : PMPI_Query_thread (interface)\n");
 return ret_tmp;
 }
 int MPI_Status_set_cancelled(MPI_Status * status,int flag);
-#define MPI_Status_set_cancelled PMPI_Status_set_cancelled
 #pragma weak MPI_Status_set_cancelled=PMPI_Status_set_cancelled
 int (*INTERFACE_LOCAL_MPI_Status_set_cancelled)(MPI_Status *,int);
 #ifdef WI4MPI_STATIC
@@ -3464,7 +3291,6 @@ printf("sort : PMPI_Status_set_cancelled (interface)\n");
 return ret_tmp;
 }
 int MPI_Status_set_elements(MPI_Status * status,MPI_Datatype datatype,int count);
-#define MPI_Status_set_elements PMPI_Status_set_elements
 #pragma weak MPI_Status_set_elements=PMPI_Status_set_elements
 int (*INTERFACE_LOCAL_MPI_Status_set_elements)(MPI_Status *,MPI_Datatype,int);
 #ifdef WI4MPI_STATIC
@@ -3484,7 +3310,6 @@ printf("sort : PMPI_Status_set_elements (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_keyval(MPI_Type_copy_attr_function * type_copy_attr_fn,MPI_Type_delete_attr_function * type_delete_attr_fn,int * type_keyval,void * extra_state);
-#define MPI_Type_create_keyval PMPI_Type_create_keyval
 #pragma weak MPI_Type_create_keyval=PMPI_Type_create_keyval
 int (*INTERFACE_LOCAL_MPI_Type_create_keyval)(MPI_Type_copy_attr_function *,MPI_Type_delete_attr_function *,int *,void *);
 #ifdef WI4MPI_STATIC
@@ -3504,7 +3329,6 @@ printf("sort : PMPI_Type_create_keyval (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_delete_attr(MPI_Datatype datatype,int type_keyval);
-#define MPI_Type_delete_attr PMPI_Type_delete_attr
 #pragma weak MPI_Type_delete_attr=PMPI_Type_delete_attr
 int (*INTERFACE_LOCAL_MPI_Type_delete_attr)(MPI_Datatype,int);
 #ifdef WI4MPI_STATIC
@@ -3524,7 +3348,6 @@ printf("sort : PMPI_Type_delete_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_dup(MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_dup PMPI_Type_dup
 #pragma weak MPI_Type_dup=PMPI_Type_dup
 int (*INTERFACE_LOCAL_MPI_Type_dup)(MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -3544,7 +3367,6 @@ printf("sort : PMPI_Type_dup (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_free_keyval(int * type_keyval);
-#define MPI_Type_free_keyval PMPI_Type_free_keyval
 #pragma weak MPI_Type_free_keyval=PMPI_Type_free_keyval
 int (*INTERFACE_LOCAL_MPI_Type_free_keyval)(int *);
 #ifdef WI4MPI_STATIC
@@ -3564,7 +3386,6 @@ printf("sort : PMPI_Type_free_keyval (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_attr(MPI_Datatype datatype,int type_keyval,void * attribute_val,int * flag);
-#define MPI_Type_get_attr PMPI_Type_get_attr
 #pragma weak MPI_Type_get_attr=PMPI_Type_get_attr
 int (*INTERFACE_LOCAL_MPI_Type_get_attr)(MPI_Datatype,int,void *,int *);
 #ifdef WI4MPI_STATIC
@@ -3584,7 +3405,6 @@ printf("sort : PMPI_Type_get_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_envelope(MPI_Datatype datatype,int * num_integers,int * num_addresses,int * num_datatypes,int * combiner);
-#define MPI_Type_get_envelope PMPI_Type_get_envelope
 #pragma weak MPI_Type_get_envelope=PMPI_Type_get_envelope
 int (*INTERFACE_LOCAL_MPI_Type_get_envelope)(MPI_Datatype,int *,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -3604,7 +3424,6 @@ printf("sort : PMPI_Type_get_envelope (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_name(MPI_Datatype datatype,char * type_name,int * resultlen);
-#define MPI_Type_get_name PMPI_Type_get_name
 #pragma weak MPI_Type_get_name=PMPI_Type_get_name
 int (*INTERFACE_LOCAL_MPI_Type_get_name)(MPI_Datatype,char *,int *);
 #ifdef WI4MPI_STATIC
@@ -3624,7 +3443,6 @@ printf("sort : PMPI_Type_get_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_set_attr(MPI_Datatype datatype,int type_keyval,void * attribute_val);
-#define MPI_Type_set_attr PMPI_Type_set_attr
 #pragma weak MPI_Type_set_attr=PMPI_Type_set_attr
 int (*INTERFACE_LOCAL_MPI_Type_set_attr)(MPI_Datatype,int,void *);
 #ifdef WI4MPI_STATIC
@@ -3644,7 +3462,6 @@ printf("sort : PMPI_Type_set_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_set_name(MPI_Datatype datatype,char * type_name);
-#define MPI_Type_set_name PMPI_Type_set_name
 #pragma weak MPI_Type_set_name=PMPI_Type_set_name
 int (*INTERFACE_LOCAL_MPI_Type_set_name)(MPI_Datatype,char *);
 #ifdef WI4MPI_STATIC
@@ -3664,7 +3481,6 @@ printf("sort : PMPI_Type_set_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_match_size(int typeclass,int size,MPI_Datatype * datatype);
-#define MPI_Type_match_size PMPI_Type_match_size
 #pragma weak MPI_Type_match_size=PMPI_Type_match_size
 int (*INTERFACE_LOCAL_MPI_Type_match_size)(int,int,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -3684,7 +3500,6 @@ printf("sort : PMPI_Type_match_size (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_call_errhandler(MPI_Win win,int errorcode);
-#define MPI_Win_call_errhandler PMPI_Win_call_errhandler
 #pragma weak MPI_Win_call_errhandler=PMPI_Win_call_errhandler
 int (*INTERFACE_LOCAL_MPI_Win_call_errhandler)(MPI_Win,int);
 #ifdef WI4MPI_STATIC
@@ -3704,7 +3519,6 @@ printf("sort : PMPI_Win_call_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_create_keyval(MPI_Win_copy_attr_function * win_copy_attr_fn,MPI_Win_delete_attr_function * win_delete_attr_fn,int * win_keyval,void * extra_state);
-#define MPI_Win_create_keyval PMPI_Win_create_keyval
 #pragma weak MPI_Win_create_keyval=PMPI_Win_create_keyval
 int (*INTERFACE_LOCAL_MPI_Win_create_keyval)(MPI_Win_copy_attr_function *,MPI_Win_delete_attr_function *,int *,void *);
 #ifdef WI4MPI_STATIC
@@ -3724,7 +3538,6 @@ printf("sort : PMPI_Win_create_keyval (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_delete_attr(MPI_Win win,int win_keyval);
-#define MPI_Win_delete_attr PMPI_Win_delete_attr
 #pragma weak MPI_Win_delete_attr=PMPI_Win_delete_attr
 int (*INTERFACE_LOCAL_MPI_Win_delete_attr)(MPI_Win,int);
 #ifdef WI4MPI_STATIC
@@ -3744,7 +3557,6 @@ printf("sort : PMPI_Win_delete_attr (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_free_keyval(int * win_keyval);
-#define MPI_Win_free_keyval PMPI_Win_free_keyval
 #pragma weak MPI_Win_free_keyval=PMPI_Win_free_keyval
 int (*INTERFACE_LOCAL_MPI_Win_free_keyval)(int *);
 #ifdef WI4MPI_STATIC
@@ -3764,7 +3576,6 @@ printf("sort : PMPI_Win_free_keyval (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_get_name(MPI_Win win,char * win_name,int * resultlen);
-#define MPI_Win_get_name PMPI_Win_get_name
 #pragma weak MPI_Win_get_name=PMPI_Win_get_name
 int (*INTERFACE_LOCAL_MPI_Win_get_name)(MPI_Win,char *,int *);
 #ifdef WI4MPI_STATIC
@@ -3784,7 +3595,6 @@ printf("sort : PMPI_Win_get_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_set_name(MPI_Win win,char * win_name);
-#define MPI_Win_set_name PMPI_Win_set_name
 #pragma weak MPI_Win_set_name=PMPI_Win_set_name
 int (*INTERFACE_LOCAL_MPI_Win_set_name)(MPI_Win,char *);
 #ifdef WI4MPI_STATIC
@@ -3804,7 +3614,6 @@ printf("sort : PMPI_Win_set_name (interface)\n");
 return ret_tmp;
 }
 int MPI_Alloc_mem(MPI_Aint size,MPI_Info info,void * baseptr);
-#define MPI_Alloc_mem PMPI_Alloc_mem
 #pragma weak MPI_Alloc_mem=PMPI_Alloc_mem
 int (*INTERFACE_LOCAL_MPI_Alloc_mem)(MPI_Aint,MPI_Info,void *);
 #ifdef WI4MPI_STATIC
@@ -3824,7 +3633,6 @@ printf("sort : PMPI_Alloc_mem (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_create_errhandler(MPI_Comm_errhandler_function * comm_errhandler_fn,MPI_Errhandler * errhandler);
-#define MPI_Comm_create_errhandler PMPI_Comm_create_errhandler
 #pragma weak MPI_Comm_create_errhandler=PMPI_Comm_create_errhandler
 int (*INTERFACE_LOCAL_MPI_Comm_create_errhandler)(MPI_Comm_errhandler_function *,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -3844,7 +3652,6 @@ printf("sort : PMPI_Comm_create_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_get_errhandler(MPI_Comm comm,MPI_Errhandler * errhandler);
-#define MPI_Comm_get_errhandler PMPI_Comm_get_errhandler
 #pragma weak MPI_Comm_get_errhandler=PMPI_Comm_get_errhandler
 int (*INTERFACE_LOCAL_MPI_Comm_get_errhandler)(MPI_Comm,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -3864,7 +3671,6 @@ printf("sort : PMPI_Comm_get_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_set_errhandler(MPI_Comm comm,MPI_Errhandler errhandler);
-#define MPI_Comm_set_errhandler PMPI_Comm_set_errhandler
 #pragma weak MPI_Comm_set_errhandler=PMPI_Comm_set_errhandler
 int (*INTERFACE_LOCAL_MPI_Comm_set_errhandler)(MPI_Comm,MPI_Errhandler);
 #ifdef WI4MPI_STATIC
@@ -3884,7 +3690,6 @@ printf("sort : PMPI_Comm_set_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_File_create_errhandler(MPI_File_errhandler_function * file_errhandler_fn,MPI_Errhandler * errhandler);
-#define MPI_File_create_errhandler PMPI_File_create_errhandler
 #pragma weak MPI_File_create_errhandler=PMPI_File_create_errhandler
 int (*INTERFACE_LOCAL_MPI_File_create_errhandler)(MPI_File_errhandler_function *,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -3904,7 +3709,6 @@ printf("sort : PMPI_File_create_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_errhandler(MPI_File file,MPI_Errhandler * errhandler);
-#define MPI_File_get_errhandler PMPI_File_get_errhandler
 #pragma weak MPI_File_get_errhandler=PMPI_File_get_errhandler
 int (*INTERFACE_LOCAL_MPI_File_get_errhandler)(MPI_File,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -3924,7 +3728,6 @@ printf("sort : PMPI_File_get_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_File_set_errhandler(MPI_File file,MPI_Errhandler errhandler);
-#define MPI_File_set_errhandler PMPI_File_set_errhandler
 #pragma weak MPI_File_set_errhandler=PMPI_File_set_errhandler
 int (*INTERFACE_LOCAL_MPI_File_set_errhandler)(MPI_File,MPI_Errhandler);
 #ifdef WI4MPI_STATIC
@@ -3944,7 +3747,6 @@ printf("sort : PMPI_File_set_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Finalized(int * flag);
-#define MPI_Finalized PMPI_Finalized
 #pragma weak MPI_Finalized=PMPI_Finalized
 int (*INTERFACE_LOCAL_MPI_Finalized)(int *);
 #ifdef WI4MPI_STATIC
@@ -3964,7 +3766,6 @@ printf("sort : PMPI_Finalized (interface)\n");
 return ret_tmp;
 }
 int MPI_Free_mem(void * base);
-#define MPI_Free_mem PMPI_Free_mem
 #pragma weak MPI_Free_mem=PMPI_Free_mem
 int (*INTERFACE_LOCAL_MPI_Free_mem)(void *);
 #ifdef WI4MPI_STATIC
@@ -3984,7 +3785,6 @@ printf("sort : PMPI_Free_mem (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_address(void * location,MPI_Aint * address);
-#define MPI_Get_address PMPI_Get_address
 #pragma weak MPI_Get_address=PMPI_Get_address
 int (*INTERFACE_LOCAL_MPI_Get_address)(void *,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -4004,7 +3804,6 @@ printf("sort : PMPI_Get_address (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_create(MPI_Info * info);
-#define MPI_Info_create PMPI_Info_create
 #pragma weak MPI_Info_create=PMPI_Info_create
 int (*INTERFACE_LOCAL_MPI_Info_create)(MPI_Info *);
 #ifdef WI4MPI_STATIC
@@ -4024,7 +3823,6 @@ printf("sort : PMPI_Info_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_delete(MPI_Info info,char * key);
-#define MPI_Info_delete PMPI_Info_delete
 #pragma weak MPI_Info_delete=PMPI_Info_delete
 int (*INTERFACE_LOCAL_MPI_Info_delete)(MPI_Info,char *);
 #ifdef WI4MPI_STATIC
@@ -4044,7 +3842,6 @@ printf("sort : PMPI_Info_delete (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_dup(MPI_Info info,MPI_Info * newinfo);
-#define MPI_Info_dup PMPI_Info_dup
 #pragma weak MPI_Info_dup=PMPI_Info_dup
 int (*INTERFACE_LOCAL_MPI_Info_dup)(MPI_Info,MPI_Info *);
 #ifdef WI4MPI_STATIC
@@ -4064,7 +3861,6 @@ printf("sort : PMPI_Info_dup (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_free(MPI_Info * info);
-#define MPI_Info_free PMPI_Info_free
 #pragma weak MPI_Info_free=PMPI_Info_free
 int (*INTERFACE_LOCAL_MPI_Info_free)(MPI_Info *);
 #ifdef WI4MPI_STATIC
@@ -4084,7 +3880,6 @@ printf("sort : PMPI_Info_free (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_get(MPI_Info info,char * key,int valuelen,char * value,int * flag);
-#define MPI_Info_get PMPI_Info_get
 #pragma weak MPI_Info_get=PMPI_Info_get
 int (*INTERFACE_LOCAL_MPI_Info_get)(MPI_Info,char *,int,char *,int *);
 #ifdef WI4MPI_STATIC
@@ -4104,7 +3899,6 @@ printf("sort : PMPI_Info_get (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_get_nkeys(MPI_Info info,int * nkeys);
-#define MPI_Info_get_nkeys PMPI_Info_get_nkeys
 #pragma weak MPI_Info_get_nkeys=PMPI_Info_get_nkeys
 int (*INTERFACE_LOCAL_MPI_Info_get_nkeys)(MPI_Info,int *);
 #ifdef WI4MPI_STATIC
@@ -4124,7 +3918,6 @@ printf("sort : PMPI_Info_get_nkeys (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_get_nthkey(MPI_Info info,int n,char * key);
-#define MPI_Info_get_nthkey PMPI_Info_get_nthkey
 #pragma weak MPI_Info_get_nthkey=PMPI_Info_get_nthkey
 int (*INTERFACE_LOCAL_MPI_Info_get_nthkey)(MPI_Info,int,char *);
 #ifdef WI4MPI_STATIC
@@ -4144,7 +3937,6 @@ printf("sort : PMPI_Info_get_nthkey (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_get_valuelen(MPI_Info info,char * key,int * valuelen,int * flag);
-#define MPI_Info_get_valuelen PMPI_Info_get_valuelen
 #pragma weak MPI_Info_get_valuelen=PMPI_Info_get_valuelen
 int (*INTERFACE_LOCAL_MPI_Info_get_valuelen)(MPI_Info,char *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -4164,7 +3956,6 @@ printf("sort : PMPI_Info_get_valuelen (interface)\n");
 return ret_tmp;
 }
 int MPI_Info_set(MPI_Info info,char * key,char * value);
-#define MPI_Info_set PMPI_Info_set
 #pragma weak MPI_Info_set=PMPI_Info_set
 int (*INTERFACE_LOCAL_MPI_Info_set)(MPI_Info,char *,char *);
 #ifdef WI4MPI_STATIC
@@ -4184,7 +3975,6 @@ printf("sort : PMPI_Info_set (interface)\n");
 return ret_tmp;
 }
 int MPI_Request_get_status(MPI_Request request,int * flag,MPI_Status * status);
-#define MPI_Request_get_status PMPI_Request_get_status
 #pragma weak MPI_Request_get_status=PMPI_Request_get_status
 int (*INTERFACE_LOCAL_MPI_Request_get_status)(MPI_Request,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -4204,7 +3994,6 @@ printf("sort : PMPI_Request_get_status (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_create_hvector PMPI_Type_create_hvector
 #pragma weak MPI_Type_create_hvector=PMPI_Type_create_hvector
 int (*INTERFACE_LOCAL_MPI_Type_create_hvector)(int,int,MPI_Aint,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -4224,7 +4013,6 @@ printf("sort : PMPI_Type_create_hvector (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_resized(MPI_Datatype oldtype,MPI_Aint lb,MPI_Aint extent,MPI_Datatype * newtype);
-#define MPI_Type_create_resized PMPI_Type_create_resized
 #pragma weak MPI_Type_create_resized=PMPI_Type_create_resized
 int (*INTERFACE_LOCAL_MPI_Type_create_resized)(MPI_Datatype,MPI_Aint,MPI_Aint,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -4244,7 +4032,6 @@ printf("sort : PMPI_Type_create_resized (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_extent(MPI_Datatype datatype,MPI_Aint * lb,MPI_Aint * extent);
-#define MPI_Type_get_extent PMPI_Type_get_extent
 #pragma weak MPI_Type_get_extent=PMPI_Type_get_extent
 int (*INTERFACE_LOCAL_MPI_Type_get_extent)(MPI_Datatype,MPI_Aint *,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -4264,7 +4051,6 @@ printf("sort : PMPI_Type_get_extent (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_true_extent(MPI_Datatype datatype,MPI_Aint * true_lb,MPI_Aint * true_extent);
-#define MPI_Type_get_true_extent PMPI_Type_get_true_extent
 #pragma weak MPI_Type_get_true_extent=PMPI_Type_get_true_extent
 int (*INTERFACE_LOCAL_MPI_Type_get_true_extent)(MPI_Datatype,MPI_Aint *,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -4284,7 +4070,6 @@ printf("sort : PMPI_Type_get_true_extent (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_create_errhandler(MPI_Win_errhandler_function * win_errhandler_fn,MPI_Errhandler * errhandler);
-#define MPI_Win_create_errhandler PMPI_Win_create_errhandler
 #pragma weak MPI_Win_create_errhandler=PMPI_Win_create_errhandler
 int (*INTERFACE_LOCAL_MPI_Win_create_errhandler)(MPI_Win_errhandler_function *,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -4304,7 +4089,6 @@ printf("sort : PMPI_Win_create_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_get_errhandler(MPI_Win win,MPI_Errhandler * errhandler);
-#define MPI_Win_get_errhandler PMPI_Win_get_errhandler
 #pragma weak MPI_Win_get_errhandler=PMPI_Win_get_errhandler
 int (*INTERFACE_LOCAL_MPI_Win_get_errhandler)(MPI_Win,MPI_Errhandler *);
 #ifdef WI4MPI_STATIC
@@ -4324,7 +4108,6 @@ printf("sort : PMPI_Win_get_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_set_errhandler(MPI_Win win,MPI_Errhandler errhandler);
-#define MPI_Win_set_errhandler PMPI_Win_set_errhandler
 #pragma weak MPI_Win_set_errhandler=PMPI_Win_set_errhandler
 int (*INTERFACE_LOCAL_MPI_Win_set_errhandler)(MPI_Win,MPI_Errhandler);
 #ifdef WI4MPI_STATIC
@@ -4344,7 +4127,6 @@ printf("sort : PMPI_Win_set_errhandler (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_f90_integer(int range,MPI_Datatype * newtype);
-#define MPI_Type_create_f90_integer PMPI_Type_create_f90_integer
 #pragma weak MPI_Type_create_f90_integer=PMPI_Type_create_f90_integer
 int (*INTERFACE_LOCAL_MPI_Type_create_f90_integer)(int,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -4364,7 +4146,6 @@ printf("sort : PMPI_Type_create_f90_integer (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_f90_real(int precision,int range,MPI_Datatype * newtype);
-#define MPI_Type_create_f90_real PMPI_Type_create_f90_real
 #pragma weak MPI_Type_create_f90_real=PMPI_Type_create_f90_real
 int (*INTERFACE_LOCAL_MPI_Type_create_f90_real)(int,int,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -4384,7 +4165,6 @@ printf("sort : PMPI_Type_create_f90_real (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_f90_complex(int precision,int range,MPI_Datatype * newtype);
-#define MPI_Type_create_f90_complex PMPI_Type_create_f90_complex
 #pragma weak MPI_Type_create_f90_complex=PMPI_Type_create_f90_complex
 int (*INTERFACE_LOCAL_MPI_Type_create_f90_complex)(int,int,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -4404,7 +4184,6 @@ printf("sort : PMPI_Type_create_f90_complex (interface)\n");
 return ret_tmp;
 }
 int MPI_Reduce_local(void * inbuf,void * inoutbuf,int count,MPI_Datatype datatype,MPI_Op op);
-#define MPI_Reduce_local PMPI_Reduce_local
 #pragma weak MPI_Reduce_local=PMPI_Reduce_local
 int (*INTERFACE_LOCAL_MPI_Reduce_local)(void *,void *,int,MPI_Datatype,MPI_Op);
 #ifdef WI4MPI_STATIC
@@ -4424,7 +4203,6 @@ printf("sort : PMPI_Reduce_local (interface)\n");
 return ret_tmp;
 }
 int MPI_Op_commutative(MPI_Op op,int * commute);
-#define MPI_Op_commutative PMPI_Op_commutative
 #pragma weak MPI_Op_commutative=PMPI_Op_commutative
 int (*INTERFACE_LOCAL_MPI_Op_commutative)(MPI_Op,int *);
 #ifdef WI4MPI_STATIC
@@ -4444,7 +4222,6 @@ printf("sort : PMPI_Op_commutative (interface)\n");
 return ret_tmp;
 }
 int MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
-#define MPI_Reduce_scatter_block PMPI_Reduce_scatter_block
 #pragma weak MPI_Reduce_scatter_block=PMPI_Reduce_scatter_block
 int (*INTERFACE_LOCAL_MPI_Reduce_scatter_block)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -4464,7 +4241,6 @@ printf("sort : PMPI_Reduce_scatter_block (interface)\n");
 return ret_tmp;
 }
 int MPI_Dist_graph_neighbors_count(MPI_Comm comm,int * indegree,int * outdegree,int * weighted);
-#define MPI_Dist_graph_neighbors_count PMPI_Dist_graph_neighbors_count
 #pragma weak MPI_Dist_graph_neighbors_count=PMPI_Dist_graph_neighbors_count
 int (*INTERFACE_LOCAL_MPI_Dist_graph_neighbors_count)(MPI_Comm,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -4484,7 +4260,6 @@ printf("sort : PMPI_Dist_graph_neighbors_count (interface)\n");
 return ret_tmp;
 }
 int MPI_Status_c2f(MPI_Status * c_status,MPI_Fint * f_status);
-#define MPI_Status_c2f PMPI_Status_c2f
 #pragma weak MPI_Status_c2f=PMPI_Status_c2f
 int (*INTERFACE_LOCAL_MPI_Status_c2f)(MPI_Status *,MPI_Fint *);
 #ifdef WI4MPI_STATIC
@@ -4504,7 +4279,6 @@ printf("sort : PMPI_Status_c2f (interface)\n");
 return ret_tmp;
 }
 int MPI_Status_f2c(MPI_Fint * f_status,MPI_Status * c_status);
-#define MPI_Status_f2c PMPI_Status_f2c
 #pragma weak MPI_Status_f2c=PMPI_Status_f2c
 int (*INTERFACE_LOCAL_MPI_Status_f2c)(MPI_Fint *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -4524,7 +4298,6 @@ printf("sort : PMPI_Status_f2c (interface)\n");
 return ret_tmp;
 }
 int MPI_Improbe(int source,int tag,MPI_Comm comm,int * flag,MPI_Message * message,MPI_Status * status);
-#define MPI_Improbe PMPI_Improbe
 #pragma weak MPI_Improbe=PMPI_Improbe
 int (*INTERFACE_LOCAL_MPI_Improbe)(int,int,MPI_Comm,int *,MPI_Message *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -4544,7 +4317,6 @@ printf("sort : PMPI_Improbe (interface)\n");
 return ret_tmp;
 }
 int MPI_Imrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message,MPI_Request * request);
-#define MPI_Imrecv PMPI_Imrecv
 #pragma weak MPI_Imrecv=PMPI_Imrecv
 int (*INTERFACE_LOCAL_MPI_Imrecv)(void *,int,MPI_Datatype,MPI_Message *,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4564,7 +4336,6 @@ printf("sort : PMPI_Imrecv (interface)\n");
 return ret_tmp;
 }
 int MPI_Mprobe(int source,int tag,MPI_Comm comm,MPI_Message * message,MPI_Status * status);
-#define MPI_Mprobe PMPI_Mprobe
 #pragma weak MPI_Mprobe=PMPI_Mprobe
 int (*INTERFACE_LOCAL_MPI_Mprobe)(int,int,MPI_Comm,MPI_Message *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -4584,7 +4355,6 @@ printf("sort : PMPI_Mprobe (interface)\n");
 return ret_tmp;
 }
 int MPI_Mrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message,MPI_Status * status);
-#define MPI_Mrecv PMPI_Mrecv
 #pragma weak MPI_Mrecv=PMPI_Mrecv
 int (*INTERFACE_LOCAL_MPI_Mrecv)(void *,int,MPI_Datatype,MPI_Message *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -4604,7 +4374,6 @@ printf("sort : PMPI_Mrecv (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_idup(MPI_Comm comm,MPI_Comm * newcomm,MPI_Request * request);
-#define MPI_Comm_idup PMPI_Comm_idup
 #pragma weak MPI_Comm_idup=PMPI_Comm_idup
 int (*INTERFACE_LOCAL_MPI_Comm_idup)(MPI_Comm,MPI_Comm *,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4624,7 +4393,6 @@ printf("sort : PMPI_Comm_idup (interface)\n");
 return ret_tmp;
 }
 int MPI_Ibarrier(MPI_Comm comm,MPI_Request * request);
-#define MPI_Ibarrier PMPI_Ibarrier
 #pragma weak MPI_Ibarrier=PMPI_Ibarrier
 int (*INTERFACE_LOCAL_MPI_Ibarrier)(MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4644,7 +4412,6 @@ printf("sort : PMPI_Ibarrier (interface)\n");
 return ret_tmp;
 }
 int MPI_Ibcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ibcast PMPI_Ibcast
 #pragma weak MPI_Ibcast=PMPI_Ibcast
 int (*INTERFACE_LOCAL_MPI_Ibcast)(void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4664,7 +4431,6 @@ printf("sort : PMPI_Ibcast (interface)\n");
 return ret_tmp;
 }
 int MPI_Igather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
-#define MPI_Igather PMPI_Igather
 #pragma weak MPI_Igather=PMPI_Igather
 int (*INTERFACE_LOCAL_MPI_Igather)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4684,7 +4450,6 @@ printf("sort : PMPI_Igather (interface)\n");
 return ret_tmp;
 }
 int MPI_Iscatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
-#define MPI_Iscatter PMPI_Iscatter
 #pragma weak MPI_Iscatter=PMPI_Iscatter
 int (*INTERFACE_LOCAL_MPI_Iscatter)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4704,7 +4469,6 @@ printf("sort : PMPI_Iscatter (interface)\n");
 return ret_tmp;
 }
 int MPI_Iallgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Iallgather PMPI_Iallgather
 #pragma weak MPI_Iallgather=PMPI_Iallgather
 int (*INTERFACE_LOCAL_MPI_Iallgather)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4724,7 +4488,6 @@ printf("sort : PMPI_Iallgather (interface)\n");
 return ret_tmp;
 }
 int MPI_Ialltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ialltoall PMPI_Ialltoall
 #pragma weak MPI_Ialltoall=PMPI_Ialltoall
 int (*INTERFACE_LOCAL_MPI_Ialltoall)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4744,7 +4507,6 @@ printf("sort : PMPI_Ialltoall (interface)\n");
 return ret_tmp;
 }
 int MPI_Ireduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,int root,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ireduce PMPI_Ireduce
 #pragma weak MPI_Ireduce=PMPI_Ireduce
 int (*INTERFACE_LOCAL_MPI_Ireduce)(void *,void *,int,MPI_Datatype,MPI_Op,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4764,7 +4526,6 @@ printf("sort : PMPI_Ireduce (interface)\n");
 return ret_tmp;
 }
 int MPI_Iallreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
-#define MPI_Iallreduce PMPI_Iallreduce
 #pragma weak MPI_Iallreduce=PMPI_Iallreduce
 int (*INTERFACE_LOCAL_MPI_Iallreduce)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4784,7 +4545,6 @@ printf("sort : PMPI_Iallreduce (interface)\n");
 return ret_tmp;
 }
 int MPI_Ireduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ireduce_scatter_block PMPI_Ireduce_scatter_block
 #pragma weak MPI_Ireduce_scatter_block=PMPI_Ireduce_scatter_block
 int (*INTERFACE_LOCAL_MPI_Ireduce_scatter_block)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4804,7 +4564,6 @@ printf("sort : PMPI_Ireduce_scatter_block (interface)\n");
 return ret_tmp;
 }
 int MPI_Iscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
-#define MPI_Iscan PMPI_Iscan
 #pragma weak MPI_Iscan=PMPI_Iscan
 int (*INTERFACE_LOCAL_MPI_Iscan)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4824,7 +4583,6 @@ printf("sort : PMPI_Iscan (interface)\n");
 return ret_tmp;
 }
 int MPI_Iexscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
-#define MPI_Iexscan PMPI_Iexscan
 #pragma weak MPI_Iexscan=PMPI_Iexscan
 int (*INTERFACE_LOCAL_MPI_Iexscan)(void *,void *,int,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4844,7 +4602,6 @@ printf("sort : PMPI_Iexscan (interface)\n");
 return ret_tmp;
 }
 int MPI_Ineighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ineighbor_allgather PMPI_Ineighbor_allgather
 #pragma weak MPI_Ineighbor_allgather=PMPI_Ineighbor_allgather
 int (*INTERFACE_LOCAL_MPI_Ineighbor_allgather)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4864,7 +4621,6 @@ printf("sort : PMPI_Ineighbor_allgather (interface)\n");
 return ret_tmp;
 }
 int MPI_Ineighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ineighbor_alltoall PMPI_Ineighbor_alltoall
 #pragma weak MPI_Ineighbor_alltoall=PMPI_Ineighbor_alltoall
 int (*INTERFACE_LOCAL_MPI_Ineighbor_alltoall)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -4884,7 +4640,6 @@ printf("sort : PMPI_Ineighbor_alltoall (interface)\n");
 return ret_tmp;
 }
 int MPI_Neighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Neighbor_allgather PMPI_Neighbor_allgather
 #pragma weak MPI_Neighbor_allgather=PMPI_Neighbor_allgather
 int (*INTERFACE_LOCAL_MPI_Neighbor_allgather)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -4904,7 +4659,6 @@ printf("sort : PMPI_Neighbor_allgather (interface)\n");
 return ret_tmp;
 }
 int MPI_Neighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Neighbor_alltoall PMPI_Neighbor_alltoall
 #pragma weak MPI_Neighbor_alltoall=PMPI_Neighbor_alltoall
 int (*INTERFACE_LOCAL_MPI_Neighbor_alltoall)(void *,int,MPI_Datatype,void *,int,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -4924,7 +4678,6 @@ printf("sort : PMPI_Neighbor_alltoall (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_split_type(MPI_Comm comm,int split_type,int key,MPI_Info info,MPI_Comm * newcomm);
-#define MPI_Comm_split_type PMPI_Comm_split_type
 #pragma weak MPI_Comm_split_type=PMPI_Comm_split_type
 int (*INTERFACE_LOCAL_MPI_Comm_split_type)(MPI_Comm,int,int,MPI_Info,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -4944,7 +4697,6 @@ printf("sort : PMPI_Comm_split_type (interface)\n");
 return ret_tmp;
 }
 int MPI_Get_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Count * count);
-#define MPI_Get_elements_x PMPI_Get_elements_x
 #pragma weak MPI_Get_elements_x=PMPI_Get_elements_x
 int (*INTERFACE_LOCAL_MPI_Get_elements_x)(MPI_Status *,MPI_Datatype,MPI_Count *);
 #ifdef WI4MPI_STATIC
@@ -4964,7 +4716,6 @@ printf("sort : PMPI_Get_elements_x (interface)\n");
 return ret_tmp;
 }
 int MPI_Status_set_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Count count);
-#define MPI_Status_set_elements_x PMPI_Status_set_elements_x
 #pragma weak MPI_Status_set_elements_x=PMPI_Status_set_elements_x
 int (*INTERFACE_LOCAL_MPI_Status_set_elements_x)(MPI_Status *,MPI_Datatype,MPI_Count);
 #ifdef WI4MPI_STATIC
@@ -4984,7 +4735,6 @@ printf("sort : PMPI_Status_set_elements_x (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count * extent);
-#define MPI_Type_get_extent_x PMPI_Type_get_extent_x
 #pragma weak MPI_Type_get_extent_x=PMPI_Type_get_extent_x
 int (*INTERFACE_LOCAL_MPI_Type_get_extent_x)(MPI_Datatype,MPI_Count *,MPI_Count *);
 #ifdef WI4MPI_STATIC
@@ -5004,7 +4754,6 @@ printf("sort : PMPI_Type_get_extent_x (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_true_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count * extent);
-#define MPI_Type_get_true_extent_x PMPI_Type_get_true_extent_x
 #pragma weak MPI_Type_get_true_extent_x=PMPI_Type_get_true_extent_x
 int (*INTERFACE_LOCAL_MPI_Type_get_true_extent_x)(MPI_Datatype,MPI_Count *,MPI_Count *);
 #ifdef WI4MPI_STATIC
@@ -5024,7 +4773,6 @@ printf("sort : PMPI_Type_get_true_extent_x (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_size_x(MPI_Datatype datatype,MPI_Count * size);
-#define MPI_Type_size_x PMPI_Type_size_x
 #pragma weak MPI_Type_size_x=PMPI_Type_size_x
 int (*INTERFACE_LOCAL_MPI_Type_size_x)(MPI_Datatype,MPI_Count *);
 #ifdef WI4MPI_STATIC
@@ -5044,7 +4792,6 @@ printf("sort : PMPI_Type_size_x (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_create_group(MPI_Comm comm,MPI_Group group,int tag,MPI_Comm * newcomm);
-#define MPI_Comm_create_group PMPI_Comm_create_group
 #pragma weak MPI_Comm_create_group=PMPI_Comm_create_group
 int (*INTERFACE_LOCAL_MPI_Comm_create_group)(MPI_Comm,MPI_Group,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -5064,7 +4811,6 @@ printf("sort : PMPI_Comm_create_group (interface)\n");
 return ret_tmp;
 }
 int MPI_T_init_thread(int required,int * provided);
-#define MPI_T_init_thread PMPI_T_init_thread
 #pragma weak MPI_T_init_thread=PMPI_T_init_thread
 int (*INTERFACE_LOCAL_MPI_T_init_thread)(int,int *);
 #ifdef WI4MPI_STATIC
@@ -5084,7 +4830,6 @@ printf("sort : PMPI_T_init_thread (interface)\n");
 return ret_tmp;
 }
 int MPI_T_enum_get_info(MPI_T_enum enumtype,int * num,char * name,int * name_len);
-#define MPI_T_enum_get_info PMPI_T_enum_get_info
 #pragma weak MPI_T_enum_get_info=PMPI_T_enum_get_info
 int (*INTERFACE_LOCAL_MPI_T_enum_get_info)(MPI_T_enum,int *,char *,int *);
 #ifdef WI4MPI_STATIC
@@ -5104,7 +4849,6 @@ printf("sort : PMPI_T_enum_get_info (interface)\n");
 return ret_tmp;
 }
 int MPI_T_enum_get_item(MPI_T_enum enumtype,int indx,int * value,char * name,int * name_len);
-#define MPI_T_enum_get_item PMPI_T_enum_get_item
 #pragma weak MPI_T_enum_get_item=PMPI_T_enum_get_item
 int (*INTERFACE_LOCAL_MPI_T_enum_get_item)(MPI_T_enum,int,int *,char *,int *);
 #ifdef WI4MPI_STATIC
@@ -5124,7 +4868,6 @@ printf("sort : PMPI_T_enum_get_item (interface)\n");
 return ret_tmp;
 }
 int MPI_T_cvar_get_num(int * num_cvar);
-#define MPI_T_cvar_get_num PMPI_T_cvar_get_num
 #pragma weak MPI_T_cvar_get_num=PMPI_T_cvar_get_num
 int (*INTERFACE_LOCAL_MPI_T_cvar_get_num)(int *);
 #ifdef WI4MPI_STATIC
@@ -5144,7 +4887,6 @@ printf("sort : PMPI_T_cvar_get_num (interface)\n");
 return ret_tmp;
 }
 int MPI_T_cvar_get_info(int cvar_index,char * name,int * name_len,int * verbosity,MPI_Datatype * datatype,MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * scope);
-#define MPI_T_cvar_get_info PMPI_T_cvar_get_info
 #pragma weak MPI_T_cvar_get_info=PMPI_T_cvar_get_info
 int (*INTERFACE_LOCAL_MPI_T_cvar_get_info)(int,char *,int *,int *,MPI_Datatype *,MPI_T_enum *,char *,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -5164,7 +4906,6 @@ printf("sort : PMPI_T_cvar_get_info (interface)\n");
 return ret_tmp;
 }
 int MPI_T_cvar_handle_alloc(int cvar_index,void * obj_handle,MPI_T_cvar_handle * handle,int * count);
-#define MPI_T_cvar_handle_alloc PMPI_T_cvar_handle_alloc
 #pragma weak MPI_T_cvar_handle_alloc=PMPI_T_cvar_handle_alloc
 int (*INTERFACE_LOCAL_MPI_T_cvar_handle_alloc)(int,void *,MPI_T_cvar_handle *,int *);
 #ifdef WI4MPI_STATIC
@@ -5184,7 +4925,6 @@ printf("sort : PMPI_T_cvar_handle_alloc (interface)\n");
 return ret_tmp;
 }
 int MPI_T_cvar_handle_free(MPI_T_cvar_handle * handle);
-#define MPI_T_cvar_handle_free PMPI_T_cvar_handle_free
 #pragma weak MPI_T_cvar_handle_free=PMPI_T_cvar_handle_free
 int (*INTERFACE_LOCAL_MPI_T_cvar_handle_free)(MPI_T_cvar_handle *);
 #ifdef WI4MPI_STATIC
@@ -5204,7 +4944,6 @@ printf("sort : PMPI_T_cvar_handle_free (interface)\n");
 return ret_tmp;
 }
 int MPI_T_cvar_read(MPI_T_cvar_handle handle,void * buf);
-#define MPI_T_cvar_read PMPI_T_cvar_read
 #pragma weak MPI_T_cvar_read=PMPI_T_cvar_read
 int (*INTERFACE_LOCAL_MPI_T_cvar_read)(MPI_T_cvar_handle,void *);
 #ifdef WI4MPI_STATIC
@@ -5224,7 +4963,6 @@ printf("sort : PMPI_T_cvar_read (interface)\n");
 return ret_tmp;
 }
 int MPI_T_cvar_write(MPI_T_cvar_handle handle,void * buf);
-#define MPI_T_cvar_write PMPI_T_cvar_write
 #pragma weak MPI_T_cvar_write=PMPI_T_cvar_write
 int (*INTERFACE_LOCAL_MPI_T_cvar_write)(MPI_T_cvar_handle,void *);
 #ifdef WI4MPI_STATIC
@@ -5244,7 +4982,6 @@ printf("sort : PMPI_T_cvar_write (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_get_num(int * num_pvar);
-#define MPI_T_pvar_get_num PMPI_T_pvar_get_num
 #pragma weak MPI_T_pvar_get_num=PMPI_T_pvar_get_num
 int (*INTERFACE_LOCAL_MPI_T_pvar_get_num)(int *);
 #ifdef WI4MPI_STATIC
@@ -5264,7 +5001,6 @@ printf("sort : PMPI_T_pvar_get_num (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_get_info(int pvar_index,char * name,int * name_len,int * verbosity,int * var_class,MPI_Datatype * datatype,MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * readonly,int * continuous,int * atomic);
-#define MPI_T_pvar_get_info PMPI_T_pvar_get_info
 #pragma weak MPI_T_pvar_get_info=PMPI_T_pvar_get_info
 int (*INTERFACE_LOCAL_MPI_T_pvar_get_info)(int,char *,int *,int *,int *,MPI_Datatype *,MPI_T_enum *,char *,int *,int *,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -5284,7 +5020,6 @@ printf("sort : PMPI_T_pvar_get_info (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_session_create(MPI_T_pvar_session * session);
-#define MPI_T_pvar_session_create PMPI_T_pvar_session_create
 #pragma weak MPI_T_pvar_session_create=PMPI_T_pvar_session_create
 int (*INTERFACE_LOCAL_MPI_T_pvar_session_create)(MPI_T_pvar_session *);
 #ifdef WI4MPI_STATIC
@@ -5304,7 +5039,6 @@ printf("sort : PMPI_T_pvar_session_create (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_session_free(MPI_T_pvar_session * session);
-#define MPI_T_pvar_session_free PMPI_T_pvar_session_free
 #pragma weak MPI_T_pvar_session_free=PMPI_T_pvar_session_free
 int (*INTERFACE_LOCAL_MPI_T_pvar_session_free)(MPI_T_pvar_session *);
 #ifdef WI4MPI_STATIC
@@ -5324,7 +5058,6 @@ printf("sort : PMPI_T_pvar_session_free (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_handle_alloc(MPI_T_pvar_session session,int pvar_index,void * obj_handle,MPI_T_pvar_handle * handle,int * count);
-#define MPI_T_pvar_handle_alloc PMPI_T_pvar_handle_alloc
 #pragma weak MPI_T_pvar_handle_alloc=PMPI_T_pvar_handle_alloc
 int (*INTERFACE_LOCAL_MPI_T_pvar_handle_alloc)(MPI_T_pvar_session,int,void *,MPI_T_pvar_handle *,int *);
 #ifdef WI4MPI_STATIC
@@ -5344,7 +5077,6 @@ printf("sort : PMPI_T_pvar_handle_alloc (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_handle_free(MPI_T_pvar_session session,MPI_T_pvar_handle * handle);
-#define MPI_T_pvar_handle_free PMPI_T_pvar_handle_free
 #pragma weak MPI_T_pvar_handle_free=PMPI_T_pvar_handle_free
 int (*INTERFACE_LOCAL_MPI_T_pvar_handle_free)(MPI_T_pvar_session,MPI_T_pvar_handle *);
 #ifdef WI4MPI_STATIC
@@ -5364,7 +5096,6 @@ printf("sort : PMPI_T_pvar_handle_free (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_start(MPI_T_pvar_session session,MPI_T_pvar_handle handle);
-#define MPI_T_pvar_start PMPI_T_pvar_start
 #pragma weak MPI_T_pvar_start=PMPI_T_pvar_start
 int (*INTERFACE_LOCAL_MPI_T_pvar_start)(MPI_T_pvar_session,MPI_T_pvar_handle);
 #ifdef WI4MPI_STATIC
@@ -5384,7 +5115,6 @@ printf("sort : PMPI_T_pvar_start (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_stop(MPI_T_pvar_session session,MPI_T_pvar_handle handle);
-#define MPI_T_pvar_stop PMPI_T_pvar_stop
 #pragma weak MPI_T_pvar_stop=PMPI_T_pvar_stop
 int (*INTERFACE_LOCAL_MPI_T_pvar_stop)(MPI_T_pvar_session,MPI_T_pvar_handle);
 #ifdef WI4MPI_STATIC
@@ -5404,7 +5134,6 @@ printf("sort : PMPI_T_pvar_stop (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_read(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf);
-#define MPI_T_pvar_read PMPI_T_pvar_read
 #pragma weak MPI_T_pvar_read=PMPI_T_pvar_read
 int (*INTERFACE_LOCAL_MPI_T_pvar_read)(MPI_T_pvar_session,MPI_T_pvar_handle,void *);
 #ifdef WI4MPI_STATIC
@@ -5424,7 +5153,6 @@ printf("sort : PMPI_T_pvar_read (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_write(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf);
-#define MPI_T_pvar_write PMPI_T_pvar_write
 #pragma weak MPI_T_pvar_write=PMPI_T_pvar_write
 int (*INTERFACE_LOCAL_MPI_T_pvar_write)(MPI_T_pvar_session,MPI_T_pvar_handle,void *);
 #ifdef WI4MPI_STATIC
@@ -5444,7 +5172,6 @@ printf("sort : PMPI_T_pvar_write (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_reset(MPI_T_pvar_session session,MPI_T_pvar_handle handle);
-#define MPI_T_pvar_reset PMPI_T_pvar_reset
 #pragma weak MPI_T_pvar_reset=PMPI_T_pvar_reset
 int (*INTERFACE_LOCAL_MPI_T_pvar_reset)(MPI_T_pvar_session,MPI_T_pvar_handle);
 #ifdef WI4MPI_STATIC
@@ -5464,7 +5191,6 @@ printf("sort : PMPI_T_pvar_reset (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_readreset(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf);
-#define MPI_T_pvar_readreset PMPI_T_pvar_readreset
 #pragma weak MPI_T_pvar_readreset=PMPI_T_pvar_readreset
 int (*INTERFACE_LOCAL_MPI_T_pvar_readreset)(MPI_T_pvar_session,MPI_T_pvar_handle,void *);
 #ifdef WI4MPI_STATIC
@@ -5484,7 +5210,6 @@ printf("sort : PMPI_T_pvar_readreset (interface)\n");
 return ret_tmp;
 }
 int MPI_T_category_get_num(int * num_cat);
-#define MPI_T_category_get_num PMPI_T_category_get_num
 #pragma weak MPI_T_category_get_num=PMPI_T_category_get_num
 int (*INTERFACE_LOCAL_MPI_T_category_get_num)(int *);
 #ifdef WI4MPI_STATIC
@@ -5504,7 +5229,6 @@ printf("sort : PMPI_T_category_get_num (interface)\n");
 return ret_tmp;
 }
 int MPI_T_category_get_info(int cat_index,char * name,int * name_len,char * desc,int * desc_len,int * num_cvars,int * num_pvars,int * num_categories);
-#define MPI_T_category_get_info PMPI_T_category_get_info
 #pragma weak MPI_T_category_get_info=PMPI_T_category_get_info
 int (*INTERFACE_LOCAL_MPI_T_category_get_info)(int,char *,int *,char *,int *,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -5524,7 +5248,6 @@ printf("sort : PMPI_T_category_get_info (interface)\n");
 return ret_tmp;
 }
 int MPI_File_open(MPI_Comm comm,char * filename,int amode,MPI_Info info,MPI_File * fh);
-#define MPI_File_open PMPI_File_open
 #pragma weak MPI_File_open=PMPI_File_open
 int (*INTERFACE_LOCAL_MPI_File_open)(MPI_Comm,char *,int,MPI_Info,MPI_File *);
 #ifdef WI4MPI_STATIC
@@ -5544,7 +5267,6 @@ printf("sort : PMPI_File_open (interface)\n");
 return ret_tmp;
 }
 int MPI_File_close(MPI_File * fh);
-#define MPI_File_close PMPI_File_close
 #pragma weak MPI_File_close=PMPI_File_close
 int (*INTERFACE_LOCAL_MPI_File_close)(MPI_File *);
 #ifdef WI4MPI_STATIC
@@ -5564,7 +5286,6 @@ printf("sort : PMPI_File_close (interface)\n");
 return ret_tmp;
 }
 int MPI_File_delete(char * filename,MPI_Info info);
-#define MPI_File_delete PMPI_File_delete
 #pragma weak MPI_File_delete=PMPI_File_delete
 int (*INTERFACE_LOCAL_MPI_File_delete)(char *,MPI_Info);
 #ifdef WI4MPI_STATIC
@@ -5584,7 +5305,6 @@ printf("sort : PMPI_File_delete (interface)\n");
 return ret_tmp;
 }
 int MPI_File_set_size(MPI_File fh,MPI_Offset size);
-#define MPI_File_set_size PMPI_File_set_size
 #pragma weak MPI_File_set_size=PMPI_File_set_size
 int (*INTERFACE_LOCAL_MPI_File_set_size)(MPI_File,MPI_Offset);
 #ifdef WI4MPI_STATIC
@@ -5604,7 +5324,6 @@ printf("sort : PMPI_File_set_size (interface)\n");
 return ret_tmp;
 }
 int MPI_File_preallocate(MPI_File fh,MPI_Offset size);
-#define MPI_File_preallocate PMPI_File_preallocate
 #pragma weak MPI_File_preallocate=PMPI_File_preallocate
 int (*INTERFACE_LOCAL_MPI_File_preallocate)(MPI_File,MPI_Offset);
 #ifdef WI4MPI_STATIC
@@ -5624,7 +5343,6 @@ printf("sort : PMPI_File_preallocate (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_size(MPI_File fh,MPI_Offset * size);
-#define MPI_File_get_size PMPI_File_get_size
 #pragma weak MPI_File_get_size=PMPI_File_get_size
 int (*INTERFACE_LOCAL_MPI_File_get_size)(MPI_File,MPI_Offset *);
 #ifdef WI4MPI_STATIC
@@ -5644,7 +5362,6 @@ printf("sort : PMPI_File_get_size (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_group(MPI_File fh,MPI_Group * group);
-#define MPI_File_get_group PMPI_File_get_group
 #pragma weak MPI_File_get_group=PMPI_File_get_group
 int (*INTERFACE_LOCAL_MPI_File_get_group)(MPI_File,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -5664,7 +5381,6 @@ printf("sort : PMPI_File_get_group (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_amode(MPI_File fh,int * amode);
-#define MPI_File_get_amode PMPI_File_get_amode
 #pragma weak MPI_File_get_amode=PMPI_File_get_amode
 int (*INTERFACE_LOCAL_MPI_File_get_amode)(MPI_File,int *);
 #ifdef WI4MPI_STATIC
@@ -5684,7 +5400,6 @@ printf("sort : PMPI_File_get_amode (interface)\n");
 return ret_tmp;
 }
 int MPI_File_set_info(MPI_File fh,MPI_Info info);
-#define MPI_File_set_info PMPI_File_set_info
 #pragma weak MPI_File_set_info=PMPI_File_set_info
 int (*INTERFACE_LOCAL_MPI_File_set_info)(MPI_File,MPI_Info);
 #ifdef WI4MPI_STATIC
@@ -5704,7 +5419,6 @@ printf("sort : PMPI_File_set_info (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_info(MPI_File fh,MPI_Info * info_used);
-#define MPI_File_get_info PMPI_File_get_info
 #pragma weak MPI_File_get_info=PMPI_File_get_info
 int (*INTERFACE_LOCAL_MPI_File_get_info)(MPI_File,MPI_Info *);
 #ifdef WI4MPI_STATIC
@@ -5724,7 +5438,6 @@ printf("sort : PMPI_File_get_info (interface)\n");
 return ret_tmp;
 }
 int MPI_File_set_view(MPI_File fh,MPI_Offset disp,MPI_Datatype etype,MPI_Datatype filetype,char * datarep,MPI_Info info);
-#define MPI_File_set_view PMPI_File_set_view
 #pragma weak MPI_File_set_view=PMPI_File_set_view
 int (*INTERFACE_LOCAL_MPI_File_set_view)(MPI_File,MPI_Offset,MPI_Datatype,MPI_Datatype,char *,MPI_Info);
 #ifdef WI4MPI_STATIC
@@ -5744,7 +5457,6 @@ printf("sort : PMPI_File_set_view (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_view(MPI_File fh,MPI_Offset * disp,MPI_Datatype * etype,MPI_Datatype * filetype,char * datarep);
-#define MPI_File_get_view PMPI_File_get_view
 #pragma weak MPI_File_get_view=PMPI_File_get_view
 int (*INTERFACE_LOCAL_MPI_File_get_view)(MPI_File,MPI_Offset *,MPI_Datatype *,MPI_Datatype *,char *);
 #ifdef WI4MPI_STATIC
@@ -5764,7 +5476,6 @@ printf("sort : PMPI_File_get_view (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_read_at PMPI_File_read_at
 #pragma weak MPI_File_read_at=PMPI_File_read_at
 int (*INTERFACE_LOCAL_MPI_File_read_at)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5784,7 +5495,6 @@ printf("sort : PMPI_File_read_at (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_read_at_all PMPI_File_read_at_all
 #pragma weak MPI_File_read_at_all=PMPI_File_read_at_all
 int (*INTERFACE_LOCAL_MPI_File_read_at_all)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5804,7 +5514,6 @@ printf("sort : PMPI_File_read_at_all (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_write_at PMPI_File_write_at
 #pragma weak MPI_File_write_at=PMPI_File_write_at
 int (*INTERFACE_LOCAL_MPI_File_write_at)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5824,7 +5533,6 @@ printf("sort : PMPI_File_write_at (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_write_at_all PMPI_File_write_at_all
 #pragma weak MPI_File_write_at_all=PMPI_File_write_at_all
 int (*INTERFACE_LOCAL_MPI_File_write_at_all)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5844,7 +5552,6 @@ printf("sort : PMPI_File_write_at_all (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iread_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iread_at PMPI_File_iread_at
 #pragma weak MPI_File_iread_at=PMPI_File_iread_at
 int (*INTERFACE_LOCAL_MPI_File_iread_at)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -5864,7 +5571,6 @@ printf("sort : PMPI_File_iread_at (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iwrite_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iwrite_at PMPI_File_iwrite_at
 #pragma weak MPI_File_iwrite_at=PMPI_File_iwrite_at
 int (*INTERFACE_LOCAL_MPI_File_iwrite_at)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -5884,7 +5590,6 @@ printf("sort : PMPI_File_iwrite_at (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_read PMPI_File_read
 #pragma weak MPI_File_read=PMPI_File_read
 int (*INTERFACE_LOCAL_MPI_File_read)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5904,7 +5609,6 @@ printf("sort : PMPI_File_read (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_read_all PMPI_File_read_all
 #pragma weak MPI_File_read_all=PMPI_File_read_all
 int (*INTERFACE_LOCAL_MPI_File_read_all)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5924,7 +5628,6 @@ printf("sort : PMPI_File_read_all (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_write PMPI_File_write
 #pragma weak MPI_File_write=PMPI_File_write
 int (*INTERFACE_LOCAL_MPI_File_write)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5944,7 +5647,6 @@ printf("sort : PMPI_File_write (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_write_all PMPI_File_write_all
 #pragma weak MPI_File_write_all=PMPI_File_write_all
 int (*INTERFACE_LOCAL_MPI_File_write_all)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -5964,7 +5666,6 @@ printf("sort : PMPI_File_write_all (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iread(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iread PMPI_File_iread
 #pragma weak MPI_File_iread=PMPI_File_iread
 int (*INTERFACE_LOCAL_MPI_File_iread)(MPI_File,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -5984,7 +5685,6 @@ printf("sort : PMPI_File_iread (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iwrite(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iwrite PMPI_File_iwrite
 #pragma weak MPI_File_iwrite=PMPI_File_iwrite
 int (*INTERFACE_LOCAL_MPI_File_iwrite)(MPI_File,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -6004,7 +5704,6 @@ printf("sort : PMPI_File_iwrite (interface)\n");
 return ret_tmp;
 }
 int MPI_File_seek(MPI_File fh,MPI_Offset offset,int whence);
-#define MPI_File_seek PMPI_File_seek
 #pragma weak MPI_File_seek=PMPI_File_seek
 int (*INTERFACE_LOCAL_MPI_File_seek)(MPI_File,MPI_Offset,int);
 #ifdef WI4MPI_STATIC
@@ -6024,7 +5723,6 @@ printf("sort : PMPI_File_seek (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_position(MPI_File fh,MPI_Offset * offset);
-#define MPI_File_get_position PMPI_File_get_position
 #pragma weak MPI_File_get_position=PMPI_File_get_position
 int (*INTERFACE_LOCAL_MPI_File_get_position)(MPI_File,MPI_Offset *);
 #ifdef WI4MPI_STATIC
@@ -6044,7 +5742,6 @@ printf("sort : PMPI_File_get_position (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_byte_offset(MPI_File fh,MPI_Offset offset,MPI_Offset * disp);
-#define MPI_File_get_byte_offset PMPI_File_get_byte_offset
 #pragma weak MPI_File_get_byte_offset=PMPI_File_get_byte_offset
 int (*INTERFACE_LOCAL_MPI_File_get_byte_offset)(MPI_File,MPI_Offset,MPI_Offset *);
 #ifdef WI4MPI_STATIC
@@ -6064,7 +5761,6 @@ printf("sort : PMPI_File_get_byte_offset (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_read_shared PMPI_File_read_shared
 #pragma weak MPI_File_read_shared=PMPI_File_read_shared
 int (*INTERFACE_LOCAL_MPI_File_read_shared)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6084,7 +5780,6 @@ printf("sort : PMPI_File_read_shared (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_write_shared PMPI_File_write_shared
 #pragma weak MPI_File_write_shared=PMPI_File_write_shared
 int (*INTERFACE_LOCAL_MPI_File_write_shared)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6104,7 +5799,6 @@ printf("sort : PMPI_File_write_shared (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iread_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iread_shared PMPI_File_iread_shared
 #pragma weak MPI_File_iread_shared=PMPI_File_iread_shared
 int (*INTERFACE_LOCAL_MPI_File_iread_shared)(MPI_File,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -6124,7 +5818,6 @@ printf("sort : PMPI_File_iread_shared (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iwrite_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iwrite_shared PMPI_File_iwrite_shared
 #pragma weak MPI_File_iwrite_shared=PMPI_File_iwrite_shared
 int (*INTERFACE_LOCAL_MPI_File_iwrite_shared)(MPI_File,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -6144,7 +5837,6 @@ printf("sort : PMPI_File_iwrite_shared (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_ordered(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_read_ordered PMPI_File_read_ordered
 #pragma weak MPI_File_read_ordered=PMPI_File_read_ordered
 int (*INTERFACE_LOCAL_MPI_File_read_ordered)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6164,7 +5856,6 @@ printf("sort : PMPI_File_read_ordered (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_ordered(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
-#define MPI_File_write_ordered PMPI_File_write_ordered
 #pragma weak MPI_File_write_ordered=PMPI_File_write_ordered
 int (*INTERFACE_LOCAL_MPI_File_write_ordered)(MPI_File,void *,int,MPI_Datatype,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6184,7 +5875,6 @@ printf("sort : PMPI_File_write_ordered (interface)\n");
 return ret_tmp;
 }
 int MPI_File_seek_shared(MPI_File fh,MPI_Offset offset,int whence);
-#define MPI_File_seek_shared PMPI_File_seek_shared
 #pragma weak MPI_File_seek_shared=PMPI_File_seek_shared
 int (*INTERFACE_LOCAL_MPI_File_seek_shared)(MPI_File,MPI_Offset,int);
 #ifdef WI4MPI_STATIC
@@ -6204,7 +5894,6 @@ printf("sort : PMPI_File_seek_shared (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_position_shared(MPI_File fh,MPI_Offset * offset);
-#define MPI_File_get_position_shared PMPI_File_get_position_shared
 #pragma weak MPI_File_get_position_shared=PMPI_File_get_position_shared
 int (*INTERFACE_LOCAL_MPI_File_get_position_shared)(MPI_File,MPI_Offset *);
 #ifdef WI4MPI_STATIC
@@ -6224,7 +5913,6 @@ printf("sort : PMPI_File_get_position_shared (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype);
-#define MPI_File_read_at_all_begin PMPI_File_read_at_all_begin
 #pragma weak MPI_File_read_at_all_begin=PMPI_File_read_at_all_begin
 int (*INTERFACE_LOCAL_MPI_File_read_at_all_begin)(MPI_File,MPI_Offset,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -6244,7 +5932,6 @@ printf("sort : PMPI_File_read_at_all_begin (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_at_all_end(MPI_File fh,void * buf,MPI_Status * status);
-#define MPI_File_read_at_all_end PMPI_File_read_at_all_end
 #pragma weak MPI_File_read_at_all_end=PMPI_File_read_at_all_end
 int (*INTERFACE_LOCAL_MPI_File_read_at_all_end)(MPI_File,void *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6264,7 +5951,6 @@ printf("sort : PMPI_File_read_at_all_end (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype);
-#define MPI_File_write_at_all_begin PMPI_File_write_at_all_begin
 #pragma weak MPI_File_write_at_all_begin=PMPI_File_write_at_all_begin
 int (*INTERFACE_LOCAL_MPI_File_write_at_all_begin)(MPI_File,MPI_Offset,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -6284,7 +5970,6 @@ printf("sort : PMPI_File_write_at_all_begin (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_at_all_end(MPI_File fh,void * buf,MPI_Status * status);
-#define MPI_File_write_at_all_end PMPI_File_write_at_all_end
 #pragma weak MPI_File_write_at_all_end=PMPI_File_write_at_all_end
 int (*INTERFACE_LOCAL_MPI_File_write_at_all_end)(MPI_File,void *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6304,7 +5989,6 @@ printf("sort : PMPI_File_write_at_all_end (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
-#define MPI_File_read_all_begin PMPI_File_read_all_begin
 #pragma weak MPI_File_read_all_begin=PMPI_File_read_all_begin
 int (*INTERFACE_LOCAL_MPI_File_read_all_begin)(MPI_File,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -6324,7 +6008,6 @@ printf("sort : PMPI_File_read_all_begin (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_all_end(MPI_File fh,void * buf,MPI_Status * status);
-#define MPI_File_read_all_end PMPI_File_read_all_end
 #pragma weak MPI_File_read_all_end=PMPI_File_read_all_end
 int (*INTERFACE_LOCAL_MPI_File_read_all_end)(MPI_File,void *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6344,7 +6027,6 @@ printf("sort : PMPI_File_read_all_end (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
-#define MPI_File_write_all_begin PMPI_File_write_all_begin
 #pragma weak MPI_File_write_all_begin=PMPI_File_write_all_begin
 int (*INTERFACE_LOCAL_MPI_File_write_all_begin)(MPI_File,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -6364,7 +6046,6 @@ printf("sort : PMPI_File_write_all_begin (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_all_end(MPI_File fh,void * buf,MPI_Status * status);
-#define MPI_File_write_all_end PMPI_File_write_all_end
 #pragma weak MPI_File_write_all_end=PMPI_File_write_all_end
 int (*INTERFACE_LOCAL_MPI_File_write_all_end)(MPI_File,void *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6384,7 +6065,6 @@ printf("sort : PMPI_File_write_all_end (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
-#define MPI_File_read_ordered_begin PMPI_File_read_ordered_begin
 #pragma weak MPI_File_read_ordered_begin=PMPI_File_read_ordered_begin
 int (*INTERFACE_LOCAL_MPI_File_read_ordered_begin)(MPI_File,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -6404,7 +6084,6 @@ printf("sort : PMPI_File_read_ordered_begin (interface)\n");
 return ret_tmp;
 }
 int MPI_File_read_ordered_end(MPI_File fh,void * buf,MPI_Status * status);
-#define MPI_File_read_ordered_end PMPI_File_read_ordered_end
 #pragma weak MPI_File_read_ordered_end=PMPI_File_read_ordered_end
 int (*INTERFACE_LOCAL_MPI_File_read_ordered_end)(MPI_File,void *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6424,7 +6103,6 @@ printf("sort : PMPI_File_read_ordered_end (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
-#define MPI_File_write_ordered_begin PMPI_File_write_ordered_begin
 #pragma weak MPI_File_write_ordered_begin=PMPI_File_write_ordered_begin
 int (*INTERFACE_LOCAL_MPI_File_write_ordered_begin)(MPI_File,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -6444,7 +6122,6 @@ printf("sort : PMPI_File_write_ordered_begin (interface)\n");
 return ret_tmp;
 }
 int MPI_File_write_ordered_end(MPI_File fh,void * buf,MPI_Status * status);
-#define MPI_File_write_ordered_end PMPI_File_write_ordered_end
 #pragma weak MPI_File_write_ordered_end=PMPI_File_write_ordered_end
 int (*INTERFACE_LOCAL_MPI_File_write_ordered_end)(MPI_File,void *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6464,7 +6141,6 @@ printf("sort : PMPI_File_write_ordered_end (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_type_extent(MPI_File fh,MPI_Datatype datatype,MPI_Aint * extent);
-#define MPI_File_get_type_extent PMPI_File_get_type_extent
 #pragma weak MPI_File_get_type_extent=PMPI_File_get_type_extent
 int (*INTERFACE_LOCAL_MPI_File_get_type_extent)(MPI_File,MPI_Datatype,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -6484,7 +6160,6 @@ printf("sort : PMPI_File_get_type_extent (interface)\n");
 return ret_tmp;
 }
 int MPI_Register_datarep(char * datarep,MPI_Datarep_conversion_function * read_conversion_fn,MPI_Datarep_conversion_function * write_conversion_fn,MPI_Datarep_extent_function * dtype_file_extent_fn,void * extra_state);
-#define MPI_Register_datarep PMPI_Register_datarep
 #pragma weak MPI_Register_datarep=PMPI_Register_datarep
 int (*INTERFACE_LOCAL_MPI_Register_datarep)(char *,MPI_Datarep_conversion_function *,MPI_Datarep_conversion_function *,MPI_Datarep_extent_function *,void *);
 #ifdef WI4MPI_STATIC
@@ -6504,7 +6179,6 @@ printf("sort : PMPI_Register_datarep (interface)\n");
 return ret_tmp;
 }
 int MPI_File_set_atomicity(MPI_File fh,int flag);
-#define MPI_File_set_atomicity PMPI_File_set_atomicity
 #pragma weak MPI_File_set_atomicity=PMPI_File_set_atomicity
 int (*INTERFACE_LOCAL_MPI_File_set_atomicity)(MPI_File,int);
 #ifdef WI4MPI_STATIC
@@ -6524,7 +6198,6 @@ printf("sort : PMPI_File_set_atomicity (interface)\n");
 return ret_tmp;
 }
 int MPI_File_get_atomicity(MPI_File fh,int * flag);
-#define MPI_File_get_atomicity PMPI_File_get_atomicity
 #pragma weak MPI_File_get_atomicity=PMPI_File_get_atomicity
 int (*INTERFACE_LOCAL_MPI_File_get_atomicity)(MPI_File,int *);
 #ifdef WI4MPI_STATIC
@@ -6544,7 +6217,6 @@ printf("sort : PMPI_File_get_atomicity (interface)\n");
 return ret_tmp;
 }
 int MPI_File_sync(MPI_File fh);
-#define MPI_File_sync PMPI_File_sync
 #pragma weak MPI_File_sync=PMPI_File_sync
 int (*INTERFACE_LOCAL_MPI_File_sync)(MPI_File);
 #ifdef WI4MPI_STATIC
@@ -6564,7 +6236,6 @@ printf("sort : PMPI_File_sync (interface)\n");
 return ret_tmp;
 }
 int MPI_T_finalize( );
-#define MPI_T_finalize PMPI_T_finalize
 #pragma weak MPI_T_finalize=PMPI_T_finalize
 int (*INTERFACE_LOCAL_MPI_T_finalize)();
 #ifdef WI4MPI_STATIC
@@ -6584,7 +6255,6 @@ printf("sort : PMPI_T_finalize (interface)\n");
 return ret_tmp;
 }
 double MPI_Wtime( );
-#define MPI_Wtime PMPI_Wtime
 #pragma weak MPI_Wtime=PMPI_Wtime
 double (*INTERFACE_LOCAL_MPI_Wtime)();
 #ifdef WI4MPI_STATIC
@@ -6604,7 +6274,6 @@ printf("sort : PMPI_Wtime (interface)\n");
 return ret_tmp;
 }
 double MPI_Wtick( );
-#define MPI_Wtick PMPI_Wtick
 #pragma weak MPI_Wtick=PMPI_Wtick
 double (*INTERFACE_LOCAL_MPI_Wtick)();
 #ifdef WI4MPI_STATIC
@@ -6624,7 +6293,6 @@ printf("sort : PMPI_Wtick (interface)\n");
 return ret_tmp;
 }
 int MPI_Finalize( );
-#define MPI_Finalize PMPI_Finalize
 #pragma weak MPI_Finalize=PMPI_Finalize
 int (*INTERFACE_LOCAL_MPI_Finalize)();
 #ifdef WI4MPI_STATIC
@@ -6644,7 +6312,6 @@ printf("sort : PMPI_Finalize (interface)\n");
 return ret_tmp;
 }
 int MPI_Waitany(int count,MPI_Request array_of_requests[],int * indx,MPI_Status * status);
-#define MPI_Waitany PMPI_Waitany
 #pragma weak MPI_Waitany=PMPI_Waitany
 int (*INTERFACE_LOCAL_MPI_Waitany)(int,MPI_Request *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6664,7 +6331,6 @@ printf("sort : PMPI_Waitany (interface)\n");
 return ret_tmp;
 }
 int MPI_Testany(int count,MPI_Request array_of_requests[],int * indx,int * flag,MPI_Status * status);
-#define MPI_Testany PMPI_Testany
 #pragma weak MPI_Testany=PMPI_Testany
 int (*INTERFACE_LOCAL_MPI_Testany)(int,MPI_Request *,int *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6684,7 +6350,6 @@ printf("sort : PMPI_Testany (interface)\n");
 return ret_tmp;
 }
 int MPI_Waitall(int count,MPI_Request array_of_requests[],MPI_Status array_of_statuses[]);
-#define MPI_Waitall PMPI_Waitall
 #pragma weak MPI_Waitall=PMPI_Waitall
 int (*INTERFACE_LOCAL_MPI_Waitall)(int,MPI_Request *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6704,7 +6369,6 @@ printf("sort : PMPI_Waitall (interface)\n");
 return ret_tmp;
 }
 int MPI_Testall(int count,MPI_Request array_of_requests[],int * flag,MPI_Status array_of_statuses[]);
-#define MPI_Testall PMPI_Testall
 #pragma weak MPI_Testall=PMPI_Testall
 int (*INTERFACE_LOCAL_MPI_Testall)(int,MPI_Request *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6724,7 +6388,6 @@ printf("sort : PMPI_Testall (interface)\n");
 return ret_tmp;
 }
 int MPI_Waitsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[]);
-#define MPI_Waitsome PMPI_Waitsome
 #pragma weak MPI_Waitsome=PMPI_Waitsome
 int (*INTERFACE_LOCAL_MPI_Waitsome)(int,MPI_Request *,int *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6744,7 +6407,6 @@ printf("sort : PMPI_Waitsome (interface)\n");
 return ret_tmp;
 }
 int MPI_Testsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[]);
-#define MPI_Testsome PMPI_Testsome
 #pragma weak MPI_Testsome=PMPI_Testsome
 int (*INTERFACE_LOCAL_MPI_Testsome)(int,MPI_Request *,int *,int *,MPI_Status *);
 #ifdef WI4MPI_STATIC
@@ -6764,7 +6426,6 @@ printf("sort : PMPI_Testsome (interface)\n");
 return ret_tmp;
 }
 int MPI_Startall(int count,MPI_Request array_of_requests[]);
-#define MPI_Startall PMPI_Startall
 #pragma weak MPI_Startall=PMPI_Startall
 int (*INTERFACE_LOCAL_MPI_Startall)(int,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -6784,7 +6445,6 @@ printf("sort : PMPI_Startall (interface)\n");
 return ret_tmp;
 }
 int MPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm);
-#define MPI_Alltoallw PMPI_Alltoallw
 #pragma weak MPI_Alltoallw=PMPI_Alltoallw
 int (*INTERFACE_LOCAL_MPI_Alltoallw)(void *,int *,int *,MPI_Datatype *,void *,int *,int *,MPI_Datatype *,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -6804,7 +6464,6 @@ printf("sort : PMPI_Alltoallw (interface)\n");
 return ret_tmp;
 }
 int MPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
-#define MPI_Reduce_scatter PMPI_Reduce_scatter
 #pragma weak MPI_Reduce_scatter=PMPI_Reduce_scatter
 int (*INTERFACE_LOCAL_MPI_Reduce_scatter)(void *,void *,int *,MPI_Datatype,MPI_Op,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -6824,7 +6483,6 @@ printf("sort : PMPI_Reduce_scatter (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_translate_ranks(MPI_Group group1,int n,int ranks1[],MPI_Group group2,int ranks2[]);
-#define MPI_Group_translate_ranks PMPI_Group_translate_ranks
 #pragma weak MPI_Group_translate_ranks=PMPI_Group_translate_ranks
 int (*INTERFACE_LOCAL_MPI_Group_translate_ranks)(MPI_Group,int,int *,MPI_Group,int *);
 #ifdef WI4MPI_STATIC
@@ -6844,7 +6502,6 @@ printf("sort : PMPI_Group_translate_ranks (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_incl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup);
-#define MPI_Group_incl PMPI_Group_incl
 #pragma weak MPI_Group_incl=PMPI_Group_incl
 int (*INTERFACE_LOCAL_MPI_Group_incl)(MPI_Group,int,int *,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -6864,7 +6521,6 @@ printf("sort : PMPI_Group_incl (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_excl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup);
-#define MPI_Group_excl PMPI_Group_excl
 #pragma weak MPI_Group_excl=PMPI_Group_excl
 int (*INTERFACE_LOCAL_MPI_Group_excl)(MPI_Group,int,int *,MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -6884,7 +6540,6 @@ printf("sort : PMPI_Group_excl (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_range_incl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup);
-#define MPI_Group_range_incl PMPI_Group_range_incl
 #pragma weak MPI_Group_range_incl=PMPI_Group_range_incl
 int (*INTERFACE_LOCAL_MPI_Group_range_incl)(MPI_Group,int,int[][3],MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -6904,7 +6559,6 @@ printf("sort : PMPI_Group_range_incl (interface)\n");
 return ret_tmp;
 }
 int MPI_Group_range_excl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup);
-#define MPI_Group_range_excl PMPI_Group_range_excl
 #pragma weak MPI_Group_range_excl=PMPI_Group_range_excl
 int (*INTERFACE_LOCAL_MPI_Group_range_excl)(MPI_Group,int,int[][3],MPI_Group *);
 #ifdef WI4MPI_STATIC
@@ -6924,7 +6578,6 @@ printf("sort : PMPI_Group_range_excl (interface)\n");
 return ret_tmp;
 }
 int MPI_Cart_create(MPI_Comm comm_old,int ndims,int dims[],int periods[],int reorder,MPI_Comm * comm_cart);
-#define MPI_Cart_create PMPI_Cart_create
 #pragma weak MPI_Cart_create=PMPI_Cart_create
 int (*INTERFACE_LOCAL_MPI_Cart_create)(MPI_Comm,int,int *,int *,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -6944,7 +6597,6 @@ printf("sort : PMPI_Cart_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Dims_create(int nnodes,int ndims,int dims[]);
-#define MPI_Dims_create PMPI_Dims_create
 #pragma weak MPI_Dims_create=PMPI_Dims_create
 int (*INTERFACE_LOCAL_MPI_Dims_create)(int,int,int *);
 #ifdef WI4MPI_STATIC
@@ -6964,7 +6616,6 @@ printf("sort : PMPI_Dims_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Graph_create(MPI_Comm comm_old,int nnodes,int indx[],int edges[],int reorder,MPI_Comm * comm_graph);
-#define MPI_Graph_create PMPI_Graph_create
 #pragma weak MPI_Graph_create=PMPI_Graph_create
 int (*INTERFACE_LOCAL_MPI_Graph_create)(MPI_Comm,int,int *,int *,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -6984,7 +6635,6 @@ printf("sort : PMPI_Graph_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Graph_get(MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[]);
-#define MPI_Graph_get PMPI_Graph_get
 #pragma weak MPI_Graph_get=PMPI_Graph_get
 int (*INTERFACE_LOCAL_MPI_Graph_get)(MPI_Comm,int,int,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -7004,7 +6654,6 @@ printf("sort : PMPI_Graph_get (interface)\n");
 return ret_tmp;
 }
 int MPI_Cart_get(MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[]);
-#define MPI_Cart_get PMPI_Cart_get
 #pragma weak MPI_Cart_get=PMPI_Cart_get
 int (*INTERFACE_LOCAL_MPI_Cart_get)(MPI_Comm,int,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -7024,7 +6673,6 @@ printf("sort : PMPI_Cart_get (interface)\n");
 return ret_tmp;
 }
 int MPI_Cart_rank(MPI_Comm comm,int coords[],int * rank);
-#define MPI_Cart_rank PMPI_Cart_rank
 #pragma weak MPI_Cart_rank=PMPI_Cart_rank
 int (*INTERFACE_LOCAL_MPI_Cart_rank)(MPI_Comm,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -7044,7 +6692,6 @@ printf("sort : PMPI_Cart_rank (interface)\n");
 return ret_tmp;
 }
 int MPI_Cart_coords(MPI_Comm comm,int rank,int maxdims,int coords[]);
-#define MPI_Cart_coords PMPI_Cart_coords
 #pragma weak MPI_Cart_coords=PMPI_Cart_coords
 int (*INTERFACE_LOCAL_MPI_Cart_coords)(MPI_Comm,int,int,int *);
 #ifdef WI4MPI_STATIC
@@ -7064,7 +6711,6 @@ printf("sort : PMPI_Cart_coords (interface)\n");
 return ret_tmp;
 }
 int MPI_Graph_neighbors(MPI_Comm comm,int rank,int maxneighbors,int neighbors[]);
-#define MPI_Graph_neighbors PMPI_Graph_neighbors
 #pragma weak MPI_Graph_neighbors=PMPI_Graph_neighbors
 int (*INTERFACE_LOCAL_MPI_Graph_neighbors)(MPI_Comm,int,int,int *);
 #ifdef WI4MPI_STATIC
@@ -7084,7 +6730,6 @@ printf("sort : PMPI_Graph_neighbors (interface)\n");
 return ret_tmp;
 }
 int MPI_Cart_sub(MPI_Comm comm,int remain_dims[],MPI_Comm * newcomm);
-#define MPI_Cart_sub PMPI_Cart_sub
 #pragma weak MPI_Cart_sub=PMPI_Cart_sub
 int (*INTERFACE_LOCAL_MPI_Cart_sub)(MPI_Comm,int *,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -7104,7 +6749,6 @@ printf("sort : PMPI_Cart_sub (interface)\n");
 return ret_tmp;
 }
 int MPI_Cart_map(MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank);
-#define MPI_Cart_map PMPI_Cart_map
 #pragma weak MPI_Cart_map=PMPI_Cart_map
 int (*INTERFACE_LOCAL_MPI_Cart_map)(MPI_Comm,int,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -7124,7 +6768,6 @@ printf("sort : PMPI_Cart_map (interface)\n");
 return ret_tmp;
 }
 int MPI_Graph_map(MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank);
-#define MPI_Graph_map PMPI_Graph_map
 #pragma weak MPI_Graph_map=PMPI_Graph_map
 int (*INTERFACE_LOCAL_MPI_Graph_map)(MPI_Comm,int,int *,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -7144,7 +6787,6 @@ printf("sort : PMPI_Graph_map (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_spawn(char * command,char * argv[],int maxprocs,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[]);
-#define MPI_Comm_spawn PMPI_Comm_spawn
 #pragma weak MPI_Comm_spawn=PMPI_Comm_spawn
 int (*INTERFACE_LOCAL_MPI_Comm_spawn)(char *,char * *,int,MPI_Info,int,MPI_Comm,MPI_Comm *,int *);
 #ifdef WI4MPI_STATIC
@@ -7164,7 +6806,6 @@ printf("sort : PMPI_Comm_spawn (interface)\n");
 return ret_tmp;
 }
 int MPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_of_argv[],int array_of_maxprocs[],MPI_Info array_of_info[],int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[]);
-#define MPI_Comm_spawn_multiple PMPI_Comm_spawn_multiple
 #pragma weak MPI_Comm_spawn_multiple=PMPI_Comm_spawn_multiple
 int (*INTERFACE_LOCAL_MPI_Comm_spawn_multiple)(int,char * *,char ** *,int *,MPI_Info *,int,MPI_Comm,MPI_Comm *,int *);
 #ifdef WI4MPI_STATIC
@@ -7184,7 +6825,6 @@ printf("sort : PMPI_Comm_spawn_multiple (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_get_contents(MPI_Datatype datatype,int max_integers,int max_addresses,int max_datatypes,int array_of_integers[],MPI_Aint array_of_addresses[],MPI_Datatype array_of_datatypes[]);
-#define MPI_Type_get_contents PMPI_Type_get_contents
 #pragma weak MPI_Type_get_contents=PMPI_Type_get_contents
 int (*INTERFACE_LOCAL_MPI_Type_get_contents)(MPI_Datatype,int,int,int,int *,MPI_Aint *,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -7204,7 +6844,6 @@ printf("sort : PMPI_Type_get_contents (interface)\n");
 return ret_tmp;
 }
 int MPI_Pack_external(char datarep[],void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,MPI_Aint outsize,MPI_Aint * position);
-#define MPI_Pack_external PMPI_Pack_external
 #pragma weak MPI_Pack_external=PMPI_Pack_external
 int (*INTERFACE_LOCAL_MPI_Pack_external)(char *,void *,int,MPI_Datatype,void *,MPI_Aint,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -7224,7 +6863,6 @@ printf("sort : PMPI_Pack_external (interface)\n");
 return ret_tmp;
 }
 int MPI_Pack_external_size(char datarep[],int incount,MPI_Datatype datatype,MPI_Aint * size);
-#define MPI_Pack_external_size PMPI_Pack_external_size
 #pragma weak MPI_Pack_external_size=PMPI_Pack_external_size
 int (*INTERFACE_LOCAL_MPI_Pack_external_size)(char *,int,MPI_Datatype,MPI_Aint *);
 #ifdef WI4MPI_STATIC
@@ -7244,7 +6882,6 @@ printf("sort : PMPI_Pack_external_size (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],int array_of_distribs[],int array_of_dargs[],int array_of_psizes[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_create_darray PMPI_Type_create_darray
 #pragma weak MPI_Type_create_darray=PMPI_Type_create_darray
 int (*INTERFACE_LOCAL_MPI_Type_create_darray)(int,int,int,int *,int *,int *,int *,int,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -7264,7 +6901,6 @@ printf("sort : PMPI_Type_create_darray (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_hindexed(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_create_hindexed PMPI_Type_create_hindexed
 #pragma weak MPI_Type_create_hindexed=PMPI_Type_create_hindexed
 int (*INTERFACE_LOCAL_MPI_Type_create_hindexed)(int,int *,MPI_Aint *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -7284,7 +6920,6 @@ printf("sort : PMPI_Type_create_hindexed (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_indexed_block(int count,int blocklength,int array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_create_indexed_block PMPI_Type_create_indexed_block
 #pragma weak MPI_Type_create_indexed_block=PMPI_Type_create_indexed_block
 int (*INTERFACE_LOCAL_MPI_Type_create_indexed_block)(int,int,int *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -7304,7 +6939,6 @@ printf("sort : PMPI_Type_create_indexed_block (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_hindexed_block(int count,int blocklength,MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_create_hindexed_block PMPI_Type_create_hindexed_block
 #pragma weak MPI_Type_create_hindexed_block=PMPI_Type_create_hindexed_block
 int (*INTERFACE_LOCAL_MPI_Type_create_hindexed_block)(int,int,MPI_Aint *,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -7324,7 +6958,6 @@ printf("sort : PMPI_Type_create_hindexed_block (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_struct(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype array_of_types[],MPI_Datatype * newtype);
-#define MPI_Type_create_struct PMPI_Type_create_struct
 #pragma weak MPI_Type_create_struct=PMPI_Type_create_struct
 int (*INTERFACE_LOCAL_MPI_Type_create_struct)(int,int *,MPI_Aint *,MPI_Datatype *,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -7344,7 +6977,6 @@ printf("sort : PMPI_Type_create_struct (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsizes[],int array_of_starts[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype);
-#define MPI_Type_create_subarray PMPI_Type_create_subarray
 #pragma weak MPI_Type_create_subarray=PMPI_Type_create_subarray
 int (*INTERFACE_LOCAL_MPI_Type_create_subarray)(int,int *,int *,int *,int,MPI_Datatype,MPI_Datatype *);
 #ifdef WI4MPI_STATIC
@@ -7364,7 +6996,6 @@ printf("sort : PMPI_Type_create_subarray (interface)\n");
 return ret_tmp;
 }
 int MPI_Unpack_external(char datarep[],void * inbuf,MPI_Aint insize,MPI_Aint * position,void * outbuf,int outcount,MPI_Datatype datatype);
-#define MPI_Unpack_external PMPI_Unpack_external
 #pragma weak MPI_Unpack_external=PMPI_Unpack_external
 int (*INTERFACE_LOCAL_MPI_Unpack_external)(char *,void *,MPI_Aint,MPI_Aint *,void *,int,MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -7384,7 +7015,6 @@ printf("sort : PMPI_Unpack_external (interface)\n");
 return ret_tmp;
 }
 int MPI_Dist_graph_create_adjacent(MPI_Comm comm_old,int indegree,int sources[],int * sourceweights,int outdegree,int destinations[],int * destweights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph);
-#define MPI_Dist_graph_create_adjacent PMPI_Dist_graph_create_adjacent
 #pragma weak MPI_Dist_graph_create_adjacent=PMPI_Dist_graph_create_adjacent
 int (*INTERFACE_LOCAL_MPI_Dist_graph_create_adjacent)(MPI_Comm,int,int *,int *,int,int *,int *,MPI_Info,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -7404,7 +7034,6 @@ printf("sort : PMPI_Dist_graph_create_adjacent (interface)\n");
 return ret_tmp;
 }
 int MPI_Dist_graph_create(MPI_Comm comm_old,int n,int sources[],int degrees[],int destinations[],int * weights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph);
-#define MPI_Dist_graph_create PMPI_Dist_graph_create
 #pragma weak MPI_Dist_graph_create=PMPI_Dist_graph_create
 int (*INTERFACE_LOCAL_MPI_Dist_graph_create)(MPI_Comm,int,int *,int *,int *,int *,MPI_Info,int,MPI_Comm *);
 #ifdef WI4MPI_STATIC
@@ -7424,7 +7053,6 @@ printf("sort : PMPI_Dist_graph_create (interface)\n");
 return ret_tmp;
 }
 int MPI_Dist_graph_neighbors(MPI_Comm comm,int maxindegree,int sources[],int * sourceweights,int maxoutdegree,int destinations[],int * destweights);
-#define MPI_Dist_graph_neighbors PMPI_Dist_graph_neighbors
 #pragma weak MPI_Dist_graph_neighbors=PMPI_Dist_graph_neighbors
 int (*INTERFACE_LOCAL_MPI_Dist_graph_neighbors)(MPI_Comm,int,int *,int *,int,int *,int *);
 #ifdef WI4MPI_STATIC
@@ -7444,7 +7072,6 @@ printf("sort : PMPI_Dist_graph_neighbors (interface)\n");
 return ret_tmp;
 }
 int MPI_Igatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
-#define MPI_Igatherv PMPI_Igatherv
 #pragma weak MPI_Igatherv=PMPI_Igatherv
 int (*INTERFACE_LOCAL_MPI_Igatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7464,7 +7091,6 @@ printf("sort : PMPI_Igatherv (interface)\n");
 return ret_tmp;
 }
 int MPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
-#define MPI_Iscatterv PMPI_Iscatterv
 #pragma weak MPI_Iscatterv=PMPI_Iscatterv
 int (*INTERFACE_LOCAL_MPI_Iscatterv)(void *,int *,int *,MPI_Datatype,void *,int,MPI_Datatype,int,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7484,7 +7110,6 @@ printf("sort : PMPI_Iscatterv (interface)\n");
 return ret_tmp;
 }
 int MPI_Iallgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Iallgatherv PMPI_Iallgatherv
 #pragma weak MPI_Iallgatherv=PMPI_Iallgatherv
 int (*INTERFACE_LOCAL_MPI_Iallgatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7504,7 +7129,6 @@ printf("sort : PMPI_Iallgatherv (interface)\n");
 return ret_tmp;
 }
 int MPI_Ialltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ialltoallv PMPI_Ialltoallv
 #pragma weak MPI_Ialltoallv=PMPI_Ialltoallv
 int (*INTERFACE_LOCAL_MPI_Ialltoallv)(void *,int *,int *,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7524,7 +7148,6 @@ printf("sort : PMPI_Ialltoallv (interface)\n");
 return ret_tmp;
 }
 int MPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request);
-#define MPI_Ialltoallw PMPI_Ialltoallw
 #pragma weak MPI_Ialltoallw=PMPI_Ialltoallw
 int (*INTERFACE_LOCAL_MPI_Ialltoallw)(void *,int *,int *,MPI_Datatype *,void *,int *,int *,MPI_Datatype *,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7544,7 +7167,6 @@ printf("sort : PMPI_Ialltoallw (interface)\n");
 return ret_tmp;
 }
 int MPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ireduce_scatter PMPI_Ireduce_scatter
 #pragma weak MPI_Ireduce_scatter=PMPI_Ireduce_scatter
 int (*INTERFACE_LOCAL_MPI_Ireduce_scatter)(void *,void *,int *,MPI_Datatype,MPI_Op,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7564,7 +7186,6 @@ printf("sort : PMPI_Ireduce_scatter (interface)\n");
 return ret_tmp;
 }
 int MPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ineighbor_allgatherv PMPI_Ineighbor_allgatherv
 #pragma weak MPI_Ineighbor_allgatherv=PMPI_Ineighbor_allgatherv
 int (*INTERFACE_LOCAL_MPI_Ineighbor_allgatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7584,7 +7205,6 @@ printf("sort : PMPI_Ineighbor_allgatherv (interface)\n");
 return ret_tmp;
 }
 int MPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
-#define MPI_Ineighbor_alltoallv PMPI_Ineighbor_alltoallv
 #pragma weak MPI_Ineighbor_alltoallv=PMPI_Ineighbor_alltoallv
 int (*INTERFACE_LOCAL_MPI_Ineighbor_alltoallv)(void *,int *,int *,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7604,7 +7224,6 @@ printf("sort : PMPI_Ineighbor_alltoallv (interface)\n");
 return ret_tmp;
 }
 int MPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request);
-#define MPI_Ineighbor_alltoallw PMPI_Ineighbor_alltoallw
 #pragma weak MPI_Ineighbor_alltoallw=PMPI_Ineighbor_alltoallw
 int (*INTERFACE_LOCAL_MPI_Ineighbor_alltoallw)(void *,int *,MPI_Aint *,MPI_Datatype *,void *,int *,MPI_Aint *,MPI_Datatype *,MPI_Comm,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7624,7 +7243,6 @@ printf("sort : PMPI_Ineighbor_alltoallw (interface)\n");
 return ret_tmp;
 }
 int MPI_Neighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Neighbor_allgatherv PMPI_Neighbor_allgatherv
 #pragma weak MPI_Neighbor_allgatherv=PMPI_Neighbor_allgatherv
 int (*INTERFACE_LOCAL_MPI_Neighbor_allgatherv)(void *,int,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -7644,7 +7262,6 @@ printf("sort : PMPI_Neighbor_allgatherv (interface)\n");
 return ret_tmp;
 }
 int MPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm);
-#define MPI_Neighbor_alltoallv PMPI_Neighbor_alltoallv
 #pragma weak MPI_Neighbor_alltoallv=PMPI_Neighbor_alltoallv
 int (*INTERFACE_LOCAL_MPI_Neighbor_alltoallv)(void *,int *,int *,MPI_Datatype,void *,int *,int *,MPI_Datatype,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -7664,7 +7281,6 @@ printf("sort : PMPI_Neighbor_alltoallv (interface)\n");
 return ret_tmp;
 }
 int MPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm);
-#define MPI_Neighbor_alltoallw PMPI_Neighbor_alltoallw
 #pragma weak MPI_Neighbor_alltoallw=PMPI_Neighbor_alltoallw
 int (*INTERFACE_LOCAL_MPI_Neighbor_alltoallw)(void *,int *,MPI_Aint *,MPI_Datatype *,void *,int *,MPI_Aint *,MPI_Datatype *,MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -7684,7 +7300,6 @@ printf("sort : PMPI_Neighbor_alltoallw (interface)\n");
 return ret_tmp;
 }
 int MPI_T_category_get_cvars(int cat_index,int len,int indices[]);
-#define MPI_T_category_get_cvars PMPI_T_category_get_cvars
 #pragma weak MPI_T_category_get_cvars=PMPI_T_category_get_cvars
 int (*INTERFACE_LOCAL_MPI_T_category_get_cvars)(int,int,int *);
 #ifdef WI4MPI_STATIC
@@ -7704,7 +7319,6 @@ printf("sort : PMPI_T_category_get_cvars (interface)\n");
 return ret_tmp;
 }
 int MPI_T_category_get_pvars(int cat_index,int len,int indices[]);
-#define MPI_T_category_get_pvars PMPI_T_category_get_pvars
 #pragma weak MPI_T_category_get_pvars=PMPI_T_category_get_pvars
 int (*INTERFACE_LOCAL_MPI_T_category_get_pvars)(int,int,int *);
 #ifdef WI4MPI_STATIC
@@ -7724,7 +7338,6 @@ printf("sort : PMPI_T_category_get_pvars (interface)\n");
 return ret_tmp;
 }
 int MPI_T_category_get_categories(int cat_index,int len,int indices[]);
-#define MPI_T_category_get_categories PMPI_T_category_get_categories
 #pragma weak MPI_T_category_get_categories=PMPI_T_category_get_categories
 int (*INTERFACE_LOCAL_MPI_T_category_get_categories)(int,int,int *);
 #ifdef WI4MPI_STATIC
@@ -7744,7 +7357,6 @@ printf("sort : PMPI_T_category_get_categories (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iwrite_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iwrite_all PMPI_File_iwrite_all
 #pragma weak MPI_File_iwrite_all=PMPI_File_iwrite_all
 int (*INTERFACE_LOCAL_MPI_File_iwrite_all)(MPI_File,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7764,7 +7376,6 @@ printf("sort : PMPI_File_iwrite_all (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iwrite_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iwrite_at_all PMPI_File_iwrite_at_all
 #pragma weak MPI_File_iwrite_at_all=PMPI_File_iwrite_at_all
 int (*INTERFACE_LOCAL_MPI_File_iwrite_at_all)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -7784,7 +7395,6 @@ printf("sort : PMPI_File_iwrite_at_all (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_Group_c2f(MPI_Group group);
-#define MPI_Group_c2f PMPI_Group_c2f
 #pragma weak MPI_Group_c2f=PMPI_Group_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_Group_c2f)(MPI_Group);
 #ifdef WI4MPI_STATIC
@@ -7804,7 +7414,6 @@ printf("sort : PMPI_Group_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Group MPI_Group_f2c(MPI_Fint group);
-#define MPI_Group_f2c PMPI_Group_f2c
 #pragma weak MPI_Group_f2c=PMPI_Group_f2c
 MPI_Group (*INTERFACE_LOCAL_MPI_Group_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -7824,7 +7433,6 @@ printf("sort : PMPI_Group_f2c (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_Info_c2f(MPI_Info info);
-#define MPI_Info_c2f PMPI_Info_c2f
 #pragma weak MPI_Info_c2f=PMPI_Info_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_Info_c2f)(MPI_Info);
 #ifdef WI4MPI_STATIC
@@ -7844,7 +7452,6 @@ printf("sort : PMPI_Info_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Info MPI_Info_f2c(MPI_Fint info);
-#define MPI_Info_f2c PMPI_Info_f2c
 #pragma weak MPI_Info_f2c=PMPI_Info_f2c
 MPI_Info (*INTERFACE_LOCAL_MPI_Info_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -7864,7 +7471,6 @@ printf("sort : PMPI_Info_f2c (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_Errhandler_c2f(MPI_Errhandler errhandler);
-#define MPI_Errhandler_c2f PMPI_Errhandler_c2f
 #pragma weak MPI_Errhandler_c2f=PMPI_Errhandler_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_Errhandler_c2f)(MPI_Errhandler);
 #ifdef WI4MPI_STATIC
@@ -7884,7 +7490,6 @@ printf("sort : PMPI_Errhandler_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Errhandler MPI_Errhandler_f2c(MPI_Fint errhandler);
-#define MPI_Errhandler_f2c PMPI_Errhandler_f2c
 #pragma weak MPI_Errhandler_f2c=PMPI_Errhandler_f2c
 MPI_Errhandler (*INTERFACE_LOCAL_MPI_Errhandler_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -7904,7 +7509,6 @@ printf("sort : PMPI_Errhandler_f2c (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_Message_c2f(MPI_Message message);
-#define MPI_Message_c2f PMPI_Message_c2f
 #pragma weak MPI_Message_c2f=PMPI_Message_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_Message_c2f)(MPI_Message);
 #ifdef WI4MPI_STATIC
@@ -7924,7 +7528,6 @@ printf("sort : PMPI_Message_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Message MPI_Message_f2c(MPI_Fint message);
-#define MPI_Message_f2c PMPI_Message_f2c
 #pragma weak MPI_Message_f2c=PMPI_Message_f2c
 MPI_Message (*INTERFACE_LOCAL_MPI_Message_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -7944,7 +7547,6 @@ printf("sort : PMPI_Message_f2c (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_Op_c2f(MPI_Op op);
-#define MPI_Op_c2f PMPI_Op_c2f
 #pragma weak MPI_Op_c2f=PMPI_Op_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_Op_c2f)(MPI_Op);
 #ifdef WI4MPI_STATIC
@@ -7964,7 +7566,6 @@ printf("sort : PMPI_Op_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Op MPI_Op_f2c(MPI_Fint op);
-#define MPI_Op_f2c PMPI_Op_f2c
 #pragma weak MPI_Op_f2c=PMPI_Op_f2c
 MPI_Op (*INTERFACE_LOCAL_MPI_Op_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -7984,7 +7585,6 @@ printf("sort : PMPI_Op_f2c (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_Request_c2f(MPI_Request request);
-#define MPI_Request_c2f PMPI_Request_c2f
 #pragma weak MPI_Request_c2f=PMPI_Request_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_Request_c2f)(MPI_Request);
 #ifdef WI4MPI_STATIC
@@ -8004,7 +7604,6 @@ printf("sort : PMPI_Request_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Request MPI_Request_f2c(MPI_Fint request);
-#define MPI_Request_f2c PMPI_Request_f2c
 #pragma weak MPI_Request_f2c=PMPI_Request_f2c
 MPI_Request (*INTERFACE_LOCAL_MPI_Request_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -8024,7 +7623,6 @@ printf("sort : PMPI_Request_f2c (interface)\n");
 return ret_tmp;
 }
 int MPI_T_category_get_index(char * name,int * cat_index);
-#define MPI_T_category_get_index PMPI_T_category_get_index
 #pragma weak MPI_T_category_get_index=PMPI_T_category_get_index
 int (*INTERFACE_LOCAL_MPI_T_category_get_index)(char *,int *);
 #ifdef WI4MPI_STATIC
@@ -8044,7 +7642,6 @@ printf("sort : PMPI_T_category_get_index (interface)\n");
 return ret_tmp;
 }
 int MPI_T_cvar_get_index(char * name,int * cvar_index);
-#define MPI_T_cvar_get_index PMPI_T_cvar_get_index
 #pragma weak MPI_T_cvar_get_index=PMPI_T_cvar_get_index
 int (*INTERFACE_LOCAL_MPI_T_cvar_get_index)(char *,int *);
 #ifdef WI4MPI_STATIC
@@ -8064,7 +7661,6 @@ printf("sort : PMPI_T_cvar_get_index (interface)\n");
 return ret_tmp;
 }
 int MPI_T_pvar_get_index(char * name,int var_class,int * pvar_index);
-#define MPI_T_pvar_get_index PMPI_T_pvar_get_index
 #pragma weak MPI_T_pvar_get_index=PMPI_T_pvar_get_index
 int (*INTERFACE_LOCAL_MPI_T_pvar_get_index)(char *,int,int *);
 #ifdef WI4MPI_STATIC
@@ -8084,7 +7680,6 @@ printf("sort : PMPI_T_pvar_get_index (interface)\n");
 return ret_tmp;
 }
 int MPI_Type_c2f(MPI_Datatype datatype);
-#define MPI_Type_c2f PMPI_Type_c2f
 #pragma weak MPI_Type_c2f=PMPI_Type_c2f
 int (*INTERFACE_LOCAL_MPI_Type_c2f)(MPI_Datatype);
 #ifdef WI4MPI_STATIC
@@ -8104,7 +7699,6 @@ printf("sort : PMPI_Type_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Datatype MPI_Type_f2c(MPI_Fint datatype);
-#define MPI_Type_f2c PMPI_Type_f2c
 #pragma weak MPI_Type_f2c=PMPI_Type_f2c
 MPI_Datatype (*INTERFACE_LOCAL_MPI_Type_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -8124,7 +7718,6 @@ printf("sort : PMPI_Type_f2c (interface)\n");
 return ret_tmp;
 }
 int MPI_Win_c2f(MPI_Win win);
-#define MPI_Win_c2f PMPI_Win_c2f
 #pragma weak MPI_Win_c2f=PMPI_Win_c2f
 int (*INTERFACE_LOCAL_MPI_Win_c2f)(MPI_Win);
 #ifdef WI4MPI_STATIC
@@ -8144,7 +7737,6 @@ printf("sort : PMPI_Win_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Win MPI_Win_f2c(MPI_Fint win);
-#define MPI_Win_f2c PMPI_Win_f2c
 #pragma weak MPI_Win_f2c=PMPI_Win_f2c
 MPI_Win (*INTERFACE_LOCAL_MPI_Win_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -8164,7 +7756,6 @@ printf("sort : PMPI_Win_f2c (interface)\n");
 return ret_tmp;
 }
 MPI_Aint MPI_Aint_add(MPI_Aint base,MPI_Aint disp);
-#define MPI_Aint_add PMPI_Aint_add
 #pragma weak MPI_Aint_add=PMPI_Aint_add
 MPI_Aint (*INTERFACE_LOCAL_MPI_Aint_add)(MPI_Aint,MPI_Aint);
 #ifdef WI4MPI_STATIC
@@ -8184,7 +7775,6 @@ printf("sort : PMPI_Aint_add (interface)\n");
 return ret_tmp;
 }
 MPI_Aint MPI_Aint_diff(MPI_Aint addr1,MPI_Aint addr2);
-#define MPI_Aint_diff PMPI_Aint_diff
 #pragma weak MPI_Aint_diff=PMPI_Aint_diff
 MPI_Aint (*INTERFACE_LOCAL_MPI_Aint_diff)(MPI_Aint,MPI_Aint);
 #ifdef WI4MPI_STATIC
@@ -8204,7 +7794,6 @@ printf("sort : PMPI_Aint_diff (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_Comm_c2f(MPI_Comm comm);
-#define MPI_Comm_c2f PMPI_Comm_c2f
 #pragma weak MPI_Comm_c2f=PMPI_Comm_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_Comm_c2f)(MPI_Comm);
 #ifdef WI4MPI_STATIC
@@ -8224,7 +7813,6 @@ printf("sort : PMPI_Comm_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_Comm MPI_Comm_f2c(MPI_Fint comm);
-#define MPI_Comm_f2c PMPI_Comm_f2c
 #pragma weak MPI_Comm_f2c=PMPI_Comm_f2c
 MPI_Comm (*INTERFACE_LOCAL_MPI_Comm_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -8244,7 +7832,6 @@ printf("sort : PMPI_Comm_f2c (interface)\n");
 return ret_tmp;
 }
 MPI_Fint MPI_File_c2f(MPI_File file);
-#define MPI_File_c2f PMPI_File_c2f
 #pragma weak MPI_File_c2f=PMPI_File_c2f
 MPI_Fint (*INTERFACE_LOCAL_MPI_File_c2f)(MPI_File);
 #ifdef WI4MPI_STATIC
@@ -8264,7 +7851,6 @@ printf("sort : PMPI_File_c2f (interface)\n");
 return ret_tmp;
 }
 MPI_File MPI_File_f2c(MPI_Fint file);
-#define MPI_File_f2c PMPI_File_f2c
 #pragma weak MPI_File_f2c=PMPI_File_f2c
 MPI_File (*INTERFACE_LOCAL_MPI_File_f2c)(MPI_Fint);
 #ifdef WI4MPI_STATIC
@@ -8284,7 +7870,6 @@ printf("sort : PMPI_File_f2c (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iread_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iread_all PMPI_File_iread_all
 #pragma weak MPI_File_iread_all=PMPI_File_iread_all
 int (*INTERFACE_LOCAL_MPI_File_iread_all)(MPI_File,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -8304,7 +7889,6 @@ printf("sort : PMPI_File_iread_all (interface)\n");
 return ret_tmp;
 }
 int MPI_File_iread_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
-#define MPI_File_iread_at_all PMPI_File_iread_at_all
 #pragma weak MPI_File_iread_at_all=PMPI_File_iread_at_all
 int (*INTERFACE_LOCAL_MPI_File_iread_at_all)(MPI_File,MPI_Offset,void *,int,MPI_Datatype,MPI_Request *);
 #ifdef WI4MPI_STATIC
@@ -8324,7 +7908,6 @@ printf("sort : PMPI_File_iread_at_all (interface)\n");
 return ret_tmp;
 }
 int MPI_T_category_changed(int * stamp);
-#define MPI_T_category_changed PMPI_T_category_changed
 #pragma weak MPI_T_category_changed=PMPI_T_category_changed
 int (*INTERFACE_LOCAL_MPI_T_category_changed)(int *);
 #ifdef WI4MPI_STATIC
