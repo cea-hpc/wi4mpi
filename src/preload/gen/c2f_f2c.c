@@ -1268,7 +1268,7 @@ return ret;
 __asm__(
 ".global MPI_Status_f2c\n"
 ".weak MPI_Status_f2c\n"
-".set MPI_Status_f2c,MPI_Status_f2c\n"
+".set MPI_Status_f2c,CCMPI_Status_f2c\n"
 ".extern in_w\n"
 ".extern A_MPI_Status_f2c\n"
 ".extern R_MPI_Status_f2c\n"
@@ -2622,7 +2622,7 @@ return ret;
 __asm__(
 ".global MPI_Status_f2c\n"
 ".weak MPI_Status_f2c\n"
-".set MPI_Status_f2c,MPI_Status_f2c\n"
+".set MPI_Status_f2c,CCMPI_Status_f2c\n"
 ".extern in_w\n"
 ".extern A_MPI_Status_f2c\n"
 ".extern R_MPI_Status_f2c\n"
