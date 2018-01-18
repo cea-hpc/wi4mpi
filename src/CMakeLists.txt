@@ -369,6 +369,25 @@ set_target_properties(wi4mpi_OMPI_OMPI
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DOMPI_OMPI"
 )
 endif()
+if(CMAKE_C_COMPILER STREQUAL "clang")
+set_target_properties(wi4mpi_INTEL_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL"
+)
+set_target_properties(wi4mpi_INTEL_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_OMPI "
+)
+
+set_target_properties(wi4mpi_OMPI_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DOMPI_INTEL"
+)
+set_target_properties(wi4mpi_OMPI_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DOMPI_OMPI"
+)
+endif()
 
 set_target_properties(mpifort.so.12 
                       mpi.so.12
