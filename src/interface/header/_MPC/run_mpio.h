@@ -120,9 +120,9 @@ typedef int R_MPI_Fint;
 
 /* Section 9.2 */
 /* Begin Prototypes */
-int R_MPI_File_open(R_MPI_Comm comm, const char *filename, int amode, R_MPI_Info info, R_MPI_File *fh);
+int R_MPI_File_open(R_MPI_Comm comm, char *filename, int amode, R_MPI_Info info, R_MPI_File *fh);
 int R_MPI_File_close(R_MPI_File *fh);
-int R_MPI_File_delete(const char *filename, R_MPI_Info info);
+int R_MPI_File_delete(char *filename, R_MPI_Info info);
 int R_MPI_File_set_size(R_MPI_File fh, R_MPI_Offset size);
 int R_MPI_File_preallocate(R_MPI_File fh, R_MPI_Offset size);
 int R_MPI_File_get_size(R_MPI_File fh, R_MPI_Offset *size);
@@ -133,7 +133,7 @@ int R_MPI_File_get_info(R_MPI_File fh, R_MPI_Info *info_used);
 
 /* Section 9.3 */
 int R_MPI_File_set_view(R_MPI_File fh, R_MPI_Offset disp, R_MPI_Datatype etype, R_MPI_Datatype filetype,
-                      const char *datarep, R_MPI_Info info);
+                      char *datarep, R_MPI_Info info);
 int R_MPI_File_get_view(R_MPI_File fh, R_MPI_Offset *disp, R_MPI_Datatype *etype, R_MPI_Datatype *filetype,
                       char *datarep);
 
@@ -143,10 +143,10 @@ int R_MPI_File_read_at(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
 int R_MPI_File_read_at_all(R_MPI_File fh, R_MPI_Offset offset, void * buf, int count,
                          R_MPI_Datatype datatype, R_MPI_Status *status)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
-int R_MPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, const void * buf, int count,
+int R_MPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, void * buf, int count,
                       R_MPI_Datatype datatype, R_MPI_Status *status)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
-int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, const void *buf, int count,
+int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
                           R_MPI_Datatype datatype, R_MPI_Status *status)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 
@@ -155,7 +155,7 @@ int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, const void *buf,
    R_MPIO_Wait are used to test and wait on nonblocking I/O requests */ 
 int R_MPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count, R_MPI_Datatype datatype,
                       R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
-int R_MPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, const void *buf, int count,
+int R_MPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
                        R_MPI_Datatype datatype, R_MPIO_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 
@@ -164,9 +164,9 @@ int R_MPI_File_read(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_read_all(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype, R_MPI_Status *status)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_write(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype,
+int R_MPI_File_write(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                    R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_write_all(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype,
+int R_MPI_File_write_all(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                        R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
 /* nonblocking calls currently use R_MPIO_Request, because generalized
@@ -175,7 +175,7 @@ int R_MPI_File_write_all(R_MPI_File fh, const void *buf, int count, R_MPI_Dataty
 
 int R_MPI_File_iread(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype, R_MPIO_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_iwrite(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype,
+int R_MPI_File_iwrite(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                     R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
 int R_MPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence);
@@ -185,15 +185,15 @@ int R_MPI_File_get_byte_offset(R_MPI_File fh, R_MPI_Offset offset, R_MPI_Offset 
 /* Section 9.4.4 */
 int R_MPI_File_read_shared(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                          R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_write_shared(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype,
+int R_MPI_File_write_shared(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                           R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_iread_shared(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                           R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_iwrite_shared(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype,
+int R_MPI_File_iwrite_shared(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                            R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_read_ordered(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                           R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_write_ordered(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype,
+int R_MPI_File_write_ordered(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                            R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_seek_shared(R_MPI_File fh, R_MPI_Offset offset, int whence);
 int R_MPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset);
@@ -202,27 +202,27 @@ int R_MPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset);
 int R_MPI_File_read_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
                                R_MPI_Datatype datatype) MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 int R_MPI_File_read_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-int R_MPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, const void *buf, int count,
+int R_MPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
                                 R_MPI_Datatype datatype) MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
-int R_MPI_File_write_at_all_end(R_MPI_File fh, const void *buf, R_MPI_Status *status);
+int R_MPI_File_write_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
 int R_MPI_File_read_all_begin(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_read_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-int R_MPI_File_write_all_begin(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype)
+int R_MPI_File_write_all_begin(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_write_all_end(R_MPI_File fh, const void *buf, R_MPI_Status *status);
+int R_MPI_File_write_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
 int R_MPI_File_read_ordered_begin(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_read_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-int R_MPI_File_write_ordered_begin(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype)
+int R_MPI_File_write_ordered_begin(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_write_ordered_end(R_MPI_File fh, const void *buf, R_MPI_Status *status);
+int R_MPI_File_write_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
 
 /* Section 9.5.1 */
 int R_MPI_File_get_type_extent(R_MPI_File fh, R_MPI_Datatype datatype, R_MPI_Aint *extent);
 
 /* Section 9.5.3 */
-int R_MPI_Register_datarep(const char *datarep, R_MPI_Datarep_conversion_function *read_conversion_fn,
+int R_MPI_Register_datarep(char *datarep, R_MPI_Datarep_conversion_function *read_conversion_fn,
 			 R_MPI_Datarep_conversion_function *write_conversion_fn,
 			 R_MPI_Datarep_extent_function *dtype_file_extent_fn, void *extra_state);
 
@@ -242,13 +242,13 @@ int R_MPI_File_get_errhandler(R_MPI_File file, R_MPI_Errhandler *errhandler);
 int R_MPI_File_iread_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
                            R_MPI_Datatype datatype, R_MPI_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
-int R_MPI_File_iwrite_at_all(R_MPI_File fh, R_MPI_Offset offset, const void *buf, int count,
+int R_MPI_File_iwrite_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
                             R_MPI_Datatype datatype, R_MPI_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 int R_MPI_File_iread_all(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                         R_MPI_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_File_iwrite_all(R_MPI_File fh, const void *buf, int count, R_MPI_Datatype datatype,
+int R_MPI_File_iwrite_all(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                          R_MPI_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 /* End Prototypes */

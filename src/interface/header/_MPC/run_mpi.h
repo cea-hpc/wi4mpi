@@ -484,7 +484,7 @@ typedef long R_MPI_Count;
 typedef MPC_Message R_MPI_Message;
 
 /* added in MPI-2.2 */
-typedef void (R_MPI_File_errhandler_function)(void *, int *, ...);
+typedef void (R_MPI_File_errhandler_function)(void*, int *, ...);
 /* names that were added in MPI-2.0 and deprecated in MPI-2.2 */
 typedef R_MPI_File_errhandler_function R_MPI_File_errhandler_fn;
  
@@ -840,11 +840,11 @@ int R_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[], R_M
 int R_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[], void *recvbuf, int recvcounts[], R_MPI_Aint rdispls[], R_MPI_Datatype recvtypes[], R_MPI_Comm comm);
 
 /* MPI Info Management */
-int R_MPI_Info_set( R_MPI_Info, const char *, const char * );
+int R_MPI_Info_set( R_MPI_Info, char *, char * );
 int R_MPI_Info_free( R_MPI_Info * );
 int R_MPI_Info_create( R_MPI_Info * );
-int R_MPI_Info_delete( R_MPI_Info , const char * );
-int R_MPI_Info_get(R_MPI_Info , const char *, int , char *, int *);
+int R_MPI_Info_delete( R_MPI_Info , char * );
+int R_MPI_Info_get(R_MPI_Info , char *, int , char *, int *);
 int R_MPI_Info_dup( R_MPI_Info , R_MPI_Info * );
 int R_MPI_Info_get_nkeys (R_MPI_Info, int *);
 int R_MPI_Info_get_nthkey (R_MPI_Info, int, char *);
@@ -965,7 +965,7 @@ int R_MPI_Win_start(R_MPI_Group, int, R_MPI_Win);
 int R_MPI_Win_test(R_MPI_Win, int *);
 int R_MPI_Win_unlock(int, R_MPI_Win);
 int R_MPI_Win_allocate(R_MPI_Aint, int, R_MPI_Info, R_MPI_Comm, void *, R_MPI_Win *);
-int R_MPI_Win_set_name(R_MPI_Win, const char *);
+int R_MPI_Win_set_name(R_MPI_Win, char *);
 int R_MPI_Win_get_name(R_MPI_Win, char *, int *);
 int R_MPI_Win_set_errhandler(R_MPI_Win, R_MPI_Errhandler);
 int R_MPI_Win_get_errhandler(R_MPI_Win, R_MPI_Errhandler *);
@@ -979,25 +979,25 @@ int R_MPI_Win_lock_all(int, R_MPI_Win);
 int R_MPI_Win_unlock_all(R_MPI_Win win);
 int R_MPI_Win_sync(R_MPI_Win win);
 int R_MPI_Win_attach(R_MPI_Win, void *, R_MPI_Aint);
-int R_MPI_Win_detach(R_MPI_Win, const void *);
+int R_MPI_Win_detach(R_MPI_Win, void *);
 int R_MPI_Win_flush(int, R_MPI_Win);
 int R_MPI_Win_flush_all(R_MPI_Win);
 int R_MPI_Win_set_info(R_MPI_Win, R_MPI_Info);
 int R_MPI_Win_get_info(R_MPI_Win, R_MPI_Info *);
-int R_MPI_Get_accumulate(const void *, int, R_MPI_Datatype, void *, int,
+int R_MPI_Get_accumulate(void *, int, R_MPI_Datatype, void *, int,
                        R_MPI_Datatype, int, R_MPI_Aint, int, R_MPI_Datatype, R_MPI_Op,
                        R_MPI_Win);
-int R_MPI_Fetch_and_op(const void *, void *, R_MPI_Datatype, int, R_MPI_Aint, R_MPI_Op,
+int R_MPI_Fetch_and_op(void *, void *, R_MPI_Datatype, int, R_MPI_Aint, R_MPI_Op,
                      R_MPI_Win);
-int R_MPI_Compare_and_swap(const void *, const void *, void *, R_MPI_Datatype, int,
+int R_MPI_Compare_and_swap(void *, void *, void *, R_MPI_Datatype, int,
                          R_MPI_Aint, R_MPI_Win);
-int R_MPI_Rput(const void *, int, R_MPI_Datatype, int, R_MPI_Aint, int, R_MPI_Datatype,
+int R_MPI_Rput(void *, int, R_MPI_Datatype, int, R_MPI_Aint, int, R_MPI_Datatype,
              R_MPI_Win, R_MPI_Request *);
 int R_MPI_Rget(void *, int, R_MPI_Datatype, int, R_MPI_Aint, int, R_MPI_Datatype,
              R_MPI_Win, R_MPI_Request *);
-int R_MPI_Raccumulate(const void *, int, R_MPI_Datatype, int, R_MPI_Aint, int,
+int R_MPI_Raccumulate(void *, int, R_MPI_Datatype, int, R_MPI_Aint, int,
                     R_MPI_Datatype, R_MPI_Op, R_MPI_Win, R_MPI_Request *);
-int R_MPI_Rget_accumulate(const void *, int, R_MPI_Datatype, void *, int,
+int R_MPI_Rget_accumulate(void *, int, R_MPI_Datatype, void *, int,
                         R_MPI_Datatype, int, R_MPI_Aint, int, R_MPI_Datatype, R_MPI_Op,
                         R_MPI_Win, R_MPI_Request *);
 /** Internal storage class (see mpit_internal.h) */
@@ -1071,7 +1071,7 @@ int R_MPI_T_cvar_get_info(int cvar_index, char *name, int *name_len,
 * @arg cvar_index Index of the target CVAR
 * @return R_MPI_T_ERR_INVALID_NAME if not found
 */
-int R_MPI_T_cvar_get_index(const char *name, int *cvar_index);
+int R_MPI_T_cvar_get_index(char *name, int *cvar_index);
 
 /** Forward declaration of the VAR container */
 
@@ -1113,7 +1113,7 @@ int R_MPI_T_cvar_read(R_MPI_T_cvar_handle handle, void *buff);
 * @arg buff The data to be written
 * @return MPI Error
 */
-int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle, const void *buff);
+int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle, void *buff);
 
 /** Performance variables (PVAR) */
 
@@ -1163,7 +1163,7 @@ int R_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
 * @arg pvar_index Index of the PVAR found
 * @return R_MPI_T_ERR_INVALID_NAME if not found
 */
-int R_MPI_T_pvar_get_index(char *name, int *pvar_class, int *pvar_index);
+int R_MPI_T_pvar_get_index(char *name, int var_class, int *pvar_index);
 
 /*** Performance experiment sessions */
 
@@ -1253,7 +1253,7 @@ int R_MPI_T_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle han
  * @return MPI Error
  */
 int R_MPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
-                     const void *buff);
+                     void *buff);
 /** Reset the value associated with a PVAR
  * @arg session Performance experiment session to read from
  * @arg handle Handle of the performance variable
@@ -1835,13 +1835,13 @@ int R_MPI_Comm_set_errhandler(R_MPI_Comm , R_MPI_Errhandler );
 /* Process Creation and Management */
 int R_MPI_Close_port (char *);
 int R_MPI_Comm_accept (char *, R_MPI_Info, int, R_MPI_Comm, R_MPI_Comm *);
-int R_MPI_Comm_connect(const char *, R_MPI_Info , int , R_MPI_Comm , R_MPI_Comm *);
+int R_MPI_Comm_connect(char *, R_MPI_Info , int , R_MPI_Comm , R_MPI_Comm *);
 int R_MPI_Comm_disconnect (R_MPI_Comm *);
 int R_MPI_Comm_get_parent (R_MPI_Comm *);
 int R_MPI_Comm_join (int, R_MPI_Comm *);
 int R_MPI_Comm_spawn (char *, char *[], int, R_MPI_Info, int, R_MPI_Comm, R_MPI_Comm *, int[]);
 int R_MPI_Comm_spawn_multiple (int, char *[], char **[], int[], R_MPI_Info[], int, R_MPI_Comm, R_MPI_Comm *, int[]);
-int R_MPI_Lookup_name(const char *, R_MPI_Info , char *);
+int R_MPI_Lookup_name(char *, R_MPI_Info , char *);
 int R_MPI_Open_port (R_MPI_Info, char *);
 int R_MPI_Publish_name (char *, R_MPI_Info, char *);
 int R_MPI_Unpublish_name (char *, R_MPI_Info, char *);
@@ -1858,7 +1858,7 @@ int R_MPI_Get_library_version(char *, int *);
   
 /* Collectives */
 int R_MPI_Reduce_scatter_block(void *, void *, int , R_MPI_Datatype , R_MPI_Op , R_MPI_Comm );
-int R_MPI_Reduce_local(const void *, void *, int, R_MPI_Datatype, R_MPI_Op);
+int R_MPI_Reduce_local(void *, void *, int, R_MPI_Datatype, R_MPI_Op);
 
 /* Extended Collective Operations */
 int R_MPI_Alltoallw (void *, int[], int[], R_MPI_Datatype[], void *, int[], int[], R_MPI_Datatype[], R_MPI_Comm);
@@ -1866,13 +1866,8 @@ int R_MPI_Alltoallw (void *, int[], int[], R_MPI_Datatype[], void *, int[], int[
 /* dist graph operations */
 int R_MPI_Dist_graph_neighbors_count(R_MPI_Comm , int *, int *, int *);
 int R_MPI_Dist_graph_neighbors(R_MPI_Comm , int , int [], int [], int , int [], int []);
-int R_MPI_Dist_graph_create(R_MPI_Comm , int , const int [],const int [], const int [],const int [],R_MPI_Info , int , R_MPI_Comm *);
-int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm ,int , const int [],const int [],int , const int [],const int [],R_MPI_Info , int , R_MPI_Comm *);
-
-/* Error handling */
-int R_MPI_File_create_errhandler(R_MPI_File_errhandler_function *, R_MPI_Errhandler *);
-int R_PMPI_File_create_errhandler(R_MPI_File_errhandler_function *file_errhandler_fn, R_MPI_Errhandler *errhandler);
-int R_MPI_File_call_errhandler(void * , int );
+int R_MPI_Dist_graph_create(R_MPI_Comm , int , int [], int [], int [],int [],R_MPI_Info , int , R_MPI_Comm *);
+int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm ,int , int [], int [],int , int [], int [],R_MPI_Info , int , R_MPI_Comm *);
 
 /* MPIX methods */
 int R_MPIX_Comm_failure_ack( R_MPI_Comm  );
@@ -1900,3 +1895,11 @@ int R_MPI_Improbe(int , int , R_MPI_Comm , int *, R_MPI_Message *, R_MPI_Status 
 #endif
 #endif /* __SCTK_MPC_MPI_H_ */
 #include "run_mpio.h"
+
+#ifndef R_MPI_FILE_DEFINED
+typedef struct ADIOI_FileD *R_MPI_File;
+#endif
+/* Error handling */
+int R_MPI_File_create_errhandler(R_MPI_File_errhandler_function *, R_MPI_Errhandler *);
+int R_PMPI_File_create_errhandler(R_MPI_File_errhandler_function *file_errhandler_fn, R_MPI_Errhandler *errhandler);
+int R_MPI_File_call_errhandler(R_MPI_File fh , int );
