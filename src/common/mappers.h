@@ -226,12 +226,14 @@ static inline void my_keyval_r2a(int *keyval,int *keyval_tmp)
     case  R_MPI_APPNUM         : *keyval=A_MPI_APPNUM         ;break;
     case  R_MPI_LASTUSEDCODE   : *keyval=A_MPI_LASTUSEDCODE   ;break;
     case  R_MPI_UNIVERSE_SIZE  : *keyval=A_MPI_UNIVERSE_SIZE  ;break;
+#if !defined(_MPC) && !defined(OMPI_MPC) && !defined(INTEL_MPC) && !defined(MPC_MPC)
+/* MPC-3.2.0 defines those variables at the same value than others above */
     case  R_MPI_WIN_BASE       : *keyval=A_MPI_WIN_BASE       ;break;
     case  R_MPI_WIN_SIZE       : *keyval=A_MPI_WIN_SIZE       ;break;
     case  R_MPI_WIN_DISP_UNIT  : *keyval=A_MPI_WIN_DISP_UNIT  ;break;
-    case R_MPI_WIN_CREATE_FLAVOR:     *keyval_tmp=A_MPI_WIN_CREATE_FLAVOR  ;break;
-    case R_MPI_WIN_MODEL:             *keyval_tmp=A_MPI_WIN_MODEL  ;break;
-
+    case  R_MPI_WIN_CREATE_FLAVOR:     *keyval_tmp=A_MPI_WIN_CREATE_FLAVOR  ;break;
+    case  R_MPI_WIN_MODEL:             *keyval_tmp=A_MPI_WIN_MODEL  ;break;
+#endif
     default: /*We may want to check the keyval hash table*/
             *keyval=*keyval_tmp;
 }}
@@ -363,11 +365,10 @@ static inline int error_code_conv_r2a(int ret_tmp)
        case_R_A(ERR_SPAWN);
        case_R_A(ERR_WIN);
        //case_R_A(ERR_LASTCODE);
-       case_R_A(ERR_RMA_RANGE);
-       case_R_A(ERR_RMA_ATTACH);
-       case_R_A(ERR_RMA_SHARED);
+       case_A_R(ERR_RMA_RANGE);
+       case_A_R(ERR_RMA_ATTACH);
+       case_A_R(ERR_RMA_SHARED);
        case_R_A(ERR_RMA_FLAVOR);
-
 	
 	  default:
          return ret_tmp;

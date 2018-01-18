@@ -191,7 +191,7 @@ int A_MPI_Status_c2f(A_MPI_Status *c_status,const A_MPI_Fint *f_status)
 	memcpy(f_status,c_status,A_f_MPI_STATUS_SIZE*sizeof(int));	
 	return A_MPI_SUCCESS;
 }
-#if defined(OMPI_OMPI) || defined(_OMPI)
+#if defined(OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 #define OMPI_TARGET
 #endif
 #ifdef OMPI_TARGET

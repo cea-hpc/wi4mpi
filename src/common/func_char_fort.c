@@ -45,23 +45,26 @@ void (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,int);
 void (*_LOCAL_MPI_Get_processor_name)(char *,int,int *,int *i);
 #endif
 
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC) || defined(OMPI_MPC) || defined(MPC_MPC)
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 255
 #endif
 
-#ifdef INTEL_INTEL
+#if defined(INTEL_INTEL) || defined(INTEL_MPC)
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 127
 #endif
+
 #if defined(OMPI_OMPI) || defined(_OMPI)
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 255
 #endif
-#ifdef INTEL_OMPI
+
+#if defined(INTEL_OMPI)
 #define R_f_MPI_MAX_PROCESSOR_NAME 512
 #define A_f_MPI_MAX_PROCESSOR_NAME 127
 #endif
+
 int (*LOCAL_MPI_Get_processor_name)(char *,int *);
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL)
 void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen)
@@ -106,23 +109,22 @@ void  pmpi_error_string_(int *,char *,int *,int *);
 void  pmpi_error_string__(int *,char *,int *,int *);
 
 void  pmpi_error_string_(int *,char *,int *,int *);
-#if defined(OMPI_INTEL) || defined(_INTEL)
+
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(OMPI_OMPI) || defined(OMPI_MPC) || defined(_OMPI) || defined(_MPC)
 #define R_f_MPI_MAX_ERROR_STRING 2048
 #define A_f_MPI_MAX_ERROR_STRING 255
 #endif
 
-#ifdef INTEL_INTEL
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(INTEL_MPC)
 #define R_f_MPI_MAX_ERROR_STRING 2048
 #define A_f_MPI_MAX_ERROR_STRING 511
 #endif
-#if defined(OMPI_OMPI) || defined(_OMPI)
+
+#if defined(MPC_INTEL) || defined(MPC_OMPI) || defined(MPC_MPC)
 #define R_f_MPI_MAX_ERROR_STRING 2048
-#define A_f_MPI_MAX_ERROR_STRING 255
+#define A_f_MPI_MAX_ERROR_STRING 512
 #endif
-#ifdef INTEL_OMPI
-#define R_f_MPI_MAX_ERROR_STRING 2048
-#define A_f_MPI_MAX_ERROR_STRING 511
-#endif
+
 //#define A_f_MPI_Error_string _PMPI_Error_string
 //#pragma weak mpi_error_string_=_PMPI_Error_string
 //#pragma weak mpi_error_string__=_PMPI_Error_string

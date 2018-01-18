@@ -140,7 +140,7 @@ int  __svml_irem16_b3;
 int  __svml_irem4;
 int  __svml_irem8_l9;
 #endif
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 char ompi_mpi_comm_null[1024];
 char ompi_mpi_comm_self[1024];
 char ompi_mpi_comm_world[1024];
@@ -251,7 +251,7 @@ char ompi_message_no_proc[512];
 
 #include "c2f_f2c.h"
 extern __thread int in_w;
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
 
 int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag)
@@ -29017,7 +29017,7 @@ printf("sort : R_MPI_T_pvar_handle_free\n");
 return ret_tmp;
 }
 
-#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 /*__asm__(
@@ -29135,7 +29135,7 @@ printf("sort : R_MPI_Errhandler_c2f\n");
 #endif
 return ret;
 }*/
-#elif defined(OMPI_INTEL) || defined(_INTEL)
+#elif defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 /*__asm__(
@@ -29264,7 +29264,7 @@ void wrapper_init_f(void);
 #endif
 WATTR void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
-#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
 #endif
@@ -29477,8 +29477,6 @@ LOCAL_MPI_Alloc_mem=dlsym(lib_handle,"PMPI_Alloc_mem");
 LOCAL_MPI_Comm_create_errhandler=dlsym(lib_handle,"PMPI_Comm_create_errhandler");
 LOCAL_MPI_Comm_get_errhandler=dlsym(lib_handle,"PMPI_Comm_get_errhandler");
 LOCAL_MPI_Comm_set_errhandler=dlsym(lib_handle,"PMPI_Comm_set_errhandler");
-LOCAL_MPI_File_get_errhandler=dlsym(lib_handle,"PMPI_File_get_errhandler");
-LOCAL_MPI_File_set_errhandler=dlsym(lib_handle,"PMPI_File_set_errhandler");
 LOCAL_MPI_Finalized=dlsym(lib_handle,"PMPI_Finalized");
 LOCAL_MPI_Free_mem=dlsym(lib_handle,"PMPI_Free_mem");
 LOCAL_MPI_Get_address=dlsym(lib_handle,"PMPI_Get_address");
@@ -29544,6 +29542,13 @@ LOCAL_MPI_T_pvar_get_num=dlsym(lib_handle,"PMPI_T_pvar_get_num");
 LOCAL_MPI_T_pvar_get_info=dlsym(lib_handle,"PMPI_T_pvar_get_info");
 LOCAL_MPI_T_category_get_num=dlsym(lib_handle,"PMPI_T_category_get_num");
 LOCAL_MPI_T_category_get_info=dlsym(lib_handle,"PMPI_T_category_get_info");
+
+#if defined(_MPC) // [Start of libromio MPC exception]
+void *lib_handle_old = lib_handle;
+lib_handle = dlopen(getenv("WI4MPI_MPC_ROMIO_LIB"), RTLD_NOW|RTLD_GLOBAL);
+#endif
+LOCAL_MPI_File_get_errhandler=dlsym(lib_handle,"PMPI_File_get_errhandler");
+LOCAL_MPI_File_set_errhandler=dlsym(lib_handle,"PMPI_File_set_errhandler");
 LOCAL_MPI_File_open=dlsym(lib_handle,"PMPI_File_open");
 LOCAL_MPI_File_close=dlsym(lib_handle,"PMPI_File_close");
 LOCAL_MPI_File_delete=dlsym(lib_handle,"PMPI_File_delete");
@@ -29592,10 +29597,18 @@ LOCAL_MPI_File_read_ordered_end=dlsym(lib_handle,"PMPI_File_read_ordered_end");
 LOCAL_MPI_File_write_ordered_begin=dlsym(lib_handle,"PMPI_File_write_ordered_begin");
 LOCAL_MPI_File_write_ordered_end=dlsym(lib_handle,"PMPI_File_write_ordered_end");
 LOCAL_MPI_File_get_type_extent=dlsym(lib_handle,"PMPI_File_get_type_extent");
-LOCAL_MPI_Register_datarep=dlsym(lib_handle,"PMPI_Register_datarep");
 LOCAL_MPI_File_set_atomicity=dlsym(lib_handle,"PMPI_File_set_atomicity");
 LOCAL_MPI_File_get_atomicity=dlsym(lib_handle,"PMPI_File_get_atomicity");
 LOCAL_MPI_File_sync=dlsym(lib_handle,"PMPI_File_sync");
+LOCAL_MPI_File_iwrite_all=dlsym(lib_handle,"PMPI_File_iwrite_all");
+LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle,"PMPI_File_iwrite_at_all");
+LOCAL_MPI_File_iread_all=dlsym(lib_handle,"PMPI_File_iread_all");
+LOCAL_MPI_File_iread_at_all=dlsym(lib_handle,"PMPI_File_iread_at_all");
+#if defined(_MPC) // [End of libromio MPC exception]
+lib_handle = lib_handle_old;
+#endif
+
+LOCAL_MPI_Register_datarep=dlsym(lib_handle,"PMPI_Register_datarep");
 LOCAL_MPI_T_finalize=dlsym(lib_handle,"PMPI_T_finalize");
 LOCAL_MPI_Wtime=dlsym(lib_handle,"PMPI_Wtime");
 LOCAL_MPI_Wtick=dlsym(lib_handle,"PMPI_Wtick");
@@ -29655,15 +29668,11 @@ LOCAL_MPI_Neighbor_alltoallw=dlsym(lib_handle,"PMPI_Neighbor_alltoallw");
 LOCAL_MPI_T_category_get_cvars=dlsym(lib_handle,"PMPI_T_category_get_cvars");
 LOCAL_MPI_T_category_get_pvars=dlsym(lib_handle,"PMPI_T_category_get_pvars");
 LOCAL_MPI_T_category_get_categories=dlsym(lib_handle,"PMPI_T_category_get_categories");
-LOCAL_MPI_File_iwrite_all=dlsym(lib_handle,"PMPI_File_iwrite_all");
-LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle,"PMPI_File_iwrite_at_all");
 LOCAL_MPI_T_category_get_index=dlsym(lib_handle,"PMPI_T_category_get_index");
 LOCAL_MPI_T_cvar_get_index=dlsym(lib_handle,"PMPI_T_cvar_get_index");
 LOCAL_MPI_T_pvar_get_index=dlsym(lib_handle,"PMPI_T_pvar_get_index");
 LOCAL_MPI_Aint_add=dlsym(lib_handle,"PMPI_Aint_add");
 LOCAL_MPI_Aint_diff=dlsym(lib_handle,"PMPI_Aint_diff");
-LOCAL_MPI_File_iread_all=dlsym(lib_handle,"PMPI_File_iread_all");
-LOCAL_MPI_File_iread_at_all=dlsym(lib_handle,"PMPI_File_iread_at_all");
 LOCAL_MPI_T_category_changed=dlsym(lib_handle,"PMPI_T_category_changed");
 #if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
 local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");

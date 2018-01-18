@@ -39,7 +39,7 @@ typedef struct {
 extern myKeyval_functions_t *myKeyval_translation_get(int);
 extern void myKeyval_translation_del(int);
 extern void myKeyval_translation_add(int,myKeyval_functions_t *);
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int *MPI_UNWEIGHTED=NULL;
 #endif
 extern __thread int in_w;
@@ -11913,8 +11913,10 @@ printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 WATTR void wrapper_init_f(void) {
 dlopen(getenv("WI4MPI_RUN_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
 void *lib_handle_f=dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"),RTLD_NOW|RTLD_GLOBAL);
-if(!lib_handle_f)
-   { printf("%s not loaded \nerror : %s\n",getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());exit(1);}
+
+#if !defined(_MPC)
+if(!lib_handle_f) {printf("%s not loaded \nerror : %s\n",getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());exit(1);}
+#endif
 _LOCAL_MPI_Send=dlsym(lib_handle_f,"pmpi_send_");
 _LOCAL_MPI_Recv=dlsym(lib_handle_f,"pmpi_recv_");
 _LOCAL_MPI_Get_count=dlsym(lib_handle_f,"pmpi_get_count_");
@@ -12081,8 +12083,6 @@ _LOCAL_MPI_Alloc_mem=dlsym(lib_handle_f,"pmpi_alloc_mem_");
 _LOCAL_MPI_Comm_create_errhandler=dlsym(lib_handle_f,"pmpi_comm_create_errhandler_");
 _LOCAL_MPI_Comm_get_errhandler=dlsym(lib_handle_f,"pmpi_comm_get_errhandler_");
 _LOCAL_MPI_Comm_set_errhandler=dlsym(lib_handle_f,"pmpi_comm_set_errhandler_");
-_LOCAL_MPI_File_get_errhandler=dlsym(lib_handle_f,"pmpi_file_get_errhandler_");
-_LOCAL_MPI_File_set_errhandler=dlsym(lib_handle_f,"pmpi_file_set_errhandler_");
 _LOCAL_MPI_Finalized=dlsym(lib_handle_f,"pmpi_finalized_");
 _LOCAL_MPI_Free_mem=dlsym(lib_handle_f,"pmpi_free_mem_");
 _LOCAL_MPI_Get_address=dlsym(lib_handle_f,"pmpi_get_address_");
@@ -12129,6 +12129,13 @@ _LOCAL_MPI_Type_get_extent_x=dlsym(lib_handle_f,"pmpi_type_get_extent_x_");
 _LOCAL_MPI_Type_get_true_extent_x=dlsym(lib_handle_f,"pmpi_type_get_true_extent_x_");
 _LOCAL_MPI_Type_size_x=dlsym(lib_handle_f,"pmpi_type_size_x_");
 _LOCAL_MPI_Comm_create_group=dlsym(lib_handle_f,"pmpi_comm_create_group_");
+
+#if defined(_MPC) // [Start of libromio MPC exception]
+void *lib_handle_f_old = lib_handle_f;
+lib_handle_f = dlopen(getenv("WI4MPI_MPC_ROMIO_LIB"), RTLD_NOW|RTLD_GLOBAL);
+#endif
+_LOCAL_MPI_File_get_errhandler=dlsym(lib_handle_f,"pmpi_file_get_errhandler_");
+_LOCAL_MPI_File_set_errhandler=dlsym(lib_handle_f,"pmpi_file_set_errhandler_");
 _LOCAL_MPI_File_close=dlsym(lib_handle_f,"pmpi_file_close_");
 _LOCAL_MPI_File_set_size=dlsym(lib_handle_f,"pmpi_file_set_size_");
 _LOCAL_MPI_File_preallocate=dlsym(lib_handle_f,"pmpi_file_preallocate_");
@@ -12176,6 +12183,20 @@ _LOCAL_MPI_File_get_type_extent=dlsym(lib_handle_f,"pmpi_file_get_type_extent_")
 _LOCAL_MPI_File_set_atomicity=dlsym(lib_handle_f,"pmpi_file_set_atomicity_");
 _LOCAL_MPI_File_get_atomicity=dlsym(lib_handle_f,"pmpi_file_get_atomicity_");
 _LOCAL_MPI_File_sync=dlsym(lib_handle_f,"pmpi_file_sync_");
+_LOCAL_MPI_File_open=dlsym(lib_handle_f,"pmpi_file_open_");
+_LOCAL_MPI_File_set_view=dlsym(lib_handle_f,"pmpi_file_set_view_");
+_LOCAL_MPI_File_get_view=dlsym(lib_handle_f,"pmpi_file_get_view_");
+_LOCAL_MPI_File_delete=dlsym(lib_handle_f,"pmpi_file_delete_");
+_LOCAL_MPI_File_iwrite_all=dlsym(lib_handle_f,"pmpi_file_iwrite_all_");
+_LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle_f,"pmpi_file_iwrite_at_all_");
+_LOCAL_MPI_File_iread_all=dlsym(lib_handle_f,"pmpi_file_iread_all_");
+_LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_f,"pmpi_file_iread_at_all_");
+_LOCAL_MPI_File_call_errhandler=dlsym(lib_handle_f,"pmpi_file_call_errhandler_");
+_LOCAL_MPI_File_create_errhandler=dlsym(lib_handle_f,"pmpi_file_create_errhandler_");
+#if defined(_MPC) // [End of libromio MPC exception]
+lib_handle_f = lib_handle_f_old;
+#endif
+
 _LOCAL_MPI_Wtime=dlsym(lib_handle_f,"pmpi_wtime_");
 _LOCAL_MPI_Wtick=dlsym(lib_handle_f,"pmpi_wtick_");
 _LOCAL_MPI_Finalize=dlsym(lib_handle_f,"pmpi_finalize_");
@@ -12226,18 +12247,10 @@ _LOCAL_MPI_Ineighbor_alltoallw=dlsym(lib_handle_f,"pmpi_ineighbor_alltoallw_");
 _LOCAL_MPI_Neighbor_allgatherv=dlsym(lib_handle_f,"pmpi_neighbor_allgatherv_");
 _LOCAL_MPI_Neighbor_alltoallv=dlsym(lib_handle_f,"pmpi_neighbor_alltoallv_");
 _LOCAL_MPI_Neighbor_alltoallw=dlsym(lib_handle_f,"pmpi_neighbor_alltoallw_");
-_LOCAL_MPI_File_iwrite_all=dlsym(lib_handle_f,"pmpi_file_iwrite_all_");
-_LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle_f,"pmpi_file_iwrite_at_all_");
 _LOCAL_MPI_Aint_add=dlsym(lib_handle_f,"pmpi_aint_add_");
 _LOCAL_MPI_Aint_diff=dlsym(lib_handle_f,"pmpi_aint_diff_");
-_LOCAL_MPI_File_iread_all=dlsym(lib_handle_f,"pmpi_file_iread_all_");
-_LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_f,"pmpi_file_iread_at_all_");
 _LOCAL_MPI_Error_string=dlsym(lib_handle_f,"pmpi_error_string_");
 _LOCAL_MPI_Get_processor_name=dlsym(lib_handle_f,"pmpi_get_processor_name_");
-_LOCAL_MPI_File_open=dlsym(lib_handle_f,"pmpi_file_open_");
-_LOCAL_MPI_File_set_view=dlsym(lib_handle_f,"pmpi_file_set_view_");
-_LOCAL_MPI_File_get_view=dlsym(lib_handle_f,"pmpi_file_get_view_");
-_LOCAL_MPI_File_delete=dlsym(lib_handle_f,"pmpi_file_delete_");
 _LOCAL_MPI_Info_delete=dlsym(lib_handle_f,"pmpi_info_delete_");
 _LOCAL_MPI_Info_get=dlsym(lib_handle_f,"pmpi_info_get_");
 _LOCAL_MPI_Info_get_nthkey=dlsym(lib_handle_f,"pmpi_info_get_nthkey_");
@@ -12274,7 +12287,7 @@ ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");
 ////mpi_null_copy_fn_;
 ////mpi_null_delete_fn_;
 #endif
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");
 ccc_mpi_fortran_in_place_=((int *)dlsym(lib_handle_f,"mpipriv1_")+1);
 ccc_mpi_fortran_argv_null_=((int*)dlsym(lib_handle_f,"mpiprivc_")+1);
@@ -12297,8 +12310,6 @@ _LOCAL_MPI_Win_create_errhandler=dlsym(lib_handle_f,"pmpi_win_create_errhandler_
 _LOCAL_MPI_Win_call_errhandler=dlsym(lib_handle_f,"pmpi_win_call_errhandler_");
 _LOCAL_MPI_Win_set_errhandler=dlsym(lib_handle_f,"pmpi_win_set_errhandler_");
 _LOCAL_MPI_Win_get_errhandler=dlsym(lib_handle_f,"pmpi_win_get_errhandler_");
-_LOCAL_MPI_File_call_errhandler=dlsym(lib_handle_f,"pmpi_file_call_errhandler_");
-_LOCAL_MPI_File_create_errhandler=dlsym(lib_handle_f,"pmpi_file_create_errhandler_");
 _LOCAL_MPI_Type_create_keyval=dlsym(lib_handle_f,"pmpi_type_create_keyval_");
 _LOCAL_MPI_Grequest_complete=dlsym(lib_handle_f,"pmpi_grequest_complete_");
 _LOCAL_MPI_Grequest_start=dlsym(lib_handle_f,"pmpi_grequest_start_");
