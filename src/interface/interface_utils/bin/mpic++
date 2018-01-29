@@ -146,8 +146,8 @@ if [[ default_mode_activated -eq 1 ]];then
 	source_default_mode
 fi
 if [[ static_compilation -eq 0 ]];then
-${WI4MPI_CXX} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi $arg $extra_arg
+${WI4MPI_CXX} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi "$arg" $extra_arg
 else
-${WI4MPI_CXX} -I${WI4MPI_ROOT}/include $arg $extra_arg ${WI4MPI_ROOT}/lib/libmpi.a 
+${WI4MPI_CXX} -I${WI4MPI_ROOT}/include "$arg" $extra_arg ${WI4MPI_ROOT}/lib/libmpi.a 
 fi
 exit $?
