@@ -3,9 +3,9 @@
 #define R_f_MPI_WTIME_IS_GLOBAL           3
 #define R_f_MPI_IO           2
 #define R_f_MPI_BOTTOM           0
-#define R_f_MPI_IN_PLACE          -1
-#define R_f_MPI_UNWEIGHTED           2
-#define R_f_MPI_WEIGHTS_EMPTY           3
+#define R_f_MPI_IN_PLACE          ((int*)-1)
+#define R_f_MPI_UNWEIGHTED           ((int*)2)
+#define R_f_MPI_WEIGHTS_EMPTY           ((int*)3)
 /***************************************/
 
 /* Hotfix by Adrien Cotte */
