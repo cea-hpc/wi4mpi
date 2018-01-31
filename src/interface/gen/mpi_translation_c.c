@@ -2176,7 +2176,7 @@ request_ptr_conv_a2r(&request,&request_tmp);
 int ret_tmp= LOCAL_MPI_Request_free( request_tmp);
 if(ret_tmp == R_MPI_SUCCESS){
 request_pers_ptr_delete(&request,&request_tmp);
-request_ptr_delete(&request,&request_tmp);
+//request_ptr_delete(&request,&request_tmp);
 }
 in_w=0;
 #ifdef DEBUG
@@ -22849,35 +22849,46 @@ printf("entre : A_MPI_Waitany\n");
 in_w=1;
 
 
-
+*indx=0;
 R_MPI_Request *array_of_requests_tmp = wi4mpi_alloc(sizeof(R_MPI_Request)*count);
 int i1,test;
 R_MPI_Status  status_ltmp;
 R_MPI_Status * status_tmp=&status_ltmp;
+bzero(status_tmp,sizeof(R_MPI_Status));
 for(i1=0; i1 < count;i1++){
 test=0;
+array_of_requests_tmp[i1]=R_MPI_REQUEST_NULL;
 request_tab_conv_a2r(&array_of_requests[i1],&array_of_requests_tmp[i1]);
+if(array_of_requests[i1]!=A_MPI_REQUEST_NULL)
+{
 int ret=R_MPI_Test(&array_of_requests_tmp[i1],&test,status_tmp);
     if(ret==R_MPI_SUCCESS&&test)
     {
         *indx=i1;
-        status_prt_conv_r2a(&status,&status_tmp);
-        request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
-
+        if(status!=A_MPI_STATUS_IGNORE)
+            status_prt_conv_r2a(&status,&status_tmp);
+         if(array_of_requests_tmp[*indx] == R_MPI_REQUEST_NULL)
+           { request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
+            array_of_requests[i1]=A_MPI_REQUEST_NULL;
+            }
 wi4mpi_free(array_of_requests_tmp);
     in_w=0;
 return A_MPI_SUCCESS;    
 }
 }
-
-int ret_tmp= LOCAL_MPI_Waitany( count, array_of_requests_tmp, indx, status_tmp);
+}
+int idx_tmp=0;
+int ret_tmp=0;ret_tmp=LOCAL_MPI_Waitany( count, array_of_requests_tmp, &idx_tmp, status_tmp);
+*indx=idx_tmp;
 if(ret_tmp == R_MPI_SUCCESS){
- if(array_of_requests_tmp[*indx] == R_MPI_REQUEST_NULL){
+printf("%d\n",*indx);
+ if(*indx!=R_MPI_UNDEFINED&&array_of_requests_tmp[*indx] == R_MPI_REQUEST_NULL){
+
 request_array_delete(&array_of_requests[*indx],&array_of_requests_tmp[*indx]);
 }
 }
-
-status_prt_conv_r2a(&status,&status_tmp);
+if(status!=A_MPI_STATUS_IGNORE)
+    status_prt_conv_r2a(&status,&status_tmp);
 wi4mpi_free(array_of_requests_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -23051,7 +23062,8 @@ if(ret!=R_MPI_SUCCESS||!test)
     }
 	else
 	{
-		
+        if(array_of_requests_tmp[i33]==R_MPI_REQUEST_NULL)
+	        request_array_delete(&array_of_requests[i1],&array_of_requests_tmp[i33]);
 		status_tab_conv_r2a(&array_of_statuses[i1],&array_of_statuses_tmp[i33]);
 	}
 }
@@ -23066,7 +23078,7 @@ request_array_delete(&array_of_requests[offset_tmp[i2]],&array_of_requests_tmp[i
 }
 }
 int i3;
-if (array_of_statuses!=A_MPI_STATUSES_IGNORE)
+if (array_of_statuses!=A_MPI_STATUSES_IGNORE&&array_of_statuses)
 {
 for(i3=0; i3 < i33;i3++){
 status_tab_conv_r2a(&array_of_statuses[offset_tmp[i3]],&array_of_statuses_tmp[i3]);
