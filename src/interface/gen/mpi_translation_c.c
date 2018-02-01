@@ -23064,7 +23064,8 @@ if(ret!=R_MPI_SUCCESS||!test)
 	{
         if(array_of_requests_tmp[i33]==R_MPI_REQUEST_NULL)
 	        request_array_delete(&array_of_requests[i1],&array_of_requests_tmp[i33]);
-		status_tab_conv_r2a(&array_of_statuses[i1],&array_of_statuses_tmp[i33]);
+		if(array_of_statuses!=A_MPI_STATUSES_IGNORE)
+            status_tab_conv_r2a(&array_of_statuses[i1],&array_of_statuses_tmp[i33]);
 	}
 }
 
