@@ -53,9 +53,7 @@ EOF
 showme() {
 
 cat <<EOF
-
 ${COMPILER} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi
-
 EOF
 
 }
@@ -63,9 +61,7 @@ EOF
 showme_static() {
 
 cat <<EOF
-
 ${COMPILER} -I${WI4MPI_ROOT}/include ${WI4MPI_ROOT}/lib/libmpi.a
-
 EOF
 
 }
