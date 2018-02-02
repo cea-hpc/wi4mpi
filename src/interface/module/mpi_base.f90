@@ -325,18 +325,20 @@ INTEGER:: ierror
 END SUBROUTINE MPI_Type_hvector
 
 SUBROUTINE MPI_Type_indexed(count,array_of_blocklengths,array_of_displacements,oldtype,newtype,ierror)
+USE MPI_CONSTANTS 
 INTEGER:: count
 INTEGER:: array_of_blocklengths(*)
-INTEGER:: array_of_displacements(*)
+INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
 INTEGER:: oldtype
 INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_indexed
 
 SUBROUTINE MPI_Type_hindexed(count,array_of_blocklengths,array_of_displacements,oldtype,newtype,ierror)
+USE MPI_CONSTANTS 
 INTEGER:: count
 INTEGER:: array_of_blocklengths(*)
-INTEGER:: array_of_displacements(*)
+INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
 INTEGER:: oldtype
 INTEGER:: newtype
 INTEGER:: ierror
@@ -354,7 +356,7 @@ END SUBROUTINE MPI_Type_hindexed
 !SUBROUTINE MPI_Type_struct(count,array_of_blocklengths,array_of_displacements,array_of_types,newtype,ierror)
 !INTEGER:: count
 !INTEGER:: array_of_blocklengths(*)
-!INTEGER:: array_of_displacements(*)
+!INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
 !INTEGER:: array_of_types(*)
 !INTEGER:: newtype
 !INTEGER:: ierror
@@ -2628,36 +2630,40 @@ INTEGER:: ierror
 END SUBROUTINE MPI_Type_create_darray
 
 SUBROUTINE MPI_Type_create_hindexed(count,array_of_blocklengths,array_of_displacements,oldtype,newtype,ierror)
+USE MPI_CONSTANTS 
 INTEGER:: count
 INTEGER:: array_of_blocklengths(*)
-INTEGER:: array_of_displacements(*)
+INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
 INTEGER:: oldtype
 INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_create_hindexed
 
 SUBROUTINE MPI_Type_create_indexed_block(count,blocklength,array_of_displacements,oldtype,newtype,ierror)
+USE MPI_CONSTANTS 
 INTEGER:: count
 INTEGER:: blocklength
-INTEGER:: array_of_displacements(*)
+INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
 INTEGER:: oldtype
 INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_create_indexed_block
 
 SUBROUTINE MPI_Type_create_hindexed_block(count,blocklength,array_of_displacements,oldtype,newtype,ierror)
+USE MPI_CONSTANTS 
 INTEGER:: count
 INTEGER:: blocklength
-INTEGER:: array_of_displacements(*)
+INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
 INTEGER:: oldtype
 INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_create_hindexed_block
 
 SUBROUTINE MPI_Type_create_struct(count,array_of_blocklengths,array_of_displacements,array_of_types,newtype,ierror)
+USE MPI_CONSTANTS 
 INTEGER:: count
 INTEGER:: array_of_blocklengths(*)
-INTEGER:: array_of_displacements(*)
+INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
 INTEGER:: array_of_types(*)
 INTEGER:: newtype
 INTEGER:: ierror
