@@ -23,6 +23,9 @@ case $progname in
     ;;
 esac
 
+# Check if COMPILER is set
+[[ -z $COMPILER ]] && (>&2 echo "$progname error: please set WI4MPI_$COMPILER_SUFFIX") && exit 1
+
 usage() {
 
     cat <<EOF
@@ -50,9 +53,7 @@ EOF
 showme() {
 
 cat <<EOF
-
 ${COMPILER} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi
-
 EOF
 
 }
@@ -60,9 +61,7 @@ EOF
 showme_static() {
 
 cat <<EOF
-
 ${COMPILER} -I${WI4MPI_ROOT}/include ${WI4MPI_ROOT}/lib/libmpi.a
-
 EOF
 
 }
