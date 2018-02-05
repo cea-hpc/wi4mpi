@@ -67,7 +67,8 @@ With the Interface mode a default conversion can be set during the compilation o
                             for the user application.
                             accepted values :
                               - OMPI
-                              - IMPI
+                              - INTEL
+                              - MPC
 ```
 To set the conversion Interface to OpenMPI please preceed as follow:
 
@@ -106,33 +107,33 @@ WI4MPI environment variables:
 
 Preload settings:                                                                                       
                                                                                                         
-{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen conversion                     
+{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen conversion.
 
 ```
-export WI4MPI_RUN_MPI_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"                             
-export WI4MPI_RUN_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"                       
+export WI4MPI_RUN_MPI_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
+export WI4MPI_RUN_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
 export LD_PRELOAD="path_to_wi4mpi_install/libexec/libwi4mpi_{FROM}_{TO}.so $WI4MPI_RUN_MPI_F_LIB $WI4MPI
-_RUN_MPI_C_LIB"                                                                                         
-export WI4MPI_APP_INCLUDES="/path/to/wi4mpi/INTERNAL/preload/include/{FROM}_{TO}"                       
-if OpenMPI --> OpenMPI                                                                                  
-  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"                   
-  WI4MPI_COMPILE_OPT "-Dompi_ompi -DOMPI_OMPI"                                                          
-else if OpenMPI --> IntelMPI                                                                            
+_RUN_MPI_C_LIB"
+export WI4MPI_APP_INCLUDES="/path/to/wi4mpi/INTERNAL/preload/include/{FROM}_{TO}"
+if OpenMPI --> OpenMPI
+  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
+  WI4MPI_COMPILE_OPT "-DOMPI_OMPI"
+else if OpenMPI --> IntelMPI
   export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakel
-ibOMPI:$LD_LIBRARY_PATH"                                                                                
-  WI4MPI_COMPILE_OPT "-Dompi_mpich -DOMPI_INTEL"                                                        
-else if IntelMPI --> IntelMPI                                                                           
-  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"                   
-  WI4MPI_COMPILE_OPT "-Dmpich_mpich -DINTEL_INTEL"                                                      
-else if IntelMPI --> OpenMPI                                                                            
+ibOMPI:$LD_LIBRARY_PATH"
+  WI4MPI_COMPILE_OPT "-DOMPI_INTEL"
+else if IntelMPI --> IntelMPI
+  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
+  WI4MPI_COMPILE_OPT "-DINTEL_INTEL"
+else if IntelMPI --> OpenMPI
   export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakel
-ibINTEL:$LD_LIBRARY_PATH"                                                                               
-  WI4MPI_COMPILE_OPT "-Dmpich_ompi -DINTEL_OMPI"                                                        
+ibINTEL:$LD_LIBRARY_PATH"
+  WI4MPI_COMPILE_OPT "-DINTEL_OMPI"
 ```
 
 Interface settings:                                                                                     
                                                                                                         
-{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen conversion                     
+{FROM} and {TO} can take as value OMPI, INTEL or MPC depending on the choosen conversion.
                                                                                                         
 ```
 export WI4MPI_INTERNAL_INCLUDES="path_to_install/INTERNAL/include"                                      
@@ -142,13 +143,15 @@ export WI4MPI_FC=ifort
 export WI4MPI_CXX=icpc                                                                                  
 export WI4MPI_RUN_MPI_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"                             
 export WI4MPI_RUN_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"                       
-export WI4MPI_WRAPPER_LIB="path_to_wi4mpi_install/lib_IMPI/libwi4mpi_CCC_{TO}.so"                       
+export WI4MPI_WRAPPER_LIB="path_to_wi4mpi_install/lib_INTEL/libwi4mpi_{TO}.so"
 export WI4MPI_APP_INCLUDES="path_to_install/INTERNAL/interface/include/{FROM}_{TO}"                     
 export LD_LIBRARY_PATH="path_to_install/lib:$LD_LIBRARY_PATH"                                           
-if CCC --> IntelMPI                                                                                     
-  export WI4MPI_COMPILE_OPT="-Dompi_ompi -DOMPI_OMPI"                                                   
-else if CCC --> OpenMPI                                                                                 
-  export WI4MPI_COMPILE_OPT="-Dompi_mpich -DOMPI_INTEL"                                                 
+if CCC --> IntelMPI
+  export WI4MPI_COMPILE_OPT="-D_OMPI"
+else if CCC --> OpenMPI
+  export WI4MPI_COMPILE_OPT="-D_INTEL"
+else if CCC --> MPC
+  export WI4MPI_COMPILE_OPT="-D_MPC"
 ```
 
 
