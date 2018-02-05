@@ -5,21 +5,33 @@ WI4MPI_UCONFIG="~/.wi4mpi.cfg"
 
 progname=$(basename $0)
 
+# Check if WI4MPI_ROOT is set
+[[ -z $WI4MPI_ROOT ]] && (>&2 echo "$progname error: please set WI4MPI_ROOT") && exit 1
+
+# Define FLAGS
+WI4MPI_CFLAGS="-I${WI4MPI_ROOT}/include"
+WI4MPI_CXXFLAGS="-I${WI4MPI_ROOT}/include"
+WI4MPI_FCFLAGS="-I${WI4MPI_ROOT}/include -cpp"
+WI4MPI_LDFLAGS="-L${WI4MPI_ROOT}/lib -lmpi"
+
 case $progname in
     mpicc)
         COMPILER=${WI4MPI_CC}
         COMPILER_SUFFIX=CC
         COMPILER_LANG=C
+        WI4MPI_FLAGS=${WI4MPI_CFLAGS}
     ;;
     mpicxx|mpic++)
         COMPILER=${WI4MPI_CXX}
         COMPILER_SUFFIX=CXX
         COMPILER_LANG=C++
+        WI4MPI_FLAGS=${WI4MPI_CXXFLAGS}
     ;;
     mpif77|mpif90)
         COMPILER=${WI4MPI_FC}
         COMPILER_SUFFIX=FC
         COMPILER_LANG=Fortran
+        WI4MPI_FLAGS=${WI4MPI_FCFLAGS}
     ;;
 esac
 
@@ -53,7 +65,7 @@ EOF
 showme() {
 
 cat <<EOF
-${COMPILER} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi
+${COMPILER} ${WI4MPI_FLAGS} ${WI4MPI_LDFLAGS}
 EOF
 
 }
@@ -61,7 +73,7 @@ EOF
 showme_static() {
 
 cat <<EOF
-${COMPILER} -I${WI4MPI_ROOT}/include ${WI4MPI_ROOT}/lib/libmpi.a
+${COMPILER} ${WI4MPI_FLAGS} ${WI4MPI_ROOT}/lib/libmpi.a
 EOF
 
 }
@@ -160,8 +172,8 @@ if [[ default_mode_activated -eq 1 ]];then
 	source_default_mode
 fi
 if [[ static_compilation -eq 0 ]];then
-${COMPILER} -I${WI4MPI_ROOT}/include -L${WI4MPI_ROOT}/lib -lmpi "${arg[@]}" $extra_arg -ldl
+${COMPILER} ${WI4MPI_FLAGS} ${WI4MPI_LDFLAGS} "${arg[@]}" $extra_arg -ldl
 else
-${COMPILER} -I${WI4MPI_ROOT}/include "${arg[@]}" $extra_arg ${WI4MPI_ROOT}/lib/libmpi.a
+${COMPILER} ${WI4MPI_FLAGS} "${arg[@]}" $extra_arg ${WI4MPI_ROOT}/lib/libmpi.a
 fi
 exit $?
