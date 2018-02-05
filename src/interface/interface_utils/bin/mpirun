@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cat << EOF
+= INFO =
+WI4MPI doesn't provide its own launcher, you need to use another MPI launcher with wi4mpi executable.
+= EXAMPLES =
+OpenMPI: \${OPENMPI_ROOT}/bin/mpirun wi4mpi -t openmpi ./exe
+Bridge: ccc_mprun wi4mpi -t openmpi ./exe
+MPC: wi4mpi -t mpc mpcrun ./exe
+EOF

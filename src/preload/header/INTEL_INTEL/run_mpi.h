@@ -2283,7 +2283,7 @@ int R_PMPIT_category_changed(int *stamp);
 #define MPIIMPL_HAVE_STATUS_SET_BYTES 1
 #define MPIIMPL_HAVE_STATUS_SET_INFO 1
 
-//#include "run_mpio.h"
+#include "run_mpio.h"
 
 #if defined(__cplusplus)
 }

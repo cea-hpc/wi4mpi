@@ -22,14 +22,7 @@
 //########################################################################
 
 
-//#ifdef OMPI_OMPI
-//#include "ompi_ext_decl.h"
-//#endif
-
-/*#ifdef FORTRAN
-#include <mpif_app.h>
-#endif*/
-#include "new_utils.h"
+#include "engine.h"
 /*
 static void dump(void * src, size_t size) {
     unsigned char * tab = (unsigned char*) malloc(size);
@@ -73,7 +66,7 @@ int req_size;
 int *counter_##varname=NULL;\
 int *p_##varname;\
 int varname##_size;
-#define stat_string_builder(type,varname) wi4mpi leaked : ## type :%d \n
+#define stat_string_builder(type,varname) wi4mpi leaked :%d \n /* ## type :%d \n*/
 #define str(x) strh(x)
 #define strh(x) #x
 #define stat_string_printer_inter(type,varname,string) printf(str(string), varname##_size-(p_##varname-counter_##varname+1))

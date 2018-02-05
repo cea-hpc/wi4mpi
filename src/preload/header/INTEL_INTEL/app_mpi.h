@@ -190,24 +190,24 @@ typedef int A_MPI_Datatype;
 #define A_MPI_LONG_LONG      A_MPI_LONG_LONG_INT
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  A_MPI_Datatype mpich_mpi_char               MPICH_ATTR_TYPE_TAG(char)               = A_MPI_CHAR;
-static  A_MPI_Datatype mpich_mpi_signed_char        MPICH_ATTR_TYPE_TAG(signed char)        = A_MPI_SIGNED_CHAR;
-static  A_MPI_Datatype mpich_mpi_unsigned_char      MPICH_ATTR_TYPE_TAG(unsigned char)      = A_MPI_UNSIGNED_CHAR;
-/*static  A_MPI_Datatype mpich_mpi_byte               MPICH_ATTR_TYPE_TAG(char)               = A_MPI_BYTE;*/
-static  A_MPI_Datatype mpich_mpi_wchar              MPICH_ATTR_TYPE_TAG(wchar_t)            = A_MPI_WCHAR;
-static  A_MPI_Datatype mpich_mpi_short              MPICH_ATTR_TYPE_TAG(short)              = A_MPI_SHORT;
-static  A_MPI_Datatype mpich_mpi_unsigned_short     MPICH_ATTR_TYPE_TAG(unsigned short)     = A_MPI_UNSIGNED_SHORT;
-static  A_MPI_Datatype mpich_mpi_int                MPICH_ATTR_TYPE_TAG(int)                = A_MPI_INT;
-static  A_MPI_Datatype mpich_mpi_unsigned           MPICH_ATTR_TYPE_TAG(unsigned)           = A_MPI_UNSIGNED;
-static  A_MPI_Datatype mpich_mpi_long               MPICH_ATTR_TYPE_TAG(long)               = A_MPI_LONG;
-static  A_MPI_Datatype mpich_mpi_unsigned_long      MPICH_ATTR_TYPE_TAG(unsigned long)      = A_MPI_UNSIGNED_LONG;
-static  A_MPI_Datatype mpich_mpi_float              MPICH_ATTR_TYPE_TAG(float)              = A_MPI_FLOAT;
-static  A_MPI_Datatype mpich_mpi_double             MPICH_ATTR_TYPE_TAG(double)             = A_MPI_DOUBLE;
+static  A_MPI_Datatype a_mpich_mpi_char               MPICH_ATTR_TYPE_TAG(char)               = A_MPI_CHAR;
+static  A_MPI_Datatype a_mpich_mpi_signed_char        MPICH_ATTR_TYPE_TAG(signed char)        = A_MPI_SIGNED_CHAR;
+static  A_MPI_Datatype a_mpich_mpi_unsigned_char      MPICH_ATTR_TYPE_TAG(unsigned char)      = A_MPI_UNSIGNED_CHAR;
+/*static  A_MPI_Datatype a_mpich_mpi_byte               MPICH_ATTR_TYPE_TAG(char)               = A_MPI_BYTE;*/
+static  A_MPI_Datatype a_mpich_mpi_wchar              MPICH_ATTR_TYPE_TAG(wchar_t)            = A_MPI_WCHAR;
+static  A_MPI_Datatype a_mpich_mpi_short              MPICH_ATTR_TYPE_TAG(short)              = A_MPI_SHORT;
+static  A_MPI_Datatype a_mpich_mpi_unsigned_short     MPICH_ATTR_TYPE_TAG(unsigned short)     = A_MPI_UNSIGNED_SHORT;
+static  A_MPI_Datatype a_mpich_mpi_int                MPICH_ATTR_TYPE_TAG(int)                = A_MPI_INT;
+static  A_MPI_Datatype a_mpich_mpi_unsigned           MPICH_ATTR_TYPE_TAG(unsigned)           = A_MPI_UNSIGNED;
+static  A_MPI_Datatype a_mpich_mpi_long               MPICH_ATTR_TYPE_TAG(long)               = A_MPI_LONG;
+static  A_MPI_Datatype a_mpich_mpi_unsigned_long      MPICH_ATTR_TYPE_TAG(unsigned long)      = A_MPI_UNSIGNED_LONG;
+static  A_MPI_Datatype a_mpich_mpi_float              MPICH_ATTR_TYPE_TAG(float)              = A_MPI_FLOAT;
+static  A_MPI_Datatype a_mpich_mpi_double             MPICH_ATTR_TYPE_TAG(double)             = A_MPI_DOUBLE;
 #if 0x4c00100c != 0x0c000000
-static  A_MPI_Datatype mpich_mpi_long_double        MPICH_ATTR_TYPE_TAG(long double)        = A_MPI_LONG_DOUBLE;
+static  A_MPI_Datatype a_mpich_mpi_long_double        MPICH_ATTR_TYPE_TAG(long double)        = A_MPI_LONG_DOUBLE;
 #endif
-static  A_MPI_Datatype mpich_mpi_long_long_int      MPICH_ATTR_TYPE_TAG(long long int)      = A_MPI_LONG_LONG_INT;
-static  A_MPI_Datatype mpich_mpi_unsigned_long_long MPICH_ATTR_TYPE_TAG(unsigned long long) = A_MPI_UNSIGNED_LONG_LONG;
+static  A_MPI_Datatype a_mpich_mpi_long_long_int      MPICH_ATTR_TYPE_TAG(long long int)      = A_MPI_LONG_LONG_INT;
+static  A_MPI_Datatype a_mpich_mpi_unsigned_long_long MPICH_ATTR_TYPE_TAG(unsigned long long) = A_MPI_UNSIGNED_LONG_LONG;
 #endif
 
 #define A_MPI_PACKED         ((A_MPI_Datatype)0x4c00010f)
@@ -230,19 +230,19 @@ static  A_MPI_Datatype mpich_mpi_unsigned_long_long MPICH_ATTR_TYPE_TAG(unsigned
 #define A_MPI_LONG_DOUBLE_INT   ((A_MPI_Datatype)0x8c000004)
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-struct mpich_struct_mpi_float_int       { float f; int i; };
-struct mpich_struct_mpi_double_int      { double d; int i; };
-struct mpich_struct_mpi_long_int        { long l; int i; };
-struct mpich_struct_mpi_short_int       { short s; int i; };
-struct mpich_struct_mpi_2int            { int i1; int i2; };
+struct a_mpich_struct_mpi_float_int       { float f; int i; };
+struct a_mpich_struct_mpi_double_int      { double d; int i; };
+struct a_mpich_struct_mpi_long_int        { long l; int i; };
+struct a_mpich_struct_mpi_short_int       { short s; int i; };
+struct a_mpich_struct_mpi_2int            { int i1; int i2; };
 #if 0x8c000004 != 0x0c000000
-struct mpich_struct_mpi_long_double_int { long double ld; int i; };
+struct a_mpich_struct_mpi_long_double_int { long double ld; int i; };
 #endif
 
-static  A_MPI_Datatype mpich_mpi_float_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_float_int)       = A_MPI_FLOAT_INT;
-static  A_MPI_Datatype mpich_mpi_double_int      MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_double_int)      = A_MPI_DOUBLE_INT;
-static  A_MPI_Datatype mpich_mpi_long_int        MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_long_int)        = A_MPI_LONG_INT;
-static  A_MPI_Datatype mpich_mpi_short_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_short_int)       = A_MPI_SHORT_INT;
+static  A_MPI_Datatype a_mpich_mpi_float_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct a_mpich_struct_mpi_float_int)       = A_MPI_FLOAT_INT;
+static  A_MPI_Datatype a_mpich_mpi_double_int      MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct a_mpich_struct_mpi_double_int)      = A_MPI_DOUBLE_INT;
+static  A_MPI_Datatype a_mpich_mpi_long_int        MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct a_mpich_struct_mpi_long_int)        = A_MPI_LONG_INT;
+static  A_MPI_Datatype a_mpich_mpi_short_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct a_mpich_struct_mpi_short_int)       = A_MPI_SHORT_INT;
 
 /*
  * The A_MPI_2INT line is commented out because currently Clang 3.3 flags
@@ -255,11 +255,11 @@ static  A_MPI_Datatype mpich_mpi_short_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMP
  * So, we disable type checking for A_MPI_2INT until Clang fixes this bug.
  */
 
-/* static  A_MPI_Datatype mpich_mpi_2int            MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_2int)            = A_MPI_2INT
+/* static  A_MPI_Datatype a_mpich_mpi_2int            MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct a_mpich_struct_mpi_2int)            = A_MPI_2INT
  */
 
 #if 0x8c000004 != 0x0c000000
-static  A_MPI_Datatype mpich_mpi_long_double_int MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_long_double_int) = A_MPI_LONG_DOUBLE_INT;
+static  A_MPI_Datatype a_mpich_mpi_long_double_int MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct a_mpich_struct_mpi_long_double_int) = A_MPI_LONG_DOUBLE_INT;
 #endif
 #endif
 
@@ -311,14 +311,14 @@ static  A_MPI_Datatype mpich_mpi_long_double_int MPICH_ATTR_TYPE_TAG_LAYOUT_COMP
 #define A_MPI_UINT64_T          ((A_MPI_Datatype)0x4c00083e)
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  A_MPI_Datatype mpich_mpi_int8_t   MPICH_ATTR_TYPE_TAG_STDINT(int8_t)   = A_MPI_INT8_T;
-static  A_MPI_Datatype mpich_mpi_int16_t  MPICH_ATTR_TYPE_TAG_STDINT(int16_t)  = A_MPI_INT16_T;
-static  A_MPI_Datatype mpich_mpi_int32_t  MPICH_ATTR_TYPE_TAG_STDINT(int32_t)  = A_MPI_INT32_T;
-static  A_MPI_Datatype mpich_mpi_int64_t  MPICH_ATTR_TYPE_TAG_STDINT(int64_t)  = A_MPI_INT64_T;
-static  A_MPI_Datatype mpich_mpi_uint8_t  MPICH_ATTR_TYPE_TAG_STDINT(uint8_t)  = A_MPI_UINT8_T;
-static  A_MPI_Datatype mpich_mpi_uint16_t MPICH_ATTR_TYPE_TAG_STDINT(uint16_t) = A_MPI_UINT16_T;
-static  A_MPI_Datatype mpich_mpi_uint32_t MPICH_ATTR_TYPE_TAG_STDINT(uint32_t) = A_MPI_UINT32_T;
-static  A_MPI_Datatype mpich_mpi_uint64_t MPICH_ATTR_TYPE_TAG_STDINT(uint64_t) = A_MPI_UINT64_T;
+static  A_MPI_Datatype a_mpich_mpi_int8_t   MPICH_ATTR_TYPE_TAG_STDINT(int8_t)   = A_MPI_INT8_T;
+static  A_MPI_Datatype a_mpich_mpi_int16_t  MPICH_ATTR_TYPE_TAG_STDINT(int16_t)  = A_MPI_INT16_T;
+static  A_MPI_Datatype a_mpich_mpi_int32_t  MPICH_ATTR_TYPE_TAG_STDINT(int32_t)  = A_MPI_INT32_T;
+static  A_MPI_Datatype a_mpich_mpi_int64_t  MPICH_ATTR_TYPE_TAG_STDINT(int64_t)  = A_MPI_INT64_T;
+static  A_MPI_Datatype a_mpich_mpi_uint8_t  MPICH_ATTR_TYPE_TAG_STDINT(uint8_t)  = A_MPI_UINT8_T;
+static  A_MPI_Datatype a_mpich_mpi_uint16_t MPICH_ATTR_TYPE_TAG_STDINT(uint16_t) = A_MPI_UINT16_T;
+static  A_MPI_Datatype a_mpich_mpi_uint32_t MPICH_ATTR_TYPE_TAG_STDINT(uint32_t) = A_MPI_UINT32_T;
+static  A_MPI_Datatype a_mpich_mpi_uint64_t MPICH_ATTR_TYPE_TAG_STDINT(uint64_t) = A_MPI_UINT64_T;
 #endif
 
 /* other C99 types */
@@ -329,11 +329,11 @@ static  A_MPI_Datatype mpich_mpi_uint64_t MPICH_ATTR_TYPE_TAG_STDINT(uint64_t) =
 #define A_MPI_C_LONG_DOUBLE_COMPLEX  ((A_MPI_Datatype)0x4c002042)
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  A_MPI_Datatype mpich_mpi_c_bool                MPICH_ATTR_TYPE_TAG_C99(_Bool)           = A_MPI_C_BOOL;
-static  A_MPI_Datatype mpich_mpi_c_float_complex       MPICH_ATTR_TYPE_TAG_C99(float _Complex)  = A_MPI_C_FLOAT_COMPLEX;
-static  A_MPI_Datatype mpich_mpi_c_double_complex      MPICH_ATTR_TYPE_TAG_C99(double _Complex) = A_MPI_C_DOUBLE_COMPLEX;
+static  A_MPI_Datatype a_mpich_mpi_c_bool                MPICH_ATTR_TYPE_TAG_C99(_Bool)           = A_MPI_C_BOOL;
+static  A_MPI_Datatype a_mpich_mpi_c_float_complex       MPICH_ATTR_TYPE_TAG_C99(float _Complex)  = A_MPI_C_FLOAT_COMPLEX;
+static  A_MPI_Datatype a_mpich_mpi_c_double_complex      MPICH_ATTR_TYPE_TAG_C99(double _Complex) = A_MPI_C_DOUBLE_COMPLEX;
 #if 0x4c002042 != 0x0c000000
-static  A_MPI_Datatype mpich_mpi_c_long_double_complex MPICH_ATTR_TYPE_TAG_C99(long double _Complex) = A_MPI_C_LONG_DOUBLE_COMPLEX;
+static  A_MPI_Datatype a_mpich_mpi_c_long_double_complex MPICH_ATTR_TYPE_TAG_C99(long double _Complex) = A_MPI_C_LONG_DOUBLE_COMPLEX;
 #endif
 #endif
 
@@ -422,7 +422,7 @@ typedef int A_MPI_Op;
 #define A_MPI_WIN_MODEL         0x66000009
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  A_MPI_Datatype mpich_mpi_datatype_null MPICH_ATTR_TYPE_TAG_MUST_BE_NULL() = A_MPI_DATATYPE_NULL;
+static  A_MPI_Datatype a_mpich_mpi_datatype_null MPICH_ATTR_TYPE_TAG_MUST_BE_NULL() = A_MPI_DATATYPE_NULL;
 #endif
 
 /* These are only guesses; make sure you change them in mpif.h as well */
@@ -652,7 +652,7 @@ typedef int A_MPI_Fint;
 typedef long long A_MPI_Count;
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  A_MPI_Datatype mpich_mpi_aint   MPICH_ATTR_TYPE_TAG(A_MPI_Aint)   = A_MPI_AINT;
+static  A_MPI_Datatype a_mpich_mpi_aint   MPICH_ATTR_TYPE_TAG(A_MPI_Aint)   = A_MPI_AINT;
 #endif
 
 /* FIXME: The following two definition are not defined by MPI and must not be
@@ -669,7 +669,7 @@ static  A_MPI_Datatype mpich_mpi_aint   MPICH_ATTR_TYPE_TAG(A_MPI_Aint)   = A_MP
 typedef long long A_MPI_Offset;
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  A_MPI_Datatype mpich_mpi_offset MPICH_ATTR_TYPE_TAG(A_MPI_Offset) = A_MPI_OFFSET;
+static  A_MPI_Datatype a_mpich_mpi_offset MPICH_ATTR_TYPE_TAG(A_MPI_Offset) = A_MPI_OFFSET;
 #endif
 
 /* The order of these elements must match that in mpif.h, mpi_f08_types.f90,
@@ -2283,7 +2283,7 @@ int A_PMPI_T_category_changed(int *stamp);
 #define MPIIMPL_HAVE_STATUS_SET_BYTES 1
 #define MPIIMPL_HAVE_STATUS_SET_INFO 1
 
-//#include "app_mpio.h"
+#include "app_mpio.h"
 
 #if defined(__cplusplus)
 }

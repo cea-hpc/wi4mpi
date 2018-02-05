@@ -21,8 +21,7 @@
 //#                                                                      #
 //########################################################################
 #include "wrapper_f.h"
-//#include "c2f.h"
-#if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+#if defined(INTEL_OMPI) || defined (OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
@@ -737,7 +736,7 @@ __asm__(
 "jmp *R_MPI_Status_f2c@GOTPCREL(%rip)\n"
 
 );
-#elif defined(OMPI_INTEL)
+#elif defined(OMPI_INTEL) || defined(_INTEL)
 #include "mappers.h"
 extern __thread int in_w;
 

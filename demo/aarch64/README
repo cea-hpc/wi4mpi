@@ -1,0 +1,7 @@
+#######################
+# wi4mpi demo aarch64 #
+#######################
+
+Warning: This is not the last version of wi4mpi, this is a modified wi4mpi-3.1.4.
+
+wi4mpi/src/interface/gen/mpi_translation_c.c was modified to work on ARM processors (aarch64).

@@ -1,3 +1,0 @@
-#!/bin/bash
-${CCC_LIBMPICC} -I${CCC_LIBMPI_ROOT}/include -L${CCC_LIBMPI_ROOT}/lib -lmpi $@
-exit $?

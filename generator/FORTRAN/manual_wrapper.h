@@ -157,7 +157,7 @@ void user_fct_ptr_conv_a2r(void **fct,void **fct_tmp)
    User_fct_g_ptr=*fct;
    *fct_tmp=(void*)wrapper_user_func;
 }
-#include "new_utils.h"
+#include "engine.h"
 void  mpi_get_processor_name_(char *,int *,int *,int);
 
 void  mpi_get_processor_name__(char *,int *,int *,int);

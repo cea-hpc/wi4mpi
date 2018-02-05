@@ -29,20 +29,20 @@
 Developer Guide
 ===============
 
-Summary:
+Sommaire:
 ---------
 1. Introduction
 2. Library
     1. How it works
-    2. Implementation
+    2. Implémentation
         1. Library settings
         2. Symbol overload
         3. Code chooser ASM
         4. A_MPI_Function
         5. R_MPI_Function
-	6. Hashtable
+				6. Hashtable
         7. Thread safety
-	8. Jit handling user function
+				8. Jit handling user function
         9. The interface
     3. Files
 3. Get Involved in WI4MPI
@@ -51,8 +51,8 @@ Summary:
 
 INTRODUCTION
 ============
-MPI is a defaco standard in HPC community which allows a simple use of clusters. Nowoaday, there are several implementation (OpenMPI, BullxMPI, MPT, IntelMPI, MPC, ...) each of which involves a specific ABI (Application Binary Interface) for an application compiled with a specific MPI implementation.
-With WI4MPI, an application compiled with an alpha MPI implementation can be run under a beta MPI implementation without any compilation protocol and any concern about the ABI (Preload version).
+MPI is a standard in HPC community which allows a simple use of clusters. Nowoaday, there are several implementation (OpenMPI, BullxMPI, MPT, IntelMPI, MPC, ...) each of which involves a specific ABI (Application Binary Interface) for an application compiled with a specific MPI implementation.
+With wi4mpi, an application compiled with an alpha MPI implementation can be run under a beta MPI implementation without any compilation protocol and any concern about the ABI (Preload version).
 WI4MPI can also be seen as a dedicated MPI implementation; This time, the application is compiled against the wi4mpi library (libmpi.so) whith the dedicated wrapper (mpicc,mpif90...) meant for that purpose, and can be run under any other MPI implementation (Interface Version).
 
 Library
@@ -78,7 +78,7 @@ Application: MPI_Init (OpenMPI)													MPI_Init (IntelMPI)
 																					 | 
 																			Translation		
 
-Implementation
+Implémentation
 --------------
 
 Library settings
@@ -112,7 +112,7 @@ The mpi called are intercept thanks to the following rerouting:
 (See interface_test.c in src/interface/gen/interface_test.c and src/interface/gen/interface_fort.c)
 This syntax is also present but hidden in test_generation_wrapper.c (src/{preload,interface}/gen/) whithin an asm code chooser for the next reason.
 
-The MPI-IO implémentation (ROMIO) present within the most MPI implementation trigger some call to the MPI user interface that WI4MPI intercept thanks to its symbols overload protocol. It means that during the runtime (phase 3 above), some MPI calls are made, forcing WI4MPI to intercept them and so making the application to crash. The crash is due to the fact that WI4MPI MPI is trying to convert runtime argument to runtime version.
+The MPI-IO implémentation (ROMIO) present within the most MPI implementation trigger some call to the MPI user interface that WI4MPI intercept thanks to its symbols overload protocol. It means that during the runtime (phase 3 above), some MPI calls are made, forcing WI4MPI to intercept them and so making the application to crash. The crash is die to the fact that WI4MPI MPI is trying to convert runtime argument to runtime version.
 
 Example:
 
@@ -136,9 +136,9 @@ To overcome this issue, we used an ASM code chooser.
 Code chooser ASM
 ~~~~~~~~~~~~~~~~
 
-The ASM code chooser does the simple following things:
+The ASM code chooser does the simpl following things:
 
-If we are alreday in the wrapper:
+If we alreday are in the wrapper:
 
 - The arguments are passed without any translation protocol to the underlying MPI runtime call (LOCAL_MPI_function)
 
@@ -146,7 +146,7 @@ Otherwise:
 
 - The arguments are translated and passed to the underlying MPI runtime call (LOCAL_MPI_function)
 
-To know in which state the process is, we defined the in_w variable:
+To know which state the process is, we defined the in_w variable:
 
 - in_w=1 : in the wrapper
 - in_w=0 : in the application
@@ -298,11 +298,11 @@ The table are spinlock protected. (cf :thread_safety.h):
 - #define unlock(a) pthread_spin_unlock(a)
 - typedef  pthread_spinlock_t (*)table_lock_t;
 
-The interface:
---------------
+L'interface:
+------------
 
-The interface version of WI4MPI proposes the promise as the preload version (one compilation, several run over different MPI implementation), but this time WI4MPI had to be seen as a fully MPI Library. 
-All the previously section are still relevent for the interface, the only things that changed is the new level name INTERFACE (see the figure below). This level has to be considered as a "libmpi.so" which is linked to the user application.
+The interface version of WI4MPI propose the promise as the preload version (one compilation, several run over different MPI implementation), but this time WI4MPI had to be seen as a fully MPI Library. 
+All the previously section are still relevent for the interface, the only things that changed is the new level name INTERFACE (see the schema below). This level has to be considered as a "libmpi.so" which is linked to the user application.
 
                
               dlopen|----------|  dlopen       |---------|
@@ -347,10 +347,6 @@ if(!interface_handle)
 }
 INTERFACE_LOCAL_MPI_Init=dlsym(interface_handle,"CCMPI_MPI_Init");
 }
-
-Static mode:
-------------
-
 Le mode static
 --------------
 une librairie statique permettant de construire un executable intégrant directement les traductions est aussi fournie : elle est basée sur le même principe que le mode interface mais pour eviter les conflits de symbole les differents symbole et constantes interne sont renomée sous la forme : INTERF2_{TARGET}_{Symbol_name}. L'initialisation ne s'appuie plus sur un dlopen mais sur un choix de pointeur de fonction en fonction de 2 variables d'environnement : WI4MPI_STATIC_TARGET_TYPE_F et WI4MPI_STATIC_TARGET_TYPE. Les valeurs acceptées sont pour le moment : OMPI et INTEL.
