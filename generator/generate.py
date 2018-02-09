@@ -780,7 +780,7 @@ if __name__ == '__main__':
 	#Generating Preload file
 	#-----------------------
 	#File containing all the functions not generated (included code chooser asm)
-	print " >>>>> Generating preload/gen/test_generation_wrapper.c"
+	print " >>>>> Generating preload/gen/mpi_translation_c.c"
 	wrapper=True
 	not_generated = open('./C/not_generated_asmK_tls.txt','r')
 	
@@ -793,7 +793,7 @@ if __name__ == '__main__':
 
 	wrapper_preload_c=generator("Wrapper_Preload_C",mappers_c,data_c)
 	os.chdir(preload_directory)
-	preload_wrapper_c = open("test_generation_wrapper.c", "w")
+	preload_wrapper_c = open("mpi_translation_c.c", "w")
 	string=generate_wrapper_c(wrapper_preload_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr, root)
 	preload_wrapper_c.write(string)
 	preload_wrapper_c.close()
@@ -818,7 +818,7 @@ if __name__ == '__main__':
 
 	#Generating Interface file
 	#-------------------------
-	print " >>>>> Generating interface/gen/test_generation_wrapper.c"
+	print " >>>>> Generating interface/gen/mpi_translation_c.c"
 	wrapper=False
 	not_generated = open('./C/not_generated_asmK_tls_updated_for_interface.txt','r')
 	
@@ -834,7 +834,7 @@ if __name__ == '__main__':
 	not_generated_ptr.seek(0,0)
 	wrapper_interface_c=generator("Wrapper_Interface_C", mappers_c,data_c)
 	os.chdir(interface_directory)
-	interface_wrapper_c =open("test_generation_wrapper.c", "w")
+	interface_wrapper_c =open("mpi_translation_c.c", "w")
 	string=generate_wrapper_c(wrapper_interface_c, wrapper, ompi_const, not_generated, def_list_c, data_c,init_conf,not_generated_ptr,root)
 	interface_wrapper_c.write(string)
 	interface_wrapper_c.close()
