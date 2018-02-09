@@ -856,7 +856,7 @@ if __name__ == '__main__':
 	os.chdir(root)
 
 
-	print " >>>>> Generating interface/gen/interface_test.c"
+	print " >>>>> Generating interface/gen/interface_c.c"
 	interface_key_gen=open('./C/not_generated_interface_KEYVAL.txt','r')
 	with open('./C/c2f_f2c_list.txt') as c2f:
 		c2f_list=c2f.read().splitlines()
@@ -870,7 +870,7 @@ if __name__ == '__main__':
 
 	c_interface=generator("Interface_C", mappers_c,data_c)
 	os.chdir(interface_directory)
-	interface_c= open("interface_test.c","w")
+	interface_c= open("interface_c.c","w")
 	string=generate_interface(c_interface, interface_key_gen, data_c, def_list_c, c2f_list)
 	interface_c.write(string)
 	interface_c.close()
