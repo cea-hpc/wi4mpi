@@ -322,7 +322,6 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
 				string=string+'int MPI_Pcontrol(int level,...);\n'
 			else:
 				string=string+'\n'+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='',interface=True)+';\n' 
-			string=string+'#define '+i['name']+' P'+i['name']+'\n'
 			string=string+'#pragma weak '+i['name']+'=P'+i['name']+'\n'
 			if i['name'] == 'MPI_Pcontrol':
 				string=string+'int (*INTERFACE_LOCAL_MPI_Pcontrol)(int,...);\n'
