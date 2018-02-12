@@ -187,8 +187,6 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
 				string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n\n'
 				if wrapper:
 					string=string+'#define A_f_'+i['name'] +' _P'+i['name']+'\n'
-				else:
-					string=string+'//#define A_f_'+i['name'] +' _P'+i['name']+'\n'
 				if wrapper:
 					string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
 					string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'

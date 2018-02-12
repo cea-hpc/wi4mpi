@@ -38,9 +38,9 @@ class generator:
 		self.mappers=mapper_list
 		self.functions=funtions_list
 
-###				  ###
-# Header_func # 
-###				  ###
+###           ###
+#  Header_func  # 
+###           ###
 	def header_func(self, func_dict, app_side=True):
 		string='\n{'
 		string=string+'\n#ifdef DEBUG'
@@ -60,9 +60,9 @@ class generator:
 				string=string+'\nin_w=1;\n'
 		return string
 
-###				  ###
-# Footer_func # 
-###				 ###		
+###           ###
+#  Footer_func  # 
+###           ###
 	def footer_func(self, func_dict, app_side=True):
 		#handle reentrency only if in Wrapper_Preload_C or Wrapper_Interface_C Wrapper_Preload_Fortran Wrapper_Interface_Fortran
 		string=''
@@ -93,9 +93,9 @@ class generator:
 			string=string+'\n}'
 		return string
 
-###				  ###
-# add_prefix # 
-###				 ###		
+###          ###
+#  add_prefix  # 
+###          ###
 	def add_prefix(self,type,prefix):
 		if self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran' or self.name =='Interface_Fortran':
 			return '' #Specifique a la generation Fortran
@@ -105,9 +105,9 @@ class generator:
 		else:
 			return type	
 
-###	           ###
-#	Print_symbol_c #
-###            ###
+###	              ###
+#	Print_symbol_c  #
+###               ###
 #Print symbol generate a function call or declaration or a function pointer declaration as follow : (we decide to separate both C and Fortran Version)
 ##.First generate the return type of the function
 ##.Second print the name
@@ -210,9 +210,9 @@ class generator:
 		str=str+')'
 		return str
 
-###									 ###	
-# print_symbol_fortran #
-###									 ###
+###                    ###
+#  print_symbol_fortran  #
+###                    ###
 	def print_symbol_f(self,func_dict,type_prefix='',prefix='',postfix='',name_arg=False,retval_name=False,app_side=False,name_arg_postfix='',call=False,func_ptr=False,lower=False,direct =False):
 		arg_len=0; 
 		if ('as_ret' in func_dict['ret'] and not retval_name):
@@ -279,9 +279,9 @@ class generator:
 		        str=str+'void'
 		str=str+')'
 		return str
-###                 	###
-#print_temporary_decl_c #
-###										###
+###                      ###
+#  print_temporary_decl_c  #
+###                      ###
 	def print_temporary_decl_c(self,arg,prefix=''):
 		str=''
 		if 'no_map' in self.mappers[arg['name']] or 'wrap' in self.mappers[arg['name']] or 'set' in self.mappers[arg['name']] :
@@ -307,9 +307,9 @@ class generator:
 		            str=self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp;'
 		return str
 
-###										 ###
-#	print_temporary_decl_f #
-###										 ###
+###                      ###
+#  print_temporary_decl_f  #
+###                      ###
 	def print_temporary_decl_f(self, arg, prefix=''):
 		str=''
 		size='1'
@@ -336,9 +336,9 @@ class generator:
 					str='void *'+arg['var']+'_tmp='+arg['var']+';'
 		return str
 
-###							 	 ###
-# affect_temp_conv_c #
-###              	 ###
+###                  ###
+#  affect_temp_conv_c  #
+###                  ###
 	def affect_temp_conv_c(self,arg,count_loop):
 		#no need to convert
 		if 'no_map' in self.mappers[arg['name']]:
@@ -375,9 +375,9 @@ class generator:
 						str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
 		return str
 
-###								 ###
-#	affect_temp_conv_f #
-###								 ###
+###                  ###
+#  affect_temp_conv_f  #
+###                  ###
 
 	def affect_temp_conv_f(self,arg):
 		if 'nomap' in self.mappers[arg['name']]:
@@ -471,7 +471,6 @@ class generator:
 							if arg['del'] == 'errhandler_del':
 								str=str+arg['del']+'('+arg['var']+','+arg['var']+'_tmp);\n}'
 							elif arg['del'] == 'communicator_translation_del(comm)':
-								#str=str+arg['del']+';'+'\n'+'comm_conv_r2a(comm,comm_tmp);\n}'
 								str=str+'comm_conv_r2a(comm,comm_tmp);\n'+arg['del']+';'+'\n}'
 							else:
 								str=str+arg['del']+'(&'+arg['var']+',&'+arg['var']+'_tmp);\n}'
@@ -526,9 +525,9 @@ class generator:
 					str= self.mappers[arg['name']]['r2a']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
 		return str
 
-###							 ###
-# affect_temp_conv #
-###							 ###
+###                ###
+#  affect_temp_conv  #
+###                ###
 
 	def affect_temp_conv(self,arg):
 		if 'nomap' in self.mappers[arg['name']]:
@@ -553,9 +552,9 @@ class generator:
 					else:
 						str= self.mappers[arg['name']]['a2r']+'(&'+arg['var']+',&'+arg['var']+'_tmp);'
 		return str
-###					    ###
-# generate_func_c #
-###             ###
+###               ###
+#  generate_func_c  #
+###               ###
 #Generate C interface, wrapper_preload_c, wrapper_interface_c
 	def generate_func_c(self,func_dict, init_conf, app_side=True):
 		count_loop=0
@@ -615,9 +614,9 @@ class generator:
 				str=str+'\n'+self.footer_func(func_dict)
 		return str
 
-###							###
-#	generate_func_f #
-###							###
+###               ###
+#  generate_func_f  #
+###               ###
 	def generate_func_f(self,func_dict):
 		string=self.print_symbol_f(func_dict,prefix='A_f_',name_arg=True,retval_name=False,app_side=True)
 		string=string+self.header_func(func_dict)
@@ -679,9 +678,9 @@ class generator:
 		string=string+self.footer_func(func_dict)
 		return string
 	
-###										 ###
-#	generate_func_asmK_tls #
-###										 ###
+###                      ###
+#  generate_func_asmK_tls  #
+###                      ###
 	def generate_func_asmK_tls(self, func_dict):
 		count_hexa=0
 		nb_args = len(func_dict['args'])
@@ -700,8 +699,6 @@ class generator:
 		for i in range(nb_args):
 			if i < 6:
 				count_hexa=count_hexa+8
-				#print 'count_hexa '+count_hexa.__str__()
-		#if count_hexa % 32 != 0: #16 without __m256 | 32 with __m256
 		while count_hexa % 16 != 0: #16 without __m256 | 32 with __m256
 			count_hexa=count_hexa+8
 		str=str+'\"push %rbp\\n\"\n'
@@ -759,9 +756,9 @@ class generator:
 		str=str+'\n);\n'
 		return str
 
-###																				   ###
-#	generate_func_asmK_tls_updated_for_interface #
-###																					 ###
+###                                              ###
+#	generate_func_asmK_tls_updated_for_interface   #
+###                                              ###
 	def generate_func_asmK_tls_updated_for_interface(self, func_dict):
 		count_hexa=0
 		nb_args = len(func_dict['args'])
@@ -780,8 +777,6 @@ class generator:
 		for i in range(nb_args):
 			if i < 6:
 				count_hexa=count_hexa+8
-				#print 'count_hexa '+count_hexa.__str__()
-		#if count_hexa % 32 != 0: #16 without __m256 | 32 with __m256
 		while count_hexa % 16 != 0: #16 without __m256 | 32 with __m256
 			count_hexa=count_hexa+8
 		str=str+'\"push %rbp\\n\"\n'
@@ -835,13 +830,12 @@ class generator:
 		str=str+'\"jmp *A_'+func_dict['name']+'@GOTPCREL(%rip)\\n\"\n'
 		str=str+'\"inwrap_'+func_dict['name']+':\\n\"\n'
 		str=str+'\"jmp *R_'+func_dict['name']+'@GOTPCREL(%rip)\\n\"\n'
-		#str=str+'\".size P'+func_dict['name']+',.-P'+func_dict['name']+'\\n\"\n'
 		str=str+'\n);\n'
 		return str
 
-###							    ###
-#	print_return_conv_c #
-### 							  ###
+###                   ###
+#  print_return_conv_c  #
+###                   ###
 	def print_return_conv_c(self,func_dict):
 		if self.mappers[func_dict['ret']['name']]['r2a'] == 'fint_conv_r2a' or self.mappers[func_dict['ret']['name']]['r2a'] == 'aint_conv_r2a' :
 			return 'return (A_'+self.mappers[func_dict['ret']['name']]['type']+')'+func_dict['ret']['var']+'_tmp;'
@@ -849,9 +843,9 @@ class generator:
 			return 'return '+self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+'_tmp);'
 		else:
 			return 'return '+func_dict['ret']['var']+'_tmp;'
-###								  ###
-# print_return_conv_f #
-###									###
+###                   ###
+#  print_return_conv_f  #
+###                   ###
 
 	def print_return_conv_f(self,func_dict):
 		str=''
@@ -863,9 +857,9 @@ class generator:
 			str=str+'return '+func_dict['ret']['var'];
 		return str
 
-###         ###
-# load_symbol #
-###         ###
+###           ###
+#  load_symbol  #
+###           ###
 	def load_symbol(self,func_dict,handle_name,postfix=''):
 		if self.name=='Wrapper_Preload_C' or self.name=='Wrapper_Interface_C' or self.name=='Interface_C':
 			return 'LOCAL_'+func_dict['name']+'=dlsym('+handle_name+',"P'+func_dict['name']+'");'
