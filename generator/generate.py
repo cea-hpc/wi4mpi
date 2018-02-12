@@ -103,16 +103,6 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 			else:
 				string=string+object_gen.generate_func_c(i, init_conf, app_side=True)+'\n'
 				string=string+object_gen.generate_func_c(i, init_conf, app_side=False)+'\n'
-	#if not wrapper:
-	#	string=string+'#ifdef OMPI_OMPI\n'	
-	#	for list_other in data:
-	#		if list_other['name'] in c2f_list:
-	#			string=string+object_gen.print_symbol(list_other,name_arg=True,retval_name=False,type_prefix='A_')+';'
-	#			string=string+object_gen.print_symbol(list_other,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n'
-	#			string=string+object_gen.generate_func_asmK_tls(list_other)
-	#			string=string+object_gen.generate_func(list_other,init_conf)
-	#			string=string+object_gen.generate_func_r(list_other)	
-	#	string=string+'#endif\n'
 	if not wrapper:
 		string=string+'void init_global(void *);\n' 
 		string=string+'void init_f2c(void *);\n'                
@@ -144,9 +134,6 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 		string=string+'A_MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");\n'
 		string=string+'A_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");\n'
 		string=string+'#endif\n'
-		string=string+'//#ifdef OMPI_OMPI\n'
-		string=string+'//init_global(lib_handle);\n'
-		string=string+'//#endif\n'
 	else:
 		string=string+'#ifdef OMPI_OMPI\n'
 		string=string+'init_global(lib_handle);\n'
@@ -250,7 +237,6 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
 		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'RTLD_NEXT')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'RTLD_NEXT')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'RTLD_NEXT')+'\n'
-		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'RTLD_NEXT')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'RTLD_NEXT')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'RTLD_NEXT')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'RTLD_NEXT')+'\n'
@@ -280,7 +266,6 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
 		string=string+object_gen.load_symbol({'name':'MPI_Comm_get_name'},'lib_handle_f')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Comm_set_name'},'lib_handle_f')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn'},'lib_handle_f')+'\n'
-		#string=string+object_gen.load_symbol({'name':'MPI_Comm_spawn_multiple'},'lib_handle_f')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Type_get_name'},'lib_handle_f')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Type_set_name'},'lib_handle_f')+'\n'
 		string=string+object_gen.load_symbol({'name':'MPI_Add_error_string'},'lib_handle_f')+'\n'
@@ -304,9 +289,6 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
 		string=string+'ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpi_fortran_statuses_ignore_");'+'\n'
 		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpi_fortran_unweighted_");'+'\n'
 		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");'+'\n'
-		string=string+'////mpi_null_delete_fn_;'+'\n'
-		string=string+'////mpi_null_copy_fn_;'+'\n'
-		string=string+'////mpi_null_delete_fn_;'+'\n'
 		string=string+'#endif\n'
 		string=string+'#ifdef ompi_mpich\n'
 		string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");'+'\n'
@@ -319,9 +301,6 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
 		string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpifcmb5_");'+'\n'
 		string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpifcmb9_");'+'\n'
 		string=string+'#endif\n'
-		string=string+'//local_mpi_null_delete_fn_=dlsym(lib_handle_f,"mpi_null_delete_fn_");'+'\n'
-		string=string+'//local_mpi_null_copy_fn_=dlsym(lib_handle_f,"mpi_null_copy_fn_");'+'\n'
-		string=string+'//local_mpi_dup_fn_=dlsym(lib_handle_f,"mpi_dup_fn_");'+'\n'
 	string=string+'}\n'
 	return string
 	
@@ -376,12 +355,6 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
 	string=string+'extern int wi4mpi__init__F;'
 	string=string+'\n__attribute__((constructor)) void wrapper_interface(void) {\n'                     
 	string=string+'if (wi4mpi__init__C != 0)\t\treturn;\nelse\n\t\twi4mpi__init__C = 1;\nif (wi4mpi__init__F == 0)\n\t\twrapper_interface_f();\n'
-	#string=string+'void *interface_handle=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n' 
-	#string=string+'if(!interface_handle)\n'                                                           
-	#string=string+'{\n'                                                                               
-	#string=string+'printf("no true IC lib defined\\nerror :%s\\n",dlerror());\n'                      
-	#string=string+'exit(1);\n'                                                                        
-	#string=string+'}\n'
 	string=string+'#ifndef WI4MPI_STATIC\n'
 	string=string+'#define to_string(name) #name\n'
 	string=string+'#define handle_loader(name)\\\n'
@@ -613,12 +586,6 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 	string=string+'\t\twi4mpi__init__F=1;\n'
 	string=string+'if(wi4mpi__init__C==0)\n' 
 	string=string+'\t\twrapper_interface();\n'
-	#string=string+'void *interface_handle_f=dlopen(getenv(\"WI4MPI_WRAPPER_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
-	#string=string+'if(!interface_handle_f)\n' 
-	#string=string+'{\n'                                    
-	#string=string+'printf("no true if lib defined\\nerror :%s\\n",dlerror());\n'
-	#string=string+'exit(1);\n'
-	#string=string+'}\n'                                                   
 	string=string+'#ifndef WI4MPI_STATIC\n'
 	string=string+'#define to_string(name) #name\n'
 	string=string+'#define handle_loader(name)\\\n'
@@ -672,7 +639,6 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 	string=string+'INTERFACE_F_LOCAL_MPI_Comm_get_name=dlsym(interface_handle_f, \"A_f_MPI_Comm_get_name\");\n'
 	string=string+'INTERFACE_F_LOCAL_MPI_Comm_set_name=dlsym(interface_handle_f, \"A_f_MPI_Comm_set_name\");\n'
 	string=string+'INTERFACE_F_LOCAL_MPI_Comm_spawn=dlsym(interface_handle_f, \"A_f_MPI_Comm_spawn\");\n'
-	#string=string+'INTERFACE_F_LOCAL_MPI_Comm_spawn_multiple=dlsym(interface_handle_f, \"A_f_MPI_Comm_spawn_multiple\");\n'
 	string=string+'INTERFACE_F_LOCAL_MPI_Type_get_name=dlsym(interface_handle_f, \"A_f_MPI_Type_get_name\");\n'
 	string=string+'INTERFACE_F_LOCAL_MPI_Type_set_name=dlsym(interface_handle_f, \"A_f_MPI_Type_set_name\");\n'
 	string=string+'INTERFACE_F_LOCAL_MPI_Add_error_string=dlsym(interface_handle_f, \"A_f_MPI_Add_error_string\");\n'
@@ -709,7 +675,6 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 		string=string+'handle_loader(MPI_Comm_get_name,INTERF_2_'+k+'_A_f_);\n'
 		string=string+'handle_loader(MPI_Comm_set_name,INTERF_2_'+k+'_A_f_);\n'
 		string=string+'handle_loader(MPI_Comm_spawn,INTERF_2_'+k+'_A_f_);\n'
-		#string=string+'handle_loader(MPI_Comm_spawn_multiple,INTERF_2_'+k+'_A_f_);\n'
 		string=string+'handle_loader(MPI_Type_get_name,INTERF_2_'+k+'_A_f_);\n'
 		string=string+'handle_loader(MPI_Type_set_name,INTERF_2_'+k+'_A_f_);\n'
 		string=string+'handle_loader(MPI_Add_error_string,INTERF_2_'+k+'_A_f_);\n'
@@ -730,15 +695,7 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 
 
 if __name__ == '__main__':
-#
-	  #if len(sys.argv) > 1:
-	  #	for i in sys.argv:
-	  #		if i == '--help':
-	  #				usage()
-	  #				sys.exit(1)
-	  #		elif i == '--only':
-	  #			sys.argv[0]
-#Set generation directories
+# Set generation directories
 #--------------------------
 	interface_directory="./interface/gen"
 	if not os.path.exists(interface_directory):
@@ -880,7 +837,6 @@ if __name__ == '__main__':
 
 	print " >>>>> Generating interface/gen/interface_fort.c"
 	f_interface=generator("Interface_Fortran",mappers_f,data_f)
-	#data_f_overide
 	os.chdir(interface_directory)
 	interface_f=open("interface_fort.c","w")
 	string=generate_interface_f(f_interface, data_f_overide, data_f,def_list_f)
