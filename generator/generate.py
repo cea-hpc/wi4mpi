@@ -348,10 +348,10 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
 		string=string+'extern int INTERF_2_'+j+'_CCMPI_Win_get_attr(MPI_Win, int, void *, int *);\n'       
 		string=string+'extern int INTERF_2_'+j+'_CCMPI_Win_set_attr(MPI_Win, int, void *);\n'       
 	string=string+'#endif /*WI4MPI_STATIC*/\n'
-	string=string+'int wi4mpi__init__C = 0;'
-	string=string+'extern int wi4mpi__init__F;'
-	string=string+'\n__attribute__((constructor)) void wrapper_interface(void) {\n'                     
-	string=string+'if (wi4mpi__init__C != 0)\t\treturn;\nelse\n\t\twi4mpi__init__C = 1;\nif (wi4mpi__init__F == 0)\n\t\twrapper_interface_f();\n'
+	string=string+'int wi4mpi__init__C=0;\n'
+	string=string+'extern int wi4mpi__init__F;\n'
+	string=string+'__attribute__((constructor)) void wrapper_interface(void) {\n'                     
+	string=string+'if(wi4mpi__init__C!=0)\n    return;\nelse\n    wi4mpi__init__C=1;\nif(wi4mpi__init__F==0)\n    wrapper_interface_f();\n'
 	string=string+'#ifndef WI4MPI_STATIC\n'
 	string=string+'#define to_string(name) #name\n'
 	string=string+'#define handle_loader(name)\\\n'
@@ -396,7 +396,7 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
 	string=string+'#else\n' 
 	string=string+'char *target_inter=getenv(\"WI4MPI_STATIC_TARGET_TYPE\");\n'
 	for j in static_list:
-		string=string+'if(target_inter && !strcmp(target_inter,\"'+j+'\")){\n'
+		string=string+'if(target_inter&&!strcmp(target_inter,\"'+j+'\")){\n'
 		string=string+'handle_loader(MPI_Keyval_create,INTERF_2_'+j+'_CC);' 
 		string=string+'handle_loader(MPI_Keyval_free,INTERF_2_'+j+'_CC);\n'                                             
 		string=string+'handle_loader(MPI_Comm_create_keyval,INTERF_2_'+j+'_CC);\n'
@@ -406,15 +406,15 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
 		for i in data:                                                                         
 			if i['name'] in def_list or i['name'] in c2f_list:                                  
 				string=string+'handle_loader('+i['name']+',INTERF_2_'+j+'_CC);\n'
-		string=string+'INTERF_2_'+j+'_wrapper_init();'
-		string=string+'INTERF_2_'+j+'_wrapper_init_f();'
+		string=string+'INTERF_2_'+j+'_wrapper_init();\n'
+		string=string+'INTERF_2_'+j+'_wrapper_init_f();\n'
 		string=string+'}else{\n'
 	string=string+'printf(\"no target library defined conversion cannot be choosen\\n\" );\nexit(1);\n\n'
 	for j in static_list:
 		string=string+'}\n'
 	string=string+'#endif\n'
-	string=string+'wrapper_interface_f();'
-	string=string+'}\n'                                                                              
+	string=string+'wrapper_interface_f();\n'
+	string=string+'}\n'
 	return string
 
 def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI","INTEL"]):
