@@ -456,7 +456,7 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
 					string=string+'extern void'+object_gen.print_symbol_f(i,func_ptr=True,prefix='INTERF_2_'+j+'_A_f_',type_prefix='')+';\n'
 				string=string+'#endif /*WI4MPI_STATIC*/\n'
 	string=string+'#ifdef WI4MPI_STATIC\n'
-	string=string+'#ifdef IFORT_CALL\n'
+	string=string+'#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL)\n'
 	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Error_string)(int *, char *, int *, int *, int);\n'
 	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_Get_processor_name)(char *, int *, int *, int);\n'
 	string=string+'extern void (INTERF_2_OMPI_A_f_MPI_File_open)(int *, char *, int *, int *, int *, int *, int);\n'
