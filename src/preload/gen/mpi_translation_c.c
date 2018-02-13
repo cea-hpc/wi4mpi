@@ -139,7 +139,6 @@ char ompi_message_no_proc[512];
 #include "mappers.h"
 
 __thread int in_w=0;
-
 #if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
 
@@ -728,7 +727,7 @@ switch(win_keyval_tmp)
    case R_MPI_WIN_BASE: //void*
       buffer_conv_r2a(&attribute_val,&attribute_val_tmp);
    case R_MPI_WIN_SIZE: //MPI_Aint
-      /**(A_MPI_Aint *)*/ attribute_val = (A_MPI_Aint *) attribute_val_tmp;
+      attribute_val = (A_MPI_Aint *) attribute_val_tmp;
    case R_MPI_WIN_DISP_UNIT :
       win_attr_flavor_conv_r2a(attribute_val,attribute_val_tmp);
    case R_MPI_WIN_CREATE_FLAVOR ://int*
@@ -805,7 +804,7 @@ switch(win_keyval_tmp)
    case R_MPI_WIN_BASE: //void*
       buffer_conv_a2r(&attribute_val,&attribute_val_tmp);
    case R_MPI_WIN_SIZE: //MPI_Aint
-      /**(R_MPI_Aint *)*/ attribute_val = (R_MPI_Aint *) attribute_val_tmp;
+      attribute_val = (R_MPI_Aint *) attribute_val_tmp;
    case R_MPI_WIN_DISP_UNIT :
       win_attr_flavor_conv_a2r(attribute_val,attribute_val_tmp);
    case R_MPI_WIN_CREATE_FLAVOR : 
@@ -29871,7 +29870,6 @@ R_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");
 A_MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");
 A_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");
 #endif
-
 datatype_translation_init();
 communicator_translation_init();
 request_translation_init();
@@ -29885,7 +29883,6 @@ message_translation_init();
 t_enum_translation_init();
 cvar_handle_translation_init();
 pvar_handle_translation_init();
-//pvar_session_translation_init();
 //DATATYPE
 datatype_translation_add_const(A_MPI_DATATYPE_NULL, R_MPI_DATATYPE_NULL);
 datatype_translation_add_const(A_MPI_CHAR, R_MPI_CHAR);
@@ -29942,7 +29939,6 @@ datatype_translation_add_const(A_MPI_CXX_FLOAT_COMPLEX    ,R_MPI_CXX_FLOAT_COMPL
 datatype_translation_add_const(A_MPI_CXX_DOUBLE_COMPLEX   ,R_MPI_CXX_DOUBLE_COMPLEX   );
 datatype_translation_add_const(A_MPI_CXX_LONG_DOUBLE_COMPLEX,R_MPI_CXX_LONG_DOUBLE_COMPLEX);
 /*New datatypes from the 3.0 standard*/
-//datatype_translation_add_const(A_MPI_COUNT,R_MPI_COUNT);
 //COMM
 communicator_translation_add_const(A_MPI_COMM_WORLD, R_MPI_COMM_WORLD);
 communicator_translation_add_const(A_MPI_COMM_SELF, R_MPI_COMM_SELF);
@@ -29964,7 +29960,6 @@ operation_translation_add_const(A_MPI_LAND, R_MPI_LAND);
 operation_translation_add_const(A_MPI_LOR, R_MPI_LOR);
 operation_translation_add_const(A_MPI_LXOR, R_MPI_LXOR);
 operation_translation_add_const(A_MPI_REPLACE, R_MPI_REPLACE);
-//operation_translation_add_const(A_MPI_SAME_MODE, R_MPI_SAME_MODE);
 //GROUP
 group_translation_add_const(A_MPI_GROUP_NULL, R_MPI_GROUP_NULL);
 group_translation_add_const(A_MPI_GROUP_EMPTY, R_MPI_GROUP_EMPTY);
@@ -29985,7 +29980,5 @@ message_translation_add_const(A_MPI_MESSAGE_NO_PROC,R_MPI_MESSAGE_NO_PROC);
 t_enum_translation_add_const(A_MPI_T_ENUM_NULL,R_MPI_T_ENUM_NULL);
 cvar_handle_translation_add_const(A_MPI_T_CVAR_HANDLE_NULL,R_MPI_T_CVAR_HANDLE_NULL);
 pvar_handle_translation_add_const(A_MPI_T_PVAR_HANDLE_NULL,R_MPI_T_PVAR_HANDLE_NULL);
-//pvar_session_translation_add_const(A_MPI_T_PVAR_SESSION_NULL,R_MPI_T_PVAR_SESSION_NULL);
 wrapper_init_f();
-
 }
