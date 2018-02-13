@@ -109,3 +109,5 @@ t_enum_translation_add_const(A_MPI_T_ENUM_NULL,R_MPI_T_ENUM_NULL);
 cvar_handle_translation_add_const(A_MPI_T_CVAR_HANDLE_NULL,R_MPI_T_CVAR_HANDLE_NULL);
 pvar_handle_translation_add_const(A_MPI_T_PVAR_HANDLE_NULL,R_MPI_T_PVAR_HANDLE_NULL);
 wrapper_init_f();
+init_f2c(lib_handle);
+WI4MPI_errhandler_key=R_MPI_KEYVAL_INVALID;

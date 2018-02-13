@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <dlfcn.h>
 /*ompi constante*/
-#if defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 char ompi_mpi_comm_null[1024];
 char ompi_mpi_comm_self[1024];
 char ompi_mpi_comm_world[1024];
@@ -139,7 +139,7 @@ char ompi_message_no_proc[512];
 #include "mappers.h"
 
 __thread int in_w=0;
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
 
 int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag)
@@ -29859,7 +29859,7 @@ LOCAL_MPI_Aint_diff=dlsym(lib_handle,"PMPI_Aint_diff");
 LOCAL_MPI_File_iread_all=dlsym(lib_handle,"PMPI_File_iread_all");
 LOCAL_MPI_File_iread_at_all=dlsym(lib_handle,"PMPI_File_iread_at_all");
 LOCAL_MPI_T_category_changed=dlsym(lib_handle,"PMPI_T_category_changed");
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");
 #endif
 #if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)
@@ -29981,4 +29981,6 @@ t_enum_translation_add_const(A_MPI_T_ENUM_NULL,R_MPI_T_ENUM_NULL);
 cvar_handle_translation_add_const(A_MPI_T_CVAR_HANDLE_NULL,R_MPI_T_CVAR_HANDLE_NULL);
 pvar_handle_translation_add_const(A_MPI_T_PVAR_HANDLE_NULL,R_MPI_T_PVAR_HANDLE_NULL);
 wrapper_init_f();
+init_f2c(lib_handle);
+WI4MPI_errhandler_key=R_MPI_KEYVAL_INVALID;
 }

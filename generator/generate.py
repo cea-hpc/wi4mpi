@@ -65,19 +65,20 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     if not wrapper:
         string=string+'int WI4MPI_errhandler_key;\n'
     if not wrapper:
-        string=string+ '#if defined(OMPI_OMPI)'+'\n'
+        string=string+ '#if defined(OMPI_OMPI) || defined(_OMPI)'+'\n'
         for i in ompi_const:
             string=string+ 'extern '+i.split('[')[0]+';'+'\n'
+        string+='int  __svml_irem16_b3;\nint  __svml_irem4;\nint  __svml_irem8_l9;\n'
         string=string+ '#endif'+'\n'    
     ompi_const.seek(0,0)
-    string=string+ '#if defined(OMPI_INTEL) || defined(_INTEL)'+'\n'
+    string=string+ '#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)'+'\n'
     for i in ompi_const:
         string=string+ i
     string=string+ '#endif'+'\n\n'
     string=string+ '#define EXTERN_ALLOCATED 1\n'
     string=string+ '#include "mappers.h"\n\n'
     if not wrapper:
-        string=string+'#include \"c2f.h\"\n'
+        string=string+'#include \"c2f_f2c.h\"\n'
         string=string+ 'extern __thread int in_w;\n'
     else:
         string=string+ '__thread int in_w=0;\n'
@@ -123,7 +124,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     for i in data:
         if i['name'] in def_list or i['name'] in c2f_list:
             string=string+object_gen.load_symbol(i,'lib_handle')+'\n'
-    string=string+'#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)\n'
+    string=string+'#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
     string=string+'local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");\n'
     string=string+'#endif\n'
     if wrapper:
@@ -136,9 +137,9 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+'A_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");\n'
         string=string+'#endif\n'
     else:
-        string=string+'#ifdef OMPI_OMPI\n'
+        string=string+'#if defined(OMPI_OMPI) || defined(_OMPI)\n'
         string=string+'init_global(lib_handle);\n'
-        string=string+'#elif OMPI_INTEL\n'
+        string=string+'#elif defined(OMPI_INTEL) || defined(_INTEL)\n'
         string=string+'R_MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");\n'
         string=string+'R_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");\n'
         string=string+'MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");\n'
