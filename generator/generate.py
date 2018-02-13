@@ -59,6 +59,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     if not wrapper:
         string=string+'#define allocate_global 1\n'
         string=string+'#include \"wrapper_f.h\"\n'
+        string=string+'#include \"override.h\"'+'\n'
     string=string+'#include <stdio.h>'+'\n'
     string=string+'#include <dlfcn.h>'+'\n'
     string=string+"/*ompi constante*/"+'\n'
