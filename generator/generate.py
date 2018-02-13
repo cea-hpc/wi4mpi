@@ -47,7 +47,7 @@ def header_license_file():
     string=string+'//########################################################################'+'\n'
     
     string=string+'/*'+'\n'
-    string=string+' * This code is full generated'+'\n'
+    string=string+' * This code is fully generated'+'\n'
     string=string+' */'+'\n'
     return string
 

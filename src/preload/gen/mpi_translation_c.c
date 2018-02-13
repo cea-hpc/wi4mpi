@@ -21,7 +21,7 @@
 //#                                                                      #
 //########################################################################
 /*
- * This code is full generated
+ * This code is fully generated
  */
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
