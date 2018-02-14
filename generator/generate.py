@@ -755,13 +755,13 @@ if __name__ == '__main__':
     print "        Done."
     os.chdir(root)
    
-    print " >>>>> Generating preload/gen/wrapper.c"
+    print " >>>>> Generating preload/gen/mpi_translation_fort.c"
     with open('./FORTRAN/functions_fort_overide.json') as data_file:
         data_f_overide = json.load(data_file)
 
     wrapper_preload_fortran=generator("Wrapper_Preload_Fortran",mappers_f,data_f)
     os.chdir(preload_directory)
-    preload_wrapper_f= open("wrapper.c","w")
+    preload_wrapper_f= open("mpi_translation_fort.c","w")
     string=generate_wrapper_f(wrapper_preload_fortran, data_f, data_f_overide,wrapper,root)
     preload_wrapper_f.write(string)
     preload_wrapper_f.close()
@@ -796,10 +796,10 @@ if __name__ == '__main__':
     print "        Done."
     os.chdir(root)
     
-    print " >>>>> Generating interface/gen/wrapper.c"
+    print " >>>>> Generating interface/gen/mpi_translation_fort.c"
     wrapper_interface_fortran=generator("Wrapper_Interface_Fortran",mappers_f,data_f)
     os.chdir(interface_directory)
-    interface_wrapper_fortran = open("wrapper.c","w")
+    interface_wrapper_fortran = open("mpi_translation_fort.c","w")
     string=generate_wrapper_f(wrapper_interface_fortran, data_f, data_f_overide, wrapper, root)
     interface_wrapper_fortran.write(string)
     interface_wrapper_fortran.close()
