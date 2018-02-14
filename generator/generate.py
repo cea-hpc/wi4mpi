@@ -106,16 +106,9 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
                 string=string+object_gen.generate_func_c(i, init_conf, app_side=True)+'\n'
                 string=string+object_gen.generate_func_c(i, init_conf, app_side=False)+'\n'
     if not wrapper:
-        string=string+'void init_global(void *);\n' 
-        string=string+'void init_f2c(void *);\n'                
-        string=string+'void wrapper_init_f(void);\n'
-        string=string+'#ifdef WI4MPI_STATIC\n'
-        string=string+'#define WATTR\n'                     
-        string=string+'#else\n'                            
-        string=string+'#define WATTR __attribute__((constructor))\n'
-        string=string+'#endif\n'
-    if not wrapper:
-        string=string+'WATTR void wrapper_init(void) {\n'
+        with open(root+'/API_FIGEE/interface_api_fige.c', 'r') as fh:
+            str_interface_api_fige = fh.read()
+        string=string+str_interface_api_fige
     else:
         with open(root+'/API_FIGEE/preload_api_fige.c', 'r') as fh:
             str_preload_api_fige = fh.read()
@@ -124,7 +117,10 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+i
     for i in data:
         if i['name'] in def_list or i['name'] in c2f_list:
-            string=string+object_gen.load_symbol(i,'lib_handle')+'\n'
+            if 'MPI_File' in i['name']:
+                string=string+object_gen.load_symbol(i,'lib_handle_io')+'\n'
+            else:
+                string=string+object_gen.load_symbol(i,'lib_handle')+'\n'
     string=string+'#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
     string=string+'local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");\n'
     string=string+'#endif\n'

@@ -1209,6 +1209,7 @@ void wrapper_init_f(void);
 #endif
 __attribute__((constructor)) void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *lib_handle_io=lib_handle; // TODO: use WI4MPI_MPIIO_LIB
 #if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
@@ -1218,8 +1219,8 @@ LOCAL_MPI_Pcontrol=dlsym(lib_handle,"PMPI_Pcontrol");
 LOCAL_MPI_Win_create_errhandler=dlsym(lib_handle,"PMPI_Win_create_errhandler");
 LOCAL_MPI_Win_call_errhandler=dlsym(lib_handle,"PMPI_Win_call_errhandler");
 LOCAL_MPI_Win_set_errhandler=dlsym(lib_handle,"PMPI_Win_set_errhandler");
-LOCAL_MPI_File_call_errhandler=dlsym(lib_handle,"PMPI_File_call_errhandler");
-LOCAL_MPI_File_create_errhandler=dlsym(lib_handle,"PMPI_File_create_errhandler");
+LOCAL_MPI_File_call_errhandler=dlsym(lib_handle_io,"PMPI_File_call_errhandler");
+LOCAL_MPI_File_create_errhandler=dlsym(lib_handle_io,"PMPI_File_create_errhandler");
 LOCAL_MPI_T_pvar_read=dlsym(lib_handle,"PMPI_T_pvar_read");
 LOCAL_MPI_T_pvar_readreset=dlsym(lib_handle,"PMPI_T_pvar_readreset");
 LOCAL_MPI_T_pvar_reset=dlsym(lib_handle,"PMPI_T_pvar_reset");
