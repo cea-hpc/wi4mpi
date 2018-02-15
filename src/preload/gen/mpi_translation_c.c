@@ -21,7 +21,7 @@
 //#                                                                      #
 //########################################################################
 /*
- * This code is full generated
+ * This code is fully generated
  */
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
@@ -29,7 +29,8 @@
 #include <stdio.h>
 #include <dlfcn.h>
 /*ompi constante*/
-#if defined(OMPI_INTEL) || defined(_INTEL)
+int WI4MPI_errhandler_key;
+#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 char ompi_mpi_comm_null[1024];
 char ompi_mpi_comm_self[1024];
 char ompi_mpi_comm_world[1024];
@@ -139,8 +140,7 @@ char ompi_message_no_proc[512];
 #include "mappers.h"
 
 __thread int in_w=0;
-
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag);
 
 int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,void *attribute_val_out, int *flag)
@@ -728,7 +728,7 @@ switch(win_keyval_tmp)
    case R_MPI_WIN_BASE: //void*
       buffer_conv_r2a(&attribute_val,&attribute_val_tmp);
    case R_MPI_WIN_SIZE: //MPI_Aint
-      /**(A_MPI_Aint *)*/ attribute_val = (A_MPI_Aint *) attribute_val_tmp;
+      attribute_val = (A_MPI_Aint *) attribute_val_tmp;
    case R_MPI_WIN_DISP_UNIT :
       win_attr_flavor_conv_r2a(attribute_val,attribute_val_tmp);
    case R_MPI_WIN_CREATE_FLAVOR ://int*
@@ -805,7 +805,7 @@ switch(win_keyval_tmp)
    case R_MPI_WIN_BASE: //void*
       buffer_conv_a2r(&attribute_val,&attribute_val_tmp);
    case R_MPI_WIN_SIZE: //MPI_Aint
-      /**(R_MPI_Aint *)*/ attribute_val = (R_MPI_Aint *) attribute_val_tmp;
+      attribute_val = (R_MPI_Aint *) attribute_val_tmp;
    case R_MPI_WIN_DISP_UNIT :
       win_attr_flavor_conv_a2r(attribute_val,attribute_val_tmp);
    case R_MPI_WIN_CREATE_FLAVOR : 
@@ -875,6 +875,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SEND_OVERRIDE
 int A_MPI_Send(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -901,6 +902,8 @@ printf("sort : A_MPI_Send\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Send(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -955,6 +958,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RECV_OVERRIDE
 int A_MPI_Recv(void * buf,int count,A_MPI_Datatype datatype,int source,int tag,A_MPI_Comm comm,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -985,6 +989,8 @@ printf("sort : A_MPI_Recv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Recv(void * buf,int count,R_MPI_Datatype datatype,int source,int tag,R_MPI_Comm comm,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -1033,6 +1039,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_COUNT_OVERRIDE
 int A_MPI_Get_count(A_MPI_Status * status,A_MPI_Datatype datatype,int * count)
 {
 #ifdef DEBUG
@@ -1054,6 +1061,8 @@ printf("sort : A_MPI_Get_count\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_count(R_MPI_Status * status,R_MPI_Datatype datatype,int * count)
 {
 #ifdef DEBUG
@@ -1108,6 +1117,7 @@ __asm__(
 
 );
 
+#ifndef MPI_BSEND_OVERRIDE
 int A_MPI_Bsend(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -1134,6 +1144,8 @@ printf("sort : A_MPI_Bsend\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Bsend(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -1188,6 +1200,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SSEND_OVERRIDE
 int A_MPI_Ssend(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -1214,6 +1227,8 @@ printf("sort : A_MPI_Ssend\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ssend(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -1268,6 +1283,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RSEND_OVERRIDE
 int A_MPI_Rsend(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -1294,6 +1310,8 @@ printf("sort : A_MPI_Rsend\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Rsend(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -1340,6 +1358,7 @@ __asm__(
 
 );
 
+#ifndef MPI_BUFFER_ATTACH_OVERRIDE
 int A_MPI_Buffer_attach(void * buffer,int size)
 {
 #ifdef DEBUG
@@ -1358,6 +1377,8 @@ printf("sort : A_MPI_Buffer_attach\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Buffer_attach(void * buffer,int size)
 {
 #ifdef DEBUG
@@ -1404,6 +1425,7 @@ __asm__(
 
 );
 
+#ifndef MPI_BUFFER_DETACH_OVERRIDE
 int A_MPI_Buffer_detach(void * buffer_addr,int * size)
 {
 #ifdef DEBUG
@@ -1423,6 +1445,8 @@ printf("sort : A_MPI_Buffer_detach\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Buffer_detach(void * buffer_addr,int * size)
 {
 #ifdef DEBUG
@@ -1477,6 +1501,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ISEND_OVERRIDE
 int A_MPI_Isend(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1508,6 +1533,8 @@ printf("sort : A_MPI_Isend\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Isend(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1562,6 +1589,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IBSEND_OVERRIDE
 int A_MPI_Ibsend(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1593,6 +1621,8 @@ printf("sort : A_MPI_Ibsend\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ibsend(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1647,6 +1677,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ISSEND_OVERRIDE
 int A_MPI_Issend(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1678,6 +1709,8 @@ printf("sort : A_MPI_Issend\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Issend(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1732,6 +1765,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IRSEND_OVERRIDE
 int A_MPI_Irsend(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1763,6 +1797,8 @@ printf("sort : A_MPI_Irsend\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Irsend(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1817,6 +1853,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IRECV_OVERRIDE
 int A_MPI_Irecv(void * buf,int count,A_MPI_Datatype datatype,int source,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1849,6 +1886,8 @@ printf("sort : A_MPI_Irecv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Irecv(void * buf,int count,R_MPI_Datatype datatype,int source,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -1895,6 +1934,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WAIT_OVERRIDE
 int A_MPI_Wait(A_MPI_Request * request,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -1920,6 +1960,8 @@ printf("sort : A_MPI_Wait\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Wait(R_MPI_Request * request,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -1968,6 +2010,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TEST_OVERRIDE
 int A_MPI_Test(A_MPI_Request * request,int * flag,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -1996,6 +2039,8 @@ printf("sort : A_MPI_Test\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Test(R_MPI_Request * request,int * flag,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -2040,6 +2085,7 @@ __asm__(
 
 );
 
+#ifndef MPI_REQUEST_FREE_OVERRIDE
 int A_MPI_Request_free(A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2053,7 +2099,6 @@ request_ptr_conv_a2r(&request,&request_tmp);
 int ret_tmp= LOCAL_MPI_Request_free( request_tmp);
 if(ret_tmp == R_MPI_SUCCESS){
 request_pers_ptr_delete(&request,&request_tmp);
-request_ptr_delete(&request,&request_tmp);
 }
 in_w=0;
 #ifdef DEBUG
@@ -2061,6 +2106,8 @@ printf("sort : A_MPI_Request_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Request_free(R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2113,6 +2160,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IPROBE_OVERRIDE
 int A_MPI_Iprobe(int source,int tag,A_MPI_Comm comm,int * flag,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -2138,6 +2186,8 @@ printf("sort : A_MPI_Iprobe\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iprobe(int source,int tag,R_MPI_Comm comm,int * flag,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -2188,6 +2238,7 @@ __asm__(
 
 );
 
+#ifndef MPI_PROBE_OVERRIDE
 int A_MPI_Probe(int source,int tag,A_MPI_Comm comm,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -2211,6 +2262,8 @@ printf("sort : A_MPI_Probe\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Probe(int source,int tag,R_MPI_Comm comm,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -2255,6 +2308,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CANCEL_OVERRIDE
 int A_MPI_Cancel(A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2275,6 +2329,8 @@ printf("sort : A_MPI_Cancel\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cancel(R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2321,6 +2377,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TEST_CANCELLED_OVERRIDE
 int A_MPI_Test_cancelled(A_MPI_Status * status,int * flag)
 {
 #ifdef DEBUG
@@ -2340,6 +2397,8 @@ printf("sort : A_MPI_Test_cancelled\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Test_cancelled(R_MPI_Status * status,int * flag)
 {
 #ifdef DEBUG
@@ -2394,6 +2453,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SEND_INIT_OVERRIDE
 int A_MPI_Send_init(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2425,6 +2485,8 @@ printf("sort : A_MPI_Send_init\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Send_init(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2479,6 +2541,7 @@ __asm__(
 
 );
 
+#ifndef MPI_BSEND_INIT_OVERRIDE
 int A_MPI_Bsend_init(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2510,6 +2573,8 @@ printf("sort : A_MPI_Bsend_init\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Bsend_init(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2564,6 +2629,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SSEND_INIT_OVERRIDE
 int A_MPI_Ssend_init(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2595,6 +2661,8 @@ printf("sort : A_MPI_Ssend_init\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ssend_init(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2649,6 +2717,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RSEND_INIT_OVERRIDE
 int A_MPI_Rsend_init(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2680,6 +2749,8 @@ printf("sort : A_MPI_Rsend_init\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Rsend_init(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2734,6 +2805,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RECV_INIT_OVERRIDE
 int A_MPI_Recv_init(void * buf,int count,A_MPI_Datatype datatype,int source,int tag,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2766,6 +2838,8 @@ printf("sort : A_MPI_Recv_init\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Recv_init(void * buf,int count,R_MPI_Datatype datatype,int source,int tag,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2810,6 +2884,7 @@ __asm__(
 
 );
 
+#ifndef MPI_START_OVERRIDE
 int A_MPI_Start(A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2828,6 +2903,8 @@ printf("sort : A_MPI_Start\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Start(R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -2882,6 +2959,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SENDRECV_OVERRIDE
 int A_MPI_Sendrecv(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,int dest,int sendtag,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,int source,int recvtag,A_MPI_Comm comm,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -2922,6 +3000,8 @@ printf("sort : A_MPI_Sendrecv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Sendrecv(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,int dest,int sendtag,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,int source,int recvtag,R_MPI_Comm comm,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -2976,6 +3056,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SENDRECV_REPLACE_OVERRIDE
 int A_MPI_Sendrecv_replace(void * buf,int count,A_MPI_Datatype datatype,int dest,int sendtag,int source,int recvtag,A_MPI_Comm comm,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -3010,6 +3091,8 @@ printf("sort : A_MPI_Sendrecv_replace\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Sendrecv_replace(void * buf,int count,R_MPI_Datatype datatype,int dest,int sendtag,int source,int recvtag,R_MPI_Comm comm,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -3058,6 +3141,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CONTIGUOUS_OVERRIDE
 int A_MPI_Type_contiguous(int count,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3079,6 +3163,8 @@ printf("sort : A_MPI_Type_contiguous\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_contiguous(int count,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3131,6 +3217,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_VECTOR_OVERRIDE
 int A_MPI_Type_vector(int count,int blocklength,int stride,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3156,6 +3243,8 @@ printf("sort : A_MPI_Type_vector\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_vector(int count,int blocklength,int stride,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3208,6 +3297,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_HVECTOR_OVERRIDE
 int A_MPI_Type_hvector(int count,int blocklength,A_MPI_Aint stride,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3233,6 +3323,8 @@ printf("sort : A_MPI_Type_hvector\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_hvector(int count,int blocklength,R_MPI_Aint stride,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3285,6 +3377,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_INDEXED_OVERRIDE
 int A_MPI_Type_indexed(int count,int * array_of_blocklengths,int * array_of_displacements,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3310,6 +3403,8 @@ printf("sort : A_MPI_Type_indexed\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_indexed(int count,int * array_of_blocklengths,int * array_of_displacements,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3362,6 +3457,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_HINDEXED_OVERRIDE
 int A_MPI_Type_hindexed(int count,int * array_of_blocklengths,A_MPI_Aint * array_of_displacements,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3391,6 +3487,8 @@ printf("sort : A_MPI_Type_hindexed\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_hindexed(int count,int * array_of_blocklengths,R_MPI_Aint * array_of_displacements,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3443,6 +3541,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_STRUCT_OVERRIDE
 int A_MPI_Type_struct(int count,int * array_of_blocklengths,A_MPI_Aint * array_of_displacements,A_MPI_Datatype array_of_types[],A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3476,6 +3575,8 @@ printf("sort : A_MPI_Type_struct\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_struct(int count,int * array_of_blocklengths,R_MPI_Aint * array_of_displacements,R_MPI_Datatype array_of_types[],R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -3522,6 +3623,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ADDRESS_OVERRIDE
 int A_MPI_Address(void * location,A_MPI_Aint * address)
 {
 #ifdef DEBUG
@@ -3541,6 +3643,8 @@ printf("sort : A_MPI_Address\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Address(void * location,R_MPI_Aint * address)
 {
 #ifdef DEBUG
@@ -3587,6 +3691,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_EXTENT_OVERRIDE
 int A_MPI_Type_extent(A_MPI_Datatype datatype,A_MPI_Aint * extent)
 {
 #ifdef DEBUG
@@ -3606,6 +3711,8 @@ printf("sort : A_MPI_Type_extent\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_extent(R_MPI_Datatype datatype,R_MPI_Aint * extent)
 {
 #ifdef DEBUG
@@ -3652,6 +3759,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_SIZE_OVERRIDE
 int A_MPI_Type_size(A_MPI_Datatype datatype,int * size)
 {
 #ifdef DEBUG
@@ -3670,6 +3778,8 @@ printf("sort : A_MPI_Type_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_size(R_MPI_Datatype datatype,int * size)
 {
 #ifdef DEBUG
@@ -3716,6 +3826,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_LB_OVERRIDE
 int A_MPI_Type_lb(A_MPI_Datatype datatype,A_MPI_Aint * displacement)
 {
 #ifdef DEBUG
@@ -3735,6 +3846,8 @@ printf("sort : A_MPI_Type_lb\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_lb(R_MPI_Datatype datatype,R_MPI_Aint * displacement)
 {
 #ifdef DEBUG
@@ -3781,6 +3894,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_UB_OVERRIDE
 int A_MPI_Type_ub(A_MPI_Datatype datatype,A_MPI_Aint * displacement)
 {
 #ifdef DEBUG
@@ -3800,6 +3914,8 @@ printf("sort : A_MPI_Type_ub\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_ub(R_MPI_Datatype datatype,R_MPI_Aint * displacement)
 {
 #ifdef DEBUG
@@ -3844,6 +3960,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_COMMIT_OVERRIDE
 int A_MPI_Type_commit(A_MPI_Datatype * datatype)
 {
 #ifdef DEBUG
@@ -3862,6 +3979,8 @@ printf("sort : A_MPI_Type_commit\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_commit(R_MPI_Datatype * datatype)
 {
 #ifdef DEBUG
@@ -3906,6 +4025,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_FREE_OVERRIDE
 int A_MPI_Type_free(A_MPI_Datatype * datatype)
 {
 #ifdef DEBUG
@@ -3924,6 +4044,8 @@ printf("sort : A_MPI_Type_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_free(R_MPI_Datatype * datatype)
 {
 #ifdef DEBUG
@@ -3972,6 +4094,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_ELEMENTS_OVERRIDE
 int A_MPI_Get_elements(A_MPI_Status * status,A_MPI_Datatype datatype,int * count)
 {
 #ifdef DEBUG
@@ -3993,6 +4116,8 @@ printf("sort : A_MPI_Get_elements\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_elements(R_MPI_Status * status,R_MPI_Datatype datatype,int * count)
 {
 #ifdef DEBUG
@@ -4047,6 +4172,7 @@ __asm__(
 
 );
 
+#ifndef MPI_PACK_OVERRIDE
 int A_MPI_Pack(void * inbuf,int incount,A_MPI_Datatype datatype,void * outbuf,int outsize,int * position,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4077,6 +4203,8 @@ printf("sort : A_MPI_Pack\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Pack(void * inbuf,int incount,R_MPI_Datatype datatype,void * outbuf,int outsize,int * position,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4131,6 +4259,7 @@ __asm__(
 
 );
 
+#ifndef MPI_UNPACK_OVERRIDE
 int A_MPI_Unpack(void * inbuf,int insize,int * position,void * outbuf,int outcount,A_MPI_Datatype datatype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4161,6 +4290,8 @@ printf("sort : A_MPI_Unpack\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Unpack(void * inbuf,int insize,int * position,void * outbuf,int outcount,R_MPI_Datatype datatype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4211,6 +4342,7 @@ __asm__(
 
 );
 
+#ifndef MPI_PACK_SIZE_OVERRIDE
 int A_MPI_Pack_size(int incount,A_MPI_Datatype datatype,A_MPI_Comm comm,int * size)
 {
 #ifdef DEBUG
@@ -4233,6 +4365,8 @@ printf("sort : A_MPI_Pack_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Pack_size(int incount,R_MPI_Datatype datatype,R_MPI_Comm comm,int * size)
 {
 #ifdef DEBUG
@@ -4277,6 +4411,7 @@ __asm__(
 
 );
 
+#ifndef MPI_BARRIER_OVERRIDE
 int A_MPI_Barrier(A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4293,6 +4428,8 @@ printf("sort : A_MPI_Barrier\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Barrier(R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4345,6 +4482,7 @@ __asm__(
 
 );
 
+#ifndef MPI_BCAST_OVERRIDE
 int A_MPI_Bcast(void * buffer,int count,A_MPI_Datatype datatype,int root,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4370,6 +4508,8 @@ printf("sort : A_MPI_Bcast\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Bcast(void * buffer,int count,R_MPI_Datatype datatype,int root,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4424,6 +4564,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GATHER_OVERRIDE
 int A_MPI_Gather(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,int root,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4455,6 +4596,8 @@ printf("sort : A_MPI_Gather\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Gather(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,int root,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4509,6 +4652,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GATHERV_OVERRIDE
 int A_MPI_Gatherv(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,A_MPI_Datatype recvtype,int root,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4542,6 +4686,8 @@ printf("sort : A_MPI_Gatherv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Gatherv(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,R_MPI_Datatype recvtype,int root,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4596,6 +4742,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SCATTER_OVERRIDE
 int A_MPI_Scatter(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,int root,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4627,6 +4774,8 @@ printf("sort : A_MPI_Scatter\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Scatter(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,int root,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4681,6 +4830,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SCATTERV_OVERRIDE
 int A_MPI_Scatterv(void * sendbuf,int * sendcounts,int * displs,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,int root,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4714,6 +4864,8 @@ printf("sort : A_MPI_Scatterv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Scatterv(void * sendbuf,int * sendcounts,int * displs,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,int root,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4768,6 +4920,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ALLGATHER_OVERRIDE
 int A_MPI_Allgather(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4797,6 +4950,8 @@ printf("sort : A_MPI_Allgather\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Allgather(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4851,6 +5006,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ALLGATHERV_OVERRIDE
 int A_MPI_Allgatherv(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4882,6 +5038,8 @@ printf("sort : A_MPI_Allgatherv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Allgatherv(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4936,6 +5094,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ALLTOALL_OVERRIDE
 int A_MPI_Alltoall(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -4965,6 +5124,8 @@ printf("sort : A_MPI_Alltoall\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Alltoall(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5019,6 +5180,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ALLTOALLV_OVERRIDE
 int A_MPI_Alltoallv(void * sendbuf,int * sendcounts,int * sdispls,A_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5052,6 +5214,8 @@ printf("sort : A_MPI_Alltoallv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Alltoallv(void * sendbuf,int * sendcounts,int * sdispls,R_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5106,6 +5270,7 @@ __asm__(
 
 );
 
+#ifndef MPI_EXSCAN_OVERRIDE
 int A_MPI_Exscan(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5133,6 +5298,8 @@ printf("sort : A_MPI_Exscan\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Exscan(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5187,6 +5354,7 @@ __asm__(
 
 );
 
+#ifndef MPI_REDUCE_OVERRIDE
 int A_MPI_Reduce(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,int root,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5216,6 +5384,8 @@ printf("sort : A_MPI_Reduce\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Reduce(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,int root,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5264,6 +5434,7 @@ __asm__(
 
 );
 
+#ifndef MPI_OP_CREATE_OVERRIDE
 int A_MPI_Op_create(A_MPI_User_function * user_fn,int commute,A_MPI_Op * op)
 {
 #ifdef DEBUG
@@ -5285,6 +5456,8 @@ printf("sort : A_MPI_Op_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Op_create(R_MPI_User_function * user_fn,int commute,R_MPI_Op * op)
 {
 #ifdef DEBUG
@@ -5329,6 +5502,7 @@ __asm__(
 
 );
 
+#ifndef MPI_OP_FREE_OVERRIDE
 int A_MPI_Op_free(A_MPI_Op * op)
 {
 #ifdef DEBUG
@@ -5347,6 +5521,8 @@ printf("sort : A_MPI_Op_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Op_free(R_MPI_Op * op)
 {
 #ifdef DEBUG
@@ -5401,6 +5577,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ALLREDUCE_OVERRIDE
 int A_MPI_Allreduce(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5428,6 +5605,8 @@ printf("sort : A_MPI_Allreduce\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Allreduce(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5482,6 +5661,7 @@ __asm__(
 
 );
 
+#ifndef MPI_SCAN_OVERRIDE
 int A_MPI_Scan(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5509,6 +5689,8 @@ printf("sort : A_MPI_Scan\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Scan(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -5555,6 +5737,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_SIZE_OVERRIDE
 int A_MPI_Group_size(A_MPI_Group group,int * size)
 {
 #ifdef DEBUG
@@ -5573,6 +5756,8 @@ printf("sort : A_MPI_Group_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_size(R_MPI_Group group,int * size)
 {
 #ifdef DEBUG
@@ -5619,6 +5804,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_RANK_OVERRIDE
 int A_MPI_Group_rank(A_MPI_Group group,int * rank)
 {
 #ifdef DEBUG
@@ -5637,6 +5823,8 @@ printf("sort : A_MPI_Group_rank\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_rank(R_MPI_Group group,int * rank)
 {
 #ifdef DEBUG
@@ -5685,6 +5873,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_COMPARE_OVERRIDE
 int A_MPI_Group_compare(A_MPI_Group group1,A_MPI_Group group2,int * result)
 {
 #ifdef DEBUG
@@ -5705,6 +5894,8 @@ printf("sort : A_MPI_Group_compare\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_compare(R_MPI_Group group1,R_MPI_Group group2,int * result)
 {
 #ifdef DEBUG
@@ -5751,6 +5942,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_GROUP_OVERRIDE
 int A_MPI_Comm_group(A_MPI_Comm comm,A_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -5770,6 +5962,8 @@ printf("sort : A_MPI_Comm_group\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_group(R_MPI_Comm comm,R_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -5818,6 +6012,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_UNION_OVERRIDE
 int A_MPI_Group_union(A_MPI_Group group1,A_MPI_Group group2,A_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -5839,6 +6034,8 @@ printf("sort : A_MPI_Group_union\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_union(R_MPI_Group group1,R_MPI_Group group2,R_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -5887,6 +6084,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_INTERSECTION_OVERRIDE
 int A_MPI_Group_intersection(A_MPI_Group group1,A_MPI_Group group2,A_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -5908,6 +6106,8 @@ printf("sort : A_MPI_Group_intersection\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_intersection(R_MPI_Group group1,R_MPI_Group group2,R_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -5956,6 +6156,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_DIFFERENCE_OVERRIDE
 int A_MPI_Group_difference(A_MPI_Group group1,A_MPI_Group group2,A_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -5977,6 +6178,8 @@ printf("sort : A_MPI_Group_difference\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_difference(R_MPI_Group group1,R_MPI_Group group2,R_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -6021,6 +6224,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_FREE_OVERRIDE
 int A_MPI_Group_free(A_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -6039,6 +6243,8 @@ printf("sort : A_MPI_Group_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_free(R_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -6085,6 +6291,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SIZE_OVERRIDE
 int A_MPI_Comm_size(A_MPI_Comm comm,int * size)
 {
 #ifdef DEBUG
@@ -6103,6 +6310,8 @@ printf("sort : A_MPI_Comm_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_size(R_MPI_Comm comm,int * size)
 {
 #ifdef DEBUG
@@ -6149,6 +6358,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_RANK_OVERRIDE
 int A_MPI_Comm_rank(A_MPI_Comm comm,int * rank)
 {
 #ifdef DEBUG
@@ -6167,6 +6377,8 @@ printf("sort : A_MPI_Comm_rank\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_rank(R_MPI_Comm comm,int * rank)
 {
 #ifdef DEBUG
@@ -6215,6 +6427,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_COMPARE_OVERRIDE
 int A_MPI_Comm_compare(A_MPI_Comm comm1,A_MPI_Comm comm2,int * result)
 {
 #ifdef DEBUG
@@ -6235,6 +6448,8 @@ printf("sort : A_MPI_Comm_compare\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_compare(R_MPI_Comm comm1,R_MPI_Comm comm2,int * result)
 {
 #ifdef DEBUG
@@ -6281,6 +6496,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_DUP_OVERRIDE
 int A_MPI_Comm_dup(A_MPI_Comm comm,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6300,6 +6516,8 @@ printf("sort : A_MPI_Comm_dup\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_dup(R_MPI_Comm comm,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6348,6 +6566,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_DUP_WITH_INFO_OVERRIDE
 int A_MPI_Comm_dup_with_info(A_MPI_Comm comm,A_MPI_Info info,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6369,6 +6588,8 @@ printf("sort : A_MPI_Comm_dup_with_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_dup_with_info(R_MPI_Comm comm,R_MPI_Info info,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6417,6 +6638,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_CREATE_OVERRIDE
 int A_MPI_Comm_create(A_MPI_Comm comm,A_MPI_Group group,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6438,6 +6660,8 @@ printf("sort : A_MPI_Comm_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_create(R_MPI_Comm comm,R_MPI_Group group,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6488,6 +6712,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SPLIT_OVERRIDE
 int A_MPI_Comm_split(A_MPI_Comm comm,int color,int key,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6511,6 +6736,8 @@ printf("sort : A_MPI_Comm_split\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_split(R_MPI_Comm comm,int color,int key,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -6555,6 +6782,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_FREE_OVERRIDE
 int A_MPI_Comm_free(A_MPI_Comm * comm)
 {
 #ifdef DEBUG
@@ -6576,6 +6804,8 @@ printf("sort : A_MPI_Comm_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_free(R_MPI_Comm * comm)
 {
 #ifdef DEBUG
@@ -6622,6 +6852,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_TEST_INTER_OVERRIDE
 int A_MPI_Comm_test_inter(A_MPI_Comm comm,int * flag)
 {
 #ifdef DEBUG
@@ -6640,6 +6871,8 @@ printf("sort : A_MPI_Comm_test_inter\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_test_inter(R_MPI_Comm comm,int * flag)
 {
 #ifdef DEBUG
@@ -6686,6 +6919,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_REMOTE_SIZE_OVERRIDE
 int A_MPI_Comm_remote_size(A_MPI_Comm comm,int * size)
 {
 #ifdef DEBUG
@@ -6704,6 +6938,8 @@ printf("sort : A_MPI_Comm_remote_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_remote_size(R_MPI_Comm comm,int * size)
 {
 #ifdef DEBUG
@@ -6750,6 +6986,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_REMOTE_GROUP_OVERRIDE
 int A_MPI_Comm_remote_group(A_MPI_Comm comm,A_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -6769,6 +7006,8 @@ printf("sort : A_MPI_Comm_remote_group\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_remote_group(R_MPI_Comm comm,R_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -6823,6 +7062,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INTERCOMM_CREATE_OVERRIDE
 int A_MPI_Intercomm_create(A_MPI_Comm local_comm,int local_leader,A_MPI_Comm peer_comm,int remote_leader,int tag,A_MPI_Comm * newintercomm)
 {
 #ifdef DEBUG
@@ -6850,6 +7090,8 @@ printf("sort : A_MPI_Intercomm_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Intercomm_create(R_MPI_Comm local_comm,int local_leader,R_MPI_Comm peer_comm,int remote_leader,int tag,R_MPI_Comm * newintercomm)
 {
 #ifdef DEBUG
@@ -6898,6 +7140,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INTERCOMM_MERGE_OVERRIDE
 int A_MPI_Intercomm_merge(A_MPI_Comm intercomm,int high,A_MPI_Comm * newintracomm)
 {
 #ifdef DEBUG
@@ -6919,6 +7162,8 @@ printf("sort : A_MPI_Intercomm_merge\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Intercomm_merge(R_MPI_Comm intercomm,int high,R_MPI_Comm * newintracomm)
 {
 #ifdef DEBUG
@@ -6967,6 +7212,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ATTR_PUT_OVERRIDE
 int A_MPI_Attr_put(A_MPI_Comm comm,int keyval,void * attribute_val)
 {
 #ifdef DEBUG
@@ -6987,6 +7233,8 @@ printf("sort : A_MPI_Attr_put\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Attr_put(R_MPI_Comm comm,int keyval,void * attribute_val)
 {
 #ifdef DEBUG
@@ -7037,6 +7285,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ATTR_GET_OVERRIDE
 int A_MPI_Attr_get(A_MPI_Comm comm,int keyval,void * attribute_val,int * flag)
 {
 #ifdef DEBUG
@@ -7059,6 +7308,8 @@ printf("sort : A_MPI_Attr_get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Attr_get(R_MPI_Comm comm,int keyval,void * attribute_val,int * flag)
 {
 #ifdef DEBUG
@@ -7105,6 +7356,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ATTR_DELETE_OVERRIDE
 int A_MPI_Attr_delete(A_MPI_Comm comm,int keyval)
 {
 #ifdef DEBUG
@@ -7123,6 +7375,8 @@ printf("sort : A_MPI_Attr_delete\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Attr_delete(R_MPI_Comm comm,int keyval)
 {
 #ifdef DEBUG
@@ -7169,6 +7423,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TOPO_TEST_OVERRIDE
 int A_MPI_Topo_test(A_MPI_Comm comm,int * status)
 {
 #ifdef DEBUG
@@ -7188,6 +7443,8 @@ printf("sort : A_MPI_Topo_test\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Topo_test(R_MPI_Comm comm,int * status)
 {
 #ifdef DEBUG
@@ -7236,6 +7493,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GRAPHDIMS_GET_OVERRIDE
 int A_MPI_Graphdims_get(A_MPI_Comm comm,int * nnodes,int * nedges)
 {
 #ifdef DEBUG
@@ -7256,6 +7514,8 @@ printf("sort : A_MPI_Graphdims_get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Graphdims_get(R_MPI_Comm comm,int * nnodes,int * nedges)
 {
 #ifdef DEBUG
@@ -7302,6 +7562,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CARTDIM_GET_OVERRIDE
 int A_MPI_Cartdim_get(A_MPI_Comm comm,int * ndims)
 {
 #ifdef DEBUG
@@ -7320,6 +7581,8 @@ printf("sort : A_MPI_Cartdim_get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cartdim_get(R_MPI_Comm comm,int * ndims)
 {
 #ifdef DEBUG
@@ -7368,6 +7631,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GRAPH_NEIGHBORS_COUNT_OVERRIDE
 int A_MPI_Graph_neighbors_count(A_MPI_Comm comm,int rank,int * nneighbors)
 {
 #ifdef DEBUG
@@ -7388,6 +7652,8 @@ printf("sort : A_MPI_Graph_neighbors_count\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Graph_neighbors_count(R_MPI_Comm comm,int rank,int * nneighbors)
 {
 #ifdef DEBUG
@@ -7440,6 +7706,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CART_SHIFT_OVERRIDE
 int A_MPI_Cart_shift(A_MPI_Comm comm,int direction,int disp,int * rank_source,int * rank_dest)
 {
 #ifdef DEBUG
@@ -7465,6 +7732,8 @@ printf("sort : A_MPI_Cart_shift\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cart_shift(R_MPI_Comm comm,int direction,int disp,int * rank_source,int * rank_dest)
 {
 #ifdef DEBUG
@@ -7511,6 +7780,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_PROCESSOR_NAME_OVERRIDE
 int A_MPI_Get_processor_name(char * name,int * resultlen)
 {
 #ifdef DEBUG
@@ -7529,6 +7799,8 @@ printf("sort : A_MPI_Get_processor_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_processor_name(char * name,int * resultlen)
 {
 #ifdef DEBUG
@@ -7575,6 +7847,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_VERSION_OVERRIDE
 int A_MPI_Get_version(int * version,int * subversion)
 {
 #ifdef DEBUG
@@ -7593,6 +7866,8 @@ printf("sort : A_MPI_Get_version\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_version(int * version,int * subversion)
 {
 #ifdef DEBUG
@@ -7639,6 +7914,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_LIBRARY_VERSION_OVERRIDE
 int A_MPI_Get_library_version(char * version,int * resultlen)
 {
 #ifdef DEBUG
@@ -7657,6 +7933,8 @@ printf("sort : A_MPI_Get_library_version\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_library_version(char * version,int * resultlen)
 {
 #ifdef DEBUG
@@ -7703,6 +7981,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ERRHANDLER_CREATE_OVERRIDE
 int A_MPI_Errhandler_create(A_MPI_Handler_function * function,A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -7722,6 +8001,8 @@ printf("sort : A_MPI_Errhandler_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Errhandler_create(R_MPI_Handler_function * function,R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -7768,6 +8049,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ERRHANDLER_SET_OVERRIDE
 int A_MPI_Errhandler_set(A_MPI_Comm comm,A_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -7791,6 +8073,8 @@ printf("sort : A_MPI_Errhandler_set\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Errhandler_set(R_MPI_Comm comm,R_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -7837,6 +8121,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ERRHANDLER_GET_OVERRIDE
 int A_MPI_Errhandler_get(A_MPI_Comm comm,A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -7858,6 +8143,8 @@ printf("sort : A_MPI_Errhandler_get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Errhandler_get(R_MPI_Comm comm,R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -7902,6 +8189,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ERRHANDLER_FREE_OVERRIDE
 int A_MPI_Errhandler_free(A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -7922,6 +8210,8 @@ printf("sort : A_MPI_Errhandler_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Errhandler_free(R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -7970,6 +8260,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ERROR_STRING_OVERRIDE
 int A_MPI_Error_string(int errorcode,char * string,int * resultlen)
 {
 #ifdef DEBUG
@@ -7990,6 +8281,8 @@ printf("sort : A_MPI_Error_string\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Error_string(int errorcode,char * string,int * resultlen)
 {
 #ifdef DEBUG
@@ -8036,6 +8329,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ERROR_CLASS_OVERRIDE
 int A_MPI_Error_class(int errorcode,int * errorclass)
 {
 #ifdef DEBUG
@@ -8054,6 +8348,8 @@ printf("sort : A_MPI_Error_class\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Error_class(int errorcode,int * errorclass)
 {
 #ifdef DEBUG
@@ -8098,6 +8394,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INITIALIZED_OVERRIDE
 int A_MPI_Initialized(int * flag)
 {
 #ifdef DEBUG
@@ -8114,6 +8411,8 @@ printf("sort : A_MPI_Initialized\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Initialized(int * flag)
 {
 #ifdef DEBUG
@@ -8160,6 +8459,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ABORT_OVERRIDE
 int A_MPI_Abort(A_MPI_Comm comm,int errorcode)
 {
 #ifdef DEBUG
@@ -8178,6 +8478,8 @@ printf("sort : A_MPI_Abort\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Abort(R_MPI_Comm comm,int errorcode)
 {
 #ifdef DEBUG
@@ -8224,6 +8526,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INIT_OVERRIDE
 int A_MPI_Init(int * argc,char *** argv)
 {
 #ifdef DEBUG
@@ -8246,6 +8549,8 @@ printf("sort : A_MPI_Init\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Init(int * argc,char *** argv)
 {
 #ifdef DEBUG
@@ -8290,6 +8595,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CLOSE_PORT_OVERRIDE
 int A_MPI_Close_port(char * port_name)
 {
 #ifdef DEBUG
@@ -8306,6 +8612,8 @@ printf("sort : A_MPI_Close_port\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Close_port(char * port_name)
 {
 #ifdef DEBUG
@@ -8358,6 +8666,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_ACCEPT_OVERRIDE
 int A_MPI_Comm_accept(char * port_name,A_MPI_Info info,int root,A_MPI_Comm comm,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -8383,6 +8692,8 @@ printf("sort : A_MPI_Comm_accept\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_accept(char * port_name,R_MPI_Info info,int root,R_MPI_Comm comm,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -8435,6 +8746,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_CONNECT_OVERRIDE
 int A_MPI_Comm_connect(char * port_name,A_MPI_Info info,int root,A_MPI_Comm comm,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -8460,6 +8772,8 @@ printf("sort : A_MPI_Comm_connect\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_connect(char * port_name,R_MPI_Info info,int root,R_MPI_Comm comm,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -8504,6 +8818,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_DISCONNECT_OVERRIDE
 int A_MPI_Comm_disconnect(A_MPI_Comm * comm)
 {
 #ifdef DEBUG
@@ -8522,6 +8837,8 @@ printf("sort : A_MPI_Comm_disconnect\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_disconnect(R_MPI_Comm * comm)
 {
 #ifdef DEBUG
@@ -8566,6 +8883,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_GET_PARENT_OVERRIDE
 int A_MPI_Comm_get_parent(A_MPI_Comm * parent)
 {
 #ifdef DEBUG
@@ -8583,6 +8901,8 @@ printf("sort : A_MPI_Comm_get_parent\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_get_parent(R_MPI_Comm * parent)
 {
 #ifdef DEBUG
@@ -8629,6 +8949,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_JOIN_OVERRIDE
 int A_MPI_Comm_join(int fd,A_MPI_Comm * intercomm)
 {
 #ifdef DEBUG
@@ -8648,6 +8969,8 @@ printf("sort : A_MPI_Comm_join\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_join(int fd,R_MPI_Comm * intercomm)
 {
 #ifdef DEBUG
@@ -8696,6 +9019,7 @@ __asm__(
 
 );
 
+#ifndef MPI_LOOKUP_NAME_OVERRIDE
 int A_MPI_Lookup_name(char * service_name,A_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8716,6 +9040,8 @@ printf("sort : A_MPI_Lookup_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Lookup_name(char * service_name,R_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8762,6 +9088,7 @@ __asm__(
 
 );
 
+#ifndef MPI_OPEN_PORT_OVERRIDE
 int A_MPI_Open_port(A_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8780,6 +9107,8 @@ printf("sort : A_MPI_Open_port\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Open_port(R_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8828,6 +9157,7 @@ __asm__(
 
 );
 
+#ifndef MPI_PUBLISH_NAME_OVERRIDE
 int A_MPI_Publish_name(char * service_name,A_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8848,6 +9178,8 @@ printf("sort : A_MPI_Publish_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Publish_name(char * service_name,R_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8896,6 +9228,7 @@ __asm__(
 
 );
 
+#ifndef MPI_UNPUBLISH_NAME_OVERRIDE
 int A_MPI_Unpublish_name(char * service_name,A_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8916,6 +9249,8 @@ printf("sort : A_MPI_Unpublish_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Unpublish_name(char * service_name,R_MPI_Info info,char * port_name)
 {
 #ifdef DEBUG
@@ -8962,6 +9297,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SET_INFO_OVERRIDE
 int A_MPI_Comm_set_info(A_MPI_Comm comm,A_MPI_Info info)
 {
 #ifdef DEBUG
@@ -8981,6 +9317,8 @@ printf("sort : A_MPI_Comm_set_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_set_info(R_MPI_Comm comm,R_MPI_Info info)
 {
 #ifdef DEBUG
@@ -9027,6 +9365,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_GET_INFO_OVERRIDE
 int A_MPI_Comm_get_info(A_MPI_Comm comm,A_MPI_Info * info)
 {
 #ifdef DEBUG
@@ -9046,6 +9385,8 @@ printf("sort : A_MPI_Comm_get_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_get_info(R_MPI_Comm comm,R_MPI_Info * info)
 {
 #ifdef DEBUG
@@ -9100,6 +9441,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ACCUMULATE_OVERRIDE
 int A_MPI_Accumulate(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Op op,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9132,6 +9474,8 @@ printf("sort : A_MPI_Accumulate\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Accumulate(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Op op,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9186,6 +9530,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_OVERRIDE
 int A_MPI_Get(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9216,6 +9561,8 @@ printf("sort : A_MPI_Get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9270,6 +9617,7 @@ __asm__(
 
 );
 
+#ifndef MPI_PUT_OVERRIDE
 int A_MPI_Put(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9300,6 +9648,8 @@ printf("sort : A_MPI_Put\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Put(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9344,6 +9694,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_COMPLETE_OVERRIDE
 int A_MPI_Win_complete(A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9360,6 +9711,8 @@ printf("sort : A_MPI_Win_complete\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_complete(R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9414,6 +9767,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_CREATE_OVERRIDE
 int A_MPI_Win_create(void * base,A_MPI_Aint size,int disp_unit,A_MPI_Info info,A_MPI_Comm comm,A_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -9441,6 +9795,8 @@ printf("sort : A_MPI_Win_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_create(void * base,R_MPI_Aint size,int disp_unit,R_MPI_Info info,R_MPI_Comm comm,R_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -9487,6 +9843,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_FENCE_OVERRIDE
 int A_MPI_Win_fence(int assert,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9505,6 +9862,8 @@ printf("sort : A_MPI_Win_fence\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_fence(int assert,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9549,6 +9908,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_FREE_OVERRIDE
 int A_MPI_Win_free(A_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -9567,6 +9927,8 @@ printf("sort : A_MPI_Win_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_free(R_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -9613,6 +9975,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_GET_GROUP_OVERRIDE
 int A_MPI_Win_get_group(A_MPI_Win win,A_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -9632,6 +9995,8 @@ printf("sort : A_MPI_Win_get_group\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_get_group(R_MPI_Win win,R_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -9682,6 +10047,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_LOCK_OVERRIDE
 int A_MPI_Win_lock(int lock_type,int rank,int assert,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9704,6 +10070,8 @@ printf("sort : A_MPI_Win_lock\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_lock(int lock_type,int rank,int assert,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9752,6 +10120,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_POST_OVERRIDE
 int A_MPI_Win_post(A_MPI_Group group,int assert,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9772,6 +10141,8 @@ printf("sort : A_MPI_Win_post\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_post(R_MPI_Group group,int assert,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9820,6 +10191,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_START_OVERRIDE
 int A_MPI_Win_start(A_MPI_Group group,int assert,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9840,6 +10212,8 @@ printf("sort : A_MPI_Win_start\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_start(R_MPI_Group group,int assert,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9886,6 +10260,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_TEST_OVERRIDE
 int A_MPI_Win_test(A_MPI_Win win,int * flag)
 {
 #ifdef DEBUG
@@ -9904,6 +10279,8 @@ printf("sort : A_MPI_Win_test\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_test(R_MPI_Win win,int * flag)
 {
 #ifdef DEBUG
@@ -9950,6 +10327,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_UNLOCK_OVERRIDE
 int A_MPI_Win_unlock(int rank,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -9968,6 +10346,8 @@ printf("sort : A_MPI_Win_unlock\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_unlock(int rank,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10012,6 +10392,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_WAIT_OVERRIDE
 int A_MPI_Win_wait(A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10028,6 +10409,8 @@ printf("sort : A_MPI_Win_wait\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_wait(R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10082,6 +10465,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_ALLOCATE_OVERRIDE
 int A_MPI_Win_allocate(A_MPI_Aint size,int disp_unit,A_MPI_Info info,A_MPI_Comm comm,void * baseptr,A_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -10110,6 +10494,8 @@ printf("sort : A_MPI_Win_allocate\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_allocate(R_MPI_Aint size,int disp_unit,R_MPI_Info info,R_MPI_Comm comm,void * baseptr,R_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -10164,6 +10550,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_ALLOCATE_SHARED_OVERRIDE
 int A_MPI_Win_allocate_shared(A_MPI_Aint size,int disp_unit,A_MPI_Info info,A_MPI_Comm comm,void * baseptr,A_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -10192,6 +10579,8 @@ printf("sort : A_MPI_Win_allocate_shared\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_allocate_shared(R_MPI_Aint size,int disp_unit,R_MPI_Info info,R_MPI_Comm comm,void * baseptr,R_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -10244,6 +10633,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_SHARED_QUERY_OVERRIDE
 int A_MPI_Win_shared_query(A_MPI_Win win,int rank,A_MPI_Aint * size,int * disp_unit,void * baseptr)
 {
 #ifdef DEBUG
@@ -10269,6 +10659,8 @@ printf("sort : A_MPI_Win_shared_query\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_shared_query(R_MPI_Win win,int rank,R_MPI_Aint * size,int * disp_unit,void * baseptr)
 {
 #ifdef DEBUG
@@ -10317,6 +10709,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_CREATE_DYNAMIC_OVERRIDE
 int A_MPI_Win_create_dynamic(A_MPI_Info info,A_MPI_Comm comm,A_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -10338,6 +10731,8 @@ printf("sort : A_MPI_Win_create_dynamic\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_create_dynamic(R_MPI_Info info,R_MPI_Comm comm,R_MPI_Win * win)
 {
 #ifdef DEBUG
@@ -10386,6 +10781,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_ATTACH_OVERRIDE
 int A_MPI_Win_attach(A_MPI_Win win,void * base,A_MPI_Aint size)
 {
 #ifdef DEBUG
@@ -10406,6 +10802,8 @@ printf("sort : A_MPI_Win_attach\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_attach(R_MPI_Win win,void * base,R_MPI_Aint size)
 {
 #ifdef DEBUG
@@ -10452,6 +10850,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_DETACH_OVERRIDE
 int A_MPI_Win_detach(A_MPI_Win win,void * base)
 {
 #ifdef DEBUG
@@ -10470,6 +10869,8 @@ printf("sort : A_MPI_Win_detach\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_detach(R_MPI_Win win,void * base)
 {
 #ifdef DEBUG
@@ -10516,6 +10917,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_GET_INFO_OVERRIDE
 int A_MPI_Win_get_info(A_MPI_Win win,A_MPI_Info * info_used)
 {
 #ifdef DEBUG
@@ -10535,6 +10937,8 @@ printf("sort : A_MPI_Win_get_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_get_info(R_MPI_Win win,R_MPI_Info * info_used)
 {
 #ifdef DEBUG
@@ -10581,6 +10985,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_SET_INFO_OVERRIDE
 int A_MPI_Win_set_info(A_MPI_Win win,A_MPI_Info info)
 {
 #ifdef DEBUG
@@ -10600,6 +11005,8 @@ printf("sort : A_MPI_Win_set_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_set_info(R_MPI_Win win,R_MPI_Info info)
 {
 #ifdef DEBUG
@@ -10654,6 +11061,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_ACCUMULATE_OVERRIDE
 int A_MPI_Get_accumulate(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,void * result_addr,int result_count,A_MPI_Datatype result_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Op op,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10693,6 +11101,8 @@ printf("sort : A_MPI_Get_accumulate\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_accumulate(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,void * result_addr,int result_count,R_MPI_Datatype result_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Op op,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10747,6 +11157,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FETCH_AND_OP_OVERRIDE
 int A_MPI_Fetch_and_op(void * origin_addr,void * result_addr,A_MPI_Datatype datatype,int target_rank,A_MPI_Aint target_disp,A_MPI_Op op,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10776,6 +11187,8 @@ printf("sort : A_MPI_Fetch_and_op\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Fetch_and_op(void * origin_addr,void * result_addr,R_MPI_Datatype datatype,int target_rank,R_MPI_Aint target_disp,R_MPI_Op op,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10830,6 +11243,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMPARE_AND_SWAP_OVERRIDE
 int A_MPI_Compare_and_swap(void * origin_addr,void * compare_addr,void * result_addr,A_MPI_Datatype datatype,int target_rank,A_MPI_Aint target_disp,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10858,6 +11272,8 @@ printf("sort : A_MPI_Compare_and_swap\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Compare_and_swap(void * origin_addr,void * compare_addr,void * result_addr,R_MPI_Datatype datatype,int target_rank,R_MPI_Aint target_disp,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -10912,6 +11328,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RPUT_OVERRIDE
 int A_MPI_Rput(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Win win,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -10947,6 +11364,8 @@ printf("sort : A_MPI_Rput\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Rput(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Win win,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -11001,6 +11420,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RGET_OVERRIDE
 int A_MPI_Rget(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Win win,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -11037,6 +11457,8 @@ printf("sort : A_MPI_Rget\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Rget(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Win win,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -11091,6 +11513,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RACCUMULATE_OVERRIDE
 int A_MPI_Raccumulate(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Op op,A_MPI_Win win,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -11128,6 +11551,8 @@ printf("sort : A_MPI_Raccumulate\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Raccumulate(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Op op,R_MPI_Win win,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -11182,6 +11607,7 @@ __asm__(
 
 );
 
+#ifndef MPI_RGET_ACCUMULATE_OVERRIDE
 int A_MPI_Rget_accumulate(void * origin_addr,int origin_count,A_MPI_Datatype origin_datatype,void * result_addr,int result_count,A_MPI_Datatype result_datatype,int target_rank,A_MPI_Aint target_disp,int target_count,A_MPI_Datatype target_datatype,A_MPI_Op op,A_MPI_Win win,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -11226,6 +11652,8 @@ printf("sort : A_MPI_Rget_accumulate\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Rget_accumulate(void * origin_addr,int origin_count,R_MPI_Datatype origin_datatype,void * result_addr,int result_count,R_MPI_Datatype result_datatype,int target_rank,R_MPI_Aint target_disp,int target_count,R_MPI_Datatype target_datatype,R_MPI_Op op,R_MPI_Win win,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -11272,6 +11700,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_LOCK_ALL_OVERRIDE
 int A_MPI_Win_lock_all(int assert,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11290,6 +11719,8 @@ printf("sort : A_MPI_Win_lock_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_lock_all(int assert,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11334,6 +11765,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_UNLOCK_ALL_OVERRIDE
 int A_MPI_Win_unlock_all(A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11350,6 +11782,8 @@ printf("sort : A_MPI_Win_unlock_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_unlock_all(R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11396,6 +11830,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_FLUSH_OVERRIDE
 int A_MPI_Win_flush(int rank,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11414,6 +11849,8 @@ printf("sort : A_MPI_Win_flush\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_flush(int rank,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11458,6 +11895,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_FLUSH_ALL_OVERRIDE
 int A_MPI_Win_flush_all(A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11474,6 +11912,8 @@ printf("sort : A_MPI_Win_flush_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_flush_all(R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11520,6 +11960,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_FLUSH_LOCAL_OVERRIDE
 int A_MPI_Win_flush_local(int rank,A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11538,6 +11979,8 @@ printf("sort : A_MPI_Win_flush_local\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_flush_local(int rank,R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11582,6 +12025,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_FLUSH_LOCAL_ALL_OVERRIDE
 int A_MPI_Win_flush_local_all(A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11598,6 +12042,8 @@ printf("sort : A_MPI_Win_flush_local_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_flush_local_all(R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11642,6 +12088,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_SYNC_OVERRIDE
 int A_MPI_Win_sync(A_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11658,6 +12105,8 @@ printf("sort : A_MPI_Win_sync\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_sync(R_MPI_Win win)
 {
 #ifdef DEBUG
@@ -11702,6 +12151,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ADD_ERROR_CLASS_OVERRIDE
 int A_MPI_Add_error_class(int * errorclass)
 {
 #ifdef DEBUG
@@ -11718,6 +12168,8 @@ printf("sort : A_MPI_Add_error_class\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Add_error_class(int * errorclass)
 {
 #ifdef DEBUG
@@ -11764,6 +12216,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ADD_ERROR_CODE_OVERRIDE
 int A_MPI_Add_error_code(int errorclass,int * errorcode)
 {
 #ifdef DEBUG
@@ -11782,6 +12235,8 @@ printf("sort : A_MPI_Add_error_code\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Add_error_code(int errorclass,int * errorcode)
 {
 #ifdef DEBUG
@@ -11828,6 +12283,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ADD_ERROR_STRING_OVERRIDE
 int A_MPI_Add_error_string(int errorcode,char * string)
 {
 #ifdef DEBUG
@@ -11846,6 +12302,8 @@ printf("sort : A_MPI_Add_error_string\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Add_error_string(int errorcode,char * string)
 {
 #ifdef DEBUG
@@ -11892,6 +12350,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_CALL_ERRHANDLER_OVERRIDE
 int A_MPI_Comm_call_errhandler(A_MPI_Comm comm,int errorcode)
 {
 #ifdef DEBUG
@@ -11910,6 +12369,8 @@ printf("sort : A_MPI_Comm_call_errhandler\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_call_errhandler(R_MPI_Comm comm,int errorcode)
 {
 #ifdef DEBUG
@@ -11956,6 +12417,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_DELETE_ATTR_OVERRIDE
 int A_MPI_Comm_delete_attr(A_MPI_Comm comm,int comm_keyval)
 {
 #ifdef DEBUG
@@ -11974,6 +12436,8 @@ printf("sort : A_MPI_Comm_delete_attr\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_delete_attr(R_MPI_Comm comm,int comm_keyval)
 {
 #ifdef DEBUG
@@ -12024,6 +12488,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_GET_ATTR_OVERRIDE
 int A_MPI_Comm_get_attr(A_MPI_Comm comm,int comm_keyval,void * attribute_val,int * flag)
 {
 #ifdef DEBUG
@@ -12046,6 +12511,8 @@ printf("sort : A_MPI_Comm_get_attr\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_get_attr(R_MPI_Comm comm,int comm_keyval,void * attribute_val,int * flag)
 {
 #ifdef DEBUG
@@ -12094,6 +12561,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_GET_NAME_OVERRIDE
 int A_MPI_Comm_get_name(A_MPI_Comm comm,char * comm_name,int * resultlen)
 {
 #ifdef DEBUG
@@ -12114,6 +12582,8 @@ printf("sort : A_MPI_Comm_get_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_get_name(R_MPI_Comm comm,char * comm_name,int * resultlen)
 {
 #ifdef DEBUG
@@ -12162,6 +12632,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SET_ATTR_OVERRIDE
 int A_MPI_Comm_set_attr(A_MPI_Comm comm,int comm_keyval,void * attribute_val)
 {
 #ifdef DEBUG
@@ -12182,6 +12653,8 @@ printf("sort : A_MPI_Comm_set_attr\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_set_attr(R_MPI_Comm comm,int comm_keyval,void * attribute_val)
 {
 #ifdef DEBUG
@@ -12228,6 +12701,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SET_NAME_OVERRIDE
 int A_MPI_Comm_set_name(A_MPI_Comm comm,char * comm_name)
 {
 #ifdef DEBUG
@@ -12247,6 +12721,8 @@ printf("sort : A_MPI_Comm_set_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_set_name(R_MPI_Comm comm,char * comm_name)
 {
 #ifdef DEBUG
@@ -12291,6 +12767,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GREQUEST_COMPLETE_OVERRIDE
 int A_MPI_Grequest_complete(A_MPI_Request request)
 {
 #ifdef DEBUG
@@ -12308,6 +12785,8 @@ printf("sort : A_MPI_Grequest_complete\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Grequest_complete(R_MPI_Request request)
 {
 #ifdef DEBUG
@@ -12360,6 +12839,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GREQUEST_START_OVERRIDE
 int A_MPI_Grequest_start(A_MPI_Grequest_query_function * query_fn,A_MPI_Grequest_free_function * free_fn,A_MPI_Grequest_cancel_function * cancel_fn,void * extra_state,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -12387,6 +12867,8 @@ printf("sort : A_MPI_Grequest_start\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Grequest_start(R_MPI_Grequest_query_function * query_fn,R_MPI_Grequest_free_function * free_fn,R_MPI_Grequest_cancel_function * cancel_fn,void * extra_state,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -12437,6 +12919,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INIT_THREAD_OVERRIDE
 int A_MPI_Init_thread(int * argc,char *** argv,int required,int * provided)
 {
 #ifdef DEBUG
@@ -12459,6 +12942,8 @@ printf("sort : A_MPI_Init_thread\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Init_thread(int * argc,char *** argv,int required,int * provided)
 {
 #ifdef DEBUG
@@ -12503,6 +12988,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IS_THREAD_MAIN_OVERRIDE
 int A_MPI_Is_thread_main(int * flag)
 {
 #ifdef DEBUG
@@ -12519,6 +13005,8 @@ printf("sort : A_MPI_Is_thread_main\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Is_thread_main(int * flag)
 {
 #ifdef DEBUG
@@ -12563,6 +13051,7 @@ __asm__(
 
 );
 
+#ifndef MPI_QUERY_THREAD_OVERRIDE
 int A_MPI_Query_thread(int * provided)
 {
 #ifdef DEBUG
@@ -12579,6 +13068,8 @@ printf("sort : A_MPI_Query_thread\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Query_thread(int * provided)
 {
 #ifdef DEBUG
@@ -12625,6 +13116,7 @@ __asm__(
 
 );
 
+#ifndef MPI_STATUS_SET_CANCELLED_OVERRIDE
 int A_MPI_Status_set_cancelled(A_MPI_Status * status,int flag)
 {
 #ifdef DEBUG
@@ -12645,6 +13137,8 @@ printf("sort : A_MPI_Status_set_cancelled\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Status_set_cancelled(R_MPI_Status * status,int flag)
 {
 #ifdef DEBUG
@@ -12693,6 +13187,7 @@ __asm__(
 
 );
 
+#ifndef MPI_STATUS_SET_ELEMENTS_OVERRIDE
 int A_MPI_Status_set_elements(A_MPI_Status * status,A_MPI_Datatype datatype,int count)
 {
 #ifdef DEBUG
@@ -12715,6 +13210,8 @@ printf("sort : A_MPI_Status_set_elements\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Status_set_elements(R_MPI_Status * status,R_MPI_Datatype datatype,int count)
 {
 #ifdef DEBUG
@@ -12765,6 +13262,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_KEYVAL_OVERRIDE
 int A_MPI_Type_create_keyval(A_MPI_Type_copy_attr_function * type_copy_attr_fn,A_MPI_Type_delete_attr_function * type_delete_attr_fn,int * type_keyval,void * extra_state)
 {
 #ifdef DEBUG
@@ -12787,6 +13285,8 @@ printf("sort : A_MPI_Type_create_keyval\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_keyval(R_MPI_Type_copy_attr_function * type_copy_attr_fn,R_MPI_Type_delete_attr_function * type_delete_attr_fn,int * type_keyval,void * extra_state)
 {
 #ifdef DEBUG
@@ -12833,6 +13333,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_DELETE_ATTR_OVERRIDE
 int A_MPI_Type_delete_attr(A_MPI_Datatype datatype,int type_keyval)
 {
 #ifdef DEBUG
@@ -12852,6 +13353,8 @@ printf("sort : A_MPI_Type_delete_attr\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_delete_attr(R_MPI_Datatype datatype,int type_keyval)
 {
 #ifdef DEBUG
@@ -12898,6 +13401,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_DUP_OVERRIDE
 int A_MPI_Type_dup(A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -12917,6 +13421,8 @@ printf("sort : A_MPI_Type_dup\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_dup(R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -12961,6 +13467,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_FREE_KEYVAL_OVERRIDE
 int A_MPI_Type_free_keyval(int * type_keyval)
 {
 #ifdef DEBUG
@@ -12979,6 +13486,8 @@ printf("sort : A_MPI_Type_free_keyval\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_free_keyval(int * type_keyval)
 {
 #ifdef DEBUG
@@ -13029,6 +13538,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_ATTR_OVERRIDE
 int A_MPI_Type_get_attr(A_MPI_Datatype datatype,int type_keyval,void * attribute_val,int * flag)
 {
 #ifdef DEBUG
@@ -13051,6 +13561,8 @@ printf("sort : A_MPI_Type_get_attr\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_attr(R_MPI_Datatype datatype,int type_keyval,void * attribute_val,int * flag)
 {
 #ifdef DEBUG
@@ -13103,6 +13615,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_ENVELOPE_OVERRIDE
 int A_MPI_Type_get_envelope(A_MPI_Datatype datatype,int * num_integers,int * num_addresses,int * num_datatypes,int * combiner)
 {
 #ifdef DEBUG
@@ -13127,6 +13640,8 @@ printf("sort : A_MPI_Type_get_envelope\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_envelope(R_MPI_Datatype datatype,int * num_integers,int * num_addresses,int * num_datatypes,int * combiner)
 {
 #ifdef DEBUG
@@ -13175,6 +13690,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_NAME_OVERRIDE
 int A_MPI_Type_get_name(A_MPI_Datatype datatype,char * type_name,int * resultlen)
 {
 #ifdef DEBUG
@@ -13195,6 +13711,8 @@ printf("sort : A_MPI_Type_get_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_name(R_MPI_Datatype datatype,char * type_name,int * resultlen)
 {
 #ifdef DEBUG
@@ -13243,6 +13761,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_SET_ATTR_OVERRIDE
 int A_MPI_Type_set_attr(A_MPI_Datatype datatype,int type_keyval,void * attribute_val)
 {
 #ifdef DEBUG
@@ -13264,6 +13783,8 @@ printf("sort : A_MPI_Type_set_attr\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_set_attr(R_MPI_Datatype datatype,int type_keyval,void * attribute_val)
 {
 #ifdef DEBUG
@@ -13310,6 +13831,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_SET_NAME_OVERRIDE
 int A_MPI_Type_set_name(A_MPI_Datatype datatype,char * type_name)
 {
 #ifdef DEBUG
@@ -13329,6 +13851,8 @@ printf("sort : A_MPI_Type_set_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_set_name(R_MPI_Datatype datatype,char * type_name)
 {
 #ifdef DEBUG
@@ -13377,6 +13901,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_MATCH_SIZE_OVERRIDE
 int A_MPI_Type_match_size(int typeclass,int size,A_MPI_Datatype * datatype)
 {
 #ifdef DEBUG
@@ -13398,6 +13923,8 @@ printf("sort : A_MPI_Type_match_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_match_size(int typeclass,int size,R_MPI_Datatype * datatype)
 {
 #ifdef DEBUG
@@ -13448,6 +13975,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_CREATE_KEYVAL_OVERRIDE
 int A_MPI_Win_create_keyval(A_MPI_Win_copy_attr_function * win_copy_attr_fn,A_MPI_Win_delete_attr_function * win_delete_attr_fn,int * win_keyval,void * extra_state)
 {
 #ifdef DEBUG
@@ -13470,6 +13998,8 @@ printf("sort : A_MPI_Win_create_keyval\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_create_keyval(R_MPI_Win_copy_attr_function * win_copy_attr_fn,R_MPI_Win_delete_attr_function * win_delete_attr_fn,int * win_keyval,void * extra_state)
 {
 #ifdef DEBUG
@@ -13516,6 +14046,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_DELETE_ATTR_OVERRIDE
 int A_MPI_Win_delete_attr(A_MPI_Win win,int win_keyval)
 {
 #ifdef DEBUG
@@ -13535,6 +14066,8 @@ printf("sort : A_MPI_Win_delete_attr\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_delete_attr(R_MPI_Win win,int win_keyval)
 {
 #ifdef DEBUG
@@ -13579,6 +14112,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_FREE_KEYVAL_OVERRIDE
 int A_MPI_Win_free_keyval(int * win_keyval)
 {
 #ifdef DEBUG
@@ -13597,6 +14131,8 @@ printf("sort : A_MPI_Win_free_keyval\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_free_keyval(int * win_keyval)
 {
 #ifdef DEBUG
@@ -13645,6 +14181,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_GET_NAME_OVERRIDE
 int A_MPI_Win_get_name(A_MPI_Win win,char * win_name,int * resultlen)
 {
 #ifdef DEBUG
@@ -13665,6 +14202,8 @@ printf("sort : A_MPI_Win_get_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_get_name(R_MPI_Win win,char * win_name,int * resultlen)
 {
 #ifdef DEBUG
@@ -13711,6 +14250,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_SET_NAME_OVERRIDE
 int A_MPI_Win_set_name(A_MPI_Win win,char * win_name)
 {
 #ifdef DEBUG
@@ -13730,6 +14270,8 @@ printf("sort : A_MPI_Win_set_name\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_set_name(R_MPI_Win win,char * win_name)
 {
 #ifdef DEBUG
@@ -13778,6 +14320,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ALLOC_MEM_OVERRIDE
 int A_MPI_Alloc_mem(A_MPI_Aint size,A_MPI_Info info,void * baseptr)
 {
 #ifdef DEBUG
@@ -13799,6 +14342,8 @@ printf("sort : A_MPI_Alloc_mem\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Alloc_mem(R_MPI_Aint size,R_MPI_Info info,void * baseptr)
 {
 #ifdef DEBUG
@@ -13845,6 +14390,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_CREATE_ERRHANDLER_OVERRIDE
 int A_MPI_Comm_create_errhandler(A_MPI_Comm_errhandler_function * comm_errhandler_fn,A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -13864,6 +14410,8 @@ printf("sort : A_MPI_Comm_create_errhandler\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function * comm_errhandler_fn,R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -13910,6 +14458,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_GET_ERRHANDLER_OVERRIDE
 int A_MPI_Comm_get_errhandler(A_MPI_Comm comm,A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -13933,6 +14482,8 @@ printf("sort : A_MPI_Comm_get_errhandler\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_get_errhandler(R_MPI_Comm comm,R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -13979,6 +14530,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SET_ERRHANDLER_OVERRIDE
 int A_MPI_Comm_set_errhandler(A_MPI_Comm comm,A_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -14002,6 +14554,8 @@ printf("sort : A_MPI_Comm_set_errhandler\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_set_errhandler(R_MPI_Comm comm,R_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -14048,6 +14602,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_ERRHANDLER_OVERRIDE
 int A_MPI_File_get_errhandler(A_MPI_File file,A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -14069,6 +14624,8 @@ printf("sort : A_MPI_File_get_errhandler\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_errhandler(R_MPI_File file,R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -14115,6 +14672,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SET_ERRHANDLER_OVERRIDE
 int A_MPI_File_set_errhandler(A_MPI_File file,A_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -14134,6 +14692,8 @@ printf("sort : A_MPI_File_set_errhandler\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_set_errhandler(R_MPI_File file,R_MPI_Errhandler errhandler)
 {
 #ifdef DEBUG
@@ -14178,6 +14738,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FINALIZED_OVERRIDE
 int A_MPI_Finalized(int * flag)
 {
 #ifdef DEBUG
@@ -14194,6 +14755,8 @@ printf("sort : A_MPI_Finalized\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Finalized(int * flag)
 {
 #ifdef DEBUG
@@ -14238,6 +14801,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FREE_MEM_OVERRIDE
 int A_MPI_Free_mem(void * base)
 {
 #ifdef DEBUG
@@ -14254,6 +14818,8 @@ printf("sort : A_MPI_Free_mem\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Free_mem(void * base)
 {
 #ifdef DEBUG
@@ -14300,6 +14866,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_ADDRESS_OVERRIDE
 int A_MPI_Get_address(void * location,A_MPI_Aint * address)
 {
 #ifdef DEBUG
@@ -14319,6 +14886,8 @@ printf("sort : A_MPI_Get_address\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_address(void * location,R_MPI_Aint * address)
 {
 #ifdef DEBUG
@@ -14363,6 +14932,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_CREATE_OVERRIDE
 int A_MPI_Info_create(A_MPI_Info * info)
 {
 #ifdef DEBUG
@@ -14380,6 +14950,8 @@ printf("sort : A_MPI_Info_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_create(R_MPI_Info * info)
 {
 #ifdef DEBUG
@@ -14426,6 +14998,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_DELETE_OVERRIDE
 int A_MPI_Info_delete(A_MPI_Info info,char * key)
 {
 #ifdef DEBUG
@@ -14445,6 +15018,8 @@ printf("sort : A_MPI_Info_delete\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_delete(R_MPI_Info info,char * key)
 {
 #ifdef DEBUG
@@ -14491,6 +15066,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_DUP_OVERRIDE
 int A_MPI_Info_dup(A_MPI_Info info,A_MPI_Info * newinfo)
 {
 #ifdef DEBUG
@@ -14510,6 +15086,8 @@ printf("sort : A_MPI_Info_dup\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_dup(R_MPI_Info info,R_MPI_Info * newinfo)
 {
 #ifdef DEBUG
@@ -14554,6 +15132,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_FREE_OVERRIDE
 int A_MPI_Info_free(A_MPI_Info * info)
 {
 #ifdef DEBUG
@@ -14571,6 +15150,8 @@ printf("sort : A_MPI_Info_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_free(R_MPI_Info * info)
 {
 #ifdef DEBUG
@@ -14623,6 +15204,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_GET_OVERRIDE
 int A_MPI_Info_get(A_MPI_Info info,char * key,int valuelen,char * value,int * flag)
 {
 #ifdef DEBUG
@@ -14647,6 +15229,8 @@ printf("sort : A_MPI_Info_get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_get(R_MPI_Info info,char * key,int valuelen,char * value,int * flag)
 {
 #ifdef DEBUG
@@ -14693,6 +15277,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_GET_NKEYS_OVERRIDE
 int A_MPI_Info_get_nkeys(A_MPI_Info info,int * nkeys)
 {
 #ifdef DEBUG
@@ -14711,6 +15296,8 @@ printf("sort : A_MPI_Info_get_nkeys\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_get_nkeys(R_MPI_Info info,int * nkeys)
 {
 #ifdef DEBUG
@@ -14759,6 +15346,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_GET_NTHKEY_OVERRIDE
 int A_MPI_Info_get_nthkey(A_MPI_Info info,int n,char * key)
 {
 #ifdef DEBUG
@@ -14779,6 +15367,8 @@ printf("sort : A_MPI_Info_get_nthkey\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_get_nthkey(R_MPI_Info info,int n,char * key)
 {
 #ifdef DEBUG
@@ -14829,6 +15419,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_GET_VALUELEN_OVERRIDE
 int A_MPI_Info_get_valuelen(A_MPI_Info info,char * key,int * valuelen,int * flag)
 {
 #ifdef DEBUG
@@ -14851,6 +15442,8 @@ printf("sort : A_MPI_Info_get_valuelen\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_get_valuelen(R_MPI_Info info,char * key,int * valuelen,int * flag)
 {
 #ifdef DEBUG
@@ -14899,6 +15492,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INFO_SET_OVERRIDE
 int A_MPI_Info_set(A_MPI_Info info,char * key,char * value)
 {
 #ifdef DEBUG
@@ -14920,6 +15514,8 @@ printf("sort : A_MPI_Info_set\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Info_set(R_MPI_Info info,char * key,char * value)
 {
 #ifdef DEBUG
@@ -14968,6 +15564,7 @@ __asm__(
 
 );
 
+#ifndef MPI_REQUEST_GET_STATUS_OVERRIDE
 int A_MPI_Request_get_status(A_MPI_Request request,int * flag,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -14989,6 +15586,8 @@ printf("sort : A_MPI_Request_get_status\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Request_get_status(R_MPI_Request request,int * flag,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -15041,6 +15640,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_HVECTOR_OVERRIDE
 int A_MPI_Type_create_hvector(int count,int blocklength,A_MPI_Aint stride,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15066,6 +15666,8 @@ printf("sort : A_MPI_Type_create_hvector\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_hvector(int count,int blocklength,R_MPI_Aint stride,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15116,6 +15718,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_RESIZED_OVERRIDE
 int A_MPI_Type_create_resized(A_MPI_Datatype oldtype,A_MPI_Aint lb,A_MPI_Aint extent,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15139,6 +15742,8 @@ printf("sort : A_MPI_Type_create_resized\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_resized(R_MPI_Datatype oldtype,R_MPI_Aint lb,R_MPI_Aint extent,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15187,6 +15792,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_EXTENT_OVERRIDE
 int A_MPI_Type_get_extent(A_MPI_Datatype datatype,A_MPI_Aint * lb,A_MPI_Aint * extent)
 {
 #ifdef DEBUG
@@ -15209,6 +15815,8 @@ printf("sort : A_MPI_Type_get_extent\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_extent(R_MPI_Datatype datatype,R_MPI_Aint * lb,R_MPI_Aint * extent)
 {
 #ifdef DEBUG
@@ -15257,6 +15865,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_TRUE_EXTENT_OVERRIDE
 int A_MPI_Type_get_true_extent(A_MPI_Datatype datatype,A_MPI_Aint * true_lb,A_MPI_Aint * true_extent)
 {
 #ifdef DEBUG
@@ -15279,6 +15888,8 @@ printf("sort : A_MPI_Type_get_true_extent\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_true_extent(R_MPI_Datatype datatype,R_MPI_Aint * true_lb,R_MPI_Aint * true_extent)
 {
 #ifdef DEBUG
@@ -15325,6 +15936,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WIN_GET_ERRHANDLER_OVERRIDE
 int A_MPI_Win_get_errhandler(A_MPI_Win win,A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -15344,6 +15956,8 @@ printf("sort : A_MPI_Win_get_errhandler\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Win_get_errhandler(R_MPI_Win win,R_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
@@ -15390,6 +16004,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_F90_INTEGER_OVERRIDE
 int A_MPI_Type_create_f90_integer(int range,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15409,6 +16024,8 @@ printf("sort : A_MPI_Type_create_f90_integer\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_f90_integer(int range,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15457,6 +16074,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_F90_REAL_OVERRIDE
 int A_MPI_Type_create_f90_real(int precision,int range,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15478,6 +16096,8 @@ printf("sort : A_MPI_Type_create_f90_real\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_f90_real(int precision,int range,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15526,6 +16146,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_F90_COMPLEX_OVERRIDE
 int A_MPI_Type_create_f90_complex(int precision,int range,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15547,6 +16168,8 @@ printf("sort : A_MPI_Type_create_f90_complex\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_f90_complex(int precision,int range,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -15599,6 +16222,7 @@ __asm__(
 
 );
 
+#ifndef MPI_REDUCE_LOCAL_OVERRIDE
 int A_MPI_Reduce_local(void * inbuf,void * inoutbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op)
 {
 #ifdef DEBUG
@@ -15624,6 +16248,8 @@ printf("sort : A_MPI_Reduce_local\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Reduce_local(void * inbuf,void * inoutbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op)
 {
 #ifdef DEBUG
@@ -15670,6 +16296,7 @@ __asm__(
 
 );
 
+#ifndef MPI_OP_COMMUTATIVE_OVERRIDE
 int A_MPI_Op_commutative(A_MPI_Op op,int * commute)
 {
 #ifdef DEBUG
@@ -15688,6 +16315,8 @@ printf("sort : A_MPI_Op_commutative\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Op_commutative(R_MPI_Op op,int * commute)
 {
 #ifdef DEBUG
@@ -15742,6 +16371,7 @@ __asm__(
 
 );
 
+#ifndef MPI_REDUCE_SCATTER_BLOCK_OVERRIDE
 int A_MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -15768,6 +16398,8 @@ printf("sort : A_MPI_Reduce_scatter_block\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -15818,6 +16450,7 @@ __asm__(
 
 );
 
+#ifndef MPI_DIST_GRAPH_NEIGHBORS_COUNT_OVERRIDE
 int A_MPI_Dist_graph_neighbors_count(A_MPI_Comm comm,int * indegree,int * outdegree,int * weighted)
 {
 #ifdef DEBUG
@@ -15840,6 +16473,8 @@ printf("sort : A_MPI_Dist_graph_neighbors_count\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Dist_graph_neighbors_count(R_MPI_Comm comm,int * indegree,int * outdegree,int * weighted)
 {
 #ifdef DEBUG
@@ -15894,6 +16529,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IMPROBE_OVERRIDE
 int A_MPI_Improbe(int source,int tag,A_MPI_Comm comm,int * flag,A_MPI_Message * message,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -15922,6 +16558,8 @@ printf("sort : A_MPI_Improbe\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Improbe(int source,int tag,R_MPI_Comm comm,int * flag,R_MPI_Message * message,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -15974,6 +16612,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IMRECV_OVERRIDE
 int A_MPI_Imrecv(void * buf,int count,A_MPI_Datatype datatype,A_MPI_Message * message,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16003,6 +16642,8 @@ printf("sort : A_MPI_Imrecv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Imrecv(void * buf,int count,R_MPI_Datatype datatype,R_MPI_Message * message,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16055,6 +16696,7 @@ __asm__(
 
 );
 
+#ifndef MPI_MPROBE_OVERRIDE
 int A_MPI_Mprobe(int source,int tag,A_MPI_Comm comm,A_MPI_Message * message,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -16081,6 +16723,8 @@ printf("sort : A_MPI_Mprobe\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Mprobe(int source,int tag,R_MPI_Comm comm,R_MPI_Message * message,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -16133,6 +16777,7 @@ __asm__(
 
 );
 
+#ifndef MPI_MRECV_OVERRIDE
 int A_MPI_Mrecv(void * buf,int count,A_MPI_Datatype datatype,A_MPI_Message * message,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -16161,6 +16806,8 @@ printf("sort : A_MPI_Mrecv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Mrecv(void * buf,int count,R_MPI_Datatype datatype,R_MPI_Message * message,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -16209,6 +16856,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_IDUP_OVERRIDE
 int A_MPI_Comm_idup(A_MPI_Comm comm,A_MPI_Comm * newcomm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16233,6 +16881,8 @@ printf("sort : A_MPI_Comm_idup\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_idup(R_MPI_Comm comm,R_MPI_Comm * newcomm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16279,6 +16929,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IBARRIER_OVERRIDE
 int A_MPI_Ibarrier(A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16300,6 +16951,8 @@ printf("sort : A_MPI_Ibarrier\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ibarrier(R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16354,6 +17007,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IBCAST_OVERRIDE
 int A_MPI_Ibcast(void * buffer,int count,A_MPI_Datatype datatype,int root,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16384,6 +17038,8 @@ printf("sort : A_MPI_Ibcast\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ibcast(void * buffer,int count,R_MPI_Datatype datatype,int root,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16438,6 +17094,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IGATHER_OVERRIDE
 int A_MPI_Igather(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,int root,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16474,6 +17131,8 @@ printf("sort : A_MPI_Igather\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Igather(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,int root,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16528,6 +17187,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ISCATTER_OVERRIDE
 int A_MPI_Iscatter(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,int root,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16564,6 +17224,8 @@ printf("sort : A_MPI_Iscatter\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iscatter(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,int root,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16618,6 +17280,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IALLGATHER_OVERRIDE
 int A_MPI_Iallgather(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16652,6 +17315,8 @@ printf("sort : A_MPI_Iallgather\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iallgather(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16706,6 +17371,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IALLTOALL_OVERRIDE
 int A_MPI_Ialltoall(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16740,6 +17406,8 @@ printf("sort : A_MPI_Ialltoall\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ialltoall(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16794,6 +17462,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IREDUCE_OVERRIDE
 int A_MPI_Ireduce(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,int root,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16828,6 +17497,8 @@ printf("sort : A_MPI_Ireduce\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ireduce(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,int root,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16882,6 +17553,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IALLREDUCE_OVERRIDE
 int A_MPI_Iallreduce(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16914,6 +17586,8 @@ printf("sort : A_MPI_Iallreduce\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iallreduce(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -16968,6 +17642,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IREDUCE_SCATTER_BLOCK_OVERRIDE
 int A_MPI_Ireduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17000,6 +17675,8 @@ printf("sort : A_MPI_Ireduce_scatter_block\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ireduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17054,6 +17731,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ISCAN_OVERRIDE
 int A_MPI_Iscan(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17086,6 +17764,8 @@ printf("sort : A_MPI_Iscan\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iscan(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17140,6 +17820,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IEXSCAN_OVERRIDE
 int A_MPI_Iexscan(void * sendbuf,void * recvbuf,int count,A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17172,6 +17853,8 @@ printf("sort : A_MPI_Iexscan\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iexscan(void * sendbuf,void * recvbuf,int count,R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17226,6 +17909,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INEIGHBOR_ALLGATHER_OVERRIDE
 int A_MPI_Ineighbor_allgather(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17259,6 +17943,8 @@ printf("sort : A_MPI_Ineighbor_allgather\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ineighbor_allgather(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17313,6 +17999,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INEIGHBOR_ALLTOALL_OVERRIDE
 int A_MPI_Ineighbor_alltoall(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17347,6 +18034,8 @@ printf("sort : A_MPI_Ineighbor_alltoall\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ineighbor_alltoall(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -17401,6 +18090,7 @@ __asm__(
 
 );
 
+#ifndef MPI_NEIGHBOR_ALLGATHER_OVERRIDE
 int A_MPI_Neighbor_allgather(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -17430,6 +18120,8 @@ printf("sort : A_MPI_Neighbor_allgather\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Neighbor_allgather(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -17484,6 +18176,7 @@ __asm__(
 
 );
 
+#ifndef MPI_NEIGHBOR_ALLTOALL_OVERRIDE
 int A_MPI_Neighbor_alltoall(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -17513,6 +18206,8 @@ printf("sort : A_MPI_Neighbor_alltoall\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Neighbor_alltoall(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -17565,6 +18260,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SPLIT_TYPE_OVERRIDE
 int A_MPI_Comm_split_type(A_MPI_Comm comm,int split_type,int key,A_MPI_Info info,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -17590,6 +18286,8 @@ printf("sort : A_MPI_Comm_split_type\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_split_type(R_MPI_Comm comm,int split_type,int key,R_MPI_Info info,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -17638,6 +18336,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GET_ELEMENTS_X_OVERRIDE
 int A_MPI_Get_elements_x(A_MPI_Status * status,A_MPI_Datatype datatype,A_MPI_Count * count)
 {
 #ifdef DEBUG
@@ -17659,6 +18358,8 @@ printf("sort : A_MPI_Get_elements_x\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Get_elements_x(R_MPI_Status * status,R_MPI_Datatype datatype,R_MPI_Count * count)
 {
 #ifdef DEBUG
@@ -17707,6 +18408,7 @@ __asm__(
 
 );
 
+#ifndef MPI_STATUS_SET_ELEMENTS_X_OVERRIDE
 int A_MPI_Status_set_elements_x(A_MPI_Status * status,A_MPI_Datatype datatype,A_MPI_Count count)
 {
 #ifdef DEBUG
@@ -17729,6 +18431,8 @@ printf("sort : A_MPI_Status_set_elements_x\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Status_set_elements_x(R_MPI_Status * status,R_MPI_Datatype datatype,R_MPI_Count count)
 {
 #ifdef DEBUG
@@ -17777,6 +18481,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_EXTENT_X_OVERRIDE
 int A_MPI_Type_get_extent_x(A_MPI_Datatype datatype,A_MPI_Count * lb,A_MPI_Count * extent)
 {
 #ifdef DEBUG
@@ -17797,6 +18502,8 @@ printf("sort : A_MPI_Type_get_extent_x\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_extent_x(R_MPI_Datatype datatype,R_MPI_Count * lb,R_MPI_Count * extent)
 {
 #ifdef DEBUG
@@ -17845,6 +18552,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_TRUE_EXTENT_X_OVERRIDE
 int A_MPI_Type_get_true_extent_x(A_MPI_Datatype datatype,A_MPI_Count * lb,A_MPI_Count * extent)
 {
 #ifdef DEBUG
@@ -17865,6 +18573,8 @@ printf("sort : A_MPI_Type_get_true_extent_x\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_true_extent_x(R_MPI_Datatype datatype,R_MPI_Count * lb,R_MPI_Count * extent)
 {
 #ifdef DEBUG
@@ -17911,6 +18621,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_SIZE_X_OVERRIDE
 int A_MPI_Type_size_x(A_MPI_Datatype datatype,A_MPI_Count * size)
 {
 #ifdef DEBUG
@@ -17929,6 +18640,8 @@ printf("sort : A_MPI_Type_size_x\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_size_x(R_MPI_Datatype datatype,R_MPI_Count * size)
 {
 #ifdef DEBUG
@@ -17979,6 +18692,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_CREATE_GROUP_OVERRIDE
 int A_MPI_Comm_create_group(A_MPI_Comm comm,A_MPI_Group group,int tag,A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -18002,6 +18716,8 @@ printf("sort : A_MPI_Comm_create_group\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_create_group(R_MPI_Comm comm,R_MPI_Group group,int tag,R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -18048,6 +18764,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_INIT_THREAD_OVERRIDE
 int A_MPI_T_init_thread(int required,int * provided)
 {
 #ifdef DEBUG
@@ -18066,6 +18783,8 @@ printf("sort : A_MPI_T_init_thread\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_init_thread(int required,int * provided)
 {
 #ifdef DEBUG
@@ -18116,6 +18835,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_ENUM_GET_INFO_OVERRIDE
 int A_MPI_T_enum_get_info(A_MPI_T_enum enumtype,int * num,char * name,int * name_len)
 {
 #ifdef DEBUG
@@ -18139,6 +18859,8 @@ printf("sort : A_MPI_T_enum_get_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_enum_get_info(R_MPI_T_enum enumtype,int * num,char * name,int * name_len)
 {
 #ifdef DEBUG
@@ -18191,6 +18913,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_ENUM_GET_ITEM_OVERRIDE
 int A_MPI_T_enum_get_item(A_MPI_T_enum enumtype,int indx,int * value,char * name,int * name_len)
 {
 #ifdef DEBUG
@@ -18216,6 +18939,8 @@ printf("sort : A_MPI_T_enum_get_item\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_enum_get_item(R_MPI_T_enum enumtype,int indx,int * value,char * name,int * name_len)
 {
 #ifdef DEBUG
@@ -18260,6 +18985,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CVAR_GET_NUM_OVERRIDE
 int A_MPI_T_cvar_get_num(int * num_cvar)
 {
 #ifdef DEBUG
@@ -18276,6 +19002,8 @@ printf("sort : A_MPI_T_cvar_get_num\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_cvar_get_num(int * num_cvar)
 {
 #ifdef DEBUG
@@ -18330,6 +19058,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CVAR_GET_INFO_OVERRIDE
 int A_MPI_T_cvar_get_info(int cvar_index,char * name,int * name_len,int * verbosity,A_MPI_Datatype * datatype,A_MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * scope)
 {
 #ifdef DEBUG
@@ -18368,6 +19097,8 @@ printf("sort : A_MPI_T_cvar_get_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_cvar_get_info(int cvar_index,char * name,int * name_len,int * verbosity,R_MPI_Datatype * datatype,R_MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * scope)
 {
 #ifdef DEBUG
@@ -18418,6 +19149,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CVAR_HANDLE_ALLOC_OVERRIDE
 int A_MPI_T_cvar_handle_alloc(int cvar_index,void * obj_handle,A_MPI_T_cvar_handle * handle,int * count)
 {
 #ifdef DEBUG
@@ -18441,6 +19173,8 @@ printf("sort : A_MPI_T_cvar_handle_alloc\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_cvar_handle_alloc(int cvar_index,void * obj_handle,R_MPI_T_cvar_handle * handle,int * count)
 {
 #ifdef DEBUG
@@ -18485,6 +19219,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CVAR_HANDLE_FREE_OVERRIDE
 int A_MPI_T_cvar_handle_free(A_MPI_T_cvar_handle * handle)
 {
 #ifdef DEBUG
@@ -18503,6 +19238,8 @@ printf("sort : A_MPI_T_cvar_handle_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_cvar_handle_free(R_MPI_T_cvar_handle * handle)
 {
 #ifdef DEBUG
@@ -18549,6 +19286,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CVAR_READ_OVERRIDE
 int A_MPI_T_cvar_read(A_MPI_T_cvar_handle handle,void * buf)
 {
 #ifdef DEBUG
@@ -18567,6 +19305,8 @@ printf("sort : A_MPI_T_cvar_read\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_cvar_read(R_MPI_T_cvar_handle handle,void * buf)
 {
 #ifdef DEBUG
@@ -18613,6 +19353,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CVAR_WRITE_OVERRIDE
 int A_MPI_T_cvar_write(A_MPI_T_cvar_handle handle,void * buf)
 {
 #ifdef DEBUG
@@ -18631,6 +19372,8 @@ printf("sort : A_MPI_T_cvar_write\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle,void * buf)
 {
 #ifdef DEBUG
@@ -18675,6 +19418,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_PVAR_GET_NUM_OVERRIDE
 int A_MPI_T_pvar_get_num(int * num_pvar)
 {
 #ifdef DEBUG
@@ -18691,6 +19435,8 @@ printf("sort : A_MPI_T_pvar_get_num\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_pvar_get_num(int * num_pvar)
 {
 #ifdef DEBUG
@@ -18745,6 +19491,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_PVAR_GET_INFO_OVERRIDE
 int A_MPI_T_pvar_get_info(int pvar_index,char * name,int * name_len,int * verbosity,int * var_class,A_MPI_Datatype * datatype,A_MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * readonly,int * continuous,int * atomic)
 {
 #ifdef DEBUG
@@ -18789,6 +19536,8 @@ printf("sort : A_MPI_T_pvar_get_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_pvar_get_info(int pvar_index,char * name,int * name_len,int * verbosity,int * var_class,R_MPI_Datatype * datatype,R_MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * readonly,int * continuous,int * atomic)
 {
 #ifdef DEBUG
@@ -18833,6 +19582,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CATEGORY_GET_NUM_OVERRIDE
 int A_MPI_T_category_get_num(int * num_cat)
 {
 #ifdef DEBUG
@@ -18849,6 +19599,8 @@ printf("sort : A_MPI_T_category_get_num\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_category_get_num(int * num_cat)
 {
 #ifdef DEBUG
@@ -18903,6 +19655,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CATEGORY_GET_INFO_OVERRIDE
 int A_MPI_T_category_get_info(int cat_index,char * name,int * name_len,char * desc,int * desc_len,int * num_cvars,int * num_pvars,int * num_categories)
 {
 #ifdef DEBUG
@@ -18935,6 +19688,8 @@ printf("sort : A_MPI_T_category_get_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_category_get_info(int cat_index,char * name,int * name_len,char * desc,int * desc_len,int * num_cvars,int * num_pvars,int * num_categories)
 {
 #ifdef DEBUG
@@ -18987,6 +19742,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_OPEN_OVERRIDE
 int A_MPI_File_open(A_MPI_Comm comm,char * filename,int amode,A_MPI_Info info,A_MPI_File * fh)
 {
 #ifdef DEBUG
@@ -19012,6 +19768,8 @@ printf("sort : A_MPI_File_open\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_open(R_MPI_Comm comm,char * filename,int amode,R_MPI_Info info,R_MPI_File * fh)
 {
 #ifdef DEBUG
@@ -19056,6 +19814,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_CLOSE_OVERRIDE
 int A_MPI_File_close(A_MPI_File * fh)
 {
 #ifdef DEBUG
@@ -19074,6 +19833,8 @@ printf("sort : A_MPI_File_close\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_close(R_MPI_File * fh)
 {
 #ifdef DEBUG
@@ -19120,6 +19881,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_DELETE_OVERRIDE
 int A_MPI_File_delete(char * filename,A_MPI_Info info)
 {
 #ifdef DEBUG
@@ -19139,6 +19901,8 @@ printf("sort : A_MPI_File_delete\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_delete(char * filename,R_MPI_Info info)
 {
 #ifdef DEBUG
@@ -19185,6 +19949,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SET_SIZE_OVERRIDE
 int A_MPI_File_set_size(A_MPI_File fh,A_MPI_Offset size)
 {
 #ifdef DEBUG
@@ -19204,6 +19969,8 @@ printf("sort : A_MPI_File_set_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_set_size(R_MPI_File fh,R_MPI_Offset size)
 {
 #ifdef DEBUG
@@ -19250,6 +20017,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_PREALLOCATE_OVERRIDE
 int A_MPI_File_preallocate(A_MPI_File fh,A_MPI_Offset size)
 {
 #ifdef DEBUG
@@ -19269,6 +20037,8 @@ printf("sort : A_MPI_File_preallocate\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_preallocate(R_MPI_File fh,R_MPI_Offset size)
 {
 #ifdef DEBUG
@@ -19315,6 +20085,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_SIZE_OVERRIDE
 int A_MPI_File_get_size(A_MPI_File fh,A_MPI_Offset * size)
 {
 #ifdef DEBUG
@@ -19334,6 +20105,8 @@ printf("sort : A_MPI_File_get_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_size(R_MPI_File fh,R_MPI_Offset * size)
 {
 #ifdef DEBUG
@@ -19380,6 +20153,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_GROUP_OVERRIDE
 int A_MPI_File_get_group(A_MPI_File fh,A_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -19399,6 +20173,8 @@ printf("sort : A_MPI_File_get_group\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_group(R_MPI_File fh,R_MPI_Group * group)
 {
 #ifdef DEBUG
@@ -19445,6 +20221,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_AMODE_OVERRIDE
 int A_MPI_File_get_amode(A_MPI_File fh,int * amode)
 {
 #ifdef DEBUG
@@ -19464,6 +20241,8 @@ printf("sort : A_MPI_File_get_amode\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_amode(R_MPI_File fh,int * amode)
 {
 #ifdef DEBUG
@@ -19510,6 +20289,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SET_INFO_OVERRIDE
 int A_MPI_File_set_info(A_MPI_File fh,A_MPI_Info info)
 {
 #ifdef DEBUG
@@ -19529,6 +20309,8 @@ printf("sort : A_MPI_File_set_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_set_info(R_MPI_File fh,R_MPI_Info info)
 {
 #ifdef DEBUG
@@ -19575,6 +20357,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_INFO_OVERRIDE
 int A_MPI_File_get_info(A_MPI_File fh,A_MPI_Info * info_used)
 {
 #ifdef DEBUG
@@ -19595,6 +20378,8 @@ printf("sort : A_MPI_File_get_info\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_info(R_MPI_File fh,R_MPI_Info * info_used)
 {
 #ifdef DEBUG
@@ -19649,6 +20434,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SET_VIEW_OVERRIDE
 int A_MPI_File_set_view(A_MPI_File fh,A_MPI_Offset disp,A_MPI_Datatype etype,A_MPI_Datatype filetype,char * datarep,A_MPI_Info info)
 {
 #ifdef DEBUG
@@ -19676,6 +20462,8 @@ printf("sort : A_MPI_File_set_view\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_set_view(R_MPI_File fh,R_MPI_Offset disp,R_MPI_Datatype etype,R_MPI_Datatype filetype,char * datarep,R_MPI_Info info)
 {
 #ifdef DEBUG
@@ -19728,6 +20516,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_VIEW_OVERRIDE
 int A_MPI_File_get_view(A_MPI_File fh,A_MPI_Offset * disp,A_MPI_Datatype * etype,A_MPI_Datatype * filetype,char * datarep)
 {
 #ifdef DEBUG
@@ -19755,6 +20544,8 @@ printf("sort : A_MPI_File_get_view\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_view(R_MPI_File fh,R_MPI_Offset * disp,R_MPI_Datatype * etype,R_MPI_Datatype * filetype,char * datarep)
 {
 #ifdef DEBUG
@@ -19809,6 +20600,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_AT_OVERRIDE
 int A_MPI_File_read_at(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -19837,6 +20629,8 @@ printf("sort : A_MPI_File_read_at\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_at(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -19891,6 +20685,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_AT_ALL_OVERRIDE
 int A_MPI_File_read_at_all(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -19919,6 +20714,8 @@ printf("sort : A_MPI_File_read_at_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_at_all(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -19973,6 +20770,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_AT_OVERRIDE
 int A_MPI_File_write_at(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20001,6 +20799,8 @@ printf("sort : A_MPI_File_write_at\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_at(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20055,6 +20855,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_AT_ALL_OVERRIDE
 int A_MPI_File_write_at_all(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20083,6 +20884,8 @@ printf("sort : A_MPI_File_write_at_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_at_all(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20137,6 +20940,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IREAD_AT_OVERRIDE
 int A_MPI_File_iread_at(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20167,6 +20971,8 @@ printf("sort : A_MPI_File_iread_at\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iread_at(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20221,6 +21027,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IWRITE_AT_OVERRIDE
 int A_MPI_File_iwrite_at(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20251,6 +21058,8 @@ printf("sort : A_MPI_File_iwrite_at\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iwrite_at(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20303,6 +21112,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_OVERRIDE
 int A_MPI_File_read(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20330,6 +21140,8 @@ printf("sort : A_MPI_File_read\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20382,6 +21194,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_ALL_OVERRIDE
 int A_MPI_File_read_all(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20409,6 +21222,8 @@ printf("sort : A_MPI_File_read_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_all(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20461,6 +21276,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_OVERRIDE
 int A_MPI_File_write(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20487,6 +21303,8 @@ printf("sort : A_MPI_File_write\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20539,6 +21357,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_ALL_OVERRIDE
 int A_MPI_File_write_all(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20565,6 +21384,8 @@ printf("sort : A_MPI_File_write_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_all(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -20617,6 +21438,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IREAD_OVERRIDE
 int A_MPI_File_iread(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20646,6 +21468,8 @@ printf("sort : A_MPI_File_iread\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iread(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20698,6 +21522,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IWRITE_OVERRIDE
 int A_MPI_File_iwrite(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20726,6 +21551,8 @@ printf("sort : A_MPI_File_iwrite\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iwrite(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -20774,6 +21601,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SEEK_OVERRIDE
 int A_MPI_File_seek(A_MPI_File fh,A_MPI_Offset offset,int whence)
 {
 #ifdef DEBUG
@@ -20795,6 +21623,8 @@ printf("sort : A_MPI_File_seek\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_seek(R_MPI_File fh,R_MPI_Offset offset,int whence)
 {
 #ifdef DEBUG
@@ -20841,6 +21671,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_POSITION_OVERRIDE
 int A_MPI_File_get_position(A_MPI_File fh,A_MPI_Offset * offset)
 {
 #ifdef DEBUG
@@ -20860,6 +21691,8 @@ printf("sort : A_MPI_File_get_position\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_position(R_MPI_File fh,R_MPI_Offset * offset)
 {
 #ifdef DEBUG
@@ -20908,6 +21741,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_BYTE_OFFSET_OVERRIDE
 int A_MPI_File_get_byte_offset(A_MPI_File fh,A_MPI_Offset offset,A_MPI_Offset * disp)
 {
 #ifdef DEBUG
@@ -20929,6 +21763,8 @@ printf("sort : A_MPI_File_get_byte_offset\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_byte_offset(R_MPI_File fh,R_MPI_Offset offset,R_MPI_Offset * disp)
 {
 #ifdef DEBUG
@@ -20981,6 +21817,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_SHARED_OVERRIDE
 int A_MPI_File_read_shared(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21008,6 +21845,8 @@ printf("sort : A_MPI_File_read_shared\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_shared(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21060,6 +21899,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_SHARED_OVERRIDE
 int A_MPI_File_write_shared(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21086,6 +21926,8 @@ printf("sort : A_MPI_File_write_shared\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_shared(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21138,6 +21980,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IREAD_SHARED_OVERRIDE
 int A_MPI_File_iread_shared(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -21167,6 +22010,8 @@ printf("sort : A_MPI_File_iread_shared\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iread_shared(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -21219,6 +22064,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IWRITE_SHARED_OVERRIDE
 int A_MPI_File_iwrite_shared(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -21247,6 +22093,8 @@ printf("sort : A_MPI_File_iwrite_shared\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iwrite_shared(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -21299,6 +22147,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_ORDERED_OVERRIDE
 int A_MPI_File_read_ordered(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21326,6 +22175,8 @@ printf("sort : A_MPI_File_read_ordered\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_ordered(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21378,6 +22229,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_ORDERED_OVERRIDE
 int A_MPI_File_write_ordered(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21404,6 +22256,8 @@ printf("sort : A_MPI_File_write_ordered\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_ordered(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21452,6 +22306,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SEEK_SHARED_OVERRIDE
 int A_MPI_File_seek_shared(A_MPI_File fh,A_MPI_Offset offset,int whence)
 {
 #ifdef DEBUG
@@ -21473,6 +22328,8 @@ printf("sort : A_MPI_File_seek_shared\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_seek_shared(R_MPI_File fh,R_MPI_Offset offset,int whence)
 {
 #ifdef DEBUG
@@ -21519,6 +22376,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_POSITION_SHARED_OVERRIDE
 int A_MPI_File_get_position_shared(A_MPI_File fh,A_MPI_Offset * offset)
 {
 #ifdef DEBUG
@@ -21538,6 +22396,8 @@ printf("sort : A_MPI_File_get_position_shared\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_position_shared(R_MPI_File fh,R_MPI_Offset * offset)
 {
 #ifdef DEBUG
@@ -21590,6 +22450,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_AT_ALL_BEGIN_OVERRIDE
 int A_MPI_File_read_at_all_begin(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -21615,6 +22476,8 @@ printf("sort : A_MPI_File_read_at_all_begin\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_at_all_begin(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -21663,6 +22526,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_AT_ALL_END_OVERRIDE
 int A_MPI_File_read_at_all_end(A_MPI_File fh,void * buf,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21685,6 +22549,8 @@ printf("sort : A_MPI_File_read_at_all_end\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_at_all_end(R_MPI_File fh,void * buf,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21737,6 +22603,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_AT_ALL_BEGIN_OVERRIDE
 int A_MPI_File_write_at_all_begin(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -21762,6 +22629,8 @@ printf("sort : A_MPI_File_write_at_all_begin\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_at_all_begin(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -21810,6 +22679,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_AT_ALL_END_OVERRIDE
 int A_MPI_File_write_at_all_end(A_MPI_File fh,void * buf,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21832,6 +22702,8 @@ printf("sort : A_MPI_File_write_at_all_end\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_at_all_end(R_MPI_File fh,void * buf,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21882,6 +22754,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_ALL_BEGIN_OVERRIDE
 int A_MPI_File_read_all_begin(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -21906,6 +22779,8 @@ printf("sort : A_MPI_File_read_all_begin\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_all_begin(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -21954,6 +22829,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_ALL_END_OVERRIDE
 int A_MPI_File_read_all_end(A_MPI_File fh,void * buf,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -21977,6 +22853,8 @@ printf("sort : A_MPI_File_read_all_end\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_all_end(R_MPI_File fh,void * buf,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -22027,6 +22905,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_ALL_BEGIN_OVERRIDE
 int A_MPI_File_write_all_begin(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -22050,6 +22929,8 @@ printf("sort : A_MPI_File_write_all_begin\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_all_begin(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -22098,6 +22979,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_ALL_END_OVERRIDE
 int A_MPI_File_write_all_end(A_MPI_File fh,void * buf,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -22120,6 +23002,8 @@ printf("sort : A_MPI_File_write_all_end\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_all_end(R_MPI_File fh,void * buf,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -22170,6 +23054,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_ORDERED_BEGIN_OVERRIDE
 int A_MPI_File_read_ordered_begin(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -22194,6 +23079,8 @@ printf("sort : A_MPI_File_read_ordered_begin\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_ordered_begin(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -22242,6 +23129,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_READ_ORDERED_END_OVERRIDE
 int A_MPI_File_read_ordered_end(A_MPI_File fh,void * buf,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -22265,6 +23153,8 @@ printf("sort : A_MPI_File_read_ordered_end\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_read_ordered_end(R_MPI_File fh,void * buf,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -22315,6 +23205,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_ORDERED_BEGIN_OVERRIDE
 int A_MPI_File_write_ordered_begin(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -22338,6 +23229,8 @@ printf("sort : A_MPI_File_write_ordered_begin\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_ordered_begin(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -22386,6 +23279,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_WRITE_ORDERED_END_OVERRIDE
 int A_MPI_File_write_ordered_end(A_MPI_File fh,void * buf,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -22408,6 +23302,8 @@ printf("sort : A_MPI_File_write_ordered_end\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_write_ordered_end(R_MPI_File fh,void * buf,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -22456,6 +23352,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_TYPE_EXTENT_OVERRIDE
 int A_MPI_File_get_type_extent(A_MPI_File fh,A_MPI_Datatype datatype,A_MPI_Aint * extent)
 {
 #ifdef DEBUG
@@ -22477,6 +23374,8 @@ printf("sort : A_MPI_File_get_type_extent\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_type_extent(R_MPI_File fh,R_MPI_Datatype datatype,R_MPI_Aint * extent)
 {
 #ifdef DEBUG
@@ -22529,6 +23428,7 @@ __asm__(
 
 );
 
+#ifndef MPI_REGISTER_DATAREP_OVERRIDE
 int A_MPI_Register_datarep(char * datarep,A_MPI_Datarep_conversion_function * read_conversion_fn,A_MPI_Datarep_conversion_function * write_conversion_fn,A_MPI_Datarep_extent_function * dtype_file_extent_fn,void * extra_state)
 {
 #ifdef DEBUG
@@ -22553,6 +23453,8 @@ printf("sort : A_MPI_Register_datarep\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Register_datarep(char * datarep,R_MPI_Datarep_conversion_function * read_conversion_fn,R_MPI_Datarep_conversion_function * write_conversion_fn,R_MPI_Datarep_extent_function * dtype_file_extent_fn,void * extra_state)
 {
 #ifdef DEBUG
@@ -22599,6 +23501,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SET_ATOMICITY_OVERRIDE
 int A_MPI_File_set_atomicity(A_MPI_File fh,int flag)
 {
 #ifdef DEBUG
@@ -22618,6 +23521,8 @@ printf("sort : A_MPI_File_set_atomicity\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_set_atomicity(R_MPI_File fh,int flag)
 {
 #ifdef DEBUG
@@ -22664,6 +23569,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_GET_ATOMICITY_OVERRIDE
 int A_MPI_File_get_atomicity(A_MPI_File fh,int * flag)
 {
 #ifdef DEBUG
@@ -22682,6 +23588,8 @@ printf("sort : A_MPI_File_get_atomicity\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_get_atomicity(R_MPI_File fh,int * flag)
 {
 #ifdef DEBUG
@@ -22726,6 +23634,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_SYNC_OVERRIDE
 int A_MPI_File_sync(A_MPI_File fh)
 {
 #ifdef DEBUG
@@ -22743,6 +23652,8 @@ printf("sort : A_MPI_File_sync\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_sync(R_MPI_File fh)
 {
 #ifdef DEBUG
@@ -22784,6 +23695,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_FINALIZE_OVERRIDE
 int A_MPI_T_finalize( )
 {
 #ifdef DEBUG
@@ -22798,6 +23710,8 @@ printf("sort : A_MPI_T_finalize\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_finalize( )
 {
 #ifdef DEBUG
@@ -22839,6 +23753,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WTIME_OVERRIDE
 double A_MPI_Wtime( )
 {
 #ifdef DEBUG
@@ -22853,6 +23768,8 @@ printf("sort : A_MPI_Wtime\n");
 #endif
 return ret_tmp;
 }
+#endif
+
 double R_MPI_Wtime( )
 {
 #ifdef DEBUG
@@ -22894,6 +23811,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WTICK_OVERRIDE
 double A_MPI_Wtick( )
 {
 #ifdef DEBUG
@@ -22908,6 +23826,8 @@ printf("sort : A_MPI_Wtick\n");
 #endif
 return ret_tmp;
 }
+#endif
+
 double R_MPI_Wtick( )
 {
 #ifdef DEBUG
@@ -22949,6 +23869,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FINALIZE_OVERRIDE
 int A_MPI_Finalize( )
 {
 #ifdef DEBUG
@@ -22963,6 +23884,8 @@ printf("sort : A_MPI_Finalize\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Finalize( )
 {
 #ifdef DEBUG
@@ -23013,6 +23936,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WAITANY_OVERRIDE
 int A_MPI_Waitany(int count,A_MPI_Request array_of_requests[],int * indx,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -23045,6 +23969,8 @@ printf("sort : A_MPI_Waitany\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Waitany(int count,R_MPI_Request array_of_requests[],int * indx,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -23097,6 +24023,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TESTANY_OVERRIDE
 int A_MPI_Testany(int count,A_MPI_Request array_of_requests[],int * indx,int * flag,A_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -23132,6 +24059,8 @@ printf("sort : A_MPI_Testany\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Testany(int count,R_MPI_Request array_of_requests[],int * indx,int * flag,R_MPI_Status * status)
 {
 #ifdef DEBUG
@@ -23180,6 +24109,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WAITALL_OVERRIDE
 int A_MPI_Waitall(int count,A_MPI_Request array_of_requests[],A_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23220,6 +24150,8 @@ printf("sort : A_MPI_Waitall\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Waitall(int count,R_MPI_Request array_of_requests[],R_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23270,6 +24202,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TESTALL_OVERRIDE
 int A_MPI_Testall(int count,A_MPI_Request array_of_requests[],int * flag,A_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23313,6 +24246,8 @@ printf("sort : A_MPI_Testall\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Testall(int count,R_MPI_Request array_of_requests[],int * flag,R_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23365,6 +24300,7 @@ __asm__(
 
 );
 
+#ifndef MPI_WAITSOME_OVERRIDE
 int A_MPI_Waitsome(int incount,A_MPI_Request array_of_requests[],int * outcount,int array_of_indices[],A_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23409,6 +24345,8 @@ printf("sort : A_MPI_Waitsome\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Waitsome(int incount,R_MPI_Request array_of_requests[],int * outcount,int array_of_indices[],R_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23461,6 +24399,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TESTSOME_OVERRIDE
 int A_MPI_Testsome(int incount,A_MPI_Request array_of_requests[],int * outcount,int array_of_indices[],A_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23505,6 +24444,8 @@ printf("sort : A_MPI_Testsome\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Testsome(int incount,R_MPI_Request array_of_requests[],int * outcount,int array_of_indices[],R_MPI_Status array_of_statuses[])
 {
 #ifdef DEBUG
@@ -23551,6 +24492,7 @@ __asm__(
 
 );
 
+#ifndef MPI_STARTALL_OVERRIDE
 int A_MPI_Startall(int count,A_MPI_Request array_of_requests[])
 {
 #ifdef DEBUG
@@ -23573,6 +24515,8 @@ printf("sort : A_MPI_Startall\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Startall(int count,R_MPI_Request array_of_requests[])
 {
 #ifdef DEBUG
@@ -23627,6 +24571,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ALLTOALLW_OVERRIDE
 int A_MPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],A_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],A_MPI_Datatype recvtypes[],A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -23671,6 +24616,8 @@ printf("sort : A_MPI_Alltoallw\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],R_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],R_MPI_Datatype recvtypes[],R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -23725,6 +24672,7 @@ __asm__(
 
 );
 
+#ifndef MPI_REDUCE_SCATTER_OVERRIDE
 int A_MPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -23752,6 +24700,8 @@ printf("sort : A_MPI_Reduce_scatter\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -23804,6 +24754,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_TRANSLATE_RANKS_OVERRIDE
 int A_MPI_Group_translate_ranks(A_MPI_Group group1,int n,int ranks1[],A_MPI_Group group2,int ranks2[])
 {
 #ifdef DEBUG
@@ -23828,6 +24779,8 @@ printf("sort : A_MPI_Group_translate_ranks\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_translate_ranks(R_MPI_Group group1,int n,int ranks1[],R_MPI_Group group2,int ranks2[])
 {
 #ifdef DEBUG
@@ -23878,6 +24831,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_INCL_OVERRIDE
 int A_MPI_Group_incl(A_MPI_Group group,int n,int ranks[],A_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -23901,6 +24855,8 @@ printf("sort : A_MPI_Group_incl\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_incl(R_MPI_Group group,int n,int ranks[],R_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -23951,6 +24907,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_EXCL_OVERRIDE
 int A_MPI_Group_excl(A_MPI_Group group,int n,int ranks[],A_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -23974,6 +24931,8 @@ printf("sort : A_MPI_Group_excl\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_excl(R_MPI_Group group,int n,int ranks[],R_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -24024,6 +24983,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_RANGE_INCL_OVERRIDE
 int A_MPI_Group_range_incl(A_MPI_Group group,int n,int ranges[][3],A_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -24047,6 +25007,8 @@ printf("sort : A_MPI_Group_range_incl\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_range_incl(R_MPI_Group group,int n,int ranges[][3],R_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -24097,6 +25059,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GROUP_RANGE_EXCL_OVERRIDE
 int A_MPI_Group_range_excl(A_MPI_Group group,int n,int ranges[][3],A_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -24120,6 +25083,8 @@ printf("sort : A_MPI_Group_range_excl\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Group_range_excl(R_MPI_Group group,int n,int ranges[][3],R_MPI_Group * newgroup)
 {
 #ifdef DEBUG
@@ -24174,6 +25139,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CART_CREATE_OVERRIDE
 int A_MPI_Cart_create(A_MPI_Comm comm_old,int ndims,int dims[],int periods[],int reorder,A_MPI_Comm * comm_cart)
 {
 #ifdef DEBUG
@@ -24201,6 +25167,8 @@ printf("sort : A_MPI_Cart_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cart_create(R_MPI_Comm comm_old,int ndims,int dims[],int periods[],int reorder,R_MPI_Comm * comm_cart)
 {
 #ifdef DEBUG
@@ -24249,6 +25217,7 @@ __asm__(
 
 );
 
+#ifndef MPI_DIMS_CREATE_OVERRIDE
 int A_MPI_Dims_create(int nnodes,int ndims,int dims[])
 {
 #ifdef DEBUG
@@ -24270,6 +25239,8 @@ printf("sort : A_MPI_Dims_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Dims_create(int nnodes,int ndims,int dims[])
 {
 #ifdef DEBUG
@@ -24324,6 +25295,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GRAPH_CREATE_OVERRIDE
 int A_MPI_Graph_create(A_MPI_Comm comm_old,int nnodes,int indx[],int edges[],int reorder,A_MPI_Comm * comm_graph)
 {
 #ifdef DEBUG
@@ -24351,6 +25323,8 @@ printf("sort : A_MPI_Graph_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Graph_create(R_MPI_Comm comm_old,int nnodes,int indx[],int edges[],int reorder,R_MPI_Comm * comm_graph)
 {
 #ifdef DEBUG
@@ -24403,6 +25377,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GRAPH_GET_OVERRIDE
 int A_MPI_Graph_get(A_MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[])
 {
 #ifdef DEBUG
@@ -24427,6 +25402,8 @@ printf("sort : A_MPI_Graph_get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Graph_get(R_MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[])
 {
 #ifdef DEBUG
@@ -24479,6 +25456,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CART_GET_OVERRIDE
 int A_MPI_Cart_get(A_MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[])
 {
 #ifdef DEBUG
@@ -24503,6 +25481,8 @@ printf("sort : A_MPI_Cart_get\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cart_get(R_MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[])
 {
 #ifdef DEBUG
@@ -24551,6 +25531,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CART_RANK_OVERRIDE
 int A_MPI_Cart_rank(A_MPI_Comm comm,int coords[],int * rank)
 {
 #ifdef DEBUG
@@ -24571,6 +25552,8 @@ printf("sort : A_MPI_Cart_rank\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cart_rank(R_MPI_Comm comm,int coords[],int * rank)
 {
 #ifdef DEBUG
@@ -24621,6 +25604,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CART_COORDS_OVERRIDE
 int A_MPI_Cart_coords(A_MPI_Comm comm,int rank,int maxdims,int coords[])
 {
 #ifdef DEBUG
@@ -24643,6 +25627,8 @@ printf("sort : A_MPI_Cart_coords\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cart_coords(R_MPI_Comm comm,int rank,int maxdims,int coords[])
 {
 #ifdef DEBUG
@@ -24693,6 +25679,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GRAPH_NEIGHBORS_OVERRIDE
 int A_MPI_Graph_neighbors(A_MPI_Comm comm,int rank,int maxneighbors,int neighbors[])
 {
 #ifdef DEBUG
@@ -24715,6 +25702,8 @@ printf("sort : A_MPI_Graph_neighbors\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Graph_neighbors(R_MPI_Comm comm,int rank,int maxneighbors,int neighbors[])
 {
 #ifdef DEBUG
@@ -24763,6 +25752,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CART_SUB_OVERRIDE
 int A_MPI_Cart_sub(A_MPI_Comm comm,int remain_dims[],A_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -24784,6 +25774,8 @@ printf("sort : A_MPI_Cart_sub\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cart_sub(R_MPI_Comm comm,int remain_dims[],R_MPI_Comm * newcomm)
 {
 #ifdef DEBUG
@@ -24836,6 +25828,7 @@ __asm__(
 
 );
 
+#ifndef MPI_CART_MAP_OVERRIDE
 int A_MPI_Cart_map(A_MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank)
 {
 #ifdef DEBUG
@@ -24860,6 +25853,8 @@ printf("sort : A_MPI_Cart_map\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Cart_map(R_MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank)
 {
 #ifdef DEBUG
@@ -24912,6 +25907,7 @@ __asm__(
 
 );
 
+#ifndef MPI_GRAPH_MAP_OVERRIDE
 int A_MPI_Graph_map(A_MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank)
 {
 #ifdef DEBUG
@@ -24936,6 +25932,8 @@ printf("sort : A_MPI_Graph_map\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Graph_map(R_MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank)
 {
 #ifdef DEBUG
@@ -24990,6 +25988,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SPAWN_OVERRIDE
 int A_MPI_Comm_spawn(char * command,char * argv[],int maxprocs,A_MPI_Info info,int root,A_MPI_Comm comm,A_MPI_Comm * intercomm,int array_of_errcodes[])
 {
 #ifdef DEBUG
@@ -25021,6 +26020,8 @@ printf("sort : A_MPI_Comm_spawn\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_spawn(char * command,char * argv[],int maxprocs,R_MPI_Info info,int root,R_MPI_Comm comm,R_MPI_Comm * intercomm,int array_of_errcodes[])
 {
 #ifdef DEBUG
@@ -25075,6 +26076,7 @@ __asm__(
 
 );
 
+#ifndef MPI_COMM_SPAWN_MULTIPLE_OVERRIDE
 int A_MPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_of_argv[],int array_of_maxprocs[],A_MPI_Info array_of_info[],int root,A_MPI_Comm comm,A_MPI_Comm * intercomm,int array_of_errcodes[])
 {
 #ifdef DEBUG
@@ -25112,6 +26114,8 @@ printf("sort : A_MPI_Comm_spawn_multiple\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_of_argv[],int array_of_maxprocs[],R_MPI_Info array_of_info[],int root,R_MPI_Comm comm,R_MPI_Comm * intercomm,int array_of_errcodes[])
 {
 #ifdef DEBUG
@@ -25166,6 +26170,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_GET_CONTENTS_OVERRIDE
 int A_MPI_Type_get_contents(A_MPI_Datatype datatype,int max_integers,int max_addresses,int max_datatypes,int array_of_integers[],A_MPI_Aint array_of_addresses[],A_MPI_Datatype array_of_datatypes[])
 {
 #ifdef DEBUG
@@ -25202,6 +26207,8 @@ printf("sort : A_MPI_Type_get_contents\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_get_contents(R_MPI_Datatype datatype,int max_integers,int max_addresses,int max_datatypes,int array_of_integers[],R_MPI_Aint array_of_addresses[],R_MPI_Datatype array_of_datatypes[])
 {
 #ifdef DEBUG
@@ -25256,6 +26263,7 @@ __asm__(
 
 );
 
+#ifndef MPI_PACK_EXTERNAL_OVERRIDE
 int A_MPI_Pack_external(char datarep[],void * inbuf,int incount,A_MPI_Datatype datatype,void * outbuf,A_MPI_Aint outsize,A_MPI_Aint * position)
 {
 #ifdef DEBUG
@@ -25285,6 +26293,8 @@ printf("sort : A_MPI_Pack_external\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Pack_external(char datarep[],void * inbuf,int incount,R_MPI_Datatype datatype,void * outbuf,R_MPI_Aint outsize,R_MPI_Aint * position)
 {
 #ifdef DEBUG
@@ -25335,6 +26345,7 @@ __asm__(
 
 );
 
+#ifndef MPI_PACK_EXTERNAL_SIZE_OVERRIDE
 int A_MPI_Pack_external_size(char datarep[],int incount,A_MPI_Datatype datatype,A_MPI_Aint * size)
 {
 #ifdef DEBUG
@@ -25358,6 +26369,8 @@ printf("sort : A_MPI_Pack_external_size\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Pack_external_size(char datarep[],int incount,R_MPI_Datatype datatype,R_MPI_Aint * size)
 {
 #ifdef DEBUG
@@ -25412,6 +26425,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_DARRAY_OVERRIDE
 int A_MPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],int array_of_distribs[],int array_of_dargs[],int array_of_psizes[],int order,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25447,6 +26461,8 @@ printf("sort : A_MPI_Type_create_darray\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],int array_of_distribs[],int array_of_dargs[],int array_of_psizes[],int order,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25499,6 +26515,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_HINDEXED_OVERRIDE
 int A_MPI_Type_create_hindexed(int count,int array_of_blocklengths[],A_MPI_Aint array_of_displacements[],A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25528,6 +26545,8 @@ printf("sort : A_MPI_Type_create_hindexed\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_hindexed(int count,int array_of_blocklengths[],R_MPI_Aint array_of_displacements[],R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25580,6 +26599,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_INDEXED_BLOCK_OVERRIDE
 int A_MPI_Type_create_indexed_block(int count,int blocklength,int array_of_displacements[],A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25606,6 +26626,8 @@ printf("sort : A_MPI_Type_create_indexed_block\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_indexed_block(int count,int blocklength,int array_of_displacements[],R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25658,6 +26680,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_HINDEXED_BLOCK_OVERRIDE
 int A_MPI_Type_create_hindexed_block(int count,int blocklength,A_MPI_Aint array_of_displacements[],A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25687,6 +26710,8 @@ printf("sort : A_MPI_Type_create_hindexed_block\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_hindexed_block(int count,int blocklength,R_MPI_Aint array_of_displacements[],R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25739,6 +26764,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_STRUCT_OVERRIDE
 int A_MPI_Type_create_struct(int count,int array_of_blocklengths[],A_MPI_Aint array_of_displacements[],A_MPI_Datatype array_of_types[],A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25772,6 +26798,8 @@ printf("sort : A_MPI_Type_create_struct\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_struct(int count,int array_of_blocklengths[],R_MPI_Aint array_of_displacements[],R_MPI_Datatype array_of_types[],R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25826,6 +26854,7 @@ __asm__(
 
 );
 
+#ifndef MPI_TYPE_CREATE_SUBARRAY_OVERRIDE
 int A_MPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsizes[],int array_of_starts[],int order,A_MPI_Datatype oldtype,A_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25855,6 +26884,8 @@ printf("sort : A_MPI_Type_create_subarray\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsizes[],int array_of_starts[],int order,R_MPI_Datatype oldtype,R_MPI_Datatype * newtype)
 {
 #ifdef DEBUG
@@ -25909,6 +26940,7 @@ __asm__(
 
 );
 
+#ifndef MPI_UNPACK_EXTERNAL_OVERRIDE
 int A_MPI_Unpack_external(char datarep[],void * inbuf,A_MPI_Aint insize,A_MPI_Aint * position,void * outbuf,int outcount,A_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -25939,6 +26971,8 @@ printf("sort : A_MPI_Unpack_external\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Unpack_external(char datarep[],void * inbuf,R_MPI_Aint insize,R_MPI_Aint * position,void * outbuf,int outcount,R_MPI_Datatype datatype)
 {
 #ifdef DEBUG
@@ -25993,6 +27027,7 @@ __asm__(
 
 );
 
+#ifndef MPI_DIST_GRAPH_CREATE_ADJACENT_OVERRIDE
 int A_MPI_Dist_graph_create_adjacent(A_MPI_Comm comm_old,int indegree,int sources[],int * sourceweights,int outdegree,int destinations[],int * destweights,A_MPI_Info info,int reorder,A_MPI_Comm * comm_dist_graph)
 {
 #ifdef DEBUG
@@ -26028,6 +27063,8 @@ printf("sort : A_MPI_Dist_graph_create_adjacent\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old,int indegree,int sources[],int * sourceweights,int outdegree,int destinations[],int * destweights,R_MPI_Info info,int reorder,R_MPI_Comm * comm_dist_graph)
 {
 #ifdef DEBUG
@@ -26082,6 +27119,7 @@ __asm__(
 
 );
 
+#ifndef MPI_DIST_GRAPH_CREATE_OVERRIDE
 int A_MPI_Dist_graph_create(A_MPI_Comm comm_old,int n,int sources[],int degrees[],int destinations[],int * weights,A_MPI_Info info,int reorder,A_MPI_Comm * comm_dist_graph)
 {
 #ifdef DEBUG
@@ -26115,6 +27153,8 @@ printf("sort : A_MPI_Dist_graph_create\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Dist_graph_create(R_MPI_Comm comm_old,int n,int sources[],int degrees[],int destinations[],int * weights,R_MPI_Info info,int reorder,R_MPI_Comm * comm_dist_graph)
 {
 #ifdef DEBUG
@@ -26169,6 +27209,7 @@ __asm__(
 
 );
 
+#ifndef MPI_DIST_GRAPH_NEIGHBORS_OVERRIDE
 int A_MPI_Dist_graph_neighbors(A_MPI_Comm comm,int maxindegree,int sources[],int * sourceweights,int maxoutdegree,int destinations[],int * destweights)
 {
 #ifdef DEBUG
@@ -26197,6 +27238,8 @@ printf("sort : A_MPI_Dist_graph_neighbors\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Dist_graph_neighbors(R_MPI_Comm comm,int maxindegree,int sources[],int * sourceweights,int maxoutdegree,int destinations[],int * destweights)
 {
 #ifdef DEBUG
@@ -26251,6 +27294,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IGATHERV_OVERRIDE
 int A_MPI_Igatherv(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],A_MPI_Datatype recvtype,int root,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26289,6 +27333,8 @@ printf("sort : A_MPI_Igatherv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Igatherv(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],R_MPI_Datatype recvtype,int root,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26343,6 +27389,7 @@ __asm__(
 
 );
 
+#ifndef MPI_ISCATTERV_OVERRIDE
 int A_MPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,A_MPI_Datatype sendtype,void * recvbuf,int recvcount,A_MPI_Datatype recvtype,int root,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26379,6 +27426,8 @@ printf("sort : A_MPI_Iscatterv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,R_MPI_Datatype sendtype,void * recvbuf,int recvcount,R_MPI_Datatype recvtype,int root,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26433,6 +27482,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IALLGATHERV_OVERRIDE
 int A_MPI_Iallgatherv(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26469,6 +27519,8 @@ printf("sort : A_MPI_Iallgatherv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Iallgatherv(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26523,6 +27575,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IALLTOALLV_OVERRIDE
 int A_MPI_Ialltoallv(void * sendbuf,int * sendcounts,int * sdispls,A_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26560,6 +27613,8 @@ printf("sort : A_MPI_Ialltoallv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ialltoallv(void * sendbuf,int * sendcounts,int * sdispls,R_MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26614,6 +27669,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IALLTOALLW_OVERRIDE
 int A_MPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],A_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],A_MPI_Datatype recvtypes[],A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26663,6 +27719,8 @@ printf("sort : A_MPI_Ialltoallw\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],R_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],R_MPI_Datatype recvtypes[],R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26717,6 +27775,7 @@ __asm__(
 
 );
 
+#ifndef MPI_IREDUCE_SCATTER_OVERRIDE
 int A_MPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],A_MPI_Datatype datatype,A_MPI_Op op,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26749,6 +27808,8 @@ printf("sort : A_MPI_Ireduce_scatter\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],R_MPI_Datatype datatype,R_MPI_Op op,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26803,6 +27864,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INEIGHBOR_ALLGATHERV_OVERRIDE
 int A_MPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26839,6 +27901,8 @@ printf("sort : A_MPI_Ineighbor_allgatherv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26893,6 +27957,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INEIGHBOR_ALLTOALLV_OVERRIDE
 int A_MPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],A_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],A_MPI_Datatype recvtype,A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26931,6 +27996,8 @@ printf("sort : A_MPI_Ineighbor_alltoallv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],R_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],R_MPI_Datatype recvtype,R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -26985,6 +28052,7 @@ __asm__(
 
 );
 
+#ifndef MPI_INEIGHBOR_ALLTOALLW_OVERRIDE
 int A_MPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],A_MPI_Aint sdispls[],A_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],A_MPI_Aint rdispls[],A_MPI_Datatype recvtypes[],A_MPI_Comm comm,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -27042,6 +28110,8 @@ printf("sort : A_MPI_Ineighbor_alltoallw\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],R_MPI_Aint sdispls[],R_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],R_MPI_Aint rdispls[],R_MPI_Datatype recvtypes[],R_MPI_Comm comm,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -27096,6 +28166,7 @@ __asm__(
 
 );
 
+#ifndef MPI_NEIGHBOR_ALLGATHERV_OVERRIDE
 int A_MPI_Neighbor_allgatherv(void * sendbuf,int sendcount,A_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -27127,6 +28198,8 @@ printf("sort : A_MPI_Neighbor_allgatherv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Neighbor_allgatherv(void * sendbuf,int sendcount,R_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -27181,6 +28254,7 @@ __asm__(
 
 );
 
+#ifndef MPI_NEIGHBOR_ALLTOALLV_OVERRIDE
 int A_MPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],A_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],A_MPI_Datatype recvtype,A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -27214,6 +28288,8 @@ printf("sort : A_MPI_Neighbor_alltoallv\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],R_MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],R_MPI_Datatype recvtype,R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -27268,6 +28344,7 @@ __asm__(
 
 );
 
+#ifndef MPI_NEIGHBOR_ALLTOALLW_OVERRIDE
 int A_MPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],A_MPI_Aint sdispls[],A_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],A_MPI_Aint rdispls[],A_MPI_Datatype recvtypes[],A_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -27320,6 +28397,8 @@ printf("sort : A_MPI_Neighbor_alltoallw\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],R_MPI_Aint sdispls[],R_MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],R_MPI_Aint rdispls[],R_MPI_Datatype recvtypes[],R_MPI_Comm comm)
 {
 #ifdef DEBUG
@@ -27368,6 +28447,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CATEGORY_GET_CVARS_OVERRIDE
 int A_MPI_T_category_get_cvars(int cat_index,int len,int indices[])
 {
 #ifdef DEBUG
@@ -27388,6 +28468,8 @@ printf("sort : A_MPI_T_category_get_cvars\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_category_get_cvars(int cat_index,int len,int indices[])
 {
 #ifdef DEBUG
@@ -27436,6 +28518,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CATEGORY_GET_PVARS_OVERRIDE
 int A_MPI_T_category_get_pvars(int cat_index,int len,int indices[])
 {
 #ifdef DEBUG
@@ -27456,6 +28539,8 @@ printf("sort : A_MPI_T_category_get_pvars\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_category_get_pvars(int cat_index,int len,int indices[])
 {
 #ifdef DEBUG
@@ -27504,6 +28589,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CATEGORY_GET_CATEGORIES_OVERRIDE
 int A_MPI_T_category_get_categories(int cat_index,int len,int indices[])
 {
 #ifdef DEBUG
@@ -27524,6 +28610,8 @@ printf("sort : A_MPI_T_category_get_categories\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_category_get_categories(int cat_index,int len,int indices[])
 {
 #ifdef DEBUG
@@ -27576,6 +28664,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IWRITE_ALL_OVERRIDE
 int A_MPI_File_iwrite_all(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -27604,6 +28693,8 @@ printf("sort : A_MPI_File_iwrite_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iwrite_all(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -27658,6 +28749,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IWRITE_AT_ALL_OVERRIDE
 int A_MPI_File_iwrite_at_all(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -27688,6 +28780,8 @@ printf("sort : A_MPI_File_iwrite_at_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iwrite_at_all(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -27734,6 +28828,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CATEGORY_GET_INDEX_OVERRIDE
 int A_MPI_T_category_get_index(char * name,int * cat_index)
 {
 #ifdef DEBUG
@@ -27752,6 +28847,8 @@ printf("sort : A_MPI_T_category_get_index\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_category_get_index(char * name,int * cat_index)
 {
 #ifdef DEBUG
@@ -27798,6 +28895,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CVAR_GET_INDEX_OVERRIDE
 int A_MPI_T_cvar_get_index(char * name,int * cvar_index)
 {
 #ifdef DEBUG
@@ -27816,6 +28914,8 @@ printf("sort : A_MPI_T_cvar_get_index\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_cvar_get_index(char * name,int * cvar_index)
 {
 #ifdef DEBUG
@@ -27864,6 +28964,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_PVAR_GET_INDEX_OVERRIDE
 int A_MPI_T_pvar_get_index(char * name,int var_class,int * pvar_index)
 {
 #ifdef DEBUG
@@ -27884,6 +28985,8 @@ printf("sort : A_MPI_T_pvar_get_index\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_pvar_get_index(char * name,int var_class,int * pvar_index)
 {
 #ifdef DEBUG
@@ -27930,6 +29033,7 @@ __asm__(
 
 );
 
+#ifndef MPI_AINT_ADD_OVERRIDE
 A_MPI_Aint A_MPI_Aint_add(A_MPI_Aint base,A_MPI_Aint disp)
 {
 #ifdef DEBUG
@@ -27948,6 +29052,8 @@ printf("sort : A_MPI_Aint_add\n");
 #endif
 return (A_MPI_Aint)ret_tmp;
 }
+#endif
+
 R_MPI_Aint R_MPI_Aint_add(R_MPI_Aint base,R_MPI_Aint disp)
 {
 #ifdef DEBUG
@@ -27994,6 +29100,7 @@ __asm__(
 
 );
 
+#ifndef MPI_AINT_DIFF_OVERRIDE
 A_MPI_Aint A_MPI_Aint_diff(A_MPI_Aint addr1,A_MPI_Aint addr2)
 {
 #ifdef DEBUG
@@ -28012,6 +29119,8 @@ printf("sort : A_MPI_Aint_diff\n");
 #endif
 return (A_MPI_Aint)ret_tmp;
 }
+#endif
+
 R_MPI_Aint R_MPI_Aint_diff(R_MPI_Aint addr1,R_MPI_Aint addr2)
 {
 #ifdef DEBUG
@@ -28064,6 +29173,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IREAD_ALL_OVERRIDE
 int A_MPI_File_iread_all(A_MPI_File fh,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -28093,6 +29203,8 @@ printf("sort : A_MPI_File_iread_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iread_all(R_MPI_File fh,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -28147,6 +29259,7 @@ __asm__(
 
 );
 
+#ifndef MPI_FILE_IREAD_AT_ALL_OVERRIDE
 int A_MPI_File_iread_at_all(A_MPI_File fh,A_MPI_Offset offset,void * buf,int count,A_MPI_Datatype datatype,A_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -28177,6 +29290,8 @@ printf("sort : A_MPI_File_iread_at_all\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_File_iread_at_all(R_MPI_File fh,R_MPI_Offset offset,void * buf,int count,R_MPI_Datatype datatype,R_MPI_Request * request)
 {
 #ifdef DEBUG
@@ -28221,6 +29336,7 @@ __asm__(
 
 );
 
+#ifndef MPI_T_CATEGORY_CHANGED_OVERRIDE
 int A_MPI_T_category_changed(int * stamp)
 {
 #ifdef DEBUG
@@ -28237,6 +29353,8 @@ printf("sort : A_MPI_T_category_changed\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }
+#endif
+
 int R_MPI_T_category_changed(int * stamp)
 {
 #ifdef DEBUG
@@ -29459,6 +30577,7 @@ void wrapper_init_f(void);
 #endif
 __attribute__((constructor)) void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *lib_handle_io=lib_handle; // TODO: use WI4MPI_MPIIO_LIB
 #if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
@@ -29468,8 +30587,8 @@ LOCAL_MPI_Pcontrol=dlsym(lib_handle,"PMPI_Pcontrol");
 LOCAL_MPI_Win_create_errhandler=dlsym(lib_handle,"PMPI_Win_create_errhandler");
 LOCAL_MPI_Win_call_errhandler=dlsym(lib_handle,"PMPI_Win_call_errhandler");
 LOCAL_MPI_Win_set_errhandler=dlsym(lib_handle,"PMPI_Win_set_errhandler");
-LOCAL_MPI_File_call_errhandler=dlsym(lib_handle,"PMPI_File_call_errhandler");
-LOCAL_MPI_File_create_errhandler=dlsym(lib_handle,"PMPI_File_create_errhandler");
+LOCAL_MPI_File_call_errhandler=dlsym(lib_handle_io,"PMPI_File_call_errhandler");
+LOCAL_MPI_File_create_errhandler=dlsym(lib_handle_io,"PMPI_File_create_errhandler");
 LOCAL_MPI_T_pvar_read=dlsym(lib_handle,"PMPI_T_pvar_read");
 LOCAL_MPI_T_pvar_readreset=dlsym(lib_handle,"PMPI_T_pvar_readreset");
 LOCAL_MPI_T_pvar_reset=dlsym(lib_handle,"PMPI_T_pvar_reset");
@@ -29672,8 +30791,8 @@ LOCAL_MPI_Alloc_mem=dlsym(lib_handle,"PMPI_Alloc_mem");
 LOCAL_MPI_Comm_create_errhandler=dlsym(lib_handle,"PMPI_Comm_create_errhandler");
 LOCAL_MPI_Comm_get_errhandler=dlsym(lib_handle,"PMPI_Comm_get_errhandler");
 LOCAL_MPI_Comm_set_errhandler=dlsym(lib_handle,"PMPI_Comm_set_errhandler");
-LOCAL_MPI_File_get_errhandler=dlsym(lib_handle,"PMPI_File_get_errhandler");
-LOCAL_MPI_File_set_errhandler=dlsym(lib_handle,"PMPI_File_set_errhandler");
+LOCAL_MPI_File_get_errhandler=dlsym(lib_handle_io,"PMPI_File_get_errhandler");
+LOCAL_MPI_File_set_errhandler=dlsym(lib_handle_io,"PMPI_File_set_errhandler");
 LOCAL_MPI_Finalized=dlsym(lib_handle,"PMPI_Finalized");
 LOCAL_MPI_Free_mem=dlsym(lib_handle,"PMPI_Free_mem");
 LOCAL_MPI_Get_address=dlsym(lib_handle,"PMPI_Get_address");
@@ -29739,58 +30858,58 @@ LOCAL_MPI_T_pvar_get_num=dlsym(lib_handle,"PMPI_T_pvar_get_num");
 LOCAL_MPI_T_pvar_get_info=dlsym(lib_handle,"PMPI_T_pvar_get_info");
 LOCAL_MPI_T_category_get_num=dlsym(lib_handle,"PMPI_T_category_get_num");
 LOCAL_MPI_T_category_get_info=dlsym(lib_handle,"PMPI_T_category_get_info");
-LOCAL_MPI_File_open=dlsym(lib_handle,"PMPI_File_open");
-LOCAL_MPI_File_close=dlsym(lib_handle,"PMPI_File_close");
-LOCAL_MPI_File_delete=dlsym(lib_handle,"PMPI_File_delete");
-LOCAL_MPI_File_set_size=dlsym(lib_handle,"PMPI_File_set_size");
-LOCAL_MPI_File_preallocate=dlsym(lib_handle,"PMPI_File_preallocate");
-LOCAL_MPI_File_get_size=dlsym(lib_handle,"PMPI_File_get_size");
-LOCAL_MPI_File_get_group=dlsym(lib_handle,"PMPI_File_get_group");
-LOCAL_MPI_File_get_amode=dlsym(lib_handle,"PMPI_File_get_amode");
-LOCAL_MPI_File_set_info=dlsym(lib_handle,"PMPI_File_set_info");
-LOCAL_MPI_File_get_info=dlsym(lib_handle,"PMPI_File_get_info");
-LOCAL_MPI_File_set_view=dlsym(lib_handle,"PMPI_File_set_view");
-LOCAL_MPI_File_get_view=dlsym(lib_handle,"PMPI_File_get_view");
-LOCAL_MPI_File_read_at=dlsym(lib_handle,"PMPI_File_read_at");
-LOCAL_MPI_File_read_at_all=dlsym(lib_handle,"PMPI_File_read_at_all");
-LOCAL_MPI_File_write_at=dlsym(lib_handle,"PMPI_File_write_at");
-LOCAL_MPI_File_write_at_all=dlsym(lib_handle,"PMPI_File_write_at_all");
-LOCAL_MPI_File_iread_at=dlsym(lib_handle,"PMPI_File_iread_at");
-LOCAL_MPI_File_iwrite_at=dlsym(lib_handle,"PMPI_File_iwrite_at");
-LOCAL_MPI_File_read=dlsym(lib_handle,"PMPI_File_read");
-LOCAL_MPI_File_read_all=dlsym(lib_handle,"PMPI_File_read_all");
-LOCAL_MPI_File_write=dlsym(lib_handle,"PMPI_File_write");
-LOCAL_MPI_File_write_all=dlsym(lib_handle,"PMPI_File_write_all");
-LOCAL_MPI_File_iread=dlsym(lib_handle,"PMPI_File_iread");
-LOCAL_MPI_File_iwrite=dlsym(lib_handle,"PMPI_File_iwrite");
-LOCAL_MPI_File_seek=dlsym(lib_handle,"PMPI_File_seek");
-LOCAL_MPI_File_get_position=dlsym(lib_handle,"PMPI_File_get_position");
-LOCAL_MPI_File_get_byte_offset=dlsym(lib_handle,"PMPI_File_get_byte_offset");
-LOCAL_MPI_File_read_shared=dlsym(lib_handle,"PMPI_File_read_shared");
-LOCAL_MPI_File_write_shared=dlsym(lib_handle,"PMPI_File_write_shared");
-LOCAL_MPI_File_iread_shared=dlsym(lib_handle,"PMPI_File_iread_shared");
-LOCAL_MPI_File_iwrite_shared=dlsym(lib_handle,"PMPI_File_iwrite_shared");
-LOCAL_MPI_File_read_ordered=dlsym(lib_handle,"PMPI_File_read_ordered");
-LOCAL_MPI_File_write_ordered=dlsym(lib_handle,"PMPI_File_write_ordered");
-LOCAL_MPI_File_seek_shared=dlsym(lib_handle,"PMPI_File_seek_shared");
-LOCAL_MPI_File_get_position_shared=dlsym(lib_handle,"PMPI_File_get_position_shared");
-LOCAL_MPI_File_read_at_all_begin=dlsym(lib_handle,"PMPI_File_read_at_all_begin");
-LOCAL_MPI_File_read_at_all_end=dlsym(lib_handle,"PMPI_File_read_at_all_end");
-LOCAL_MPI_File_write_at_all_begin=dlsym(lib_handle,"PMPI_File_write_at_all_begin");
-LOCAL_MPI_File_write_at_all_end=dlsym(lib_handle,"PMPI_File_write_at_all_end");
-LOCAL_MPI_File_read_all_begin=dlsym(lib_handle,"PMPI_File_read_all_begin");
-LOCAL_MPI_File_read_all_end=dlsym(lib_handle,"PMPI_File_read_all_end");
-LOCAL_MPI_File_write_all_begin=dlsym(lib_handle,"PMPI_File_write_all_begin");
-LOCAL_MPI_File_write_all_end=dlsym(lib_handle,"PMPI_File_write_all_end");
-LOCAL_MPI_File_read_ordered_begin=dlsym(lib_handle,"PMPI_File_read_ordered_begin");
-LOCAL_MPI_File_read_ordered_end=dlsym(lib_handle,"PMPI_File_read_ordered_end");
-LOCAL_MPI_File_write_ordered_begin=dlsym(lib_handle,"PMPI_File_write_ordered_begin");
-LOCAL_MPI_File_write_ordered_end=dlsym(lib_handle,"PMPI_File_write_ordered_end");
-LOCAL_MPI_File_get_type_extent=dlsym(lib_handle,"PMPI_File_get_type_extent");
+LOCAL_MPI_File_open=dlsym(lib_handle_io,"PMPI_File_open");
+LOCAL_MPI_File_close=dlsym(lib_handle_io,"PMPI_File_close");
+LOCAL_MPI_File_delete=dlsym(lib_handle_io,"PMPI_File_delete");
+LOCAL_MPI_File_set_size=dlsym(lib_handle_io,"PMPI_File_set_size");
+LOCAL_MPI_File_preallocate=dlsym(lib_handle_io,"PMPI_File_preallocate");
+LOCAL_MPI_File_get_size=dlsym(lib_handle_io,"PMPI_File_get_size");
+LOCAL_MPI_File_get_group=dlsym(lib_handle_io,"PMPI_File_get_group");
+LOCAL_MPI_File_get_amode=dlsym(lib_handle_io,"PMPI_File_get_amode");
+LOCAL_MPI_File_set_info=dlsym(lib_handle_io,"PMPI_File_set_info");
+LOCAL_MPI_File_get_info=dlsym(lib_handle_io,"PMPI_File_get_info");
+LOCAL_MPI_File_set_view=dlsym(lib_handle_io,"PMPI_File_set_view");
+LOCAL_MPI_File_get_view=dlsym(lib_handle_io,"PMPI_File_get_view");
+LOCAL_MPI_File_read_at=dlsym(lib_handle_io,"PMPI_File_read_at");
+LOCAL_MPI_File_read_at_all=dlsym(lib_handle_io,"PMPI_File_read_at_all");
+LOCAL_MPI_File_write_at=dlsym(lib_handle_io,"PMPI_File_write_at");
+LOCAL_MPI_File_write_at_all=dlsym(lib_handle_io,"PMPI_File_write_at_all");
+LOCAL_MPI_File_iread_at=dlsym(lib_handle_io,"PMPI_File_iread_at");
+LOCAL_MPI_File_iwrite_at=dlsym(lib_handle_io,"PMPI_File_iwrite_at");
+LOCAL_MPI_File_read=dlsym(lib_handle_io,"PMPI_File_read");
+LOCAL_MPI_File_read_all=dlsym(lib_handle_io,"PMPI_File_read_all");
+LOCAL_MPI_File_write=dlsym(lib_handle_io,"PMPI_File_write");
+LOCAL_MPI_File_write_all=dlsym(lib_handle_io,"PMPI_File_write_all");
+LOCAL_MPI_File_iread=dlsym(lib_handle_io,"PMPI_File_iread");
+LOCAL_MPI_File_iwrite=dlsym(lib_handle_io,"PMPI_File_iwrite");
+LOCAL_MPI_File_seek=dlsym(lib_handle_io,"PMPI_File_seek");
+LOCAL_MPI_File_get_position=dlsym(lib_handle_io,"PMPI_File_get_position");
+LOCAL_MPI_File_get_byte_offset=dlsym(lib_handle_io,"PMPI_File_get_byte_offset");
+LOCAL_MPI_File_read_shared=dlsym(lib_handle_io,"PMPI_File_read_shared");
+LOCAL_MPI_File_write_shared=dlsym(lib_handle_io,"PMPI_File_write_shared");
+LOCAL_MPI_File_iread_shared=dlsym(lib_handle_io,"PMPI_File_iread_shared");
+LOCAL_MPI_File_iwrite_shared=dlsym(lib_handle_io,"PMPI_File_iwrite_shared");
+LOCAL_MPI_File_read_ordered=dlsym(lib_handle_io,"PMPI_File_read_ordered");
+LOCAL_MPI_File_write_ordered=dlsym(lib_handle_io,"PMPI_File_write_ordered");
+LOCAL_MPI_File_seek_shared=dlsym(lib_handle_io,"PMPI_File_seek_shared");
+LOCAL_MPI_File_get_position_shared=dlsym(lib_handle_io,"PMPI_File_get_position_shared");
+LOCAL_MPI_File_read_at_all_begin=dlsym(lib_handle_io,"PMPI_File_read_at_all_begin");
+LOCAL_MPI_File_read_at_all_end=dlsym(lib_handle_io,"PMPI_File_read_at_all_end");
+LOCAL_MPI_File_write_at_all_begin=dlsym(lib_handle_io,"PMPI_File_write_at_all_begin");
+LOCAL_MPI_File_write_at_all_end=dlsym(lib_handle_io,"PMPI_File_write_at_all_end");
+LOCAL_MPI_File_read_all_begin=dlsym(lib_handle_io,"PMPI_File_read_all_begin");
+LOCAL_MPI_File_read_all_end=dlsym(lib_handle_io,"PMPI_File_read_all_end");
+LOCAL_MPI_File_write_all_begin=dlsym(lib_handle_io,"PMPI_File_write_all_begin");
+LOCAL_MPI_File_write_all_end=dlsym(lib_handle_io,"PMPI_File_write_all_end");
+LOCAL_MPI_File_read_ordered_begin=dlsym(lib_handle_io,"PMPI_File_read_ordered_begin");
+LOCAL_MPI_File_read_ordered_end=dlsym(lib_handle_io,"PMPI_File_read_ordered_end");
+LOCAL_MPI_File_write_ordered_begin=dlsym(lib_handle_io,"PMPI_File_write_ordered_begin");
+LOCAL_MPI_File_write_ordered_end=dlsym(lib_handle_io,"PMPI_File_write_ordered_end");
+LOCAL_MPI_File_get_type_extent=dlsym(lib_handle_io,"PMPI_File_get_type_extent");
 LOCAL_MPI_Register_datarep=dlsym(lib_handle,"PMPI_Register_datarep");
-LOCAL_MPI_File_set_atomicity=dlsym(lib_handle,"PMPI_File_set_atomicity");
-LOCAL_MPI_File_get_atomicity=dlsym(lib_handle,"PMPI_File_get_atomicity");
-LOCAL_MPI_File_sync=dlsym(lib_handle,"PMPI_File_sync");
+LOCAL_MPI_File_set_atomicity=dlsym(lib_handle_io,"PMPI_File_set_atomicity");
+LOCAL_MPI_File_get_atomicity=dlsym(lib_handle_io,"PMPI_File_get_atomicity");
+LOCAL_MPI_File_sync=dlsym(lib_handle_io,"PMPI_File_sync");
 LOCAL_MPI_T_finalize=dlsym(lib_handle,"PMPI_T_finalize");
 LOCAL_MPI_Wtime=dlsym(lib_handle,"PMPI_Wtime");
 LOCAL_MPI_Wtick=dlsym(lib_handle,"PMPI_Wtick");
@@ -29850,17 +30969,17 @@ LOCAL_MPI_Neighbor_alltoallw=dlsym(lib_handle,"PMPI_Neighbor_alltoallw");
 LOCAL_MPI_T_category_get_cvars=dlsym(lib_handle,"PMPI_T_category_get_cvars");
 LOCAL_MPI_T_category_get_pvars=dlsym(lib_handle,"PMPI_T_category_get_pvars");
 LOCAL_MPI_T_category_get_categories=dlsym(lib_handle,"PMPI_T_category_get_categories");
-LOCAL_MPI_File_iwrite_all=dlsym(lib_handle,"PMPI_File_iwrite_all");
-LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle,"PMPI_File_iwrite_at_all");
+LOCAL_MPI_File_iwrite_all=dlsym(lib_handle_io,"PMPI_File_iwrite_all");
+LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle_io,"PMPI_File_iwrite_at_all");
 LOCAL_MPI_T_category_get_index=dlsym(lib_handle,"PMPI_T_category_get_index");
 LOCAL_MPI_T_cvar_get_index=dlsym(lib_handle,"PMPI_T_cvar_get_index");
 LOCAL_MPI_T_pvar_get_index=dlsym(lib_handle,"PMPI_T_pvar_get_index");
 LOCAL_MPI_Aint_add=dlsym(lib_handle,"PMPI_Aint_add");
 LOCAL_MPI_Aint_diff=dlsym(lib_handle,"PMPI_Aint_diff");
-LOCAL_MPI_File_iread_all=dlsym(lib_handle,"PMPI_File_iread_all");
-LOCAL_MPI_File_iread_at_all=dlsym(lib_handle,"PMPI_File_iread_at_all");
+LOCAL_MPI_File_iread_all=dlsym(lib_handle_io,"PMPI_File_iread_all");
+LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_io,"PMPI_File_iread_at_all");
 LOCAL_MPI_T_category_changed=dlsym(lib_handle,"PMPI_T_category_changed");
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");
 #endif
 #if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)
@@ -29871,7 +30990,6 @@ R_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");
 A_MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");
 A_MPI_WEIGHTS_EMPTY=dlsym(lib_handle,"MPI_WEIGHTS_EMPTY");
 #endif
-
 datatype_translation_init();
 communicator_translation_init();
 request_translation_init();
@@ -29885,7 +31003,6 @@ message_translation_init();
 t_enum_translation_init();
 cvar_handle_translation_init();
 pvar_handle_translation_init();
-//pvar_session_translation_init();
 //DATATYPE
 datatype_translation_add_const(A_MPI_DATATYPE_NULL, R_MPI_DATATYPE_NULL);
 datatype_translation_add_const(A_MPI_CHAR, R_MPI_CHAR);
@@ -29942,7 +31059,6 @@ datatype_translation_add_const(A_MPI_CXX_FLOAT_COMPLEX    ,R_MPI_CXX_FLOAT_COMPL
 datatype_translation_add_const(A_MPI_CXX_DOUBLE_COMPLEX   ,R_MPI_CXX_DOUBLE_COMPLEX   );
 datatype_translation_add_const(A_MPI_CXX_LONG_DOUBLE_COMPLEX,R_MPI_CXX_LONG_DOUBLE_COMPLEX);
 /*New datatypes from the 3.0 standard*/
-//datatype_translation_add_const(A_MPI_COUNT,R_MPI_COUNT);
 //COMM
 communicator_translation_add_const(A_MPI_COMM_WORLD, R_MPI_COMM_WORLD);
 communicator_translation_add_const(A_MPI_COMM_SELF, R_MPI_COMM_SELF);
@@ -29964,7 +31080,6 @@ operation_translation_add_const(A_MPI_LAND, R_MPI_LAND);
 operation_translation_add_const(A_MPI_LOR, R_MPI_LOR);
 operation_translation_add_const(A_MPI_LXOR, R_MPI_LXOR);
 operation_translation_add_const(A_MPI_REPLACE, R_MPI_REPLACE);
-//operation_translation_add_const(A_MPI_SAME_MODE, R_MPI_SAME_MODE);
 //GROUP
 group_translation_add_const(A_MPI_GROUP_NULL, R_MPI_GROUP_NULL);
 group_translation_add_const(A_MPI_GROUP_EMPTY, R_MPI_GROUP_EMPTY);
@@ -29985,7 +31100,7 @@ message_translation_add_const(A_MPI_MESSAGE_NO_PROC,R_MPI_MESSAGE_NO_PROC);
 t_enum_translation_add_const(A_MPI_T_ENUM_NULL,R_MPI_T_ENUM_NULL);
 cvar_handle_translation_add_const(A_MPI_T_CVAR_HANDLE_NULL,R_MPI_T_CVAR_HANDLE_NULL);
 pvar_handle_translation_add_const(A_MPI_T_PVAR_HANDLE_NULL,R_MPI_T_PVAR_HANDLE_NULL);
-//pvar_session_translation_add_const(A_MPI_T_PVAR_SESSION_NULL,R_MPI_T_PVAR_SESSION_NULL);
 wrapper_init_f();
-
+init_f2c(lib_handle);
+WI4MPI_errhandler_key=R_MPI_KEYVAL_INVALID;
 }

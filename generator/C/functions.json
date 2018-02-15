@@ -764,8 +764,7 @@
         "name": "Request_ptr_converter", 
         "In": 1,
         "if": "R_MPI_SUCCESS",
-        "del": "request_pers_ptr_delete",
-        "del2": "request_ptr_delete"
+        "del": "request_pers_ptr_delete"
       }
     ], 
     "name": "MPI_Request_free", 

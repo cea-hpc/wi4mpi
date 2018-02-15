@@ -496,7 +496,7 @@ MPI_Unpack_external
 #MPI_Errhandler_c2f
 #MPI_Errhandler_f2c
 
-#Pour l'interface seulement interface_test.c
+#Pour l'interface seulement interface_c.c
 
 # Win #
 ######

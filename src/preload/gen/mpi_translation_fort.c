@@ -21,7 +21,7 @@
 //#                                                                      #
 //########################################################################
 /*
- * This code is full generated
+ * This code is fully generated
  */
  #include <stdlib.h>
  #include <stdio.h>
@@ -12705,7 +12705,9 @@ in_w=0;
 printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 #endif
 }
+
 __attribute__((constructor)) void wrapper_init_f(void) {
+/* ABI FIGE */
 _LOCAL_MPI_Win_free_keyval=dlsym(RTLD_NEXT,"pmpi_win_free_keyval_");
 _LOCAL_MPI_Win_delete_attr=dlsym(RTLD_NEXT,"pmpi_win_delete_attr_");
 _LOCAL_MPI_Win_get_attr=dlsym(RTLD_NEXT,"pmpi_win_get_attr_");
@@ -12725,6 +12727,7 @@ _LOCAL_MPI_Comm_free_keyval=dlsym(RTLD_NEXT,"pmpi_comm_free_keyval_");
 _LOCAL_MPI_Register_datarep=dlsym(RTLD_NEXT,"pmpi_register_datarep_");
 _LOCAL_MPI_Comm_spawn_multiple=dlsym(RTLD_NEXT,"pmpi_comm_spawn_multiple_");
 _LOCAL_MPI_Pcontrol=dlsym(RTLD_NEXT,"pmpi_pcontrol_");
+/* --- */
 _LOCAL_MPI_Send=dlsym(RTLD_NEXT,"pmpi_send_");
 _LOCAL_MPI_Recv=dlsym(RTLD_NEXT,"pmpi_recv_");
 _LOCAL_MPI_Get_count=dlsym(RTLD_NEXT,"pmpi_get_count_");

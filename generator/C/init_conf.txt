@@ -11,7 +11,6 @@ message_translation_init();
 t_enum_translation_init();
 cvar_handle_translation_init();
 pvar_handle_translation_init();
-//pvar_session_translation_init();
 //DATATYPE
 datatype_translation_add_const(A_MPI_DATATYPE_NULL, R_MPI_DATATYPE_NULL);
 datatype_translation_add_const(A_MPI_CHAR, R_MPI_CHAR);
@@ -68,7 +67,6 @@ datatype_translation_add_const(A_MPI_CXX_FLOAT_COMPLEX    ,R_MPI_CXX_FLOAT_COMPL
 datatype_translation_add_const(A_MPI_CXX_DOUBLE_COMPLEX   ,R_MPI_CXX_DOUBLE_COMPLEX   );
 datatype_translation_add_const(A_MPI_CXX_LONG_DOUBLE_COMPLEX,R_MPI_CXX_LONG_DOUBLE_COMPLEX);
 /*New datatypes from the 3.0 standard*/
-//datatype_translation_add_const(A_MPI_COUNT,R_MPI_COUNT);
 //COMM
 communicator_translation_add_const(A_MPI_COMM_WORLD, R_MPI_COMM_WORLD);
 communicator_translation_add_const(A_MPI_COMM_SELF, R_MPI_COMM_SELF);
@@ -90,7 +88,6 @@ operation_translation_add_const(A_MPI_LAND, R_MPI_LAND);
 operation_translation_add_const(A_MPI_LOR, R_MPI_LOR);
 operation_translation_add_const(A_MPI_LXOR, R_MPI_LXOR);
 operation_translation_add_const(A_MPI_REPLACE, R_MPI_REPLACE);
-//operation_translation_add_const(A_MPI_SAME_MODE, R_MPI_SAME_MODE);
 //GROUP
 group_translation_add_const(A_MPI_GROUP_NULL, R_MPI_GROUP_NULL);
 group_translation_add_const(A_MPI_GROUP_EMPTY, R_MPI_GROUP_EMPTY);
@@ -111,7 +108,6 @@ message_translation_add_const(A_MPI_MESSAGE_NO_PROC,R_MPI_MESSAGE_NO_PROC);
 t_enum_translation_add_const(A_MPI_T_ENUM_NULL,R_MPI_T_ENUM_NULL);
 cvar_handle_translation_add_const(A_MPI_T_CVAR_HANDLE_NULL,R_MPI_T_CVAR_HANDLE_NULL);
 pvar_handle_translation_add_const(A_MPI_T_PVAR_HANDLE_NULL,R_MPI_T_PVAR_HANDLE_NULL);
-//pvar_session_translation_add_const(A_MPI_T_PVAR_SESSION_NULL,R_MPI_T_PVAR_SESSION_NULL);
 wrapper_init_f();
-init_f2c(lib_handle);                        
-WI4MPI_errhandler_key = R_MPI_KEYVAL_INVALID;
+init_f2c(lib_handle);
+WI4MPI_errhandler_key=R_MPI_KEYVAL_INVALID;

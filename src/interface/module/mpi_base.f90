@@ -20,9 +20,7 @@
 !#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 !#                                                                      #
 !########################################################################
-!
-! This code is full generated
-!
+
 MODULE MPI_BASE
 USE MPI_CONSTANTS 
 IMPLICIT NONE
@@ -33,27 +31,6 @@ INTEGER:: level
 INTEGER:: ierror
 END SUBROUTINE MPI_Pcontrol
 
-!SUBROUTINE MPI_Send(buf,count,datatype,dest,tag,comm,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Send
-
-!SUBROUTINE MPI_Recv(buf,count,datatype,source,tag,comm,status,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: source
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Recv
-
 SUBROUTINE MPI_Get_count(status,datatype,count,ierror)
 USE MPI_CONSTANTS
 INTEGER:: status(MPI_STATUS_SIZE)
@@ -61,103 +38,6 @@ INTEGER:: datatype
 INTEGER:: count
 INTEGER:: ierror
 END SUBROUTINE MPI_Get_count
-
-!SUBROUTINE MPI_Bsend(buf,count,datatype,dest,tag,comm,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Bsend
-
-!SUBROUTINE MPI_Ssend(buf,count,datatype,dest,tag,comm,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ssend
-
-!SUBROUTINE MPI_Rsend(buf,count,datatype,dest,tag,comm,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Rsend
-!
-!SUBROUTINE MPI_Buffer_attach(buffer,size,ierror)
-!EXTERNAL:: buffer
-!INTEGER:: size
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Buffer_attach
-!
-!SUBROUTINE MPI_Buffer_detach(buffer_addr,size,ierror)
-!EXTERNAL:: buffer_addr
-!INTEGER:: size
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Buffer_detach
-!
-!SUBROUTINE MPI_Isend(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Isend
-!
-!SUBROUTINE MPI_Ibsend(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ibsend
-!
-!SUBROUTINE MPI_Issend(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Issend
-!
-!SUBROUTINE MPI_Irsend(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Irsend
-!
-!SUBROUTINE MPI_Irecv(buf,count,datatype,source,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: source
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Irecv
 
 SUBROUTINE MPI_Wait(request,status,ierror)
 USE MPI_CONSTANTS
@@ -210,94 +90,10 @@ LOGICAL:: flag
 INTEGER:: ierror
 END SUBROUTINE MPI_Test_cancelled
 
-!SUBROUTINE MPI_Send_init(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Send_init
-!
-!SUBROUTINE MPI_Bsend_init(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Bsend_init
-!
-!SUBROUTINE MPI_Ssend_init(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ssend_init
-!
-!SUBROUTINE MPI_Rsend_init(buf,count,datatype,dest,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Rsend_init
-!
-!SUBROUTINE MPI_Recv_init(buf,count,datatype,source,tag,comm,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: source
-!INTEGER:: tag
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Recv_init
-
 SUBROUTINE MPI_Start(request,ierror)
 INTEGER:: request
 INTEGER:: ierror
 END SUBROUTINE MPI_Start
-
-!SUBROUTINE MPI_Sendrecv(sendbuf,sendcount,sendtype,dest,sendtag,recvbuf,recvcount,recvtype,source,recvtag,comm,status,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!INTEGER:: dest
-!INTEGER:: sendtag
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: source
-!INTEGER:: recvtag
-!INTEGER:: comm
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Sendrecv
-!
-!SUBROUTINE MPI_Sendrecv_replace(buf,count,datatype,dest,sendtag,source,recvtag,comm,status,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: dest
-!INTEGER:: sendtag
-!INTEGER:: source
-!INTEGER:: recvtag
-!INTEGER:: comm
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Sendrecv_replace
 
 SUBROUTINE MPI_Type_contiguous(count,oldtype,newtype,ierror)
 INTEGER:: count
@@ -344,30 +140,6 @@ INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_hindexed
 
-!SUBROUTINE MPI_Type_struct(count,array_of_blocklengths,array_of_displacements,array_of_types,newtype,ierror)
-!USE MPI_CONSTANTS 
-!INTEGER, INTENT(IN) :: count,array_of_blocklengths(count),array_of_displacements(count)
-!INTEGER(KIND=MPI_ADDRESS_KIND),INTENT(IN):: array_of_types(count)
-!INTEGER:: newtype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Type_struct
-
-!Bug Abinit:
-!SUBROUTINE MPI_Type_struct(count,array_of_blocklengths,array_of_displacements,array_of_types,newtype,ierror)
-!INTEGER:: count
-!INTEGER:: array_of_blocklengths(*)
-!INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_displacements(*)
-!INTEGER:: array_of_types(*)
-!INTEGER:: newtype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Type_struct
-
-!SUBROUTINE MPI_Address(location,address,ierror)
-!EXTERNAL:: location
-!INTEGER:: address
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Address
-
 SUBROUTINE MPI_Type_extent(datatype,extent,ierror)
 INTEGER:: datatype
 INTEGER:: extent
@@ -410,28 +182,6 @@ INTEGER:: count
 INTEGER:: ierror
 END SUBROUTINE MPI_Get_elements
 
-!SUBROUTINE MPI_Pack(inbuf,incount,datatype,outbuf,outsize,position,comm,ierror)
-!EXTERNAL:: inbuf
-!INTEGER:: incount
-!INTEGER:: datatype
-!EXTERNAL:: outbuf
-!INTEGER:: outsize
-!INTEGER:: position
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Pack
-
-!SUBROUTINE MPI_Unpack(inbuf,insize,position,outbuf,outcount,datatype,comm,ierror)
-!EXTERNAL:: inbuf
-!INTEGER:: insize
-!INTEGER:: position
-!EXTERNAL:: outbuf
-!INTEGER:: outcount
-!INTEGER:: datatype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Unpack
-
 SUBROUTINE MPI_Pack_size(incount,datatype,comm,size,ierror)
 INTEGER:: incount
 INTEGER:: datatype
@@ -445,164 +195,10 @@ INTEGER:: comm
 INTEGER:: ierror
 END SUBROUTINE MPI_Barrier
 
-!SUBROUTINE MPI_Bcast(buffer,count,datatype,root,comm,ierror)
-!EXTERNAL:: buffer
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Bcast
-
-!SUBROUTINE MPI_Gather(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,root,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Gather
-!
-!SUBROUTINE MPI_Gatherv(sendbuf,sendcount,sendtype,recvbuf,recvcounts,displs,recvtype,root,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: displs
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Gatherv
-!
-!SUBROUTINE MPI_Scatter(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,root,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Scatter
-!
-!SUBROUTINE MPI_Scatterv(sendbuf,sendcounts,displs,sendtype,recvbuf,recvcount,recvtype,root,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: displs
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Scatterv
-!
-!SUBROUTINE MPI_Allgather(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Allgather
-!
-!SUBROUTINE MPI_Allgatherv(sendbuf,sendcount,sendtype,recvbuf,recvcounts,displs,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: displs
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Allgatherv
-!
-!SUBROUTINE MPI_Alltoall(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Alltoall
-!
-!SUBROUTINE MPI_Alltoallv(sendbuf,sendcounts,sdispls,sendtype,recvbuf,recvcounts,rdispls,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Alltoallv
-!
-!SUBROUTINE MPI_Exscan(sendbuf,recvbuf,count,datatype,op,comm,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Exscan
-
-!SUBROUTINE MPI_Reduce(sendbuf,recvbuf,count,datatype,op,root,comm,ierror)
-!TYPE(*), INTENT(IN)  sendbuf
-!TYPE(*) recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Reduce
-
-!SUBROUTINE MPI_Op_create(user_fn,commute,op,ierror)
-!EXTERNAL:: user_fn
-!INTEGER:: commute
-!INTEGER:: op
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Op_create
-
 SUBROUTINE MPI_Op_free(op,ierror)
 INTEGER:: op
 INTEGER:: ierror
 END SUBROUTINE MPI_Op_free
-
-!SUBROUTINE MPI_Allreduce(sendbuf,recvbuf,count,datatype,op,comm,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Allreduce
-
-!SUBROUTINE MPI_Scan(sendbuf,recvbuf,count,datatype,op,comm,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Scan
 
 SUBROUTINE MPI_Group_size(group,size,ierror)
 INTEGER:: group
@@ -742,14 +338,6 @@ INTEGER:: newintracomm
 INTEGER:: ierror
 END SUBROUTINE MPI_Intercomm_merge
 
-!SUBROUTINE MPI_Keyval_create(copy_fn,delete_fn,keyval,extra_state,ierror)
-!EXTERNAL:: copy_fn
-!EXTERNAL:: delete_fn
-!INTEGER:: keyval
-!EXTERNAL:: extra_state
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Keyval_create
-
 SUBROUTINE MPI_Keyval_free(keyval,ierror)
 INTEGER:: keyval
 INTEGER:: ierror
@@ -823,12 +411,6 @@ CHARACTER(LEN=*):: version
 INTEGER:: resultlen
 INTEGER:: ierror
 END SUBROUTINE MPI_Get_library_version
-
-!SUBROUTINE MPI_Errhandler_create(function,errhandler,ierror)
-!EXTERNAL:: function
-!INTEGER:: errhandler
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Errhandler_create
 
 SUBROUTINE MPI_Errhandler_set(comm,errhandler,ierror)
 INTEGER:: comm
@@ -946,57 +528,10 @@ INTEGER:: info
 INTEGER:: ierror
 END SUBROUTINE MPI_Comm_get_info
 
-!SUBROUTINE MPI_Accumulate(origin_addr,origin_count,origin_datatype,target_rank,target_disp,target_count,target_datatype,op,win,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: op
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Accumulate
-
-!SUBROUTINE MPI_Get(origin_addr,origin_count,origin_datatype,target_rank,target_disp,target_count,target_datatype,win,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Get
-
-!SUBROUTINE MPI_Put(origin_addr,origin_count,origin_datatype,target_rank,target_disp,target_count,target_datatype,win,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Put
-
 SUBROUTINE MPI_Win_complete(win,ierror)
 INTEGER:: win
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_complete
-
-!SUBROUTINE MPI_Win_create(base,size,disp_unit,info,comm,win,ierror)
-!EXTERNAL:: base
-!INTEGER:: size
-!INTEGER:: disp_unit
-!INTEGER:: info
-!INTEGER:: comm
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_create
 
 SUBROUTINE MPI_Win_fence(assert,win,ierror)
 INTEGER:: assert
@@ -1054,54 +589,12 @@ INTEGER:: win
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_wait
 
-!SUBROUTINE MPI_Win_allocate(size,disp_unit,info,comm,baseptr,win,ierror)
-!INTEGER:: size
-!INTEGER:: disp_unit
-!INTEGER:: info
-!INTEGER:: comm
-!EXTERNAL:: baseptr
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_allocate
-!
-!SUBROUTINE MPI_Win_allocate_shared(size,disp_unit,info,comm,baseptr,win,ierror)
-!INTEGER:: size
-!INTEGER:: disp_unit
-!INTEGER:: info
-!INTEGER:: comm
-!EXTERNAL:: baseptr
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_allocate_shared
-!
-!SUBROUTINE MPI_Win_shared_query(win,rank,size,disp_unit,baseptr,ierror)
-!INTEGER:: win
-!INTEGER:: rank
-!INTEGER:: size
-!INTEGER:: disp_unit
-!EXTERNAL:: baseptr
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_shared_query
-
 SUBROUTINE MPI_Win_create_dynamic(info,comm,win,ierror)
 INTEGER:: info
 INTEGER:: comm
 INTEGER:: win
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_create_dynamic
-
-!SUBROUTINE MPI_Win_attach(win,base,size,ierror)
-!INTEGER:: win
-!EXTERNAL:: base
-!INTEGER:: size
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_attach
-!
-!SUBROUTINE MPI_Win_detach(win,base,ierror)
-!INTEGER:: win
-!EXTERNAL:: base
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_detach
 
 SUBROUTINE MPI_Win_get_info(win,info_used,ierror)
 INTEGER:: win
@@ -1114,101 +607,6 @@ INTEGER:: win
 INTEGER:: info
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_set_info
-
-!SUBROUTINE MPI_Get_accumulate(origin_addr,origin_count,origin_datatype,result_addr,result_count,result_datatype,target_rank,target_disp,target_count,target_datatype,op,win,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!EXTERNAL:: result_addr
-!INTEGER:: result_count
-!INTEGER:: result_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: op
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Get_accumulate
-!
-!SUBROUTINE MPI_Fetch_and_op(origin_addr,result_addr,datatype,target_rank,target_disp,op,win,ierror)
-!EXTERNAL:: origin_addr
-!EXTERNAL:: result_addr
-!INTEGER:: datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: op
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Fetch_and_op
-!
-!SUBROUTINE MPI_Compare_and_swap(origin_addr,compare_addr,result_addr,datatype,target_rank,target_disp,win,ierror)
-!EXTERNAL:: origin_addr
-!EXTERNAL:: compare_addr
-!EXTERNAL:: result_addr
-!INTEGER:: datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: win
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Compare_and_swap
-!
-!SUBROUTINE MPI_Rput(origin_addr,origin_count,origin_datatype,target_rank,target_disp,target_count,target_datatype,win,request,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: win
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Rput
-!
-!SUBROUTINE MPI_Rget(origin_addr,origin_count,origin_datatype,target_rank,target_disp,target_count,target_datatype,win,request,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: win
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Rget
-!
-!SUBROUTINE MPI_Raccumulate(origin_addr,origin_count,origin_datatype,target_rank,target_disp,target_count,target_datatype,op,win,request,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: op
-!INTEGER:: win
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Raccumulate
-!
-!SUBROUTINE MPI_Rget_accumulate(origin_addr,origin_count,origin_datatype,result_addr,result_count,result_datatype,target_rank,target_disp,target_count,target_datatype,op,win,request,ierror)
-!EXTERNAL:: origin_addr
-!INTEGER:: origin_count
-!INTEGER:: origin_datatype
-!EXTERNAL:: result_addr
-!INTEGER:: result_count
-!INTEGER:: result_datatype
-!INTEGER:: target_rank
-!INTEGER:: target_disp
-!INTEGER:: target_count
-!INTEGER:: target_datatype
-!INTEGER:: op
-!INTEGER:: win
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Rget_accumulate
 
 SUBROUTINE MPI_Win_lock_all(assert,win,ierror)
 INTEGER:: assert
@@ -1271,14 +669,6 @@ INTEGER:: errorcode
 INTEGER:: ierror
 END SUBROUTINE MPI_Comm_call_errhandler
 
-!SUBROUTINE MPI_Comm_create_keyval(comm_copy_attr_fn,comm_delete_attr_fn,comm_keyval,extra_state,ierror)
-!EXTERNAL:: comm_copy_attr_fn
-!EXTERNAL:: comm_delete_attr_fn
-!INTEGER:: comm_keyval
-!EXTERNAL:: extra_state
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Comm_create_keyval
-
 SUBROUTINE MPI_Comm_delete_attr(comm,comm_keyval,ierror)
 INTEGER:: comm
 INTEGER:: comm_keyval
@@ -1290,27 +680,12 @@ INTEGER:: comm_keyval
 INTEGER:: ierror
 END SUBROUTINE MPI_Comm_free_keyval
 
-!SUBROUTINE MPI_Comm_get_attr(comm,comm_keyval,attribute_val,flag,ierror)
-!INTEGER:: comm
-!INTEGER:: comm_keyval
-!EXTERNAL:: attribute_val
-!INTEGER:: flag
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Comm_get_attr
-
 SUBROUTINE MPI_Comm_get_name(comm,comm_name,resultlen,ierror)
 INTEGER:: comm
 CHARACTER(LEN=*):: comm_name
 INTEGER:: resultlen
 INTEGER:: ierror
 END SUBROUTINE MPI_Comm_get_name
-
-!SUBROUTINE MPI_Comm_set_attr(comm,comm_keyval,attribute_val,ierror)
-!INTEGER:: comm
-!INTEGER:: comm_keyval
-!EXTERNAL:: attribute_val
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Comm_set_attr
 
 SUBROUTINE MPI_Comm_set_name(comm,comm_name,ierror)
 INTEGER:: comm
@@ -1328,15 +703,6 @@ SUBROUTINE MPI_Grequest_complete(request,ierror)
 INTEGER:: request
 INTEGER:: ierror
 END SUBROUTINE MPI_Grequest_complete
-
-!SUBROUTINE MPI_Grequest_start(query_fn,free_fn,cancel_fn,extra_state,request,ierror)
-!EXTERNAL:: query_fn
-!EXTERNAL:: free_fn
-!EXTERNAL:: cancel_fn
-!EXTERNAL:: extra_state
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Grequest_start
 
 SUBROUTINE MPI_Init_thread(required,provided,ierror)
 INTEGER:: required
@@ -1369,14 +735,6 @@ INTEGER:: count
 INTEGER:: ierror
 END SUBROUTINE MPI_Status_set_elements
 
-!SUBROUTINE MPI_Type_create_keyval(type_copy_attr_fn,type_delete_attr_fn,type_keyval,extra_state,ierror)
-!EXTERNAL:: type_copy_attr_fn
-!EXTERNAL:: type_delete_attr_fn
-!INTEGER:: type_keyval
-!EXTERNAL:: extra_state
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Type_create_keyval
-
 SUBROUTINE MPI_Type_delete_attr(datatype,type_keyval,ierror)
 INTEGER:: datatype
 INTEGER:: type_keyval
@@ -1394,14 +752,6 @@ INTEGER:: type_keyval
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_free_keyval
 
-!SUBROUTINE MPI_Type_get_attr(datatype,type_keyval,attribute_val,flag,ierror)
-!INTEGER:: datatype
-!INTEGER:: type_keyval
-!EXTERNAL:: attribute_val
-!INTEGER:: flag
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Type_get_attr
-
 SUBROUTINE MPI_Type_get_envelope(datatype,num_integers,num_addresses,num_datatypes,combiner,ierror)
 INTEGER:: datatype
 INTEGER:: num_integers
@@ -1417,13 +767,6 @@ CHARACTER(LEN=*):: type_name
 INTEGER:: resultlen
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_get_name
-
-!SUBROUTINE MPI_Type_set_attr(datatype,type_keyval,attribute_val,ierror)
-!INTEGER:: datatype
-!INTEGER:: type_keyval
-!EXTERNAL:: attribute_val
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Type_set_attr
 
 SUBROUTINE MPI_Type_set_name(datatype,type_name,ierror)
 INTEGER:: datatype
@@ -1444,14 +787,6 @@ INTEGER:: errorcode
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_call_errhandler
 
-!SUBROUTINE MPI_Win_create_keyval(win_copy_attr_fn,win_delete_attr_fn,win_keyval,extra_state,ierror)
-!EXTERNAL:: win_copy_attr_fn
-!EXTERNAL:: win_delete_attr_fn
-!INTEGER:: win_keyval
-!EXTERNAL:: extra_state
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_create_keyval
-
 SUBROUTINE MPI_Win_delete_attr(win,win_keyval,ierror)
 INTEGER:: win
 INTEGER:: win_keyval
@@ -1463,14 +798,6 @@ INTEGER:: win_keyval
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_free_keyval
 
-!SUBROUTINE MPI_Win_get_attr(win,win_keyval,attribute_val,flag,ierror)
-!INTEGER:: win
-!INTEGER:: win_keyval
-!EXTERNAL:: attribute_val
-!INTEGER:: flag
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_get_attr
-
 SUBROUTINE MPI_Win_get_name(win,win_name,resultlen,ierror)
 INTEGER:: win
 CHARACTER(LEN=*):: win_name
@@ -1478,31 +805,11 @@ INTEGER:: resultlen
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_get_name
 
-!SUBROUTINE MPI_Win_set_attr(win,win_keyval,attribute_val,ierror)
-!INTEGER:: win
-!INTEGER:: win_keyval
-!EXTERNAL:: attribute_val
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_set_attr
-
 SUBROUTINE MPI_Win_set_name(win,win_name,ierror)
 INTEGER:: win
 CHARACTER(LEN=*):: win_name
 INTEGER:: ierror
 END SUBROUTINE MPI_Win_set_name
-
-!SUBROUTINE MPI_Alloc_mem(size,info,baseptr,ierror)
-!INTEGER:: size
-!INTEGER:: info
-!EXTERNAL:: baseptr
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Alloc_mem
-
-!SUBROUTINE MPI_Comm_create_errhandler(comm_errhandler_fn,errhandler,ierror)
-!EXTERNAL:: comm_errhandler_fn
-!INTEGER:: errhandler
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Comm_create_errhandler
 
 SUBROUTINE MPI_Comm_get_errhandler(comm,errhandler,ierror)
 INTEGER:: comm
@@ -1515,12 +822,6 @@ INTEGER:: comm
 INTEGER:: errhandler
 INTEGER:: ierror
 END SUBROUTINE MPI_Comm_set_errhandler
-
-!SUBROUTINE MPI_File_create_errhandler(file_errhandler_fn,errhandler,ierror)
-!EXTERNAL:: file_errhandler_fn
-!INTEGER:: errhandler
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_create_errhandler
 
 SUBROUTINE MPI_File_get_errhandler(file,errhandler,ierror)
 INTEGER:: file
@@ -1538,17 +839,6 @@ SUBROUTINE MPI_Finalized(flag,ierror)
 LOGICAL:: flag
 INTEGER:: ierror
 END SUBROUTINE MPI_Finalized
-
-!SUBROUTINE MPI_Free_mem(base,ierror)
-!EXTERNAL:: base
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Free_mem
-
-!SUBROUTINE MPI_Get_address(location,address,ierror)
-!EXTERNAL:: location
-!INTEGER:: address
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Get_address
 
 SUBROUTINE MPI_Info_create(info,ierror)
 INTEGER:: info
@@ -1615,12 +905,6 @@ INTEGER(KIND=MPI_ADDRESS_KIND):: true_extent
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_get_true_extent
 
-!SUBROUTINE MPI_Win_create_errhandler(win_errhandler_fn,errhandler,ierror)
-!EXTERNAL:: win_errhandler_fn
-!INTEGER:: errhandler
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Win_create_errhandler
-
 SUBROUTINE MPI_Win_get_errhandler(win,errhandler,ierror)
 INTEGER:: win
 INTEGER:: errhandler
@@ -1653,15 +937,6 @@ INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_create_f90_complex
 
-!SUBROUTINE MPI_Reduce_local(inbuf,inoutbuf,count,datatype,op,ierror)
-!EXTERNAL:: inbuf
-!EXTERNAL:: inoutbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Reduce_local
-
 SUBROUTINE MPI_Op_commutative(op,commute,ierror)
 INTEGER:: op
 INTEGER:: commute
@@ -1687,15 +962,6 @@ INTEGER:: status(MPI_STATUS_SIZE)
 INTEGER:: ierror
 END SUBROUTINE MPI_Improbe
 
-!SUBROUTINE MPI_Imrecv(buf,count,datatype,message,request,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: message
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Imrecv
-
 SUBROUTINE MPI_Mprobe(source,tag,comm,message,status,ierror)
 USE MPI_CONSTANTS
 INTEGER:: source
@@ -1705,15 +971,6 @@ INTEGER:: message
 INTEGER:: status(MPI_STATUS_SIZE)
 INTEGER:: ierror
 END SUBROUTINE MPI_Mprobe
-
-!SUBROUTINE MPI_Mrecv(buf,count,datatype,message,status,ierror)
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: message
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Mrecv
 
 SUBROUTINE MPI_Comm_idup(comm,newcomm,request,ierror)
 INTEGER:: comm
@@ -1727,168 +984,6 @@ INTEGER:: comm
 INTEGER:: request
 INTEGER:: ierror
 END SUBROUTINE MPI_Ibarrier
-
-!SUBROUTINE MPI_Ibcast(buffer,count,datatype,root,comm,request,ierror)
-!EXTERNAL:: buffer
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ibcast
-
-!SUBROUTINE MPI_Igather(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,root,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Igather
-
-!SUBROUTINE MPI_Iscatter(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,root,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Iscatter
-
-!SUBROUTINE MPI_Iallgather(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Iallgather
-
-!SUBROUTINE MPI_Ialltoall(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ialltoall
-
-!SUBROUTINE MPI_Ireduce(sendbuf,recvbuf,count,datatype,op,root,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ireduce
-!
-!SUBROUTINE MPI_Iallreduce(sendbuf,recvbuf,count,datatype,op,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Iallreduce
-!
-!SUBROUTINE MPI_Ireduce_scatter_block(sendbuf,recvbuf,recvcount,datatype,op,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ireduce_scatter_block
-!
-!SUBROUTINE MPI_Iscan(sendbuf,recvbuf,count,datatype,op,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Iscan
-!
-!SUBROUTINE MPI_Iexscan(sendbuf,recvbuf,count,datatype,op,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Iexscan
-!
-!SUBROUTINE MPI_Ineighbor_allgather(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ineighbor_allgather
-!
-!SUBROUTINE MPI_Ineighbor_alltoall(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ineighbor_alltoall
-!
-!SUBROUTINE MPI_Neighbor_allgather(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Neighbor_allgather
-!
-!SUBROUTINE MPI_Neighbor_alltoall(sendbuf,sendcount,sendtype,recvbuf,recvcount,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Neighbor_alltoall
 
 SUBROUTINE MPI_Comm_split_type(comm,split_type,key,info,newcomm,ierror)
 INTEGER:: comm
@@ -1996,114 +1091,6 @@ INTEGER:: info_used
 INTEGER:: ierror
 END SUBROUTINE MPI_File_get_info
 
-!SUBROUTINE MPI_File_read_at(fh,offset,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_at
-!
-!SUBROUTINE MPI_File_read_at_all(fh,offset, buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL::  buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_at_all
-!
-!SUBROUTINE MPI_File_write_at(fh,offset, buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL::  buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_at
-!
-!SUBROUTINE MPI_File_write_at_all(fh,offset,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_at_all
-!
-!SUBROUTINE MPI_File_iread_at(fh,offset,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iread_at
-!
-!SUBROUTINE MPI_File_iwrite_at(fh,offset,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iwrite_at
-!
-!SUBROUTINE MPI_File_read(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read
-!
-!SUBROUTINE MPI_File_read_all(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_all
-!
-!SUBROUTINE MPI_File_write(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write
-!
-!SUBROUTINE MPI_File_write_all(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_all
-!
-!SUBROUTINE MPI_File_iread(fh,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iread
-!
-!SUBROUTINE MPI_File_iwrite(fh,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iwrite
-
 SUBROUTINE MPI_File_seek(fh,offset,whence,ierror)
 USE MPI_CONSTANTS 
 INTEGER:: fh
@@ -2126,60 +1113,6 @@ INTEGER(KIND=MPI_OFFSET_KIND):: offset, disp
 INTEGER:: ierror
 END SUBROUTINE MPI_File_get_byte_offset
 
-!SUBROUTINE MPI_File_read_shared(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_shared
-!
-!SUBROUTINE MPI_File_write_shared(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_shared
-!
-!SUBROUTINE MPI_File_iread_shared(fh,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iread_shared
-!
-!SUBROUTINE MPI_File_iwrite_shared(fh,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iwrite_shared
-!
-!SUBROUTINE MPI_File_read_ordered(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_ordered
-!
-!SUBROUTINE MPI_File_write_ordered(fh,buf,count,datatype,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_ordered
-
 SUBROUTINE MPI_File_seek_shared(fh,offset,whence,ierror)
 USE MPI_CONSTANTS 
 INTEGER:: fh
@@ -2195,96 +1128,6 @@ INTEGER(KIND=MPI_OFFSET_KIND):: offset
 INTEGER:: ierror
 END SUBROUTINE MPI_File_get_position_shared
 
-!SUBROUTINE MPI_File_read_at_all_begin(fh,offset,buf,count,datatype,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_at_all_begin
-
-!SUBROUTINE MPI_File_read_at_all_end(fh,buf,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_at_all_end
-!
-!SUBROUTINE MPI_File_write_at_all_begin(fh,offset,buf,count,datatype,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_at_all_begin
-!
-!SUBROUTINE MPI_File_write_at_all_end(fh,buf,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_at_all_end
-!
-!SUBROUTINE MPI_File_read_all_begin(fh,buf,count,datatype,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_all_begin
-!
-!SUBROUTINE MPI_File_read_all_end(fh,buf,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_all_end
-!
-!SUBROUTINE MPI_File_write_all_begin(fh,buf,count,datatype,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_all_begin
-!
-!SUBROUTINE MPI_File_write_all_end(fh,buf,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_all_end
-!
-!SUBROUTINE MPI_File_read_ordered_begin(fh,buf,count,datatype,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_ordered_begin
-!
-!SUBROUTINE MPI_File_read_ordered_end(fh,buf,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_read_ordered_end
-!
-!SUBROUTINE MPI_File_write_ordered_begin(fh,buf,count,datatype,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_ordered_begin
-!
-!SUBROUTINE MPI_File_write_ordered_end(fh,buf,status,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: status
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_write_ordered_end
-
 SUBROUTINE MPI_File_get_type_extent(fh,datatype,extent,ierror)
 USE MPI_CONSTANTS 
 INTEGER:: fh
@@ -2292,15 +1135,6 @@ INTEGER:: datatype
 INTEGER(KIND=MPI_ADDRESS_KIND):: extent
 INTEGER:: ierror
 END SUBROUTINE MPI_File_get_type_extent
-
-!SUBROUTINE MPI_Register_datarep(datarep,read_conversion_fn,write_conversion_fn,dtype_file_extent_fn,extra_state,ierror)
-!CHARACTER:: datarep
-!EXTERNAL:: read_conversion_fn
-!EXTERNAL:: write_conversion_fn
-!EXTERNAL:: dtype_file_extent_fn
-!EXTERNAL:: extra_state
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Register_datarep
 
 SUBROUTINE MPI_File_set_atomicity(fh,flag,ierror)
 INTEGER:: fh
@@ -2392,29 +1226,6 @@ INTEGER:: count
 INTEGER:: array_of_requests(*)
 INTEGER:: ierror
 END SUBROUTINE MPI_Startall
-
-!SUBROUTINE MPI_Alltoallw(sendbuf,sendcounts,sdispls,sendtypes,recvbuf,recvcounts,rdispls,recvtypes,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtypes
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtypes
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Alltoallw
-!
-!SUBROUTINE MPI_Reduce_scatter(sendbuf,recvbuf,recvcounts,datatype,op,comm,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Reduce_scatter
 
 SUBROUTINE MPI_Group_translate_ranks(group1,n,ranks1,group2,ranks2,ierror)
 INTEGER:: group1
@@ -2525,22 +1336,6 @@ INTEGER:: neighbors(*)
 INTEGER:: ierror
 END SUBROUTINE MPI_Graph_neighbors
 
-!SUBROUTINE MPI_Cart_sub(comm,remain_dims,newcomm,ierror)
-!INTEGER:: comm
-!INTEGER:: remain_dims
-!INTEGER:: newcomm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Cart_sub
-
-
- 
-!subroutine MPI_Cart_sub(comm, remain_dims, new_comm, ierror)
-!  integer, intent(in) :: comm
-!  logical, dimension(*), intent(in) :: remain_dims
-!  integer, intent(out) :: new_comm
-!  integer, intent(out) :: ierror
-!end subroutine MPI_Cart_sub 
-
 SUBROUTINE MPI_Cart_map(comm,ndims,dims,periods,newrank,ierror)
 INTEGER:: comm
 INTEGER:: ndims
@@ -2595,16 +1390,6 @@ INTEGER(KIND=MPI_ADDRESS_KIND):: array_of_addresses(*)
 INTEGER:: array_of_datatypes(*)
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_get_contents
-
-!SUBROUTINE MPI_Pack_external(datarep,inbuf,incount,datatype,outbuf,outsize,position,ierror)
-!EXTERNAL:: inbuf
-!INTEGER:: incount
-!INTEGER:: datatype
-!EXTERNAL:: outbuf
-!INTEGER:: outsize
-!INTEGER:: position
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Pack_external
 
 SUBROUTINE MPI_Pack_external_size(datarep,incount,datatype,size,ierror)
 USE MPI_CONSTANTS 
@@ -2680,16 +1465,6 @@ INTEGER:: newtype
 INTEGER:: ierror
 END SUBROUTINE MPI_Type_create_subarray
 
-!SUBROUTINE MPI_Unpack_external(datarep,inbuf,insize,position,outbuf,outcount,datatype,ierror)
-!EXTERNAL:: inbuf
-!INTEGER:: insize
-!INTEGER:: position
-!EXTERNAL:: outbuf
-!INTEGER:: outcount
-!INTEGER:: datatype
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Unpack_external
-
 SUBROUTINE MPI_Dist_graph_create_adjacent(comm_old,indegree,sources,sourceweights,outdegree,destinations,destweights,info,reorder,comm_dist_graph,ierror)
 INTEGER:: comm_old
 INTEGER:: indegree
@@ -2728,183 +1503,6 @@ INTEGER:: destweights(*)
 INTEGER:: ierror
 END SUBROUTINE MPI_Dist_graph_neighbors
 
-!SUBROUTINE MPI_Igatherv(sendbuf,sendcount,sendtype,recvbuf,recvcounts,displs,recvtype,root,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: displs
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Igatherv
-!
-!SUBROUTINE MPI_Iscatterv(sendbuf,sendcounts,displs,sendtype,recvbuf,recvcount,recvtype,root,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: displs
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcount
-!INTEGER:: recvtype
-!INTEGER:: root
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Iscatterv
-!
-!SUBROUTINE MPI_Iallgatherv(sendbuf,sendcount,sendtype,recvbuf,recvcounts,displs,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: displs
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Iallgatherv
-!
-!SUBROUTINE MPI_Ialltoallv(sendbuf,sendcounts,sdispls,sendtype,recvbuf,recvcounts,rdispls,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ialltoallv
-!
-!SUBROUTINE MPI_Ialltoallw(sendbuf,sendcounts,sdispls,sendtypes,recvbuf,recvcounts,rdispls,recvtypes,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtypes(*)
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtypes(*)
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ialltoallw
-!
-!SUBROUTINE MPI_Ireduce_scatter(sendbuf,recvbuf,recvcounts,datatype,op,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: datatype
-!INTEGER:: op
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ireduce_scatter
-!
-!SUBROUTINE MPI_Ineighbor_allgatherv(sendbuf,sendcount,sendtype,recvbuf,recvcounts,displs,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: displs
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ineighbor_allgatherv
-!
-!SUBROUTINE MPI_Ineighbor_alltoallv(sendbuf,sendcounts,sdispls,sendtype,recvbuf,recvcounts,rdispls,recvtype,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ineighbor_alltoallv
-!
-!SUBROUTINE MPI_Ineighbor_alltoallw(sendbuf,sendcounts,sdispls,sendtypes,recvbuf,recvcounts,rdispls,recvtypes,comm,request,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtypes
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtypes
-!INTEGER:: comm
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Ineighbor_alltoallw
-!
-!SUBROUTINE MPI_Neighbor_allgatherv(sendbuf,sendcount,sendtype,recvbuf,recvcounts,displs,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcount
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: displs
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Neighbor_allgatherv
-!
-!SUBROUTINE MPI_Neighbor_alltoallv(sendbuf,sendcounts,sdispls,sendtype,recvbuf,recvcounts,rdispls,recvtype,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtype
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtype
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Neighbor_alltoallv
-!
-!SUBROUTINE MPI_Neighbor_alltoallw(sendbuf,sendcounts,sdispls,sendtypes,recvbuf,recvcounts,rdispls,recvtypes,comm,ierror)
-!EXTERNAL:: sendbuf
-!INTEGER:: sendcounts
-!INTEGER:: sdispls
-!INTEGER:: sendtypes(*)
-!EXTERNAL:: recvbuf
-!INTEGER:: recvcounts
-!INTEGER:: rdispls
-!INTEGER:: recvtypes(*)
-!INTEGER:: comm
-!INTEGER:: ierror
-!END SUBROUTINE MPI_Neighbor_alltoallw
-!
-!SUBROUTINE MPI_File_iwrite_all(fh,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iwrite_all
-!
-!SUBROUTINE MPI_File_iwrite_at_all(fh,offset,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iwrite_at_all
-
 FUNCTION MPI_Aint_add(base,disp,ierror)
 USE MPI_CONSTANTS
 INTEGER(KIND=MPI_ADDRESS_KIND):: MPI_Aint_add
@@ -2920,15 +1518,6 @@ INTEGER(KIND=MPI_ADDRESS_KIND):: addr1
 INTEGER(KIND=MPI_ADDRESS_KIND):: addr2
 INTEGER:: ierror
 END FUNCTION MPI_Aint_diff
-
-!SUBROUTINE MPI_File_iread_all(fh,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iread_all
 
 SUBROUTINE MPI_Error_string(errorcode,string,resultlen,ierror)
 INTEGER:: errorcode
@@ -3016,14 +1605,5 @@ CHARACTER(len=*):: value
 INTEGER:: ierror
 END SUBROUTINE MPI_Info_set
 
-!SUBROUTINE MPI_File_iread_at_all(fh,offset,buf,count,datatype,request,ierror)
-!INTEGER:: fh
-!EXTERNAL:: buf
-!INTEGER:: count
-!INTEGER:: datatype
-!INTEGER:: request
-!INTEGER:: ierror
-!END SUBROUTINE MPI_File_iread_at_all
 END INTERFACE
 END MODULE MPI_BASE
-!Nombre de fonction ajoutee: 363

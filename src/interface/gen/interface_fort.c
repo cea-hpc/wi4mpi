@@ -21,7 +21,7 @@
 //#                                                                      #
 //########################################################################
 /*
- * This code is full generated
+ * This code is fully generated
  */
 #include <stdlib.h>
 #define _GNU_SOURCE
