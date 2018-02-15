@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <dlfcn.h>
 /*ompi constante*/
+int WI4MPI_errhandler_key;
 #if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 char ompi_mpi_comm_null[1024];
 char ompi_mpi_comm_self[1024];

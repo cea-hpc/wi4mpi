@@ -63,8 +63,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     string=string+'#include <stdio.h>'+'\n'
     string=string+'#include <dlfcn.h>'+'\n'
     string=string+"/*ompi constante*/"+'\n'
-    if not wrapper:
-        string=string+'int WI4MPI_errhandler_key;\n'
+    string=string+'int WI4MPI_errhandler_key;\n'
     if not wrapper:
         string=string+ '#if defined(OMPI_OMPI) || defined(_OMPI)'+'\n'
         for i in ompi_const:
