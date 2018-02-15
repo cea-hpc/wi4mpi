@@ -206,7 +206,9 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
             str_interface_api_fige_fortran = fh.read()
         string=string+str_interface_api_fige_fortran
     else:
-        pass#string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
+        with open(root+'/API_FIGEE/preload_api_fige_fortran.c', 'r') as fh:
+            str_preload_api_fige_fortran = fh.read()
+        string=string+str_preload_api_fige_fortran
     for i in data_f:
         for j in def_list_f:
             if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
