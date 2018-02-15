@@ -172,8 +172,8 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
         string=string+'extern myKeyval_functions_t *myKeyval_translation_get(int);\n'
         string=string+'extern void myKeyval_translation_del(int);\n'
         string=string+'extern void myKeyval_translation_add(int,myKeyval_functions_t *);\n'
-        string=string+'#ifdef OMPI_INTEL\n'
-        string=string+'int *MPI_UNWEIGHTED = NULL;\n'
+        string=string+'#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
+        string=string+'int *MPI_UNWEIGHTED=NULL;\n'
         string=string+'#endif\n'
     string=string+'extern __thread int in_w;'+'\n'
     for i in data_f:
@@ -203,20 +203,21 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
                     string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
                     string=string+object_gen.generate_func_f(i)+'\n'
     if not wrapper:
-        string=string+'#ifdef WI4MPI_STATIC\n#define WATTR\n#else\n#define WATTR __attribute__((constructor))\n#endif\n'
-        string=string+'WATTR void wrapper_init_f(void) {\n'
-        string=string+'dlopen(getenv(\"WI4MPI_RUN_MPI_LIB\"), RTLD_NOW | RTLD_GLOBAL);\n'
-        string=string+'void *lib_handle_f=dlopen(getenv(\"WI4MPI_RUN_MPI_F_LIB\"),RTLD_NOW|RTLD_GLOBAL);\n'
-        string=string+'if (!lib_handle_f) {\n\tprintf("%s not loaded \\nerror : %s\\n", getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());\n\texit(1);\n}'
+        with open(root+'/API_FIGEE/interface_api_fige_fortran.c', 'r') as fh:
+            str_interface_api_fige_fortran = fh.read()
+        string=string+str_interface_api_fige_fortran
     else:
-        string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
+        pass#string=string+'__attribute__((constructor)) void wrapper_init_f(void) {\n'
     for i in data_f:
         for j in def_list_f:
             if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
                 if wrapper:
                     string=string+object_gen.load_symbol(i,'RTLD_NEXT')+'\n'
                 else:
-                    string=string+object_gen.load_symbol(i,'lib_handle_f')+'\n'
+                    if 'MPI_File' in i['name']:
+                        string=string+object_gen.load_symbol(i,'lib_handle_io_f')+'\n'
+                    else:
+                        string=string+object_gen.load_symbol(i,'lib_handle_f')+'\n'
     if wrapper:
         string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'RTLD_NEXT')+'\n'
         string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'RTLD_NEXT')+'\n'
@@ -249,10 +250,10 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
     else:
         string=string+object_gen.load_symbol({'name':'MPI_Error_string'},'lib_handle_f')+'\n'
         string=string+object_gen.load_symbol({'name':'MPI_Get_processor_name'},'lib_handle_f')+'\n'
-        string=string+object_gen.load_symbol({'name':'MPI_File_open'},'lib_handle_f')+'\n'
-        string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'lib_handle_f')+'\n'
-        string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'lib_handle_f')+'\n'
-        string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'lib_handle_f')+'\n'
+        string=string+object_gen.load_symbol({'name':'MPI_File_open'},'lib_handle_io_f')+'\n'
+        string=string+object_gen.load_symbol({'name':'MPI_File_set_view'},'lib_handle_io_f')+'\n'
+        string=string+object_gen.load_symbol({'name':'MPI_File_get_view'},'lib_handle_io_f')+'\n'
+        string=string+object_gen.load_symbol({'name':'MPI_File_delete'},'lib_handle_io_f')+'\n'
         string=string+object_gen.load_symbol({'name':'MPI_Info_delete'},'lib_handle_f')+'\n'
         string=string+object_gen.load_symbol({'name':'MPI_Info_get'},'lib_handle_f')+'\n'
         string=string+object_gen.load_symbol({'name':'MPI_Info_get_nthkey'},'lib_handle_f')+'\n'
@@ -276,7 +277,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
         string=string+object_gen.load_symbol({'name':'MPI_Pack_external_size'},'lib_handle_f')+'\n'
         string=string+object_gen.load_symbol({'name':'MPI_Unpack_external'},'lib_handle_f')+'\n'
 
-        string=string+'#ifdef ompi_ompi\n'
+        string=string+'#if defined(OMPI_OMPI) || defined(_OMPI)\n'
         string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpi_fortran_bottom_");'+'\n'
         string=string+'ccc_mpi_fortran_in_place_=dlsym(lib_handle_f,"mpi_fortran_in_place_");'+'\n'
         string=string+'ccc_mpi_fortran_argv_null_=dlsym(lib_handle_f,"mpi_fortran_argv_null_");'+'\n'
@@ -287,7 +288,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
         string=string+'ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpi_fortran_unweighted_");'+'\n'
         string=string+'ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");'+'\n'
         string=string+'#endif\n'
-        string=string+'#ifdef ompi_mpich\n'
+        string=string+'#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
         string=string+'ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");'+'\n'
         string=string+'ccc_mpi_fortran_in_place_=((int *)dlsym(lib_handle_f,"mpipriv1_")+1);'+'\n'
         string=string+'ccc_mpi_fortran_argv_null_=((int*)dlsym(lib_handle_f,"mpiprivc_")+1);'+'\n'
