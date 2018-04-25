@@ -21,7 +21,7 @@
 //#                                                                      #
 //########################################################################
 /*
- * This code is full generated
+ * This code is fully generated
  */
 #include <stdlib.h>
 #define _GNU_SOURCE
@@ -43,6 +43,15 @@ void *mpi_type_dup_fn_=NULL;
 void *mpi_win_null_copy_fn_=NULL;
 /*ompi constante*/
 
+int mpi_fortran_bottom_;
+int mpi_fortran_in_place_;
+int mpi_fortran_argv_null_;
+int mpi_fortran_argvs_null_;
+int mpi_fortran_errcodes_ignore_;
+int mpi_fortran_status_ignore_;
+int mpi_fortran_statuses_ignore_;
+int mpi_fortran_unweighted_;
+int mpi_fortran_weights_empty_;
 char wi4mpi_mode_f[]="";
 
 void  mpi_pcontrol_(int * level,int * ret);

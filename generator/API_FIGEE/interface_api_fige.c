@@ -46,7 +46,7 @@ printf("sort : A_MPI_Pcontrol\n");
 //return error_code_conv_r2a(ret_tmp);
 return A_MPI_SUCCESS;
 }
-int R_MPI_Pcontrol(int level, ...)
+int R_MPI_Pcontrol(int level,...)
 {
 #ifdef DEBUG
 printf("entre : R_MPI_Pcontrol\n");
@@ -967,7 +967,7 @@ printf("sort : R_MPI_T_pvar_handle_free\n");
 return ret_tmp;
 }
 
-#if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+#if defined(INTEL_OMPI) || defined(OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 /*__asm__(
@@ -1085,7 +1085,7 @@ printf("sort : R_MPI_Errhandler_c2f\n");
 #endif
 return ret;
 }*/
-#elif defined(OMPI_INTEL)
+#elif defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 /*__asm__(
@@ -1205,9 +1205,20 @@ return op;
 }*/
 #endif
 
-__attribute__((constructor)) void wrapper_init(void) {
+void init_global(void *);
+void init_f2c(void *);
+void wrapper_init_f(void);
+
+#ifdef WI4MPI_STATIC
+#define WATTR
+#else
+#define WATTR __attribute__((constructor)) 
+#endif
+
+WATTR void wrapper_init(void) {
 void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
-#if defined(INTEL_OMPI) || defined (OMPI_OMPI)
+void *lib_handle_io=dlopen(getenv("WI4MPI_RUN_MPIIO_LIB"),RTLD_NOW|RTLD_GLOBAL);
+#if defined(INTEL_OMPI) || defined (OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
 #endif
@@ -1216,8 +1227,8 @@ LOCAL_MPI_Pcontrol=dlsym(lib_handle,"PMPI_Pcontrol");
 LOCAL_MPI_Win_create_errhandler=dlsym(lib_handle,"PMPI_Win_create_errhandler");
 LOCAL_MPI_Win_call_errhandler=dlsym(lib_handle,"PMPI_Win_call_errhandler");
 LOCAL_MPI_Win_set_errhandler=dlsym(lib_handle,"PMPI_Win_set_errhandler");
-LOCAL_MPI_File_call_errhandler=dlsym(lib_handle,"PMPI_File_call_errhandler");
-LOCAL_MPI_File_create_errhandler=dlsym(lib_handle,"PMPI_File_create_errhandler");
+LOCAL_MPI_File_call_errhandler=dlsym(lib_handle_io,"PMPI_File_call_errhandler");
+LOCAL_MPI_File_create_errhandler=dlsym(lib_handle_io,"PMPI_File_create_errhandler");
 LOCAL_MPI_T_pvar_read=dlsym(lib_handle,"PMPI_T_pvar_read");
 LOCAL_MPI_T_pvar_readreset=dlsym(lib_handle,"PMPI_T_pvar_readreset");
 LOCAL_MPI_T_pvar_reset=dlsym(lib_handle,"PMPI_T_pvar_reset");
@@ -1229,4 +1240,3 @@ LOCAL_MPI_T_pvar_write=dlsym(lib_handle,"PMPI_T_pvar_write");
 LOCAL_MPI_T_pvar_handle_alloc=dlsym(lib_handle,"PMPI_T_pvar_handle_alloc");
 LOCAL_MPI_T_pvar_handle_free=dlsym(lib_handle,"PMPI_T_pvar_handle_free");
 /* --- */
-}

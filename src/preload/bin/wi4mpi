@@ -108,14 +108,12 @@ if [[ -z $FROM ]]; then
 		WI4MPI_FAMILY=${WI4MPI_MPC}
 		WI4MPI_RUN_MPI_C_LIB="$MPC_ROOT/lib/libmpc_framework.so"
 		WI4MPI_RUN_MPI_F_LIB="$MPC_ROOT/lib/libmpc_frameworkf.so"
-        WI4MPI_MPC_ROMIO_LIB="$MPC_ROOT/lib/libromio.so"
+        WI4MPI_MPIIO_LIB="$MPC_ROOT/lib/libromio.so"
         WI4MPI_MPC_HOOK_MAIN_LIB="$MPC_ROOT/lib/libmpc_hookmain.so"
 	    WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
         LD_PRELOAD="${WI4MPI_WRAPPER_LIB} ${WI4MPI_INTERFACE}/libmpi.so ${WI4MPI_RUN_MPI_C_LIB} ${WI4MPI_MPC_HOOK_MAIN_LIB}"
 	    [[ -n "$VERBOSE" ]] && echo $WI4MPI_MPC_HOOK_MAIN_LIB && echo $LD_PRELOAD
 	    [[ ! -e ${WI4MPI_MPC_HOOK_MAIN_LIB} ]] && { echo "Error: could not find the HOOK_MAIN library for MPC support." >&2 ; exit 1; }
-	    [[ ! -e ${WI4MPI_MPC_ROMIO_LIB} ]] && { echo "Error: could not find the ROMIO library for MPC support." >&2 ; exit 1; }
-        export WI4MPI_MPC_ROMIO_LIB
         export WI4MPI_MPC_HOOK_MAIN_LIB
         export LD_PRELOAD
 		;;
@@ -124,6 +122,7 @@ if [[ -z $FROM ]]; then
 	WI4MPI_FROM="INTERFACE"
 	WI4MPI_TO=${TARGET_FAMILY}
 	WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
+    WI4MPI_MPIIO_LIB="${WI4MPI_MPIIO_LIB:-$WI4MPI_RUN_MPI_C_LIB}"
 	LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
 	if [[ -n "$VERBOSE" ]]; then
 		echo ${WI4MPI_WRAPPER_LIB}
@@ -135,12 +134,14 @@ if [[ -z $FROM ]]; then
 	[[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
 	[[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
 	[[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+	[[ ! -e ${WI4MPI_MPIIO_LIB} ]] && { echo "Error: could not find the MPI-IO target mpi library." >&2 ; exit 1; }
     export LD_LIBRARY_PATH
 	export WI4MPI_FROM
 	export WI4MPI_TO
 	export WI4MPI_WRAPPER_LIB
 	export WI4MPI_RUN_MPI_C_LIB
 	export WI4MPI_RUN_MPI_F_LIB
+    export WI4MPI_MPIIO_LIB
 #PRELOAD	
 else
 	if [[ -n "$VERBOSE" ]]; then

@@ -1,4 +1,4 @@
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL)
+#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state,
                          void *attribute_val_in, void *attribute_val_out,
                          int *flag);

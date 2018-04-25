@@ -21,20 +21,20 @@
 //#                                                                      #
 //########################################################################
 /*
- * This code is full generated
+ * This code is fully generated
  */
+#include "mappers.h"
+#include "run_mpi.h"
  #include <stdlib.h>
  #include <stdio.h>
 #include <dlfcn.h>
-#include "run_mpi.h"
 #include "wrapper_f.h"
-#include "mappers.h"
-typedef void (A_F_MPI_Copy_function) (int *,int *,void*,void *,void *,int *,int *) ;
+typedef void (A_F_MPI_Copy_function) (int *,int *,void*,void *,void *,int *,int *);
 typedef void (A_F_MPI_Delete_function) (int *,int *,void*,void *,int *);
 typedef struct {
-    A_F_MPI_Copy_function* cp_function;
-    A_F_MPI_Delete_function* del_function;
-    int ref;
+	A_F_MPI_Copy_function* cp_function;
+	A_F_MPI_Delete_function* del_function;
+	int ref;
 } myKeyval_functions_t;
 extern myKeyval_functions_t *myKeyval_translation_get(int);
 extern void myKeyval_translation_del(int);
@@ -53,7 +53,6 @@ void  pmpi_send__(void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_send_(void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Send _PMPI_Send
 void  (*_LOCAL_MPI_Send)(void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Send(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * ret)
@@ -92,7 +91,6 @@ void  pmpi_recv__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_recv_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Recv _PMPI_Recv
 void  (*_LOCAL_MPI_Recv)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Recv(void * buf,int * count,int * datatype,int * source,int * tag,int * comm,int * status,int * ret)
@@ -136,7 +134,6 @@ void  pmpi_get_count__(int *,int *,int *,int *);
 
 void  pmpi_get_count_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Get_count _PMPI_Get_count
 void  (*_LOCAL_MPI_Get_count)(int *,int *,int *,int *);
 
 void  A_f_MPI_Get_count(int * status,int * datatype,int * count,int * ret)
@@ -170,7 +167,6 @@ void  pmpi_bsend__(void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_bsend_(void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Bsend _PMPI_Bsend
 void  (*_LOCAL_MPI_Bsend)(void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Bsend(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * ret)
@@ -209,7 +205,6 @@ void  pmpi_ssend__(void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_ssend_(void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ssend _PMPI_Ssend
 void  (*_LOCAL_MPI_Ssend)(void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ssend(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * ret)
@@ -248,7 +243,6 @@ void  pmpi_rsend__(void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_rsend_(void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Rsend _PMPI_Rsend
 void  (*_LOCAL_MPI_Rsend)(void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Rsend(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * ret)
@@ -287,7 +281,6 @@ void  pmpi_buffer_attach__(void *,int *,int *);
 
 void  pmpi_buffer_attach_(void *,int *,int *);
 
-//#define A_f_MPI_Buffer_attach _PMPI_Buffer_attach
 void  (*_LOCAL_MPI_Buffer_attach)(void *,int *,int *);
 
 void  A_f_MPI_Buffer_attach(void * buffer,int * size,int * ret)
@@ -318,7 +311,6 @@ void  pmpi_buffer_detach__(void *,int *,int *);
 
 void  pmpi_buffer_detach_(void *,int *,int *);
 
-//#define A_f_MPI_Buffer_detach _PMPI_Buffer_detach
 void  (*_LOCAL_MPI_Buffer_detach)(void *,int *,int *);
 
 void  A_f_MPI_Buffer_detach(void * buffer_addr,int * size,int * ret)
@@ -349,7 +341,6 @@ void  pmpi_isend__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_isend_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Isend _PMPI_Isend
 void  (*_LOCAL_MPI_Isend)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Isend(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -390,7 +381,6 @@ void  pmpi_ibsend__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_ibsend_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ibsend _PMPI_Ibsend
 void  (*_LOCAL_MPI_Ibsend)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ibsend(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -431,7 +421,6 @@ void  pmpi_issend__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_issend_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Issend _PMPI_Issend
 void  (*_LOCAL_MPI_Issend)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Issend(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -472,7 +461,6 @@ void  pmpi_irsend__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_irsend_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Irsend _PMPI_Irsend
 void  (*_LOCAL_MPI_Irsend)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Irsend(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -513,7 +501,6 @@ void  pmpi_irecv__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_irecv_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Irecv _PMPI_Irecv
 void  (*_LOCAL_MPI_Irecv)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Irecv(void * buf,int * count,int * datatype,int * source,int * tag,int * comm,int * request,int * ret)
@@ -554,7 +541,6 @@ void  pmpi_wait__(int *,int *,int *);
 
 void  pmpi_wait_(int *,int *,int *);
 
-//#define A_f_MPI_Wait _PMPI_Wait
 void  (*_LOCAL_MPI_Wait)(int *,int *,int *);
 
 void  A_f_MPI_Wait(int * request,int * status,int * ret)
@@ -590,7 +576,6 @@ void  pmpi_test__(int *,int *,int *,int *);
 
 void  pmpi_test_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Test _PMPI_Test
 void  (*_LOCAL_MPI_Test)(int *,int *,int *,int *);
 
 void  A_f_MPI_Test(int * request,int * flag,int * status,int * ret)
@@ -626,7 +611,6 @@ void  pmpi_request_free__(int *,int *);
 
 void  pmpi_request_free_(int *,int *);
 
-//#define A_f_MPI_Request_free _PMPI_Request_free
 void  (*_LOCAL_MPI_Request_free)(int *,int *);
 
 void  A_f_MPI_Request_free(int * request,int * ret)
@@ -658,7 +642,6 @@ void  pmpi_iprobe__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_iprobe_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iprobe _PMPI_Iprobe
 void  (*_LOCAL_MPI_Iprobe)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iprobe(int * source,int * tag,int * comm,int * flag,int * status,int * ret)
@@ -697,7 +680,6 @@ void  pmpi_probe__(int *,int *,int *,int *,int *);
 
 void  pmpi_probe_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Probe _PMPI_Probe
 void  (*_LOCAL_MPI_Probe)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Probe(int * source,int * tag,int * comm,int * status,int * ret)
@@ -736,7 +718,6 @@ void  pmpi_cancel__(int *,int *);
 
 void  pmpi_cancel_(int *,int *);
 
-//#define A_f_MPI_Cancel _PMPI_Cancel
 void  (*_LOCAL_MPI_Cancel)(int *,int *);
 
 void  A_f_MPI_Cancel(int * request,int * ret)
@@ -767,7 +748,6 @@ void  pmpi_test_cancelled__(int *,int *,int *);
 
 void  pmpi_test_cancelled_(int *,int *,int *);
 
-//#define A_f_MPI_Test_cancelled _PMPI_Test_cancelled
 void  (*_LOCAL_MPI_Test_cancelled)(int *,int *,int *);
 
 void  A_f_MPI_Test_cancelled(int * status,int * flag,int * ret)
@@ -799,7 +779,6 @@ void  pmpi_send_init__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_send_init_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Send_init _PMPI_Send_init
 void  (*_LOCAL_MPI_Send_init)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Send_init(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -840,7 +819,6 @@ void  pmpi_bsend_init__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_bsend_init_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Bsend_init _PMPI_Bsend_init
 void  (*_LOCAL_MPI_Bsend_init)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Bsend_init(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -881,7 +859,6 @@ void  pmpi_ssend_init__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_ssend_init_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ssend_init _PMPI_Ssend_init
 void  (*_LOCAL_MPI_Ssend_init)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ssend_init(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -922,7 +899,6 @@ void  pmpi_rsend_init__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_rsend_init_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Rsend_init _PMPI_Rsend_init
 void  (*_LOCAL_MPI_Rsend_init)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Rsend_init(void * buf,int * count,int * datatype,int * dest,int * tag,int * comm,int * request,int * ret)
@@ -963,7 +939,6 @@ void  pmpi_recv_init__(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_recv_init_(void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Recv_init _PMPI_Recv_init
 void  (*_LOCAL_MPI_Recv_init)(void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Recv_init(void * buf,int * count,int * datatype,int * source,int * tag,int * comm,int * request,int * ret)
@@ -1004,7 +979,6 @@ void  pmpi_start__(int *,int *);
 
 void  pmpi_start_(int *,int *);
 
-//#define A_f_MPI_Start _PMPI_Start
 void  (*_LOCAL_MPI_Start)(int *,int *);
 
 void  A_f_MPI_Start(int * request,int * ret)
@@ -1036,7 +1010,6 @@ void  pmpi_sendrecv__(void *,int *,int *,int *,int *,void *,int *,int *,int *,in
 
 void  pmpi_sendrecv_(void *,int *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Sendrecv _PMPI_Sendrecv
 void  (*_LOCAL_MPI_Sendrecv)(void *,int *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Sendrecv(void * sendbuf,int * sendcount,int * sendtype,int * dest,int * sendtag,void * recvbuf,int * recvcount,int * recvtype,int * source,int * recvtag,int * comm,int * status,int * ret)
@@ -1087,7 +1060,6 @@ void  pmpi_sendrecv_replace__(void *,int *,int *,int *,int *,int *,int *,int *,i
 
 void  pmpi_sendrecv_replace_(void *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Sendrecv_replace _PMPI_Sendrecv_replace
 void  (*_LOCAL_MPI_Sendrecv_replace)(void *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Sendrecv_replace(void * buf,int * count,int * datatype,int * dest,int * sendtag,int * source,int * recvtag,int * comm,int * status,int * ret)
@@ -1135,7 +1107,6 @@ void  pmpi_type_contiguous__(int *,int *,int *,int *);
 
 void  pmpi_type_contiguous_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_contiguous _PMPI_Type_contiguous
 void  (*_LOCAL_MPI_Type_contiguous)(int *,int *,int *,int *);
 
 void  A_f_MPI_Type_contiguous(int * count,int * oldtype,int * newtype,int * ret)
@@ -1168,7 +1139,6 @@ void  pmpi_type_vector__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_type_vector_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_vector _PMPI_Type_vector
 void  (*_LOCAL_MPI_Type_vector)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Type_vector(int * count,int * blocklength,int * stride,int * oldtype,int * newtype,int * ret)
@@ -1201,7 +1171,6 @@ void  pmpi_type_hvector__(int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_type_hvector_(int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Type_hvector _PMPI_Type_hvector
 void  (*_LOCAL_MPI_Type_hvector)(int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Type_hvector(int * count,int * blocklength,size_t * stride,int * oldtype,int * newtype,int * ret)
@@ -1234,7 +1203,6 @@ void  pmpi_type_indexed__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_type_indexed_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_indexed _PMPI_Type_indexed
 void  (*_LOCAL_MPI_Type_indexed)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Type_indexed(int * count,int * array_of_blocklengths,int * array_of_displacements,int * oldtype,int * newtype,int * ret)
@@ -1267,7 +1235,6 @@ void  pmpi_type_hindexed__(int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_type_hindexed_(int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Type_hindexed _PMPI_Type_hindexed
 void  (*_LOCAL_MPI_Type_hindexed)(int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Type_hindexed(int * count,int * array_of_blocklengths,size_t * array_of_displacements,int * oldtype,int * newtype,int * ret)
@@ -1300,7 +1267,6 @@ void  pmpi_type_struct__(int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_type_struct_(int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Type_struct _PMPI_Type_struct
 void  (*_LOCAL_MPI_Type_struct)(int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Type_struct(int * count,int * array_of_blocklengths,size_t * array_of_displacements,int * array_of_types,int * newtype,int * ret)
@@ -1335,7 +1301,6 @@ void  pmpi_address__(void *,size_t *,int *);
 
 void  pmpi_address_(void *,size_t *,int *);
 
-//#define A_f_MPI_Address _PMPI_Address
 void  (*_LOCAL_MPI_Address)(void *,size_t *,int *);
 
 void  A_f_MPI_Address(void * location,size_t * address,int * ret)
@@ -1366,7 +1331,6 @@ void  pmpi_type_extent__(int *,size_t *,int *);
 
 void  pmpi_type_extent_(int *,size_t *,int *);
 
-//#define A_f_MPI_Type_extent _PMPI_Type_extent
 void  (*_LOCAL_MPI_Type_extent)(int *,size_t *,int *);
 
 void  A_f_MPI_Type_extent(int * datatype,size_t * extent,int * ret)
@@ -1397,7 +1361,6 @@ void  pmpi_type_size__(int *,int *,int *);
 
 void  pmpi_type_size_(int *,int *,int *);
 
-//#define A_f_MPI_Type_size _PMPI_Type_size
 void  (*_LOCAL_MPI_Type_size)(int *,int *,int *);
 
 void  A_f_MPI_Type_size(int * datatype,int * size,int * ret)
@@ -1428,7 +1391,6 @@ void  pmpi_type_lb__(int *,size_t *,int *);
 
 void  pmpi_type_lb_(int *,size_t *,int *);
 
-//#define A_f_MPI_Type_lb _PMPI_Type_lb
 void  (*_LOCAL_MPI_Type_lb)(int *,size_t *,int *);
 
 void  A_f_MPI_Type_lb(int * datatype,size_t * displacement,int * ret)
@@ -1459,7 +1421,6 @@ void  pmpi_type_ub__(int *,size_t *,int *);
 
 void  pmpi_type_ub_(int *,size_t *,int *);
 
-//#define A_f_MPI_Type_ub _PMPI_Type_ub
 void  (*_LOCAL_MPI_Type_ub)(int *,size_t *,int *);
 
 void  A_f_MPI_Type_ub(int * datatype,size_t * displacement,int * ret)
@@ -1490,7 +1451,6 @@ void  pmpi_type_commit__(int *,int *);
 
 void  pmpi_type_commit_(int *,int *);
 
-//#define A_f_MPI_Type_commit _PMPI_Type_commit
 void  (*_LOCAL_MPI_Type_commit)(int *,int *);
 
 void  A_f_MPI_Type_commit(int * datatype,int * ret)
@@ -1521,7 +1481,6 @@ void  pmpi_type_free__(int *,int *);
 
 void  pmpi_type_free_(int *,int *);
 
-//#define A_f_MPI_Type_free _PMPI_Type_free
 void  (*_LOCAL_MPI_Type_free)(int *,int *);
 
 void  A_f_MPI_Type_free(int * datatype,int * ret)
@@ -1553,7 +1512,6 @@ void  pmpi_get_elements__(int *,int *,int *,int *);
 
 void  pmpi_get_elements_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Get_elements _PMPI_Get_elements
 void  (*_LOCAL_MPI_Get_elements)(int *,int *,int *,int *);
 
 void  A_f_MPI_Get_elements(int * status,int * datatype,int * count,int * ret)
@@ -1587,7 +1545,6 @@ void  pmpi_pack__(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  pmpi_pack_(void *,int *,int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Pack _PMPI_Pack
 void  (*_LOCAL_MPI_Pack)(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_Pack(void * inbuf,int * incount,int * datatype,void * outbuf,int * outsize,int * position,int * comm,int * ret)
@@ -1624,7 +1581,6 @@ void  pmpi_unpack__(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  pmpi_unpack_(void *,int *,int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Unpack _PMPI_Unpack
 void  (*_LOCAL_MPI_Unpack)(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_Unpack(void * inbuf,int * insize,int * position,void * outbuf,int * outcount,int * datatype,int * comm,int * ret)
@@ -1661,7 +1617,6 @@ void  pmpi_pack_size__(int *,int *,int *,int *,int *);
 
 void  pmpi_pack_size_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Pack_size _PMPI_Pack_size
 void  (*_LOCAL_MPI_Pack_size)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Pack_size(int * incount,int * datatype,int * comm,int * size,int * ret)
@@ -1694,7 +1649,6 @@ void  pmpi_barrier__(int *,int *);
 
 void  pmpi_barrier_(int *,int *);
 
-//#define A_f_MPI_Barrier _PMPI_Barrier
 void  (*_LOCAL_MPI_Barrier)(int *,int *);
 
 void  A_f_MPI_Barrier(int * comm,int * ret)
@@ -1725,7 +1679,6 @@ void  pmpi_bcast__(void *,int *,int *,int *,int *,int *);
 
 void  pmpi_bcast_(void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Bcast _PMPI_Bcast
 void  (*_LOCAL_MPI_Bcast)(void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Bcast(void * buffer,int * count,int * datatype,int * root,int * comm,int * ret)
@@ -1761,7 +1714,6 @@ void  pmpi_gather__(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_gather_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Gather _PMPI_Gather
 void  (*_LOCAL_MPI_Gather)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Gather(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * root,int * comm,int * ret)
@@ -1801,7 +1753,6 @@ void  pmpi_gatherv__(void *,int *,int *,void *,int *,int *,int *,int *,int *,int
 
 void  pmpi_gatherv_(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Gatherv _PMPI_Gatherv
 void  (*_LOCAL_MPI_Gatherv)(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Gatherv(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcounts,int * displs,int * recvtype,int * root,int * comm,int * ret)
@@ -1841,7 +1792,6 @@ void  pmpi_scatter__(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_scatter_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Scatter _PMPI_Scatter
 void  (*_LOCAL_MPI_Scatter)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Scatter(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * root,int * comm,int * ret)
@@ -1881,7 +1831,6 @@ void  pmpi_scatterv__(void *,int *,int *,int *,void *,int *,int *,int *,int *,in
 
 void  pmpi_scatterv_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Scatterv _PMPI_Scatterv
 void  (*_LOCAL_MPI_Scatterv)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Scatterv(void * sendbuf,int * sendcounts,int * displs,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * root,int * comm,int * ret)
@@ -1921,7 +1870,6 @@ void  pmpi_allgather__(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  pmpi_allgather_(void *,int *,int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Allgather _PMPI_Allgather
 void  (*_LOCAL_MPI_Allgather)(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_Allgather(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * ret)
@@ -1961,7 +1909,6 @@ void  pmpi_allgatherv__(void *,int *,int *,void *,int *,int *,int *,int *,int *)
 
 void  pmpi_allgatherv_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Allgatherv _PMPI_Allgatherv
 void  (*_LOCAL_MPI_Allgatherv)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Allgatherv(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcounts,int * displs,int * recvtype,int * comm,int * ret)
@@ -2001,7 +1948,6 @@ void  pmpi_alltoall__(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  pmpi_alltoall_(void *,int *,int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Alltoall _PMPI_Alltoall
 void  (*_LOCAL_MPI_Alltoall)(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_Alltoall(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * ret)
@@ -2041,7 +1987,6 @@ void  pmpi_alltoallv__(void *,int *,int *,int *,void *,int *,int *,int *,int *,i
 
 void  pmpi_alltoallv_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Alltoallv _PMPI_Alltoallv
 void  (*_LOCAL_MPI_Alltoallv)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Alltoallv(void * sendbuf,int * sendcounts,int * sdispls,int * sendtype,void * recvbuf,int * recvcounts,int * rdispls,int * recvtype,int * comm,int * ret)
@@ -2081,7 +2026,6 @@ void  pmpi_exscan__(void *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_exscan_(void *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Exscan _PMPI_Exscan
 void  (*_LOCAL_MPI_Exscan)(void *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Exscan(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * comm,int * ret)
@@ -2120,7 +2064,6 @@ void  pmpi_reduce__(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_reduce_(void *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Reduce _PMPI_Reduce
 void  (*_LOCAL_MPI_Reduce)(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Reduce(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * root,int * comm,int * ret)
@@ -2160,7 +2103,6 @@ void  pmpi_op_create__(void *,int *,int *,int *);
 
 void  pmpi_op_create_(void *,int *,int *,int *);
 
-//#define A_f_MPI_Op_create _PMPI_Op_create
 void  (*_LOCAL_MPI_Op_create)(void *,int *,int *,int *);
 
 void  A_f_MPI_Op_create(void * user_fn,int * commute,int * op,int * ret)
@@ -2193,7 +2135,6 @@ void  pmpi_op_free__(int *,int *);
 
 void  pmpi_op_free_(int *,int *);
 
-//#define A_f_MPI_Op_free _PMPI_Op_free
 void  (*_LOCAL_MPI_Op_free)(int *,int *);
 
 void  A_f_MPI_Op_free(int * op,int * ret)
@@ -2225,7 +2166,6 @@ void  pmpi_allreduce__(void *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_allreduce_(void *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Allreduce _PMPI_Allreduce
 void  (*_LOCAL_MPI_Allreduce)(void *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Allreduce(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * comm,int * ret)
@@ -2265,7 +2205,6 @@ void  pmpi_scan__(void *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_scan_(void *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Scan _PMPI_Scan
 void  (*_LOCAL_MPI_Scan)(void *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Scan(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * comm,int * ret)
@@ -2304,7 +2243,6 @@ void  pmpi_group_size__(int *,int *,int *);
 
 void  pmpi_group_size_(int *,int *,int *);
 
-//#define A_f_MPI_Group_size _PMPI_Group_size
 void  (*_LOCAL_MPI_Group_size)(int *,int *,int *);
 
 void  A_f_MPI_Group_size(int * group,int * size,int * ret)
@@ -2335,7 +2273,6 @@ void  pmpi_group_rank__(int *,int *,int *);
 
 void  pmpi_group_rank_(int *,int *,int *);
 
-//#define A_f_MPI_Group_rank _PMPI_Group_rank
 void  (*_LOCAL_MPI_Group_rank)(int *,int *,int *);
 
 void  A_f_MPI_Group_rank(int * group,int * rank,int * ret)
@@ -2366,7 +2303,6 @@ void  pmpi_group_compare__(int *,int *,int *,int *);
 
 void  pmpi_group_compare_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_compare _PMPI_Group_compare
 void  (*_LOCAL_MPI_Group_compare)(int *,int *,int *,int *);
 
 void  A_f_MPI_Group_compare(int * group1,int * group2,int * result,int * ret)
@@ -2399,7 +2335,6 @@ void  pmpi_comm_group__(int *,int *,int *);
 
 void  pmpi_comm_group_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_group _PMPI_Comm_group
 void  (*_LOCAL_MPI_Comm_group)(int *,int *,int *);
 
 void  A_f_MPI_Comm_group(int * comm,int * group,int * ret)
@@ -2432,7 +2367,6 @@ void  pmpi_group_union__(int *,int *,int *,int *);
 
 void  pmpi_group_union_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_union _PMPI_Group_union
 void  (*_LOCAL_MPI_Group_union)(int *,int *,int *,int *);
 
 void  A_f_MPI_Group_union(int * group1,int * group2,int * newgroup,int * ret)
@@ -2467,7 +2401,6 @@ void  pmpi_group_intersection__(int *,int *,int *,int *);
 
 void  pmpi_group_intersection_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_intersection _PMPI_Group_intersection
 void  (*_LOCAL_MPI_Group_intersection)(int *,int *,int *,int *);
 
 void  A_f_MPI_Group_intersection(int * group1,int * group2,int * newgroup,int * ret)
@@ -2502,7 +2435,6 @@ void  pmpi_group_difference__(int *,int *,int *,int *);
 
 void  pmpi_group_difference_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_difference _PMPI_Group_difference
 void  (*_LOCAL_MPI_Group_difference)(int *,int *,int *,int *);
 
 void  A_f_MPI_Group_difference(int * group1,int * group2,int * newgroup,int * ret)
@@ -2537,7 +2469,6 @@ void  pmpi_group_free__(int *,int *);
 
 void  pmpi_group_free_(int *,int *);
 
-//#define A_f_MPI_Group_free _PMPI_Group_free
 void  (*_LOCAL_MPI_Group_free)(int *,int *);
 
 void  A_f_MPI_Group_free(int * group,int * ret)
@@ -2569,7 +2500,6 @@ void  pmpi_comm_size__(int *,int *,int *);
 
 void  pmpi_comm_size_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_size _PMPI_Comm_size
 void  (*_LOCAL_MPI_Comm_size)(int *,int *,int *);
 
 void  A_f_MPI_Comm_size(int * comm,int * size,int * ret)
@@ -2600,7 +2530,6 @@ void  pmpi_comm_rank__(int *,int *,int *);
 
 void  pmpi_comm_rank_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_rank _PMPI_Comm_rank
 void  (*_LOCAL_MPI_Comm_rank)(int *,int *,int *);
 
 void  A_f_MPI_Comm_rank(int * comm,int * rank,int * ret)
@@ -2631,7 +2560,6 @@ void  pmpi_comm_compare__(int *,int *,int *,int *);
 
 void  pmpi_comm_compare_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_compare _PMPI_Comm_compare
 void  (*_LOCAL_MPI_Comm_compare)(int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_compare(int * comm1,int * comm2,int * result,int * ret)
@@ -2664,7 +2592,6 @@ void  pmpi_comm_dup__(int *,int *,int *);
 
 void  pmpi_comm_dup_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_dup _PMPI_Comm_dup
 void  (*_LOCAL_MPI_Comm_dup)(int *,int *,int *);
 
 void  A_f_MPI_Comm_dup(int * comm,int * newcomm,int * ret)
@@ -2697,7 +2624,6 @@ void  pmpi_comm_dup_with_info__(int *,int *,int *,int *);
 
 void  pmpi_comm_dup_with_info_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_dup_with_info _PMPI_Comm_dup_with_info
 void  (*_LOCAL_MPI_Comm_dup_with_info)(int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_dup_with_info(int * comm,int * info,int * newcomm,int * ret)
@@ -2732,7 +2658,6 @@ void  pmpi_comm_create__(int *,int *,int *,int *);
 
 void  pmpi_comm_create_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_create _PMPI_Comm_create
 void  (*_LOCAL_MPI_Comm_create)(int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_create(int * comm,int * group,int * newcomm,int * ret)
@@ -2767,7 +2692,6 @@ void  pmpi_comm_split__(int *,int *,int *,int *,int *);
 
 void  pmpi_comm_split_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_split _PMPI_Comm_split
 void  (*_LOCAL_MPI_Comm_split)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_split(int * comm,int * color,int * key,int * newcomm,int * ret)
@@ -2800,7 +2724,6 @@ void  pmpi_comm_free__(int *,int *);
 
 void  pmpi_comm_free_(int *,int *);
 
-//#define A_f_MPI_Comm_free _PMPI_Comm_free
 void  (*_LOCAL_MPI_Comm_free)(int *,int *);
 
 void  A_f_MPI_Comm_free(int * comm,int * ret)
@@ -2813,8 +2736,8 @@ int  ret_tmp=0;
 
 int comm_tmp;
 comm_a2r(comm,&comm_tmp);
- _LOCAL_MPI_Comm_free( &comm_tmp, &ret_tmp);
-if(ret_tmp==R_f_MPI_SUCCESS)comm_r2au(comm,&comm_tmp);
+ _LOCAL_MPI_Comm_free( &comm_tmp, &ret_tmp);if (ret_tmp == R_f_MPI_SUCCESS)
+	comm_r2au(comm, &comm_tmp);
 error_r2a(ret,&ret_tmp);
 
 in_w=0;
@@ -2832,7 +2755,6 @@ void  pmpi_comm_test_inter__(int *,int *,int *);
 
 void  pmpi_comm_test_inter_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_test_inter _PMPI_Comm_test_inter
 void  (*_LOCAL_MPI_Comm_test_inter)(int *,int *,int *);
 
 void  A_f_MPI_Comm_test_inter(int * comm,int * flag,int * ret)
@@ -2863,7 +2785,6 @@ void  pmpi_comm_remote_size__(int *,int *,int *);
 
 void  pmpi_comm_remote_size_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_remote_size _PMPI_Comm_remote_size
 void  (*_LOCAL_MPI_Comm_remote_size)(int *,int *,int *);
 
 void  A_f_MPI_Comm_remote_size(int * comm,int * size,int * ret)
@@ -2894,7 +2815,6 @@ void  pmpi_comm_remote_group__(int *,int *,int *);
 
 void  pmpi_comm_remote_group_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_remote_group _PMPI_Comm_remote_group
 void  (*_LOCAL_MPI_Comm_remote_group)(int *,int *,int *);
 
 void  A_f_MPI_Comm_remote_group(int * comm,int * group,int * ret)
@@ -2927,7 +2847,6 @@ void  pmpi_intercomm_create__(int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_intercomm_create_(int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Intercomm_create _PMPI_Intercomm_create
 void  (*_LOCAL_MPI_Intercomm_create)(int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Intercomm_create(int * local_comm,int * local_leader,int * peer_comm,int * remote_leader,int * tag,int * newintercomm,int * ret)
@@ -2964,7 +2883,6 @@ void  pmpi_intercomm_merge__(int *,int *,int *,int *);
 
 void  pmpi_intercomm_merge_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Intercomm_merge _PMPI_Intercomm_merge
 void  (*_LOCAL_MPI_Intercomm_merge)(int *,int *,int *,int *);
 
 void  A_f_MPI_Intercomm_merge(int * intercomm,int * high,int * newintracomm,int * ret)
@@ -2997,94 +2915,100 @@ void  pmpi_keyval_create__(void *,void *,int *,void *,int *);
 
 void  pmpi_keyval_create_(void *,void *,int *,void *,int *);
 
-//#define A_f_MPI_Keyval_create _PMPI_Keyval_create
-void  (*_LOCAL_MPI_Keyval_create)(void *,void *,int *,void *,int *);
-int  (*LOCAL_MPI_Keyval_create)(void *,void *,int *,void *);
-int  (*LOCAL_MPI_Comm_create_keyval)(void *,void *,int *,void *);
+void (*_LOCAL_MPI_Keyval_create)(void *, void *, int *, void *, int *);
+int (*LOCAL_MPI_Keyval_create)(void *, void *, int *, void *);
+int (*LOCAL_MPI_Comm_create_keyval)(void *, void *, int *, void *);
 extern void *mpi_null_copy_fn_;
 extern void *mpi_dup_fn_;
 extern void *mpi_null_delete_fn_;
-int wrapper_copy_function_f(R_MPI_Comm comm, int keyval, void* extra_state,
-        void* attribute_val_in, void* attribute_val_out, int* flag)
-{
-    A_MPI_Comm comm_tmp;
-    comm_conv_r2a_static(&comm_tmp, &comm);
-    A_F_MPI_Copy_function* ptr_copy_func = myKeyval_translation_get(keyval)->cp_function;
-    myKeyval_translation_get(keyval)->ref++;
-    //printf("duped %d %p %d %p\n", keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
-    if(ptr_copy_func==(A_F_MPI_Copy_function *)A_MPI_NULL_COPY_FN||ptr_copy_func==(A_F_MPI_Copy_function *)A_MPI_COMM_NULL_DELETE_FN ||ptr_copy_func==(A_F_MPI_Copy_function *)&mpi_null_copy_fn_)
-        {
-            *flag=0;
-            return R_MPI_SUCCESS;
-        }else
-    if(ptr_copy_func==(A_F_MPI_Copy_function *)A_MPI_COMM_DUP_FN||ptr_copy_func==(A_F_MPI_Copy_function *)&mpi_dup_fn_)
-        {
-            *((int**) attribute_val_out) = (int*)attribute_val_in;
-            *flag=1;
-            return R_MPI_SUCCESS;
-        }
-    int comm_tmpf=A_MPI_Comm_c2f(comm_tmp);
-    int res ; (ptr_copy_func)(&comm_tmpf, &keyval, extra_state, &attribute_val_in,attribute_val_out, flag,&res);
-//    ptr_copy_func = NULL;
-    return  error_code_conv_r2a(res);
+int wrapper_copy_function_f(R_MPI_Comm comm, int keyval, void *extra_state,
+                            void *attribute_val_in, void *attribute_val_out,
+                            int *flag) {
+  A_MPI_Comm comm_tmp;
+  comm_conv_r2a_static(&comm_tmp, &comm);
+  A_F_MPI_Copy_function *ptr_copy_func =
+      myKeyval_translation_get(keyval)->cp_function;
+  myKeyval_translation_get(keyval)->ref++;
+  // printf("duped %d %p %d %p\n",
+  // keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
+  if (ptr_copy_func == (A_F_MPI_Copy_function *)A_MPI_NULL_COPY_FN ||
+      ptr_copy_func == (A_F_MPI_Copy_function *)A_MPI_COMM_NULL_DELETE_FN ||
+      ptr_copy_func == (A_F_MPI_Copy_function *)&mpi_null_copy_fn_) {
+    *flag = 0;
+    return R_MPI_SUCCESS;
+  } else if (ptr_copy_func == (A_F_MPI_Copy_function *)A_MPI_COMM_DUP_FN ||
+             ptr_copy_func == (A_F_MPI_Copy_function *)&mpi_dup_fn_) {
+    *((int **)attribute_val_out) = (int *)attribute_val_in;
+    *flag = 1;
+    return R_MPI_SUCCESS;
+  }
+  int comm_tmpf = A_MPI_Comm_c2f(comm_tmp);
+  int res;
+  (ptr_copy_func)(&comm_tmpf, &keyval, extra_state, &attribute_val_in,
+                  attribute_val_out, flag, &res);
+  //    ptr_copy_func = NULL;
+  return error_code_conv_r2a(res);
 }
 
-
-int wrapper_delete_function_f(R_MPI_Comm comm, int keyval,
-        void* attribute_val, void* extra_state)
-{
-    A_MPI_Comm comm_tmp;
-    int res;
-    comm_conv_r2a_static(&comm_tmp, &comm);
-    int ct=A_MPI_Comm_c2f(comm_tmp);
-    A_F_MPI_Delete_function* ptr_delete_func=myKeyval_translation_get(keyval)->del_function;
-    if( ptr_delete_func!=(A_F_MPI_Delete_function *)A_MPI_NULL_DELETE_FN&&ptr_delete_func!=(A_F_MPI_Delete_function *)&mpi_null_delete_fn_)
-        (ptr_delete_func)(&ct, &keyval, attribute_val, extra_state,&res);
-    else
-        res=R_MPI_SUCCESS;
-    myKeyval_translation_get(keyval)->ref--;
-    //printf("deleted %d %p %d\n", keyval,comm,myKeyval_translation_get(keyval)->ref);
-    if(myKeyval_translation_get(keyval)->ref==0)
-        myKeyval_translation_del(keyval);
-    //ptr_delete_func = NULL;
-    return error_code_conv_r2a(res);
+int wrapper_delete_function_f(R_MPI_Comm comm, int keyval, void *attribute_val,
+                              void *extra_state) {
+  A_MPI_Comm comm_tmp;
+  int res;
+  comm_conv_r2a_static(&comm_tmp, &comm);
+  int ct = A_MPI_Comm_c2f(comm_tmp);
+  A_F_MPI_Delete_function *ptr_delete_func =
+      myKeyval_translation_get(keyval)->del_function;
+  if (ptr_delete_func != (A_F_MPI_Delete_function *)A_MPI_NULL_DELETE_FN &&
+      ptr_delete_func != (A_F_MPI_Delete_function *)&mpi_null_delete_fn_)
+    (ptr_delete_func)(&ct, &keyval, attribute_val, extra_state, &res);
+  else
+    res = R_MPI_SUCCESS;
+  myKeyval_translation_get(keyval)->ref--;
+  // printf("deleted %d %p %d\n",
+  // keyval,comm,myKeyval_translation_get(keyval)->ref);
+  if (myKeyval_translation_get(keyval)->ref == 0)
+    myKeyval_translation_del(keyval);
+  // ptr_delete_func = NULL;
+  return error_code_conv_r2a(res);
 }
-void  A_f_MPI_Keyval_create(void * copy_fn,void * delete_fn,int * keyval,void * extra_state,int * ret)
-{
+void A_f_MPI_Keyval_create(void *copy_fn, void *delete_fn, int *keyval,
+                           void *extra_state, int *ret) {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Keyval_create\n");
+  printf("entre : A_f_MPI_Keyval_create\n");
 #endif
-in_w=1;
+  in_w = 1;
 
-/*void *copy_fn_tmp=copy_fn;
-void *delete_fn_tmp=delete_fn;
-void *extra_state_tmp=extra_state;
-copy_ptr_converter_a2r(&copy_fn,&copy_fn_tmp);
-delete_ptr_converter_a2r(&delete_fn,&delete_fn_tmp);
-buffer_a2r(&extra_state,&extra_state_tmp);
- LOCAL_MPI_Keyval_create(copy_fn_tmp,delete_fn_tmp, keyval,extra_state_tmp, &ret_tmp);
-ns_t* functions = NULL;
-*/
-myKeyval_functions_t* functions = NULL;
+  /*void *copy_fn_tmp=copy_fn;
+  void *delete_fn_tmp=delete_fn;
+  void *extra_state_tmp=extra_state;
+  copy_ptr_converter_a2r(&copy_fn,&copy_fn_tmp);
+  delete_ptr_converter_a2r(&delete_fn,&delete_fn_tmp);
+  buffer_a2r(&extra_state,&extra_state_tmp);
+   LOCAL_MPI_Keyval_create(copy_fn_tmp,delete_fn_tmp, keyval,extra_state_tmp,
+  &ret_tmp);
+  ns_t* functions = NULL;
+  */
+  myKeyval_functions_t *functions = NULL;
 
-    R_MPI_Copy_function * copy_fn_tmp;
-    R_MPI_Delete_function* delete_fn_tmp;
-        copy_fn_tmp =wrapper_copy_function_f;
-        delete_fn_tmp = wrapper_delete_function_f;
+  R_MPI_Copy_function *copy_fn_tmp;
+  R_MPI_Delete_function *delete_fn_tmp;
+  copy_fn_tmp = wrapper_copy_function_f;
+  delete_fn_tmp = wrapper_delete_function_f;
 
-    int ret_tmp= LOCAL_MPI_Comm_create_keyval( copy_fn_tmp, delete_fn_tmp, keyval, extra_state);
+  int ret_tmp = LOCAL_MPI_Comm_create_keyval(copy_fn_tmp, delete_fn_tmp, keyval,
+                                             extra_state);
 
-    functions = (myKeyval_functions_t*) malloc(sizeof(myKeyval_functions_t));
-    functions->cp_function = copy_fn;
-    functions->del_function = delete_fn;
-    functions->ref=1;
-    myKeyval_translation_add(*keyval, functions);
+  functions = (myKeyval_functions_t *)malloc(sizeof(myKeyval_functions_t));
+  functions->cp_function = copy_fn;
+  functions->del_function = delete_fn;
+  functions->ref = 1;
+  myKeyval_translation_add(*keyval, functions);
 
-error_r2a(ret,&ret_tmp);
+  error_r2a(ret, &ret_tmp);
 
-in_w=0;
+  in_w = 0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Keyval_create\n");
+  printf("sort : A_f_MPI_Keyval_create\n");
 #endif
 }
 void  mpi_keyval_free_(int *,int *);
@@ -3097,29 +3021,27 @@ void  pmpi_keyval_free__(int *,int *);
 
 void  pmpi_keyval_free_(int *,int *);
 
-//#define A_f_MPI_Keyval_free _PMPI_Keyval_free
-void  (*_LOCAL_MPI_Keyval_free)(int *,int *);
+void (*_LOCAL_MPI_Keyval_free)(int *, int *);
 
-void  A_f_MPI_Keyval_free(int * keyval,int * ret)
-{
+void A_f_MPI_Keyval_free(int *keyval, int *ret) {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Keyval_free\n");
+  printf("entre : A_f_MPI_Keyval_free\n");
 #endif
-in_w=1;
-int  ret_tmp=0;
-/*
- _LOCAL_MPI_Keyval_free( keyval, &ret_tmp);
-if(ret_tmp==R_f_MPI_SUCCESS)
-{
-	*keyval=A_MPI_KEYVAL_INVALID;
-}
-*/
-    ret_tmp=A_MPI_Keyval_free(keyval);
-error_r2a(ret,&ret_tmp);
+  in_w = 1;
+  int ret_tmp = 0;
+  /*
+   _LOCAL_MPI_Keyval_free( keyval, &ret_tmp);
+  if(ret_tmp==R_f_MPI_SUCCESS)
+  {
+          *keyval=A_MPI_KEYVAL_INVALID;
+  }
+  */
+  ret_tmp = A_MPI_Keyval_free(keyval);
+  error_r2a(ret, &ret_tmp);
 
-in_w=0;
+  in_w = 0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Keyval_free\n");
+  printf("sort : A_f_MPI_Keyval_free\n");
 #endif
 }
 void  mpi_attr_put_(int *,int *,int *,int *);
@@ -3132,30 +3054,28 @@ void  pmpi_attr_put__(int *,int *,int *,int *);
 
 void  pmpi_attr_put_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Attr_put _PMPI_Attr_put
-void  (*_LOCAL_MPI_Attr_put)(int *,int *,int *,int *);
+void (*_LOCAL_MPI_Attr_put)(int *, int *, int *, int *);
 
-void  A_f_MPI_Attr_put(int * comm,int * keyval,int * attribute_val,int * ret)
-{
+void A_f_MPI_Attr_put(int *comm, int *keyval, int *attribute_val, int *ret) {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Attr_put\n");
+  printf("entre : A_f_MPI_Attr_put\n");
 #endif
-//in_w=1;
-int  ret_tmp=0;
+  // in_w=1;
+  int ret_tmp = 0;
 
-int comm_tmp;
-/*comm_a2r(comm,&comm_tmp);
- _LOCAL_MPI_Attr_put( &comm_tmp, keyval, attribute_val, &ret_tmp);
-//if(*keyval==R_F_MPI_INVALID) *keyval=A_F_MPI_INVALID;
-*/
-A_MPI_Comm ct=A_MPI_Comm_f2c(*comm);
-long tv=*(attribute_val);
-ret_tmp=A_MPI_Attr_put(ct,*keyval,&tv);
-error_r2a(ret,&ret_tmp);
+  int comm_tmp;
+  /*comm_a2r(comm,&comm_tmp);
+   _LOCAL_MPI_Attr_put( &comm_tmp, keyval, attribute_val, &ret_tmp);
+  //if(*keyval==R_F_MPI_INVALID) *keyval=A_F_MPI_INVALID;
+  */
+  A_MPI_Comm ct = A_MPI_Comm_f2c(*comm);
+  long tv = *(attribute_val);
+  ret_tmp = A_MPI_Attr_put(ct, *keyval, &tv);
+  error_r2a(ret, &ret_tmp);
 
-//in_w=0;
+// in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Attr_put\n");
+  printf("sort : A_f_MPI_Attr_put\n");
 #endif
 }
 void  mpi_attr_get_(int *,int *,int *,int *,int *);
@@ -3168,35 +3088,35 @@ void  pmpi_attr_get__(int *,int *,int *,int *,int *);
 
 void  pmpi_attr_get_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Attr_get _PMPI_Attr_get
-void  (*_LOCAL_MPI_Attr_get)(int *,int *,int *,int *,int *);
+void (*_LOCAL_MPI_Attr_get)(int *, int *, int *, int *, int *);
 
-void  A_f_MPI_Attr_get(int * comm,int * keyval,int * attribute_val,int * flag,int * ret)
-{
+void A_f_MPI_Attr_get(int *comm, int *keyval, int *attribute_val, int *flag,
+                      int *ret) {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Attr_get\n");
+  printf("entre : A_f_MPI_Attr_get\n");
 #endif
-//in_w=1;
-int  ret_tmp=0;
+  // in_w=1;
+  int ret_tmp = 0;
 
-int comm_tmp;
-int keyval_tmp=*keyval;//=(*keyval==R_F_MPI_INVALID?A_F_MPI_INVALID:*keyval);
-/*comm_a2r(comm,&comm_tmp);
- _LOCAL_MPI_Attr_get( &comm_tmp, &keyval_tmp, attribute_val, flag, &ret_tmp);
-*/
-A_MPI_Comm ct=A_MPI_Comm_f2c(*comm);
-long kt=0;
-*attribute_val=0;
-//printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
-    ret_tmp=A_MPI_Attr_get(ct,*keyval,&kt,flag);
-if(kt>>32)
-    kt=(int)(((long)(1<<31))-1);
-*attribute_val=(int)kt;
-//printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
-error_r2a(ret,&ret_tmp);
-//in_w=0;
+  int comm_tmp;
+  int keyval_tmp =
+      *keyval; //=(*keyval==R_F_MPI_INVALID?A_F_MPI_INVALID:*keyval);
+  /*comm_a2r(comm,&comm_tmp);
+   _LOCAL_MPI_Attr_get( &comm_tmp, &keyval_tmp, attribute_val, flag, &ret_tmp);
+  */
+  A_MPI_Comm ct = A_MPI_Comm_f2c(*comm);
+  long kt = 0;
+  *attribute_val = 0;
+  // printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
+  ret_tmp = A_MPI_Attr_get(ct, *keyval, &kt, flag);
+  if (kt >> 32)
+    kt = (int)(((long)(1 << 31)) - 1);
+  *attribute_val = (int)kt;
+  // printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
+  error_r2a(ret, &ret_tmp);
+// in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Attr_get\n");
+  printf("sort : A_f_MPI_Attr_get\n");
 #endif
 }
 void  mpi_attr_delete_(int *,int *,int *);
@@ -3209,29 +3129,27 @@ void  pmpi_attr_delete__(int *,int *,int *);
 
 void  pmpi_attr_delete_(int *,int *,int *);
 
-//#define A_f_MPI_Attr_delete _PMPI_Attr_delete
-void  (*_LOCAL_MPI_Attr_delete)(int *,int *,int *);
-int  A_MPI_Attr_delete(A_MPI_Comm,int );
+void (*_LOCAL_MPI_Attr_delete)(int *, int *, int *);
+int A_MPI_Attr_delete(A_MPI_Comm, int);
 
-void  A_f_MPI_Attr_delete(int * comm,int * keyval,int * ret)
-{
+void A_f_MPI_Attr_delete(int *comm, int *keyval, int *ret) {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Attr_delete\n");
+  printf("entre : A_f_MPI_Attr_delete\n");
 #endif
-in_w=1;
-int  ret_tmp=0;
+  in_w = 1;
+  int ret_tmp = 0;
 
-int comm_tmp;
-int keyval_tmp;
-//comm_a2r(comm,&comm_tmp);
-A_MPI_Comm ct=A_MPI_Comm_f2c(*comm);
-    ret_tmp=A_MPI_Attr_delete(ct,*keyval);
-// _LOCAL_MPI_Attr_delete( &comm_tmp, keyval, &ret_tmp);
-error_r2a(ret,&ret_tmp);
+  int comm_tmp;
+  int keyval_tmp;
+  // comm_a2r(comm,&comm_tmp);
+  A_MPI_Comm ct = A_MPI_Comm_f2c(*comm);
+  ret_tmp = A_MPI_Attr_delete(ct, *keyval);
+  // _LOCAL_MPI_Attr_delete( &comm_tmp, keyval, &ret_tmp);
+  error_r2a(ret, &ret_tmp);
 
-in_w=0;
+  in_w = 0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Attr_delete\n");
+  printf("sort : A_f_MPI_Attr_delete\n");
 #endif
 }
 void  mpi_topo_test_(int *,int *,int *);
@@ -3244,7 +3162,6 @@ void  pmpi_topo_test__(int *,int *,int *);
 
 void  pmpi_topo_test_(int *,int *,int *);
 
-//#define A_f_MPI_Topo_test _PMPI_Topo_test
 void  (*_LOCAL_MPI_Topo_test)(int *,int *,int *);
 
 void  A_f_MPI_Topo_test(int * comm,int * status,int * ret)
@@ -3279,7 +3196,6 @@ void  pmpi_graphdims_get__(int *,int *,int *,int *);
 
 void  pmpi_graphdims_get_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Graphdims_get _PMPI_Graphdims_get
 void  (*_LOCAL_MPI_Graphdims_get)(int *,int *,int *,int *);
 
 void  A_f_MPI_Graphdims_get(int * comm,int * nnodes,int * nedges,int * ret)
@@ -3310,7 +3226,6 @@ void  pmpi_cartdim_get__(int *,int *,int *);
 
 void  pmpi_cartdim_get_(int *,int *,int *);
 
-//#define A_f_MPI_Cartdim_get _PMPI_Cartdim_get
 void  (*_LOCAL_MPI_Cartdim_get)(int *,int *,int *);
 
 void  A_f_MPI_Cartdim_get(int * comm,int * ndims,int * ret)
@@ -3341,7 +3256,6 @@ void  pmpi_graph_neighbors_count__(int *,int *,int *,int *);
 
 void  pmpi_graph_neighbors_count_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Graph_neighbors_count _PMPI_Graph_neighbors_count
 void  (*_LOCAL_MPI_Graph_neighbors_count)(int *,int *,int *,int *);
 
 void  A_f_MPI_Graph_neighbors_count(int * comm,int * rank,int * nneighbors,int * ret)
@@ -3372,7 +3286,6 @@ void  pmpi_cart_shift__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_cart_shift_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Cart_shift _PMPI_Cart_shift
 void  (*_LOCAL_MPI_Cart_shift)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Cart_shift(int * comm,int * direction,int * disp,int * rank_source,int * rank_dest,int * ret)
@@ -3403,7 +3316,6 @@ void  pmpi_get_version__(int *,int *,int *);
 
 void  pmpi_get_version_(int *,int *,int *);
 
-//#define A_f_MPI_Get_version _PMPI_Get_version
 void  (*_LOCAL_MPI_Get_version)(int *,int *,int *);
 
 void  A_f_MPI_Get_version(int * version,int * subversion,int * ret)
@@ -3432,7 +3344,6 @@ void  pmpi_errhandler_create__(void *,int *,int *);
 
 void  pmpi_errhandler_create_(void *,int *,int *);
 
-//#define A_f_MPI_Errhandler_create _PMPI_Errhandler_create
 void  (*_LOCAL_MPI_Errhandler_create)(void *,int *,int *);
 extern int WI4MPI_errhandler_key;
 #include "mappers.h"
@@ -3492,7 +3403,6 @@ void  pmpi_errhandler_set__(int *,int *,int *);
 
 void  pmpi_errhandler_set_(int *,int *,int *);
 
-//#define A_f_MPI_Errhandler_set _PMPI_Errhandler_set
 void  (*_LOCAL_MPI_Errhandler_set)(int *,int *,int *);
 void  A_f_MPI_Errhandler_set(int * comm,int * errhandler,int * ret)
 {
@@ -3530,7 +3440,6 @@ void  pmpi_errhandler_get__(int *,int *,int *);
 
 void  pmpi_errhandler_get_(int *,int *,int *);
 
-//#define A_f_MPI_Errhandler_get _PMPI_Errhandler_get
 void  (*_LOCAL_MPI_Errhandler_get)(int *,int *,int *);
 
 void  A_f_MPI_Errhandler_get(int * comm,int * errhandler,int * ret)
@@ -3572,7 +3481,6 @@ void  pmpi_errhandler_free__(int *,int *);
 
 void  pmpi_errhandler_free_(int *,int *);
 
-//#define A_f_MPI_Errhandler_free _PMPI_Errhandler_free
 void  (*_LOCAL_MPI_Errhandler_free)(int *,int *);
 
 void  A_f_MPI_Errhandler_free(int * errhandler,int * ret)
@@ -3617,7 +3525,6 @@ void  pmpi_error_class__(int *,int *,int *);
 
 void  pmpi_error_class_(int *,int *,int *);
 
-//#define A_f_MPI_Error_class _PMPI_Error_class
 void  (*_LOCAL_MPI_Error_class)(int *,int *,int *);
 
 void  A_f_MPI_Error_class(int * errorcode,int * errorclass,int * ret)
@@ -3650,7 +3557,6 @@ void  pmpi_initialized__(int *,int *);
 
 void  pmpi_initialized_(int *,int *);
 
-//#define A_f_MPI_Initialized _PMPI_Initialized
 void  (*_LOCAL_MPI_Initialized)(int *,int *);
 
 void  A_f_MPI_Initialized(int * flag,int * ret)
@@ -3679,7 +3585,6 @@ void  pmpi_abort__(int *,int *,int *);
 
 void  pmpi_abort_(int *,int *,int *);
 
-//#define A_f_MPI_Abort _PMPI_Abort
 void  (*_LOCAL_MPI_Abort)(int *,int *,int *);
 
 void  A_f_MPI_Abort(int * comm,int * errorcode,int * ret)
@@ -3712,7 +3617,6 @@ void  pmpi_init__(int *);
 
 void  pmpi_init_(int *);
 
-//#define A_f_MPI_Init _PMPI_Init
 void  (*_LOCAL_MPI_Init)(int *);
 
 void  A_f_MPI_Init(int * ret)
@@ -3741,7 +3645,6 @@ void  pmpi_comm_accept__(char *,int *,int *,int *,int *,int *);
 
 void  pmpi_comm_accept_(char *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_accept _PMPI_Comm_accept
 void  (*_LOCAL_MPI_Comm_accept)(char *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_accept(char * port_name,int * info,int * root,int * comm,int * newcomm,int * ret)
@@ -3778,7 +3681,6 @@ void  pmpi_comm_connect__(char *,int *,int *,int *,int *,int *);
 
 void  pmpi_comm_connect_(char *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_connect _PMPI_Comm_connect
 void  (*_LOCAL_MPI_Comm_connect)(char *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_connect(char * port_name,int * info,int * root,int * comm,int * newcomm,int * ret)
@@ -3815,7 +3717,6 @@ void  pmpi_comm_disconnect__(int *,int *);
 
 void  pmpi_comm_disconnect_(int *,int *);
 
-//#define A_f_MPI_Comm_disconnect _PMPI_Comm_disconnect
 void  (*_LOCAL_MPI_Comm_disconnect)(int *,int *);
 
 void  A_f_MPI_Comm_disconnect(int * comm,int * ret)
@@ -3847,7 +3748,6 @@ void  pmpi_comm_get_parent__(int *,int *);
 
 void  pmpi_comm_get_parent_(int *,int *);
 
-//#define A_f_MPI_Comm_get_parent _PMPI_Comm_get_parent
 void  (*_LOCAL_MPI_Comm_get_parent)(int *,int *);
 
 void  A_f_MPI_Comm_get_parent(int * parent,int * ret)
@@ -3878,7 +3778,6 @@ void  pmpi_comm_join__(int *,int *,int *);
 
 void  pmpi_comm_join_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_join _PMPI_Comm_join
 void  (*_LOCAL_MPI_Comm_join)(int *,int *,int *);
 
 void  A_f_MPI_Comm_join(int * fd,int * intercomm,int * ret)
@@ -3909,7 +3808,6 @@ void  pmpi_comm_set_info__(int *,int *,int *);
 
 void  pmpi_comm_set_info_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_set_info _PMPI_Comm_set_info
 void  (*_LOCAL_MPI_Comm_set_info)(int *,int *,int *);
 
 void  A_f_MPI_Comm_set_info(int * comm,int * info,int * ret)
@@ -3942,7 +3840,6 @@ void  pmpi_comm_get_info__(int *,int *,int *);
 
 void  pmpi_comm_get_info_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_get_info _PMPI_Comm_get_info
 void  (*_LOCAL_MPI_Comm_get_info)(int *,int *,int *);
 
 void  A_f_MPI_Comm_get_info(int * comm,int * info,int * ret)
@@ -3975,7 +3872,6 @@ void  pmpi_accumulate__(void *,int *,int *,int *,size_t *,int *,int *,int *,int 
 
 void  pmpi_accumulate_(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Accumulate _PMPI_Accumulate
 void  (*_LOCAL_MPI_Accumulate)(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Accumulate(void * origin_addr,int * origin_count,int * origin_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * op,int * win,int * ret)
@@ -4016,7 +3912,6 @@ void  pmpi_get__(void *,int *,int *,int *,size_t *,int *,int *,int *,int *);
 
 void  pmpi_get_(void *,int *,int *,int *,size_t *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Get _PMPI_Get
 void  (*_LOCAL_MPI_Get)(void *,int *,int *,int *,size_t *,int *,int *,int *,int *);
 
 void  A_f_MPI_Get(void * origin_addr,int * origin_count,int * origin_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * win,int * ret)
@@ -4055,7 +3950,6 @@ void  pmpi_put__(void *,int *,int *,int *,size_t *,int *,int *,int *,int *);
 
 void  pmpi_put_(void *,int *,int *,int *,size_t *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Put _PMPI_Put
 void  (*_LOCAL_MPI_Put)(void *,int *,int *,int *,size_t *,int *,int *,int *,int *);
 
 void  A_f_MPI_Put(void * origin_addr,int * origin_count,int * origin_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * win,int * ret)
@@ -4094,7 +3988,6 @@ void  pmpi_win_complete__(int *,int *);
 
 void  pmpi_win_complete_(int *,int *);
 
-//#define A_f_MPI_Win_complete _PMPI_Win_complete
 void  (*_LOCAL_MPI_Win_complete)(int *,int *);
 
 void  A_f_MPI_Win_complete(int * win,int * ret)
@@ -4125,7 +4018,6 @@ void  pmpi_win_create__(void *,size_t *,int *,int *,int *,int *,int *);
 
 void  pmpi_win_create_(void *,size_t *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Win_create _PMPI_Win_create
 void  (*_LOCAL_MPI_Win_create)(void *,size_t *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Win_create(void * base,size_t * size,int * disp_unit,int * info,int * comm,int * win,int * ret)
@@ -4162,7 +4054,6 @@ void  pmpi_win_fence__(int *,int *,int *);
 
 void  pmpi_win_fence_(int *,int *,int *);
 
-//#define A_f_MPI_Win_fence _PMPI_Win_fence
 void  (*_LOCAL_MPI_Win_fence)(int *,int *,int *);
 
 void  A_f_MPI_Win_fence(int * assert,int * win,int * ret)
@@ -4195,7 +4086,6 @@ void  pmpi_win_free__(int *,int *);
 
 void  pmpi_win_free_(int *,int *);
 
-//#define A_f_MPI_Win_free _PMPI_Win_free
 void  (*_LOCAL_MPI_Win_free)(int *,int *);
 
 void  A_f_MPI_Win_free(int * win,int * ret)
@@ -4227,7 +4117,6 @@ void  pmpi_win_get_group__(int *,int *,int *);
 
 void  pmpi_win_get_group_(int *,int *,int *);
 
-//#define A_f_MPI_Win_get_group _PMPI_Win_get_group
 void  (*_LOCAL_MPI_Win_get_group)(int *,int *,int *);
 
 void  A_f_MPI_Win_get_group(int * win,int * group,int * ret)
@@ -4260,7 +4149,6 @@ void  pmpi_win_lock__(int *,int *,int *,int *,int *);
 
 void  pmpi_win_lock_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Win_lock _PMPI_Win_lock
 void  (*_LOCAL_MPI_Win_lock)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Win_lock(int * lock_type,int * rank,int * assert,int * win,int * ret)
@@ -4297,7 +4185,6 @@ void  pmpi_win_post__(int *,int *,int *,int *);
 
 void  pmpi_win_post_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Win_post _PMPI_Win_post
 void  (*_LOCAL_MPI_Win_post)(int *,int *,int *,int *);
 
 void  A_f_MPI_Win_post(int * group,int * assert,int * win,int * ret)
@@ -4332,7 +4219,6 @@ void  pmpi_win_start__(int *,int *,int *,int *);
 
 void  pmpi_win_start_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Win_start _PMPI_Win_start
 void  (*_LOCAL_MPI_Win_start)(int *,int *,int *,int *);
 
 void  A_f_MPI_Win_start(int * group,int * assert,int * win,int * ret)
@@ -4367,7 +4253,6 @@ void  pmpi_win_test__(int *,int *,int *);
 
 void  pmpi_win_test_(int *,int *,int *);
 
-//#define A_f_MPI_Win_test _PMPI_Win_test
 void  (*_LOCAL_MPI_Win_test)(int *,int *,int *);
 
 void  A_f_MPI_Win_test(int * win,int * flag,int * ret)
@@ -4398,7 +4283,6 @@ void  pmpi_win_unlock__(int *,int *,int *);
 
 void  pmpi_win_unlock_(int *,int *,int *);
 
-//#define A_f_MPI_Win_unlock _PMPI_Win_unlock
 void  (*_LOCAL_MPI_Win_unlock)(int *,int *,int *);
 
 void  A_f_MPI_Win_unlock(int * rank,int * win,int * ret)
@@ -4431,7 +4315,6 @@ void  pmpi_win_wait__(int *,int *);
 
 void  pmpi_win_wait_(int *,int *);
 
-//#define A_f_MPI_Win_wait _PMPI_Win_wait
 void  (*_LOCAL_MPI_Win_wait)(int *,int *);
 
 void  A_f_MPI_Win_wait(int * win,int * ret)
@@ -4462,7 +4345,6 @@ void  pmpi_win_allocate__(size_t *,int *,int *,int *,void *,int *,int *);
 
 void  pmpi_win_allocate_(size_t *,int *,int *,int *,void *,int *,int *);
 
-//#define A_f_MPI_Win_allocate _PMPI_Win_allocate
 void  (*_LOCAL_MPI_Win_allocate)(size_t *,int *,int *,int *,void *,int *,int *);
 
 void  A_f_MPI_Win_allocate(size_t * size,int * disp_unit,int * info,int * comm,void * baseptr,int * win,int * ret)
@@ -4497,7 +4379,6 @@ void  pmpi_win_allocate_shared__(size_t *,int *,int *,int *,void *,int *,int *);
 
 void  pmpi_win_allocate_shared_(size_t *,int *,int *,int *,void *,int *,int *);
 
-//#define A_f_MPI_Win_allocate_shared _PMPI_Win_allocate_shared
 void  (*_LOCAL_MPI_Win_allocate_shared)(size_t *,int *,int *,int *,void *,int *,int *);
 
 void  A_f_MPI_Win_allocate_shared(size_t * size,int * disp_unit,int * info,int * comm,void * baseptr,int * win,int * ret)
@@ -4534,7 +4415,6 @@ void  pmpi_win_shared_query__(int *,int *,size_t *,int *,void *,int *);
 
 void  pmpi_win_shared_query_(int *,int *,size_t *,int *,void *,int *);
 
-//#define A_f_MPI_Win_shared_query _PMPI_Win_shared_query
 void  (*_LOCAL_MPI_Win_shared_query)(int *,int *,size_t *,int *,void *,int *);
 
 void  A_f_MPI_Win_shared_query(int * win,int * rank,size_t * size,int * disp_unit,void * baseptr,int * ret)
@@ -4567,7 +4447,6 @@ void  pmpi_win_create_dynamic__(int *,int *,int *,int *);
 
 void  pmpi_win_create_dynamic_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Win_create_dynamic _PMPI_Win_create_dynamic
 void  (*_LOCAL_MPI_Win_create_dynamic)(int *,int *,int *,int *);
 
 void  A_f_MPI_Win_create_dynamic(int * info,int * comm,int * win,int * ret)
@@ -4602,7 +4481,6 @@ void  pmpi_win_attach__(int *,void *,size_t *,int *);
 
 void  pmpi_win_attach_(int *,void *,size_t *,int *);
 
-//#define A_f_MPI_Win_attach _PMPI_Win_attach
 void  (*_LOCAL_MPI_Win_attach)(int *,void *,size_t *,int *);
 
 void  A_f_MPI_Win_attach(int * win,void * base,size_t * size,int * ret)
@@ -4635,7 +4513,6 @@ void  pmpi_win_detach__(int *,void *,int *);
 
 void  pmpi_win_detach_(int *,void *,int *);
 
-//#define A_f_MPI_Win_detach _PMPI_Win_detach
 void  (*_LOCAL_MPI_Win_detach)(int *,void *,int *);
 
 void  A_f_MPI_Win_detach(int * win,void * base,int * ret)
@@ -4668,7 +4545,6 @@ void  pmpi_win_get_info__(int *,int *,int *);
 
 void  pmpi_win_get_info_(int *,int *,int *);
 
-//#define A_f_MPI_Win_get_info _PMPI_Win_get_info
 void  (*_LOCAL_MPI_Win_get_info)(int *,int *,int *);
 
 void  A_f_MPI_Win_get_info(int * win,int * info_used,int * ret)
@@ -4701,7 +4577,6 @@ void  pmpi_win_set_info__(int *,int *,int *);
 
 void  pmpi_win_set_info_(int *,int *,int *);
 
-//#define A_f_MPI_Win_set_info _PMPI_Win_set_info
 void  (*_LOCAL_MPI_Win_set_info)(int *,int *,int *);
 
 void  A_f_MPI_Win_set_info(int * win,int * info,int * ret)
@@ -4734,7 +4609,6 @@ void  pmpi_get_accumulate__(void *,int *,int *,void *,int *,int *,int *,size_t *
 
 void  pmpi_get_accumulate_(void *,int *,int *,void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Get_accumulate _PMPI_Get_accumulate
 void  (*_LOCAL_MPI_Get_accumulate)(void *,int *,int *,void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Get_accumulate(void * origin_addr,int * origin_count,int * origin_datatype,void * result_addr,int * result_count,int * result_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * op,int * win,int * ret)
@@ -4779,7 +4653,6 @@ void  pmpi_fetch_and_op__(void *,void *,int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_fetch_and_op_(void *,void *,int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Fetch_and_op _PMPI_Fetch_and_op
 void  (*_LOCAL_MPI_Fetch_and_op)(void *,void *,int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Fetch_and_op(void * origin_addr,void * result_addr,int * datatype,int * target_rank,size_t * target_disp,int * op,int * win,int * ret)
@@ -4821,7 +4694,6 @@ void  pmpi_compare_and_swap__(void *,void *,void *,int *,int *,size_t *,int *,in
 
 void  pmpi_compare_and_swap_(void *,void *,void *,int *,int *,size_t *,int *,int *);
 
-//#define A_f_MPI_Compare_and_swap _PMPI_Compare_and_swap
 void  (*_LOCAL_MPI_Compare_and_swap)(void *,void *,void *,int *,int *,size_t *,int *,int *);
 
 void  A_f_MPI_Compare_and_swap(void * origin_addr,void * compare_addr,void * result_addr,int * datatype,int * target_rank,size_t * target_disp,int * win,int * ret)
@@ -4863,7 +4735,6 @@ void  pmpi_rput__(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int 
 
 void  pmpi_rput_(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Rput _PMPI_Rput
 void  (*_LOCAL_MPI_Rput)(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Rput(void * origin_addr,int * origin_count,int * origin_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * win,int * request,int * ret)
@@ -4904,7 +4775,6 @@ void  pmpi_rget__(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int 
 
 void  pmpi_rget_(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Rget _PMPI_Rget
 void  (*_LOCAL_MPI_Rget)(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Rget(void * origin_addr,int * origin_count,int * origin_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * win,int * request,int * ret)
@@ -4945,7 +4815,6 @@ void  pmpi_raccumulate__(void *,int *,int *,int *,size_t *,int *,int *,int *,int
 
 void  pmpi_raccumulate_(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Raccumulate _PMPI_Raccumulate
 void  (*_LOCAL_MPI_Raccumulate)(void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Raccumulate(void * origin_addr,int * origin_count,int * origin_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * op,int * win,int * request,int * ret)
@@ -4988,7 +4857,6 @@ void  pmpi_rget_accumulate__(void *,int *,int *,void *,int *,int *,int *,size_t 
 
 void  pmpi_rget_accumulate_(void *,int *,int *,void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Rget_accumulate _PMPI_Rget_accumulate
 void  (*_LOCAL_MPI_Rget_accumulate)(void *,int *,int *,void *,int *,int *,int *,size_t *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Rget_accumulate(void * origin_addr,int * origin_count,int * origin_datatype,void * result_addr,int * result_count,int * result_datatype,int * target_rank,size_t * target_disp,int * target_count,int * target_datatype,int * op,int * win,int * request,int * ret)
@@ -5035,7 +4903,6 @@ void  pmpi_win_lock_all__(int *,int *,int *);
 
 void  pmpi_win_lock_all_(int *,int *,int *);
 
-//#define A_f_MPI_Win_lock_all _PMPI_Win_lock_all
 void  (*_LOCAL_MPI_Win_lock_all)(int *,int *,int *);
 
 void  A_f_MPI_Win_lock_all(int * assert,int * win,int * ret)
@@ -5068,7 +4935,6 @@ void  pmpi_win_unlock_all__(int *,int *);
 
 void  pmpi_win_unlock_all_(int *,int *);
 
-//#define A_f_MPI_Win_unlock_all _PMPI_Win_unlock_all
 void  (*_LOCAL_MPI_Win_unlock_all)(int *,int *);
 
 void  A_f_MPI_Win_unlock_all(int * win,int * ret)
@@ -5099,7 +4965,6 @@ void  pmpi_win_flush__(int *,int *,int *);
 
 void  pmpi_win_flush_(int *,int *,int *);
 
-//#define A_f_MPI_Win_flush _PMPI_Win_flush
 void  (*_LOCAL_MPI_Win_flush)(int *,int *,int *);
 
 void  A_f_MPI_Win_flush(int * rank,int * win,int * ret)
@@ -5132,7 +4997,6 @@ void  pmpi_win_flush_all__(int *,int *);
 
 void  pmpi_win_flush_all_(int *,int *);
 
-//#define A_f_MPI_Win_flush_all _PMPI_Win_flush_all
 void  (*_LOCAL_MPI_Win_flush_all)(int *,int *);
 
 void  A_f_MPI_Win_flush_all(int * win,int * ret)
@@ -5163,7 +5027,6 @@ void  pmpi_win_flush_local__(int *,int *,int *);
 
 void  pmpi_win_flush_local_(int *,int *,int *);
 
-//#define A_f_MPI_Win_flush_local _PMPI_Win_flush_local
 void  (*_LOCAL_MPI_Win_flush_local)(int *,int *,int *);
 
 void  A_f_MPI_Win_flush_local(int * rank,int * win,int * ret)
@@ -5196,7 +5059,6 @@ void  pmpi_win_flush_local_all__(int *,int *);
 
 void  pmpi_win_flush_local_all_(int *,int *);
 
-//#define A_f_MPI_Win_flush_local_all _PMPI_Win_flush_local_all
 void  (*_LOCAL_MPI_Win_flush_local_all)(int *,int *);
 
 void  A_f_MPI_Win_flush_local_all(int * win,int * ret)
@@ -5227,7 +5089,6 @@ void  pmpi_win_sync__(int *,int *);
 
 void  pmpi_win_sync_(int *,int *);
 
-//#define A_f_MPI_Win_sync _PMPI_Win_sync
 void  (*_LOCAL_MPI_Win_sync)(int *,int *);
 
 void  A_f_MPI_Win_sync(int * win,int * ret)
@@ -5258,7 +5119,6 @@ void  pmpi_add_error_class__(int *,int *);
 
 void  pmpi_add_error_class_(int *,int *);
 
-//#define A_f_MPI_Add_error_class _PMPI_Add_error_class
 void  (*_LOCAL_MPI_Add_error_class)(int *,int *);
 
 void  A_f_MPI_Add_error_class(int * errorclass,int * ret)
@@ -5289,7 +5149,6 @@ void  pmpi_add_error_code__(int *,int *,int *);
 
 void  pmpi_add_error_code_(int *,int *,int *);
 
-//#define A_f_MPI_Add_error_code _PMPI_Add_error_code
 void  (*_LOCAL_MPI_Add_error_code)(int *,int *,int *);
 
 void  A_f_MPI_Add_error_code(int * errorclass,int * errorcode,int * ret)
@@ -5320,7 +5179,6 @@ void  pmpi_comm_call_errhandler__(int *,int *,int *);
 
 void  pmpi_comm_call_errhandler_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_call_errhandler _PMPI_Comm_call_errhandler
 void  (*_LOCAL_MPI_Comm_call_errhandler)(int *,int *,int *);
 
 void  A_f_MPI_Comm_call_errhandler(int * comm,int * errorcode,int * ret)
@@ -5353,7 +5211,6 @@ void  pmpi_comm_delete_attr__(int *,int *,int *);
 
 void  pmpi_comm_delete_attr_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_delete_attr _PMPI_Comm_delete_attr
 void  (*_LOCAL_MPI_Comm_delete_attr)(int *,int *,int *);
 
 void  A_f_MPI_Comm_delete_attr(int * comm,int * comm_keyval,int * ret)
@@ -5386,7 +5243,6 @@ void  pmpi_comm_get_attr__(int *,int *,void *,int *,int *);
 
 void  pmpi_comm_get_attr_(int *,int *,void *,int *,int *);
 
-//#define A_f_MPI_Comm_get_attr _PMPI_Comm_get_attr
 void  (*_LOCAL_MPI_Comm_get_attr)(int *,int *,void *,int *,int *);
 
 void  A_f_MPI_Comm_get_attr(int * comm,int * comm_keyval,void * attribute_val,int * flag,int * ret)
@@ -5421,7 +5277,6 @@ void  pmpi_comm_set_attr__(int *,int *,void *,int *);
 
 void  pmpi_comm_set_attr_(int *,int *,void *,int *);
 
-//#define A_f_MPI_Comm_set_attr _PMPI_Comm_set_attr
 void  (*_LOCAL_MPI_Comm_set_attr)(int *,int *,void *,int *);
 
 void  A_f_MPI_Comm_set_attr(int * comm,int * comm_keyval,void * attribute_val,int * ret)
@@ -5456,7 +5311,6 @@ void  pmpi_init_thread__(int *,int *,int *);
 
 void  pmpi_init_thread_(int *,int *,int *);
 
-//#define A_f_MPI_Init_thread _PMPI_Init_thread
 void  (*_LOCAL_MPI_Init_thread)(int *,int *,int *);
 
 void  A_f_MPI_Init_thread(int * required,int * provided,int * ret)
@@ -5485,7 +5339,6 @@ void  pmpi_is_thread_main__(int *,int *);
 
 void  pmpi_is_thread_main_(int *,int *);
 
-//#define A_f_MPI_Is_thread_main _PMPI_Is_thread_main
 void  (*_LOCAL_MPI_Is_thread_main)(int *,int *);
 
 void  A_f_MPI_Is_thread_main(int * flag,int * ret)
@@ -5514,7 +5367,6 @@ void  pmpi_query_thread__(int *,int *);
 
 void  pmpi_query_thread_(int *,int *);
 
-//#define A_f_MPI_Query_thread _PMPI_Query_thread
 void  (*_LOCAL_MPI_Query_thread)(int *,int *);
 
 void  A_f_MPI_Query_thread(int * provided,int * ret)
@@ -5543,7 +5395,6 @@ void  pmpi_status_set_cancelled__(int *,int *,int *);
 
 void  pmpi_status_set_cancelled_(int *,int *,int *);
 
-//#define A_f_MPI_Status_set_cancelled _PMPI_Status_set_cancelled
 void  (*_LOCAL_MPI_Status_set_cancelled)(int *,int *,int *);
 
 void  A_f_MPI_Status_set_cancelled(int * status,int * flag,int * ret)
@@ -5575,7 +5426,6 @@ void  pmpi_status_set_elements__(int *,int *,int *,int *);
 
 void  pmpi_status_set_elements_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Status_set_elements _PMPI_Status_set_elements
 void  (*_LOCAL_MPI_Status_set_elements)(int *,int *,int *,int *);
 
 void  A_f_MPI_Status_set_elements(int * status,int * datatype,int * count,int * ret)
@@ -5609,7 +5459,6 @@ void  pmpi_type_delete_attr__(int *,int *,int *);
 
 void  pmpi_type_delete_attr_(int *,int *,int *);
 
-//#define A_f_MPI_Type_delete_attr _PMPI_Type_delete_attr
 void  (*_LOCAL_MPI_Type_delete_attr)(int *,int *,int *);
 
 void  A_f_MPI_Type_delete_attr(int * datatype,int * type_keyval,int * ret)
@@ -5642,7 +5491,6 @@ void  pmpi_type_dup__(int *,int *,int *);
 
 void  pmpi_type_dup_(int *,int *,int *);
 
-//#define A_f_MPI_Type_dup _PMPI_Type_dup
 void  (*_LOCAL_MPI_Type_dup)(int *,int *,int *);
 
 void  A_f_MPI_Type_dup(int * oldtype,int * newtype,int * ret)
@@ -5675,7 +5523,6 @@ void  pmpi_type_free_keyval__(int *,int *);
 
 void  pmpi_type_free_keyval_(int *,int *);
 
-//#define A_f_MPI_Type_free_keyval _PMPI_Type_free_keyval
 void  (*_LOCAL_MPI_Type_free_keyval)(int *,int *);
 
 void  A_f_MPI_Type_free_keyval(int * type_keyval,int * ret)
@@ -5707,7 +5554,6 @@ void  pmpi_type_get_attr__(int *,int *,void *,int *,int *);
 
 void  pmpi_type_get_attr_(int *,int *,void *,int *,int *);
 
-//#define A_f_MPI_Type_get_attr _PMPI_Type_get_attr
 void  (*_LOCAL_MPI_Type_get_attr)(int *,int *,void *,int *,int *);
 
 void  A_f_MPI_Type_get_attr(int * datatype,int * type_keyval,void * attribute_val,int * flag,int * ret)
@@ -5742,7 +5588,6 @@ void  pmpi_type_get_envelope__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_type_get_envelope_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_get_envelope _PMPI_Type_get_envelope
 void  (*_LOCAL_MPI_Type_get_envelope)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Type_get_envelope(int * datatype,int * num_integers,int * num_addresses,int * num_datatypes,int * combiner,int * ret)
@@ -5773,7 +5618,6 @@ void  pmpi_type_set_attr__(int *,int *,void *,int *);
 
 void  pmpi_type_set_attr_(int *,int *,void *,int *);
 
-//#define A_f_MPI_Type_set_attr _PMPI_Type_set_attr
 void  (*_LOCAL_MPI_Type_set_attr)(int *,int *,void *,int *);
 
 void  A_f_MPI_Type_set_attr(int * datatype,int * type_keyval,void * attribute_val,int * ret)
@@ -5808,7 +5652,6 @@ void  pmpi_type_match_size__(int *,int *,int *,int *);
 
 void  pmpi_type_match_size_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_match_size _PMPI_Type_match_size
 void  (*_LOCAL_MPI_Type_match_size)(int *,int *,int *,int *);
 
 void  A_f_MPI_Type_match_size(int * typeclass,int * size,int * datatype,int * ret)
@@ -5839,7 +5682,6 @@ void  pmpi_alloc_mem__(size_t *,int *,void *,int *);
 
 void  pmpi_alloc_mem_(size_t *,int *,void *,int *);
 
-//#define A_f_MPI_Alloc_mem _PMPI_Alloc_mem
 void  (*_LOCAL_MPI_Alloc_mem)(size_t *,int *,void *,int *);
 
 void  A_f_MPI_Alloc_mem(size_t * size,int * info,void * baseptr,int * ret)
@@ -5872,7 +5714,6 @@ void  pmpi_comm_create_errhandler__(void *,int *,int *);
 
 void  pmpi_comm_create_errhandler_(void *,int *,int *);
 
-//#define A_f_MPI_Comm_create_errhandler _PMPI_Comm_create_errhandler
 void  (*_LOCAL_MPI_Comm_create_errhandler)(void *,int *,int *);
 
 void  A_f_MPI_Comm_create_errhandler(void * comm_errhandler_fn,int * errhandler,int * ret)
@@ -5908,7 +5749,6 @@ void  pmpi_comm_get_errhandler__(int *,int *,int *);
 
 void  pmpi_comm_get_errhandler_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_get_errhandler _PMPI_Comm_get_errhandler
 void  (*_LOCAL_MPI_Comm_get_errhandler)(int *,int *,int *);
 
 void  A_f_MPI_Comm_get_errhandler(int * comm,int * errhandler,int * ret)
@@ -5943,7 +5783,6 @@ void  pmpi_comm_set_errhandler__(int *,int *,int *);
 
 void  pmpi_comm_set_errhandler_(int *,int *,int *);
 
-//#define A_f_MPI_Comm_set_errhandler _PMPI_Comm_set_errhandler
 void  (*_LOCAL_MPI_Comm_set_errhandler)(int *,int *,int *);
 
 void  A_f_MPI_Comm_set_errhandler(int * comm,int * errhandler,int * ret)
@@ -5980,7 +5819,6 @@ void  pmpi_file_get_errhandler__(int *,int *,int *);
 
 void  pmpi_file_get_errhandler_(int *,int *,int *);
 
-//#define A_f_MPI_File_get_errhandler _PMPI_File_get_errhandler
 void  (*_LOCAL_MPI_File_get_errhandler)(int *,int *,int *);
 
 void  A_f_MPI_File_get_errhandler(int * file,int * errhandler,int * ret)
@@ -6011,7 +5849,6 @@ void  pmpi_file_set_errhandler__(int *,int *,int *);
 
 void  pmpi_file_set_errhandler_(int *,int *,int *);
 
-//#define A_f_MPI_File_set_errhandler _PMPI_File_set_errhandler
 void  (*_LOCAL_MPI_File_set_errhandler)(int *,int *,int *);
 
 void  A_f_MPI_File_set_errhandler(int * file,int * errhandler,int * ret)
@@ -6042,7 +5879,6 @@ void  pmpi_finalized__(int *,int *);
 
 void  pmpi_finalized_(int *,int *);
 
-//#define A_f_MPI_Finalized _PMPI_Finalized
 void  (*_LOCAL_MPI_Finalized)(int *,int *);
 
 void  A_f_MPI_Finalized(int * flag,int * ret)
@@ -6071,7 +5907,6 @@ void  pmpi_free_mem__(void *,int *);
 
 void  pmpi_free_mem_(void *,int *);
 
-//#define A_f_MPI_Free_mem _PMPI_Free_mem
 void  (*_LOCAL_MPI_Free_mem)(void *,int *);
 
 void  A_f_MPI_Free_mem(void * base,int * ret)
@@ -6102,7 +5937,6 @@ void  pmpi_get_address__(void *,size_t *,int *);
 
 void  pmpi_get_address_(void *,size_t *,int *);
 
-//#define A_f_MPI_Get_address _PMPI_Get_address
 void  (*_LOCAL_MPI_Get_address)(void *,size_t *,int *);
 
 void  A_f_MPI_Get_address(void * location,size_t * address,int * ret)
@@ -6133,7 +5967,6 @@ void  pmpi_info_create__(int *,int *);
 
 void  pmpi_info_create_(int *,int *);
 
-//#define A_f_MPI_Info_create _PMPI_Info_create
 void  (*_LOCAL_MPI_Info_create)(int *,int *);
 
 void  A_f_MPI_Info_create(int * info,int * ret)
@@ -6164,7 +5997,6 @@ void  pmpi_info_dup__(int *,int *,int *);
 
 void  pmpi_info_dup_(int *,int *,int *);
 
-//#define A_f_MPI_Info_dup _PMPI_Info_dup
 void  (*_LOCAL_MPI_Info_dup)(int *,int *,int *);
 
 void  A_f_MPI_Info_dup(int * info,int * newinfo,int * ret)
@@ -6197,7 +6029,6 @@ void  pmpi_info_free__(int *,int *);
 
 void  pmpi_info_free_(int *,int *);
 
-//#define A_f_MPI_Info_free _PMPI_Info_free
 void  (*_LOCAL_MPI_Info_free)(int *,int *);
 
 void  A_f_MPI_Info_free(int * info,int * ret)
@@ -6229,7 +6060,6 @@ void  pmpi_info_get_nkeys__(int *,int *,int *);
 
 void  pmpi_info_get_nkeys_(int *,int *,int *);
 
-//#define A_f_MPI_Info_get_nkeys _PMPI_Info_get_nkeys
 void  (*_LOCAL_MPI_Info_get_nkeys)(int *,int *,int *);
 
 void  A_f_MPI_Info_get_nkeys(int * info,int * nkeys,int * ret)
@@ -6260,7 +6090,6 @@ void  pmpi_request_get_status__(int *,int *,int *,int *);
 
 void  pmpi_request_get_status_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Request_get_status _PMPI_Request_get_status
 void  (*_LOCAL_MPI_Request_get_status)(int *,int *,int *,int *);
 
 void  A_f_MPI_Request_get_status(int * request,int * flag,int * status,int * ret)
@@ -6295,7 +6124,6 @@ void  pmpi_type_create_hvector__(int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_type_create_hvector_(int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_hvector _PMPI_Type_create_hvector
 void  (*_LOCAL_MPI_Type_create_hvector)(int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_hvector(int * count,int * blocklength,size_t * stride,int * oldtype,int * newtype,int * ret)
@@ -6328,7 +6156,6 @@ void  pmpi_type_create_resized__(int *,size_t *,size_t *,int *,int *);
 
 void  pmpi_type_create_resized_(int *,size_t *,size_t *,int *,int *);
 
-//#define A_f_MPI_Type_create_resized _PMPI_Type_create_resized
 void  (*_LOCAL_MPI_Type_create_resized)(int *,size_t *,size_t *,int *,int *);
 
 void  A_f_MPI_Type_create_resized(int * oldtype,size_t * lb,size_t * extent,int * newtype,int * ret)
@@ -6361,7 +6188,6 @@ void  pmpi_type_get_extent__(int *,size_t *,size_t *,int *);
 
 void  pmpi_type_get_extent_(int *,size_t *,size_t *,int *);
 
-//#define A_f_MPI_Type_get_extent _PMPI_Type_get_extent
 void  (*_LOCAL_MPI_Type_get_extent)(int *,size_t *,size_t *,int *);
 
 void  A_f_MPI_Type_get_extent(int * datatype,size_t * lb,size_t * extent,int * ret)
@@ -6392,7 +6218,6 @@ void  pmpi_type_get_true_extent__(int *,size_t *,size_t *,int *);
 
 void  pmpi_type_get_true_extent_(int *,size_t *,size_t *,int *);
 
-//#define A_f_MPI_Type_get_true_extent _PMPI_Type_get_true_extent
 void  (*_LOCAL_MPI_Type_get_true_extent)(int *,size_t *,size_t *,int *);
 
 void  A_f_MPI_Type_get_true_extent(int * datatype,size_t * true_lb,size_t * true_extent,int * ret)
@@ -6423,7 +6248,6 @@ void  pmpi_type_create_f90_integer__(int *,int *,int *);
 
 void  pmpi_type_create_f90_integer_(int *,int *,int *);
 
-//#define A_f_MPI_Type_create_f90_integer _PMPI_Type_create_f90_integer
 void  (*_LOCAL_MPI_Type_create_f90_integer)(int *,int *,int *);
 
 void  A_f_MPI_Type_create_f90_integer(int * range,int * newtype,int * ret)
@@ -6454,7 +6278,6 @@ void  pmpi_type_create_f90_real__(int *,int *,int *,int *);
 
 void  pmpi_type_create_f90_real_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_f90_real _PMPI_Type_create_f90_real
 void  (*_LOCAL_MPI_Type_create_f90_real)(int *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_f90_real(int * precision,int * range,int * newtype,int * ret)
@@ -6485,7 +6308,6 @@ void  pmpi_type_create_f90_complex__(int *,int *,int *,int *);
 
 void  pmpi_type_create_f90_complex_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_f90_complex _PMPI_Type_create_f90_complex
 void  (*_LOCAL_MPI_Type_create_f90_complex)(int *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_f90_complex(int * precision,int * range,int * newtype,int * ret)
@@ -6516,7 +6338,6 @@ void  pmpi_reduce_local__(void *,void *,int *,int *,int *,int *);
 
 void  pmpi_reduce_local_(void *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Reduce_local _PMPI_Reduce_local
 void  (*_LOCAL_MPI_Reduce_local)(void *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_Reduce_local(void * inbuf,void * inoutbuf,int * count,int * datatype,int * op,int * ret)
@@ -6553,7 +6374,6 @@ void  pmpi_op_commutative__(int *,int *,int *);
 
 void  pmpi_op_commutative_(int *,int *,int *);
 
-//#define A_f_MPI_Op_commutative _PMPI_Op_commutative
 void  (*_LOCAL_MPI_Op_commutative)(int *,int *,int *);
 
 void  A_f_MPI_Op_commutative(int * op,int * commute,int * ret)
@@ -6584,7 +6404,6 @@ void  pmpi_reduce_scatter_block__(void *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_reduce_scatter_block_(void *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Reduce_scatter_block _PMPI_Reduce_scatter_block
 void  (*_LOCAL_MPI_Reduce_scatter_block)(void *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int * recvcount,int * datatype,int * op,int * comm,int * ret)
@@ -6623,7 +6442,6 @@ void  pmpi_dist_graph_neighbors_count__(int *,int *,int *,int *,int *);
 
 void  pmpi_dist_graph_neighbors_count_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Dist_graph_neighbors_count _PMPI_Dist_graph_neighbors_count
 void  (*_LOCAL_MPI_Dist_graph_neighbors_count)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Dist_graph_neighbors_count(int * comm,int * indegree,int * outdegree,int * weighted,int * ret)
@@ -6654,7 +6472,6 @@ void  pmpi_improbe__(int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_improbe_(int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Improbe _PMPI_Improbe
 void  (*_LOCAL_MPI_Improbe)(int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Improbe(int * source,int * tag,int * comm,int * flag,int * message,int * status,int * ret)
@@ -6695,7 +6512,6 @@ void  pmpi_imrecv__(void *,int *,int *,int *,int *,int *);
 
 void  pmpi_imrecv_(void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Imrecv _PMPI_Imrecv
 void  (*_LOCAL_MPI_Imrecv)(void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Imrecv(void * buf,int * count,int * datatype,int * message,int * request,int * ret)
@@ -6733,7 +6549,6 @@ void  pmpi_mprobe__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_mprobe_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Mprobe _PMPI_Mprobe
 void  (*_LOCAL_MPI_Mprobe)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Mprobe(int * source,int * tag,int * comm,int * message,int * status,int * ret)
@@ -6774,7 +6589,6 @@ void  pmpi_mrecv__(void *,int *,int *,int *,int *,int *);
 
 void  pmpi_mrecv_(void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Mrecv _PMPI_Mrecv
 void  (*_LOCAL_MPI_Mrecv)(void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Mrecv(void * buf,int * count,int * datatype,int * message,int * status,int * ret)
@@ -6814,7 +6628,6 @@ void  pmpi_comm_idup__(int *,int *,int *,int *);
 
 void  pmpi_comm_idup_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_idup _PMPI_Comm_idup
 void  (*_LOCAL_MPI_Comm_idup)(int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_idup(int * comm,int * newcomm,int * request,int * ret)
@@ -6849,7 +6662,6 @@ void  pmpi_ibarrier__(int *,int *,int *);
 
 void  pmpi_ibarrier_(int *,int *,int *);
 
-//#define A_f_MPI_Ibarrier _PMPI_Ibarrier
 void  (*_LOCAL_MPI_Ibarrier)(int *,int *,int *);
 
 void  A_f_MPI_Ibarrier(int * comm,int * request,int * ret)
@@ -6882,7 +6694,6 @@ void  pmpi_ibcast__(void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_ibcast_(void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ibcast _PMPI_Ibcast
 void  (*_LOCAL_MPI_Ibcast)(void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ibcast(void * buffer,int * count,int * datatype,int * root,int * comm,int * request,int * ret)
@@ -6920,7 +6731,6 @@ void  pmpi_igather__(void *,int *,int *,void *,int *,int *,int *,int *,int *,int
 
 void  pmpi_igather_(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Igather _PMPI_Igather
 void  (*_LOCAL_MPI_Igather)(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Igather(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * root,int * comm,int * request,int * ret)
@@ -6962,7 +6772,6 @@ void  pmpi_iscatter__(void *,int *,int *,void *,int *,int *,int *,int *,int *,in
 
 void  pmpi_iscatter_(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iscatter _PMPI_Iscatter
 void  (*_LOCAL_MPI_Iscatter)(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iscatter(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * root,int * comm,int * request,int * ret)
@@ -7004,7 +6813,6 @@ void  pmpi_iallgather__(void *,int *,int *,void *,int *,int *,int *,int *,int *)
 
 void  pmpi_iallgather_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iallgather _PMPI_Iallgather
 void  (*_LOCAL_MPI_Iallgather)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iallgather(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * request,int * ret)
@@ -7046,7 +6854,6 @@ void  pmpi_ialltoall__(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_ialltoall_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ialltoall _PMPI_Ialltoall
 void  (*_LOCAL_MPI_Ialltoall)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ialltoall(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * request,int * ret)
@@ -7088,7 +6895,6 @@ void  pmpi_ireduce__(void *,void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_ireduce_(void *,void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ireduce _PMPI_Ireduce
 void  (*_LOCAL_MPI_Ireduce)(void *,void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ireduce(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * root,int * comm,int * request,int * ret)
@@ -7130,7 +6936,6 @@ void  pmpi_iallreduce__(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_iallreduce_(void *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iallreduce _PMPI_Iallreduce
 void  (*_LOCAL_MPI_Iallreduce)(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iallreduce(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * comm,int * request,int * ret)
@@ -7172,7 +6977,6 @@ void  pmpi_ireduce_scatter_block__(void *,void *,int *,int *,int *,int *,int *,i
 
 void  pmpi_ireduce_scatter_block_(void *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ireduce_scatter_block _PMPI_Ireduce_scatter_block
 void  (*_LOCAL_MPI_Ireduce_scatter_block)(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ireduce_scatter_block(void * sendbuf,void * recvbuf,int * recvcount,int * datatype,int * op,int * comm,int * request,int * ret)
@@ -7215,7 +7019,6 @@ void  pmpi_iscan__(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_iscan_(void *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iscan _PMPI_Iscan
 void  (*_LOCAL_MPI_Iscan)(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iscan(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * comm,int * request,int * ret)
@@ -7256,7 +7059,6 @@ void  pmpi_iexscan__(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_iexscan_(void *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iexscan _PMPI_Iexscan
 void  (*_LOCAL_MPI_Iexscan)(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iexscan(void * sendbuf,void * recvbuf,int * count,int * datatype,int * op,int * comm,int * request,int * ret)
@@ -7297,7 +7099,6 @@ void  pmpi_ineighbor_allgather__(void *,int *,int *,void *,int *,int *,int *,int
 
 void  pmpi_ineighbor_allgather_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ineighbor_allgather _PMPI_Ineighbor_allgather
 void  (*_LOCAL_MPI_Ineighbor_allgather)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ineighbor_allgather(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * request,int * ret)
@@ -7338,7 +7139,6 @@ void  pmpi_ineighbor_alltoall__(void *,int *,int *,void *,int *,int *,int *,int 
 
 void  pmpi_ineighbor_alltoall_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ineighbor_alltoall _PMPI_Ineighbor_alltoall
 void  (*_LOCAL_MPI_Ineighbor_alltoall)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ineighbor_alltoall(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * request,int * ret)
@@ -7379,7 +7179,6 @@ void  pmpi_neighbor_allgather__(void *,int *,int *,void *,int *,int *,int *,int 
 
 void  pmpi_neighbor_allgather_(void *,int *,int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Neighbor_allgather _PMPI_Neighbor_allgather
 void  (*_LOCAL_MPI_Neighbor_allgather)(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_Neighbor_allgather(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * ret)
@@ -7418,7 +7217,6 @@ void  pmpi_neighbor_alltoall__(void *,int *,int *,void *,int *,int *,int *,int *
 
 void  pmpi_neighbor_alltoall_(void *,int *,int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Neighbor_alltoall _PMPI_Neighbor_alltoall
 void  (*_LOCAL_MPI_Neighbor_alltoall)(void *,int *,int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_Neighbor_alltoall(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * comm,int * ret)
@@ -7457,7 +7255,6 @@ void  pmpi_comm_split_type__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_comm_split_type_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_split_type _PMPI_Comm_split_type
 void  (*_LOCAL_MPI_Comm_split_type)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_split_type(int * comm,int * split_type,int * key,int * info,int * newcomm,int * ret)
@@ -7492,7 +7289,6 @@ void  pmpi_get_elements_x__(int *,int *,int *,int *);
 
 void  pmpi_get_elements_x_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Get_elements_x _PMPI_Get_elements_x
 void  (*_LOCAL_MPI_Get_elements_x)(int *,int *,int *,int *);
 
 void  A_f_MPI_Get_elements_x(int * status,int * datatype,int * count,int * ret)
@@ -7526,7 +7322,6 @@ void  pmpi_status_set_elements_x__(int *,int *,int *,int *);
 
 void  pmpi_status_set_elements_x_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Status_set_elements_x _PMPI_Status_set_elements_x
 void  (*_LOCAL_MPI_Status_set_elements_x)(int *,int *,int *,int *);
 
 void  A_f_MPI_Status_set_elements_x(int * status,int * datatype,int * count,int * ret)
@@ -7562,7 +7357,6 @@ void  pmpi_type_get_extent_x__(int *,int *,int *,int *);
 
 void  pmpi_type_get_extent_x_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_get_extent_x _PMPI_Type_get_extent_x
 void  (*_LOCAL_MPI_Type_get_extent_x)(int *,int *,int *,int *);
 
 void  A_f_MPI_Type_get_extent_x(int * datatype,int * lb,int * extent,int * ret)
@@ -7593,7 +7387,6 @@ void  pmpi_type_get_true_extent_x__(int *,int *,int *,int *);
 
 void  pmpi_type_get_true_extent_x_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_get_true_extent_x _PMPI_Type_get_true_extent_x
 void  (*_LOCAL_MPI_Type_get_true_extent_x)(int *,int *,int *,int *);
 
 void  A_f_MPI_Type_get_true_extent_x(int * datatype,int * lb,int * extent,int * ret)
@@ -7624,7 +7417,6 @@ void  pmpi_type_size_x__(int *,int *,int *);
 
 void  pmpi_type_size_x_(int *,int *,int *);
 
-//#define A_f_MPI_Type_size_x _PMPI_Type_size_x
 void  (*_LOCAL_MPI_Type_size_x)(int *,int *,int *);
 
 void  A_f_MPI_Type_size_x(int * datatype,int * size,int * ret)
@@ -7655,7 +7447,6 @@ void  pmpi_comm_create_group__(int *,int *,int *,int *,int *);
 
 void  pmpi_comm_create_group_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Comm_create_group _PMPI_Comm_create_group
 void  (*_LOCAL_MPI_Comm_create_group)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Comm_create_group(int * comm,int * group,int * tag,int * newcomm,int * ret)
@@ -7692,7 +7483,6 @@ void  pmpi_file_close__(int *,int *);
 
 void  pmpi_file_close_(int *,int *);
 
-//#define A_f_MPI_File_close _PMPI_File_close
 void  (*_LOCAL_MPI_File_close)(int *,int *);
 
 void  A_f_MPI_File_close(int * fh,int * ret)
@@ -7721,7 +7511,6 @@ void  pmpi_file_set_size__(int *,int*,int *);
 
 void  pmpi_file_set_size_(int *,int*,int *);
 
-//#define A_f_MPI_File_set_size _PMPI_File_set_size
 void  (*_LOCAL_MPI_File_set_size)(int *,int*,int *);
 
 void  A_f_MPI_File_set_size(int * fh,int* size,int * ret)
@@ -7750,7 +7539,6 @@ void  pmpi_file_preallocate__(int *,int*,int *);
 
 void  pmpi_file_preallocate_(int *,int*,int *);
 
-//#define A_f_MPI_File_preallocate _PMPI_File_preallocate
 void  (*_LOCAL_MPI_File_preallocate)(int *,int*,int *);
 
 void  A_f_MPI_File_preallocate(int * fh,int* size,int * ret)
@@ -7779,7 +7567,6 @@ void  pmpi_file_get_size__(int *,int*,int *);
 
 void  pmpi_file_get_size_(int *,int*,int *);
 
-//#define A_f_MPI_File_get_size _PMPI_File_get_size
 void  (*_LOCAL_MPI_File_get_size)(int *,int*,int *);
 
 void  A_f_MPI_File_get_size(int * fh,int* size,int * ret)
@@ -7808,7 +7595,6 @@ void  pmpi_file_get_group__(int *,int *,int *);
 
 void  pmpi_file_get_group_(int *,int *,int *);
 
-//#define A_f_MPI_File_get_group _PMPI_File_get_group
 void  (*_LOCAL_MPI_File_get_group)(int *,int *,int *);
 
 void  A_f_MPI_File_get_group(int * fh,int * group,int * ret)
@@ -7839,7 +7625,6 @@ void  pmpi_file_get_amode__(int *,int *,int *);
 
 void  pmpi_file_get_amode_(int *,int *,int *);
 
-//#define A_f_MPI_File_get_amode _PMPI_File_get_amode
 void  (*_LOCAL_MPI_File_get_amode)(int *,int *,int *);
 
 void  A_f_MPI_File_get_amode(int * fh,int * amode,int * ret)
@@ -7868,7 +7653,6 @@ void  pmpi_file_set_info__(int *,int *,int *);
 
 void  pmpi_file_set_info_(int *,int *,int *);
 
-//#define A_f_MPI_File_set_info _PMPI_File_set_info
 void  (*_LOCAL_MPI_File_set_info)(int *,int *,int *);
 
 void  A_f_MPI_File_set_info(int * fh,int * info,int * ret)
@@ -7899,7 +7683,6 @@ void  pmpi_file_get_info__(int *,int *,int *);
 
 void  pmpi_file_get_info_(int *,int *,int *);
 
-//#define A_f_MPI_File_get_info _PMPI_File_get_info
 void  (*_LOCAL_MPI_File_get_info)(int *,int *,int *);
 
 void  A_f_MPI_File_get_info(int * fh,int * info_used,int * ret)
@@ -7930,7 +7713,6 @@ void  pmpi_file_read_at__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_read_at_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_at _PMPI_File_read_at
 void  (*_LOCAL_MPI_File_read_at)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_read_at(int * fh,int* offset,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -7967,7 +7749,6 @@ void  pmpi_file_read_at_all__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_read_at_all_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_at_all _PMPI_File_read_at_all
 void  (*_LOCAL_MPI_File_read_at_all)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_read_at_all(int * fh,int* offset,void *  buf,int * count,int * datatype,int * status,int * ret)
@@ -8004,7 +7785,6 @@ void  pmpi_file_write_at__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_write_at_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_at _PMPI_File_write_at
 void  (*_LOCAL_MPI_File_write_at)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_write_at(int * fh,int* offset,void *  buf,int * count,int * datatype,int * status,int * ret)
@@ -8041,7 +7821,6 @@ void  pmpi_file_write_at_all__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_write_at_all_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_at_all _PMPI_File_write_at_all
 void  (*_LOCAL_MPI_File_write_at_all)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_write_at_all(int * fh,int* offset,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8078,7 +7857,6 @@ void  pmpi_file_iread_at__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iread_at_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iread_at _PMPI_File_iread_at
 void  (*_LOCAL_MPI_File_iread_at)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iread_at(int * fh,int* offset,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -8113,7 +7891,6 @@ void  pmpi_file_iwrite_at__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iwrite_at_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iwrite_at _PMPI_File_iwrite_at
 void  (*_LOCAL_MPI_File_iwrite_at)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iwrite_at(int * fh,int* offset,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -8148,7 +7925,6 @@ void  pmpi_file_read__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_read_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_read _PMPI_File_read
 void  (*_LOCAL_MPI_File_read)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_read(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8185,7 +7961,6 @@ void  pmpi_file_read_all__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_read_all_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_all _PMPI_File_read_all
 void  (*_LOCAL_MPI_File_read_all)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_read_all(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8222,7 +7997,6 @@ void  pmpi_file_write__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_write_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_write _PMPI_File_write
 void  (*_LOCAL_MPI_File_write)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_write(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8259,7 +8033,6 @@ void  pmpi_file_write_all__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_write_all_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_all _PMPI_File_write_all
 void  (*_LOCAL_MPI_File_write_all)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_write_all(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8296,7 +8069,6 @@ void  pmpi_file_iread__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iread_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iread _PMPI_File_iread
 void  (*_LOCAL_MPI_File_iread)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iread(int * fh,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -8331,7 +8103,6 @@ void  pmpi_file_iwrite__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iwrite_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iwrite _PMPI_File_iwrite
 void  (*_LOCAL_MPI_File_iwrite)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iwrite(int * fh,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -8368,7 +8139,6 @@ void  pmpi_file_seek__(int *,int*,int *,int *);
 
 void  pmpi_file_seek_(int *,int*,int *,int *);
 
-//#define A_f_MPI_File_seek _PMPI_File_seek
 void  (*_LOCAL_MPI_File_seek)(int *,int*,int *,int *);
 
 void  A_f_MPI_File_seek(int * fh,int* offset,int * whence,int * ret)
@@ -8397,7 +8167,6 @@ void  pmpi_file_get_position__(int *,int*,int *);
 
 void  pmpi_file_get_position_(int *,int*,int *);
 
-//#define A_f_MPI_File_get_position _PMPI_File_get_position
 void  (*_LOCAL_MPI_File_get_position)(int *,int*,int *);
 
 void  A_f_MPI_File_get_position(int * fh,int* offset,int * ret)
@@ -8426,7 +8195,6 @@ void  pmpi_file_get_byte_offset__(int *,int*,int*,int *);
 
 void  pmpi_file_get_byte_offset_(int *,int*,int*,int *);
 
-//#define A_f_MPI_File_get_byte_offset _PMPI_File_get_byte_offset
 void  (*_LOCAL_MPI_File_get_byte_offset)(int *,int*,int*,int *);
 
 void  A_f_MPI_File_get_byte_offset(int * fh,int* offset,int* disp,int * ret)
@@ -8455,7 +8223,6 @@ void  pmpi_file_read_shared__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_read_shared_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_shared _PMPI_File_read_shared
 void  (*_LOCAL_MPI_File_read_shared)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_read_shared(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8492,7 +8259,6 @@ void  pmpi_file_write_shared__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_write_shared_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_shared _PMPI_File_write_shared
 void  (*_LOCAL_MPI_File_write_shared)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_write_shared(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8529,7 +8295,6 @@ void  pmpi_file_iread_shared__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iread_shared_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iread_shared _PMPI_File_iread_shared
 void  (*_LOCAL_MPI_File_iread_shared)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iread_shared(int * fh,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -8564,7 +8329,6 @@ void  pmpi_file_iwrite_shared__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iwrite_shared_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iwrite_shared _PMPI_File_iwrite_shared
 void  (*_LOCAL_MPI_File_iwrite_shared)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iwrite_shared(int * fh,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -8599,7 +8363,6 @@ void  pmpi_file_read_ordered__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_read_ordered_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_ordered _PMPI_File_read_ordered
 void  (*_LOCAL_MPI_File_read_ordered)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_read_ordered(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8636,7 +8399,6 @@ void  pmpi_file_write_ordered__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_write_ordered_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_ordered _PMPI_File_write_ordered
 void  (*_LOCAL_MPI_File_write_ordered)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_write_ordered(int * fh,void * buf,int * count,int * datatype,int * status,int * ret)
@@ -8673,7 +8435,6 @@ void  pmpi_file_seek_shared__(int *,int*,int *,int *);
 
 void  pmpi_file_seek_shared_(int *,int*,int *,int *);
 
-//#define A_f_MPI_File_seek_shared _PMPI_File_seek_shared
 void  (*_LOCAL_MPI_File_seek_shared)(int *,int*,int *,int *);
 
 void  A_f_MPI_File_seek_shared(int * fh,int* offset,int * whence,int * ret)
@@ -8702,7 +8463,6 @@ void  pmpi_file_get_position_shared__(int *,int*,int *);
 
 void  pmpi_file_get_position_shared_(int *,int*,int *);
 
-//#define A_f_MPI_File_get_position_shared _PMPI_File_get_position_shared
 void  (*_LOCAL_MPI_File_get_position_shared)(int *,int*,int *);
 
 void  A_f_MPI_File_get_position_shared(int * fh,int* offset,int * ret)
@@ -8731,7 +8491,6 @@ void  pmpi_file_read_at_all_begin__(int *,int*,void *,int *,int *,int *);
 
 void  pmpi_file_read_at_all_begin_(int *,int*,void *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_at_all_begin _PMPI_File_read_at_all_begin
 void  (*_LOCAL_MPI_File_read_at_all_begin)(int *,int*,void *,int *,int *,int *);
 
 void  A_f_MPI_File_read_at_all_begin(int * fh,int* offset,void * buf,int * count,int * datatype,int * ret)
@@ -8764,7 +8523,6 @@ void  pmpi_file_read_at_all_end__(int *,void *,int *,int *);
 
 void  pmpi_file_read_at_all_end_(int *,void *,int *,int *);
 
-//#define A_f_MPI_File_read_at_all_end _PMPI_File_read_at_all_end
 void  (*_LOCAL_MPI_File_read_at_all_end)(int *,void *,int *,int *);
 
 void  A_f_MPI_File_read_at_all_end(int * fh,void * buf,int * status,int * ret)
@@ -8799,7 +8557,6 @@ void  pmpi_file_write_at_all_begin__(int *,int*,void *,int *,int *,int *);
 
 void  pmpi_file_write_at_all_begin_(int *,int*,void *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_at_all_begin _PMPI_File_write_at_all_begin
 void  (*_LOCAL_MPI_File_write_at_all_begin)(int *,int*,void *,int *,int *,int *);
 
 void  A_f_MPI_File_write_at_all_begin(int * fh,int* offset,void * buf,int * count,int * datatype,int * ret)
@@ -8832,7 +8589,6 @@ void  pmpi_file_write_at_all_end__(int *,void *,int *,int *);
 
 void  pmpi_file_write_at_all_end_(int *,void *,int *,int *);
 
-//#define A_f_MPI_File_write_at_all_end _PMPI_File_write_at_all_end
 void  (*_LOCAL_MPI_File_write_at_all_end)(int *,void *,int *,int *);
 
 void  A_f_MPI_File_write_at_all_end(int * fh,void * buf,int * status,int * ret)
@@ -8867,7 +8623,6 @@ void  pmpi_file_read_all_begin__(int *,void *,int *,int *,int *);
 
 void  pmpi_file_read_all_begin_(int *,void *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_all_begin _PMPI_File_read_all_begin
 void  (*_LOCAL_MPI_File_read_all_begin)(int *,void *,int *,int *,int *);
 
 void  A_f_MPI_File_read_all_begin(int * fh,void * buf,int * count,int * datatype,int * ret)
@@ -8900,7 +8655,6 @@ void  pmpi_file_read_all_end__(int *,void *,int *,int *);
 
 void  pmpi_file_read_all_end_(int *,void *,int *,int *);
 
-//#define A_f_MPI_File_read_all_end _PMPI_File_read_all_end
 void  (*_LOCAL_MPI_File_read_all_end)(int *,void *,int *,int *);
 
 void  A_f_MPI_File_read_all_end(int * fh,void * buf,int * status,int * ret)
@@ -8935,7 +8689,6 @@ void  pmpi_file_write_all_begin__(int *,void *,int *,int *,int *);
 
 void  pmpi_file_write_all_begin_(int *,void *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_all_begin _PMPI_File_write_all_begin
 void  (*_LOCAL_MPI_File_write_all_begin)(int *,void *,int *,int *,int *);
 
 void  A_f_MPI_File_write_all_begin(int * fh,void * buf,int * count,int * datatype,int * ret)
@@ -8970,7 +8723,6 @@ void  pmpi_file_write_all_end__(int *,void *,int *,int *);
 
 void  pmpi_file_write_all_end_(int *,void *,int *,int *);
 
-//#define A_f_MPI_File_write_all_end _PMPI_File_write_all_end
 void  (*_LOCAL_MPI_File_write_all_end)(int *,void *,int *,int *);
 
 void  A_f_MPI_File_write_all_end(int * fh,void * buf,int * status,int * ret)
@@ -9005,7 +8757,6 @@ void  pmpi_file_read_ordered_begin__(int *,void *,int *,int *,int *);
 
 void  pmpi_file_read_ordered_begin_(int *,void *,int *,int *,int *);
 
-//#define A_f_MPI_File_read_ordered_begin _PMPI_File_read_ordered_begin
 void  (*_LOCAL_MPI_File_read_ordered_begin)(int *,void *,int *,int *,int *);
 
 void  A_f_MPI_File_read_ordered_begin(int * fh,void * buf,int * count,int * datatype,int * ret)
@@ -9038,7 +8789,6 @@ void  pmpi_file_read_ordered_end__(int *,void *,int *,int *);
 
 void  pmpi_file_read_ordered_end_(int *,void *,int *,int *);
 
-//#define A_f_MPI_File_read_ordered_end _PMPI_File_read_ordered_end
 void  (*_LOCAL_MPI_File_read_ordered_end)(int *,void *,int *,int *);
 
 void  A_f_MPI_File_read_ordered_end(int * fh,void * buf,int * status,int * ret)
@@ -9073,7 +8823,6 @@ void  pmpi_file_write_ordered_begin__(int *,void *,int *,int *,int *);
 
 void  pmpi_file_write_ordered_begin_(int *,void *,int *,int *,int *);
 
-//#define A_f_MPI_File_write_ordered_begin _PMPI_File_write_ordered_begin
 void  (*_LOCAL_MPI_File_write_ordered_begin)(int *,void *,int *,int *,int *);
 
 void  A_f_MPI_File_write_ordered_begin(int * fh,void * buf,int * count,int * datatype,int * ret)
@@ -9106,7 +8855,6 @@ void  pmpi_file_write_ordered_end__(int *,void *,int *,int *);
 
 void  pmpi_file_write_ordered_end_(int *,void *,int *,int *);
 
-//#define A_f_MPI_File_write_ordered_end _PMPI_File_write_ordered_end
 void  (*_LOCAL_MPI_File_write_ordered_end)(int *,void *,int *,int *);
 
 void  A_f_MPI_File_write_ordered_end(int * fh,void * buf,int * status,int * ret)
@@ -9141,7 +8889,6 @@ void  pmpi_file_get_type_extent__(int *,int *,size_t *,int *);
 
 void  pmpi_file_get_type_extent_(int *,int *,size_t *,int *);
 
-//#define A_f_MPI_File_get_type_extent _PMPI_File_get_type_extent
 void  (*_LOCAL_MPI_File_get_type_extent)(int *,int *,size_t *,int *);
 
 void  A_f_MPI_File_get_type_extent(int * fh,int * datatype,size_t * extent,int * ret)
@@ -9172,7 +8919,6 @@ void  pmpi_file_set_atomicity__(int *,int *,int *);
 
 void  pmpi_file_set_atomicity_(int *,int *,int *);
 
-//#define A_f_MPI_File_set_atomicity _PMPI_File_set_atomicity
 void  (*_LOCAL_MPI_File_set_atomicity)(int *,int *,int *);
 
 void  A_f_MPI_File_set_atomicity(int * fh,int * flag,int * ret)
@@ -9201,7 +8947,6 @@ void  pmpi_file_get_atomicity__(int *,int *,int *);
 
 void  pmpi_file_get_atomicity_(int *,int *,int *);
 
-//#define A_f_MPI_File_get_atomicity _PMPI_File_get_atomicity
 void  (*_LOCAL_MPI_File_get_atomicity)(int *,int *,int *);
 
 void  A_f_MPI_File_get_atomicity(int * fh,int * flag,int * ret)
@@ -9230,7 +8975,6 @@ void  pmpi_file_sync__(int *,int *);
 
 void  pmpi_file_sync_(int *,int *);
 
-//#define A_f_MPI_File_sync _PMPI_File_sync
 void  (*_LOCAL_MPI_File_sync)(int *,int *);
 
 void  A_f_MPI_File_sync(int * fh,int * ret)
@@ -9259,7 +9003,6 @@ void  pmpi_wtime__(double *);
 
 void  pmpi_wtime_(double *);
 
-//#define A_f_MPI_Wtime _PMPI_Wtime
 void  (*_LOCAL_MPI_Wtime)(double *);
 
 void  A_f_MPI_Wtime(double * ret)
@@ -9287,7 +9030,6 @@ void  pmpi_wtick__(double *);
 
 void  pmpi_wtick_(double *);
 
-//#define A_f_MPI_Wtick _PMPI_Wtick
 void  (*_LOCAL_MPI_Wtick)(double *);
 
 void  A_f_MPI_Wtick(double * ret)
@@ -9315,7 +9057,6 @@ void  pmpi_finalize__(int *);
 
 void  pmpi_finalize_(int *);
 
-//#define A_f_MPI_Finalize _PMPI_Finalize
 void  (*_LOCAL_MPI_Finalize)(int *);
 
 void  A_f_MPI_Finalize(int * ret)
@@ -9344,7 +9085,6 @@ void  pmpi_waitany__(int *,int *,int *,int *,int *);
 
 void  pmpi_waitany_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Waitany _PMPI_Waitany
 void  (*_LOCAL_MPI_Waitany)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Waitany(int * count,int * array_of_requests,int * indx,int * status,int * ret)
@@ -9383,7 +9123,6 @@ void  pmpi_testany__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_testany_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Testany _PMPI_Testany
 void  (*_LOCAL_MPI_Testany)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Testany(int * count,int * array_of_requests,int * indx,int * flag,int * status,int * ret)
@@ -9422,7 +9161,6 @@ void  pmpi_waitall__(int *,int *,int *,int *);
 
 void  pmpi_waitall_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Waitall _PMPI_Waitall
 void  (*_LOCAL_MPI_Waitall)(int *,int *,int *,int *);
 
 void  A_f_MPI_Waitall(int * count,int * array_of_requests,int * array_of_statuses,int * ret)
@@ -9463,7 +9201,6 @@ void  pmpi_testall__(int *,int *,int *,int *,int *);
 
 void  pmpi_testall_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Testall _PMPI_Testall
 void  (*_LOCAL_MPI_Testall)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Testall(int * count,int * array_of_requests,int * flag,int * array_of_statuses,int * ret)
@@ -9504,7 +9241,6 @@ void  pmpi_waitsome__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_waitsome_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Waitsome _PMPI_Waitsome
 void  (*_LOCAL_MPI_Waitsome)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Waitsome(int * incount,int * array_of_requests,int * outcount,int * array_of_indices,int * array_of_statuses,int * ret)
@@ -9545,7 +9281,6 @@ void  pmpi_testsome__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_testsome_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Testsome _PMPI_Testsome
 void  (*_LOCAL_MPI_Testsome)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Testsome(int * incount,int * array_of_requests,int * outcount,int * array_of_indices,int * array_of_statuses,int * ret)
@@ -9586,7 +9321,6 @@ void  pmpi_startall__(int *,int *,int *);
 
 void  pmpi_startall_(int *,int *,int *);
 
-//#define A_f_MPI_Startall _PMPI_Startall
 void  (*_LOCAL_MPI_Startall)(int *,int *,int *);
 
 void  A_f_MPI_Startall(int * count,int * array_of_requests,int * ret)
@@ -9621,7 +9355,6 @@ void  pmpi_alltoallw__(void *,int *,int *,int *,void *,int *,int *,int *,int *,i
 
 void  pmpi_alltoallw_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Alltoallw _PMPI_Alltoallw
 void  (*_LOCAL_MPI_Alltoallw)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Alltoallw(void * sendbuf,int * sendcounts,int * sdispls,int * sendtypes,void * recvbuf,int * recvcounts,int * rdispls,int * recvtypes,int * comm,int * ret)
@@ -9664,7 +9397,6 @@ void  pmpi_reduce_scatter__(void *,void *,int *,int *,int *,int *,int *);
 
 void  pmpi_reduce_scatter_(void *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Reduce_scatter _PMPI_Reduce_scatter
 void  (*_LOCAL_MPI_Reduce_scatter)(void *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Reduce_scatter(void * sendbuf,void * recvbuf,int * recvcounts,int * datatype,int * op,int * comm,int * ret)
@@ -9704,7 +9436,6 @@ void  pmpi_group_translate_ranks__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_group_translate_ranks_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_translate_ranks _PMPI_Group_translate_ranks
 void  (*_LOCAL_MPI_Group_translate_ranks)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Group_translate_ranks(int * group1,int * n,int * ranks1,int * group2,int * ranks2,int * ret)
@@ -9737,7 +9468,6 @@ void  pmpi_group_incl__(int *,int *,int *,int *,int *);
 
 void  pmpi_group_incl_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_incl _PMPI_Group_incl
 void  (*_LOCAL_MPI_Group_incl)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Group_incl(int * group,int * n,int * ranks,int * newgroup,int * ret)
@@ -9770,7 +9500,6 @@ void  pmpi_group_excl__(int *,int *,int *,int *,int *);
 
 void  pmpi_group_excl_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_excl _PMPI_Group_excl
 void  (*_LOCAL_MPI_Group_excl)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Group_excl(int * group,int * n,int * ranks,int * newgroup,int * ret)
@@ -9803,7 +9532,6 @@ void  pmpi_group_range_incl__(int *,int *,int *,int *,int *);
 
 void  pmpi_group_range_incl_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_range_incl _PMPI_Group_range_incl
 void  (*_LOCAL_MPI_Group_range_incl)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Group_range_incl(int * group,int * n,int * ranges,int * newgroup,int * ret)
@@ -9836,7 +9564,6 @@ void  pmpi_group_range_excl__(int *,int *,int *,int *,int *);
 
 void  pmpi_group_range_excl_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Group_range_excl _PMPI_Group_range_excl
 void  (*_LOCAL_MPI_Group_range_excl)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Group_range_excl(int * group,int * n,int * ranges,int * newgroup,int * ret)
@@ -9869,7 +9596,6 @@ void  pmpi_cart_create__(int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_cart_create_(int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Cart_create _PMPI_Cart_create
 void  (*_LOCAL_MPI_Cart_create)(int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Cart_create(int * comm_old,int * ndims,int * dims,int * periods,int * reorder,int * comm_cart,int * ret)
@@ -9902,7 +9628,6 @@ void  pmpi_dims_create__(int *,int *,int *,int *);
 
 void  pmpi_dims_create_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Dims_create _PMPI_Dims_create
 void  (*_LOCAL_MPI_Dims_create)(int *,int *,int *,int *);
 
 void  A_f_MPI_Dims_create(int * nnodes,int * ndims,int * dims,int * ret)
@@ -9931,7 +9656,6 @@ void  pmpi_graph_create__(int *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_graph_create_(int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Graph_create _PMPI_Graph_create
 void  (*_LOCAL_MPI_Graph_create)(int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Graph_create(int * comm_old,int * nnodes,int * indx,int * edges,int * reorder,int * comm_graph,int * ret)
@@ -9964,7 +9688,6 @@ void  pmpi_graph_get__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_graph_get_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Graph_get _PMPI_Graph_get
 void  (*_LOCAL_MPI_Graph_get)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Graph_get(int * comm,int * maxindex,int * maxedges,int * indx,int * edges,int * ret)
@@ -9995,7 +9718,6 @@ void  pmpi_cart_get__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_cart_get_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Cart_get _PMPI_Cart_get
 void  (*_LOCAL_MPI_Cart_get)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Cart_get(int * comm,int * maxdims,int * dims,int * periods,int * coords,int * ret)
@@ -10026,7 +9748,6 @@ void  pmpi_cart_rank__(int *,int *,int *,int *);
 
 void  pmpi_cart_rank_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Cart_rank _PMPI_Cart_rank
 void  (*_LOCAL_MPI_Cart_rank)(int *,int *,int *,int *);
 
 void  A_f_MPI_Cart_rank(int * comm,int * coords,int * rank,int * ret)
@@ -10057,7 +9778,6 @@ void  pmpi_cart_coords__(int *,int *,int *,int *,int *);
 
 void  pmpi_cart_coords_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Cart_coords _PMPI_Cart_coords
 void  (*_LOCAL_MPI_Cart_coords)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Cart_coords(int * comm,int * rank,int * maxdims,int * coords,int * ret)
@@ -10088,7 +9808,6 @@ void  pmpi_graph_neighbors__(int *,int *,int *,int *,int *);
 
 void  pmpi_graph_neighbors_(int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Graph_neighbors _PMPI_Graph_neighbors
 void  (*_LOCAL_MPI_Graph_neighbors)(int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Graph_neighbors(int * comm,int * rank,int * maxneighbors,int * neighbors,int * ret)
@@ -10119,7 +9838,6 @@ void  pmpi_cart_sub__(int *,int *,int *,int *);
 
 void  pmpi_cart_sub_(int *,int *,int *,int *);
 
-//#define A_f_MPI_Cart_sub _PMPI_Cart_sub
 void  (*_LOCAL_MPI_Cart_sub)(int *,int *,int *,int *);
 
 void  A_f_MPI_Cart_sub(int * comm,int * remain_dims,int * newcomm,int * ret)
@@ -10152,7 +9870,6 @@ void  pmpi_cart_map__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_cart_map_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Cart_map _PMPI_Cart_map
 void  (*_LOCAL_MPI_Cart_map)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Cart_map(int * comm,int * ndims,int * dims,int * periods,int * newrank,int * ret)
@@ -10183,7 +9900,6 @@ void  pmpi_graph_map__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_graph_map_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Graph_map _PMPI_Graph_map
 void  (*_LOCAL_MPI_Graph_map)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Graph_map(int * comm,int * nnodes,int * indx,int * edges,int * newrank,int * ret)
@@ -10214,7 +9930,6 @@ void  pmpi_type_get_contents__(int *,int *,int *,int *,int *,size_t *,int *,int 
 
 void  pmpi_type_get_contents_(int *,int *,int *,int *,int *,size_t *,int *,int *);
 
-//#define A_f_MPI_Type_get_contents _PMPI_Type_get_contents
 void  (*_LOCAL_MPI_Type_get_contents)(int *,int *,int *,int *,int *,size_t *,int *,int *);
 
 void  A_f_MPI_Type_get_contents(int * datatype,int * max_integers,int * max_addresses,int * max_datatypes,int * array_of_integers,size_t * array_of_addresses,int * array_of_datatypes,int * ret)
@@ -10249,7 +9964,6 @@ void  pmpi_type_create_darray__(int *,int *,int *,int *,int *,int *,int *,int *,
 
 void  pmpi_type_create_darray_(int *,int *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_darray _PMPI_Type_create_darray
 void  (*_LOCAL_MPI_Type_create_darray)(int *,int *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_darray(int * size,int * rank,int * ndims,int * array_of_gsizes,int * array_of_distribs,int * array_of_dargs,int * array_of_psizes,int * order,int * oldtype,int * newtype,int * ret)
@@ -10284,7 +9998,6 @@ void  pmpi_type_create_hindexed__(int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_type_create_hindexed_(int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_hindexed _PMPI_Type_create_hindexed
 void  (*_LOCAL_MPI_Type_create_hindexed)(int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_hindexed(int * count,int * array_of_blocklengths,size_t * array_of_displacements,int * oldtype,int * newtype,int * ret)
@@ -10317,7 +10030,6 @@ void  pmpi_type_create_indexed_block__(int *,int *,int *,int *,int *,int *);
 
 void  pmpi_type_create_indexed_block_(int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_indexed_block _PMPI_Type_create_indexed_block
 void  (*_LOCAL_MPI_Type_create_indexed_block)(int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_indexed_block(int * count,int * blocklength,int * array_of_displacements,int * oldtype,int * newtype,int * ret)
@@ -10350,7 +10062,6 @@ void  pmpi_type_create_hindexed_block__(int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_type_create_hindexed_block_(int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_hindexed_block _PMPI_Type_create_hindexed_block
 void  (*_LOCAL_MPI_Type_create_hindexed_block)(int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_hindexed_block(int * count,int * blocklength,size_t * array_of_displacements,int * oldtype,int * newtype,int * ret)
@@ -10383,7 +10094,6 @@ void  pmpi_type_create_struct__(int *,int *,size_t *,int *,int *,int *);
 
 void  pmpi_type_create_struct_(int *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_struct _PMPI_Type_create_struct
 void  (*_LOCAL_MPI_Type_create_struct)(int *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_struct(int * count,int * array_of_blocklengths,size_t * array_of_displacements,int * array_of_types,int * newtype,int * ret)
@@ -10418,7 +10128,6 @@ void  pmpi_type_create_subarray__(int *,int *,int *,int *,int *,int *,int *,int 
 
 void  pmpi_type_create_subarray_(int *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Type_create_subarray _PMPI_Type_create_subarray
 void  (*_LOCAL_MPI_Type_create_subarray)(int *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Type_create_subarray(int * ndims,int * array_of_sizes,int * array_of_subsizes,int * array_of_starts,int * order,int * oldtype,int * newtype,int * ret)
@@ -10453,7 +10162,6 @@ void  pmpi_dist_graph_create_adjacent__(int *,int *,int *,int *,int *,int *,int 
 
 void  pmpi_dist_graph_create_adjacent_(int *,int *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Dist_graph_create_adjacent _PMPI_Dist_graph_create_adjacent
 void  (*_LOCAL_MPI_Dist_graph_create_adjacent)(int *,int *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Dist_graph_create_adjacent(int * comm_old,int * indegree,int * sources,int * sourceweights,int * outdegree,int * destinations,int * destweights,int * info,int * reorder,int * comm_dist_graph,int * ret)
@@ -10492,7 +10200,6 @@ void  pmpi_dist_graph_create__(int *,int *,int *,int *,int *,int *,int *,int *,i
 
 void  pmpi_dist_graph_create_(int *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Dist_graph_create _PMPI_Dist_graph_create
 void  (*_LOCAL_MPI_Dist_graph_create)(int *,int *,int *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Dist_graph_create(int * comm_old,int * n,int * sources,int * degrees,int * destinations,int * weights,int * info,int * reorder,int * comm_dist_graph,int * ret)
@@ -10529,7 +10236,6 @@ void  pmpi_dist_graph_neighbors__(int *,int *,int *,int *,int *,int *,int *,int 
 
 void  pmpi_dist_graph_neighbors_(int *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Dist_graph_neighbors _PMPI_Dist_graph_neighbors
 void  (*_LOCAL_MPI_Dist_graph_neighbors)(int *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Dist_graph_neighbors(int * comm,int * maxindegree,int * sources,int * sourceweights,int * maxoutdegree,int * destinations,int * destweights,int * ret)
@@ -10564,7 +10270,6 @@ void  pmpi_igatherv__(void *,int *,int *,void *,int *,int *,int *,int *,int *,in
 
 void  pmpi_igatherv_(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Igatherv _PMPI_Igatherv
 void  (*_LOCAL_MPI_Igatherv)(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Igatherv(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcounts,int * displs,int * recvtype,int * root,int * comm,int * request,int * ret)
@@ -10606,7 +10311,6 @@ void  pmpi_iscatterv__(void *,int *,int *,int *,void *,int *,int *,int *,int *,i
 
 void  pmpi_iscatterv_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iscatterv _PMPI_Iscatterv
 void  (*_LOCAL_MPI_Iscatterv)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iscatterv(void * sendbuf,int * sendcounts,int * displs,int * sendtype,void * recvbuf,int * recvcount,int * recvtype,int * root,int * comm,int * request,int * ret)
@@ -10648,7 +10352,6 @@ void  pmpi_iallgatherv__(void *,int *,int *,void *,int *,int *,int *,int *,int *
 
 void  pmpi_iallgatherv_(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Iallgatherv _PMPI_Iallgatherv
 void  (*_LOCAL_MPI_Iallgatherv)(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Iallgatherv(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcounts,int * displs,int * recvtype,int * comm,int * request,int * ret)
@@ -10690,7 +10393,6 @@ void  pmpi_ialltoallv__(void *,int *,int *,int *,void *,int *,int *,int *,int *,
 
 void  pmpi_ialltoallv_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ialltoallv _PMPI_Ialltoallv
 void  (*_LOCAL_MPI_Ialltoallv)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ialltoallv(void * sendbuf,int * sendcounts,int * sdispls,int * sendtype,void * recvbuf,int * recvcounts,int * rdispls,int * recvtype,int * comm,int * request,int * ret)
@@ -10733,7 +10435,6 @@ void  pmpi_ialltoallw__(void *,int *,int *,int *,void *,int *,int *,int *,int *,
 
 void  pmpi_ialltoallw_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ialltoallw _PMPI_Ialltoallw
 void  (*_LOCAL_MPI_Ialltoallw)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ialltoallw(void * sendbuf,int * sendcounts,int * sdispls,int * sendtypes,void * recvbuf,int * recvcounts,int * rdispls,int * recvtypes,int * comm,int * request,int * ret)
@@ -10782,7 +10483,6 @@ void  pmpi_ireduce_scatter__(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  pmpi_ireduce_scatter_(void *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ireduce_scatter _PMPI_Ireduce_scatter
 void  (*_LOCAL_MPI_Ireduce_scatter)(void *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int * recvcounts,int * datatype,int * op,int * comm,int * request,int * ret)
@@ -10823,7 +10523,6 @@ void  pmpi_ineighbor_allgatherv__(void *,int *,int *,void *,int *,int *,int *,in
 
 void  pmpi_ineighbor_allgatherv_(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ineighbor_allgatherv _PMPI_Ineighbor_allgatherv
 void  (*_LOCAL_MPI_Ineighbor_allgatherv)(void *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ineighbor_allgatherv(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcounts,int * displs,int * recvtype,int * comm,int * request,int * ret)
@@ -10864,7 +10563,6 @@ void  pmpi_ineighbor_alltoallv__(void *,int *,int *,int *,void *,int *,int *,int
 
 void  pmpi_ineighbor_alltoallv_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ineighbor_alltoallv _PMPI_Ineighbor_alltoallv
 void  (*_LOCAL_MPI_Ineighbor_alltoallv)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ineighbor_alltoallv(void * sendbuf,int * sendcounts,int * sdispls,int * sendtype,void * recvbuf,int * recvcounts,int * rdispls,int * recvtype,int * comm,int * request,int * ret)
@@ -10905,7 +10603,6 @@ void  pmpi_ineighbor_alltoallw__(void *,int *,size_t *,int *,void *,int *,size_t
 
 void  pmpi_ineighbor_alltoallw_(void *,int *,size_t *,int *,void *,int *,size_t *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Ineighbor_alltoallw _PMPI_Ineighbor_alltoallw
 void  (*_LOCAL_MPI_Ineighbor_alltoallw)(void *,int *,size_t *,int *,void *,int *,size_t *,int *,int *,int *,int *);
 
 void  A_f_MPI_Ineighbor_alltoallw(void * sendbuf,int * sendcounts,size_t * sdispls,int * sendtypes,void * recvbuf,int * recvcounts,size_t * rdispls,int * recvtypes,int * comm,int * request,int * ret)
@@ -10949,7 +10646,6 @@ void  pmpi_neighbor_allgatherv__(void *,int *,int *,void *,int *,int *,int *,int
 
 void  pmpi_neighbor_allgatherv_(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Neighbor_allgatherv _PMPI_Neighbor_allgatherv
 void  (*_LOCAL_MPI_Neighbor_allgatherv)(void *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Neighbor_allgatherv(void * sendbuf,int * sendcount,int * sendtype,void * recvbuf,int * recvcounts,int * displs,int * recvtype,int * comm,int * ret)
@@ -10988,7 +10684,6 @@ void  pmpi_neighbor_alltoallv__(void *,int *,int *,int *,void *,int *,int *,int 
 
 void  pmpi_neighbor_alltoallv_(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
-//#define A_f_MPI_Neighbor_alltoallv _PMPI_Neighbor_alltoallv
 void  (*_LOCAL_MPI_Neighbor_alltoallv)(void *,int *,int *,int *,void *,int *,int *,int *,int *,int *);
 
 void  A_f_MPI_Neighbor_alltoallv(void * sendbuf,int * sendcounts,int * sdispls,int * sendtype,void * recvbuf,int * recvcounts,int * rdispls,int * recvtype,int * comm,int * ret)
@@ -11027,7 +10722,6 @@ void  pmpi_neighbor_alltoallw__(void *,int *,size_t *,int *,void *,int *,size_t 
 
 void  pmpi_neighbor_alltoallw_(void *,int *,size_t *,int *,void *,int *,size_t *,int *,int *,int *);
 
-//#define A_f_MPI_Neighbor_alltoallw _PMPI_Neighbor_alltoallw
 void  (*_LOCAL_MPI_Neighbor_alltoallw)(void *,int *,size_t *,int *,void *,int *,size_t *,int *,int *,int *);
 
 void  A_f_MPI_Neighbor_alltoallw(void * sendbuf,int * sendcounts,size_t * sdispls,int * sendtypes,void * recvbuf,int * recvcounts,size_t * rdispls,int * recvtypes,int * comm,int * ret)
@@ -11073,7 +10767,6 @@ void  pmpi_file_iwrite_all__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iwrite_all_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iwrite_all _PMPI_File_iwrite_all
 void  (*_LOCAL_MPI_File_iwrite_all)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iwrite_all(int * fh,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -11109,7 +10802,6 @@ void  pmpi_file_iwrite_at_all__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iwrite_at_all_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iwrite_at_all _PMPI_File_iwrite_at_all
 void  (*_LOCAL_MPI_File_iwrite_at_all)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iwrite_at_all(int * fh,int* offset,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -11145,7 +10837,6 @@ void  pmpi_aint_add__(size_t *,size_t *,size_t *);
 
 void  pmpi_aint_add_(size_t *,size_t *,size_t *);
 
-//#define A_f_MPI_Aint_add _PMPI_Aint_add
 void  (*_LOCAL_MPI_Aint_add)(size_t *,size_t *,size_t *);
 
 void  A_f_MPI_Aint_add(size_t * base,size_t * disp,size_t * ret)
@@ -11173,7 +10864,6 @@ void  pmpi_aint_diff__(size_t *,size_t *,size_t *);
 
 void  pmpi_aint_diff_(size_t *,size_t *,size_t *);
 
-//#define A_f_MPI_Aint_diff _PMPI_Aint_diff
 void  (*_LOCAL_MPI_Aint_diff)(size_t *,size_t *,size_t *);
 
 void  A_f_MPI_Aint_diff(size_t * addr1,size_t * addr2,size_t * ret)
@@ -11201,7 +10891,6 @@ void  pmpi_file_iread_all__(int *,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iread_all_(int *,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iread_all _PMPI_File_iread_all
 void  (*_LOCAL_MPI_File_iread_all)(int *,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iread_all(int * fh,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -11237,7 +10926,6 @@ void  pmpi_file_iread_at_all__(int *,int*,void *,int *,int *,int *,int *);
 
 void  pmpi_file_iread_at_all_(int *,int*,void *,int *,int *,int *,int *);
 
-//#define A_f_MPI_File_iread_at_all _PMPI_File_iread_at_all
 void  (*_LOCAL_MPI_File_iread_at_all)(int *,int*,void *,int *,int *,int *,int *);
 
 void  A_f_MPI_File_iread_at_all(int * fh,int* offset,void * buf,int * count,int * datatype,int * request,int * ret)
@@ -11905,6 +11593,7 @@ in_w=0;
 printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 #endif
 }
+
 #ifdef WI4MPI_STATIC
 #define WATTR
 #else
@@ -11913,10 +11602,32 @@ printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 WATTR void wrapper_init_f(void) {
 dlopen(getenv("WI4MPI_RUN_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
 void *lib_handle_f=dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"),RTLD_NOW|RTLD_GLOBAL);
+void *lib_handle_io_f=dlopen(getenv("WI4MPI_MPIIO_LIB"),RTLD_NOW|RTLD_GLOBAL);
 
 #if !defined(_MPC)
 if(!lib_handle_f) {printf("%s not loaded \nerror : %s\n",getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());exit(1);}
 #endif
+/* ABI FIGE */
+_LOCAL_MPI_Win_free_keyval=dlsym(lib_handle_f,"pmpi_win_free_keyval_");
+_LOCAL_MPI_Win_delete_attr=dlsym(lib_handle_f,"pmpi_win_delete_attr_");
+_LOCAL_MPI_Win_get_attr=dlsym(lib_handle_f,"pmpi_win_get_attr_");
+_LOCAL_MPI_Win_set_attr=dlsym(lib_handle_f,"pmpi_win_set_attr_");
+_LOCAL_MPI_Win_create_keyval=dlsym(lib_handle_f,"pmpi_win_create_keyval_");
+_LOCAL_MPI_Win_create_errhandler=dlsym(lib_handle_f,"pmpi_win_create_errhandler_");
+_LOCAL_MPI_Win_call_errhandler=dlsym(lib_handle_f,"pmpi_win_call_errhandler_");
+_LOCAL_MPI_Win_set_errhandler=dlsym(lib_handle_f,"pmpi_win_set_errhandler_");
+_LOCAL_MPI_Win_get_errhandler=dlsym(lib_handle_f,"pmpi_win_get_errhandler_");
+_LOCAL_MPI_File_call_errhandler=dlsym(lib_handle_io_f,"pmpi_file_call_errhandler_");
+_LOCAL_MPI_File_create_errhandler=dlsym(lib_handle_io_f,"pmpi_file_create_errhandler_");
+_LOCAL_MPI_Type_create_keyval=dlsym(lib_handle_f,"pmpi_type_create_keyval_");
+_LOCAL_MPI_Grequest_complete=dlsym(lib_handle_f,"pmpi_grequest_complete_");
+_LOCAL_MPI_Grequest_start=dlsym(lib_handle_f,"pmpi_grequest_start_");
+_LOCAL_MPI_Comm_create_keyval=dlsym(lib_handle_f,"pmpi_comm_create_keyval_");
+_LOCAL_MPI_Comm_free_keyval=dlsym(lib_handle_f,"pmpi_comm_free_keyval_");
+_LOCAL_MPI_Register_datarep=dlsym(lib_handle_f,"pmpi_register_datarep_");
+_LOCAL_MPI_Comm_spawn_multiple=dlsym(lib_handle_f,"pmpi_comm_spawn_multiple_");
+_LOCAL_MPI_Pcontrol=dlsym(lib_handle_f,"pmpi_pcontrol_");
+/* --- */
 _LOCAL_MPI_Send=dlsym(lib_handle_f,"pmpi_send_");
 _LOCAL_MPI_Recv=dlsym(lib_handle_f,"pmpi_recv_");
 _LOCAL_MPI_Get_count=dlsym(lib_handle_f,"pmpi_get_count_");
@@ -12083,6 +11794,8 @@ _LOCAL_MPI_Alloc_mem=dlsym(lib_handle_f,"pmpi_alloc_mem_");
 _LOCAL_MPI_Comm_create_errhandler=dlsym(lib_handle_f,"pmpi_comm_create_errhandler_");
 _LOCAL_MPI_Comm_get_errhandler=dlsym(lib_handle_f,"pmpi_comm_get_errhandler_");
 _LOCAL_MPI_Comm_set_errhandler=dlsym(lib_handle_f,"pmpi_comm_set_errhandler_");
+_LOCAL_MPI_File_get_errhandler=dlsym(lib_handle_io_f,"pmpi_file_get_errhandler_");
+_LOCAL_MPI_File_set_errhandler=dlsym(lib_handle_io_f,"pmpi_file_set_errhandler_");
 _LOCAL_MPI_Finalized=dlsym(lib_handle_f,"pmpi_finalized_");
 _LOCAL_MPI_Free_mem=dlsym(lib_handle_f,"pmpi_free_mem_");
 _LOCAL_MPI_Get_address=dlsym(lib_handle_f,"pmpi_get_address_");
@@ -12129,74 +11842,53 @@ _LOCAL_MPI_Type_get_extent_x=dlsym(lib_handle_f,"pmpi_type_get_extent_x_");
 _LOCAL_MPI_Type_get_true_extent_x=dlsym(lib_handle_f,"pmpi_type_get_true_extent_x_");
 _LOCAL_MPI_Type_size_x=dlsym(lib_handle_f,"pmpi_type_size_x_");
 _LOCAL_MPI_Comm_create_group=dlsym(lib_handle_f,"pmpi_comm_create_group_");
-
-#if defined(_MPC) // [Start of libromio MPC exception]
-void *lib_handle_f_old = lib_handle_f;
-lib_handle_f = dlopen(getenv("WI4MPI_MPC_ROMIO_LIB"), RTLD_NOW|RTLD_GLOBAL);
-#endif
-_LOCAL_MPI_File_get_errhandler=dlsym(lib_handle_f,"pmpi_file_get_errhandler_");
-_LOCAL_MPI_File_set_errhandler=dlsym(lib_handle_f,"pmpi_file_set_errhandler_");
-_LOCAL_MPI_File_close=dlsym(lib_handle_f,"pmpi_file_close_");
-_LOCAL_MPI_File_set_size=dlsym(lib_handle_f,"pmpi_file_set_size_");
-_LOCAL_MPI_File_preallocate=dlsym(lib_handle_f,"pmpi_file_preallocate_");
-_LOCAL_MPI_File_get_size=dlsym(lib_handle_f,"pmpi_file_get_size_");
-_LOCAL_MPI_File_get_group=dlsym(lib_handle_f,"pmpi_file_get_group_");
-_LOCAL_MPI_File_get_amode=dlsym(lib_handle_f,"pmpi_file_get_amode_");
-_LOCAL_MPI_File_set_info=dlsym(lib_handle_f,"pmpi_file_set_info_");
-_LOCAL_MPI_File_get_info=dlsym(lib_handle_f,"pmpi_file_get_info_");
-_LOCAL_MPI_File_read_at=dlsym(lib_handle_f,"pmpi_file_read_at_");
-_LOCAL_MPI_File_read_at_all=dlsym(lib_handle_f,"pmpi_file_read_at_all_");
-_LOCAL_MPI_File_write_at=dlsym(lib_handle_f,"pmpi_file_write_at_");
-_LOCAL_MPI_File_write_at_all=dlsym(lib_handle_f,"pmpi_file_write_at_all_");
-_LOCAL_MPI_File_iread_at=dlsym(lib_handle_f,"pmpi_file_iread_at_");
-_LOCAL_MPI_File_iwrite_at=dlsym(lib_handle_f,"pmpi_file_iwrite_at_");
-_LOCAL_MPI_File_read=dlsym(lib_handle_f,"pmpi_file_read_");
-_LOCAL_MPI_File_read_all=dlsym(lib_handle_f,"pmpi_file_read_all_");
-_LOCAL_MPI_File_write=dlsym(lib_handle_f,"pmpi_file_write_");
-_LOCAL_MPI_File_write_all=dlsym(lib_handle_f,"pmpi_file_write_all_");
-_LOCAL_MPI_File_iread=dlsym(lib_handle_f,"pmpi_file_iread_");
-_LOCAL_MPI_File_iwrite=dlsym(lib_handle_f,"pmpi_file_iwrite_");
-_LOCAL_MPI_File_seek=dlsym(lib_handle_f,"pmpi_file_seek_");
-_LOCAL_MPI_File_get_position=dlsym(lib_handle_f,"pmpi_file_get_position_");
-_LOCAL_MPI_File_get_byte_offset=dlsym(lib_handle_f,"pmpi_file_get_byte_offset_");
-_LOCAL_MPI_File_read_shared=dlsym(lib_handle_f,"pmpi_file_read_shared_");
-_LOCAL_MPI_File_write_shared=dlsym(lib_handle_f,"pmpi_file_write_shared_");
-_LOCAL_MPI_File_iread_shared=dlsym(lib_handle_f,"pmpi_file_iread_shared_");
-_LOCAL_MPI_File_iwrite_shared=dlsym(lib_handle_f,"pmpi_file_iwrite_shared_");
-_LOCAL_MPI_File_read_ordered=dlsym(lib_handle_f,"pmpi_file_read_ordered_");
-_LOCAL_MPI_File_write_ordered=dlsym(lib_handle_f,"pmpi_file_write_ordered_");
-_LOCAL_MPI_File_seek_shared=dlsym(lib_handle_f,"pmpi_file_seek_shared_");
-_LOCAL_MPI_File_get_position_shared=dlsym(lib_handle_f,"pmpi_file_get_position_shared_");
-_LOCAL_MPI_File_read_at_all_begin=dlsym(lib_handle_f,"pmpi_file_read_at_all_begin_");
-_LOCAL_MPI_File_read_at_all_end=dlsym(lib_handle_f,"pmpi_file_read_at_all_end_");
-_LOCAL_MPI_File_write_at_all_begin=dlsym(lib_handle_f,"pmpi_file_write_at_all_begin_");
-_LOCAL_MPI_File_write_at_all_end=dlsym(lib_handle_f,"pmpi_file_write_at_all_end_");
-_LOCAL_MPI_File_read_all_begin=dlsym(lib_handle_f,"pmpi_file_read_all_begin_");
-_LOCAL_MPI_File_read_all_end=dlsym(lib_handle_f,"pmpi_file_read_all_end_");
-_LOCAL_MPI_File_write_all_begin=dlsym(lib_handle_f,"pmpi_file_write_all_begin_");
-_LOCAL_MPI_File_write_all_end=dlsym(lib_handle_f,"pmpi_file_write_all_end_");
-_LOCAL_MPI_File_read_ordered_begin=dlsym(lib_handle_f,"pmpi_file_read_ordered_begin_");
-_LOCAL_MPI_File_read_ordered_end=dlsym(lib_handle_f,"pmpi_file_read_ordered_end_");
-_LOCAL_MPI_File_write_ordered_begin=dlsym(lib_handle_f,"pmpi_file_write_ordered_begin_");
-_LOCAL_MPI_File_write_ordered_end=dlsym(lib_handle_f,"pmpi_file_write_ordered_end_");
-_LOCAL_MPI_File_get_type_extent=dlsym(lib_handle_f,"pmpi_file_get_type_extent_");
-_LOCAL_MPI_File_set_atomicity=dlsym(lib_handle_f,"pmpi_file_set_atomicity_");
-_LOCAL_MPI_File_get_atomicity=dlsym(lib_handle_f,"pmpi_file_get_atomicity_");
-_LOCAL_MPI_File_sync=dlsym(lib_handle_f,"pmpi_file_sync_");
-_LOCAL_MPI_File_open=dlsym(lib_handle_f,"pmpi_file_open_");
-_LOCAL_MPI_File_set_view=dlsym(lib_handle_f,"pmpi_file_set_view_");
-_LOCAL_MPI_File_get_view=dlsym(lib_handle_f,"pmpi_file_get_view_");
-_LOCAL_MPI_File_delete=dlsym(lib_handle_f,"pmpi_file_delete_");
-_LOCAL_MPI_File_iwrite_all=dlsym(lib_handle_f,"pmpi_file_iwrite_all_");
-_LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle_f,"pmpi_file_iwrite_at_all_");
-_LOCAL_MPI_File_iread_all=dlsym(lib_handle_f,"pmpi_file_iread_all_");
-_LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_f,"pmpi_file_iread_at_all_");
-_LOCAL_MPI_File_call_errhandler=dlsym(lib_handle_f,"pmpi_file_call_errhandler_");
-_LOCAL_MPI_File_create_errhandler=dlsym(lib_handle_f,"pmpi_file_create_errhandler_");
-#if defined(_MPC) // [End of libromio MPC exception]
-lib_handle_f = lib_handle_f_old;
-#endif
-
+_LOCAL_MPI_File_close=dlsym(lib_handle_io_f,"pmpi_file_close_");
+_LOCAL_MPI_File_set_size=dlsym(lib_handle_io_f,"pmpi_file_set_size_");
+_LOCAL_MPI_File_preallocate=dlsym(lib_handle_io_f,"pmpi_file_preallocate_");
+_LOCAL_MPI_File_get_size=dlsym(lib_handle_io_f,"pmpi_file_get_size_");
+_LOCAL_MPI_File_get_group=dlsym(lib_handle_io_f,"pmpi_file_get_group_");
+_LOCAL_MPI_File_get_amode=dlsym(lib_handle_io_f,"pmpi_file_get_amode_");
+_LOCAL_MPI_File_set_info=dlsym(lib_handle_io_f,"pmpi_file_set_info_");
+_LOCAL_MPI_File_get_info=dlsym(lib_handle_io_f,"pmpi_file_get_info_");
+_LOCAL_MPI_File_read_at=dlsym(lib_handle_io_f,"pmpi_file_read_at_");
+_LOCAL_MPI_File_read_at_all=dlsym(lib_handle_io_f,"pmpi_file_read_at_all_");
+_LOCAL_MPI_File_write_at=dlsym(lib_handle_io_f,"pmpi_file_write_at_");
+_LOCAL_MPI_File_write_at_all=dlsym(lib_handle_io_f,"pmpi_file_write_at_all_");
+_LOCAL_MPI_File_iread_at=dlsym(lib_handle_io_f,"pmpi_file_iread_at_");
+_LOCAL_MPI_File_iwrite_at=dlsym(lib_handle_io_f,"pmpi_file_iwrite_at_");
+_LOCAL_MPI_File_read=dlsym(lib_handle_io_f,"pmpi_file_read_");
+_LOCAL_MPI_File_read_all=dlsym(lib_handle_io_f,"pmpi_file_read_all_");
+_LOCAL_MPI_File_write=dlsym(lib_handle_io_f,"pmpi_file_write_");
+_LOCAL_MPI_File_write_all=dlsym(lib_handle_io_f,"pmpi_file_write_all_");
+_LOCAL_MPI_File_iread=dlsym(lib_handle_io_f,"pmpi_file_iread_");
+_LOCAL_MPI_File_iwrite=dlsym(lib_handle_io_f,"pmpi_file_iwrite_");
+_LOCAL_MPI_File_seek=dlsym(lib_handle_io_f,"pmpi_file_seek_");
+_LOCAL_MPI_File_get_position=dlsym(lib_handle_io_f,"pmpi_file_get_position_");
+_LOCAL_MPI_File_get_byte_offset=dlsym(lib_handle_io_f,"pmpi_file_get_byte_offset_");
+_LOCAL_MPI_File_read_shared=dlsym(lib_handle_io_f,"pmpi_file_read_shared_");
+_LOCAL_MPI_File_write_shared=dlsym(lib_handle_io_f,"pmpi_file_write_shared_");
+_LOCAL_MPI_File_iread_shared=dlsym(lib_handle_io_f,"pmpi_file_iread_shared_");
+_LOCAL_MPI_File_iwrite_shared=dlsym(lib_handle_io_f,"pmpi_file_iwrite_shared_");
+_LOCAL_MPI_File_read_ordered=dlsym(lib_handle_io_f,"pmpi_file_read_ordered_");
+_LOCAL_MPI_File_write_ordered=dlsym(lib_handle_io_f,"pmpi_file_write_ordered_");
+_LOCAL_MPI_File_seek_shared=dlsym(lib_handle_io_f,"pmpi_file_seek_shared_");
+_LOCAL_MPI_File_get_position_shared=dlsym(lib_handle_io_f,"pmpi_file_get_position_shared_");
+_LOCAL_MPI_File_read_at_all_begin=dlsym(lib_handle_io_f,"pmpi_file_read_at_all_begin_");
+_LOCAL_MPI_File_read_at_all_end=dlsym(lib_handle_io_f,"pmpi_file_read_at_all_end_");
+_LOCAL_MPI_File_write_at_all_begin=dlsym(lib_handle_io_f,"pmpi_file_write_at_all_begin_");
+_LOCAL_MPI_File_write_at_all_end=dlsym(lib_handle_io_f,"pmpi_file_write_at_all_end_");
+_LOCAL_MPI_File_read_all_begin=dlsym(lib_handle_io_f,"pmpi_file_read_all_begin_");
+_LOCAL_MPI_File_read_all_end=dlsym(lib_handle_io_f,"pmpi_file_read_all_end_");
+_LOCAL_MPI_File_write_all_begin=dlsym(lib_handle_io_f,"pmpi_file_write_all_begin_");
+_LOCAL_MPI_File_write_all_end=dlsym(lib_handle_io_f,"pmpi_file_write_all_end_");
+_LOCAL_MPI_File_read_ordered_begin=dlsym(lib_handle_io_f,"pmpi_file_read_ordered_begin_");
+_LOCAL_MPI_File_read_ordered_end=dlsym(lib_handle_io_f,"pmpi_file_read_ordered_end_");
+_LOCAL_MPI_File_write_ordered_begin=dlsym(lib_handle_io_f,"pmpi_file_write_ordered_begin_");
+_LOCAL_MPI_File_write_ordered_end=dlsym(lib_handle_io_f,"pmpi_file_write_ordered_end_");
+_LOCAL_MPI_File_get_type_extent=dlsym(lib_handle_io_f,"pmpi_file_get_type_extent_");
+_LOCAL_MPI_File_set_atomicity=dlsym(lib_handle_io_f,"pmpi_file_set_atomicity_");
+_LOCAL_MPI_File_get_atomicity=dlsym(lib_handle_io_f,"pmpi_file_get_atomicity_");
+_LOCAL_MPI_File_sync=dlsym(lib_handle_io_f,"pmpi_file_sync_");
 _LOCAL_MPI_Wtime=dlsym(lib_handle_f,"pmpi_wtime_");
 _LOCAL_MPI_Wtick=dlsym(lib_handle_f,"pmpi_wtick_");
 _LOCAL_MPI_Finalize=dlsym(lib_handle_f,"pmpi_finalize_");
@@ -12247,10 +11939,18 @@ _LOCAL_MPI_Ineighbor_alltoallw=dlsym(lib_handle_f,"pmpi_ineighbor_alltoallw_");
 _LOCAL_MPI_Neighbor_allgatherv=dlsym(lib_handle_f,"pmpi_neighbor_allgatherv_");
 _LOCAL_MPI_Neighbor_alltoallv=dlsym(lib_handle_f,"pmpi_neighbor_alltoallv_");
 _LOCAL_MPI_Neighbor_alltoallw=dlsym(lib_handle_f,"pmpi_neighbor_alltoallw_");
+_LOCAL_MPI_File_iwrite_all=dlsym(lib_handle_io_f,"pmpi_file_iwrite_all_");
+_LOCAL_MPI_File_iwrite_at_all=dlsym(lib_handle_io_f,"pmpi_file_iwrite_at_all_");
 _LOCAL_MPI_Aint_add=dlsym(lib_handle_f,"pmpi_aint_add_");
 _LOCAL_MPI_Aint_diff=dlsym(lib_handle_f,"pmpi_aint_diff_");
+_LOCAL_MPI_File_iread_all=dlsym(lib_handle_io_f,"pmpi_file_iread_all_");
+_LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_io_f,"pmpi_file_iread_at_all_");
 _LOCAL_MPI_Error_string=dlsym(lib_handle_f,"pmpi_error_string_");
 _LOCAL_MPI_Get_processor_name=dlsym(lib_handle_f,"pmpi_get_processor_name_");
+_LOCAL_MPI_File_open=dlsym(lib_handle_io_f,"pmpi_file_open_");
+_LOCAL_MPI_File_set_view=dlsym(lib_handle_io_f,"pmpi_file_set_view_");
+_LOCAL_MPI_File_get_view=dlsym(lib_handle_io_f,"pmpi_file_get_view_");
+_LOCAL_MPI_File_delete=dlsym(lib_handle_io_f,"pmpi_file_delete_");
 _LOCAL_MPI_Info_delete=dlsym(lib_handle_f,"pmpi_info_delete_");
 _LOCAL_MPI_Info_get=dlsym(lib_handle_f,"pmpi_info_get_");
 _LOCAL_MPI_Info_get_nthkey=dlsym(lib_handle_f,"pmpi_info_get_nthkey_");
@@ -12283,9 +11983,6 @@ ccc_mpi_fortran_status_ignore_=dlsym(lib_handle_f,"mpi_fortran_status_ignore_");
 ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpi_fortran_statuses_ignore_");
 ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpi_fortran_unweighted_");
 ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpi_fortran_weights_empty_");
-////mpi_null_delete_fn_;
-////mpi_null_copy_fn_;
-////mpi_null_delete_fn_;
 #endif
 #if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 ccc_mpi_fortran_bottom_=dlsym(lib_handle_f,"mpipriv1_");
@@ -12298,24 +11995,4 @@ ccc_mpi_fortran_statuses_ignore_=dlsym(lib_handle_f,"mpipriv2_");
 ccc_mpi_fortran_unweighted_=dlsym(lib_handle_f,"mpifcmb5_");
 ccc_mpi_fortran_weights_empty_=dlsym(lib_handle_f,"mpifcmb9_");
 #endif
-//local_mpi_null_delete_fn_=dlsym(lib_handle_f,"mpi_null_delete_fn_");
-//local_mpi_null_copy_fn_=dlsym(lib_handle_f,"mpi_null_copy_fn_");
-//local_mpi_dup_fn_=dlsym(lib_handle_f,"mpi_dup_fn_");
-_LOCAL_MPI_Win_free_keyval=dlsym(lib_handle_f,"pmpi_win_free_keyval_");
-_LOCAL_MPI_Win_delete_attr=dlsym(lib_handle_f,"pmpi_win_delete_attr_");
-_LOCAL_MPI_Win_get_attr=dlsym(lib_handle_f,"pmpi_win_get_attr_");
-_LOCAL_MPI_Win_set_attr=dlsym(lib_handle_f,"pmpi_win_set_attr_");
-_LOCAL_MPI_Win_create_keyval=dlsym(lib_handle_f,"pmpi_win_create_keyval_");
-_LOCAL_MPI_Win_create_errhandler=dlsym(lib_handle_f,"pmpi_win_create_errhandler_");
-_LOCAL_MPI_Win_call_errhandler=dlsym(lib_handle_f,"pmpi_win_call_errhandler_");
-_LOCAL_MPI_Win_set_errhandler=dlsym(lib_handle_f,"pmpi_win_set_errhandler_");
-_LOCAL_MPI_Win_get_errhandler=dlsym(lib_handle_f,"pmpi_win_get_errhandler_");
-_LOCAL_MPI_Type_create_keyval=dlsym(lib_handle_f,"pmpi_type_create_keyval_");
-_LOCAL_MPI_Grequest_complete=dlsym(lib_handle_f,"pmpi_grequest_complete_");
-_LOCAL_MPI_Grequest_start=dlsym(lib_handle_f,"pmpi_grequest_start_");
-_LOCAL_MPI_Comm_create_keyval=dlsym(lib_handle_f,"pmpi_comm_create_keyval_");
-_LOCAL_MPI_Comm_free_keyval=dlsym(lib_handle_f,"pmpi_comm_free_keyval_");
-_LOCAL_MPI_Register_datarep=dlsym(lib_handle_f,"pmpi_register_datarep_");
-_LOCAL_MPI_Comm_spawn_multiple=dlsym(lib_handle_f,"pmpi_comm_spawn_multiple_");
-_LOCAL_MPI_Pcontrol=dlsym(lib_handle_f,"pmpi_pcontrol_");
 }

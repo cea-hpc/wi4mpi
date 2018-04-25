@@ -1,38 +1,38 @@
-#define A_f_MPI_BOTTOM (((int*)&a_mpi_fortran_bottom_))
-int a_mpi_fortran_bottom_;
-#define A_f_MPI_IN_PLACE (((int*)&a_mpi_fortran_in_place_))
-int a_mpi_fortran_in_place_;
-#define A_f_MPI_ARGV_NULL (((int*)&a_mpi_fortran_argv_null_))
-int a_mpi_fortran_argv_null_;
-#define A_f_MPI_ARGVS_NULL (((int*)&a_mpi_fortran_argvs_null_))
-int a_mpi_fortran_argvs_null_;
-#define A_f_MPI_ERRCODES_IGNORE (((int*)&a_mpi_fortran_errcodes_ignore_))
-int a_mpi_fortran_errcodes_ignore_;
-#define A_f_MPI_STATUS_IGNORE (((int*)&a_mpi_fortran_status_ignore_))
-int a_mpi_fortran_status_ignore_;
-#define A_f_MPI_STATUSES_IGNORE (((int*)&a_mpi_fortran_statuses_ignore_))
-int a_mpi_fortran_statuses_ignore_;
-#define A_f_MPI_UNWEIGHTED (((int*)&a_mpi_fortran_unweighted_))
-int a_mpi_fortran_unweighted_;
-#define A_f_MPI_WEIGHTS_EMPTY (((int*)&a_mpi_fortran_weights_empty_))
-int a_mpi_fortran_weights_empty_;
-#define R_f_MPI_BOTTOM (((int*)ccc_mpi_fortran_bottom_))
+#define A_f_MPI_BOTTOM (((int*)&mpi_fortran_bottom_))
+int mpi_fortran_bottom_;
+#define A_f_MPI_IN_PLACE (((int*)&mpi_fortran_in_place_))
+int mpi_fortran_in_place_;
+#define A_f_MPI_ARGV_NULL (((int*)&mpi_fortran_argv_null_))
+int mpi_fortran_argv_null_;
+#define A_f_MPI_ARGVS_NULL (((int*)&mpi_fortran_argvs_null_))
+int mpi_fortran_argvs_null_;
+#define A_f_MPI_ERRCODES_IGNORE (((int*)&mpi_fortran_errcodes_ignore_))
+int mpi_fortran_errcodes_ignore_;
+#define A_f_MPI_STATUS_IGNORE (((int*)&mpi_fortran_status_ignore_))
+int mpi_fortran_status_ignore_;
+#define A_f_MPI_STATUSES_IGNORE (((int*)&mpi_fortran_statuses_ignore_))
+int mpi_fortran_statuses_ignore_;
+#define A_f_MPI_UNWEIGHTED (((int*)&mpi_fortran_unweighted_))
+int mpi_fortran_unweighted_;
+#define A_f_MPI_WEIGHTS_EMPTY (((int*)&mpi_fortran_weights_empty_))
+int mpi_fortran_weights_empty_;
+#define R_f_MPI_BOTTOM (((int*)&mpi_fortran_bottom_))
 int *ccc_mpi_fortran_bottom_;
-#define R_f_MPI_IN_PLACE (((int*)ccc_mpi_fortran_in_place_))
+#define R_f_MPI_IN_PLACE (((int*)&mpi_fortran_in_place_))
 int *ccc_mpi_fortran_in_place_;
-#define R_f_MPI_ARGV_NULL (((int*)ccc_mpi_fortran_argv_null_))
+#define R_f_MPI_ARGV_NULL (((int*)&mpi_fortran_argv_null_))
 int *ccc_mpi_fortran_argv_null_;
-#define R_f_MPI_ARGVS_NULL (((int*)ccc_mpi_fortran_argvs_null_))
+#define R_f_MPI_ARGVS_NULL (((int*)&mpi_fortran_argvs_null_))
 int *ccc_mpi_fortran_argvs_null_;
-#define R_f_MPI_ERRCODES_IGNORE (((int*)ccc_mpi_fortran_errcodes_ignore_))
+#define R_f_MPI_ERRCODES_IGNORE (((int*)&mpi_fortran_errcodes_ignore_))
 int *ccc_mpi_fortran_errcodes_ignore_;
-#define R_f_MPI_STATUS_IGNORE (((int*)ccc_mpi_fortran_status_ignore_))
+#define R_f_MPI_STATUS_IGNORE (((int*)&mpi_fortran_status_ignore_))
 int *ccc_mpi_fortran_status_ignore_;
-#define R_f_MPI_STATUSES_IGNORE (((int*)ccc_mpi_fortran_statuses_ignore_))
+#define R_f_MPI_STATUSES_IGNORE (((int*)&mpi_fortran_statuses_ignore_))
 int *ccc_mpi_fortran_statuses_ignore_;
-#define R_f_MPI_UNWEIGHTED (((int*)ccc_mpi_fortran_unweighted_))
+#define R_f_MPI_UNWEIGHTED (((int*)&mpi_fortran_unweighted_))
 int *ccc_mpi_fortran_unweighted_;
-#define R_f_MPI_WEIGHTS_EMPTY (((int*)ccc_mpi_fortran_weights_empty_))
+#define R_f_MPI_WEIGHTS_EMPTY (((int*)&mpi_fortran_weights_empty_))
 int *ccc_mpi_fortran_weights_empty_;
 //############################# Wi4MPI License ###########################
 //# `04/04/2016`                                                         #

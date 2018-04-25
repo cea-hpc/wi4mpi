@@ -12,6 +12,7 @@ file(GLOB SOURCE_WI4MPI_SO
     )  
 #libwi4mpi_*.so
 file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
+    interface/gen/override.c
     interface/gen/mpi_translation_c.c
     interface/gen/mpi_translation_fort.c
     interface/gen/c2f_f2c.c
