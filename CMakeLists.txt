@@ -112,7 +112,7 @@ if(NOT CMAKE_THREAD_LIBS_INIT)
 endif()
 
 #Setting wi4mpi.cfg
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/src/preload/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg)
 
 
 #Source subdirectory

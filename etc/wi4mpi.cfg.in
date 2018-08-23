@@ -1,0 +1,6 @@
+#This part is handled by cmake
+WI4MPI_VERSION="@WI4MPI_VERSION@"
+OPENMPI_DEFAULT_ROOT="@OPENMPI_ROOT@"
+#Please provide the following variables to use the launcher
+INTELMPI_DEFAULT_ROOT=""
+MPC_DEFAULT_ROOT=""
