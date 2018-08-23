@@ -42,7 +42,6 @@ void *mpi_type_null_delete_fn_=NULL;
 void *mpi_type_dup_fn_=NULL;
 void *mpi_win_null_copy_fn_=NULL;
 /*ompi constante*/
-
 int mpi_fortran_bottom_;
 int mpi_fortran_in_place_;
 int mpi_fortran_argv_null_;
@@ -52,6 +51,7 @@ int mpi_fortran_status_ignore_;
 int mpi_fortran_statuses_ignore_;
 int mpi_fortran_unweighted_;
 int mpi_fortran_weights_empty_;
+
 char wi4mpi_mode_f[]="";
 
 void  mpi_pcontrol_(int * level,int * ret);

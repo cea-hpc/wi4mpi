@@ -428,15 +428,6 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
     string=string+'#define _GNU_SOURCE\n'
     string=string+'#include <stdio.h>\n'
     string=string+'#include <dlfcn.h>\n'
-    string=string+'#int mpi_fortran_bottom_;'
-    string=string+'#int mpi_fortran_in_place_;'
-    string=string+'#int mpi_fortran_argv_null_;'
-    string=string+'#int mpi_fortran_argvs_null_;'
-    string=string+'#int mpi_fortran_errcodes_ignore_;'
-    string=string+'#int mpi_fortran_status_ignore_;'
-    string=string+'#int mpi_fortran_statuses_ignore_;'
-    string=string+'#int mpi_fortran_unweighted_;'
-    string=string+'#int mpi_fortran_weights_empty_;'
     string=string+'#include \"manual_interface.h\"\n'
     string=string+'void *mpi_comm_null_copy_fn_=NULL;\n'
     string=string+'void *mpi_win_dup_fn_=NULL;\n'
@@ -452,6 +443,15 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
     string=string+'void *mpi_type_dup_fn_=NULL;\n'
     string=string+'void *mpi_win_null_copy_fn_=NULL;\n'
     string=string+"/*ompi constante*/\n"
+    string=string+'int mpi_fortran_bottom_;\n'
+    string=string+'int mpi_fortran_in_place_;\n'
+    string=string+'int mpi_fortran_argv_null_;\n'
+    string=string+'int mpi_fortran_argvs_null_;\n'
+    string=string+'int mpi_fortran_errcodes_ignore_;\n'
+    string=string+'int mpi_fortran_status_ignore_;\n'
+    string=string+'int mpi_fortran_statuses_ignore_;\n'
+    string=string+'int mpi_fortran_unweighted_;\n'
+    string=string+'int mpi_fortran_weights_empty_;\n'
     string=string+"\nchar wi4mpi_mode_f[]=\"\";\n\n"
     for i in data_f:
         for j in def_list_f: 
