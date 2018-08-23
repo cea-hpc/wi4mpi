@@ -12,11 +12,11 @@ file(GLOB SOURCE_WI4MPI_SO
     )  
 #libwi4mpi_*.so
 file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
-    interface/gen/override.c
     interface/gen/mpi_translation_c.c
     interface/gen/mpi_translation_fort.c
     interface/gen/c2f_f2c.c
-    interface/gen/mpi_translation_c2f_f2c_init.c
+    common/override.c
+    common/mpi_translation_c2f_f2c_init.c
     common/engine.c      
     common/engine_fn.c 
     common/func_char_fort.c
@@ -33,11 +33,11 @@ file(GLOB_RECURSE SOURCE_WI4MPI_MODULE
 
 #libwi4mpi_FROM_TO.so
 file(GLOB SOURCE_WI4MPI_PRELOAD
-    interface/gen/override.c
     preload/gen/mpi_translation_c.c
     preload/gen/mpi_translation_fort.c
     preload/gen/c2f_f2c.c
-    preload/gen/mpi_translation_c2f_f2c_init.c
+    common/override.c
+    common/mpi_translation_c2f_f2c_init.c
     common/engine.c
     common/engine_fn.c
     common/func_char_fort.c
