@@ -352,11 +352,16 @@ add_library(wi4mpi_OMPI_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
 add_library(mpifort.so.12 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi.so.12 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
+add_library(mpi.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_f77.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
+add_library(mpi_f77.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_f90.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
+add_library(mpi_f90.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_mpifh.so.2 SHARED ${SOURCE_WI4MPI_EMPTY})
+add_library(mpi_mpifh.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_cxx.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_cxx.so.12 SHARED ${SOURCE_WI4MPI_EMPTY})
+add_library(mpi_cxx.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpigf.so.4 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_mt.so.4 SHARED ${SOURCE_WI4MPI_EMPTY})
 
@@ -476,7 +481,7 @@ PROPERTIES COMPILE_FLAGS "-shared -fPIC")
 # Link options
 #-------------
 
-target_link_libraries(wi4mpi_INTEL_OMPI ${MPI_C_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_INTEL_OMPI ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_INTEL_INTEL ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_OMPI_OMPI ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_OMPI_INTEL ${CMAKE_THREAD_LIBS_INIT})
@@ -562,14 +567,16 @@ install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.1.so DESTINATION libexec/wi4
                 RENAME libmpi_cxx.so.1
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
-
 install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.12.so DESTINATION libexec/wi4mpi/fakelibCXX
                 RENAME libmpi_cxx.so.12
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
-
 install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.12.so DESTINATION libexec/wi4mpi/fakelibCXX
                 RENAME libmpicxx.so.12
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.20.so DESTINATION libexec/wi4mpi/fakelibCXX
+                RENAME libmpicxx.so.20
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 
@@ -595,17 +602,33 @@ install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.1.so DESTINATION libexec/wi4mpi/
 install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f77.so.1.so     DESTINATION libexec/wi4mpi/fakelibOMPI
                 RENAME libmpi_f77.so.1
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f77.so.20.so     DESTINATION libexec/wi4mpi/fakelibOMPI
+                RENAME libmpi_f77.so.20
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )   
 install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f90.so.1.so     DESTINATION libexec/wi4mpi/fakelibOMPI
                 RENAME  libmpi_f90.so.1
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f90.so.20.so     DESTINATION libexec/wi4mpi/fakelibOMPI
+                RENAME  libmpi_f90.so.20
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_mpifh.so.2.so DESTINATION libexec/wi4mpi/fakelibOMPI
                 RENAME  libmpi_mpifh.so.2
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_mpifh.so.20.so DESTINATION libexec/wi4mpi/fakelibOMPI
+                RENAME  libmpi_mpifh.so.20
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
 install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.1.so             DESTINATION libexec/wi4mpi/fakelibOMPI
                 RENAME  libmpi.so.1
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.20.so             DESTINATION libexec/wi4mpi/fakelibOMPI
+                RENAME  libmpi.so.20
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
                 
