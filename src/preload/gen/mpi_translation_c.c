@@ -147,6 +147,11 @@ int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribu
 {
 return local_MPIR_Dup_fn(oldcomm,keyval,extra_state,attribute_val_in,attribute_val_out,flag);
 }
+int *ptr_mpifcmb5_;
+int *ptr_mpifcmb9_;
+int *ptr_mpipriv1_;
+int *ptr_mpipriv2_;
+int *ptr_mpiprivc_;
 #endif
 
 void wrapper_win_copy_function(R_MPI_Win oldwin, int win_keyval, void *extra_state, 
@@ -30981,6 +30986,11 @@ LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_io,"PMPI_File_iread_at_all");
 LOCAL_MPI_T_category_changed=dlsym(lib_handle,"PMPI_T_category_changed");
 #if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");
+ptr_mpifcmb5_=dlsym(lib_handle,"mpifcmb5_");
+ptr_mpifcmb9_=dlsym(lib_handle,"mpifcmb9_");
+ptr_mpipriv1_=dlsym(lib_handle,"mpipriv1_");
+ptr_mpipriv2_=dlsym(lib_handle,"mpipriv2_");
+ptr_mpiprivc_=dlsym(lib_handle,"mpiprivc_");
 #endif
 #if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)
 R_MPI_UNWEIGHTED=dlsym(lib_handle,"MPI_UNWEIGHTED");
