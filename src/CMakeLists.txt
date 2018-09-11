@@ -364,6 +364,8 @@ add_library(mpi_cxx.so.12 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_cxx.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpigf.so.4 SHARED ${SOURCE_WI4MPI_EMPTY})
 add_library(mpi_mt.so.4 SHARED ${SOURCE_WI4MPI_EMPTY})
+add_library(mpi_usempif08.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
+add_library(mpi_usempi_ignore_tkr.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
 
 #Headers
 #-------
@@ -629,6 +631,14 @@ install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.1.so             DESTINATION lib
 )
 install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.20.so             DESTINATION libexec/wi4mpi/fakelibOMPI
                 RENAME  libmpi.so.20
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_usempif08.so.20.so             DESTINATION libexec/wi4mpi/fakelibOMPI
+                RENAME  libmpi_usempif08.so.20
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_usempi_ignore_tkr.so.20.so             DESTINATION libexec/wi4mpi/fakelibOMPI
+                RENAME  libmpi_usempi_ignore_tkr.so.20
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
                 
