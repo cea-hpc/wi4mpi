@@ -120,8 +120,13 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
                 string=string+object_gen.load_symbol(i,'lib_handle_io')+'\n'
             else:
                 string=string+object_gen.load_symbol(i,'lib_handle')+'\n'
-    string=string+'#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
+    string=string+'#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
     string=string+'local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");\n'
+    string=string+'ptr_mpifcmb5_=dlsym(lib_handle,"mpifcmb5_");\n'
+    string=string+'ptr_mpifcmb9_=dlsym(lib_handle,"mpifcmb9_");\n'
+    string=string+'ptr_mpipriv1_=dlsym(lib_handle,"mpipriv1_");\n'
+    string=string+'ptr_mpipriv2_=dlsym(lib_handle,"mpipriv2_");\n'
+    string=string+'ptr_mpiprivc_=dlsym(lib_handle,"mpiprivc_");\n'
     string=string+'#endif\n'
     if wrapper:
         string=string+'#if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)\n'
