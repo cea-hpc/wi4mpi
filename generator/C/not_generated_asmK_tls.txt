@@ -5,6 +5,8 @@ int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribu
 {
 return local_MPIR_Dup_fn(oldcomm,keyval,extra_state,attribute_val_in,attribute_val_out,flag);
 }
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
 int *ptr_mpifcmb5_;
 int *ptr_mpifcmb9_;
 int *ptr_mpipriv1_;

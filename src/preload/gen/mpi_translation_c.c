@@ -147,6 +147,8 @@ int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribu
 {
 return local_MPIR_Dup_fn(oldcomm,keyval,extra_state,attribute_val_in,attribute_val_out,flag);
 }
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
 int *ptr_mpifcmb5_;
 int *ptr_mpifcmb9_;
 int *ptr_mpipriv1_;
@@ -30986,6 +30988,8 @@ LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_io,"PMPI_File_iread_at_all");
 LOCAL_MPI_T_category_changed=dlsym(lib_handle,"PMPI_T_category_changed");
 #if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
 ptr_mpifcmb5_=dlsym(lib_handle,"mpifcmb5_");
 ptr_mpifcmb9_=dlsym(lib_handle,"mpifcmb9_");
 ptr_mpipriv1_=dlsym(lib_handle,"mpipriv1_");
