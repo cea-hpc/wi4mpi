@@ -349,23 +349,27 @@ add_library(wi4mpi_INTEL_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
 add_library(wi4mpi_OMPI_INTEL SHARED ${SOURCE_WI4MPI_PRELOAD})
 add_library(wi4mpi_OMPI_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
 #Empty libraries
-add_library(mpifort.so.12 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi.so.12 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_f77.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_f77.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_f90.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_f90.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_mpifh.so.2 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_mpifh.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_cxx.so.1 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_cxx.so.12 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_cxx.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpigf.so.4 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_mt.so.4 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_usempif08.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
-add_library(mpi_usempi_ignore_tkr.so.20 SHARED ${SOURCE_WI4MPI_EMPTY})
+set(LIST_FAKECXX mpicxx mpi_cxx)
+set(LIST_FAKECXX_SOEXT so so.1 so.4 so.5 so.12 so.20)
+set(LIST_FAKEINTEL mpifort mpigf mpi_mt)
+set(LIST_FAKEINTEL_SOEXT so so.4 so.5 so.12)
+set(LIST_FAKEOMPI mpi_mpifh mpi_usempifh08 mpi_usempi_ignore_tkr)
+set(LIST_FAKEOMPI_SOEXT so so.1 so.20)
+foreach(LIB ${LIST_FAKECXX})
+    foreach(SOEXT ${LIST_FAKECXX_SOEXT})
+        add_library(${LIB}.${SOEXT} SHARED ${SOURCE_WI4MPI_EMPTY})
+    endforeach(SOEXT)
+endforeach(LIB)
+foreach(LIB ${LIST_FAKEINTEL})
+    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
+        add_library(${LIB}.${SOEXT} SHARED ${SOURCE_WI4MPI_EMPTY})
+    endforeach(SOEXT)
+endforeach(LIB)
+foreach(LIB ${LIST_FAKEOMPI})
+    foreach(SOEXT ${LIST_FAKEOMPI_SOEXT})
+        add_library(${LIB}.${SOEXT} SHARED ${SOURCE_WI4MPI_EMPTY})
+    endforeach(SOEXT)
+endforeach(LIB)
 
 #Headers
 #-------
@@ -463,22 +467,21 @@ set_target_properties(wi4mpi_OMPI_OMPI
 )
 endif()
 
-set_target_properties(mpifort.so.12 
-                      mpi.so.12
-                      mpi.so.1
-                      mpi_f77.so.1
-                      mpi_f90.so.1
-                      mpi_mpifh.so.2
-                      mpi_cxx.so.1
-                      mpi_cxx.so.12 
-                      mpigf.so.4
-                      mpi_mt.so.4
-                      mpi_cxx.so.1
-                      mpi_cxx.so.12 
-                      mpigf.so.4
-                      mpi_mt.so.4
-PROPERTIES COMPILE_FLAGS "-shared -fPIC")
-
+foreach(LIB ${LIST_FAKECXX})
+    foreach(SOEXT ${LIST_FAKECXX_SOEXT})
+        set_target_properties(${LIB}.${SOEXT} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
+    endforeach(SOEXT)
+endforeach(LIB)
+foreach(LIB ${LIST_FAKEINTEL})
+    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
+        set_target_properties(${LIB}.${SOEXT} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
+    endforeach(SOEXT)
+endforeach(LIB)
+foreach(LIB ${LIST_FAKEOMPI})
+    foreach(SOEXT ${LIST_FAKEOMPI_SOEXT})
+        set_target_properties(${LIB}.${SOEXT} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
+    endforeach(SOEXT)
+endforeach(LIB)
 
 # Link options
 #-------------
@@ -552,6 +555,7 @@ install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_O} DESTINATION INTERNAL/preload/i
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_I} DESTINATION INTERNAL/preload/include/OMPI_INTEL) 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_I_O} DESTINATION INTERNAL/preload/include/INTEL_OMPI) 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_I_I} DESTINATION INTERNAL/preload/include/INTEL_INTEL) 
+
 #Preload libraries
 #-----------------
 install(TARGETS 
@@ -563,85 +567,30 @@ install(TARGETS
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 
-
-#fakelibCXX
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.1.so DESTINATION libexec/wi4mpi/fakelibCXX
-                RENAME libmpi_cxx.so.1
+foreach(LIB ${LIST_FAKECXX})
+    foreach(SOEXT ${LIST_FAKECXX_SOEXT})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibCXX
+                RENAME lib${LIB}.${SOEXT}
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.12.so DESTINATION libexec/wi4mpi/fakelibCXX
-                RENAME libmpi_cxx.so.12
+                )
+    endforeach(SOEXT)
+endforeach(LIB)
+foreach(LIB ${LIST_FAKEINTEL})
+    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibINTEL
+                RENAME lib${LIB}.${SOEXT}
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.12.so DESTINATION libexec/wi4mpi/fakelibCXX
-                RENAME libmpicxx.so.12
+                )
+    endforeach(SOEXT)
+endforeach(LIB)
+foreach(LIB ${LIST_FAKEOMPI})
+    foreach(SOEXT ${LIST_FAKEOMPI_SOEXT})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibOMPI
+                RENAME lib${LIB}.${SOEXT}
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_cxx.so.20.so DESTINATION libexec/wi4mpi/fakelibCXX
-                RENAME libmpicxx.so.20
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-
-#fakelibINTEL
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpigf.so.4.so DESTINATION libexec/wi4mpi/fakelibINTEL
-                RENAME libmpigf.so.4
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_mt.so.4.so DESTINATION libexec/wi4mpi/fakelibINTEL
-                RENAME libmpi_mt.so.4
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.12.so DESTINATION libexec/wi4mpi/fakelibINTEL
-                RENAME libmpi.so.12
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.1.so DESTINATION libexec/wi4mpi/fakelibINTEL
-                RENAME libmpifort.so.12
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-
-#fakelibOMPI
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f77.so.1.so     DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME libmpi_f77.so.1
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f77.so.20.so     DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME libmpi_f77.so.20
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)   
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f90.so.1.so     DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi_f90.so.1
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_f90.so.20.so     DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi_f90.so.20
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_mpifh.so.2.so DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi_mpifh.so.2
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_mpifh.so.20.so DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi_mpifh.so.20
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.1.so             DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi.so.1
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi.so.20.so             DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi.so.20
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_usempif08.so.20.so             DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi_usempif08.so.20
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-install(FILES ${CMAKE_BINARY_DIR}/src/libmpi_usempi_ignore_tkr.so.20.so             DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME  libmpi_usempi_ignore_tkr.so.20
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-)
-                
+                )
+    endforeach(SOEXT)
+endforeach(LIB)
 
 #Interface libraries
 #-------------------
