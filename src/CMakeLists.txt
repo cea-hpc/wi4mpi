@@ -351,7 +351,7 @@ add_library(wi4mpi_OMPI_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
 #Empty libraries
 set(LIST_FAKEINTEL mpi mpifort mpigf mpi_mt)
 set(LIST_FAKEINTEL_SOEXT so.4 so.5 so.12)
-set(LIST_FAKEOMPI mpi mpi_mpifh mpi_usempifh08 mpi_usempi_ignore_tkr)
+set(LIST_FAKEOMPI mpi mpi_mpifh mpi_usempif08 mpi_usempi_ignore_tkr)
 set(LIST_FAKEOMPI_SOEXT so.1 so.20)
 set(LIST_FAKECXX mpicxx mpi_cxx)
 set(LIST_FAKECXX_SOEXT ${LIST_FAKEINTEL_SOEXT} ${LIST_FAKEOMPI_SOEXT})
