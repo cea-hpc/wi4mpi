@@ -4,7 +4,7 @@ enable_language(C Fortran)
 
 set(VERSION_MAJOR 3)
 set(VERSION_MINOR 2)
-set(VERSION_PATCH 1)
+set(VERSION_PATCH 2)
 
 set(WI4MPI_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
@@ -80,7 +80,7 @@ if(WI4MPI_REALEASE MATCHES DEBUG)
 elseif(WI4MPI_REALEASE MATCHES RELEASE)
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_RELEASE})
 elseif(WI4MPI_REALEASE MATCHES GCC_JIT)
-	 set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_GCC_JIT})
+     set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_GCC_JIT})
 else()
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_NORMAL})
 endif()
@@ -103,16 +103,16 @@ if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
     if(NOT ERR_VAR2)
       message(FATAL_ERROR "Be sure to have an OpenMPI librarie in your PATH")
     endif()
-		get_filename_component(OPENMPI_ROOT ${MPI_C_INCLUDE_PATH} DIRECTORY)
+        get_filename_component(OPENMPI_ROOT ${MPI_C_INCLUDE_PATH} DIRECTORY)
 endif()
 
 find_package(Threads)
 if(NOT CMAKE_THREAD_LIBS_INIT)
-	message(FATAL_ERROR "Be sure to have Pthread available on you system")
+    message(FATAL_ERROR "Be sure to have Pthread available on you system")
 endif()
 
 #Setting wi4mpi.cfg
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/src/preload/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg)
 
 
 #Source subdirectory

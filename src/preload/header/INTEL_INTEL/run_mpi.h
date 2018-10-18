@@ -1211,8 +1211,6 @@ int R_MPI_Abort(R_MPI_Comm comm, int errorcode);
 /* Note that we may need to define a @PCONTROL_LIST@ depending on whether
    stdargs are supported */
 int R_MPI_Pcontrol( int level, ...);
-int R_MPI_DUP_FN(R_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
-               void *attribute_val_out, int *flag);
 
 /* Process Creation and Management */
 int R_MPI_Close_port( char *port_name);

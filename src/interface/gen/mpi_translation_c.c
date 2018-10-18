@@ -252,7 +252,7 @@ char ompi_message_no_proc[512];
 
 #include "c2f_f2c.h"
 extern __thread int in_w;
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state,
                          void *attribute_val_in, void *attribute_val_out,
                          int *flag);
@@ -262,6 +262,13 @@ int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state,
   return local_MPIR_Dup_fn(oldcomm, keyval, extra_state, attribute_val_in,
                            attribute_val_out, flag);
 }
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+int *ptr_mpifcmb5_;
+int *ptr_mpifcmb9_;
+int *ptr_mpipriv1_;
+int *ptr_mpipriv2_;
+int *ptr_mpiprivc_;
 #endif
 void wrapper_win_copy_function(R_MPI_Win oldwin, int win_keyval,
                                void *extra_state, void *attribute_val_in,
@@ -30713,8 +30720,15 @@ LOCAL_MPI_Aint_diff=dlsym(lib_handle,"PMPI_Aint_diff");
 LOCAL_MPI_File_iread_all=dlsym(lib_handle_io,"PMPI_File_iread_all");
 LOCAL_MPI_File_iread_at_all=dlsym(lib_handle_io,"PMPI_File_iread_at_all");
 LOCAL_MPI_T_category_changed=dlsym(lib_handle,"PMPI_T_category_changed");
-#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
 local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)
+ptr_mpifcmb5_=dlsym(lib_handle,"mpifcmb5_");
+ptr_mpifcmb9_=dlsym(lib_handle,"mpifcmb9_");
+ptr_mpipriv1_=dlsym(lib_handle,"mpipriv1_");
+ptr_mpipriv2_=dlsym(lib_handle,"mpipriv2_");
+ptr_mpiprivc_=dlsym(lib_handle,"mpiprivc_");
 #endif
 #if defined(OMPI_OMPI) || defined(_OMPI)
 init_global(lib_handle);

@@ -120,8 +120,15 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
                 string=string+object_gen.load_symbol(i,'lib_handle_io')+'\n'
             else:
                 string=string+object_gen.load_symbol(i,'lib_handle')+'\n'
-    string=string+'#if defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
+    string=string+'#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)\n'
     string=string+'local_MPIR_Dup_fn=dlsym(lib_handle,"MPIR_Dup_fn");\n'
+    string=string+'#endif\n'
+    string=string+'#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || defined(_INTEL)\n'
+    string=string+'ptr_mpifcmb5_=dlsym(lib_handle,"mpifcmb5_");\n'
+    string=string+'ptr_mpifcmb9_=dlsym(lib_handle,"mpifcmb9_");\n'
+    string=string+'ptr_mpipriv1_=dlsym(lib_handle,"mpipriv1_");\n'
+    string=string+'ptr_mpipriv2_=dlsym(lib_handle,"mpipriv2_");\n'
+    string=string+'ptr_mpiprivc_=dlsym(lib_handle,"mpiprivc_");\n'
     string=string+'#endif\n'
     if wrapper:
         string=string+'#if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)\n'
@@ -428,15 +435,6 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
     string=string+'#define _GNU_SOURCE\n'
     string=string+'#include <stdio.h>\n'
     string=string+'#include <dlfcn.h>\n'
-    string=string+'#int mpi_fortran_bottom_;'
-    string=string+'#int mpi_fortran_in_place_;'
-    string=string+'#int mpi_fortran_argv_null_;'
-    string=string+'#int mpi_fortran_argvs_null_;'
-    string=string+'#int mpi_fortran_errcodes_ignore_;'
-    string=string+'#int mpi_fortran_status_ignore_;'
-    string=string+'#int mpi_fortran_statuses_ignore_;'
-    string=string+'#int mpi_fortran_unweighted_;'
-    string=string+'#int mpi_fortran_weights_empty_;'
     string=string+'#include \"manual_interface.h\"\n'
     string=string+'void *mpi_comm_null_copy_fn_=NULL;\n'
     string=string+'void *mpi_win_dup_fn_=NULL;\n'
@@ -452,6 +450,15 @@ def generate_interface_f(object_gen, data2,data_f,def_list_f,static_list=["OMPI"
     string=string+'void *mpi_type_dup_fn_=NULL;\n'
     string=string+'void *mpi_win_null_copy_fn_=NULL;\n'
     string=string+"/*ompi constante*/\n"
+    string=string+'int mpi_fortran_bottom_;\n'
+    string=string+'int mpi_fortran_in_place_;\n'
+    string=string+'int mpi_fortran_argv_null_;\n'
+    string=string+'int mpi_fortran_argvs_null_;\n'
+    string=string+'int mpi_fortran_errcodes_ignore_;\n'
+    string=string+'int mpi_fortran_status_ignore_;\n'
+    string=string+'int mpi_fortran_statuses_ignore_;\n'
+    string=string+'int mpi_fortran_unweighted_;\n'
+    string=string+'int mpi_fortran_weights_empty_;\n'
     string=string+"\nchar wi4mpi_mode_f[]=\"\";\n\n"
     for i in data_f:
         for j in def_list_f: 
