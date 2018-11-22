@@ -76,7 +76,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+ i
     string=string+ '#endif'+'\n\n'
     string=string+ '#define EXTERN_ALLOCATED 1\n'
-    string=string+ '#include "mappers.h"\n\n'
+    string=string+ '#include "mappers.h"\n#include "helper.h"\n'
     if not wrapper:
         string=string+'#include \"c2f_f2c.h\"\n'
         string=string+ 'extern __thread int in_w;\n'
@@ -86,6 +86,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+ i
     for i in data:
         if i['name'] in def_list:
+            string=string+'long long '+i['name']+'=WI4MPI_MAX_TIME';
             string=string+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='A_')+';\n'
             string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n\n'
             if wrapper:
