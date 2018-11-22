@@ -156,7 +156,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;timeout_config_file();\n'
     for i in data:
         if (i['name'] in def_list):
-            string=string+'if(current_str=getenv(WI4'+i['name']+'_timeout)){ current_val=strtoll(current_str,NULL,10);if (current_val>0) WI4'+i['name']+'_timeout=current_val;}\n'
+            string=string+'if(current_str=getenv(\"WI4'+i['name']+'_timeout\")){ current_val=strtoll(current_str,NULL,10);if (current_val>0) WI4'+i['name']+'_timeout=current_val;}\n'
     string=string+'}\n'
     return string
 

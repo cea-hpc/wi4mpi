@@ -35094,1867 +35094,1867 @@ __attribute__((constructor)) void wi4mpi_timeout_config(void) {
   char *current_str;
   size_t current_val;
   timeout_config_file();
-  if (current_str = getenv(WI4MPI_Send_timeout)) {
+  if (current_str = getenv("WI4MPI_Send_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Send_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Recv_timeout)) {
+  if (current_str = getenv("WI4MPI_Recv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Recv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_count_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_count_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_count_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Bsend_timeout)) {
+  if (current_str = getenv("WI4MPI_Bsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Bsend_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ssend_timeout)) {
+  if (current_str = getenv("WI4MPI_Ssend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ssend_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Rsend_timeout)) {
+  if (current_str = getenv("WI4MPI_Rsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rsend_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Buffer_attach_timeout)) {
+  if (current_str = getenv("WI4MPI_Buffer_attach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Buffer_attach_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Buffer_detach_timeout)) {
+  if (current_str = getenv("WI4MPI_Buffer_detach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Buffer_detach_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Isend_timeout)) {
+  if (current_str = getenv("WI4MPI_Isend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Isend_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ibsend_timeout)) {
+  if (current_str = getenv("WI4MPI_Ibsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ibsend_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Issend_timeout)) {
+  if (current_str = getenv("WI4MPI_Issend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Issend_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Irsend_timeout)) {
+  if (current_str = getenv("WI4MPI_Irsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Irsend_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Irecv_timeout)) {
+  if (current_str = getenv("WI4MPI_Irecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Irecv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Wait_timeout)) {
+  if (current_str = getenv("WI4MPI_Wait_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Wait_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Test_timeout)) {
+  if (current_str = getenv("WI4MPI_Test_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Test_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Request_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Request_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Request_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iprobe_timeout)) {
+  if (current_str = getenv("WI4MPI_Iprobe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iprobe_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Probe_timeout)) {
+  if (current_str = getenv("WI4MPI_Probe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Probe_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cancel_timeout)) {
+  if (current_str = getenv("WI4MPI_Cancel_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cancel_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Test_cancelled_timeout)) {
+  if (current_str = getenv("WI4MPI_Test_cancelled_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Test_cancelled_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Send_init_timeout)) {
+  if (current_str = getenv("WI4MPI_Send_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Send_init_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Bsend_init_timeout)) {
+  if (current_str = getenv("WI4MPI_Bsend_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Bsend_init_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ssend_init_timeout)) {
+  if (current_str = getenv("WI4MPI_Ssend_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ssend_init_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Rsend_init_timeout)) {
+  if (current_str = getenv("WI4MPI_Rsend_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rsend_init_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Recv_init_timeout)) {
+  if (current_str = getenv("WI4MPI_Recv_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Recv_init_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Start_timeout)) {
+  if (current_str = getenv("WI4MPI_Start_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Start_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Sendrecv_timeout)) {
+  if (current_str = getenv("WI4MPI_Sendrecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Sendrecv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Sendrecv_replace_timeout)) {
+  if (current_str = getenv("WI4MPI_Sendrecv_replace_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Sendrecv_replace_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_contiguous_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_contiguous_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_contiguous_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_vector_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_vector_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_vector_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_hvector_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_hvector_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_hvector_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_indexed_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_indexed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_indexed_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_hindexed_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_hindexed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_hindexed_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_struct_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_struct_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_struct_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Address_timeout)) {
+  if (current_str = getenv("WI4MPI_Address_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Address_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_extent_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_extent_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_size_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_lb_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_lb_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_lb_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_ub_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_ub_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_ub_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_commit_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_commit_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_commit_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_elements_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_elements_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_elements_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Pack_timeout)) {
+  if (current_str = getenv("WI4MPI_Pack_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Unpack_timeout)) {
+  if (current_str = getenv("WI4MPI_Unpack_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Unpack_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Pack_size_timeout)) {
+  if (current_str = getenv("WI4MPI_Pack_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Barrier_timeout)) {
+  if (current_str = getenv("WI4MPI_Barrier_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Barrier_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Bcast_timeout)) {
+  if (current_str = getenv("WI4MPI_Bcast_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Bcast_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Gather_timeout)) {
+  if (current_str = getenv("WI4MPI_Gather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Gather_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Gatherv_timeout)) {
+  if (current_str = getenv("WI4MPI_Gatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Gatherv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Scatter_timeout)) {
+  if (current_str = getenv("WI4MPI_Scatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Scatter_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Scatterv_timeout)) {
+  if (current_str = getenv("WI4MPI_Scatterv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Scatterv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Allgather_timeout)) {
+  if (current_str = getenv("WI4MPI_Allgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Allgather_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Allgatherv_timeout)) {
+  if (current_str = getenv("WI4MPI_Allgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Allgatherv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Alltoall_timeout)) {
+  if (current_str = getenv("WI4MPI_Alltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alltoall_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Alltoallv_timeout)) {
+  if (current_str = getenv("WI4MPI_Alltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alltoallv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Exscan_timeout)) {
+  if (current_str = getenv("WI4MPI_Exscan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Exscan_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Reduce_timeout)) {
+  if (current_str = getenv("WI4MPI_Reduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Op_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Op_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Op_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Op_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Op_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Op_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Allreduce_timeout)) {
+  if (current_str = getenv("WI4MPI_Allreduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Allreduce_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Scan_timeout)) {
+  if (current_str = getenv("WI4MPI_Scan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Scan_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_size_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_rank_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_rank_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_rank_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_compare_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_compare_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_compare_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_group_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_group_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_union_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_union_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_union_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_intersection_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_intersection_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_intersection_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_difference_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_difference_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_difference_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_size_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_rank_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_rank_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_rank_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_compare_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_compare_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_compare_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_dup_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_dup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_dup_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_dup_with_info_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_dup_with_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_dup_with_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_split_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_split_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_split_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_test_inter_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_test_inter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_test_inter_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_remote_size_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_remote_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_remote_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_remote_group_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_remote_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_remote_group_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Intercomm_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Intercomm_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Intercomm_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Intercomm_merge_timeout)) {
+  if (current_str = getenv("WI4MPI_Intercomm_merge_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Intercomm_merge_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Attr_put_timeout)) {
+  if (current_str = getenv("WI4MPI_Attr_put_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Attr_put_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Attr_get_timeout)) {
+  if (current_str = getenv("WI4MPI_Attr_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Attr_get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Attr_delete_timeout)) {
+  if (current_str = getenv("WI4MPI_Attr_delete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Attr_delete_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Topo_test_timeout)) {
+  if (current_str = getenv("WI4MPI_Topo_test_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Topo_test_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Graphdims_get_timeout)) {
+  if (current_str = getenv("WI4MPI_Graphdims_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graphdims_get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cartdim_get_timeout)) {
+  if (current_str = getenv("WI4MPI_Cartdim_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cartdim_get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Graph_neighbors_count_timeout)) {
+  if (current_str = getenv("WI4MPI_Graph_neighbors_count_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_neighbors_count_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cart_shift_timeout)) {
+  if (current_str = getenv("WI4MPI_Cart_shift_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_shift_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_processor_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_processor_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_processor_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_version_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_version_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_version_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_library_version_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_library_version_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_library_version_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Errhandler_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Errhandler_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Errhandler_set_timeout)) {
+  if (current_str = getenv("WI4MPI_Errhandler_set_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_set_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Errhandler_get_timeout)) {
+  if (current_str = getenv("WI4MPI_Errhandler_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Errhandler_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Errhandler_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Error_string_timeout)) {
+  if (current_str = getenv("WI4MPI_Error_string_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Error_string_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Error_class_timeout)) {
+  if (current_str = getenv("WI4MPI_Error_class_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Error_class_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Initialized_timeout)) {
+  if (current_str = getenv("WI4MPI_Initialized_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Initialized_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Abort_timeout)) {
+  if (current_str = getenv("WI4MPI_Abort_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Abort_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Init_timeout)) {
+  if (current_str = getenv("WI4MPI_Init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Init_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Close_port_timeout)) {
+  if (current_str = getenv("WI4MPI_Close_port_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Close_port_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_accept_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_accept_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_accept_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_connect_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_connect_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_connect_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_disconnect_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_disconnect_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_disconnect_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_get_parent_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_get_parent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_parent_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_join_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_join_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_join_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Lookup_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Lookup_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Lookup_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Open_port_timeout)) {
+  if (current_str = getenv("WI4MPI_Open_port_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Open_port_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Publish_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Publish_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Publish_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Unpublish_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Unpublish_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Unpublish_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_set_info_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_set_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_get_info_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Accumulate_timeout)) {
+  if (current_str = getenv("WI4MPI_Accumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Accumulate_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Put_timeout)) {
+  if (current_str = getenv("WI4MPI_Put_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Put_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_complete_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_complete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_complete_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_fence_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_fence_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_fence_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_get_group_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_get_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_group_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_lock_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_lock_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_lock_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_post_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_post_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_post_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_start_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_start_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_start_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_test_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_test_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_test_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_unlock_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_unlock_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_unlock_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_wait_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_wait_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_wait_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_allocate_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_allocate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_allocate_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_allocate_shared_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_allocate_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_allocate_shared_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_shared_query_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_shared_query_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_shared_query_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_create_dynamic_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_create_dynamic_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_create_dynamic_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_attach_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_attach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_attach_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_detach_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_detach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_detach_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_get_info_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_set_info_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_set_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_set_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_accumulate_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_accumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_accumulate_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Fetch_and_op_timeout)) {
+  if (current_str = getenv("WI4MPI_Fetch_and_op_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Fetch_and_op_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Compare_and_swap_timeout)) {
+  if (current_str = getenv("WI4MPI_Compare_and_swap_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Compare_and_swap_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Rput_timeout)) {
+  if (current_str = getenv("WI4MPI_Rput_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rput_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Rget_timeout)) {
+  if (current_str = getenv("WI4MPI_Rget_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rget_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Raccumulate_timeout)) {
+  if (current_str = getenv("WI4MPI_Raccumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Raccumulate_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Rget_accumulate_timeout)) {
+  if (current_str = getenv("WI4MPI_Rget_accumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rget_accumulate_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_lock_all_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_lock_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_lock_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_unlock_all_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_unlock_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_unlock_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_flush_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_flush_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_flush_all_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_flush_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_flush_local_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_flush_local_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_local_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_flush_local_all_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_flush_local_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_local_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_sync_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_sync_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_sync_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Add_error_class_timeout)) {
+  if (current_str = getenv("WI4MPI_Add_error_class_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Add_error_class_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Add_error_code_timeout)) {
+  if (current_str = getenv("WI4MPI_Add_error_code_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Add_error_code_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Add_error_string_timeout)) {
+  if (current_str = getenv("WI4MPI_Add_error_string_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Add_error_string_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_call_errhandler_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_call_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_call_errhandler_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_delete_attr_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_delete_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_delete_attr_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_get_attr_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_get_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_attr_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_get_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_get_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_set_attr_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_set_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_attr_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_set_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_set_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Grequest_complete_timeout)) {
+  if (current_str = getenv("WI4MPI_Grequest_complete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Grequest_complete_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Grequest_start_timeout)) {
+  if (current_str = getenv("WI4MPI_Grequest_start_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Grequest_start_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Init_thread_timeout)) {
+  if (current_str = getenv("WI4MPI_Init_thread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Init_thread_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Is_thread_main_timeout)) {
+  if (current_str = getenv("WI4MPI_Is_thread_main_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Is_thread_main_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Query_thread_timeout)) {
+  if (current_str = getenv("WI4MPI_Query_thread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Query_thread_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Status_set_cancelled_timeout)) {
+  if (current_str = getenv("WI4MPI_Status_set_cancelled_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Status_set_cancelled_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Status_set_elements_timeout)) {
+  if (current_str = getenv("WI4MPI_Status_set_elements_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Status_set_elements_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_keyval_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_keyval_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_delete_attr_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_delete_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_delete_attr_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_dup_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_dup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_dup_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_free_keyval_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_free_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_free_keyval_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_attr_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_attr_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_envelope_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_envelope_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_envelope_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_set_attr_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_set_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_set_attr_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_set_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_set_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_set_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_match_size_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_match_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_match_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_create_keyval_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_create_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_create_keyval_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_delete_attr_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_delete_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_delete_attr_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_free_keyval_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_free_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_free_keyval_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_get_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_get_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_set_name_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_set_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_set_name_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Alloc_mem_timeout)) {
+  if (current_str = getenv("WI4MPI_Alloc_mem_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alloc_mem_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_create_errhandler_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_create_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_create_errhandler_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_get_errhandler_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_get_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_errhandler_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_set_errhandler_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_set_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_errhandler_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_errhandler_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_errhandler_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_set_errhandler_timeout)) {
+  if (current_str = getenv("WI4MPI_File_set_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_errhandler_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Finalized_timeout)) {
+  if (current_str = getenv("WI4MPI_Finalized_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Finalized_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Free_mem_timeout)) {
+  if (current_str = getenv("WI4MPI_Free_mem_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Free_mem_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_address_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_address_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_address_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_delete_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_delete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_delete_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_dup_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_dup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_dup_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_free_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_get_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_get_nkeys_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_get_nkeys_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_nkeys_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_get_nthkey_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_get_nthkey_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_nthkey_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_get_valuelen_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_get_valuelen_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_valuelen_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Info_set_timeout)) {
+  if (current_str = getenv("WI4MPI_Info_set_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_set_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Request_get_status_timeout)) {
+  if (current_str = getenv("WI4MPI_Request_get_status_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Request_get_status_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_hvector_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_hvector_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_hvector_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_resized_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_resized_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_resized_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_extent_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_extent_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_true_extent_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_true_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_true_extent_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Win_get_errhandler_timeout)) {
+  if (current_str = getenv("WI4MPI_Win_get_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_errhandler_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_f90_integer_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_f90_integer_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_f90_integer_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_f90_real_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_f90_real_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_f90_real_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_f90_complex_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_f90_complex_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_f90_complex_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Reduce_local_timeout)) {
+  if (current_str = getenv("WI4MPI_Reduce_local_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_local_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Op_commutative_timeout)) {
+  if (current_str = getenv("WI4MPI_Op_commutative_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Op_commutative_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Reduce_scatter_block_timeout)) {
+  if (current_str = getenv("WI4MPI_Reduce_scatter_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_scatter_block_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Dist_graph_neighbors_count_timeout)) {
+  if (current_str = getenv("WI4MPI_Dist_graph_neighbors_count_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_neighbors_count_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Improbe_timeout)) {
+  if (current_str = getenv("WI4MPI_Improbe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Improbe_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Imrecv_timeout)) {
+  if (current_str = getenv("WI4MPI_Imrecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Imrecv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Mprobe_timeout)) {
+  if (current_str = getenv("WI4MPI_Mprobe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Mprobe_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Mrecv_timeout)) {
+  if (current_str = getenv("WI4MPI_Mrecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Mrecv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_idup_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_idup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_idup_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ibarrier_timeout)) {
+  if (current_str = getenv("WI4MPI_Ibarrier_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ibarrier_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ibcast_timeout)) {
+  if (current_str = getenv("WI4MPI_Ibcast_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ibcast_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Igather_timeout)) {
+  if (current_str = getenv("WI4MPI_Igather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Igather_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iscatter_timeout)) {
+  if (current_str = getenv("WI4MPI_Iscatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iscatter_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iallgather_timeout)) {
+  if (current_str = getenv("WI4MPI_Iallgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iallgather_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ialltoall_timeout)) {
+  if (current_str = getenv("WI4MPI_Ialltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ialltoall_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ireduce_timeout)) {
+  if (current_str = getenv("WI4MPI_Ireduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ireduce_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iallreduce_timeout)) {
+  if (current_str = getenv("WI4MPI_Iallreduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iallreduce_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ireduce_scatter_block_timeout)) {
+  if (current_str = getenv("WI4MPI_Ireduce_scatter_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ireduce_scatter_block_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iscan_timeout)) {
+  if (current_str = getenv("WI4MPI_Iscan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iscan_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iexscan_timeout)) {
+  if (current_str = getenv("WI4MPI_Iexscan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iexscan_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ineighbor_allgather_timeout)) {
+  if (current_str = getenv("WI4MPI_Ineighbor_allgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_allgather_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ineighbor_alltoall_timeout)) {
+  if (current_str = getenv("WI4MPI_Ineighbor_alltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_alltoall_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Neighbor_allgather_timeout)) {
+  if (current_str = getenv("WI4MPI_Neighbor_allgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_allgather_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Neighbor_alltoall_timeout)) {
+  if (current_str = getenv("WI4MPI_Neighbor_alltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_alltoall_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_split_type_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_split_type_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_split_type_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Get_elements_x_timeout)) {
+  if (current_str = getenv("WI4MPI_Get_elements_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_elements_x_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Status_set_elements_x_timeout)) {
+  if (current_str = getenv("WI4MPI_Status_set_elements_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Status_set_elements_x_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_extent_x_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_extent_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_extent_x_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_true_extent_x_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_true_extent_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_true_extent_x_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_size_x_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_size_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_size_x_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_create_group_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_create_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_create_group_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_init_thread_timeout)) {
+  if (current_str = getenv("WI4MPI_T_init_thread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_init_thread_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_enum_get_info_timeout)) {
+  if (current_str = getenv("WI4MPI_T_enum_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_enum_get_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_enum_get_item_timeout)) {
+  if (current_str = getenv("WI4MPI_T_enum_get_item_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_enum_get_item_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_cvar_get_num_timeout)) {
+  if (current_str = getenv("WI4MPI_T_cvar_get_num_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_get_num_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_cvar_get_info_timeout)) {
+  if (current_str = getenv("WI4MPI_T_cvar_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_get_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_cvar_handle_alloc_timeout)) {
+  if (current_str = getenv("WI4MPI_T_cvar_handle_alloc_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_handle_alloc_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_cvar_handle_free_timeout)) {
+  if (current_str = getenv("WI4MPI_T_cvar_handle_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_handle_free_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_cvar_read_timeout)) {
+  if (current_str = getenv("WI4MPI_T_cvar_read_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_read_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_cvar_write_timeout)) {
+  if (current_str = getenv("WI4MPI_T_cvar_write_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_write_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_pvar_get_num_timeout)) {
+  if (current_str = getenv("WI4MPI_T_pvar_get_num_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_pvar_get_num_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_pvar_get_info_timeout)) {
+  if (current_str = getenv("WI4MPI_T_pvar_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_pvar_get_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_category_get_num_timeout)) {
+  if (current_str = getenv("WI4MPI_T_category_get_num_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_num_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_category_get_info_timeout)) {
+  if (current_str = getenv("WI4MPI_T_category_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_open_timeout)) {
+  if (current_str = getenv("WI4MPI_File_open_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_open_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_close_timeout)) {
+  if (current_str = getenv("WI4MPI_File_close_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_close_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_delete_timeout)) {
+  if (current_str = getenv("WI4MPI_File_delete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_delete_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_set_size_timeout)) {
+  if (current_str = getenv("WI4MPI_File_set_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_preallocate_timeout)) {
+  if (current_str = getenv("WI4MPI_File_preallocate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_preallocate_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_size_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_group_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_group_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_amode_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_amode_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_amode_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_set_info_timeout)) {
+  if (current_str = getenv("WI4MPI_File_set_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_info_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_info_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_set_view_timeout)) {
+  if (current_str = getenv("WI4MPI_File_set_view_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_view_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_view_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_view_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_view_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_at_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_at_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_at_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_at_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iread_at_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iread_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_at_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iwrite_at_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iwrite_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_at_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iread_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iwrite_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iwrite_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_seek_timeout)) {
+  if (current_str = getenv("WI4MPI_File_seek_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_seek_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_position_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_position_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_position_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_byte_offset_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_byte_offset_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_byte_offset_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_shared_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_shared_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_shared_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_shared_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iread_shared_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iread_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_shared_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iwrite_shared_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iwrite_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_shared_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_ordered_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_ordered_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_ordered_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_ordered_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_ordered_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_ordered_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_seek_shared_timeout)) {
+  if (current_str = getenv("WI4MPI_File_seek_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_seek_shared_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_position_shared_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_position_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_position_shared_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_at_all_begin_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_at_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_all_begin_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_at_all_end_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_at_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_all_end_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_at_all_begin_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_at_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_all_begin_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_at_all_end_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_at_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_all_end_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_all_begin_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_all_begin_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_all_end_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_all_end_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_all_begin_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_all_begin_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_all_end_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_all_end_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_ordered_begin_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_ordered_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_ordered_begin_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_read_ordered_end_timeout)) {
+  if (current_str = getenv("WI4MPI_File_read_ordered_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_ordered_end_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_ordered_begin_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_ordered_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_ordered_begin_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_write_ordered_end_timeout)) {
+  if (current_str = getenv("WI4MPI_File_write_ordered_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_ordered_end_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_type_extent_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_type_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_type_extent_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Register_datarep_timeout)) {
+  if (current_str = getenv("WI4MPI_Register_datarep_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Register_datarep_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_set_atomicity_timeout)) {
+  if (current_str = getenv("WI4MPI_File_set_atomicity_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_atomicity_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_get_atomicity_timeout)) {
+  if (current_str = getenv("WI4MPI_File_get_atomicity_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_atomicity_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_sync_timeout)) {
+  if (current_str = getenv("WI4MPI_File_sync_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_sync_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_finalize_timeout)) {
+  if (current_str = getenv("WI4MPI_T_finalize_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_finalize_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Wtime_timeout)) {
+  if (current_str = getenv("WI4MPI_Wtime_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Wtime_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Wtick_timeout)) {
+  if (current_str = getenv("WI4MPI_Wtick_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Wtick_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Finalize_timeout)) {
+  if (current_str = getenv("WI4MPI_Finalize_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Finalize_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Waitany_timeout)) {
+  if (current_str = getenv("WI4MPI_Waitany_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Waitany_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Testany_timeout)) {
+  if (current_str = getenv("WI4MPI_Testany_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Testany_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Waitall_timeout)) {
+  if (current_str = getenv("WI4MPI_Waitall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Waitall_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Testall_timeout)) {
+  if (current_str = getenv("WI4MPI_Testall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Testall_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Waitsome_timeout)) {
+  if (current_str = getenv("WI4MPI_Waitsome_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Waitsome_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Testsome_timeout)) {
+  if (current_str = getenv("WI4MPI_Testsome_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Testsome_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Startall_timeout)) {
+  if (current_str = getenv("WI4MPI_Startall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Startall_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Alltoallw_timeout)) {
+  if (current_str = getenv("WI4MPI_Alltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alltoallw_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Reduce_scatter_timeout)) {
+  if (current_str = getenv("WI4MPI_Reduce_scatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_scatter_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_translate_ranks_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_translate_ranks_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_translate_ranks_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_incl_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_incl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_incl_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_excl_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_excl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_excl_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_range_incl_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_range_incl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_range_incl_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Group_range_excl_timeout)) {
+  if (current_str = getenv("WI4MPI_Group_range_excl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_range_excl_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cart_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Cart_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Dims_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Dims_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dims_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Graph_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Graph_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Graph_get_timeout)) {
+  if (current_str = getenv("WI4MPI_Graph_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cart_get_timeout)) {
+  if (current_str = getenv("WI4MPI_Cart_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_get_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cart_rank_timeout)) {
+  if (current_str = getenv("WI4MPI_Cart_rank_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_rank_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cart_coords_timeout)) {
+  if (current_str = getenv("WI4MPI_Cart_coords_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_coords_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Graph_neighbors_timeout)) {
+  if (current_str = getenv("WI4MPI_Graph_neighbors_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_neighbors_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cart_sub_timeout)) {
+  if (current_str = getenv("WI4MPI_Cart_sub_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_sub_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Cart_map_timeout)) {
+  if (current_str = getenv("WI4MPI_Cart_map_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_map_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Graph_map_timeout)) {
+  if (current_str = getenv("WI4MPI_Graph_map_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_map_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_spawn_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_spawn_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_spawn_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Comm_spawn_multiple_timeout)) {
+  if (current_str = getenv("WI4MPI_Comm_spawn_multiple_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_spawn_multiple_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_get_contents_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_get_contents_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_contents_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Pack_external_timeout)) {
+  if (current_str = getenv("WI4MPI_Pack_external_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_external_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Pack_external_size_timeout)) {
+  if (current_str = getenv("WI4MPI_Pack_external_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_external_size_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_darray_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_darray_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_darray_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_hindexed_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_hindexed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_hindexed_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_indexed_block_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_indexed_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_indexed_block_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_hindexed_block_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_hindexed_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_hindexed_block_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_struct_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_struct_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_struct_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Type_create_subarray_timeout)) {
+  if (current_str = getenv("WI4MPI_Type_create_subarray_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_subarray_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Unpack_external_timeout)) {
+  if (current_str = getenv("WI4MPI_Unpack_external_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Unpack_external_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Dist_graph_create_adjacent_timeout)) {
+  if (current_str = getenv("WI4MPI_Dist_graph_create_adjacent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_create_adjacent_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Dist_graph_create_timeout)) {
+  if (current_str = getenv("WI4MPI_Dist_graph_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_create_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Dist_graph_neighbors_timeout)) {
+  if (current_str = getenv("WI4MPI_Dist_graph_neighbors_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_neighbors_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Igatherv_timeout)) {
+  if (current_str = getenv("WI4MPI_Igatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Igatherv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iscatterv_timeout)) {
+  if (current_str = getenv("WI4MPI_Iscatterv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iscatterv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Iallgatherv_timeout)) {
+  if (current_str = getenv("WI4MPI_Iallgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iallgatherv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ialltoallv_timeout)) {
+  if (current_str = getenv("WI4MPI_Ialltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ialltoallv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ialltoallw_timeout)) {
+  if (current_str = getenv("WI4MPI_Ialltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ialltoallw_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ireduce_scatter_timeout)) {
+  if (current_str = getenv("WI4MPI_Ireduce_scatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ireduce_scatter_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ineighbor_allgatherv_timeout)) {
+  if (current_str = getenv("WI4MPI_Ineighbor_allgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_allgatherv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ineighbor_alltoallv_timeout)) {
+  if (current_str = getenv("WI4MPI_Ineighbor_alltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_alltoallv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Ineighbor_alltoallw_timeout)) {
+  if (current_str = getenv("WI4MPI_Ineighbor_alltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_alltoallw_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Neighbor_allgatherv_timeout)) {
+  if (current_str = getenv("WI4MPI_Neighbor_allgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_allgatherv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Neighbor_alltoallv_timeout)) {
+  if (current_str = getenv("WI4MPI_Neighbor_alltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_alltoallv_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Neighbor_alltoallw_timeout)) {
+  if (current_str = getenv("WI4MPI_Neighbor_alltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_alltoallw_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_category_get_cvars_timeout)) {
+  if (current_str = getenv("WI4MPI_T_category_get_cvars_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_cvars_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_category_get_pvars_timeout)) {
+  if (current_str = getenv("WI4MPI_T_category_get_pvars_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_pvars_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_category_get_categories_timeout)) {
+  if (current_str = getenv("WI4MPI_T_category_get_categories_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_categories_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iwrite_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iwrite_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iwrite_at_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iwrite_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_at_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_category_get_index_timeout)) {
+  if (current_str = getenv("WI4MPI_T_category_get_index_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_index_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_cvar_get_index_timeout)) {
+  if (current_str = getenv("WI4MPI_T_cvar_get_index_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_get_index_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_pvar_get_index_timeout)) {
+  if (current_str = getenv("WI4MPI_T_pvar_get_index_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_pvar_get_index_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Aint_add_timeout)) {
+  if (current_str = getenv("WI4MPI_Aint_add_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Aint_add_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_Aint_diff_timeout)) {
+  if (current_str = getenv("WI4MPI_Aint_diff_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Aint_diff_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iread_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iread_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_File_iread_at_all_timeout)) {
+  if (current_str = getenv("WI4MPI_File_iread_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_at_all_timeout = current_val;
   }
-  if (current_str = getenv(WI4MPI_T_category_changed_timeout)) {
+  if (current_str = getenv("WI4MPI_T_category_changed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_changed_timeout = current_val;
