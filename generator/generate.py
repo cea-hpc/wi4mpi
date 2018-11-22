@@ -2,6 +2,7 @@
 import json
 import string
 import os, sys
+from subprocess import call
 from pprint import pprint
 from generator import generator
 
@@ -776,6 +777,7 @@ if __name__ == '__main__':
     preload_wrapper_c.close()
     fl.close()
     not_generated.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_c.c'])
     print "        Done."
     os.chdir(root)
    
@@ -790,6 +792,7 @@ if __name__ == '__main__':
     preload_wrapper_f.write(string)
     preload_wrapper_f.close()
     fl_f.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_fort.c'])
     print "        Done."
     os.chdir(root)
 
@@ -817,6 +820,7 @@ if __name__ == '__main__':
     interface_wrapper_c.close()
     fl.close()
     not_generated.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_c.c'])
     print "        Done."
     os.chdir(root)
     
@@ -829,6 +833,7 @@ if __name__ == '__main__':
     interface_wrapper_fortran.close()
     data_file.close()
     fl_f.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_fort.c'])
     print "        Done."
     os.chdir(root)
 

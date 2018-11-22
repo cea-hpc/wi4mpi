@@ -83,7 +83,7 @@ class generator:
             string=string+'\nprintf(\"sort : A_f_'+func_dict['name']+'\\n\");'
         elif self.name == 'Interface_C':
             string=string+'\nprintf(\"sort : P'+func_dict['name']+' (interface)\\n\");'
-        string=string+'\n#endif'
+        string=string+'\n#endif\n'
         string=string+'#ifdef TIMEOUT_SUPPORT'
         if app_side:
                 string=string+'\nwi4mpi_unset_timeout();'
