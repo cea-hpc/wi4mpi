@@ -147,3 +147,19 @@ __attribute__((constructor)) void timeout_init(void)
     /*launch the helper thread*/
     pthread_create(&timeout_thread,NULL,&wi4mpi_timeout_main_loop, (void*)my_elt);
 }
+void timeout_config_file(void)
+{   
+    FILE *ff;
+    char buff[1024];
+    long long *vv;
+    char *fname=getenv("WI4MPI_TIMEOUT_CONFIG_FILE");
+    if(!fname)
+        return;
+    ff=fopen("fname");
+    while(getline(buff,1024)>0){
+        char *split=&(buff[0]);
+        while(*split!='=') split++;
+        *split='\0';
+        if(vv=dlsym(RTLD_SELF,buff)) *vv=strtoll(split+1,NULL,10);
+    }
+}
