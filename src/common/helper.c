@@ -89,12 +89,15 @@ va_list va;
 th_reg_list *last_elt;
 /* each thread has a pointer on is own control structure*/
 __thread th_reg_list *my_elt;
+static pthread_mutex_t mutex_list_lock = PTHREAD_MUTEX_INITIALIZER;
 #include <app_mpi.h>
 int wi4mpi_timeout_main_loop(void *felement)
 {
     int mi,rank;
     /*first list element is the application main thread*/
+    pthread_mutex_lock(&mutex_list_lock);
     my_elt=(th_reg_list*)felement;
+    pthread_mutex_unlock(&mutex_list_lock);
     while(!timeout_thread_end){
         size_t ts=gettimestamp();
         th_reg_list *otmp;
@@ -151,7 +154,10 @@ void wi4mpi_timeout_thread_register(int th)
     my_elt->tid=th;
     my_elt->next=NULL;
     /* do the insertion in lock free manner the overhead price is paid only once per thread */
-    __atomic_exchange(&last_elt,&my_elt,&tmp,__ATOMIC_SEQ_CST);
+    pthread_mutex_lock(&mutex_list_lock);
+    tmp=last_elt;
+    last_elt=my_elt;
+    pthread_mutex_unlock(&mutex_list_lock);
     tmp->next=my_elt;
 }
 void wi4mpi_timeout_thread_unregister()
@@ -163,13 +169,16 @@ __attribute__((constructor)) void timeout_init(void)
 {
     pthread_t timeout_thread;
     /*register the main thread */
+    pthread_mutex_lock(&mutex_list_lock);
     my_elt=malloc(sizeof(th_reg_list));
     my_elt->active=1;
     my_elt->next=NULL;
     my_elt->tid=gettid();
     my_elt->timeout=WI4MPI_MAX_TIME;
+    last_elt=my_elt;
     /*launch the helper thread*/
     pthread_create(&timeout_thread,NULL,&wi4mpi_timeout_main_loop, (void*)my_elt);
+    pthread_mutex_unlock(&mutex_list_lock);
 }
 void timeout_config_file(void)
 {   
