@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include "helper.h"
 #include <sched.h>
+#include <dlfcn.h>
 int gettid(void)
 {
     return syscall(SYS_gettid);
@@ -159,11 +160,12 @@ void timeout_config_file(void)
     FILE *ff;
     char buff[1024];
     long long *vv;
+    int *n;
     char *fname=getenv("WI4MPI_TIMEOUT_CONFIG_FILE");
     if(!fname)
         return;
     ff=fopen("fname","r");
-    while(getline(&buff[0],1024)>0){
+    while(getline(&buff,&n)>0){
         char *split=&(buff[0]);
         while(*split!='=') split++;
         *split='\0';
