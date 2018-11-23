@@ -2,6 +2,7 @@
 import json
 import string
 import os, sys
+from subprocess import call
 from pprint import pprint
 from generator import generator
 
@@ -76,7 +77,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+ i
     string=string+ '#endif'+'\n\n'
     string=string+ '#define EXTERN_ALLOCATED 1\n'
-    string=string+ '#include "mappers.h"\n\n'
+    string=string+ '#include "mappers.h"\n#include "helper.h"\n'
     if not wrapper:
         string=string+'#include \"c2f_f2c.h\"\n'
         string=string+ 'extern __thread int in_w;\n'
@@ -86,6 +87,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+ i
     for i in data:
         if i['name'] in def_list:
+            string=string+'unsigned long long WI4'+i['name']+'_timeout=WI4MPI_MAX_TIME;\n'
             string=string+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='A_')+';\n'
             string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n\n'
             if wrapper:
@@ -150,7 +152,12 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+'#endif\n'
     for conf in init_conf:
         string=string+conf
-    string=string+'}'
+    string=string+'}\n'
+    string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;timeout_config_file();\n'
+    for i in data:
+        if (i['name'] in def_list):
+            string=string+'if(current_str=getenv(\"WI4'+i['name']+'_timeout\")){ current_val=strtoll(current_str,NULL,10);if (current_val>0) WI4'+i['name']+'_timeout=current_val;}\n'
+    string=string+'}\n'
     return string
 
 def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_not_gen=['MPI_Keyval_create','MPI_Keyval_free','MPI_Attr_put','MPI_Attr_get','MPI_Attr_delete','MPI_Errhandler_create','MPI_Errhandler_set','MPI_Errhandler_get','MPI_Errhandler_free','MPI_Comm_create_errhandler','MPI_Comm_get_errhandler','MPI_Comm_set_errhandler','MPI_Info_free']):
@@ -196,6 +203,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
                     string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
                     string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
                     string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
+                string=string+'extern unsigned long long WI4'+i['name']+'_timeout;\n'
                 if not wrapper:
                     if i['name'] in list_not_gen:
                         string_file=root+'/FORTRAN/'+i['name']
@@ -770,6 +778,7 @@ if __name__ == '__main__':
     preload_wrapper_c.close()
     fl.close()
     not_generated.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_c.c'])
     print "        Done."
     os.chdir(root)
    
@@ -784,6 +793,7 @@ if __name__ == '__main__':
     preload_wrapper_f.write(string)
     preload_wrapper_f.close()
     fl_f.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_fort.c'])
     print "        Done."
     os.chdir(root)
 
@@ -811,6 +821,7 @@ if __name__ == '__main__':
     interface_wrapper_c.close()
     fl.close()
     not_generated.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_c.c'])
     print "        Done."
     os.chdir(root)
     
@@ -823,6 +834,7 @@ if __name__ == '__main__':
     interface_wrapper_fortran.close()
     data_file.close()
     fl_f.close()
+    call(['clang-format','-style=LLVM','-i','mpi_translation_fort.c'])
     print "        Done."
     os.chdir(root)
 

@@ -54,6 +54,10 @@ class generator:
         elif self.name == 'Interface_C':
             string=string+'\nprintf(\"entre : P'+func_dict['name']+' (interface) \\n\");'
         string=string+'\n#endif'
+        string=string+'\n#ifdef TIMEOUT_SUPPORT'
+        if app_side:
+                string=string+'\nwi4mpi_set_timeout(WI4'+func_dict['name']+'_timeout);'
+        string=string+'\n#endif'
         #handle reentrency only if in Wrapper_Preload_C or Wrapper_Interface_C Wrapper_Preload_Fortran Wrapper_Interface_Fortran
         if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C' or self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
             if app_side:
@@ -79,6 +83,10 @@ class generator:
             string=string+'\nprintf(\"sort : A_f_'+func_dict['name']+'\\n\");'
         elif self.name == 'Interface_C':
             string=string+'\nprintf(\"sort : P'+func_dict['name']+' (interface)\\n\");'
+        string=string+'\n#endif\n'
+        string=string+'#ifdef TIMEOUT_SUPPORT'
+        if app_side:
+                string=string+'\nwi4mpi_unset_timeout();'
         string=string+'\n#endif'
         if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C':
             if app_side:
