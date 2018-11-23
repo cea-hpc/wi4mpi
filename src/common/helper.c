@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <unistd.h>
-#define __GNU_SOURCE
+#define _GNU_SOURCE
 #include <sys/syscall.h>    
 #include <sched.h>
 #include <stdio.h>
@@ -158,17 +158,17 @@ __attribute__((constructor)) void timeout_init(void)
 void timeout_config_file(void)
 {   
     FILE *ff;
-    char buff[1024];
+    char *buff=(char*)malloc(1024*sizeof(char));
     long long *vv;
     int *n;
     char *fname=getenv("WI4MPI_TIMEOUT_CONFIG_FILE");
     if(!fname)
         return;
     ff=fopen("fname","r");
-    while(getline(&buff,&n)>0){
+    while(getline(&buff,&n,ff)>0){
         char *split=&(buff[0]);
         while(*split!='=') split++;
         *split='\0';
-        if(vv=dlsym(RTLD_SELF,buff)) *vv=strtoll(split+1,NULL,10);
+        if(vv=dlsym(RTLD_DEFAULT,buff)) *vv=strtoll(split+1,NULL,10);
     }
 }
