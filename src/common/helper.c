@@ -104,20 +104,11 @@ int wi4mpi_timeout_main_loop(void *felement)
             {
                 if (ts>=tmp->timeout){
                     /* effective timeout kill the responsible thread*/
-                    if(A_MPI_Initialized(&mi))
-                    {
-                        
-                        A_MPI_Comm_rank(A_MPI_COMM_WORLD,&rank);
-                        fprintf(stderr,"rank %d has reached a timeout\n",rank);
-                    }            
-                    else
-                    {
                         char hostname[2048];
                         gethostname(hostname,2048);
                         fprintf(stderr,"processus %d on host %s has reached a timeout\n",getpid(),hostname);
                     
-                        }
-                    fsync(stderr);
+                    fflush(stderr);
                      kill(tmp->tid,SIGABRT);
                     return;
                 }
