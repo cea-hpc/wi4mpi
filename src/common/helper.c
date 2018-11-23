@@ -104,6 +104,7 @@ int wi4mpi_timeout_main_loop(void *felement)
                 if (ts>=tmp->timeout){
                     /* effective timeout kill the responsible thread*/
                     kill(tmp->tid,SIGABRT);
+                    return;
                 }
                 else
                 {
