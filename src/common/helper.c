@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <unistd.h>
+#include <stdarg.h>
 #define _GNU_SOURCE
 #include <sys/syscall.h>    
 #include <sched.h>
