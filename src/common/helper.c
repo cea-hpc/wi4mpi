@@ -162,8 +162,8 @@ void timeout_config_file(void)
     char *fname=getenv("WI4MPI_TIMEOUT_CONFIG_FILE");
     if(!fname)
         return;
-    ff=fopen("fname");
-    while(getline(buff,1024)>0){
+    ff=fopen("fname","r");
+    while(getline(&buff[0],1024)>0){
         char *split=&(buff[0]);
         while(*split!='=') split++;
         *split='\0';
