@@ -116,7 +116,7 @@ int wi4mpi_timeout_main_loop(void *felement)
                 {
                     /*this elt reference a thread who had released the slot*/
                     /* last position is protected to avoid a data corruption in case of thread register occuring at the same time, if in last position the elt will be released after a new thread registration or at end of this thread */
-                    if(tmp!=last_elt)
+                    if(tmp!=last_elt&&tmp!=my_elt)
                     {
                         otmp->next=tmp->next;
                         free(tmp);
