@@ -9,9 +9,11 @@
 #include <signal.h>
 #include <unistd.h>
 #define __GNU_SOURCE
+#include <sys/syscall.h>    
 #include <sched.h>
 #include <stdio.h>
 #include "helper.h"
+#include <sched.h>
 int gettid(void)
 {
     return syscall(SYS_gettid);
