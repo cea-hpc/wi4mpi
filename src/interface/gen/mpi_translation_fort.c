@@ -54,7 +54,7 @@ void pmpi_send__(void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_send_(void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Send_timeout;
+extern unsigned long long WI4MPI_Send_timeout;
 void (*_LOCAL_MPI_Send)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Send(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -100,7 +100,7 @@ void pmpi_recv__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_recv_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Recv_timeout;
+extern unsigned long long WI4MPI_Recv_timeout;
 void (*_LOCAL_MPI_Recv)(void *, int *, int *, int *, int *, int *, int *,
                         int *);
 
@@ -155,7 +155,7 @@ void pmpi_get_count__(int *, int *, int *, int *);
 
 void pmpi_get_count_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Get_count_timeout;
+extern unsigned long long WI4MPI_Get_count_timeout;
 void (*_LOCAL_MPI_Get_count)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_count(int *status, int *datatype, int *count, int *ret) {
@@ -195,7 +195,7 @@ void pmpi_bsend__(void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_bsend_(void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Bsend_timeout;
+extern unsigned long long WI4MPI_Bsend_timeout;
 void (*_LOCAL_MPI_Bsend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Bsend(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -241,7 +241,7 @@ void pmpi_ssend__(void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_ssend_(void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Ssend_timeout;
+extern unsigned long long WI4MPI_Ssend_timeout;
 void (*_LOCAL_MPI_Ssend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Ssend(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -287,7 +287,7 @@ void pmpi_rsend__(void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_rsend_(void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Rsend_timeout;
+extern unsigned long long WI4MPI_Rsend_timeout;
 void (*_LOCAL_MPI_Rsend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Rsend(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -333,7 +333,7 @@ void pmpi_buffer_attach__(void *, int *, int *);
 
 void pmpi_buffer_attach_(void *, int *, int *);
 
-extern long long WI4MPI_Buffer_attach_timeout;
+extern unsigned long long WI4MPI_Buffer_attach_timeout;
 void (*_LOCAL_MPI_Buffer_attach)(void *, int *, int *);
 
 void A_f_MPI_Buffer_attach(void *buffer, int *size, int *ret) {
@@ -369,7 +369,7 @@ void pmpi_buffer_detach__(void *, int *, int *);
 
 void pmpi_buffer_detach_(void *, int *, int *);
 
-extern long long WI4MPI_Buffer_detach_timeout;
+extern unsigned long long WI4MPI_Buffer_detach_timeout;
 void (*_LOCAL_MPI_Buffer_detach)(void *, int *, int *);
 
 void A_f_MPI_Buffer_detach(void *buffer_addr, int *size, int *ret) {
@@ -406,7 +406,7 @@ void pmpi_isend__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_isend_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Isend_timeout;
+extern unsigned long long WI4MPI_Isend_timeout;
 void (*_LOCAL_MPI_Isend)(void *, int *, int *, int *, int *, int *, int *,
                          int *);
 
@@ -456,7 +456,7 @@ void pmpi_ibsend__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_ibsend_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Ibsend_timeout;
+extern unsigned long long WI4MPI_Ibsend_timeout;
 void (*_LOCAL_MPI_Ibsend)(void *, int *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -506,7 +506,7 @@ void pmpi_issend__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_issend_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Issend_timeout;
+extern unsigned long long WI4MPI_Issend_timeout;
 void (*_LOCAL_MPI_Issend)(void *, int *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -556,7 +556,7 @@ void pmpi_irsend__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_irsend_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Irsend_timeout;
+extern unsigned long long WI4MPI_Irsend_timeout;
 void (*_LOCAL_MPI_Irsend)(void *, int *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -606,7 +606,7 @@ void pmpi_irecv__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_irecv_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Irecv_timeout;
+extern unsigned long long WI4MPI_Irecv_timeout;
 void (*_LOCAL_MPI_Irecv)(void *, int *, int *, int *, int *, int *, int *,
                          int *);
 
@@ -657,7 +657,7 @@ void pmpi_wait__(int *, int *, int *);
 
 void pmpi_wait_(int *, int *, int *);
 
-extern long long WI4MPI_Wait_timeout;
+extern unsigned long long WI4MPI_Wait_timeout;
 void (*_LOCAL_MPI_Wait)(int *, int *, int *);
 
 void A_f_MPI_Wait(int *request, int *status, int *ret) {
@@ -701,7 +701,7 @@ void pmpi_test__(int *, int *, int *, int *);
 
 void pmpi_test_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Test_timeout;
+extern unsigned long long WI4MPI_Test_timeout;
 void (*_LOCAL_MPI_Test)(int *, int *, int *, int *);
 
 void A_f_MPI_Test(int *request, int *flag, int *status, int *ret) {
@@ -745,7 +745,7 @@ void pmpi_request_free__(int *, int *);
 
 void pmpi_request_free_(int *, int *);
 
-extern long long WI4MPI_Request_free_timeout;
+extern unsigned long long WI4MPI_Request_free_timeout;
 void (*_LOCAL_MPI_Request_free)(int *, int *);
 
 void A_f_MPI_Request_free(int *request, int *ret) {
@@ -783,7 +783,7 @@ void pmpi_iprobe__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_iprobe_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Iprobe_timeout;
+extern unsigned long long WI4MPI_Iprobe_timeout;
 void (*_LOCAL_MPI_Iprobe)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Iprobe(int *source, int *tag, int *comm, int *flag, int *status,
@@ -831,7 +831,7 @@ void pmpi_probe__(int *, int *, int *, int *, int *);
 
 void pmpi_probe_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Probe_timeout;
+extern unsigned long long WI4MPI_Probe_timeout;
 void (*_LOCAL_MPI_Probe)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Probe(int *source, int *tag, int *comm, int *status, int *ret) {
@@ -877,7 +877,7 @@ void pmpi_cancel__(int *, int *);
 
 void pmpi_cancel_(int *, int *);
 
-extern long long WI4MPI_Cancel_timeout;
+extern unsigned long long WI4MPI_Cancel_timeout;
 void (*_LOCAL_MPI_Cancel)(int *, int *);
 
 void A_f_MPI_Cancel(int *request, int *ret) {
@@ -913,7 +913,7 @@ void pmpi_test_cancelled__(int *, int *, int *);
 
 void pmpi_test_cancelled_(int *, int *, int *);
 
-extern long long WI4MPI_Test_cancelled_timeout;
+extern unsigned long long WI4MPI_Test_cancelled_timeout;
 void (*_LOCAL_MPI_Test_cancelled)(int *, int *, int *);
 
 void A_f_MPI_Test_cancelled(int *status, int *flag, int *ret) {
@@ -951,7 +951,7 @@ void pmpi_send_init__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_send_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Send_init_timeout;
+extern unsigned long long WI4MPI_Send_init_timeout;
 void (*_LOCAL_MPI_Send_init)(void *, int *, int *, int *, int *, int *, int *,
                              int *);
 
@@ -1001,7 +1001,7 @@ void pmpi_bsend_init__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_bsend_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Bsend_init_timeout;
+extern unsigned long long WI4MPI_Bsend_init_timeout;
 void (*_LOCAL_MPI_Bsend_init)(void *, int *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -1051,7 +1051,7 @@ void pmpi_ssend_init__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_ssend_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Ssend_init_timeout;
+extern unsigned long long WI4MPI_Ssend_init_timeout;
 void (*_LOCAL_MPI_Ssend_init)(void *, int *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -1101,7 +1101,7 @@ void pmpi_rsend_init__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_rsend_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Rsend_init_timeout;
+extern unsigned long long WI4MPI_Rsend_init_timeout;
 void (*_LOCAL_MPI_Rsend_init)(void *, int *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -1151,7 +1151,7 @@ void pmpi_recv_init__(void *, int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_recv_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Recv_init_timeout;
+extern unsigned long long WI4MPI_Recv_init_timeout;
 void (*_LOCAL_MPI_Recv_init)(void *, int *, int *, int *, int *, int *, int *,
                              int *);
 
@@ -1202,7 +1202,7 @@ void pmpi_start__(int *, int *);
 
 void pmpi_start_(int *, int *);
 
-extern long long WI4MPI_Start_timeout;
+extern unsigned long long WI4MPI_Start_timeout;
 void (*_LOCAL_MPI_Start)(int *, int *);
 
 void A_f_MPI_Start(int *request, int *ret) {
@@ -1245,7 +1245,7 @@ void pmpi_sendrecv__(void *, int *, int *, int *, int *, void *, int *, int *,
 void pmpi_sendrecv_(void *, int *, int *, int *, int *, void *, int *, int *,
                     int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Sendrecv_timeout;
+extern unsigned long long WI4MPI_Sendrecv_timeout;
 void (*_LOCAL_MPI_Sendrecv)(void *, int *, int *, int *, int *, void *, int *,
                             int *, int *, int *, int *, int *, int *);
 
@@ -1316,7 +1316,7 @@ void pmpi_sendrecv_replace__(void *, int *, int *, int *, int *, int *, int *,
 void pmpi_sendrecv_replace_(void *, int *, int *, int *, int *, int *, int *,
                             int *, int *, int *);
 
-extern long long WI4MPI_Sendrecv_replace_timeout;
+extern unsigned long long WI4MPI_Sendrecv_replace_timeout;
 void (*_LOCAL_MPI_Sendrecv_replace)(void *, int *, int *, int *, int *, int *,
                                     int *, int *, int *, int *);
 
@@ -1377,7 +1377,7 @@ void pmpi_type_contiguous__(int *, int *, int *, int *);
 
 void pmpi_type_contiguous_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_contiguous_timeout;
+extern unsigned long long WI4MPI_Type_contiguous_timeout;
 void (*_LOCAL_MPI_Type_contiguous)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_contiguous(int *count, int *oldtype, int *newtype, int *ret) {
@@ -1416,7 +1416,7 @@ void pmpi_type_vector__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_type_vector_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_vector_timeout;
+extern unsigned long long WI4MPI_Type_vector_timeout;
 void (*_LOCAL_MPI_Type_vector)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Type_vector(int *count, int *blocklength, int *stride,
@@ -1457,7 +1457,7 @@ void pmpi_type_hvector__(int *, int *, size_t *, int *, int *, int *);
 
 void pmpi_type_hvector_(int *, int *, size_t *, int *, int *, int *);
 
-extern long long WI4MPI_Type_hvector_timeout;
+extern unsigned long long WI4MPI_Type_hvector_timeout;
 void (*_LOCAL_MPI_Type_hvector)(int *, int *, size_t *, int *, int *, int *);
 
 void A_f_MPI_Type_hvector(int *count, int *blocklength, size_t *stride,
@@ -1498,7 +1498,7 @@ void pmpi_type_indexed__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_type_indexed_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_indexed_timeout;
+extern unsigned long long WI4MPI_Type_indexed_timeout;
 void (*_LOCAL_MPI_Type_indexed)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Type_indexed(int *count, int *array_of_blocklengths,
@@ -1540,7 +1540,7 @@ void pmpi_type_hindexed__(int *, int *, size_t *, int *, int *, int *);
 
 void pmpi_type_hindexed_(int *, int *, size_t *, int *, int *, int *);
 
-extern long long WI4MPI_Type_hindexed_timeout;
+extern unsigned long long WI4MPI_Type_hindexed_timeout;
 void (*_LOCAL_MPI_Type_hindexed)(int *, int *, size_t *, int *, int *, int *);
 
 void A_f_MPI_Type_hindexed(int *count, int *array_of_blocklengths,
@@ -1582,7 +1582,7 @@ void pmpi_type_struct__(int *, int *, size_t *, int *, int *, int *);
 
 void pmpi_type_struct_(int *, int *, size_t *, int *, int *, int *);
 
-extern long long WI4MPI_Type_struct_timeout;
+extern unsigned long long WI4MPI_Type_struct_timeout;
 void (*_LOCAL_MPI_Type_struct)(int *, int *, size_t *, int *, int *, int *);
 
 void A_f_MPI_Type_struct(int *count, int *array_of_blocklengths,
@@ -1626,7 +1626,7 @@ void pmpi_address__(void *, size_t *, int *);
 
 void pmpi_address_(void *, size_t *, int *);
 
-extern long long WI4MPI_Address_timeout;
+extern unsigned long long WI4MPI_Address_timeout;
 void (*_LOCAL_MPI_Address)(void *, size_t *, int *);
 
 void A_f_MPI_Address(void *location, size_t *address, int *ret) {
@@ -1662,7 +1662,7 @@ void pmpi_type_extent__(int *, size_t *, int *);
 
 void pmpi_type_extent_(int *, size_t *, int *);
 
-extern long long WI4MPI_Type_extent_timeout;
+extern unsigned long long WI4MPI_Type_extent_timeout;
 void (*_LOCAL_MPI_Type_extent)(int *, size_t *, int *);
 
 void A_f_MPI_Type_extent(int *datatype, size_t *extent, int *ret) {
@@ -1698,7 +1698,7 @@ void pmpi_type_size__(int *, int *, int *);
 
 void pmpi_type_size_(int *, int *, int *);
 
-extern long long WI4MPI_Type_size_timeout;
+extern unsigned long long WI4MPI_Type_size_timeout;
 void (*_LOCAL_MPI_Type_size)(int *, int *, int *);
 
 void A_f_MPI_Type_size(int *datatype, int *size, int *ret) {
@@ -1734,7 +1734,7 @@ void pmpi_type_lb__(int *, size_t *, int *);
 
 void pmpi_type_lb_(int *, size_t *, int *);
 
-extern long long WI4MPI_Type_lb_timeout;
+extern unsigned long long WI4MPI_Type_lb_timeout;
 void (*_LOCAL_MPI_Type_lb)(int *, size_t *, int *);
 
 void A_f_MPI_Type_lb(int *datatype, size_t *displacement, int *ret) {
@@ -1770,7 +1770,7 @@ void pmpi_type_ub__(int *, size_t *, int *);
 
 void pmpi_type_ub_(int *, size_t *, int *);
 
-extern long long WI4MPI_Type_ub_timeout;
+extern unsigned long long WI4MPI_Type_ub_timeout;
 void (*_LOCAL_MPI_Type_ub)(int *, size_t *, int *);
 
 void A_f_MPI_Type_ub(int *datatype, size_t *displacement, int *ret) {
@@ -1806,7 +1806,7 @@ void pmpi_type_commit__(int *, int *);
 
 void pmpi_type_commit_(int *, int *);
 
-extern long long WI4MPI_Type_commit_timeout;
+extern unsigned long long WI4MPI_Type_commit_timeout;
 void (*_LOCAL_MPI_Type_commit)(int *, int *);
 
 void A_f_MPI_Type_commit(int *datatype, int *ret) {
@@ -1842,7 +1842,7 @@ void pmpi_type_free__(int *, int *);
 
 void pmpi_type_free_(int *, int *);
 
-extern long long WI4MPI_Type_free_timeout;
+extern unsigned long long WI4MPI_Type_free_timeout;
 void (*_LOCAL_MPI_Type_free)(int *, int *);
 
 void A_f_MPI_Type_free(int *datatype, int *ret) {
@@ -1880,7 +1880,7 @@ void pmpi_get_elements__(int *, int *, int *, int *);
 
 void pmpi_get_elements_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Get_elements_timeout;
+extern unsigned long long WI4MPI_Get_elements_timeout;
 void (*_LOCAL_MPI_Get_elements)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_elements(int *status, int *datatype, int *count, int *ret) {
@@ -1920,7 +1920,7 @@ void pmpi_pack__(void *, int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_pack_(void *, int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Pack_timeout;
+extern unsigned long long WI4MPI_Pack_timeout;
 void (*_LOCAL_MPI_Pack)(void *, int *, int *, void *, int *, int *, int *,
                         int *);
 
@@ -1966,7 +1966,7 @@ void pmpi_unpack__(void *, int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_unpack_(void *, int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Unpack_timeout;
+extern unsigned long long WI4MPI_Unpack_timeout;
 void (*_LOCAL_MPI_Unpack)(void *, int *, int *, void *, int *, int *, int *,
                           int *);
 
@@ -2012,7 +2012,7 @@ void pmpi_pack_size__(int *, int *, int *, int *, int *);
 
 void pmpi_pack_size_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Pack_size_timeout;
+extern unsigned long long WI4MPI_Pack_size_timeout;
 void (*_LOCAL_MPI_Pack_size)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Pack_size(int *incount, int *datatype, int *comm, int *size,
@@ -2051,7 +2051,7 @@ void pmpi_barrier__(int *, int *);
 
 void pmpi_barrier_(int *, int *);
 
-extern long long WI4MPI_Barrier_timeout;
+extern unsigned long long WI4MPI_Barrier_timeout;
 void (*_LOCAL_MPI_Barrier)(int *, int *);
 
 void A_f_MPI_Barrier(int *comm, int *ret) {
@@ -2087,7 +2087,7 @@ void pmpi_bcast__(void *, int *, int *, int *, int *, int *);
 
 void pmpi_bcast_(void *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Bcast_timeout;
+extern unsigned long long WI4MPI_Bcast_timeout;
 void (*_LOCAL_MPI_Bcast)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Bcast(void *buffer, int *count, int *datatype, int *root,
@@ -2135,7 +2135,7 @@ void pmpi_gather__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_gather_(void *, int *, int *, void *, int *, int *, int *, int *,
                   int *);
 
-extern long long WI4MPI_Gather_timeout;
+extern unsigned long long WI4MPI_Gather_timeout;
 void (*_LOCAL_MPI_Gather)(void *, int *, int *, void *, int *, int *, int *,
                           int *, int *);
 
@@ -2190,7 +2190,7 @@ void pmpi_gatherv__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_gatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
                    int *, int *);
 
-extern long long WI4MPI_Gatherv_timeout;
+extern unsigned long long WI4MPI_Gatherv_timeout;
 void (*_LOCAL_MPI_Gatherv)(void *, int *, int *, void *, int *, int *, int *,
                            int *, int *, int *);
 
@@ -2246,7 +2246,7 @@ void pmpi_scatter__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_scatter_(void *, int *, int *, void *, int *, int *, int *, int *,
                    int *);
 
-extern long long WI4MPI_Scatter_timeout;
+extern unsigned long long WI4MPI_Scatter_timeout;
 void (*_LOCAL_MPI_Scatter)(void *, int *, int *, void *, int *, int *, int *,
                            int *, int *);
 
@@ -2301,7 +2301,7 @@ void pmpi_scatterv__(void *, int *, int *, int *, void *, int *, int *, int *,
 void pmpi_scatterv_(void *, int *, int *, int *, void *, int *, int *, int *,
                     int *, int *);
 
-extern long long WI4MPI_Scatterv_timeout;
+extern unsigned long long WI4MPI_Scatterv_timeout;
 void (*_LOCAL_MPI_Scatterv)(void *, int *, int *, int *, void *, int *, int *,
                             int *, int *, int *);
 
@@ -2352,7 +2352,7 @@ void pmpi_allgather__(void *, int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_allgather_(void *, int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Allgather_timeout;
+extern unsigned long long WI4MPI_Allgather_timeout;
 void (*_LOCAL_MPI_Allgather)(void *, int *, int *, void *, int *, int *, int *,
                              int *);
 
@@ -2407,7 +2407,7 @@ void pmpi_allgatherv__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_allgatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
                       int *);
 
-extern long long WI4MPI_Allgatherv_timeout;
+extern unsigned long long WI4MPI_Allgatherv_timeout;
 void (*_LOCAL_MPI_Allgatherv)(void *, int *, int *, void *, int *, int *, int *,
                               int *, int *);
 
@@ -2457,7 +2457,7 @@ void pmpi_alltoall__(void *, int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_alltoall_(void *, int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Alltoall_timeout;
+extern unsigned long long WI4MPI_Alltoall_timeout;
 void (*_LOCAL_MPI_Alltoall)(void *, int *, int *, void *, int *, int *, int *,
                             int *);
 
@@ -2512,7 +2512,7 @@ void pmpi_alltoallv__(void *, int *, int *, int *, void *, int *, int *, int *,
 void pmpi_alltoallv_(void *, int *, int *, int *, void *, int *, int *, int *,
                      int *, int *);
 
-extern long long WI4MPI_Alltoallv_timeout;
+extern unsigned long long WI4MPI_Alltoallv_timeout;
 void (*_LOCAL_MPI_Alltoallv)(void *, int *, int *, int *, void *, int *, int *,
                              int *, int *, int *);
 
@@ -2563,7 +2563,7 @@ void pmpi_exscan__(void *, void *, int *, int *, int *, int *, int *);
 
 void pmpi_exscan_(void *, void *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Exscan_timeout;
+extern unsigned long long WI4MPI_Exscan_timeout;
 void (*_LOCAL_MPI_Exscan)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Exscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
@@ -2610,7 +2610,7 @@ void pmpi_reduce__(void *, void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_reduce_(void *, void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Reduce_timeout;
+extern unsigned long long WI4MPI_Reduce_timeout;
 void (*_LOCAL_MPI_Reduce)(void *, void *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -2659,7 +2659,7 @@ void pmpi_op_create__(void *, int *, int *, int *);
 
 void pmpi_op_create_(void *, int *, int *, int *);
 
-extern long long WI4MPI_Op_create_timeout;
+extern unsigned long long WI4MPI_Op_create_timeout;
 void (*_LOCAL_MPI_Op_create)(void *, int *, int *, int *);
 
 void A_f_MPI_Op_create(void *user_fn, int *commute, int *op, int *ret) {
@@ -2698,7 +2698,7 @@ void pmpi_op_free__(int *, int *);
 
 void pmpi_op_free_(int *, int *);
 
-extern long long WI4MPI_Op_free_timeout;
+extern unsigned long long WI4MPI_Op_free_timeout;
 void (*_LOCAL_MPI_Op_free)(int *, int *);
 
 void A_f_MPI_Op_free(int *op, int *ret) {
@@ -2736,7 +2736,7 @@ void pmpi_allreduce__(void *, void *, int *, int *, int *, int *, int *);
 
 void pmpi_allreduce_(void *, void *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Allreduce_timeout;
+extern unsigned long long WI4MPI_Allreduce_timeout;
 void (*_LOCAL_MPI_Allreduce)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Allreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
@@ -2784,7 +2784,7 @@ void pmpi_scan__(void *, void *, int *, int *, int *, int *, int *);
 
 void pmpi_scan_(void *, void *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Scan_timeout;
+extern unsigned long long WI4MPI_Scan_timeout;
 void (*_LOCAL_MPI_Scan)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Scan(void *sendbuf, void *recvbuf, int *count, int *datatype,
@@ -2831,7 +2831,7 @@ void pmpi_group_size__(int *, int *, int *);
 
 void pmpi_group_size_(int *, int *, int *);
 
-extern long long WI4MPI_Group_size_timeout;
+extern unsigned long long WI4MPI_Group_size_timeout;
 void (*_LOCAL_MPI_Group_size)(int *, int *, int *);
 
 void A_f_MPI_Group_size(int *group, int *size, int *ret) {
@@ -2867,7 +2867,7 @@ void pmpi_group_rank__(int *, int *, int *);
 
 void pmpi_group_rank_(int *, int *, int *);
 
-extern long long WI4MPI_Group_rank_timeout;
+extern unsigned long long WI4MPI_Group_rank_timeout;
 void (*_LOCAL_MPI_Group_rank)(int *, int *, int *);
 
 void A_f_MPI_Group_rank(int *group, int *rank, int *ret) {
@@ -2903,7 +2903,7 @@ void pmpi_group_compare__(int *, int *, int *, int *);
 
 void pmpi_group_compare_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_compare_timeout;
+extern unsigned long long WI4MPI_Group_compare_timeout;
 void (*_LOCAL_MPI_Group_compare)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_compare(int *group1, int *group2, int *result, int *ret) {
@@ -2941,7 +2941,7 @@ void pmpi_comm_group__(int *, int *, int *);
 
 void pmpi_comm_group_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_group_timeout;
+extern unsigned long long WI4MPI_Comm_group_timeout;
 void (*_LOCAL_MPI_Comm_group)(int *, int *, int *);
 
 void A_f_MPI_Comm_group(int *comm, int *group, int *ret) {
@@ -2980,7 +2980,7 @@ void pmpi_group_union__(int *, int *, int *, int *);
 
 void pmpi_group_union_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_union_timeout;
+extern unsigned long long WI4MPI_Group_union_timeout;
 void (*_LOCAL_MPI_Group_union)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_union(int *group1, int *group2, int *newgroup, int *ret) {
@@ -3021,7 +3021,7 @@ void pmpi_group_intersection__(int *, int *, int *, int *);
 
 void pmpi_group_intersection_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_intersection_timeout;
+extern unsigned long long WI4MPI_Group_intersection_timeout;
 void (*_LOCAL_MPI_Group_intersection)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_intersection(int *group1, int *group2, int *newgroup,
@@ -3064,7 +3064,7 @@ void pmpi_group_difference__(int *, int *, int *, int *);
 
 void pmpi_group_difference_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_difference_timeout;
+extern unsigned long long WI4MPI_Group_difference_timeout;
 void (*_LOCAL_MPI_Group_difference)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_difference(int *group1, int *group2, int *newgroup,
@@ -3107,7 +3107,7 @@ void pmpi_group_free__(int *, int *);
 
 void pmpi_group_free_(int *, int *);
 
-extern long long WI4MPI_Group_free_timeout;
+extern unsigned long long WI4MPI_Group_free_timeout;
 void (*_LOCAL_MPI_Group_free)(int *, int *);
 
 void A_f_MPI_Group_free(int *group, int *ret) {
@@ -3145,7 +3145,7 @@ void pmpi_comm_size__(int *, int *, int *);
 
 void pmpi_comm_size_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_size_timeout;
+extern unsigned long long WI4MPI_Comm_size_timeout;
 void (*_LOCAL_MPI_Comm_size)(int *, int *, int *);
 
 void A_f_MPI_Comm_size(int *comm, int *size, int *ret) {
@@ -3181,7 +3181,7 @@ void pmpi_comm_rank__(int *, int *, int *);
 
 void pmpi_comm_rank_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_rank_timeout;
+extern unsigned long long WI4MPI_Comm_rank_timeout;
 void (*_LOCAL_MPI_Comm_rank)(int *, int *, int *);
 
 void A_f_MPI_Comm_rank(int *comm, int *rank, int *ret) {
@@ -3217,7 +3217,7 @@ void pmpi_comm_compare__(int *, int *, int *, int *);
 
 void pmpi_comm_compare_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_compare_timeout;
+extern unsigned long long WI4MPI_Comm_compare_timeout;
 void (*_LOCAL_MPI_Comm_compare)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_compare(int *comm1, int *comm2, int *result, int *ret) {
@@ -3255,7 +3255,7 @@ void pmpi_comm_dup__(int *, int *, int *);
 
 void pmpi_comm_dup_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_dup_timeout;
+extern unsigned long long WI4MPI_Comm_dup_timeout;
 void (*_LOCAL_MPI_Comm_dup)(int *, int *, int *);
 
 void A_f_MPI_Comm_dup(int *comm, int *newcomm, int *ret) {
@@ -3294,7 +3294,7 @@ void pmpi_comm_dup_with_info__(int *, int *, int *, int *);
 
 void pmpi_comm_dup_with_info_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_dup_with_info_timeout;
+extern unsigned long long WI4MPI_Comm_dup_with_info_timeout;
 void (*_LOCAL_MPI_Comm_dup_with_info)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_dup_with_info(int *comm, int *info, int *newcomm, int *ret) {
@@ -3335,7 +3335,7 @@ void pmpi_comm_create__(int *, int *, int *, int *);
 
 void pmpi_comm_create_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_create_timeout;
+extern unsigned long long WI4MPI_Comm_create_timeout;
 void (*_LOCAL_MPI_Comm_create)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_create(int *comm, int *group, int *newcomm, int *ret) {
@@ -3376,7 +3376,7 @@ void pmpi_comm_split__(int *, int *, int *, int *, int *);
 
 void pmpi_comm_split_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_split_timeout;
+extern unsigned long long WI4MPI_Comm_split_timeout;
 void (*_LOCAL_MPI_Comm_split)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_split(int *comm, int *color, int *key, int *newcomm,
@@ -3416,7 +3416,7 @@ void pmpi_comm_free__(int *, int *);
 
 void pmpi_comm_free_(int *, int *);
 
-extern long long WI4MPI_Comm_free_timeout;
+extern unsigned long long WI4MPI_Comm_free_timeout;
 void (*_LOCAL_MPI_Comm_free)(int *, int *);
 
 void A_f_MPI_Comm_free(int *comm, int *ret) {
@@ -3454,7 +3454,7 @@ void pmpi_comm_test_inter__(int *, int *, int *);
 
 void pmpi_comm_test_inter_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_test_inter_timeout;
+extern unsigned long long WI4MPI_Comm_test_inter_timeout;
 void (*_LOCAL_MPI_Comm_test_inter)(int *, int *, int *);
 
 void A_f_MPI_Comm_test_inter(int *comm, int *flag, int *ret) {
@@ -3490,7 +3490,7 @@ void pmpi_comm_remote_size__(int *, int *, int *);
 
 void pmpi_comm_remote_size_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_remote_size_timeout;
+extern unsigned long long WI4MPI_Comm_remote_size_timeout;
 void (*_LOCAL_MPI_Comm_remote_size)(int *, int *, int *);
 
 void A_f_MPI_Comm_remote_size(int *comm, int *size, int *ret) {
@@ -3526,7 +3526,7 @@ void pmpi_comm_remote_group__(int *, int *, int *);
 
 void pmpi_comm_remote_group_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_remote_group_timeout;
+extern unsigned long long WI4MPI_Comm_remote_group_timeout;
 void (*_LOCAL_MPI_Comm_remote_group)(int *, int *, int *);
 
 void A_f_MPI_Comm_remote_group(int *comm, int *group, int *ret) {
@@ -3565,7 +3565,7 @@ void pmpi_intercomm_create__(int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_intercomm_create_(int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Intercomm_create_timeout;
+extern unsigned long long WI4MPI_Intercomm_create_timeout;
 void (*_LOCAL_MPI_Intercomm_create)(int *, int *, int *, int *, int *, int *,
                                     int *);
 
@@ -3613,7 +3613,7 @@ void pmpi_intercomm_merge__(int *, int *, int *, int *);
 
 void pmpi_intercomm_merge_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Intercomm_merge_timeout;
+extern unsigned long long WI4MPI_Intercomm_merge_timeout;
 void (*_LOCAL_MPI_Intercomm_merge)(int *, int *, int *, int *);
 
 void A_f_MPI_Intercomm_merge(int *intercomm, int *high, int *newintracomm,
@@ -3653,7 +3653,7 @@ void pmpi_keyval_create__(void *, void *, int *, void *, int *);
 
 void pmpi_keyval_create_(void *, void *, int *, void *, int *);
 
-extern long long WI4MPI_Keyval_create_timeout;
+extern unsigned long long WI4MPI_Keyval_create_timeout;
 void (*_LOCAL_MPI_Keyval_create)(void *, void *, int *, void *, int *);
 int (*LOCAL_MPI_Keyval_create)(void *, void *, int *, void *);
 int (*LOCAL_MPI_Comm_create_keyval)(void *, void *, int *, void *);
@@ -3760,7 +3760,7 @@ void pmpi_keyval_free__(int *, int *);
 
 void pmpi_keyval_free_(int *, int *);
 
-extern long long WI4MPI_Keyval_free_timeout;
+extern unsigned long long WI4MPI_Keyval_free_timeout;
 void (*_LOCAL_MPI_Keyval_free)(int *, int *);
 
 void A_f_MPI_Keyval_free(int *keyval, int *ret) {
@@ -3794,7 +3794,7 @@ void pmpi_attr_put__(int *, int *, int *, int *);
 
 void pmpi_attr_put_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Attr_put_timeout;
+extern unsigned long long WI4MPI_Attr_put_timeout;
 void (*_LOCAL_MPI_Attr_put)(int *, int *, int *, int *);
 
 void A_f_MPI_Attr_put(int *comm, int *keyval, int *attribute_val, int *ret) {
@@ -3829,7 +3829,7 @@ void pmpi_attr_get__(int *, int *, int *, int *, int *);
 
 void pmpi_attr_get_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Attr_get_timeout;
+extern unsigned long long WI4MPI_Attr_get_timeout;
 void (*_LOCAL_MPI_Attr_get)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Attr_get(int *comm, int *keyval, int *attribute_val, int *flag,
@@ -3871,7 +3871,7 @@ void pmpi_attr_delete__(int *, int *, int *);
 
 void pmpi_attr_delete_(int *, int *, int *);
 
-extern long long WI4MPI_Attr_delete_timeout;
+extern unsigned long long WI4MPI_Attr_delete_timeout;
 void (*_LOCAL_MPI_Attr_delete)(int *, int *, int *);
 int A_MPI_Attr_delete(A_MPI_Comm, int);
 
@@ -3905,7 +3905,7 @@ void pmpi_topo_test__(int *, int *, int *);
 
 void pmpi_topo_test_(int *, int *, int *);
 
-extern long long WI4MPI_Topo_test_timeout;
+extern unsigned long long WI4MPI_Topo_test_timeout;
 void (*_LOCAL_MPI_Topo_test)(int *, int *, int *);
 
 void A_f_MPI_Topo_test(int *comm, int *status, int *ret) {
@@ -3947,7 +3947,7 @@ void pmpi_graphdims_get__(int *, int *, int *, int *);
 
 void pmpi_graphdims_get_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Graphdims_get_timeout;
+extern unsigned long long WI4MPI_Graphdims_get_timeout;
 void (*_LOCAL_MPI_Graphdims_get)(int *, int *, int *, int *);
 
 void A_f_MPI_Graphdims_get(int *comm, int *nnodes, int *nedges, int *ret) {
@@ -3983,7 +3983,7 @@ void pmpi_cartdim_get__(int *, int *, int *);
 
 void pmpi_cartdim_get_(int *, int *, int *);
 
-extern long long WI4MPI_Cartdim_get_timeout;
+extern unsigned long long WI4MPI_Cartdim_get_timeout;
 void (*_LOCAL_MPI_Cartdim_get)(int *, int *, int *);
 
 void A_f_MPI_Cartdim_get(int *comm, int *ndims, int *ret) {
@@ -4019,7 +4019,7 @@ void pmpi_graph_neighbors_count__(int *, int *, int *, int *);
 
 void pmpi_graph_neighbors_count_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Graph_neighbors_count_timeout;
+extern unsigned long long WI4MPI_Graph_neighbors_count_timeout;
 void (*_LOCAL_MPI_Graph_neighbors_count)(int *, int *, int *, int *);
 
 void A_f_MPI_Graph_neighbors_count(int *comm, int *rank, int *nneighbors,
@@ -4056,7 +4056,7 @@ void pmpi_cart_shift__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_cart_shift_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Cart_shift_timeout;
+extern unsigned long long WI4MPI_Cart_shift_timeout;
 void (*_LOCAL_MPI_Cart_shift)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_shift(int *comm, int *direction, int *disp, int *rank_source,
@@ -4094,7 +4094,7 @@ void pmpi_get_version__(int *, int *, int *);
 
 void pmpi_get_version_(int *, int *, int *);
 
-extern long long WI4MPI_Get_version_timeout;
+extern unsigned long long WI4MPI_Get_version_timeout;
 void (*_LOCAL_MPI_Get_version)(int *, int *, int *);
 
 void A_f_MPI_Get_version(int *version, int *subversion, int *ret) {
@@ -4128,7 +4128,7 @@ void pmpi_errhandler_create__(void *, int *, int *);
 
 void pmpi_errhandler_create_(void *, int *, int *);
 
-extern long long WI4MPI_Errhandler_create_timeout;
+extern unsigned long long WI4MPI_Errhandler_create_timeout;
 void (*_LOCAL_MPI_Errhandler_create)(void *, int *, int *);
 extern int WI4MPI_errhandler_key;
 #include "mappers.h"
@@ -4188,7 +4188,7 @@ void pmpi_errhandler_set__(int *, int *, int *);
 
 void pmpi_errhandler_set_(int *, int *, int *);
 
-extern long long WI4MPI_Errhandler_set_timeout;
+extern unsigned long long WI4MPI_Errhandler_set_timeout;
 void (*_LOCAL_MPI_Errhandler_set)(int *, int *, int *);
 void A_f_MPI_Errhandler_set(int *comm, int *errhandler, int *ret) {
 #ifdef DEBUG
@@ -4225,7 +4225,7 @@ void pmpi_errhandler_get__(int *, int *, int *);
 
 void pmpi_errhandler_get_(int *, int *, int *);
 
-extern long long WI4MPI_Errhandler_get_timeout;
+extern unsigned long long WI4MPI_Errhandler_get_timeout;
 void (*_LOCAL_MPI_Errhandler_get)(int *, int *, int *);
 
 void A_f_MPI_Errhandler_get(int *comm, int *errhandler, int *ret) {
@@ -4266,7 +4266,7 @@ void pmpi_errhandler_free__(int *, int *);
 
 void pmpi_errhandler_free_(int *, int *);
 
-extern long long WI4MPI_Errhandler_free_timeout;
+extern unsigned long long WI4MPI_Errhandler_free_timeout;
 void (*_LOCAL_MPI_Errhandler_free)(int *, int *);
 
 void A_f_MPI_Errhandler_free(int *errhandler, int *ret) {
@@ -4310,7 +4310,7 @@ void pmpi_error_class__(int *, int *, int *);
 
 void pmpi_error_class_(int *, int *, int *);
 
-extern long long WI4MPI_Error_class_timeout;
+extern unsigned long long WI4MPI_Error_class_timeout;
 void (*_LOCAL_MPI_Error_class)(int *, int *, int *);
 
 void A_f_MPI_Error_class(int *errorcode, int *errorclass, int *ret) {
@@ -4348,7 +4348,7 @@ void pmpi_initialized__(int *, int *);
 
 void pmpi_initialized_(int *, int *);
 
-extern long long WI4MPI_Initialized_timeout;
+extern unsigned long long WI4MPI_Initialized_timeout;
 void (*_LOCAL_MPI_Initialized)(int *, int *);
 
 void A_f_MPI_Initialized(int *flag, int *ret) {
@@ -4382,7 +4382,7 @@ void pmpi_abort__(int *, int *, int *);
 
 void pmpi_abort_(int *, int *, int *);
 
-extern long long WI4MPI_Abort_timeout;
+extern unsigned long long WI4MPI_Abort_timeout;
 void (*_LOCAL_MPI_Abort)(int *, int *, int *);
 
 void A_f_MPI_Abort(int *comm, int *errorcode, int *ret) {
@@ -4420,7 +4420,7 @@ void pmpi_init__(int *);
 
 void pmpi_init_(int *);
 
-extern long long WI4MPI_Init_timeout;
+extern unsigned long long WI4MPI_Init_timeout;
 void (*_LOCAL_MPI_Init)(int *);
 
 void A_f_MPI_Init(int *ret) {
@@ -4454,7 +4454,7 @@ void pmpi_comm_accept__(char *, int *, int *, int *, int *, int *);
 
 void pmpi_comm_accept_(char *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_accept_timeout;
+extern unsigned long long WI4MPI_Comm_accept_timeout;
 void (*_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
@@ -4499,7 +4499,7 @@ void pmpi_comm_connect__(char *, int *, int *, int *, int *, int *);
 
 void pmpi_comm_connect_(char *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_connect_timeout;
+extern unsigned long long WI4MPI_Comm_connect_timeout;
 void (*_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
@@ -4544,7 +4544,7 @@ void pmpi_comm_disconnect__(int *, int *);
 
 void pmpi_comm_disconnect_(int *, int *);
 
-extern long long WI4MPI_Comm_disconnect_timeout;
+extern unsigned long long WI4MPI_Comm_disconnect_timeout;
 void (*_LOCAL_MPI_Comm_disconnect)(int *, int *);
 
 void A_f_MPI_Comm_disconnect(int *comm, int *ret) {
@@ -4582,7 +4582,7 @@ void pmpi_comm_get_parent__(int *, int *);
 
 void pmpi_comm_get_parent_(int *, int *);
 
-extern long long WI4MPI_Comm_get_parent_timeout;
+extern unsigned long long WI4MPI_Comm_get_parent_timeout;
 void (*_LOCAL_MPI_Comm_get_parent)(int *, int *);
 
 void A_f_MPI_Comm_get_parent(int *parent, int *ret) {
@@ -4619,7 +4619,7 @@ void pmpi_comm_join__(int *, int *, int *);
 
 void pmpi_comm_join_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_join_timeout;
+extern unsigned long long WI4MPI_Comm_join_timeout;
 void (*_LOCAL_MPI_Comm_join)(int *, int *, int *);
 
 void A_f_MPI_Comm_join(int *fd, int *intercomm, int *ret) {
@@ -4656,7 +4656,7 @@ void pmpi_comm_set_info__(int *, int *, int *);
 
 void pmpi_comm_set_info_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_set_info_timeout;
+extern unsigned long long WI4MPI_Comm_set_info_timeout;
 void (*_LOCAL_MPI_Comm_set_info)(int *, int *, int *);
 
 void A_f_MPI_Comm_set_info(int *comm, int *info, int *ret) {
@@ -4694,7 +4694,7 @@ void pmpi_comm_get_info__(int *, int *, int *);
 
 void pmpi_comm_get_info_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_get_info_timeout;
+extern unsigned long long WI4MPI_Comm_get_info_timeout;
 void (*_LOCAL_MPI_Comm_get_info)(int *, int *, int *);
 
 void A_f_MPI_Comm_get_info(int *comm, int *info, int *ret) {
@@ -4738,7 +4738,7 @@ void pmpi_accumulate__(void *, int *, int *, int *, size_t *, int *, int *,
 void pmpi_accumulate_(void *, int *, int *, int *, size_t *, int *, int *,
                       int *, int *, int *);
 
-extern long long WI4MPI_Accumulate_timeout;
+extern unsigned long long WI4MPI_Accumulate_timeout;
 void (*_LOCAL_MPI_Accumulate)(void *, int *, int *, int *, size_t *, int *,
                               int *, int *, int *, int *);
 
@@ -4795,7 +4795,7 @@ void pmpi_get__(void *, int *, int *, int *, size_t *, int *, int *, int *,
 void pmpi_get_(void *, int *, int *, int *, size_t *, int *, int *, int *,
                int *);
 
-extern long long WI4MPI_Get_timeout;
+extern unsigned long long WI4MPI_Get_timeout;
 void (*_LOCAL_MPI_Get)(void *, int *, int *, int *, size_t *, int *, int *,
                        int *, int *);
 
@@ -4850,7 +4850,7 @@ void pmpi_put__(void *, int *, int *, int *, size_t *, int *, int *, int *,
 void pmpi_put_(void *, int *, int *, int *, size_t *, int *, int *, int *,
                int *);
 
-extern long long WI4MPI_Put_timeout;
+extern unsigned long long WI4MPI_Put_timeout;
 void (*_LOCAL_MPI_Put)(void *, int *, int *, int *, size_t *, int *, int *,
                        int *, int *);
 
@@ -4899,7 +4899,7 @@ void pmpi_win_complete__(int *, int *);
 
 void pmpi_win_complete_(int *, int *);
 
-extern long long WI4MPI_Win_complete_timeout;
+extern unsigned long long WI4MPI_Win_complete_timeout;
 void (*_LOCAL_MPI_Win_complete)(int *, int *);
 
 void A_f_MPI_Win_complete(int *win, int *ret) {
@@ -4935,7 +4935,7 @@ void pmpi_win_create__(void *, size_t *, int *, int *, int *, int *, int *);
 
 void pmpi_win_create_(void *, size_t *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Win_create_timeout;
+extern unsigned long long WI4MPI_Win_create_timeout;
 void (*_LOCAL_MPI_Win_create)(void *, size_t *, int *, int *, int *, int *,
                               int *);
 
@@ -4981,7 +4981,7 @@ void pmpi_win_fence__(int *, int *, int *);
 
 void pmpi_win_fence_(int *, int *, int *);
 
-extern long long WI4MPI_Win_fence_timeout;
+extern unsigned long long WI4MPI_Win_fence_timeout;
 void (*_LOCAL_MPI_Win_fence)(int *, int *, int *);
 
 void A_f_MPI_Win_fence(int *assert, int *win, int *ret) {
@@ -5019,7 +5019,7 @@ void pmpi_win_free__(int *, int *);
 
 void pmpi_win_free_(int *, int *);
 
-extern long long WI4MPI_Win_free_timeout;
+extern unsigned long long WI4MPI_Win_free_timeout;
 void (*_LOCAL_MPI_Win_free)(int *, int *);
 
 void A_f_MPI_Win_free(int *win, int *ret) {
@@ -5057,7 +5057,7 @@ void pmpi_win_get_group__(int *, int *, int *);
 
 void pmpi_win_get_group_(int *, int *, int *);
 
-extern long long WI4MPI_Win_get_group_timeout;
+extern unsigned long long WI4MPI_Win_get_group_timeout;
 void (*_LOCAL_MPI_Win_get_group)(int *, int *, int *);
 
 void A_f_MPI_Win_get_group(int *win, int *group, int *ret) {
@@ -5096,7 +5096,7 @@ void pmpi_win_lock__(int *, int *, int *, int *, int *);
 
 void pmpi_win_lock_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Win_lock_timeout;
+extern unsigned long long WI4MPI_Win_lock_timeout;
 void (*_LOCAL_MPI_Win_lock)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Win_lock(int *lock_type, int *rank, int *assert, int *win,
@@ -5140,7 +5140,7 @@ void pmpi_win_post__(int *, int *, int *, int *);
 
 void pmpi_win_post_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Win_post_timeout;
+extern unsigned long long WI4MPI_Win_post_timeout;
 void (*_LOCAL_MPI_Win_post)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_post(int *group, int *assert, int *win, int *ret) {
@@ -5180,7 +5180,7 @@ void pmpi_win_start__(int *, int *, int *, int *);
 
 void pmpi_win_start_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Win_start_timeout;
+extern unsigned long long WI4MPI_Win_start_timeout;
 void (*_LOCAL_MPI_Win_start)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_start(int *group, int *assert, int *win, int *ret) {
@@ -5220,7 +5220,7 @@ void pmpi_win_test__(int *, int *, int *);
 
 void pmpi_win_test_(int *, int *, int *);
 
-extern long long WI4MPI_Win_test_timeout;
+extern unsigned long long WI4MPI_Win_test_timeout;
 void (*_LOCAL_MPI_Win_test)(int *, int *, int *);
 
 void A_f_MPI_Win_test(int *win, int *flag, int *ret) {
@@ -5256,7 +5256,7 @@ void pmpi_win_unlock__(int *, int *, int *);
 
 void pmpi_win_unlock_(int *, int *, int *);
 
-extern long long WI4MPI_Win_unlock_timeout;
+extern unsigned long long WI4MPI_Win_unlock_timeout;
 void (*_LOCAL_MPI_Win_unlock)(int *, int *, int *);
 
 void A_f_MPI_Win_unlock(int *rank, int *win, int *ret) {
@@ -5294,7 +5294,7 @@ void pmpi_win_wait__(int *, int *);
 
 void pmpi_win_wait_(int *, int *);
 
-extern long long WI4MPI_Win_wait_timeout;
+extern unsigned long long WI4MPI_Win_wait_timeout;
 void (*_LOCAL_MPI_Win_wait)(int *, int *);
 
 void A_f_MPI_Win_wait(int *win, int *ret) {
@@ -5330,7 +5330,7 @@ void pmpi_win_allocate__(size_t *, int *, int *, int *, void *, int *, int *);
 
 void pmpi_win_allocate_(size_t *, int *, int *, int *, void *, int *, int *);
 
-extern long long WI4MPI_Win_allocate_timeout;
+extern unsigned long long WI4MPI_Win_allocate_timeout;
 void (*_LOCAL_MPI_Win_allocate)(size_t *, int *, int *, int *, void *, int *,
                                 int *);
 
@@ -5380,7 +5380,7 @@ void pmpi_win_allocate_shared__(size_t *, int *, int *, int *, void *, int *,
 void pmpi_win_allocate_shared_(size_t *, int *, int *, int *, void *, int *,
                                int *);
 
-extern long long WI4MPI_Win_allocate_shared_timeout;
+extern unsigned long long WI4MPI_Win_allocate_shared_timeout;
 void (*_LOCAL_MPI_Win_allocate_shared)(size_t *, int *, int *, int *, void *,
                                        int *, int *);
 
@@ -5427,7 +5427,7 @@ void pmpi_win_shared_query__(int *, int *, size_t *, int *, void *, int *);
 
 void pmpi_win_shared_query_(int *, int *, size_t *, int *, void *, int *);
 
-extern long long WI4MPI_Win_shared_query_timeout;
+extern unsigned long long WI4MPI_Win_shared_query_timeout;
 void (*_LOCAL_MPI_Win_shared_query)(int *, int *, size_t *, int *, void *,
                                     int *);
 
@@ -5469,7 +5469,7 @@ void pmpi_win_create_dynamic__(int *, int *, int *, int *);
 
 void pmpi_win_create_dynamic_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Win_create_dynamic_timeout;
+extern unsigned long long WI4MPI_Win_create_dynamic_timeout;
 void (*_LOCAL_MPI_Win_create_dynamic)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_create_dynamic(int *info, int *comm, int *win, int *ret) {
@@ -5510,7 +5510,7 @@ void pmpi_win_attach__(int *, void *, size_t *, int *);
 
 void pmpi_win_attach_(int *, void *, size_t *, int *);
 
-extern long long WI4MPI_Win_attach_timeout;
+extern unsigned long long WI4MPI_Win_attach_timeout;
 void (*_LOCAL_MPI_Win_attach)(int *, void *, size_t *, int *);
 
 void A_f_MPI_Win_attach(int *win, void *base, size_t *size, int *ret) {
@@ -5548,7 +5548,7 @@ void pmpi_win_detach__(int *, void *, int *);
 
 void pmpi_win_detach_(int *, void *, int *);
 
-extern long long WI4MPI_Win_detach_timeout;
+extern unsigned long long WI4MPI_Win_detach_timeout;
 void (*_LOCAL_MPI_Win_detach)(int *, void *, int *);
 
 void A_f_MPI_Win_detach(int *win, void *base, int *ret) {
@@ -5586,7 +5586,7 @@ void pmpi_win_get_info__(int *, int *, int *);
 
 void pmpi_win_get_info_(int *, int *, int *);
 
-extern long long WI4MPI_Win_get_info_timeout;
+extern unsigned long long WI4MPI_Win_get_info_timeout;
 void (*_LOCAL_MPI_Win_get_info)(int *, int *, int *);
 
 void A_f_MPI_Win_get_info(int *win, int *info_used, int *ret) {
@@ -5625,7 +5625,7 @@ void pmpi_win_set_info__(int *, int *, int *);
 
 void pmpi_win_set_info_(int *, int *, int *);
 
-extern long long WI4MPI_Win_set_info_timeout;
+extern unsigned long long WI4MPI_Win_set_info_timeout;
 void (*_LOCAL_MPI_Win_set_info)(int *, int *, int *);
 
 void A_f_MPI_Win_set_info(int *win, int *info, int *ret) {
@@ -5668,7 +5668,7 @@ void pmpi_get_accumulate__(void *, int *, int *, void *, int *, int *, int *,
 void pmpi_get_accumulate_(void *, int *, int *, void *, int *, int *, int *,
                           size_t *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Get_accumulate_timeout;
+extern unsigned long long WI4MPI_Get_accumulate_timeout;
 void (*_LOCAL_MPI_Get_accumulate)(void *, int *, int *, void *, int *, int *,
                                   int *, size_t *, int *, int *, int *, int *,
                                   int *);
@@ -5733,7 +5733,7 @@ void pmpi_fetch_and_op__(void *, void *, int *, int *, size_t *, int *, int *,
 void pmpi_fetch_and_op_(void *, void *, int *, int *, size_t *, int *, int *,
                         int *);
 
-extern long long WI4MPI_Fetch_and_op_timeout;
+extern unsigned long long WI4MPI_Fetch_and_op_timeout;
 void (*_LOCAL_MPI_Fetch_and_op)(void *, void *, int *, int *, size_t *, int *,
                                 int *, int *);
 
@@ -5791,7 +5791,7 @@ void pmpi_compare_and_swap__(void *, void *, void *, int *, int *, size_t *,
 void pmpi_compare_and_swap_(void *, void *, void *, int *, int *, size_t *,
                             int *, int *);
 
-extern long long WI4MPI_Compare_and_swap_timeout;
+extern unsigned long long WI4MPI_Compare_and_swap_timeout;
 void (*_LOCAL_MPI_Compare_and_swap)(void *, void *, void *, int *, int *,
                                     size_t *, int *, int *);
 
@@ -5850,7 +5850,7 @@ void pmpi_rput__(void *, int *, int *, int *, size_t *, int *, int *, int *,
 void pmpi_rput_(void *, int *, int *, int *, size_t *, int *, int *, int *,
                 int *, int *);
 
-extern long long WI4MPI_Rput_timeout;
+extern unsigned long long WI4MPI_Rput_timeout;
 void (*_LOCAL_MPI_Rput)(void *, int *, int *, int *, size_t *, int *, int *,
                         int *, int *, int *);
 
@@ -5907,7 +5907,7 @@ void pmpi_rget__(void *, int *, int *, int *, size_t *, int *, int *, int *,
 void pmpi_rget_(void *, int *, int *, int *, size_t *, int *, int *, int *,
                 int *, int *);
 
-extern long long WI4MPI_Rget_timeout;
+extern unsigned long long WI4MPI_Rget_timeout;
 void (*_LOCAL_MPI_Rget)(void *, int *, int *, int *, size_t *, int *, int *,
                         int *, int *, int *);
 
@@ -5964,7 +5964,7 @@ void pmpi_raccumulate__(void *, int *, int *, int *, size_t *, int *, int *,
 void pmpi_raccumulate_(void *, int *, int *, int *, size_t *, int *, int *,
                        int *, int *, int *, int *);
 
-extern long long WI4MPI_Raccumulate_timeout;
+extern unsigned long long WI4MPI_Raccumulate_timeout;
 void (*_LOCAL_MPI_Raccumulate)(void *, int *, int *, int *, size_t *, int *,
                                int *, int *, int *, int *, int *);
 
@@ -6026,7 +6026,7 @@ void pmpi_rget_accumulate__(void *, int *, int *, void *, int *, int *, int *,
 void pmpi_rget_accumulate_(void *, int *, int *, void *, int *, int *, int *,
                            size_t *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Rget_accumulate_timeout;
+extern unsigned long long WI4MPI_Rget_accumulate_timeout;
 void (*_LOCAL_MPI_Rget_accumulate)(void *, int *, int *, void *, int *, int *,
                                    int *, size_t *, int *, int *, int *, int *,
                                    int *, int *);
@@ -6090,7 +6090,7 @@ void pmpi_win_lock_all__(int *, int *, int *);
 
 void pmpi_win_lock_all_(int *, int *, int *);
 
-extern long long WI4MPI_Win_lock_all_timeout;
+extern unsigned long long WI4MPI_Win_lock_all_timeout;
 void (*_LOCAL_MPI_Win_lock_all)(int *, int *, int *);
 
 void A_f_MPI_Win_lock_all(int *assert, int *win, int *ret) {
@@ -6128,7 +6128,7 @@ void pmpi_win_unlock_all__(int *, int *);
 
 void pmpi_win_unlock_all_(int *, int *);
 
-extern long long WI4MPI_Win_unlock_all_timeout;
+extern unsigned long long WI4MPI_Win_unlock_all_timeout;
 void (*_LOCAL_MPI_Win_unlock_all)(int *, int *);
 
 void A_f_MPI_Win_unlock_all(int *win, int *ret) {
@@ -6164,7 +6164,7 @@ void pmpi_win_flush__(int *, int *, int *);
 
 void pmpi_win_flush_(int *, int *, int *);
 
-extern long long WI4MPI_Win_flush_timeout;
+extern unsigned long long WI4MPI_Win_flush_timeout;
 void (*_LOCAL_MPI_Win_flush)(int *, int *, int *);
 
 void A_f_MPI_Win_flush(int *rank, int *win, int *ret) {
@@ -6202,7 +6202,7 @@ void pmpi_win_flush_all__(int *, int *);
 
 void pmpi_win_flush_all_(int *, int *);
 
-extern long long WI4MPI_Win_flush_all_timeout;
+extern unsigned long long WI4MPI_Win_flush_all_timeout;
 void (*_LOCAL_MPI_Win_flush_all)(int *, int *);
 
 void A_f_MPI_Win_flush_all(int *win, int *ret) {
@@ -6238,7 +6238,7 @@ void pmpi_win_flush_local__(int *, int *, int *);
 
 void pmpi_win_flush_local_(int *, int *, int *);
 
-extern long long WI4MPI_Win_flush_local_timeout;
+extern unsigned long long WI4MPI_Win_flush_local_timeout;
 void (*_LOCAL_MPI_Win_flush_local)(int *, int *, int *);
 
 void A_f_MPI_Win_flush_local(int *rank, int *win, int *ret) {
@@ -6276,7 +6276,7 @@ void pmpi_win_flush_local_all__(int *, int *);
 
 void pmpi_win_flush_local_all_(int *, int *);
 
-extern long long WI4MPI_Win_flush_local_all_timeout;
+extern unsigned long long WI4MPI_Win_flush_local_all_timeout;
 void (*_LOCAL_MPI_Win_flush_local_all)(int *, int *);
 
 void A_f_MPI_Win_flush_local_all(int *win, int *ret) {
@@ -6312,7 +6312,7 @@ void pmpi_win_sync__(int *, int *);
 
 void pmpi_win_sync_(int *, int *);
 
-extern long long WI4MPI_Win_sync_timeout;
+extern unsigned long long WI4MPI_Win_sync_timeout;
 void (*_LOCAL_MPI_Win_sync)(int *, int *);
 
 void A_f_MPI_Win_sync(int *win, int *ret) {
@@ -6348,7 +6348,7 @@ void pmpi_add_error_class__(int *, int *);
 
 void pmpi_add_error_class_(int *, int *);
 
-extern long long WI4MPI_Add_error_class_timeout;
+extern unsigned long long WI4MPI_Add_error_class_timeout;
 void (*_LOCAL_MPI_Add_error_class)(int *, int *);
 
 void A_f_MPI_Add_error_class(int *errorclass, int *ret) {
@@ -6385,7 +6385,7 @@ void pmpi_add_error_code__(int *, int *, int *);
 
 void pmpi_add_error_code_(int *, int *, int *);
 
-extern long long WI4MPI_Add_error_code_timeout;
+extern unsigned long long WI4MPI_Add_error_code_timeout;
 void (*_LOCAL_MPI_Add_error_code)(int *, int *, int *);
 
 void A_f_MPI_Add_error_code(int *errorclass, int *errorcode, int *ret) {
@@ -6422,7 +6422,7 @@ void pmpi_comm_call_errhandler__(int *, int *, int *);
 
 void pmpi_comm_call_errhandler_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_call_errhandler_timeout;
+extern unsigned long long WI4MPI_Comm_call_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_call_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_call_errhandler(int *comm, int *errorcode, int *ret) {
@@ -6460,7 +6460,7 @@ void pmpi_comm_delete_attr__(int *, int *, int *);
 
 void pmpi_comm_delete_attr_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_delete_attr_timeout;
+extern unsigned long long WI4MPI_Comm_delete_attr_timeout;
 void (*_LOCAL_MPI_Comm_delete_attr)(int *, int *, int *);
 
 void A_f_MPI_Comm_delete_attr(int *comm, int *comm_keyval, int *ret) {
@@ -6498,7 +6498,7 @@ void pmpi_comm_get_attr__(int *, int *, void *, int *, int *);
 
 void pmpi_comm_get_attr_(int *, int *, void *, int *, int *);
 
-extern long long WI4MPI_Comm_get_attr_timeout;
+extern unsigned long long WI4MPI_Comm_get_attr_timeout;
 void (*_LOCAL_MPI_Comm_get_attr)(int *, int *, void *, int *, int *);
 
 void A_f_MPI_Comm_get_attr(int *comm, int *comm_keyval, void *attribute_val,
@@ -6541,7 +6541,7 @@ void pmpi_comm_set_attr__(int *, int *, void *, int *);
 
 void pmpi_comm_set_attr_(int *, int *, void *, int *);
 
-extern long long WI4MPI_Comm_set_attr_timeout;
+extern unsigned long long WI4MPI_Comm_set_attr_timeout;
 void (*_LOCAL_MPI_Comm_set_attr)(int *, int *, void *, int *);
 
 void A_f_MPI_Comm_set_attr(int *comm, int *comm_keyval, void *attribute_val,
@@ -6583,7 +6583,7 @@ void pmpi_init_thread__(int *, int *, int *);
 
 void pmpi_init_thread_(int *, int *, int *);
 
-extern long long WI4MPI_Init_thread_timeout;
+extern unsigned long long WI4MPI_Init_thread_timeout;
 void (*_LOCAL_MPI_Init_thread)(int *, int *, int *);
 
 void A_f_MPI_Init_thread(int *required, int *provided, int *ret) {
@@ -6617,7 +6617,7 @@ void pmpi_is_thread_main__(int *, int *);
 
 void pmpi_is_thread_main_(int *, int *);
 
-extern long long WI4MPI_Is_thread_main_timeout;
+extern unsigned long long WI4MPI_Is_thread_main_timeout;
 void (*_LOCAL_MPI_Is_thread_main)(int *, int *);
 
 void A_f_MPI_Is_thread_main(int *flag, int *ret) {
@@ -6651,7 +6651,7 @@ void pmpi_query_thread__(int *, int *);
 
 void pmpi_query_thread_(int *, int *);
 
-extern long long WI4MPI_Query_thread_timeout;
+extern unsigned long long WI4MPI_Query_thread_timeout;
 void (*_LOCAL_MPI_Query_thread)(int *, int *);
 
 void A_f_MPI_Query_thread(int *provided, int *ret) {
@@ -6685,7 +6685,7 @@ void pmpi_status_set_cancelled__(int *, int *, int *);
 
 void pmpi_status_set_cancelled_(int *, int *, int *);
 
-extern long long WI4MPI_Status_set_cancelled_timeout;
+extern unsigned long long WI4MPI_Status_set_cancelled_timeout;
 void (*_LOCAL_MPI_Status_set_cancelled)(int *, int *, int *);
 
 void A_f_MPI_Status_set_cancelled(int *status, int *flag, int *ret) {
@@ -6723,7 +6723,7 @@ void pmpi_status_set_elements__(int *, int *, int *, int *);
 
 void pmpi_status_set_elements_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Status_set_elements_timeout;
+extern unsigned long long WI4MPI_Status_set_elements_timeout;
 void (*_LOCAL_MPI_Status_set_elements)(int *, int *, int *, int *);
 
 void A_f_MPI_Status_set_elements(int *status, int *datatype, int *count,
@@ -6764,7 +6764,7 @@ void pmpi_type_delete_attr__(int *, int *, int *);
 
 void pmpi_type_delete_attr_(int *, int *, int *);
 
-extern long long WI4MPI_Type_delete_attr_timeout;
+extern unsigned long long WI4MPI_Type_delete_attr_timeout;
 void (*_LOCAL_MPI_Type_delete_attr)(int *, int *, int *);
 
 void A_f_MPI_Type_delete_attr(int *datatype, int *type_keyval, int *ret) {
@@ -6802,7 +6802,7 @@ void pmpi_type_dup__(int *, int *, int *);
 
 void pmpi_type_dup_(int *, int *, int *);
 
-extern long long WI4MPI_Type_dup_timeout;
+extern unsigned long long WI4MPI_Type_dup_timeout;
 void (*_LOCAL_MPI_Type_dup)(int *, int *, int *);
 
 void A_f_MPI_Type_dup(int *oldtype, int *newtype, int *ret) {
@@ -6841,7 +6841,7 @@ void pmpi_type_free_keyval__(int *, int *);
 
 void pmpi_type_free_keyval_(int *, int *);
 
-extern long long WI4MPI_Type_free_keyval_timeout;
+extern unsigned long long WI4MPI_Type_free_keyval_timeout;
 void (*_LOCAL_MPI_Type_free_keyval)(int *, int *);
 
 void A_f_MPI_Type_free_keyval(int *type_keyval, int *ret) {
@@ -6879,7 +6879,7 @@ void pmpi_type_get_attr__(int *, int *, void *, int *, int *);
 
 void pmpi_type_get_attr_(int *, int *, void *, int *, int *);
 
-extern long long WI4MPI_Type_get_attr_timeout;
+extern unsigned long long WI4MPI_Type_get_attr_timeout;
 void (*_LOCAL_MPI_Type_get_attr)(int *, int *, void *, int *, int *);
 
 void A_f_MPI_Type_get_attr(int *datatype, int *type_keyval, void *attribute_val,
@@ -6922,7 +6922,7 @@ void pmpi_type_get_envelope__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_type_get_envelope_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_get_envelope_timeout;
+extern unsigned long long WI4MPI_Type_get_envelope_timeout;
 void (*_LOCAL_MPI_Type_get_envelope)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_envelope(int *datatype, int *num_integers,
@@ -6961,7 +6961,7 @@ void pmpi_type_set_attr__(int *, int *, void *, int *);
 
 void pmpi_type_set_attr_(int *, int *, void *, int *);
 
-extern long long WI4MPI_Type_set_attr_timeout;
+extern unsigned long long WI4MPI_Type_set_attr_timeout;
 void (*_LOCAL_MPI_Type_set_attr)(int *, int *, void *, int *);
 
 void A_f_MPI_Type_set_attr(int *datatype, int *type_keyval, void *attribute_val,
@@ -7003,7 +7003,7 @@ void pmpi_type_match_size__(int *, int *, int *, int *);
 
 void pmpi_type_match_size_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_match_size_timeout;
+extern unsigned long long WI4MPI_Type_match_size_timeout;
 void (*_LOCAL_MPI_Type_match_size)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_match_size(int *typeclass, int *size, int *datatype,
@@ -7041,7 +7041,7 @@ void pmpi_alloc_mem__(size_t *, int *, void *, int *);
 
 void pmpi_alloc_mem_(size_t *, int *, void *, int *);
 
-extern long long WI4MPI_Alloc_mem_timeout;
+extern unsigned long long WI4MPI_Alloc_mem_timeout;
 void (*_LOCAL_MPI_Alloc_mem)(size_t *, int *, void *, int *);
 
 void A_f_MPI_Alloc_mem(size_t *size, int *info, void *baseptr, int *ret) {
@@ -7080,7 +7080,7 @@ void pmpi_comm_create_errhandler__(void *, int *, int *);
 
 void pmpi_comm_create_errhandler_(void *, int *, int *);
 
-extern long long WI4MPI_Comm_create_errhandler_timeout;
+extern unsigned long long WI4MPI_Comm_create_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_create_errhandler)(void *, int *, int *);
 
 void A_f_MPI_Comm_create_errhandler(void *comm_errhandler_fn, int *errhandler,
@@ -7117,7 +7117,7 @@ void pmpi_comm_get_errhandler__(int *, int *, int *);
 
 void pmpi_comm_get_errhandler_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_get_errhandler_timeout;
+extern unsigned long long WI4MPI_Comm_get_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_get_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_get_errhandler(int *comm, int *errhandler, int *ret) {
@@ -7151,7 +7151,7 @@ void pmpi_comm_set_errhandler__(int *, int *, int *);
 
 void pmpi_comm_set_errhandler_(int *, int *, int *);
 
-extern long long WI4MPI_Comm_set_errhandler_timeout;
+extern unsigned long long WI4MPI_Comm_set_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_set_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_set_errhandler(int *comm, int *errhandler, int *ret) {
@@ -7186,7 +7186,7 @@ void pmpi_file_get_errhandler__(int *, int *, int *);
 
 void pmpi_file_get_errhandler_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_errhandler_timeout;
+extern unsigned long long WI4MPI_File_get_errhandler_timeout;
 void (*_LOCAL_MPI_File_get_errhandler)(int *, int *, int *);
 
 void A_f_MPI_File_get_errhandler(int *file, int *errhandler, int *ret) {
@@ -7223,7 +7223,7 @@ void pmpi_file_set_errhandler__(int *, int *, int *);
 
 void pmpi_file_set_errhandler_(int *, int *, int *);
 
-extern long long WI4MPI_File_set_errhandler_timeout;
+extern unsigned long long WI4MPI_File_set_errhandler_timeout;
 void (*_LOCAL_MPI_File_set_errhandler)(int *, int *, int *);
 
 void A_f_MPI_File_set_errhandler(int *file, int *errhandler, int *ret) {
@@ -7259,7 +7259,7 @@ void pmpi_finalized__(int *, int *);
 
 void pmpi_finalized_(int *, int *);
 
-extern long long WI4MPI_Finalized_timeout;
+extern unsigned long long WI4MPI_Finalized_timeout;
 void (*_LOCAL_MPI_Finalized)(int *, int *);
 
 void A_f_MPI_Finalized(int *flag, int *ret) {
@@ -7293,7 +7293,7 @@ void pmpi_free_mem__(void *, int *);
 
 void pmpi_free_mem_(void *, int *);
 
-extern long long WI4MPI_Free_mem_timeout;
+extern unsigned long long WI4MPI_Free_mem_timeout;
 void (*_LOCAL_MPI_Free_mem)(void *, int *);
 
 void A_f_MPI_Free_mem(void *base, int *ret) {
@@ -7329,7 +7329,7 @@ void pmpi_get_address__(void *, size_t *, int *);
 
 void pmpi_get_address_(void *, size_t *, int *);
 
-extern long long WI4MPI_Get_address_timeout;
+extern unsigned long long WI4MPI_Get_address_timeout;
 void (*_LOCAL_MPI_Get_address)(void *, size_t *, int *);
 
 void A_f_MPI_Get_address(void *location, size_t *address, int *ret) {
@@ -7365,7 +7365,7 @@ void pmpi_info_create__(int *, int *);
 
 void pmpi_info_create_(int *, int *);
 
-extern long long WI4MPI_Info_create_timeout;
+extern unsigned long long WI4MPI_Info_create_timeout;
 void (*_LOCAL_MPI_Info_create)(int *, int *);
 
 void A_f_MPI_Info_create(int *info, int *ret) {
@@ -7402,7 +7402,7 @@ void pmpi_info_dup__(int *, int *, int *);
 
 void pmpi_info_dup_(int *, int *, int *);
 
-extern long long WI4MPI_Info_dup_timeout;
+extern unsigned long long WI4MPI_Info_dup_timeout;
 void (*_LOCAL_MPI_Info_dup)(int *, int *, int *);
 
 void A_f_MPI_Info_dup(int *info, int *newinfo, int *ret) {
@@ -7441,7 +7441,7 @@ void pmpi_info_free__(int *, int *);
 
 void pmpi_info_free_(int *, int *);
 
-extern long long WI4MPI_Info_free_timeout;
+extern unsigned long long WI4MPI_Info_free_timeout;
 void (*_LOCAL_MPI_Info_free)(int *, int *);
 
 void A_f_MPI_Info_free(int *info, int *ret) {
@@ -7473,7 +7473,7 @@ void pmpi_info_get_nkeys__(int *, int *, int *);
 
 void pmpi_info_get_nkeys_(int *, int *, int *);
 
-extern long long WI4MPI_Info_get_nkeys_timeout;
+extern unsigned long long WI4MPI_Info_get_nkeys_timeout;
 void (*_LOCAL_MPI_Info_get_nkeys)(int *, int *, int *);
 
 void A_f_MPI_Info_get_nkeys(int *info, int *nkeys, int *ret) {
@@ -7509,7 +7509,7 @@ void pmpi_request_get_status__(int *, int *, int *, int *);
 
 void pmpi_request_get_status_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Request_get_status_timeout;
+extern unsigned long long WI4MPI_Request_get_status_timeout;
 void (*_LOCAL_MPI_Request_get_status)(int *, int *, int *, int *);
 
 void A_f_MPI_Request_get_status(int *request, int *flag, int *status,
@@ -7552,7 +7552,7 @@ void pmpi_type_create_hvector__(int *, int *, size_t *, int *, int *, int *);
 
 void pmpi_type_create_hvector_(int *, int *, size_t *, int *, int *, int *);
 
-extern long long WI4MPI_Type_create_hvector_timeout;
+extern unsigned long long WI4MPI_Type_create_hvector_timeout;
 void (*_LOCAL_MPI_Type_create_hvector)(int *, int *, size_t *, int *, int *,
                                        int *);
 
@@ -7594,7 +7594,7 @@ void pmpi_type_create_resized__(int *, size_t *, size_t *, int *, int *);
 
 void pmpi_type_create_resized_(int *, size_t *, size_t *, int *, int *);
 
-extern long long WI4MPI_Type_create_resized_timeout;
+extern unsigned long long WI4MPI_Type_create_resized_timeout;
 void (*_LOCAL_MPI_Type_create_resized)(int *, size_t *, size_t *, int *, int *);
 
 void A_f_MPI_Type_create_resized(int *oldtype, size_t *lb, size_t *extent,
@@ -7635,7 +7635,7 @@ void pmpi_type_get_extent__(int *, size_t *, size_t *, int *);
 
 void pmpi_type_get_extent_(int *, size_t *, size_t *, int *);
 
-extern long long WI4MPI_Type_get_extent_timeout;
+extern unsigned long long WI4MPI_Type_get_extent_timeout;
 void (*_LOCAL_MPI_Type_get_extent)(int *, size_t *, size_t *, int *);
 
 void A_f_MPI_Type_get_extent(int *datatype, size_t *lb, size_t *extent,
@@ -7672,7 +7672,7 @@ void pmpi_type_get_true_extent__(int *, size_t *, size_t *, int *);
 
 void pmpi_type_get_true_extent_(int *, size_t *, size_t *, int *);
 
-extern long long WI4MPI_Type_get_true_extent_timeout;
+extern unsigned long long WI4MPI_Type_get_true_extent_timeout;
 void (*_LOCAL_MPI_Type_get_true_extent)(int *, size_t *, size_t *, int *);
 
 void A_f_MPI_Type_get_true_extent(int *datatype, size_t *true_lb,
@@ -7710,7 +7710,7 @@ void pmpi_type_create_f90_integer__(int *, int *, int *);
 
 void pmpi_type_create_f90_integer_(int *, int *, int *);
 
-extern long long WI4MPI_Type_create_f90_integer_timeout;
+extern unsigned long long WI4MPI_Type_create_f90_integer_timeout;
 void (*_LOCAL_MPI_Type_create_f90_integer)(int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_integer(int *range, int *newtype, int *ret) {
@@ -7747,7 +7747,7 @@ void pmpi_type_create_f90_real__(int *, int *, int *, int *);
 
 void pmpi_type_create_f90_real_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_create_f90_real_timeout;
+extern unsigned long long WI4MPI_Type_create_f90_real_timeout;
 void (*_LOCAL_MPI_Type_create_f90_real)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_real(int *precision, int *range, int *newtype,
@@ -7785,7 +7785,7 @@ void pmpi_type_create_f90_complex__(int *, int *, int *, int *);
 
 void pmpi_type_create_f90_complex_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_create_f90_complex_timeout;
+extern unsigned long long WI4MPI_Type_create_f90_complex_timeout;
 void (*_LOCAL_MPI_Type_create_f90_complex)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_complex(int *precision, int *range, int *newtype,
@@ -7823,7 +7823,7 @@ void pmpi_reduce_local__(void *, void *, int *, int *, int *, int *);
 
 void pmpi_reduce_local_(void *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Reduce_local_timeout;
+extern unsigned long long WI4MPI_Reduce_local_timeout;
 void (*_LOCAL_MPI_Reduce_local)(void *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_Reduce_local(void *inbuf, void *inoutbuf, int *count,
@@ -7868,7 +7868,7 @@ void pmpi_op_commutative__(int *, int *, int *);
 
 void pmpi_op_commutative_(int *, int *, int *);
 
-extern long long WI4MPI_Op_commutative_timeout;
+extern unsigned long long WI4MPI_Op_commutative_timeout;
 void (*_LOCAL_MPI_Op_commutative)(int *, int *, int *);
 
 void A_f_MPI_Op_commutative(int *op, int *commute, int *ret) {
@@ -7909,7 +7909,7 @@ void pmpi_reduce_scatter_block__(void *, void *, int *, int *, int *, int *,
 void pmpi_reduce_scatter_block_(void *, void *, int *, int *, int *, int *,
                                 int *);
 
-extern long long WI4MPI_Reduce_scatter_block_timeout;
+extern unsigned long long WI4MPI_Reduce_scatter_block_timeout;
 void (*_LOCAL_MPI_Reduce_scatter_block)(void *, void *, int *, int *, int *,
                                         int *, int *);
 
@@ -7957,7 +7957,7 @@ void pmpi_dist_graph_neighbors_count__(int *, int *, int *, int *, int *);
 
 void pmpi_dist_graph_neighbors_count_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Dist_graph_neighbors_count_timeout;
+extern unsigned long long WI4MPI_Dist_graph_neighbors_count_timeout;
 void (*_LOCAL_MPI_Dist_graph_neighbors_count)(int *, int *, int *, int *,
                                               int *);
 
@@ -7997,7 +7997,7 @@ void pmpi_improbe__(int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_improbe_(int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Improbe_timeout;
+extern unsigned long long WI4MPI_Improbe_timeout;
 void (*_LOCAL_MPI_Improbe)(int *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Improbe(int *source, int *tag, int *comm, int *flag, int *message,
@@ -8048,7 +8048,7 @@ void pmpi_imrecv__(void *, int *, int *, int *, int *, int *);
 
 void pmpi_imrecv_(void *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Imrecv_timeout;
+extern unsigned long long WI4MPI_Imrecv_timeout;
 void (*_LOCAL_MPI_Imrecv)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Imrecv(void *buf, int *count, int *datatype, int *message,
@@ -8096,7 +8096,7 @@ void pmpi_mprobe__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_mprobe_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Mprobe_timeout;
+extern unsigned long long WI4MPI_Mprobe_timeout;
 void (*_LOCAL_MPI_Mprobe)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Mprobe(int *source, int *tag, int *comm, int *message, int *status,
@@ -8147,7 +8147,7 @@ void pmpi_mrecv__(void *, int *, int *, int *, int *, int *);
 
 void pmpi_mrecv_(void *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Mrecv_timeout;
+extern unsigned long long WI4MPI_Mrecv_timeout;
 void (*_LOCAL_MPI_Mrecv)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Mrecv(void *buf, int *count, int *datatype, int *message,
@@ -8198,7 +8198,7 @@ void pmpi_comm_idup__(int *, int *, int *, int *);
 
 void pmpi_comm_idup_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_idup_timeout;
+extern unsigned long long WI4MPI_Comm_idup_timeout;
 void (*_LOCAL_MPI_Comm_idup)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_idup(int *comm, int *newcomm, int *request, int *ret) {
@@ -8240,7 +8240,7 @@ void pmpi_ibarrier__(int *, int *, int *);
 
 void pmpi_ibarrier_(int *, int *, int *);
 
-extern long long WI4MPI_Ibarrier_timeout;
+extern unsigned long long WI4MPI_Ibarrier_timeout;
 void (*_LOCAL_MPI_Ibarrier)(int *, int *, int *);
 
 void A_f_MPI_Ibarrier(int *comm, int *request, int *ret) {
@@ -8279,7 +8279,7 @@ void pmpi_ibcast__(void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_ibcast_(void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Ibcast_timeout;
+extern unsigned long long WI4MPI_Ibcast_timeout;
 void (*_LOCAL_MPI_Ibcast)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Ibcast(void *buffer, int *count, int *datatype, int *root,
@@ -8331,7 +8331,7 @@ void pmpi_igather__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_igather_(void *, int *, int *, void *, int *, int *, int *, int *,
                    int *, int *);
 
-extern long long WI4MPI_Igather_timeout;
+extern unsigned long long WI4MPI_Igather_timeout;
 void (*_LOCAL_MPI_Igather)(void *, int *, int *, void *, int *, int *, int *,
                            int *, int *, int *);
 
@@ -8390,7 +8390,7 @@ void pmpi_iscatter__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_iscatter_(void *, int *, int *, void *, int *, int *, int *, int *,
                     int *, int *);
 
-extern long long WI4MPI_Iscatter_timeout;
+extern unsigned long long WI4MPI_Iscatter_timeout;
 void (*_LOCAL_MPI_Iscatter)(void *, int *, int *, void *, int *, int *, int *,
                             int *, int *, int *);
 
@@ -8449,7 +8449,7 @@ void pmpi_iallgather__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_iallgather_(void *, int *, int *, void *, int *, int *, int *, int *,
                       int *);
 
-extern long long WI4MPI_Iallgather_timeout;
+extern unsigned long long WI4MPI_Iallgather_timeout;
 void (*_LOCAL_MPI_Iallgather)(void *, int *, int *, void *, int *, int *, int *,
                               int *, int *);
 
@@ -8508,7 +8508,7 @@ void pmpi_ialltoall__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_ialltoall_(void *, int *, int *, void *, int *, int *, int *, int *,
                      int *);
 
-extern long long WI4MPI_Ialltoall_timeout;
+extern unsigned long long WI4MPI_Ialltoall_timeout;
 void (*_LOCAL_MPI_Ialltoall)(void *, int *, int *, void *, int *, int *, int *,
                              int *, int *);
 
@@ -8567,7 +8567,7 @@ void pmpi_ireduce__(void *, void *, int *, int *, int *, int *, int *, int *,
 void pmpi_ireduce_(void *, void *, int *, int *, int *, int *, int *, int *,
                    int *);
 
-extern long long WI4MPI_Ireduce_timeout;
+extern unsigned long long WI4MPI_Ireduce_timeout;
 void (*_LOCAL_MPI_Ireduce)(void *, void *, int *, int *, int *, int *, int *,
                            int *, int *);
 
@@ -8620,7 +8620,7 @@ void pmpi_iallreduce__(void *, void *, int *, int *, int *, int *, int *,
 
 void pmpi_iallreduce_(void *, void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Iallreduce_timeout;
+extern unsigned long long WI4MPI_Iallreduce_timeout;
 void (*_LOCAL_MPI_Iallreduce)(void *, void *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -8677,7 +8677,7 @@ void pmpi_ireduce_scatter_block__(void *, void *, int *, int *, int *, int *,
 void pmpi_ireduce_scatter_block_(void *, void *, int *, int *, int *, int *,
                                  int *, int *);
 
-extern long long WI4MPI_Ireduce_scatter_block_timeout;
+extern unsigned long long WI4MPI_Ireduce_scatter_block_timeout;
 void (*_LOCAL_MPI_Ireduce_scatter_block)(void *, void *, int *, int *, int *,
                                          int *, int *, int *);
 
@@ -8732,7 +8732,7 @@ void pmpi_iscan__(void *, void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_iscan_(void *, void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Iscan_timeout;
+extern unsigned long long WI4MPI_Iscan_timeout;
 void (*_LOCAL_MPI_Iscan)(void *, void *, int *, int *, int *, int *, int *,
                          int *);
 
@@ -8783,7 +8783,7 @@ void pmpi_iexscan__(void *, void *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_iexscan_(void *, void *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Iexscan_timeout;
+extern unsigned long long WI4MPI_Iexscan_timeout;
 void (*_LOCAL_MPI_Iexscan)(void *, void *, int *, int *, int *, int *, int *,
                            int *);
 
@@ -8839,7 +8839,7 @@ void pmpi_ineighbor_allgather__(void *, int *, int *, void *, int *, int *,
 void pmpi_ineighbor_allgather_(void *, int *, int *, void *, int *, int *,
                                int *, int *, int *);
 
-extern long long WI4MPI_Ineighbor_allgather_timeout;
+extern unsigned long long WI4MPI_Ineighbor_allgather_timeout;
 void (*_LOCAL_MPI_Ineighbor_allgather)(void *, int *, int *, void *, int *,
                                        int *, int *, int *, int *);
 
@@ -8897,7 +8897,7 @@ void pmpi_ineighbor_alltoall__(void *, int *, int *, void *, int *, int *,
 void pmpi_ineighbor_alltoall_(void *, int *, int *, void *, int *, int *, int *,
                               int *, int *);
 
-extern long long WI4MPI_Ineighbor_alltoall_timeout;
+extern unsigned long long WI4MPI_Ineighbor_alltoall_timeout;
 void (*_LOCAL_MPI_Ineighbor_alltoall)(void *, int *, int *, void *, int *,
                                       int *, int *, int *, int *);
 
@@ -8955,7 +8955,7 @@ void pmpi_neighbor_allgather__(void *, int *, int *, void *, int *, int *,
 void pmpi_neighbor_allgather_(void *, int *, int *, void *, int *, int *, int *,
                               int *);
 
-extern long long WI4MPI_Neighbor_allgather_timeout;
+extern unsigned long long WI4MPI_Neighbor_allgather_timeout;
 void (*_LOCAL_MPI_Neighbor_allgather)(void *, int *, int *, void *, int *,
                                       int *, int *, int *);
 
@@ -9010,7 +9010,7 @@ void pmpi_neighbor_alltoall__(void *, int *, int *, void *, int *, int *, int *,
 void pmpi_neighbor_alltoall_(void *, int *, int *, void *, int *, int *, int *,
                              int *);
 
-extern long long WI4MPI_Neighbor_alltoall_timeout;
+extern unsigned long long WI4MPI_Neighbor_alltoall_timeout;
 void (*_LOCAL_MPI_Neighbor_alltoall)(void *, int *, int *, void *, int *, int *,
                                      int *, int *);
 
@@ -9060,7 +9060,7 @@ void pmpi_comm_split_type__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_comm_split_type_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_split_type_timeout;
+extern unsigned long long WI4MPI_Comm_split_type_timeout;
 void (*_LOCAL_MPI_Comm_split_type)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_split_type(int *comm, int *split_type, int *key, int *info,
@@ -9103,7 +9103,7 @@ void pmpi_get_elements_x__(int *, int *, int *, int *);
 
 void pmpi_get_elements_x_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Get_elements_x_timeout;
+extern unsigned long long WI4MPI_Get_elements_x_timeout;
 void (*_LOCAL_MPI_Get_elements_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_elements_x(int *status, int *datatype, int *count, int *ret) {
@@ -9143,7 +9143,7 @@ void pmpi_status_set_elements_x__(int *, int *, int *, int *);
 
 void pmpi_status_set_elements_x_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Status_set_elements_x_timeout;
+extern unsigned long long WI4MPI_Status_set_elements_x_timeout;
 void (*_LOCAL_MPI_Status_set_elements_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Status_set_elements_x(int *status, int *datatype, int *count,
@@ -9187,7 +9187,7 @@ void pmpi_type_get_extent_x__(int *, int *, int *, int *);
 
 void pmpi_type_get_extent_x_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_get_extent_x_timeout;
+extern unsigned long long WI4MPI_Type_get_extent_x_timeout;
 void (*_LOCAL_MPI_Type_get_extent_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_extent_x(int *datatype, int *lb, int *extent, int *ret) {
@@ -9223,7 +9223,7 @@ void pmpi_type_get_true_extent_x__(int *, int *, int *, int *);
 
 void pmpi_type_get_true_extent_x_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_get_true_extent_x_timeout;
+extern unsigned long long WI4MPI_Type_get_true_extent_x_timeout;
 void (*_LOCAL_MPI_Type_get_true_extent_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_true_extent_x(int *datatype, int *lb, int *extent,
@@ -9260,7 +9260,7 @@ void pmpi_type_size_x__(int *, int *, int *);
 
 void pmpi_type_size_x_(int *, int *, int *);
 
-extern long long WI4MPI_Type_size_x_timeout;
+extern unsigned long long WI4MPI_Type_size_x_timeout;
 void (*_LOCAL_MPI_Type_size_x)(int *, int *, int *);
 
 void A_f_MPI_Type_size_x(int *datatype, int *size, int *ret) {
@@ -9296,7 +9296,7 @@ void pmpi_comm_create_group__(int *, int *, int *, int *, int *);
 
 void pmpi_comm_create_group_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Comm_create_group_timeout;
+extern unsigned long long WI4MPI_Comm_create_group_timeout;
 void (*_LOCAL_MPI_Comm_create_group)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_create_group(int *comm, int *group, int *tag, int *newcomm,
@@ -9341,7 +9341,7 @@ void pmpi_file_close__(int *, int *);
 
 void pmpi_file_close_(int *, int *);
 
-extern long long WI4MPI_File_close_timeout;
+extern unsigned long long WI4MPI_File_close_timeout;
 void (*_LOCAL_MPI_File_close)(int *, int *);
 
 void A_f_MPI_File_close(int *fh, int *ret) {
@@ -9375,7 +9375,7 @@ void pmpi_file_set_size__(int *, int *, int *);
 
 void pmpi_file_set_size_(int *, int *, int *);
 
-extern long long WI4MPI_File_set_size_timeout;
+extern unsigned long long WI4MPI_File_set_size_timeout;
 void (*_LOCAL_MPI_File_set_size)(int *, int *, int *);
 
 void A_f_MPI_File_set_size(int *fh, int *size, int *ret) {
@@ -9409,7 +9409,7 @@ void pmpi_file_preallocate__(int *, int *, int *);
 
 void pmpi_file_preallocate_(int *, int *, int *);
 
-extern long long WI4MPI_File_preallocate_timeout;
+extern unsigned long long WI4MPI_File_preallocate_timeout;
 void (*_LOCAL_MPI_File_preallocate)(int *, int *, int *);
 
 void A_f_MPI_File_preallocate(int *fh, int *size, int *ret) {
@@ -9443,7 +9443,7 @@ void pmpi_file_get_size__(int *, int *, int *);
 
 void pmpi_file_get_size_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_size_timeout;
+extern unsigned long long WI4MPI_File_get_size_timeout;
 void (*_LOCAL_MPI_File_get_size)(int *, int *, int *);
 
 void A_f_MPI_File_get_size(int *fh, int *size, int *ret) {
@@ -9477,7 +9477,7 @@ void pmpi_file_get_group__(int *, int *, int *);
 
 void pmpi_file_get_group_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_group_timeout;
+extern unsigned long long WI4MPI_File_get_group_timeout;
 void (*_LOCAL_MPI_File_get_group)(int *, int *, int *);
 
 void A_f_MPI_File_get_group(int *fh, int *group, int *ret) {
@@ -9514,7 +9514,7 @@ void pmpi_file_get_amode__(int *, int *, int *);
 
 void pmpi_file_get_amode_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_amode_timeout;
+extern unsigned long long WI4MPI_File_get_amode_timeout;
 void (*_LOCAL_MPI_File_get_amode)(int *, int *, int *);
 
 void A_f_MPI_File_get_amode(int *fh, int *amode, int *ret) {
@@ -9548,7 +9548,7 @@ void pmpi_file_set_info__(int *, int *, int *);
 
 void pmpi_file_set_info_(int *, int *, int *);
 
-extern long long WI4MPI_File_set_info_timeout;
+extern unsigned long long WI4MPI_File_set_info_timeout;
 void (*_LOCAL_MPI_File_set_info)(int *, int *, int *);
 
 void A_f_MPI_File_set_info(int *fh, int *info, int *ret) {
@@ -9584,7 +9584,7 @@ void pmpi_file_get_info__(int *, int *, int *);
 
 void pmpi_file_get_info_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_info_timeout;
+extern unsigned long long WI4MPI_File_get_info_timeout;
 void (*_LOCAL_MPI_File_get_info)(int *, int *, int *);
 
 void A_f_MPI_File_get_info(int *fh, int *info_used, int *ret) {
@@ -9621,7 +9621,7 @@ void pmpi_file_read_at__(int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_read_at_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_at_timeout;
+extern unsigned long long WI4MPI_File_read_at_timeout;
 void (*_LOCAL_MPI_File_read_at)(int *, int *, void *, int *, int *, int *,
                                 int *);
 
@@ -9669,7 +9669,7 @@ void pmpi_file_read_at_all__(int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_read_at_all_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_at_all_timeout;
+extern unsigned long long WI4MPI_File_read_at_all_timeout;
 void (*_LOCAL_MPI_File_read_at_all)(int *, int *, void *, int *, int *, int *,
                                     int *);
 
@@ -9717,7 +9717,7 @@ void pmpi_file_write_at__(int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_write_at_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_at_timeout;
+extern unsigned long long WI4MPI_File_write_at_timeout;
 void (*_LOCAL_MPI_File_write_at)(int *, int *, void *, int *, int *, int *,
                                  int *);
 
@@ -9764,7 +9764,7 @@ void pmpi_file_write_at_all__(int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_write_at_all_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_at_all_timeout;
+extern unsigned long long WI4MPI_File_write_at_all_timeout;
 void (*_LOCAL_MPI_File_write_at_all)(int *, int *, void *, int *, int *, int *,
                                      int *);
 
@@ -9811,7 +9811,7 @@ void pmpi_file_iread_at__(int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iread_at_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iread_at_timeout;
+extern unsigned long long WI4MPI_File_iread_at_timeout;
 void (*_LOCAL_MPI_File_iread_at)(int *, int *, void *, int *, int *, int *,
                                  int *);
 
@@ -9856,7 +9856,7 @@ void pmpi_file_iwrite_at__(int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iwrite_at_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iwrite_at_timeout;
+extern unsigned long long WI4MPI_File_iwrite_at_timeout;
 void (*_LOCAL_MPI_File_iwrite_at)(int *, int *, void *, int *, int *, int *,
                                   int *);
 
@@ -9900,7 +9900,7 @@ void pmpi_file_read__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_read_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_timeout;
+extern unsigned long long WI4MPI_File_read_timeout;
 void (*_LOCAL_MPI_File_read)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read(int *fh, void *buf, int *count, int *datatype,
@@ -9946,7 +9946,7 @@ void pmpi_file_read_all__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_read_all_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_all_timeout;
+extern unsigned long long WI4MPI_File_read_all_timeout;
 void (*_LOCAL_MPI_File_read_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_all(int *fh, void *buf, int *count, int *datatype,
@@ -9993,7 +9993,7 @@ void pmpi_file_write__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_write_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_timeout;
+extern unsigned long long WI4MPI_File_write_timeout;
 void (*_LOCAL_MPI_File_write)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write(int *fh, void *buf, int *count, int *datatype,
@@ -10039,7 +10039,7 @@ void pmpi_file_write_all__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_write_all_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_all_timeout;
+extern unsigned long long WI4MPI_File_write_all_timeout;
 void (*_LOCAL_MPI_File_write_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write_all(int *fh, void *buf, int *count, int *datatype,
@@ -10085,7 +10085,7 @@ void pmpi_file_iread__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iread_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iread_timeout;
+extern unsigned long long WI4MPI_File_iread_timeout;
 void (*_LOCAL_MPI_File_iread)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread(int *fh, void *buf, int *count, int *datatype,
@@ -10129,7 +10129,7 @@ void pmpi_file_iwrite__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iwrite_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iwrite_timeout;
+extern unsigned long long WI4MPI_File_iwrite_timeout;
 void (*_LOCAL_MPI_File_iwrite)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iwrite(int *fh, void *buf, int *count, int *datatype,
@@ -10174,7 +10174,7 @@ void pmpi_file_seek__(int *, int *, int *, int *);
 
 void pmpi_file_seek_(int *, int *, int *, int *);
 
-extern long long WI4MPI_File_seek_timeout;
+extern unsigned long long WI4MPI_File_seek_timeout;
 void (*_LOCAL_MPI_File_seek)(int *, int *, int *, int *);
 
 void A_f_MPI_File_seek(int *fh, int *offset, int *whence, int *ret) {
@@ -10208,7 +10208,7 @@ void pmpi_file_get_position__(int *, int *, int *);
 
 void pmpi_file_get_position_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_position_timeout;
+extern unsigned long long WI4MPI_File_get_position_timeout;
 void (*_LOCAL_MPI_File_get_position)(int *, int *, int *);
 
 void A_f_MPI_File_get_position(int *fh, int *offset, int *ret) {
@@ -10242,7 +10242,7 @@ void pmpi_file_get_byte_offset__(int *, int *, int *, int *);
 
 void pmpi_file_get_byte_offset_(int *, int *, int *, int *);
 
-extern long long WI4MPI_File_get_byte_offset_timeout;
+extern unsigned long long WI4MPI_File_get_byte_offset_timeout;
 void (*_LOCAL_MPI_File_get_byte_offset)(int *, int *, int *, int *);
 
 void A_f_MPI_File_get_byte_offset(int *fh, int *offset, int *disp, int *ret) {
@@ -10276,7 +10276,7 @@ void pmpi_file_read_shared__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_read_shared_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_shared_timeout;
+extern unsigned long long WI4MPI_File_read_shared_timeout;
 void (*_LOCAL_MPI_File_read_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_shared(int *fh, void *buf, int *count, int *datatype,
@@ -10323,7 +10323,7 @@ void pmpi_file_write_shared__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_write_shared_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_shared_timeout;
+extern unsigned long long WI4MPI_File_write_shared_timeout;
 void (*_LOCAL_MPI_File_write_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write_shared(int *fh, void *buf, int *count, int *datatype,
@@ -10369,7 +10369,7 @@ void pmpi_file_iread_shared__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iread_shared_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iread_shared_timeout;
+extern unsigned long long WI4MPI_File_iread_shared_timeout;
 void (*_LOCAL_MPI_File_iread_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread_shared(int *fh, void *buf, int *count, int *datatype,
@@ -10413,7 +10413,7 @@ void pmpi_file_iwrite_shared__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iwrite_shared_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iwrite_shared_timeout;
+extern unsigned long long WI4MPI_File_iwrite_shared_timeout;
 void (*_LOCAL_MPI_File_iwrite_shared)(int *, void *, int *, int *, int *,
                                       int *);
 
@@ -10457,7 +10457,7 @@ void pmpi_file_read_ordered__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_read_ordered_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_ordered_timeout;
+extern unsigned long long WI4MPI_File_read_ordered_timeout;
 void (*_LOCAL_MPI_File_read_ordered)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_ordered(int *fh, void *buf, int *count, int *datatype,
@@ -10504,7 +10504,7 @@ void pmpi_file_write_ordered__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_write_ordered_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_ordered_timeout;
+extern unsigned long long WI4MPI_File_write_ordered_timeout;
 void (*_LOCAL_MPI_File_write_ordered)(int *, void *, int *, int *, int *,
                                       int *);
 
@@ -10551,7 +10551,7 @@ void pmpi_file_seek_shared__(int *, int *, int *, int *);
 
 void pmpi_file_seek_shared_(int *, int *, int *, int *);
 
-extern long long WI4MPI_File_seek_shared_timeout;
+extern unsigned long long WI4MPI_File_seek_shared_timeout;
 void (*_LOCAL_MPI_File_seek_shared)(int *, int *, int *, int *);
 
 void A_f_MPI_File_seek_shared(int *fh, int *offset, int *whence, int *ret) {
@@ -10585,7 +10585,7 @@ void pmpi_file_get_position_shared__(int *, int *, int *);
 
 void pmpi_file_get_position_shared_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_position_shared_timeout;
+extern unsigned long long WI4MPI_File_get_position_shared_timeout;
 void (*_LOCAL_MPI_File_get_position_shared)(int *, int *, int *);
 
 void A_f_MPI_File_get_position_shared(int *fh, int *offset, int *ret) {
@@ -10619,7 +10619,7 @@ void pmpi_file_read_at_all_begin__(int *, int *, void *, int *, int *, int *);
 
 void pmpi_file_read_at_all_begin_(int *, int *, void *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_at_all_begin_timeout;
+extern unsigned long long WI4MPI_File_read_at_all_begin_timeout;
 void (*_LOCAL_MPI_File_read_at_all_begin)(int *, int *, void *, int *, int *,
                                           int *);
 
@@ -10661,7 +10661,7 @@ void pmpi_file_read_at_all_end__(int *, void *, int *, int *);
 
 void pmpi_file_read_at_all_end_(int *, void *, int *, int *);
 
-extern long long WI4MPI_File_read_at_all_end_timeout;
+extern unsigned long long WI4MPI_File_read_at_all_end_timeout;
 void (*_LOCAL_MPI_File_read_at_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_at_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -10704,7 +10704,7 @@ void pmpi_file_write_at_all_begin__(int *, int *, void *, int *, int *, int *);
 
 void pmpi_file_write_at_all_begin_(int *, int *, void *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_at_all_begin_timeout;
+extern unsigned long long WI4MPI_File_write_at_all_begin_timeout;
 void (*_LOCAL_MPI_File_write_at_all_begin)(int *, int *, void *, int *, int *,
                                            int *);
 
@@ -10745,7 +10745,7 @@ void pmpi_file_write_at_all_end__(int *, void *, int *, int *);
 
 void pmpi_file_write_at_all_end_(int *, void *, int *, int *);
 
-extern long long WI4MPI_File_write_at_all_end_timeout;
+extern unsigned long long WI4MPI_File_write_at_all_end_timeout;
 void (*_LOCAL_MPI_File_write_at_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_at_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -10787,7 +10787,7 @@ void pmpi_file_read_all_begin__(int *, void *, int *, int *, int *);
 
 void pmpi_file_read_all_begin_(int *, void *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_all_begin_timeout;
+extern unsigned long long WI4MPI_File_read_all_begin_timeout;
 void (*_LOCAL_MPI_File_read_all_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_read_all_begin(int *fh, void *buf, int *count, int *datatype,
@@ -10827,7 +10827,7 @@ void pmpi_file_read_all_end__(int *, void *, int *, int *);
 
 void pmpi_file_read_all_end_(int *, void *, int *, int *);
 
-extern long long WI4MPI_File_read_all_end_timeout;
+extern unsigned long long WI4MPI_File_read_all_end_timeout;
 void (*_LOCAL_MPI_File_read_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -10870,7 +10870,7 @@ void pmpi_file_write_all_begin__(int *, void *, int *, int *, int *);
 
 void pmpi_file_write_all_begin_(int *, void *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_all_begin_timeout;
+extern unsigned long long WI4MPI_File_write_all_begin_timeout;
 void (*_LOCAL_MPI_File_write_all_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_write_all_begin(int *fh, void *buf, int *count, int *datatype,
@@ -10912,7 +10912,7 @@ void pmpi_file_write_all_end__(int *, void *, int *, int *);
 
 void pmpi_file_write_all_end_(int *, void *, int *, int *);
 
-extern long long WI4MPI_File_write_all_end_timeout;
+extern unsigned long long WI4MPI_File_write_all_end_timeout;
 void (*_LOCAL_MPI_File_write_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -10954,7 +10954,7 @@ void pmpi_file_read_ordered_begin__(int *, void *, int *, int *, int *);
 
 void pmpi_file_read_ordered_begin_(int *, void *, int *, int *, int *);
 
-extern long long WI4MPI_File_read_ordered_begin_timeout;
+extern unsigned long long WI4MPI_File_read_ordered_begin_timeout;
 void (*_LOCAL_MPI_File_read_ordered_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_read_ordered_begin(int *fh, void *buf, int *count,
@@ -10995,7 +10995,7 @@ void pmpi_file_read_ordered_end__(int *, void *, int *, int *);
 
 void pmpi_file_read_ordered_end_(int *, void *, int *, int *);
 
-extern long long WI4MPI_File_read_ordered_end_timeout;
+extern unsigned long long WI4MPI_File_read_ordered_end_timeout;
 void (*_LOCAL_MPI_File_read_ordered_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_ordered_end(int *fh, void *buf, int *status, int *ret) {
@@ -11038,7 +11038,7 @@ void pmpi_file_write_ordered_begin__(int *, void *, int *, int *, int *);
 
 void pmpi_file_write_ordered_begin_(int *, void *, int *, int *, int *);
 
-extern long long WI4MPI_File_write_ordered_begin_timeout;
+extern unsigned long long WI4MPI_File_write_ordered_begin_timeout;
 void (*_LOCAL_MPI_File_write_ordered_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_write_ordered_begin(int *fh, void *buf, int *count,
@@ -11079,7 +11079,7 @@ void pmpi_file_write_ordered_end__(int *, void *, int *, int *);
 
 void pmpi_file_write_ordered_end_(int *, void *, int *, int *);
 
-extern long long WI4MPI_File_write_ordered_end_timeout;
+extern unsigned long long WI4MPI_File_write_ordered_end_timeout;
 void (*_LOCAL_MPI_File_write_ordered_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_ordered_end(int *fh, void *buf, int *status, int *ret) {
@@ -11121,7 +11121,7 @@ void pmpi_file_get_type_extent__(int *, int *, size_t *, int *);
 
 void pmpi_file_get_type_extent_(int *, int *, size_t *, int *);
 
-extern long long WI4MPI_File_get_type_extent_timeout;
+extern unsigned long long WI4MPI_File_get_type_extent_timeout;
 void (*_LOCAL_MPI_File_get_type_extent)(int *, int *, size_t *, int *);
 
 void A_f_MPI_File_get_type_extent(int *fh, int *datatype, size_t *extent,
@@ -11158,7 +11158,7 @@ void pmpi_file_set_atomicity__(int *, int *, int *);
 
 void pmpi_file_set_atomicity_(int *, int *, int *);
 
-extern long long WI4MPI_File_set_atomicity_timeout;
+extern unsigned long long WI4MPI_File_set_atomicity_timeout;
 void (*_LOCAL_MPI_File_set_atomicity)(int *, int *, int *);
 
 void A_f_MPI_File_set_atomicity(int *fh, int *flag, int *ret) {
@@ -11192,7 +11192,7 @@ void pmpi_file_get_atomicity__(int *, int *, int *);
 
 void pmpi_file_get_atomicity_(int *, int *, int *);
 
-extern long long WI4MPI_File_get_atomicity_timeout;
+extern unsigned long long WI4MPI_File_get_atomicity_timeout;
 void (*_LOCAL_MPI_File_get_atomicity)(int *, int *, int *);
 
 void A_f_MPI_File_get_atomicity(int *fh, int *flag, int *ret) {
@@ -11226,7 +11226,7 @@ void pmpi_file_sync__(int *, int *);
 
 void pmpi_file_sync_(int *, int *);
 
-extern long long WI4MPI_File_sync_timeout;
+extern unsigned long long WI4MPI_File_sync_timeout;
 void (*_LOCAL_MPI_File_sync)(int *, int *);
 
 void A_f_MPI_File_sync(int *fh, int *ret) {
@@ -11260,7 +11260,7 @@ void pmpi_wtime__(double *);
 
 void pmpi_wtime_(double *);
 
-extern long long WI4MPI_Wtime_timeout;
+extern unsigned long long WI4MPI_Wtime_timeout;
 void (*_LOCAL_MPI_Wtime)(double *);
 
 void A_f_MPI_Wtime(double *ret) {
@@ -11293,7 +11293,7 @@ void pmpi_wtick__(double *);
 
 void pmpi_wtick_(double *);
 
-extern long long WI4MPI_Wtick_timeout;
+extern unsigned long long WI4MPI_Wtick_timeout;
 void (*_LOCAL_MPI_Wtick)(double *);
 
 void A_f_MPI_Wtick(double *ret) {
@@ -11326,7 +11326,7 @@ void pmpi_finalize__(int *);
 
 void pmpi_finalize_(int *);
 
-extern long long WI4MPI_Finalize_timeout;
+extern unsigned long long WI4MPI_Finalize_timeout;
 void (*_LOCAL_MPI_Finalize)(int *);
 
 void A_f_MPI_Finalize(int *ret) {
@@ -11360,7 +11360,7 @@ void pmpi_waitany__(int *, int *, int *, int *, int *);
 
 void pmpi_waitany_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Waitany_timeout;
+extern unsigned long long WI4MPI_Waitany_timeout;
 void (*_LOCAL_MPI_Waitany)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Waitany(int *count, int *array_of_requests, int *indx, int *status,
@@ -11408,7 +11408,7 @@ void pmpi_testany__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_testany_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Testany_timeout;
+extern unsigned long long WI4MPI_Testany_timeout;
 void (*_LOCAL_MPI_Testany)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testany(int *count, int *array_of_requests, int *indx, int *flag,
@@ -11457,7 +11457,7 @@ void pmpi_waitall__(int *, int *, int *, int *);
 
 void pmpi_waitall_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Waitall_timeout;
+extern unsigned long long WI4MPI_Waitall_timeout;
 void (*_LOCAL_MPI_Waitall)(int *, int *, int *, int *);
 
 void A_f_MPI_Waitall(int *count, int *array_of_requests, int *array_of_statuses,
@@ -11512,7 +11512,7 @@ void pmpi_testall__(int *, int *, int *, int *, int *);
 
 void pmpi_testall_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Testall_timeout;
+extern unsigned long long WI4MPI_Testall_timeout;
 void (*_LOCAL_MPI_Testall)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testall(int *count, int *array_of_requests, int *flag,
@@ -11567,7 +11567,7 @@ void pmpi_waitsome__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_waitsome_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Waitsome_timeout;
+extern unsigned long long WI4MPI_Waitsome_timeout;
 void (*_LOCAL_MPI_Waitsome)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Waitsome(int *incount, int *array_of_requests, int *outcount,
@@ -11623,7 +11623,7 @@ void pmpi_testsome__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_testsome_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Testsome_timeout;
+extern unsigned long long WI4MPI_Testsome_timeout;
 void (*_LOCAL_MPI_Testsome)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testsome(int *incount, int *array_of_requests, int *outcount,
@@ -11679,7 +11679,7 @@ void pmpi_startall__(int *, int *, int *);
 
 void pmpi_startall_(int *, int *, int *);
 
-extern long long WI4MPI_Startall_timeout;
+extern unsigned long long WI4MPI_Startall_timeout;
 void (*_LOCAL_MPI_Startall)(int *, int *, int *);
 
 void A_f_MPI_Startall(int *count, int *array_of_requests, int *ret) {
@@ -11725,7 +11725,7 @@ void pmpi_alltoallw__(void *, int *, int *, int *, void *, int *, int *, int *,
 void pmpi_alltoallw_(void *, int *, int *, int *, void *, int *, int *, int *,
                      int *, int *);
 
-extern long long WI4MPI_Alltoallw_timeout;
+extern unsigned long long WI4MPI_Alltoallw_timeout;
 void (*_LOCAL_MPI_Alltoallw)(void *, int *, int *, int *, void *, int *, int *,
                              int *, int *, int *);
 
@@ -11779,7 +11779,7 @@ void pmpi_reduce_scatter__(void *, void *, int *, int *, int *, int *, int *);
 
 void pmpi_reduce_scatter_(void *, void *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Reduce_scatter_timeout;
+extern unsigned long long WI4MPI_Reduce_scatter_timeout;
 void (*_LOCAL_MPI_Reduce_scatter)(void *, void *, int *, int *, int *, int *,
                                   int *);
 
@@ -11828,7 +11828,7 @@ void pmpi_group_translate_ranks__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_group_translate_ranks_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_translate_ranks_timeout;
+extern unsigned long long WI4MPI_Group_translate_ranks_timeout;
 void (*_LOCAL_MPI_Group_translate_ranks)(int *, int *, int *, int *, int *,
                                          int *);
 
@@ -11869,7 +11869,7 @@ void pmpi_group_incl__(int *, int *, int *, int *, int *);
 
 void pmpi_group_incl_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_incl_timeout;
+extern unsigned long long WI4MPI_Group_incl_timeout;
 void (*_LOCAL_MPI_Group_incl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_incl(int *group, int *n, int *ranks, int *newgroup,
@@ -11909,7 +11909,7 @@ void pmpi_group_excl__(int *, int *, int *, int *, int *);
 
 void pmpi_group_excl_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_excl_timeout;
+extern unsigned long long WI4MPI_Group_excl_timeout;
 void (*_LOCAL_MPI_Group_excl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_excl(int *group, int *n, int *ranks, int *newgroup,
@@ -11949,7 +11949,7 @@ void pmpi_group_range_incl__(int *, int *, int *, int *, int *);
 
 void pmpi_group_range_incl_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_range_incl_timeout;
+extern unsigned long long WI4MPI_Group_range_incl_timeout;
 void (*_LOCAL_MPI_Group_range_incl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_range_incl(int *group, int *n, int *ranges, int *newgroup,
@@ -11989,7 +11989,7 @@ void pmpi_group_range_excl__(int *, int *, int *, int *, int *);
 
 void pmpi_group_range_excl_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Group_range_excl_timeout;
+extern unsigned long long WI4MPI_Group_range_excl_timeout;
 void (*_LOCAL_MPI_Group_range_excl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_range_excl(int *group, int *n, int *ranges, int *newgroup,
@@ -12029,7 +12029,7 @@ void pmpi_cart_create__(int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_cart_create_(int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Cart_create_timeout;
+extern unsigned long long WI4MPI_Cart_create_timeout;
 void (*_LOCAL_MPI_Cart_create)(int *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_create(int *comm_old, int *ndims, int *dims, int *periods,
@@ -12070,7 +12070,7 @@ void pmpi_dims_create__(int *, int *, int *, int *);
 
 void pmpi_dims_create_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Dims_create_timeout;
+extern unsigned long long WI4MPI_Dims_create_timeout;
 void (*_LOCAL_MPI_Dims_create)(int *, int *, int *, int *);
 
 void A_f_MPI_Dims_create(int *nnodes, int *ndims, int *dims, int *ret) {
@@ -12104,7 +12104,7 @@ void pmpi_graph_create__(int *, int *, int *, int *, int *, int *, int *);
 
 void pmpi_graph_create_(int *, int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Graph_create_timeout;
+extern unsigned long long WI4MPI_Graph_create_timeout;
 void (*_LOCAL_MPI_Graph_create)(int *, int *, int *, int *, int *, int *,
                                 int *);
 
@@ -12146,7 +12146,7 @@ void pmpi_graph_get__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_graph_get_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Graph_get_timeout;
+extern unsigned long long WI4MPI_Graph_get_timeout;
 void (*_LOCAL_MPI_Graph_get)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_get(int *comm, int *maxindex, int *maxedges, int *indx,
@@ -12183,7 +12183,7 @@ void pmpi_cart_get__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_cart_get_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Cart_get_timeout;
+extern unsigned long long WI4MPI_Cart_get_timeout;
 void (*_LOCAL_MPI_Cart_get)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_get(int *comm, int *maxdims, int *dims, int *periods,
@@ -12220,7 +12220,7 @@ void pmpi_cart_rank__(int *, int *, int *, int *);
 
 void pmpi_cart_rank_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Cart_rank_timeout;
+extern unsigned long long WI4MPI_Cart_rank_timeout;
 void (*_LOCAL_MPI_Cart_rank)(int *, int *, int *, int *);
 
 void A_f_MPI_Cart_rank(int *comm, int *coords, int *rank, int *ret) {
@@ -12256,7 +12256,7 @@ void pmpi_cart_coords__(int *, int *, int *, int *, int *);
 
 void pmpi_cart_coords_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Cart_coords_timeout;
+extern unsigned long long WI4MPI_Cart_coords_timeout;
 void (*_LOCAL_MPI_Cart_coords)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_coords(int *comm, int *rank, int *maxdims, int *coords,
@@ -12293,7 +12293,7 @@ void pmpi_graph_neighbors__(int *, int *, int *, int *, int *);
 
 void pmpi_graph_neighbors_(int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Graph_neighbors_timeout;
+extern unsigned long long WI4MPI_Graph_neighbors_timeout;
 void (*_LOCAL_MPI_Graph_neighbors)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_neighbors(int *comm, int *rank, int *maxneighbors,
@@ -12331,7 +12331,7 @@ void pmpi_cart_sub__(int *, int *, int *, int *);
 
 void pmpi_cart_sub_(int *, int *, int *, int *);
 
-extern long long WI4MPI_Cart_sub_timeout;
+extern unsigned long long WI4MPI_Cart_sub_timeout;
 void (*_LOCAL_MPI_Cart_sub)(int *, int *, int *, int *);
 
 void A_f_MPI_Cart_sub(int *comm, int *remain_dims, int *newcomm, int *ret) {
@@ -12370,7 +12370,7 @@ void pmpi_cart_map__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_cart_map_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Cart_map_timeout;
+extern unsigned long long WI4MPI_Cart_map_timeout;
 void (*_LOCAL_MPI_Cart_map)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_map(int *comm, int *ndims, int *dims, int *periods,
@@ -12407,7 +12407,7 @@ void pmpi_graph_map__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_graph_map_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Graph_map_timeout;
+extern unsigned long long WI4MPI_Graph_map_timeout;
 void (*_LOCAL_MPI_Graph_map)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_map(int *comm, int *nnodes, int *indx, int *edges,
@@ -12449,7 +12449,7 @@ void pmpi_type_get_contents__(int *, int *, int *, int *, int *, size_t *,
 void pmpi_type_get_contents_(int *, int *, int *, int *, int *, size_t *, int *,
                              int *);
 
-extern long long WI4MPI_Type_get_contents_timeout;
+extern unsigned long long WI4MPI_Type_get_contents_timeout;
 void (*_LOCAL_MPI_Type_get_contents)(int *, int *, int *, int *, int *,
                                      size_t *, int *, int *);
 
@@ -12503,7 +12503,7 @@ void pmpi_type_create_darray__(int *, int *, int *, int *, int *, int *, int *,
 void pmpi_type_create_darray_(int *, int *, int *, int *, int *, int *, int *,
                               int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_create_darray_timeout;
+extern unsigned long long WI4MPI_Type_create_darray_timeout;
 void (*_LOCAL_MPI_Type_create_darray)(int *, int *, int *, int *, int *, int *,
                                       int *, int *, int *, int *, int *);
 
@@ -12551,7 +12551,7 @@ void pmpi_type_create_hindexed__(int *, int *, size_t *, int *, int *, int *);
 
 void pmpi_type_create_hindexed_(int *, int *, size_t *, int *, int *, int *);
 
-extern long long WI4MPI_Type_create_hindexed_timeout;
+extern unsigned long long WI4MPI_Type_create_hindexed_timeout;
 void (*_LOCAL_MPI_Type_create_hindexed)(int *, int *, size_t *, int *, int *,
                                         int *);
 
@@ -12595,7 +12595,7 @@ void pmpi_type_create_indexed_block__(int *, int *, int *, int *, int *, int *);
 
 void pmpi_type_create_indexed_block_(int *, int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Type_create_indexed_block_timeout;
+extern unsigned long long WI4MPI_Type_create_indexed_block_timeout;
 void (*_LOCAL_MPI_Type_create_indexed_block)(int *, int *, int *, int *, int *,
                                              int *);
 
@@ -12644,7 +12644,7 @@ void pmpi_type_create_hindexed_block__(int *, int *, size_t *, int *, int *,
 void pmpi_type_create_hindexed_block_(int *, int *, size_t *, int *, int *,
                                       int *);
 
-extern long long WI4MPI_Type_create_hindexed_block_timeout;
+extern unsigned long long WI4MPI_Type_create_hindexed_block_timeout;
 void (*_LOCAL_MPI_Type_create_hindexed_block)(int *, int *, size_t *, int *,
                                               int *, int *);
 
@@ -12688,7 +12688,7 @@ void pmpi_type_create_struct__(int *, int *, size_t *, int *, int *, int *);
 
 void pmpi_type_create_struct_(int *, int *, size_t *, int *, int *, int *);
 
-extern long long WI4MPI_Type_create_struct_timeout;
+extern unsigned long long WI4MPI_Type_create_struct_timeout;
 void (*_LOCAL_MPI_Type_create_struct)(int *, int *, size_t *, int *, int *,
                                       int *);
 
@@ -12739,7 +12739,7 @@ void pmpi_type_create_subarray__(int *, int *, int *, int *, int *, int *,
 void pmpi_type_create_subarray_(int *, int *, int *, int *, int *, int *, int *,
                                 int *);
 
-extern long long WI4MPI_Type_create_subarray_timeout;
+extern unsigned long long WI4MPI_Type_create_subarray_timeout;
 void (*_LOCAL_MPI_Type_create_subarray)(int *, int *, int *, int *, int *,
                                         int *, int *, int *);
 
@@ -12791,7 +12791,7 @@ void pmpi_dist_graph_create_adjacent__(int *, int *, int *, int *, int *, int *,
 void pmpi_dist_graph_create_adjacent_(int *, int *, int *, int *, int *, int *,
                                       int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Dist_graph_create_adjacent_timeout;
+extern unsigned long long WI4MPI_Dist_graph_create_adjacent_timeout;
 void (*_LOCAL_MPI_Dist_graph_create_adjacent)(int *, int *, int *, int *, int *,
                                               int *, int *, int *, int *, int *,
                                               int *);
@@ -12851,7 +12851,7 @@ void pmpi_dist_graph_create__(int *, int *, int *, int *, int *, int *, int *,
 void pmpi_dist_graph_create_(int *, int *, int *, int *, int *, int *, int *,
                              int *, int *, int *);
 
-extern long long WI4MPI_Dist_graph_create_timeout;
+extern unsigned long long WI4MPI_Dist_graph_create_timeout;
 void (*_LOCAL_MPI_Dist_graph_create)(int *, int *, int *, int *, int *, int *,
                                      int *, int *, int *, int *);
 
@@ -12905,7 +12905,7 @@ void pmpi_dist_graph_neighbors__(int *, int *, int *, int *, int *, int *,
 void pmpi_dist_graph_neighbors_(int *, int *, int *, int *, int *, int *, int *,
                                 int *);
 
-extern long long WI4MPI_Dist_graph_neighbors_timeout;
+extern unsigned long long WI4MPI_Dist_graph_neighbors_timeout;
 void (*_LOCAL_MPI_Dist_graph_neighbors)(int *, int *, int *, int *, int *,
                                         int *, int *, int *);
 
@@ -12958,7 +12958,7 @@ void pmpi_igatherv__(void *, int *, int *, void *, int *, int *, int *, int *,
 void pmpi_igatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
                     int *, int *, int *);
 
-extern long long WI4MPI_Igatherv_timeout;
+extern unsigned long long WI4MPI_Igatherv_timeout;
 void (*_LOCAL_MPI_Igatherv)(void *, int *, int *, void *, int *, int *, int *,
                             int *, int *, int *, int *);
 
@@ -13018,7 +13018,7 @@ void pmpi_iscatterv__(void *, int *, int *, int *, void *, int *, int *, int *,
 void pmpi_iscatterv_(void *, int *, int *, int *, void *, int *, int *, int *,
                      int *, int *, int *);
 
-extern long long WI4MPI_Iscatterv_timeout;
+extern unsigned long long WI4MPI_Iscatterv_timeout;
 void (*_LOCAL_MPI_Iscatterv)(void *, int *, int *, int *, void *, int *, int *,
                              int *, int *, int *, int *);
 
@@ -13078,7 +13078,7 @@ void pmpi_iallgatherv__(void *, int *, int *, void *, int *, int *, int *,
 void pmpi_iallgatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
                        int *, int *);
 
-extern long long WI4MPI_Iallgatherv_timeout;
+extern unsigned long long WI4MPI_Iallgatherv_timeout;
 void (*_LOCAL_MPI_Iallgatherv)(void *, int *, int *, void *, int *, int *,
                                int *, int *, int *, int *);
 
@@ -13137,7 +13137,7 @@ void pmpi_ialltoallv__(void *, int *, int *, int *, void *, int *, int *, int *,
 void pmpi_ialltoallv_(void *, int *, int *, int *, void *, int *, int *, int *,
                       int *, int *, int *);
 
-extern long long WI4MPI_Ialltoallv_timeout;
+extern unsigned long long WI4MPI_Ialltoallv_timeout;
 void (*_LOCAL_MPI_Ialltoallv)(void *, int *, int *, int *, void *, int *, int *,
                               int *, int *, int *, int *);
 
@@ -13199,7 +13199,7 @@ void pmpi_ialltoallw__(void *, int *, int *, int *, void *, int *, int *, int *,
 void pmpi_ialltoallw_(void *, int *, int *, int *, void *, int *, int *, int *,
                       int *, int *, int *);
 
-extern long long WI4MPI_Ialltoallw_timeout;
+extern unsigned long long WI4MPI_Ialltoallw_timeout;
 void (*_LOCAL_MPI_Ialltoallw)(void *, int *, int *, int *, void *, int *, int *,
                               int *, int *, int *, int *);
 
@@ -13266,7 +13266,7 @@ void pmpi_ireduce_scatter__(void *, void *, int *, int *, int *, int *, int *,
 void pmpi_ireduce_scatter_(void *, void *, int *, int *, int *, int *, int *,
                            int *);
 
-extern long long WI4MPI_Ireduce_scatter_timeout;
+extern unsigned long long WI4MPI_Ireduce_scatter_timeout;
 void (*_LOCAL_MPI_Ireduce_scatter)(void *, void *, int *, int *, int *, int *,
                                    int *, int *);
 
@@ -13324,7 +13324,7 @@ void pmpi_ineighbor_allgatherv__(void *, int *, int *, void *, int *, int *,
 void pmpi_ineighbor_allgatherv_(void *, int *, int *, void *, int *, int *,
                                 int *, int *, int *, int *);
 
-extern long long WI4MPI_Ineighbor_allgatherv_timeout;
+extern unsigned long long WI4MPI_Ineighbor_allgatherv_timeout;
 void (*_LOCAL_MPI_Ineighbor_allgatherv)(void *, int *, int *, void *, int *,
                                         int *, int *, int *, int *, int *);
 
@@ -13383,7 +13383,7 @@ void pmpi_ineighbor_alltoallv__(void *, int *, int *, int *, void *, int *,
 void pmpi_ineighbor_alltoallv_(void *, int *, int *, int *, void *, int *,
                                int *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Ineighbor_alltoallv_timeout;
+extern unsigned long long WI4MPI_Ineighbor_alltoallv_timeout;
 void (*_LOCAL_MPI_Ineighbor_alltoallv)(void *, int *, int *, int *, void *,
                                        int *, int *, int *, int *, int *,
                                        int *);
@@ -13443,7 +13443,7 @@ void pmpi_ineighbor_alltoallw__(void *, int *, size_t *, int *, void *, int *,
 void pmpi_ineighbor_alltoallw_(void *, int *, size_t *, int *, void *, int *,
                                size_t *, int *, int *, int *, int *);
 
-extern long long WI4MPI_Ineighbor_alltoallw_timeout;
+extern unsigned long long WI4MPI_Ineighbor_alltoallw_timeout;
 void (*_LOCAL_MPI_Ineighbor_alltoallw)(void *, int *, size_t *, int *, void *,
                                        int *, size_t *, int *, int *, int *,
                                        int *);
@@ -13508,7 +13508,7 @@ void pmpi_neighbor_allgatherv__(void *, int *, int *, void *, int *, int *,
 void pmpi_neighbor_allgatherv_(void *, int *, int *, void *, int *, int *,
                                int *, int *, int *);
 
-extern long long WI4MPI_Neighbor_allgatherv_timeout;
+extern unsigned long long WI4MPI_Neighbor_allgatherv_timeout;
 void (*_LOCAL_MPI_Neighbor_allgatherv)(void *, int *, int *, void *, int *,
                                        int *, int *, int *, int *);
 
@@ -13563,7 +13563,7 @@ void pmpi_neighbor_alltoallv__(void *, int *, int *, int *, void *, int *,
 void pmpi_neighbor_alltoallv_(void *, int *, int *, int *, void *, int *, int *,
                               int *, int *, int *);
 
-extern long long WI4MPI_Neighbor_alltoallv_timeout;
+extern unsigned long long WI4MPI_Neighbor_alltoallv_timeout;
 void (*_LOCAL_MPI_Neighbor_alltoallv)(void *, int *, int *, int *, void *,
                                       int *, int *, int *, int *, int *);
 
@@ -13619,7 +13619,7 @@ void pmpi_neighbor_alltoallw__(void *, int *, size_t *, int *, void *, int *,
 void pmpi_neighbor_alltoallw_(void *, int *, size_t *, int *, void *, int *,
                               size_t *, int *, int *, int *);
 
-extern long long WI4MPI_Neighbor_alltoallw_timeout;
+extern unsigned long long WI4MPI_Neighbor_alltoallw_timeout;
 void (*_LOCAL_MPI_Neighbor_alltoallw)(void *, int *, size_t *, int *, void *,
                                       int *, size_t *, int *, int *, int *);
 
@@ -13678,7 +13678,7 @@ void pmpi_file_iwrite_all__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iwrite_all_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iwrite_all_timeout;
+extern unsigned long long WI4MPI_File_iwrite_all_timeout;
 void (*_LOCAL_MPI_File_iwrite_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iwrite_all(int *fh, void *buf, int *count, int *datatype,
@@ -13724,7 +13724,7 @@ void pmpi_file_iwrite_at_all__(int *, int *, void *, int *, int *, int *,
 
 void pmpi_file_iwrite_at_all_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iwrite_at_all_timeout;
+extern unsigned long long WI4MPI_File_iwrite_at_all_timeout;
 void (*_LOCAL_MPI_File_iwrite_at_all)(int *, int *, void *, int *, int *, int *,
                                       int *);
 
@@ -13770,7 +13770,7 @@ void pmpi_aint_add__(size_t *, size_t *, size_t *);
 
 void pmpi_aint_add_(size_t *, size_t *, size_t *);
 
-extern long long WI4MPI_Aint_add_timeout;
+extern unsigned long long WI4MPI_Aint_add_timeout;
 void (*_LOCAL_MPI_Aint_add)(size_t *, size_t *, size_t *);
 
 void A_f_MPI_Aint_add(size_t *base, size_t *disp, size_t *ret) {
@@ -13803,7 +13803,7 @@ void pmpi_aint_diff__(size_t *, size_t *, size_t *);
 
 void pmpi_aint_diff_(size_t *, size_t *, size_t *);
 
-extern long long WI4MPI_Aint_diff_timeout;
+extern unsigned long long WI4MPI_Aint_diff_timeout;
 void (*_LOCAL_MPI_Aint_diff)(size_t *, size_t *, size_t *);
 
 void A_f_MPI_Aint_diff(size_t *addr1, size_t *addr2, size_t *ret) {
@@ -13836,7 +13836,7 @@ void pmpi_file_iread_all__(int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iread_all_(int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iread_all_timeout;
+extern unsigned long long WI4MPI_File_iread_all_timeout;
 void (*_LOCAL_MPI_File_iread_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread_all(int *fh, void *buf, int *count, int *datatype,
@@ -13881,7 +13881,7 @@ void pmpi_file_iread_at_all__(int *, int *, void *, int *, int *, int *, int *);
 
 void pmpi_file_iread_at_all_(int *, int *, void *, int *, int *, int *, int *);
 
-extern long long WI4MPI_File_iread_at_all_timeout;
+extern unsigned long long WI4MPI_File_iread_at_all_timeout;
 void (*_LOCAL_MPI_File_iread_at_all)(int *, int *, void *, int *, int *, int *,
                                      int *);
 
