@@ -9,7 +9,7 @@ void slow_add(void *in,void *out,int *len,MPI_Datatype *dat)
 {
         (*iout)+=iin[i];
         if(*iin==0)
-        sleep(10);
+            sleep(10);
 }
 }
 int main(int argc,char **argv)
