@@ -87,7 +87,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
         string=string+ i
     for i in data:
         if i['name'] in def_list:
-            string=string+'long long WI4'+i['name']+'_timeout=WI4MPI_MAX_TIME;\n'
+            string=string+'unsigned long long WI4'+i['name']+'_timeout=WI4MPI_MAX_TIME;\n'
             string=string+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='A_')+';\n'
             string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n\n'
             if wrapper:
@@ -203,7 +203,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
                     string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
                     string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
                     string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
-                string=string+'extern long long WI4'+i['name']+'_timeout;\n'
+                string=string+'extern unsigned long long WI4'+i['name']+'_timeout;\n'
                 if not wrapper:
                     if i['name'] in list_not_gen:
                         string_file=root+'/FORTRAN/'+i['name']
