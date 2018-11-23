@@ -193,6 +193,8 @@ void timeout_config_file(void)
     if(!fname)
         return;
     ff=fopen("fname","r");
+    if(!ff)
+        return;
     while(getline(&buff,&n,ff)>0){
         char *split=&(buff[0]);
         while(*split!='=') split++;
