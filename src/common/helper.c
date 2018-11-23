@@ -10,7 +10,12 @@
 #include <unistd.h>
 #define __GNU_SOURCE
 #include <sched.h>
+#include <stdio.h>
 #include "helper.h"
+int gettid(void)
+{
+    return syscall(SYS_gettid);
+}
 /* data structure to keep information on timeout for each thread, the linked list property is use only by controler thread*/
 typedef struct thdat {
     int tid;
