@@ -203,6 +203,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
                     string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
                     string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
                     string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
+                string=string+'extern long long WI4'+i['name']+'_timeout;\n'
                 if not wrapper:
                     if i['name'] in list_not_gen:
                         string_file=root+'/FORTRAN/'+i['name']

@@ -42,6 +42,7 @@ void pmpi_send_(void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_send_ = _PMPI_Send
 #pragma weak mpi_send__ = _PMPI_Send
 #pragma weak pmpi_send__ = _PMPI_Send
+extern long long WI4MPI_Send_timeout;
 void (*_LOCAL_MPI_Send)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Send(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -91,6 +92,7 @@ void pmpi_recv_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_recv_ = _PMPI_Recv
 #pragma weak mpi_recv__ = _PMPI_Recv
 #pragma weak pmpi_recv__ = _PMPI_Recv
+extern long long WI4MPI_Recv_timeout;
 void (*_LOCAL_MPI_Recv)(void *, int *, int *, int *, int *, int *, int *,
                         int *);
 
@@ -149,6 +151,7 @@ void pmpi_get_count_(int *, int *, int *, int *);
 #pragma weak mpi_get_count_ = _PMPI_Get_count
 #pragma weak mpi_get_count__ = _PMPI_Get_count
 #pragma weak pmpi_get_count__ = _PMPI_Get_count
+extern long long WI4MPI_Get_count_timeout;
 void (*_LOCAL_MPI_Get_count)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_count(int *status, int *datatype, int *count, int *ret) {
@@ -192,6 +195,7 @@ void pmpi_bsend_(void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_bsend_ = _PMPI_Bsend
 #pragma weak mpi_bsend__ = _PMPI_Bsend
 #pragma weak pmpi_bsend__ = _PMPI_Bsend
+extern long long WI4MPI_Bsend_timeout;
 void (*_LOCAL_MPI_Bsend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Bsend(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -241,6 +245,7 @@ void pmpi_ssend_(void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_ssend_ = _PMPI_Ssend
 #pragma weak mpi_ssend__ = _PMPI_Ssend
 #pragma weak pmpi_ssend__ = _PMPI_Ssend
+extern long long WI4MPI_Ssend_timeout;
 void (*_LOCAL_MPI_Ssend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Ssend(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -290,6 +295,7 @@ void pmpi_rsend_(void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_rsend_ = _PMPI_Rsend
 #pragma weak mpi_rsend__ = _PMPI_Rsend
 #pragma weak pmpi_rsend__ = _PMPI_Rsend
+extern long long WI4MPI_Rsend_timeout;
 void (*_LOCAL_MPI_Rsend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Rsend(void *buf, int *count, int *datatype, int *dest, int *tag,
@@ -339,6 +345,7 @@ void pmpi_buffer_attach_(void *, int *, int *);
 #pragma weak mpi_buffer_attach_ = _PMPI_Buffer_attach
 #pragma weak mpi_buffer_attach__ = _PMPI_Buffer_attach
 #pragma weak pmpi_buffer_attach__ = _PMPI_Buffer_attach
+extern long long WI4MPI_Buffer_attach_timeout;
 void (*_LOCAL_MPI_Buffer_attach)(void *, int *, int *);
 
 void A_f_MPI_Buffer_attach(void *buffer, int *size, int *ret) {
@@ -378,6 +385,7 @@ void pmpi_buffer_detach_(void *, int *, int *);
 #pragma weak mpi_buffer_detach_ = _PMPI_Buffer_detach
 #pragma weak mpi_buffer_detach__ = _PMPI_Buffer_detach
 #pragma weak pmpi_buffer_detach__ = _PMPI_Buffer_detach
+extern long long WI4MPI_Buffer_detach_timeout;
 void (*_LOCAL_MPI_Buffer_detach)(void *, int *, int *);
 
 void A_f_MPI_Buffer_detach(void *buffer_addr, int *size, int *ret) {
@@ -418,6 +426,7 @@ void pmpi_isend_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_isend_ = _PMPI_Isend
 #pragma weak mpi_isend__ = _PMPI_Isend
 #pragma weak pmpi_isend__ = _PMPI_Isend
+extern long long WI4MPI_Isend_timeout;
 void (*_LOCAL_MPI_Isend)(void *, int *, int *, int *, int *, int *, int *,
                          int *);
 
@@ -471,6 +480,7 @@ void pmpi_ibsend_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_ibsend_ = _PMPI_Ibsend
 #pragma weak mpi_ibsend__ = _PMPI_Ibsend
 #pragma weak pmpi_ibsend__ = _PMPI_Ibsend
+extern long long WI4MPI_Ibsend_timeout;
 void (*_LOCAL_MPI_Ibsend)(void *, int *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -524,6 +534,7 @@ void pmpi_issend_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_issend_ = _PMPI_Issend
 #pragma weak mpi_issend__ = _PMPI_Issend
 #pragma weak pmpi_issend__ = _PMPI_Issend
+extern long long WI4MPI_Issend_timeout;
 void (*_LOCAL_MPI_Issend)(void *, int *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -577,6 +588,7 @@ void pmpi_irsend_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_irsend_ = _PMPI_Irsend
 #pragma weak mpi_irsend__ = _PMPI_Irsend
 #pragma weak pmpi_irsend__ = _PMPI_Irsend
+extern long long WI4MPI_Irsend_timeout;
 void (*_LOCAL_MPI_Irsend)(void *, int *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -630,6 +642,7 @@ void pmpi_irecv_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_irecv_ = _PMPI_Irecv
 #pragma weak mpi_irecv__ = _PMPI_Irecv
 #pragma weak pmpi_irecv__ = _PMPI_Irecv
+extern long long WI4MPI_Irecv_timeout;
 void (*_LOCAL_MPI_Irecv)(void *, int *, int *, int *, int *, int *, int *,
                          int *);
 
@@ -684,6 +697,7 @@ void pmpi_wait_(int *, int *, int *);
 #pragma weak mpi_wait_ = _PMPI_Wait
 #pragma weak mpi_wait__ = _PMPI_Wait
 #pragma weak pmpi_wait__ = _PMPI_Wait
+extern long long WI4MPI_Wait_timeout;
 void (*_LOCAL_MPI_Wait)(int *, int *, int *);
 
 void A_f_MPI_Wait(int *request, int *status, int *ret) {
@@ -731,6 +745,7 @@ void pmpi_test_(int *, int *, int *, int *);
 #pragma weak mpi_test_ = _PMPI_Test
 #pragma weak mpi_test__ = _PMPI_Test
 #pragma weak pmpi_test__ = _PMPI_Test
+extern long long WI4MPI_Test_timeout;
 void (*_LOCAL_MPI_Test)(int *, int *, int *, int *);
 
 void A_f_MPI_Test(int *request, int *flag, int *status, int *ret) {
@@ -778,6 +793,7 @@ void pmpi_request_free_(int *, int *);
 #pragma weak mpi_request_free_ = _PMPI_Request_free
 #pragma weak mpi_request_free__ = _PMPI_Request_free
 #pragma weak pmpi_request_free__ = _PMPI_Request_free
+extern long long WI4MPI_Request_free_timeout;
 void (*_LOCAL_MPI_Request_free)(int *, int *);
 
 void A_f_MPI_Request_free(int *request, int *ret) {
@@ -819,6 +835,7 @@ void pmpi_iprobe_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_iprobe_ = _PMPI_Iprobe
 #pragma weak mpi_iprobe__ = _PMPI_Iprobe
 #pragma weak pmpi_iprobe__ = _PMPI_Iprobe
+extern long long WI4MPI_Iprobe_timeout;
 void (*_LOCAL_MPI_Iprobe)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Iprobe(int *source, int *tag, int *comm, int *flag, int *status,
@@ -870,6 +887,7 @@ void pmpi_probe_(int *, int *, int *, int *, int *);
 #pragma weak mpi_probe_ = _PMPI_Probe
 #pragma weak mpi_probe__ = _PMPI_Probe
 #pragma weak pmpi_probe__ = _PMPI_Probe
+extern long long WI4MPI_Probe_timeout;
 void (*_LOCAL_MPI_Probe)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Probe(int *source, int *tag, int *comm, int *status, int *ret) {
@@ -919,6 +937,7 @@ void pmpi_cancel_(int *, int *);
 #pragma weak mpi_cancel_ = _PMPI_Cancel
 #pragma weak mpi_cancel__ = _PMPI_Cancel
 #pragma weak pmpi_cancel__ = _PMPI_Cancel
+extern long long WI4MPI_Cancel_timeout;
 void (*_LOCAL_MPI_Cancel)(int *, int *);
 
 void A_f_MPI_Cancel(int *request, int *ret) {
@@ -958,6 +977,7 @@ void pmpi_test_cancelled_(int *, int *, int *);
 #pragma weak mpi_test_cancelled_ = _PMPI_Test_cancelled
 #pragma weak mpi_test_cancelled__ = _PMPI_Test_cancelled
 #pragma weak pmpi_test_cancelled__ = _PMPI_Test_cancelled
+extern long long WI4MPI_Test_cancelled_timeout;
 void (*_LOCAL_MPI_Test_cancelled)(int *, int *, int *);
 
 void A_f_MPI_Test_cancelled(int *status, int *flag, int *ret) {
@@ -999,6 +1019,7 @@ void pmpi_send_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_send_init_ = _PMPI_Send_init
 #pragma weak mpi_send_init__ = _PMPI_Send_init
 #pragma weak pmpi_send_init__ = _PMPI_Send_init
+extern long long WI4MPI_Send_init_timeout;
 void (*_LOCAL_MPI_Send_init)(void *, int *, int *, int *, int *, int *, int *,
                              int *);
 
@@ -1052,6 +1073,7 @@ void pmpi_bsend_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_bsend_init_ = _PMPI_Bsend_init
 #pragma weak mpi_bsend_init__ = _PMPI_Bsend_init
 #pragma weak pmpi_bsend_init__ = _PMPI_Bsend_init
+extern long long WI4MPI_Bsend_init_timeout;
 void (*_LOCAL_MPI_Bsend_init)(void *, int *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -1105,6 +1127,7 @@ void pmpi_ssend_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_ssend_init_ = _PMPI_Ssend_init
 #pragma weak mpi_ssend_init__ = _PMPI_Ssend_init
 #pragma weak pmpi_ssend_init__ = _PMPI_Ssend_init
+extern long long WI4MPI_Ssend_init_timeout;
 void (*_LOCAL_MPI_Ssend_init)(void *, int *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -1158,6 +1181,7 @@ void pmpi_rsend_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_rsend_init_ = _PMPI_Rsend_init
 #pragma weak mpi_rsend_init__ = _PMPI_Rsend_init
 #pragma weak pmpi_rsend_init__ = _PMPI_Rsend_init
+extern long long WI4MPI_Rsend_init_timeout;
 void (*_LOCAL_MPI_Rsend_init)(void *, int *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -1211,6 +1235,7 @@ void pmpi_recv_init_(void *, int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_recv_init_ = _PMPI_Recv_init
 #pragma weak mpi_recv_init__ = _PMPI_Recv_init
 #pragma weak pmpi_recv_init__ = _PMPI_Recv_init
+extern long long WI4MPI_Recv_init_timeout;
 void (*_LOCAL_MPI_Recv_init)(void *, int *, int *, int *, int *, int *, int *,
                              int *);
 
@@ -1265,6 +1290,7 @@ void pmpi_start_(int *, int *);
 #pragma weak mpi_start_ = _PMPI_Start
 #pragma weak mpi_start__ = _PMPI_Start
 #pragma weak pmpi_start__ = _PMPI_Start
+extern long long WI4MPI_Start_timeout;
 void (*_LOCAL_MPI_Start)(int *, int *);
 
 void A_f_MPI_Start(int *request, int *ret) {
@@ -1311,6 +1337,7 @@ void pmpi_sendrecv_(void *, int *, int *, int *, int *, void *, int *, int *,
 #pragma weak mpi_sendrecv_ = _PMPI_Sendrecv
 #pragma weak mpi_sendrecv__ = _PMPI_Sendrecv
 #pragma weak pmpi_sendrecv__ = _PMPI_Sendrecv
+extern long long WI4MPI_Sendrecv_timeout;
 void (*_LOCAL_MPI_Sendrecv)(void *, int *, int *, int *, int *, void *, int *,
                             int *, int *, int *, int *, int *, int *);
 
@@ -1385,6 +1412,7 @@ void pmpi_sendrecv_replace_(void *, int *, int *, int *, int *, int *, int *,
 #pragma weak mpi_sendrecv_replace_ = _PMPI_Sendrecv_replace
 #pragma weak mpi_sendrecv_replace__ = _PMPI_Sendrecv_replace
 #pragma weak pmpi_sendrecv_replace__ = _PMPI_Sendrecv_replace
+extern long long WI4MPI_Sendrecv_replace_timeout;
 void (*_LOCAL_MPI_Sendrecv_replace)(void *, int *, int *, int *, int *, int *,
                                     int *, int *, int *, int *);
 
@@ -1449,6 +1477,7 @@ void pmpi_type_contiguous_(int *, int *, int *, int *);
 #pragma weak mpi_type_contiguous_ = _PMPI_Type_contiguous
 #pragma weak mpi_type_contiguous__ = _PMPI_Type_contiguous
 #pragma weak pmpi_type_contiguous__ = _PMPI_Type_contiguous
+extern long long WI4MPI_Type_contiguous_timeout;
 void (*_LOCAL_MPI_Type_contiguous)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_contiguous(int *count, int *oldtype, int *newtype, int *ret) {
@@ -1491,6 +1520,7 @@ void pmpi_type_vector_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_type_vector_ = _PMPI_Type_vector
 #pragma weak mpi_type_vector__ = _PMPI_Type_vector
 #pragma weak pmpi_type_vector__ = _PMPI_Type_vector
+extern long long WI4MPI_Type_vector_timeout;
 void (*_LOCAL_MPI_Type_vector)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Type_vector(int *count, int *blocklength, int *stride,
@@ -1535,6 +1565,7 @@ void pmpi_type_hvector_(int *, int *, size_t *, int *, int *, int *);
 #pragma weak mpi_type_hvector_ = _PMPI_Type_hvector
 #pragma weak mpi_type_hvector__ = _PMPI_Type_hvector
 #pragma weak pmpi_type_hvector__ = _PMPI_Type_hvector
+extern long long WI4MPI_Type_hvector_timeout;
 void (*_LOCAL_MPI_Type_hvector)(int *, int *, size_t *, int *, int *, int *);
 
 void A_f_MPI_Type_hvector(int *count, int *blocklength, size_t *stride,
@@ -1579,6 +1610,7 @@ void pmpi_type_indexed_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_type_indexed_ = _PMPI_Type_indexed
 #pragma weak mpi_type_indexed__ = _PMPI_Type_indexed
 #pragma weak pmpi_type_indexed__ = _PMPI_Type_indexed
+extern long long WI4MPI_Type_indexed_timeout;
 void (*_LOCAL_MPI_Type_indexed)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Type_indexed(int *count, int *array_of_blocklengths,
@@ -1624,6 +1656,7 @@ void pmpi_type_hindexed_(int *, int *, size_t *, int *, int *, int *);
 #pragma weak mpi_type_hindexed_ = _PMPI_Type_hindexed
 #pragma weak mpi_type_hindexed__ = _PMPI_Type_hindexed
 #pragma weak pmpi_type_hindexed__ = _PMPI_Type_hindexed
+extern long long WI4MPI_Type_hindexed_timeout;
 void (*_LOCAL_MPI_Type_hindexed)(int *, int *, size_t *, int *, int *, int *);
 
 void A_f_MPI_Type_hindexed(int *count, int *array_of_blocklengths,
@@ -1669,6 +1702,7 @@ void pmpi_type_struct_(int *, int *, size_t *, int *, int *, int *);
 #pragma weak mpi_type_struct_ = _PMPI_Type_struct
 #pragma weak mpi_type_struct__ = _PMPI_Type_struct
 #pragma weak pmpi_type_struct__ = _PMPI_Type_struct
+extern long long WI4MPI_Type_struct_timeout;
 void (*_LOCAL_MPI_Type_struct)(int *, int *, size_t *, int *, int *, int *);
 
 void A_f_MPI_Type_struct(int *count, int *array_of_blocklengths,
@@ -1716,6 +1750,7 @@ void pmpi_address_(void *, size_t *, int *);
 #pragma weak mpi_address_ = _PMPI_Address
 #pragma weak mpi_address__ = _PMPI_Address
 #pragma weak pmpi_address__ = _PMPI_Address
+extern long long WI4MPI_Address_timeout;
 void (*_LOCAL_MPI_Address)(void *, size_t *, int *);
 
 void A_f_MPI_Address(void *location, size_t *address, int *ret) {
@@ -1755,6 +1790,7 @@ void pmpi_type_extent_(int *, size_t *, int *);
 #pragma weak mpi_type_extent_ = _PMPI_Type_extent
 #pragma weak mpi_type_extent__ = _PMPI_Type_extent
 #pragma weak pmpi_type_extent__ = _PMPI_Type_extent
+extern long long WI4MPI_Type_extent_timeout;
 void (*_LOCAL_MPI_Type_extent)(int *, size_t *, int *);
 
 void A_f_MPI_Type_extent(int *datatype, size_t *extent, int *ret) {
@@ -1794,6 +1830,7 @@ void pmpi_type_size_(int *, int *, int *);
 #pragma weak mpi_type_size_ = _PMPI_Type_size
 #pragma weak mpi_type_size__ = _PMPI_Type_size
 #pragma weak pmpi_type_size__ = _PMPI_Type_size
+extern long long WI4MPI_Type_size_timeout;
 void (*_LOCAL_MPI_Type_size)(int *, int *, int *);
 
 void A_f_MPI_Type_size(int *datatype, int *size, int *ret) {
@@ -1833,6 +1870,7 @@ void pmpi_type_lb_(int *, size_t *, int *);
 #pragma weak mpi_type_lb_ = _PMPI_Type_lb
 #pragma weak mpi_type_lb__ = _PMPI_Type_lb
 #pragma weak pmpi_type_lb__ = _PMPI_Type_lb
+extern long long WI4MPI_Type_lb_timeout;
 void (*_LOCAL_MPI_Type_lb)(int *, size_t *, int *);
 
 void A_f_MPI_Type_lb(int *datatype, size_t *displacement, int *ret) {
@@ -1872,6 +1910,7 @@ void pmpi_type_ub_(int *, size_t *, int *);
 #pragma weak mpi_type_ub_ = _PMPI_Type_ub
 #pragma weak mpi_type_ub__ = _PMPI_Type_ub
 #pragma weak pmpi_type_ub__ = _PMPI_Type_ub
+extern long long WI4MPI_Type_ub_timeout;
 void (*_LOCAL_MPI_Type_ub)(int *, size_t *, int *);
 
 void A_f_MPI_Type_ub(int *datatype, size_t *displacement, int *ret) {
@@ -1911,6 +1950,7 @@ void pmpi_type_commit_(int *, int *);
 #pragma weak mpi_type_commit_ = _PMPI_Type_commit
 #pragma weak mpi_type_commit__ = _PMPI_Type_commit
 #pragma weak pmpi_type_commit__ = _PMPI_Type_commit
+extern long long WI4MPI_Type_commit_timeout;
 void (*_LOCAL_MPI_Type_commit)(int *, int *);
 
 void A_f_MPI_Type_commit(int *datatype, int *ret) {
@@ -1950,6 +1990,7 @@ void pmpi_type_free_(int *, int *);
 #pragma weak mpi_type_free_ = _PMPI_Type_free
 #pragma weak mpi_type_free__ = _PMPI_Type_free
 #pragma weak pmpi_type_free__ = _PMPI_Type_free
+extern long long WI4MPI_Type_free_timeout;
 void (*_LOCAL_MPI_Type_free)(int *, int *);
 
 void A_f_MPI_Type_free(int *datatype, int *ret) {
@@ -1991,6 +2032,7 @@ void pmpi_get_elements_(int *, int *, int *, int *);
 #pragma weak mpi_get_elements_ = _PMPI_Get_elements
 #pragma weak mpi_get_elements__ = _PMPI_Get_elements
 #pragma weak pmpi_get_elements__ = _PMPI_Get_elements
+extern long long WI4MPI_Get_elements_timeout;
 void (*_LOCAL_MPI_Get_elements)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_elements(int *status, int *datatype, int *count, int *ret) {
@@ -2034,6 +2076,7 @@ void pmpi_pack_(void *, int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_pack_ = _PMPI_Pack
 #pragma weak mpi_pack__ = _PMPI_Pack
 #pragma weak pmpi_pack__ = _PMPI_Pack
+extern long long WI4MPI_Pack_timeout;
 void (*_LOCAL_MPI_Pack)(void *, int *, int *, void *, int *, int *, int *,
                         int *);
 
@@ -2083,6 +2126,7 @@ void pmpi_unpack_(void *, int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_unpack_ = _PMPI_Unpack
 #pragma weak mpi_unpack__ = _PMPI_Unpack
 #pragma weak pmpi_unpack__ = _PMPI_Unpack
+extern long long WI4MPI_Unpack_timeout;
 void (*_LOCAL_MPI_Unpack)(void *, int *, int *, void *, int *, int *, int *,
                           int *);
 
@@ -2132,6 +2176,7 @@ void pmpi_pack_size_(int *, int *, int *, int *, int *);
 #pragma weak mpi_pack_size_ = _PMPI_Pack_size
 #pragma weak mpi_pack_size__ = _PMPI_Pack_size
 #pragma weak pmpi_pack_size__ = _PMPI_Pack_size
+extern long long WI4MPI_Pack_size_timeout;
 void (*_LOCAL_MPI_Pack_size)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Pack_size(int *incount, int *datatype, int *comm, int *size,
@@ -2174,6 +2219,7 @@ void pmpi_barrier_(int *, int *);
 #pragma weak mpi_barrier_ = _PMPI_Barrier
 #pragma weak mpi_barrier__ = _PMPI_Barrier
 #pragma weak pmpi_barrier__ = _PMPI_Barrier
+extern long long WI4MPI_Barrier_timeout;
 void (*_LOCAL_MPI_Barrier)(int *, int *);
 
 void A_f_MPI_Barrier(int *comm, int *ret) {
@@ -2213,6 +2259,7 @@ void pmpi_bcast_(void *, int *, int *, int *, int *, int *);
 #pragma weak mpi_bcast_ = _PMPI_Bcast
 #pragma weak mpi_bcast__ = _PMPI_Bcast
 #pragma weak pmpi_bcast__ = _PMPI_Bcast
+extern long long WI4MPI_Bcast_timeout;
 void (*_LOCAL_MPI_Bcast)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Bcast(void *buffer, int *count, int *datatype, int *root,
@@ -2264,6 +2311,7 @@ void pmpi_gather_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_gather_ = _PMPI_Gather
 #pragma weak mpi_gather__ = _PMPI_Gather
 #pragma weak pmpi_gather__ = _PMPI_Gather
+extern long long WI4MPI_Gather_timeout;
 void (*_LOCAL_MPI_Gather)(void *, int *, int *, void *, int *, int *, int *,
                           int *, int *);
 
@@ -2322,6 +2370,7 @@ void pmpi_gatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_gatherv_ = _PMPI_Gatherv
 #pragma weak mpi_gatherv__ = _PMPI_Gatherv
 #pragma weak pmpi_gatherv__ = _PMPI_Gatherv
+extern long long WI4MPI_Gatherv_timeout;
 void (*_LOCAL_MPI_Gatherv)(void *, int *, int *, void *, int *, int *, int *,
                            int *, int *, int *);
 
@@ -2381,6 +2430,7 @@ void pmpi_scatter_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_scatter_ = _PMPI_Scatter
 #pragma weak mpi_scatter__ = _PMPI_Scatter
 #pragma weak pmpi_scatter__ = _PMPI_Scatter
+extern long long WI4MPI_Scatter_timeout;
 void (*_LOCAL_MPI_Scatter)(void *, int *, int *, void *, int *, int *, int *,
                            int *, int *);
 
@@ -2439,6 +2489,7 @@ void pmpi_scatterv_(void *, int *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_scatterv_ = _PMPI_Scatterv
 #pragma weak mpi_scatterv__ = _PMPI_Scatterv
 #pragma weak pmpi_scatterv__ = _PMPI_Scatterv
+extern long long WI4MPI_Scatterv_timeout;
 void (*_LOCAL_MPI_Scatterv)(void *, int *, int *, int *, void *, int *, int *,
                             int *, int *, int *);
 
@@ -2493,6 +2544,7 @@ void pmpi_allgather_(void *, int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_allgather_ = _PMPI_Allgather
 #pragma weak mpi_allgather__ = _PMPI_Allgather
 #pragma weak pmpi_allgather__ = _PMPI_Allgather
+extern long long WI4MPI_Allgather_timeout;
 void (*_LOCAL_MPI_Allgather)(void *, int *, int *, void *, int *, int *, int *,
                              int *);
 
@@ -2551,6 +2603,7 @@ void pmpi_allgatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_allgatherv_ = _PMPI_Allgatherv
 #pragma weak mpi_allgatherv__ = _PMPI_Allgatherv
 #pragma weak pmpi_allgatherv__ = _PMPI_Allgatherv
+extern long long WI4MPI_Allgatherv_timeout;
 void (*_LOCAL_MPI_Allgatherv)(void *, int *, int *, void *, int *, int *, int *,
                               int *, int *);
 
@@ -2604,6 +2657,7 @@ void pmpi_alltoall_(void *, int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_alltoall_ = _PMPI_Alltoall
 #pragma weak mpi_alltoall__ = _PMPI_Alltoall
 #pragma weak pmpi_alltoall__ = _PMPI_Alltoall
+extern long long WI4MPI_Alltoall_timeout;
 void (*_LOCAL_MPI_Alltoall)(void *, int *, int *, void *, int *, int *, int *,
                             int *);
 
@@ -2662,6 +2716,7 @@ void pmpi_alltoallv_(void *, int *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_alltoallv_ = _PMPI_Alltoallv
 #pragma weak mpi_alltoallv__ = _PMPI_Alltoallv
 #pragma weak pmpi_alltoallv__ = _PMPI_Alltoallv
+extern long long WI4MPI_Alltoallv_timeout;
 void (*_LOCAL_MPI_Alltoallv)(void *, int *, int *, int *, void *, int *, int *,
                              int *, int *, int *);
 
@@ -2716,6 +2771,7 @@ void pmpi_exscan_(void *, void *, int *, int *, int *, int *, int *);
 #pragma weak mpi_exscan_ = _PMPI_Exscan
 #pragma weak mpi_exscan__ = _PMPI_Exscan
 #pragma weak pmpi_exscan__ = _PMPI_Exscan
+extern long long WI4MPI_Exscan_timeout;
 void (*_LOCAL_MPI_Exscan)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Exscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
@@ -2766,6 +2822,7 @@ void pmpi_reduce_(void *, void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_reduce_ = _PMPI_Reduce
 #pragma weak mpi_reduce__ = _PMPI_Reduce
 #pragma weak pmpi_reduce__ = _PMPI_Reduce
+extern long long WI4MPI_Reduce_timeout;
 void (*_LOCAL_MPI_Reduce)(void *, void *, int *, int *, int *, int *, int *,
                           int *);
 
@@ -2818,6 +2875,7 @@ void pmpi_op_create_(void *, int *, int *, int *);
 #pragma weak mpi_op_create_ = _PMPI_Op_create
 #pragma weak mpi_op_create__ = _PMPI_Op_create
 #pragma weak pmpi_op_create__ = _PMPI_Op_create
+extern long long WI4MPI_Op_create_timeout;
 void (*_LOCAL_MPI_Op_create)(void *, int *, int *, int *);
 
 void A_f_MPI_Op_create(void *user_fn, int *commute, int *op, int *ret) {
@@ -2860,6 +2918,7 @@ void pmpi_op_free_(int *, int *);
 #pragma weak mpi_op_free_ = _PMPI_Op_free
 #pragma weak mpi_op_free__ = _PMPI_Op_free
 #pragma weak pmpi_op_free__ = _PMPI_Op_free
+extern long long WI4MPI_Op_free_timeout;
 void (*_LOCAL_MPI_Op_free)(int *, int *);
 
 void A_f_MPI_Op_free(int *op, int *ret) {
@@ -2901,6 +2960,7 @@ void pmpi_allreduce_(void *, void *, int *, int *, int *, int *, int *);
 #pragma weak mpi_allreduce_ = _PMPI_Allreduce
 #pragma weak mpi_allreduce__ = _PMPI_Allreduce
 #pragma weak pmpi_allreduce__ = _PMPI_Allreduce
+extern long long WI4MPI_Allreduce_timeout;
 void (*_LOCAL_MPI_Allreduce)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Allreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
@@ -2952,6 +3012,7 @@ void pmpi_scan_(void *, void *, int *, int *, int *, int *, int *);
 #pragma weak mpi_scan_ = _PMPI_Scan
 #pragma weak mpi_scan__ = _PMPI_Scan
 #pragma weak pmpi_scan__ = _PMPI_Scan
+extern long long WI4MPI_Scan_timeout;
 void (*_LOCAL_MPI_Scan)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Scan(void *sendbuf, void *recvbuf, int *count, int *datatype,
@@ -3002,6 +3063,7 @@ void pmpi_group_size_(int *, int *, int *);
 #pragma weak mpi_group_size_ = _PMPI_Group_size
 #pragma weak mpi_group_size__ = _PMPI_Group_size
 #pragma weak pmpi_group_size__ = _PMPI_Group_size
+extern long long WI4MPI_Group_size_timeout;
 void (*_LOCAL_MPI_Group_size)(int *, int *, int *);
 
 void A_f_MPI_Group_size(int *group, int *size, int *ret) {
@@ -3041,6 +3103,7 @@ void pmpi_group_rank_(int *, int *, int *);
 #pragma weak mpi_group_rank_ = _PMPI_Group_rank
 #pragma weak mpi_group_rank__ = _PMPI_Group_rank
 #pragma weak pmpi_group_rank__ = _PMPI_Group_rank
+extern long long WI4MPI_Group_rank_timeout;
 void (*_LOCAL_MPI_Group_rank)(int *, int *, int *);
 
 void A_f_MPI_Group_rank(int *group, int *rank, int *ret) {
@@ -3080,6 +3143,7 @@ void pmpi_group_compare_(int *, int *, int *, int *);
 #pragma weak mpi_group_compare_ = _PMPI_Group_compare
 #pragma weak mpi_group_compare__ = _PMPI_Group_compare
 #pragma weak pmpi_group_compare__ = _PMPI_Group_compare
+extern long long WI4MPI_Group_compare_timeout;
 void (*_LOCAL_MPI_Group_compare)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_compare(int *group1, int *group2, int *result, int *ret) {
@@ -3121,6 +3185,7 @@ void pmpi_comm_group_(int *, int *, int *);
 #pragma weak mpi_comm_group_ = _PMPI_Comm_group
 #pragma weak mpi_comm_group__ = _PMPI_Comm_group
 #pragma weak pmpi_comm_group__ = _PMPI_Comm_group
+extern long long WI4MPI_Comm_group_timeout;
 void (*_LOCAL_MPI_Comm_group)(int *, int *, int *);
 
 void A_f_MPI_Comm_group(int *comm, int *group, int *ret) {
@@ -3163,6 +3228,7 @@ void pmpi_group_union_(int *, int *, int *, int *);
 #pragma weak mpi_group_union_ = _PMPI_Group_union
 #pragma weak mpi_group_union__ = _PMPI_Group_union
 #pragma weak pmpi_group_union__ = _PMPI_Group_union
+extern long long WI4MPI_Group_union_timeout;
 void (*_LOCAL_MPI_Group_union)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_union(int *group1, int *group2, int *newgroup, int *ret) {
@@ -3207,6 +3273,7 @@ void pmpi_group_intersection_(int *, int *, int *, int *);
 #pragma weak mpi_group_intersection_ = _PMPI_Group_intersection
 #pragma weak mpi_group_intersection__ = _PMPI_Group_intersection
 #pragma weak pmpi_group_intersection__ = _PMPI_Group_intersection
+extern long long WI4MPI_Group_intersection_timeout;
 void (*_LOCAL_MPI_Group_intersection)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_intersection(int *group1, int *group2, int *newgroup,
@@ -3253,6 +3320,7 @@ void pmpi_group_difference_(int *, int *, int *, int *);
 #pragma weak mpi_group_difference_ = _PMPI_Group_difference
 #pragma weak mpi_group_difference__ = _PMPI_Group_difference
 #pragma weak pmpi_group_difference__ = _PMPI_Group_difference
+extern long long WI4MPI_Group_difference_timeout;
 void (*_LOCAL_MPI_Group_difference)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_difference(int *group1, int *group2, int *newgroup,
@@ -3299,6 +3367,7 @@ void pmpi_group_free_(int *, int *);
 #pragma weak mpi_group_free_ = _PMPI_Group_free
 #pragma weak mpi_group_free__ = _PMPI_Group_free
 #pragma weak pmpi_group_free__ = _PMPI_Group_free
+extern long long WI4MPI_Group_free_timeout;
 void (*_LOCAL_MPI_Group_free)(int *, int *);
 
 void A_f_MPI_Group_free(int *group, int *ret) {
@@ -3340,6 +3409,7 @@ void pmpi_comm_size_(int *, int *, int *);
 #pragma weak mpi_comm_size_ = _PMPI_Comm_size
 #pragma weak mpi_comm_size__ = _PMPI_Comm_size
 #pragma weak pmpi_comm_size__ = _PMPI_Comm_size
+extern long long WI4MPI_Comm_size_timeout;
 void (*_LOCAL_MPI_Comm_size)(int *, int *, int *);
 
 void A_f_MPI_Comm_size(int *comm, int *size, int *ret) {
@@ -3379,6 +3449,7 @@ void pmpi_comm_rank_(int *, int *, int *);
 #pragma weak mpi_comm_rank_ = _PMPI_Comm_rank
 #pragma weak mpi_comm_rank__ = _PMPI_Comm_rank
 #pragma weak pmpi_comm_rank__ = _PMPI_Comm_rank
+extern long long WI4MPI_Comm_rank_timeout;
 void (*_LOCAL_MPI_Comm_rank)(int *, int *, int *);
 
 void A_f_MPI_Comm_rank(int *comm, int *rank, int *ret) {
@@ -3418,6 +3489,7 @@ void pmpi_comm_compare_(int *, int *, int *, int *);
 #pragma weak mpi_comm_compare_ = _PMPI_Comm_compare
 #pragma weak mpi_comm_compare__ = _PMPI_Comm_compare
 #pragma weak pmpi_comm_compare__ = _PMPI_Comm_compare
+extern long long WI4MPI_Comm_compare_timeout;
 void (*_LOCAL_MPI_Comm_compare)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_compare(int *comm1, int *comm2, int *result, int *ret) {
@@ -3459,6 +3531,7 @@ void pmpi_comm_dup_(int *, int *, int *);
 #pragma weak mpi_comm_dup_ = _PMPI_Comm_dup
 #pragma weak mpi_comm_dup__ = _PMPI_Comm_dup
 #pragma weak pmpi_comm_dup__ = _PMPI_Comm_dup
+extern long long WI4MPI_Comm_dup_timeout;
 void (*_LOCAL_MPI_Comm_dup)(int *, int *, int *);
 
 void A_f_MPI_Comm_dup(int *comm, int *newcomm, int *ret) {
@@ -3501,6 +3574,7 @@ void pmpi_comm_dup_with_info_(int *, int *, int *, int *);
 #pragma weak mpi_comm_dup_with_info_ = _PMPI_Comm_dup_with_info
 #pragma weak mpi_comm_dup_with_info__ = _PMPI_Comm_dup_with_info
 #pragma weak pmpi_comm_dup_with_info__ = _PMPI_Comm_dup_with_info
+extern long long WI4MPI_Comm_dup_with_info_timeout;
 void (*_LOCAL_MPI_Comm_dup_with_info)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_dup_with_info(int *comm, int *info, int *newcomm, int *ret) {
@@ -3545,6 +3619,7 @@ void pmpi_comm_create_(int *, int *, int *, int *);
 #pragma weak mpi_comm_create_ = _PMPI_Comm_create
 #pragma weak mpi_comm_create__ = _PMPI_Comm_create
 #pragma weak pmpi_comm_create__ = _PMPI_Comm_create
+extern long long WI4MPI_Comm_create_timeout;
 void (*_LOCAL_MPI_Comm_create)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_create(int *comm, int *group, int *newcomm, int *ret) {
@@ -3589,6 +3664,7 @@ void pmpi_comm_split_(int *, int *, int *, int *, int *);
 #pragma weak mpi_comm_split_ = _PMPI_Comm_split
 #pragma weak mpi_comm_split__ = _PMPI_Comm_split
 #pragma weak pmpi_comm_split__ = _PMPI_Comm_split
+extern long long WI4MPI_Comm_split_timeout;
 void (*_LOCAL_MPI_Comm_split)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_split(int *comm, int *color, int *key, int *newcomm,
@@ -3632,6 +3708,7 @@ void pmpi_comm_free_(int *, int *);
 #pragma weak mpi_comm_free_ = _PMPI_Comm_free
 #pragma weak mpi_comm_free__ = _PMPI_Comm_free
 #pragma weak pmpi_comm_free__ = _PMPI_Comm_free
+extern long long WI4MPI_Comm_free_timeout;
 void (*_LOCAL_MPI_Comm_free)(int *, int *);
 
 void A_f_MPI_Comm_free(int *comm, int *ret) {
@@ -3673,6 +3750,7 @@ void pmpi_comm_test_inter_(int *, int *, int *);
 #pragma weak mpi_comm_test_inter_ = _PMPI_Comm_test_inter
 #pragma weak mpi_comm_test_inter__ = _PMPI_Comm_test_inter
 #pragma weak pmpi_comm_test_inter__ = _PMPI_Comm_test_inter
+extern long long WI4MPI_Comm_test_inter_timeout;
 void (*_LOCAL_MPI_Comm_test_inter)(int *, int *, int *);
 
 void A_f_MPI_Comm_test_inter(int *comm, int *flag, int *ret) {
@@ -3712,6 +3790,7 @@ void pmpi_comm_remote_size_(int *, int *, int *);
 #pragma weak mpi_comm_remote_size_ = _PMPI_Comm_remote_size
 #pragma weak mpi_comm_remote_size__ = _PMPI_Comm_remote_size
 #pragma weak pmpi_comm_remote_size__ = _PMPI_Comm_remote_size
+extern long long WI4MPI_Comm_remote_size_timeout;
 void (*_LOCAL_MPI_Comm_remote_size)(int *, int *, int *);
 
 void A_f_MPI_Comm_remote_size(int *comm, int *size, int *ret) {
@@ -3751,6 +3830,7 @@ void pmpi_comm_remote_group_(int *, int *, int *);
 #pragma weak mpi_comm_remote_group_ = _PMPI_Comm_remote_group
 #pragma weak mpi_comm_remote_group__ = _PMPI_Comm_remote_group
 #pragma weak pmpi_comm_remote_group__ = _PMPI_Comm_remote_group
+extern long long WI4MPI_Comm_remote_group_timeout;
 void (*_LOCAL_MPI_Comm_remote_group)(int *, int *, int *);
 
 void A_f_MPI_Comm_remote_group(int *comm, int *group, int *ret) {
@@ -3793,6 +3873,7 @@ void pmpi_intercomm_create_(int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_intercomm_create_ = _PMPI_Intercomm_create
 #pragma weak mpi_intercomm_create__ = _PMPI_Intercomm_create
 #pragma weak pmpi_intercomm_create__ = _PMPI_Intercomm_create
+extern long long WI4MPI_Intercomm_create_timeout;
 void (*_LOCAL_MPI_Intercomm_create)(int *, int *, int *, int *, int *, int *,
                                     int *);
 
@@ -3844,6 +3925,7 @@ void pmpi_intercomm_merge_(int *, int *, int *, int *);
 #pragma weak mpi_intercomm_merge_ = _PMPI_Intercomm_merge
 #pragma weak mpi_intercomm_merge__ = _PMPI_Intercomm_merge
 #pragma weak pmpi_intercomm_merge__ = _PMPI_Intercomm_merge
+extern long long WI4MPI_Intercomm_merge_timeout;
 void (*_LOCAL_MPI_Intercomm_merge)(int *, int *, int *, int *);
 
 void A_f_MPI_Intercomm_merge(int *intercomm, int *high, int *newintracomm,
@@ -3887,6 +3969,7 @@ void pmpi_keyval_create_(void *, void *, int *, void *, int *);
 #pragma weak mpi_keyval_create_ = _PMPI_Keyval_create
 #pragma weak mpi_keyval_create__ = _PMPI_Keyval_create
 #pragma weak pmpi_keyval_create__ = _PMPI_Keyval_create
+extern long long WI4MPI_Keyval_create_timeout;
 void (*_LOCAL_MPI_Keyval_create)(void *, void *, int *, void *, int *);
 
 void A_f_MPI_Keyval_create(void *copy_fn, void *delete_fn, int *keyval,
@@ -3932,6 +4015,7 @@ void pmpi_keyval_free_(int *, int *);
 #pragma weak mpi_keyval_free_ = _PMPI_Keyval_free
 #pragma weak mpi_keyval_free__ = _PMPI_Keyval_free
 #pragma weak pmpi_keyval_free__ = _PMPI_Keyval_free
+extern long long WI4MPI_Keyval_free_timeout;
 void (*_LOCAL_MPI_Keyval_free)(int *, int *);
 
 void A_f_MPI_Keyval_free(int *keyval, int *ret) {
@@ -3973,6 +4057,7 @@ void pmpi_attr_put_(int *, int *, int *, int *);
 #pragma weak mpi_attr_put_ = _PMPI_Attr_put
 #pragma weak mpi_attr_put__ = _PMPI_Attr_put
 #pragma weak pmpi_attr_put__ = _PMPI_Attr_put
+extern long long WI4MPI_Attr_put_timeout;
 void (*_LOCAL_MPI_Attr_put)(int *, int *, int *, int *);
 
 void A_f_MPI_Attr_put(int *comm, int *keyval, int *attribute_val, int *ret) {
@@ -4012,6 +4097,7 @@ void pmpi_attr_get_(int *, int *, int *, int *, int *);
 #pragma weak mpi_attr_get_ = _PMPI_Attr_get
 #pragma weak mpi_attr_get__ = _PMPI_Attr_get
 #pragma weak pmpi_attr_get__ = _PMPI_Attr_get
+extern long long WI4MPI_Attr_get_timeout;
 void (*_LOCAL_MPI_Attr_get)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Attr_get(int *comm, int *keyval, int *attribute_val, int *flag,
@@ -4054,6 +4140,7 @@ void pmpi_attr_delete_(int *, int *, int *);
 #pragma weak mpi_attr_delete_ = _PMPI_Attr_delete
 #pragma weak mpi_attr_delete__ = _PMPI_Attr_delete
 #pragma weak pmpi_attr_delete__ = _PMPI_Attr_delete
+extern long long WI4MPI_Attr_delete_timeout;
 void (*_LOCAL_MPI_Attr_delete)(int *, int *, int *);
 
 void A_f_MPI_Attr_delete(int *comm, int *keyval, int *ret) {
@@ -4095,6 +4182,7 @@ void pmpi_topo_test_(int *, int *, int *);
 #pragma weak mpi_topo_test_ = _PMPI_Topo_test
 #pragma weak mpi_topo_test__ = _PMPI_Topo_test
 #pragma weak pmpi_topo_test__ = _PMPI_Topo_test
+extern long long WI4MPI_Topo_test_timeout;
 void (*_LOCAL_MPI_Topo_test)(int *, int *, int *);
 
 void A_f_MPI_Topo_test(int *comm, int *status, int *ret) {
@@ -4140,6 +4228,7 @@ void pmpi_graphdims_get_(int *, int *, int *, int *);
 #pragma weak mpi_graphdims_get_ = _PMPI_Graphdims_get
 #pragma weak mpi_graphdims_get__ = _PMPI_Graphdims_get
 #pragma weak pmpi_graphdims_get__ = _PMPI_Graphdims_get
+extern long long WI4MPI_Graphdims_get_timeout;
 void (*_LOCAL_MPI_Graphdims_get)(int *, int *, int *, int *);
 
 void A_f_MPI_Graphdims_get(int *comm, int *nnodes, int *nedges, int *ret) {
@@ -4179,6 +4268,7 @@ void pmpi_cartdim_get_(int *, int *, int *);
 #pragma weak mpi_cartdim_get_ = _PMPI_Cartdim_get
 #pragma weak mpi_cartdim_get__ = _PMPI_Cartdim_get
 #pragma weak pmpi_cartdim_get__ = _PMPI_Cartdim_get
+extern long long WI4MPI_Cartdim_get_timeout;
 void (*_LOCAL_MPI_Cartdim_get)(int *, int *, int *);
 
 void A_f_MPI_Cartdim_get(int *comm, int *ndims, int *ret) {
@@ -4218,6 +4308,7 @@ void pmpi_graph_neighbors_count_(int *, int *, int *, int *);
 #pragma weak mpi_graph_neighbors_count_ = _PMPI_Graph_neighbors_count
 #pragma weak mpi_graph_neighbors_count__ = _PMPI_Graph_neighbors_count
 #pragma weak pmpi_graph_neighbors_count__ = _PMPI_Graph_neighbors_count
+extern long long WI4MPI_Graph_neighbors_count_timeout;
 void (*_LOCAL_MPI_Graph_neighbors_count)(int *, int *, int *, int *);
 
 void A_f_MPI_Graph_neighbors_count(int *comm, int *rank, int *nneighbors,
@@ -4258,6 +4349,7 @@ void pmpi_cart_shift_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_cart_shift_ = _PMPI_Cart_shift
 #pragma weak mpi_cart_shift__ = _PMPI_Cart_shift
 #pragma weak pmpi_cart_shift__ = _PMPI_Cart_shift
+extern long long WI4MPI_Cart_shift_timeout;
 void (*_LOCAL_MPI_Cart_shift)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_shift(int *comm, int *direction, int *disp, int *rank_source,
@@ -4299,6 +4391,7 @@ void pmpi_get_version_(int *, int *, int *);
 #pragma weak mpi_get_version_ = _PMPI_Get_version
 #pragma weak mpi_get_version__ = _PMPI_Get_version
 #pragma weak pmpi_get_version__ = _PMPI_Get_version
+extern long long WI4MPI_Get_version_timeout;
 void (*_LOCAL_MPI_Get_version)(int *, int *, int *);
 
 void A_f_MPI_Get_version(int *version, int *subversion, int *ret) {
@@ -4336,6 +4429,7 @@ void pmpi_errhandler_create_(void *, int *, int *);
 #pragma weak mpi_errhandler_create_ = _PMPI_Errhandler_create
 #pragma weak mpi_errhandler_create__ = _PMPI_Errhandler_create
 #pragma weak pmpi_errhandler_create__ = _PMPI_Errhandler_create
+extern long long WI4MPI_Errhandler_create_timeout;
 void (*_LOCAL_MPI_Errhandler_create)(void *, int *, int *);
 
 void A_f_MPI_Errhandler_create(void *function, int *errhandler, int *ret) {
@@ -4379,6 +4473,7 @@ void pmpi_errhandler_set_(int *, int *, int *);
 #pragma weak mpi_errhandler_set_ = _PMPI_Errhandler_set
 #pragma weak mpi_errhandler_set__ = _PMPI_Errhandler_set
 #pragma weak pmpi_errhandler_set__ = _PMPI_Errhandler_set
+extern long long WI4MPI_Errhandler_set_timeout;
 void (*_LOCAL_MPI_Errhandler_set)(int *, int *, int *);
 
 void A_f_MPI_Errhandler_set(int *comm, int *errhandler, int *ret) {
@@ -4421,6 +4516,7 @@ void pmpi_errhandler_get_(int *, int *, int *);
 #pragma weak mpi_errhandler_get_ = _PMPI_Errhandler_get
 #pragma weak mpi_errhandler_get__ = _PMPI_Errhandler_get
 #pragma weak pmpi_errhandler_get__ = _PMPI_Errhandler_get
+extern long long WI4MPI_Errhandler_get_timeout;
 void (*_LOCAL_MPI_Errhandler_get)(int *, int *, int *);
 
 void A_f_MPI_Errhandler_get(int *comm, int *errhandler, int *ret) {
@@ -4463,6 +4559,7 @@ void pmpi_errhandler_free_(int *, int *);
 #pragma weak mpi_errhandler_free_ = _PMPI_Errhandler_free
 #pragma weak mpi_errhandler_free__ = _PMPI_Errhandler_free
 #pragma weak pmpi_errhandler_free__ = _PMPI_Errhandler_free
+extern long long WI4MPI_Errhandler_free_timeout;
 void (*_LOCAL_MPI_Errhandler_free)(int *, int *);
 
 void A_f_MPI_Errhandler_free(int *errhandler, int *ret) {
@@ -4507,6 +4604,7 @@ void pmpi_error_class_(int *, int *, int *);
 #pragma weak mpi_error_class_ = _PMPI_Error_class
 #pragma weak mpi_error_class__ = _PMPI_Error_class
 #pragma weak pmpi_error_class__ = _PMPI_Error_class
+extern long long WI4MPI_Error_class_timeout;
 void (*_LOCAL_MPI_Error_class)(int *, int *, int *);
 
 void A_f_MPI_Error_class(int *errorcode, int *errorclass, int *ret) {
@@ -4548,6 +4646,7 @@ void pmpi_initialized_(int *, int *);
 #pragma weak mpi_initialized_ = _PMPI_Initialized
 #pragma weak mpi_initialized__ = _PMPI_Initialized
 #pragma weak pmpi_initialized__ = _PMPI_Initialized
+extern long long WI4MPI_Initialized_timeout;
 void (*_LOCAL_MPI_Initialized)(int *, int *);
 
 void A_f_MPI_Initialized(int *flag, int *ret) {
@@ -4585,6 +4684,7 @@ void pmpi_abort_(int *, int *, int *);
 #pragma weak mpi_abort_ = _PMPI_Abort
 #pragma weak mpi_abort__ = _PMPI_Abort
 #pragma weak pmpi_abort__ = _PMPI_Abort
+extern long long WI4MPI_Abort_timeout;
 void (*_LOCAL_MPI_Abort)(int *, int *, int *);
 
 void A_f_MPI_Abort(int *comm, int *errorcode, int *ret) {
@@ -4626,6 +4726,7 @@ void pmpi_init_(int *);
 #pragma weak mpi_init_ = _PMPI_Init
 #pragma weak mpi_init__ = _PMPI_Init
 #pragma weak pmpi_init__ = _PMPI_Init
+extern long long WI4MPI_Init_timeout;
 void (*_LOCAL_MPI_Init)(int *);
 
 void A_f_MPI_Init(int *ret) {
@@ -4663,6 +4764,7 @@ void pmpi_comm_accept_(char *, int *, int *, int *, int *, int *);
 #pragma weak mpi_comm_accept_ = _PMPI_Comm_accept
 #pragma weak mpi_comm_accept__ = _PMPI_Comm_accept
 #pragma weak pmpi_comm_accept__ = _PMPI_Comm_accept
+extern long long WI4MPI_Comm_accept_timeout;
 void (*_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
@@ -4711,6 +4813,7 @@ void pmpi_comm_connect_(char *, int *, int *, int *, int *, int *);
 #pragma weak mpi_comm_connect_ = _PMPI_Comm_connect
 #pragma weak mpi_comm_connect__ = _PMPI_Comm_connect
 #pragma weak pmpi_comm_connect__ = _PMPI_Comm_connect
+extern long long WI4MPI_Comm_connect_timeout;
 void (*_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
@@ -4759,6 +4862,7 @@ void pmpi_comm_disconnect_(int *, int *);
 #pragma weak mpi_comm_disconnect_ = _PMPI_Comm_disconnect
 #pragma weak mpi_comm_disconnect__ = _PMPI_Comm_disconnect
 #pragma weak pmpi_comm_disconnect__ = _PMPI_Comm_disconnect
+extern long long WI4MPI_Comm_disconnect_timeout;
 void (*_LOCAL_MPI_Comm_disconnect)(int *, int *);
 
 void A_f_MPI_Comm_disconnect(int *comm, int *ret) {
@@ -4800,6 +4904,7 @@ void pmpi_comm_get_parent_(int *, int *);
 #pragma weak mpi_comm_get_parent_ = _PMPI_Comm_get_parent
 #pragma weak mpi_comm_get_parent__ = _PMPI_Comm_get_parent
 #pragma weak pmpi_comm_get_parent__ = _PMPI_Comm_get_parent
+extern long long WI4MPI_Comm_get_parent_timeout;
 void (*_LOCAL_MPI_Comm_get_parent)(int *, int *);
 
 void A_f_MPI_Comm_get_parent(int *parent, int *ret) {
@@ -4840,6 +4945,7 @@ void pmpi_comm_join_(int *, int *, int *);
 #pragma weak mpi_comm_join_ = _PMPI_Comm_join
 #pragma weak mpi_comm_join__ = _PMPI_Comm_join
 #pragma weak pmpi_comm_join__ = _PMPI_Comm_join
+extern long long WI4MPI_Comm_join_timeout;
 void (*_LOCAL_MPI_Comm_join)(int *, int *, int *);
 
 void A_f_MPI_Comm_join(int *fd, int *intercomm, int *ret) {
@@ -4880,6 +4986,7 @@ void pmpi_comm_set_info_(int *, int *, int *);
 #pragma weak mpi_comm_set_info_ = _PMPI_Comm_set_info
 #pragma weak mpi_comm_set_info__ = _PMPI_Comm_set_info
 #pragma weak pmpi_comm_set_info__ = _PMPI_Comm_set_info
+extern long long WI4MPI_Comm_set_info_timeout;
 void (*_LOCAL_MPI_Comm_set_info)(int *, int *, int *);
 
 void A_f_MPI_Comm_set_info(int *comm, int *info, int *ret) {
@@ -4921,6 +5028,7 @@ void pmpi_comm_get_info_(int *, int *, int *);
 #pragma weak mpi_comm_get_info_ = _PMPI_Comm_get_info
 #pragma weak mpi_comm_get_info__ = _PMPI_Comm_get_info
 #pragma weak pmpi_comm_get_info__ = _PMPI_Comm_get_info
+extern long long WI4MPI_Comm_get_info_timeout;
 void (*_LOCAL_MPI_Comm_get_info)(int *, int *, int *);
 
 void A_f_MPI_Comm_get_info(int *comm, int *info, int *ret) {
@@ -4968,6 +5076,7 @@ void pmpi_accumulate_(void *, int *, int *, int *, size_t *, int *, int *,
 #pragma weak mpi_accumulate_ = _PMPI_Accumulate
 #pragma weak mpi_accumulate__ = _PMPI_Accumulate
 #pragma weak pmpi_accumulate__ = _PMPI_Accumulate
+extern long long WI4MPI_Accumulate_timeout;
 void (*_LOCAL_MPI_Accumulate)(void *, int *, int *, int *, size_t *, int *,
                               int *, int *, int *, int *);
 
@@ -5028,6 +5137,7 @@ void pmpi_get_(void *, int *, int *, int *, size_t *, int *, int *, int *,
 #pragma weak mpi_get_ = _PMPI_Get
 #pragma weak mpi_get__ = _PMPI_Get
 #pragma weak pmpi_get__ = _PMPI_Get
+extern long long WI4MPI_Get_timeout;
 void (*_LOCAL_MPI_Get)(void *, int *, int *, int *, size_t *, int *, int *,
                        int *, int *);
 
@@ -5086,6 +5196,7 @@ void pmpi_put_(void *, int *, int *, int *, size_t *, int *, int *, int *,
 #pragma weak mpi_put_ = _PMPI_Put
 #pragma weak mpi_put__ = _PMPI_Put
 #pragma weak pmpi_put__ = _PMPI_Put
+extern long long WI4MPI_Put_timeout;
 void (*_LOCAL_MPI_Put)(void *, int *, int *, int *, size_t *, int *, int *,
                        int *, int *);
 
@@ -5138,6 +5249,7 @@ void pmpi_win_complete_(int *, int *);
 #pragma weak mpi_win_complete_ = _PMPI_Win_complete
 #pragma weak mpi_win_complete__ = _PMPI_Win_complete
 #pragma weak pmpi_win_complete__ = _PMPI_Win_complete
+extern long long WI4MPI_Win_complete_timeout;
 void (*_LOCAL_MPI_Win_complete)(int *, int *);
 
 void A_f_MPI_Win_complete(int *win, int *ret) {
@@ -5177,6 +5289,7 @@ void pmpi_win_create_(void *, size_t *, int *, int *, int *, int *, int *);
 #pragma weak mpi_win_create_ = _PMPI_Win_create
 #pragma weak mpi_win_create__ = _PMPI_Win_create
 #pragma weak pmpi_win_create__ = _PMPI_Win_create
+extern long long WI4MPI_Win_create_timeout;
 void (*_LOCAL_MPI_Win_create)(void *, size_t *, int *, int *, int *, int *,
                               int *);
 
@@ -5226,6 +5339,7 @@ void pmpi_win_fence_(int *, int *, int *);
 #pragma weak mpi_win_fence_ = _PMPI_Win_fence
 #pragma weak mpi_win_fence__ = _PMPI_Win_fence
 #pragma weak pmpi_win_fence__ = _PMPI_Win_fence
+extern long long WI4MPI_Win_fence_timeout;
 void (*_LOCAL_MPI_Win_fence)(int *, int *, int *);
 
 void A_f_MPI_Win_fence(int *assert, int *win, int *ret) {
@@ -5267,6 +5381,7 @@ void pmpi_win_free_(int *, int *);
 #pragma weak mpi_win_free_ = _PMPI_Win_free
 #pragma weak mpi_win_free__ = _PMPI_Win_free
 #pragma weak pmpi_win_free__ = _PMPI_Win_free
+extern long long WI4MPI_Win_free_timeout;
 void (*_LOCAL_MPI_Win_free)(int *, int *);
 
 void A_f_MPI_Win_free(int *win, int *ret) {
@@ -5308,6 +5423,7 @@ void pmpi_win_get_group_(int *, int *, int *);
 #pragma weak mpi_win_get_group_ = _PMPI_Win_get_group
 #pragma weak mpi_win_get_group__ = _PMPI_Win_get_group
 #pragma weak pmpi_win_get_group__ = _PMPI_Win_get_group
+extern long long WI4MPI_Win_get_group_timeout;
 void (*_LOCAL_MPI_Win_get_group)(int *, int *, int *);
 
 void A_f_MPI_Win_get_group(int *win, int *group, int *ret) {
@@ -5350,6 +5466,7 @@ void pmpi_win_lock_(int *, int *, int *, int *, int *);
 #pragma weak mpi_win_lock_ = _PMPI_Win_lock
 #pragma weak mpi_win_lock__ = _PMPI_Win_lock
 #pragma weak pmpi_win_lock__ = _PMPI_Win_lock
+extern long long WI4MPI_Win_lock_timeout;
 void (*_LOCAL_MPI_Win_lock)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Win_lock(int *lock_type, int *rank, int *assert, int *win,
@@ -5397,6 +5514,7 @@ void pmpi_win_post_(int *, int *, int *, int *);
 #pragma weak mpi_win_post_ = _PMPI_Win_post
 #pragma weak mpi_win_post__ = _PMPI_Win_post
 #pragma weak pmpi_win_post__ = _PMPI_Win_post
+extern long long WI4MPI_Win_post_timeout;
 void (*_LOCAL_MPI_Win_post)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_post(int *group, int *assert, int *win, int *ret) {
@@ -5440,6 +5558,7 @@ void pmpi_win_start_(int *, int *, int *, int *);
 #pragma weak mpi_win_start_ = _PMPI_Win_start
 #pragma weak mpi_win_start__ = _PMPI_Win_start
 #pragma weak pmpi_win_start__ = _PMPI_Win_start
+extern long long WI4MPI_Win_start_timeout;
 void (*_LOCAL_MPI_Win_start)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_start(int *group, int *assert, int *win, int *ret) {
@@ -5483,6 +5602,7 @@ void pmpi_win_test_(int *, int *, int *);
 #pragma weak mpi_win_test_ = _PMPI_Win_test
 #pragma weak mpi_win_test__ = _PMPI_Win_test
 #pragma weak pmpi_win_test__ = _PMPI_Win_test
+extern long long WI4MPI_Win_test_timeout;
 void (*_LOCAL_MPI_Win_test)(int *, int *, int *);
 
 void A_f_MPI_Win_test(int *win, int *flag, int *ret) {
@@ -5522,6 +5642,7 @@ void pmpi_win_unlock_(int *, int *, int *);
 #pragma weak mpi_win_unlock_ = _PMPI_Win_unlock
 #pragma weak mpi_win_unlock__ = _PMPI_Win_unlock
 #pragma weak pmpi_win_unlock__ = _PMPI_Win_unlock
+extern long long WI4MPI_Win_unlock_timeout;
 void (*_LOCAL_MPI_Win_unlock)(int *, int *, int *);
 
 void A_f_MPI_Win_unlock(int *rank, int *win, int *ret) {
@@ -5563,6 +5684,7 @@ void pmpi_win_wait_(int *, int *);
 #pragma weak mpi_win_wait_ = _PMPI_Win_wait
 #pragma weak mpi_win_wait__ = _PMPI_Win_wait
 #pragma weak pmpi_win_wait__ = _PMPI_Win_wait
+extern long long WI4MPI_Win_wait_timeout;
 void (*_LOCAL_MPI_Win_wait)(int *, int *);
 
 void A_f_MPI_Win_wait(int *win, int *ret) {
@@ -5602,6 +5724,7 @@ void pmpi_win_allocate_(size_t *, int *, int *, int *, void *, int *, int *);
 #pragma weak mpi_win_allocate_ = _PMPI_Win_allocate
 #pragma weak mpi_win_allocate__ = _PMPI_Win_allocate
 #pragma weak pmpi_win_allocate__ = _PMPI_Win_allocate
+extern long long WI4MPI_Win_allocate_timeout;
 void (*_LOCAL_MPI_Win_allocate)(size_t *, int *, int *, int *, void *, int *,
                                 int *);
 
@@ -5655,6 +5778,7 @@ void pmpi_win_allocate_shared_(size_t *, int *, int *, int *, void *, int *,
 #pragma weak mpi_win_allocate_shared_ = _PMPI_Win_allocate_shared
 #pragma weak mpi_win_allocate_shared__ = _PMPI_Win_allocate_shared
 #pragma weak pmpi_win_allocate_shared__ = _PMPI_Win_allocate_shared
+extern long long WI4MPI_Win_allocate_shared_timeout;
 void (*_LOCAL_MPI_Win_allocate_shared)(size_t *, int *, int *, int *, void *,
                                        int *, int *);
 
@@ -5705,6 +5829,7 @@ void pmpi_win_shared_query_(int *, int *, size_t *, int *, void *, int *);
 #pragma weak mpi_win_shared_query_ = _PMPI_Win_shared_query
 #pragma weak mpi_win_shared_query__ = _PMPI_Win_shared_query
 #pragma weak pmpi_win_shared_query__ = _PMPI_Win_shared_query
+extern long long WI4MPI_Win_shared_query_timeout;
 void (*_LOCAL_MPI_Win_shared_query)(int *, int *, size_t *, int *, void *,
                                     int *);
 
@@ -5750,6 +5875,7 @@ void pmpi_win_create_dynamic_(int *, int *, int *, int *);
 #pragma weak mpi_win_create_dynamic_ = _PMPI_Win_create_dynamic
 #pragma weak mpi_win_create_dynamic__ = _PMPI_Win_create_dynamic
 #pragma weak pmpi_win_create_dynamic__ = _PMPI_Win_create_dynamic
+extern long long WI4MPI_Win_create_dynamic_timeout;
 void (*_LOCAL_MPI_Win_create_dynamic)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_create_dynamic(int *info, int *comm, int *win, int *ret) {
@@ -5794,6 +5920,7 @@ void pmpi_win_attach_(int *, void *, size_t *, int *);
 #pragma weak mpi_win_attach_ = _PMPI_Win_attach
 #pragma weak mpi_win_attach__ = _PMPI_Win_attach
 #pragma weak pmpi_win_attach__ = _PMPI_Win_attach
+extern long long WI4MPI_Win_attach_timeout;
 void (*_LOCAL_MPI_Win_attach)(int *, void *, size_t *, int *);
 
 void A_f_MPI_Win_attach(int *win, void *base, size_t *size, int *ret) {
@@ -5835,6 +5962,7 @@ void pmpi_win_detach_(int *, void *, int *);
 #pragma weak mpi_win_detach_ = _PMPI_Win_detach
 #pragma weak mpi_win_detach__ = _PMPI_Win_detach
 #pragma weak pmpi_win_detach__ = _PMPI_Win_detach
+extern long long WI4MPI_Win_detach_timeout;
 void (*_LOCAL_MPI_Win_detach)(int *, void *, int *);
 
 void A_f_MPI_Win_detach(int *win, void *base, int *ret) {
@@ -5876,6 +6004,7 @@ void pmpi_win_get_info_(int *, int *, int *);
 #pragma weak mpi_win_get_info_ = _PMPI_Win_get_info
 #pragma weak mpi_win_get_info__ = _PMPI_Win_get_info
 #pragma weak pmpi_win_get_info__ = _PMPI_Win_get_info
+extern long long WI4MPI_Win_get_info_timeout;
 void (*_LOCAL_MPI_Win_get_info)(int *, int *, int *);
 
 void A_f_MPI_Win_get_info(int *win, int *info_used, int *ret) {
@@ -5918,6 +6047,7 @@ void pmpi_win_set_info_(int *, int *, int *);
 #pragma weak mpi_win_set_info_ = _PMPI_Win_set_info
 #pragma weak mpi_win_set_info__ = _PMPI_Win_set_info
 #pragma weak pmpi_win_set_info__ = _PMPI_Win_set_info
+extern long long WI4MPI_Win_set_info_timeout;
 void (*_LOCAL_MPI_Win_set_info)(int *, int *, int *);
 
 void A_f_MPI_Win_set_info(int *win, int *info, int *ret) {
@@ -5964,6 +6094,7 @@ void pmpi_get_accumulate_(void *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_get_accumulate_ = _PMPI_Get_accumulate
 #pragma weak mpi_get_accumulate__ = _PMPI_Get_accumulate
 #pragma weak pmpi_get_accumulate__ = _PMPI_Get_accumulate
+extern long long WI4MPI_Get_accumulate_timeout;
 void (*_LOCAL_MPI_Get_accumulate)(void *, int *, int *, void *, int *, int *,
                                   int *, size_t *, int *, int *, int *, int *,
                                   int *);
@@ -6032,6 +6163,7 @@ void pmpi_fetch_and_op_(void *, void *, int *, int *, size_t *, int *, int *,
 #pragma weak mpi_fetch_and_op_ = _PMPI_Fetch_and_op
 #pragma weak mpi_fetch_and_op__ = _PMPI_Fetch_and_op
 #pragma weak pmpi_fetch_and_op__ = _PMPI_Fetch_and_op
+extern long long WI4MPI_Fetch_and_op_timeout;
 void (*_LOCAL_MPI_Fetch_and_op)(void *, void *, int *, int *, size_t *, int *,
                                 int *, int *);
 
@@ -6093,6 +6225,7 @@ void pmpi_compare_and_swap_(void *, void *, void *, int *, int *, size_t *,
 #pragma weak mpi_compare_and_swap_ = _PMPI_Compare_and_swap
 #pragma weak mpi_compare_and_swap__ = _PMPI_Compare_and_swap
 #pragma weak pmpi_compare_and_swap__ = _PMPI_Compare_and_swap
+extern long long WI4MPI_Compare_and_swap_timeout;
 void (*_LOCAL_MPI_Compare_and_swap)(void *, void *, void *, int *, int *,
                                     size_t *, int *, int *);
 
@@ -6155,6 +6288,7 @@ void pmpi_rput_(void *, int *, int *, int *, size_t *, int *, int *, int *,
 #pragma weak mpi_rput_ = _PMPI_Rput
 #pragma weak mpi_rput__ = _PMPI_Rput
 #pragma weak pmpi_rput__ = _PMPI_Rput
+extern long long WI4MPI_Rput_timeout;
 void (*_LOCAL_MPI_Rput)(void *, int *, int *, int *, size_t *, int *, int *,
                         int *, int *, int *);
 
@@ -6215,6 +6349,7 @@ void pmpi_rget_(void *, int *, int *, int *, size_t *, int *, int *, int *,
 #pragma weak mpi_rget_ = _PMPI_Rget
 #pragma weak mpi_rget__ = _PMPI_Rget
 #pragma weak pmpi_rget__ = _PMPI_Rget
+extern long long WI4MPI_Rget_timeout;
 void (*_LOCAL_MPI_Rget)(void *, int *, int *, int *, size_t *, int *, int *,
                         int *, int *, int *);
 
@@ -6275,6 +6410,7 @@ void pmpi_raccumulate_(void *, int *, int *, int *, size_t *, int *, int *,
 #pragma weak mpi_raccumulate_ = _PMPI_Raccumulate
 #pragma weak mpi_raccumulate__ = _PMPI_Raccumulate
 #pragma weak pmpi_raccumulate__ = _PMPI_Raccumulate
+extern long long WI4MPI_Raccumulate_timeout;
 void (*_LOCAL_MPI_Raccumulate)(void *, int *, int *, int *, size_t *, int *,
                                int *, int *, int *, int *, int *);
 
@@ -6340,6 +6476,7 @@ void pmpi_rget_accumulate_(void *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_rget_accumulate_ = _PMPI_Rget_accumulate
 #pragma weak mpi_rget_accumulate__ = _PMPI_Rget_accumulate
 #pragma weak pmpi_rget_accumulate__ = _PMPI_Rget_accumulate
+extern long long WI4MPI_Rget_accumulate_timeout;
 void (*_LOCAL_MPI_Rget_accumulate)(void *, int *, int *, void *, int *, int *,
                                    int *, size_t *, int *, int *, int *, int *,
                                    int *, int *);
@@ -6407,6 +6544,7 @@ void pmpi_win_lock_all_(int *, int *, int *);
 #pragma weak mpi_win_lock_all_ = _PMPI_Win_lock_all
 #pragma weak mpi_win_lock_all__ = _PMPI_Win_lock_all
 #pragma weak pmpi_win_lock_all__ = _PMPI_Win_lock_all
+extern long long WI4MPI_Win_lock_all_timeout;
 void (*_LOCAL_MPI_Win_lock_all)(int *, int *, int *);
 
 void A_f_MPI_Win_lock_all(int *assert, int *win, int *ret) {
@@ -6448,6 +6586,7 @@ void pmpi_win_unlock_all_(int *, int *);
 #pragma weak mpi_win_unlock_all_ = _PMPI_Win_unlock_all
 #pragma weak mpi_win_unlock_all__ = _PMPI_Win_unlock_all
 #pragma weak pmpi_win_unlock_all__ = _PMPI_Win_unlock_all
+extern long long WI4MPI_Win_unlock_all_timeout;
 void (*_LOCAL_MPI_Win_unlock_all)(int *, int *);
 
 void A_f_MPI_Win_unlock_all(int *win, int *ret) {
@@ -6487,6 +6626,7 @@ void pmpi_win_flush_(int *, int *, int *);
 #pragma weak mpi_win_flush_ = _PMPI_Win_flush
 #pragma weak mpi_win_flush__ = _PMPI_Win_flush
 #pragma weak pmpi_win_flush__ = _PMPI_Win_flush
+extern long long WI4MPI_Win_flush_timeout;
 void (*_LOCAL_MPI_Win_flush)(int *, int *, int *);
 
 void A_f_MPI_Win_flush(int *rank, int *win, int *ret) {
@@ -6528,6 +6668,7 @@ void pmpi_win_flush_all_(int *, int *);
 #pragma weak mpi_win_flush_all_ = _PMPI_Win_flush_all
 #pragma weak mpi_win_flush_all__ = _PMPI_Win_flush_all
 #pragma weak pmpi_win_flush_all__ = _PMPI_Win_flush_all
+extern long long WI4MPI_Win_flush_all_timeout;
 void (*_LOCAL_MPI_Win_flush_all)(int *, int *);
 
 void A_f_MPI_Win_flush_all(int *win, int *ret) {
@@ -6567,6 +6708,7 @@ void pmpi_win_flush_local_(int *, int *, int *);
 #pragma weak mpi_win_flush_local_ = _PMPI_Win_flush_local
 #pragma weak mpi_win_flush_local__ = _PMPI_Win_flush_local
 #pragma weak pmpi_win_flush_local__ = _PMPI_Win_flush_local
+extern long long WI4MPI_Win_flush_local_timeout;
 void (*_LOCAL_MPI_Win_flush_local)(int *, int *, int *);
 
 void A_f_MPI_Win_flush_local(int *rank, int *win, int *ret) {
@@ -6608,6 +6750,7 @@ void pmpi_win_flush_local_all_(int *, int *);
 #pragma weak mpi_win_flush_local_all_ = _PMPI_Win_flush_local_all
 #pragma weak mpi_win_flush_local_all__ = _PMPI_Win_flush_local_all
 #pragma weak pmpi_win_flush_local_all__ = _PMPI_Win_flush_local_all
+extern long long WI4MPI_Win_flush_local_all_timeout;
 void (*_LOCAL_MPI_Win_flush_local_all)(int *, int *);
 
 void A_f_MPI_Win_flush_local_all(int *win, int *ret) {
@@ -6647,6 +6790,7 @@ void pmpi_win_sync_(int *, int *);
 #pragma weak mpi_win_sync_ = _PMPI_Win_sync
 #pragma weak mpi_win_sync__ = _PMPI_Win_sync
 #pragma weak pmpi_win_sync__ = _PMPI_Win_sync
+extern long long WI4MPI_Win_sync_timeout;
 void (*_LOCAL_MPI_Win_sync)(int *, int *);
 
 void A_f_MPI_Win_sync(int *win, int *ret) {
@@ -6686,6 +6830,7 @@ void pmpi_add_error_class_(int *, int *);
 #pragma weak mpi_add_error_class_ = _PMPI_Add_error_class
 #pragma weak mpi_add_error_class__ = _PMPI_Add_error_class
 #pragma weak pmpi_add_error_class__ = _PMPI_Add_error_class
+extern long long WI4MPI_Add_error_class_timeout;
 void (*_LOCAL_MPI_Add_error_class)(int *, int *);
 
 void A_f_MPI_Add_error_class(int *errorclass, int *ret) {
@@ -6726,6 +6871,7 @@ void pmpi_add_error_code_(int *, int *, int *);
 #pragma weak mpi_add_error_code_ = _PMPI_Add_error_code
 #pragma weak mpi_add_error_code__ = _PMPI_Add_error_code
 #pragma weak pmpi_add_error_code__ = _PMPI_Add_error_code
+extern long long WI4MPI_Add_error_code_timeout;
 void (*_LOCAL_MPI_Add_error_code)(int *, int *, int *);
 
 void A_f_MPI_Add_error_code(int *errorclass, int *errorcode, int *ret) {
@@ -6766,6 +6912,7 @@ void pmpi_comm_call_errhandler_(int *, int *, int *);
 #pragma weak mpi_comm_call_errhandler_ = _PMPI_Comm_call_errhandler
 #pragma weak mpi_comm_call_errhandler__ = _PMPI_Comm_call_errhandler
 #pragma weak pmpi_comm_call_errhandler__ = _PMPI_Comm_call_errhandler
+extern long long WI4MPI_Comm_call_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_call_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_call_errhandler(int *comm, int *errorcode, int *ret) {
@@ -6807,6 +6954,7 @@ void pmpi_comm_delete_attr_(int *, int *, int *);
 #pragma weak mpi_comm_delete_attr_ = _PMPI_Comm_delete_attr
 #pragma weak mpi_comm_delete_attr__ = _PMPI_Comm_delete_attr
 #pragma weak pmpi_comm_delete_attr__ = _PMPI_Comm_delete_attr
+extern long long WI4MPI_Comm_delete_attr_timeout;
 void (*_LOCAL_MPI_Comm_delete_attr)(int *, int *, int *);
 
 void A_f_MPI_Comm_delete_attr(int *comm, int *comm_keyval, int *ret) {
@@ -6848,6 +6996,7 @@ void pmpi_comm_get_attr_(int *, int *, void *, int *, int *);
 #pragma weak mpi_comm_get_attr_ = _PMPI_Comm_get_attr
 #pragma weak mpi_comm_get_attr__ = _PMPI_Comm_get_attr
 #pragma weak pmpi_comm_get_attr__ = _PMPI_Comm_get_attr
+extern long long WI4MPI_Comm_get_attr_timeout;
 void (*_LOCAL_MPI_Comm_get_attr)(int *, int *, void *, int *, int *);
 
 void A_f_MPI_Comm_get_attr(int *comm, int *comm_keyval, void *attribute_val,
@@ -6894,6 +7043,7 @@ void pmpi_comm_set_attr_(int *, int *, void *, int *);
 #pragma weak mpi_comm_set_attr_ = _PMPI_Comm_set_attr
 #pragma weak mpi_comm_set_attr__ = _PMPI_Comm_set_attr
 #pragma weak pmpi_comm_set_attr__ = _PMPI_Comm_set_attr
+extern long long WI4MPI_Comm_set_attr_timeout;
 void (*_LOCAL_MPI_Comm_set_attr)(int *, int *, void *, int *);
 
 void A_f_MPI_Comm_set_attr(int *comm, int *comm_keyval, void *attribute_val,
@@ -6939,6 +7089,7 @@ void pmpi_init_thread_(int *, int *, int *);
 #pragma weak mpi_init_thread_ = _PMPI_Init_thread
 #pragma weak mpi_init_thread__ = _PMPI_Init_thread
 #pragma weak pmpi_init_thread__ = _PMPI_Init_thread
+extern long long WI4MPI_Init_thread_timeout;
 void (*_LOCAL_MPI_Init_thread)(int *, int *, int *);
 
 void A_f_MPI_Init_thread(int *required, int *provided, int *ret) {
@@ -6976,6 +7127,7 @@ void pmpi_is_thread_main_(int *, int *);
 #pragma weak mpi_is_thread_main_ = _PMPI_Is_thread_main
 #pragma weak mpi_is_thread_main__ = _PMPI_Is_thread_main
 #pragma weak pmpi_is_thread_main__ = _PMPI_Is_thread_main
+extern long long WI4MPI_Is_thread_main_timeout;
 void (*_LOCAL_MPI_Is_thread_main)(int *, int *);
 
 void A_f_MPI_Is_thread_main(int *flag, int *ret) {
@@ -7013,6 +7165,7 @@ void pmpi_query_thread_(int *, int *);
 #pragma weak mpi_query_thread_ = _PMPI_Query_thread
 #pragma weak mpi_query_thread__ = _PMPI_Query_thread
 #pragma weak pmpi_query_thread__ = _PMPI_Query_thread
+extern long long WI4MPI_Query_thread_timeout;
 void (*_LOCAL_MPI_Query_thread)(int *, int *);
 
 void A_f_MPI_Query_thread(int *provided, int *ret) {
@@ -7050,6 +7203,7 @@ void pmpi_status_set_cancelled_(int *, int *, int *);
 #pragma weak mpi_status_set_cancelled_ = _PMPI_Status_set_cancelled
 #pragma weak mpi_status_set_cancelled__ = _PMPI_Status_set_cancelled
 #pragma weak pmpi_status_set_cancelled__ = _PMPI_Status_set_cancelled
+extern long long WI4MPI_Status_set_cancelled_timeout;
 void (*_LOCAL_MPI_Status_set_cancelled)(int *, int *, int *);
 
 void A_f_MPI_Status_set_cancelled(int *status, int *flag, int *ret) {
@@ -7091,6 +7245,7 @@ void pmpi_status_set_elements_(int *, int *, int *, int *);
 #pragma weak mpi_status_set_elements_ = _PMPI_Status_set_elements
 #pragma weak mpi_status_set_elements__ = _PMPI_Status_set_elements
 #pragma weak pmpi_status_set_elements__ = _PMPI_Status_set_elements
+extern long long WI4MPI_Status_set_elements_timeout;
 void (*_LOCAL_MPI_Status_set_elements)(int *, int *, int *, int *);
 
 void A_f_MPI_Status_set_elements(int *status, int *datatype, int *count,
@@ -7135,6 +7290,7 @@ void pmpi_type_delete_attr_(int *, int *, int *);
 #pragma weak mpi_type_delete_attr_ = _PMPI_Type_delete_attr
 #pragma weak mpi_type_delete_attr__ = _PMPI_Type_delete_attr
 #pragma weak pmpi_type_delete_attr__ = _PMPI_Type_delete_attr
+extern long long WI4MPI_Type_delete_attr_timeout;
 void (*_LOCAL_MPI_Type_delete_attr)(int *, int *, int *);
 
 void A_f_MPI_Type_delete_attr(int *datatype, int *type_keyval, int *ret) {
@@ -7176,6 +7332,7 @@ void pmpi_type_dup_(int *, int *, int *);
 #pragma weak mpi_type_dup_ = _PMPI_Type_dup
 #pragma weak mpi_type_dup__ = _PMPI_Type_dup
 #pragma weak pmpi_type_dup__ = _PMPI_Type_dup
+extern long long WI4MPI_Type_dup_timeout;
 void (*_LOCAL_MPI_Type_dup)(int *, int *, int *);
 
 void A_f_MPI_Type_dup(int *oldtype, int *newtype, int *ret) {
@@ -7218,6 +7375,7 @@ void pmpi_type_free_keyval_(int *, int *);
 #pragma weak mpi_type_free_keyval_ = _PMPI_Type_free_keyval
 #pragma weak mpi_type_free_keyval__ = _PMPI_Type_free_keyval
 #pragma weak pmpi_type_free_keyval__ = _PMPI_Type_free_keyval
+extern long long WI4MPI_Type_free_keyval_timeout;
 void (*_LOCAL_MPI_Type_free_keyval)(int *, int *);
 
 void A_f_MPI_Type_free_keyval(int *type_keyval, int *ret) {
@@ -7259,6 +7417,7 @@ void pmpi_type_get_attr_(int *, int *, void *, int *, int *);
 #pragma weak mpi_type_get_attr_ = _PMPI_Type_get_attr
 #pragma weak mpi_type_get_attr__ = _PMPI_Type_get_attr
 #pragma weak pmpi_type_get_attr__ = _PMPI_Type_get_attr
+extern long long WI4MPI_Type_get_attr_timeout;
 void (*_LOCAL_MPI_Type_get_attr)(int *, int *, void *, int *, int *);
 
 void A_f_MPI_Type_get_attr(int *datatype, int *type_keyval, void *attribute_val,
@@ -7305,6 +7464,7 @@ void pmpi_type_get_envelope_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_type_get_envelope_ = _PMPI_Type_get_envelope
 #pragma weak mpi_type_get_envelope__ = _PMPI_Type_get_envelope
 #pragma weak pmpi_type_get_envelope__ = _PMPI_Type_get_envelope
+extern long long WI4MPI_Type_get_envelope_timeout;
 void (*_LOCAL_MPI_Type_get_envelope)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_envelope(int *datatype, int *num_integers,
@@ -7347,6 +7507,7 @@ void pmpi_type_set_attr_(int *, int *, void *, int *);
 #pragma weak mpi_type_set_attr_ = _PMPI_Type_set_attr
 #pragma weak mpi_type_set_attr__ = _PMPI_Type_set_attr
 #pragma weak pmpi_type_set_attr__ = _PMPI_Type_set_attr
+extern long long WI4MPI_Type_set_attr_timeout;
 void (*_LOCAL_MPI_Type_set_attr)(int *, int *, void *, int *);
 
 void A_f_MPI_Type_set_attr(int *datatype, int *type_keyval, void *attribute_val,
@@ -7392,6 +7553,7 @@ void pmpi_type_match_size_(int *, int *, int *, int *);
 #pragma weak mpi_type_match_size_ = _PMPI_Type_match_size
 #pragma weak mpi_type_match_size__ = _PMPI_Type_match_size
 #pragma weak pmpi_type_match_size__ = _PMPI_Type_match_size
+extern long long WI4MPI_Type_match_size_timeout;
 void (*_LOCAL_MPI_Type_match_size)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_match_size(int *typeclass, int *size, int *datatype,
@@ -7433,6 +7595,7 @@ void pmpi_alloc_mem_(size_t *, int *, void *, int *);
 #pragma weak mpi_alloc_mem_ = _PMPI_Alloc_mem
 #pragma weak mpi_alloc_mem__ = _PMPI_Alloc_mem
 #pragma weak pmpi_alloc_mem__ = _PMPI_Alloc_mem
+extern long long WI4MPI_Alloc_mem_timeout;
 void (*_LOCAL_MPI_Alloc_mem)(size_t *, int *, void *, int *);
 
 void A_f_MPI_Alloc_mem(size_t *size, int *info, void *baseptr, int *ret) {
@@ -7475,6 +7638,7 @@ void pmpi_comm_create_errhandler_(void *, int *, int *);
 #pragma weak mpi_comm_create_errhandler_ = _PMPI_Comm_create_errhandler
 #pragma weak mpi_comm_create_errhandler__ = _PMPI_Comm_create_errhandler
 #pragma weak pmpi_comm_create_errhandler__ = _PMPI_Comm_create_errhandler
+extern long long WI4MPI_Comm_create_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_create_errhandler)(void *, int *, int *);
 
 void A_f_MPI_Comm_create_errhandler(void *comm_errhandler_fn, int *errhandler,
@@ -7520,6 +7684,7 @@ void pmpi_comm_get_errhandler_(int *, int *, int *);
 #pragma weak mpi_comm_get_errhandler_ = _PMPI_Comm_get_errhandler
 #pragma weak mpi_comm_get_errhandler__ = _PMPI_Comm_get_errhandler
 #pragma weak pmpi_comm_get_errhandler__ = _PMPI_Comm_get_errhandler
+extern long long WI4MPI_Comm_get_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_get_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_get_errhandler(int *comm, int *errhandler, int *ret) {
@@ -7562,6 +7727,7 @@ void pmpi_comm_set_errhandler_(int *, int *, int *);
 #pragma weak mpi_comm_set_errhandler_ = _PMPI_Comm_set_errhandler
 #pragma weak mpi_comm_set_errhandler__ = _PMPI_Comm_set_errhandler
 #pragma weak pmpi_comm_set_errhandler__ = _PMPI_Comm_set_errhandler
+extern long long WI4MPI_Comm_set_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_set_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_set_errhandler(int *comm, int *errhandler, int *ret) {
@@ -7604,6 +7770,7 @@ void pmpi_file_get_errhandler_(int *, int *, int *);
 #pragma weak mpi_file_get_errhandler_ = _PMPI_File_get_errhandler
 #pragma weak mpi_file_get_errhandler__ = _PMPI_File_get_errhandler
 #pragma weak pmpi_file_get_errhandler__ = _PMPI_File_get_errhandler
+extern long long WI4MPI_File_get_errhandler_timeout;
 void (*_LOCAL_MPI_File_get_errhandler)(int *, int *, int *);
 
 void A_f_MPI_File_get_errhandler(int *file, int *errhandler, int *ret) {
@@ -7644,6 +7811,7 @@ void pmpi_file_set_errhandler_(int *, int *, int *);
 #pragma weak mpi_file_set_errhandler_ = _PMPI_File_set_errhandler
 #pragma weak mpi_file_set_errhandler__ = _PMPI_File_set_errhandler
 #pragma weak pmpi_file_set_errhandler__ = _PMPI_File_set_errhandler
+extern long long WI4MPI_File_set_errhandler_timeout;
 void (*_LOCAL_MPI_File_set_errhandler)(int *, int *, int *);
 
 void A_f_MPI_File_set_errhandler(int *file, int *errhandler, int *ret) {
@@ -7683,6 +7851,7 @@ void pmpi_finalized_(int *, int *);
 #pragma weak mpi_finalized_ = _PMPI_Finalized
 #pragma weak mpi_finalized__ = _PMPI_Finalized
 #pragma weak pmpi_finalized__ = _PMPI_Finalized
+extern long long WI4MPI_Finalized_timeout;
 void (*_LOCAL_MPI_Finalized)(int *, int *);
 
 void A_f_MPI_Finalized(int *flag, int *ret) {
@@ -7720,6 +7889,7 @@ void pmpi_free_mem_(void *, int *);
 #pragma weak mpi_free_mem_ = _PMPI_Free_mem
 #pragma weak mpi_free_mem__ = _PMPI_Free_mem
 #pragma weak pmpi_free_mem__ = _PMPI_Free_mem
+extern long long WI4MPI_Free_mem_timeout;
 void (*_LOCAL_MPI_Free_mem)(void *, int *);
 
 void A_f_MPI_Free_mem(void *base, int *ret) {
@@ -7759,6 +7929,7 @@ void pmpi_get_address_(void *, size_t *, int *);
 #pragma weak mpi_get_address_ = _PMPI_Get_address
 #pragma weak mpi_get_address__ = _PMPI_Get_address
 #pragma weak pmpi_get_address__ = _PMPI_Get_address
+extern long long WI4MPI_Get_address_timeout;
 void (*_LOCAL_MPI_Get_address)(void *, size_t *, int *);
 
 void A_f_MPI_Get_address(void *location, size_t *address, int *ret) {
@@ -7798,6 +7969,7 @@ void pmpi_info_create_(int *, int *);
 #pragma weak mpi_info_create_ = _PMPI_Info_create
 #pragma weak mpi_info_create__ = _PMPI_Info_create
 #pragma weak pmpi_info_create__ = _PMPI_Info_create
+extern long long WI4MPI_Info_create_timeout;
 void (*_LOCAL_MPI_Info_create)(int *, int *);
 
 void A_f_MPI_Info_create(int *info, int *ret) {
@@ -7838,6 +8010,7 @@ void pmpi_info_dup_(int *, int *, int *);
 #pragma weak mpi_info_dup_ = _PMPI_Info_dup
 #pragma weak mpi_info_dup__ = _PMPI_Info_dup
 #pragma weak pmpi_info_dup__ = _PMPI_Info_dup
+extern long long WI4MPI_Info_dup_timeout;
 void (*_LOCAL_MPI_Info_dup)(int *, int *, int *);
 
 void A_f_MPI_Info_dup(int *info, int *newinfo, int *ret) {
@@ -7880,6 +8053,7 @@ void pmpi_info_free_(int *, int *);
 #pragma weak mpi_info_free_ = _PMPI_Info_free
 #pragma weak mpi_info_free__ = _PMPI_Info_free
 #pragma weak pmpi_info_free__ = _PMPI_Info_free
+extern long long WI4MPI_Info_free_timeout;
 void (*_LOCAL_MPI_Info_free)(int *, int *);
 
 void A_f_MPI_Info_free(int *info, int *ret) {
@@ -7921,6 +8095,7 @@ void pmpi_info_get_nkeys_(int *, int *, int *);
 #pragma weak mpi_info_get_nkeys_ = _PMPI_Info_get_nkeys
 #pragma weak mpi_info_get_nkeys__ = _PMPI_Info_get_nkeys
 #pragma weak pmpi_info_get_nkeys__ = _PMPI_Info_get_nkeys
+extern long long WI4MPI_Info_get_nkeys_timeout;
 void (*_LOCAL_MPI_Info_get_nkeys)(int *, int *, int *);
 
 void A_f_MPI_Info_get_nkeys(int *info, int *nkeys, int *ret) {
@@ -7960,6 +8135,7 @@ void pmpi_request_get_status_(int *, int *, int *, int *);
 #pragma weak mpi_request_get_status_ = _PMPI_Request_get_status
 #pragma weak mpi_request_get_status__ = _PMPI_Request_get_status
 #pragma weak pmpi_request_get_status__ = _PMPI_Request_get_status
+extern long long WI4MPI_Request_get_status_timeout;
 void (*_LOCAL_MPI_Request_get_status)(int *, int *, int *, int *);
 
 void A_f_MPI_Request_get_status(int *request, int *flag, int *status,
@@ -8006,6 +8182,7 @@ void pmpi_type_create_hvector_(int *, int *, size_t *, int *, int *, int *);
 #pragma weak mpi_type_create_hvector_ = _PMPI_Type_create_hvector
 #pragma weak mpi_type_create_hvector__ = _PMPI_Type_create_hvector
 #pragma weak pmpi_type_create_hvector__ = _PMPI_Type_create_hvector
+extern long long WI4MPI_Type_create_hvector_timeout;
 void (*_LOCAL_MPI_Type_create_hvector)(int *, int *, size_t *, int *, int *,
                                        int *);
 
@@ -8051,6 +8228,7 @@ void pmpi_type_create_resized_(int *, size_t *, size_t *, int *, int *);
 #pragma weak mpi_type_create_resized_ = _PMPI_Type_create_resized
 #pragma weak mpi_type_create_resized__ = _PMPI_Type_create_resized
 #pragma weak pmpi_type_create_resized__ = _PMPI_Type_create_resized
+extern long long WI4MPI_Type_create_resized_timeout;
 void (*_LOCAL_MPI_Type_create_resized)(int *, size_t *, size_t *, int *, int *);
 
 void A_f_MPI_Type_create_resized(int *oldtype, size_t *lb, size_t *extent,
@@ -8095,6 +8273,7 @@ void pmpi_type_get_extent_(int *, size_t *, size_t *, int *);
 #pragma weak mpi_type_get_extent_ = _PMPI_Type_get_extent
 #pragma weak mpi_type_get_extent__ = _PMPI_Type_get_extent
 #pragma weak pmpi_type_get_extent__ = _PMPI_Type_get_extent
+extern long long WI4MPI_Type_get_extent_timeout;
 void (*_LOCAL_MPI_Type_get_extent)(int *, size_t *, size_t *, int *);
 
 void A_f_MPI_Type_get_extent(int *datatype, size_t *lb, size_t *extent,
@@ -8135,6 +8314,7 @@ void pmpi_type_get_true_extent_(int *, size_t *, size_t *, int *);
 #pragma weak mpi_type_get_true_extent_ = _PMPI_Type_get_true_extent
 #pragma weak mpi_type_get_true_extent__ = _PMPI_Type_get_true_extent
 #pragma weak pmpi_type_get_true_extent__ = _PMPI_Type_get_true_extent
+extern long long WI4MPI_Type_get_true_extent_timeout;
 void (*_LOCAL_MPI_Type_get_true_extent)(int *, size_t *, size_t *, int *);
 
 void A_f_MPI_Type_get_true_extent(int *datatype, size_t *true_lb,
@@ -8176,6 +8356,7 @@ void pmpi_type_create_f90_integer_(int *, int *, int *);
 #pragma weak mpi_type_create_f90_integer_ = _PMPI_Type_create_f90_integer
 #pragma weak mpi_type_create_f90_integer__ = _PMPI_Type_create_f90_integer
 #pragma weak pmpi_type_create_f90_integer__ = _PMPI_Type_create_f90_integer
+extern long long WI4MPI_Type_create_f90_integer_timeout;
 void (*_LOCAL_MPI_Type_create_f90_integer)(int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_integer(int *range, int *newtype, int *ret) {
@@ -8216,6 +8397,7 @@ void pmpi_type_create_f90_real_(int *, int *, int *, int *);
 #pragma weak mpi_type_create_f90_real_ = _PMPI_Type_create_f90_real
 #pragma weak mpi_type_create_f90_real__ = _PMPI_Type_create_f90_real
 #pragma weak pmpi_type_create_f90_real__ = _PMPI_Type_create_f90_real
+extern long long WI4MPI_Type_create_f90_real_timeout;
 void (*_LOCAL_MPI_Type_create_f90_real)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_real(int *precision, int *range, int *newtype,
@@ -8257,6 +8439,7 @@ void pmpi_type_create_f90_complex_(int *, int *, int *, int *);
 #pragma weak mpi_type_create_f90_complex_ = _PMPI_Type_create_f90_complex
 #pragma weak mpi_type_create_f90_complex__ = _PMPI_Type_create_f90_complex
 #pragma weak pmpi_type_create_f90_complex__ = _PMPI_Type_create_f90_complex
+extern long long WI4MPI_Type_create_f90_complex_timeout;
 void (*_LOCAL_MPI_Type_create_f90_complex)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_complex(int *precision, int *range, int *newtype,
@@ -8298,6 +8481,7 @@ void pmpi_reduce_local_(void *, void *, int *, int *, int *, int *);
 #pragma weak mpi_reduce_local_ = _PMPI_Reduce_local
 #pragma weak mpi_reduce_local__ = _PMPI_Reduce_local
 #pragma weak pmpi_reduce_local__ = _PMPI_Reduce_local
+extern long long WI4MPI_Reduce_local_timeout;
 void (*_LOCAL_MPI_Reduce_local)(void *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_Reduce_local(void *inbuf, void *inoutbuf, int *count,
@@ -8346,6 +8530,7 @@ void pmpi_op_commutative_(int *, int *, int *);
 #pragma weak mpi_op_commutative_ = _PMPI_Op_commutative
 #pragma weak mpi_op_commutative__ = _PMPI_Op_commutative
 #pragma weak pmpi_op_commutative__ = _PMPI_Op_commutative
+extern long long WI4MPI_Op_commutative_timeout;
 void (*_LOCAL_MPI_Op_commutative)(int *, int *, int *);
 
 void A_f_MPI_Op_commutative(int *op, int *commute, int *ret) {
@@ -8390,6 +8575,7 @@ void pmpi_reduce_scatter_block_(void *, void *, int *, int *, int *, int *,
 #pragma weak mpi_reduce_scatter_block_ = _PMPI_Reduce_scatter_block
 #pragma weak mpi_reduce_scatter_block__ = _PMPI_Reduce_scatter_block
 #pragma weak pmpi_reduce_scatter_block__ = _PMPI_Reduce_scatter_block
+extern long long WI4MPI_Reduce_scatter_block_timeout;
 void (*_LOCAL_MPI_Reduce_scatter_block)(void *, void *, int *, int *, int *,
                                         int *, int *);
 
@@ -8442,6 +8628,7 @@ void pmpi_dist_graph_neighbors_count_(int *, int *, int *, int *, int *);
 #pragma weak mpi_dist_graph_neighbors_count__ = _PMPI_Dist_graph_neighbors_count
 #pragma weak pmpi_dist_graph_neighbors_count__ =                               \
     _PMPI_Dist_graph_neighbors_count
+extern long long WI4MPI_Dist_graph_neighbors_count_timeout;
 void (*_LOCAL_MPI_Dist_graph_neighbors_count)(int *, int *, int *, int *,
                                               int *);
 
@@ -8485,6 +8672,7 @@ void pmpi_improbe_(int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_improbe_ = _PMPI_Improbe
 #pragma weak mpi_improbe__ = _PMPI_Improbe
 #pragma weak pmpi_improbe__ = _PMPI_Improbe
+extern long long WI4MPI_Improbe_timeout;
 void (*_LOCAL_MPI_Improbe)(int *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Improbe(int *source, int *tag, int *comm, int *flag, int *message,
@@ -8539,6 +8727,7 @@ void pmpi_imrecv_(void *, int *, int *, int *, int *, int *);
 #pragma weak mpi_imrecv_ = _PMPI_Imrecv
 #pragma weak mpi_imrecv__ = _PMPI_Imrecv
 #pragma weak pmpi_imrecv__ = _PMPI_Imrecv
+extern long long WI4MPI_Imrecv_timeout;
 void (*_LOCAL_MPI_Imrecv)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Imrecv(void *buf, int *count, int *datatype, int *message,
@@ -8590,6 +8779,7 @@ void pmpi_mprobe_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_mprobe_ = _PMPI_Mprobe
 #pragma weak mpi_mprobe__ = _PMPI_Mprobe
 #pragma weak pmpi_mprobe__ = _PMPI_Mprobe
+extern long long WI4MPI_Mprobe_timeout;
 void (*_LOCAL_MPI_Mprobe)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Mprobe(int *source, int *tag, int *comm, int *message, int *status,
@@ -8644,6 +8834,7 @@ void pmpi_mrecv_(void *, int *, int *, int *, int *, int *);
 #pragma weak mpi_mrecv_ = _PMPI_Mrecv
 #pragma weak mpi_mrecv__ = _PMPI_Mrecv
 #pragma weak pmpi_mrecv__ = _PMPI_Mrecv
+extern long long WI4MPI_Mrecv_timeout;
 void (*_LOCAL_MPI_Mrecv)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Mrecv(void *buf, int *count, int *datatype, int *message,
@@ -8698,6 +8889,7 @@ void pmpi_comm_idup_(int *, int *, int *, int *);
 #pragma weak mpi_comm_idup_ = _PMPI_Comm_idup
 #pragma weak mpi_comm_idup__ = _PMPI_Comm_idup
 #pragma weak pmpi_comm_idup__ = _PMPI_Comm_idup
+extern long long WI4MPI_Comm_idup_timeout;
 void (*_LOCAL_MPI_Comm_idup)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_idup(int *comm, int *newcomm, int *request, int *ret) {
@@ -8743,6 +8935,7 @@ void pmpi_ibarrier_(int *, int *, int *);
 #pragma weak mpi_ibarrier_ = _PMPI_Ibarrier
 #pragma weak mpi_ibarrier__ = _PMPI_Ibarrier
 #pragma weak pmpi_ibarrier__ = _PMPI_Ibarrier
+extern long long WI4MPI_Ibarrier_timeout;
 void (*_LOCAL_MPI_Ibarrier)(int *, int *, int *);
 
 void A_f_MPI_Ibarrier(int *comm, int *request, int *ret) {
@@ -8785,6 +8978,7 @@ void pmpi_ibcast_(void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_ibcast_ = _PMPI_Ibcast
 #pragma weak mpi_ibcast__ = _PMPI_Ibcast
 #pragma weak pmpi_ibcast__ = _PMPI_Ibcast
+extern long long WI4MPI_Ibcast_timeout;
 void (*_LOCAL_MPI_Ibcast)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Ibcast(void *buffer, int *count, int *datatype, int *root,
@@ -8840,6 +9034,7 @@ void pmpi_igather_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_igather_ = _PMPI_Igather
 #pragma weak mpi_igather__ = _PMPI_Igather
 #pragma weak pmpi_igather__ = _PMPI_Igather
+extern long long WI4MPI_Igather_timeout;
 void (*_LOCAL_MPI_Igather)(void *, int *, int *, void *, int *, int *, int *,
                            int *, int *, int *);
 
@@ -8902,6 +9097,7 @@ void pmpi_iscatter_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_iscatter_ = _PMPI_Iscatter
 #pragma weak mpi_iscatter__ = _PMPI_Iscatter
 #pragma weak pmpi_iscatter__ = _PMPI_Iscatter
+extern long long WI4MPI_Iscatter_timeout;
 void (*_LOCAL_MPI_Iscatter)(void *, int *, int *, void *, int *, int *, int *,
                             int *, int *, int *);
 
@@ -8964,6 +9160,7 @@ void pmpi_iallgather_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_iallgather_ = _PMPI_Iallgather
 #pragma weak mpi_iallgather__ = _PMPI_Iallgather
 #pragma weak pmpi_iallgather__ = _PMPI_Iallgather
+extern long long WI4MPI_Iallgather_timeout;
 void (*_LOCAL_MPI_Iallgather)(void *, int *, int *, void *, int *, int *, int *,
                               int *, int *);
 
@@ -9026,6 +9223,7 @@ void pmpi_ialltoall_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_ialltoall_ = _PMPI_Ialltoall
 #pragma weak mpi_ialltoall__ = _PMPI_Ialltoall
 #pragma weak pmpi_ialltoall__ = _PMPI_Ialltoall
+extern long long WI4MPI_Ialltoall_timeout;
 void (*_LOCAL_MPI_Ialltoall)(void *, int *, int *, void *, int *, int *, int *,
                              int *, int *);
 
@@ -9088,6 +9286,7 @@ void pmpi_ireduce_(void *, void *, int *, int *, int *, int *, int *, int *,
 #pragma weak mpi_ireduce_ = _PMPI_Ireduce
 #pragma weak mpi_ireduce__ = _PMPI_Ireduce
 #pragma weak pmpi_ireduce__ = _PMPI_Ireduce
+extern long long WI4MPI_Ireduce_timeout;
 void (*_LOCAL_MPI_Ireduce)(void *, void *, int *, int *, int *, int *, int *,
                            int *, int *);
 
@@ -9144,6 +9343,7 @@ void pmpi_iallreduce_(void *, void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_iallreduce_ = _PMPI_Iallreduce
 #pragma weak mpi_iallreduce__ = _PMPI_Iallreduce
 #pragma weak pmpi_iallreduce__ = _PMPI_Iallreduce
+extern long long WI4MPI_Iallreduce_timeout;
 void (*_LOCAL_MPI_Iallreduce)(void *, void *, int *, int *, int *, int *, int *,
                               int *);
 
@@ -9204,6 +9404,7 @@ void pmpi_ireduce_scatter_block_(void *, void *, int *, int *, int *, int *,
 #pragma weak mpi_ireduce_scatter_block_ = _PMPI_Ireduce_scatter_block
 #pragma weak mpi_ireduce_scatter_block__ = _PMPI_Ireduce_scatter_block
 #pragma weak pmpi_ireduce_scatter_block__ = _PMPI_Ireduce_scatter_block
+extern long long WI4MPI_Ireduce_scatter_block_timeout;
 void (*_LOCAL_MPI_Ireduce_scatter_block)(void *, void *, int *, int *, int *,
                                          int *, int *, int *);
 
@@ -9262,6 +9463,7 @@ void pmpi_iscan_(void *, void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_iscan_ = _PMPI_Iscan
 #pragma weak mpi_iscan__ = _PMPI_Iscan
 #pragma weak pmpi_iscan__ = _PMPI_Iscan
+extern long long WI4MPI_Iscan_timeout;
 void (*_LOCAL_MPI_Iscan)(void *, void *, int *, int *, int *, int *, int *,
                          int *);
 
@@ -9316,6 +9518,7 @@ void pmpi_iexscan_(void *, void *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_iexscan_ = _PMPI_Iexscan
 #pragma weak mpi_iexscan__ = _PMPI_Iexscan
 #pragma weak pmpi_iexscan__ = _PMPI_Iexscan
+extern long long WI4MPI_Iexscan_timeout;
 void (*_LOCAL_MPI_Iexscan)(void *, void *, int *, int *, int *, int *, int *,
                            int *);
 
@@ -9375,6 +9578,7 @@ void pmpi_ineighbor_allgather_(void *, int *, int *, void *, int *, int *,
 #pragma weak mpi_ineighbor_allgather_ = _PMPI_Ineighbor_allgather
 #pragma weak mpi_ineighbor_allgather__ = _PMPI_Ineighbor_allgather
 #pragma weak pmpi_ineighbor_allgather__ = _PMPI_Ineighbor_allgather
+extern long long WI4MPI_Ineighbor_allgather_timeout;
 void (*_LOCAL_MPI_Ineighbor_allgather)(void *, int *, int *, void *, int *,
                                        int *, int *, int *, int *);
 
@@ -9436,6 +9640,7 @@ void pmpi_ineighbor_alltoall_(void *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_ineighbor_alltoall_ = _PMPI_Ineighbor_alltoall
 #pragma weak mpi_ineighbor_alltoall__ = _PMPI_Ineighbor_alltoall
 #pragma weak pmpi_ineighbor_alltoall__ = _PMPI_Ineighbor_alltoall
+extern long long WI4MPI_Ineighbor_alltoall_timeout;
 void (*_LOCAL_MPI_Ineighbor_alltoall)(void *, int *, int *, void *, int *,
                                       int *, int *, int *, int *);
 
@@ -9497,6 +9702,7 @@ void pmpi_neighbor_allgather_(void *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_neighbor_allgather_ = _PMPI_Neighbor_allgather
 #pragma weak mpi_neighbor_allgather__ = _PMPI_Neighbor_allgather
 #pragma weak pmpi_neighbor_allgather__ = _PMPI_Neighbor_allgather
+extern long long WI4MPI_Neighbor_allgather_timeout;
 void (*_LOCAL_MPI_Neighbor_allgather)(void *, int *, int *, void *, int *,
                                       int *, int *, int *);
 
@@ -9555,6 +9761,7 @@ void pmpi_neighbor_alltoall_(void *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_neighbor_alltoall_ = _PMPI_Neighbor_alltoall
 #pragma weak mpi_neighbor_alltoall__ = _PMPI_Neighbor_alltoall
 #pragma weak pmpi_neighbor_alltoall__ = _PMPI_Neighbor_alltoall
+extern long long WI4MPI_Neighbor_alltoall_timeout;
 void (*_LOCAL_MPI_Neighbor_alltoall)(void *, int *, int *, void *, int *, int *,
                                      int *, int *);
 
@@ -9608,6 +9815,7 @@ void pmpi_comm_split_type_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_comm_split_type_ = _PMPI_Comm_split_type
 #pragma weak mpi_comm_split_type__ = _PMPI_Comm_split_type
 #pragma weak pmpi_comm_split_type__ = _PMPI_Comm_split_type
+extern long long WI4MPI_Comm_split_type_timeout;
 void (*_LOCAL_MPI_Comm_split_type)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_split_type(int *comm, int *split_type, int *key, int *info,
@@ -9654,6 +9862,7 @@ void pmpi_get_elements_x_(int *, int *, int *, int *);
 #pragma weak mpi_get_elements_x_ = _PMPI_Get_elements_x
 #pragma weak mpi_get_elements_x__ = _PMPI_Get_elements_x
 #pragma weak pmpi_get_elements_x__ = _PMPI_Get_elements_x
+extern long long WI4MPI_Get_elements_x_timeout;
 void (*_LOCAL_MPI_Get_elements_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_elements_x(int *status, int *datatype, int *count, int *ret) {
@@ -9697,6 +9906,7 @@ void pmpi_status_set_elements_x_(int *, int *, int *, int *);
 #pragma weak mpi_status_set_elements_x_ = _PMPI_Status_set_elements_x
 #pragma weak mpi_status_set_elements_x__ = _PMPI_Status_set_elements_x
 #pragma weak pmpi_status_set_elements_x__ = _PMPI_Status_set_elements_x
+extern long long WI4MPI_Status_set_elements_x_timeout;
 void (*_LOCAL_MPI_Status_set_elements_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Status_set_elements_x(int *status, int *datatype, int *count,
@@ -9744,6 +9954,7 @@ void pmpi_type_get_extent_x_(int *, int *, int *, int *);
 #pragma weak mpi_type_get_extent_x_ = _PMPI_Type_get_extent_x
 #pragma weak mpi_type_get_extent_x__ = _PMPI_Type_get_extent_x
 #pragma weak pmpi_type_get_extent_x__ = _PMPI_Type_get_extent_x
+extern long long WI4MPI_Type_get_extent_x_timeout;
 void (*_LOCAL_MPI_Type_get_extent_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_extent_x(int *datatype, int *lb, int *extent, int *ret) {
@@ -9783,6 +9994,7 @@ void pmpi_type_get_true_extent_x_(int *, int *, int *, int *);
 #pragma weak mpi_type_get_true_extent_x_ = _PMPI_Type_get_true_extent_x
 #pragma weak mpi_type_get_true_extent_x__ = _PMPI_Type_get_true_extent_x
 #pragma weak pmpi_type_get_true_extent_x__ = _PMPI_Type_get_true_extent_x
+extern long long WI4MPI_Type_get_true_extent_x_timeout;
 void (*_LOCAL_MPI_Type_get_true_extent_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_true_extent_x(int *datatype, int *lb, int *extent,
@@ -9823,6 +10035,7 @@ void pmpi_type_size_x_(int *, int *, int *);
 #pragma weak mpi_type_size_x_ = _PMPI_Type_size_x
 #pragma weak mpi_type_size_x__ = _PMPI_Type_size_x
 #pragma weak pmpi_type_size_x__ = _PMPI_Type_size_x
+extern long long WI4MPI_Type_size_x_timeout;
 void (*_LOCAL_MPI_Type_size_x)(int *, int *, int *);
 
 void A_f_MPI_Type_size_x(int *datatype, int *size, int *ret) {
@@ -9862,6 +10075,7 @@ void pmpi_comm_create_group_(int *, int *, int *, int *, int *);
 #pragma weak mpi_comm_create_group_ = _PMPI_Comm_create_group
 #pragma weak mpi_comm_create_group__ = _PMPI_Comm_create_group
 #pragma weak pmpi_comm_create_group__ = _PMPI_Comm_create_group
+extern long long WI4MPI_Comm_create_group_timeout;
 void (*_LOCAL_MPI_Comm_create_group)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_create_group(int *comm, int *group, int *tag, int *newcomm,
@@ -9910,6 +10124,7 @@ void pmpi_file_close_(int *, int *);
 #pragma weak mpi_file_close_ = _PMPI_File_close
 #pragma weak mpi_file_close__ = _PMPI_File_close
 #pragma weak pmpi_file_close__ = _PMPI_File_close
+extern long long WI4MPI_File_close_timeout;
 void (*_LOCAL_MPI_File_close)(int *, int *);
 
 void A_f_MPI_File_close(int *fh, int *ret) {
@@ -9947,6 +10162,7 @@ void pmpi_file_set_size_(int *, int *, int *);
 #pragma weak mpi_file_set_size_ = _PMPI_File_set_size
 #pragma weak mpi_file_set_size__ = _PMPI_File_set_size
 #pragma weak pmpi_file_set_size__ = _PMPI_File_set_size
+extern long long WI4MPI_File_set_size_timeout;
 void (*_LOCAL_MPI_File_set_size)(int *, int *, int *);
 
 void A_f_MPI_File_set_size(int *fh, int *size, int *ret) {
@@ -9984,6 +10200,7 @@ void pmpi_file_preallocate_(int *, int *, int *);
 #pragma weak mpi_file_preallocate_ = _PMPI_File_preallocate
 #pragma weak mpi_file_preallocate__ = _PMPI_File_preallocate
 #pragma weak pmpi_file_preallocate__ = _PMPI_File_preallocate
+extern long long WI4MPI_File_preallocate_timeout;
 void (*_LOCAL_MPI_File_preallocate)(int *, int *, int *);
 
 void A_f_MPI_File_preallocate(int *fh, int *size, int *ret) {
@@ -10021,6 +10238,7 @@ void pmpi_file_get_size_(int *, int *, int *);
 #pragma weak mpi_file_get_size_ = _PMPI_File_get_size
 #pragma weak mpi_file_get_size__ = _PMPI_File_get_size
 #pragma weak pmpi_file_get_size__ = _PMPI_File_get_size
+extern long long WI4MPI_File_get_size_timeout;
 void (*_LOCAL_MPI_File_get_size)(int *, int *, int *);
 
 void A_f_MPI_File_get_size(int *fh, int *size, int *ret) {
@@ -10058,6 +10276,7 @@ void pmpi_file_get_group_(int *, int *, int *);
 #pragma weak mpi_file_get_group_ = _PMPI_File_get_group
 #pragma weak mpi_file_get_group__ = _PMPI_File_get_group
 #pragma weak pmpi_file_get_group__ = _PMPI_File_get_group
+extern long long WI4MPI_File_get_group_timeout;
 void (*_LOCAL_MPI_File_get_group)(int *, int *, int *);
 
 void A_f_MPI_File_get_group(int *fh, int *group, int *ret) {
@@ -10098,6 +10317,7 @@ void pmpi_file_get_amode_(int *, int *, int *);
 #pragma weak mpi_file_get_amode_ = _PMPI_File_get_amode
 #pragma weak mpi_file_get_amode__ = _PMPI_File_get_amode
 #pragma weak pmpi_file_get_amode__ = _PMPI_File_get_amode
+extern long long WI4MPI_File_get_amode_timeout;
 void (*_LOCAL_MPI_File_get_amode)(int *, int *, int *);
 
 void A_f_MPI_File_get_amode(int *fh, int *amode, int *ret) {
@@ -10135,6 +10355,7 @@ void pmpi_file_set_info_(int *, int *, int *);
 #pragma weak mpi_file_set_info_ = _PMPI_File_set_info
 #pragma weak mpi_file_set_info__ = _PMPI_File_set_info
 #pragma weak pmpi_file_set_info__ = _PMPI_File_set_info
+extern long long WI4MPI_File_set_info_timeout;
 void (*_LOCAL_MPI_File_set_info)(int *, int *, int *);
 
 void A_f_MPI_File_set_info(int *fh, int *info, int *ret) {
@@ -10174,6 +10395,7 @@ void pmpi_file_get_info_(int *, int *, int *);
 #pragma weak mpi_file_get_info_ = _PMPI_File_get_info
 #pragma weak mpi_file_get_info__ = _PMPI_File_get_info
 #pragma weak pmpi_file_get_info__ = _PMPI_File_get_info
+extern long long WI4MPI_File_get_info_timeout;
 void (*_LOCAL_MPI_File_get_info)(int *, int *, int *);
 
 void A_f_MPI_File_get_info(int *fh, int *info_used, int *ret) {
@@ -10214,6 +10436,7 @@ void pmpi_file_read_at_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_read_at_ = _PMPI_File_read_at
 #pragma weak mpi_file_read_at__ = _PMPI_File_read_at
 #pragma weak pmpi_file_read_at__ = _PMPI_File_read_at
+extern long long WI4MPI_File_read_at_timeout;
 void (*_LOCAL_MPI_File_read_at)(int *, int *, void *, int *, int *, int *,
                                 int *);
 
@@ -10265,6 +10488,7 @@ void pmpi_file_read_at_all_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_read_at_all_ = _PMPI_File_read_at_all
 #pragma weak mpi_file_read_at_all__ = _PMPI_File_read_at_all
 #pragma weak pmpi_file_read_at_all__ = _PMPI_File_read_at_all
+extern long long WI4MPI_File_read_at_all_timeout;
 void (*_LOCAL_MPI_File_read_at_all)(int *, int *, void *, int *, int *, int *,
                                     int *);
 
@@ -10316,6 +10540,7 @@ void pmpi_file_write_at_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_write_at_ = _PMPI_File_write_at
 #pragma weak mpi_file_write_at__ = _PMPI_File_write_at
 #pragma weak pmpi_file_write_at__ = _PMPI_File_write_at
+extern long long WI4MPI_File_write_at_timeout;
 void (*_LOCAL_MPI_File_write_at)(int *, int *, void *, int *, int *, int *,
                                  int *);
 
@@ -10366,6 +10591,7 @@ void pmpi_file_write_at_all_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_write_at_all_ = _PMPI_File_write_at_all
 #pragma weak mpi_file_write_at_all__ = _PMPI_File_write_at_all
 #pragma weak pmpi_file_write_at_all__ = _PMPI_File_write_at_all
+extern long long WI4MPI_File_write_at_all_timeout;
 void (*_LOCAL_MPI_File_write_at_all)(int *, int *, void *, int *, int *, int *,
                                      int *);
 
@@ -10416,6 +10642,7 @@ void pmpi_file_iread_at_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iread_at_ = _PMPI_File_iread_at
 #pragma weak mpi_file_iread_at__ = _PMPI_File_iread_at
 #pragma weak pmpi_file_iread_at__ = _PMPI_File_iread_at
+extern long long WI4MPI_File_iread_at_timeout;
 void (*_LOCAL_MPI_File_iread_at)(int *, int *, void *, int *, int *, int *,
                                  int *);
 
@@ -10464,6 +10691,7 @@ void pmpi_file_iwrite_at_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iwrite_at_ = _PMPI_File_iwrite_at
 #pragma weak mpi_file_iwrite_at__ = _PMPI_File_iwrite_at
 #pragma weak pmpi_file_iwrite_at__ = _PMPI_File_iwrite_at
+extern long long WI4MPI_File_iwrite_at_timeout;
 void (*_LOCAL_MPI_File_iwrite_at)(int *, int *, void *, int *, int *, int *,
                                   int *);
 
@@ -10511,6 +10739,7 @@ void pmpi_file_read_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_read_ = _PMPI_File_read
 #pragma weak mpi_file_read__ = _PMPI_File_read
 #pragma weak pmpi_file_read__ = _PMPI_File_read
+extern long long WI4MPI_File_read_timeout;
 void (*_LOCAL_MPI_File_read)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read(int *fh, void *buf, int *count, int *datatype,
@@ -10560,6 +10789,7 @@ void pmpi_file_read_all_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_read_all_ = _PMPI_File_read_all
 #pragma weak mpi_file_read_all__ = _PMPI_File_read_all
 #pragma weak pmpi_file_read_all__ = _PMPI_File_read_all
+extern long long WI4MPI_File_read_all_timeout;
 void (*_LOCAL_MPI_File_read_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_all(int *fh, void *buf, int *count, int *datatype,
@@ -10610,6 +10840,7 @@ void pmpi_file_write_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_write_ = _PMPI_File_write
 #pragma weak mpi_file_write__ = _PMPI_File_write
 #pragma weak pmpi_file_write__ = _PMPI_File_write
+extern long long WI4MPI_File_write_timeout;
 void (*_LOCAL_MPI_File_write)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write(int *fh, void *buf, int *count, int *datatype,
@@ -10659,6 +10890,7 @@ void pmpi_file_write_all_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_write_all_ = _PMPI_File_write_all
 #pragma weak mpi_file_write_all__ = _PMPI_File_write_all
 #pragma weak pmpi_file_write_all__ = _PMPI_File_write_all
+extern long long WI4MPI_File_write_all_timeout;
 void (*_LOCAL_MPI_File_write_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write_all(int *fh, void *buf, int *count, int *datatype,
@@ -10708,6 +10940,7 @@ void pmpi_file_iread_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iread_ = _PMPI_File_iread
 #pragma weak mpi_file_iread__ = _PMPI_File_iread
 #pragma weak pmpi_file_iread__ = _PMPI_File_iread
+extern long long WI4MPI_File_iread_timeout;
 void (*_LOCAL_MPI_File_iread)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread(int *fh, void *buf, int *count, int *datatype,
@@ -10755,6 +10988,7 @@ void pmpi_file_iwrite_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iwrite_ = _PMPI_File_iwrite
 #pragma weak mpi_file_iwrite__ = _PMPI_File_iwrite
 #pragma weak pmpi_file_iwrite__ = _PMPI_File_iwrite
+extern long long WI4MPI_File_iwrite_timeout;
 void (*_LOCAL_MPI_File_iwrite)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iwrite(int *fh, void *buf, int *count, int *datatype,
@@ -10803,6 +11037,7 @@ void pmpi_file_seek_(int *, int *, int *, int *);
 #pragma weak mpi_file_seek_ = _PMPI_File_seek
 #pragma weak mpi_file_seek__ = _PMPI_File_seek
 #pragma weak pmpi_file_seek__ = _PMPI_File_seek
+extern long long WI4MPI_File_seek_timeout;
 void (*_LOCAL_MPI_File_seek)(int *, int *, int *, int *);
 
 void A_f_MPI_File_seek(int *fh, int *offset, int *whence, int *ret) {
@@ -10840,6 +11075,7 @@ void pmpi_file_get_position_(int *, int *, int *);
 #pragma weak mpi_file_get_position_ = _PMPI_File_get_position
 #pragma weak mpi_file_get_position__ = _PMPI_File_get_position
 #pragma weak pmpi_file_get_position__ = _PMPI_File_get_position
+extern long long WI4MPI_File_get_position_timeout;
 void (*_LOCAL_MPI_File_get_position)(int *, int *, int *);
 
 void A_f_MPI_File_get_position(int *fh, int *offset, int *ret) {
@@ -10877,6 +11113,7 @@ void pmpi_file_get_byte_offset_(int *, int *, int *, int *);
 #pragma weak mpi_file_get_byte_offset_ = _PMPI_File_get_byte_offset
 #pragma weak mpi_file_get_byte_offset__ = _PMPI_File_get_byte_offset
 #pragma weak pmpi_file_get_byte_offset__ = _PMPI_File_get_byte_offset
+extern long long WI4MPI_File_get_byte_offset_timeout;
 void (*_LOCAL_MPI_File_get_byte_offset)(int *, int *, int *, int *);
 
 void A_f_MPI_File_get_byte_offset(int *fh, int *offset, int *disp, int *ret) {
@@ -10914,6 +11151,7 @@ void pmpi_file_read_shared_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_read_shared_ = _PMPI_File_read_shared
 #pragma weak mpi_file_read_shared__ = _PMPI_File_read_shared
 #pragma weak pmpi_file_read_shared__ = _PMPI_File_read_shared
+extern long long WI4MPI_File_read_shared_timeout;
 void (*_LOCAL_MPI_File_read_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_shared(int *fh, void *buf, int *count, int *datatype,
@@ -10964,6 +11202,7 @@ void pmpi_file_write_shared_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_write_shared_ = _PMPI_File_write_shared
 #pragma weak mpi_file_write_shared__ = _PMPI_File_write_shared
 #pragma weak pmpi_file_write_shared__ = _PMPI_File_write_shared
+extern long long WI4MPI_File_write_shared_timeout;
 void (*_LOCAL_MPI_File_write_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write_shared(int *fh, void *buf, int *count, int *datatype,
@@ -11013,6 +11252,7 @@ void pmpi_file_iread_shared_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iread_shared_ = _PMPI_File_iread_shared
 #pragma weak mpi_file_iread_shared__ = _PMPI_File_iread_shared
 #pragma weak pmpi_file_iread_shared__ = _PMPI_File_iread_shared
+extern long long WI4MPI_File_iread_shared_timeout;
 void (*_LOCAL_MPI_File_iread_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread_shared(int *fh, void *buf, int *count, int *datatype,
@@ -11060,6 +11300,7 @@ void pmpi_file_iwrite_shared_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iwrite_shared_ = _PMPI_File_iwrite_shared
 #pragma weak mpi_file_iwrite_shared__ = _PMPI_File_iwrite_shared
 #pragma weak pmpi_file_iwrite_shared__ = _PMPI_File_iwrite_shared
+extern long long WI4MPI_File_iwrite_shared_timeout;
 void (*_LOCAL_MPI_File_iwrite_shared)(int *, void *, int *, int *, int *,
                                       int *);
 
@@ -11107,6 +11348,7 @@ void pmpi_file_read_ordered_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_read_ordered_ = _PMPI_File_read_ordered
 #pragma weak mpi_file_read_ordered__ = _PMPI_File_read_ordered
 #pragma weak pmpi_file_read_ordered__ = _PMPI_File_read_ordered
+extern long long WI4MPI_File_read_ordered_timeout;
 void (*_LOCAL_MPI_File_read_ordered)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_ordered(int *fh, void *buf, int *count, int *datatype,
@@ -11157,6 +11399,7 @@ void pmpi_file_write_ordered_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_write_ordered_ = _PMPI_File_write_ordered
 #pragma weak mpi_file_write_ordered__ = _PMPI_File_write_ordered
 #pragma weak pmpi_file_write_ordered__ = _PMPI_File_write_ordered
+extern long long WI4MPI_File_write_ordered_timeout;
 void (*_LOCAL_MPI_File_write_ordered)(int *, void *, int *, int *, int *,
                                       int *);
 
@@ -11207,6 +11450,7 @@ void pmpi_file_seek_shared_(int *, int *, int *, int *);
 #pragma weak mpi_file_seek_shared_ = _PMPI_File_seek_shared
 #pragma weak mpi_file_seek_shared__ = _PMPI_File_seek_shared
 #pragma weak pmpi_file_seek_shared__ = _PMPI_File_seek_shared
+extern long long WI4MPI_File_seek_shared_timeout;
 void (*_LOCAL_MPI_File_seek_shared)(int *, int *, int *, int *);
 
 void A_f_MPI_File_seek_shared(int *fh, int *offset, int *whence, int *ret) {
@@ -11244,6 +11488,7 @@ void pmpi_file_get_position_shared_(int *, int *, int *);
 #pragma weak mpi_file_get_position_shared_ = _PMPI_File_get_position_shared
 #pragma weak mpi_file_get_position_shared__ = _PMPI_File_get_position_shared
 #pragma weak pmpi_file_get_position_shared__ = _PMPI_File_get_position_shared
+extern long long WI4MPI_File_get_position_shared_timeout;
 void (*_LOCAL_MPI_File_get_position_shared)(int *, int *, int *);
 
 void A_f_MPI_File_get_position_shared(int *fh, int *offset, int *ret) {
@@ -11281,6 +11526,7 @@ void pmpi_file_read_at_all_begin_(int *, int *, void *, int *, int *, int *);
 #pragma weak mpi_file_read_at_all_begin_ = _PMPI_File_read_at_all_begin
 #pragma weak mpi_file_read_at_all_begin__ = _PMPI_File_read_at_all_begin
 #pragma weak pmpi_file_read_at_all_begin__ = _PMPI_File_read_at_all_begin
+extern long long WI4MPI_File_read_at_all_begin_timeout;
 void (*_LOCAL_MPI_File_read_at_all_begin)(int *, int *, void *, int *, int *,
                                           int *);
 
@@ -11326,6 +11572,7 @@ void pmpi_file_read_at_all_end_(int *, void *, int *, int *);
 #pragma weak mpi_file_read_at_all_end_ = _PMPI_File_read_at_all_end
 #pragma weak mpi_file_read_at_all_end__ = _PMPI_File_read_at_all_end
 #pragma weak pmpi_file_read_at_all_end__ = _PMPI_File_read_at_all_end
+extern long long WI4MPI_File_read_at_all_end_timeout;
 void (*_LOCAL_MPI_File_read_at_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_at_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -11372,6 +11619,7 @@ void pmpi_file_write_at_all_begin_(int *, int *, void *, int *, int *, int *);
 #pragma weak mpi_file_write_at_all_begin_ = _PMPI_File_write_at_all_begin
 #pragma weak mpi_file_write_at_all_begin__ = _PMPI_File_write_at_all_begin
 #pragma weak pmpi_file_write_at_all_begin__ = _PMPI_File_write_at_all_begin
+extern long long WI4MPI_File_write_at_all_begin_timeout;
 void (*_LOCAL_MPI_File_write_at_all_begin)(int *, int *, void *, int *, int *,
                                            int *);
 
@@ -11416,6 +11664,7 @@ void pmpi_file_write_at_all_end_(int *, void *, int *, int *);
 #pragma weak mpi_file_write_at_all_end_ = _PMPI_File_write_at_all_end
 #pragma weak mpi_file_write_at_all_end__ = _PMPI_File_write_at_all_end
 #pragma weak pmpi_file_write_at_all_end__ = _PMPI_File_write_at_all_end
+extern long long WI4MPI_File_write_at_all_end_timeout;
 void (*_LOCAL_MPI_File_write_at_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_at_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -11461,6 +11710,7 @@ void pmpi_file_read_all_begin_(int *, void *, int *, int *, int *);
 #pragma weak mpi_file_read_all_begin_ = _PMPI_File_read_all_begin
 #pragma weak mpi_file_read_all_begin__ = _PMPI_File_read_all_begin
 #pragma weak pmpi_file_read_all_begin__ = _PMPI_File_read_all_begin
+extern long long WI4MPI_File_read_all_begin_timeout;
 void (*_LOCAL_MPI_File_read_all_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_read_all_begin(int *fh, void *buf, int *count, int *datatype,
@@ -11504,6 +11754,7 @@ void pmpi_file_read_all_end_(int *, void *, int *, int *);
 #pragma weak mpi_file_read_all_end_ = _PMPI_File_read_all_end
 #pragma weak mpi_file_read_all_end__ = _PMPI_File_read_all_end
 #pragma weak pmpi_file_read_all_end__ = _PMPI_File_read_all_end
+extern long long WI4MPI_File_read_all_end_timeout;
 void (*_LOCAL_MPI_File_read_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -11550,6 +11801,7 @@ void pmpi_file_write_all_begin_(int *, void *, int *, int *, int *);
 #pragma weak mpi_file_write_all_begin_ = _PMPI_File_write_all_begin
 #pragma weak mpi_file_write_all_begin__ = _PMPI_File_write_all_begin
 #pragma weak pmpi_file_write_all_begin__ = _PMPI_File_write_all_begin
+extern long long WI4MPI_File_write_all_begin_timeout;
 void (*_LOCAL_MPI_File_write_all_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_write_all_begin(int *fh, void *buf, int *count, int *datatype,
@@ -11595,6 +11847,7 @@ void pmpi_file_write_all_end_(int *, void *, int *, int *);
 #pragma weak mpi_file_write_all_end_ = _PMPI_File_write_all_end
 #pragma weak mpi_file_write_all_end__ = _PMPI_File_write_all_end
 #pragma weak pmpi_file_write_all_end__ = _PMPI_File_write_all_end
+extern long long WI4MPI_File_write_all_end_timeout;
 void (*_LOCAL_MPI_File_write_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_all_end(int *fh, void *buf, int *status, int *ret) {
@@ -11640,6 +11893,7 @@ void pmpi_file_read_ordered_begin_(int *, void *, int *, int *, int *);
 #pragma weak mpi_file_read_ordered_begin_ = _PMPI_File_read_ordered_begin
 #pragma weak mpi_file_read_ordered_begin__ = _PMPI_File_read_ordered_begin
 #pragma weak pmpi_file_read_ordered_begin__ = _PMPI_File_read_ordered_begin
+extern long long WI4MPI_File_read_ordered_begin_timeout;
 void (*_LOCAL_MPI_File_read_ordered_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_read_ordered_begin(int *fh, void *buf, int *count,
@@ -11684,6 +11938,7 @@ void pmpi_file_read_ordered_end_(int *, void *, int *, int *);
 #pragma weak mpi_file_read_ordered_end_ = _PMPI_File_read_ordered_end
 #pragma weak mpi_file_read_ordered_end__ = _PMPI_File_read_ordered_end
 #pragma weak pmpi_file_read_ordered_end__ = _PMPI_File_read_ordered_end
+extern long long WI4MPI_File_read_ordered_end_timeout;
 void (*_LOCAL_MPI_File_read_ordered_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_ordered_end(int *fh, void *buf, int *status, int *ret) {
@@ -11730,6 +11985,7 @@ void pmpi_file_write_ordered_begin_(int *, void *, int *, int *, int *);
 #pragma weak mpi_file_write_ordered_begin_ = _PMPI_File_write_ordered_begin
 #pragma weak mpi_file_write_ordered_begin__ = _PMPI_File_write_ordered_begin
 #pragma weak pmpi_file_write_ordered_begin__ = _PMPI_File_write_ordered_begin
+extern long long WI4MPI_File_write_ordered_begin_timeout;
 void (*_LOCAL_MPI_File_write_ordered_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_write_ordered_begin(int *fh, void *buf, int *count,
@@ -11774,6 +12030,7 @@ void pmpi_file_write_ordered_end_(int *, void *, int *, int *);
 #pragma weak mpi_file_write_ordered_end_ = _PMPI_File_write_ordered_end
 #pragma weak mpi_file_write_ordered_end__ = _PMPI_File_write_ordered_end
 #pragma weak pmpi_file_write_ordered_end__ = _PMPI_File_write_ordered_end
+extern long long WI4MPI_File_write_ordered_end_timeout;
 void (*_LOCAL_MPI_File_write_ordered_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_ordered_end(int *fh, void *buf, int *status, int *ret) {
@@ -11819,6 +12076,7 @@ void pmpi_file_get_type_extent_(int *, int *, size_t *, int *);
 #pragma weak mpi_file_get_type_extent_ = _PMPI_File_get_type_extent
 #pragma weak mpi_file_get_type_extent__ = _PMPI_File_get_type_extent
 #pragma weak pmpi_file_get_type_extent__ = _PMPI_File_get_type_extent
+extern long long WI4MPI_File_get_type_extent_timeout;
 void (*_LOCAL_MPI_File_get_type_extent)(int *, int *, size_t *, int *);
 
 void A_f_MPI_File_get_type_extent(int *fh, int *datatype, size_t *extent,
@@ -11859,6 +12117,7 @@ void pmpi_file_set_atomicity_(int *, int *, int *);
 #pragma weak mpi_file_set_atomicity_ = _PMPI_File_set_atomicity
 #pragma weak mpi_file_set_atomicity__ = _PMPI_File_set_atomicity
 #pragma weak pmpi_file_set_atomicity__ = _PMPI_File_set_atomicity
+extern long long WI4MPI_File_set_atomicity_timeout;
 void (*_LOCAL_MPI_File_set_atomicity)(int *, int *, int *);
 
 void A_f_MPI_File_set_atomicity(int *fh, int *flag, int *ret) {
@@ -11896,6 +12155,7 @@ void pmpi_file_get_atomicity_(int *, int *, int *);
 #pragma weak mpi_file_get_atomicity_ = _PMPI_File_get_atomicity
 #pragma weak mpi_file_get_atomicity__ = _PMPI_File_get_atomicity
 #pragma weak pmpi_file_get_atomicity__ = _PMPI_File_get_atomicity
+extern long long WI4MPI_File_get_atomicity_timeout;
 void (*_LOCAL_MPI_File_get_atomicity)(int *, int *, int *);
 
 void A_f_MPI_File_get_atomicity(int *fh, int *flag, int *ret) {
@@ -11933,6 +12193,7 @@ void pmpi_file_sync_(int *, int *);
 #pragma weak mpi_file_sync_ = _PMPI_File_sync
 #pragma weak mpi_file_sync__ = _PMPI_File_sync
 #pragma weak pmpi_file_sync__ = _PMPI_File_sync
+extern long long WI4MPI_File_sync_timeout;
 void (*_LOCAL_MPI_File_sync)(int *, int *);
 
 void A_f_MPI_File_sync(int *fh, int *ret) {
@@ -11970,6 +12231,7 @@ void pmpi_wtime_(double *);
 #pragma weak mpi_wtime_ = _PMPI_Wtime
 #pragma weak mpi_wtime__ = _PMPI_Wtime
 #pragma weak pmpi_wtime__ = _PMPI_Wtime
+extern long long WI4MPI_Wtime_timeout;
 void (*_LOCAL_MPI_Wtime)(double *);
 
 void A_f_MPI_Wtime(double *ret) {
@@ -12006,6 +12268,7 @@ void pmpi_wtick_(double *);
 #pragma weak mpi_wtick_ = _PMPI_Wtick
 #pragma weak mpi_wtick__ = _PMPI_Wtick
 #pragma weak pmpi_wtick__ = _PMPI_Wtick
+extern long long WI4MPI_Wtick_timeout;
 void (*_LOCAL_MPI_Wtick)(double *);
 
 void A_f_MPI_Wtick(double *ret) {
@@ -12042,6 +12305,7 @@ void pmpi_finalize_(int *);
 #pragma weak mpi_finalize_ = _PMPI_Finalize
 #pragma weak mpi_finalize__ = _PMPI_Finalize
 #pragma weak pmpi_finalize__ = _PMPI_Finalize
+extern long long WI4MPI_Finalize_timeout;
 void (*_LOCAL_MPI_Finalize)(int *);
 
 void A_f_MPI_Finalize(int *ret) {
@@ -12079,6 +12343,7 @@ void pmpi_waitany_(int *, int *, int *, int *, int *);
 #pragma weak mpi_waitany_ = _PMPI_Waitany
 #pragma weak mpi_waitany__ = _PMPI_Waitany
 #pragma weak pmpi_waitany__ = _PMPI_Waitany
+extern long long WI4MPI_Waitany_timeout;
 void (*_LOCAL_MPI_Waitany)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Waitany(int *count, int *array_of_requests, int *indx, int *status,
@@ -12130,6 +12395,7 @@ void pmpi_testany_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_testany_ = _PMPI_Testany
 #pragma weak mpi_testany__ = _PMPI_Testany
 #pragma weak pmpi_testany__ = _PMPI_Testany
+extern long long WI4MPI_Testany_timeout;
 void (*_LOCAL_MPI_Testany)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testany(int *count, int *array_of_requests, int *indx, int *flag,
@@ -12182,6 +12448,7 @@ void pmpi_waitall_(int *, int *, int *, int *);
 #pragma weak mpi_waitall_ = _PMPI_Waitall
 #pragma weak mpi_waitall__ = _PMPI_Waitall
 #pragma weak pmpi_waitall__ = _PMPI_Waitall
+extern long long WI4MPI_Waitall_timeout;
 void (*_LOCAL_MPI_Waitall)(int *, int *, int *, int *);
 
 void A_f_MPI_Waitall(int *count, int *array_of_requests, int *array_of_statuses,
@@ -12240,6 +12507,7 @@ void pmpi_testall_(int *, int *, int *, int *, int *);
 #pragma weak mpi_testall_ = _PMPI_Testall
 #pragma weak mpi_testall__ = _PMPI_Testall
 #pragma weak pmpi_testall__ = _PMPI_Testall
+extern long long WI4MPI_Testall_timeout;
 void (*_LOCAL_MPI_Testall)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testall(int *count, int *array_of_requests, int *flag,
@@ -12298,6 +12566,7 @@ void pmpi_waitsome_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_waitsome_ = _PMPI_Waitsome
 #pragma weak mpi_waitsome__ = _PMPI_Waitsome
 #pragma weak pmpi_waitsome__ = _PMPI_Waitsome
+extern long long WI4MPI_Waitsome_timeout;
 void (*_LOCAL_MPI_Waitsome)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Waitsome(int *incount, int *array_of_requests, int *outcount,
@@ -12357,6 +12626,7 @@ void pmpi_testsome_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_testsome_ = _PMPI_Testsome
 #pragma weak mpi_testsome__ = _PMPI_Testsome
 #pragma weak pmpi_testsome__ = _PMPI_Testsome
+extern long long WI4MPI_Testsome_timeout;
 void (*_LOCAL_MPI_Testsome)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testsome(int *incount, int *array_of_requests, int *outcount,
@@ -12416,6 +12686,7 @@ void pmpi_startall_(int *, int *, int *);
 #pragma weak mpi_startall_ = _PMPI_Startall
 #pragma weak mpi_startall__ = _PMPI_Startall
 #pragma weak pmpi_startall__ = _PMPI_Startall
+extern long long WI4MPI_Startall_timeout;
 void (*_LOCAL_MPI_Startall)(int *, int *, int *);
 
 void A_f_MPI_Startall(int *count, int *array_of_requests, int *ret) {
@@ -12465,6 +12736,7 @@ void pmpi_alltoallw_(void *, int *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_alltoallw_ = _PMPI_Alltoallw
 #pragma weak mpi_alltoallw__ = _PMPI_Alltoallw
 #pragma weak pmpi_alltoallw__ = _PMPI_Alltoallw
+extern long long WI4MPI_Alltoallw_timeout;
 void (*_LOCAL_MPI_Alltoallw)(void *, int *, int *, int *, void *, int *, int *,
                              int *, int *, int *);
 
@@ -12522,6 +12794,7 @@ void pmpi_reduce_scatter_(void *, void *, int *, int *, int *, int *, int *);
 #pragma weak mpi_reduce_scatter_ = _PMPI_Reduce_scatter
 #pragma weak mpi_reduce_scatter__ = _PMPI_Reduce_scatter
 #pragma weak pmpi_reduce_scatter__ = _PMPI_Reduce_scatter
+extern long long WI4MPI_Reduce_scatter_timeout;
 void (*_LOCAL_MPI_Reduce_scatter)(void *, void *, int *, int *, int *, int *,
                                   int *);
 
@@ -12574,6 +12847,7 @@ void pmpi_group_translate_ranks_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_group_translate_ranks_ = _PMPI_Group_translate_ranks
 #pragma weak mpi_group_translate_ranks__ = _PMPI_Group_translate_ranks
 #pragma weak pmpi_group_translate_ranks__ = _PMPI_Group_translate_ranks
+extern long long WI4MPI_Group_translate_ranks_timeout;
 void (*_LOCAL_MPI_Group_translate_ranks)(int *, int *, int *, int *, int *,
                                          int *);
 
@@ -12618,6 +12892,7 @@ void pmpi_group_incl_(int *, int *, int *, int *, int *);
 #pragma weak mpi_group_incl_ = _PMPI_Group_incl
 #pragma weak mpi_group_incl__ = _PMPI_Group_incl
 #pragma weak pmpi_group_incl__ = _PMPI_Group_incl
+extern long long WI4MPI_Group_incl_timeout;
 void (*_LOCAL_MPI_Group_incl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_incl(int *group, int *n, int *ranks, int *newgroup,
@@ -12661,6 +12936,7 @@ void pmpi_group_excl_(int *, int *, int *, int *, int *);
 #pragma weak mpi_group_excl_ = _PMPI_Group_excl
 #pragma weak mpi_group_excl__ = _PMPI_Group_excl
 #pragma weak pmpi_group_excl__ = _PMPI_Group_excl
+extern long long WI4MPI_Group_excl_timeout;
 void (*_LOCAL_MPI_Group_excl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_excl(int *group, int *n, int *ranks, int *newgroup,
@@ -12704,6 +12980,7 @@ void pmpi_group_range_incl_(int *, int *, int *, int *, int *);
 #pragma weak mpi_group_range_incl_ = _PMPI_Group_range_incl
 #pragma weak mpi_group_range_incl__ = _PMPI_Group_range_incl
 #pragma weak pmpi_group_range_incl__ = _PMPI_Group_range_incl
+extern long long WI4MPI_Group_range_incl_timeout;
 void (*_LOCAL_MPI_Group_range_incl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_range_incl(int *group, int *n, int *ranges, int *newgroup,
@@ -12747,6 +13024,7 @@ void pmpi_group_range_excl_(int *, int *, int *, int *, int *);
 #pragma weak mpi_group_range_excl_ = _PMPI_Group_range_excl
 #pragma weak mpi_group_range_excl__ = _PMPI_Group_range_excl
 #pragma weak pmpi_group_range_excl__ = _PMPI_Group_range_excl
+extern long long WI4MPI_Group_range_excl_timeout;
 void (*_LOCAL_MPI_Group_range_excl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_range_excl(int *group, int *n, int *ranges, int *newgroup,
@@ -12790,6 +13068,7 @@ void pmpi_cart_create_(int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_cart_create_ = _PMPI_Cart_create
 #pragma weak mpi_cart_create__ = _PMPI_Cart_create
 #pragma weak pmpi_cart_create__ = _PMPI_Cart_create
+extern long long WI4MPI_Cart_create_timeout;
 void (*_LOCAL_MPI_Cart_create)(int *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_create(int *comm_old, int *ndims, int *dims, int *periods,
@@ -12834,6 +13113,7 @@ void pmpi_dims_create_(int *, int *, int *, int *);
 #pragma weak mpi_dims_create_ = _PMPI_Dims_create
 #pragma weak mpi_dims_create__ = _PMPI_Dims_create
 #pragma weak pmpi_dims_create__ = _PMPI_Dims_create
+extern long long WI4MPI_Dims_create_timeout;
 void (*_LOCAL_MPI_Dims_create)(int *, int *, int *, int *);
 
 void A_f_MPI_Dims_create(int *nnodes, int *ndims, int *dims, int *ret) {
@@ -12871,6 +13151,7 @@ void pmpi_graph_create_(int *, int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_graph_create_ = _PMPI_Graph_create
 #pragma weak mpi_graph_create__ = _PMPI_Graph_create
 #pragma weak pmpi_graph_create__ = _PMPI_Graph_create
+extern long long WI4MPI_Graph_create_timeout;
 void (*_LOCAL_MPI_Graph_create)(int *, int *, int *, int *, int *, int *,
                                 int *);
 
@@ -12916,6 +13197,7 @@ void pmpi_graph_get_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_graph_get_ = _PMPI_Graph_get
 #pragma weak mpi_graph_get__ = _PMPI_Graph_get
 #pragma weak pmpi_graph_get__ = _PMPI_Graph_get
+extern long long WI4MPI_Graph_get_timeout;
 void (*_LOCAL_MPI_Graph_get)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_get(int *comm, int *maxindex, int *maxedges, int *indx,
@@ -12956,6 +13238,7 @@ void pmpi_cart_get_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_cart_get_ = _PMPI_Cart_get
 #pragma weak mpi_cart_get__ = _PMPI_Cart_get
 #pragma weak pmpi_cart_get__ = _PMPI_Cart_get
+extern long long WI4MPI_Cart_get_timeout;
 void (*_LOCAL_MPI_Cart_get)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_get(int *comm, int *maxdims, int *dims, int *periods,
@@ -12996,6 +13279,7 @@ void pmpi_cart_rank_(int *, int *, int *, int *);
 #pragma weak mpi_cart_rank_ = _PMPI_Cart_rank
 #pragma weak mpi_cart_rank__ = _PMPI_Cart_rank
 #pragma weak pmpi_cart_rank__ = _PMPI_Cart_rank
+extern long long WI4MPI_Cart_rank_timeout;
 void (*_LOCAL_MPI_Cart_rank)(int *, int *, int *, int *);
 
 void A_f_MPI_Cart_rank(int *comm, int *coords, int *rank, int *ret) {
@@ -13035,6 +13319,7 @@ void pmpi_cart_coords_(int *, int *, int *, int *, int *);
 #pragma weak mpi_cart_coords_ = _PMPI_Cart_coords
 #pragma weak mpi_cart_coords__ = _PMPI_Cart_coords
 #pragma weak pmpi_cart_coords__ = _PMPI_Cart_coords
+extern long long WI4MPI_Cart_coords_timeout;
 void (*_LOCAL_MPI_Cart_coords)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_coords(int *comm, int *rank, int *maxdims, int *coords,
@@ -13075,6 +13360,7 @@ void pmpi_graph_neighbors_(int *, int *, int *, int *, int *);
 #pragma weak mpi_graph_neighbors_ = _PMPI_Graph_neighbors
 #pragma weak mpi_graph_neighbors__ = _PMPI_Graph_neighbors
 #pragma weak pmpi_graph_neighbors__ = _PMPI_Graph_neighbors
+extern long long WI4MPI_Graph_neighbors_timeout;
 void (*_LOCAL_MPI_Graph_neighbors)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_neighbors(int *comm, int *rank, int *maxneighbors,
@@ -13116,6 +13402,7 @@ void pmpi_cart_sub_(int *, int *, int *, int *);
 #pragma weak mpi_cart_sub_ = _PMPI_Cart_sub
 #pragma weak mpi_cart_sub__ = _PMPI_Cart_sub
 #pragma weak pmpi_cart_sub__ = _PMPI_Cart_sub
+extern long long WI4MPI_Cart_sub_timeout;
 void (*_LOCAL_MPI_Cart_sub)(int *, int *, int *, int *);
 
 void A_f_MPI_Cart_sub(int *comm, int *remain_dims, int *newcomm, int *ret) {
@@ -13158,6 +13445,7 @@ void pmpi_cart_map_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_cart_map_ = _PMPI_Cart_map
 #pragma weak mpi_cart_map__ = _PMPI_Cart_map
 #pragma weak pmpi_cart_map__ = _PMPI_Cart_map
+extern long long WI4MPI_Cart_map_timeout;
 void (*_LOCAL_MPI_Cart_map)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_map(int *comm, int *ndims, int *dims, int *periods,
@@ -13198,6 +13486,7 @@ void pmpi_graph_map_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_graph_map_ = _PMPI_Graph_map
 #pragma weak mpi_graph_map__ = _PMPI_Graph_map
 #pragma weak pmpi_graph_map__ = _PMPI_Graph_map
+extern long long WI4MPI_Graph_map_timeout;
 void (*_LOCAL_MPI_Graph_map)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_map(int *comm, int *nnodes, int *indx, int *edges,
@@ -13243,6 +13532,7 @@ void pmpi_type_get_contents_(int *, int *, int *, int *, int *, size_t *, int *,
 #pragma weak mpi_type_get_contents_ = _PMPI_Type_get_contents
 #pragma weak mpi_type_get_contents__ = _PMPI_Type_get_contents
 #pragma weak pmpi_type_get_contents__ = _PMPI_Type_get_contents
+extern long long WI4MPI_Type_get_contents_timeout;
 void (*_LOCAL_MPI_Type_get_contents)(int *, int *, int *, int *, int *,
                                      size_t *, int *, int *);
 
@@ -13300,6 +13590,7 @@ void pmpi_type_create_darray_(int *, int *, int *, int *, int *, int *, int *,
 #pragma weak mpi_type_create_darray_ = _PMPI_Type_create_darray
 #pragma weak mpi_type_create_darray__ = _PMPI_Type_create_darray
 #pragma weak pmpi_type_create_darray__ = _PMPI_Type_create_darray
+extern long long WI4MPI_Type_create_darray_timeout;
 void (*_LOCAL_MPI_Type_create_darray)(int *, int *, int *, int *, int *, int *,
                                       int *, int *, int *, int *, int *);
 
@@ -13351,6 +13642,7 @@ void pmpi_type_create_hindexed_(int *, int *, size_t *, int *, int *, int *);
 #pragma weak mpi_type_create_hindexed_ = _PMPI_Type_create_hindexed
 #pragma weak mpi_type_create_hindexed__ = _PMPI_Type_create_hindexed
 #pragma weak pmpi_type_create_hindexed__ = _PMPI_Type_create_hindexed
+extern long long WI4MPI_Type_create_hindexed_timeout;
 void (*_LOCAL_MPI_Type_create_hindexed)(int *, int *, size_t *, int *, int *,
                                         int *);
 
@@ -13398,6 +13690,7 @@ void pmpi_type_create_indexed_block_(int *, int *, int *, int *, int *, int *);
 #pragma weak mpi_type_create_indexed_block_ = _PMPI_Type_create_indexed_block
 #pragma weak mpi_type_create_indexed_block__ = _PMPI_Type_create_indexed_block
 #pragma weak pmpi_type_create_indexed_block__ = _PMPI_Type_create_indexed_block
+extern long long WI4MPI_Type_create_indexed_block_timeout;
 void (*_LOCAL_MPI_Type_create_indexed_block)(int *, int *, int *, int *, int *,
                                              int *);
 
@@ -13451,6 +13744,7 @@ void pmpi_type_create_hindexed_block_(int *, int *, size_t *, int *, int *,
 #pragma weak mpi_type_create_hindexed_block__ = _PMPI_Type_create_hindexed_block
 #pragma weak pmpi_type_create_hindexed_block__ =                               \
     _PMPI_Type_create_hindexed_block
+extern long long WI4MPI_Type_create_hindexed_block_timeout;
 void (*_LOCAL_MPI_Type_create_hindexed_block)(int *, int *, size_t *, int *,
                                               int *, int *);
 
@@ -13498,6 +13792,7 @@ void pmpi_type_create_struct_(int *, int *, size_t *, int *, int *, int *);
 #pragma weak mpi_type_create_struct_ = _PMPI_Type_create_struct
 #pragma weak mpi_type_create_struct__ = _PMPI_Type_create_struct
 #pragma weak pmpi_type_create_struct__ = _PMPI_Type_create_struct
+extern long long WI4MPI_Type_create_struct_timeout;
 void (*_LOCAL_MPI_Type_create_struct)(int *, int *, size_t *, int *, int *,
                                       int *);
 
@@ -13552,6 +13847,7 @@ void pmpi_type_create_subarray_(int *, int *, int *, int *, int *, int *, int *,
 #pragma weak mpi_type_create_subarray_ = _PMPI_Type_create_subarray
 #pragma weak mpi_type_create_subarray__ = _PMPI_Type_create_subarray
 #pragma weak pmpi_type_create_subarray__ = _PMPI_Type_create_subarray
+extern long long WI4MPI_Type_create_subarray_timeout;
 void (*_LOCAL_MPI_Type_create_subarray)(int *, int *, int *, int *, int *,
                                         int *, int *, int *);
 
@@ -13608,6 +13904,7 @@ void pmpi_dist_graph_create_adjacent_(int *, int *, int *, int *, int *, int *,
 #pragma weak mpi_dist_graph_create_adjacent__ = _PMPI_Dist_graph_create_adjacent
 #pragma weak pmpi_dist_graph_create_adjacent__ =                               \
     _PMPI_Dist_graph_create_adjacent
+extern long long WI4MPI_Dist_graph_create_adjacent_timeout;
 void (*_LOCAL_MPI_Dist_graph_create_adjacent)(int *, int *, int *, int *, int *,
                                               int *, int *, int *, int *, int *,
                                               int *);
@@ -13671,6 +13968,7 @@ void pmpi_dist_graph_create_(int *, int *, int *, int *, int *, int *, int *,
 #pragma weak mpi_dist_graph_create_ = _PMPI_Dist_graph_create
 #pragma weak mpi_dist_graph_create__ = _PMPI_Dist_graph_create
 #pragma weak pmpi_dist_graph_create__ = _PMPI_Dist_graph_create
+extern long long WI4MPI_Dist_graph_create_timeout;
 void (*_LOCAL_MPI_Dist_graph_create)(int *, int *, int *, int *, int *, int *,
                                      int *, int *, int *, int *);
 
@@ -13728,6 +14026,7 @@ void pmpi_dist_graph_neighbors_(int *, int *, int *, int *, int *, int *, int *,
 #pragma weak mpi_dist_graph_neighbors_ = _PMPI_Dist_graph_neighbors
 #pragma weak mpi_dist_graph_neighbors__ = _PMPI_Dist_graph_neighbors
 #pragma weak pmpi_dist_graph_neighbors__ = _PMPI_Dist_graph_neighbors
+extern long long WI4MPI_Dist_graph_neighbors_timeout;
 void (*_LOCAL_MPI_Dist_graph_neighbors)(int *, int *, int *, int *, int *,
                                         int *, int *, int *);
 
@@ -13784,6 +14083,7 @@ void pmpi_igatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_igatherv_ = _PMPI_Igatherv
 #pragma weak mpi_igatherv__ = _PMPI_Igatherv
 #pragma weak pmpi_igatherv__ = _PMPI_Igatherv
+extern long long WI4MPI_Igatherv_timeout;
 void (*_LOCAL_MPI_Igatherv)(void *, int *, int *, void *, int *, int *, int *,
                             int *, int *, int *, int *);
 
@@ -13847,6 +14147,7 @@ void pmpi_iscatterv_(void *, int *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_iscatterv_ = _PMPI_Iscatterv
 #pragma weak mpi_iscatterv__ = _PMPI_Iscatterv
 #pragma weak pmpi_iscatterv__ = _PMPI_Iscatterv
+extern long long WI4MPI_Iscatterv_timeout;
 void (*_LOCAL_MPI_Iscatterv)(void *, int *, int *, int *, void *, int *, int *,
                              int *, int *, int *, int *);
 
@@ -13910,6 +14211,7 @@ void pmpi_iallgatherv_(void *, int *, int *, void *, int *, int *, int *, int *,
 #pragma weak mpi_iallgatherv_ = _PMPI_Iallgatherv
 #pragma weak mpi_iallgatherv__ = _PMPI_Iallgatherv
 #pragma weak pmpi_iallgatherv__ = _PMPI_Iallgatherv
+extern long long WI4MPI_Iallgatherv_timeout;
 void (*_LOCAL_MPI_Iallgatherv)(void *, int *, int *, void *, int *, int *,
                                int *, int *, int *, int *);
 
@@ -13972,6 +14274,7 @@ void pmpi_ialltoallv_(void *, int *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_ialltoallv_ = _PMPI_Ialltoallv
 #pragma weak mpi_ialltoallv__ = _PMPI_Ialltoallv
 #pragma weak pmpi_ialltoallv__ = _PMPI_Ialltoallv
+extern long long WI4MPI_Ialltoallv_timeout;
 void (*_LOCAL_MPI_Ialltoallv)(void *, int *, int *, int *, void *, int *, int *,
                               int *, int *, int *, int *);
 
@@ -14037,6 +14340,7 @@ void pmpi_ialltoallw_(void *, int *, int *, int *, void *, int *, int *, int *,
 #pragma weak mpi_ialltoallw_ = _PMPI_Ialltoallw
 #pragma weak mpi_ialltoallw__ = _PMPI_Ialltoallw
 #pragma weak pmpi_ialltoallw__ = _PMPI_Ialltoallw
+extern long long WI4MPI_Ialltoallw_timeout;
 void (*_LOCAL_MPI_Ialltoallw)(void *, int *, int *, int *, void *, int *, int *,
                               int *, int *, int *, int *);
 
@@ -14107,6 +14411,7 @@ void pmpi_ireduce_scatter_(void *, void *, int *, int *, int *, int *, int *,
 #pragma weak mpi_ireduce_scatter_ = _PMPI_Ireduce_scatter
 #pragma weak mpi_ireduce_scatter__ = _PMPI_Ireduce_scatter
 #pragma weak pmpi_ireduce_scatter__ = _PMPI_Ireduce_scatter
+extern long long WI4MPI_Ireduce_scatter_timeout;
 void (*_LOCAL_MPI_Ireduce_scatter)(void *, void *, int *, int *, int *, int *,
                                    int *, int *);
 
@@ -14168,6 +14473,7 @@ void pmpi_ineighbor_allgatherv_(void *, int *, int *, void *, int *, int *,
 #pragma weak mpi_ineighbor_allgatherv_ = _PMPI_Ineighbor_allgatherv
 #pragma weak mpi_ineighbor_allgatherv__ = _PMPI_Ineighbor_allgatherv
 #pragma weak pmpi_ineighbor_allgatherv__ = _PMPI_Ineighbor_allgatherv
+extern long long WI4MPI_Ineighbor_allgatherv_timeout;
 void (*_LOCAL_MPI_Ineighbor_allgatherv)(void *, int *, int *, void *, int *,
                                         int *, int *, int *, int *, int *);
 
@@ -14230,6 +14536,7 @@ void pmpi_ineighbor_alltoallv_(void *, int *, int *, int *, void *, int *,
 #pragma weak mpi_ineighbor_alltoallv_ = _PMPI_Ineighbor_alltoallv
 #pragma weak mpi_ineighbor_alltoallv__ = _PMPI_Ineighbor_alltoallv
 #pragma weak pmpi_ineighbor_alltoallv__ = _PMPI_Ineighbor_alltoallv
+extern long long WI4MPI_Ineighbor_alltoallv_timeout;
 void (*_LOCAL_MPI_Ineighbor_alltoallv)(void *, int *, int *, int *, void *,
                                        int *, int *, int *, int *, int *,
                                        int *);
@@ -14293,6 +14600,7 @@ void pmpi_ineighbor_alltoallw_(void *, int *, size_t *, int *, void *, int *,
 #pragma weak mpi_ineighbor_alltoallw_ = _PMPI_Ineighbor_alltoallw
 #pragma weak mpi_ineighbor_alltoallw__ = _PMPI_Ineighbor_alltoallw
 #pragma weak pmpi_ineighbor_alltoallw__ = _PMPI_Ineighbor_alltoallw
+extern long long WI4MPI_Ineighbor_alltoallw_timeout;
 void (*_LOCAL_MPI_Ineighbor_alltoallw)(void *, int *, size_t *, int *, void *,
                                        int *, size_t *, int *, int *, int *,
                                        int *);
@@ -14361,6 +14669,7 @@ void pmpi_neighbor_allgatherv_(void *, int *, int *, void *, int *, int *,
 #pragma weak mpi_neighbor_allgatherv_ = _PMPI_Neighbor_allgatherv
 #pragma weak mpi_neighbor_allgatherv__ = _PMPI_Neighbor_allgatherv
 #pragma weak pmpi_neighbor_allgatherv__ = _PMPI_Neighbor_allgatherv
+extern long long WI4MPI_Neighbor_allgatherv_timeout;
 void (*_LOCAL_MPI_Neighbor_allgatherv)(void *, int *, int *, void *, int *,
                                        int *, int *, int *, int *);
 
@@ -14419,6 +14728,7 @@ void pmpi_neighbor_alltoallv_(void *, int *, int *, int *, void *, int *, int *,
 #pragma weak mpi_neighbor_alltoallv_ = _PMPI_Neighbor_alltoallv
 #pragma weak mpi_neighbor_alltoallv__ = _PMPI_Neighbor_alltoallv
 #pragma weak pmpi_neighbor_alltoallv__ = _PMPI_Neighbor_alltoallv
+extern long long WI4MPI_Neighbor_alltoallv_timeout;
 void (*_LOCAL_MPI_Neighbor_alltoallv)(void *, int *, int *, int *, void *,
                                       int *, int *, int *, int *, int *);
 
@@ -14478,6 +14788,7 @@ void pmpi_neighbor_alltoallw_(void *, int *, size_t *, int *, void *, int *,
 #pragma weak mpi_neighbor_alltoallw_ = _PMPI_Neighbor_alltoallw
 #pragma weak mpi_neighbor_alltoallw__ = _PMPI_Neighbor_alltoallw
 #pragma weak pmpi_neighbor_alltoallw__ = _PMPI_Neighbor_alltoallw
+extern long long WI4MPI_Neighbor_alltoallw_timeout;
 void (*_LOCAL_MPI_Neighbor_alltoallw)(void *, int *, size_t *, int *, void *,
                                       int *, size_t *, int *, int *, int *);
 
@@ -14540,6 +14851,7 @@ void pmpi_file_iwrite_all_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iwrite_all_ = _PMPI_File_iwrite_all
 #pragma weak mpi_file_iwrite_all__ = _PMPI_File_iwrite_all
 #pragma weak pmpi_file_iwrite_all__ = _PMPI_File_iwrite_all
+extern long long WI4MPI_File_iwrite_all_timeout;
 void (*_LOCAL_MPI_File_iwrite_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iwrite_all(int *fh, void *buf, int *count, int *datatype,
@@ -14589,6 +14901,7 @@ void pmpi_file_iwrite_at_all_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iwrite_at_all_ = _PMPI_File_iwrite_at_all
 #pragma weak mpi_file_iwrite_at_all__ = _PMPI_File_iwrite_at_all
 #pragma weak pmpi_file_iwrite_at_all__ = _PMPI_File_iwrite_at_all
+extern long long WI4MPI_File_iwrite_at_all_timeout;
 void (*_LOCAL_MPI_File_iwrite_at_all)(int *, int *, void *, int *, int *, int *,
                                       int *);
 
@@ -14638,6 +14951,7 @@ void pmpi_aint_add_(size_t *, size_t *, size_t *);
 #pragma weak mpi_aint_add_ = _PMPI_Aint_add
 #pragma weak mpi_aint_add__ = _PMPI_Aint_add
 #pragma weak pmpi_aint_add__ = _PMPI_Aint_add
+extern long long WI4MPI_Aint_add_timeout;
 void (*_LOCAL_MPI_Aint_add)(size_t *, size_t *, size_t *);
 
 void A_f_MPI_Aint_add(size_t *base, size_t *disp, size_t *ret) {
@@ -14674,6 +14988,7 @@ void pmpi_aint_diff_(size_t *, size_t *, size_t *);
 #pragma weak mpi_aint_diff_ = _PMPI_Aint_diff
 #pragma weak mpi_aint_diff__ = _PMPI_Aint_diff
 #pragma weak pmpi_aint_diff__ = _PMPI_Aint_diff
+extern long long WI4MPI_Aint_diff_timeout;
 void (*_LOCAL_MPI_Aint_diff)(size_t *, size_t *, size_t *);
 
 void A_f_MPI_Aint_diff(size_t *addr1, size_t *addr2, size_t *ret) {
@@ -14710,6 +15025,7 @@ void pmpi_file_iread_all_(int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iread_all_ = _PMPI_File_iread_all
 #pragma weak mpi_file_iread_all__ = _PMPI_File_iread_all
 #pragma weak pmpi_file_iread_all__ = _PMPI_File_iread_all
+extern long long WI4MPI_File_iread_all_timeout;
 void (*_LOCAL_MPI_File_iread_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread_all(int *fh, void *buf, int *count, int *datatype,
@@ -14758,6 +15074,7 @@ void pmpi_file_iread_at_all_(int *, int *, void *, int *, int *, int *, int *);
 #pragma weak mpi_file_iread_at_all_ = _PMPI_File_iread_at_all
 #pragma weak mpi_file_iread_at_all__ = _PMPI_File_iread_at_all
 #pragma weak pmpi_file_iread_at_all__ = _PMPI_File_iread_at_all
+extern long long WI4MPI_File_iread_at_all_timeout;
 void (*_LOCAL_MPI_File_iread_at_all)(int *, int *, void *, int *, int *, int *,
                                      int *);
 
