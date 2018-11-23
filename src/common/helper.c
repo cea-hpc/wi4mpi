@@ -66,7 +66,7 @@ int clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg,...)
 {
     int ret;
     pid_t *ptid;
-    void *tls
+    void *tls;
     pid_t *ctid;
 va_list va;
    va_start (va, arg);
