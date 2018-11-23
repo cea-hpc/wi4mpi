@@ -61,10 +61,19 @@ int clone_wrap_fn(void* arg)
         wi4mpi_timeout_thread_unregister();
     return ret;
 }
+int __clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg,...)
 int clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg,
-          pid_t *ptid, void *tls, pid_t *ctid)
+          ...)
 {
     int ret;
+    pid_t *ptid;
+    void *tls
+    pid_t *ctid;
+va_list va;
+   va_start (va, arg);
+    ptid=va_arg(va,pid_t*);
+    tls=va_arg(va,void*);
+    ctid=va_arg(va,pid_t*);
     /* will be freed in the created thread */
     struct clone_arg *warg=malloc(sizeof(struct clone_arg));
     warg->fn=fn;
