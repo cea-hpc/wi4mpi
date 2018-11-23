@@ -99,7 +99,7 @@ int wi4mpi_timeout_main_loop(void *felement)
     my_elt=(th_reg_list*)felement;
     pthread_mutex_unlock(&mutex_list_lock);
     while(!timeout_thread_end){
-        size_t ts=gettimestamp();
+        unsigned long long ts=gettimestamp();
         th_reg_list *otmp;
         for (th_reg_list *tmp=my_elt;tmp!=NULL;tmp=tmp->next)
         {
