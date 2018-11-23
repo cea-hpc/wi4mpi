@@ -61,9 +61,8 @@ int clone_wrap_fn(void* arg)
         wi4mpi_timeout_thread_unregister();
     return ret;
 }
-int __clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg,...)
-int clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg,
-          ...)
+int __clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg,...);
+int clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg,...)
 {
     int ret;
     pid_t *ptid;
