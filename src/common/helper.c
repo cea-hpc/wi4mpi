@@ -89,9 +89,10 @@ va_list va;
 th_reg_list *last_elt;
 /* each thread has a pointer on is own control structure*/
 __thread th_reg_list *my_elt;
-
+#include <app_mpi.h>
 int wi4mpi_timeout_main_loop(void *felement)
 {
+    int mi,rank;
     /*first list element is the application main thread*/
     my_elt=(th_reg_list*)felement;
     while(!timeout_thread_end){
@@ -103,7 +104,21 @@ int wi4mpi_timeout_main_loop(void *felement)
             {
                 if (ts>=tmp->timeout){
                     /* effective timeout kill the responsible thread*/
-                    kill(tmp->tid,SIGABRT);
+                    if(A_MPI_Initialized(&mi))
+                    {
+                        
+                        A_MPI_Comm_rank(A_MPI_COMM_WOLRD,&rank);
+                        fprintf(stderr,"rank %d has reached a timeout\n",rank);
+                    }            
+                    else
+                    {
+                        char hostname[2048];
+                        gethostname(hostname,2048);
+                        fprintf(stderr,"processus %d on host %s has reached a timeout\n",getpid(),hostname);
+                    
+                        }
+                    fsync(stderr);
+                     kill(tmp->tid,SIGABRT);
                     return;
                 }
                 else
