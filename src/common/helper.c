@@ -139,7 +139,10 @@ void wi4mpi_set_timeout(unsigned long long  timeout_val)
     /* may need a memfence to ensure that compiler doen't do timeout = ts;timeout+=timeout_val; or
      in the reverse order*/
     unsigned long long ts=gettimestamp();
-    my_elt->timeout=ts+timeout_val;
+    unsigned long long ret=ts+timeout_val;
+    if(ret<=ts)
+        ret=WI4MPI_MAX_TIME;
+    my_elt->timeout=ret;
 }
 void wi4mpi_unset_timeout()
 {
