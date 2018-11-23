@@ -23,7 +23,7 @@ int gettid(void)
 /* data structure to keep information on timeout for each thread, the linked list property is use only by controler thread*/
 typedef struct thdat {
     int tid;
-    size_t timeout;
+    unsigned long long timeout;
     struct thdat *next;
     int active;
 } th_reg_list;
@@ -32,11 +32,11 @@ int timeout_thread_end;
 int wi4mpi_timeout_main_loop(void*);
 void wi4mpi_timeout_thread_register(int th);
 void wi4mpi_timeout_thread_unregister();
-long long gettimestamp(void)
+unsigned long long gettimestamp(void)
 {
     int a,d;
     __asm__ volatile ("rdtsc":"=a"(a),"=d"(d));
-    return ((long long)a)|(((long long)d)<<32);
+    return ((unsigned long long)a)|(((long long)d)<<32);
 }
 /*libc clone is a weak symbol of __clone, we use a wrapper function to clone in order to do the registration/unregistration of the threads*/
 struct clone_arg
@@ -131,11 +131,11 @@ int wi4mpi_timeout_main_loop(void *felement)
     return 0;
 }
 
-void wi4mpi_set_timeout(size_t timeout_val)
+void wi4mpi_set_timeout(unsigned long long  timeout_val)
 {
     /* may need a memfence to ensure that compiler doen't do timeout = ts;timeout+=timeout_val; or
      in the reverse order*/
-    size_t ts=gettimestamp();
+    unsigned long long ts=gettimestamp();
     my_elt->timeout=ts+timeout_val;
 }
 void wi4mpi_unset_timeout()
