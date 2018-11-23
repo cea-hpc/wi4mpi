@@ -107,7 +107,7 @@ int wi4mpi_timeout_main_loop(void *felement)
                     if(A_MPI_Initialized(&mi))
                     {
                         
-                        A_MPI_Comm_rank(A_MPI_COMM_WOLRD,&rank);
+                        A_MPI_Comm_rank(A_MPI_COMM_WORLD,&rank);
                         fprintf(stderr,"rank %d has reached a timeout\n",rank);
                     }            
                     else
