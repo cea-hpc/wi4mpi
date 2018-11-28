@@ -21,6 +21,7 @@ void debug_printer(const char *ctr_str,...)
             printf("%s",print_str);
             pointer_disp=0;
             to_dec=1;
+            void *parg;
             while(to_dec)
             {
                 it++;
@@ -34,7 +35,9 @@ void debug_printer(const char *ctr_str,...)
                     print_status(pointer_disp?*va_arg(ap,A_MPI_Status *):va_arg(ap,A_MPI_Status));
                     break;
                 case 'd':
-                    printf("%d",pointer_disp?*(va_arg(ap,int *)):va_arg(ap,int));
+                    if(pointer_disp)
+                        parg=(void*)va_arg(ap,int*);
+                    printf("%d",pointer_disp?*((int*)parg):va_arg(ap,int));
                     break;
                 //case 's':
                 //    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
@@ -43,7 +46,6 @@ void debug_printer(const char *ctr_str,...)
                     break;
             }
             }
-            it++;
             i=-1;
         }
         i++;
