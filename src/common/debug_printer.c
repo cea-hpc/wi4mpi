@@ -32,9 +32,9 @@ decode:
                 case 'd':
                     printf("%d",pointer_disp?*(va_arg(ap,int *)):va_arg(ap,int));
                     break;
-                case 's':
-                    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
-                    break;
+                //case 's':
+                //    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
+                //    break;
                 default:
                     break;
             }
