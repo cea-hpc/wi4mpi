@@ -43,7 +43,10 @@ decode:
         }
         i++;
         it++;
-    }
+    } 
+    print_str[i]='\0';
+    printf("%s",print_str);
+            
     
 }
 void print_status(A_MPI_Status stat)
