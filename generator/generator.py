@@ -46,8 +46,12 @@ class generator:
         out_arg_list=""
         for i in func_dict['args']:
             if('debug_type' in self.mappers[i['name']]):
-                out_str=out_str+i['var']+" : "+self.mappers[i['name']]['debug_type']+",\\n"
-                out_arg_list=out_arg_list+i['var']+","
+                ii=i['var']
+                idx=ii.find('[]')
+                if idx!= -1:
+                    ii=ii[:idx-1]
+                out_str=out_str+ii+" : "+self.mappers[i['name']]['debug_type']+",\\n"
+                out_arg_list=out_arg_list+ii+","
         out_arg_list=out_arg_list+"ret_tmp"
         out_str=out_str+"return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"}\\n"
         return [out_str,out_arg_list] 
