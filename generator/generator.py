@@ -37,6 +37,21 @@ class generator:
         self.name=name
         self.mappers=mapper_list
         self.functions=funtions_list
+###                     ###
+#   create debug string   #
+###                     ###
+# use mapper info to create a debug string available to par by an ad-hoc function
+    def debug_string(self,func_dict): 
+        out_str=func_dict['name']+" : \\n{\\n"
+        out_arg_list=""
+        for i in func_dict['args']:
+            if('debug_type' in self.mappers[i['name']]):
+                out_str=out_str+i['var']+" : "+self.mappers[i['name']]['debug_type']+",\\n"
+                out_arg_list=out_arg_list+i['var']+","
+        out_arg_list=out_arg_list+"ret"
+        out_str=out_str+"return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"}\\n"
+        return [out_str,out_arg_list] 
+
 
 ###           ###
 #  Header_func  # 
@@ -77,6 +92,7 @@ class generator:
         if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
             if app_side:
                 string=string+'\nprintf(\"sort : A_'+func_dict['name']+'\\n\");'
+                string=string+'debug_printer(\"'+self.debug_string(func_dict)[0]+'\",'+self.debug_string(func_dict)[1]+');'
             else:
                 string=string+'\nprintf(\"sort : R_'+func_dict['name']+'\\n\");'
         elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
@@ -112,7 +128,6 @@ class generator:
             return str[0]+prefix+'MPI_'+str[1]
         else:
             return type 
-
 ###               ###
 #   Print_symbol_c  #
 ###               ###
