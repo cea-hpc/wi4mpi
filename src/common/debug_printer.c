@@ -16,16 +16,20 @@ void debug_printer(const char *ctr_str,...)
         print_str[i]=ctr_str[it];
         if(ctr_str[it]=='%')
         {
+            int to_dec;
             print_str[i]='\0';
             printf("%s",print_str);
             pointer_disp=0;
-            it++;
-decode:
+            to_dec=1;
+            while(to_dec)
+            {
+                it++;
+                to_dec=0;
             switch (ctr_str[it]){
                 case '*':
                     pointer_disp++;
-                    it++;
-                    goto decode;
+                    to_dec=1;    
+                    break;
                 case 'n':
                     print_status(pointer_disp?*va_arg(ap,A_MPI_Status *):va_arg(ap,A_MPI_Status));
                     break;
@@ -37,6 +41,7 @@ decode:
                 //    break;
                 default:
                     break;
+            }
             }
             it++;
             i=-1;
