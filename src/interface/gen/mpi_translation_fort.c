@@ -23,6 +23,7 @@
 /*
  * This code is fully generated
  */
+#include "helper.h"
 #include "mappers.h"
 #include "run_mpi.h"
 #include "wrapper_f.h"
@@ -3653,7 +3654,6 @@ void pmpi_keyval_create__(void *, void *, int *, void *, int *);
 
 void pmpi_keyval_create_(void *, void *, int *, void *, int *);
 
-extern unsigned long long WI4MPI_Keyval_create_timeout;
 void (*_LOCAL_MPI_Keyval_create)(void *, void *, int *, void *, int *);
 int (*LOCAL_MPI_Keyval_create)(void *, void *, int *, void *);
 int (*LOCAL_MPI_Comm_create_keyval)(void *, void *, int *, void *);
@@ -3760,7 +3760,6 @@ void pmpi_keyval_free__(int *, int *);
 
 void pmpi_keyval_free_(int *, int *);
 
-extern unsigned long long WI4MPI_Keyval_free_timeout;
 void (*_LOCAL_MPI_Keyval_free)(int *, int *);
 
 void A_f_MPI_Keyval_free(int *keyval, int *ret) {
@@ -3794,7 +3793,6 @@ void pmpi_attr_put__(int *, int *, int *, int *);
 
 void pmpi_attr_put_(int *, int *, int *, int *);
 
-extern unsigned long long WI4MPI_Attr_put_timeout;
 void (*_LOCAL_MPI_Attr_put)(int *, int *, int *, int *);
 
 void A_f_MPI_Attr_put(int *comm, int *keyval, int *attribute_val, int *ret) {
@@ -3829,7 +3827,6 @@ void pmpi_attr_get__(int *, int *, int *, int *, int *);
 
 void pmpi_attr_get_(int *, int *, int *, int *, int *);
 
-extern unsigned long long WI4MPI_Attr_get_timeout;
 void (*_LOCAL_MPI_Attr_get)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Attr_get(int *comm, int *keyval, int *attribute_val, int *flag,
@@ -3871,7 +3868,6 @@ void pmpi_attr_delete__(int *, int *, int *);
 
 void pmpi_attr_delete_(int *, int *, int *);
 
-extern unsigned long long WI4MPI_Attr_delete_timeout;
 void (*_LOCAL_MPI_Attr_delete)(int *, int *, int *);
 int A_MPI_Attr_delete(A_MPI_Comm, int);
 
@@ -4128,7 +4124,6 @@ void pmpi_errhandler_create__(void *, int *, int *);
 
 void pmpi_errhandler_create_(void *, int *, int *);
 
-extern unsigned long long WI4MPI_Errhandler_create_timeout;
 void (*_LOCAL_MPI_Errhandler_create)(void *, int *, int *);
 extern int WI4MPI_errhandler_key;
 #include "mappers.h"
@@ -4188,7 +4183,6 @@ void pmpi_errhandler_set__(int *, int *, int *);
 
 void pmpi_errhandler_set_(int *, int *, int *);
 
-extern unsigned long long WI4MPI_Errhandler_set_timeout;
 void (*_LOCAL_MPI_Errhandler_set)(int *, int *, int *);
 void A_f_MPI_Errhandler_set(int *comm, int *errhandler, int *ret) {
 #ifdef DEBUG
@@ -4225,7 +4219,6 @@ void pmpi_errhandler_get__(int *, int *, int *);
 
 void pmpi_errhandler_get_(int *, int *, int *);
 
-extern unsigned long long WI4MPI_Errhandler_get_timeout;
 void (*_LOCAL_MPI_Errhandler_get)(int *, int *, int *);
 
 void A_f_MPI_Errhandler_get(int *comm, int *errhandler, int *ret) {
@@ -4266,7 +4259,6 @@ void pmpi_errhandler_free__(int *, int *);
 
 void pmpi_errhandler_free_(int *, int *);
 
-extern unsigned long long WI4MPI_Errhandler_free_timeout;
 void (*_LOCAL_MPI_Errhandler_free)(int *, int *);
 
 void A_f_MPI_Errhandler_free(int *errhandler, int *ret) {
@@ -7080,7 +7072,6 @@ void pmpi_comm_create_errhandler__(void *, int *, int *);
 
 void pmpi_comm_create_errhandler_(void *, int *, int *);
 
-extern unsigned long long WI4MPI_Comm_create_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_create_errhandler)(void *, int *, int *);
 
 void A_f_MPI_Comm_create_errhandler(void *comm_errhandler_fn, int *errhandler,
@@ -7117,7 +7108,6 @@ void pmpi_comm_get_errhandler__(int *, int *, int *);
 
 void pmpi_comm_get_errhandler_(int *, int *, int *);
 
-extern unsigned long long WI4MPI_Comm_get_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_get_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_get_errhandler(int *comm, int *errhandler, int *ret) {
@@ -7151,7 +7141,6 @@ void pmpi_comm_set_errhandler__(int *, int *, int *);
 
 void pmpi_comm_set_errhandler_(int *, int *, int *);
 
-extern unsigned long long WI4MPI_Comm_set_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_set_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_set_errhandler(int *comm, int *errhandler, int *ret) {
@@ -7441,7 +7430,6 @@ void pmpi_info_free__(int *, int *);
 
 void pmpi_info_free_(int *, int *);
 
-extern unsigned long long WI4MPI_Info_free_timeout;
 void (*_LOCAL_MPI_Info_free)(int *, int *);
 
 void A_f_MPI_Info_free(int *info, int *ret) {

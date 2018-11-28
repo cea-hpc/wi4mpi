@@ -464,7 +464,7 @@ __asm__(".global PMPI_Keyval_create\n"
 
 int (*LOCAL_MPI_Keyval_create)(R_MPI_Copy_function *, R_MPI_Delete_function *,
                                int *, void *);
-
+unsigned long long WI4MPI_Keyval_create_timeout = WI4MPI_MAX_TIME;
 int A_MPI_Keyval_create(A_MPI_Copy_function *copy_fn,
                         A_MPI_Delete_function *delete_fn, int *keyval,
                         void *extra_state) {
@@ -600,6 +600,7 @@ __asm__(".global PMPI_Keyval_free\n"
         ".size PMPI_Keyval_free,.-PMPI_Keyval_free\n");
 
 int (*LOCAL_MPI_Keyval_free)(int *);
+unsigned long long WI4MPI_Keyval_free_timeout = WI4MPI_MAX_TIME;
 
 int A_MPI_Keyval_free(int *keyval) {
   in_w = 1;
