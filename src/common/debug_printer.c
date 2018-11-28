@@ -10,6 +10,7 @@ void debug_printer(const char *ctr_str,...)
     int it,i;
     va_start(ap,ctr_str);
     int pointer_disp;
+    it=0;i=0;
     while(ctr_str[it]!='\0')
     {
         print_str[i]=ctr_str[it];
