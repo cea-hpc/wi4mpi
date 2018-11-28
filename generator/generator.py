@@ -49,7 +49,7 @@ class generator:
                 ii=i['var']
                 idx=ii.find('[]')
                 if idx!= -1:
-                    ii=ii[:idx-1]
+                    ii=ii[:idx]
                 out_str=out_str+ii+" : "+self.mappers[i['name']]['debug_type']+",\\n"
                 out_arg_list=out_arg_list+ii+","
         out_arg_list=out_arg_list+"ret_tmp"

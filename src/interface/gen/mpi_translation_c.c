@@ -4158,10 +4158,10 @@ int A_MPI_Type_struct(int count, int *array_of_blocklengths,
 #ifdef DEBUG
   printf("sort : A_MPI_Type_struct\n");
   debug_printer("MPI_Type_struct : \n{\ncount : %d,\narray_of_blocklengths : "
-                "%*d,\narray_of_displacements : %*ld,\narray_of_type : "
+                "%*d,\narray_of_displacements : %*ld,\narray_of_types : "
                 "%D,\nnewtype : %*D,\nreturn : %d}\n",
                 count, array_of_blocklengths, array_of_displacements,
-                array_of_type, newtype, ret_tmp);
+                array_of_types, newtype, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -27840,9 +27840,9 @@ int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Waitany\n");
-  debug_printer("MPI_Waitany : \n{\ncount : %d,\narray_of_request : %r,\nindx "
+  debug_printer("MPI_Waitany : \n{\ncount : %d,\narray_of_requests : %r,\nindx "
                 ": %*d,\nstatus : %*n,\nreturn : %d}\n",
-                count, array_of_request, indx, status, ret_tmp);
+                count, array_of_requests, indx, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -27942,9 +27942,9 @@ int A_MPI_Testany(int count, A_MPI_Request array_of_requests[], int *indx,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Testany\n");
-  debug_printer("MPI_Testany : \n{\ncount : %d,\narray_of_request : %r,\nindx "
+  debug_printer("MPI_Testany : \n{\ncount : %d,\narray_of_requests : %r,\nindx "
                 ": %*d,\nflag : %*d,\nstatus : %*n,\nreturn : %d}\n",
-                count, array_of_request, indx, flag, status, ret_tmp);
+                count, array_of_requests, indx, flag, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28049,9 +28049,9 @@ int A_MPI_Waitall(int count, A_MPI_Request array_of_requests[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Waitall\n");
-  debug_printer("MPI_Waitall : \n{\ncount : %d,\narray_of_request : "
-                "%r,\narray_of_statuse : %n,\nreturn : %d}\n",
-                count, array_of_request, array_of_statuse, ret_tmp);
+  debug_printer("MPI_Waitall : \n{\ncount : %d,\narray_of_requests : "
+                "%r,\narray_of_statuses : %n,\nreturn : %d}\n",
+                count, array_of_requests, array_of_statuses, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28161,9 +28161,9 @@ int A_MPI_Testall(int count, A_MPI_Request array_of_requests[], int *flag,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Testall\n");
-  debug_printer("MPI_Testall : \n{\ncount : %d,\narray_of_request : %r,\nflag "
-                ": %*d,\narray_of_statuse : %n,\nreturn : %d}\n",
-                count, array_of_request, flag, array_of_statuse, ret_tmp);
+  debug_printer("MPI_Testall : \n{\ncount : %d,\narray_of_requests : %r,\nflag "
+                ": %*d,\narray_of_statuses : %n,\nreturn : %d}\n",
+                count, array_of_requests, flag, array_of_statuses, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28276,11 +28276,11 @@ int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Waitsome\n");
-  debug_printer("MPI_Waitsome : \n{\nincount : %d,\narray_of_request : "
-                "%r,\noutcount : %*d,\narray_of_indice : %d,\narray_of_statuse "
-                ": %n,\nreturn : %d}\n",
-                incount, array_of_request, outcount, array_of_indice,
-                array_of_statuse, ret_tmp);
+  debug_printer("MPI_Waitsome : \n{\nincount : %d,\narray_of_requests : "
+                "%r,\noutcount : %*d,\narray_of_indices : "
+                "%d,\narray_of_statuses : %n,\nreturn : %d}\n",
+                incount, array_of_requests, outcount, array_of_indices,
+                array_of_statuses, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28394,11 +28394,11 @@ int A_MPI_Testsome(int incount, A_MPI_Request array_of_requests[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Testsome\n");
-  debug_printer("MPI_Testsome : \n{\nincount : %d,\narray_of_request : "
-                "%r,\noutcount : %*d,\narray_of_indice : %d,\narray_of_statuse "
-                ": %n,\nreturn : %d}\n",
-                incount, array_of_request, outcount, array_of_indice,
-                array_of_statuse, ret_tmp);
+  debug_printer("MPI_Testsome : \n{\nincount : %d,\narray_of_requests : "
+                "%r,\noutcount : %*d,\narray_of_indices : "
+                "%d,\narray_of_statuses : %n,\nreturn : %d}\n",
+                incount, array_of_requests, outcount, array_of_indices,
+                array_of_statuses, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28479,9 +28479,9 @@ int A_MPI_Startall(int count, A_MPI_Request array_of_requests[]) {
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Startall\n");
-  debug_printer(
-      "MPI_Startall : \n{\ncount : %d,\narray_of_request : %r,\nreturn : %d}\n",
-      count, array_of_request, ret_tmp);
+  debug_printer("MPI_Startall : \n{\ncount : %d,\narray_of_requests : "
+                "%r,\nreturn : %d}\n",
+                count, array_of_requests, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28594,11 +28594,12 @@ int A_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Alltoallw\n");
-  debug_printer("MPI_Alltoallw : \n{\nsendbuf : %p,\nsendcount : %d,\nsdispl : "
-                "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\nrdispl : "
-                "%d,\nrecvtype : %D,\ncomm : %C,\nreturn : %d}\n",
-                sendbuf, sendcount, sdispl, sendtype, recvbuf, recvcount,
-                rdispl, recvtype, comm, ret_tmp);
+  debug_printer("MPI_Alltoallw : \n{\nsendbuf : %p,\nsendcounts : %d,\nsdispls "
+                ": %d,\nsendtypes : %D,\nrecvbuf : %p,\nrecvcounts : "
+                "%d,\nrdispls : %d,\nrecvtypes : %D,\ncomm : %C,\nreturn : "
+                "%d}\n",
+                sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts,
+                rdispls, recvtypes, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28700,9 +28701,9 @@ int A_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
 #ifdef DEBUG
   printf("sort : A_MPI_Reduce_scatter\n");
   debug_printer("MPI_Reduce_scatter : \n{\nsendbuf : %p,\nrecvbuf : "
-                "%p,\nrecvcount : %d,\ndatatype : %D,\nop : %o,\ncomm : "
+                "%p,\nrecvcounts : %d,\ndatatype : %D,\nop : %o,\ncomm : "
                 "%C,\nreturn : %d}\n",
-                sendbuf, recvbuf, recvcount, datatype, op, comm, ret_tmp);
+                sendbuf, recvbuf, recvcounts, datatype, op, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28793,9 +28794,9 @@ int A_MPI_Group_translate_ranks(A_MPI_Group group1, int n, int ranks1[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Group_translate_ranks\n");
-  debug_printer("MPI_Group_translate_ranks : \n{\ngroup1 : %g,\nn : %d,\nranks "
-                ": %d,\ngroup2 : %g,\nranks : %d,\nreturn : %d}\n",
-                group1, n, ranks, group2, ranks, ret_tmp);
+  debug_printer("MPI_Group_translate_ranks : \n{\ngroup1 : %g,\nn : "
+                "%d,\nranks1 : %d,\ngroup2 : %g,\nranks2 : %d,\nreturn : %d}\n",
+                group1, n, ranks1, group2, ranks2, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28880,9 +28881,9 @@ int A_MPI_Group_incl(A_MPI_Group group, int n, int ranks[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Group_incl\n");
-  debug_printer("MPI_Group_incl : \n{\ngroup : %g,\nn : %d,\nrank : "
+  debug_printer("MPI_Group_incl : \n{\ngroup : %g,\nn : %d,\nranks : "
                 "%d,\nnewgroup : %*G,\nreturn : %d}\n",
-                group, n, rank, newgroup, ret_tmp);
+                group, n, ranks, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -28966,9 +28967,9 @@ int A_MPI_Group_excl(A_MPI_Group group, int n, int ranks[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Group_excl\n");
-  debug_printer("MPI_Group_excl : \n{\ngroup : %g,\nn : %d,\nrank : "
+  debug_printer("MPI_Group_excl : \n{\ngroup : %g,\nn : %d,\nranks : "
                 "%d,\nnewgroup : %*G,\nreturn : %d}\n",
-                group, n, rank, newgroup, ret_tmp);
+                group, n, ranks, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29052,9 +29053,9 @@ int A_MPI_Group_range_incl(A_MPI_Group group, int n, int ranges[][3],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Group_range_incl\n");
-  debug_printer("MPI_Group_range_incl : \n{\ngroup : %g,\nn : %d,\nrange : "
+  debug_printer("MPI_Group_range_incl : \n{\ngroup : %g,\nn : %d,\nranges : "
                 "%d,\nnewgroup : %*G,\nreturn : %d}\n",
-                group, n, range, newgroup, ret_tmp);
+                group, n, ranges, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29138,9 +29139,9 @@ int A_MPI_Group_range_excl(A_MPI_Group group, int n, int ranges[][3],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Group_range_excl\n");
-  debug_printer("MPI_Group_range_excl : \n{\ngroup : %g,\nn : %d,\nrange : "
+  debug_printer("MPI_Group_range_excl : \n{\ngroup : %g,\nn : %d,\nranges : "
                 "%d,\nnewgroup : %*G,\nreturn : %d}\n",
-                group, n, range, newgroup, ret_tmp);
+                group, n, ranges, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29229,10 +29230,10 @@ int A_MPI_Cart_create(A_MPI_Comm comm_old, int ndims, int dims[], int periods[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Cart_create\n");
-  debug_printer("MPI_Cart_create : \n{\ncomm_old : %C,\nndims : %d,\ndim : "
-                "%d,\nperiod : %d,\nreorder : %d,\ncomm_cart : %*o,\nreturn : "
+  debug_printer("MPI_Cart_create : \n{\ncomm_old : %C,\nndims : %d,\ndims : "
+                "%d,\nperiods : %d,\nreorder : %d,\ncomm_cart : %*o,\nreturn : "
                 "%d}\n",
-                comm_old, ndims, dim, period, reorder, comm_cart, ret_tmp);
+                comm_old, ndims, dims, periods, reorder, comm_cart, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29308,9 +29309,9 @@ int A_MPI_Dims_create(int nnodes, int ndims, int dims[]) {
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Dims_create\n");
-  debug_printer("MPI_Dims_create : \n{\nnnodes : %d,\nndims : %d,\ndim : "
+  debug_printer("MPI_Dims_create : \n{\nnnodes : %d,\nndims : %d,\ndims : "
                 "%d,\nreturn : %d}\n",
-                nnodes, ndims, dim, ret_tmp);
+                nnodes, ndims, dims, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29398,10 +29399,10 @@ int A_MPI_Graph_create(A_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Graph_create\n");
-  debug_printer("MPI_Graph_create : \n{\ncomm_old : %C,\nnnodes : %d,\nind : "
-                "%d,\nedge : %d,\nreorder : %d,\ncomm_graph : %*o,\nreturn : "
+  debug_printer("MPI_Graph_create : \n{\ncomm_old : %C,\nnnodes : %d,\nindx : "
+                "%d,\nedges : %d,\nreorder : %d,\ncomm_graph : %*o,\nreturn : "
                 "%d}\n",
-                comm_old, nnodes, ind, edge, reorder, comm_graph, ret_tmp);
+                comm_old, nnodes, indx, edges, reorder, comm_graph, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29487,8 +29488,8 @@ int A_MPI_Graph_get(A_MPI_Comm comm, int maxindex, int maxedges, int indx[],
 #ifdef DEBUG
   printf("sort : A_MPI_Graph_get\n");
   debug_printer("MPI_Graph_get : \n{\ncomm : %C,\nmaxindex : %d,\nmaxedges : "
-                "%d,\nind : %d,\nedge : %d,\nreturn : %d}\n",
-                comm, maxindex, maxedges, ind, edge, ret_tmp);
+                "%d,\nindx : %d,\nedges : %d,\nreturn : %d}\n",
+                comm, maxindex, maxedges, indx, edges, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29572,9 +29573,9 @@ int A_MPI_Cart_get(A_MPI_Comm comm, int maxdims, int dims[], int periods[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Cart_get\n");
-  debug_printer("MPI_Cart_get : \n{\ncomm : %C,\nmaxdims : %d,\ndim : "
-                "%d,\nperiod : %d,\ncoord : %d,\nreturn : %d}\n",
-                comm, maxdims, dim, period, coord, ret_tmp);
+  debug_printer("MPI_Cart_get : \n{\ncomm : %C,\nmaxdims : %d,\ndims : "
+                "%d,\nperiods : %d,\ncoords : %d,\nreturn : %d}\n",
+                comm, maxdims, dims, periods, coords, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29652,9 +29653,9 @@ int A_MPI_Cart_rank(A_MPI_Comm comm, int coords[], int *rank) {
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Cart_rank\n");
-  debug_printer("MPI_Cart_rank : \n{\ncomm : %C,\ncoord : %d,\nrank : "
+  debug_printer("MPI_Cart_rank : \n{\ncomm : %C,\ncoords : %d,\nrank : "
                 "%*d,\nreturn : %d}\n",
-                comm, coord, rank, ret_tmp);
+                comm, coords, rank, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29734,8 +29735,8 @@ int A_MPI_Cart_coords(A_MPI_Comm comm, int rank, int maxdims, int coords[]) {
 #ifdef DEBUG
   printf("sort : A_MPI_Cart_coords\n");
   debug_printer("MPI_Cart_coords : \n{\ncomm : %C,\nrank : %d,\nmaxdims : "
-                "%d,\ncoord : %d,\nreturn : %d}\n",
-                comm, rank, maxdims, coord, ret_tmp);
+                "%d,\ncoords : %d,\nreturn : %d}\n",
+                comm, rank, maxdims, coords, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29818,8 +29819,8 @@ int A_MPI_Graph_neighbors(A_MPI_Comm comm, int rank, int maxneighbors,
 #ifdef DEBUG
   printf("sort : A_MPI_Graph_neighbors\n");
   debug_printer("MPI_Graph_neighbors : \n{\ncomm : %C,\nrank : "
-                "%d,\nmaxneighbors : %d,\nneighbor : %d,\nreturn : %d}\n",
-                comm, rank, maxneighbors, neighbor, ret_tmp);
+                "%d,\nmaxneighbors : %d,\nneighbors : %d,\nreturn : %d}\n",
+                comm, rank, maxneighbors, neighbors, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29899,9 +29900,9 @@ int A_MPI_Cart_sub(A_MPI_Comm comm, int remain_dims[], A_MPI_Comm *newcomm) {
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Cart_sub\n");
-  debug_printer("MPI_Cart_sub : \n{\ncomm : %C,\nremain_dim : %d,\nnewcomm : "
+  debug_printer("MPI_Cart_sub : \n{\ncomm : %C,\nremain_dims : %d,\nnewcomm : "
                 "%*o,\nreturn : %d}\n",
-                comm, remain_dim, newcomm, ret_tmp);
+                comm, remain_dims, newcomm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -29984,9 +29985,9 @@ int A_MPI_Cart_map(A_MPI_Comm comm, int ndims, int dims[], int periods[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Cart_map\n");
-  debug_printer("MPI_Cart_map : \n{\ncomm : %C,\nndims : %d,\ndim : "
-                "%d,\nperiod : %d,\nnewrank : %*d,\nreturn : %d}\n",
-                comm, ndims, dim, period, newrank, ret_tmp);
+  debug_printer("MPI_Cart_map : \n{\ncomm : %C,\nndims : %d,\ndims : "
+                "%d,\nperiods : %d,\nnewrank : %*d,\nreturn : %d}\n",
+                comm, ndims, dims, periods, newrank, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -30070,9 +30071,9 @@ int A_MPI_Graph_map(A_MPI_Comm comm, int nnodes, int indx[], int edges[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Graph_map\n");
-  debug_printer("MPI_Graph_map : \n{\ncomm : %C,\nnnodes : %d,\nind : "
-                "%d,\nedge : %d,\nnewrank : %*d,\nreturn : %d}\n",
-                comm, nnodes, ind, edge, newrank, ret_tmp);
+  debug_printer("MPI_Graph_map : \n{\ncomm : %C,\nnnodes : %d,\nindx : "
+                "%d,\nedges : %d,\nnewrank : %*d,\nreturn : %d}\n",
+                comm, nnodes, indx, edges, newrank, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -30169,11 +30170,11 @@ int A_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, A_MPI_Info info,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Comm_spawn\n");
-  debug_printer("MPI_Comm_spawn : \n{\ncommand : %s,\narg : %s,\nmaxprocs : "
+  debug_printer("MPI_Comm_spawn : \n{\ncommand : %s,\nargv : %s,\nmaxprocs : "
                 "%d,\ninfo : %I,\nroot : %d,\ncomm : %C,\nintercomm : "
-                "%*o,\narray_of_errcode : %d,\nreturn : %d}\n",
-                command, arg, maxprocs, info, root, comm, intercomm,
-                array_of_errcode, ret_tmp);
+                "%*o,\narray_of_errcodes : %d,\nreturn : %d}\n",
+                command, argv, maxprocs, info, root, comm, intercomm,
+                array_of_errcodes, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -30281,12 +30282,13 @@ int A_MPI_Comm_spawn_multiple(int count, char *array_of_commands[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Comm_spawn_multiple\n");
-  debug_printer("MPI_Comm_spawn_multiple : \n{\ncount : %d,\narray_of_command "
-                ": %s,\narray_of_arg : %*s,\narray_of_maxproc : "
-                "%d,\narray_of_inf : %I,\nroot : %d,\ncomm : %C,\nintercomm : "
-                "%*o,\narray_of_errcode : %d,\nreturn : %d}\n",
-                count, array_of_command, array_of_arg, array_of_maxproc,
-                array_of_inf, root, comm, intercomm, array_of_errcode, ret_tmp);
+  debug_printer("MPI_Comm_spawn_multiple : \n{\ncount : %d,\narray_of_commands "
+                ": %s,\narray_of_argv : %*s,\narray_of_maxprocs : "
+                "%d,\narray_of_info : %I,\nroot : %d,\ncomm : %C,\nintercomm : "
+                "%*o,\narray_of_errcodes : %d,\nreturn : %d}\n",
+                count, array_of_commands, array_of_argv, array_of_maxprocs,
+                array_of_info, root, comm, intercomm, array_of_errcodes,
+                ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -30400,12 +30402,13 @@ int A_MPI_Type_get_contents(A_MPI_Datatype datatype, int max_integers,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Type_get_contents\n");
-  debug_printer(
-      "MPI_Type_get_contents : \n{\ndatatype : %D,\nmax_integers : "
-      "%d,\nmax_addresses : %d,\nmax_datatypes : %d,\narray_of_integer : "
-      "%d,\narray_of_addresse : %ld,\narray_of_datatype : %D,\nreturn : %d}\n",
-      datatype, max_integers, max_addresses, max_datatypes, array_of_integer,
-      array_of_addresse, array_of_datatype, ret_tmp);
+  debug_printer("MPI_Type_get_contents : \n{\ndatatype : %D,\nmax_integers : "
+                "%d,\nmax_addresses : %d,\nmax_datatypes : "
+                "%d,\narray_of_integers : %d,\narray_of_addresses : "
+                "%ld,\narray_of_datatypes : %D,\nreturn : %d}\n",
+                datatype, max_integers, max_addresses, max_datatypes,
+                array_of_integers, array_of_addresses, array_of_datatypes,
+                ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -30509,10 +30512,10 @@ int A_MPI_Pack_external(char datarep[], void *inbuf, int incount,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Pack_external\n");
-  debug_printer("MPI_Pack_external : \n{\ndatare : %c,\ninbuf : %p,\nincount : "
-                "%d,\ndatatype : %D,\noutbuf : %p,\noutsize : %ld,\nposition : "
-                "%*d,\nreturn : %d}\n",
-                datare, inbuf, incount, datatype, outbuf, outsize, position,
+  debug_printer("MPI_Pack_external : \n{\ndatarep : %c,\ninbuf : %p,\nincount "
+                ": %d,\ndatatype : %D,\noutbuf : %p,\noutsize : %ld,\nposition "
+                ": %*d,\nreturn : %d}\n",
+                datarep, inbuf, incount, datatype, outbuf, outsize, position,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30599,9 +30602,9 @@ int A_MPI_Pack_external_size(char datarep[], int incount,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Pack_external_size\n");
-  debug_printer("MPI_Pack_external_size : \n{\ndatare : %c,\nincount : "
+  debug_printer("MPI_Pack_external_size : \n{\ndatarep : %c,\nincount : "
                 "%d,\ndatatype : %D,\nsize : %*d,\nreturn : %d}\n",
-                datare, incount, datatype, size, ret_tmp);
+                datarep, incount, datatype, size, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -30699,11 +30702,11 @@ int A_MPI_Type_create_darray(int size, int rank, int ndims,
 #ifdef DEBUG
   printf("sort : A_MPI_Type_create_darray\n");
   debug_printer("MPI_Type_create_darray : \n{\nsize : %d,\nrank : %d,\nndims : "
-                "%d,\narray_of_gsize : %d,\narray_of_distrib : "
-                "%d,\narray_of_darg : %d,\narray_of_psize : %d,\norder : "
+                "%d,\narray_of_gsizes : %d,\narray_of_distribs : "
+                "%d,\narray_of_dargs : %d,\narray_of_psizes : %d,\norder : "
                 "%d,\noldtype : %D,\nnewtype : %*D,\nreturn : %d}\n",
-                size, rank, ndims, array_of_gsize, array_of_distrib,
-                array_of_darg, array_of_psize, order, oldtype, newtype,
+                size, rank, ndims, array_of_gsizes, array_of_distribs,
+                array_of_dargs, array_of_psizes, order, oldtype, newtype,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30808,9 +30811,9 @@ int A_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
 #ifdef DEBUG
   printf("sort : A_MPI_Type_create_hindexed\n");
   debug_printer("MPI_Type_create_hindexed : \n{\ncount : "
-                "%d,\narray_of_blocklength : %d,\narray_of_displacement : "
+                "%d,\narray_of_blocklengths : %d,\narray_of_displacements : "
                 "%ld,\noldtype : %D,\nnewtype : %*D,\nreturn : %d}\n",
-                count, array_of_blocklength, array_of_displacement, oldtype,
+                count, array_of_blocklengths, array_of_displacements, oldtype,
                 newtype, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30907,9 +30910,9 @@ int A_MPI_Type_create_indexed_block(int count, int blocklength,
 #ifdef DEBUG
   printf("sort : A_MPI_Type_create_indexed_block\n");
   debug_printer("MPI_Type_create_indexed_block : \n{\ncount : %d,\nblocklength "
-                ": %d,\narray_of_displacement : %d,\noldtype : %D,\nnewtype : "
+                ": %d,\narray_of_displacements : %d,\noldtype : %D,\nnewtype : "
                 "%*D,\nreturn : %d}\n",
-                count, blocklength, array_of_displacement, oldtype, newtype,
+                count, blocklength, array_of_displacements, oldtype, newtype,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31012,9 +31015,9 @@ int A_MPI_Type_create_hindexed_block(int count, int blocklength,
 #ifdef DEBUG
   printf("sort : A_MPI_Type_create_hindexed_block\n");
   debug_printer("MPI_Type_create_hindexed_block : \n{\ncount : "
-                "%d,\nblocklength : %d,\narray_of_displacement : %ld,\noldtype "
-                ": %D,\nnewtype : %*D,\nreturn : %d}\n",
-                count, blocklength, array_of_displacement, oldtype, newtype,
+                "%d,\nblocklength : %d,\narray_of_displacements : "
+                "%ld,\noldtype : %D,\nnewtype : %*D,\nreturn : %d}\n",
+                count, blocklength, array_of_displacements, oldtype, newtype,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31123,10 +31126,10 @@ int A_MPI_Type_create_struct(int count, int array_of_blocklengths[],
 #ifdef DEBUG
   printf("sort : A_MPI_Type_create_struct\n");
   debug_printer("MPI_Type_create_struct : \n{\ncount : "
-                "%d,\narray_of_blocklength : %d,\narray_of_displacement : "
-                "%ld,\narray_of_type : %D,\nnewtype : %*D,\nreturn : %d}\n",
-                count, array_of_blocklength, array_of_displacement,
-                array_of_type, newtype, ret_tmp);
+                "%d,\narray_of_blocklengths : %d,\narray_of_displacements : "
+                "%ld,\narray_of_types : %D,\nnewtype : %*D,\nreturn : %d}\n",
+                count, array_of_blocklengths, array_of_displacements,
+                array_of_types, newtype, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -31226,11 +31229,11 @@ int A_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Type_create_subarray\n");
-  debug_printer("MPI_Type_create_subarray : \n{\nndims : %d,\narray_of_size : "
-                "%d,\narray_of_subsize : %d,\narray_of_start : %d,\norder : "
+  debug_printer("MPI_Type_create_subarray : \n{\nndims : %d,\narray_of_sizes : "
+                "%d,\narray_of_subsizes : %d,\narray_of_starts : %d,\norder : "
                 "%d,\noldtype : %D,\nnewtype : %*D,\nreturn : %d}\n",
-                ndims, array_of_size, array_of_subsize, array_of_start, order,
-                oldtype, newtype, ret_tmp);
+                ndims, array_of_sizes, array_of_subsizes, array_of_starts,
+                order, oldtype, newtype, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -31334,10 +31337,10 @@ int A_MPI_Unpack_external(char datarep[], void *inbuf, A_MPI_Aint insize,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Unpack_external\n");
-  debug_printer("MPI_Unpack_external : \n{\ndatare : %c,\ninbuf : %p,\ninsize "
+  debug_printer("MPI_Unpack_external : \n{\ndatarep : %c,\ninbuf : %p,\ninsize "
                 ": %ld,\nposition : %*d,\noutbuf : %p,\noutcount : "
                 "%d,\ndatatype : %D,\nreturn : %d}\n",
-                datare, inbuf, insize, position, outbuf, outcount, datatype,
+                datarep, inbuf, insize, position, outbuf, outcount, datatype,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31448,10 +31451,10 @@ int A_MPI_Dist_graph_create_adjacent(A_MPI_Comm comm_old, int indegree,
   printf("sort : A_MPI_Dist_graph_create_adjacent\n");
   debug_printer(
       "MPI_Dist_graph_create_adjacent : \n{\ncomm_old : %C,\nindegree : "
-      "%d,\nsource : %d,\nsourceweights : %*d,\noutdegree : %d,\ndestination : "
-      "%d,\ndestweights : %*d,\ninfo : %I,\nreorder : %d,\ncomm_dist_graph : "
+      "%d,\nsources : %d,\nsourceweights : %*d,\noutdegree : %d,\ndestinations "
+      ": %d,\ndestweights : %*d,\ninfo : %I,\nreorder : %d,\ncomm_dist_graph : "
       "%*o,\nreturn : %d}\n",
-      comm_old, indegree, source, sourceweights, outdegree, destination,
+      comm_old, indegree, sources, sourceweights, outdegree, destinations,
       destweights, info, reorder, comm_dist_graph, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31557,10 +31560,11 @@ int A_MPI_Dist_graph_create(A_MPI_Comm comm_old, int n, int sources[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Dist_graph_create\n");
-  debug_printer("MPI_Dist_graph_create : \n{\ncomm_old : %C,\nn : %d,\nsource "
-                ": %d,\ndegree : %d,\ndestination : %d,\nweights : %*d,\ninfo "
-                ": %I,\nreorder : %d,\ncomm_dist_graph : %*o,\nreturn : %d}\n",
-                comm_old, n, source, degree, destination, weights, info,
+  debug_printer("MPI_Dist_graph_create : \n{\ncomm_old : %C,\nn : %d,\nsources "
+                ": %d,\ndegrees : %d,\ndestinations : %d,\nweights : "
+                "%*d,\ninfo : %I,\nreorder : %d,\ncomm_dist_graph : "
+                "%*o,\nreturn : %d}\n",
+                comm_old, n, sources, degrees, destinations, weights, info,
                 reorder, comm_dist_graph, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31663,10 +31667,10 @@ int A_MPI_Dist_graph_neighbors(A_MPI_Comm comm, int maxindegree, int sources[],
 #ifdef DEBUG
   printf("sort : A_MPI_Dist_graph_neighbors\n");
   debug_printer("MPI_Dist_graph_neighbors : \n{\ncomm : %C,\nmaxindegree : "
-                "%d,\nsource : %d,\nsourceweights : %*d,\nmaxoutdegree : "
-                "%d,\ndestination : %d,\ndestweights : %*d,\nreturn : %d}\n",
-                comm, maxindegree, source, sourceweights, maxoutdegree,
-                destination, destweights, ret_tmp);
+                "%d,\nsources : %d,\nsourceweights : %*d,\nmaxoutdegree : "
+                "%d,\ndestinations : %d,\ndestweights : %*d,\nreturn : %d}\n",
+                comm, maxindegree, sources, sourceweights, maxoutdegree,
+                destinations, destweights, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -31778,9 +31782,10 @@ int A_MPI_Igatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
 #ifdef DEBUG
   printf("sort : A_MPI_Igatherv\n");
   debug_printer("MPI_Igatherv : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype "
-                ": %D,\nrecvbuf : %p,\nrecvcount : %d,\ndispl : %d,\nrecvtype "
-                ": %D,\nroot : %d,\ncomm : %C,\nrequest : %p,\nreturn : %d}\n",
-                sendbuf, sendcount, sendtype, recvbuf, recvcount, displ,
+                ": %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls : "
+                "%d,\nrecvtype : %D,\nroot : %d,\ncomm : %C,\nrequest : "
+                "%p,\nreturn : %d}\n",
+                sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                 recvtype, root, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31893,11 +31898,11 @@ int A_MPI_Iscatterv(void *sendbuf, int sendcounts[], int *displs,
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Iscatterv\n");
-  debug_printer("MPI_Iscatterv : \n{\nsendbuf : %p,\nsendcount : %d,\ndispls : "
-                "%*d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : "
+  debug_printer("MPI_Iscatterv : \n{\nsendbuf : %p,\nsendcounts : %d,\ndispls "
+                ": %*d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : "
                 "%d,\nrecvtype : %D,\nroot : %d,\ncomm : %C,\nrequest : "
                 "%p,\nreturn : %d}\n",
-                sendbuf, sendcount, displs, sendtype, recvbuf, recvcount,
+                sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount,
                 recvtype, root, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32010,10 +32015,10 @@ int A_MPI_Iallgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
 #ifdef DEBUG
   printf("sort : A_MPI_Iallgatherv\n");
   debug_printer("MPI_Iallgatherv : \n{\nsendbuf : %p,\nsendcount : "
-                "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\ndispl : "
-                "%d,\nrecvtype : %D,\ncomm : %C,\nrequest : %p,\nreturn : "
+                "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls "
+                ": %d,\nrecvtype : %D,\ncomm : %C,\nrequest : %p,\nreturn : "
                 "%d}\n",
-                sendbuf, sendcount, sendtype, recvbuf, recvcount, displ,
+                sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                 recvtype, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32257,12 +32262,12 @@ int A_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Ialltoallw\n");
-  debug_printer("MPI_Ialltoallw : \n{\nsendbuf : %p,\nsendcount : %d,\nsdispl "
-                ": %d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\nrdispl "
-                ": %d,\nrecvtype : %D,\ncomm : %C,\nrequest : %p,\nreturn : "
-                "%d}\n",
-                sendbuf, sendcount, sdispl, sendtype, recvbuf, recvcount,
-                rdispl, recvtype, comm, request, ret_tmp);
+  debug_printer("MPI_Ialltoallw : \n{\nsendbuf : %p,\nsendcounts : "
+                "%d,\nsdispls : %d,\nsendtypes : %D,\nrecvbuf : "
+                "%p,\nrecvcounts : %d,\nrdispls : %d,\nrecvtypes : %D,\ncomm : "
+                "%C,\nrequest : %p,\nreturn : %d}\n",
+                sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts,
+                rdispls, recvtypes, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -32372,9 +32377,9 @@ int A_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
 #ifdef DEBUG
   printf("sort : A_MPI_Ireduce_scatter\n");
   debug_printer("MPI_Ireduce_scatter : \n{\nsendbuf : %p,\nrecvbuf : "
-                "%p,\nrecvcount : %d,\ndatatype : %D,\nop : %o,\ncomm : "
+                "%p,\nrecvcounts : %d,\ndatatype : %D,\nop : %o,\ncomm : "
                 "%C,\nrequest : %p,\nreturn : %d}\n",
-                sendbuf, recvbuf, recvcount, datatype, op, comm, request,
+                sendbuf, recvbuf, recvcounts, datatype, op, comm, request,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32488,10 +32493,10 @@ int A_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount,
 #ifdef DEBUG
   printf("sort : A_MPI_Ineighbor_allgatherv\n");
   debug_printer("MPI_Ineighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
-                "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\ndispl : "
-                "%d,\nrecvtype : %D,\ncomm : %C,\nrequest : %p,\nreturn : "
+                "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls "
+                ": %d,\nrecvtype : %D,\ncomm : %C,\nrequest : %p,\nreturn : "
                 "%d}\n",
-                sendbuf, sendcount, sendtype, recvbuf, recvcount, displ,
+                sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                 recvtype, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32607,12 +32612,12 @@ int A_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Ineighbor_alltoallv\n");
-  debug_printer("MPI_Ineighbor_alltoallv : \n{\nsendbuf : %p,\nsendcount : "
-                "%d,\nsdispl : %d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : "
-                "%d,\nrdispl : %d,\nrecvtype : %D,\ncomm : %C,\nrequest : "
+  debug_printer("MPI_Ineighbor_alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
+                "%d,\nsdispls : %d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts "
+                ": %d,\nrdispls : %d,\nrecvtype : %D,\ncomm : %C,\nrequest : "
                 "%p,\nreturn : %d}\n",
-                sendbuf, sendcount, sdispl, sendtype, recvbuf, recvcount,
-                rdispl, recvtype, comm, request, ret_tmp);
+                sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts,
+                rdispls, recvtype, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -32754,12 +32759,12 @@ int A_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Ineighbor_alltoallw\n");
-  debug_printer("MPI_Ineighbor_alltoallw : \n{\nsendbuf : %p,\nsendcount : "
-                "%d,\nsdispl : %ld,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount "
-                ": %d,\nrdispl : %ld,\nrecvtype : %D,\ncomm : %C,\nrequest : "
-                "%p,\nreturn : %d}\n",
-                sendbuf, sendcount, sdispl, sendtype, recvbuf, recvcount,
-                rdispl, recvtype, comm, request, ret_tmp);
+  debug_printer("MPI_Ineighbor_alltoallw : \n{\nsendbuf : %p,\nsendcounts : "
+                "%d,\nsdispls : %ld,\nsendtypes : %D,\nrecvbuf : "
+                "%p,\nrecvcounts : %d,\nrdispls : %ld,\nrecvtypes : %D,\ncomm "
+                ": %C,\nrequest : %p,\nreturn : %d}\n",
+                sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts,
+                rdispls, recvtypes, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -32867,9 +32872,9 @@ int A_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount,
 #ifdef DEBUG
   printf("sort : A_MPI_Neighbor_allgatherv\n");
   debug_printer("MPI_Neighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
-                "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\ndispl : "
-                "%d,\nrecvtype : %D,\ncomm : %C,\nreturn : %d}\n",
-                sendbuf, sendcount, sendtype, recvbuf, recvcount, displ,
+                "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls "
+                ": %d,\nrecvtype : %D,\ncomm : %C,\nreturn : %d}\n",
+                sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                 recvtype, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32977,11 +32982,12 @@ int A_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Neighbor_alltoallv\n");
-  debug_printer("MPI_Neighbor_alltoallv : \n{\nsendbuf : %p,\nsendcount : "
-                "%d,\nsdispl : %d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : "
-                "%d,\nrdispl : %d,\nrecvtype : %D,\ncomm : %C,\nreturn : %d}\n",
-                sendbuf, sendcount, sdispl, sendtype, recvbuf, recvcount,
-                rdispl, recvtype, comm, ret_tmp);
+  debug_printer("MPI_Neighbor_alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
+                "%d,\nsdispls : %d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts "
+                ": %d,\nrdispls : %d,\nrecvtype : %D,\ncomm : %C,\nreturn : "
+                "%d}\n",
+                sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts,
+                rdispls, recvtype, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -33116,12 +33122,12 @@ int A_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[],
   in_w = 0;
 #ifdef DEBUG
   printf("sort : A_MPI_Neighbor_alltoallw\n");
-  debug_printer("MPI_Neighbor_alltoallw : \n{\nsendbuf : %p,\nsendcount : "
-                "%d,\nsdispl : %ld,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount "
-                ": %d,\nrdispl : %ld,\nrecvtype : %D,\ncomm : %C,\nreturn : "
-                "%d}\n",
-                sendbuf, sendcount, sdispl, sendtype, recvbuf, recvcount,
-                rdispl, recvtype, comm, ret_tmp);
+  debug_printer("MPI_Neighbor_alltoallw : \n{\nsendbuf : %p,\nsendcounts : "
+                "%d,\nsdispls : %ld,\nsendtypes : %D,\nrecvbuf : "
+                "%p,\nrecvcounts : %d,\nrdispls : %ld,\nrecvtypes : %D,\ncomm "
+                ": %C,\nreturn : %d}\n",
+                sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts,
+                rdispls, recvtypes, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -33202,8 +33208,8 @@ int A_MPI_T_category_get_cvars(int cat_index, int len, int indices[]) {
 #ifdef DEBUG
   printf("sort : A_MPI_T_category_get_cvars\n");
   debug_printer("MPI_T_category_get_cvars : \n{\ncat_index : %d,\nlen : "
-                "%d,\nindice : %d,\nreturn : %d}\n",
-                cat_index, len, indice, ret_tmp);
+                "%d,\nindices : %d,\nreturn : %d}\n",
+                cat_index, len, indices, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -33278,8 +33284,8 @@ int A_MPI_T_category_get_pvars(int cat_index, int len, int indices[]) {
 #ifdef DEBUG
   printf("sort : A_MPI_T_category_get_pvars\n");
   debug_printer("MPI_T_category_get_pvars : \n{\ncat_index : %d,\nlen : "
-                "%d,\nindice : %d,\nreturn : %d}\n",
-                cat_index, len, indice, ret_tmp);
+                "%d,\nindices : %d,\nreturn : %d}\n",
+                cat_index, len, indices, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -33354,8 +33360,8 @@ int A_MPI_T_category_get_categories(int cat_index, int len, int indices[]) {
 #ifdef DEBUG
   printf("sort : A_MPI_T_category_get_categories\n");
   debug_printer("MPI_T_category_get_categories : \n{\ncat_index : %d,\nlen : "
-                "%d,\nindice : %d,\nreturn : %d}\n",
-                cat_index, len, indice, ret_tmp);
+                "%d,\nindices : %d,\nreturn : %d}\n",
+                cat_index, len, indices, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
