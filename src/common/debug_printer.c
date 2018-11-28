@@ -19,8 +19,8 @@ void debug_printer(const char *ctr_str,...)
             print_str[i]='\0';
             printf("%s",print_str);
             pointer_disp=0;
-decode:
             it++;
+decode:
             switch (ctr_str[it]){
                 case '*':
                     pointer_disp++;
