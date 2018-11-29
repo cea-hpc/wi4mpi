@@ -41,6 +41,7 @@ void debug_printer(const char *ctr_str,...)
                 //    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
                 //    break;
                 default:
+                    va_arg(ap,void*);
                     it++;
                     break;
             }
