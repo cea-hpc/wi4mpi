@@ -40,7 +40,7 @@ void debug_printer(const char *ctr_str,...)
                 //case 's':
                 //    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
                 //    break;
-                case C:
+                case 'C':
                     A_MPI_Comm cc=pointer_disp?*(va_arg(ap,A_MPI_Comm*)):(va_arg(ap,A_MPI_Comm));
                     char cname[2048];int namelen;
                     A_MPI_Comm_get_name(cc,&cname[0],&namelen);
