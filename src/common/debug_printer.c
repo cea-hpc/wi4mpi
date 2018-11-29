@@ -50,7 +50,8 @@ void debug_printer(const char *ctr_str,...)
                     A_MPI_Comm_get_name(cc,&cname[0],&namelen);
                     debug_act=1;
                     printf("%p : %s",cc,cname);
-                default:
+                    break; 
+               default:
                     va_arg(ap,void*);
                     it++;
                     break;
