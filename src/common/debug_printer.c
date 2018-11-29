@@ -18,7 +18,7 @@ void debug_printer(const char *ctr_str,...)
     it=0;i=0;
     while(ctr_str[it]!='\0')
     {
-        int        nb_elt=1;
+        int        nb_elt=0;
         print_str[i]=ctr_str[it];
         if(ctr_str[it]=='%')
         {
@@ -39,7 +39,7 @@ void debug_printer(const char *ctr_str,...)
                     to_dec=1;    
                     break;
                 case 'n':
-                    if(nb_elt==1)
+                    if(nb_elt==0)
                     print_status(pointer_disp?*va_arg(ap,A_MPI_Status *):va_arg(ap,A_MPI_Status));
                     else
                     {
@@ -51,7 +51,7 @@ void debug_printer(const char *ctr_str,...)
                     }
                     break;
                 case 'd':
-                    if(nb_elt==1)
+                    if(nb_elt==0)
                     printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     else
                     {
@@ -73,9 +73,18 @@ void debug_printer(const char *ctr_str,...)
                     nb_elt=va_arg(ap,int);
                     
                     break;
-                //case 's':
-                //    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
-                //    break;
+                case 's':
+                    if(nb_elt==0)
+                        printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
+                    else
+                    
+                    char **s=pointer_disp?*va_arg(ap,char ***):va_arg(ap,char**);
+                    printf("[\n");
+                    for(ii=0;ii<nb_elt;ii++)
+                    {if(ii) printf(",\n%s",s[ii]);else printf("%s",s[ii]);}
+                    printf("]\n");
+                    }
+                    break;
                 case 'C':
                     A_MPI_Comm cc=pointer_disp?*(va_arg(ap,A_MPI_Comm*)):(va_arg(ap,A_MPI_Comm));
                     debug_act=0;
