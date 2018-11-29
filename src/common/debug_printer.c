@@ -66,6 +66,10 @@ void debug_printer(const char *ctr_str,...)
     va_end(ap);       
     
 }}
+__attibute__((constructor)) void init_debug(void)
+{
+    debug_act=1;
+}
 void print_status(A_MPI_Status stat)
 {
     printf("{ source :%d, tag : %d ,error :%d}",stat.A_MPI_SOURCE,stat.A_MPI_TAG,stat.A_MPI_ERROR);
