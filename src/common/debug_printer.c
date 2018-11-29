@@ -66,7 +66,7 @@ void debug_printer(const char *ctr_str,...)
     va_end(ap);       
     
 }}
-__attibute__((constructor)) void init_debug(void)
+__attribute__((constructor)) void init_debug(void)
 {
     debug_act=1;
 }
