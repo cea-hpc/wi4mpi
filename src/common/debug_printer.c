@@ -18,6 +18,7 @@ void debug_printer(const char *ctr_str,...)
     it=0;i=0;
     while(ctr_str[it]!='\0')
     {
+        int        nb_elt=1;
         print_str[i]=ctr_str[it];
         if(ctr_str[it]=='%')
         {
@@ -32,7 +33,6 @@ void debug_printer(const char *ctr_str,...)
                     char cname[2048];int namelen;
                 it++;
                 to_dec=0;
-                nb_elt=1;
             switch (ctr_str[it]){
                 case '*':
                     pointer_disp++;
