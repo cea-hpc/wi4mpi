@@ -77,13 +77,14 @@ void debug_printer(const char *ctr_str,...)
                     if(nb_elt==0)
                         printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
                     else
-                    
+                   { 
                     char **s=pointer_disp?*va_arg(ap,char ***):va_arg(ap,char**);
                     printf("[\n");
                     for(ii=0;ii<nb_elt;ii++)
                     {if(ii) printf(",\n%s",s[ii]);else printf("%s",s[ii]);}
                     printf("]\n");
-                    }
+                    }}
+
                     break;
                 case 'C':
                     A_MPI_Comm cc=pointer_disp?*(va_arg(ap,A_MPI_Comm*)):(va_arg(ap,A_MPI_Comm));
