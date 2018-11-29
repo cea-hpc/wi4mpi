@@ -51,6 +51,9 @@ class generator:
                 if idx!= -1:
                     ii=ii[:idx]
                 out_str=out_str+ii+" : "+self.mappers[i['name']]['debug_type']+",\\n"
+                
+                if i['arg_dep'] !='':
+                    out_arg_list=out_arg_list+i['arg_dep'] +","
                 out_arg_list=out_arg_list+ii+","
         out_arg_list=out_arg_list+"ret_tmp"
         out_str=out_str+"return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"\\n}\\n"

@@ -4183,7 +4183,7 @@
       }, 
       {
         "var": "argv", 
-        "arg_dep": "", 
+        "arg_dep": "*argc", 
         "In": 1, 
         "name": "char_ppp_converter", 
         "Out": 0
@@ -6512,7 +6512,7 @@
       }, 
       {
         "var": "argv", 
-        "arg_dep": "", 
+        "arg_dep": "*argc", 
         "In": 1, 
         "name": "char_ppp_converter", 
         "Out": 0

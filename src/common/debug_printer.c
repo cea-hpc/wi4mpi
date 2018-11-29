@@ -72,7 +72,7 @@ void debug_printer(const char *ctr_str,...)
                     break; 
                 case 'a':
                     nb_elt=va_arg(ap,int);
-                    
+                    to_dec=1; 
                     break;
                 case 's':
                     if(nb_elt==0)
