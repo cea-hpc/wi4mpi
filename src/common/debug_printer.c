@@ -97,6 +97,7 @@ void debug_printer(const char *ctr_str,...)
 
                case 'p':
                     printf("%p",va_arg(ap,void*)); 
+                    break;
                default:
                     va_arg(ap,void*);
                     break;
