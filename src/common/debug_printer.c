@@ -2,8 +2,8 @@
 #include <string.h>
 #include "app_mpi.h"
 #include <stdarg.h>
-int debug_act;
-
+__thread int debug_act;
+void print_status(A_MPI_Status);
 void debug_printer(const char *ctr_str,...)
 {
     if(debug_act!=0)
@@ -55,7 +55,7 @@ void debug_printer(const char *ctr_str,...)
                     printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     else
                     {
-                    int *s=pointer_disp?*va_arg(int **):va_arg(ap,int*);
+                    int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
                     printf("[\n");
                     for(ii=0;ii<nb_elt;ii++)
                     {if(ii) printf(",\n%d",s[ii]);else printf("%d",s[ii]);}
