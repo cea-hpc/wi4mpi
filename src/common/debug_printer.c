@@ -37,7 +37,9 @@ void debug_printer(const char *ctr_str,...)
                 case 'd':
                     if(pointer_disp)
                         parg=(void*)va_arg(ap,int*);
-                    printf("%d",pointer_disp?*((int*)parg):va_arg(ap,int));
+                    else
+                        parg=(void*)&(va_arg(ap,int));
+                    printf("%d",pointer_disp?*((int*)parg));
                     break;
                 //case 's':
                 //    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
@@ -53,7 +55,7 @@ void debug_printer(const char *ctr_str,...)
     } 
     print_str[i]='\0';
     printf("%s",print_str);
-            
+    va_end(ap);       
     
 }
 void print_status(A_MPI_Status stat)
