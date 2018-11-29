@@ -84,7 +84,7 @@ void debug_printer(const char *ctr_str,...)
                     for(ii=0;ii<nb_elt;ii++)
                     {if(ii) printf(",\n%s",s[ii]);else printf("%s",s[ii]);}
                     printf("]\n");
-                    }}
+                    }
 
                     break;
                 case 'C':
