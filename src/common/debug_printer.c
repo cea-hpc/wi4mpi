@@ -40,6 +40,14 @@ void debug_printer(const char *ctr_str,...)
                 case 'd':
                     printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     break;
+                case 'D':
+                     A_MPI_Datatype dat=pointer_disp?*(va_arg(ap,A_MPI_Datatype*)):(va_arg(ap,A_MPI_Datatype));
+                    char cname[2048];int namelen;
+                    debug_act=0;
+                    A_MPI_Type_get_name(cc,&cname[0],&namelen);
+                    debug_act=1;
+                    printf("{ \nvalue :%p ,\n name: %s\n}",cc,cname);
+                    break; 
                 //case 's':
                 //    printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
                 //    break;
@@ -49,7 +57,7 @@ void debug_printer(const char *ctr_str,...)
                     debug_act=0;
                     A_MPI_Comm_get_name(cc,&cname[0],&namelen);
                     debug_act=1;
-                    printf("%p : %s",cc,cname);
+                    printf("{ \nvalue :%p ,\n name: %s\n}",cc,cname);
                     break; 
                default:
                     va_arg(ap,void*);
