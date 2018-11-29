@@ -26959,7 +26959,7 @@ int A_MPI_Graph_get(A_MPI_Comm comm, int maxindex, int maxedges, int indx[],
 #ifdef DEBUG
   debug_printer("MPI_Graph_get : \n{\ncomm : %C,\nmaxindex : %d,\nmaxedges : "
                 "%d,\nindx : %d,\nedges : %d,\nreturn : %d\n}\n",
-                comm, maxindex, maxedges, mmaxindex, indx, maxedges, edges,
+                comm, maxindex, maxedges, maxindex, indx, maxedges, edges,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28561,7 +28561,7 @@ int A_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
   debug_printer("MPI_Type_create_subarray : \n{\nndims : %d,\narray_of_sizes : "
                 "%d,\narray_of_subsizes : %d,\narray_of_starts : %d,\norder : "
                 "%d,\noldtype : %D,\nnewtype : %*D,\nreturn : %d\n}\n",
-                ndims, count, array_of_sizes, count, array_of_subsizes, count,
+                ndims, ndims, array_of_sizes, ndims, array_of_subsizes, ndims,
                 array_of_starts, order, oldtype, newtype, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
