@@ -60,9 +60,6 @@ void (*_LOCAL_MPI_Send)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Send(void *buf, int *count, int *datatype, int *dest, int *tag,
                   int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Send\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Send_timeout);
 #endif
@@ -85,7 +82,6 @@ void A_f_MPI_Send(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Send\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -107,9 +103,6 @@ void (*_LOCAL_MPI_Recv)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Recv(void *buf, int *count, int *datatype, int *source, int *tag,
                   int *comm, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Recv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Recv_timeout);
 #endif
@@ -140,7 +133,6 @@ void A_f_MPI_Recv(void *buf, int *count, int *datatype, int *source, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Recv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -160,9 +152,6 @@ extern unsigned long long WI4MPI_Get_count_timeout;
 void (*_LOCAL_MPI_Get_count)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_count(int *status, int *datatype, int *count, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Get_count\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Get_count_timeout);
 #endif
@@ -180,7 +169,6 @@ void A_f_MPI_Get_count(int *status, int *datatype, int *count, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Get_count\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -201,9 +189,6 @@ void (*_LOCAL_MPI_Bsend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Bsend(void *buf, int *count, int *datatype, int *dest, int *tag,
                    int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Bsend\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Bsend_timeout);
 #endif
@@ -226,7 +211,6 @@ void A_f_MPI_Bsend(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Bsend\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -247,9 +231,6 @@ void (*_LOCAL_MPI_Ssend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Ssend(void *buf, int *count, int *datatype, int *dest, int *tag,
                    int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ssend\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ssend_timeout);
 #endif
@@ -272,7 +253,6 @@ void A_f_MPI_Ssend(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ssend\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -293,9 +273,6 @@ void (*_LOCAL_MPI_Rsend)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Rsend(void *buf, int *count, int *datatype, int *dest, int *tag,
                    int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Rsend\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Rsend_timeout);
 #endif
@@ -318,7 +295,6 @@ void A_f_MPI_Rsend(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Rsend\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -338,9 +314,6 @@ extern unsigned long long WI4MPI_Buffer_attach_timeout;
 void (*_LOCAL_MPI_Buffer_attach)(void *, int *, int *);
 
 void A_f_MPI_Buffer_attach(void *buffer, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Buffer_attach\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Buffer_attach_timeout);
 #endif
@@ -354,7 +327,6 @@ void A_f_MPI_Buffer_attach(void *buffer, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Buffer_attach\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -374,9 +346,6 @@ extern unsigned long long WI4MPI_Buffer_detach_timeout;
 void (*_LOCAL_MPI_Buffer_detach)(void *, int *, int *);
 
 void A_f_MPI_Buffer_detach(void *buffer_addr, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Buffer_detach\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Buffer_detach_timeout);
 #endif
@@ -391,7 +360,6 @@ void A_f_MPI_Buffer_detach(void *buffer_addr, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Buffer_detach\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -413,9 +381,6 @@ void (*_LOCAL_MPI_Isend)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Isend(void *buf, int *count, int *datatype, int *dest, int *tag,
                    int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Isend\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Isend_timeout);
 #endif
@@ -441,7 +406,6 @@ void A_f_MPI_Isend(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Isend\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -463,9 +427,6 @@ void (*_LOCAL_MPI_Ibsend)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Ibsend(void *buf, int *count, int *datatype, int *dest, int *tag,
                     int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ibsend\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ibsend_timeout);
 #endif
@@ -491,7 +452,6 @@ void A_f_MPI_Ibsend(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ibsend\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -513,9 +473,6 @@ void (*_LOCAL_MPI_Issend)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Issend(void *buf, int *count, int *datatype, int *dest, int *tag,
                     int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Issend\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Issend_timeout);
 #endif
@@ -541,7 +498,6 @@ void A_f_MPI_Issend(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Issend\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -563,9 +519,6 @@ void (*_LOCAL_MPI_Irsend)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Irsend(void *buf, int *count, int *datatype, int *dest, int *tag,
                     int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Irsend\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Irsend_timeout);
 #endif
@@ -591,7 +544,6 @@ void A_f_MPI_Irsend(void *buf, int *count, int *datatype, int *dest, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Irsend\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -613,9 +565,6 @@ void (*_LOCAL_MPI_Irecv)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Irecv(void *buf, int *count, int *datatype, int *source, int *tag,
                    int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Irecv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Irecv_timeout);
 #endif
@@ -642,7 +591,6 @@ void A_f_MPI_Irecv(void *buf, int *count, int *datatype, int *source, int *tag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Irecv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -662,9 +610,6 @@ extern unsigned long long WI4MPI_Wait_timeout;
 void (*_LOCAL_MPI_Wait)(int *, int *, int *);
 
 void A_f_MPI_Wait(int *request, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Wait\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Wait_timeout);
 #endif
@@ -686,7 +631,6 @@ void A_f_MPI_Wait(int *request, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Wait\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -706,9 +650,6 @@ extern unsigned long long WI4MPI_Test_timeout;
 void (*_LOCAL_MPI_Test)(int *, int *, int *, int *);
 
 void A_f_MPI_Test(int *request, int *flag, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Test\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Test_timeout);
 #endif
@@ -730,7 +671,6 @@ void A_f_MPI_Test(int *request, int *flag, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Test\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -750,9 +690,6 @@ extern unsigned long long WI4MPI_Request_free_timeout;
 void (*_LOCAL_MPI_Request_free)(int *, int *);
 
 void A_f_MPI_Request_free(int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Request_free\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Request_free_timeout);
 #endif
@@ -768,7 +705,6 @@ void A_f_MPI_Request_free(int *request, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Request_free\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -789,9 +725,6 @@ void (*_LOCAL_MPI_Iprobe)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Iprobe(int *source, int *tag, int *comm, int *flag, int *status,
                     int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iprobe\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iprobe_timeout);
 #endif
@@ -816,7 +749,6 @@ void A_f_MPI_Iprobe(int *source, int *tag, int *comm, int *flag, int *status,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iprobe\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -836,9 +768,6 @@ extern unsigned long long WI4MPI_Probe_timeout;
 void (*_LOCAL_MPI_Probe)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Probe(int *source, int *tag, int *comm, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Probe\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Probe_timeout);
 #endif
@@ -862,7 +791,6 @@ void A_f_MPI_Probe(int *source, int *tag, int *comm, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Probe\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -882,9 +810,6 @@ extern unsigned long long WI4MPI_Cancel_timeout;
 void (*_LOCAL_MPI_Cancel)(int *, int *);
 
 void A_f_MPI_Cancel(int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cancel\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cancel_timeout);
 #endif
@@ -898,7 +823,6 @@ void A_f_MPI_Cancel(int *request, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cancel\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -918,9 +842,6 @@ extern unsigned long long WI4MPI_Test_cancelled_timeout;
 void (*_LOCAL_MPI_Test_cancelled)(int *, int *, int *);
 
 void A_f_MPI_Test_cancelled(int *status, int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Test_cancelled\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Test_cancelled_timeout);
 #endif
@@ -936,7 +857,6 @@ void A_f_MPI_Test_cancelled(int *status, int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Test_cancelled\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -958,9 +878,6 @@ void (*_LOCAL_MPI_Send_init)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Send_init(void *buf, int *count, int *datatype, int *dest,
                        int *tag, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Send_init\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Send_init_timeout);
 #endif
@@ -986,7 +903,6 @@ void A_f_MPI_Send_init(void *buf, int *count, int *datatype, int *dest,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Send_init\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1008,9 +924,6 @@ void (*_LOCAL_MPI_Bsend_init)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Bsend_init(void *buf, int *count, int *datatype, int *dest,
                         int *tag, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Bsend_init\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Bsend_init_timeout);
 #endif
@@ -1036,7 +949,6 @@ void A_f_MPI_Bsend_init(void *buf, int *count, int *datatype, int *dest,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Bsend_init\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1058,9 +970,6 @@ void (*_LOCAL_MPI_Ssend_init)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Ssend_init(void *buf, int *count, int *datatype, int *dest,
                         int *tag, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ssend_init\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ssend_init_timeout);
 #endif
@@ -1086,7 +995,6 @@ void A_f_MPI_Ssend_init(void *buf, int *count, int *datatype, int *dest,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ssend_init\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1108,9 +1016,6 @@ void (*_LOCAL_MPI_Rsend_init)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Rsend_init(void *buf, int *count, int *datatype, int *dest,
                         int *tag, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Rsend_init\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Rsend_init_timeout);
 #endif
@@ -1136,7 +1041,6 @@ void A_f_MPI_Rsend_init(void *buf, int *count, int *datatype, int *dest,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Rsend_init\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1158,9 +1062,6 @@ void (*_LOCAL_MPI_Recv_init)(void *, int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Recv_init(void *buf, int *count, int *datatype, int *source,
                        int *tag, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Recv_init\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Recv_init_timeout);
 #endif
@@ -1187,7 +1088,6 @@ void A_f_MPI_Recv_init(void *buf, int *count, int *datatype, int *source,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Recv_init\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1207,9 +1107,6 @@ extern unsigned long long WI4MPI_Start_timeout;
 void (*_LOCAL_MPI_Start)(int *, int *);
 
 void A_f_MPI_Start(int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Start\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Start_timeout);
 #endif
@@ -1225,7 +1122,6 @@ void A_f_MPI_Start(int *request, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Start\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1254,9 +1150,6 @@ void A_f_MPI_Sendrecv(void *sendbuf, int *sendcount, int *sendtype, int *dest,
                       int *sendtag, void *recvbuf, int *recvcount,
                       int *recvtype, int *source, int *recvtag, int *comm,
                       int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Sendrecv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Sendrecv_timeout);
 #endif
@@ -1296,7 +1189,6 @@ void A_f_MPI_Sendrecv(void *sendbuf, int *sendcount, int *sendtype, int *dest,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Sendrecv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1324,9 +1216,6 @@ void (*_LOCAL_MPI_Sendrecv_replace)(void *, int *, int *, int *, int *, int *,
 void A_f_MPI_Sendrecv_replace(void *buf, int *count, int *datatype, int *dest,
                               int *sendtag, int *source, int *recvtag,
                               int *comm, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Sendrecv_replace\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Sendrecv_replace_timeout);
 #endif
@@ -1362,7 +1251,6 @@ void A_f_MPI_Sendrecv_replace(void *buf, int *count, int *datatype, int *dest,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Sendrecv_replace\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1382,9 +1270,6 @@ extern unsigned long long WI4MPI_Type_contiguous_timeout;
 void (*_LOCAL_MPI_Type_contiguous)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_contiguous(int *count, int *oldtype, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_contiguous\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_contiguous_timeout);
 #endif
@@ -1401,7 +1286,6 @@ void A_f_MPI_Type_contiguous(int *count, int *oldtype, int *newtype, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_contiguous\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1422,9 +1306,6 @@ void (*_LOCAL_MPI_Type_vector)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Type_vector(int *count, int *blocklength, int *stride,
                          int *oldtype, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_vector\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_vector_timeout);
 #endif
@@ -1442,7 +1323,6 @@ void A_f_MPI_Type_vector(int *count, int *blocklength, int *stride,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_vector\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1463,9 +1343,6 @@ void (*_LOCAL_MPI_Type_hvector)(int *, int *, size_t *, int *, int *, int *);
 
 void A_f_MPI_Type_hvector(int *count, int *blocklength, size_t *stride,
                           int *oldtype, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_hvector\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_hvector_timeout);
 #endif
@@ -1483,7 +1360,6 @@ void A_f_MPI_Type_hvector(int *count, int *blocklength, size_t *stride,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_hvector\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1505,9 +1381,6 @@ void (*_LOCAL_MPI_Type_indexed)(int *, int *, int *, int *, int *, int *);
 void A_f_MPI_Type_indexed(int *count, int *array_of_blocklengths,
                           int *array_of_displacements, int *oldtype,
                           int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_indexed\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_indexed_timeout);
 #endif
@@ -1525,7 +1398,6 @@ void A_f_MPI_Type_indexed(int *count, int *array_of_blocklengths,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_indexed\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1547,9 +1419,6 @@ void (*_LOCAL_MPI_Type_hindexed)(int *, int *, size_t *, int *, int *, int *);
 void A_f_MPI_Type_hindexed(int *count, int *array_of_blocklengths,
                            size_t *array_of_displacements, int *oldtype,
                            int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_hindexed\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_hindexed_timeout);
 #endif
@@ -1567,7 +1436,6 @@ void A_f_MPI_Type_hindexed(int *count, int *array_of_blocklengths,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_hindexed\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1589,9 +1457,6 @@ void (*_LOCAL_MPI_Type_struct)(int *, int *, size_t *, int *, int *, int *);
 void A_f_MPI_Type_struct(int *count, int *array_of_blocklengths,
                          size_t *array_of_displacements, int *array_of_types,
                          int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_struct\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_struct_timeout);
 #endif
@@ -1611,7 +1476,6 @@ void A_f_MPI_Type_struct(int *count, int *array_of_blocklengths,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_struct\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1631,9 +1495,6 @@ extern unsigned long long WI4MPI_Address_timeout;
 void (*_LOCAL_MPI_Address)(void *, size_t *, int *);
 
 void A_f_MPI_Address(void *location, size_t *address, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Address\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Address_timeout);
 #endif
@@ -1647,7 +1508,6 @@ void A_f_MPI_Address(void *location, size_t *address, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Address\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1667,9 +1527,6 @@ extern unsigned long long WI4MPI_Type_extent_timeout;
 void (*_LOCAL_MPI_Type_extent)(int *, size_t *, int *);
 
 void A_f_MPI_Type_extent(int *datatype, size_t *extent, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_extent\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_extent_timeout);
 #endif
@@ -1683,7 +1540,6 @@ void A_f_MPI_Type_extent(int *datatype, size_t *extent, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_extent\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1703,9 +1559,6 @@ extern unsigned long long WI4MPI_Type_size_timeout;
 void (*_LOCAL_MPI_Type_size)(int *, int *, int *);
 
 void A_f_MPI_Type_size(int *datatype, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_size_timeout);
 #endif
@@ -1719,7 +1572,6 @@ void A_f_MPI_Type_size(int *datatype, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1739,9 +1591,6 @@ extern unsigned long long WI4MPI_Type_lb_timeout;
 void (*_LOCAL_MPI_Type_lb)(int *, size_t *, int *);
 
 void A_f_MPI_Type_lb(int *datatype, size_t *displacement, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_lb\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_lb_timeout);
 #endif
@@ -1755,7 +1604,6 @@ void A_f_MPI_Type_lb(int *datatype, size_t *displacement, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_lb\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1775,9 +1623,6 @@ extern unsigned long long WI4MPI_Type_ub_timeout;
 void (*_LOCAL_MPI_Type_ub)(int *, size_t *, int *);
 
 void A_f_MPI_Type_ub(int *datatype, size_t *displacement, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_ub\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_ub_timeout);
 #endif
@@ -1791,7 +1636,6 @@ void A_f_MPI_Type_ub(int *datatype, size_t *displacement, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_ub\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1811,9 +1655,6 @@ extern unsigned long long WI4MPI_Type_commit_timeout;
 void (*_LOCAL_MPI_Type_commit)(int *, int *);
 
 void A_f_MPI_Type_commit(int *datatype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_commit\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_commit_timeout);
 #endif
@@ -1827,7 +1668,6 @@ void A_f_MPI_Type_commit(int *datatype, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_commit\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1847,9 +1687,6 @@ extern unsigned long long WI4MPI_Type_free_timeout;
 void (*_LOCAL_MPI_Type_free)(int *, int *);
 
 void A_f_MPI_Type_free(int *datatype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_free\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_free_timeout);
 #endif
@@ -1865,7 +1702,6 @@ void A_f_MPI_Type_free(int *datatype, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_free\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1885,9 +1721,6 @@ extern unsigned long long WI4MPI_Get_elements_timeout;
 void (*_LOCAL_MPI_Get_elements)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_elements(int *status, int *datatype, int *count, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Get_elements\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Get_elements_timeout);
 #endif
@@ -1905,7 +1738,6 @@ void A_f_MPI_Get_elements(int *status, int *datatype, int *count, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Get_elements\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1927,9 +1759,6 @@ void (*_LOCAL_MPI_Pack)(void *, int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_Pack(void *inbuf, int *incount, int *datatype, void *outbuf,
                   int *outsize, int *position, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Pack\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Pack_timeout);
 #endif
@@ -1951,7 +1780,6 @@ void A_f_MPI_Pack(void *inbuf, int *incount, int *datatype, void *outbuf,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Pack\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1973,9 +1801,6 @@ void (*_LOCAL_MPI_Unpack)(void *, int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_Unpack(void *inbuf, int *insize, int *position, void *outbuf,
                     int *outcount, int *datatype, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Unpack\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Unpack_timeout);
 #endif
@@ -1997,7 +1822,6 @@ void A_f_MPI_Unpack(void *inbuf, int *insize, int *position, void *outbuf,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Unpack\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2018,9 +1842,6 @@ void (*_LOCAL_MPI_Pack_size)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Pack_size(int *incount, int *datatype, int *comm, int *size,
                        int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Pack_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Pack_size_timeout);
 #endif
@@ -2036,7 +1857,6 @@ void A_f_MPI_Pack_size(int *incount, int *datatype, int *comm, int *size,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Pack_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2056,9 +1876,6 @@ extern unsigned long long WI4MPI_Barrier_timeout;
 void (*_LOCAL_MPI_Barrier)(int *, int *);
 
 void A_f_MPI_Barrier(int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Barrier\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Barrier_timeout);
 #endif
@@ -2072,7 +1889,6 @@ void A_f_MPI_Barrier(int *comm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Barrier\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2093,9 +1909,6 @@ void (*_LOCAL_MPI_Bcast)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Bcast(void *buffer, int *count, int *datatype, int *root,
                    int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Bcast\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Bcast_timeout);
 #endif
@@ -2115,7 +1928,6 @@ void A_f_MPI_Bcast(void *buffer, int *count, int *datatype, int *root,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Bcast\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2143,9 +1955,6 @@ void (*_LOCAL_MPI_Gather)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Gather(void *sendbuf, int *sendcount, int *sendtype, void *recvbuf,
                     int *recvcount, int *recvtype, int *root, int *comm,
                     int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Gather\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Gather_timeout);
 #endif
@@ -2170,7 +1979,6 @@ void A_f_MPI_Gather(void *sendbuf, int *sendcount, int *sendtype, void *recvbuf,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Gather\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2198,9 +2006,6 @@ void (*_LOCAL_MPI_Gatherv)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Gatherv(void *sendbuf, int *sendcount, int *sendtype,
                      void *recvbuf, int *recvcounts, int *displs, int *recvtype,
                      int *root, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Gatherv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Gatherv_timeout);
 #endif
@@ -2226,7 +2031,6 @@ void A_f_MPI_Gatherv(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Gatherv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2254,9 +2058,6 @@ void (*_LOCAL_MPI_Scatter)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Scatter(void *sendbuf, int *sendcount, int *sendtype,
                      void *recvbuf, int *recvcount, int *recvtype, int *root,
                      int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Scatter\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Scatter_timeout);
 #endif
@@ -2281,7 +2082,6 @@ void A_f_MPI_Scatter(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Scatter\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2309,9 +2109,6 @@ void (*_LOCAL_MPI_Scatterv)(void *, int *, int *, int *, void *, int *, int *,
 void A_f_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
                       int *sendtype, void *recvbuf, int *recvcount,
                       int *recvtype, int *root, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Scatterv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Scatterv_timeout);
 #endif
@@ -2337,7 +2134,6 @@ void A_f_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Scatterv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2360,9 +2156,6 @@ void (*_LOCAL_MPI_Allgather)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Allgather(void *sendbuf, int *sendcount, int *sendtype,
                        void *recvbuf, int *recvcount, int *recvtype, int *comm,
                        int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Allgather\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Allgather_timeout);
 #endif
@@ -2387,7 +2180,6 @@ void A_f_MPI_Allgather(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Allgather\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2415,9 +2207,6 @@ void (*_LOCAL_MPI_Allgatherv)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Allgatherv(void *sendbuf, int *sendcount, int *sendtype,
                         void *recvbuf, int *recvcounts, int *displs,
                         int *recvtype, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Allgatherv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Allgatherv_timeout);
 #endif
@@ -2442,7 +2231,6 @@ void A_f_MPI_Allgatherv(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Allgatherv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2465,9 +2253,6 @@ void (*_LOCAL_MPI_Alltoall)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Alltoall(void *sendbuf, int *sendcount, int *sendtype,
                       void *recvbuf, int *recvcount, int *recvtype, int *comm,
                       int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Alltoall\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Alltoall_timeout);
 #endif
@@ -2492,7 +2277,6 @@ void A_f_MPI_Alltoall(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Alltoall\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2520,9 +2304,6 @@ void (*_LOCAL_MPI_Alltoallv)(void *, int *, int *, int *, void *, int *, int *,
 void A_f_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                        int *sendtype, void *recvbuf, int *recvcounts,
                        int *rdispls, int *recvtype, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Alltoallv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Alltoallv_timeout);
 #endif
@@ -2548,7 +2329,6 @@ void A_f_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Alltoallv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2569,9 +2349,6 @@ void (*_LOCAL_MPI_Exscan)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Exscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
                     int *op, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Exscan\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Exscan_timeout);
 #endif
@@ -2595,7 +2372,6 @@ void A_f_MPI_Exscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Exscan\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2617,9 +2393,6 @@ void (*_LOCAL_MPI_Reduce)(void *, void *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Reduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
                     int *op, int *root, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Reduce\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Reduce_timeout);
 #endif
@@ -2644,7 +2417,6 @@ void A_f_MPI_Reduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Reduce\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2664,9 +2436,6 @@ extern unsigned long long WI4MPI_Op_create_timeout;
 void (*_LOCAL_MPI_Op_create)(void *, int *, int *, int *);
 
 void A_f_MPI_Op_create(void *user_fn, int *commute, int *op, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Op_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Op_create_timeout);
 #endif
@@ -2683,7 +2452,6 @@ void A_f_MPI_Op_create(void *user_fn, int *commute, int *op, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Op_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2703,9 +2471,6 @@ extern unsigned long long WI4MPI_Op_free_timeout;
 void (*_LOCAL_MPI_Op_free)(int *, int *);
 
 void A_f_MPI_Op_free(int *op, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Op_free\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Op_free_timeout);
 #endif
@@ -2721,7 +2486,6 @@ void A_f_MPI_Op_free(int *op, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Op_free\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2742,9 +2506,6 @@ void (*_LOCAL_MPI_Allreduce)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Allreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
                        int *op, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Allreduce\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Allreduce_timeout);
 #endif
@@ -2769,7 +2530,6 @@ void A_f_MPI_Allreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Allreduce\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2790,9 +2550,6 @@ void (*_LOCAL_MPI_Scan)(void *, void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Scan(void *sendbuf, void *recvbuf, int *count, int *datatype,
                   int *op, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Scan\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Scan_timeout);
 #endif
@@ -2816,7 +2573,6 @@ void A_f_MPI_Scan(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Scan\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2836,9 +2592,6 @@ extern unsigned long long WI4MPI_Group_size_timeout;
 void (*_LOCAL_MPI_Group_size)(int *, int *, int *);
 
 void A_f_MPI_Group_size(int *group, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_size_timeout);
 #endif
@@ -2852,7 +2605,6 @@ void A_f_MPI_Group_size(int *group, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2872,9 +2624,6 @@ extern unsigned long long WI4MPI_Group_rank_timeout;
 void (*_LOCAL_MPI_Group_rank)(int *, int *, int *);
 
 void A_f_MPI_Group_rank(int *group, int *rank, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_rank\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_rank_timeout);
 #endif
@@ -2888,7 +2637,6 @@ void A_f_MPI_Group_rank(int *group, int *rank, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_rank\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2908,9 +2656,6 @@ extern unsigned long long WI4MPI_Group_compare_timeout;
 void (*_LOCAL_MPI_Group_compare)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_compare(int *group1, int *group2, int *result, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_compare\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_compare_timeout);
 #endif
@@ -2926,7 +2671,6 @@ void A_f_MPI_Group_compare(int *group1, int *group2, int *result, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_compare\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2946,9 +2690,6 @@ extern unsigned long long WI4MPI_Comm_group_timeout;
 void (*_LOCAL_MPI_Comm_group)(int *, int *, int *);
 
 void A_f_MPI_Comm_group(int *comm, int *group, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_group\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_group_timeout);
 #endif
@@ -2965,7 +2706,6 @@ void A_f_MPI_Comm_group(int *comm, int *group, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_group\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2985,9 +2725,6 @@ extern unsigned long long WI4MPI_Group_union_timeout;
 void (*_LOCAL_MPI_Group_union)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_union(int *group1, int *group2, int *newgroup, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_union\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_union_timeout);
 #endif
@@ -3006,7 +2743,6 @@ void A_f_MPI_Group_union(int *group1, int *group2, int *newgroup, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_union\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3027,9 +2763,6 @@ void (*_LOCAL_MPI_Group_intersection)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_intersection(int *group1, int *group2, int *newgroup,
                                 int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_intersection\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_intersection_timeout);
 #endif
@@ -3049,7 +2782,6 @@ void A_f_MPI_Group_intersection(int *group1, int *group2, int *newgroup,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_intersection\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3070,9 +2802,6 @@ void (*_LOCAL_MPI_Group_difference)(int *, int *, int *, int *);
 
 void A_f_MPI_Group_difference(int *group1, int *group2, int *newgroup,
                               int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_difference\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_difference_timeout);
 #endif
@@ -3092,7 +2821,6 @@ void A_f_MPI_Group_difference(int *group1, int *group2, int *newgroup,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_difference\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3112,9 +2840,6 @@ extern unsigned long long WI4MPI_Group_free_timeout;
 void (*_LOCAL_MPI_Group_free)(int *, int *);
 
 void A_f_MPI_Group_free(int *group, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_free\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_free_timeout);
 #endif
@@ -3130,7 +2855,6 @@ void A_f_MPI_Group_free(int *group, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_free\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3150,9 +2874,6 @@ extern unsigned long long WI4MPI_Comm_size_timeout;
 void (*_LOCAL_MPI_Comm_size)(int *, int *, int *);
 
 void A_f_MPI_Comm_size(int *comm, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_size_timeout);
 #endif
@@ -3166,7 +2887,6 @@ void A_f_MPI_Comm_size(int *comm, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3186,9 +2906,6 @@ extern unsigned long long WI4MPI_Comm_rank_timeout;
 void (*_LOCAL_MPI_Comm_rank)(int *, int *, int *);
 
 void A_f_MPI_Comm_rank(int *comm, int *rank, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_rank\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_rank_timeout);
 #endif
@@ -3202,7 +2919,6 @@ void A_f_MPI_Comm_rank(int *comm, int *rank, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_rank\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3222,9 +2938,6 @@ extern unsigned long long WI4MPI_Comm_compare_timeout;
 void (*_LOCAL_MPI_Comm_compare)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_compare(int *comm1, int *comm2, int *result, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_compare\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_compare_timeout);
 #endif
@@ -3240,7 +2953,6 @@ void A_f_MPI_Comm_compare(int *comm1, int *comm2, int *result, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_compare\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3260,9 +2972,6 @@ extern unsigned long long WI4MPI_Comm_dup_timeout;
 void (*_LOCAL_MPI_Comm_dup)(int *, int *, int *);
 
 void A_f_MPI_Comm_dup(int *comm, int *newcomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_dup\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_dup_timeout);
 #endif
@@ -3279,7 +2988,6 @@ void A_f_MPI_Comm_dup(int *comm, int *newcomm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_dup\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3299,9 +3007,6 @@ extern unsigned long long WI4MPI_Comm_dup_with_info_timeout;
 void (*_LOCAL_MPI_Comm_dup_with_info)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_dup_with_info(int *comm, int *info, int *newcomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_dup_with_info\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_dup_with_info_timeout);
 #endif
@@ -3320,7 +3025,6 @@ void A_f_MPI_Comm_dup_with_info(int *comm, int *info, int *newcomm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_dup_with_info\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3340,9 +3044,6 @@ extern unsigned long long WI4MPI_Comm_create_timeout;
 void (*_LOCAL_MPI_Comm_create)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_create(int *comm, int *group, int *newcomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_create_timeout);
 #endif
@@ -3361,7 +3062,6 @@ void A_f_MPI_Comm_create(int *comm, int *group, int *newcomm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3382,9 +3082,6 @@ void (*_LOCAL_MPI_Comm_split)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_split(int *comm, int *color, int *key, int *newcomm,
                         int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_split\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_split_timeout);
 #endif
@@ -3401,7 +3098,6 @@ void A_f_MPI_Comm_split(int *comm, int *color, int *key, int *newcomm,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_split\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3421,9 +3117,6 @@ extern unsigned long long WI4MPI_Comm_free_timeout;
 void (*_LOCAL_MPI_Comm_free)(int *, int *);
 
 void A_f_MPI_Comm_free(int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_free\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_free_timeout);
 #endif
@@ -3439,7 +3132,6 @@ void A_f_MPI_Comm_free(int *comm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_free\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3459,9 +3151,6 @@ extern unsigned long long WI4MPI_Comm_test_inter_timeout;
 void (*_LOCAL_MPI_Comm_test_inter)(int *, int *, int *);
 
 void A_f_MPI_Comm_test_inter(int *comm, int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_test_inter\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_test_inter_timeout);
 #endif
@@ -3475,7 +3164,6 @@ void A_f_MPI_Comm_test_inter(int *comm, int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_test_inter\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3495,9 +3183,6 @@ extern unsigned long long WI4MPI_Comm_remote_size_timeout;
 void (*_LOCAL_MPI_Comm_remote_size)(int *, int *, int *);
 
 void A_f_MPI_Comm_remote_size(int *comm, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_remote_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_remote_size_timeout);
 #endif
@@ -3511,7 +3196,6 @@ void A_f_MPI_Comm_remote_size(int *comm, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_remote_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3531,9 +3215,6 @@ extern unsigned long long WI4MPI_Comm_remote_group_timeout;
 void (*_LOCAL_MPI_Comm_remote_group)(int *, int *, int *);
 
 void A_f_MPI_Comm_remote_group(int *comm, int *group, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_remote_group\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_remote_group_timeout);
 #endif
@@ -3550,7 +3231,6 @@ void A_f_MPI_Comm_remote_group(int *comm, int *group, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_remote_group\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3573,9 +3253,6 @@ void (*_LOCAL_MPI_Intercomm_create)(int *, int *, int *, int *, int *, int *,
 void A_f_MPI_Intercomm_create(int *local_comm, int *local_leader,
                               int *peer_comm, int *remote_leader, int *tag,
                               int *newintercomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Intercomm_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Intercomm_create_timeout);
 #endif
@@ -3598,7 +3275,6 @@ void A_f_MPI_Intercomm_create(int *local_comm, int *local_leader,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Intercomm_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3619,9 +3295,6 @@ void (*_LOCAL_MPI_Intercomm_merge)(int *, int *, int *, int *);
 
 void A_f_MPI_Intercomm_merge(int *intercomm, int *high, int *newintracomm,
                              int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Intercomm_merge\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Intercomm_merge_timeout);
 #endif
@@ -3638,7 +3311,6 @@ void A_f_MPI_Intercomm_merge(int *intercomm, int *high, int *newintracomm,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Intercomm_merge\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3905,9 +3577,6 @@ extern unsigned long long WI4MPI_Topo_test_timeout;
 void (*_LOCAL_MPI_Topo_test)(int *, int *, int *);
 
 void A_f_MPI_Topo_test(int *comm, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Topo_test\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Topo_test_timeout);
 #endif
@@ -3927,7 +3596,6 @@ void A_f_MPI_Topo_test(int *comm, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Topo_test\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3947,9 +3615,6 @@ extern unsigned long long WI4MPI_Graphdims_get_timeout;
 void (*_LOCAL_MPI_Graphdims_get)(int *, int *, int *, int *);
 
 void A_f_MPI_Graphdims_get(int *comm, int *nnodes, int *nedges, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Graphdims_get\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Graphdims_get_timeout);
 #endif
@@ -3963,7 +3628,6 @@ void A_f_MPI_Graphdims_get(int *comm, int *nnodes, int *nedges, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Graphdims_get\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -3983,9 +3647,6 @@ extern unsigned long long WI4MPI_Cartdim_get_timeout;
 void (*_LOCAL_MPI_Cartdim_get)(int *, int *, int *);
 
 void A_f_MPI_Cartdim_get(int *comm, int *ndims, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cartdim_get\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cartdim_get_timeout);
 #endif
@@ -3999,7 +3660,6 @@ void A_f_MPI_Cartdim_get(int *comm, int *ndims, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cartdim_get\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4020,9 +3680,6 @@ void (*_LOCAL_MPI_Graph_neighbors_count)(int *, int *, int *, int *);
 
 void A_f_MPI_Graph_neighbors_count(int *comm, int *rank, int *nneighbors,
                                    int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Graph_neighbors_count\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Graph_neighbors_count_timeout);
 #endif
@@ -4036,7 +3693,6 @@ void A_f_MPI_Graph_neighbors_count(int *comm, int *rank, int *nneighbors,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Graph_neighbors_count\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4057,9 +3713,6 @@ void (*_LOCAL_MPI_Cart_shift)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_shift(int *comm, int *direction, int *disp, int *rank_source,
                         int *rank_dest, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cart_shift\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cart_shift_timeout);
 #endif
@@ -4074,7 +3727,6 @@ void A_f_MPI_Cart_shift(int *comm, int *direction, int *disp, int *rank_source,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cart_shift\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4094,9 +3746,6 @@ extern unsigned long long WI4MPI_Get_version_timeout;
 void (*_LOCAL_MPI_Get_version)(int *, int *, int *);
 
 void A_f_MPI_Get_version(int *version, int *subversion, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Get_version\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Get_version_timeout);
 #endif
@@ -4108,7 +3757,6 @@ void A_f_MPI_Get_version(int *version, int *subversion, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Get_version\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4306,9 +3954,6 @@ extern unsigned long long WI4MPI_Error_class_timeout;
 void (*_LOCAL_MPI_Error_class)(int *, int *, int *);
 
 void A_f_MPI_Error_class(int *errorcode, int *errorclass, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Error_class\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Error_class_timeout);
 #endif
@@ -4324,7 +3969,6 @@ void A_f_MPI_Error_class(int *errorcode, int *errorclass, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Error_class\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4344,9 +3988,6 @@ extern unsigned long long WI4MPI_Initialized_timeout;
 void (*_LOCAL_MPI_Initialized)(int *, int *);
 
 void A_f_MPI_Initialized(int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Initialized\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Initialized_timeout);
 #endif
@@ -4358,7 +3999,6 @@ void A_f_MPI_Initialized(int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Initialized\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4378,9 +4018,6 @@ extern unsigned long long WI4MPI_Abort_timeout;
 void (*_LOCAL_MPI_Abort)(int *, int *, int *);
 
 void A_f_MPI_Abort(int *comm, int *errorcode, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Abort\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Abort_timeout);
 #endif
@@ -4396,7 +4033,6 @@ void A_f_MPI_Abort(int *comm, int *errorcode, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Abort\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4416,9 +4052,6 @@ extern unsigned long long WI4MPI_Init_timeout;
 void (*_LOCAL_MPI_Init)(int *);
 
 void A_f_MPI_Init(int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Init\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Init_timeout);
 #endif
@@ -4430,7 +4063,6 @@ void A_f_MPI_Init(int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Init\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4451,9 +4083,6 @@ void (*_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
                          int *newcomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_accept\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_accept_timeout);
 #endif
@@ -4475,7 +4104,6 @@ void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_accept\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4496,9 +4124,6 @@ void (*_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
                           int *newcomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_connect\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_connect_timeout);
 #endif
@@ -4520,7 +4145,6 @@ void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_connect\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4540,9 +4164,6 @@ extern unsigned long long WI4MPI_Comm_disconnect_timeout;
 void (*_LOCAL_MPI_Comm_disconnect)(int *, int *);
 
 void A_f_MPI_Comm_disconnect(int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_disconnect\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_disconnect_timeout);
 #endif
@@ -4558,7 +4179,6 @@ void A_f_MPI_Comm_disconnect(int *comm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_disconnect\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4578,9 +4198,6 @@ extern unsigned long long WI4MPI_Comm_get_parent_timeout;
 void (*_LOCAL_MPI_Comm_get_parent)(int *, int *);
 
 void A_f_MPI_Comm_get_parent(int *parent, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_get_parent\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_get_parent_timeout);
 #endif
@@ -4595,7 +4212,6 @@ void A_f_MPI_Comm_get_parent(int *parent, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_get_parent\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4615,9 +4231,6 @@ extern unsigned long long WI4MPI_Comm_join_timeout;
 void (*_LOCAL_MPI_Comm_join)(int *, int *, int *);
 
 void A_f_MPI_Comm_join(int *fd, int *intercomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_join\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_join_timeout);
 #endif
@@ -4632,7 +4245,6 @@ void A_f_MPI_Comm_join(int *fd, int *intercomm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_join\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4652,9 +4264,6 @@ extern unsigned long long WI4MPI_Comm_set_info_timeout;
 void (*_LOCAL_MPI_Comm_set_info)(int *, int *, int *);
 
 void A_f_MPI_Comm_set_info(int *comm, int *info, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_set_info\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_set_info_timeout);
 #endif
@@ -4670,7 +4279,6 @@ void A_f_MPI_Comm_set_info(int *comm, int *info, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_set_info\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4690,9 +4298,6 @@ extern unsigned long long WI4MPI_Comm_get_info_timeout;
 void (*_LOCAL_MPI_Comm_get_info)(int *, int *, int *);
 
 void A_f_MPI_Comm_get_info(int *comm, int *info, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_get_info\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_get_info_timeout);
 #endif
@@ -4709,7 +4314,6 @@ void A_f_MPI_Comm_get_info(int *comm, int *info, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_get_info\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4738,9 +4342,6 @@ void A_f_MPI_Accumulate(void *origin_addr, int *origin_count,
                         int *origin_datatype, int *target_rank,
                         size_t *target_disp, int *target_count,
                         int *target_datatype, int *op, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Accumulate\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Accumulate_timeout);
 #endif
@@ -4766,7 +4367,6 @@ void A_f_MPI_Accumulate(void *origin_addr, int *origin_count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Accumulate\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4794,9 +4394,6 @@ void (*_LOCAL_MPI_Get)(void *, int *, int *, int *, size_t *, int *, int *,
 void A_f_MPI_Get(void *origin_addr, int *origin_count, int *origin_datatype,
                  int *target_rank, size_t *target_disp, int *target_count,
                  int *target_datatype, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Get\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Get_timeout);
 #endif
@@ -4821,7 +4418,6 @@ void A_f_MPI_Get(void *origin_addr, int *origin_count, int *origin_datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Get\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4849,9 +4445,6 @@ void (*_LOCAL_MPI_Put)(void *, int *, int *, int *, size_t *, int *, int *,
 void A_f_MPI_Put(void *origin_addr, int *origin_count, int *origin_datatype,
                  int *target_rank, size_t *target_disp, int *target_count,
                  int *target_datatype, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Put\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Put_timeout);
 #endif
@@ -4875,7 +4468,6 @@ void A_f_MPI_Put(void *origin_addr, int *origin_count, int *origin_datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Put\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4895,9 +4487,6 @@ extern unsigned long long WI4MPI_Win_complete_timeout;
 void (*_LOCAL_MPI_Win_complete)(int *, int *);
 
 void A_f_MPI_Win_complete(int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_complete\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_complete_timeout);
 #endif
@@ -4911,7 +4500,6 @@ void A_f_MPI_Win_complete(int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_complete\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4933,9 +4521,6 @@ void (*_LOCAL_MPI_Win_create)(void *, size_t *, int *, int *, int *, int *,
 
 void A_f_MPI_Win_create(void *base, size_t *size, int *disp_unit, int *info,
                         int *comm, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_create_timeout);
 #endif
@@ -4957,7 +4542,6 @@ void A_f_MPI_Win_create(void *base, size_t *size, int *disp_unit, int *info,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4977,9 +4561,6 @@ extern unsigned long long WI4MPI_Win_fence_timeout;
 void (*_LOCAL_MPI_Win_fence)(int *, int *, int *);
 
 void A_f_MPI_Win_fence(int *assert, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_fence\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_fence_timeout);
 #endif
@@ -4995,7 +4576,6 @@ void A_f_MPI_Win_fence(int *assert, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_fence\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5015,9 +4595,6 @@ extern unsigned long long WI4MPI_Win_free_timeout;
 void (*_LOCAL_MPI_Win_free)(int *, int *);
 
 void A_f_MPI_Win_free(int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_free\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_free_timeout);
 #endif
@@ -5033,7 +4610,6 @@ void A_f_MPI_Win_free(int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_free\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5053,9 +4629,6 @@ extern unsigned long long WI4MPI_Win_get_group_timeout;
 void (*_LOCAL_MPI_Win_get_group)(int *, int *, int *);
 
 void A_f_MPI_Win_get_group(int *win, int *group, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_get_group\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_get_group_timeout);
 #endif
@@ -5072,7 +4645,6 @@ void A_f_MPI_Win_get_group(int *win, int *group, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_get_group\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5093,9 +4665,6 @@ void (*_LOCAL_MPI_Win_lock)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Win_lock(int *lock_type, int *rank, int *assert, int *win,
                       int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_lock\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_lock_timeout);
 #endif
@@ -5116,7 +4685,6 @@ void A_f_MPI_Win_lock(int *lock_type, int *rank, int *assert, int *win,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_lock\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5136,9 +4704,6 @@ extern unsigned long long WI4MPI_Win_post_timeout;
 void (*_LOCAL_MPI_Win_post)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_post(int *group, int *assert, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_post\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_post_timeout);
 #endif
@@ -5156,7 +4721,6 @@ void A_f_MPI_Win_post(int *group, int *assert, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_post\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5176,9 +4740,6 @@ extern unsigned long long WI4MPI_Win_start_timeout;
 void (*_LOCAL_MPI_Win_start)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_start(int *group, int *assert, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_start\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_start_timeout);
 #endif
@@ -5196,7 +4757,6 @@ void A_f_MPI_Win_start(int *group, int *assert, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_start\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5216,9 +4776,6 @@ extern unsigned long long WI4MPI_Win_test_timeout;
 void (*_LOCAL_MPI_Win_test)(int *, int *, int *);
 
 void A_f_MPI_Win_test(int *win, int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_test\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_test_timeout);
 #endif
@@ -5232,7 +4789,6 @@ void A_f_MPI_Win_test(int *win, int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_test\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5252,9 +4808,6 @@ extern unsigned long long WI4MPI_Win_unlock_timeout;
 void (*_LOCAL_MPI_Win_unlock)(int *, int *, int *);
 
 void A_f_MPI_Win_unlock(int *rank, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_unlock\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_unlock_timeout);
 #endif
@@ -5270,7 +4823,6 @@ void A_f_MPI_Win_unlock(int *rank, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_unlock\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5290,9 +4842,6 @@ extern unsigned long long WI4MPI_Win_wait_timeout;
 void (*_LOCAL_MPI_Win_wait)(int *, int *);
 
 void A_f_MPI_Win_wait(int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_wait\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_wait_timeout);
 #endif
@@ -5306,7 +4855,6 @@ void A_f_MPI_Win_wait(int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_wait\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5328,9 +4876,6 @@ void (*_LOCAL_MPI_Win_allocate)(size_t *, int *, int *, int *, void *, int *,
 
 void A_f_MPI_Win_allocate(size_t *size, int *disp_unit, int *info, int *comm,
                           void *baseptr, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_allocate\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_allocate_timeout);
 #endif
@@ -5351,7 +4896,6 @@ void A_f_MPI_Win_allocate(size_t *size, int *disp_unit, int *info, int *comm,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_allocate\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5378,9 +4922,6 @@ void (*_LOCAL_MPI_Win_allocate_shared)(size_t *, int *, int *, int *, void *,
 
 void A_f_MPI_Win_allocate_shared(size_t *size, int *disp_unit, int *info,
                                  int *comm, void *baseptr, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_allocate_shared\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_allocate_shared_timeout);
 #endif
@@ -5403,7 +4944,6 @@ void A_f_MPI_Win_allocate_shared(size_t *size, int *disp_unit, int *info,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_allocate_shared\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5425,9 +4965,6 @@ void (*_LOCAL_MPI_Win_shared_query)(int *, int *, size_t *, int *, void *,
 
 void A_f_MPI_Win_shared_query(int *win, int *rank, size_t *size, int *disp_unit,
                               void *baseptr, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_shared_query\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_shared_query_timeout);
 #endif
@@ -5445,7 +4982,6 @@ void A_f_MPI_Win_shared_query(int *win, int *rank, size_t *size, int *disp_unit,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_shared_query\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5465,9 +5001,6 @@ extern unsigned long long WI4MPI_Win_create_dynamic_timeout;
 void (*_LOCAL_MPI_Win_create_dynamic)(int *, int *, int *, int *);
 
 void A_f_MPI_Win_create_dynamic(int *info, int *comm, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_create_dynamic\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_create_dynamic_timeout);
 #endif
@@ -5486,7 +5019,6 @@ void A_f_MPI_Win_create_dynamic(int *info, int *comm, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_create_dynamic\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5506,9 +5038,6 @@ extern unsigned long long WI4MPI_Win_attach_timeout;
 void (*_LOCAL_MPI_Win_attach)(int *, void *, size_t *, int *);
 
 void A_f_MPI_Win_attach(int *win, void *base, size_t *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_attach\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_attach_timeout);
 #endif
@@ -5524,7 +5053,6 @@ void A_f_MPI_Win_attach(int *win, void *base, size_t *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_attach\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5544,9 +5072,6 @@ extern unsigned long long WI4MPI_Win_detach_timeout;
 void (*_LOCAL_MPI_Win_detach)(int *, void *, int *);
 
 void A_f_MPI_Win_detach(int *win, void *base, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_detach\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_detach_timeout);
 #endif
@@ -5562,7 +5087,6 @@ void A_f_MPI_Win_detach(int *win, void *base, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_detach\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5582,9 +5106,6 @@ extern unsigned long long WI4MPI_Win_get_info_timeout;
 void (*_LOCAL_MPI_Win_get_info)(int *, int *, int *);
 
 void A_f_MPI_Win_get_info(int *win, int *info_used, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_get_info\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_get_info_timeout);
 #endif
@@ -5601,7 +5122,6 @@ void A_f_MPI_Win_get_info(int *win, int *info_used, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_get_info\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5621,9 +5141,6 @@ extern unsigned long long WI4MPI_Win_set_info_timeout;
 void (*_LOCAL_MPI_Win_set_info)(int *, int *, int *);
 
 void A_f_MPI_Win_set_info(int *win, int *info, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_set_info\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_set_info_timeout);
 #endif
@@ -5639,7 +5156,6 @@ void A_f_MPI_Win_set_info(int *win, int *info, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_set_info\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5671,9 +5187,6 @@ void A_f_MPI_Get_accumulate(void *origin_addr, int *origin_count,
                             int *target_rank, size_t *target_disp,
                             int *target_count, int *target_datatype, int *op,
                             int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Get_accumulate\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Get_accumulate_timeout);
 #endif
@@ -5704,7 +5217,6 @@ void A_f_MPI_Get_accumulate(void *origin_addr, int *origin_count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Get_accumulate\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5732,9 +5244,6 @@ void (*_LOCAL_MPI_Fetch_and_op)(void *, void *, int *, int *, size_t *, int *,
 void A_f_MPI_Fetch_and_op(void *origin_addr, void *result_addr, int *datatype,
                           int *target_rank, size_t *target_disp, int *op,
                           int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Fetch_and_op\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Fetch_and_op_timeout);
 #endif
@@ -5762,7 +5271,6 @@ void A_f_MPI_Fetch_and_op(void *origin_addr, void *result_addr, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Fetch_and_op\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5791,9 +5299,6 @@ void A_f_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
                               void *result_addr, int *datatype,
                               int *target_rank, size_t *target_disp, int *win,
                               int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Compare_and_swap\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Compare_and_swap_timeout);
 #endif
@@ -5821,7 +5326,6 @@ void A_f_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Compare_and_swap\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5849,9 +5353,6 @@ void (*_LOCAL_MPI_Rput)(void *, int *, int *, int *, size_t *, int *, int *,
 void A_f_MPI_Rput(void *origin_addr, int *origin_count, int *origin_datatype,
                   int *target_rank, size_t *target_disp, int *target_count,
                   int *target_datatype, int *win, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Rput\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Rput_timeout);
 #endif
@@ -5878,7 +5379,6 @@ void A_f_MPI_Rput(void *origin_addr, int *origin_count, int *origin_datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Rput\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5906,9 +5406,6 @@ void (*_LOCAL_MPI_Rget)(void *, int *, int *, int *, size_t *, int *, int *,
 void A_f_MPI_Rget(void *origin_addr, int *origin_count, int *origin_datatype,
                   int *target_rank, size_t *target_disp, int *target_count,
                   int *target_datatype, int *win, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Rget\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Rget_timeout);
 #endif
@@ -5935,7 +5432,6 @@ void A_f_MPI_Rget(void *origin_addr, int *origin_count, int *origin_datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Rget\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5965,9 +5461,6 @@ void A_f_MPI_Raccumulate(void *origin_addr, int *origin_count,
                          size_t *target_disp, int *target_count,
                          int *target_datatype, int *op, int *win, int *request,
                          int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Raccumulate\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Raccumulate_timeout);
 #endif
@@ -5997,7 +5490,6 @@ void A_f_MPI_Raccumulate(void *origin_addr, int *origin_count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Raccumulate\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6029,9 +5521,6 @@ void A_f_MPI_Rget_accumulate(void *origin_addr, int *origin_count,
                              int *target_rank, size_t *target_disp,
                              int *target_count, int *target_datatype, int *op,
                              int *win, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Rget_accumulate\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Rget_accumulate_timeout);
 #endif
@@ -6066,7 +5555,6 @@ void A_f_MPI_Rget_accumulate(void *origin_addr, int *origin_count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Rget_accumulate\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6086,9 +5574,6 @@ extern unsigned long long WI4MPI_Win_lock_all_timeout;
 void (*_LOCAL_MPI_Win_lock_all)(int *, int *, int *);
 
 void A_f_MPI_Win_lock_all(int *assert, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_lock_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_lock_all_timeout);
 #endif
@@ -6104,7 +5589,6 @@ void A_f_MPI_Win_lock_all(int *assert, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_lock_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6124,9 +5608,6 @@ extern unsigned long long WI4MPI_Win_unlock_all_timeout;
 void (*_LOCAL_MPI_Win_unlock_all)(int *, int *);
 
 void A_f_MPI_Win_unlock_all(int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_unlock_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_unlock_all_timeout);
 #endif
@@ -6140,7 +5621,6 @@ void A_f_MPI_Win_unlock_all(int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_unlock_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6160,9 +5640,6 @@ extern unsigned long long WI4MPI_Win_flush_timeout;
 void (*_LOCAL_MPI_Win_flush)(int *, int *, int *);
 
 void A_f_MPI_Win_flush(int *rank, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_flush\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_flush_timeout);
 #endif
@@ -6178,7 +5655,6 @@ void A_f_MPI_Win_flush(int *rank, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_flush\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6198,9 +5674,6 @@ extern unsigned long long WI4MPI_Win_flush_all_timeout;
 void (*_LOCAL_MPI_Win_flush_all)(int *, int *);
 
 void A_f_MPI_Win_flush_all(int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_flush_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_flush_all_timeout);
 #endif
@@ -6214,7 +5687,6 @@ void A_f_MPI_Win_flush_all(int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_flush_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6234,9 +5706,6 @@ extern unsigned long long WI4MPI_Win_flush_local_timeout;
 void (*_LOCAL_MPI_Win_flush_local)(int *, int *, int *);
 
 void A_f_MPI_Win_flush_local(int *rank, int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_flush_local\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_flush_local_timeout);
 #endif
@@ -6252,7 +5721,6 @@ void A_f_MPI_Win_flush_local(int *rank, int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_flush_local\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6272,9 +5740,6 @@ extern unsigned long long WI4MPI_Win_flush_local_all_timeout;
 void (*_LOCAL_MPI_Win_flush_local_all)(int *, int *);
 
 void A_f_MPI_Win_flush_local_all(int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_flush_local_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_flush_local_all_timeout);
 #endif
@@ -6288,7 +5753,6 @@ void A_f_MPI_Win_flush_local_all(int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_flush_local_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6308,9 +5772,6 @@ extern unsigned long long WI4MPI_Win_sync_timeout;
 void (*_LOCAL_MPI_Win_sync)(int *, int *);
 
 void A_f_MPI_Win_sync(int *win, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Win_sync\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Win_sync_timeout);
 #endif
@@ -6324,7 +5785,6 @@ void A_f_MPI_Win_sync(int *win, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Win_sync\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6344,9 +5804,6 @@ extern unsigned long long WI4MPI_Add_error_class_timeout;
 void (*_LOCAL_MPI_Add_error_class)(int *, int *);
 
 void A_f_MPI_Add_error_class(int *errorclass, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Add_error_class\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Add_error_class_timeout);
 #endif
@@ -6361,7 +5818,6 @@ void A_f_MPI_Add_error_class(int *errorclass, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Add_error_class\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6381,9 +5837,6 @@ extern unsigned long long WI4MPI_Add_error_code_timeout;
 void (*_LOCAL_MPI_Add_error_code)(int *, int *, int *);
 
 void A_f_MPI_Add_error_code(int *errorclass, int *errorcode, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Add_error_code\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Add_error_code_timeout);
 #endif
@@ -6398,7 +5851,6 @@ void A_f_MPI_Add_error_code(int *errorclass, int *errorcode, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Add_error_code\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6418,9 +5870,6 @@ extern unsigned long long WI4MPI_Comm_call_errhandler_timeout;
 void (*_LOCAL_MPI_Comm_call_errhandler)(int *, int *, int *);
 
 void A_f_MPI_Comm_call_errhandler(int *comm, int *errorcode, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_call_errhandler\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_call_errhandler_timeout);
 #endif
@@ -6436,7 +5885,6 @@ void A_f_MPI_Comm_call_errhandler(int *comm, int *errorcode, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_call_errhandler\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6456,9 +5904,6 @@ extern unsigned long long WI4MPI_Comm_delete_attr_timeout;
 void (*_LOCAL_MPI_Comm_delete_attr)(int *, int *, int *);
 
 void A_f_MPI_Comm_delete_attr(int *comm, int *comm_keyval, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_delete_attr\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_delete_attr_timeout);
 #endif
@@ -6474,7 +5919,6 @@ void A_f_MPI_Comm_delete_attr(int *comm, int *comm_keyval, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_delete_attr\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6495,9 +5939,6 @@ void (*_LOCAL_MPI_Comm_get_attr)(int *, int *, void *, int *, int *);
 
 void A_f_MPI_Comm_get_attr(int *comm, int *comm_keyval, void *attribute_val,
                            int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_get_attr\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_get_attr_timeout);
 #endif
@@ -6517,7 +5958,6 @@ void A_f_MPI_Comm_get_attr(int *comm, int *comm_keyval, void *attribute_val,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_get_attr\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6538,9 +5978,6 @@ void (*_LOCAL_MPI_Comm_set_attr)(int *, int *, void *, int *);
 
 void A_f_MPI_Comm_set_attr(int *comm, int *comm_keyval, void *attribute_val,
                            int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_set_attr\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_set_attr_timeout);
 #endif
@@ -6559,7 +5996,6 @@ void A_f_MPI_Comm_set_attr(int *comm, int *comm_keyval, void *attribute_val,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_set_attr\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6579,9 +6015,6 @@ extern unsigned long long WI4MPI_Init_thread_timeout;
 void (*_LOCAL_MPI_Init_thread)(int *, int *, int *);
 
 void A_f_MPI_Init_thread(int *required, int *provided, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Init_thread\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Init_thread_timeout);
 #endif
@@ -6593,7 +6026,6 @@ void A_f_MPI_Init_thread(int *required, int *provided, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Init_thread\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6613,9 +6045,6 @@ extern unsigned long long WI4MPI_Is_thread_main_timeout;
 void (*_LOCAL_MPI_Is_thread_main)(int *, int *);
 
 void A_f_MPI_Is_thread_main(int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Is_thread_main\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Is_thread_main_timeout);
 #endif
@@ -6627,7 +6056,6 @@ void A_f_MPI_Is_thread_main(int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Is_thread_main\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6647,9 +6075,6 @@ extern unsigned long long WI4MPI_Query_thread_timeout;
 void (*_LOCAL_MPI_Query_thread)(int *, int *);
 
 void A_f_MPI_Query_thread(int *provided, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Query_thread\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Query_thread_timeout);
 #endif
@@ -6661,7 +6086,6 @@ void A_f_MPI_Query_thread(int *provided, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Query_thread\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6681,9 +6105,6 @@ extern unsigned long long WI4MPI_Status_set_cancelled_timeout;
 void (*_LOCAL_MPI_Status_set_cancelled)(int *, int *, int *);
 
 void A_f_MPI_Status_set_cancelled(int *status, int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Status_set_cancelled\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Status_set_cancelled_timeout);
 #endif
@@ -6699,7 +6120,6 @@ void A_f_MPI_Status_set_cancelled(int *status, int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Status_set_cancelled\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6720,9 +6140,6 @@ void (*_LOCAL_MPI_Status_set_elements)(int *, int *, int *, int *);
 
 void A_f_MPI_Status_set_elements(int *status, int *datatype, int *count,
                                  int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Status_set_elements\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Status_set_elements_timeout);
 #endif
@@ -6740,7 +6157,6 @@ void A_f_MPI_Status_set_elements(int *status, int *datatype, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Status_set_elements\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6760,9 +6176,6 @@ extern unsigned long long WI4MPI_Type_delete_attr_timeout;
 void (*_LOCAL_MPI_Type_delete_attr)(int *, int *, int *);
 
 void A_f_MPI_Type_delete_attr(int *datatype, int *type_keyval, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_delete_attr\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_delete_attr_timeout);
 #endif
@@ -6778,7 +6191,6 @@ void A_f_MPI_Type_delete_attr(int *datatype, int *type_keyval, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_delete_attr\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6798,9 +6210,6 @@ extern unsigned long long WI4MPI_Type_dup_timeout;
 void (*_LOCAL_MPI_Type_dup)(int *, int *, int *);
 
 void A_f_MPI_Type_dup(int *oldtype, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_dup\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_dup_timeout);
 #endif
@@ -6817,7 +6226,6 @@ void A_f_MPI_Type_dup(int *oldtype, int *newtype, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_dup\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6837,9 +6245,6 @@ extern unsigned long long WI4MPI_Type_free_keyval_timeout;
 void (*_LOCAL_MPI_Type_free_keyval)(int *, int *);
 
 void A_f_MPI_Type_free_keyval(int *type_keyval, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_free_keyval\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_free_keyval_timeout);
 #endif
@@ -6855,7 +6260,6 @@ void A_f_MPI_Type_free_keyval(int *type_keyval, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_free_keyval\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6876,9 +6280,6 @@ void (*_LOCAL_MPI_Type_get_attr)(int *, int *, void *, int *, int *);
 
 void A_f_MPI_Type_get_attr(int *datatype, int *type_keyval, void *attribute_val,
                            int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_get_attr\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_get_attr_timeout);
 #endif
@@ -6898,7 +6299,6 @@ void A_f_MPI_Type_get_attr(int *datatype, int *type_keyval, void *attribute_val,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_get_attr\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6920,9 +6320,6 @@ void (*_LOCAL_MPI_Type_get_envelope)(int *, int *, int *, int *, int *, int *);
 void A_f_MPI_Type_get_envelope(int *datatype, int *num_integers,
                                int *num_addresses, int *num_datatypes,
                                int *combiner, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_get_envelope\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_get_envelope_timeout);
 #endif
@@ -6937,7 +6334,6 @@ void A_f_MPI_Type_get_envelope(int *datatype, int *num_integers,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_get_envelope\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6958,9 +6354,6 @@ void (*_LOCAL_MPI_Type_set_attr)(int *, int *, void *, int *);
 
 void A_f_MPI_Type_set_attr(int *datatype, int *type_keyval, void *attribute_val,
                            int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_set_attr\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_set_attr_timeout);
 #endif
@@ -6979,7 +6372,6 @@ void A_f_MPI_Type_set_attr(int *datatype, int *type_keyval, void *attribute_val,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_set_attr\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7000,9 +6392,6 @@ void (*_LOCAL_MPI_Type_match_size)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_match_size(int *typeclass, int *size, int *datatype,
                              int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_match_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_match_size_timeout);
 #endif
@@ -7017,7 +6406,6 @@ void A_f_MPI_Type_match_size(int *typeclass, int *size, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_match_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7037,9 +6425,6 @@ extern unsigned long long WI4MPI_Alloc_mem_timeout;
 void (*_LOCAL_MPI_Alloc_mem)(size_t *, int *, void *, int *);
 
 void A_f_MPI_Alloc_mem(size_t *size, int *info, void *baseptr, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Alloc_mem\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Alloc_mem_timeout);
 #endif
@@ -7056,7 +6441,6 @@ void A_f_MPI_Alloc_mem(size_t *size, int *info, void *baseptr, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Alloc_mem\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7179,9 +6563,6 @@ extern unsigned long long WI4MPI_File_get_errhandler_timeout;
 void (*_LOCAL_MPI_File_get_errhandler)(int *, int *, int *);
 
 void A_f_MPI_File_get_errhandler(int *file, int *errhandler, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_errhandler\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_errhandler_timeout);
 #endif
@@ -7196,7 +6577,6 @@ void A_f_MPI_File_get_errhandler(int *file, int *errhandler, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_errhandler\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7216,9 +6596,6 @@ extern unsigned long long WI4MPI_File_set_errhandler_timeout;
 void (*_LOCAL_MPI_File_set_errhandler)(int *, int *, int *);
 
 void A_f_MPI_File_set_errhandler(int *file, int *errhandler, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_set_errhandler\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_set_errhandler_timeout);
 #endif
@@ -7232,7 +6609,6 @@ void A_f_MPI_File_set_errhandler(int *file, int *errhandler, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_set_errhandler\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7252,9 +6628,6 @@ extern unsigned long long WI4MPI_Finalized_timeout;
 void (*_LOCAL_MPI_Finalized)(int *, int *);
 
 void A_f_MPI_Finalized(int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Finalized\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Finalized_timeout);
 #endif
@@ -7266,7 +6639,6 @@ void A_f_MPI_Finalized(int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Finalized\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7286,9 +6658,6 @@ extern unsigned long long WI4MPI_Free_mem_timeout;
 void (*_LOCAL_MPI_Free_mem)(void *, int *);
 
 void A_f_MPI_Free_mem(void *base, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Free_mem\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Free_mem_timeout);
 #endif
@@ -7302,7 +6671,6 @@ void A_f_MPI_Free_mem(void *base, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Free_mem\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7322,9 +6690,6 @@ extern unsigned long long WI4MPI_Get_address_timeout;
 void (*_LOCAL_MPI_Get_address)(void *, size_t *, int *);
 
 void A_f_MPI_Get_address(void *location, size_t *address, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Get_address\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Get_address_timeout);
 #endif
@@ -7338,7 +6703,6 @@ void A_f_MPI_Get_address(void *location, size_t *address, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Get_address\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7358,9 +6722,6 @@ extern unsigned long long WI4MPI_Info_create_timeout;
 void (*_LOCAL_MPI_Info_create)(int *, int *);
 
 void A_f_MPI_Info_create(int *info, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Info_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Info_create_timeout);
 #endif
@@ -7375,7 +6736,6 @@ void A_f_MPI_Info_create(int *info, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Info_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7395,9 +6755,6 @@ extern unsigned long long WI4MPI_Info_dup_timeout;
 void (*_LOCAL_MPI_Info_dup)(int *, int *, int *);
 
 void A_f_MPI_Info_dup(int *info, int *newinfo, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Info_dup\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Info_dup_timeout);
 #endif
@@ -7414,7 +6771,6 @@ void A_f_MPI_Info_dup(int *info, int *newinfo, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Info_dup\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7465,9 +6821,6 @@ extern unsigned long long WI4MPI_Info_get_nkeys_timeout;
 void (*_LOCAL_MPI_Info_get_nkeys)(int *, int *, int *);
 
 void A_f_MPI_Info_get_nkeys(int *info, int *nkeys, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Info_get_nkeys\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Info_get_nkeys_timeout);
 #endif
@@ -7481,7 +6834,6 @@ void A_f_MPI_Info_get_nkeys(int *info, int *nkeys, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Info_get_nkeys\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7502,9 +6854,6 @@ void (*_LOCAL_MPI_Request_get_status)(int *, int *, int *, int *);
 
 void A_f_MPI_Request_get_status(int *request, int *flag, int *status,
                                 int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Request_get_status\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Request_get_status_timeout);
 #endif
@@ -7524,7 +6873,6 @@ void A_f_MPI_Request_get_status(int *request, int *flag, int *status,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Request_get_status\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7546,9 +6894,6 @@ void (*_LOCAL_MPI_Type_create_hvector)(int *, int *, size_t *, int *, int *,
 
 void A_f_MPI_Type_create_hvector(int *count, int *blocklength, size_t *stride,
                                  int *oldtype, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_hvector\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_hvector_timeout);
 #endif
@@ -7566,7 +6911,6 @@ void A_f_MPI_Type_create_hvector(int *count, int *blocklength, size_t *stride,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_hvector\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7587,9 +6931,6 @@ void (*_LOCAL_MPI_Type_create_resized)(int *, size_t *, size_t *, int *, int *);
 
 void A_f_MPI_Type_create_resized(int *oldtype, size_t *lb, size_t *extent,
                                  int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_resized\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_resized_timeout);
 #endif
@@ -7607,7 +6948,6 @@ void A_f_MPI_Type_create_resized(int *oldtype, size_t *lb, size_t *extent,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_resized\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7628,9 +6968,6 @@ void (*_LOCAL_MPI_Type_get_extent)(int *, size_t *, size_t *, int *);
 
 void A_f_MPI_Type_get_extent(int *datatype, size_t *lb, size_t *extent,
                              int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_get_extent\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_get_extent_timeout);
 #endif
@@ -7644,7 +6981,6 @@ void A_f_MPI_Type_get_extent(int *datatype, size_t *lb, size_t *extent,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_get_extent\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7665,9 +7001,6 @@ void (*_LOCAL_MPI_Type_get_true_extent)(int *, size_t *, size_t *, int *);
 
 void A_f_MPI_Type_get_true_extent(int *datatype, size_t *true_lb,
                                   size_t *true_extent, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_get_true_extent\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_get_true_extent_timeout);
 #endif
@@ -7682,7 +7015,6 @@ void A_f_MPI_Type_get_true_extent(int *datatype, size_t *true_lb,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_get_true_extent\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7702,9 +7034,6 @@ extern unsigned long long WI4MPI_Type_create_f90_integer_timeout;
 void (*_LOCAL_MPI_Type_create_f90_integer)(int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_integer(int *range, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_f90_integer\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_f90_integer_timeout);
 #endif
@@ -7719,7 +7048,6 @@ void A_f_MPI_Type_create_f90_integer(int *range, int *newtype, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_f90_integer\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7740,9 +7068,6 @@ void (*_LOCAL_MPI_Type_create_f90_real)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_real(int *precision, int *range, int *newtype,
                                   int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_f90_real\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_f90_real_timeout);
 #endif
@@ -7757,7 +7082,6 @@ void A_f_MPI_Type_create_f90_real(int *precision, int *range, int *newtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_f90_real\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7778,9 +7102,6 @@ void (*_LOCAL_MPI_Type_create_f90_complex)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_create_f90_complex(int *precision, int *range, int *newtype,
                                      int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_f90_complex\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_f90_complex_timeout);
 #endif
@@ -7795,7 +7116,6 @@ void A_f_MPI_Type_create_f90_complex(int *precision, int *range, int *newtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_f90_complex\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7816,9 +7136,6 @@ void (*_LOCAL_MPI_Reduce_local)(void *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_Reduce_local(void *inbuf, void *inoutbuf, int *count,
                           int *datatype, int *op, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Reduce_local\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Reduce_local_timeout);
 #endif
@@ -7840,7 +7157,6 @@ void A_f_MPI_Reduce_local(void *inbuf, void *inoutbuf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Reduce_local\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7860,9 +7176,6 @@ extern unsigned long long WI4MPI_Op_commutative_timeout;
 void (*_LOCAL_MPI_Op_commutative)(int *, int *, int *);
 
 void A_f_MPI_Op_commutative(int *op, int *commute, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Op_commutative\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Op_commutative_timeout);
 #endif
@@ -7876,7 +7189,6 @@ void A_f_MPI_Op_commutative(int *op, int *commute, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Op_commutative\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7903,9 +7215,6 @@ void (*_LOCAL_MPI_Reduce_scatter_block)(void *, void *, int *, int *, int *,
 
 void A_f_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int *recvcount,
                                   int *datatype, int *op, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Reduce_scatter_block\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Reduce_scatter_block_timeout);
 #endif
@@ -7929,7 +7238,6 @@ void A_f_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int *recvcount,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Reduce_scatter_block\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7952,9 +7260,6 @@ void (*_LOCAL_MPI_Dist_graph_neighbors_count)(int *, int *, int *, int *,
 void A_f_MPI_Dist_graph_neighbors_count(int *comm, int *indegree,
                                         int *outdegree, int *weighted,
                                         int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Dist_graph_neighbors_count\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Dist_graph_neighbors_count_timeout);
 #endif
@@ -7969,7 +7274,6 @@ void A_f_MPI_Dist_graph_neighbors_count(int *comm, int *indegree,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Dist_graph_neighbors_count\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7990,9 +7294,6 @@ void (*_LOCAL_MPI_Improbe)(int *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Improbe(int *source, int *tag, int *comm, int *flag, int *message,
                      int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Improbe\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Improbe_timeout);
 #endif
@@ -8020,7 +7321,6 @@ void A_f_MPI_Improbe(int *source, int *tag, int *comm, int *flag, int *message,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Improbe\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8041,9 +7341,6 @@ void (*_LOCAL_MPI_Imrecv)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Imrecv(void *buf, int *count, int *datatype, int *message,
                     int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Imrecv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Imrecv_timeout);
 #endif
@@ -8068,7 +7365,6 @@ void A_f_MPI_Imrecv(void *buf, int *count, int *datatype, int *message,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Imrecv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8089,9 +7385,6 @@ void (*_LOCAL_MPI_Mprobe)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Mprobe(int *source, int *tag, int *comm, int *message, int *status,
                     int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Mprobe\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Mprobe_timeout);
 #endif
@@ -8119,7 +7412,6 @@ void A_f_MPI_Mprobe(int *source, int *tag, int *comm, int *message, int *status,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Mprobe\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8140,9 +7432,6 @@ void (*_LOCAL_MPI_Mrecv)(void *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Mrecv(void *buf, int *count, int *datatype, int *message,
                    int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Mrecv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Mrecv_timeout);
 #endif
@@ -8170,7 +7459,6 @@ void A_f_MPI_Mrecv(void *buf, int *count, int *datatype, int *message,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Mrecv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8190,9 +7478,6 @@ extern unsigned long long WI4MPI_Comm_idup_timeout;
 void (*_LOCAL_MPI_Comm_idup)(int *, int *, int *, int *);
 
 void A_f_MPI_Comm_idup(int *comm, int *newcomm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_idup\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_idup_timeout);
 #endif
@@ -8212,7 +7497,6 @@ void A_f_MPI_Comm_idup(int *comm, int *newcomm, int *request, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_idup\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8232,9 +7516,6 @@ extern unsigned long long WI4MPI_Ibarrier_timeout;
 void (*_LOCAL_MPI_Ibarrier)(int *, int *, int *);
 
 void A_f_MPI_Ibarrier(int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ibarrier\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ibarrier_timeout);
 #endif
@@ -8251,7 +7532,6 @@ void A_f_MPI_Ibarrier(int *comm, int *request, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ibarrier\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8272,9 +7552,6 @@ void (*_LOCAL_MPI_Ibcast)(void *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Ibcast(void *buffer, int *count, int *datatype, int *root,
                     int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ibcast\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ibcast_timeout);
 #endif
@@ -8298,7 +7575,6 @@ void A_f_MPI_Ibcast(void *buffer, int *count, int *datatype, int *root,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ibcast\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8326,9 +7602,6 @@ void (*_LOCAL_MPI_Igather)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Igather(void *sendbuf, int *sendcount, int *sendtype,
                      void *recvbuf, int *recvcount, int *recvtype, int *root,
                      int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Igather\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Igather_timeout);
 #endif
@@ -8357,7 +7630,6 @@ void A_f_MPI_Igather(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Igather\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8385,9 +7657,6 @@ void (*_LOCAL_MPI_Iscatter)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Iscatter(void *sendbuf, int *sendcount, int *sendtype,
                       void *recvbuf, int *recvcount, int *recvtype, int *root,
                       int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iscatter\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iscatter_timeout);
 #endif
@@ -8416,7 +7685,6 @@ void A_f_MPI_Iscatter(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iscatter\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8444,9 +7712,6 @@ void (*_LOCAL_MPI_Iallgather)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Iallgather(void *sendbuf, int *sendcount, int *sendtype,
                         void *recvbuf, int *recvcount, int *recvtype, int *comm,
                         int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iallgather\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iallgather_timeout);
 #endif
@@ -8475,7 +7740,6 @@ void A_f_MPI_Iallgather(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iallgather\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8503,9 +7767,6 @@ void (*_LOCAL_MPI_Ialltoall)(void *, int *, int *, void *, int *, int *, int *,
 void A_f_MPI_Ialltoall(void *sendbuf, int *sendcount, int *sendtype,
                        void *recvbuf, int *recvcount, int *recvtype, int *comm,
                        int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ialltoall\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ialltoall_timeout);
 #endif
@@ -8534,7 +7795,6 @@ void A_f_MPI_Ialltoall(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ialltoall\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8561,9 +7821,6 @@ void (*_LOCAL_MPI_Ireduce)(void *, void *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Ireduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
                      int *op, int *root, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ireduce\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ireduce_timeout);
 #endif
@@ -8591,7 +7848,6 @@ void A_f_MPI_Ireduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ireduce\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8614,9 +7870,6 @@ void (*_LOCAL_MPI_Iallreduce)(void *, void *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Iallreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
                         int *op, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iallreduce\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iallreduce_timeout);
 #endif
@@ -8644,7 +7897,6 @@ void A_f_MPI_Iallreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iallreduce\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8672,9 +7924,6 @@ void (*_LOCAL_MPI_Ireduce_scatter_block)(void *, void *, int *, int *, int *,
 void A_f_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int *recvcount,
                                    int *datatype, int *op, int *comm,
                                    int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ireduce_scatter_block\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ireduce_scatter_block_timeout);
 #endif
@@ -8704,7 +7953,6 @@ void A_f_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int *recvcount,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ireduce_scatter_block\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8726,9 +7974,6 @@ void (*_LOCAL_MPI_Iscan)(void *, void *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Iscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
                    int *op, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iscan\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iscan_timeout);
 #endif
@@ -8755,7 +8000,6 @@ void A_f_MPI_Iscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iscan\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8777,9 +8021,6 @@ void (*_LOCAL_MPI_Iexscan)(void *, void *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Iexscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
                      int *op, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iexscan\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iexscan_timeout);
 #endif
@@ -8806,7 +8047,6 @@ void A_f_MPI_Iexscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iexscan\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8834,9 +8074,6 @@ void (*_LOCAL_MPI_Ineighbor_allgather)(void *, int *, int *, void *, int *,
 void A_f_MPI_Ineighbor_allgather(void *sendbuf, int *sendcount, int *sendtype,
                                  void *recvbuf, int *recvcount, int *recvtype,
                                  int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ineighbor_allgather\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ineighbor_allgather_timeout);
 #endif
@@ -8864,7 +8101,6 @@ void A_f_MPI_Ineighbor_allgather(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ineighbor_allgather\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8892,9 +8128,6 @@ void (*_LOCAL_MPI_Ineighbor_alltoall)(void *, int *, int *, void *, int *,
 void A_f_MPI_Ineighbor_alltoall(void *sendbuf, int *sendcount, int *sendtype,
                                 void *recvbuf, int *recvcount, int *recvtype,
                                 int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ineighbor_alltoall\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ineighbor_alltoall_timeout);
 #endif
@@ -8922,7 +8155,6 @@ void A_f_MPI_Ineighbor_alltoall(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ineighbor_alltoall\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8950,9 +8182,6 @@ void (*_LOCAL_MPI_Neighbor_allgather)(void *, int *, int *, void *, int *,
 void A_f_MPI_Neighbor_allgather(void *sendbuf, int *sendcount, int *sendtype,
                                 void *recvbuf, int *recvcount, int *recvtype,
                                 int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Neighbor_allgather\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Neighbor_allgather_timeout);
 #endif
@@ -8977,7 +8206,6 @@ void A_f_MPI_Neighbor_allgather(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Neighbor_allgather\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9005,9 +8233,6 @@ void (*_LOCAL_MPI_Neighbor_alltoall)(void *, int *, int *, void *, int *, int *,
 void A_f_MPI_Neighbor_alltoall(void *sendbuf, int *sendcount, int *sendtype,
                                void *recvbuf, int *recvcount, int *recvtype,
                                int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Neighbor_alltoall\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Neighbor_alltoall_timeout);
 #endif
@@ -9032,7 +8257,6 @@ void A_f_MPI_Neighbor_alltoall(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Neighbor_alltoall\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9053,9 +8277,6 @@ void (*_LOCAL_MPI_Comm_split_type)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_split_type(int *comm, int *split_type, int *key, int *info,
                              int *newcomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_split_type\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_split_type_timeout);
 #endif
@@ -9075,7 +8296,6 @@ void A_f_MPI_Comm_split_type(int *comm, int *split_type, int *key, int *info,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_split_type\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9095,9 +8315,6 @@ extern unsigned long long WI4MPI_Get_elements_x_timeout;
 void (*_LOCAL_MPI_Get_elements_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Get_elements_x(int *status, int *datatype, int *count, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Get_elements_x\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Get_elements_x_timeout);
 #endif
@@ -9115,7 +8332,6 @@ void A_f_MPI_Get_elements_x(int *status, int *datatype, int *count, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Get_elements_x\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9136,9 +8352,6 @@ void (*_LOCAL_MPI_Status_set_elements_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Status_set_elements_x(int *status, int *datatype, int *count,
                                    int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Status_set_elements_x\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Status_set_elements_x_timeout);
 #endif
@@ -9159,7 +8372,6 @@ void A_f_MPI_Status_set_elements_x(int *status, int *datatype, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Status_set_elements_x\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9179,9 +8391,6 @@ extern unsigned long long WI4MPI_Type_get_extent_x_timeout;
 void (*_LOCAL_MPI_Type_get_extent_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_extent_x(int *datatype, int *lb, int *extent, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_get_extent_x\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_get_extent_x_timeout);
 #endif
@@ -9195,7 +8404,6 @@ void A_f_MPI_Type_get_extent_x(int *datatype, int *lb, int *extent, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_get_extent_x\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9216,9 +8424,6 @@ void (*_LOCAL_MPI_Type_get_true_extent_x)(int *, int *, int *, int *);
 
 void A_f_MPI_Type_get_true_extent_x(int *datatype, int *lb, int *extent,
                                     int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_get_true_extent_x\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_get_true_extent_x_timeout);
 #endif
@@ -9232,7 +8437,6 @@ void A_f_MPI_Type_get_true_extent_x(int *datatype, int *lb, int *extent,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_get_true_extent_x\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9252,9 +8456,6 @@ extern unsigned long long WI4MPI_Type_size_x_timeout;
 void (*_LOCAL_MPI_Type_size_x)(int *, int *, int *);
 
 void A_f_MPI_Type_size_x(int *datatype, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_size_x\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_size_x_timeout);
 #endif
@@ -9268,7 +8469,6 @@ void A_f_MPI_Type_size_x(int *datatype, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_size_x\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9289,9 +8489,6 @@ void (*_LOCAL_MPI_Comm_create_group)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Comm_create_group(int *comm, int *group, int *tag, int *newcomm,
                                int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Comm_create_group\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Comm_create_group_timeout);
 #endif
@@ -9313,7 +8510,6 @@ void A_f_MPI_Comm_create_group(int *comm, int *group, int *tag, int *newcomm,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Comm_create_group\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9333,9 +8529,6 @@ extern unsigned long long WI4MPI_File_close_timeout;
 void (*_LOCAL_MPI_File_close)(int *, int *);
 
 void A_f_MPI_File_close(int *fh, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_close\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_close_timeout);
 #endif
@@ -9347,7 +8540,6 @@ void A_f_MPI_File_close(int *fh, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_close\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9367,9 +8559,6 @@ extern unsigned long long WI4MPI_File_set_size_timeout;
 void (*_LOCAL_MPI_File_set_size)(int *, int *, int *);
 
 void A_f_MPI_File_set_size(int *fh, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_set_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_set_size_timeout);
 #endif
@@ -9381,7 +8570,6 @@ void A_f_MPI_File_set_size(int *fh, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_set_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9401,9 +8589,6 @@ extern unsigned long long WI4MPI_File_preallocate_timeout;
 void (*_LOCAL_MPI_File_preallocate)(int *, int *, int *);
 
 void A_f_MPI_File_preallocate(int *fh, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_preallocate\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_preallocate_timeout);
 #endif
@@ -9415,7 +8600,6 @@ void A_f_MPI_File_preallocate(int *fh, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_preallocate\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9435,9 +8619,6 @@ extern unsigned long long WI4MPI_File_get_size_timeout;
 void (*_LOCAL_MPI_File_get_size)(int *, int *, int *);
 
 void A_f_MPI_File_get_size(int *fh, int *size, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_size\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_size_timeout);
 #endif
@@ -9449,7 +8630,6 @@ void A_f_MPI_File_get_size(int *fh, int *size, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_size\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9469,9 +8649,6 @@ extern unsigned long long WI4MPI_File_get_group_timeout;
 void (*_LOCAL_MPI_File_get_group)(int *, int *, int *);
 
 void A_f_MPI_File_get_group(int *fh, int *group, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_group\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_group_timeout);
 #endif
@@ -9486,7 +8663,6 @@ void A_f_MPI_File_get_group(int *fh, int *group, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_group\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9506,9 +8682,6 @@ extern unsigned long long WI4MPI_File_get_amode_timeout;
 void (*_LOCAL_MPI_File_get_amode)(int *, int *, int *);
 
 void A_f_MPI_File_get_amode(int *fh, int *amode, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_amode\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_amode_timeout);
 #endif
@@ -9520,7 +8693,6 @@ void A_f_MPI_File_get_amode(int *fh, int *amode, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_amode\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9540,9 +8712,6 @@ extern unsigned long long WI4MPI_File_set_info_timeout;
 void (*_LOCAL_MPI_File_set_info)(int *, int *, int *);
 
 void A_f_MPI_File_set_info(int *fh, int *info, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_set_info\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_set_info_timeout);
 #endif
@@ -9556,7 +8725,6 @@ void A_f_MPI_File_set_info(int *fh, int *info, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_set_info\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9576,9 +8744,6 @@ extern unsigned long long WI4MPI_File_get_info_timeout;
 void (*_LOCAL_MPI_File_get_info)(int *, int *, int *);
 
 void A_f_MPI_File_get_info(int *fh, int *info_used, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_info\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_info_timeout);
 #endif
@@ -9593,7 +8758,6 @@ void A_f_MPI_File_get_info(int *fh, int *info_used, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_info\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9615,9 +8779,6 @@ void (*_LOCAL_MPI_File_read_at)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_read_at(int *fh, int *offset, void *buf, int *count,
                           int *datatype, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_at\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_at_timeout);
 #endif
@@ -9641,7 +8802,6 @@ void A_f_MPI_File_read_at(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_at\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9663,9 +8823,6 @@ void (*_LOCAL_MPI_File_read_at_all)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_read_at_all(int *fh, int *offset, void *buf, int *count,
                               int *datatype, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_at_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_at_all_timeout);
 #endif
@@ -9689,7 +8846,6 @@ void A_f_MPI_File_read_at_all(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_at_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9711,9 +8867,6 @@ void (*_LOCAL_MPI_File_write_at)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_write_at(int *fh, int *offset, void *buf, int *count,
                            int *datatype, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_at\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_at_timeout);
 #endif
@@ -9736,7 +8889,6 @@ void A_f_MPI_File_write_at(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_at\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9758,9 +8910,6 @@ void (*_LOCAL_MPI_File_write_at_all)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_write_at_all(int *fh, int *offset, void *buf, int *count,
                                int *datatype, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_at_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_at_all_timeout);
 #endif
@@ -9783,7 +8932,6 @@ void A_f_MPI_File_write_at_all(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_at_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9805,9 +8953,6 @@ void (*_LOCAL_MPI_File_iread_at)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_iread_at(int *fh, int *offset, void *buf, int *count,
                            int *datatype, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iread_at\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iread_at_timeout);
 #endif
@@ -9828,7 +8973,6 @@ void A_f_MPI_File_iread_at(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iread_at\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9850,9 +8994,6 @@ void (*_LOCAL_MPI_File_iwrite_at)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_iwrite_at(int *fh, int *offset, void *buf, int *count,
                             int *datatype, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iwrite_at\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iwrite_at_timeout);
 #endif
@@ -9872,7 +9013,6 @@ void A_f_MPI_File_iwrite_at(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iwrite_at\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9893,9 +9033,6 @@ void (*_LOCAL_MPI_File_read)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read(int *fh, void *buf, int *count, int *datatype,
                        int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_timeout);
 #endif
@@ -9918,7 +9055,6 @@ void A_f_MPI_File_read(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9939,9 +9075,6 @@ void (*_LOCAL_MPI_File_read_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_all(int *fh, void *buf, int *count, int *datatype,
                            int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_all_timeout);
 #endif
@@ -9965,7 +9098,6 @@ void A_f_MPI_File_read_all(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9986,9 +9118,6 @@ void (*_LOCAL_MPI_File_write)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write(int *fh, void *buf, int *count, int *datatype,
                         int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_timeout);
 #endif
@@ -10011,7 +9140,6 @@ void A_f_MPI_File_write(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10032,9 +9160,6 @@ void (*_LOCAL_MPI_File_write_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write_all(int *fh, void *buf, int *count, int *datatype,
                             int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_all_timeout);
 #endif
@@ -10057,7 +9182,6 @@ void A_f_MPI_File_write_all(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10078,9 +9202,6 @@ void (*_LOCAL_MPI_File_iread)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread(int *fh, void *buf, int *count, int *datatype,
                         int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iread\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iread_timeout);
 #endif
@@ -10101,7 +9222,6 @@ void A_f_MPI_File_iread(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iread\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10122,9 +9242,6 @@ void (*_LOCAL_MPI_File_iwrite)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iwrite(int *fh, void *buf, int *count, int *datatype,
                          int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iwrite\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iwrite_timeout);
 #endif
@@ -10146,7 +9263,6 @@ void A_f_MPI_File_iwrite(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iwrite\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10166,9 +9282,6 @@ extern unsigned long long WI4MPI_File_seek_timeout;
 void (*_LOCAL_MPI_File_seek)(int *, int *, int *, int *);
 
 void A_f_MPI_File_seek(int *fh, int *offset, int *whence, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_seek\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_seek_timeout);
 #endif
@@ -10180,7 +9293,6 @@ void A_f_MPI_File_seek(int *fh, int *offset, int *whence, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_seek\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10200,9 +9312,6 @@ extern unsigned long long WI4MPI_File_get_position_timeout;
 void (*_LOCAL_MPI_File_get_position)(int *, int *, int *);
 
 void A_f_MPI_File_get_position(int *fh, int *offset, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_position\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_position_timeout);
 #endif
@@ -10214,7 +9323,6 @@ void A_f_MPI_File_get_position(int *fh, int *offset, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_position\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10234,9 +9342,6 @@ extern unsigned long long WI4MPI_File_get_byte_offset_timeout;
 void (*_LOCAL_MPI_File_get_byte_offset)(int *, int *, int *, int *);
 
 void A_f_MPI_File_get_byte_offset(int *fh, int *offset, int *disp, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_byte_offset\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_byte_offset_timeout);
 #endif
@@ -10248,7 +9353,6 @@ void A_f_MPI_File_get_byte_offset(int *fh, int *offset, int *disp, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_byte_offset\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10269,9 +9373,6 @@ void (*_LOCAL_MPI_File_read_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_shared(int *fh, void *buf, int *count, int *datatype,
                               int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_shared\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_shared_timeout);
 #endif
@@ -10295,7 +9396,6 @@ void A_f_MPI_File_read_shared(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_shared\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10316,9 +9416,6 @@ void (*_LOCAL_MPI_File_write_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_write_shared(int *fh, void *buf, int *count, int *datatype,
                                int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_shared\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_shared_timeout);
 #endif
@@ -10341,7 +9438,6 @@ void A_f_MPI_File_write_shared(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_shared\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10362,9 +9458,6 @@ void (*_LOCAL_MPI_File_iread_shared)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread_shared(int *fh, void *buf, int *count, int *datatype,
                                int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iread_shared\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iread_shared_timeout);
 #endif
@@ -10385,7 +9478,6 @@ void A_f_MPI_File_iread_shared(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iread_shared\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10407,9 +9499,6 @@ void (*_LOCAL_MPI_File_iwrite_shared)(int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_iwrite_shared(int *fh, void *buf, int *count, int *datatype,
                                 int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iwrite_shared\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iwrite_shared_timeout);
 #endif
@@ -10429,7 +9518,6 @@ void A_f_MPI_File_iwrite_shared(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iwrite_shared\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10450,9 +9538,6 @@ void (*_LOCAL_MPI_File_read_ordered)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_read_ordered(int *fh, void *buf, int *count, int *datatype,
                                int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_ordered\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_ordered_timeout);
 #endif
@@ -10476,7 +9561,6 @@ void A_f_MPI_File_read_ordered(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_ordered\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10498,9 +9582,6 @@ void (*_LOCAL_MPI_File_write_ordered)(int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_write_ordered(int *fh, void *buf, int *count, int *datatype,
                                 int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_ordered\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_ordered_timeout);
 #endif
@@ -10523,7 +9604,6 @@ void A_f_MPI_File_write_ordered(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_ordered\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10543,9 +9623,6 @@ extern unsigned long long WI4MPI_File_seek_shared_timeout;
 void (*_LOCAL_MPI_File_seek_shared)(int *, int *, int *, int *);
 
 void A_f_MPI_File_seek_shared(int *fh, int *offset, int *whence, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_seek_shared\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_seek_shared_timeout);
 #endif
@@ -10557,7 +9634,6 @@ void A_f_MPI_File_seek_shared(int *fh, int *offset, int *whence, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_seek_shared\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10577,9 +9653,6 @@ extern unsigned long long WI4MPI_File_get_position_shared_timeout;
 void (*_LOCAL_MPI_File_get_position_shared)(int *, int *, int *);
 
 void A_f_MPI_File_get_position_shared(int *fh, int *offset, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_position_shared\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_position_shared_timeout);
 #endif
@@ -10591,7 +9664,6 @@ void A_f_MPI_File_get_position_shared(int *fh, int *offset, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_position_shared\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10613,9 +9685,6 @@ void (*_LOCAL_MPI_File_read_at_all_begin)(int *, int *, void *, int *, int *,
 
 void A_f_MPI_File_read_at_all_begin(int *fh, int *offset, void *buf, int *count,
                                     int *datatype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_at_all_begin\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_at_all_begin_timeout);
 #endif
@@ -10633,7 +9702,6 @@ void A_f_MPI_File_read_at_all_begin(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_at_all_begin\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10653,9 +9721,6 @@ extern unsigned long long WI4MPI_File_read_at_all_end_timeout;
 void (*_LOCAL_MPI_File_read_at_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_at_all_end(int *fh, void *buf, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_at_all_end\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_at_all_end_timeout);
 #endif
@@ -10676,7 +9741,6 @@ void A_f_MPI_File_read_at_all_end(int *fh, void *buf, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_at_all_end\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10698,9 +9762,6 @@ void (*_LOCAL_MPI_File_write_at_all_begin)(int *, int *, void *, int *, int *,
 
 void A_f_MPI_File_write_at_all_begin(int *fh, int *offset, void *buf,
                                      int *count, int *datatype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_at_all_begin\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_at_all_begin_timeout);
 #endif
@@ -10717,7 +9778,6 @@ void A_f_MPI_File_write_at_all_begin(int *fh, int *offset, void *buf,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_at_all_begin\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10737,9 +9797,6 @@ extern unsigned long long WI4MPI_File_write_at_all_end_timeout;
 void (*_LOCAL_MPI_File_write_at_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_at_all_end(int *fh, void *buf, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_at_all_end\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_at_all_end_timeout);
 #endif
@@ -10759,7 +9816,6 @@ void A_f_MPI_File_write_at_all_end(int *fh, void *buf, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_at_all_end\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10780,9 +9836,6 @@ void (*_LOCAL_MPI_File_read_all_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_read_all_begin(int *fh, void *buf, int *count, int *datatype,
                                  int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_all_begin\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_all_begin_timeout);
 #endif
@@ -10799,7 +9852,6 @@ void A_f_MPI_File_read_all_begin(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_all_begin\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10819,9 +9871,6 @@ extern unsigned long long WI4MPI_File_read_all_end_timeout;
 void (*_LOCAL_MPI_File_read_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_all_end(int *fh, void *buf, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_all_end\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_all_end_timeout);
 #endif
@@ -10842,7 +9891,6 @@ void A_f_MPI_File_read_all_end(int *fh, void *buf, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_all_end\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10863,9 +9911,6 @@ void (*_LOCAL_MPI_File_write_all_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_write_all_begin(int *fh, void *buf, int *count, int *datatype,
                                   int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_all_begin\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_all_begin_timeout);
 #endif
@@ -10884,7 +9929,6 @@ void A_f_MPI_File_write_all_begin(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_all_begin\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10904,9 +9948,6 @@ extern unsigned long long WI4MPI_File_write_all_end_timeout;
 void (*_LOCAL_MPI_File_write_all_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_all_end(int *fh, void *buf, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_all_end\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_all_end_timeout);
 #endif
@@ -10926,7 +9967,6 @@ void A_f_MPI_File_write_all_end(int *fh, void *buf, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_all_end\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10947,9 +9987,6 @@ void (*_LOCAL_MPI_File_read_ordered_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_read_ordered_begin(int *fh, void *buf, int *count,
                                      int *datatype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_ordered_begin\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_ordered_begin_timeout);
 #endif
@@ -10967,7 +10004,6 @@ void A_f_MPI_File_read_ordered_begin(int *fh, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_ordered_begin\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10987,9 +10023,6 @@ extern unsigned long long WI4MPI_File_read_ordered_end_timeout;
 void (*_LOCAL_MPI_File_read_ordered_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_read_ordered_end(int *fh, void *buf, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_read_ordered_end\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_read_ordered_end_timeout);
 #endif
@@ -11010,7 +10043,6 @@ void A_f_MPI_File_read_ordered_end(int *fh, void *buf, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_read_ordered_end\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11031,9 +10063,6 @@ void (*_LOCAL_MPI_File_write_ordered_begin)(int *, void *, int *, int *, int *);
 
 void A_f_MPI_File_write_ordered_begin(int *fh, void *buf, int *count,
                                       int *datatype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_ordered_begin\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_ordered_begin_timeout);
 #endif
@@ -11051,7 +10080,6 @@ void A_f_MPI_File_write_ordered_begin(int *fh, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_ordered_begin\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11071,9 +10099,6 @@ extern unsigned long long WI4MPI_File_write_ordered_end_timeout;
 void (*_LOCAL_MPI_File_write_ordered_end)(int *, void *, int *, int *);
 
 void A_f_MPI_File_write_ordered_end(int *fh, void *buf, int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_write_ordered_end\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_write_ordered_end_timeout);
 #endif
@@ -11093,7 +10118,6 @@ void A_f_MPI_File_write_ordered_end(int *fh, void *buf, int *status, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_write_ordered_end\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11114,9 +10138,6 @@ void (*_LOCAL_MPI_File_get_type_extent)(int *, int *, size_t *, int *);
 
 void A_f_MPI_File_get_type_extent(int *fh, int *datatype, size_t *extent,
                                   int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_type_extent\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_type_extent_timeout);
 #endif
@@ -11130,7 +10151,6 @@ void A_f_MPI_File_get_type_extent(int *fh, int *datatype, size_t *extent,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_type_extent\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11150,9 +10170,6 @@ extern unsigned long long WI4MPI_File_set_atomicity_timeout;
 void (*_LOCAL_MPI_File_set_atomicity)(int *, int *, int *);
 
 void A_f_MPI_File_set_atomicity(int *fh, int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_set_atomicity\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_set_atomicity_timeout);
 #endif
@@ -11164,7 +10181,6 @@ void A_f_MPI_File_set_atomicity(int *fh, int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_set_atomicity\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11184,9 +10200,6 @@ extern unsigned long long WI4MPI_File_get_atomicity_timeout;
 void (*_LOCAL_MPI_File_get_atomicity)(int *, int *, int *);
 
 void A_f_MPI_File_get_atomicity(int *fh, int *flag, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_get_atomicity\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_get_atomicity_timeout);
 #endif
@@ -11198,7 +10211,6 @@ void A_f_MPI_File_get_atomicity(int *fh, int *flag, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_get_atomicity\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11218,9 +10230,6 @@ extern unsigned long long WI4MPI_File_sync_timeout;
 void (*_LOCAL_MPI_File_sync)(int *, int *);
 
 void A_f_MPI_File_sync(int *fh, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_sync\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_sync_timeout);
 #endif
@@ -11232,7 +10241,6 @@ void A_f_MPI_File_sync(int *fh, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_sync\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11252,9 +10260,6 @@ extern unsigned long long WI4MPI_Wtime_timeout;
 void (*_LOCAL_MPI_Wtime)(double *);
 
 void A_f_MPI_Wtime(double *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Wtime\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Wtime_timeout);
 #endif
@@ -11265,7 +10270,6 @@ void A_f_MPI_Wtime(double *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Wtime\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11285,9 +10289,6 @@ extern unsigned long long WI4MPI_Wtick_timeout;
 void (*_LOCAL_MPI_Wtick)(double *);
 
 void A_f_MPI_Wtick(double *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Wtick\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Wtick_timeout);
 #endif
@@ -11298,7 +10299,6 @@ void A_f_MPI_Wtick(double *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Wtick\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11318,9 +10318,6 @@ extern unsigned long long WI4MPI_Finalize_timeout;
 void (*_LOCAL_MPI_Finalize)(int *);
 
 void A_f_MPI_Finalize(int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Finalize\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Finalize_timeout);
 #endif
@@ -11332,7 +10329,6 @@ void A_f_MPI_Finalize(int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Finalize\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11353,9 +10349,6 @@ void (*_LOCAL_MPI_Waitany)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Waitany(int *count, int *array_of_requests, int *indx, int *status,
                      int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Waitany\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Waitany_timeout);
 #endif
@@ -11380,7 +10373,6 @@ void A_f_MPI_Waitany(int *count, int *array_of_requests, int *indx, int *status,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Waitany\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11401,9 +10393,6 @@ void (*_LOCAL_MPI_Testany)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testany(int *count, int *array_of_requests, int *indx, int *flag,
                      int *status, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Testany\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Testany_timeout);
 #endif
@@ -11429,7 +10418,6 @@ void A_f_MPI_Testany(int *count, int *array_of_requests, int *indx, int *flag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Testany\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11450,9 +10438,6 @@ void (*_LOCAL_MPI_Waitall)(int *, int *, int *, int *);
 
 void A_f_MPI_Waitall(int *count, int *array_of_requests, int *array_of_statuses,
                      int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Waitall\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Waitall_timeout);
 #endif
@@ -11484,7 +10469,6 @@ void A_f_MPI_Waitall(int *count, int *array_of_requests, int *array_of_statuses,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Waitall\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11505,9 +10489,6 @@ void (*_LOCAL_MPI_Testall)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testall(int *count, int *array_of_requests, int *flag,
                      int *array_of_statuses, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Testall\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Testall_timeout);
 #endif
@@ -11539,7 +10520,6 @@ void A_f_MPI_Testall(int *count, int *array_of_requests, int *flag,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Testall\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11560,9 +10540,6 @@ void (*_LOCAL_MPI_Waitsome)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Waitsome(int *incount, int *array_of_requests, int *outcount,
                       int *array_of_indices, int *array_of_statuses, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Waitsome\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Waitsome_timeout);
 #endif
@@ -11595,7 +10572,6 @@ void A_f_MPI_Waitsome(int *incount, int *array_of_requests, int *outcount,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Waitsome\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11616,9 +10592,6 @@ void (*_LOCAL_MPI_Testsome)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Testsome(int *incount, int *array_of_requests, int *outcount,
                       int *array_of_indices, int *array_of_statuses, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Testsome\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Testsome_timeout);
 #endif
@@ -11651,7 +10624,6 @@ void A_f_MPI_Testsome(int *incount, int *array_of_requests, int *outcount,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Testsome\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11671,9 +10643,6 @@ extern unsigned long long WI4MPI_Startall_timeout;
 void (*_LOCAL_MPI_Startall)(int *, int *, int *);
 
 void A_f_MPI_Startall(int *count, int *array_of_requests, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Startall\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Startall_timeout);
 #endif
@@ -11692,7 +10661,6 @@ void A_f_MPI_Startall(int *count, int *array_of_requests, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Startall\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11720,9 +10688,6 @@ void (*_LOCAL_MPI_Alltoallw)(void *, int *, int *, int *, void *, int *, int *,
 void A_f_MPI_Alltoallw(void *sendbuf, int *sendcounts, int *sdispls,
                        int *sendtypes, void *recvbuf, int *recvcounts,
                        int *rdispls, int *recvtypes, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Alltoallw\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Alltoallw_timeout);
 #endif
@@ -11751,7 +10716,6 @@ void A_f_MPI_Alltoallw(void *sendbuf, int *sendcounts, int *sdispls,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Alltoallw\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11773,9 +10737,6 @@ void (*_LOCAL_MPI_Reduce_scatter)(void *, void *, int *, int *, int *, int *,
 
 void A_f_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int *recvcounts,
                             int *datatype, int *op, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Reduce_scatter\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Reduce_scatter_timeout);
 #endif
@@ -11800,7 +10761,6 @@ void A_f_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int *recvcounts,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Reduce_scatter\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11822,9 +10782,6 @@ void (*_LOCAL_MPI_Group_translate_ranks)(int *, int *, int *, int *, int *,
 
 void A_f_MPI_Group_translate_ranks(int *group1, int *n, int *ranks1,
                                    int *group2, int *ranks2, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_translate_ranks\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_translate_ranks_timeout);
 #endif
@@ -11841,7 +10798,6 @@ void A_f_MPI_Group_translate_ranks(int *group1, int *n, int *ranks1,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_translate_ranks\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11862,9 +10818,6 @@ void (*_LOCAL_MPI_Group_incl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_incl(int *group, int *n, int *ranks, int *newgroup,
                         int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_incl\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_incl_timeout);
 #endif
@@ -11881,7 +10834,6 @@ void A_f_MPI_Group_incl(int *group, int *n, int *ranks, int *newgroup,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_incl\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11902,9 +10854,6 @@ void (*_LOCAL_MPI_Group_excl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_excl(int *group, int *n, int *ranks, int *newgroup,
                         int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_excl\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_excl_timeout);
 #endif
@@ -11921,7 +10870,6 @@ void A_f_MPI_Group_excl(int *group, int *n, int *ranks, int *newgroup,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_excl\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11942,9 +10890,6 @@ void (*_LOCAL_MPI_Group_range_incl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_range_incl(int *group, int *n, int *ranges, int *newgroup,
                               int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_range_incl\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_range_incl_timeout);
 #endif
@@ -11961,7 +10906,6 @@ void A_f_MPI_Group_range_incl(int *group, int *n, int *ranges, int *newgroup,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_range_incl\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11982,9 +10926,6 @@ void (*_LOCAL_MPI_Group_range_excl)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Group_range_excl(int *group, int *n, int *ranges, int *newgroup,
                               int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Group_range_excl\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Group_range_excl_timeout);
 #endif
@@ -12001,7 +10942,6 @@ void A_f_MPI_Group_range_excl(int *group, int *n, int *ranges, int *newgroup,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Group_range_excl\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12022,9 +10962,6 @@ void (*_LOCAL_MPI_Cart_create)(int *, int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_create(int *comm_old, int *ndims, int *dims, int *periods,
                          int *reorder, int *comm_cart, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cart_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cart_create_timeout);
 #endif
@@ -12042,7 +10979,6 @@ void A_f_MPI_Cart_create(int *comm_old, int *ndims, int *dims, int *periods,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cart_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12062,9 +10998,6 @@ extern unsigned long long WI4MPI_Dims_create_timeout;
 void (*_LOCAL_MPI_Dims_create)(int *, int *, int *, int *);
 
 void A_f_MPI_Dims_create(int *nnodes, int *ndims, int *dims, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Dims_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Dims_create_timeout);
 #endif
@@ -12076,7 +11009,6 @@ void A_f_MPI_Dims_create(int *nnodes, int *ndims, int *dims, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Dims_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12098,9 +11030,6 @@ void (*_LOCAL_MPI_Graph_create)(int *, int *, int *, int *, int *, int *,
 
 void A_f_MPI_Graph_create(int *comm_old, int *nnodes, int *indx, int *edges,
                           int *reorder, int *comm_graph, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Graph_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Graph_create_timeout);
 #endif
@@ -12118,7 +11047,6 @@ void A_f_MPI_Graph_create(int *comm_old, int *nnodes, int *indx, int *edges,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Graph_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12139,9 +11067,6 @@ void (*_LOCAL_MPI_Graph_get)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_get(int *comm, int *maxindex, int *maxedges, int *indx,
                        int *edges, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Graph_get\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Graph_get_timeout);
 #endif
@@ -12155,7 +11080,6 @@ void A_f_MPI_Graph_get(int *comm, int *maxindex, int *maxedges, int *indx,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Graph_get\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12176,9 +11100,6 @@ void (*_LOCAL_MPI_Cart_get)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_get(int *comm, int *maxdims, int *dims, int *periods,
                       int *coords, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cart_get\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cart_get_timeout);
 #endif
@@ -12192,7 +11113,6 @@ void A_f_MPI_Cart_get(int *comm, int *maxdims, int *dims, int *periods,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cart_get\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12212,9 +11132,6 @@ extern unsigned long long WI4MPI_Cart_rank_timeout;
 void (*_LOCAL_MPI_Cart_rank)(int *, int *, int *, int *);
 
 void A_f_MPI_Cart_rank(int *comm, int *coords, int *rank, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cart_rank\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cart_rank_timeout);
 #endif
@@ -12228,7 +11145,6 @@ void A_f_MPI_Cart_rank(int *comm, int *coords, int *rank, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cart_rank\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12249,9 +11165,6 @@ void (*_LOCAL_MPI_Cart_coords)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_coords(int *comm, int *rank, int *maxdims, int *coords,
                          int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cart_coords\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cart_coords_timeout);
 #endif
@@ -12265,7 +11178,6 @@ void A_f_MPI_Cart_coords(int *comm, int *rank, int *maxdims, int *coords,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cart_coords\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12286,9 +11198,6 @@ void (*_LOCAL_MPI_Graph_neighbors)(int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_neighbors(int *comm, int *rank, int *maxneighbors,
                              int *neighbors, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Graph_neighbors\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Graph_neighbors_timeout);
 #endif
@@ -12303,7 +11212,6 @@ void A_f_MPI_Graph_neighbors(int *comm, int *rank, int *maxneighbors,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Graph_neighbors\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12323,9 +11231,6 @@ extern unsigned long long WI4MPI_Cart_sub_timeout;
 void (*_LOCAL_MPI_Cart_sub)(int *, int *, int *, int *);
 
 void A_f_MPI_Cart_sub(int *comm, int *remain_dims, int *newcomm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cart_sub\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cart_sub_timeout);
 #endif
@@ -12342,7 +11247,6 @@ void A_f_MPI_Cart_sub(int *comm, int *remain_dims, int *newcomm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cart_sub\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12363,9 +11267,6 @@ void (*_LOCAL_MPI_Cart_map)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Cart_map(int *comm, int *ndims, int *dims, int *periods,
                       int *newrank, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Cart_map\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Cart_map_timeout);
 #endif
@@ -12379,7 +11280,6 @@ void A_f_MPI_Cart_map(int *comm, int *ndims, int *dims, int *periods,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Cart_map\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12400,9 +11300,6 @@ void (*_LOCAL_MPI_Graph_map)(int *, int *, int *, int *, int *, int *);
 
 void A_f_MPI_Graph_map(int *comm, int *nnodes, int *indx, int *edges,
                        int *newrank, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Graph_map\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Graph_map_timeout);
 #endif
@@ -12416,7 +11313,6 @@ void A_f_MPI_Graph_map(int *comm, int *nnodes, int *indx, int *edges,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Graph_map\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12446,9 +11342,6 @@ void A_f_MPI_Type_get_contents(int *datatype, int *max_integers,
                                int *array_of_integers,
                                size_t *array_of_addresses,
                                int *array_of_datatypes, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_get_contents\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_get_contents_timeout);
 #endif
@@ -12470,7 +11363,6 @@ void A_f_MPI_Type_get_contents(int *datatype, int *max_integers,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_get_contents\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12500,9 +11392,6 @@ void A_f_MPI_Type_create_darray(int *size, int *rank, int *ndims,
                                 int *array_of_dargs, int *array_of_psizes,
                                 int *order, int *oldtype, int *newtype,
                                 int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_darray\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_darray_timeout);
 #endif
@@ -12523,7 +11412,6 @@ void A_f_MPI_Type_create_darray(int *size, int *rank, int *ndims,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_darray\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12546,9 +11434,6 @@ void (*_LOCAL_MPI_Type_create_hindexed)(int *, int *, size_t *, int *, int *,
 void A_f_MPI_Type_create_hindexed(int *count, int *array_of_blocklengths,
                                   size_t *array_of_displacements, int *oldtype,
                                   int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_hindexed\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_hindexed_timeout);
 #endif
@@ -12567,7 +11452,6 @@ void A_f_MPI_Type_create_hindexed(int *count, int *array_of_blocklengths,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_hindexed\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12590,9 +11474,6 @@ void (*_LOCAL_MPI_Type_create_indexed_block)(int *, int *, int *, int *, int *,
 void A_f_MPI_Type_create_indexed_block(int *count, int *blocklength,
                                        int *array_of_displacements,
                                        int *oldtype, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_indexed_block\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_indexed_block_timeout);
 #endif
@@ -12611,7 +11492,6 @@ void A_f_MPI_Type_create_indexed_block(int *count, int *blocklength,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_indexed_block\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12639,9 +11519,6 @@ void (*_LOCAL_MPI_Type_create_hindexed_block)(int *, int *, size_t *, int *,
 void A_f_MPI_Type_create_hindexed_block(int *count, int *blocklength,
                                         size_t *array_of_displacements,
                                         int *oldtype, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_hindexed_block\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_hindexed_block_timeout);
 #endif
@@ -12660,7 +11537,6 @@ void A_f_MPI_Type_create_hindexed_block(int *count, int *blocklength,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_hindexed_block\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12683,9 +11559,6 @@ void (*_LOCAL_MPI_Type_create_struct)(int *, int *, size_t *, int *, int *,
 void A_f_MPI_Type_create_struct(int *count, int *array_of_blocklengths,
                                 size_t *array_of_displacements,
                                 int *array_of_types, int *newtype, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_struct\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_struct_timeout);
 #endif
@@ -12706,7 +11579,6 @@ void A_f_MPI_Type_create_struct(int *count, int *array_of_blocklengths,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_struct\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12735,9 +11607,6 @@ void A_f_MPI_Type_create_subarray(int *ndims, int *array_of_sizes,
                                   int *array_of_subsizes, int *array_of_starts,
                                   int *order, int *oldtype, int *newtype,
                                   int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Type_create_subarray\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Type_create_subarray_timeout);
 #endif
@@ -12758,7 +11627,6 @@ void A_f_MPI_Type_create_subarray(int *ndims, int *array_of_sizes,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Type_create_subarray\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12790,9 +11658,6 @@ void A_f_MPI_Dist_graph_create_adjacent(int *comm_old, int *indegree,
                                         int *destweights, int *info,
                                         int *reorder, int *comm_dist_graph,
                                         int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Dist_graph_create_adjacent\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Dist_graph_create_adjacent_timeout);
 #endif
@@ -12818,7 +11683,6 @@ void A_f_MPI_Dist_graph_create_adjacent(int *comm_old, int *indegree,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Dist_graph_create_adjacent\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12847,9 +11711,6 @@ void A_f_MPI_Dist_graph_create(int *comm_old, int *n, int *sources,
                                int *degrees, int *destinations, int *weights,
                                int *info, int *reorder, int *comm_dist_graph,
                                int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Dist_graph_create\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Dist_graph_create_timeout);
 #endif
@@ -12872,7 +11733,6 @@ void A_f_MPI_Dist_graph_create(int *comm_old, int *n, int *sources,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Dist_graph_create\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12901,9 +11761,6 @@ void A_f_MPI_Dist_graph_neighbors(int *comm, int *maxindegree, int *sources,
                                   int *sourceweights, int *maxoutdegree,
                                   int *destinations, int *destweights,
                                   int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Dist_graph_neighbors\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Dist_graph_neighbors_timeout);
 #endif
@@ -12925,7 +11782,6 @@ void A_f_MPI_Dist_graph_neighbors(int *comm, int *maxindegree, int *sources,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Dist_graph_neighbors\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12954,9 +11810,6 @@ void A_f_MPI_Igatherv(void *sendbuf, int *sendcount, int *sendtype,
                       void *recvbuf, int *recvcounts, int *displs,
                       int *recvtype, int *root, int *comm, int *request,
                       int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Igatherv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Igatherv_timeout);
 #endif
@@ -12985,7 +11838,6 @@ void A_f_MPI_Igatherv(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Igatherv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13014,9 +11866,6 @@ void A_f_MPI_Iscatterv(void *sendbuf, int *sendcounts, int *displs,
                        int *sendtype, void *recvbuf, int *recvcount,
                        int *recvtype, int *root, int *comm, int *request,
                        int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iscatterv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iscatterv_timeout);
 #endif
@@ -13045,7 +11894,6 @@ void A_f_MPI_Iscatterv(void *sendbuf, int *sendcounts, int *displs,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iscatterv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13073,9 +11921,6 @@ void (*_LOCAL_MPI_Iallgatherv)(void *, int *, int *, void *, int *, int *,
 void A_f_MPI_Iallgatherv(void *sendbuf, int *sendcount, int *sendtype,
                          void *recvbuf, int *recvcounts, int *displs,
                          int *recvtype, int *comm, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Iallgatherv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Iallgatherv_timeout);
 #endif
@@ -13104,7 +11949,6 @@ void A_f_MPI_Iallgatherv(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Iallgatherv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13133,9 +11977,6 @@ void A_f_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                         int *sendtype, void *recvbuf, int *recvcounts,
                         int *rdispls, int *recvtype, int *comm, int *request,
                         int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ialltoallv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ialltoallv_timeout);
 #endif
@@ -13166,7 +12007,6 @@ void A_f_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ialltoallv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13195,9 +12035,6 @@ void A_f_MPI_Ialltoallw(void *sendbuf, int *sendcounts, int *sdispls,
                         int *sendtypes, void *recvbuf, int *recvcounts,
                         int *rdispls, int *recvtypes, int *comm, int *request,
                         int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ialltoallw\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ialltoallw_timeout);
 #endif
@@ -13233,7 +12070,6 @@ void A_f_MPI_Ialltoallw(void *sendbuf, int *sendcounts, int *sdispls,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ialltoallw\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13261,9 +12097,6 @@ void (*_LOCAL_MPI_Ireduce_scatter)(void *, void *, int *, int *, int *, int *,
 void A_f_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int *recvcounts,
                              int *datatype, int *op, int *comm, int *request,
                              int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ireduce_scatter\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ireduce_scatter_timeout);
 #endif
@@ -13291,7 +12124,6 @@ void A_f_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int *recvcounts,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ireduce_scatter\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13320,9 +12152,6 @@ void A_f_MPI_Ineighbor_allgatherv(void *sendbuf, int *sendcount, int *sendtype,
                                   void *recvbuf, int *recvcounts, int *displs,
                                   int *recvtype, int *comm, int *request,
                                   int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ineighbor_allgatherv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ineighbor_allgatherv_timeout);
 #endif
@@ -13350,7 +12179,6 @@ void A_f_MPI_Ineighbor_allgatherv(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ineighbor_allgatherv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13380,9 +12208,6 @@ void A_f_MPI_Ineighbor_alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                                  int *sendtype, void *recvbuf, int *recvcounts,
                                  int *rdispls, int *recvtype, int *comm,
                                  int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ineighbor_alltoallv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ineighbor_alltoallv_timeout);
 #endif
@@ -13410,7 +12235,6 @@ void A_f_MPI_Ineighbor_alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ineighbor_alltoallv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13441,9 +12265,6 @@ void A_f_MPI_Ineighbor_alltoallw(void *sendbuf, int *sendcounts,
                                  int *recvcounts, size_t *rdispls,
                                  int *recvtypes, int *comm, int *request,
                                  int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Ineighbor_alltoallw\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Ineighbor_alltoallw_timeout);
 #endif
@@ -13475,7 +12296,6 @@ void A_f_MPI_Ineighbor_alltoallw(void *sendbuf, int *sendcounts,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Ineighbor_alltoallw\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13503,9 +12323,6 @@ void (*_LOCAL_MPI_Neighbor_allgatherv)(void *, int *, int *, void *, int *,
 void A_f_MPI_Neighbor_allgatherv(void *sendbuf, int *sendcount, int *sendtype,
                                  void *recvbuf, int *recvcounts, int *displs,
                                  int *recvtype, int *comm, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Neighbor_allgatherv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Neighbor_allgatherv_timeout);
 #endif
@@ -13530,7 +12347,6 @@ void A_f_MPI_Neighbor_allgatherv(void *sendbuf, int *sendcount, int *sendtype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Neighbor_allgatherv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13559,9 +12375,6 @@ void A_f_MPI_Neighbor_alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                                 int *sendtype, void *recvbuf, int *recvcounts,
                                 int *rdispls, int *recvtype, int *comm,
                                 int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Neighbor_alltoallv\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Neighbor_alltoallv_timeout);
 #endif
@@ -13586,7 +12399,6 @@ void A_f_MPI_Neighbor_alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Neighbor_alltoallv\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13615,9 +12427,6 @@ void A_f_MPI_Neighbor_alltoallw(void *sendbuf, int *sendcounts, size_t *sdispls,
                                 int *sendtypes, void *recvbuf, int *recvcounts,
                                 size_t *rdispls, int *recvtypes, int *comm,
                                 int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Neighbor_alltoallw\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Neighbor_alltoallw_timeout);
 #endif
@@ -13650,7 +12459,6 @@ void A_f_MPI_Neighbor_alltoallw(void *sendbuf, int *sendcounts, size_t *sdispls,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Neighbor_alltoallw\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13671,9 +12479,6 @@ void (*_LOCAL_MPI_File_iwrite_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iwrite_all(int *fh, void *buf, int *count, int *datatype,
                              int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iwrite_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iwrite_all_timeout);
 #endif
@@ -13695,7 +12500,6 @@ void A_f_MPI_File_iwrite_all(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iwrite_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13718,9 +12522,6 @@ void (*_LOCAL_MPI_File_iwrite_at_all)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_iwrite_at_all(int *fh, int *offset, void *buf, int *count,
                                 int *datatype, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iwrite_at_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iwrite_at_all_timeout);
 #endif
@@ -13742,7 +12543,6 @@ void A_f_MPI_File_iwrite_at_all(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iwrite_at_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13762,9 +12562,6 @@ extern unsigned long long WI4MPI_Aint_add_timeout;
 void (*_LOCAL_MPI_Aint_add)(size_t *, size_t *, size_t *);
 
 void A_f_MPI_Aint_add(size_t *base, size_t *disp, size_t *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Aint_add\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Aint_add_timeout);
 #endif
@@ -13775,7 +12572,6 @@ void A_f_MPI_Aint_add(size_t *base, size_t *disp, size_t *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Aint_add\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13795,9 +12591,6 @@ extern unsigned long long WI4MPI_Aint_diff_timeout;
 void (*_LOCAL_MPI_Aint_diff)(size_t *, size_t *, size_t *);
 
 void A_f_MPI_Aint_diff(size_t *addr1, size_t *addr2, size_t *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_Aint_diff\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Aint_diff_timeout);
 #endif
@@ -13808,7 +12601,6 @@ void A_f_MPI_Aint_diff(size_t *addr1, size_t *addr2, size_t *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Aint_diff\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13829,9 +12621,6 @@ void (*_LOCAL_MPI_File_iread_all)(int *, void *, int *, int *, int *, int *);
 
 void A_f_MPI_File_iread_all(int *fh, void *buf, int *count, int *datatype,
                             int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iread_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iread_all_timeout);
 #endif
@@ -13853,7 +12642,6 @@ void A_f_MPI_File_iread_all(int *fh, void *buf, int *count, int *datatype,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iread_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13875,9 +12663,6 @@ void (*_LOCAL_MPI_File_iread_at_all)(int *, int *, void *, int *, int *, int *,
 
 void A_f_MPI_File_iread_at_all(int *fh, int *offset, void *buf, int *count,
                                int *datatype, int *request, int *ret) {
-#ifdef DEBUG
-  printf("entre : A_f_MPI_File_iread_at_all\n");
-#endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_File_iread_at_all_timeout);
 #endif
@@ -13899,7 +12684,6 @@ void A_f_MPI_File_iread_at_all(int *fh, int *offset, void *buf, int *count,
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_File_iread_at_all\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();

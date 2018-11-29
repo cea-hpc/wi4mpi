@@ -53,7 +53,7 @@ class generator:
                 out_str=out_str+ii+" : "+self.mappers[i['name']]['debug_type']+",\\n"
                 out_arg_list=out_arg_list+ii+","
         out_arg_list=out_arg_list+"ret_tmp"
-        out_str=out_str+"return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"}\\n"
+        out_str=out_str+"return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"\\n}\\n"
         return [out_str,out_arg_list] 
 
 
@@ -62,17 +62,17 @@ class generator:
 ###           ###
     def header_func(self, func_dict, app_side=True):
         string='\n{'
-        string=string+'\n#ifdef DEBUG'
-        if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
-            if app_side:
-                string=string+'\nprintf(\"entre : A_'+func_dict['name']+'\\n\");'
-            else:
-                string=string+'\nprintf(\"entre : R_'+func_dict['name']+'\\n\");'
-        elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
-            string=string+'\nprintf(\"entre : A_f_'+func_dict['name']+'\\n\");'
-        elif self.name == 'Interface_C':
-            string=string+'\nprintf(\"entre : P'+func_dict['name']+' (interface) \\n\");'
-        string=string+'\n#endif'
+      #  string=string+'\n#ifdef DEBUG'
+      #  if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
+          #  if app_side:
+          #      string=string+'\nprintf(\"entre : A_'+func_dict['name']+'\\n\");'
+          #  else:
+          #      string=string+'\nprintf(\"entre : R_'+func_dict['name']+'\\n\");'
+       # elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
+        #    string=string+'\nprintf(\"entre : A_f_'+func_dict['name']+'\\n\");'
+       # elif self.name == 'Interface_C':
+       #     string=string+'\nprintf(\"entre : P'+func_dict['name']+' (interface) \\n\");'
+      #  string=string+'\n#endif'
         string=string+'\n#ifdef TIMEOUT_SUPPORT'
         if app_side:
                 string=string+'\nwi4mpi_set_timeout(WI4'+func_dict['name']+'_timeout);'
@@ -95,14 +95,14 @@ class generator:
         string=string+'#ifdef DEBUG'
         if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
             if app_side:
-                string=string+'\nprintf(\"sort : A_'+func_dict['name']+'\\n\");'
+       #         string=string+'\nprintf(\"sort : A_'+func_dict['name']+'\\n\");'
                 string=string+'debug_printer(\"'+self.debug_string(func_dict)[0]+'\",'+self.debug_string(func_dict)[1]+');'
-            else:
-                string=string+'\nprintf(\"sort : R_'+func_dict['name']+'\\n\");'
-        elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
-            string=string+'\nprintf(\"sort : A_f_'+func_dict['name']+'\\n\");'
-        elif self.name == 'Interface_C':
-            string=string+'\nprintf(\"sort : P'+func_dict['name']+' (interface)\\n\");'
+        #    else:
+        #        string=string+'\nprintf(\"sort : R_'+func_dict['name']+'\\n\");'
+        #elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
+        #    string=string+'\nprintf(\"sort : A_f_'+func_dict['name']+'\\n\");'
+        #elif self.name == 'Interface_C':
+        #    string=string+'\nprintf(\"sort : P'+func_dict['name']+' (interface)\\n\");'
         string=string+'\n#endif\n'
         string=string+'#ifdef TIMEOUT_SUPPORT'
         if app_side:
