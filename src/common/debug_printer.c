@@ -93,7 +93,10 @@ void debug_printer(const char *ctr_str,...)
                     A_MPI_Comm_get_name(cc,&cname[0],&namelen);
                     debug_act=1;
                     printf("{ \nvalue :%p ,\n name: %s\n}",cc,cname);
-                    break; 
+                    break;
+
+               case 'p':
+                    printf("%p",va_arg(ap,void*)); 
                default:
                     va_arg(ap,void*);
                     break;
