@@ -63,11 +63,12 @@ void debug_printer(const char *ctr_str,...)
                     }
                     break;
                 case 'D':
-                     A_MPI_Datatype dat=pointer_disp?*(va_arg(ap,A_MPI_Datatype*)):(va_arg(ap,A_MPI_Datatype));
+                    { A_MPI_Datatype dat=pointer_disp?*(va_arg(ap,A_MPI_Datatype*)):(va_arg(ap,A_MPI_Datatype));
                     debug_act=0;
                     A_MPI_Type_get_name(dat,&cname[0],&namelen);
                     debug_act=1;
                     printf("{ \nvalue :%p ,\n name: %s\n}",dat,cname);
+                    }
                     break; 
                 case 'a':
                     nb_elt=va_arg(ap,int);
