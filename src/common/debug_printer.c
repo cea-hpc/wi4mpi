@@ -2,7 +2,10 @@
 #include <string.h>
 #include "app_mpi.h"
 #include <stdarg.h>
+int debug_act;
 void debug_printer(const char *ctr_str,...)
+{
+    if(debug_act!=0)
 {
     int len=strlen(ctr_str);
     char print_str[4096];
@@ -43,7 +46,9 @@ void debug_printer(const char *ctr_str,...)
                 case 'C':
                     A_MPI_Comm cc=pointer_disp?*(va_arg(ap,A_MPI_Comm*)):(va_arg(ap,A_MPI_Comm));
                     char cname[2048];int namelen;
+                    debug_act=0;
                     A_MPI_Comm_get_name(cc,&cname[0],&namelen);
+                    debug_act=1;
                     printf("%p : %s",cc,cname);
                 default:
                     va_arg(ap,void*);
@@ -60,7 +65,7 @@ void debug_printer(const char *ctr_str,...)
     printf("%s",print_str);
     va_end(ap);       
     
-}
+}}
 void print_status(A_MPI_Status stat)
 {
     printf("{ source :%d, tag : %d ,error :%d}",stat.A_MPI_SOURCE,stat.A_MPI_TAG,stat.A_MPI_ERROR);
