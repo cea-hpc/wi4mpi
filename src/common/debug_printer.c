@@ -4,6 +4,34 @@
 #include <stdarg.h>
 __thread int debug_act;
 void print_status(A_MPI_Status);
+#define print_type(type,printf_string) \
+                    if(nb_elt==0)\
+                   printf(#printf_string ,pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type)));\
+                    else\
+                    {\
+                    type *s=pointer_disp?*va_arg(ap,type **):va_arg(ap,type*);\
+                    printf("[\n");\
+                    for(ii=0;ii<nb_elt;ii++)\
+                    {if(ii) printf(",\n"); printf( #printf_string,s[ii]);}\
+                    printf("]\n");\
+                    }
+
+#define print_named_type(type)\
+                    if(nb_elt==0){\
+                    type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
+                    type_##get_name(dat,cname,namelen);\
+                   printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
+                    }else\
+                    {\
+                    type *s=pointer_disp?*va_arg(ap,type **):va_arg(ap,type*);\
+                    printf("[\n");\
+                    for(ii=0;ii<nb_elt;ii++)\
+                    {\
+                        type_##get_name(s[ii],cname,namelen);\
+                        if(ii) printf(,\n');\
+                   printf("{ value : "#printf_string ", name :%s }" ,ss[ii],cname);}\
+                    printf("]\n");\
+                    }
 void debug_printer(const char *ctr_str,...)
 {
     if(debug_act!=0)
@@ -39,7 +67,7 @@ void debug_printer(const char *ctr_str,...)
                     to_dec=1;    
                     break;
                 case 'n':
-                    if(nb_elt==0)
+                  /*  if(nb_elt==0)
                     print_status(pointer_disp?*va_arg(ap,A_MPI_Status *):va_arg(ap,A_MPI_Status));
                     else
                     {
@@ -48,11 +76,12 @@ void debug_printer(const char *ctr_str,...)
                     for(ii=0;ii<nb_elt;ii++)
                     {if(!ii) printf(",");print_status(s[ii]);}
                     printf("]\n");
-                    }
+                    }*/
+                    print_type(A_MPI_Statusi,%p)
                     break;
                 case 'd':
                     if(nb_elt==0)
-                    printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
+                   printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     else
                     {
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
