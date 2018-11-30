@@ -82,7 +82,7 @@ void debug_printer(const char *ctr_str,...)
                     }
                     break;
                 case 'd':
-                  /*  if(nb_elt==0)
+                    if(nb_elt==0)
                    printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     else
                     {
@@ -91,9 +91,9 @@ void debug_printer(const char *ctr_str,...)
                     for(ii=0;ii<nb_elt;ii++)
                     {if(ii) printf(",\n%d",s[ii]);else printf("%d",s[ii]);}
                     printf("]\n");
-                    }*/
+                    }
                     
-                    print_type(int,%d)
+                    //print_type(int,%d)
                     break;
                 case 'D':
                     /*{ A_MPI_Datatype dat=pointer_disp?*(va_arg(ap,A_MPI_Datatype*)):(va_arg(ap,A_MPI_Datatype));
