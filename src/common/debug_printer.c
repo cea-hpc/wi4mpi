@@ -29,7 +29,8 @@ void print_status(A_MPI_Status);
                     {\
                         type_##get_name(s[ii],cname,namelen);\
                         if(ii) printf(,\n');\
-                   printf("{ value : "#printf_string ", name :%s }" ,ss[ii],cname);}\
+             printf("{ value : "#printf_string ", name :%s }" ,ss[ii],cname);\
+                    }\
                     printf("]\n");\
                     }
 void debug_printer(const char *ctr_str,...)
@@ -77,7 +78,7 @@ void debug_printer(const char *ctr_str,...)
                     {if(!ii) printf(",");print_status(s[ii]);}
                     printf("]\n");
                     }*/
-                    print_type(A_MPI_Status,%p)
+                    print_type(A_MPI_Status,%d)
                     break;
                 case 'd':
                     if(nb_elt==0)
