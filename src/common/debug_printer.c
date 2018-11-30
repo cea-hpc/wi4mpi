@@ -13,7 +13,7 @@ void print_status(A_MPI_Status);
                     printf("[\n");\
                     for(ii=0;ii<nb_elt;ii++)\
                     {if(ii) printf(",\n"); printf( #printf_string,s[ii]);}\
-                    printf("]\n");\
+                    printf("\n]\n");\
                     }
 
 #define print_named_type(type,printf_string,func)\
@@ -32,7 +32,7 @@ void print_status(A_MPI_Status);
                         if(ii) printf(",\n");\
              printf("{ value : "#printf_string ", name :%s }" ,s[ii],cname);\
                     }\
-                    printf("]\n");\
+                    printf("\n]\n");\
                     }\
                     debug_act=1;
 void debug_printer(const char *ctr_str,...)
