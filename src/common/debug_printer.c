@@ -68,7 +68,7 @@ void debug_printer(const char *ctr_str,...)
                     to_dec=1;    
                     break;
                 case 'n':
-                  /*  if(nb_elt==0)
+                    if(nb_elt==0)
                     print_status(pointer_disp?*va_arg(ap,A_MPI_Status *):va_arg(ap,A_MPI_Status));
                     else
                     {
@@ -77,11 +77,10 @@ void debug_printer(const char *ctr_str,...)
                     for(ii=0;ii<nb_elt;ii++)
                     {if(!ii) printf(",");print_status(s[ii]);}
                     printf("]\n");
-                    }*/
-                    print_type(A_MPI_Status,%d)
+                    }
                     break;
                 case 'd':
-                    if(nb_elt==0)
+                  /*  if(nb_elt==0)
                    printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     else
                     {
@@ -90,7 +89,9 @@ void debug_printer(const char *ctr_str,...)
                     for(ii=0;ii<nb_elt;ii++)
                     {if(ii) printf(",\n%d",s[ii]);else printf("%d",s[ii]);}
                     printf("]\n");
-                    }
+                    }*/
+                    
+                    print_type(int,%d)
                     break;
                 case 'D':
                     { A_MPI_Datatype dat=pointer_disp?*(va_arg(ap,A_MPI_Datatype*)):(va_arg(ap,A_MPI_Datatype));
