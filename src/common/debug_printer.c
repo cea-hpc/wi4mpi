@@ -16,10 +16,10 @@ void print_status(A_MPI_Status);
                     printf("]\n");\
                     }
 
-#define print_named_type(type,printf_string)\
+#define print_named_type(type,printf_string,func)\
                     if(nb_elt==0){\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
-                    type_##get_name(dat,cname,namelen);\
+                    func(dat,cname,namelen);\
                    printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
                     }else\
                     {\
@@ -94,19 +94,20 @@ void debug_printer(const char *ctr_str,...)
                     print_type(int,%d)
                     break;
                 case 'D':
-                    { A_MPI_Datatype dat=pointer_disp?*(va_arg(ap,A_MPI_Datatype*)):(va_arg(ap,A_MPI_Datatype));
+                    /*{ A_MPI_Datatype dat=pointer_disp?*(va_arg(ap,A_MPI_Datatype*)):(va_arg(ap,A_MPI_Datatype));
                     debug_act=0;
                     A_MPI_Type_get_name(dat,&cname[0],&namelen);
                     debug_act=1;
                     printf("{ \nvalue :%p ,\n name: %s\n}",dat,cname);
-                    }
+                    }*/
+                    print_named_type(A_MPI_Datatype,%p,A_MPI_Type_get_name)
                     break; 
                 case 'a':
                     nb_elt=va_arg(ap,int);
                     to_dec=1; 
                     break;
                 case 's':
-                    if(nb_elt==0)
+                 /*   if(nb_elt==0)
                         printf("%s",pointer_disp?*(va_arg(ap,char **)):va_arg(ap,char*));
                     else
                    { 
@@ -116,19 +117,22 @@ void debug_printer(const char *ctr_str,...)
                     {if(ii) printf(",\n%s",s[ii]);else printf("%s",s[ii]);}
                     printf("\n]\n");
                     }
-
+*/
+                    print_type(char *,"%s")
                     break;
                 case 'C':
-                    A_MPI_Comm cc=pointer_disp?*(va_arg(ap,A_MPI_Comm*)):(va_arg(ap,A_MPI_Comm));
+                    /*A_MPI_Comm cc=pointer_disp?*(va_arg(ap,A_MPI_Comm*)):(va_arg(ap,A_MPI_Comm));
                     debug_act=0;
                     A_MPI_Comm_get_name(cc,&cname[0],&namelen);
                     debug_act=1;
                     printf("{ \nvalue :%p ,\n name: %s\n}",cc,cname);
                     break;
-
+*/
+                    print_named_type(A_MPI_Comm,"%p",A_MPI_Comm_get_name)
                case 'p':
-                    printf("%p",va_arg(ap,void*)); 
-                    break;
+                  //  printf("%p",va_arg(ap,void*)); 
+                     print_type(void *,%p)
+                     break;
                default:
                     va_arg(ap,void*);
                     break;
