@@ -28,7 +28,7 @@ void print_status(A_MPI_Status);
                     for(ii=0;ii<nb_elt;ii++)\
                     {\
                         func(s[ii],cname,&namelen);\
-                        if(ii) printf(,\n');\
+                        if(ii) printf(",\n");\
              printf("{ value : "#printf_string ", name :%s }" ,ss[ii],cname);\
                     }\
                     printf("]\n");\
