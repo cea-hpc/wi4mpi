@@ -19,7 +19,7 @@ void print_status(A_MPI_Status);
 #define print_named_type(type,printf_string,func)\
                     if(nb_elt==0){\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
-                    func(dat,cname,namelen);\
+                    func(dat,cname,&namelen);\
                    printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
                     }else\
                     {\
@@ -27,7 +27,7 @@ void print_status(A_MPI_Status);
                     printf("[\n");\
                     for(ii=0;ii<nb_elt;ii++)\
                     {\
-                        func(s[ii],cname,namelen);\
+                        func(s[ii],cname,&namelen);\
                         if(ii) printf(,\n');\
              printf("{ value : "#printf_string ", name :%s }" ,ss[ii],cname);\
                     }\
