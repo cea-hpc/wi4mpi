@@ -120,7 +120,7 @@ void debug_printer(const char *ctr_str,...)
                     printf("\n]\n");
                     }
 */
-                    print_type(char *,"%s")
+                    print_type(char *,%s)
                     break;
                 case 'C':
                     /*A_MPI_Comm cc=pointer_disp?*(va_arg(ap,A_MPI_Comm*)):(va_arg(ap,A_MPI_Comm));
@@ -130,7 +130,7 @@ void debug_printer(const char *ctr_str,...)
                     printf("{ \nvalue :%p ,\n name: %s\n}",cc,cname);
                     break;
 */
-                    print_named_type(A_MPI_Comm,"%p",A_MPI_Comm_get_name)
+                    print_named_type(A_MPI_Comm,%p,A_MPI_Comm_get_name)
                case 'p':
                   //  printf("%p",va_arg(ap,void*)); 
                      print_type(void *,%p)
