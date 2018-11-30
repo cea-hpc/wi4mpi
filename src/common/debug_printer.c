@@ -131,7 +131,8 @@ void debug_printer(const char *ctr_str,...)
                     break;
 */
                     print_named_type(A_MPI_Comm,%p,A_MPI_Comm_get_name)
-               case 'p':
+                    break;
+                 case 'p':
                   //  printf("%p",va_arg(ap,void*)); 
                      print_type(void *,%p)
                      break;
