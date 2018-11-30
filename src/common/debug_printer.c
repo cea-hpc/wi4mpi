@@ -29,7 +29,7 @@ void print_status(A_MPI_Status);
                     {\
                         func(s[ii],cname,&namelen);\
                         if(ii) printf(",\n");\
-             printf("{ value : "#printf_string ", name :%s }" ,ss[ii],cname);\
+             printf("{ value : "#printf_string ", name :%s }" ,s[ii],cname);\
                     }\
                     printf("]\n");\
                     }
