@@ -16,7 +16,7 @@ void print_status(A_MPI_Status);
                     printf("]\n");\
                     }
 
-#define print_named_type(type)\
+#define print_named_type(type,printf_string)\
                     if(nb_elt==0){\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
                     type_##get_name(dat,cname,namelen);\
@@ -77,7 +77,7 @@ void debug_printer(const char *ctr_str,...)
                     {if(!ii) printf(",");print_status(s[ii]);}
                     printf("]\n");
                     }*/
-                    print_type(A_MPI_Statusi,%p)
+                    print_type(A_MPI_Status,%p)
                     break;
                 case 'd':
                     if(nb_elt==0)
