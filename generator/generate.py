@@ -155,7 +155,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     for conf in init_conf:
         string=string+conf
     string=string+'}\n'
-    string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;int current_deb;timeout_config_file();\nint default_debug;if(current_str=getenv(WI4MPI_DEFAULT_PRINT)) {default_deb=strtol(current_str,NULL,10);} else default_debug=0;'
+    string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;int current_deb;timeout_config_file();\nint default_debug;if(current_str=getenv(\"WI4MPI_DEFAULT_PRINT\")) {default_debug=strtol(current_str,NULL,10);} else default_debug=0;'
     for i in data:
         if (i['name'] in def_list):
             string=string+'if(current_str=getenv(\"WI4'+i['name']+'_timeout\")){ current_val=strtoll(current_str,NULL,10);if (current_val>0) WI4'+i['name']+'_timeout=current_val;}\n'

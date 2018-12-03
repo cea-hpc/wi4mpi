@@ -34191,8 +34191,8 @@ __attribute__((constructor)) void wi4mpi_timeout_config(void) {
   int current_deb;
   timeout_config_file();
   int default_debug;
-  if (current_str = getenv(WI4MPI_DEFAULT_PRINT)) {
-    default_deb = strtol(current_str, NULL, 10);
+  if (current_str = getenv("WI4MPI_DEFAULT_PRINT")) {
+    default_debug = strtol(current_str, NULL, 10);
   } else
     default_debug = 0;
   if (current_str = getenv("WI4MPI_Send_timeout")) {
