@@ -963,6 +963,7 @@ int R_MPI_Win_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Send_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Send_print = 0;
 int MPI_Send(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
              A_MPI_Comm comm);
 int (*LOCAL_MPI_Send)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm);
@@ -1028,6 +1029,8 @@ int A_MPI_Send(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
       LOCAL_MPI_Send(buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp, comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Send_print)
+    \;
   debug_printer("MPI_Send : \n{\nbuf : %p,\ncount : %d,\ndatatype : %D,\ndest "
                 ": %d,\ntag : %d,\ncomm : %C,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, ret_tmp);
@@ -1051,6 +1054,7 @@ int R_MPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Recv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Recv_print = 0;
 int MPI_Recv(void *buf, int count, A_MPI_Datatype datatype, int source, int tag,
              A_MPI_Comm comm, A_MPI_Status *status);
 int (*LOCAL_MPI_Recv)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -1121,6 +1125,8 @@ int A_MPI_Recv(void *buf, int count, A_MPI_Datatype datatype, int source,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Recv_print)
+    \;
   debug_printer("MPI_Recv : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\nsource : %d,\ntag : %d,\ncomm : %C,\nstatus : "
                 "%*n,\nreturn : %d\n}\n",
@@ -1145,6 +1151,7 @@ int R_MPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_count_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_count_print = 0;
 int MPI_Get_count(A_MPI_Status *status, A_MPI_Datatype datatype, int *count);
 int (*LOCAL_MPI_Get_count)(R_MPI_Status *, R_MPI_Datatype, int *);
 
@@ -1197,6 +1204,8 @@ int A_MPI_Get_count(A_MPI_Status *status, A_MPI_Datatype datatype, int *count) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_count_print)
+    \;
   debug_printer("MPI_Get_count : \n{\nstatus : %*n,\ndatatype : %D,\ncount : "
                 "%*d,\nreturn : %d\n}\n",
                 status, datatype, count, ret_tmp);
@@ -1219,6 +1228,7 @@ int R_MPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Bsend_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Bsend_print = 0;
 int MPI_Bsend(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
               A_MPI_Comm comm);
 int (*LOCAL_MPI_Bsend)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm);
@@ -1284,6 +1294,8 @@ int A_MPI_Bsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
                                 comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Bsend_print)
+    \;
   debug_printer("MPI_Bsend : \n{\nbuf : %p,\ncount : %d,\ndatatype : %D,\ndest "
                 ": %d,\ntag : %d,\ncomm : %C,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, ret_tmp);
@@ -1307,6 +1319,7 @@ int R_MPI_Bsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ssend_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ssend_print = 0;
 int MPI_Ssend(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
               A_MPI_Comm comm);
 int (*LOCAL_MPI_Ssend)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm);
@@ -1372,6 +1385,8 @@ int A_MPI_Ssend(void *buf, int count, A_MPI_Datatype datatype, int dest,
                                 comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ssend_print)
+    \;
   debug_printer("MPI_Ssend : \n{\nbuf : %p,\ncount : %d,\ndatatype : %D,\ndest "
                 ": %d,\ntag : %d,\ncomm : %C,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, ret_tmp);
@@ -1395,6 +1410,7 @@ int R_MPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Rsend_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Rsend_print = 0;
 int MPI_Rsend(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
               A_MPI_Comm comm);
 int (*LOCAL_MPI_Rsend)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm);
@@ -1460,6 +1476,8 @@ int A_MPI_Rsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
                                 comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Rsend_print)
+    \;
   debug_printer("MPI_Rsend : \n{\nbuf : %p,\ncount : %d,\ndatatype : %D,\ndest "
                 ": %d,\ntag : %d,\ncomm : %C,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, ret_tmp);
@@ -1483,6 +1501,7 @@ int R_MPI_Rsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Buffer_attach_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Buffer_attach_print = 0;
 int MPI_Buffer_attach(void *buffer, int size);
 int (*LOCAL_MPI_Buffer_attach)(void *, int);
 
@@ -1529,6 +1548,8 @@ int A_MPI_Buffer_attach(void *buffer, int size) {
   int ret_tmp = LOCAL_MPI_Buffer_attach(buffer_tmp, size);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Buffer_attach_print)
+    \;
   debug_printer(
       "MPI_Buffer_attach : \n{\nbuffer : %p,\nsize : %d,\nreturn : %d\n}\n",
       buffer, size, ret_tmp);
@@ -1551,6 +1572,7 @@ int R_MPI_Buffer_attach(void *buffer, int size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Buffer_detach_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Buffer_detach_print = 0;
 int MPI_Buffer_detach(void *buffer_addr, int *size);
 int (*LOCAL_MPI_Buffer_detach)(void *, int *);
 
@@ -1599,6 +1621,8 @@ int A_MPI_Buffer_detach(void *buffer_addr, int *size) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Buffer_detach_print)
+    \;
   debug_printer("MPI_Buffer_detach : \n{\nbuffer_addr : %p,\nsize : "
                 "%*d,\nreturn : %d\n}\n",
                 buffer_addr, size, ret_tmp);
@@ -1621,6 +1645,7 @@ int R_MPI_Buffer_detach(void *buffer_addr, int *size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Isend_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Isend_print = 0;
 int MPI_Isend(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
               A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Isend)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -1692,6 +1717,8 @@ int A_MPI_Isend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Isend_print)
+    \;
   debug_printer("MPI_Isend : \n{\nbuf : %p,\ncount : %d,\ndatatype : %D,\ndest "
                 ": %d,\ntag : %d,\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, request, ret_tmp);
@@ -1715,6 +1742,7 @@ int R_MPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ibsend_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ibsend_print = 0;
 int MPI_Ibsend(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
                A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Ibsend)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -1786,6 +1814,8 @@ int A_MPI_Ibsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ibsend_print)
+    \;
   debug_printer("MPI_Ibsend : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\ndest : %d,\ntag : %d,\ncomm : %C,\nrequest : %p,\nreturn "
                 ": %d\n}\n",
@@ -1811,6 +1841,7 @@ int R_MPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Issend_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Issend_print = 0;
 int MPI_Issend(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
                A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Issend)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -1882,6 +1913,8 @@ int A_MPI_Issend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Issend_print)
+    \;
   debug_printer("MPI_Issend : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\ndest : %d,\ntag : %d,\ncomm : %C,\nrequest : %p,\nreturn "
                 ": %d\n}\n",
@@ -1907,6 +1940,7 @@ int R_MPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Irsend_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Irsend_print = 0;
 int MPI_Irsend(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
                A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Irsend)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -1978,6 +2012,8 @@ int A_MPI_Irsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Irsend_print)
+    \;
   debug_printer("MPI_Irsend : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\ndest : %d,\ntag : %d,\ncomm : %C,\nrequest : %p,\nreturn "
                 ": %d\n}\n",
@@ -2003,6 +2039,7 @@ int R_MPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Irecv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Irecv_print = 0;
 int MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
               int tag, A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Irecv)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -2075,6 +2112,8 @@ int A_MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Irecv_print)
+    \;
   debug_printer("MPI_Irecv : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\nsource : %d,\ntag : %d,\ncomm : %C,\nrequest : "
                 "%p,\nreturn : %d\n}\n",
@@ -2100,6 +2139,7 @@ int R_MPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Wait_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Wait_print = 0;
 int MPI_Wait(A_MPI_Request *request, A_MPI_Status *status);
 int (*LOCAL_MPI_Wait)(R_MPI_Request *, R_MPI_Status *);
 
@@ -2154,6 +2194,8 @@ int A_MPI_Wait(A_MPI_Request *request, A_MPI_Status *status) {
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Wait_print)
+    \;
   debug_printer(
       "MPI_Wait : \n{\nrequest : %p,\nstatus : %*n,\nreturn : %d\n}\n", request,
       status, ret_tmp);
@@ -2176,6 +2218,7 @@ int R_MPI_Wait(R_MPI_Request *request, R_MPI_Status *status) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Test_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Test_print = 0;
 int MPI_Test(A_MPI_Request *request, int *flag, A_MPI_Status *status);
 int (*LOCAL_MPI_Test)(R_MPI_Request *, int *, R_MPI_Status *);
 
@@ -2235,6 +2278,8 @@ int A_MPI_Test(A_MPI_Request *request, int *flag, A_MPI_Status *status) {
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Test_print)
+    \;
   debug_printer("MPI_Test : \n{\nrequest : %p,\nflag : %*d,\nstatus : "
                 "%*n,\nreturn : %d\n}\n",
                 request, flag, status, ret_tmp);
@@ -2257,6 +2302,7 @@ int R_MPI_Test(R_MPI_Request *request, int *flag, R_MPI_Status *status) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Request_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Request_free_print = 0;
 int MPI_Request_free(A_MPI_Request *request);
 int (*LOCAL_MPI_Request_free)(R_MPI_Request *);
 
@@ -2304,6 +2350,8 @@ int A_MPI_Request_free(A_MPI_Request *request) {
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Request_free_print)
+    \;
   debug_printer("MPI_Request_free : \n{\nrequest : %p,\nreturn : %d\n}\n",
                 request, ret_tmp);
 #endif
@@ -2325,6 +2373,7 @@ int R_MPI_Request_free(R_MPI_Request *request) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iprobe_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iprobe_print = 0;
 int MPI_Iprobe(int source, int tag, A_MPI_Comm comm, int *flag,
                A_MPI_Status *status);
 int (*LOCAL_MPI_Iprobe)(int, int, R_MPI_Comm, int *, R_MPI_Status *);
@@ -2388,6 +2437,8 @@ int A_MPI_Iprobe(int source, int tag, A_MPI_Comm comm, int *flag,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iprobe_print)
+    \;
   debug_printer("MPI_Iprobe : \n{\nsource : %d,\ntag : %d,\ncomm : %C,\nflag : "
                 "%*d,\nstatus : %*n,\nreturn : %d\n}\n",
                 source, tag, comm, flag, status, ret_tmp);
@@ -2411,6 +2462,7 @@ int R_MPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Probe_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Probe_print = 0;
 int MPI_Probe(int source, int tag, A_MPI_Comm comm, A_MPI_Status *status);
 int (*LOCAL_MPI_Probe)(int, int, R_MPI_Comm, R_MPI_Status *);
 
@@ -2467,6 +2519,8 @@ int A_MPI_Probe(int source, int tag, A_MPI_Comm comm, A_MPI_Status *status) {
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Probe_print)
+    \;
   debug_printer("MPI_Probe : \n{\nsource : %d,\ntag : %d,\ncomm : %C,\nstatus "
                 ": %*n,\nreturn : %d\n}\n",
                 source, tag, comm, status, ret_tmp);
@@ -2489,6 +2543,7 @@ int R_MPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cancel_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cancel_print = 0;
 int MPI_Cancel(A_MPI_Request *request);
 int (*LOCAL_MPI_Cancel)(R_MPI_Request *);
 
@@ -2536,6 +2591,8 @@ int A_MPI_Cancel(A_MPI_Request *request) {
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cancel_print)
+    \;
   debug_printer("MPI_Cancel : \n{\nrequest : %p,\nreturn : %d\n}\n", request,
                 ret_tmp);
 #endif
@@ -2557,6 +2614,7 @@ int R_MPI_Cancel(R_MPI_Request *request) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Test_cancelled_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Test_cancelled_print = 0;
 int MPI_Test_cancelled(A_MPI_Status *status, int *flag);
 int (*LOCAL_MPI_Test_cancelled)(R_MPI_Status *, int *);
 
@@ -2605,6 +2663,8 @@ int A_MPI_Test_cancelled(A_MPI_Status *status, int *flag) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Test_cancelled_print)
+    \;
   debug_printer(
       "MPI_Test_cancelled : \n{\nstatus : %*n,\nflag : %*d,\nreturn : %d\n}\n",
       status, flag, ret_tmp);
@@ -2627,6 +2687,7 @@ int R_MPI_Test_cancelled(R_MPI_Status *status, int *flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Send_init_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Send_init_print = 0;
 int MPI_Send_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
                   int tag, A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Send_init)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -2698,9 +2759,11 @@ int A_MPI_Send_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Send_init_print)
+    \;
   debug_printer("MPI_Send_init : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\ndest : %d,\ntag : %d,\ncomm : %C,\nrequest : "
-                "%*r,\nreturn : %d\n}\n",
+                "%*p,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2723,6 +2786,7 @@ int R_MPI_Send_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Bsend_init_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Bsend_init_print = 0;
 int MPI_Bsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
                    int tag, A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Bsend_init)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -2794,9 +2858,11 @@ int A_MPI_Bsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Bsend_init_print)
+    \;
   debug_printer("MPI_Bsend_init : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\ndest : %d,\ntag : %d,\ncomm : %C,\nrequest : "
-                "%*r,\nreturn : %d\n}\n",
+                "%*p,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2819,6 +2885,7 @@ int R_MPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ssend_init_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ssend_init_print = 0;
 int MPI_Ssend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
                    int tag, A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Ssend_init)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -2890,9 +2957,11 @@ int A_MPI_Ssend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ssend_init_print)
+    \;
   debug_printer("MPI_Ssend_init : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\ndest : %d,\ntag : %d,\ncomm : %C,\nrequest : "
-                "%*r,\nreturn : %d\n}\n",
+                "%*p,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2915,6 +2984,7 @@ int R_MPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Rsend_init_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Rsend_init_print = 0;
 int MPI_Rsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
                    int tag, A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Rsend_init)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -2986,9 +3056,11 @@ int A_MPI_Rsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Rsend_init_print)
+    \;
   debug_printer("MPI_Rsend_init : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\ndest : %d,\ntag : %d,\ncomm : %C,\nrequest : "
-                "%*r,\nreturn : %d\n}\n",
+                "%*p,\nreturn : %d\n}\n",
                 buf, count, datatype, dest, tag, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3011,6 +3083,7 @@ int R_MPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Recv_init_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Recv_init_print = 0;
 int MPI_Recv_init(void *buf, int count, A_MPI_Datatype datatype, int source,
                   int tag, A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Recv_init)(void *, int, R_MPI_Datatype, int, int, R_MPI_Comm,
@@ -3083,9 +3156,11 @@ int A_MPI_Recv_init(void *buf, int count, A_MPI_Datatype datatype, int source,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Recv_init_print)
+    \;
   debug_printer("MPI_Recv_init : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
                 "%D,\nsource : %d,\ntag : %d,\ncomm : %C,\nrequest : "
-                "%*r,\nreturn : %d\n}\n",
+                "%*p,\nreturn : %d\n}\n",
                 buf, count, datatype, source, tag, comm, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3108,6 +3183,7 @@ int R_MPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Start_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Start_print = 0;
 int MPI_Start(A_MPI_Request *request);
 int (*LOCAL_MPI_Start)(R_MPI_Request *);
 
@@ -3153,7 +3229,9 @@ int A_MPI_Start(A_MPI_Request *request) {
   request_pers_ptr_conv_r2a(&request, &request_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Start : \n{\nrequest : %*r,\nreturn : %d\n}\n", request,
+  if (WI4MPI_Start_print)
+    \;
+  debug_printer("MPI_Start : \n{\nrequest : %*p,\nreturn : %d\n}\n", request,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3174,6 +3252,7 @@ int R_MPI_Start(R_MPI_Request *request) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Sendrecv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Sendrecv_print = 0;
 int MPI_Sendrecv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                  int dest, int sendtag, void *recvbuf, int recvcount,
                  A_MPI_Datatype recvtype, int source, int recvtag,
@@ -3258,6 +3337,8 @@ int A_MPI_Sendrecv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Sendrecv_print)
+    \;
   debug_printer("MPI_Sendrecv : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype "
                 ": %D,\ndest : %d,\nsendtag : %d,\nrecvbuf : %p,\nrecvcount : "
                 "%d,\nrecvtype : %D,\nsource : %d,\nrecvtag : %d,\ncomm : "
@@ -3288,6 +3369,7 @@ int R_MPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Sendrecv_replace_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Sendrecv_replace_print = 0;
 int MPI_Sendrecv_replace(void *buf, int count, A_MPI_Datatype datatype,
                          int dest, int sendtag, int source, int recvtag,
                          A_MPI_Comm comm, A_MPI_Status *status);
@@ -3365,6 +3447,8 @@ int A_MPI_Sendrecv_replace(void *buf, int count, A_MPI_Datatype datatype,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Sendrecv_replace_print)
+    \;
   debug_printer("MPI_Sendrecv_replace : \n{\nbuf : %p,\ncount : %d,\ndatatype "
                 ": %D,\ndest : %d,\nsendtag : %d,\nsource : %d,\nrecvtag : "
                 "%d,\ncomm : %C,\nstatus : %*n,\nreturn : %d\n}\n",
@@ -3392,6 +3476,7 @@ int R_MPI_Sendrecv_replace(void *buf, int count, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_contiguous_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_contiguous_print = 0;
 int MPI_Type_contiguous(int count, A_MPI_Datatype oldtype,
                         A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_contiguous)(int, R_MPI_Datatype, R_MPI_Datatype *);
@@ -3444,6 +3529,8 @@ int A_MPI_Type_contiguous(int count, A_MPI_Datatype oldtype,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_contiguous_print)
+    \;
   debug_printer("MPI_Type_contiguous : \n{\ncount : %d,\noldtype : "
                 "%D,\nnewtype : %*D,\nreturn : %d\n}\n",
                 count, oldtype, newtype, ret_tmp);
@@ -3467,6 +3554,7 @@ int R_MPI_Type_contiguous(int count, R_MPI_Datatype oldtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_vector_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_vector_print = 0;
 int MPI_Type_vector(int count, int blocklength, int stride,
                     A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_vector)(int, int, int, R_MPI_Datatype, R_MPI_Datatype *);
@@ -3524,6 +3612,8 @@ int A_MPI_Type_vector(int count, int blocklength, int stride,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_vector_print)
+    \;
   debug_printer("MPI_Type_vector : \n{\ncount : %d,\nblocklength : %d,\nstride "
                 ": %d,\noldtype : %D,\nnewtype : %*D,\nreturn : %d\n}\n",
                 count, blocklength, stride, oldtype, newtype, ret_tmp);
@@ -3548,6 +3638,7 @@ int R_MPI_Type_vector(int count, int blocklength, int stride,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_hvector_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_hvector_print = 0;
 int MPI_Type_hvector(int count, int blocklength, A_MPI_Aint stride,
                      A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_hvector)(int, int, R_MPI_Aint, R_MPI_Datatype,
@@ -3608,6 +3699,8 @@ int A_MPI_Type_hvector(int count, int blocklength, A_MPI_Aint stride,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_hvector_print)
+    \;
   debug_printer("MPI_Type_hvector : \n{\ncount : %d,\nblocklength : "
                 "%d,\nstride : %ld,\noldtype : %D,\nnewtype : %*D,\nreturn : "
                 "%d\n}\n",
@@ -3633,6 +3726,7 @@ int R_MPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_indexed_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_indexed_print = 0;
 int MPI_Type_indexed(int count, int *array_of_blocklengths,
                      int *array_of_displacements, A_MPI_Datatype oldtype,
                      A_MPI_Datatype *newtype);
@@ -3694,6 +3788,8 @@ int A_MPI_Type_indexed(int count, int *array_of_blocklengths,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_indexed_print)
+    \;
   debug_printer("MPI_Type_indexed : \n{\ncount : %d,\narray_of_blocklengths : "
                 "%*d,\narray_of_displacements : %*d,\noldtype : %D,\nnewtype : "
                 "%*D,\nreturn : %d\n}\n",
@@ -3721,6 +3817,7 @@ int R_MPI_Type_indexed(int count, int *array_of_blocklengths,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_hindexed_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_hindexed_print = 0;
 int MPI_Type_hindexed(int count, int *array_of_blocklengths,
                       A_MPI_Aint *array_of_displacements,
                       A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
@@ -3789,6 +3886,8 @@ int A_MPI_Type_hindexed(int count, int *array_of_blocklengths,
   wi4mpi_free(array_of_displacements_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_hindexed_print)
+    \;
   debug_printer("MPI_Type_hindexed : \n{\ncount : %d,\narray_of_blocklengths : "
                 "%*d,\narray_of_displacements : %*ld,\noldtype : %D,\nnewtype "
                 ": %*D,\nreturn : %d\n}\n",
@@ -3816,6 +3915,7 @@ int R_MPI_Type_hindexed(int count, int *array_of_blocklengths,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_struct_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_struct_print = 0;
 int MPI_Type_struct(int count, int *array_of_blocklengths,
                     A_MPI_Aint *array_of_displacements,
                     R_MPI_Datatype *array_of_types[], A_MPI_Datatype *newtype);
@@ -3890,6 +3990,8 @@ int A_MPI_Type_struct(int count, int *array_of_blocklengths,
   wi4mpi_free(array_of_types_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_struct_print)
+    \;
   debug_printer("MPI_Type_struct : \n{\ncount : %d,\narray_of_blocklengths : "
                 "%*d,\narray_of_displacements : %*ld,\narray_of_types : "
                 "%D,\nnewtype : %*D,\nreturn : %d\n}\n",
@@ -3919,6 +4021,7 @@ int R_MPI_Type_struct(int count, int *array_of_blocklengths,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Address_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Address_print = 0;
 int MPI_Address(void *location, A_MPI_Aint *address);
 int (*LOCAL_MPI_Address)(void *, R_MPI_Aint *);
 
@@ -3967,6 +4070,8 @@ int A_MPI_Address(void *location, A_MPI_Aint *address) {
   *address = (A_MPI_Aint)*address_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Address_print)
+    \;
   debug_printer(
       "MPI_Address : \n{\nlocation : %p,\naddress : %*d,\nreturn : %d\n}\n",
       location, address, ret_tmp);
@@ -3989,6 +4094,7 @@ int R_MPI_Address(void *location, R_MPI_Aint *address) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_extent_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_extent_print = 0;
 int MPI_Type_extent(A_MPI_Datatype datatype, A_MPI_Aint *extent);
 int (*LOCAL_MPI_Type_extent)(R_MPI_Datatype, R_MPI_Aint *);
 
@@ -4037,6 +4143,8 @@ int A_MPI_Type_extent(A_MPI_Datatype datatype, A_MPI_Aint *extent) {
   *extent = (A_MPI_Aint)*extent_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_extent_print)
+    \;
   debug_printer(
       "MPI_Type_extent : \n{\ndatatype : %D,\nextent : %*d,\nreturn : %d\n}\n",
       datatype, extent, ret_tmp);
@@ -4059,6 +4167,7 @@ int R_MPI_Type_extent(R_MPI_Datatype datatype, R_MPI_Aint *extent) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_size_print = 0;
 int MPI_Type_size(A_MPI_Datatype datatype, int *size);
 int (*LOCAL_MPI_Type_size)(R_MPI_Datatype, int *);
 
@@ -4106,6 +4215,8 @@ int A_MPI_Type_size(A_MPI_Datatype datatype, int *size) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_size_print)
+    \;
   debug_printer(
       "MPI_Type_size : \n{\ndatatype : %D,\nsize : %*d,\nreturn : %d\n}\n",
       datatype, size, ret_tmp);
@@ -4128,6 +4239,7 @@ int R_MPI_Type_size(R_MPI_Datatype datatype, int *size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_lb_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_lb_print = 0;
 int MPI_Type_lb(A_MPI_Datatype datatype, A_MPI_Aint *displacement);
 int (*LOCAL_MPI_Type_lb)(R_MPI_Datatype, R_MPI_Aint *);
 
@@ -4176,6 +4288,8 @@ int A_MPI_Type_lb(A_MPI_Datatype datatype, A_MPI_Aint *displacement) {
   *displacement = (A_MPI_Aint)*displacement_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_lb_print)
+    \;
   debug_printer("MPI_Type_lb : \n{\ndatatype : %D,\ndisplacement : "
                 "%*d,\nreturn : %d\n}\n",
                 datatype, displacement, ret_tmp);
@@ -4198,6 +4312,7 @@ int R_MPI_Type_lb(R_MPI_Datatype datatype, R_MPI_Aint *displacement) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_ub_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_ub_print = 0;
 int MPI_Type_ub(A_MPI_Datatype datatype, A_MPI_Aint *displacement);
 int (*LOCAL_MPI_Type_ub)(R_MPI_Datatype, R_MPI_Aint *);
 
@@ -4246,6 +4361,8 @@ int A_MPI_Type_ub(A_MPI_Datatype datatype, A_MPI_Aint *displacement) {
   *displacement = (A_MPI_Aint)*displacement_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_ub_print)
+    \;
   debug_printer("MPI_Type_ub : \n{\ndatatype : %D,\ndisplacement : "
                 "%*d,\nreturn : %d\n}\n",
                 datatype, displacement, ret_tmp);
@@ -4268,6 +4385,7 @@ int R_MPI_Type_ub(R_MPI_Datatype datatype, R_MPI_Aint *displacement) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_commit_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_commit_print = 0;
 int MPI_Type_commit(A_MPI_Datatype *datatype);
 int (*LOCAL_MPI_Type_commit)(R_MPI_Datatype *);
 
@@ -4313,6 +4431,8 @@ int A_MPI_Type_commit(A_MPI_Datatype *datatype) {
   datatype_conv_r2a(datatype, datatype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_commit_print)
+    \;
   debug_printer("MPI_Type_commit : \n{\ndatatype : %*D,\nreturn : %d\n}\n",
                 datatype, ret_tmp);
 #endif
@@ -4334,6 +4454,7 @@ int R_MPI_Type_commit(R_MPI_Datatype *datatype) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_free_print = 0;
 int MPI_Type_free(A_MPI_Datatype *datatype);
 int (*LOCAL_MPI_Type_free)(R_MPI_Datatype *);
 
@@ -4379,6 +4500,8 @@ int A_MPI_Type_free(A_MPI_Datatype *datatype) {
   datatype_conv_r2a(datatype, datatype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_free_print)
+    \;
   debug_printer("MPI_Type_free : \n{\ndatatype : %*D,\nreturn : %d\n}\n",
                 datatype, ret_tmp);
 #endif
@@ -4400,6 +4523,7 @@ int R_MPI_Type_free(R_MPI_Datatype *datatype) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_elements_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_elements_print = 0;
 int MPI_Get_elements(A_MPI_Status *status, A_MPI_Datatype datatype, int *count);
 int (*LOCAL_MPI_Get_elements)(R_MPI_Status *, R_MPI_Datatype, int *);
 
@@ -4453,6 +4577,8 @@ int A_MPI_Get_elements(A_MPI_Status *status, A_MPI_Datatype datatype,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_elements_print)
+    \;
   debug_printer("MPI_Get_elements : \n{\nstatus : %*n,\ndatatype : %D,\ncount "
                 ": %*d,\nreturn : %d\n}\n",
                 status, datatype, count, ret_tmp);
@@ -4476,6 +4602,7 @@ int R_MPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Pack_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Pack_print = 0;
 int MPI_Pack(void *inbuf, int incount, A_MPI_Datatype datatype, void *outbuf,
              int outsize, int *position, A_MPI_Comm comm);
 int (*LOCAL_MPI_Pack)(void *, int, R_MPI_Datatype, void *, int, int *,
@@ -4543,6 +4670,8 @@ int A_MPI_Pack(void *inbuf, int incount, A_MPI_Datatype datatype, void *outbuf,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Pack_print)
+    \;
   debug_printer(
       "MPI_Pack : \n{\ninbuf : %p,\nincount : %d,\ndatatype : %D,\noutbuf : "
       "%p,\noutsize : %d,\nposition : %*d,\ncomm : %C,\nreturn : %d\n}\n",
@@ -4568,6 +4697,7 @@ int R_MPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype, void *outbuf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Unpack_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Unpack_print = 0;
 int MPI_Unpack(void *inbuf, int insize, int *position, void *outbuf,
                int outcount, A_MPI_Datatype datatype, A_MPI_Comm comm);
 int (*LOCAL_MPI_Unpack)(void *, int, int *, void *, int, R_MPI_Datatype,
@@ -4635,6 +4765,8 @@ int A_MPI_Unpack(void *inbuf, int insize, int *position, void *outbuf,
   buffer_conv_r2a(&outbuf, &outbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Unpack_print)
+    \;
   debug_printer(
       "MPI_Unpack : \n{\ninbuf : %p,\ninsize : %d,\nposition : %*d,\noutbuf : "
       "%p,\noutcount : %d,\ndatatype : %D,\ncomm : %C,\nreturn : %d\n}\n",
@@ -4660,6 +4792,7 @@ int R_MPI_Unpack(void *inbuf, int insize, int *position, void *outbuf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Pack_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Pack_size_print = 0;
 int MPI_Pack_size(int incount, A_MPI_Datatype datatype, A_MPI_Comm comm,
                   int *size);
 int (*LOCAL_MPI_Pack_size)(int, R_MPI_Datatype, R_MPI_Comm, int *);
@@ -4715,6 +4848,8 @@ int A_MPI_Pack_size(int incount, A_MPI_Datatype datatype, A_MPI_Comm comm,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Pack_size_print)
+    \;
   debug_printer("MPI_Pack_size : \n{\nincount : %d,\ndatatype : %D,\ncomm : "
                 "%C,\nsize : %*d,\nreturn : %d\n}\n",
                 incount, datatype, comm, size, ret_tmp);
@@ -4738,6 +4873,7 @@ int R_MPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Barrier_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Barrier_print = 0;
 int MPI_Barrier(A_MPI_Comm comm);
 int (*LOCAL_MPI_Barrier)(R_MPI_Comm);
 
@@ -4781,6 +4917,8 @@ int A_MPI_Barrier(A_MPI_Comm comm) {
   int ret_tmp = LOCAL_MPI_Barrier(comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Barrier_print)
+    \;
   debug_printer("MPI_Barrier : \n{\ncomm : %C,\nreturn : %d\n}\n", comm,
                 ret_tmp);
 #endif
@@ -4802,6 +4940,7 @@ int R_MPI_Barrier(R_MPI_Comm comm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Bcast_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Bcast_print = 0;
 int MPI_Bcast(void *buffer, int count, A_MPI_Datatype datatype, int root,
               A_MPI_Comm comm);
 int (*LOCAL_MPI_Bcast)(void *, int, R_MPI_Datatype, int, R_MPI_Comm);
@@ -4863,6 +5002,8 @@ int A_MPI_Bcast(void *buffer, int count, A_MPI_Datatype datatype, int root,
   buffer_conv_r2a(&buffer, &buffer_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Bcast_print)
+    \;
   debug_printer("MPI_Bcast : \n{\nbuffer : %p,\ncount : %d,\ndatatype : "
                 "%D,\nroot : %d,\ncomm : %C,\nreturn : %d\n}\n",
                 buffer, count, datatype, root, comm, ret_tmp);
@@ -4886,6 +5027,7 @@ int R_MPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype, int root,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Gather_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Gather_print = 0;
 int MPI_Gather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                void *recvbuf, int recvcount, A_MPI_Datatype recvtype, int root,
                A_MPI_Comm comm);
@@ -4958,6 +5100,8 @@ int A_MPI_Gather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Gather_print)
+    \;
   debug_printer("MPI_Gather : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype : "
                 "%D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype : %D,\nroot : "
                 "%d,\ncomm : %C,\nreturn : %d\n}\n",
@@ -4985,6 +5129,7 @@ int R_MPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Gatherv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Gatherv_print = 0;
 int MPI_Gatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                 void *recvbuf, int *recvcounts, int *displs,
                 A_MPI_Datatype recvtype, int root, A_MPI_Comm comm);
@@ -5057,6 +5202,8 @@ int A_MPI_Gatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Gatherv_print)
+    \;
   debug_printer("MPI_Gatherv : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype : "
                 "%D,\nrecvbuf : %p,\nrecvcounts : %*d,\ndispls : "
                 "%*d,\nrecvtype : %D,\nroot : %d,\ncomm : %C,\nreturn : "
@@ -5085,6 +5232,7 @@ int R_MPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Scatter_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Scatter_print = 0;
 int MPI_Scatter(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                 void *recvbuf, int recvcount, A_MPI_Datatype recvtype, int root,
                 A_MPI_Comm comm);
@@ -5157,6 +5305,8 @@ int A_MPI_Scatter(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Scatter_print)
+    \;
   debug_printer("MPI_Scatter : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype : "
                 "%D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype : %D,\nroot : "
                 "%d,\ncomm : %C,\nreturn : %d\n}\n",
@@ -5184,6 +5334,7 @@ int R_MPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Scatterv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Scatterv_print = 0;
 int MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
                  A_MPI_Datatype sendtype, void *recvbuf, int recvcount,
                  A_MPI_Datatype recvtype, int root, A_MPI_Comm comm);
@@ -5256,6 +5407,8 @@ int A_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Scatterv_print)
+    \;
   debug_printer("MPI_Scatterv : \n{\nsendbuf : %p,\nsendcounts : %*d,\ndispls "
                 ": %*d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : "
                 "%d,\nrecvtype : %D,\nroot : %d,\ncomm : %C,\nreturn : %d\n}\n",
@@ -5283,6 +5436,7 @@ int R_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Allgather_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Allgather_print = 0;
 int MPI_Allgather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                   void *recvbuf, int recvcount, A_MPI_Datatype recvtype,
                   A_MPI_Comm comm);
@@ -5354,6 +5508,8 @@ int A_MPI_Allgather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Allgather_print)
+    \;
   debug_printer("MPI_Allgather : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype "
                 ": %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype : %D,\ncomm : "
                 "%C,\nreturn : %d\n}\n",
@@ -5381,6 +5537,7 @@ int R_MPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Allgatherv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Allgatherv_print = 0;
 int MPI_Allgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                    void *recvbuf, int *recvcounts, int *displs,
                    A_MPI_Datatype recvtype, A_MPI_Comm comm);
@@ -5452,6 +5609,8 @@ int A_MPI_Allgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Allgatherv_print)
+    \;
   debug_printer("MPI_Allgatherv : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts : %*d,\ndispls "
                 ": %*d,\nrecvtype : %D,\ncomm : %C,\nreturn : %d\n}\n",
@@ -5479,6 +5638,7 @@ int R_MPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Alltoall_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Alltoall_print = 0;
 int MPI_Alltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                  void *recvbuf, int recvcount, A_MPI_Datatype recvtype,
                  A_MPI_Comm comm);
@@ -5550,6 +5710,8 @@ int A_MPI_Alltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Alltoall_print)
+    \;
   debug_printer("MPI_Alltoall : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype "
                 ": %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype : %D,\ncomm : "
                 "%C,\nreturn : %d\n}\n",
@@ -5577,6 +5739,7 @@ int R_MPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Alltoallv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Alltoallv_print = 0;
 int MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                   A_MPI_Datatype sendtype, void *recvbuf, int *recvcounts,
                   int *rdispls, A_MPI_Datatype recvtype, A_MPI_Comm comm);
@@ -5648,6 +5811,8 @@ int A_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Alltoallv_print)
+    \;
   debug_printer("MPI_Alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                 "%*d,\nsdispls : %*d,\nsendtype : %D,\nrecvbuf : "
                 "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : %D,\ncomm "
@@ -5677,6 +5842,7 @@ int R_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Exscan_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Exscan_print = 0;
 int MPI_Exscan(void *sendbuf, void *recvbuf, int count, A_MPI_Datatype datatype,
                A_MPI_Op op, A_MPI_Comm comm);
 int (*LOCAL_MPI_Exscan)(void *, void *, int, R_MPI_Datatype, R_MPI_Op,
@@ -5744,8 +5910,10 @@ int A_MPI_Exscan(void *sendbuf, void *recvbuf, int count,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Exscan_print)
+    \;
   debug_printer("MPI_Exscan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\ncomm : %C,\nreturn : %d\n}\n",
+                "%d,\ndatatype : %D,\nop : %op,\ncomm : %C,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5767,6 +5935,7 @@ int R_MPI_Exscan(void *sendbuf, void *recvbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Reduce_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Reduce_print = 0;
 int MPI_Reduce(void *sendbuf, void *recvbuf, int count, A_MPI_Datatype datatype,
                A_MPI_Op op, int root, A_MPI_Comm comm);
 int (*LOCAL_MPI_Reduce)(void *, void *, int, R_MPI_Datatype, R_MPI_Op, int,
@@ -5836,9 +6005,11 @@ int A_MPI_Reduce(void *sendbuf, void *recvbuf, int count,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Reduce_print)
+    \;
   debug_printer("MPI_Reduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\nroot : %d,\ncomm : %C,\nreturn "
-                ": %d\n}\n",
+                "%d,\ndatatype : %D,\nop : %op,\nroot : %d,\ncomm : "
+                "%C,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, root, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5862,6 +6033,7 @@ int R_MPI_Reduce(void *sendbuf, void *recvbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Op_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Op_create_print = 0;
 int MPI_Op_create(A_MPI_User_function *user_fn, int commute, A_MPI_Op *op);
 int (*LOCAL_MPI_Op_create)(R_MPI_User_function *, int, R_MPI_Op *);
 
@@ -5913,8 +6085,10 @@ int A_MPI_Op_create(A_MPI_User_function *user_fn, int commute, A_MPI_Op *op) {
   op_conv_r2a(op, op_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Op_create_print)
+    \;
   debug_printer("MPI_Op_create : \n{\nuser_fn : %p,\ncommute : %d,\nop : "
-                "%p,\nreturn : %d\n}\n",
+                "%*p,\nreturn : %d\n}\n",
                 user_fn, commute, op, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5935,6 +6109,7 @@ int R_MPI_Op_create(R_MPI_User_function *user_fn, int commute, R_MPI_Op *op) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Op_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Op_free_print = 0;
 int MPI_Op_free(A_MPI_Op *op);
 int (*LOCAL_MPI_Op_free)(R_MPI_Op *);
 
@@ -5980,7 +6155,9 @@ int A_MPI_Op_free(A_MPI_Op *op) {
   op_conv_r2a(op, op_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Op_free : \n{\nop : %p,\nreturn : %d\n}\n", op, ret_tmp);
+  if (WI4MPI_Op_free_print)
+    \;
+  debug_printer("MPI_Op_free : \n{\nop : %*p,\nreturn : %d\n}\n", op, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6000,6 +6177,7 @@ int R_MPI_Op_free(R_MPI_Op *op) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Allreduce_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Allreduce_print = 0;
 int MPI_Allreduce(void *sendbuf, void *recvbuf, int count,
                   A_MPI_Datatype datatype, A_MPI_Op op, A_MPI_Comm comm);
 int (*LOCAL_MPI_Allreduce)(void *, void *, int, R_MPI_Datatype, R_MPI_Op,
@@ -6067,8 +6245,10 @@ int A_MPI_Allreduce(void *sendbuf, void *recvbuf, int count,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Allreduce_print)
+    \;
   debug_printer("MPI_Allreduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\ncomm : %C,\nreturn : %d\n}\n",
+                "%d,\ndatatype : %D,\nop : %op,\ncomm : %C,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6091,6 +6271,7 @@ int R_MPI_Allreduce(void *sendbuf, void *recvbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Scan_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Scan_print = 0;
 int MPI_Scan(void *sendbuf, void *recvbuf, int count, A_MPI_Datatype datatype,
              A_MPI_Op op, A_MPI_Comm comm);
 int (*LOCAL_MPI_Scan)(void *, void *, int, R_MPI_Datatype, R_MPI_Op,
@@ -6158,8 +6339,10 @@ int A_MPI_Scan(void *sendbuf, void *recvbuf, int count, A_MPI_Datatype datatype,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Scan_print)
+    \;
   debug_printer("MPI_Scan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\ncomm : %C,\nreturn : %d\n}\n",
+                "%d,\ndatatype : %D,\nop : %op,\ncomm : %C,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, comm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6181,6 +6364,7 @@ int R_MPI_Scan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_size_print = 0;
 int MPI_Group_size(A_MPI_Group group, int *size);
 int (*LOCAL_MPI_Group_size)(R_MPI_Group, int *);
 
@@ -6228,8 +6412,10 @@ int A_MPI_Group_size(A_MPI_Group group, int *size) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Group_size_print)
+    \;
   debug_printer(
-      "MPI_Group_size : \n{\ngroup : %g,\nsize : %*d,\nreturn : %d\n}\n", group,
+      "MPI_Group_size : \n{\ngroup : %p,\nsize : %*d,\nreturn : %d\n}\n", group,
       size, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6250,6 +6436,7 @@ int R_MPI_Group_size(R_MPI_Group group, int *size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_rank_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_rank_print = 0;
 int MPI_Group_rank(A_MPI_Group group, int *rank);
 int (*LOCAL_MPI_Group_rank)(R_MPI_Group, int *);
 
@@ -6297,8 +6484,10 @@ int A_MPI_Group_rank(A_MPI_Group group, int *rank) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Group_rank_print)
+    \;
   debug_printer(
-      "MPI_Group_rank : \n{\ngroup : %g,\nrank : %*d,\nreturn : %d\n}\n", group,
+      "MPI_Group_rank : \n{\ngroup : %p,\nrank : %*d,\nreturn : %d\n}\n", group,
       rank, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6319,6 +6508,7 @@ int R_MPI_Group_rank(R_MPI_Group group, int *rank) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_compare_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_compare_print = 0;
 int MPI_Group_compare(A_MPI_Group group1, A_MPI_Group group2, int *result);
 int (*LOCAL_MPI_Group_compare)(R_MPI_Group, R_MPI_Group, int *);
 
@@ -6370,7 +6560,9 @@ int A_MPI_Group_compare(A_MPI_Group group1, A_MPI_Group group2, int *result) {
 
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_compare : \n{\ngroup1 : %g,\ngroup2 : %g,\nresult : "
+  if (WI4MPI_Group_compare_print)
+    \;
+  debug_printer("MPI_Group_compare : \n{\ngroup1 : %p,\ngroup2 : %p,\nresult : "
                 "%*d,\nreturn : %d\n}\n",
                 group1, group2, result, ret_tmp);
 #endif
@@ -6392,6 +6584,7 @@ int R_MPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_group_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_group_print = 0;
 int MPI_Comm_group(A_MPI_Comm comm, A_MPI_Group *group);
 int (*LOCAL_MPI_Comm_group)(R_MPI_Comm, R_MPI_Group *);
 
@@ -6440,8 +6633,10 @@ int A_MPI_Comm_group(A_MPI_Comm comm, A_MPI_Group *group) {
   group_conv_r2a(group, group_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_group_print)
+    \;
   debug_printer(
-      "MPI_Comm_group : \n{\ncomm : %C,\ngroup : %*G,\nreturn : %d\n}\n", comm,
+      "MPI_Comm_group : \n{\ncomm : %C,\ngroup : %*p,\nreturn : %d\n}\n", comm,
       group, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6462,6 +6657,7 @@ int R_MPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_union_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_union_print = 0;
 int MPI_Group_union(A_MPI_Group group1, A_MPI_Group group2,
                     A_MPI_Group *newgroup);
 int (*LOCAL_MPI_Group_union)(R_MPI_Group, R_MPI_Group, R_MPI_Group *);
@@ -6516,8 +6712,10 @@ int A_MPI_Group_union(A_MPI_Group group1, A_MPI_Group group2,
   group_conv_r2a(newgroup, newgroup_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_union : \n{\ngroup1 : %g,\ngroup2 : %g,\nnewgroup : "
-                "%*G,\nreturn : %d\n}\n",
+  if (WI4MPI_Group_union_print)
+    \;
+  debug_printer("MPI_Group_union : \n{\ngroup1 : %p,\ngroup2 : %p,\nnewgroup : "
+                "%*p,\nreturn : %d\n}\n",
                 group1, group2, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6539,6 +6737,7 @@ int R_MPI_Group_union(R_MPI_Group group1, R_MPI_Group group2,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_intersection_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_intersection_print = 0;
 int MPI_Group_intersection(A_MPI_Group group1, A_MPI_Group group2,
                            A_MPI_Group *newgroup);
 int (*LOCAL_MPI_Group_intersection)(R_MPI_Group, R_MPI_Group, R_MPI_Group *);
@@ -6594,8 +6793,10 @@ int A_MPI_Group_intersection(A_MPI_Group group1, A_MPI_Group group2,
   group_conv_r2a(newgroup, newgroup_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_intersection : \n{\ngroup1 : %g,\ngroup2 : "
-                "%g,\nnewgroup : %*G,\nreturn : %d\n}\n",
+  if (WI4MPI_Group_intersection_print)
+    \;
+  debug_printer("MPI_Group_intersection : \n{\ngroup1 : %p,\ngroup2 : "
+                "%p,\nnewgroup : %*p,\nreturn : %d\n}\n",
                 group1, group2, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6617,6 +6818,7 @@ int R_MPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_difference_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_difference_print = 0;
 int MPI_Group_difference(A_MPI_Group group1, A_MPI_Group group2,
                          A_MPI_Group *newgroup);
 int (*LOCAL_MPI_Group_difference)(R_MPI_Group, R_MPI_Group, R_MPI_Group *);
@@ -6672,8 +6874,10 @@ int A_MPI_Group_difference(A_MPI_Group group1, A_MPI_Group group2,
   group_conv_r2a(newgroup, newgroup_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_difference : \n{\ngroup1 : %g,\ngroup2 : "
-                "%g,\nnewgroup : %*G,\nreturn : %d\n}\n",
+  if (WI4MPI_Group_difference_print)
+    \;
+  debug_printer("MPI_Group_difference : \n{\ngroup1 : %p,\ngroup2 : "
+                "%p,\nnewgroup : %*p,\nreturn : %d\n}\n",
                 group1, group2, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6695,6 +6899,7 @@ int R_MPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_free_print = 0;
 int MPI_Group_free(A_MPI_Group *group);
 int (*LOCAL_MPI_Group_free)(R_MPI_Group *);
 
@@ -6740,7 +6945,9 @@ int A_MPI_Group_free(A_MPI_Group *group) {
   group_conv_r2a(group, group_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_free : \n{\ngroup : %*G,\nreturn : %d\n}\n", group,
+  if (WI4MPI_Group_free_print)
+    \;
+  debug_printer("MPI_Group_free : \n{\ngroup : %*p,\nreturn : %d\n}\n", group,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6761,6 +6968,7 @@ int R_MPI_Group_free(R_MPI_Group *group) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_size_print = 0;
 int MPI_Comm_size(A_MPI_Comm comm, int *size);
 int (*LOCAL_MPI_Comm_size)(R_MPI_Comm, int *);
 
@@ -6808,6 +7016,8 @@ int A_MPI_Comm_size(A_MPI_Comm comm, int *size) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_size_print)
+    \;
   debug_printer(
       "MPI_Comm_size : \n{\ncomm : %C,\nsize : %*d,\nreturn : %d\n}\n", comm,
       size, ret_tmp);
@@ -6830,6 +7040,7 @@ int R_MPI_Comm_size(R_MPI_Comm comm, int *size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_rank_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_rank_print = 0;
 int MPI_Comm_rank(A_MPI_Comm comm, int *rank);
 int (*LOCAL_MPI_Comm_rank)(R_MPI_Comm, int *);
 
@@ -6877,6 +7088,8 @@ int A_MPI_Comm_rank(A_MPI_Comm comm, int *rank) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_rank_print)
+    \;
   debug_printer(
       "MPI_Comm_rank : \n{\ncomm : %C,\nrank : %*d,\nreturn : %d\n}\n", comm,
       rank, ret_tmp);
@@ -6899,6 +7112,7 @@ int R_MPI_Comm_rank(R_MPI_Comm comm, int *rank) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_compare_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_compare_print = 0;
 int MPI_Comm_compare(A_MPI_Comm comm1, A_MPI_Comm comm2, int *result);
 int (*LOCAL_MPI_Comm_compare)(R_MPI_Comm, R_MPI_Comm, int *);
 
@@ -6950,6 +7164,8 @@ int A_MPI_Comm_compare(A_MPI_Comm comm1, A_MPI_Comm comm2, int *result) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_compare_print)
+    \;
   debug_printer("MPI_Comm_compare : \n{\ncomm1 : %C,\ncomm2 : %C,\nresult : "
                 "%*d,\nreturn : %d\n}\n",
                 comm1, comm2, result, ret_tmp);
@@ -6972,6 +7188,7 @@ int R_MPI_Comm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_dup_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_dup_print = 0;
 int MPI_Comm_dup(A_MPI_Comm comm, A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_dup)(R_MPI_Comm, R_MPI_Comm *);
 
@@ -7020,6 +7237,8 @@ int A_MPI_Comm_dup(A_MPI_Comm comm, A_MPI_Comm *newcomm) {
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_dup_print)
+    \;
   debug_printer(
       "MPI_Comm_dup : \n{\ncomm : %C,\nnewcomm : %*o,\nreturn : %d\n}\n", comm,
       newcomm, ret_tmp);
@@ -7042,6 +7261,7 @@ int R_MPI_Comm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_dup_with_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_dup_with_info_print = 0;
 int MPI_Comm_dup_with_info(A_MPI_Comm comm, A_MPI_Info info,
                            A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_dup_with_info)(R_MPI_Comm, R_MPI_Info, R_MPI_Comm *);
@@ -7096,7 +7316,9 @@ int A_MPI_Comm_dup_with_info(A_MPI_Comm comm, A_MPI_Info info,
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Comm_dup_with_info : \n{\ncomm : %C,\ninfo : %I,\nnewcomm "
+  if (WI4MPI_Comm_dup_with_info_print)
+    \;
+  debug_printer("MPI_Comm_dup_with_info : \n{\ncomm : %C,\ninfo : %p,\nnewcomm "
                 ": %*o,\nreturn : %d\n}\n",
                 comm, info, newcomm, ret_tmp);
 #endif
@@ -7119,6 +7341,7 @@ int R_MPI_Comm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_create_print = 0;
 int MPI_Comm_create(A_MPI_Comm comm, A_MPI_Group group, A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_create)(R_MPI_Comm, R_MPI_Group, R_MPI_Comm *);
 
@@ -7171,7 +7394,9 @@ int A_MPI_Comm_create(A_MPI_Comm comm, A_MPI_Group group, A_MPI_Comm *newcomm) {
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Comm_create : \n{\ncomm : %C,\ngroup : %g,\nnewcomm : "
+  if (WI4MPI_Comm_create_print)
+    \;
+  debug_printer("MPI_Comm_create : \n{\ncomm : %C,\ngroup : %p,\nnewcomm : "
                 "%*o,\nreturn : %d\n}\n",
                 comm, group, newcomm, ret_tmp);
 #endif
@@ -7193,6 +7418,7 @@ int R_MPI_Comm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_split_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_split_print = 0;
 int MPI_Comm_split(A_MPI_Comm comm, int color, int key, A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_split)(R_MPI_Comm, int, int, R_MPI_Comm *);
 
@@ -7246,6 +7472,8 @@ int A_MPI_Comm_split(A_MPI_Comm comm, int color, int key, A_MPI_Comm *newcomm) {
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_split_print)
+    \;
   debug_printer("MPI_Comm_split : \n{\ncomm : %C,\ncolor : %d,\nkey : "
                 "%d,\nnewcomm : %*o,\nreturn : %d\n}\n",
                 comm, color, key, newcomm, ret_tmp);
@@ -7268,6 +7496,7 @@ int R_MPI_Comm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_free_print = 0;
 int MPI_Comm_free(A_MPI_Comm *comm);
 int (*LOCAL_MPI_Comm_free)(R_MPI_Comm *);
 
@@ -7316,6 +7545,8 @@ int A_MPI_Comm_free(A_MPI_Comm *comm) {
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_free_print)
+    \;
   debug_printer("MPI_Comm_free : \n{\ncomm : %*o,\nreturn : %d\n}\n", comm,
                 ret_tmp);
 #endif
@@ -7337,6 +7568,7 @@ int R_MPI_Comm_free(R_MPI_Comm *comm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_test_inter_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_test_inter_print = 0;
 int MPI_Comm_test_inter(A_MPI_Comm comm, int *flag);
 int (*LOCAL_MPI_Comm_test_inter)(R_MPI_Comm, int *);
 
@@ -7384,6 +7616,8 @@ int A_MPI_Comm_test_inter(A_MPI_Comm comm, int *flag) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_test_inter_print)
+    \;
   debug_printer(
       "MPI_Comm_test_inter : \n{\ncomm : %C,\nflag : %*d,\nreturn : %d\n}\n",
       comm, flag, ret_tmp);
@@ -7406,6 +7640,7 @@ int R_MPI_Comm_test_inter(R_MPI_Comm comm, int *flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_remote_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_remote_size_print = 0;
 int MPI_Comm_remote_size(A_MPI_Comm comm, int *size);
 int (*LOCAL_MPI_Comm_remote_size)(R_MPI_Comm, int *);
 
@@ -7453,6 +7688,8 @@ int A_MPI_Comm_remote_size(A_MPI_Comm comm, int *size) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_remote_size_print)
+    \;
   debug_printer(
       "MPI_Comm_remote_size : \n{\ncomm : %C,\nsize : %*d,\nreturn : %d\n}\n",
       comm, size, ret_tmp);
@@ -7475,6 +7712,7 @@ int R_MPI_Comm_remote_size(R_MPI_Comm comm, int *size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_remote_group_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_remote_group_print = 0;
 int MPI_Comm_remote_group(A_MPI_Comm comm, A_MPI_Group *group);
 int (*LOCAL_MPI_Comm_remote_group)(R_MPI_Comm, R_MPI_Group *);
 
@@ -7523,8 +7761,10 @@ int A_MPI_Comm_remote_group(A_MPI_Comm comm, A_MPI_Group *group) {
   group_conv_r2a(group, group_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_remote_group_print)
+    \;
   debug_printer(
-      "MPI_Comm_remote_group : \n{\ncomm : %C,\ngroup : %*G,\nreturn : %d\n}\n",
+      "MPI_Comm_remote_group : \n{\ncomm : %C,\ngroup : %*p,\nreturn : %d\n}\n",
       comm, group, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7545,6 +7785,7 @@ int R_MPI_Comm_remote_group(R_MPI_Comm comm, R_MPI_Group *group) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Intercomm_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Intercomm_create_print = 0;
 int MPI_Intercomm_create(A_MPI_Comm local_comm, int local_leader,
                          A_MPI_Comm peer_comm, int remote_leader, int tag,
                          A_MPI_Comm *newintercomm);
@@ -7614,6 +7855,8 @@ int A_MPI_Intercomm_create(A_MPI_Comm local_comm, int local_leader,
   comm_conv_r2a(newintercomm, newintercomm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Intercomm_create_print)
+    \;
   debug_printer("MPI_Intercomm_create : \n{\nlocal_comm : %C,\nlocal_leader : "
                 "%d,\npeer_comm : %C,\nremote_leader : %d,\ntag : "
                 "%d,\nnewintercomm : %*o,\nreturn : %d\n}\n",
@@ -7641,6 +7884,7 @@ int R_MPI_Intercomm_create(R_MPI_Comm local_comm, int local_leader,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Intercomm_merge_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Intercomm_merge_print = 0;
 int MPI_Intercomm_merge(A_MPI_Comm intercomm, int high,
                         A_MPI_Comm *newintracomm);
 int (*LOCAL_MPI_Intercomm_merge)(R_MPI_Comm, int, R_MPI_Comm *);
@@ -7695,6 +7939,8 @@ int A_MPI_Intercomm_merge(A_MPI_Comm intercomm, int high,
   comm_conv_r2a(newintracomm, newintracomm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Intercomm_merge_print)
+    \;
   debug_printer("MPI_Intercomm_merge : \n{\nintercomm : %C,\nhigh : "
                 "%d,\nnewintracomm : %*o,\nreturn : %d\n}\n",
                 intercomm, high, newintracomm, ret_tmp);
@@ -7718,6 +7964,7 @@ int R_MPI_Intercomm_merge(R_MPI_Comm intercomm, int high,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Attr_put_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Attr_put_print = 0;
 int MPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val);
 int (*LOCAL_MPI_Attr_put)(R_MPI_Comm, int, void *);
 
@@ -7771,6 +8018,8 @@ int A_MPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val) {
   int ret_tmp = LOCAL_MPI_Attr_put(comm_tmp, keyval_tmp, attribute_val);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Attr_put_print)
+    \;
   debug_printer("MPI_Attr_put : \n{\ncomm : %C,\nkeyval : %d,\nattribute_val : "
                 "%p,\nreturn : %d\n}\n",
                 comm, keyval, attribute_val, ret_tmp);
@@ -7793,6 +8042,7 @@ int R_MPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Attr_get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Attr_get_print = 0;
 int MPI_Attr_get(A_MPI_Comm comm, int keyval, void *attribute_val, int *flag);
 int (*LOCAL_MPI_Attr_get)(R_MPI_Comm, int, void *, int *);
 
@@ -7847,6 +8097,8 @@ int A_MPI_Attr_get(A_MPI_Comm comm, int keyval, void *attribute_val,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Attr_get_print)
+    \;
   debug_printer("MPI_Attr_get : \n{\ncomm : %C,\nkeyval : %d,\nattribute_val : "
                 "%p,\nflag : %*d,\nreturn : %d\n}\n",
                 comm, keyval, attribute_val, flag, ret_tmp);
@@ -7870,6 +8122,7 @@ int R_MPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Attr_delete_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Attr_delete_print = 0;
 int MPI_Attr_delete(A_MPI_Comm comm, int keyval);
 int (*LOCAL_MPI_Attr_delete)(R_MPI_Comm, int);
 
@@ -7917,6 +8170,8 @@ int A_MPI_Attr_delete(A_MPI_Comm comm, int keyval) {
   int ret_tmp = LOCAL_MPI_Attr_delete(comm_tmp, keyval_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Attr_delete_print)
+    \;
   debug_printer(
       "MPI_Attr_delete : \n{\ncomm : %C,\nkeyval : %d,\nreturn : %d\n}\n", comm,
       keyval, ret_tmp);
@@ -7939,6 +8194,7 @@ int R_MPI_Attr_delete(R_MPI_Comm comm, int keyval) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Topo_test_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Topo_test_print = 0;
 int MPI_Topo_test(A_MPI_Comm comm, int *status);
 int (*LOCAL_MPI_Topo_test)(R_MPI_Comm, int *);
 
@@ -7987,6 +8243,8 @@ int A_MPI_Topo_test(A_MPI_Comm comm, int *status) {
   topo_status_mapper(status, status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Topo_test_print)
+    \;
   debug_printer(
       "MPI_Topo_test : \n{\ncomm : %C,\nstatus : %*d,\nreturn : %d\n}\n", comm,
       status, ret_tmp);
@@ -8009,6 +8267,7 @@ int R_MPI_Topo_test(R_MPI_Comm comm, int *status) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Graphdims_get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Graphdims_get_print = 0;
 int MPI_Graphdims_get(A_MPI_Comm comm, int *nnodes, int *nedges);
 int (*LOCAL_MPI_Graphdims_get)(R_MPI_Comm, int *, int *);
 
@@ -8058,6 +8317,8 @@ int A_MPI_Graphdims_get(A_MPI_Comm comm, int *nnodes, int *nedges) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Graphdims_get_print)
+    \;
   debug_printer("MPI_Graphdims_get : \n{\ncomm : %C,\nnnodes : %*d,\nnedges : "
                 "%*d,\nreturn : %d\n}\n",
                 comm, nnodes, nedges, ret_tmp);
@@ -8080,6 +8341,7 @@ int R_MPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cartdim_get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cartdim_get_print = 0;
 int MPI_Cartdim_get(A_MPI_Comm comm, int *ndims);
 int (*LOCAL_MPI_Cartdim_get)(R_MPI_Comm, int *);
 
@@ -8127,6 +8389,8 @@ int A_MPI_Cartdim_get(A_MPI_Comm comm, int *ndims) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cartdim_get_print)
+    \;
   debug_printer(
       "MPI_Cartdim_get : \n{\ncomm : %C,\nndims : %*d,\nreturn : %d\n}\n", comm,
       ndims, ret_tmp);
@@ -8149,6 +8413,7 @@ int R_MPI_Cartdim_get(R_MPI_Comm comm, int *ndims) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Graph_neighbors_count_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Graph_neighbors_count_print = 0;
 int MPI_Graph_neighbors_count(A_MPI_Comm comm, int rank, int *nneighbors);
 int (*LOCAL_MPI_Graph_neighbors_count)(R_MPI_Comm, int, int *);
 
@@ -8198,6 +8463,8 @@ int A_MPI_Graph_neighbors_count(A_MPI_Comm comm, int rank, int *nneighbors) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Graph_neighbors_count_print)
+    \;
   debug_printer("MPI_Graph_neighbors_count : \n{\ncomm : %C,\nrank : "
                 "%d,\nnneighbors : %*d,\nreturn : %d\n}\n",
                 comm, rank, nneighbors, ret_tmp);
@@ -8220,6 +8487,7 @@ int R_MPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cart_shift_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cart_shift_print = 0;
 int MPI_Cart_shift(A_MPI_Comm comm, int direction, int disp, int *rank_source,
                    int *rank_dest);
 int (*LOCAL_MPI_Cart_shift)(R_MPI_Comm, int, int, int *, int *);
@@ -8280,6 +8548,8 @@ int A_MPI_Cart_shift(A_MPI_Comm comm, int direction, int disp, int *rank_source,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cart_shift_print)
+    \;
   debug_printer("MPI_Cart_shift : \n{\ncomm : %C,\ndirection : %d,\ndisp : "
                 "%d,\nrank_source : %*d,\nrank_dest : %*d,\nreturn : %d\n}\n",
                 comm, direction, disp, rank_source, rank_dest, ret_tmp);
@@ -8304,6 +8574,7 @@ int R_MPI_Cart_shift(R_MPI_Comm comm, int direction, int disp, int *rank_source,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_processor_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_processor_name_print = 0;
 int MPI_Get_processor_name(char *name, int *resultlen);
 int (*LOCAL_MPI_Get_processor_name)(char *, int *);
 
@@ -8348,6 +8619,8 @@ int A_MPI_Get_processor_name(char *name, int *resultlen) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_processor_name_print)
+    \;
   debug_printer("MPI_Get_processor_name : \n{\nname : %s,\nresultlen : "
                 "%*d,\nreturn : %d\n}\n",
                 name, resultlen, ret_tmp);
@@ -8370,6 +8643,7 @@ int R_MPI_Get_processor_name(char *name, int *resultlen) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_version_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_version_print = 0;
 int MPI_Get_version(int *version, int *subversion);
 int (*LOCAL_MPI_Get_version)(int *, int *);
 
@@ -8414,6 +8688,8 @@ int A_MPI_Get_version(int *version, int *subversion) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_version_print)
+    \;
   debug_printer("MPI_Get_version : \n{\nversion : %*d,\nsubversion : "
                 "%*d,\nreturn : %d\n}\n",
                 version, subversion, ret_tmp);
@@ -8436,6 +8712,7 @@ int R_MPI_Get_version(int *version, int *subversion) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_library_version_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_library_version_print = 0;
 int MPI_Get_library_version(char *version, int *resultlen);
 int (*LOCAL_MPI_Get_library_version)(char *, int *);
 
@@ -8480,6 +8757,8 @@ int A_MPI_Get_library_version(char *version, int *resultlen) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_library_version_print)
+    \;
   debug_printer("MPI_Get_library_version : \n{\nversion : %s,\nresultlen : "
                 "%*d,\nreturn : %d\n}\n",
                 version, resultlen, ret_tmp);
@@ -8502,6 +8781,7 @@ int R_MPI_Get_library_version(char *version, int *resultlen) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Errhandler_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Errhandler_create_print = 0;
 int MPI_Errhandler_create(A_MPI_Handler_function *function,
                           A_MPI_Errhandler *errhandler);
 int (*LOCAL_MPI_Errhandler_create)(R_MPI_Handler_function *,
@@ -8555,6 +8835,8 @@ int A_MPI_Errhandler_create(A_MPI_Handler_function *function,
   errhandler_locks_re();
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Errhandler_create_print)
+    \;
   debug_printer("MPI_Errhandler_create : \n{\nfunction : %p,\nerrhandler : "
                 "%p,\nreturn : %d\n}\n",
                 function, errhandler, ret_tmp);
@@ -8578,6 +8860,7 @@ int R_MPI_Errhandler_create(R_MPI_Handler_function *function,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Errhandler_set_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Errhandler_set_print = 0;
 int MPI_Errhandler_set(A_MPI_Comm comm, A_MPI_Errhandler errhandler);
 int (*LOCAL_MPI_Errhandler_set)(R_MPI_Comm, R_MPI_Errhandler);
 
@@ -8669,6 +8952,7 @@ int R_MPI_Errhandler_set(R_MPI_Comm comm, R_MPI_Errhandler errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Errhandler_get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Errhandler_get_print = 0;
 int MPI_Errhandler_get(A_MPI_Comm comm, A_MPI_Errhandler *errhandler);
 int (*LOCAL_MPI_Errhandler_get)(R_MPI_Comm, R_MPI_Errhandler *);
 
@@ -8746,6 +9030,7 @@ int R_MPI_Errhandler_get(R_MPI_Comm comm, R_MPI_Errhandler *errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Errhandler_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Errhandler_free_print = 0;
 int MPI_Errhandler_free(A_MPI_Errhandler *errhandler);
 int (*LOCAL_MPI_Errhandler_free)(R_MPI_Errhandler *);
 
@@ -8809,6 +9094,7 @@ int R_MPI_Errhandler_free(R_MPI_Errhandler *errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Error_string_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Error_string_print = 0;
 int MPI_Error_string(int errorcode, char *string, int *resultlen);
 int (*LOCAL_MPI_Error_string)(int, char *, int *);
 
@@ -8855,6 +9141,8 @@ int A_MPI_Error_string(int errorcode, char *string, int *resultlen) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Error_string_print)
+    \;
   debug_printer("MPI_Error_string : \n{\nerrorcode : %d,\nstring : "
                 "%s,\nresultlen : %*d,\nreturn : %d\n}\n",
                 errorcode, string, resultlen, ret_tmp);
@@ -8877,6 +9165,7 @@ int R_MPI_Error_string(int errorcode, char *string, int *resultlen) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Error_class_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Error_class_print = 0;
 int MPI_Error_class(int errorcode, int *errorclass);
 int (*LOCAL_MPI_Error_class)(int, int *);
 
@@ -8921,6 +9210,8 @@ int A_MPI_Error_class(int errorcode, int *errorclass) {
   *errorclass = error_code_conv_r2a(*errorclass);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Error_class_print)
+    \;
   debug_printer("MPI_Error_class : \n{\nerrorcode : %d,\nerrorclass : "
                 "%*d,\nreturn : %d\n}\n",
                 errorcode, errorclass, ret_tmp);
@@ -8943,6 +9234,7 @@ int R_MPI_Error_class(int errorcode, int *errorclass) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Initialized_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Initialized_print = 0;
 int MPI_Initialized(int *flag);
 int (*LOCAL_MPI_Initialized)(int *);
 
@@ -8985,6 +9277,8 @@ int A_MPI_Initialized(int *flag) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Initialized_print)
+    \;
   debug_printer("MPI_Initialized : \n{\nflag : %*d,\nreturn : %d\n}\n", flag,
                 ret_tmp);
 #endif
@@ -9006,6 +9300,7 @@ int R_MPI_Initialized(int *flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Abort_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Abort_print = 0;
 int MPI_Abort(A_MPI_Comm comm, int errorcode);
 int (*LOCAL_MPI_Abort)(R_MPI_Comm, int);
 
@@ -9052,6 +9347,8 @@ int A_MPI_Abort(A_MPI_Comm comm, int errorcode) {
   int ret_tmp = LOCAL_MPI_Abort(comm_tmp, errorcode);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Abort_print)
+    \;
   debug_printer(
       "MPI_Abort : \n{\ncomm : %C,\nerrorcode : %d,\nreturn : %d\n}\n", comm,
       errorcode, ret_tmp);
@@ -9074,6 +9371,7 @@ int R_MPI_Abort(R_MPI_Comm comm, int errorcode) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Init_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Init_print = 0;
 int MPI_Init(int *argc, char ***argv);
 int (*LOCAL_MPI_Init)(int *, char ***);
 
@@ -9124,6 +9422,8 @@ int A_MPI_Init(int *argc, char ***argv) {
             getenv("WI4MPI_VERSION"), getenv("WI4MPI_TO"));
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Init_print)
+    \;
   debug_printer("MPI_Init : \n{\nargc : %*d,\nargv : %*as,\nreturn : %d\n}\n",
                 argc, *argc, argv, ret_tmp);
 #endif
@@ -9145,6 +9445,7 @@ int R_MPI_Init(int *argc, char ***argv) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Close_port_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Close_port_print = 0;
 int MPI_Close_port(char *port_name);
 int (*LOCAL_MPI_Close_port)(char *);
 
@@ -9186,6 +9487,8 @@ int A_MPI_Close_port(char *port_name) {
   int ret_tmp = LOCAL_MPI_Close_port(port_name);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Close_port_print)
+    \;
   debug_printer("MPI_Close_port : \n{\nport_name : %s,\nreturn : %d\n}\n",
                 port_name, ret_tmp);
 #endif
@@ -9207,6 +9510,7 @@ int R_MPI_Close_port(char *port_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_accept_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_accept_print = 0;
 int MPI_Comm_accept(char *port_name, A_MPI_Info info, int root, A_MPI_Comm comm,
                     A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_accept)(char *, R_MPI_Info, int, R_MPI_Comm, R_MPI_Comm *);
@@ -9267,7 +9571,9 @@ int A_MPI_Comm_accept(char *port_name, A_MPI_Info info, int root,
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Comm_accept : \n{\nport_name : %s,\ninfo : %I,\nroot : "
+  if (WI4MPI_Comm_accept_print)
+    \;
+  debug_printer("MPI_Comm_accept : \n{\nport_name : %s,\ninfo : %p,\nroot : "
                 "%d,\ncomm : %C,\nnewcomm : %*o,\nreturn : %d\n}\n",
                 port_name, info, root, comm, newcomm, ret_tmp);
 #endif
@@ -9290,6 +9596,7 @@ int R_MPI_Comm_accept(char *port_name, R_MPI_Info info, int root,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_connect_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_connect_print = 0;
 int MPI_Comm_connect(char *port_name, A_MPI_Info info, int root,
                      A_MPI_Comm comm, A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_connect)(char *, R_MPI_Info, int, R_MPI_Comm,
@@ -9351,7 +9658,9 @@ int A_MPI_Comm_connect(char *port_name, A_MPI_Info info, int root,
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Comm_connect : \n{\nport_name : %s,\ninfo : %I,\nroot : "
+  if (WI4MPI_Comm_connect_print)
+    \;
+  debug_printer("MPI_Comm_connect : \n{\nport_name : %s,\ninfo : %p,\nroot : "
                 "%d,\ncomm : %C,\nnewcomm : %*o,\nreturn : %d\n}\n",
                 port_name, info, root, comm, newcomm, ret_tmp);
 #endif
@@ -9374,6 +9683,7 @@ int R_MPI_Comm_connect(char *port_name, R_MPI_Info info, int root,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_disconnect_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_disconnect_print = 0;
 int MPI_Comm_disconnect(A_MPI_Comm *comm);
 int (*LOCAL_MPI_Comm_disconnect)(R_MPI_Comm *);
 
@@ -9419,6 +9729,8 @@ int A_MPI_Comm_disconnect(A_MPI_Comm *comm) {
   comm_conv_r2a(comm, comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_disconnect_print)
+    \;
   debug_printer("MPI_Comm_disconnect : \n{\ncomm : %*o,\nreturn : %d\n}\n",
                 comm, ret_tmp);
 #endif
@@ -9440,6 +9752,7 @@ int R_MPI_Comm_disconnect(R_MPI_Comm *comm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_get_parent_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_get_parent_print = 0;
 int MPI_Comm_get_parent(A_MPI_Comm *parent);
 int (*LOCAL_MPI_Comm_get_parent)(R_MPI_Comm *);
 
@@ -9484,6 +9797,8 @@ int A_MPI_Comm_get_parent(A_MPI_Comm *parent) {
   comm_conv_r2a(parent, parent_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_get_parent_print)
+    \;
   debug_printer("MPI_Comm_get_parent : \n{\nparent : %*o,\nreturn : %d\n}\n",
                 parent, ret_tmp);
 #endif
@@ -9505,6 +9820,7 @@ int R_MPI_Comm_get_parent(R_MPI_Comm *parent) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_join_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_join_print = 0;
 int MPI_Comm_join(int fd, A_MPI_Comm *intercomm);
 int (*LOCAL_MPI_Comm_join)(int, R_MPI_Comm *);
 
@@ -9551,6 +9867,8 @@ int A_MPI_Comm_join(int fd, A_MPI_Comm *intercomm) {
   comm_conv_r2a(intercomm, intercomm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_join_print)
+    \;
   debug_printer(
       "MPI_Comm_join : \n{\nfd : %d,\nintercomm : %*o,\nreturn : %d\n}\n", fd,
       intercomm, ret_tmp);
@@ -9573,6 +9891,7 @@ int R_MPI_Comm_join(int fd, R_MPI_Comm *intercomm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Lookup_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Lookup_name_print = 0;
 int MPI_Lookup_name(char *service_name, A_MPI_Info info, char *port_name);
 int (*LOCAL_MPI_Lookup_name)(char *, R_MPI_Info, char *);
 
@@ -9622,8 +9941,10 @@ int A_MPI_Lookup_name(char *service_name, A_MPI_Info info, char *port_name) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Lookup_name_print)
+    \;
   debug_printer("MPI_Lookup_name : \n{\nservice_name : %s,\ninfo : "
-                "%I,\nport_name : %s,\nreturn : %d\n}\n",
+                "%p,\nport_name : %s,\nreturn : %d\n}\n",
                 service_name, info, port_name, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9644,6 +9965,7 @@ int R_MPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Open_port_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Open_port_print = 0;
 int MPI_Open_port(A_MPI_Info info, char *port_name);
 int (*LOCAL_MPI_Open_port)(R_MPI_Info, char *);
 
@@ -9691,8 +10013,10 @@ int A_MPI_Open_port(A_MPI_Info info, char *port_name) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Open_port_print)
+    \;
   debug_printer(
-      "MPI_Open_port : \n{\ninfo : %I,\nport_name : %s,\nreturn : %d\n}\n",
+      "MPI_Open_port : \n{\ninfo : %p,\nport_name : %s,\nreturn : %d\n}\n",
       info, port_name, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9713,6 +10037,7 @@ int R_MPI_Open_port(R_MPI_Info info, char *port_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Publish_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Publish_name_print = 0;
 int MPI_Publish_name(char *service_name, A_MPI_Info info, char *port_name);
 int (*LOCAL_MPI_Publish_name)(char *, R_MPI_Info, char *);
 
@@ -9761,8 +10086,10 @@ int A_MPI_Publish_name(char *service_name, A_MPI_Info info, char *port_name) {
   int ret_tmp = LOCAL_MPI_Publish_name(service_name, info_tmp, port_name);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Publish_name_print)
+    \;
   debug_printer("MPI_Publish_name : \n{\nservice_name : %s,\ninfo : "
-                "%I,\nport_name : %s,\nreturn : %d\n}\n",
+                "%p,\nport_name : %s,\nreturn : %d\n}\n",
                 service_name, info, port_name, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9783,6 +10110,7 @@ int R_MPI_Publish_name(char *service_name, R_MPI_Info info, char *port_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Unpublish_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Unpublish_name_print = 0;
 int MPI_Unpublish_name(char *service_name, A_MPI_Info info, char *port_name);
 int (*LOCAL_MPI_Unpublish_name)(char *, R_MPI_Info, char *);
 
@@ -9831,8 +10159,10 @@ int A_MPI_Unpublish_name(char *service_name, A_MPI_Info info, char *port_name) {
   int ret_tmp = LOCAL_MPI_Unpublish_name(service_name, info_tmp, port_name);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Unpublish_name_print)
+    \;
   debug_printer("MPI_Unpublish_name : \n{\nservice_name : %s,\ninfo : "
-                "%I,\nport_name : %s,\nreturn : %d\n}\n",
+                "%p,\nport_name : %s,\nreturn : %d\n}\n",
                 service_name, info, port_name, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9853,6 +10183,7 @@ int R_MPI_Unpublish_name(char *service_name, R_MPI_Info info, char *port_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_set_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_set_info_print = 0;
 int MPI_Comm_set_info(A_MPI_Comm comm, A_MPI_Info info);
 int (*LOCAL_MPI_Comm_set_info)(R_MPI_Comm, R_MPI_Info);
 
@@ -9901,8 +10232,10 @@ int A_MPI_Comm_set_info(A_MPI_Comm comm, A_MPI_Info info) {
   comm_conv_r2a(&comm, &comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_set_info_print)
+    \;
   debug_printer(
-      "MPI_Comm_set_info : \n{\ncomm : %C,\ninfo : %I,\nreturn : %d\n}\n", comm,
+      "MPI_Comm_set_info : \n{\ncomm : %C,\ninfo : %p,\nreturn : %d\n}\n", comm,
       info, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9923,6 +10256,7 @@ int R_MPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_get_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_get_info_print = 0;
 int MPI_Comm_get_info(A_MPI_Comm comm, A_MPI_Info *info);
 int (*LOCAL_MPI_Comm_get_info)(R_MPI_Comm, R_MPI_Info *);
 
@@ -9971,8 +10305,10 @@ int A_MPI_Comm_get_info(A_MPI_Comm comm, A_MPI_Info *info) {
   info_conv_r2a(info, info_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_get_info_print)
+    \;
   debug_printer(
-      "MPI_Comm_get_info : \n{\ncomm : %C,\ninfo : %*I,\nreturn : %d\n}\n",
+      "MPI_Comm_get_info : \n{\ncomm : %C,\ninfo : %*p,\nreturn : %d\n}\n",
       comm, info, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9993,6 +10329,7 @@ int R_MPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Accumulate_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Accumulate_print = 0;
 int MPI_Accumulate(void *origin_addr, int origin_count,
                    A_MPI_Datatype origin_datatype, int target_rank,
                    A_MPI_Aint target_disp, int target_count,
@@ -10070,10 +10407,12 @@ int A_MPI_Accumulate(void *origin_addr, int origin_count,
       target_disp_tmp, target_count, target_datatype_tmp, op_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Accumulate_print)
+    \;
   debug_printer("MPI_Accumulate : \n{\norigin_addr : %p,\norigin_count : "
                 "%d,\norigin_datatype : %D,\ntarget_rank : %d,\ntarget_disp : "
                 "%ld,\ntarget_count : %d,\ntarget_datatype : %D,\nop : "
-                "%o,\nwin : %w,\nreturn : %d\n}\n",
+                "%op,\nwin : %w,\nreturn : %d\n}\n",
                 origin_addr, origin_count, origin_datatype, target_rank,
                 target_disp, target_count, target_datatype, op, win, ret_tmp);
 #endif
@@ -10101,6 +10440,7 @@ int R_MPI_Accumulate(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_print = 0;
 int MPI_Get(void *origin_addr, int origin_count, A_MPI_Datatype origin_datatype,
             int target_rank, A_MPI_Aint target_disp, int target_count,
             A_MPI_Datatype target_datatype, A_MPI_Win win);
@@ -10175,6 +10515,8 @@ int A_MPI_Get(void *origin_addr, int origin_count,
       target_disp_tmp, target_count_tmp, target_datatype_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_print)
+    \;
   debug_printer("MPI_Get : \n{\norigin_addr : %p,\norigin_count : "
                 "%d,\norigin_datatype : %D,\ntarget_rank : %d,\ntarget_disp : "
                 "%ld,\ntarget_count : %d,\ntarget_datatype : %D,\nwin : "
@@ -10205,6 +10547,7 @@ int R_MPI_Get(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Put_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Put_print = 0;
 int MPI_Put(void *origin_addr, int origin_count, A_MPI_Datatype origin_datatype,
             int target_rank, A_MPI_Aint target_disp, int target_count,
             A_MPI_Datatype target_datatype, A_MPI_Win win);
@@ -10278,6 +10621,8 @@ int A_MPI_Put(void *origin_addr, int origin_count,
       target_disp_tmp, target_count, target_datatype_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Put_print)
+    \;
   debug_printer("MPI_Put : \n{\norigin_addr : %p,\norigin_count : "
                 "%d,\norigin_datatype : %D,\ntarget_rank : %d,\ntarget_disp : "
                 "%ld,\ntarget_count : %d,\ntarget_datatype : %D,\nwin : "
@@ -10308,6 +10653,7 @@ int R_MPI_Put(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_complete_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_complete_print = 0;
 int MPI_Win_complete(A_MPI_Win win);
 int (*LOCAL_MPI_Win_complete)(R_MPI_Win);
 
@@ -10351,6 +10697,8 @@ int A_MPI_Win_complete(A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_complete(win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_complete_print)
+    \;
   debug_printer("MPI_Win_complete : \n{\nwin : %w,\nreturn : %d\n}\n", win,
                 ret_tmp);
 #endif
@@ -10372,6 +10720,7 @@ int R_MPI_Win_complete(R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_create_print = 0;
 int MPI_Win_create(void *base, A_MPI_Aint size, int disp_unit, A_MPI_Info info,
                    A_MPI_Comm comm, A_MPI_Win *win);
 int (*LOCAL_MPI_Win_create)(void *, R_MPI_Aint, int, R_MPI_Info, R_MPI_Comm,
@@ -10439,8 +10788,10 @@ int A_MPI_Win_create(void *base, A_MPI_Aint size, int disp_unit,
   win_conv_r2a(win, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_create_print)
+    \;
   debug_printer("MPI_Win_create : \n{\nbase : %p,\nsize : %ld,\ndisp_unit : "
-                "%d,\ninfo : %I,\ncomm : %C,\nwin : %p,\nreturn : %d\n}\n",
+                "%d,\ninfo : %p,\ncomm : %C,\nwin : %p,\nreturn : %d\n}\n",
                 base, size, disp_unit, info, comm, win, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10462,6 +10813,7 @@ int R_MPI_Win_create(void *base, R_MPI_Aint size, int disp_unit,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_fence_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_fence_print = 0;
 int MPI_Win_fence(int assert, A_MPI_Win win);
 int (*LOCAL_MPI_Win_fence)(int, R_MPI_Win);
 
@@ -10509,6 +10861,8 @@ int A_MPI_Win_fence(int assert, A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_fence(assert_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_fence_print)
+    \;
   debug_printer(
       "MPI_Win_fence : \n{\nassert : %d,\nwin : %w,\nreturn : %d\n}\n", assert,
       win, ret_tmp);
@@ -10531,6 +10885,7 @@ int R_MPI_Win_fence(int assert, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_free_print = 0;
 int MPI_Win_free(A_MPI_Win *win);
 int (*LOCAL_MPI_Win_free)(R_MPI_Win *);
 
@@ -10576,6 +10931,8 @@ int A_MPI_Win_free(A_MPI_Win *win) {
   win_conv_r2a(win, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_free_print)
+    \;
   debug_printer("MPI_Win_free : \n{\nwin : %p,\nreturn : %d\n}\n", win,
                 ret_tmp);
 #endif
@@ -10597,6 +10954,7 @@ int R_MPI_Win_free(R_MPI_Win *win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_get_group_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_get_group_print = 0;
 int MPI_Win_get_group(A_MPI_Win win, A_MPI_Group *group);
 int (*LOCAL_MPI_Win_get_group)(R_MPI_Win, R_MPI_Group *);
 
@@ -10645,8 +11003,10 @@ int A_MPI_Win_get_group(A_MPI_Win win, A_MPI_Group *group) {
   group_conv_r2a(group, group_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_get_group_print)
+    \;
   debug_printer(
-      "MPI_Win_get_group : \n{\nwin : %w,\ngroup : %*G,\nreturn : %d\n}\n", win,
+      "MPI_Win_get_group : \n{\nwin : %w,\ngroup : %*p,\nreturn : %d\n}\n", win,
       group, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10667,6 +11027,7 @@ int R_MPI_Win_get_group(R_MPI_Win win, R_MPI_Group *group) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_lock_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_lock_print = 0;
 int MPI_Win_lock(int lock_type, int rank, int assert, A_MPI_Win win);
 int (*LOCAL_MPI_Win_lock)(int, int, int, R_MPI_Win);
 
@@ -10723,6 +11084,8 @@ int A_MPI_Win_lock(int lock_type, int rank, int assert, A_MPI_Win win) {
       LOCAL_MPI_Win_lock(lock_type_tmp, rank_tmp, assert_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_lock_print)
+    \;
   debug_printer("MPI_Win_lock : \n{\nlock_type : %d,\nrank : %d,\nassert : "
                 "%d,\nwin : %w,\nreturn : %d\n}\n",
                 lock_type, rank, assert, win, ret_tmp);
@@ -10745,6 +11108,7 @@ int R_MPI_Win_lock(int lock_type, int rank, int assert, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_post_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_post_print = 0;
 int MPI_Win_post(A_MPI_Group group, int assert, A_MPI_Win win);
 int (*LOCAL_MPI_Win_post)(R_MPI_Group, int, R_MPI_Win);
 
@@ -10796,7 +11160,9 @@ int A_MPI_Win_post(A_MPI_Group group, int assert, A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_post(group_tmp, assert_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Win_post : \n{\ngroup : %g,\nassert : %d,\nwin : "
+  if (WI4MPI_Win_post_print)
+    \;
+  debug_printer("MPI_Win_post : \n{\ngroup : %p,\nassert : %d,\nwin : "
                 "%w,\nreturn : %d\n}\n",
                 group, assert, win, ret_tmp);
 #endif
@@ -10818,6 +11184,7 @@ int R_MPI_Win_post(R_MPI_Group group, int assert, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_start_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_start_print = 0;
 int MPI_Win_start(A_MPI_Group group, int assert, A_MPI_Win win);
 int (*LOCAL_MPI_Win_start)(R_MPI_Group, int, R_MPI_Win);
 
@@ -10869,7 +11236,9 @@ int A_MPI_Win_start(A_MPI_Group group, int assert, A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_start(group_tmp, assert_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Win_start : \n{\ngroup : %g,\nassert : %d,\nwin : "
+  if (WI4MPI_Win_start_print)
+    \;
+  debug_printer("MPI_Win_start : \n{\ngroup : %p,\nassert : %d,\nwin : "
                 "%w,\nreturn : %d\n}\n",
                 group, assert, win, ret_tmp);
 #endif
@@ -10891,6 +11260,7 @@ int R_MPI_Win_start(R_MPI_Group group, int assert, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_test_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_test_print = 0;
 int MPI_Win_test(A_MPI_Win win, int *flag);
 int (*LOCAL_MPI_Win_test)(R_MPI_Win, int *);
 
@@ -10938,6 +11308,8 @@ int A_MPI_Win_test(A_MPI_Win win, int *flag) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_test_print)
+    \;
   debug_printer("MPI_Win_test : \n{\nwin : %w,\nflag : %*d,\nreturn : %d\n}\n",
                 win, flag, ret_tmp);
 #endif
@@ -10959,6 +11331,7 @@ int R_MPI_Win_test(R_MPI_Win win, int *flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_unlock_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_unlock_print = 0;
 int MPI_Win_unlock(int rank, A_MPI_Win win);
 int (*LOCAL_MPI_Win_unlock)(int, R_MPI_Win);
 
@@ -11006,6 +11379,8 @@ int A_MPI_Win_unlock(int rank, A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_unlock(rank_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_unlock_print)
+    \;
   debug_printer("MPI_Win_unlock : \n{\nrank : %d,\nwin : %w,\nreturn : %d\n}\n",
                 rank, win, ret_tmp);
 #endif
@@ -11027,6 +11402,7 @@ int R_MPI_Win_unlock(int rank, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_wait_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_wait_print = 0;
 int MPI_Win_wait(A_MPI_Win win);
 int (*LOCAL_MPI_Win_wait)(R_MPI_Win);
 
@@ -11070,6 +11446,8 @@ int A_MPI_Win_wait(A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_wait(win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_wait_print)
+    \;
   debug_printer("MPI_Win_wait : \n{\nwin : %w,\nreturn : %d\n}\n", win,
                 ret_tmp);
 #endif
@@ -11091,6 +11469,7 @@ int R_MPI_Win_wait(R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_allocate_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_allocate_print = 0;
 int MPI_Win_allocate(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
                      A_MPI_Comm comm, void *baseptr, A_MPI_Win *win);
 int (*LOCAL_MPI_Win_allocate)(R_MPI_Aint, int, R_MPI_Info, R_MPI_Comm, void *,
@@ -11159,8 +11538,10 @@ int A_MPI_Win_allocate(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
   win_conv_r2a(win, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_allocate_print)
+    \;
   debug_printer("MPI_Win_allocate : \n{\nsize : %ld,\ndisp_unit : %d,\ninfo : "
-                "%I,\ncomm : %C,\nbaseptr : %p,\nwin : %p,\nreturn : %d\n}\n",
+                "%p,\ncomm : %C,\nbaseptr : %p,\nwin : %p,\nreturn : %d\n}\n",
                 size, disp_unit, info, comm, baseptr, win, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11183,6 +11564,7 @@ int R_MPI_Win_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_allocate_shared_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_allocate_shared_print = 0;
 int MPI_Win_allocate_shared(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
                             A_MPI_Comm comm, void *baseptr, A_MPI_Win *win);
 int (*LOCAL_MPI_Win_allocate_shared)(R_MPI_Aint, int, R_MPI_Info, R_MPI_Comm,
@@ -11251,8 +11633,10 @@ int A_MPI_Win_allocate_shared(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
   win_conv_r2a(win, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_allocate_shared_print)
+    \;
   debug_printer("MPI_Win_allocate_shared : \n{\nsize : %ld,\ndisp_unit : "
-                "%d,\ninfo : %I,\ncomm : %C,\nbaseptr : %p,\nwin : %p,\nreturn "
+                "%d,\ninfo : %p,\ncomm : %C,\nbaseptr : %p,\nwin : %p,\nreturn "
                 ": %d\n}\n",
                 size, disp_unit, info, comm, baseptr, win, ret_tmp);
 #endif
@@ -11276,6 +11660,7 @@ int R_MPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_shared_query_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_shared_query_print = 0;
 int MPI_Win_shared_query(A_MPI_Win win, int rank, A_MPI_Aint *size,
                          int *disp_unit, void *baseptr);
 int (*LOCAL_MPI_Win_shared_query)(R_MPI_Win, int, R_MPI_Aint *, int *, void *);
@@ -11339,6 +11724,8 @@ int A_MPI_Win_shared_query(A_MPI_Win win, int rank, A_MPI_Aint *size,
   buffer_conv_r2a(&baseptr, &baseptr_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_shared_query_print)
+    \;
   debug_printer("MPI_Win_shared_query : \n{\nwin : %w,\nrank : %d,\nsize : "
                 "%*d,\ndisp_unit : %*d,\nbaseptr : %p,\nreturn : %d\n}\n",
                 win, rank, size, disp_unit, baseptr, ret_tmp);
@@ -11362,6 +11749,7 @@ int R_MPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_create_dynamic_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_create_dynamic_print = 0;
 int MPI_Win_create_dynamic(A_MPI_Info info, A_MPI_Comm comm, A_MPI_Win *win);
 int (*LOCAL_MPI_Win_create_dynamic)(R_MPI_Info, R_MPI_Comm, R_MPI_Win *);
 
@@ -11414,7 +11802,9 @@ int A_MPI_Win_create_dynamic(A_MPI_Info info, A_MPI_Comm comm, A_MPI_Win *win) {
   win_conv_r2a(win, win_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Win_create_dynamic : \n{\ninfo : %I,\ncomm : %C,\nwin : "
+  if (WI4MPI_Win_create_dynamic_print)
+    \;
+  debug_printer("MPI_Win_create_dynamic : \n{\ninfo : %p,\ncomm : %C,\nwin : "
                 "%p,\nreturn : %d\n}\n",
                 info, comm, win, ret_tmp);
 #endif
@@ -11436,6 +11826,7 @@ int R_MPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_attach_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_attach_print = 0;
 int MPI_Win_attach(A_MPI_Win win, void *base, A_MPI_Aint size);
 int (*LOCAL_MPI_Win_attach)(R_MPI_Win, void *, R_MPI_Aint);
 
@@ -11487,6 +11878,8 @@ int A_MPI_Win_attach(A_MPI_Win win, void *base, A_MPI_Aint size) {
   int ret_tmp = LOCAL_MPI_Win_attach(win_tmp, base_tmp, size_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_attach_print)
+    \;
   debug_printer("MPI_Win_attach : \n{\nwin : %w,\nbase : %p,\nsize : "
                 "%ld,\nreturn : %d\n}\n",
                 win, base, size, ret_tmp);
@@ -11509,6 +11902,7 @@ int R_MPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_detach_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_detach_print = 0;
 int MPI_Win_detach(A_MPI_Win win, void *base);
 int (*LOCAL_MPI_Win_detach)(R_MPI_Win, void *);
 
@@ -11556,6 +11950,8 @@ int A_MPI_Win_detach(A_MPI_Win win, void *base) {
   int ret_tmp = LOCAL_MPI_Win_detach(win_tmp, base_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_detach_print)
+    \;
   debug_printer("MPI_Win_detach : \n{\nwin : %w,\nbase : %p,\nreturn : %d\n}\n",
                 win, base, ret_tmp);
 #endif
@@ -11577,6 +11973,7 @@ int R_MPI_Win_detach(R_MPI_Win win, void *base) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_get_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_get_info_print = 0;
 int MPI_Win_get_info(A_MPI_Win win, A_MPI_Info *info_used);
 int (*LOCAL_MPI_Win_get_info)(R_MPI_Win, R_MPI_Info *);
 
@@ -11625,8 +12022,10 @@ int A_MPI_Win_get_info(A_MPI_Win win, A_MPI_Info *info_used) {
   info_conv_r2a(info_used, info_used_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_get_info_print)
+    \;
   debug_printer(
-      "MPI_Win_get_info : \n{\nwin : %w,\ninfo_used : %*I,\nreturn : %d\n}\n",
+      "MPI_Win_get_info : \n{\nwin : %w,\ninfo_used : %*p,\nreturn : %d\n}\n",
       win, info_used, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11647,6 +12046,7 @@ int R_MPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_set_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_set_info_print = 0;
 int MPI_Win_set_info(A_MPI_Win win, A_MPI_Info info);
 int (*LOCAL_MPI_Win_set_info)(R_MPI_Win, R_MPI_Info);
 
@@ -11695,8 +12095,10 @@ int A_MPI_Win_set_info(A_MPI_Win win, A_MPI_Info info) {
   win_conv_r2a(&win, &win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_set_info_print)
+    \;
   debug_printer(
-      "MPI_Win_set_info : \n{\nwin : %w,\ninfo : %I,\nreturn : %d\n}\n", win,
+      "MPI_Win_set_info : \n{\nwin : %w,\ninfo : %p,\nreturn : %d\n}\n", win,
       info, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11717,6 +12119,7 @@ int R_MPI_Win_set_info(R_MPI_Win win, R_MPI_Info info) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_accumulate_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_accumulate_print = 0;
 int MPI_Get_accumulate(void *origin_addr, int origin_count,
                        A_MPI_Datatype origin_datatype, void *result_addr,
                        int result_count, A_MPI_Datatype result_datatype,
@@ -11805,11 +12208,13 @@ int A_MPI_Get_accumulate(void *origin_addr, int origin_count,
   buffer_conv_r2a(&result_addr, &result_addr_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_accumulate_print)
+    \;
   debug_printer("MPI_Get_accumulate : \n{\norigin_addr : %p,\norigin_count : "
                 "%d,\norigin_datatype : %D,\nresult_addr : %p,\nresult_count : "
                 "%d,\nresult_datatype : %D,\ntarget_rank : %d,\ntarget_disp : "
                 "%ld,\ntarget_count : %d,\ntarget_datatype : %D,\nop : "
-                "%o,\nwin : %w,\nreturn : %d\n}\n",
+                "%op,\nwin : %w,\nreturn : %d\n}\n",
                 origin_addr, origin_count, origin_datatype, result_addr,
                 result_count, result_datatype, target_rank, target_disp,
                 target_count, target_datatype, op, win, ret_tmp);
@@ -11840,6 +12245,7 @@ int R_MPI_Get_accumulate(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Fetch_and_op_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Fetch_and_op_print = 0;
 int MPI_Fetch_and_op(void *origin_addr, void *result_addr,
                      A_MPI_Datatype datatype, int target_rank,
                      A_MPI_Aint target_disp, A_MPI_Op op, A_MPI_Win win);
@@ -11913,9 +12319,11 @@ int A_MPI_Fetch_and_op(void *origin_addr, void *result_addr,
   buffer_conv_r2a(&result_addr, &result_addr_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Fetch_and_op_print)
+    \;
   debug_printer("MPI_Fetch_and_op : \n{\norigin_addr : %p,\nresult_addr : "
                 "%p,\ndatatype : %D,\ntarget_rank : %d,\ntarget_disp : "
-                "%ld,\nop : %o,\nwin : %w,\nreturn : %d\n}\n",
+                "%ld,\nop : %op,\nwin : %w,\nreturn : %d\n}\n",
                 origin_addr, result_addr, datatype, target_rank, target_disp,
                 op, win, ret_tmp);
 #endif
@@ -11940,6 +12348,7 @@ int R_MPI_Fetch_and_op(void *origin_addr, void *result_addr,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Compare_and_swap_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Compare_and_swap_print = 0;
 int MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
                          void *result_addr, A_MPI_Datatype datatype,
                          int target_rank, A_MPI_Aint target_disp,
@@ -12014,6 +12423,8 @@ int A_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
       target_rank_tmp, target_disp_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Compare_and_swap_print)
+    \;
   debug_printer("MPI_Compare_and_swap : \n{\norigin_addr : %p,\ncompare_addr : "
                 "%p,\nresult_addr : %p,\ndatatype : %D,\ntarget_rank : "
                 "%d,\ntarget_disp : %ld,\nwin : %w,\nreturn : %d\n}\n",
@@ -12043,6 +12454,7 @@ int R_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Rput_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Rput_print = 0;
 int MPI_Rput(void *origin_addr, int origin_count,
              A_MPI_Datatype origin_datatype, int target_rank,
              A_MPI_Aint target_disp, int target_count,
@@ -12124,6 +12536,8 @@ int A_MPI_Rput(void *origin_addr, int origin_count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Rput_print)
+    \;
   debug_printer(
       "MPI_Rput : \n{\norigin_addr : %p,\norigin_count : %d,\norigin_datatype "
       ": %D,\ntarget_rank : %d,\ntarget_disp : %ld,\ntarget_count : "
@@ -12155,6 +12569,7 @@ int R_MPI_Rput(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Rget_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Rget_print = 0;
 int MPI_Rget(void *origin_addr, int origin_count,
              A_MPI_Datatype origin_datatype, int target_rank,
              A_MPI_Aint target_disp, int target_count,
@@ -12237,6 +12652,8 @@ int A_MPI_Rget(void *origin_addr, int origin_count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Rget_print)
+    \;
   debug_printer(
       "MPI_Rget : \n{\norigin_addr : %p,\norigin_count : %d,\norigin_datatype "
       ": %D,\ntarget_rank : %d,\ntarget_disp : %ld,\ntarget_count : "
@@ -12268,6 +12685,7 @@ int R_MPI_Rget(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Raccumulate_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Raccumulate_print = 0;
 int MPI_Raccumulate(void *origin_addr, int origin_count,
                     A_MPI_Datatype origin_datatype, int target_rank,
                     A_MPI_Aint target_disp, int target_count,
@@ -12353,10 +12771,12 @@ int A_MPI_Raccumulate(void *origin_addr, int origin_count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Raccumulate_print)
+    \;
   debug_printer("MPI_Raccumulate : \n{\norigin_addr : %p,\norigin_count : "
                 "%d,\norigin_datatype : %D,\ntarget_rank : %d,\ntarget_disp : "
                 "%ld,\ntarget_count : %d,\ntarget_datatype : %D,\nop : "
-                "%o,\nwin : %w,\nrequest : %p,\nreturn : %d\n}\n",
+                "%op,\nwin : %w,\nrequest : %p,\nreturn : %d\n}\n",
                 origin_addr, origin_count, origin_datatype, target_rank,
                 target_disp, target_count, target_datatype, op, win, request,
                 ret_tmp);
@@ -12385,6 +12805,7 @@ int R_MPI_Raccumulate(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Rget_accumulate_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Rget_accumulate_print = 0;
 int MPI_Rget_accumulate(void *origin_addr, int origin_count,
                         A_MPI_Datatype origin_datatype, void *result_addr,
                         int result_count, A_MPI_Datatype result_datatype,
@@ -12479,11 +12900,13 @@ int A_MPI_Rget_accumulate(void *origin_addr, int origin_count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Rget_accumulate_print)
+    \;
   debug_printer("MPI_Rget_accumulate : \n{\norigin_addr : %p,\norigin_count : "
                 "%d,\norigin_datatype : %D,\nresult_addr : %p,\nresult_count : "
                 "%d,\nresult_datatype : %D,\ntarget_rank : %d,\ntarget_disp : "
                 "%ld,\ntarget_count : %d,\ntarget_datatype : %D,\nop : "
-                "%o,\nwin : %w,\nrequest : %p,\nreturn : %d\n}\n",
+                "%op,\nwin : %w,\nrequest : %p,\nreturn : %d\n}\n",
                 origin_addr, origin_count, origin_datatype, result_addr,
                 result_count, result_datatype, target_rank, target_disp,
                 target_count, target_datatype, op, win, request, ret_tmp);
@@ -12514,6 +12937,7 @@ int R_MPI_Rget_accumulate(void *origin_addr, int origin_count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_lock_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_lock_all_print = 0;
 int MPI_Win_lock_all(int assert, A_MPI_Win win);
 int (*LOCAL_MPI_Win_lock_all)(int, R_MPI_Win);
 
@@ -12561,6 +12985,8 @@ int A_MPI_Win_lock_all(int assert, A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_lock_all(assert_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_lock_all_print)
+    \;
   debug_printer(
       "MPI_Win_lock_all : \n{\nassert : %d,\nwin : %w,\nreturn : %d\n}\n",
       assert, win, ret_tmp);
@@ -12583,6 +13009,7 @@ int R_MPI_Win_lock_all(int assert, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_unlock_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_unlock_all_print = 0;
 int MPI_Win_unlock_all(A_MPI_Win win);
 int (*LOCAL_MPI_Win_unlock_all)(R_MPI_Win);
 
@@ -12626,6 +13053,8 @@ int A_MPI_Win_unlock_all(A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_unlock_all(win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_unlock_all_print)
+    \;
   debug_printer("MPI_Win_unlock_all : \n{\nwin : %w,\nreturn : %d\n}\n", win,
                 ret_tmp);
 #endif
@@ -12647,6 +13076,7 @@ int R_MPI_Win_unlock_all(R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_flush_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_flush_print = 0;
 int MPI_Win_flush(int rank, A_MPI_Win win);
 int (*LOCAL_MPI_Win_flush)(int, R_MPI_Win);
 
@@ -12694,6 +13124,8 @@ int A_MPI_Win_flush(int rank, A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_flush(rank_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_flush_print)
+    \;
   debug_printer("MPI_Win_flush : \n{\nrank : %d,\nwin : %w,\nreturn : %d\n}\n",
                 rank, win, ret_tmp);
 #endif
@@ -12715,6 +13147,7 @@ int R_MPI_Win_flush(int rank, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_flush_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_flush_all_print = 0;
 int MPI_Win_flush_all(A_MPI_Win win);
 int (*LOCAL_MPI_Win_flush_all)(R_MPI_Win);
 
@@ -12758,6 +13191,8 @@ int A_MPI_Win_flush_all(A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_flush_all(win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_flush_all_print)
+    \;
   debug_printer("MPI_Win_flush_all : \n{\nwin : %w,\nreturn : %d\n}\n", win,
                 ret_tmp);
 #endif
@@ -12779,6 +13214,7 @@ int R_MPI_Win_flush_all(R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_flush_local_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_flush_local_print = 0;
 int MPI_Win_flush_local(int rank, A_MPI_Win win);
 int (*LOCAL_MPI_Win_flush_local)(int, R_MPI_Win);
 
@@ -12826,6 +13262,8 @@ int A_MPI_Win_flush_local(int rank, A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_flush_local(rank_tmp, win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_flush_local_print)
+    \;
   debug_printer(
       "MPI_Win_flush_local : \n{\nrank : %d,\nwin : %w,\nreturn : %d\n}\n",
       rank, win, ret_tmp);
@@ -12848,6 +13286,7 @@ int R_MPI_Win_flush_local(int rank, R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_flush_local_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_flush_local_all_print = 0;
 int MPI_Win_flush_local_all(A_MPI_Win win);
 int (*LOCAL_MPI_Win_flush_local_all)(R_MPI_Win);
 
@@ -12891,6 +13330,8 @@ int A_MPI_Win_flush_local_all(A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_flush_local_all(win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_flush_local_all_print)
+    \;
   debug_printer("MPI_Win_flush_local_all : \n{\nwin : %w,\nreturn : %d\n}\n",
                 win, ret_tmp);
 #endif
@@ -12912,6 +13353,7 @@ int R_MPI_Win_flush_local_all(R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_sync_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_sync_print = 0;
 int MPI_Win_sync(A_MPI_Win win);
 int (*LOCAL_MPI_Win_sync)(R_MPI_Win);
 
@@ -12955,6 +13397,8 @@ int A_MPI_Win_sync(A_MPI_Win win) {
   int ret_tmp = LOCAL_MPI_Win_sync(win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_sync_print)
+    \;
   debug_printer("MPI_Win_sync : \n{\nwin : %w,\nreturn : %d\n}\n", win,
                 ret_tmp);
 #endif
@@ -12976,6 +13420,7 @@ int R_MPI_Win_sync(R_MPI_Win win) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Add_error_class_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Add_error_class_print = 0;
 int MPI_Add_error_class(int *errorclass);
 int (*LOCAL_MPI_Add_error_class)(int *);
 
@@ -13018,6 +13463,8 @@ int A_MPI_Add_error_class(int *errorclass) {
   *errorclass = error_code_conv_r2a(*errorclass);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Add_error_class_print)
+    \;
   debug_printer(
       "MPI_Add_error_class : \n{\nerrorclass : %*d,\nreturn : %d\n}\n",
       errorclass, ret_tmp);
@@ -13040,6 +13487,7 @@ int R_MPI_Add_error_class(int *errorclass) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Add_error_code_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Add_error_code_print = 0;
 int MPI_Add_error_code(int errorclass, int *errorcode);
 int (*LOCAL_MPI_Add_error_code)(int, int *);
 
@@ -13084,6 +13532,8 @@ int A_MPI_Add_error_code(int errorclass, int *errorcode) {
   *errorcode = error_code_conv_r2a(*errorcode);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Add_error_code_print)
+    \;
   debug_printer("MPI_Add_error_code : \n{\nerrorclass : %d,\nerrorcode : "
                 "%*d,\nreturn : %d\n}\n",
                 errorclass, errorcode, ret_tmp);
@@ -13106,6 +13556,7 @@ int R_MPI_Add_error_code(int errorclass, int *errorcode) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Add_error_string_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Add_error_string_print = 0;
 int MPI_Add_error_string(int errorcode, char *string);
 int (*LOCAL_MPI_Add_error_string)(int, char *);
 
@@ -13149,6 +13600,8 @@ int A_MPI_Add_error_string(int errorcode, char *string) {
   int ret_tmp = LOCAL_MPI_Add_error_string(errorcode, string);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Add_error_string_print)
+    \;
   debug_printer("MPI_Add_error_string : \n{\nerrorcode : %d,\nstring : "
                 "%s,\nreturn : %d\n}\n",
                 errorcode, string, ret_tmp);
@@ -13171,6 +13624,7 @@ int R_MPI_Add_error_string(int errorcode, char *string) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_call_errhandler_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_call_errhandler_print = 0;
 int MPI_Comm_call_errhandler(A_MPI_Comm comm, int errorcode);
 int (*LOCAL_MPI_Comm_call_errhandler)(R_MPI_Comm, int);
 
@@ -13218,6 +13672,8 @@ int A_MPI_Comm_call_errhandler(A_MPI_Comm comm, int errorcode) {
   int ret_tmp = LOCAL_MPI_Comm_call_errhandler(comm_tmp, errorcode_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_call_errhandler_print)
+    \;
   debug_printer("MPI_Comm_call_errhandler : \n{\ncomm : %C,\nerrorcode : "
                 "%d,\nreturn : %d\n}\n",
                 comm, errorcode, ret_tmp);
@@ -13240,6 +13696,7 @@ int R_MPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_delete_attr_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_delete_attr_print = 0;
 int MPI_Comm_delete_attr(A_MPI_Comm comm, int comm_keyval);
 int (*LOCAL_MPI_Comm_delete_attr)(R_MPI_Comm, int);
 
@@ -13286,6 +13743,8 @@ int A_MPI_Comm_delete_attr(A_MPI_Comm comm, int comm_keyval) {
   int ret_tmp = LOCAL_MPI_Comm_delete_attr(comm_tmp, comm_keyval);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_delete_attr_print)
+    \;
   debug_printer("MPI_Comm_delete_attr : \n{\ncomm : %C,\ncomm_keyval : "
                 "%d,\nreturn : %d\n}\n",
                 comm, comm_keyval, ret_tmp);
@@ -13308,6 +13767,7 @@ int R_MPI_Comm_delete_attr(R_MPI_Comm comm, int comm_keyval) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_get_attr_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_get_attr_print = 0;
 int MPI_Comm_get_attr(A_MPI_Comm comm, int comm_keyval, void *attribute_val,
                       int *flag);
 int (*LOCAL_MPI_Comm_get_attr)(R_MPI_Comm, int, void *, int *);
@@ -13364,6 +13824,8 @@ int A_MPI_Comm_get_attr(A_MPI_Comm comm, int comm_keyval, void *attribute_val,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_get_attr_print)
+    \;
   debug_printer("MPI_Comm_get_attr : \n{\ncomm : %C,\ncomm_keyval : "
                 "%d,\nattribute_val : %p,\nflag : %*d,\nreturn : %d\n}\n",
                 comm, comm_keyval, attribute_val, flag, ret_tmp);
@@ -13387,6 +13849,7 @@ int R_MPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_get_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_get_name_print = 0;
 int MPI_Comm_get_name(A_MPI_Comm comm, char *comm_name, int *resultlen);
 int (*LOCAL_MPI_Comm_get_name)(R_MPI_Comm, char *, int *);
 
@@ -13436,6 +13899,8 @@ int A_MPI_Comm_get_name(A_MPI_Comm comm, char *comm_name, int *resultlen) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_get_name_print)
+    \;
   debug_printer("MPI_Comm_get_name : \n{\ncomm : %C,\ncomm_name : "
                 "%s,\nresultlen : %*d,\nreturn : %d\n}\n",
                 comm, comm_name, resultlen, ret_tmp);
@@ -13458,6 +13923,7 @@ int R_MPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_set_attr_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_set_attr_print = 0;
 int MPI_Comm_set_attr(A_MPI_Comm comm, int comm_keyval, void *attribute_val);
 int (*LOCAL_MPI_Comm_set_attr)(R_MPI_Comm, int, void *);
 
@@ -13506,6 +13972,8 @@ int A_MPI_Comm_set_attr(A_MPI_Comm comm, int comm_keyval, void *attribute_val) {
   int ret_tmp = LOCAL_MPI_Comm_set_attr(comm_tmp, comm_keyval, attribute_val);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_set_attr_print)
+    \;
   debug_printer("MPI_Comm_set_attr : \n{\ncomm : %C,\ncomm_keyval : "
                 "%d,\nattribute_val : %p,\nreturn : %d\n}\n",
                 comm, comm_keyval, attribute_val, ret_tmp);
@@ -13528,6 +13996,7 @@ int R_MPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_set_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_set_name_print = 0;
 int MPI_Comm_set_name(A_MPI_Comm comm, char *comm_name);
 int (*LOCAL_MPI_Comm_set_name)(R_MPI_Comm, char *);
 
@@ -13575,6 +14044,8 @@ int A_MPI_Comm_set_name(A_MPI_Comm comm, char *comm_name) {
   comm_conv_r2a(&comm, &comm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_set_name_print)
+    \;
   debug_printer(
       "MPI_Comm_set_name : \n{\ncomm : %C,\ncomm_name : %s,\nreturn : %d\n}\n",
       comm, comm_name, ret_tmp);
@@ -13597,6 +14068,7 @@ int R_MPI_Comm_set_name(R_MPI_Comm comm, char *comm_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Grequest_complete_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Grequest_complete_print = 0;
 int MPI_Grequest_complete(A_MPI_Request request);
 int (*LOCAL_MPI_Grequest_complete)(R_MPI_Request);
 
@@ -13641,7 +14113,9 @@ int A_MPI_Grequest_complete(A_MPI_Request request) {
   request_tab_conv_r2a(&request, &request_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Grequest_complete : \n{\nrequest : %r,\nreturn : %d\n}\n",
+  if (WI4MPI_Grequest_complete_print)
+    \;
+  debug_printer("MPI_Grequest_complete : \n{\nrequest : %ap,\nreturn : %d\n}\n",
                 request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13662,6 +14136,7 @@ int R_MPI_Grequest_complete(R_MPI_Request request) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Grequest_start_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Grequest_start_print = 0;
 int MPI_Grequest_start(A_MPI_Grequest_query_function *query_fn,
                        A_MPI_Grequest_free_function *free_fn,
                        A_MPI_Grequest_cancel_function *cancel_fn,
@@ -13731,6 +14206,8 @@ int A_MPI_Grequest_start(A_MPI_Grequest_query_function *query_fn,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Grequest_start_print)
+    \;
   debug_printer("MPI_Grequest_start : \n{\nquery_fn : %p,\nfree_fn : "
                 "%p,\ncancel_fn : %p,\nextra_state : %p,\nrequest : "
                 "%p,\nreturn : %d\n}\n",
@@ -13758,6 +14235,7 @@ int R_MPI_Grequest_start(R_MPI_Grequest_query_function *query_fn,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Init_thread_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Init_thread_print = 0;
 int MPI_Init_thread(int *argc, char ***argv, int required, int *provided);
 int (*LOCAL_MPI_Init_thread)(int *, char ***, int, int *);
 
@@ -13806,6 +14284,8 @@ int A_MPI_Init_thread(int *argc, char ***argv, int required, int *provided) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Init_thread_print)
+    \;
   debug_printer("MPI_Init_thread : \n{\nargc : %*d,\nargv : %*as,\nrequired : "
                 "%d,\nprovided : %*d,\nreturn : %d\n}\n",
                 argc, *argc, argv, required, provided, ret_tmp);
@@ -13828,6 +14308,7 @@ int R_MPI_Init_thread(int *argc, char ***argv, int required, int *provided) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Is_thread_main_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Is_thread_main_print = 0;
 int MPI_Is_thread_main(int *flag);
 int (*LOCAL_MPI_Is_thread_main)(int *);
 
@@ -13870,6 +14351,8 @@ int A_MPI_Is_thread_main(int *flag) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Is_thread_main_print)
+    \;
   debug_printer("MPI_Is_thread_main : \n{\nflag : %*d,\nreturn : %d\n}\n", flag,
                 ret_tmp);
 #endif
@@ -13891,6 +14374,7 @@ int R_MPI_Is_thread_main(int *flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Query_thread_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Query_thread_print = 0;
 int MPI_Query_thread(int *provided);
 int (*LOCAL_MPI_Query_thread)(int *);
 
@@ -13933,6 +14417,8 @@ int A_MPI_Query_thread(int *provided) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Query_thread_print)
+    \;
   debug_printer("MPI_Query_thread : \n{\nprovided : %*d,\nreturn : %d\n}\n",
                 provided, ret_tmp);
 #endif
@@ -13954,6 +14440,7 @@ int R_MPI_Query_thread(int *provided) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Status_set_cancelled_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Status_set_cancelled_print = 0;
 int MPI_Status_set_cancelled(A_MPI_Status *status, int flag);
 int (*LOCAL_MPI_Status_set_cancelled)(R_MPI_Status *, int);
 
@@ -14002,6 +14489,8 @@ int A_MPI_Status_set_cancelled(A_MPI_Status *status, int flag) {
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Status_set_cancelled_print)
+    \;
   debug_printer("MPI_Status_set_cancelled : \n{\nstatus : %*n,\nflag : "
                 "%d,\nreturn : %d\n}\n",
                 status, flag, ret_tmp);
@@ -14024,6 +14513,7 @@ int R_MPI_Status_set_cancelled(R_MPI_Status *status, int flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Status_set_elements_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Status_set_elements_print = 0;
 int MPI_Status_set_elements(A_MPI_Status *status, A_MPI_Datatype datatype,
                             int count);
 int (*LOCAL_MPI_Status_set_elements)(R_MPI_Status *, R_MPI_Datatype, int);
@@ -14078,6 +14568,8 @@ int A_MPI_Status_set_elements(A_MPI_Status *status, A_MPI_Datatype datatype,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Status_set_elements_print)
+    \;
   debug_printer("MPI_Status_set_elements : \n{\nstatus : %*n,\ndatatype : "
                 "%D,\ncount : %d,\nreturn : %d\n}\n",
                 status, datatype, count, ret_tmp);
@@ -14101,6 +14593,7 @@ int R_MPI_Status_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_keyval_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_keyval_print = 0;
 int MPI_Type_create_keyval(A_MPI_Type_copy_attr_function *type_copy_attr_fn,
                            A_MPI_Type_delete_attr_function *type_delete_attr_fn,
                            int *type_keyval, void *extra_state);
@@ -14165,6 +14658,8 @@ int A_MPI_Type_create_keyval(
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_keyval_print)
+    \;
   debug_printer("MPI_Type_create_keyval : \n{\ntype_copy_attr_fn : "
                 "%p,\ntype_delete_attr_fn : %p,\ntype_keyval : "
                 "%*d,\nextra_state : %p,\nreturn : %d\n}\n",
@@ -14193,6 +14688,7 @@ int R_MPI_Type_create_keyval(
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_delete_attr_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_delete_attr_print = 0;
 int MPI_Type_delete_attr(A_MPI_Datatype datatype, int type_keyval);
 int (*LOCAL_MPI_Type_delete_attr)(R_MPI_Datatype, int);
 
@@ -14241,6 +14737,8 @@ int A_MPI_Type_delete_attr(A_MPI_Datatype datatype, int type_keyval) {
   datatype_conv_r2a(&datatype, &datatype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_delete_attr_print)
+    \;
   debug_printer("MPI_Type_delete_attr : \n{\ndatatype : %D,\ntype_keyval : "
                 "%d,\nreturn : %d\n}\n",
                 datatype, type_keyval, ret_tmp);
@@ -14263,6 +14761,7 @@ int R_MPI_Type_delete_attr(R_MPI_Datatype datatype, int type_keyval) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_dup_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_dup_print = 0;
 int MPI_Type_dup(A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_dup)(R_MPI_Datatype, R_MPI_Datatype *);
 
@@ -14311,6 +14810,8 @@ int A_MPI_Type_dup(A_MPI_Datatype oldtype, A_MPI_Datatype *newtype) {
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_dup_print)
+    \;
   debug_printer(
       "MPI_Type_dup : \n{\noldtype : %D,\nnewtype : %*D,\nreturn : %d\n}\n",
       oldtype, newtype, ret_tmp);
@@ -14333,6 +14834,7 @@ int R_MPI_Type_dup(R_MPI_Datatype oldtype, R_MPI_Datatype *newtype) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_free_keyval_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_free_keyval_print = 0;
 int MPI_Type_free_keyval(int *type_keyval);
 int (*LOCAL_MPI_Type_free_keyval)(int *);
 
@@ -14378,6 +14880,8 @@ int A_MPI_Type_free_keyval(int *type_keyval) {
   my_keyval_r2a(type_keyval, type_keyval_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_free_keyval_print)
+    \;
   debug_printer(
       "MPI_Type_free_keyval : \n{\ntype_keyval : %*d,\nreturn : %d\n}\n",
       type_keyval, ret_tmp);
@@ -14400,6 +14904,7 @@ int R_MPI_Type_free_keyval(int *type_keyval) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_attr_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_attr_print = 0;
 int MPI_Type_get_attr(A_MPI_Datatype datatype, int type_keyval,
                       void *attribute_val, int *flag);
 int (*LOCAL_MPI_Type_get_attr)(R_MPI_Datatype, int, void *, int *);
@@ -14458,6 +14963,8 @@ int A_MPI_Type_get_attr(A_MPI_Datatype datatype, int type_keyval,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_attr_print)
+    \;
   debug_printer("MPI_Type_get_attr : \n{\ndatatype : %D,\ntype_keyval : "
                 "%d,\nattribute_val : %p,\nflag : %*d,\nreturn : %d\n}\n",
                 datatype, type_keyval, attribute_val, flag, ret_tmp);
@@ -14482,6 +14989,7 @@ int R_MPI_Type_get_attr(R_MPI_Datatype datatype, int type_keyval,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_envelope_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_envelope_print = 0;
 int MPI_Type_get_envelope(A_MPI_Datatype datatype, int *num_integers,
                           int *num_addresses, int *num_datatypes,
                           int *combiner);
@@ -14540,6 +15048,8 @@ int A_MPI_Type_get_envelope(A_MPI_Datatype datatype, int *num_integers,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_envelope_print)
+    \;
   debug_printer("MPI_Type_get_envelope : \n{\ndatatype : %D,\nnum_integers : "
                 "%*d,\nnum_addresses : %*d,\nnum_datatypes : %*d,\ncombiner : "
                 "%*d,\nreturn : %d\n}\n",
@@ -14567,6 +15077,7 @@ int R_MPI_Type_get_envelope(R_MPI_Datatype datatype, int *num_integers,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_name_print = 0;
 int MPI_Type_get_name(A_MPI_Datatype datatype, char *type_name, int *resultlen);
 int (*LOCAL_MPI_Type_get_name)(R_MPI_Datatype, char *, int *);
 
@@ -14617,6 +15128,8 @@ int A_MPI_Type_get_name(A_MPI_Datatype datatype, char *type_name,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_name_print)
+    \;
   debug_printer("MPI_Type_get_name : \n{\ndatatype : %D,\ntype_name : "
                 "%s,\nresultlen : %*d,\nreturn : %d\n}\n",
                 datatype, type_name, resultlen, ret_tmp);
@@ -14640,6 +15153,7 @@ int R_MPI_Type_get_name(R_MPI_Datatype datatype, char *type_name,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_set_attr_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_set_attr_print = 0;
 int MPI_Type_set_attr(A_MPI_Datatype datatype, int type_keyval,
                       void *attribute_val);
 int (*LOCAL_MPI_Type_set_attr)(R_MPI_Datatype, int, void *);
@@ -14695,6 +15209,8 @@ int A_MPI_Type_set_attr(A_MPI_Datatype datatype, int type_keyval,
   datatype_conv_r2a(&datatype, &datatype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_set_attr_print)
+    \;
   debug_printer("MPI_Type_set_attr : \n{\ndatatype : %D,\ntype_keyval : "
                 "%d,\nattribute_val : %p,\nreturn : %d\n}\n",
                 datatype, type_keyval, attribute_val, ret_tmp);
@@ -14718,6 +15234,7 @@ int R_MPI_Type_set_attr(R_MPI_Datatype datatype, int type_keyval,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_set_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_set_name_print = 0;
 int MPI_Type_set_name(A_MPI_Datatype datatype, char *type_name);
 int (*LOCAL_MPI_Type_set_name)(R_MPI_Datatype, char *);
 
@@ -14765,6 +15282,8 @@ int A_MPI_Type_set_name(A_MPI_Datatype datatype, char *type_name) {
   datatype_conv_r2a(&datatype, &datatype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_set_name_print)
+    \;
   debug_printer("MPI_Type_set_name : \n{\ndatatype : %D,\ntype_name : "
                 "%s,\nreturn : %d\n}\n",
                 datatype, type_name, ret_tmp);
@@ -14787,6 +15306,7 @@ int R_MPI_Type_set_name(R_MPI_Datatype datatype, char *type_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_match_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_match_size_print = 0;
 int MPI_Type_match_size(int typeclass, int size, A_MPI_Datatype *datatype);
 int (*LOCAL_MPI_Type_match_size)(int, int, R_MPI_Datatype *);
 
@@ -14838,6 +15358,8 @@ int A_MPI_Type_match_size(int typeclass, int size, A_MPI_Datatype *datatype) {
   datatype_conv_r2a(datatype, datatype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_match_size_print)
+    \;
   debug_printer("MPI_Type_match_size : \n{\ntypeclass : %d,\nsize : "
                 "%d,\ndatatype : %*D,\nreturn : %d\n}\n",
                 typeclass, size, datatype, ret_tmp);
@@ -14860,6 +15382,7 @@ int R_MPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *datatype) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_create_keyval_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_create_keyval_print = 0;
 int MPI_Win_create_keyval(A_MPI_Win_copy_attr_function *win_copy_attr_fn,
                           A_MPI_Win_delete_attr_function *win_delete_attr_fn,
                           int *win_keyval, void *extra_state);
@@ -14923,6 +15446,8 @@ int A_MPI_Win_create_keyval(A_MPI_Win_copy_attr_function *win_copy_attr_fn,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_create_keyval_print)
+    \;
   debug_printer("MPI_Win_create_keyval : \n{\nwin_copy_attr_fn : "
                 "%p,\nwin_keyval : %*d,\nextra_state : %p,\nreturn : %d\n}\n",
                 win_copy_attr_fn, win_keyval, extra_state, ret_tmp);
@@ -14948,6 +15473,7 @@ int R_MPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_delete_attr_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_delete_attr_print = 0;
 int MPI_Win_delete_attr(A_MPI_Win win, int win_keyval);
 int (*LOCAL_MPI_Win_delete_attr)(R_MPI_Win, int);
 
@@ -14996,6 +15522,8 @@ int A_MPI_Win_delete_attr(A_MPI_Win win, int win_keyval) {
   win_conv_r2a(&win, &win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_delete_attr_print)
+    \;
   debug_printer("MPI_Win_delete_attr : \n{\nwin : %w,\nwin_keyval : "
                 "%d,\nreturn : %d\n}\n",
                 win, win_keyval, ret_tmp);
@@ -15018,6 +15546,7 @@ int R_MPI_Win_delete_attr(R_MPI_Win win, int win_keyval) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_free_keyval_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_free_keyval_print = 0;
 int MPI_Win_free_keyval(int *win_keyval);
 int (*LOCAL_MPI_Win_free_keyval)(int *);
 
@@ -15063,6 +15592,8 @@ int A_MPI_Win_free_keyval(int *win_keyval) {
   my_keyval_r2a(win_keyval, win_keyval_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_free_keyval_print)
+    \;
   debug_printer(
       "MPI_Win_free_keyval : \n{\nwin_keyval : %*d,\nreturn : %d\n}\n",
       win_keyval, ret_tmp);
@@ -15085,6 +15616,7 @@ int R_MPI_Win_free_keyval(int *win_keyval) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_get_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_get_name_print = 0;
 int MPI_Win_get_name(A_MPI_Win win, char *win_name, int *resultlen);
 int (*LOCAL_MPI_Win_get_name)(R_MPI_Win, char *, int *);
 
@@ -15134,6 +15666,8 @@ int A_MPI_Win_get_name(A_MPI_Win win, char *win_name, int *resultlen) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_get_name_print)
+    \;
   debug_printer("MPI_Win_get_name : \n{\nwin : %w,\nwin_name : %s,\nresultlen "
                 ": %*d,\nreturn : %d\n}\n",
                 win, win_name, resultlen, ret_tmp);
@@ -15156,6 +15690,7 @@ int R_MPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_set_name_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_set_name_print = 0;
 int MPI_Win_set_name(A_MPI_Win win, char *win_name);
 int (*LOCAL_MPI_Win_set_name)(R_MPI_Win, char *);
 
@@ -15203,6 +15738,8 @@ int A_MPI_Win_set_name(A_MPI_Win win, char *win_name) {
   win_conv_r2a(&win, &win_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_set_name_print)
+    \;
   debug_printer(
       "MPI_Win_set_name : \n{\nwin : %w,\nwin_name : %s,\nreturn : %d\n}\n",
       win, win_name, ret_tmp);
@@ -15225,6 +15762,7 @@ int R_MPI_Win_set_name(R_MPI_Win win, char *win_name) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Alloc_mem_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Alloc_mem_print = 0;
 int MPI_Alloc_mem(A_MPI_Aint size, A_MPI_Info info, void *baseptr);
 int (*LOCAL_MPI_Alloc_mem)(R_MPI_Aint, R_MPI_Info, void *);
 
@@ -15277,7 +15815,9 @@ int A_MPI_Alloc_mem(A_MPI_Aint size, A_MPI_Info info, void *baseptr) {
   buffer_conv_r2a(&baseptr, &baseptr_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Alloc_mem : \n{\nsize : %ld,\ninfo : %I,\nbaseptr : "
+  if (WI4MPI_Alloc_mem_print)
+    \;
+  debug_printer("MPI_Alloc_mem : \n{\nsize : %ld,\ninfo : %p,\nbaseptr : "
                 "%p,\nreturn : %d\n}\n",
                 size, info, baseptr, ret_tmp);
 #endif
@@ -15299,6 +15839,7 @@ int R_MPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info, void *baseptr) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_create_errhandler_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_create_errhandler_print = 0;
 int MPI_Comm_create_errhandler(
     A_MPI_Comm_errhandler_function *comm_errhandler_fn,
     A_MPI_Errhandler *errhandler);
@@ -15361,6 +15902,7 @@ int R_MPI_Comm_create_errhandler(
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_get_errhandler_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_get_errhandler_print = 0;
 int MPI_Comm_get_errhandler(A_MPI_Comm comm, A_MPI_Errhandler *errhandler);
 int (*LOCAL_MPI_Comm_get_errhandler)(R_MPI_Comm, R_MPI_Errhandler *);
 
@@ -15411,6 +15953,7 @@ int R_MPI_Comm_get_errhandler(R_MPI_Comm comm, R_MPI_Errhandler *errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_set_errhandler_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_set_errhandler_print = 0;
 int MPI_Comm_set_errhandler(A_MPI_Comm comm, A_MPI_Errhandler errhandler);
 int (*LOCAL_MPI_Comm_set_errhandler)(R_MPI_Comm, R_MPI_Errhandler);
 
@@ -15461,6 +16004,7 @@ int R_MPI_Comm_set_errhandler(R_MPI_Comm comm, R_MPI_Errhandler errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_errhandler_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_errhandler_print = 0;
 int MPI_File_get_errhandler(A_MPI_File file, A_MPI_Errhandler *errhandler);
 int (*LOCAL_MPI_File_get_errhandler)(R_MPI_File, R_MPI_Errhandler *);
 
@@ -15511,7 +16055,9 @@ int A_MPI_File_get_errhandler(A_MPI_File file, A_MPI_Errhandler *errhandler) {
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_get_errhandler : \n{\nfile : %F,\nerrhandler : "
+  if (WI4MPI_File_get_errhandler_print)
+    \;
+  debug_printer("MPI_File_get_errhandler : \n{\nfile : %p,\nerrhandler : "
                 "%p,\nreturn : %d\n}\n",
                 file, errhandler, ret_tmp);
 #endif
@@ -15533,6 +16079,7 @@ int R_MPI_File_get_errhandler(R_MPI_File file, R_MPI_Errhandler *errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_set_errhandler_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_set_errhandler_print = 0;
 int MPI_File_set_errhandler(A_MPI_File file, A_MPI_Errhandler errhandler);
 int (*LOCAL_MPI_File_set_errhandler)(R_MPI_File, R_MPI_Errhandler);
 
@@ -15581,7 +16128,9 @@ int A_MPI_File_set_errhandler(A_MPI_File file, A_MPI_Errhandler errhandler) {
   file_conv_r2a(&file, &file_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_set_errhandler : \n{\nfile : %F,\nerrhandler : "
+  if (WI4MPI_File_set_errhandler_print)
+    \;
+  debug_printer("MPI_File_set_errhandler : \n{\nfile : %p,\nerrhandler : "
                 "%e,\nreturn : %d\n}\n",
                 file, errhandler, ret_tmp);
 #endif
@@ -15603,6 +16152,7 @@ int R_MPI_File_set_errhandler(R_MPI_File file, R_MPI_Errhandler errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Finalized_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Finalized_print = 0;
 int MPI_Finalized(int *flag);
 int (*LOCAL_MPI_Finalized)(int *);
 
@@ -15645,6 +16195,8 @@ int A_MPI_Finalized(int *flag) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Finalized_print)
+    \;
   debug_printer("MPI_Finalized : \n{\nflag : %*d,\nreturn : %d\n}\n", flag,
                 ret_tmp);
 #endif
@@ -15666,6 +16218,7 @@ int R_MPI_Finalized(int *flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Free_mem_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Free_mem_print = 0;
 int MPI_Free_mem(void *base);
 int (*LOCAL_MPI_Free_mem)(void *);
 
@@ -15709,6 +16262,8 @@ int A_MPI_Free_mem(void *base) {
   int ret_tmp = LOCAL_MPI_Free_mem(base_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Free_mem_print)
+    \;
   debug_printer("MPI_Free_mem : \n{\nbase : %p,\nreturn : %d\n}\n", base,
                 ret_tmp);
 #endif
@@ -15730,6 +16285,7 @@ int R_MPI_Free_mem(void *base) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_address_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_address_print = 0;
 int MPI_Get_address(void *location, A_MPI_Aint *address);
 int (*LOCAL_MPI_Get_address)(void *, R_MPI_Aint *);
 
@@ -15778,6 +16334,8 @@ int A_MPI_Get_address(void *location, A_MPI_Aint *address) {
   *address = (A_MPI_Aint)*address_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_address_print)
+    \;
   debug_printer(
       "MPI_Get_address : \n{\nlocation : %p,\naddress : %*d,\nreturn : %d\n}\n",
       location, address, ret_tmp);
@@ -15800,6 +16358,7 @@ int R_MPI_Get_address(void *location, R_MPI_Aint *address) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_create_print = 0;
 int MPI_Info_create(A_MPI_Info *info);
 int (*LOCAL_MPI_Info_create)(R_MPI_Info *);
 
@@ -15844,7 +16403,9 @@ int A_MPI_Info_create(A_MPI_Info *info) {
   info_conv_r2a(info, info_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Info_create : \n{\ninfo : %*I,\nreturn : %d\n}\n", info,
+  if (WI4MPI_Info_create_print)
+    \;
+  debug_printer("MPI_Info_create : \n{\ninfo : %*p,\nreturn : %d\n}\n", info,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15865,6 +16426,7 @@ int R_MPI_Info_create(R_MPI_Info *info) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_delete_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_delete_print = 0;
 int MPI_Info_delete(A_MPI_Info info, char *key);
 int (*LOCAL_MPI_Info_delete)(R_MPI_Info, char *);
 
@@ -15912,8 +16474,10 @@ int A_MPI_Info_delete(A_MPI_Info info, char *key) {
   info_conv_r2a(&info, &info_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Info_delete_print)
+    \;
   debug_printer(
-      "MPI_Info_delete : \n{\ninfo : %I,\nkey : %s,\nreturn : %d\n}\n", info,
+      "MPI_Info_delete : \n{\ninfo : %p,\nkey : %s,\nreturn : %d\n}\n", info,
       key, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15934,6 +16498,7 @@ int R_MPI_Info_delete(R_MPI_Info info, char *key) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_dup_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_dup_print = 0;
 int MPI_Info_dup(A_MPI_Info info, A_MPI_Info *newinfo);
 int (*LOCAL_MPI_Info_dup)(R_MPI_Info, R_MPI_Info *);
 
@@ -15982,8 +16547,10 @@ int A_MPI_Info_dup(A_MPI_Info info, A_MPI_Info *newinfo) {
   info_conv_r2a(newinfo, newinfo_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Info_dup_print)
+    \;
   debug_printer(
-      "MPI_Info_dup : \n{\ninfo : %I,\nnewinfo : %*I,\nreturn : %d\n}\n", info,
+      "MPI_Info_dup : \n{\ninfo : %p,\nnewinfo : %*p,\nreturn : %d\n}\n", info,
       newinfo, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16004,6 +16571,7 @@ int R_MPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_free_print = 0;
 int MPI_Info_free(A_MPI_Info *info);
 int (*LOCAL_MPI_Info_free)(R_MPI_Info *);
 
@@ -16048,7 +16616,9 @@ int A_MPI_Info_free(A_MPI_Info *info) {
   int ret_tmp = LOCAL_MPI_Info_free(info_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Info_free : \n{\ninfo : %*I,\nreturn : %d\n}\n", info,
+  if (WI4MPI_Info_free_print)
+    \;
+  debug_printer("MPI_Info_free : \n{\ninfo : %*p,\nreturn : %d\n}\n", info,
                 ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16069,6 +16639,7 @@ int R_MPI_Info_free(R_MPI_Info *info) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_get_print = 0;
 int MPI_Info_get(A_MPI_Info info, char *key, int valuelen, char *value,
                  int *flag);
 int (*LOCAL_MPI_Info_get)(R_MPI_Info, char *, int, char *, int *);
@@ -16124,7 +16695,9 @@ int A_MPI_Info_get(A_MPI_Info info, char *key, int valuelen, char *value,
 
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Info_get : \n{\ninfo : %I,\nkey : %s,\nvaluelen : "
+  if (WI4MPI_Info_get_print)
+    \;
+  debug_printer("MPI_Info_get : \n{\ninfo : %p,\nkey : %s,\nvaluelen : "
                 "%d,\nvalue : %s,\nflag : %*d,\nreturn : %d\n}\n",
                 info, key, valuelen, value, flag, ret_tmp);
 #endif
@@ -16147,6 +16720,7 @@ int R_MPI_Info_get(R_MPI_Info info, char *key, int valuelen, char *value,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_get_nkeys_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_get_nkeys_print = 0;
 int MPI_Info_get_nkeys(A_MPI_Info info, int *nkeys);
 int (*LOCAL_MPI_Info_get_nkeys)(R_MPI_Info, int *);
 
@@ -16194,8 +16768,10 @@ int A_MPI_Info_get_nkeys(A_MPI_Info info, int *nkeys) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Info_get_nkeys_print)
+    \;
   debug_printer(
-      "MPI_Info_get_nkeys : \n{\ninfo : %I,\nnkeys : %*d,\nreturn : %d\n}\n",
+      "MPI_Info_get_nkeys : \n{\ninfo : %p,\nnkeys : %*d,\nreturn : %d\n}\n",
       info, nkeys, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16216,6 +16792,7 @@ int R_MPI_Info_get_nkeys(R_MPI_Info info, int *nkeys) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_get_nthkey_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_get_nthkey_print = 0;
 int MPI_Info_get_nthkey(A_MPI_Info info, int n, char *key);
 int (*LOCAL_MPI_Info_get_nthkey)(R_MPI_Info, int, char *);
 
@@ -16265,7 +16842,9 @@ int A_MPI_Info_get_nthkey(A_MPI_Info info, int n, char *key) {
 
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Info_get_nthkey : \n{\ninfo : %I,\nn : %d,\nkey : "
+  if (WI4MPI_Info_get_nthkey_print)
+    \;
+  debug_printer("MPI_Info_get_nthkey : \n{\ninfo : %p,\nn : %d,\nkey : "
                 "%s,\nreturn : %d\n}\n",
                 info, n, key, ret_tmp);
 #endif
@@ -16287,6 +16866,7 @@ int R_MPI_Info_get_nthkey(R_MPI_Info info, int n, char *key) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_get_valuelen_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_get_valuelen_print = 0;
 int MPI_Info_get_valuelen(A_MPI_Info info, char *key, int *valuelen, int *flag);
 int (*LOCAL_MPI_Info_get_valuelen)(R_MPI_Info, char *, int *, int *);
 
@@ -16339,7 +16919,9 @@ int A_MPI_Info_get_valuelen(A_MPI_Info info, char *key, int *valuelen,
 
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Info_get_valuelen : \n{\ninfo : %I,\nkey : %s,\nvaluelen "
+  if (WI4MPI_Info_get_valuelen_print)
+    \;
+  debug_printer("MPI_Info_get_valuelen : \n{\ninfo : %p,\nkey : %s,\nvaluelen "
                 ": %*d,\nflag : %*d,\nreturn : %d\n}\n",
                 info, key, valuelen, flag, ret_tmp);
 #endif
@@ -16362,6 +16944,7 @@ int R_MPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Info_set_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Info_set_print = 0;
 int MPI_Info_set(A_MPI_Info info, char *key, char *value);
 int (*LOCAL_MPI_Info_set)(R_MPI_Info, char *, char *);
 
@@ -16411,7 +16994,9 @@ int A_MPI_Info_set(A_MPI_Info info, char *key, char *value) {
   info_conv_r2a(&info, &info_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Info_set : \n{\ninfo : %I,\nkey : %s,\nvalue : "
+  if (WI4MPI_Info_set_print)
+    \;
+  debug_printer("MPI_Info_set : \n{\ninfo : %p,\nkey : %s,\nvalue : "
                 "%s,\nreturn : %d\n}\n",
                 info, key, value, ret_tmp);
 #endif
@@ -16433,6 +17018,7 @@ int R_MPI_Info_set(R_MPI_Info info, char *key, char *value) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Request_get_status_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Request_get_status_print = 0;
 int MPI_Request_get_status(A_MPI_Request request, int *flag,
                            A_MPI_Status *status);
 int (*LOCAL_MPI_Request_get_status)(R_MPI_Request, int *, R_MPI_Status *);
@@ -16487,7 +17073,9 @@ int A_MPI_Request_get_status(A_MPI_Request request, int *flag,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Request_get_status : \n{\nrequest : %r,\nflag : "
+  if (WI4MPI_Request_get_status_print)
+    \;
+  debug_printer("MPI_Request_get_status : \n{\nrequest : %ap,\nflag : "
                 "%*d,\nstatus : %*n,\nreturn : %d\n}\n",
                 request, flag, status, ret_tmp);
 #endif
@@ -16510,6 +17098,7 @@ int R_MPI_Request_get_status(R_MPI_Request request, int *flag,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_hvector_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_hvector_print = 0;
 int MPI_Type_create_hvector(int count, int blocklength, A_MPI_Aint stride,
                             A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_create_hvector)(int, int, R_MPI_Aint, R_MPI_Datatype,
@@ -16570,6 +17159,8 @@ int A_MPI_Type_create_hvector(int count, int blocklength, A_MPI_Aint stride,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_hvector_print)
+    \;
   debug_printer("MPI_Type_create_hvector : \n{\ncount : %d,\nblocklength : "
                 "%d,\nstride : %ld,\noldtype : %D,\nnewtype : %*D,\nreturn : "
                 "%d\n}\n",
@@ -16595,6 +17186,7 @@ int R_MPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_resized_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_resized_print = 0;
 int MPI_Type_create_resized(A_MPI_Datatype oldtype, A_MPI_Aint lb,
                             A_MPI_Aint extent, A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_create_resized)(R_MPI_Datatype, R_MPI_Aint, R_MPI_Aint,
@@ -16655,6 +17247,8 @@ int A_MPI_Type_create_resized(A_MPI_Datatype oldtype, A_MPI_Aint lb,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_resized_print)
+    \;
   debug_printer("MPI_Type_create_resized : \n{\noldtype : %D,\nlb : "
                 "%ld,\nextent : %ld,\nnewtype : %*D,\nreturn : %d\n}\n",
                 oldtype, lb, extent, newtype, ret_tmp);
@@ -16678,6 +17272,7 @@ int R_MPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_extent_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_extent_print = 0;
 int MPI_Type_get_extent(A_MPI_Datatype datatype, A_MPI_Aint *lb,
                         A_MPI_Aint *extent);
 int (*LOCAL_MPI_Type_get_extent)(R_MPI_Datatype, R_MPI_Aint *, R_MPI_Aint *);
@@ -16733,6 +17328,8 @@ int A_MPI_Type_get_extent(A_MPI_Datatype datatype, A_MPI_Aint *lb,
   *extent = (A_MPI_Aint)*extent_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_extent_print)
+    \;
   debug_printer("MPI_Type_get_extent : \n{\ndatatype : %D,\nlb : %*d,\nextent "
                 ": %*d,\nreturn : %d\n}\n",
                 datatype, lb, extent, ret_tmp);
@@ -16756,6 +17353,7 @@ int R_MPI_Type_get_extent(R_MPI_Datatype datatype, R_MPI_Aint *lb,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_true_extent_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_true_extent_print = 0;
 int MPI_Type_get_true_extent(A_MPI_Datatype datatype, A_MPI_Aint *true_lb,
                              A_MPI_Aint *true_extent);
 int (*LOCAL_MPI_Type_get_true_extent)(R_MPI_Datatype, R_MPI_Aint *,
@@ -16813,6 +17411,8 @@ int A_MPI_Type_get_true_extent(A_MPI_Datatype datatype, A_MPI_Aint *true_lb,
   *true_extent = (A_MPI_Aint)*true_extent_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_true_extent_print)
+    \;
   debug_printer("MPI_Type_get_true_extent : \n{\ndatatype : %D,\ntrue_lb : "
                 "%*d,\ntrue_extent : %*d,\nreturn : %d\n}\n",
                 datatype, true_lb, true_extent, ret_tmp);
@@ -16836,6 +17436,7 @@ int R_MPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Win_get_errhandler_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Win_get_errhandler_print = 0;
 int MPI_Win_get_errhandler(A_MPI_Win win, A_MPI_Errhandler *errhandler);
 int (*LOCAL_MPI_Win_get_errhandler)(R_MPI_Win, R_MPI_Errhandler *);
 
@@ -16884,6 +17485,8 @@ int A_MPI_Win_get_errhandler(A_MPI_Win win, A_MPI_Errhandler *errhandler) {
   errhandler_ptr_conv_r2a(&errhandler, &errhandler_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Win_get_errhandler_print)
+    \;
   debug_printer("MPI_Win_get_errhandler : \n{\nwin : %w,\nerrhandler : "
                 "%p,\nreturn : %d\n}\n",
                 win, errhandler, ret_tmp);
@@ -16906,6 +17509,7 @@ int R_MPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_f90_integer_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_f90_integer_print = 0;
 int MPI_Type_create_f90_integer(int range, A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_create_f90_integer)(int, R_MPI_Datatype *);
 
@@ -16952,6 +17556,8 @@ int A_MPI_Type_create_f90_integer(int range, A_MPI_Datatype *newtype) {
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_f90_integer_print)
+    \;
   debug_printer("MPI_Type_create_f90_integer : \n{\nrange : %d,\nnewtype : "
                 "%*D,\nreturn : %d\n}\n",
                 range, newtype, ret_tmp);
@@ -16974,6 +17580,7 @@ int R_MPI_Type_create_f90_integer(int range, R_MPI_Datatype *newtype) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_f90_real_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_f90_real_print = 0;
 int MPI_Type_create_f90_real(int precision, int range, A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_create_f90_real)(int, int, R_MPI_Datatype *);
 
@@ -17023,6 +17630,8 @@ int A_MPI_Type_create_f90_real(int precision, int range,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_f90_real_print)
+    \;
   debug_printer("MPI_Type_create_f90_real : \n{\nprecision : %d,\nrange : "
                 "%d,\nnewtype : %*D,\nreturn : %d\n}\n",
                 precision, range, newtype, ret_tmp);
@@ -17046,6 +17655,7 @@ int R_MPI_Type_create_f90_real(int precision, int range,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_f90_complex_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_f90_complex_print = 0;
 int MPI_Type_create_f90_complex(int precision, int range,
                                 A_MPI_Datatype *newtype);
 int (*LOCAL_MPI_Type_create_f90_complex)(int, int, R_MPI_Datatype *);
@@ -17097,6 +17707,8 @@ int A_MPI_Type_create_f90_complex(int precision, int range,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_f90_complex_print)
+    \;
   debug_printer("MPI_Type_create_f90_complex : \n{\nprecision : %d,\nrange : "
                 "%d,\nnewtype : %*D,\nreturn : %d\n}\n",
                 precision, range, newtype, ret_tmp);
@@ -17120,6 +17732,7 @@ int R_MPI_Type_create_f90_complex(int precision, int range,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Reduce_local_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Reduce_local_print = 0;
 int MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
                      A_MPI_Datatype datatype, A_MPI_Op op);
 int (*LOCAL_MPI_Reduce_local)(void *, void *, int, R_MPI_Datatype, R_MPI_Op);
@@ -17182,8 +17795,10 @@ int A_MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
   buffer_conv_r2a(&inoutbuf, &inoutbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Reduce_local_print)
+    \;
   debug_printer("MPI_Reduce_local : \n{\ninbuf : %p,\ninoutbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\nreturn : %d\n}\n",
+                "%d,\ndatatype : %D,\nop : %op,\nreturn : %d\n}\n",
                 inbuf, inoutbuf, count, datatype, op, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17205,6 +17820,7 @@ int R_MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Op_commutative_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Op_commutative_print = 0;
 int MPI_Op_commutative(A_MPI_Op op, int *commute);
 int (*LOCAL_MPI_Op_commutative)(R_MPI_Op, int *);
 
@@ -17252,8 +17868,10 @@ int A_MPI_Op_commutative(A_MPI_Op op, int *commute) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Op_commutative_print)
+    \;
   debug_printer(
-      "MPI_Op_commutative : \n{\nop : %o,\ncommute : %*d,\nreturn : %d\n}\n",
+      "MPI_Op_commutative : \n{\nop : %op,\ncommute : %*d,\nreturn : %d\n}\n",
       op, commute, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17274,6 +17892,7 @@ int R_MPI_Op_commutative(R_MPI_Op op, int *commute) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Reduce_scatter_block_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Reduce_scatter_block_print = 0;
 int MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                              A_MPI_Datatype datatype, A_MPI_Op op,
                              A_MPI_Comm comm);
@@ -17342,8 +17961,10 @@ int A_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Reduce_scatter_block_print)
+    \;
   debug_printer("MPI_Reduce_scatter_block : \n{\nsendbuf : %p,\nrecvbuf : "
-                "%p,\nrecvcount : %d,\ndatatype : %D,\nop : %o,\ncomm : "
+                "%p,\nrecvcount : %d,\ndatatype : %D,\nop : %op,\ncomm : "
                 "%C,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, recvcount, datatype, op, comm, ret_tmp);
 #endif
@@ -17368,6 +17989,7 @@ int R_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Dist_graph_neighbors_count_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Dist_graph_neighbors_count_print = 0;
 int MPI_Dist_graph_neighbors_count(A_MPI_Comm comm, int *indegree,
                                    int *outdegree, int *weighted);
 int (*LOCAL_MPI_Dist_graph_neighbors_count)(R_MPI_Comm, int *, int *, int *);
@@ -17422,6 +18044,8 @@ int A_MPI_Dist_graph_neighbors_count(A_MPI_Comm comm, int *indegree,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Dist_graph_neighbors_count_print)
+    \;
   debug_printer("MPI_Dist_graph_neighbors_count : \n{\ncomm : %C,\nindegree : "
                 "%*d,\noutdegree : %*d,\nweighted : %*d,\nreturn : %d\n}\n",
                 comm, indegree, outdegree, weighted, ret_tmp);
@@ -17446,6 +18070,7 @@ int R_MPI_Dist_graph_neighbors_count(R_MPI_Comm comm, int *indegree,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Improbe_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Improbe_print = 0;
 int MPI_Improbe(int source, int tag, A_MPI_Comm comm, int *flag,
                 A_MPI_Message *message, A_MPI_Status *status);
 int (*LOCAL_MPI_Improbe)(int, int, R_MPI_Comm, int *, R_MPI_Message *,
@@ -17515,8 +18140,10 @@ int A_MPI_Improbe(int source, int tag, A_MPI_Comm comm, int *flag,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Improbe_print)
+    \;
   debug_printer("MPI_Improbe : \n{\nsource : %d,\ntag : %d,\ncomm : %C,\nflag "
-                ": %*d,\nmessage : %*m,\nstatus : %*n,\nreturn : %d\n}\n",
+                ": %*d,\nmessage : %*p,\nstatus : %*n,\nreturn : %d\n}\n",
                 source, tag, comm, flag, message, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17538,6 +18165,7 @@ int R_MPI_Improbe(int source, int tag, R_MPI_Comm comm, int *flag,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Imrecv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Imrecv_print = 0;
 int MPI_Imrecv(void *buf, int count, A_MPI_Datatype datatype,
                A_MPI_Message *message, A_MPI_Request *request);
 int (*LOCAL_MPI_Imrecv)(void *, int, R_MPI_Datatype, R_MPI_Message *,
@@ -17605,8 +18233,10 @@ int A_MPI_Imrecv(void *buf, int count, A_MPI_Datatype datatype,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Imrecv_print)
+    \;
   debug_printer("MPI_Imrecv : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
-                "%D,\nmessage : %*m,\nrequest : %p,\nreturn : %d\n}\n",
+                "%D,\nmessage : %*p,\nrequest : %p,\nreturn : %d\n}\n",
                 buf, count, datatype, message, request, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17628,6 +18258,7 @@ int R_MPI_Imrecv(void *buf, int count, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Mprobe_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Mprobe_print = 0;
 int MPI_Mprobe(int source, int tag, A_MPI_Comm comm, A_MPI_Message *message,
                A_MPI_Status *status);
 int (*LOCAL_MPI_Mprobe)(int, int, R_MPI_Comm, R_MPI_Message *, R_MPI_Status *);
@@ -17692,8 +18323,10 @@ int A_MPI_Mprobe(int source, int tag, A_MPI_Comm comm, A_MPI_Message *message,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Mprobe_print)
+    \;
   debug_printer("MPI_Mprobe : \n{\nsource : %d,\ntag : %d,\ncomm : "
-                "%C,\nmessage : %*m,\nstatus : %*n,\nreturn : %d\n}\n",
+                "%C,\nmessage : %*p,\nstatus : %*n,\nreturn : %d\n}\n",
                 source, tag, comm, message, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17715,6 +18348,7 @@ int R_MPI_Mprobe(int source, int tag, R_MPI_Comm comm, R_MPI_Message *message,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Mrecv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Mrecv_print = 0;
 int MPI_Mrecv(void *buf, int count, A_MPI_Datatype datatype,
               A_MPI_Message *message, A_MPI_Status *status);
 int (*LOCAL_MPI_Mrecv)(void *, int, R_MPI_Datatype, R_MPI_Message *,
@@ -17781,8 +18415,10 @@ int A_MPI_Mrecv(void *buf, int count, A_MPI_Datatype datatype,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Mrecv_print)
+    \;
   debug_printer("MPI_Mrecv : \n{\nbuf : %p,\ncount : %d,\ndatatype : "
-                "%D,\nmessage : %*m,\nstatus : %*n,\nreturn : %d\n}\n",
+                "%D,\nmessage : %*p,\nstatus : %*n,\nreturn : %d\n}\n",
                 buf, count, datatype, message, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17804,6 +18440,7 @@ int R_MPI_Mrecv(void *buf, int count, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_idup_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_idup_print = 0;
 int MPI_Comm_idup(A_MPI_Comm comm, A_MPI_Comm *newcomm, A_MPI_Request *request);
 int (*LOCAL_MPI_Comm_idup)(R_MPI_Comm, R_MPI_Comm *, R_MPI_Request *);
 
@@ -17860,6 +18497,8 @@ int A_MPI_Comm_idup(A_MPI_Comm comm, A_MPI_Comm *newcomm,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_idup_print)
+    \;
   debug_printer("MPI_Comm_idup : \n{\ncomm : %C,\nnewcomm : %*o,\nrequest : "
                 "%p,\nreturn : %d\n}\n",
                 comm, newcomm, request, ret_tmp);
@@ -17883,6 +18522,7 @@ int R_MPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ibarrier_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ibarrier_print = 0;
 int MPI_Ibarrier(A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Ibarrier)(R_MPI_Comm, R_MPI_Request *);
 
@@ -17933,6 +18573,8 @@ int A_MPI_Ibarrier(A_MPI_Comm comm, A_MPI_Request *request) {
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ibarrier_print)
+    \;
   debug_printer(
       "MPI_Ibarrier : \n{\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n", comm,
       request, ret_tmp);
@@ -17955,6 +18597,7 @@ int R_MPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ibcast_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ibcast_print = 0;
 int MPI_Ibcast(void *buffer, int count, A_MPI_Datatype datatype, int root,
                A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Ibcast)(void *, int, R_MPI_Datatype, int, R_MPI_Comm,
@@ -18024,6 +18667,8 @@ int A_MPI_Ibcast(void *buffer, int count, A_MPI_Datatype datatype, int root,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ibcast_print)
+    \;
   debug_printer("MPI_Ibcast : \n{\nbuffer : %p,\ncount : %d,\ndatatype : "
                 "%D,\nroot : %d,\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n",
                 buffer, count, datatype, root, comm, request, ret_tmp);
@@ -18047,6 +18692,7 @@ int R_MPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype, int root,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Igather_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Igather_print = 0;
 int MPI_Igather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                 void *recvbuf, int recvcount, A_MPI_Datatype recvtype, int root,
                 A_MPI_Comm comm, A_MPI_Request *request);
@@ -18124,6 +18770,8 @@ int A_MPI_Igather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Igather_print)
+    \;
   debug_printer("MPI_Igather : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype : "
                 "%D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype : %D,\nroot : "
                 "%d,\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n",
@@ -18151,6 +18799,7 @@ int R_MPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iscatter_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iscatter_print = 0;
 int MPI_Iscatter(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                  void *recvbuf, int recvcount, A_MPI_Datatype recvtype,
                  int root, A_MPI_Comm comm, A_MPI_Request *request);
@@ -18228,6 +18877,8 @@ int A_MPI_Iscatter(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iscatter_print)
+    \;
   debug_printer("MPI_Iscatter : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype "
                 ": %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype : %D,\nroot : "
                 "%d,\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n",
@@ -18255,6 +18906,7 @@ int R_MPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iallgather_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iallgather_print = 0;
 int MPI_Iallgather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                    void *recvbuf, int recvcount, A_MPI_Datatype recvtype,
                    A_MPI_Comm comm, A_MPI_Request *request);
@@ -18331,6 +18983,8 @@ int A_MPI_Iallgather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iallgather_print)
+    \;
   debug_printer("MPI_Iallgather : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype "
                 ": %D,\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n",
@@ -18358,6 +19012,7 @@ int R_MPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ialltoall_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ialltoall_print = 0;
 int MPI_Ialltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                   void *recvbuf, int recvcount, A_MPI_Datatype recvtype,
                   A_MPI_Comm comm, A_MPI_Request *request);
@@ -18434,6 +19089,8 @@ int A_MPI_Ialltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ialltoall_print)
+    \;
   debug_printer("MPI_Ialltoall : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype "
                 ": %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype : %D,\ncomm : "
                 "%C,\nrequest : %p,\nreturn : %d\n}\n",
@@ -18461,6 +19118,7 @@ int R_MPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ireduce_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ireduce_print = 0;
 int MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
                 A_MPI_Datatype datatype, A_MPI_Op op, int root, A_MPI_Comm comm,
                 A_MPI_Request *request);
@@ -18536,8 +19194,10 @@ int A_MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ireduce_print)
+    \;
   debug_printer("MPI_Ireduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\nroot : %d,\ncomm : "
+                "%d,\ndatatype : %D,\nop : %op,\nroot : %d,\ncomm : "
                 "%C,\nrequest : %p,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, root, comm, request,
                 ret_tmp);
@@ -18563,6 +19223,7 @@ int R_MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iallreduce_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iallreduce_print = 0;
 int MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
                    A_MPI_Datatype datatype, A_MPI_Op op, A_MPI_Comm comm,
                    A_MPI_Request *request);
@@ -18638,8 +19299,10 @@ int A_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iallreduce_print)
+    \;
   debug_printer("MPI_Iallreduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\ncomm : %C,\nrequest : "
+                "%d,\ndatatype : %D,\nop : %op,\ncomm : %C,\nrequest : "
                 "%p,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, comm, request, ret_tmp);
 #endif
@@ -18664,6 +19327,7 @@ int R_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ireduce_scatter_block_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ireduce_scatter_block_print = 0;
 int MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                               A_MPI_Datatype datatype, A_MPI_Op op,
                               A_MPI_Comm comm, A_MPI_Request *request);
@@ -18739,8 +19403,10 @@ int A_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ireduce_scatter_block_print)
+    \;
   debug_printer("MPI_Ireduce_scatter_block : \n{\nsendbuf : %p,\nrecvbuf : "
-                "%p,\nrecvcount : %d,\ndatatype : %D,\nop : %o,\ncomm : "
+                "%p,\nrecvcount : %d,\ndatatype : %D,\nop : %op,\ncomm : "
                 "%C,\nrequest : %p,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, recvcount, datatype, op, comm, request,
                 ret_tmp);
@@ -18766,6 +19432,7 @@ int R_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iscan_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iscan_print = 0;
 int MPI_Iscan(void *sendbuf, void *recvbuf, int count, A_MPI_Datatype datatype,
               A_MPI_Op op, A_MPI_Comm comm, A_MPI_Request *request);
 int (*LOCAL_MPI_Iscan)(void *, void *, int, R_MPI_Datatype, R_MPI_Op,
@@ -18839,8 +19506,10 @@ int A_MPI_Iscan(void *sendbuf, void *recvbuf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iscan_print)
+    \;
   debug_printer("MPI_Iscan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\ncomm : %C,\nrequest : "
+                "%d,\ndatatype : %D,\nop : %op,\ncomm : %C,\nrequest : "
                 "%p,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, comm, request, ret_tmp);
 #endif
@@ -18865,6 +19534,7 @@ int R_MPI_Iscan(void *sendbuf, void *recvbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iexscan_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iexscan_print = 0;
 int MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
                 A_MPI_Datatype datatype, A_MPI_Op op, A_MPI_Comm comm,
                 A_MPI_Request *request);
@@ -18939,8 +19609,10 @@ int A_MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iexscan_print)
+    \;
   debug_printer("MPI_Iexscan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                "%d,\ndatatype : %D,\nop : %o,\ncomm : %C,\nrequest : "
+                "%d,\ndatatype : %D,\nop : %op,\ncomm : %C,\nrequest : "
                 "%p,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, count, datatype, op, comm, request, ret_tmp);
 #endif
@@ -18965,6 +19637,7 @@ int R_MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ineighbor_allgather_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ineighbor_allgather_print = 0;
 int MPI_Ineighbor_allgather(void *sendbuf, int sendcount,
                             A_MPI_Datatype sendtype, void *recvbuf,
                             int recvcount, A_MPI_Datatype recvtype,
@@ -19043,6 +19716,8 @@ int A_MPI_Ineighbor_allgather(void *sendbuf, int sendcount,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ineighbor_allgather_print)
+    \;
   debug_printer("MPI_Ineighbor_allgather : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype "
                 ": %D,\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n",
@@ -19072,6 +19747,7 @@ int R_MPI_Ineighbor_allgather(void *sendbuf, int sendcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ineighbor_alltoall_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ineighbor_alltoall_print = 0;
 int MPI_Ineighbor_alltoall(void *sendbuf, int sendcount,
                            A_MPI_Datatype sendtype, void *recvbuf,
                            int recvcount, A_MPI_Datatype recvtype,
@@ -19151,6 +19827,8 @@ int A_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ineighbor_alltoall_print)
+    \;
   debug_printer("MPI_Ineighbor_alltoall : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype "
                 ": %D,\ncomm : %C,\nrequest : %p,\nreturn : %d\n}\n",
@@ -19180,6 +19858,7 @@ int R_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Neighbor_allgather_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Neighbor_allgather_print = 0;
 int MPI_Neighbor_allgather(void *sendbuf, int sendcount,
                            A_MPI_Datatype sendtype, void *recvbuf,
                            int recvcount, A_MPI_Datatype recvtype,
@@ -19253,6 +19932,8 @@ int A_MPI_Neighbor_allgather(void *sendbuf, int sendcount,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Neighbor_allgather_print)
+    \;
   debug_printer("MPI_Neighbor_allgather : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype "
                 ": %D,\ncomm : %C,\nreturn : %d\n}\n",
@@ -19281,6 +19962,7 @@ int R_MPI_Neighbor_allgather(void *sendbuf, int sendcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Neighbor_alltoall_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Neighbor_alltoall_print = 0;
 int MPI_Neighbor_alltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                           void *recvbuf, int recvcount, A_MPI_Datatype recvtype,
                           A_MPI_Comm comm);
@@ -19353,6 +20035,8 @@ int A_MPI_Neighbor_alltoall(void *sendbuf, int sendcount,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Neighbor_alltoall_print)
+    \;
   debug_printer("MPI_Neighbor_alltoall : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : %d,\nrecvtype "
                 ": %D,\ncomm : %C,\nreturn : %d\n}\n",
@@ -19381,6 +20065,7 @@ int R_MPI_Neighbor_alltoall(void *sendbuf, int sendcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_split_type_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_split_type_print = 0;
 int MPI_Comm_split_type(A_MPI_Comm comm, int split_type, int key,
                         A_MPI_Info info, A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_split_type)(R_MPI_Comm, int, int, R_MPI_Info,
@@ -19444,8 +20129,10 @@ int A_MPI_Comm_split_type(A_MPI_Comm comm, int split_type, int key,
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_split_type_print)
+    \;
   debug_printer("MPI_Comm_split_type : \n{\ncomm : %C,\nsplit_type : %d,\nkey "
-                ": %d,\ninfo : %I,\nnewcomm : %*o,\nreturn : %d\n}\n",
+                ": %d,\ninfo : %p,\nnewcomm : %*o,\nreturn : %d\n}\n",
                 comm, split_type, key, info, newcomm, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19467,6 +20154,7 @@ int R_MPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Get_elements_x_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Get_elements_x_print = 0;
 int MPI_Get_elements_x(A_MPI_Status *status, A_MPI_Datatype datatype,
                        A_MPI_Count *count);
 int (*LOCAL_MPI_Get_elements_x)(R_MPI_Status *, R_MPI_Datatype, R_MPI_Count *);
@@ -19521,6 +20209,8 @@ int A_MPI_Get_elements_x(A_MPI_Status *status, A_MPI_Datatype datatype,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Get_elements_x_print)
+    \;
   debug_printer("MPI_Get_elements_x : \n{\nstatus : %*n,\ndatatype : "
                 "%D,\ncount : %*d,\nreturn : %d\n}\n",
                 status, datatype, count, ret_tmp);
@@ -19544,6 +20234,7 @@ int R_MPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Status_set_elements_x_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Status_set_elements_x_print = 0;
 int MPI_Status_set_elements_x(A_MPI_Status *status, A_MPI_Datatype datatype,
                               A_MPI_Count count);
 int (*LOCAL_MPI_Status_set_elements_x)(R_MPI_Status *, R_MPI_Datatype,
@@ -19600,6 +20291,8 @@ int A_MPI_Status_set_elements_x(A_MPI_Status *status, A_MPI_Datatype datatype,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Status_set_elements_x_print)
+    \;
   debug_printer("MPI_Status_set_elements_x : \n{\nstatus : %*n,\ndatatype : "
                 "%D,\ncount : %d,\nreturn : %d\n}\n",
                 status, datatype, count, ret_tmp);
@@ -19623,6 +20316,7 @@ int R_MPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_extent_x_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_extent_x_print = 0;
 int MPI_Type_get_extent_x(A_MPI_Datatype datatype, A_MPI_Count *lb,
                           A_MPI_Count *extent);
 int (*LOCAL_MPI_Type_get_extent_x)(R_MPI_Datatype, R_MPI_Count *,
@@ -19675,6 +20369,8 @@ int A_MPI_Type_get_extent_x(A_MPI_Datatype datatype, A_MPI_Count *lb,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_extent_x_print)
+    \;
   debug_printer("MPI_Type_get_extent_x : \n{\ndatatype : %D,\nlb : "
                 "%*d,\nextent : %*d,\nreturn : %d\n}\n",
                 datatype, lb, extent, ret_tmp);
@@ -19698,6 +20394,7 @@ int R_MPI_Type_get_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_true_extent_x_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_true_extent_x_print = 0;
 int MPI_Type_get_true_extent_x(A_MPI_Datatype datatype, A_MPI_Count *lb,
                                A_MPI_Count *extent);
 int (*LOCAL_MPI_Type_get_true_extent_x)(R_MPI_Datatype, R_MPI_Count *,
@@ -19750,6 +20447,8 @@ int A_MPI_Type_get_true_extent_x(A_MPI_Datatype datatype, A_MPI_Count *lb,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_true_extent_x_print)
+    \;
   debug_printer("MPI_Type_get_true_extent_x : \n{\ndatatype : %D,\nlb : "
                 "%*d,\nextent : %*d,\nreturn : %d\n}\n",
                 datatype, lb, extent, ret_tmp);
@@ -19773,6 +20472,7 @@ int R_MPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_size_x_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_size_x_print = 0;
 int MPI_Type_size_x(A_MPI_Datatype datatype, A_MPI_Count *size);
 int (*LOCAL_MPI_Type_size_x)(R_MPI_Datatype, R_MPI_Count *);
 
@@ -19820,6 +20520,8 @@ int A_MPI_Type_size_x(A_MPI_Datatype datatype, A_MPI_Count *size) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_size_x_print)
+    \;
   debug_printer(
       "MPI_Type_size_x : \n{\ndatatype : %D,\nsize : %*d,\nreturn : %d\n}\n",
       datatype, size, ret_tmp);
@@ -19842,6 +20544,7 @@ int R_MPI_Type_size_x(R_MPI_Datatype datatype, R_MPI_Count *size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_create_group_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_create_group_print = 0;
 int MPI_Comm_create_group(A_MPI_Comm comm, A_MPI_Group group, int tag,
                           A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Comm_create_group)(R_MPI_Comm, R_MPI_Group, int, R_MPI_Comm *);
@@ -19901,7 +20604,9 @@ int A_MPI_Comm_create_group(A_MPI_Comm comm, A_MPI_Group group, int tag,
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Comm_create_group : \n{\ncomm : %C,\ngroup : %g,\ntag : "
+  if (WI4MPI_Comm_create_group_print)
+    \;
+  debug_printer("MPI_Comm_create_group : \n{\ncomm : %C,\ngroup : %p,\ntag : "
                 "%d,\nnewcomm : %*o,\nreturn : %d\n}\n",
                 comm, group, tag, newcomm, ret_tmp);
 #endif
@@ -19924,6 +20629,7 @@ int R_MPI_Comm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_init_thread_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_init_thread_print = 0;
 int MPI_T_init_thread(int required, int *provided);
 int (*LOCAL_MPI_T_init_thread)(int, int *);
 
@@ -19968,6 +20674,8 @@ int A_MPI_T_init_thread(int required, int *provided) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_init_thread_print)
+    \;
   debug_printer("MPI_T_init_thread : \n{\nrequired : %d,\nprovided : "
                 "%*d,\nreturn : %d\n}\n",
                 required, provided, ret_tmp);
@@ -19990,6 +20698,7 @@ int R_MPI_T_init_thread(int required, int *provided) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_enum_get_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_enum_get_info_print = 0;
 int MPI_T_enum_get_info(A_MPI_T_enum enumtype, int *num, char *name,
                         int *name_len);
 int (*LOCAL_MPI_T_enum_get_info)(R_MPI_T_enum, int *, char *, int *);
@@ -20043,6 +20752,8 @@ int A_MPI_T_enum_get_info(A_MPI_T_enum enumtype, int *num, char *name,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_enum_get_info_print)
+    \;
   debug_printer("MPI_T_enum_get_info : \n{\nenumtype : %d,\nnum : %*d,\nname : "
                 "%s,\nname_len : %*d,\nreturn : %d\n}\n",
                 enumtype, num, name, name_len, ret_tmp);
@@ -20066,6 +20777,7 @@ int R_MPI_T_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_enum_get_item_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_enum_get_item_print = 0;
 int MPI_T_enum_get_item(A_MPI_T_enum enumtype, int indx, int *value, char *name,
                         int *name_len);
 int (*LOCAL_MPI_T_enum_get_item)(R_MPI_T_enum, int, int *, char *, int *);
@@ -20122,6 +20834,8 @@ int A_MPI_T_enum_get_item(A_MPI_T_enum enumtype, int indx, int *value,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_enum_get_item_print)
+    \;
   debug_printer("MPI_T_enum_get_item : \n{\nenumtype : %d,\nindx : %d,\nvalue "
                 ": %*d,\nname : %s,\nname_len : %*d,\nreturn : %d\n}\n",
                 enumtype, indx, value, name, name_len, ret_tmp);
@@ -20146,6 +20860,7 @@ int R_MPI_T_enum_get_item(R_MPI_T_enum enumtype, int indx, int *value,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_cvar_get_num_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_cvar_get_num_print = 0;
 int MPI_T_cvar_get_num(int *num_cvar);
 int (*LOCAL_MPI_T_cvar_get_num)(int *);
 
@@ -20188,6 +20903,8 @@ int A_MPI_T_cvar_get_num(int *num_cvar) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_cvar_get_num_print)
+    \;
   debug_printer("MPI_T_cvar_get_num : \n{\nnum_cvar : %*d,\nreturn : %d\n}\n",
                 num_cvar, ret_tmp);
 #endif
@@ -20209,6 +20926,7 @@ int R_MPI_T_cvar_get_num(int *num_cvar) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_cvar_get_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_cvar_get_info_print = 0;
 int MPI_T_cvar_get_info(int cvar_index, char *name, int *name_len,
                         int *verbosity, A_MPI_Datatype *datatype,
                         A_MPI_T_enum *enumtype, char *desc, int *desc_len,
@@ -20278,6 +20996,8 @@ int A_MPI_T_cvar_get_info(int cvar_index, char *name, int *name_len,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_cvar_get_info_print)
+    \;
   debug_printer("MPI_T_cvar_get_info : \n{\ncvar_index : %d,\nname : "
                 "%s,\nname_len : %*d,\nverbosity : %*d,\ndatatype : "
                 "%*D,\nenumtype : %d,\ndesc : %s,\ndesc_len : %*d,\nbinding : "
@@ -20308,6 +21028,7 @@ int R_MPI_T_cvar_get_info(int cvar_index, char *name, int *name_len,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_cvar_handle_alloc_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_cvar_handle_alloc_print = 0;
 int MPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle,
                             A_MPI_T_cvar_handle *handle, int *count);
 int (*LOCAL_MPI_T_cvar_handle_alloc)(int, void *, R_MPI_T_cvar_handle *, int *);
@@ -20365,6 +21086,8 @@ int A_MPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_cvar_handle_alloc_print)
+    \;
   debug_printer("MPI_T_cvar_handle_alloc : \n{\ncvar_index : %d,\nobj_handle : "
                 "%p,\nhandle : %p,\ncount : %*d,\nreturn : %d\n}\n",
                 cvar_index, obj_handle, handle, count, ret_tmp);
@@ -20389,6 +21112,7 @@ int R_MPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_cvar_handle_free_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_cvar_handle_free_print = 0;
 int MPI_T_cvar_handle_free(A_MPI_T_cvar_handle *handle);
 int (*LOCAL_MPI_T_cvar_handle_free)(R_MPI_T_cvar_handle *);
 
@@ -20434,6 +21158,8 @@ int A_MPI_T_cvar_handle_free(A_MPI_T_cvar_handle *handle) {
   cvar_handle_conv_r2a(handle, handle_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_cvar_handle_free_print)
+    \;
   debug_printer("MPI_T_cvar_handle_free : \n{\nhandle : %p,\nreturn : %d\n}\n",
                 handle, ret_tmp);
 #endif
@@ -20455,6 +21181,7 @@ int R_MPI_T_cvar_handle_free(R_MPI_T_cvar_handle *handle) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_cvar_read_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_cvar_read_print = 0;
 int MPI_T_cvar_read(A_MPI_T_cvar_handle handle, void *buf);
 int (*LOCAL_MPI_T_cvar_read)(R_MPI_T_cvar_handle, void *);
 
@@ -20502,6 +21229,8 @@ int A_MPI_T_cvar_read(A_MPI_T_cvar_handle handle, void *buf) {
   buffer_conv_r2a(&buf, &buf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_cvar_read_print)
+    \;
   debug_printer("MPI_T_cvar_read : \n{\nbuf : %p,\nreturn : %d\n}\n", buf,
                 ret_tmp);
 #endif
@@ -20523,6 +21252,7 @@ int R_MPI_T_cvar_read(R_MPI_T_cvar_handle handle, void *buf) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_cvar_write_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_cvar_write_print = 0;
 int MPI_T_cvar_write(A_MPI_T_cvar_handle handle, void *buf);
 int (*LOCAL_MPI_T_cvar_write)(R_MPI_T_cvar_handle, void *);
 
@@ -20570,6 +21300,8 @@ int A_MPI_T_cvar_write(A_MPI_T_cvar_handle handle, void *buf) {
   int ret_tmp = LOCAL_MPI_T_cvar_write(handle_tmp, buf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_cvar_write_print)
+    \;
   debug_printer("MPI_T_cvar_write : \n{\nbuf : %p,\nreturn : %d\n}\n", buf,
                 ret_tmp);
 #endif
@@ -20591,6 +21323,7 @@ int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle, void *buf) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_pvar_get_num_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_pvar_get_num_print = 0;
 int MPI_T_pvar_get_num(int *num_pvar);
 int (*LOCAL_MPI_T_pvar_get_num)(int *);
 
@@ -20633,6 +21366,8 @@ int A_MPI_T_pvar_get_num(int *num_pvar) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_pvar_get_num_print)
+    \;
   debug_printer("MPI_T_pvar_get_num : \n{\nnum_pvar : %*d,\nreturn : %d\n}\n",
                 num_pvar, ret_tmp);
 #endif
@@ -20654,6 +21389,7 @@ int R_MPI_T_pvar_get_num(int *num_pvar) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_pvar_get_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_pvar_get_info_print = 0;
 int MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
                         int *verbosity, int *var_class,
                         A_MPI_Datatype *datatype, A_MPI_T_enum *enumtype,
@@ -20726,6 +21462,8 @@ int A_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_pvar_get_info_print)
+    \;
   debug_printer(
       "MPI_T_pvar_get_info : \n{\npvar_index : %d,\nname : %s,\nname_len : "
       "%*d,\nverbosity : %*d,\nvar_class : %*d,\ndatatype : %*D,\nenumtype : "
@@ -20758,6 +21496,7 @@ int R_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_category_get_num_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_category_get_num_print = 0;
 int MPI_T_category_get_num(int *num_cat);
 int (*LOCAL_MPI_T_category_get_num)(int *);
 
@@ -20800,6 +21539,8 @@ int A_MPI_T_category_get_num(int *num_cat) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_category_get_num_print)
+    \;
   debug_printer(
       "MPI_T_category_get_num : \n{\nnum_cat : %*d,\nreturn : %d\n}\n", num_cat,
       ret_tmp);
@@ -20822,6 +21563,7 @@ int R_MPI_T_category_get_num(int *num_cat) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_category_get_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_category_get_info_print = 0;
 int MPI_T_category_get_info(int cat_index, char *name, int *name_len,
                             char *desc, int *desc_len, int *num_cvars,
                             int *num_pvars, int *num_categories);
@@ -20881,6 +21623,8 @@ int A_MPI_T_category_get_info(int cat_index, char *name, int *name_len,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_category_get_info_print)
+    \;
   debug_printer("MPI_T_category_get_info : \n{\ncat_index : %d,\nname : "
                 "%s,\nname_len : %*d,\ndesc : %s,\ndesc_len : %*d,\nnum_cvars "
                 ": %*d,\nnum_pvars : %*d,\nnum_categories : %*d,\nreturn : "
@@ -20910,6 +21654,7 @@ int R_MPI_T_category_get_info(int cat_index, char *name, int *name_len,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_open_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_open_print = 0;
 int MPI_File_open(A_MPI_Comm comm, char *filename, int amode, A_MPI_Info info,
                   A_MPI_File *fh);
 int (*LOCAL_MPI_File_open)(R_MPI_Comm, char *, int, R_MPI_Info, R_MPI_File *);
@@ -20972,8 +21717,10 @@ int A_MPI_File_open(A_MPI_Comm comm, char *filename, int amode, A_MPI_Info info,
   file_conv_r2a(fh, fh_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_open_print)
+    \;
   debug_printer("MPI_File_open : \n{\ncomm : %C,\nfilename : %s,\namode : "
-                "%d,\ninfo : %I,\nfh : %p,\nreturn : %d\n}\n",
+                "%d,\ninfo : %p,\nfh : %p,\nreturn : %d\n}\n",
                 comm, filename, amode, info, fh, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20995,6 +21742,7 @@ int R_MPI_File_open(R_MPI_Comm comm, char *filename, int amode, R_MPI_Info info,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_close_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_close_print = 0;
 int MPI_File_close(A_MPI_File *fh);
 int (*LOCAL_MPI_File_close)(R_MPI_File *);
 
@@ -21040,6 +21788,8 @@ int A_MPI_File_close(A_MPI_File *fh) {
   file_conv_r2a(fh, fh_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_close_print)
+    \;
   debug_printer("MPI_File_close : \n{\nfh : %p,\nreturn : %d\n}\n", fh,
                 ret_tmp);
 #endif
@@ -21061,6 +21811,7 @@ int R_MPI_File_close(R_MPI_File *fh) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_delete_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_delete_print = 0;
 int MPI_File_delete(char *filename, A_MPI_Info info);
 int (*LOCAL_MPI_File_delete)(char *, R_MPI_Info);
 
@@ -21107,8 +21858,10 @@ int A_MPI_File_delete(char *filename, A_MPI_Info info) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_delete_print)
+    \;
   debug_printer(
-      "MPI_File_delete : \n{\nfilename : %s,\ninfo : %I,\nreturn : %d\n}\n",
+      "MPI_File_delete : \n{\nfilename : %s,\ninfo : %p,\nreturn : %d\n}\n",
       filename, info, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21129,6 +21882,7 @@ int R_MPI_File_delete(char *filename, R_MPI_Info info) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_set_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_set_size_print = 0;
 int MPI_File_set_size(A_MPI_File fh, A_MPI_Offset size);
 int (*LOCAL_MPI_File_set_size)(R_MPI_File, R_MPI_Offset);
 
@@ -21177,8 +21931,10 @@ int A_MPI_File_set_size(A_MPI_File fh, A_MPI_Offset size) {
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_set_size_print)
+    \;
   debug_printer(
-      "MPI_File_set_size : \n{\nfh : %F,\nsize : %ld,\nreturn : %d\n}\n", fh,
+      "MPI_File_set_size : \n{\nfh : %p,\nsize : %ld,\nreturn : %d\n}\n", fh,
       size, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21199,6 +21955,7 @@ int R_MPI_File_set_size(R_MPI_File fh, R_MPI_Offset size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_preallocate_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_preallocate_print = 0;
 int MPI_File_preallocate(A_MPI_File fh, A_MPI_Offset size);
 int (*LOCAL_MPI_File_preallocate)(R_MPI_File, R_MPI_Offset);
 
@@ -21247,8 +22004,10 @@ int A_MPI_File_preallocate(A_MPI_File fh, A_MPI_Offset size) {
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_preallocate_print)
+    \;
   debug_printer(
-      "MPI_File_preallocate : \n{\nfh : %F,\nsize : %ld,\nreturn : %d\n}\n", fh,
+      "MPI_File_preallocate : \n{\nfh : %p,\nsize : %ld,\nreturn : %d\n}\n", fh,
       size, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21269,6 +22028,7 @@ int R_MPI_File_preallocate(R_MPI_File fh, R_MPI_Offset size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_size_print = 0;
 int MPI_File_get_size(A_MPI_File fh, A_MPI_Offset *size);
 int (*LOCAL_MPI_File_get_size)(R_MPI_File, R_MPI_Offset *);
 
@@ -21317,8 +22077,10 @@ int A_MPI_File_get_size(A_MPI_File fh, A_MPI_Offset *size) {
   *size = (A_MPI_Offset)*size_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_get_size_print)
+    \;
   debug_printer(
-      "MPI_File_get_size : \n{\nfh : %F,\nsize : %*o,\nreturn : %d\n}\n", fh,
+      "MPI_File_get_size : \n{\nfh : %p,\nsize : %*o,\nreturn : %d\n}\n", fh,
       size, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21339,6 +22101,7 @@ int R_MPI_File_get_size(R_MPI_File fh, R_MPI_Offset *size) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_group_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_group_print = 0;
 int MPI_File_get_group(A_MPI_File fh, A_MPI_Group *group);
 int (*LOCAL_MPI_File_get_group)(R_MPI_File, R_MPI_Group *);
 
@@ -21387,8 +22150,10 @@ int A_MPI_File_get_group(A_MPI_File fh, A_MPI_Group *group) {
   group_conv_r2a(group, group_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_get_group_print)
+    \;
   debug_printer(
-      "MPI_File_get_group : \n{\nfh : %F,\ngroup : %*G,\nreturn : %d\n}\n", fh,
+      "MPI_File_get_group : \n{\nfh : %p,\ngroup : %*p,\nreturn : %d\n}\n", fh,
       group, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21409,6 +22174,7 @@ int R_MPI_File_get_group(R_MPI_File fh, R_MPI_Group *group) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_amode_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_amode_print = 0;
 int MPI_File_get_amode(A_MPI_File fh, int *amode);
 int (*LOCAL_MPI_File_get_amode)(R_MPI_File, int *);
 
@@ -21457,8 +22223,10 @@ int A_MPI_File_get_amode(A_MPI_File fh, int *amode) {
   amode_conv_r2a(amode, amode_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_get_amode_print)
+    \;
   debug_printer(
-      "MPI_File_get_amode : \n{\nfh : %F,\namode : %*d,\nreturn : %d\n}\n", fh,
+      "MPI_File_get_amode : \n{\nfh : %p,\namode : %*d,\nreturn : %d\n}\n", fh,
       amode, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21479,6 +22247,7 @@ int R_MPI_File_get_amode(R_MPI_File fh, int *amode) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_set_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_set_info_print = 0;
 int MPI_File_set_info(A_MPI_File fh, A_MPI_Info info);
 int (*LOCAL_MPI_File_set_info)(R_MPI_File, R_MPI_Info);
 
@@ -21527,8 +22296,10 @@ int A_MPI_File_set_info(A_MPI_File fh, A_MPI_Info info) {
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_set_info_print)
+    \;
   debug_printer(
-      "MPI_File_set_info : \n{\nfh : %F,\ninfo : %I,\nreturn : %d\n}\n", fh,
+      "MPI_File_set_info : \n{\nfh : %p,\ninfo : %p,\nreturn : %d\n}\n", fh,
       info, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21549,6 +22320,7 @@ int R_MPI_File_set_info(R_MPI_File fh, R_MPI_Info info) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_info_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_info_print = 0;
 int MPI_File_get_info(A_MPI_File fh, A_MPI_Info *info_used);
 int (*LOCAL_MPI_File_get_info)(R_MPI_File, R_MPI_Info *);
 
@@ -21598,8 +22370,10 @@ int A_MPI_File_get_info(A_MPI_File fh, A_MPI_Info *info_used) {
   info_conv_r2a(info_used, info_used_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_get_info_print)
+    \;
   debug_printer(
-      "MPI_File_get_info : \n{\nfh : %F,\ninfo_used : %*I,\nreturn : %d\n}\n",
+      "MPI_File_get_info : \n{\nfh : %p,\ninfo_used : %*p,\nreturn : %d\n}\n",
       fh, info_used, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21620,6 +22394,7 @@ int R_MPI_File_get_info(R_MPI_File fh, R_MPI_Info *info_used) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_set_view_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_set_view_print = 0;
 int MPI_File_set_view(A_MPI_File fh, A_MPI_Offset disp, A_MPI_Datatype etype,
                       A_MPI_Datatype filetype, char *datarep, A_MPI_Info info);
 int (*LOCAL_MPI_File_set_view)(R_MPI_File, R_MPI_Offset, R_MPI_Datatype,
@@ -21688,8 +22463,10 @@ int A_MPI_File_set_view(A_MPI_File fh, A_MPI_Offset disp, A_MPI_Datatype etype,
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_set_view : \n{\nfh : %F,\ndisp : %ld,\netype : "
-                "%D,\nfiletype : %D,\ndatarep : %s,\ninfo : %I,\nreturn : "
+  if (WI4MPI_File_set_view_print)
+    \;
+  debug_printer("MPI_File_set_view : \n{\nfh : %p,\ndisp : %ld,\netype : "
+                "%D,\nfiletype : %D,\ndatarep : %s,\ninfo : %p,\nreturn : "
                 "%d\n}\n",
                 fh, disp, etype, filetype, datarep, info, ret_tmp);
 #endif
@@ -21714,6 +22491,7 @@ int R_MPI_File_set_view(R_MPI_File fh, R_MPI_Offset disp, R_MPI_Datatype etype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_view_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_view_print = 0;
 int MPI_File_get_view(A_MPI_File fh, A_MPI_Offset *disp, A_MPI_Datatype *etype,
                       A_MPI_Datatype *filetype, char *datarep);
 int (*LOCAL_MPI_File_get_view)(R_MPI_File, R_MPI_Offset *, R_MPI_Datatype *,
@@ -21781,7 +22559,9 @@ int A_MPI_File_get_view(A_MPI_File fh, A_MPI_Offset *disp,
 
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_get_view : \n{\nfh : %F,\ndisp : %*o,\netype : "
+  if (WI4MPI_File_get_view_print)
+    \;
+  debug_printer("MPI_File_get_view : \n{\nfh : %p,\ndisp : %*o,\netype : "
                 "%*D,\nfiletype : %*D,\ndatarep : %s,\nreturn : %d\n}\n",
                 fh, disp, etype, filetype, datarep, ret_tmp);
 #endif
@@ -21805,6 +22585,7 @@ int R_MPI_File_get_view(R_MPI_File fh, R_MPI_Offset *disp,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_at_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_at_print = 0;
 int MPI_File_read_at(A_MPI_File fh, A_MPI_Offset offset, void *buf, int count,
                      A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_read_at)(R_MPI_File, R_MPI_Offset, void *, int,
@@ -21873,7 +22654,9 @@ int A_MPI_File_read_at(A_MPI_File fh, A_MPI_Offset offset, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_at : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_read_at_print)
+    \;
+  debug_printer("MPI_File_read_at : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nstatus : %*n,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, status, ret_tmp);
@@ -21898,6 +22681,7 @@ int R_MPI_File_read_at(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_at_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_at_all_print = 0;
 int MPI_File_read_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                          int count, A_MPI_Datatype datatype,
                          A_MPI_Status *status);
@@ -21968,7 +22752,9 @@ int A_MPI_File_read_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_at_all : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_read_at_all_print)
+    \;
+  debug_printer("MPI_File_read_at_all : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nstatus : %*n,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, status, ret_tmp);
@@ -21994,6 +22780,7 @@ int R_MPI_File_read_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_at_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_at_print = 0;
 int MPI_File_write_at(A_MPI_File fh, A_MPI_Offset offset, void *buf, int count,
                       A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_write_at)(R_MPI_File, R_MPI_Offset, void *, int,
@@ -22063,7 +22850,9 @@ int A_MPI_File_write_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_at : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_write_at_print)
+    \;
+  debug_printer("MPI_File_write_at : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nstatus : %*n,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, status, ret_tmp);
@@ -22089,6 +22878,7 @@ int R_MPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_at_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_at_all_print = 0;
 int MPI_File_write_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                           int count, A_MPI_Datatype datatype,
                           A_MPI_Status *status);
@@ -22159,7 +22949,9 @@ int A_MPI_File_write_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_at_all : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_write_at_all_print)
+    \;
+  debug_printer("MPI_File_write_at_all : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nstatus : %*n,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, status, ret_tmp);
@@ -22185,6 +22977,7 @@ int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iread_at_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iread_at_print = 0;
 int MPI_File_iread_at(A_MPI_File fh, A_MPI_Offset offset, void *buf, int count,
                       A_MPI_Datatype datatype, A_MPI_Request *request);
 int (*LOCAL_MPI_File_iread_at)(R_MPI_File, R_MPI_Offset, void *, int,
@@ -22256,7 +23049,9 @@ int A_MPI_File_iread_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iread_at : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_iread_at_print)
+    \;
+  debug_printer("MPI_File_iread_at : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nrequest : %p,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, request, ret_tmp);
@@ -22282,6 +23077,7 @@ int R_MPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iwrite_at_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iwrite_at_print = 0;
 int MPI_File_iwrite_at(A_MPI_File fh, A_MPI_Offset offset, void *buf, int count,
                        A_MPI_Datatype datatype, A_MPI_Request *request);
 int (*LOCAL_MPI_File_iwrite_at)(R_MPI_File, R_MPI_Offset, void *, int,
@@ -22353,7 +23149,9 @@ int A_MPI_File_iwrite_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iwrite_at : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_iwrite_at_print)
+    \;
+  debug_printer("MPI_File_iwrite_at : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nrequest : %p,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, request, ret_tmp);
@@ -22379,6 +23177,7 @@ int R_MPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_print = 0;
 int MPI_File_read(A_MPI_File fh, void *buf, int count, A_MPI_Datatype datatype,
                   A_MPI_Status *status);
 int (*LOCAL_MPI_File_read)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -22444,7 +23243,9 @@ int A_MPI_File_read(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_read_print)
+    \;
+  debug_printer("MPI_File_read : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -22467,6 +23268,7 @@ int R_MPI_File_read(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_all_print = 0;
 int MPI_File_read_all(A_MPI_File fh, void *buf, int count,
                       A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_read_all)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -22532,7 +23334,9 @@ int A_MPI_File_read_all(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_all : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_read_all_print)
+    \;
+  debug_printer("MPI_File_read_all : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -22555,6 +23359,7 @@ int R_MPI_File_read_all(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_print = 0;
 int MPI_File_write(A_MPI_File fh, void *buf, int count, A_MPI_Datatype datatype,
                    A_MPI_Status *status);
 int (*LOCAL_MPI_File_write)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -22619,7 +23424,9 @@ int A_MPI_File_write(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_write_print)
+    \;
+  debug_printer("MPI_File_write : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -22642,6 +23449,7 @@ int R_MPI_File_write(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_all_print = 0;
 int MPI_File_write_all(A_MPI_File fh, void *buf, int count,
                        A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_write_all)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -22706,7 +23514,9 @@ int A_MPI_File_write_all(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_all : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_write_all_print)
+    \;
+  debug_printer("MPI_File_write_all : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -22729,6 +23539,7 @@ int R_MPI_File_write_all(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iread_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iread_print = 0;
 int MPI_File_iread(A_MPI_File fh, void *buf, int count, A_MPI_Datatype datatype,
                    A_MPI_Request *request);
 int (*LOCAL_MPI_File_iread)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -22796,7 +23607,9 @@ int A_MPI_File_iread(A_MPI_File fh, void *buf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iread : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_iread_print)
+    \;
+  debug_printer("MPI_File_iread : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nrequest : %p,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, request, ret_tmp);
 #endif
@@ -22819,6 +23632,7 @@ int R_MPI_File_iread(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iwrite_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iwrite_print = 0;
 int MPI_File_iwrite(A_MPI_File fh, void *buf, int count,
                     A_MPI_Datatype datatype, A_MPI_Request *request);
 int (*LOCAL_MPI_File_iwrite)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -22885,7 +23699,9 @@ int A_MPI_File_iwrite(A_MPI_File fh, void *buf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iwrite : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_iwrite_print)
+    \;
+  debug_printer("MPI_File_iwrite : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nrequest : %p,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, request, ret_tmp);
 #endif
@@ -22908,6 +23724,7 @@ int R_MPI_File_iwrite(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_seek_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_seek_print = 0;
 int MPI_File_seek(A_MPI_File fh, A_MPI_Offset offset, int whence);
 int (*LOCAL_MPI_File_seek)(R_MPI_File, R_MPI_Offset, int);
 
@@ -22959,7 +23776,9 @@ int A_MPI_File_seek(A_MPI_File fh, A_MPI_Offset offset, int whence) {
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_seek : \n{\nfh : %F,\noffset : %ld,\nwhence : "
+  if (WI4MPI_File_seek_print)
+    \;
+  debug_printer("MPI_File_seek : \n{\nfh : %p,\noffset : %ld,\nwhence : "
                 "%d,\nreturn : %d\n}\n",
                 fh, offset, whence, ret_tmp);
 #endif
@@ -22981,6 +23800,7 @@ int R_MPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_position_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_position_print = 0;
 int MPI_File_get_position(A_MPI_File fh, A_MPI_Offset *offset);
 int (*LOCAL_MPI_File_get_position)(R_MPI_File, R_MPI_Offset *);
 
@@ -23029,8 +23849,10 @@ int A_MPI_File_get_position(A_MPI_File fh, A_MPI_Offset *offset) {
   *offset = (A_MPI_Offset)*offset_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_get_position_print)
+    \;
   debug_printer(
-      "MPI_File_get_position : \n{\nfh : %F,\noffset : %*o,\nreturn : %d\n}\n",
+      "MPI_File_get_position : \n{\nfh : %p,\noffset : %*o,\nreturn : %d\n}\n",
       fh, offset, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23051,6 +23873,7 @@ int R_MPI_File_get_position(R_MPI_File fh, R_MPI_Offset *offset) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_byte_offset_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_byte_offset_print = 0;
 int MPI_File_get_byte_offset(A_MPI_File fh, A_MPI_Offset offset,
                              A_MPI_Offset *disp);
 int (*LOCAL_MPI_File_get_byte_offset)(R_MPI_File, R_MPI_Offset, R_MPI_Offset *);
@@ -23105,7 +23928,9 @@ int A_MPI_File_get_byte_offset(A_MPI_File fh, A_MPI_Offset offset,
   *disp = (A_MPI_Offset)*disp_tmp;
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_get_byte_offset : \n{\nfh : %F,\noffset : %ld,\ndisp "
+  if (WI4MPI_File_get_byte_offset_print)
+    \;
+  debug_printer("MPI_File_get_byte_offset : \n{\nfh : %p,\noffset : %ld,\ndisp "
                 ": %*o,\nreturn : %d\n}\n",
                 fh, offset, disp, ret_tmp);
 #endif
@@ -23128,6 +23953,7 @@ int R_MPI_File_get_byte_offset(R_MPI_File fh, R_MPI_Offset offset,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_shared_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_shared_print = 0;
 int MPI_File_read_shared(A_MPI_File fh, void *buf, int count,
                          A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_read_shared)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -23193,7 +24019,9 @@ int A_MPI_File_read_shared(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_shared : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_read_shared_print)
+    \;
+  debug_printer("MPI_File_read_shared : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -23216,6 +24044,7 @@ int R_MPI_File_read_shared(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_shared_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_shared_print = 0;
 int MPI_File_write_shared(A_MPI_File fh, void *buf, int count,
                           A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_write_shared)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -23280,7 +24109,9 @@ int A_MPI_File_write_shared(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_shared : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_write_shared_print)
+    \;
+  debug_printer("MPI_File_write_shared : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -23303,6 +24134,7 @@ int R_MPI_File_write_shared(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iread_shared_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iread_shared_print = 0;
 int MPI_File_iread_shared(A_MPI_File fh, void *buf, int count,
                           A_MPI_Datatype datatype, A_MPI_Request *request);
 int (*LOCAL_MPI_File_iread_shared)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -23370,7 +24202,9 @@ int A_MPI_File_iread_shared(A_MPI_File fh, void *buf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iread_shared : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_iread_shared_print)
+    \;
+  debug_printer("MPI_File_iread_shared : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nrequest : %p,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, request, ret_tmp);
 #endif
@@ -23393,6 +24227,7 @@ int R_MPI_File_iread_shared(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iwrite_shared_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iwrite_shared_print = 0;
 int MPI_File_iwrite_shared(A_MPI_File fh, void *buf, int count,
                            A_MPI_Datatype datatype, A_MPI_Request *request);
 int (*LOCAL_MPI_File_iwrite_shared)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -23459,7 +24294,9 @@ int A_MPI_File_iwrite_shared(A_MPI_File fh, void *buf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iwrite_shared : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_iwrite_shared_print)
+    \;
+  debug_printer("MPI_File_iwrite_shared : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nrequest : %p,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, request, ret_tmp);
 #endif
@@ -23482,6 +24319,7 @@ int R_MPI_File_iwrite_shared(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_ordered_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_ordered_print = 0;
 int MPI_File_read_ordered(A_MPI_File fh, void *buf, int count,
                           A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_read_ordered)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -23547,7 +24385,9 @@ int A_MPI_File_read_ordered(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_ordered : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_read_ordered_print)
+    \;
+  debug_printer("MPI_File_read_ordered : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -23570,6 +24410,7 @@ int R_MPI_File_read_ordered(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_ordered_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_ordered_print = 0;
 int MPI_File_write_ordered(A_MPI_File fh, void *buf, int count,
                            A_MPI_Datatype datatype, A_MPI_Status *status);
 int (*LOCAL_MPI_File_write_ordered)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -23634,7 +24475,9 @@ int A_MPI_File_write_ordered(A_MPI_File fh, void *buf, int count,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_ordered : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_write_ordered_print)
+    \;
+  debug_printer("MPI_File_write_ordered : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nstatus : %*n,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, status, ret_tmp);
 #endif
@@ -23657,6 +24500,7 @@ int R_MPI_File_write_ordered(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_seek_shared_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_seek_shared_print = 0;
 int MPI_File_seek_shared(A_MPI_File fh, A_MPI_Offset offset, int whence);
 int (*LOCAL_MPI_File_seek_shared)(R_MPI_File, R_MPI_Offset, int);
 
@@ -23708,7 +24552,9 @@ int A_MPI_File_seek_shared(A_MPI_File fh, A_MPI_Offset offset, int whence) {
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_seek_shared : \n{\nfh : %F,\noffset : %ld,\nwhence : "
+  if (WI4MPI_File_seek_shared_print)
+    \;
+  debug_printer("MPI_File_seek_shared : \n{\nfh : %p,\noffset : %ld,\nwhence : "
                 "%d,\nreturn : %d\n}\n",
                 fh, offset, whence, ret_tmp);
 #endif
@@ -23730,6 +24576,7 @@ int R_MPI_File_seek_shared(R_MPI_File fh, R_MPI_Offset offset, int whence) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_position_shared_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_position_shared_print = 0;
 int MPI_File_get_position_shared(A_MPI_File fh, A_MPI_Offset *offset);
 int (*LOCAL_MPI_File_get_position_shared)(R_MPI_File, R_MPI_Offset *);
 
@@ -23778,7 +24625,9 @@ int A_MPI_File_get_position_shared(A_MPI_File fh, A_MPI_Offset *offset) {
   *offset = (A_MPI_Offset)*offset_tmp;
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_get_position_shared : \n{\nfh : %F,\noffset : "
+  if (WI4MPI_File_get_position_shared_print)
+    \;
+  debug_printer("MPI_File_get_position_shared : \n{\nfh : %p,\noffset : "
                 "%*o,\nreturn : %d\n}\n",
                 fh, offset, ret_tmp);
 #endif
@@ -23800,6 +24649,7 @@ int R_MPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_at_all_begin_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_at_all_begin_print = 0;
 int MPI_File_read_at_all_begin(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                                int count, A_MPI_Datatype datatype);
 int (*LOCAL_MPI_File_read_at_all_begin)(R_MPI_File, R_MPI_Offset, void *, int,
@@ -23863,7 +24713,9 @@ int A_MPI_File_read_at_all_begin(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   buffer_conv_r2a(&buf, &buf_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_at_all_begin : \n{\nfh : %F,\noffset : "
+  if (WI4MPI_File_read_at_all_begin_print)
+    \;
+  debug_printer("MPI_File_read_at_all_begin : \n{\nfh : %p,\noffset : "
                 "%ld,\nbuf : %p,\ncount : %d,\ndatatype : %D,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, ret_tmp);
@@ -23888,6 +24740,7 @@ int R_MPI_File_read_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_at_all_end_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_at_all_end_print = 0;
 int MPI_File_read_at_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status);
 int (*LOCAL_MPI_File_read_at_all_end)(R_MPI_File, void *, R_MPI_Status *);
 
@@ -23941,7 +24794,9 @@ int A_MPI_File_read_at_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status) {
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_at_all_end : \n{\nfh : %F,\nbuf : %p,\nstatus : "
+  if (WI4MPI_File_read_at_all_end_print)
+    \;
+  debug_printer("MPI_File_read_at_all_end : \n{\nfh : %p,\nbuf : %p,\nstatus : "
                 "%*n,\nreturn : %d\n}\n",
                 fh, buf, status, ret_tmp);
 #endif
@@ -23963,6 +24818,7 @@ int R_MPI_File_read_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_at_all_begin_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_at_all_begin_print = 0;
 int MPI_File_write_at_all_begin(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                                 int count, A_MPI_Datatype datatype);
 int (*LOCAL_MPI_File_write_at_all_begin)(R_MPI_File, R_MPI_Offset, void *, int,
@@ -24026,7 +24882,9 @@ int A_MPI_File_write_at_all_begin(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_at_all_begin : \n{\nfh : %F,\noffset : "
+  if (WI4MPI_File_write_at_all_begin_print)
+    \;
+  debug_printer("MPI_File_write_at_all_begin : \n{\nfh : %p,\noffset : "
                 "%ld,\nbuf : %p,\ncount : %d,\ndatatype : %D,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, ret_tmp);
@@ -24051,6 +24909,7 @@ int R_MPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_at_all_end_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_at_all_end_print = 0;
 int MPI_File_write_at_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status);
 int (*LOCAL_MPI_File_write_at_all_end)(R_MPI_File, void *, R_MPI_Status *);
 
@@ -24105,7 +24964,9 @@ int A_MPI_File_write_at_all_end(A_MPI_File fh, void *buf,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_at_all_end : \n{\nfh : %F,\nbuf : %p,\nstatus "
+  if (WI4MPI_File_write_at_all_end_print)
+    \;
+  debug_printer("MPI_File_write_at_all_end : \n{\nfh : %p,\nbuf : %p,\nstatus "
                 ": %*n,\nreturn : %d\n}\n",
                 fh, buf, status, ret_tmp);
 #endif
@@ -24128,6 +24989,7 @@ int R_MPI_File_write_at_all_end(R_MPI_File fh, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_all_begin_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_all_begin_print = 0;
 int MPI_File_read_all_begin(A_MPI_File fh, void *buf, int count,
                             A_MPI_Datatype datatype);
 int (*LOCAL_MPI_File_read_all_begin)(R_MPI_File, void *, int, R_MPI_Datatype);
@@ -24187,7 +25049,9 @@ int A_MPI_File_read_all_begin(A_MPI_File fh, void *buf, int count,
   buffer_conv_r2a(&buf, &buf_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_all_begin : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_read_all_begin_print)
+    \;
+  debug_printer("MPI_File_read_all_begin : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, ret_tmp);
 #endif
@@ -24210,6 +25074,7 @@ int R_MPI_File_read_all_begin(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_all_end_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_all_end_print = 0;
 int MPI_File_read_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status);
 int (*LOCAL_MPI_File_read_all_end)(R_MPI_File, void *, R_MPI_Status *);
 
@@ -24264,7 +25129,9 @@ int A_MPI_File_read_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status) {
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_all_end : \n{\nfh : %F,\nbuf : %p,\nstatus : "
+  if (WI4MPI_File_read_all_end_print)
+    \;
+  debug_printer("MPI_File_read_all_end : \n{\nfh : %p,\nbuf : %p,\nstatus : "
                 "%*n,\nreturn : %d\n}\n",
                 fh, buf, status, ret_tmp);
 #endif
@@ -24286,6 +25153,7 @@ int R_MPI_File_read_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_all_begin_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_all_begin_print = 0;
 int MPI_File_write_all_begin(A_MPI_File fh, void *buf, int count,
                              A_MPI_Datatype datatype);
 int (*LOCAL_MPI_File_write_all_begin)(R_MPI_File, void *, int, R_MPI_Datatype);
@@ -24344,7 +25212,9 @@ int A_MPI_File_write_all_begin(A_MPI_File fh, void *buf, int count,
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_all_begin : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_write_all_begin_print)
+    \;
+  debug_printer("MPI_File_write_all_begin : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, ret_tmp);
 #endif
@@ -24367,6 +25237,7 @@ int R_MPI_File_write_all_begin(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_all_end_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_all_end_print = 0;
 int MPI_File_write_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status);
 int (*LOCAL_MPI_File_write_all_end)(R_MPI_File, void *, R_MPI_Status *);
 
@@ -24420,7 +25291,9 @@ int A_MPI_File_write_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status) {
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_all_end : \n{\nfh : %F,\nbuf : %p,\nstatus : "
+  if (WI4MPI_File_write_all_end_print)
+    \;
+  debug_printer("MPI_File_write_all_end : \n{\nfh : %p,\nbuf : %p,\nstatus : "
                 "%*n,\nreturn : %d\n}\n",
                 fh, buf, status, ret_tmp);
 #endif
@@ -24442,6 +25315,7 @@ int R_MPI_File_write_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_ordered_begin_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_ordered_begin_print = 0;
 int MPI_File_read_ordered_begin(A_MPI_File fh, void *buf, int count,
                                 A_MPI_Datatype datatype);
 int (*LOCAL_MPI_File_read_ordered_begin)(R_MPI_File, void *, int,
@@ -24502,7 +25376,9 @@ int A_MPI_File_read_ordered_begin(A_MPI_File fh, void *buf, int count,
   buffer_conv_r2a(&buf, &buf_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_ordered_begin : \n{\nfh : %F,\nbuf : %p,\ncount "
+  if (WI4MPI_File_read_ordered_begin_print)
+    \;
+  debug_printer("MPI_File_read_ordered_begin : \n{\nfh : %p,\nbuf : %p,\ncount "
                 ": %d,\ndatatype : %D,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, ret_tmp);
 #endif
@@ -24525,6 +25401,7 @@ int R_MPI_File_read_ordered_begin(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_read_ordered_end_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_read_ordered_end_print = 0;
 int MPI_File_read_ordered_end(A_MPI_File fh, void *buf, A_MPI_Status *status);
 int (*LOCAL_MPI_File_read_ordered_end)(R_MPI_File, void *, R_MPI_Status *);
 
@@ -24580,7 +25457,9 @@ int A_MPI_File_read_ordered_end(A_MPI_File fh, void *buf,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_read_ordered_end : \n{\nfh : %F,\nbuf : %p,\nstatus "
+  if (WI4MPI_File_read_ordered_end_print)
+    \;
+  debug_printer("MPI_File_read_ordered_end : \n{\nfh : %p,\nbuf : %p,\nstatus "
                 ": %*n,\nreturn : %d\n}\n",
                 fh, buf, status, ret_tmp);
 #endif
@@ -24603,6 +25482,7 @@ int R_MPI_File_read_ordered_end(R_MPI_File fh, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_ordered_begin_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_ordered_begin_print = 0;
 int MPI_File_write_ordered_begin(A_MPI_File fh, void *buf, int count,
                                  A_MPI_Datatype datatype);
 int (*LOCAL_MPI_File_write_ordered_begin)(R_MPI_File, void *, int,
@@ -24662,7 +25542,9 @@ int A_MPI_File_write_ordered_begin(A_MPI_File fh, void *buf, int count,
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_ordered_begin : \n{\nfh : %F,\nbuf : "
+  if (WI4MPI_File_write_ordered_begin_print)
+    \;
+  debug_printer("MPI_File_write_ordered_begin : \n{\nfh : %p,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, ret_tmp);
 #endif
@@ -24685,6 +25567,7 @@ int R_MPI_File_write_ordered_begin(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_write_ordered_end_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_write_ordered_end_print = 0;
 int MPI_File_write_ordered_end(A_MPI_File fh, void *buf, A_MPI_Status *status);
 int (*LOCAL_MPI_File_write_ordered_end)(R_MPI_File, void *, R_MPI_Status *);
 
@@ -24739,7 +25622,9 @@ int A_MPI_File_write_ordered_end(A_MPI_File fh, void *buf,
   status_prt_conv_r2a(&status, &status_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_write_ordered_end : \n{\nfh : %F,\nbuf : %p,\nstatus "
+  if (WI4MPI_File_write_ordered_end_print)
+    \;
+  debug_printer("MPI_File_write_ordered_end : \n{\nfh : %p,\nbuf : %p,\nstatus "
                 ": %*n,\nreturn : %d\n}\n",
                 fh, buf, status, ret_tmp);
 #endif
@@ -24762,6 +25647,7 @@ int R_MPI_File_write_ordered_end(R_MPI_File fh, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_type_extent_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_type_extent_print = 0;
 int MPI_File_get_type_extent(A_MPI_File fh, A_MPI_Datatype datatype,
                              A_MPI_Aint *extent);
 int (*LOCAL_MPI_File_get_type_extent)(R_MPI_File, R_MPI_Datatype, R_MPI_Aint *);
@@ -24817,7 +25703,9 @@ int A_MPI_File_get_type_extent(A_MPI_File fh, A_MPI_Datatype datatype,
   *extent = (A_MPI_Aint)*extent_tmp;
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_get_type_extent : \n{\nfh : %F,\ndatatype : "
+  if (WI4MPI_File_get_type_extent_print)
+    \;
+  debug_printer("MPI_File_get_type_extent : \n{\nfh : %p,\ndatatype : "
                 "%D,\nextent : %*d,\nreturn : %d\n}\n",
                 fh, datatype, extent, ret_tmp);
 #endif
@@ -24840,6 +25728,7 @@ int R_MPI_File_get_type_extent(R_MPI_File fh, R_MPI_Datatype datatype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Register_datarep_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Register_datarep_print = 0;
 int MPI_Register_datarep(char *datarep,
                          A_MPI_Datarep_conversion_function *read_conversion_fn,
                          A_MPI_Datarep_conversion_function *write_conversion_fn,
@@ -24910,6 +25799,8 @@ int A_MPI_Register_datarep(
       dtype_file_extent_fn_tmp, extra_state_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Register_datarep_print)
+    \;
   debug_printer("MPI_Register_datarep : \n{\ndatarep : %s,\nread_conversion_fn "
                 ": %p,\nwrite_conversion_fn : %p,\ndtype_file_extent_fn : "
                 "%p,\nextra_state : %p,\nreturn : %d\n}\n",
@@ -24939,6 +25830,7 @@ int R_MPI_Register_datarep(
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_set_atomicity_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_set_atomicity_print = 0;
 int MPI_File_set_atomicity(A_MPI_File fh, int flag);
 int (*LOCAL_MPI_File_set_atomicity)(R_MPI_File, int);
 
@@ -24986,8 +25878,10 @@ int A_MPI_File_set_atomicity(A_MPI_File fh, int flag) {
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_set_atomicity_print)
+    \;
   debug_printer(
-      "MPI_File_set_atomicity : \n{\nfh : %F,\nflag : %d,\nreturn : %d\n}\n",
+      "MPI_File_set_atomicity : \n{\nfh : %p,\nflag : %d,\nreturn : %d\n}\n",
       fh, flag, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25008,6 +25902,7 @@ int R_MPI_File_set_atomicity(R_MPI_File fh, int flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_get_atomicity_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_get_atomicity_print = 0;
 int MPI_File_get_atomicity(A_MPI_File fh, int *flag);
 int (*LOCAL_MPI_File_get_atomicity)(R_MPI_File, int *);
 
@@ -25055,8 +25950,10 @@ int A_MPI_File_get_atomicity(A_MPI_File fh, int *flag) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_File_get_atomicity_print)
+    \;
   debug_printer(
-      "MPI_File_get_atomicity : \n{\nfh : %F,\nflag : %*d,\nreturn : %d\n}\n",
+      "MPI_File_get_atomicity : \n{\nfh : %p,\nflag : %*d,\nreturn : %d\n}\n",
       fh, flag, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25077,6 +25974,7 @@ int R_MPI_File_get_atomicity(R_MPI_File fh, int *flag) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_sync_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_sync_print = 0;
 int MPI_File_sync(A_MPI_File fh);
 int (*LOCAL_MPI_File_sync)(R_MPI_File);
 
@@ -25121,7 +26019,9 @@ int A_MPI_File_sync(A_MPI_File fh) {
   file_conv_r2a(&fh, &fh_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_sync : \n{\nfh : %F,\nreturn : %d\n}\n", fh, ret_tmp);
+  if (WI4MPI_File_sync_print)
+    \;
+  debug_printer("MPI_File_sync : \n{\nfh : %p,\nreturn : %d\n}\n", fh, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -25141,6 +26041,7 @@ int R_MPI_File_sync(R_MPI_File fh) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_finalize_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_finalize_print = 0;
 int MPI_T_finalize();
 int (*LOCAL_MPI_T_finalize)();
 
@@ -25179,6 +26080,8 @@ int A_MPI_T_finalize() {
   int ret_tmp = LOCAL_MPI_T_finalize();
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_finalize_print)
+    \;
   debug_printer("MPI_T_finalize : \n{\nreturn : %d\n}\n", ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25199,6 +26102,7 @@ int R_MPI_T_finalize() {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Wtime_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Wtime_print = 0;
 double MPI_Wtime();
 double (*LOCAL_MPI_Wtime)();
 
@@ -25237,6 +26141,8 @@ double A_MPI_Wtime() {
   double ret_tmp = LOCAL_MPI_Wtime();
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Wtime_print)
+    \;
   debug_printer("MPI_Wtime : \n{\nreturn : %lf\n}\n", ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25257,6 +26163,7 @@ double R_MPI_Wtime() {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Wtick_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Wtick_print = 0;
 double MPI_Wtick();
 double (*LOCAL_MPI_Wtick)();
 
@@ -25295,6 +26202,8 @@ double A_MPI_Wtick() {
   double ret_tmp = LOCAL_MPI_Wtick();
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Wtick_print)
+    \;
   debug_printer("MPI_Wtick : \n{\nreturn : %lf\n}\n", ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25315,6 +26224,7 @@ double R_MPI_Wtick() {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Finalize_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Finalize_print = 0;
 int MPI_Finalize();
 int (*LOCAL_MPI_Finalize)();
 
@@ -25353,6 +26263,8 @@ int A_MPI_Finalize() {
   int ret_tmp = LOCAL_MPI_Finalize();
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Finalize_print)
+    \;
   debug_printer("MPI_Finalize : \n{\nreturn : %d\n}\n", ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25373,6 +26285,7 @@ int R_MPI_Finalize() {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Waitany_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Waitany_print = 0;
 int MPI_Waitany(int count, R_MPI_Request *array_of_requests[], int *indx,
                 A_MPI_Status *status);
 int (*LOCAL_MPI_Waitany)(int, R_MPI_Request *, int *, R_MPI_Status *);
@@ -25441,8 +26354,10 @@ int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
   wi4mpi_free(array_of_requests_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Waitany : \n{\ncount : %d,\narray_of_requests : %r,\nindx "
-                ": %*d,\nstatus : %*n,\nreturn : %d\n}\n",
+  if (WI4MPI_Waitany_print)
+    \;
+  debug_printer("MPI_Waitany : \n{\ncount : %d,\narray_of_requests : "
+                "%ap,\nindx : %*d,\nstatus : %*n,\nreturn : %d\n}\n",
                 count, count, array_of_requests, indx, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25464,6 +26379,7 @@ int R_MPI_Waitany(int count, R_MPI_Request array_of_requests[], int *indx,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Testany_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Testany_print = 0;
 int MPI_Testany(int count, R_MPI_Request *array_of_requests[], int *indx,
                 int *flag, A_MPI_Status *status);
 int (*LOCAL_MPI_Testany)(int, R_MPI_Request *, int *, int *, R_MPI_Status *);
@@ -25535,8 +26451,11 @@ int A_MPI_Testany(int count, A_MPI_Request array_of_requests[], int *indx,
   wi4mpi_free(array_of_requests_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Testany : \n{\ncount : %d,\narray_of_requests : %r,\nindx "
-                ": %*d,\nflag : %*d,\nstatus : %*n,\nreturn : %d\n}\n",
+  if (WI4MPI_Testany_print)
+    \;
+  debug_printer("MPI_Testany : \n{\ncount : %d,\narray_of_requests : "
+                "%ap,\nindx : %*d,\nflag : %*d,\nstatus : %*n,\nreturn : "
+                "%d\n}\n",
                 count, count, array_of_requests, indx, flag, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25558,6 +26477,7 @@ int R_MPI_Testany(int count, R_MPI_Request array_of_requests[], int *indx,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Waitall_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Waitall_print = 0;
 int MPI_Waitall(int count, R_MPI_Request *array_of_requests[],
                 R_MPI_Status *array_of_statuses[]);
 int (*LOCAL_MPI_Waitall)(int, R_MPI_Request *, R_MPI_Status *);
@@ -25634,8 +26554,10 @@ int A_MPI_Waitall(int count, A_MPI_Request array_of_requests[],
     wi4mpi_free(array_of_statuses_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Waitall_print)
+    \;
   debug_printer("MPI_Waitall : \n{\ncount : %d,\narray_of_requests : "
-                "%r,\narray_of_statuses : %n,\nreturn : %d\n}\n",
+                "%ap,\narray_of_statuses : %n,\nreturn : %d\n}\n",
                 count, count, array_of_requests, count, array_of_statuses,
                 ret_tmp);
 #endif
@@ -25658,6 +26580,7 @@ int R_MPI_Waitall(int count, R_MPI_Request array_of_requests[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Testall_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Testall_print = 0;
 int MPI_Testall(int count, R_MPI_Request *array_of_requests[], int *flag,
                 R_MPI_Status *array_of_statuses[]);
 int (*LOCAL_MPI_Testall)(int, R_MPI_Request *, int *, R_MPI_Status *);
@@ -25739,8 +26662,10 @@ int A_MPI_Testall(int count, A_MPI_Request array_of_requests[], int *flag,
     wi4mpi_free(array_of_statuses_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Testall : \n{\ncount : %d,\narray_of_requests : %r,\nflag "
-                ": %*d,\narray_of_statuses : %n,\nreturn : %d\n}\n",
+  if (WI4MPI_Testall_print)
+    \;
+  debug_printer("MPI_Testall : \n{\ncount : %d,\narray_of_requests : "
+                "%ap,\nflag : %*d,\narray_of_statuses : %n,\nreturn : %d\n}\n",
                 count, count, array_of_requests, flag, count, array_of_statuses,
                 ret_tmp);
 #endif
@@ -25764,6 +26689,7 @@ int R_MPI_Testall(int count, R_MPI_Request array_of_requests[], int *flag,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Waitsome_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Waitsome_print = 0;
 int MPI_Waitsome(int incount, R_MPI_Request *array_of_requests[], int *outcount,
                  int array_of_indices[], R_MPI_Status *array_of_statuses[]);
 int (*LOCAL_MPI_Waitsome)(int, R_MPI_Request *, int *, int *, R_MPI_Status *);
@@ -25847,8 +26773,10 @@ int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
     wi4mpi_free(array_of_statuses_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Waitsome_print)
+    \;
   debug_printer("MPI_Waitsome : \n{\nincount : %d,\narray_of_requests : "
-                "%r,\noutcount : %*d,\narray_of_indices : "
+                "%ap,\noutcount : %*d,\narray_of_indices : "
                 "%d,\narray_of_statuses : %n,\nreturn : %d\n}\n",
                 incount, incount, array_of_requests, outcount, outcount,
                 array_of_indices, *outcount, array_of_statuses, ret_tmp);
@@ -25874,6 +26802,7 @@ int R_MPI_Waitsome(int incount, R_MPI_Request array_of_requests[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Testsome_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Testsome_print = 0;
 int MPI_Testsome(int incount, R_MPI_Request *array_of_requests[], int *outcount,
                  int array_of_indices[], R_MPI_Status *array_of_statuses[]);
 int (*LOCAL_MPI_Testsome)(int, R_MPI_Request *, int *, int *, R_MPI_Status *);
@@ -25957,8 +26886,10 @@ int A_MPI_Testsome(int incount, A_MPI_Request array_of_requests[],
     wi4mpi_free(array_of_statuses_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Testsome_print)
+    \;
   debug_printer("MPI_Testsome : \n{\nincount : %d,\narray_of_requests : "
-                "%r,\noutcount : %*d,\narray_of_indices : "
+                "%ap,\noutcount : %*d,\narray_of_indices : "
                 "%d,\narray_of_statuses : %n,\nreturn : %d\n}\n",
                 incount, incount, array_of_requests, outcount, outcount,
                 array_of_indices, *outcount, array_of_statuses, ret_tmp);
@@ -25984,6 +26915,7 @@ int R_MPI_Testsome(int incount, R_MPI_Request array_of_requests[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Startall_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Startall_print = 0;
 int MPI_Startall(int count, R_MPI_Request *array_of_requests[]);
 int (*LOCAL_MPI_Startall)(int, R_MPI_Request *);
 
@@ -26034,8 +26966,10 @@ int A_MPI_Startall(int count, A_MPI_Request array_of_requests[]) {
   wi4mpi_free(array_of_requests_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Startall_print)
+    \;
   debug_printer("MPI_Startall : \n{\ncount : %d,\narray_of_requests : "
-                "%r,\nreturn : %d\n}\n",
+                "%ap,\nreturn : %d\n}\n",
                 count, count, array_of_requests, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26056,6 +26990,7 @@ int R_MPI_Startall(int count, R_MPI_Request array_of_requests[]) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Alltoallw_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Alltoallw_print = 0;
 int MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
                   R_MPI_Datatype *sendtypes[], void *recvbuf, int recvcounts[],
                   int rdispls[], R_MPI_Datatype *recvtypes[], A_MPI_Comm comm);
@@ -26141,6 +27076,8 @@ int A_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   wi4mpi_free(recvtypes_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Alltoallw_print)
+    \;
   debug_printer("MPI_Alltoallw : \n{\nsendbuf : %p,\nsendcounts : %d,\nsdispls "
                 ": %d,\nsendtypes : %D,\nrecvbuf : %p,\nrecvcounts : "
                 "%d,\nrdispls : %d,\nrecvtypes : %D,\ncomm : %C,\nreturn : "
@@ -26171,6 +27108,7 @@ int R_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Reduce_scatter_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Reduce_scatter_print = 0;
 int MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                        A_MPI_Datatype datatype, A_MPI_Op op, A_MPI_Comm comm);
 int (*LOCAL_MPI_Reduce_scatter)(void *, void *, int *, R_MPI_Datatype, R_MPI_Op,
@@ -26239,8 +27177,10 @@ int A_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Reduce_scatter_print)
+    \;
   debug_printer("MPI_Reduce_scatter : \n{\nsendbuf : %p,\nrecvbuf : "
-                "%p,\nrecvcounts : %d,\ndatatype : %D,\nop : %o,\ncomm : "
+                "%p,\nrecvcounts : %d,\ndatatype : %D,\nop : %op,\ncomm : "
                 "%C,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, recvcounts, datatype, op, comm, ret_tmp);
 #endif
@@ -26265,6 +27205,7 @@ int R_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_translate_ranks_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_translate_ranks_print = 0;
 int MPI_Group_translate_ranks(A_MPI_Group group1, int n, int ranks1[],
                               A_MPI_Group group2, int ranks2[]);
 int (*LOCAL_MPI_Group_translate_ranks)(R_MPI_Group, int, int *, R_MPI_Group,
@@ -26325,8 +27266,10 @@ int A_MPI_Group_translate_ranks(A_MPI_Group group1, int n, int ranks1[],
 
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_translate_ranks : \n{\ngroup1 : %g,\nn : "
-                "%d,\nranks1 : %d,\ngroup2 : %g,\nranks2 : %d,\nreturn : "
+  if (WI4MPI_Group_translate_ranks_print)
+    \;
+  debug_printer("MPI_Group_translate_ranks : \n{\ngroup1 : %p,\nn : "
+                "%d,\nranks1 : %d,\ngroup2 : %p,\nranks2 : %d,\nreturn : "
                 "%d\n}\n",
                 group1, n, n, ranks1, group2, n, ranks2, ret_tmp);
 #endif
@@ -26350,6 +27293,7 @@ int R_MPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_incl_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_incl_print = 0;
 int MPI_Group_incl(A_MPI_Group group, int n, int ranks[],
                    A_MPI_Group *newgroup);
 int (*LOCAL_MPI_Group_incl)(R_MPI_Group, int, int *, R_MPI_Group *);
@@ -26405,8 +27349,10 @@ int A_MPI_Group_incl(A_MPI_Group group, int n, int ranks[],
   group_conv_r2a(newgroup, newgroup_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_incl : \n{\ngroup : %g,\nn : %d,\nranks : "
-                "%d,\nnewgroup : %*G,\nreturn : %d\n}\n",
+  if (WI4MPI_Group_incl_print)
+    \;
+  debug_printer("MPI_Group_incl : \n{\ngroup : %p,\nn : %d,\nranks : "
+                "%d,\nnewgroup : %*p,\nreturn : %d\n}\n",
                 group, n, ranks, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26428,6 +27374,7 @@ int R_MPI_Group_incl(R_MPI_Group group, int n, int ranks[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_excl_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_excl_print = 0;
 int MPI_Group_excl(A_MPI_Group group, int n, int ranks[],
                    A_MPI_Group *newgroup);
 int (*LOCAL_MPI_Group_excl)(R_MPI_Group, int, int *, R_MPI_Group *);
@@ -26483,8 +27430,10 @@ int A_MPI_Group_excl(A_MPI_Group group, int n, int ranks[],
   group_conv_r2a(newgroup, newgroup_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_excl : \n{\ngroup : %g,\nn : %d,\nranks : "
-                "%d,\nnewgroup : %*G,\nreturn : %d\n}\n",
+  if (WI4MPI_Group_excl_print)
+    \;
+  debug_printer("MPI_Group_excl : \n{\ngroup : %p,\nn : %d,\nranks : "
+                "%d,\nnewgroup : %*p,\nreturn : %d\n}\n",
                 group, n, ranks, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26506,6 +27455,7 @@ int R_MPI_Group_excl(R_MPI_Group group, int n, int ranks[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_range_incl_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_range_incl_print = 0;
 int MPI_Group_range_incl(A_MPI_Group group, int n, int ranges[][3],
                          A_MPI_Group *newgroup);
 int (*LOCAL_MPI_Group_range_incl)(R_MPI_Group, int, int[][3], R_MPI_Group *);
@@ -26561,8 +27511,10 @@ int A_MPI_Group_range_incl(A_MPI_Group group, int n, int ranges[][3],
   group_conv_r2a(newgroup, newgroup_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_range_incl : \n{\ngroup : %g,\nn : %d,\nranges : "
-                "%d,\nnewgroup : %*G,\nreturn : %d\n}\n",
+  if (WI4MPI_Group_range_incl_print)
+    \;
+  debug_printer("MPI_Group_range_incl : \n{\ngroup : %p,\nn : %d,\nranges : "
+                "%d,\nnewgroup : %*p,\nreturn : %d\n}\n",
                 group, n, n, ranges, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26584,6 +27536,7 @@ int R_MPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Group_range_excl_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Group_range_excl_print = 0;
 int MPI_Group_range_excl(A_MPI_Group group, int n, int ranges[][3],
                          A_MPI_Group *newgroup);
 int (*LOCAL_MPI_Group_range_excl)(R_MPI_Group, int, int[][3], R_MPI_Group *);
@@ -26639,8 +27592,10 @@ int A_MPI_Group_range_excl(A_MPI_Group group, int n, int ranges[][3],
   group_conv_r2a(newgroup, newgroup_tmp);
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_Group_range_excl : \n{\ngroup : %g,\nn : %d,\nranges : "
-                "%d,\nnewgroup : %*G,\nreturn : %d\n}\n",
+  if (WI4MPI_Group_range_excl_print)
+    \;
+  debug_printer("MPI_Group_range_excl : \n{\ngroup : %p,\nn : %d,\nranges : "
+                "%d,\nnewgroup : %*p,\nreturn : %d\n}\n",
                 group, n, n, ranges, newgroup, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26662,6 +27617,7 @@ int R_MPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cart_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cart_create_print = 0;
 int MPI_Cart_create(A_MPI_Comm comm_old, int ndims, int dims[], int periods[],
                     int reorder, A_MPI_Comm *comm_cart);
 int (*LOCAL_MPI_Cart_create)(R_MPI_Comm, int, int *, int *, int, R_MPI_Comm *);
@@ -26722,6 +27678,8 @@ int A_MPI_Cart_create(A_MPI_Comm comm_old, int ndims, int dims[], int periods[],
   comm_conv_r2a(comm_cart, comm_cart_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cart_create_print)
+    \;
   debug_printer("MPI_Cart_create : \n{\ncomm_old : %C,\nndims : %d,\ndims : "
                 "%d,\nperiods : %d,\nreorder : %d,\ncomm_cart : %*o,\nreturn : "
                 "%d\n}\n",
@@ -26748,6 +27706,7 @@ int R_MPI_Cart_create(R_MPI_Comm comm_old, int ndims, int dims[], int periods[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Dims_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Dims_create_print = 0;
 int MPI_Dims_create(int nnodes, int ndims, int dims[]);
 int (*LOCAL_MPI_Dims_create)(int, int, int *);
 
@@ -26794,6 +27753,8 @@ int A_MPI_Dims_create(int nnodes, int ndims, int dims[]) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Dims_create_print)
+    \;
   debug_printer("MPI_Dims_create : \n{\nnnodes : %d,\nndims : %d,\ndims : "
                 "%d,\nreturn : %d\n}\n",
                 nnodes, ndims, ndims, dims, ret_tmp);
@@ -26816,6 +27777,7 @@ int R_MPI_Dims_create(int nnodes, int ndims, int dims[]) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Graph_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Graph_create_print = 0;
 int MPI_Graph_create(A_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
                      int reorder, A_MPI_Comm *comm_graph);
 int (*LOCAL_MPI_Graph_create)(R_MPI_Comm, int, int *, int *, int, R_MPI_Comm *);
@@ -26876,6 +27838,8 @@ int A_MPI_Graph_create(A_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
   comm_conv_r2a(comm_graph, comm_graph_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Graph_create_print)
+    \;
   debug_printer("MPI_Graph_create : \n{\ncomm_old : %C,\nnnodes : %d,\nindx : "
                 "%d,\nedges : %d,\nreorder : %d,\ncomm_graph : %*o,\nreturn : "
                 "%d\n}\n",
@@ -26902,6 +27866,7 @@ int R_MPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Graph_get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Graph_get_print = 0;
 int MPI_Graph_get(A_MPI_Comm comm, int maxindex, int maxedges, int indx[],
                   int edges[]);
 int (*LOCAL_MPI_Graph_get)(R_MPI_Comm, int, int, int *, int *);
@@ -26957,6 +27922,8 @@ int A_MPI_Graph_get(A_MPI_Comm comm, int maxindex, int maxedges, int indx[],
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Graph_get_print)
+    \;
   debug_printer("MPI_Graph_get : \n{\ncomm : %C,\nmaxindex : %d,\nmaxedges : "
                 "%d,\nindx : %d,\nedges : %d,\nreturn : %d\n}\n",
                 comm, maxindex, maxedges, maxindex, indx, maxedges, edges,
@@ -26981,6 +27948,7 @@ int R_MPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges, int indx[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cart_get_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cart_get_print = 0;
 int MPI_Cart_get(A_MPI_Comm comm, int maxdims, int dims[], int periods[],
                  int coords[]);
 int (*LOCAL_MPI_Cart_get)(R_MPI_Comm, int, int *, int *, int *);
@@ -27036,6 +28004,8 @@ int A_MPI_Cart_get(A_MPI_Comm comm, int maxdims, int dims[], int periods[],
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cart_get_print)
+    \;
   debug_printer("MPI_Cart_get : \n{\ncomm : %C,\nmaxdims : %d,\ndims : "
                 "%d,\nperiods : %d,\ncoords : %d,\nreturn : %d\n}\n",
                 comm, maxdims, maxdims, dims, maxdims, periods, maxdims, coords,
@@ -27060,6 +28030,7 @@ int R_MPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[], int periods[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cart_rank_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cart_rank_print = 0;
 int MPI_Cart_rank(A_MPI_Comm comm, int coords[], int *rank);
 int (*LOCAL_MPI_Cart_rank)(R_MPI_Comm, int *, int *);
 
@@ -27109,6 +28080,8 @@ int A_MPI_Cart_rank(A_MPI_Comm comm, int coords[], int *rank) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cart_rank_print)
+    \;
   debug_printer("MPI_Cart_rank : \n{\ncomm : %C,\ncoords : %d,\nrank : "
                 "%*d,\nreturn : %d\n}\n",
                 comm, coords, rank, ret_tmp);
@@ -27131,6 +28104,7 @@ int R_MPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cart_coords_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cart_coords_print = 0;
 int MPI_Cart_coords(A_MPI_Comm comm, int rank, int maxdims, int coords[]);
 int (*LOCAL_MPI_Cart_coords)(R_MPI_Comm, int, int, int *);
 
@@ -27182,6 +28156,8 @@ int A_MPI_Cart_coords(A_MPI_Comm comm, int rank, int maxdims, int coords[]) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cart_coords_print)
+    \;
   debug_printer("MPI_Cart_coords : \n{\ncomm : %C,\nrank : %d,\nmaxdims : "
                 "%d,\ncoords : %d,\nreturn : %d\n}\n",
                 comm, rank, maxdims, maxdims, coords, ret_tmp);
@@ -27204,6 +28180,7 @@ int R_MPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Graph_neighbors_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Graph_neighbors_print = 0;
 int MPI_Graph_neighbors(A_MPI_Comm comm, int rank, int maxneighbors,
                         int neighbors[]);
 int (*LOCAL_MPI_Graph_neighbors)(R_MPI_Comm, int, int, int *);
@@ -27258,6 +28235,8 @@ int A_MPI_Graph_neighbors(A_MPI_Comm comm, int rank, int maxneighbors,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Graph_neighbors_print)
+    \;
   debug_printer("MPI_Graph_neighbors : \n{\ncomm : %C,\nrank : "
                 "%d,\nmaxneighbors : %d,\nneighbors : %d,\nreturn : %d\n}\n",
                 comm, rank, maxneighbors, maxneighbors, neighbors, ret_tmp);
@@ -27281,6 +28260,7 @@ int R_MPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cart_sub_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cart_sub_print = 0;
 int MPI_Cart_sub(A_MPI_Comm comm, int remain_dims[], A_MPI_Comm *newcomm);
 int (*LOCAL_MPI_Cart_sub)(R_MPI_Comm, int *, R_MPI_Comm *);
 
@@ -27332,6 +28312,8 @@ int A_MPI_Cart_sub(A_MPI_Comm comm, int remain_dims[], A_MPI_Comm *newcomm) {
   comm_conv_r2a(newcomm, newcomm_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cart_sub_print)
+    \;
   debug_printer("MPI_Cart_sub : \n{\ncomm : %C,\nremain_dims : %d,\nnewcomm : "
                 "%*o,\nreturn : %d\n}\n",
                 comm, remain_dims, newcomm, ret_tmp);
@@ -27354,6 +28336,7 @@ int R_MPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *newcomm) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Cart_map_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Cart_map_print = 0;
 int MPI_Cart_map(A_MPI_Comm comm, int ndims, int dims[], int periods[],
                  int *newrank);
 int (*LOCAL_MPI_Cart_map)(R_MPI_Comm, int, int *, int *, int *);
@@ -27409,6 +28392,8 @@ int A_MPI_Cart_map(A_MPI_Comm comm, int ndims, int dims[], int periods[],
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Cart_map_print)
+    \;
   debug_printer("MPI_Cart_map : \n{\ncomm : %C,\nndims : %d,\ndims : "
                 "%d,\nperiods : %d,\nnewrank : %*d,\nreturn : %d\n}\n",
                 comm, ndims, ndims, dims, ndims, periods, newrank, ret_tmp);
@@ -27432,6 +28417,7 @@ int R_MPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[], int periods[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Graph_map_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Graph_map_print = 0;
 int MPI_Graph_map(A_MPI_Comm comm, int nnodes, int indx[], int edges[],
                   int *newrank);
 int (*LOCAL_MPI_Graph_map)(R_MPI_Comm, int, int *, int *, int *);
@@ -27487,6 +28473,8 @@ int A_MPI_Graph_map(A_MPI_Comm comm, int nnodes, int indx[], int edges[],
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Graph_map_print)
+    \;
   debug_printer("MPI_Graph_map : \n{\ncomm : %C,\nnnodes : %d,\nindx : "
                 "%d,\nedges : %d,\nnewrank : %*d,\nreturn : %d\n}\n",
                 comm, nnodes, nnodes, indx, nnodes, edges, newrank, ret_tmp);
@@ -27510,6 +28498,7 @@ int R_MPI_Graph_map(R_MPI_Comm comm, int nnodes, int indx[], int edges[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_spawn_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_spawn_print = 0;
 int MPI_Comm_spawn(char *command, char *argv[], int maxprocs, A_MPI_Info info,
                    int root, A_MPI_Comm comm, A_MPI_Comm *intercomm,
                    int array_of_errcodes[]);
@@ -27578,8 +28567,10 @@ int A_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, A_MPI_Info info,
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_spawn_print)
+    \;
   debug_printer("MPI_Comm_spawn : \n{\ncommand : %s,\nargv : %s,\nmaxprocs : "
-                "%d,\ninfo : %I,\nroot : %d,\ncomm : %C,\nintercomm : "
+                "%d,\ninfo : %p,\nroot : %d,\ncomm : %C,\nintercomm : "
                 "%*o,\narray_of_errcodes : %d,\nreturn : %d\n}\n",
                 command, argv, maxprocs, info, root, comm, intercomm,
                 array_of_errcodes, ret_tmp);
@@ -27605,6 +28596,7 @@ int R_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Comm_spawn_multiple_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Comm_spawn_multiple_print = 0;
 int MPI_Comm_spawn_multiple(int count, char *array_of_commands[],
                             char **array_of_argv[], int array_of_maxprocs[],
                             R_MPI_Info *array_of_info[], int root,
@@ -27682,9 +28674,11 @@ int A_MPI_Comm_spawn_multiple(int count, char *array_of_commands[],
   wi4mpi_free(array_of_info_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Comm_spawn_multiple_print)
+    \;
   debug_printer("MPI_Comm_spawn_multiple : \n{\ncount : %d,\narray_of_commands "
                 ": %s,\narray_of_argv : %*s,\narray_of_maxprocs : "
-                "%d,\narray_of_info : %I,\nroot : %d,\ncomm : %C,\nintercomm : "
+                "%d,\narray_of_info : %p,\nroot : %d,\ncomm : %C,\nintercomm : "
                 "%*o,\narray_of_errcodes : %d,\nreturn : %d\n}\n",
                 count, array_of_commands, array_of_argv, array_of_maxprocs,
                 count, array_of_info, root, comm, intercomm, array_of_errcodes,
@@ -27714,6 +28708,7 @@ int R_MPI_Comm_spawn_multiple(int count, char *array_of_commands[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_get_contents_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_get_contents_print = 0;
 int MPI_Type_get_contents(A_MPI_Datatype datatype, int max_integers,
                           int max_addresses, int max_datatypes,
                           int array_of_integers[],
@@ -27794,6 +28789,8 @@ int A_MPI_Type_get_contents(A_MPI_Datatype datatype, int max_integers,
   wi4mpi_free(array_of_datatypes_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_get_contents_print)
+    \;
   debug_printer("MPI_Type_get_contents : \n{\ndatatype : %D,\nmax_integers : "
                 "%d,\nmax_addresses : %d,\nmax_datatypes : "
                 "%d,\narray_of_integers : %d,\narray_of_addresses : "
@@ -27826,6 +28823,7 @@ int R_MPI_Type_get_contents(R_MPI_Datatype datatype, int max_integers,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Pack_external_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Pack_external_print = 0;
 int MPI_Pack_external(char datarep[], void *inbuf, int incount,
                       A_MPI_Datatype datatype, void *outbuf, A_MPI_Aint outsize,
                       A_MPI_Aint *position);
@@ -27896,6 +28894,8 @@ int A_MPI_Pack_external(char datarep[], void *inbuf, int incount,
   *position = (A_MPI_Aint)*position_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Pack_external_print)
+    \;
   debug_printer("MPI_Pack_external : \n{\ndatarep : %c,\ninbuf : %p,\nincount "
                 ": %d,\ndatatype : %D,\noutbuf : %p,\noutsize : %ld,\nposition "
                 ": %*d,\nreturn : %d\n}\n",
@@ -27923,6 +28923,7 @@ int R_MPI_Pack_external(char datarep[], void *inbuf, int incount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Pack_external_size_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Pack_external_size_print = 0;
 int MPI_Pack_external_size(char datarep[], int incount, A_MPI_Datatype datatype,
                            A_MPI_Aint *size);
 int (*LOCAL_MPI_Pack_external_size)(char *, int, R_MPI_Datatype, R_MPI_Aint *);
@@ -27978,6 +28979,8 @@ int A_MPI_Pack_external_size(char datarep[], int incount,
   *size = (A_MPI_Aint)*size_tmp;
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Pack_external_size_print)
+    \;
   debug_printer("MPI_Pack_external_size : \n{\ndatarep : %c,\nincount : "
                 "%d,\ndatatype : %D,\nsize : %*d,\nreturn : %d\n}\n",
                 datarep, incount, datatype, size, ret_tmp);
@@ -28001,6 +29004,7 @@ int R_MPI_Pack_external_size(char datarep[], int incount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_darray_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_darray_print = 0;
 int MPI_Type_create_darray(int size, int rank, int ndims, int array_of_gsizes[],
                            int array_of_distribs[], int array_of_dargs[],
                            int array_of_psizes[], int order,
@@ -28069,6 +29073,8 @@ int A_MPI_Type_create_darray(int size, int rank, int ndims,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_darray_print)
+    \;
   debug_printer("MPI_Type_create_darray : \n{\nsize : %d,\nrank : %d,\nndims : "
                 "%d,\narray_of_gsizes : %d,\narray_of_distribs : "
                 "%d,\narray_of_dargs : %d,\narray_of_psizes : %d,\norder : "
@@ -28101,6 +29107,7 @@ int R_MPI_Type_create_darray(int size, int rank, int ndims,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_hindexed_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_hindexed_print = 0;
 int MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
                              R_MPI_Aint *array_of_displacements[],
                              A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
@@ -28170,6 +29177,8 @@ int A_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
   wi4mpi_free(array_of_displacements_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_hindexed_print)
+    \;
   debug_printer("MPI_Type_create_hindexed : \n{\ncount : "
                 "%d,\narray_of_blocklengths : %d,\narray_of_displacements : "
                 "%ld,\noldtype : %D,\nnewtype : %*D,\nreturn : %d\n}\n",
@@ -28198,6 +29207,7 @@ int R_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_indexed_block_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_indexed_block_print = 0;
 int MPI_Type_create_indexed_block(int count, int blocklength,
                                   int array_of_displacements[],
                                   A_MPI_Datatype oldtype,
@@ -28261,6 +29271,8 @@ int A_MPI_Type_create_indexed_block(int count, int blocklength,
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_indexed_block_print)
+    \;
   debug_printer("MPI_Type_create_indexed_block : \n{\ncount : %d,\nblocklength "
                 ": %d,\narray_of_displacements : %d,\noldtype : %D,\nnewtype : "
                 "%*D,\nreturn : %d\n}\n",
@@ -28289,6 +29301,7 @@ int R_MPI_Type_create_indexed_block(int count, int blocklength,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_hindexed_block_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_hindexed_block_print = 0;
 int MPI_Type_create_hindexed_block(int count, int blocklength,
                                    R_MPI_Aint *array_of_displacements[],
                                    A_MPI_Datatype oldtype,
@@ -28358,6 +29371,8 @@ int A_MPI_Type_create_hindexed_block(int count, int blocklength,
   wi4mpi_free(array_of_displacements_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_hindexed_block_print)
+    \;
   debug_printer("MPI_Type_create_hindexed_block : \n{\ncount : "
                 "%d,\nblocklength : %d,\narray_of_displacements : "
                 "%ld,\noldtype : %D,\nnewtype : %*D,\nreturn : %d\n}\n",
@@ -28386,6 +29401,7 @@ int R_MPI_Type_create_hindexed_block(int count, int blocklength,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_struct_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_struct_print = 0;
 int MPI_Type_create_struct(int count, int array_of_blocklengths[],
                            R_MPI_Aint *array_of_displacements[],
                            R_MPI_Datatype *array_of_types[],
@@ -28461,6 +29477,8 @@ int A_MPI_Type_create_struct(int count, int array_of_blocklengths[],
   wi4mpi_free(array_of_types_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_struct_print)
+    \;
   debug_printer("MPI_Type_create_struct : \n{\ncount : "
                 "%d,\narray_of_blocklengths : %d,\narray_of_displacements : "
                 "%ld,\narray_of_types : %D,\nnewtype : %*D,\nreturn : %d\n}\n",
@@ -28491,6 +29509,7 @@ int R_MPI_Type_create_struct(int count, int array_of_blocklengths[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Type_create_subarray_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Type_create_subarray_print = 0;
 int MPI_Type_create_subarray(int ndims, int array_of_sizes[],
                              int array_of_subsizes[], int array_of_starts[],
                              int order, A_MPI_Datatype oldtype,
@@ -28558,6 +29577,8 @@ int A_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
   datatype_conv_r2a(newtype, newtype_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Type_create_subarray_print)
+    \;
   debug_printer("MPI_Type_create_subarray : \n{\nndims : %d,\narray_of_sizes : "
                 "%d,\narray_of_subsizes : %d,\narray_of_starts : %d,\norder : "
                 "%d,\noldtype : %D,\nnewtype : %*D,\nreturn : %d\n}\n",
@@ -28587,6 +29608,7 @@ int R_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Unpack_external_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Unpack_external_print = 0;
 int MPI_Unpack_external(char datarep[], void *inbuf, A_MPI_Aint insize,
                         A_MPI_Aint *position, void *outbuf, int outcount,
                         A_MPI_Datatype datatype);
@@ -28658,6 +29680,8 @@ int A_MPI_Unpack_external(char datarep[], void *inbuf, A_MPI_Aint insize,
   buffer_conv_r2a(&outbuf, &outbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Unpack_external_print)
+    \;
   debug_printer("MPI_Unpack_external : \n{\ndatarep : %c,\ninbuf : %p,\ninsize "
                 ": %ld,\nposition : %*d,\noutbuf : %p,\noutcount : "
                 "%d,\ndatatype : %D,\nreturn : %d\n}\n",
@@ -28685,6 +29709,7 @@ int R_MPI_Unpack_external(char datarep[], void *inbuf, R_MPI_Aint insize,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Dist_graph_create_adjacent_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Dist_graph_create_adjacent_print = 0;
 int MPI_Dist_graph_create_adjacent(A_MPI_Comm comm_old, int indegree,
                                    int sources[], int *sourceweights,
                                    int outdegree, int destinations[],
@@ -28762,10 +29787,12 @@ int A_MPI_Dist_graph_create_adjacent(A_MPI_Comm comm_old, int indegree,
   comm_conv_r2a(comm_dist_graph, comm_dist_graph_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Dist_graph_create_adjacent_print)
+    \;
   debug_printer("MPI_Dist_graph_create_adjacent : \n{\ncomm_old : "
                 "%C,\nindegree : %d,\nsources : %d,\nsourceweights : "
                 "%*d,\noutdegree : %d,\ndestinations : %d,\ndestweights : "
-                "%*d,\ninfo : %I,\nreorder : %d,\ncomm_dist_graph : "
+                "%*d,\ninfo : %p,\nreorder : %d,\ncomm_dist_graph : "
                 "%*o,\nreturn : %d\n}\n",
                 comm_old, indegree, indegree, sources, sourceweights, outdegree,
                 outdegree, destinations, destweights, info, reorder,
@@ -28795,6 +29822,7 @@ int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old, int indegree,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Dist_graph_create_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Dist_graph_create_print = 0;
 int MPI_Dist_graph_create(A_MPI_Comm comm_old, int n, int sources[],
                           int degrees[], int destinations[], int *weights,
                           A_MPI_Info info, int reorder,
@@ -28866,9 +29894,11 @@ int A_MPI_Dist_graph_create(A_MPI_Comm comm_old, int n, int sources[],
   comm_conv_r2a(comm_dist_graph, comm_dist_graph_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Dist_graph_create_print)
+    \;
   debug_printer("MPI_Dist_graph_create : \n{\ncomm_old : %C,\nn : %d,\nsources "
                 ": %d,\ndegrees : %d,\ndestinations : %d,\nweights : "
-                "%*d,\ninfo : %I,\nreorder : %d,\ncomm_dist_graph : "
+                "%*d,\ninfo : %p,\nreorder : %d,\ncomm_dist_graph : "
                 "%*o,\nreturn : %d\n}\n",
                 comm_old, n, n, sources, n, degrees, n, destinations, weights,
                 info, reorder, comm_dist_graph, ret_tmp);
@@ -28896,6 +29926,7 @@ int R_MPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int sources[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Dist_graph_neighbors_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Dist_graph_neighbors_print = 0;
 int MPI_Dist_graph_neighbors(A_MPI_Comm comm, int maxindegree, int sources[],
                              int *sourceweights, int maxoutdegree,
                              int destinations[], int *destweights);
@@ -28964,6 +29995,8 @@ int A_MPI_Dist_graph_neighbors(A_MPI_Comm comm, int maxindegree, int sources[],
   weight_conv_r2a(&destweights, &destweights_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Dist_graph_neighbors_print)
+    \;
   debug_printer("MPI_Dist_graph_neighbors : \n{\ncomm : %C,\nmaxindegree : "
                 "%d,\nsources : %d,\nsourceweights : %*d,\nmaxoutdegree : "
                 "%d,\ndestinations : %d,\ndestweights : %*d,\nreturn : %d\n}\n",
@@ -28992,6 +30025,7 @@ int R_MPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree, int sources[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Igatherv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Igatherv_print = 0;
 int MPI_Igatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                  void *recvbuf, int recvcounts[], int displs[],
                  A_MPI_Datatype recvtype, int root, A_MPI_Comm comm,
@@ -29071,6 +30105,8 @@ int A_MPI_Igatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Igatherv_print)
+    \;
   debug_printer("MPI_Igatherv : \n{\nsendbuf : %p,\nsendcount : %d,\nsendtype "
                 ": %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls : "
                 "%d,\nrecvtype : %D,\nroot : %d,\ncomm : %C,\nrequest : "
@@ -29101,6 +30137,7 @@ int R_MPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iscatterv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iscatterv_print = 0;
 int MPI_Iscatterv(void *sendbuf, int sendcounts[], int *displs,
                   A_MPI_Datatype sendtype, void *recvbuf, int recvcount,
                   A_MPI_Datatype recvtype, int root, A_MPI_Comm comm,
@@ -29180,6 +30217,8 @@ int A_MPI_Iscatterv(void *sendbuf, int sendcounts[], int *displs,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iscatterv_print)
+    \;
   debug_printer("MPI_Iscatterv : \n{\nsendbuf : %p,\nsendcounts : %d,\ndispls "
                 ": %*d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcount : "
                 "%d,\nrecvtype : %D,\nroot : %d,\ncomm : %C,\nrequest : "
@@ -29210,6 +30249,7 @@ int R_MPI_Iscatterv(void *sendbuf, int sendcounts[], int *displs,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Iallgatherv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Iallgatherv_print = 0;
 int MPI_Iallgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
                     void *recvbuf, int recvcounts[], int displs[],
                     A_MPI_Datatype recvtype, A_MPI_Comm comm,
@@ -29288,6 +30328,8 @@ int A_MPI_Iallgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Iallgatherv_print)
+    \;
   debug_printer("MPI_Iallgatherv : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls "
                 ": %d,\nrecvtype : %D,\ncomm : %C,\nrequest : %p,\nreturn : "
@@ -29318,6 +30360,7 @@ int R_MPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ialltoallv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ialltoallv_print = 0;
 int MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                    A_MPI_Datatype sendtype, void *recvbuf, int *recvcounts,
                    int *rdispls, A_MPI_Datatype recvtype, A_MPI_Comm comm,
@@ -29397,6 +30440,8 @@ int A_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ialltoallv_print)
+    \;
   debug_printer("MPI_Ialltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                 "%*d,\nsdispls : %*d,\nsendtype : %D,\nrecvbuf : "
                 "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : %D,\ncomm "
@@ -29427,6 +30472,7 @@ int R_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ialltoallw_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ialltoallw_print = 0;
 int MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
                    R_MPI_Datatype *sendtypes[], void *recvbuf, int recvcounts[],
                    int rdispls[], R_MPI_Datatype *recvtypes[], A_MPI_Comm comm,
@@ -29520,6 +30566,8 @@ int A_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   wi4mpi_free(recvtypes_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ialltoallw_print)
+    \;
   debug_printer(
       "MPI_Ialltoallw : \n{\nsendbuf : %p,\nsendcounts : %d,\nsdispls : "
       "%d,\nsendtypes : %D,\nrecvbuf : %p,\nrecvcounts : %d,\nrdispls : "
@@ -29551,6 +30599,7 @@ int R_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ireduce_scatter_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ireduce_scatter_print = 0;
 int MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                         A_MPI_Datatype datatype, A_MPI_Op op, A_MPI_Comm comm,
                         A_MPI_Request *request);
@@ -29626,8 +30675,10 @@ int A_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ireduce_scatter_print)
+    \;
   debug_printer("MPI_Ireduce_scatter : \n{\nsendbuf : %p,\nrecvbuf : "
-                "%p,\nrecvcounts : %d,\ndatatype : %D,\nop : %o,\ncomm : "
+                "%p,\nrecvcounts : %d,\ndatatype : %D,\nop : %op,\ncomm : "
                 "%C,\nrequest : %p,\nreturn : %d\n}\n",
                 sendbuf, recvbuf, recvcounts, datatype, op, comm, request,
                 ret_tmp);
@@ -29653,6 +30704,7 @@ int R_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ineighbor_allgatherv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ineighbor_allgatherv_print = 0;
 int MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount,
                              A_MPI_Datatype sendtype, void *recvbuf,
                              int recvcounts[], int displs[],
@@ -29734,6 +30786,8 @@ int A_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount,
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ineighbor_allgatherv_print)
+    \;
   debug_printer("MPI_Ineighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls "
                 ": %d,\nrecvtype : %D,\ncomm : %C,\nrequest : %p,\nreturn : "
@@ -29765,6 +30819,7 @@ int R_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ineighbor_alltoallv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ineighbor_alltoallv_print = 0;
 int MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                             A_MPI_Datatype sendtype, void *recvbuf,
                             int recvcounts[], int rdispls[],
@@ -29846,6 +30901,8 @@ int A_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   }
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ineighbor_alltoallv_print)
+    \;
   debug_printer("MPI_Ineighbor_alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                 "%d,\nsdispls : %d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts "
                 ": %d,\nrdispls : %d,\nrecvtype : %D,\ncomm : %C,\nrequest : "
@@ -29877,6 +30934,7 @@ int R_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Ineighbor_alltoallw_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Ineighbor_alltoallw_print = 0;
 int MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
                             R_MPI_Aint *sdispls[], R_MPI_Datatype *sendtypes[],
                             void *recvbuf, int recvcounts[],
@@ -29985,6 +31043,8 @@ int A_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
   wi4mpi_free(recvtypes_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Ineighbor_alltoallw_print)
+    \;
   debug_printer("MPI_Ineighbor_alltoallw : \n{\nsendbuf : %p,\nsendcounts : "
                 "%d,\nsdispls : %ld,\nsendtypes : %D,\nrecvbuf : "
                 "%p,\nrecvcounts : %d,\nrdispls : %ld,\nrecvtypes : %D,\ncomm "
@@ -30017,6 +31077,7 @@ int R_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Neighbor_allgatherv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Neighbor_allgatherv_print = 0;
 int MPI_Neighbor_allgatherv(void *sendbuf, int sendcount,
                             A_MPI_Datatype sendtype, void *recvbuf,
                             int recvcounts[], int displs[],
@@ -30090,6 +31151,8 @@ int A_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount,
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Neighbor_allgatherv_print)
+    \;
   debug_printer("MPI_Neighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
                 "%d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts : %d,\ndispls "
                 ": %d,\nrecvtype : %D,\ncomm : %C,\nreturn : %d\n}\n",
@@ -30119,6 +31182,7 @@ int R_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount,
   return ret_tmp;
 }
 unsigned long long WI4MPI_Neighbor_alltoallv_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Neighbor_alltoallv_print = 0;
 int MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                            A_MPI_Datatype sendtype, void *recvbuf,
                            int recvcounts[], int rdispls[],
@@ -30193,6 +31257,8 @@ int A_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Neighbor_alltoallv_print)
+    \;
   debug_printer("MPI_Neighbor_alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                 "%d,\nsdispls : %d,\nsendtype : %D,\nrecvbuf : %p,\nrecvcounts "
                 ": %d,\nrdispls : %d,\nrecvtype : %D,\ncomm : %C,\nreturn : "
@@ -30223,6 +31289,7 @@ int R_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_Neighbor_alltoallw_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Neighbor_alltoallw_print = 0;
 int MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[],
                            R_MPI_Aint *sdispls[], R_MPI_Datatype *sendtypes[],
                            void *recvbuf, int recvcounts[],
@@ -30325,6 +31392,8 @@ int A_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[],
   wi4mpi_free(recvtypes_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Neighbor_alltoallw_print)
+    \;
   debug_printer(
       "MPI_Neighbor_alltoallw : \n{\nsendbuf : %p,\nsendcounts : %d,\nsdispls "
       ": %ld,\nsendtypes : %D,\nrecvbuf : %p,\nrecvcounts : %d,\nrdispls : "
@@ -30356,6 +31425,7 @@ int R_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[],
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_category_get_cvars_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_category_get_cvars_print = 0;
 int MPI_T_category_get_cvars(int cat_index, int len, int indices[]);
 int (*LOCAL_MPI_T_category_get_cvars)(int, int, int *);
 
@@ -30402,6 +31472,8 @@ int A_MPI_T_category_get_cvars(int cat_index, int len, int indices[]) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_category_get_cvars_print)
+    \;
   debug_printer("MPI_T_category_get_cvars : \n{\ncat_index : %d,\nlen : "
                 "%d,\nindices : %d,\nreturn : %d\n}\n",
                 cat_index, len, len, indices, ret_tmp);
@@ -30424,6 +31496,7 @@ int R_MPI_T_category_get_cvars(int cat_index, int len, int indices[]) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_category_get_pvars_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_category_get_pvars_print = 0;
 int MPI_T_category_get_pvars(int cat_index, int len, int indices[]);
 int (*LOCAL_MPI_T_category_get_pvars)(int, int, int *);
 
@@ -30470,6 +31543,8 @@ int A_MPI_T_category_get_pvars(int cat_index, int len, int indices[]) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_category_get_pvars_print)
+    \;
   debug_printer("MPI_T_category_get_pvars : \n{\ncat_index : %d,\nlen : "
                 "%d,\nindices : %d,\nreturn : %d\n}\n",
                 cat_index, len, len, indices, ret_tmp);
@@ -30492,6 +31567,7 @@ int R_MPI_T_category_get_pvars(int cat_index, int len, int indices[]) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_category_get_categories_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_category_get_categories_print = 0;
 int MPI_T_category_get_categories(int cat_index, int len, int indices[]);
 int (*LOCAL_MPI_T_category_get_categories)(int, int, int *);
 
@@ -30538,6 +31614,8 @@ int A_MPI_T_category_get_categories(int cat_index, int len, int indices[]) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_category_get_categories_print)
+    \;
   debug_printer("MPI_T_category_get_categories : \n{\ncat_index : %d,\nlen : "
                 "%d,\nindices : %d,\nreturn : %d\n}\n",
                 cat_index, len, len, indices, ret_tmp);
@@ -30560,6 +31638,7 @@ int R_MPI_T_category_get_categories(int cat_index, int len, int indices[]) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iwrite_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iwrite_all_print = 0;
 int MPI_File_iwrite_all(A_MPI_File fh, void *buf, int count,
                         A_MPI_Datatype datatype, A_MPI_Request *request);
 int (*LOCAL_MPI_File_iwrite_all)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -30626,7 +31705,9 @@ int A_MPI_File_iwrite_all(A_MPI_File fh, void *buf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iwrite_all : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_iwrite_all_print)
+    \;
+  debug_printer("MPI_File_iwrite_all : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nrequest : %p,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, request, ret_tmp);
 #endif
@@ -30649,6 +31730,7 @@ int R_MPI_File_iwrite_all(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iwrite_at_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iwrite_at_all_print = 0;
 int MPI_File_iwrite_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                            int count, A_MPI_Datatype datatype,
                            A_MPI_Request *request);
@@ -30721,7 +31803,9 @@ int A_MPI_File_iwrite_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iwrite_at_all : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_iwrite_at_all_print)
+    \;
+  debug_printer("MPI_File_iwrite_at_all : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nrequest : %p,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, request, ret_tmp);
@@ -30747,6 +31831,7 @@ int R_MPI_File_iwrite_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_category_get_index_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_category_get_index_print = 0;
 int MPI_T_category_get_index(char *name, int *cat_index);
 int (*LOCAL_MPI_T_category_get_index)(char *, int *);
 
@@ -30791,6 +31876,8 @@ int A_MPI_T_category_get_index(char *name, int *cat_index) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_category_get_index_print)
+    \;
   debug_printer("MPI_T_category_get_index : \n{\nname : %s,\ncat_index : "
                 "%*d,\nreturn : %d\n}\n",
                 name, cat_index, ret_tmp);
@@ -30813,6 +31900,7 @@ int R_MPI_T_category_get_index(char *name, int *cat_index) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_cvar_get_index_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_cvar_get_index_print = 0;
 int MPI_T_cvar_get_index(char *name, int *cvar_index);
 int (*LOCAL_MPI_T_cvar_get_index)(char *, int *);
 
@@ -30857,6 +31945,8 @@ int A_MPI_T_cvar_get_index(char *name, int *cvar_index) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_cvar_get_index_print)
+    \;
   debug_printer("MPI_T_cvar_get_index : \n{\nname : %s,\ncvar_index : "
                 "%*d,\nreturn : %d\n}\n",
                 name, cvar_index, ret_tmp);
@@ -30879,6 +31969,7 @@ int R_MPI_T_cvar_get_index(char *name, int *cvar_index) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_pvar_get_index_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_pvar_get_index_print = 0;
 int MPI_T_pvar_get_index(char *name, int var_class, int *pvar_index);
 int (*LOCAL_MPI_T_pvar_get_index)(char *, int, int *);
 
@@ -30925,6 +32016,8 @@ int A_MPI_T_pvar_get_index(char *name, int var_class, int *pvar_index) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_pvar_get_index_print)
+    \;
   debug_printer("MPI_T_pvar_get_index : \n{\nname : %s,\nvar_class : "
                 "%d,\npvar_index : %*d,\nreturn : %d\n}\n",
                 name, var_class, pvar_index, ret_tmp);
@@ -30947,6 +32040,7 @@ int R_MPI_T_pvar_get_index(char *name, int var_class, int *pvar_index) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Aint_add_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Aint_add_print = 0;
 A_MPI_Aint MPI_Aint_add(A_MPI_Aint base, A_MPI_Aint disp);
 R_MPI_Aint (*LOCAL_MPI_Aint_add)(R_MPI_Aint, R_MPI_Aint);
 
@@ -30994,6 +32088,8 @@ A_MPI_Aint A_MPI_Aint_add(A_MPI_Aint base, A_MPI_Aint disp) {
   R_MPI_Aint ret_tmp = LOCAL_MPI_Aint_add(base_tmp, disp_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Aint_add_print)
+    \;
   debug_printer(
       "MPI_Aint_add : \n{\nbase : %ld,\ndisp : %ld,\nreturn : %ld\n}\n", base,
       disp, ret_tmp);
@@ -31016,6 +32112,7 @@ R_MPI_Aint R_MPI_Aint_add(R_MPI_Aint base, R_MPI_Aint disp) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_Aint_diff_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_Aint_diff_print = 0;
 A_MPI_Aint MPI_Aint_diff(A_MPI_Aint addr1, A_MPI_Aint addr2);
 R_MPI_Aint (*LOCAL_MPI_Aint_diff)(R_MPI_Aint, R_MPI_Aint);
 
@@ -31063,6 +32160,8 @@ A_MPI_Aint A_MPI_Aint_diff(A_MPI_Aint addr1, A_MPI_Aint addr2) {
   R_MPI_Aint ret_tmp = LOCAL_MPI_Aint_diff(addr1_tmp, addr2_tmp);
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_Aint_diff_print)
+    \;
   debug_printer(
       "MPI_Aint_diff : \n{\naddr1 : %ld,\naddr2 : %ld,\nreturn : %ld\n}\n",
       addr1, addr2, ret_tmp);
@@ -31085,6 +32184,7 @@ R_MPI_Aint R_MPI_Aint_diff(R_MPI_Aint addr1, R_MPI_Aint addr2) {
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iread_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iread_all_print = 0;
 int MPI_File_iread_all(A_MPI_File fh, void *buf, int count,
                        A_MPI_Datatype datatype, A_MPI_Request *request);
 int (*LOCAL_MPI_File_iread_all)(R_MPI_File, void *, int, R_MPI_Datatype,
@@ -31152,7 +32252,9 @@ int A_MPI_File_iread_all(A_MPI_File fh, void *buf, int count,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iread_all : \n{\nfh : %F,\nbuf : %p,\ncount : "
+  if (WI4MPI_File_iread_all_print)
+    \;
+  debug_printer("MPI_File_iread_all : \n{\nfh : %p,\nbuf : %p,\ncount : "
                 "%d,\ndatatype : %D,\nrequest : %p,\nreturn : %d\n}\n",
                 fh, buf, count, datatype, request, ret_tmp);
 #endif
@@ -31175,6 +32277,7 @@ int R_MPI_File_iread_all(R_MPI_File fh, void *buf, int count,
   return ret_tmp;
 }
 unsigned long long WI4MPI_File_iread_at_all_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_File_iread_at_all_print = 0;
 int MPI_File_iread_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                           int count, A_MPI_Datatype datatype,
                           A_MPI_Request *request);
@@ -31247,7 +32350,9 @@ int A_MPI_File_iread_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   }
   in_w = 0;
 #ifdef DEBUG
-  debug_printer("MPI_File_iread_at_all : \n{\nfh : %F,\noffset : %ld,\nbuf : "
+  if (WI4MPI_File_iread_at_all_print)
+    \;
+  debug_printer("MPI_File_iread_at_all : \n{\nfh : %p,\noffset : %ld,\nbuf : "
                 "%p,\ncount : %d,\ndatatype : %D,\nrequest : %p,\nreturn : "
                 "%d\n}\n",
                 fh, offset, buf, count, datatype, request, ret_tmp);
@@ -31273,6 +32378,7 @@ int R_MPI_File_iread_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   return ret_tmp;
 }
 unsigned long long WI4MPI_T_category_changed_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPI_T_category_changed_print = 0;
 int MPI_T_category_changed(int *stamp);
 int (*LOCAL_MPI_T_category_changed)(int *);
 
@@ -31315,6 +32421,8 @@ int A_MPI_T_category_changed(int *stamp) {
 
   in_w = 0;
 #ifdef DEBUG
+  if (WI4MPI_T_category_changed_print)
+    \;
   debug_printer("MPI_T_category_changed : \n{\nstamp : %*d,\nreturn : %d\n}\n",
                 stamp, ret_tmp);
 #endif
@@ -33138,1870 +34246,4114 @@ WATTR void wrapper_init(void) {
 __attribute__((constructor)) void wi4mpi_timeout_config(void) {
   char *current_str;
   size_t current_val;
+  int current_deb;
   timeout_config_file();
+  int default_debug;
+  if (current_str = getenv(WI4MPI_DEFAULT_PRINT)) {
+    default_deb = strtol(current_str, NULL, 10);
+  } else
+    default_debug = 0;
   if (current_str = getenv("WI4MPI_Send_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Send_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Send_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Send_print = current_deb;
+  } else
+    WI4MPI_Send_print = default_debug;
   if (current_str = getenv("WI4MPI_Recv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Recv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Recv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Recv_print = current_deb;
+  } else
+    WI4MPI_Recv_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_count_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_count_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_count_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_count_print = current_deb;
+  } else
+    WI4MPI_Get_count_print = default_debug;
   if (current_str = getenv("WI4MPI_Bsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Bsend_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Bsend_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Bsend_print = current_deb;
+  } else
+    WI4MPI_Bsend_print = default_debug;
   if (current_str = getenv("WI4MPI_Ssend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ssend_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ssend_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ssend_print = current_deb;
+  } else
+    WI4MPI_Ssend_print = default_debug;
   if (current_str = getenv("WI4MPI_Rsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rsend_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Rsend_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Rsend_print = current_deb;
+  } else
+    WI4MPI_Rsend_print = default_debug;
   if (current_str = getenv("WI4MPI_Buffer_attach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Buffer_attach_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Buffer_attach_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Buffer_attach_print = current_deb;
+  } else
+    WI4MPI_Buffer_attach_print = default_debug;
   if (current_str = getenv("WI4MPI_Buffer_detach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Buffer_detach_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Buffer_detach_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Buffer_detach_print = current_deb;
+  } else
+    WI4MPI_Buffer_detach_print = default_debug;
   if (current_str = getenv("WI4MPI_Isend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Isend_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Isend_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Isend_print = current_deb;
+  } else
+    WI4MPI_Isend_print = default_debug;
   if (current_str = getenv("WI4MPI_Ibsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ibsend_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ibsend_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ibsend_print = current_deb;
+  } else
+    WI4MPI_Ibsend_print = default_debug;
   if (current_str = getenv("WI4MPI_Issend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Issend_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Issend_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Issend_print = current_deb;
+  } else
+    WI4MPI_Issend_print = default_debug;
   if (current_str = getenv("WI4MPI_Irsend_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Irsend_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Irsend_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Irsend_print = current_deb;
+  } else
+    WI4MPI_Irsend_print = default_debug;
   if (current_str = getenv("WI4MPI_Irecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Irecv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Irecv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Irecv_print = current_deb;
+  } else
+    WI4MPI_Irecv_print = default_debug;
   if (current_str = getenv("WI4MPI_Wait_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Wait_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Wait_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Wait_print = current_deb;
+  } else
+    WI4MPI_Wait_print = default_debug;
   if (current_str = getenv("WI4MPI_Test_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Test_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Test_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Test_print = current_deb;
+  } else
+    WI4MPI_Test_print = default_debug;
   if (current_str = getenv("WI4MPI_Request_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Request_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Request_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Request_free_print = current_deb;
+  } else
+    WI4MPI_Request_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Iprobe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iprobe_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iprobe_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iprobe_print = current_deb;
+  } else
+    WI4MPI_Iprobe_print = default_debug;
   if (current_str = getenv("WI4MPI_Probe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Probe_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Probe_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Probe_print = current_deb;
+  } else
+    WI4MPI_Probe_print = default_debug;
   if (current_str = getenv("WI4MPI_Cancel_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cancel_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cancel_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cancel_print = current_deb;
+  } else
+    WI4MPI_Cancel_print = default_debug;
   if (current_str = getenv("WI4MPI_Test_cancelled_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Test_cancelled_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Test_cancelled_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Test_cancelled_print = current_deb;
+  } else
+    WI4MPI_Test_cancelled_print = default_debug;
   if (current_str = getenv("WI4MPI_Send_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Send_init_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Send_init_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Send_init_print = current_deb;
+  } else
+    WI4MPI_Send_init_print = default_debug;
   if (current_str = getenv("WI4MPI_Bsend_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Bsend_init_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Bsend_init_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Bsend_init_print = current_deb;
+  } else
+    WI4MPI_Bsend_init_print = default_debug;
   if (current_str = getenv("WI4MPI_Ssend_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ssend_init_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ssend_init_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ssend_init_print = current_deb;
+  } else
+    WI4MPI_Ssend_init_print = default_debug;
   if (current_str = getenv("WI4MPI_Rsend_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rsend_init_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Rsend_init_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Rsend_init_print = current_deb;
+  } else
+    WI4MPI_Rsend_init_print = default_debug;
   if (current_str = getenv("WI4MPI_Recv_init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Recv_init_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Recv_init_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Recv_init_print = current_deb;
+  } else
+    WI4MPI_Recv_init_print = default_debug;
   if (current_str = getenv("WI4MPI_Start_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Start_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Start_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Start_print = current_deb;
+  } else
+    WI4MPI_Start_print = default_debug;
   if (current_str = getenv("WI4MPI_Sendrecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Sendrecv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Sendrecv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Sendrecv_print = current_deb;
+  } else
+    WI4MPI_Sendrecv_print = default_debug;
   if (current_str = getenv("WI4MPI_Sendrecv_replace_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Sendrecv_replace_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Sendrecv_replace_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Sendrecv_replace_print = current_deb;
+  } else
+    WI4MPI_Sendrecv_replace_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_contiguous_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_contiguous_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_contiguous_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_contiguous_print = current_deb;
+  } else
+    WI4MPI_Type_contiguous_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_vector_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_vector_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_vector_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_vector_print = current_deb;
+  } else
+    WI4MPI_Type_vector_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_hvector_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_hvector_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_hvector_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_hvector_print = current_deb;
+  } else
+    WI4MPI_Type_hvector_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_indexed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_indexed_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_indexed_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_indexed_print = current_deb;
+  } else
+    WI4MPI_Type_indexed_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_hindexed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_hindexed_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_hindexed_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_hindexed_print = current_deb;
+  } else
+    WI4MPI_Type_hindexed_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_struct_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_struct_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_struct_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_struct_print = current_deb;
+  } else
+    WI4MPI_Type_struct_print = default_debug;
   if (current_str = getenv("WI4MPI_Address_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Address_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Address_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Address_print = current_deb;
+  } else
+    WI4MPI_Address_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_extent_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_extent_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_extent_print = current_deb;
+  } else
+    WI4MPI_Type_extent_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_size_print = current_deb;
+  } else
+    WI4MPI_Type_size_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_lb_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_lb_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_lb_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_lb_print = current_deb;
+  } else
+    WI4MPI_Type_lb_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_ub_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_ub_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_ub_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_ub_print = current_deb;
+  } else
+    WI4MPI_Type_ub_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_commit_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_commit_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_commit_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_commit_print = current_deb;
+  } else
+    WI4MPI_Type_commit_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_free_print = current_deb;
+  } else
+    WI4MPI_Type_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_elements_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_elements_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_elements_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_elements_print = current_deb;
+  } else
+    WI4MPI_Get_elements_print = default_debug;
   if (current_str = getenv("WI4MPI_Pack_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Pack_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Pack_print = current_deb;
+  } else
+    WI4MPI_Pack_print = default_debug;
   if (current_str = getenv("WI4MPI_Unpack_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Unpack_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Unpack_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Unpack_print = current_deb;
+  } else
+    WI4MPI_Unpack_print = default_debug;
   if (current_str = getenv("WI4MPI_Pack_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Pack_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Pack_size_print = current_deb;
+  } else
+    WI4MPI_Pack_size_print = default_debug;
   if (current_str = getenv("WI4MPI_Barrier_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Barrier_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Barrier_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Barrier_print = current_deb;
+  } else
+    WI4MPI_Barrier_print = default_debug;
   if (current_str = getenv("WI4MPI_Bcast_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Bcast_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Bcast_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Bcast_print = current_deb;
+  } else
+    WI4MPI_Bcast_print = default_debug;
   if (current_str = getenv("WI4MPI_Gather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Gather_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Gather_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Gather_print = current_deb;
+  } else
+    WI4MPI_Gather_print = default_debug;
   if (current_str = getenv("WI4MPI_Gatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Gatherv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Gatherv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Gatherv_print = current_deb;
+  } else
+    WI4MPI_Gatherv_print = default_debug;
   if (current_str = getenv("WI4MPI_Scatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Scatter_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Scatter_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Scatter_print = current_deb;
+  } else
+    WI4MPI_Scatter_print = default_debug;
   if (current_str = getenv("WI4MPI_Scatterv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Scatterv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Scatterv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Scatterv_print = current_deb;
+  } else
+    WI4MPI_Scatterv_print = default_debug;
   if (current_str = getenv("WI4MPI_Allgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Allgather_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Allgather_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Allgather_print = current_deb;
+  } else
+    WI4MPI_Allgather_print = default_debug;
   if (current_str = getenv("WI4MPI_Allgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Allgatherv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Allgatherv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Allgatherv_print = current_deb;
+  } else
+    WI4MPI_Allgatherv_print = default_debug;
   if (current_str = getenv("WI4MPI_Alltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alltoall_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Alltoall_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Alltoall_print = current_deb;
+  } else
+    WI4MPI_Alltoall_print = default_debug;
   if (current_str = getenv("WI4MPI_Alltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alltoallv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Alltoallv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Alltoallv_print = current_deb;
+  } else
+    WI4MPI_Alltoallv_print = default_debug;
   if (current_str = getenv("WI4MPI_Exscan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Exscan_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Exscan_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Exscan_print = current_deb;
+  } else
+    WI4MPI_Exscan_print = default_debug;
   if (current_str = getenv("WI4MPI_Reduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Reduce_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Reduce_print = current_deb;
+  } else
+    WI4MPI_Reduce_print = default_debug;
   if (current_str = getenv("WI4MPI_Op_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Op_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Op_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Op_create_print = current_deb;
+  } else
+    WI4MPI_Op_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Op_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Op_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Op_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Op_free_print = current_deb;
+  } else
+    WI4MPI_Op_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Allreduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Allreduce_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Allreduce_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Allreduce_print = current_deb;
+  } else
+    WI4MPI_Allreduce_print = default_debug;
   if (current_str = getenv("WI4MPI_Scan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Scan_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Scan_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Scan_print = current_deb;
+  } else
+    WI4MPI_Scan_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_size_print = current_deb;
+  } else
+    WI4MPI_Group_size_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_rank_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_rank_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_rank_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_rank_print = current_deb;
+  } else
+    WI4MPI_Group_rank_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_compare_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_compare_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_compare_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_compare_print = current_deb;
+  } else
+    WI4MPI_Group_compare_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_group_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_group_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_group_print = current_deb;
+  } else
+    WI4MPI_Comm_group_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_union_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_union_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_union_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_union_print = current_deb;
+  } else
+    WI4MPI_Group_union_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_intersection_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_intersection_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_intersection_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_intersection_print = current_deb;
+  } else
+    WI4MPI_Group_intersection_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_difference_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_difference_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_difference_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_difference_print = current_deb;
+  } else
+    WI4MPI_Group_difference_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_free_print = current_deb;
+  } else
+    WI4MPI_Group_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_size_print = current_deb;
+  } else
+    WI4MPI_Comm_size_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_rank_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_rank_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_rank_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_rank_print = current_deb;
+  } else
+    WI4MPI_Comm_rank_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_compare_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_compare_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_compare_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_compare_print = current_deb;
+  } else
+    WI4MPI_Comm_compare_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_dup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_dup_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_dup_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_dup_print = current_deb;
+  } else
+    WI4MPI_Comm_dup_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_dup_with_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_dup_with_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_dup_with_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_dup_with_info_print = current_deb;
+  } else
+    WI4MPI_Comm_dup_with_info_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_create_print = current_deb;
+  } else
+    WI4MPI_Comm_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_split_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_split_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_split_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_split_print = current_deb;
+  } else
+    WI4MPI_Comm_split_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_free_print = current_deb;
+  } else
+    WI4MPI_Comm_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_test_inter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_test_inter_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_test_inter_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_test_inter_print = current_deb;
+  } else
+    WI4MPI_Comm_test_inter_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_remote_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_remote_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_remote_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_remote_size_print = current_deb;
+  } else
+    WI4MPI_Comm_remote_size_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_remote_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_remote_group_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_remote_group_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_remote_group_print = current_deb;
+  } else
+    WI4MPI_Comm_remote_group_print = default_debug;
   if (current_str = getenv("WI4MPI_Intercomm_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Intercomm_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Intercomm_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Intercomm_create_print = current_deb;
+  } else
+    WI4MPI_Intercomm_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Intercomm_merge_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Intercomm_merge_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Intercomm_merge_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Intercomm_merge_print = current_deb;
+  } else
+    WI4MPI_Intercomm_merge_print = default_debug;
   if (current_str = getenv("WI4MPI_Attr_put_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Attr_put_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Attr_put_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Attr_put_print = current_deb;
+  } else
+    WI4MPI_Attr_put_print = default_debug;
   if (current_str = getenv("WI4MPI_Attr_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Attr_get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Attr_get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Attr_get_print = current_deb;
+  } else
+    WI4MPI_Attr_get_print = default_debug;
   if (current_str = getenv("WI4MPI_Attr_delete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Attr_delete_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Attr_delete_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Attr_delete_print = current_deb;
+  } else
+    WI4MPI_Attr_delete_print = default_debug;
   if (current_str = getenv("WI4MPI_Topo_test_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Topo_test_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Topo_test_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Topo_test_print = current_deb;
+  } else
+    WI4MPI_Topo_test_print = default_debug;
   if (current_str = getenv("WI4MPI_Graphdims_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graphdims_get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Graphdims_get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Graphdims_get_print = current_deb;
+  } else
+    WI4MPI_Graphdims_get_print = default_debug;
   if (current_str = getenv("WI4MPI_Cartdim_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cartdim_get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cartdim_get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cartdim_get_print = current_deb;
+  } else
+    WI4MPI_Cartdim_get_print = default_debug;
   if (current_str = getenv("WI4MPI_Graph_neighbors_count_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_neighbors_count_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Graph_neighbors_count_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Graph_neighbors_count_print = current_deb;
+  } else
+    WI4MPI_Graph_neighbors_count_print = default_debug;
   if (current_str = getenv("WI4MPI_Cart_shift_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_shift_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cart_shift_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cart_shift_print = current_deb;
+  } else
+    WI4MPI_Cart_shift_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_processor_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_processor_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_processor_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_processor_name_print = current_deb;
+  } else
+    WI4MPI_Get_processor_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_version_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_version_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_version_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_version_print = current_deb;
+  } else
+    WI4MPI_Get_version_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_library_version_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_library_version_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_library_version_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_library_version_print = current_deb;
+  } else
+    WI4MPI_Get_library_version_print = default_debug;
   if (current_str = getenv("WI4MPI_Errhandler_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Errhandler_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Errhandler_create_print = current_deb;
+  } else
+    WI4MPI_Errhandler_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Errhandler_set_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_set_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Errhandler_set_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Errhandler_set_print = current_deb;
+  } else
+    WI4MPI_Errhandler_set_print = default_debug;
   if (current_str = getenv("WI4MPI_Errhandler_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Errhandler_get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Errhandler_get_print = current_deb;
+  } else
+    WI4MPI_Errhandler_get_print = default_debug;
   if (current_str = getenv("WI4MPI_Errhandler_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Errhandler_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Errhandler_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Errhandler_free_print = current_deb;
+  } else
+    WI4MPI_Errhandler_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Error_string_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Error_string_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Error_string_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Error_string_print = current_deb;
+  } else
+    WI4MPI_Error_string_print = default_debug;
   if (current_str = getenv("WI4MPI_Error_class_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Error_class_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Error_class_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Error_class_print = current_deb;
+  } else
+    WI4MPI_Error_class_print = default_debug;
   if (current_str = getenv("WI4MPI_Initialized_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Initialized_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Initialized_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Initialized_print = current_deb;
+  } else
+    WI4MPI_Initialized_print = default_debug;
   if (current_str = getenv("WI4MPI_Abort_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Abort_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Abort_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Abort_print = current_deb;
+  } else
+    WI4MPI_Abort_print = default_debug;
   if (current_str = getenv("WI4MPI_Init_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Init_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Init_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Init_print = current_deb;
+  } else
+    WI4MPI_Init_print = default_debug;
   if (current_str = getenv("WI4MPI_Close_port_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Close_port_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Close_port_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Close_port_print = current_deb;
+  } else
+    WI4MPI_Close_port_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_accept_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_accept_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_accept_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_accept_print = current_deb;
+  } else
+    WI4MPI_Comm_accept_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_connect_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_connect_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_connect_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_connect_print = current_deb;
+  } else
+    WI4MPI_Comm_connect_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_disconnect_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_disconnect_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_disconnect_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_disconnect_print = current_deb;
+  } else
+    WI4MPI_Comm_disconnect_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_get_parent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_parent_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_get_parent_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_get_parent_print = current_deb;
+  } else
+    WI4MPI_Comm_get_parent_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_join_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_join_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_join_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_join_print = current_deb;
+  } else
+    WI4MPI_Comm_join_print = default_debug;
   if (current_str = getenv("WI4MPI_Lookup_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Lookup_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Lookup_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Lookup_name_print = current_deb;
+  } else
+    WI4MPI_Lookup_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Open_port_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Open_port_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Open_port_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Open_port_print = current_deb;
+  } else
+    WI4MPI_Open_port_print = default_debug;
   if (current_str = getenv("WI4MPI_Publish_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Publish_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Publish_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Publish_name_print = current_deb;
+  } else
+    WI4MPI_Publish_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Unpublish_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Unpublish_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Unpublish_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Unpublish_name_print = current_deb;
+  } else
+    WI4MPI_Unpublish_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_set_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_set_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_set_info_print = current_deb;
+  } else
+    WI4MPI_Comm_set_info_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_get_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_get_info_print = current_deb;
+  } else
+    WI4MPI_Comm_get_info_print = default_debug;
   if (current_str = getenv("WI4MPI_Accumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Accumulate_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Accumulate_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Accumulate_print = current_deb;
+  } else
+    WI4MPI_Accumulate_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_print = current_deb;
+  } else
+    WI4MPI_Get_print = default_debug;
   if (current_str = getenv("WI4MPI_Put_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Put_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Put_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Put_print = current_deb;
+  } else
+    WI4MPI_Put_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_complete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_complete_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_complete_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_complete_print = current_deb;
+  } else
+    WI4MPI_Win_complete_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_create_print = current_deb;
+  } else
+    WI4MPI_Win_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_fence_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_fence_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_fence_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_fence_print = current_deb;
+  } else
+    WI4MPI_Win_fence_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_free_print = current_deb;
+  } else
+    WI4MPI_Win_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_get_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_group_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_get_group_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_get_group_print = current_deb;
+  } else
+    WI4MPI_Win_get_group_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_lock_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_lock_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_lock_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_lock_print = current_deb;
+  } else
+    WI4MPI_Win_lock_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_post_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_post_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_post_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_post_print = current_deb;
+  } else
+    WI4MPI_Win_post_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_start_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_start_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_start_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_start_print = current_deb;
+  } else
+    WI4MPI_Win_start_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_test_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_test_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_test_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_test_print = current_deb;
+  } else
+    WI4MPI_Win_test_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_unlock_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_unlock_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_unlock_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_unlock_print = current_deb;
+  } else
+    WI4MPI_Win_unlock_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_wait_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_wait_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_wait_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_wait_print = current_deb;
+  } else
+    WI4MPI_Win_wait_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_allocate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_allocate_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_allocate_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_allocate_print = current_deb;
+  } else
+    WI4MPI_Win_allocate_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_allocate_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_allocate_shared_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_allocate_shared_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_allocate_shared_print = current_deb;
+  } else
+    WI4MPI_Win_allocate_shared_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_shared_query_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_shared_query_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_shared_query_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_shared_query_print = current_deb;
+  } else
+    WI4MPI_Win_shared_query_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_create_dynamic_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_create_dynamic_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_create_dynamic_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_create_dynamic_print = current_deb;
+  } else
+    WI4MPI_Win_create_dynamic_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_attach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_attach_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_attach_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_attach_print = current_deb;
+  } else
+    WI4MPI_Win_attach_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_detach_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_detach_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_detach_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_detach_print = current_deb;
+  } else
+    WI4MPI_Win_detach_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_get_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_get_info_print = current_deb;
+  } else
+    WI4MPI_Win_get_info_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_set_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_set_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_set_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_set_info_print = current_deb;
+  } else
+    WI4MPI_Win_set_info_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_accumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_accumulate_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_accumulate_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_accumulate_print = current_deb;
+  } else
+    WI4MPI_Get_accumulate_print = default_debug;
   if (current_str = getenv("WI4MPI_Fetch_and_op_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Fetch_and_op_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Fetch_and_op_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Fetch_and_op_print = current_deb;
+  } else
+    WI4MPI_Fetch_and_op_print = default_debug;
   if (current_str = getenv("WI4MPI_Compare_and_swap_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Compare_and_swap_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Compare_and_swap_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Compare_and_swap_print = current_deb;
+  } else
+    WI4MPI_Compare_and_swap_print = default_debug;
   if (current_str = getenv("WI4MPI_Rput_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rput_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Rput_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Rput_print = current_deb;
+  } else
+    WI4MPI_Rput_print = default_debug;
   if (current_str = getenv("WI4MPI_Rget_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rget_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Rget_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Rget_print = current_deb;
+  } else
+    WI4MPI_Rget_print = default_debug;
   if (current_str = getenv("WI4MPI_Raccumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Raccumulate_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Raccumulate_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Raccumulate_print = current_deb;
+  } else
+    WI4MPI_Raccumulate_print = default_debug;
   if (current_str = getenv("WI4MPI_Rget_accumulate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Rget_accumulate_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Rget_accumulate_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Rget_accumulate_print = current_deb;
+  } else
+    WI4MPI_Rget_accumulate_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_lock_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_lock_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_lock_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_lock_all_print = current_deb;
+  } else
+    WI4MPI_Win_lock_all_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_unlock_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_unlock_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_unlock_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_unlock_all_print = current_deb;
+  } else
+    WI4MPI_Win_unlock_all_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_flush_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_flush_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_flush_print = current_deb;
+  } else
+    WI4MPI_Win_flush_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_flush_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_flush_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_flush_all_print = current_deb;
+  } else
+    WI4MPI_Win_flush_all_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_flush_local_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_local_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_flush_local_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_flush_local_print = current_deb;
+  } else
+    WI4MPI_Win_flush_local_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_flush_local_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_flush_local_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_flush_local_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_flush_local_all_print = current_deb;
+  } else
+    WI4MPI_Win_flush_local_all_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_sync_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_sync_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_sync_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_sync_print = current_deb;
+  } else
+    WI4MPI_Win_sync_print = default_debug;
   if (current_str = getenv("WI4MPI_Add_error_class_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Add_error_class_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Add_error_class_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Add_error_class_print = current_deb;
+  } else
+    WI4MPI_Add_error_class_print = default_debug;
   if (current_str = getenv("WI4MPI_Add_error_code_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Add_error_code_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Add_error_code_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Add_error_code_print = current_deb;
+  } else
+    WI4MPI_Add_error_code_print = default_debug;
   if (current_str = getenv("WI4MPI_Add_error_string_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Add_error_string_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Add_error_string_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Add_error_string_print = current_deb;
+  } else
+    WI4MPI_Add_error_string_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_call_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_call_errhandler_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_call_errhandler_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_call_errhandler_print = current_deb;
+  } else
+    WI4MPI_Comm_call_errhandler_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_delete_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_delete_attr_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_delete_attr_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_delete_attr_print = current_deb;
+  } else
+    WI4MPI_Comm_delete_attr_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_get_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_attr_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_get_attr_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_get_attr_print = current_deb;
+  } else
+    WI4MPI_Comm_get_attr_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_get_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_get_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_get_name_print = current_deb;
+  } else
+    WI4MPI_Comm_get_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_set_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_attr_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_set_attr_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_set_attr_print = current_deb;
+  } else
+    WI4MPI_Comm_set_attr_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_set_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_set_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_set_name_print = current_deb;
+  } else
+    WI4MPI_Comm_set_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Grequest_complete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Grequest_complete_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Grequest_complete_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Grequest_complete_print = current_deb;
+  } else
+    WI4MPI_Grequest_complete_print = default_debug;
   if (current_str = getenv("WI4MPI_Grequest_start_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Grequest_start_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Grequest_start_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Grequest_start_print = current_deb;
+  } else
+    WI4MPI_Grequest_start_print = default_debug;
   if (current_str = getenv("WI4MPI_Init_thread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Init_thread_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Init_thread_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Init_thread_print = current_deb;
+  } else
+    WI4MPI_Init_thread_print = default_debug;
   if (current_str = getenv("WI4MPI_Is_thread_main_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Is_thread_main_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Is_thread_main_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Is_thread_main_print = current_deb;
+  } else
+    WI4MPI_Is_thread_main_print = default_debug;
   if (current_str = getenv("WI4MPI_Query_thread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Query_thread_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Query_thread_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Query_thread_print = current_deb;
+  } else
+    WI4MPI_Query_thread_print = default_debug;
   if (current_str = getenv("WI4MPI_Status_set_cancelled_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Status_set_cancelled_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Status_set_cancelled_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Status_set_cancelled_print = current_deb;
+  } else
+    WI4MPI_Status_set_cancelled_print = default_debug;
   if (current_str = getenv("WI4MPI_Status_set_elements_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Status_set_elements_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Status_set_elements_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Status_set_elements_print = current_deb;
+  } else
+    WI4MPI_Status_set_elements_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_keyval_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_keyval_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_keyval_print = current_deb;
+  } else
+    WI4MPI_Type_create_keyval_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_delete_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_delete_attr_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_delete_attr_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_delete_attr_print = current_deb;
+  } else
+    WI4MPI_Type_delete_attr_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_dup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_dup_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_dup_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_dup_print = current_deb;
+  } else
+    WI4MPI_Type_dup_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_free_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_free_keyval_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_free_keyval_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_free_keyval_print = current_deb;
+  } else
+    WI4MPI_Type_free_keyval_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_attr_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_attr_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_attr_print = current_deb;
+  } else
+    WI4MPI_Type_get_attr_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_envelope_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_envelope_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_envelope_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_envelope_print = current_deb;
+  } else
+    WI4MPI_Type_get_envelope_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_name_print = current_deb;
+  } else
+    WI4MPI_Type_get_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_set_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_set_attr_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_set_attr_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_set_attr_print = current_deb;
+  } else
+    WI4MPI_Type_set_attr_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_set_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_set_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_set_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_set_name_print = current_deb;
+  } else
+    WI4MPI_Type_set_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_match_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_match_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_match_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_match_size_print = current_deb;
+  } else
+    WI4MPI_Type_match_size_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_create_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_create_keyval_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_create_keyval_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_create_keyval_print = current_deb;
+  } else
+    WI4MPI_Win_create_keyval_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_delete_attr_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_delete_attr_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_delete_attr_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_delete_attr_print = current_deb;
+  } else
+    WI4MPI_Win_delete_attr_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_free_keyval_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_free_keyval_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_free_keyval_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_free_keyval_print = current_deb;
+  } else
+    WI4MPI_Win_free_keyval_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_get_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_get_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_get_name_print = current_deb;
+  } else
+    WI4MPI_Win_get_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_set_name_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_set_name_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_set_name_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_set_name_print = current_deb;
+  } else
+    WI4MPI_Win_set_name_print = default_debug;
   if (current_str = getenv("WI4MPI_Alloc_mem_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alloc_mem_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Alloc_mem_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Alloc_mem_print = current_deb;
+  } else
+    WI4MPI_Alloc_mem_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_create_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_create_errhandler_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_create_errhandler_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_create_errhandler_print = current_deb;
+  } else
+    WI4MPI_Comm_create_errhandler_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_get_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_get_errhandler_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_get_errhandler_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_get_errhandler_print = current_deb;
+  } else
+    WI4MPI_Comm_get_errhandler_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_set_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_set_errhandler_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_set_errhandler_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_set_errhandler_print = current_deb;
+  } else
+    WI4MPI_Comm_set_errhandler_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_errhandler_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_errhandler_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_errhandler_print = current_deb;
+  } else
+    WI4MPI_File_get_errhandler_print = default_debug;
   if (current_str = getenv("WI4MPI_File_set_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_errhandler_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_set_errhandler_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_set_errhandler_print = current_deb;
+  } else
+    WI4MPI_File_set_errhandler_print = default_debug;
   if (current_str = getenv("WI4MPI_Finalized_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Finalized_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Finalized_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Finalized_print = current_deb;
+  } else
+    WI4MPI_Finalized_print = default_debug;
   if (current_str = getenv("WI4MPI_Free_mem_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Free_mem_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Free_mem_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Free_mem_print = current_deb;
+  } else
+    WI4MPI_Free_mem_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_address_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_address_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_address_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_address_print = current_deb;
+  } else
+    WI4MPI_Get_address_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_create_print = current_deb;
+  } else
+    WI4MPI_Info_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_delete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_delete_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_delete_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_delete_print = current_deb;
+  } else
+    WI4MPI_Info_delete_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_dup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_dup_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_dup_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_dup_print = current_deb;
+  } else
+    WI4MPI_Info_dup_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_free_print = current_deb;
+  } else
+    WI4MPI_Info_free_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_get_print = current_deb;
+  } else
+    WI4MPI_Info_get_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_get_nkeys_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_nkeys_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_get_nkeys_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_get_nkeys_print = current_deb;
+  } else
+    WI4MPI_Info_get_nkeys_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_get_nthkey_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_nthkey_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_get_nthkey_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_get_nthkey_print = current_deb;
+  } else
+    WI4MPI_Info_get_nthkey_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_get_valuelen_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_get_valuelen_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_get_valuelen_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_get_valuelen_print = current_deb;
+  } else
+    WI4MPI_Info_get_valuelen_print = default_debug;
   if (current_str = getenv("WI4MPI_Info_set_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Info_set_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Info_set_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Info_set_print = current_deb;
+  } else
+    WI4MPI_Info_set_print = default_debug;
   if (current_str = getenv("WI4MPI_Request_get_status_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Request_get_status_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Request_get_status_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Request_get_status_print = current_deb;
+  } else
+    WI4MPI_Request_get_status_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_hvector_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_hvector_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_hvector_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_hvector_print = current_deb;
+  } else
+    WI4MPI_Type_create_hvector_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_resized_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_resized_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_resized_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_resized_print = current_deb;
+  } else
+    WI4MPI_Type_create_resized_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_extent_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_extent_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_extent_print = current_deb;
+  } else
+    WI4MPI_Type_get_extent_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_true_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_true_extent_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_true_extent_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_true_extent_print = current_deb;
+  } else
+    WI4MPI_Type_get_true_extent_print = default_debug;
   if (current_str = getenv("WI4MPI_Win_get_errhandler_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Win_get_errhandler_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Win_get_errhandler_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Win_get_errhandler_print = current_deb;
+  } else
+    WI4MPI_Win_get_errhandler_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_f90_integer_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_f90_integer_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_f90_integer_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_f90_integer_print = current_deb;
+  } else
+    WI4MPI_Type_create_f90_integer_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_f90_real_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_f90_real_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_f90_real_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_f90_real_print = current_deb;
+  } else
+    WI4MPI_Type_create_f90_real_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_f90_complex_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_f90_complex_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_f90_complex_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_f90_complex_print = current_deb;
+  } else
+    WI4MPI_Type_create_f90_complex_print = default_debug;
   if (current_str = getenv("WI4MPI_Reduce_local_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_local_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Reduce_local_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Reduce_local_print = current_deb;
+  } else
+    WI4MPI_Reduce_local_print = default_debug;
   if (current_str = getenv("WI4MPI_Op_commutative_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Op_commutative_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Op_commutative_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Op_commutative_print = current_deb;
+  } else
+    WI4MPI_Op_commutative_print = default_debug;
   if (current_str = getenv("WI4MPI_Reduce_scatter_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_scatter_block_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Reduce_scatter_block_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Reduce_scatter_block_print = current_deb;
+  } else
+    WI4MPI_Reduce_scatter_block_print = default_debug;
   if (current_str = getenv("WI4MPI_Dist_graph_neighbors_count_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_neighbors_count_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Dist_graph_neighbors_count_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Dist_graph_neighbors_count_print = current_deb;
+  } else
+    WI4MPI_Dist_graph_neighbors_count_print = default_debug;
   if (current_str = getenv("WI4MPI_Improbe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Improbe_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Improbe_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Improbe_print = current_deb;
+  } else
+    WI4MPI_Improbe_print = default_debug;
   if (current_str = getenv("WI4MPI_Imrecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Imrecv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Imrecv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Imrecv_print = current_deb;
+  } else
+    WI4MPI_Imrecv_print = default_debug;
   if (current_str = getenv("WI4MPI_Mprobe_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Mprobe_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Mprobe_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Mprobe_print = current_deb;
+  } else
+    WI4MPI_Mprobe_print = default_debug;
   if (current_str = getenv("WI4MPI_Mrecv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Mrecv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Mrecv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Mrecv_print = current_deb;
+  } else
+    WI4MPI_Mrecv_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_idup_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_idup_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_idup_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_idup_print = current_deb;
+  } else
+    WI4MPI_Comm_idup_print = default_debug;
   if (current_str = getenv("WI4MPI_Ibarrier_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ibarrier_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ibarrier_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ibarrier_print = current_deb;
+  } else
+    WI4MPI_Ibarrier_print = default_debug;
   if (current_str = getenv("WI4MPI_Ibcast_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ibcast_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ibcast_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ibcast_print = current_deb;
+  } else
+    WI4MPI_Ibcast_print = default_debug;
   if (current_str = getenv("WI4MPI_Igather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Igather_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Igather_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Igather_print = current_deb;
+  } else
+    WI4MPI_Igather_print = default_debug;
   if (current_str = getenv("WI4MPI_Iscatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iscatter_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iscatter_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iscatter_print = current_deb;
+  } else
+    WI4MPI_Iscatter_print = default_debug;
   if (current_str = getenv("WI4MPI_Iallgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iallgather_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iallgather_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iallgather_print = current_deb;
+  } else
+    WI4MPI_Iallgather_print = default_debug;
   if (current_str = getenv("WI4MPI_Ialltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ialltoall_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ialltoall_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ialltoall_print = current_deb;
+  } else
+    WI4MPI_Ialltoall_print = default_debug;
   if (current_str = getenv("WI4MPI_Ireduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ireduce_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ireduce_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ireduce_print = current_deb;
+  } else
+    WI4MPI_Ireduce_print = default_debug;
   if (current_str = getenv("WI4MPI_Iallreduce_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iallreduce_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iallreduce_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iallreduce_print = current_deb;
+  } else
+    WI4MPI_Iallreduce_print = default_debug;
   if (current_str = getenv("WI4MPI_Ireduce_scatter_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ireduce_scatter_block_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ireduce_scatter_block_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ireduce_scatter_block_print = current_deb;
+  } else
+    WI4MPI_Ireduce_scatter_block_print = default_debug;
   if (current_str = getenv("WI4MPI_Iscan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iscan_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iscan_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iscan_print = current_deb;
+  } else
+    WI4MPI_Iscan_print = default_debug;
   if (current_str = getenv("WI4MPI_Iexscan_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iexscan_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iexscan_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iexscan_print = current_deb;
+  } else
+    WI4MPI_Iexscan_print = default_debug;
   if (current_str = getenv("WI4MPI_Ineighbor_allgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_allgather_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ineighbor_allgather_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ineighbor_allgather_print = current_deb;
+  } else
+    WI4MPI_Ineighbor_allgather_print = default_debug;
   if (current_str = getenv("WI4MPI_Ineighbor_alltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_alltoall_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ineighbor_alltoall_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ineighbor_alltoall_print = current_deb;
+  } else
+    WI4MPI_Ineighbor_alltoall_print = default_debug;
   if (current_str = getenv("WI4MPI_Neighbor_allgather_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_allgather_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Neighbor_allgather_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Neighbor_allgather_print = current_deb;
+  } else
+    WI4MPI_Neighbor_allgather_print = default_debug;
   if (current_str = getenv("WI4MPI_Neighbor_alltoall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_alltoall_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Neighbor_alltoall_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Neighbor_alltoall_print = current_deb;
+  } else
+    WI4MPI_Neighbor_alltoall_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_split_type_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_split_type_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_split_type_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_split_type_print = current_deb;
+  } else
+    WI4MPI_Comm_split_type_print = default_debug;
   if (current_str = getenv("WI4MPI_Get_elements_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Get_elements_x_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Get_elements_x_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Get_elements_x_print = current_deb;
+  } else
+    WI4MPI_Get_elements_x_print = default_debug;
   if (current_str = getenv("WI4MPI_Status_set_elements_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Status_set_elements_x_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Status_set_elements_x_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Status_set_elements_x_print = current_deb;
+  } else
+    WI4MPI_Status_set_elements_x_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_extent_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_extent_x_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_extent_x_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_extent_x_print = current_deb;
+  } else
+    WI4MPI_Type_get_extent_x_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_true_extent_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_true_extent_x_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_true_extent_x_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_true_extent_x_print = current_deb;
+  } else
+    WI4MPI_Type_get_true_extent_x_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_size_x_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_size_x_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_size_x_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_size_x_print = current_deb;
+  } else
+    WI4MPI_Type_size_x_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_create_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_create_group_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_create_group_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_create_group_print = current_deb;
+  } else
+    WI4MPI_Comm_create_group_print = default_debug;
   if (current_str = getenv("WI4MPI_T_init_thread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_init_thread_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_init_thread_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_init_thread_print = current_deb;
+  } else
+    WI4MPI_T_init_thread_print = default_debug;
   if (current_str = getenv("WI4MPI_T_enum_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_enum_get_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_enum_get_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_enum_get_info_print = current_deb;
+  } else
+    WI4MPI_T_enum_get_info_print = default_debug;
   if (current_str = getenv("WI4MPI_T_enum_get_item_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_enum_get_item_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_enum_get_item_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_enum_get_item_print = current_deb;
+  } else
+    WI4MPI_T_enum_get_item_print = default_debug;
   if (current_str = getenv("WI4MPI_T_cvar_get_num_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_get_num_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_cvar_get_num_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_cvar_get_num_print = current_deb;
+  } else
+    WI4MPI_T_cvar_get_num_print = default_debug;
   if (current_str = getenv("WI4MPI_T_cvar_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_get_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_cvar_get_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_cvar_get_info_print = current_deb;
+  } else
+    WI4MPI_T_cvar_get_info_print = default_debug;
   if (current_str = getenv("WI4MPI_T_cvar_handle_alloc_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_handle_alloc_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_cvar_handle_alloc_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_cvar_handle_alloc_print = current_deb;
+  } else
+    WI4MPI_T_cvar_handle_alloc_print = default_debug;
   if (current_str = getenv("WI4MPI_T_cvar_handle_free_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_handle_free_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_cvar_handle_free_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_cvar_handle_free_print = current_deb;
+  } else
+    WI4MPI_T_cvar_handle_free_print = default_debug;
   if (current_str = getenv("WI4MPI_T_cvar_read_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_read_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_cvar_read_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_cvar_read_print = current_deb;
+  } else
+    WI4MPI_T_cvar_read_print = default_debug;
   if (current_str = getenv("WI4MPI_T_cvar_write_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_write_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_cvar_write_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_cvar_write_print = current_deb;
+  } else
+    WI4MPI_T_cvar_write_print = default_debug;
   if (current_str = getenv("WI4MPI_T_pvar_get_num_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_pvar_get_num_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_pvar_get_num_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_pvar_get_num_print = current_deb;
+  } else
+    WI4MPI_T_pvar_get_num_print = default_debug;
   if (current_str = getenv("WI4MPI_T_pvar_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_pvar_get_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_pvar_get_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_pvar_get_info_print = current_deb;
+  } else
+    WI4MPI_T_pvar_get_info_print = default_debug;
   if (current_str = getenv("WI4MPI_T_category_get_num_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_num_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_category_get_num_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_category_get_num_print = current_deb;
+  } else
+    WI4MPI_T_category_get_num_print = default_debug;
   if (current_str = getenv("WI4MPI_T_category_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_category_get_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_category_get_info_print = current_deb;
+  } else
+    WI4MPI_T_category_get_info_print = default_debug;
   if (current_str = getenv("WI4MPI_File_open_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_open_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_open_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_open_print = current_deb;
+  } else
+    WI4MPI_File_open_print = default_debug;
   if (current_str = getenv("WI4MPI_File_close_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_close_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_close_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_close_print = current_deb;
+  } else
+    WI4MPI_File_close_print = default_debug;
   if (current_str = getenv("WI4MPI_File_delete_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_delete_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_delete_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_delete_print = current_deb;
+  } else
+    WI4MPI_File_delete_print = default_debug;
   if (current_str = getenv("WI4MPI_File_set_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_set_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_set_size_print = current_deb;
+  } else
+    WI4MPI_File_set_size_print = default_debug;
   if (current_str = getenv("WI4MPI_File_preallocate_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_preallocate_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_preallocate_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_preallocate_print = current_deb;
+  } else
+    WI4MPI_File_preallocate_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_size_print = current_deb;
+  } else
+    WI4MPI_File_get_size_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_group_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_group_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_group_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_group_print = current_deb;
+  } else
+    WI4MPI_File_get_group_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_amode_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_amode_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_amode_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_amode_print = current_deb;
+  } else
+    WI4MPI_File_get_amode_print = default_debug;
   if (current_str = getenv("WI4MPI_File_set_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_set_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_set_info_print = current_deb;
+  } else
+    WI4MPI_File_set_info_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_info_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_info_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_info_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_info_print = current_deb;
+  } else
+    WI4MPI_File_get_info_print = default_debug;
   if (current_str = getenv("WI4MPI_File_set_view_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_view_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_set_view_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_set_view_print = current_deb;
+  } else
+    WI4MPI_File_set_view_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_view_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_view_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_view_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_view_print = current_deb;
+  } else
+    WI4MPI_File_get_view_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_at_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_at_print = current_deb;
+  } else
+    WI4MPI_File_read_at_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_at_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_at_all_print = current_deb;
+  } else
+    WI4MPI_File_read_at_all_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_at_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_at_print = current_deb;
+  } else
+    WI4MPI_File_write_at_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_at_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_at_all_print = current_deb;
+  } else
+    WI4MPI_File_write_at_all_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iread_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_at_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iread_at_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iread_at_print = current_deb;
+  } else
+    WI4MPI_File_iread_at_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iwrite_at_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_at_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iwrite_at_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iwrite_at_print = current_deb;
+  } else
+    WI4MPI_File_iwrite_at_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_print = current_deb;
+  } else
+    WI4MPI_File_read_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_all_print = current_deb;
+  } else
+    WI4MPI_File_read_all_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_print = current_deb;
+  } else
+    WI4MPI_File_write_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_all_print = current_deb;
+  } else
+    WI4MPI_File_write_all_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iread_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iread_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iread_print = current_deb;
+  } else
+    WI4MPI_File_iread_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iwrite_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iwrite_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iwrite_print = current_deb;
+  } else
+    WI4MPI_File_iwrite_print = default_debug;
   if (current_str = getenv("WI4MPI_File_seek_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_seek_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_seek_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_seek_print = current_deb;
+  } else
+    WI4MPI_File_seek_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_position_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_position_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_position_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_position_print = current_deb;
+  } else
+    WI4MPI_File_get_position_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_byte_offset_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_byte_offset_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_byte_offset_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_byte_offset_print = current_deb;
+  } else
+    WI4MPI_File_get_byte_offset_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_shared_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_shared_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_shared_print = current_deb;
+  } else
+    WI4MPI_File_read_shared_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_shared_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_shared_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_shared_print = current_deb;
+  } else
+    WI4MPI_File_write_shared_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iread_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_shared_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iread_shared_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iread_shared_print = current_deb;
+  } else
+    WI4MPI_File_iread_shared_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iwrite_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_shared_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iwrite_shared_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iwrite_shared_print = current_deb;
+  } else
+    WI4MPI_File_iwrite_shared_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_ordered_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_ordered_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_ordered_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_ordered_print = current_deb;
+  } else
+    WI4MPI_File_read_ordered_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_ordered_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_ordered_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_ordered_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_ordered_print = current_deb;
+  } else
+    WI4MPI_File_write_ordered_print = default_debug;
   if (current_str = getenv("WI4MPI_File_seek_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_seek_shared_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_seek_shared_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_seek_shared_print = current_deb;
+  } else
+    WI4MPI_File_seek_shared_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_position_shared_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_position_shared_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_position_shared_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_position_shared_print = current_deb;
+  } else
+    WI4MPI_File_get_position_shared_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_at_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_all_begin_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_at_all_begin_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_at_all_begin_print = current_deb;
+  } else
+    WI4MPI_File_read_at_all_begin_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_at_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_at_all_end_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_at_all_end_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_at_all_end_print = current_deb;
+  } else
+    WI4MPI_File_read_at_all_end_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_at_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_all_begin_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_at_all_begin_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_at_all_begin_print = current_deb;
+  } else
+    WI4MPI_File_write_at_all_begin_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_at_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_at_all_end_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_at_all_end_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_at_all_end_print = current_deb;
+  } else
+    WI4MPI_File_write_at_all_end_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_all_begin_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_all_begin_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_all_begin_print = current_deb;
+  } else
+    WI4MPI_File_read_all_begin_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_all_end_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_all_end_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_all_end_print = current_deb;
+  } else
+    WI4MPI_File_read_all_end_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_all_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_all_begin_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_all_begin_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_all_begin_print = current_deb;
+  } else
+    WI4MPI_File_write_all_begin_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_all_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_all_end_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_all_end_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_all_end_print = current_deb;
+  } else
+    WI4MPI_File_write_all_end_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_ordered_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_ordered_begin_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_ordered_begin_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_ordered_begin_print = current_deb;
+  } else
+    WI4MPI_File_read_ordered_begin_print = default_debug;
   if (current_str = getenv("WI4MPI_File_read_ordered_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_read_ordered_end_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_read_ordered_end_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_read_ordered_end_print = current_deb;
+  } else
+    WI4MPI_File_read_ordered_end_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_ordered_begin_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_ordered_begin_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_ordered_begin_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_ordered_begin_print = current_deb;
+  } else
+    WI4MPI_File_write_ordered_begin_print = default_debug;
   if (current_str = getenv("WI4MPI_File_write_ordered_end_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_write_ordered_end_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_write_ordered_end_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_write_ordered_end_print = current_deb;
+  } else
+    WI4MPI_File_write_ordered_end_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_type_extent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_type_extent_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_type_extent_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_type_extent_print = current_deb;
+  } else
+    WI4MPI_File_get_type_extent_print = default_debug;
   if (current_str = getenv("WI4MPI_Register_datarep_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Register_datarep_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Register_datarep_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Register_datarep_print = current_deb;
+  } else
+    WI4MPI_Register_datarep_print = default_debug;
   if (current_str = getenv("WI4MPI_File_set_atomicity_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_set_atomicity_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_set_atomicity_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_set_atomicity_print = current_deb;
+  } else
+    WI4MPI_File_set_atomicity_print = default_debug;
   if (current_str = getenv("WI4MPI_File_get_atomicity_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_get_atomicity_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_get_atomicity_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_get_atomicity_print = current_deb;
+  } else
+    WI4MPI_File_get_atomicity_print = default_debug;
   if (current_str = getenv("WI4MPI_File_sync_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_sync_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_sync_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_sync_print = current_deb;
+  } else
+    WI4MPI_File_sync_print = default_debug;
   if (current_str = getenv("WI4MPI_T_finalize_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_finalize_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_finalize_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_finalize_print = current_deb;
+  } else
+    WI4MPI_T_finalize_print = default_debug;
   if (current_str = getenv("WI4MPI_Wtime_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Wtime_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Wtime_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Wtime_print = current_deb;
+  } else
+    WI4MPI_Wtime_print = default_debug;
   if (current_str = getenv("WI4MPI_Wtick_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Wtick_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Wtick_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Wtick_print = current_deb;
+  } else
+    WI4MPI_Wtick_print = default_debug;
   if (current_str = getenv("WI4MPI_Finalize_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Finalize_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Finalize_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Finalize_print = current_deb;
+  } else
+    WI4MPI_Finalize_print = default_debug;
   if (current_str = getenv("WI4MPI_Waitany_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Waitany_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Waitany_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Waitany_print = current_deb;
+  } else
+    WI4MPI_Waitany_print = default_debug;
   if (current_str = getenv("WI4MPI_Testany_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Testany_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Testany_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Testany_print = current_deb;
+  } else
+    WI4MPI_Testany_print = default_debug;
   if (current_str = getenv("WI4MPI_Waitall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Waitall_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Waitall_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Waitall_print = current_deb;
+  } else
+    WI4MPI_Waitall_print = default_debug;
   if (current_str = getenv("WI4MPI_Testall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Testall_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Testall_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Testall_print = current_deb;
+  } else
+    WI4MPI_Testall_print = default_debug;
   if (current_str = getenv("WI4MPI_Waitsome_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Waitsome_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Waitsome_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Waitsome_print = current_deb;
+  } else
+    WI4MPI_Waitsome_print = default_debug;
   if (current_str = getenv("WI4MPI_Testsome_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Testsome_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Testsome_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Testsome_print = current_deb;
+  } else
+    WI4MPI_Testsome_print = default_debug;
   if (current_str = getenv("WI4MPI_Startall_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Startall_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Startall_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Startall_print = current_deb;
+  } else
+    WI4MPI_Startall_print = default_debug;
   if (current_str = getenv("WI4MPI_Alltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Alltoallw_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Alltoallw_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Alltoallw_print = current_deb;
+  } else
+    WI4MPI_Alltoallw_print = default_debug;
   if (current_str = getenv("WI4MPI_Reduce_scatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Reduce_scatter_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Reduce_scatter_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Reduce_scatter_print = current_deb;
+  } else
+    WI4MPI_Reduce_scatter_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_translate_ranks_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_translate_ranks_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_translate_ranks_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_translate_ranks_print = current_deb;
+  } else
+    WI4MPI_Group_translate_ranks_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_incl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_incl_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_incl_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_incl_print = current_deb;
+  } else
+    WI4MPI_Group_incl_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_excl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_excl_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_excl_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_excl_print = current_deb;
+  } else
+    WI4MPI_Group_excl_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_range_incl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_range_incl_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_range_incl_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_range_incl_print = current_deb;
+  } else
+    WI4MPI_Group_range_incl_print = default_debug;
   if (current_str = getenv("WI4MPI_Group_range_excl_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Group_range_excl_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Group_range_excl_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Group_range_excl_print = current_deb;
+  } else
+    WI4MPI_Group_range_excl_print = default_debug;
   if (current_str = getenv("WI4MPI_Cart_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cart_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cart_create_print = current_deb;
+  } else
+    WI4MPI_Cart_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Dims_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dims_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Dims_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Dims_create_print = current_deb;
+  } else
+    WI4MPI_Dims_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Graph_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Graph_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Graph_create_print = current_deb;
+  } else
+    WI4MPI_Graph_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Graph_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Graph_get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Graph_get_print = current_deb;
+  } else
+    WI4MPI_Graph_get_print = default_debug;
   if (current_str = getenv("WI4MPI_Cart_get_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_get_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cart_get_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cart_get_print = current_deb;
+  } else
+    WI4MPI_Cart_get_print = default_debug;
   if (current_str = getenv("WI4MPI_Cart_rank_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_rank_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cart_rank_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cart_rank_print = current_deb;
+  } else
+    WI4MPI_Cart_rank_print = default_debug;
   if (current_str = getenv("WI4MPI_Cart_coords_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_coords_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cart_coords_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cart_coords_print = current_deb;
+  } else
+    WI4MPI_Cart_coords_print = default_debug;
   if (current_str = getenv("WI4MPI_Graph_neighbors_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_neighbors_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Graph_neighbors_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Graph_neighbors_print = current_deb;
+  } else
+    WI4MPI_Graph_neighbors_print = default_debug;
   if (current_str = getenv("WI4MPI_Cart_sub_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_sub_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cart_sub_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cart_sub_print = current_deb;
+  } else
+    WI4MPI_Cart_sub_print = default_debug;
   if (current_str = getenv("WI4MPI_Cart_map_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Cart_map_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Cart_map_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Cart_map_print = current_deb;
+  } else
+    WI4MPI_Cart_map_print = default_debug;
   if (current_str = getenv("WI4MPI_Graph_map_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Graph_map_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Graph_map_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Graph_map_print = current_deb;
+  } else
+    WI4MPI_Graph_map_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_spawn_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_spawn_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_spawn_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_spawn_print = current_deb;
+  } else
+    WI4MPI_Comm_spawn_print = default_debug;
   if (current_str = getenv("WI4MPI_Comm_spawn_multiple_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Comm_spawn_multiple_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Comm_spawn_multiple_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Comm_spawn_multiple_print = current_deb;
+  } else
+    WI4MPI_Comm_spawn_multiple_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_get_contents_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_get_contents_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_get_contents_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_get_contents_print = current_deb;
+  } else
+    WI4MPI_Type_get_contents_print = default_debug;
   if (current_str = getenv("WI4MPI_Pack_external_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_external_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Pack_external_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Pack_external_print = current_deb;
+  } else
+    WI4MPI_Pack_external_print = default_debug;
   if (current_str = getenv("WI4MPI_Pack_external_size_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Pack_external_size_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Pack_external_size_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Pack_external_size_print = current_deb;
+  } else
+    WI4MPI_Pack_external_size_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_darray_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_darray_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_darray_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_darray_print = current_deb;
+  } else
+    WI4MPI_Type_create_darray_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_hindexed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_hindexed_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_hindexed_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_hindexed_print = current_deb;
+  } else
+    WI4MPI_Type_create_hindexed_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_indexed_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_indexed_block_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_indexed_block_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_indexed_block_print = current_deb;
+  } else
+    WI4MPI_Type_create_indexed_block_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_hindexed_block_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_hindexed_block_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_hindexed_block_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_hindexed_block_print = current_deb;
+  } else
+    WI4MPI_Type_create_hindexed_block_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_struct_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_struct_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_struct_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_struct_print = current_deb;
+  } else
+    WI4MPI_Type_create_struct_print = default_debug;
   if (current_str = getenv("WI4MPI_Type_create_subarray_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Type_create_subarray_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Type_create_subarray_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Type_create_subarray_print = current_deb;
+  } else
+    WI4MPI_Type_create_subarray_print = default_debug;
   if (current_str = getenv("WI4MPI_Unpack_external_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Unpack_external_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Unpack_external_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Unpack_external_print = current_deb;
+  } else
+    WI4MPI_Unpack_external_print = default_debug;
   if (current_str = getenv("WI4MPI_Dist_graph_create_adjacent_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_create_adjacent_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Dist_graph_create_adjacent_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Dist_graph_create_adjacent_print = current_deb;
+  } else
+    WI4MPI_Dist_graph_create_adjacent_print = default_debug;
   if (current_str = getenv("WI4MPI_Dist_graph_create_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_create_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Dist_graph_create_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Dist_graph_create_print = current_deb;
+  } else
+    WI4MPI_Dist_graph_create_print = default_debug;
   if (current_str = getenv("WI4MPI_Dist_graph_neighbors_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Dist_graph_neighbors_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Dist_graph_neighbors_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Dist_graph_neighbors_print = current_deb;
+  } else
+    WI4MPI_Dist_graph_neighbors_print = default_debug;
   if (current_str = getenv("WI4MPI_Igatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Igatherv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Igatherv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Igatherv_print = current_deb;
+  } else
+    WI4MPI_Igatherv_print = default_debug;
   if (current_str = getenv("WI4MPI_Iscatterv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iscatterv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iscatterv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iscatterv_print = current_deb;
+  } else
+    WI4MPI_Iscatterv_print = default_debug;
   if (current_str = getenv("WI4MPI_Iallgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Iallgatherv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Iallgatherv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Iallgatherv_print = current_deb;
+  } else
+    WI4MPI_Iallgatherv_print = default_debug;
   if (current_str = getenv("WI4MPI_Ialltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ialltoallv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ialltoallv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ialltoallv_print = current_deb;
+  } else
+    WI4MPI_Ialltoallv_print = default_debug;
   if (current_str = getenv("WI4MPI_Ialltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ialltoallw_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ialltoallw_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ialltoallw_print = current_deb;
+  } else
+    WI4MPI_Ialltoallw_print = default_debug;
   if (current_str = getenv("WI4MPI_Ireduce_scatter_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ireduce_scatter_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ireduce_scatter_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ireduce_scatter_print = current_deb;
+  } else
+    WI4MPI_Ireduce_scatter_print = default_debug;
   if (current_str = getenv("WI4MPI_Ineighbor_allgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_allgatherv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ineighbor_allgatherv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ineighbor_allgatherv_print = current_deb;
+  } else
+    WI4MPI_Ineighbor_allgatherv_print = default_debug;
   if (current_str = getenv("WI4MPI_Ineighbor_alltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_alltoallv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ineighbor_alltoallv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ineighbor_alltoallv_print = current_deb;
+  } else
+    WI4MPI_Ineighbor_alltoallv_print = default_debug;
   if (current_str = getenv("WI4MPI_Ineighbor_alltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Ineighbor_alltoallw_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Ineighbor_alltoallw_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Ineighbor_alltoallw_print = current_deb;
+  } else
+    WI4MPI_Ineighbor_alltoallw_print = default_debug;
   if (current_str = getenv("WI4MPI_Neighbor_allgatherv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_allgatherv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Neighbor_allgatherv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Neighbor_allgatherv_print = current_deb;
+  } else
+    WI4MPI_Neighbor_allgatherv_print = default_debug;
   if (current_str = getenv("WI4MPI_Neighbor_alltoallv_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_alltoallv_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Neighbor_alltoallv_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Neighbor_alltoallv_print = current_deb;
+  } else
+    WI4MPI_Neighbor_alltoallv_print = default_debug;
   if (current_str = getenv("WI4MPI_Neighbor_alltoallw_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Neighbor_alltoallw_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Neighbor_alltoallw_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Neighbor_alltoallw_print = current_deb;
+  } else
+    WI4MPI_Neighbor_alltoallw_print = default_debug;
   if (current_str = getenv("WI4MPI_T_category_get_cvars_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_cvars_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_category_get_cvars_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_category_get_cvars_print = current_deb;
+  } else
+    WI4MPI_T_category_get_cvars_print = default_debug;
   if (current_str = getenv("WI4MPI_T_category_get_pvars_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_pvars_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_category_get_pvars_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_category_get_pvars_print = current_deb;
+  } else
+    WI4MPI_T_category_get_pvars_print = default_debug;
   if (current_str = getenv("WI4MPI_T_category_get_categories_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_categories_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_category_get_categories_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_category_get_categories_print = current_deb;
+  } else
+    WI4MPI_T_category_get_categories_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iwrite_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iwrite_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iwrite_all_print = current_deb;
+  } else
+    WI4MPI_File_iwrite_all_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iwrite_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iwrite_at_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iwrite_at_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iwrite_at_all_print = current_deb;
+  } else
+    WI4MPI_File_iwrite_at_all_print = default_debug;
   if (current_str = getenv("WI4MPI_T_category_get_index_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_get_index_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_category_get_index_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_category_get_index_print = current_deb;
+  } else
+    WI4MPI_T_category_get_index_print = default_debug;
   if (current_str = getenv("WI4MPI_T_cvar_get_index_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_cvar_get_index_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_cvar_get_index_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_cvar_get_index_print = current_deb;
+  } else
+    WI4MPI_T_cvar_get_index_print = default_debug;
   if (current_str = getenv("WI4MPI_T_pvar_get_index_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_pvar_get_index_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_pvar_get_index_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_pvar_get_index_print = current_deb;
+  } else
+    WI4MPI_T_pvar_get_index_print = default_debug;
   if (current_str = getenv("WI4MPI_Aint_add_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Aint_add_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Aint_add_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Aint_add_print = current_deb;
+  } else
+    WI4MPI_Aint_add_print = default_debug;
   if (current_str = getenv("WI4MPI_Aint_diff_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_Aint_diff_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_Aint_diff_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_Aint_diff_print = current_deb;
+  } else
+    WI4MPI_Aint_diff_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iread_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iread_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iread_all_print = current_deb;
+  } else
+    WI4MPI_File_iread_all_print = default_debug;
   if (current_str = getenv("WI4MPI_File_iread_at_all_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_File_iread_at_all_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_File_iread_at_all_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_File_iread_at_all_print = current_deb;
+  } else
+    WI4MPI_File_iread_at_all_print = default_debug;
   if (current_str = getenv("WI4MPI_T_category_changed_timeout")) {
     current_val = strtoll(current_str, NULL, 10);
     if (current_val > 0)
       WI4MPI_T_category_changed_timeout = current_val;
   }
+  if (current_str = getenv("WI4MPI_T_category_changed_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4MPI_T_category_changed_print = current_deb;
+  } else
+    WI4MPI_T_category_changed_print = default_debug;
 }

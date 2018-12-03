@@ -89,6 +89,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     for i in data:
         if i['name'] in def_list:
             string=string+'unsigned long long WI4'+i['name']+'_timeout=WI4MPI_MAX_TIME;\n'
+            string=string+'unsigned int WI4'+i['name']+'_print=0;\n'
             string=string+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='A_')+';\n'
             string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n\n'
             if wrapper:
@@ -154,10 +155,11 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     for conf in init_conf:
         string=string+conf
     string=string+'}\n'
-    string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;timeout_config_file();\n'
+    string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;int current_deb;timeout_config_file();\nint default_debug;if(current_str=getenv(WI4MPI_DEFAULT_PRINT)) {default_deb=strtol(current_str,NULL,10);} else default_debug=0;'
     for i in data:
         if (i['name'] in def_list):
             string=string+'if(current_str=getenv(\"WI4'+i['name']+'_timeout\")){ current_val=strtoll(current_str,NULL,10);if (current_val>0) WI4'+i['name']+'_timeout=current_val;}\n'
+            string=string+'if(current_str=getenv(\"WI4'+i['name']+'_debug\")){ current_deb=strtol(current_str,NULL,10);if (current_deb>0) WI4'+i['name']+'_print=current_deb;}else WI4'+i['name']+'_print=default_debug;\n'
     string=string+'}\n'
     return string
 

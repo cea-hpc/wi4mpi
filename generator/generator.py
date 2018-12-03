@@ -99,7 +99,7 @@ class generator:
         if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
             if app_side:
        #         string=string+'\nprintf(\"sort : A_'+func_dict['name']+'\\n\");'
-                string=string+'\ndebug_printer(\"'+self.debug_string(func_dict)[0]+'\",'+self.debug_string(func_dict)[1]+');'
+                string=string+'\nif (WI4'+func_dict['name']+'_print)\;debug_printer(\"'+self.debug_string(func_dict)[0]+'\",'+self.debug_string(func_dict)[1]+');'
         #    else:
         #        string=string+'\nprintf(\"sort : R_'+func_dict['name']+'\\n\");'
         #elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
