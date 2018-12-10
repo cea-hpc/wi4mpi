@@ -216,10 +216,12 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
                             string=string+not_gen_func 
                     else: 
                         string=string+'extern unsigned long long WI4'+i['name']+'_timeout;\n'
+                        string=string+'extern unsigned int WI4'+i['name']+'_print;\n'
                         string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
                         string=string+object_gen.generate_func_f(i)+'\n'
                 else:
                     string=string+'extern unsigned long long WI4'+i['name']+'_timeout;\n'
+                    string=string+'extern unsigned int WI4'+i['name']+'_print;\n'
                     string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
                     string=string+object_gen.generate_func_f(i)+'\n'
     if not wrapper:
