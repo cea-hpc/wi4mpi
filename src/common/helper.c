@@ -4,15 +4,15 @@
  list managed in a lock free manner
 
  */
+#define _GNU_SOURCE
+#include <dlfcn.h>
+#include "helper.h"
 #include <pthread.h>
 #include <signal.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
-#define _GNU_SOURCE
-#include "helper.h"
-#include <dlfcn.h>
 #include <sched.h>
 #include <stdio.h>
 #include <sys/syscall.h>
@@ -84,7 +84,6 @@ th_reg_list *last_elt;
 /* each thread has a pointer on is own control structure*/
 __thread th_reg_list *my_elt;
 static pthread_mutex_t mutex_list_lock = PTHREAD_MUTEX_INITIALIZER;
-#include <app_mpi.h>
 int wi4mpi_timeout_main_loop(void *felement) {
   int mi, rank;
   /*first list element is the application main thread*/
@@ -169,6 +168,36 @@ __attribute__((constructor)) void timeout_init(void) {
   pthread_create(&timeout_thread, NULL, &wi4mpi_timeout_main_loop,
                  (void *)my_elt);
   pthread_mutex_unlock(&mutex_list_lock);
+}
+double
+sctk_atomics_get_timestamp_gettimeofday ()
+{
+  struct timeval tp;
+  gettimeofday (&tp, NULL);
+  return tp.tv_usec + tp.tv_sec * 1000000;
+}
+long long get_freq_multiplier(void)
+{
+    char *env;
+    if(env=getenv("WI4MPI_FREQ_MULT"))
+    {   
+        return strtoll(env,NULL,10);
+    }
+    else
+    {
+    //while(1)
+    {
+        double dt=sctk_atomics_get_timestamp_gettimeofday();
+        long long val=gettimestamp();
+        for(int i=0;i<100000;i++)
+            rand();
+        val=(gettimestamp()-val);
+        dt=sctk_atomics_get_timestamp_gettimeofday()-dt;
+        val/=dt;
+        if(val<6000&&val>100) 
+         return val;
+    }
+    }
 }
 void timeout_config_file(void) {
   FILE *ff;

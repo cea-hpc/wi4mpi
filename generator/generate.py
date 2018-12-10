@@ -169,6 +169,7 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
         string=string+'#include \"mappers.h\"\n'
         string=string+'#include \"run_mpi.h\"\n'
         string=string+'#include \"helper.h\"\n'
+    string=string+'#define debug_printer debug_printer_f\nvoid debug_printer(const char *,...);\n'
     #overiding json dictionary
     for idx,j in enumerate(data_f):
         for i in data_f_overide:

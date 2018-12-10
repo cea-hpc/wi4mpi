@@ -96,7 +96,8 @@ class generator:
             if app_side:
                 string=string+'\nin_w=0;\n'
         string=string+'#ifdef DEBUG'
-        if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
+        #if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
+        if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C' or self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
             if app_side:
        #         string=string+'\nprintf(\"sort : A_'+func_dict['name']+'\\n\");'
                 string=string+'\nif (WI4'+func_dict['name']+'_print)\ndebug_printer(\"'+self.debug_string(func_dict)[0]+'\",'+self.debug_string(func_dict)[1]+');'
