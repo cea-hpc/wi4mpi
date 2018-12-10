@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "wrapper_f.h"
 #include "app_mpi.h"
 #include <stdarg.h>
 __thread int debug_act;
@@ -195,7 +196,7 @@ void debug_printer_f(const char *ctr_str,...)
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
                     printf("[\n");
                     for(ii=0;ii<nb_elt;ii++)
-                    {if(!ii) printf(",");print_status_f(&s[ii*A_MPI_STATUS_SIZE]);}
+                    {if(!ii) printf(",");print_status_f(&s[ii*A_f_MPI_STATUS_SIZE]);}
                     printf("]\n");
                     }
                     break;
@@ -220,7 +221,7 @@ void debug_printer_f(const char *ctr_str,...)
                     debug_act=1;
                     printf("{ \nvalue :%p ,\n name: %s\n}",dat,cname);
                     }*/
-                    print_named_type(A_MPI_Datatype,%p,A_MPI_Type_get_name)
+                    print_named_type(int,%d,A_f_MPI_Type_get_name)
                     break; 
                 case 'a':
                     nb_elt=va_arg(ap,int);
@@ -248,7 +249,7 @@ void debug_printer_f(const char *ctr_str,...)
                     printf("{ \nvalue :%p ,\n name: %s\n}",cc,cname);
                     break;
 */
-                    print_named_type(int,%p,A_f_MPI_Comm_get_name)
+                    print_named_type(int,%d,A_f_MPI_Comm_get_name)
                     break;
                  case 'p':
                   //  printf("%p",va_arg(ap,void*)); 
@@ -281,5 +282,5 @@ void print_status(A_MPI_Status stat)
 void print_status_f(int *stat)
 {
     
-    printf("{ source :%d, tag : %d ,error :%d}",stat[A_MPI_SOURCE],stat[A_MPI_TAG],stat[A_MPI_ERROR]);
+    printf("{ source :%d, tag : %d ,error :%d}",stat[A_f_MPI_SOURCE],stat[A_f_MPI_TAG],stat[A_f_MPI_ERROR]);
 }
