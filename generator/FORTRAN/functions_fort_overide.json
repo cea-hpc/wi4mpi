@@ -1,12 +1,6 @@
 [ 
 {
-    "args":[ {
-        "var": "",
-        "arg_dep": "",
-        "In": 0,
-        "name": "no_args_converter",
-        "Out": 0
-      }]
+    "args":[ ]
     ,
     "name": "MPI_Init",
     "ret": {

@@ -4102,22 +4102,7 @@
     }
   }, 
   {
-    "args": [
-      {
-        "var": "argc", 
-        "arg_dep": "", 
-        "Out": 0, 
-        "name": "int_ptr_mapper", 
-        "In": 1
-      }, 
-      {
-        "var": "argv", 
-        "arg_dep": "", 
-        "Out": 0, 
-        "name": "char_ppp_converter", 
-        "In": 1
-      }
-    ], 
+    "args": [], 
     "name": "MPI_Init", 
     "ret": {
       "var": "ret", 
@@ -11935,14 +11920,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "Out": 0, 
-        "name": "no_args_converter", 
-        "In": 0
-      }
-    ], 
+        ], 
     "name": "MPI_T_finalize", 
     "ret": {
       "var": "ret", 
@@ -11953,14 +11931,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "In": 0, 
-        "name": "no_args_converter", 
-        "Out": 0
-      }
-    ], 
+          ], 
     "name": "MPI_Wtime", 
     "ret": {
       "var": "ret", 
@@ -11971,14 +11942,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "In": 0, 
-        "name": "no_args_converter", 
-        "Out": 0
-      }
-    ], 
+          ], 
     "name": "MPI_Wtick", 
     "ret": {
       "var": "ret", 
@@ -11989,14 +11953,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "In": 0, 
-        "name": "no_args_converter", 
-        "Out": 0
-      }
-    ], 
+          ], 
     "name": "MPI_Finalize", 
     "ret": {
       "var": "ret", 

@@ -44,6 +44,8 @@ class generator:
     def debug_string(self,func_dict): 
         out_str=func_dict['name']+" : \\n{\\n"
         out_arg_list=""
+        if(func_dict['name']=='MPI_Init'):
+            pprint (func_dict)
         for i in func_dict['args']:
             if('debug_type' in self.mappers[i['name']]):
                 ii=i['var']
@@ -55,8 +57,9 @@ class generator:
                 if i['arg_dep'] !='':
                     out_arg_list=out_arg_list+i['arg_dep'] +","
                 out_arg_list=out_arg_list+ii+","
-        out_arg_list=out_arg_list+"ret_tmp"
-        out_str=out_str+"return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"\\n}\\n"
+        if func_dict['ret'] is not None:
+            out_arg_list=out_arg_list+"ret_tmp"
+            out_str=out_str+"error/return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"\\n}\\n"
         return [out_str,out_arg_list] 
 
 
