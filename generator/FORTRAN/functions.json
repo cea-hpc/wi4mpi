@@ -1622,14 +1622,14 @@
       }, 
       {
         "var": "array_of_blocklengths", 
-        "arg_dep": "", 
+        "arg_dep": "count", 
         "Out": 0, 
         "name": "cont_int_ptr_mapper", 
         "In": 1
       }, 
       {
         "var": "array_of_displacements", 
-        "arg_dep": "", 
+        "arg_dep": "count", 
         "Out": 0, 
         "name": "Aint_const_ptr_converter", 
         "In": 1
@@ -11980,7 +11980,7 @@
       }, 
       {
         "var": "indx", 
-        "arg_dep": "count", 
+        "arg_dep": "", 
         "Out": 1, 
         "name": "int_ptr_mapper", 
         "In": 0
@@ -12020,7 +12020,7 @@
       }, 
       {
         "var": "indx", 
-        "arg_dep": "count", 
+        "arg_dep": "", 
         "Out": 1, 
         "name": "int_ptr_mapper", 
         "In": 0
@@ -12744,7 +12744,7 @@
       }, 
       {
         "var": "indx", 
-        "arg_dep": "mmaxindex", 
+        "arg_dep": "maxindex", 
         "In": 0, 
         "name": "int_mapper", 
         "Out": 1
@@ -13639,21 +13639,21 @@
       }, 
       {
         "var": "array_of_sizes", 
-        "arg_dep": "count", 
+        "arg_dep": "ndims", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "array_of_subsizes", 
-        "arg_dep": "count", 
+        "arg_dep": "ndims", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "array_of_starts", 
-        "arg_dep": "count", 
+        "arg_dep": "", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0

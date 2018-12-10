@@ -1792,8 +1792,9 @@ void A_f_MPI_Type_struct(int *count, int *array_of_blocklengths,
     debug_printer("MPI_Type_struct : \n{\ncount : *d,\narray_of_blocklengths : "
                   "*d,\narray_of_displacements : *d,\narray_of_types : "
                   "*d,\nnewtype : *d,\nerror/return : *d\n}\n",
-                  count, array_of_blocklengths, array_of_displacements, count,
-                  array_of_types, newtype, ret_tmp);
+                  count, count, array_of_blocklengths, count,
+                  array_of_displacements, count, array_of_types, newtype,
+                  ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12761,8 +12762,7 @@ void A_f_MPI_Waitany(int *count, int *array_of_requests, int *indx, int *status,
   if (WI4MPI_Waitany_print)
     debug_printer("MPI_Waitany : \n{\ncount : *d,\narray_of_requests : "
                   "*d,\nindx : *d,\nstatus : *d,\nerror/return : *d\n}\n",
-                  count, count, array_of_requests, count, indx, status,
-                  ret_tmp);
+                  count, count, array_of_requests, indx, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12814,10 +12814,10 @@ void A_f_MPI_Testany(int *count, int *array_of_requests, int *indx, int *flag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Testany_print)
-    debug_printer(
-        "MPI_Testany : \n{\ncount : *d,\narray_of_requests : *d,\nindx : "
-        "*d,\nflag : *d,\nstatus : *d,\nerror/return : *d\n}\n",
-        count, count, array_of_requests, count, indx, flag, status, ret_tmp);
+    debug_printer("MPI_Testany : \n{\ncount : *d,\narray_of_requests : "
+                  "*d,\nindx : *d,\nflag : *d,\nstatus : *d,\nerror/return : "
+                  "*d\n}\n",
+                  count, count, array_of_requests, indx, flag, status, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13639,7 +13639,7 @@ void A_f_MPI_Graph_get(int *comm, int *maxindex, int *maxedges, int *indx,
   if (WI4MPI_Graph_get_print)
     debug_printer("MPI_Graph_get : \n{\ncomm : *d,\nmaxindex : *d,\nmaxedges : "
                   "*d,\nindx : *d,\nedges : *d,\nerror/return : *d\n}\n",
-                  comm, maxindex, maxedges, mmaxindex, indx, maxedges, edges,
+                  comm, maxindex, maxedges, maxindex, indx, maxedges, edges,
                   ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14336,7 +14336,7 @@ void A_f_MPI_Type_create_subarray(int *ndims, int *array_of_sizes,
                   ": *d,\narray_of_subsizes : *d,\narray_of_starts : "
                   "*d,\norder : *d,\noldtype : *d,\nnewtype : "
                   "*d,\nerror/return : *d\n}\n",
-                  ndims, count, array_of_sizes, count, array_of_subsizes, count,
+                  ndims, ndims, array_of_sizes, ndims, array_of_subsizes,
                   array_of_starts, order, oldtype, newtype, ret_tmp);
 #endif
 #ifdef TIMEOUT_SUPPORT
