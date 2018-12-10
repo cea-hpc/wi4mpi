@@ -189,13 +189,13 @@ void debug_printer_f(const char *ctr_str,...)
                     break;
                 case 'n':
                     if(nb_elt==0)
-                    print_status(pointer_disp?*va_arg(ap,int *):va_arg(ap,int));
+                    print_status(pointer_disp?*va_arg(ap,int **):va_arg(ap,int*));
                     else
                     {
-                    int *s=pointer_disp?*va_arg(ap,int *):va_arg(ap,int*);
+                    int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
                     printf("[\n");
                     for(ii=0;ii<nb_elt;ii++)
-                    {if(!ii) printf(",");print_status_f(&s[ii*MPI_STATUS_SIZE]);}
+                    {if(!ii) printf(",");print_status_f(&s[ii*A_MPI_STATUS_SIZE]);}
                     printf("]\n");
                     }
                     break;
