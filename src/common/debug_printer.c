@@ -189,7 +189,7 @@ void debug_printer_f(const char *ctr_str,...)
                     break;
                 case 'n':
                     if(nb_elt==0)
-                    print_status(pointer_disp?*va_arg(ap,int **):va_arg(ap,int*));
+                    print_status_f(pointer_disp?*va_arg(ap,int **):va_arg(ap,int*));
                     else
                     {
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
@@ -276,4 +276,10 @@ __attribute__((constructor)) void init_debug(void)
 void print_status(A_MPI_Status stat)
 {
     printf("{ source :%d, tag : %d ,error :%d}",stat.A_MPI_SOURCE,stat.A_MPI_TAG,stat.A_MPI_ERROR);
+}
+
+void print_status_f(int *stat)
+{
+    
+    printf("{ source :%d, tag : %d ,error :%d}",stat[A_MPI_SOURCE],stat[A_MPI_TAG],stat[A_MPI_ERROR]);
 }
