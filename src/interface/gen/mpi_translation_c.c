@@ -1027,7 +1027,7 @@ int A_MPI_Send(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
   comm_conv_a2r(&comm, &comm_tmp);
   int ret_tmp =
       LOCAL_MPI_Send(buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp, comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Send_print)
@@ -1049,7 +1049,7 @@ int R_MPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
 #endif
   int ret_tmp = LOCAL_MPI_Send(buf, count, datatype, dest, tag, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1126,7 +1126,7 @@ int A_MPI_Recv(void *buf, int count, A_MPI_Datatype datatype, int source,
                                tag_tmp, comm_tmp, status_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Recv_print)
@@ -1148,7 +1148,7 @@ int R_MPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source,
 #endif
   int ret_tmp = LOCAL_MPI_Recv(buf, count, datatype, source, tag, comm, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1207,7 +1207,7 @@ int A_MPI_Get_count(A_MPI_Status *status, A_MPI_Datatype datatype, int *count) {
 
   int ret_tmp = LOCAL_MPI_Get_count(status_tmp, datatype_tmp, count);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_count_print)
@@ -1227,7 +1227,7 @@ int R_MPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count) {
 #endif
   int ret_tmp = LOCAL_MPI_Get_count(status, datatype, count);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1299,7 +1299,7 @@ int A_MPI_Bsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   comm_conv_a2r(&comm, &comm_tmp);
   int ret_tmp = LOCAL_MPI_Bsend(buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp,
                                 comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Bsend_print)
@@ -1321,7 +1321,7 @@ int R_MPI_Bsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
 #endif
   int ret_tmp = LOCAL_MPI_Bsend(buf, count, datatype, dest, tag, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1393,7 +1393,7 @@ int A_MPI_Ssend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   comm_conv_a2r(&comm, &comm_tmp);
   int ret_tmp = LOCAL_MPI_Ssend(buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp,
                                 comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ssend_print)
@@ -1415,7 +1415,7 @@ int R_MPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest,
 #endif
   int ret_tmp = LOCAL_MPI_Ssend(buf, count, datatype, dest, tag, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1487,7 +1487,7 @@ int A_MPI_Rsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   comm_conv_a2r(&comm, &comm_tmp);
   int ret_tmp = LOCAL_MPI_Rsend(buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp,
                                 comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rsend_print)
@@ -1509,7 +1509,7 @@ int R_MPI_Rsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
 #endif
   int ret_tmp = LOCAL_MPI_Rsend(buf, count, datatype, dest, tag, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1562,7 +1562,7 @@ int A_MPI_Buffer_attach(void *buffer, int size) {
   buffer_conv_a2r(&buffer, &buffer_tmp);
 
   int ret_tmp = LOCAL_MPI_Buffer_attach(buffer_tmp, size);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Buffer_attach_print)
@@ -1582,7 +1582,7 @@ int R_MPI_Buffer_attach(void *buffer, int size) {
 #endif
   int ret_tmp = LOCAL_MPI_Buffer_attach(buffer, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1637,7 +1637,7 @@ int A_MPI_Buffer_detach(void *buffer_addr, int *size) {
   int ret_tmp = LOCAL_MPI_Buffer_detach(buffer_addr_tmp, size);
   buffer_conv_r2a(&buffer_addr, &buffer_addr_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Buffer_detach_print)
@@ -1657,7 +1657,7 @@ int R_MPI_Buffer_detach(void *buffer_addr, int *size) {
 #endif
   int ret_tmp = LOCAL_MPI_Buffer_detach(buffer_addr, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1735,7 +1735,7 @@ int A_MPI_Isend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Isend_print)
@@ -1757,7 +1757,7 @@ int R_MPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest,
 #endif
   int ret_tmp = LOCAL_MPI_Isend(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1835,7 +1835,7 @@ int A_MPI_Ibsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ibsend_print)
@@ -1858,7 +1858,7 @@ int R_MPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   int ret_tmp =
       LOCAL_MPI_Ibsend(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1936,7 +1936,7 @@ int A_MPI_Issend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Issend_print)
@@ -1959,7 +1959,7 @@ int R_MPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   int ret_tmp =
       LOCAL_MPI_Issend(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2037,7 +2037,7 @@ int A_MPI_Irsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Irsend_print)
@@ -2060,7 +2060,7 @@ int R_MPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
   int ret_tmp =
       LOCAL_MPI_Irsend(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2139,7 +2139,7 @@ int A_MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Irecv_print)
@@ -2162,7 +2162,7 @@ int R_MPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source,
   int ret_tmp =
       LOCAL_MPI_Irecv(buf, count, datatype, source, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2223,7 +2223,7 @@ int A_MPI_Wait(A_MPI_Request *request, A_MPI_Status *status) {
     }
   }
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Wait_print)
@@ -2243,7 +2243,7 @@ int R_MPI_Wait(R_MPI_Request *request, R_MPI_Status *status) {
 #endif
   int ret_tmp = LOCAL_MPI_Wait(request, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2309,7 +2309,7 @@ int A_MPI_Test(A_MPI_Request *request, int *flag, A_MPI_Status *status) {
   }
 
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Test_print)
@@ -2329,7 +2329,7 @@ int R_MPI_Test(R_MPI_Request *request, int *flag, R_MPI_Status *status) {
 #endif
   int ret_tmp = LOCAL_MPI_Test(request, flag, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2383,7 +2383,7 @@ int A_MPI_Request_free(A_MPI_Request *request) {
   if (ret_tmp == R_MPI_SUCCESS) {
     request_pers_ptr_delete(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Request_free_print)
@@ -2403,7 +2403,7 @@ int R_MPI_Request_free(R_MPI_Request *request) {
 #endif
   int ret_tmp = LOCAL_MPI_Request_free(request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2473,7 +2473,7 @@ int A_MPI_Iprobe(int source, int tag, A_MPI_Comm comm, int *flag,
       LOCAL_MPI_Iprobe(source_tmp, tag_tmp, comm_tmp, flag, status_tmp);
 
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iprobe_print)
@@ -2494,7 +2494,7 @@ int R_MPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag,
 #endif
   int ret_tmp = LOCAL_MPI_Iprobe(source, tag, comm, flag, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2557,7 +2557,7 @@ int A_MPI_Probe(int source, int tag, A_MPI_Comm comm, A_MPI_Status *status) {
   R_MPI_Status *status_tmp = &status_ltmp;
   int ret_tmp = LOCAL_MPI_Probe(source_tmp, tag_tmp, comm_tmp, status_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Probe_print)
@@ -2577,7 +2577,7 @@ int R_MPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status) {
 #endif
   int ret_tmp = LOCAL_MPI_Probe(source, tag, comm, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2631,7 +2631,7 @@ int A_MPI_Cancel(A_MPI_Request *request) {
   if (ret_tmp == R_MPI_SUCCESS) {
     request_cancel_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cancel_print)
@@ -2650,7 +2650,7 @@ int R_MPI_Cancel(R_MPI_Request *request) {
 #endif
   int ret_tmp = LOCAL_MPI_Cancel(request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2705,7 +2705,7 @@ int A_MPI_Test_cancelled(A_MPI_Status *status, int *flag) {
 
   int ret_tmp = LOCAL_MPI_Test_cancelled(status_tmp, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Test_cancelled_print)
@@ -2725,7 +2725,7 @@ int R_MPI_Test_cancelled(R_MPI_Status *status, int *flag) {
 #endif
   int ret_tmp = LOCAL_MPI_Test_cancelled(status, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2803,7 +2803,7 @@ int A_MPI_Send_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_pers_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Send_init_print)
@@ -2826,7 +2826,7 @@ int R_MPI_Send_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   int ret_tmp =
       LOCAL_MPI_Send_init(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2904,7 +2904,7 @@ int A_MPI_Bsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_pers_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Bsend_init_print)
@@ -2927,7 +2927,7 @@ int R_MPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   int ret_tmp =
       LOCAL_MPI_Bsend_init(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3005,7 +3005,7 @@ int A_MPI_Ssend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_pers_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ssend_init_print)
@@ -3028,7 +3028,7 @@ int R_MPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   int ret_tmp =
       LOCAL_MPI_Ssend_init(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3106,7 +3106,7 @@ int A_MPI_Rsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_pers_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rsend_init_print)
@@ -3129,7 +3129,7 @@ int R_MPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest,
   int ret_tmp =
       LOCAL_MPI_Rsend_init(buf, count, datatype, dest, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3208,7 +3208,7 @@ int A_MPI_Recv_init(void *buf, int count, A_MPI_Datatype datatype, int source,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_pers_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Recv_init_print)
@@ -3231,7 +3231,7 @@ int R_MPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source,
   int ret_tmp =
       LOCAL_MPI_Recv_init(buf, count, datatype, source, tag, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3283,7 +3283,7 @@ int A_MPI_Start(A_MPI_Request *request) {
   request_pers_ptr_conv_a2r(&request, &request_tmp);
   int ret_tmp = LOCAL_MPI_Start(request_tmp);
   request_pers_ptr_conv_r2a(&request, &request_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Start_print)
@@ -3302,7 +3302,7 @@ int R_MPI_Start(R_MPI_Request *request) {
 #endif
   int ret_tmp = LOCAL_MPI_Start(request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3393,7 +3393,7 @@ int A_MPI_Sendrecv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
       recvcount, recvtype_tmp, source_tmp, recvtag_tmp, comm_tmp, status_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Sendrecv_print)
@@ -3421,7 +3421,7 @@ int R_MPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
       LOCAL_MPI_Sendrecv(sendbuf, sendcount, sendtype, dest, sendtag, recvbuf,
                          recvcount, recvtype, source, recvtag, comm, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3505,7 +3505,7 @@ int A_MPI_Sendrecv_replace(void *buf, int count, A_MPI_Datatype datatype,
                                            recvtag_tmp, comm_tmp, status_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Sendrecv_replace_print)
@@ -3531,7 +3531,7 @@ int R_MPI_Sendrecv_replace(void *buf, int count, R_MPI_Datatype datatype,
   int ret_tmp = LOCAL_MPI_Sendrecv_replace(buf, count, datatype, dest, sendtag,
                                            source, recvtag, comm, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3590,7 +3590,7 @@ int A_MPI_Type_contiguous(int count, A_MPI_Datatype oldtype,
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_contiguous(count, oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_contiguous_print)
@@ -3611,7 +3611,7 @@ int R_MPI_Type_contiguous(int count, R_MPI_Datatype oldtype,
 #endif
   int ret_tmp = LOCAL_MPI_Type_contiguous(count, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3675,7 +3675,7 @@ int A_MPI_Type_vector(int count, int blocklength, int stride,
   int ret_tmp = LOCAL_MPI_Type_vector(count, blocklength, stride, oldtype_tmp,
                                       newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_vector_print)
@@ -3698,7 +3698,7 @@ int R_MPI_Type_vector(int count, int blocklength, int stride,
   int ret_tmp =
       LOCAL_MPI_Type_vector(count, blocklength, stride, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3765,7 +3765,7 @@ int A_MPI_Type_hvector(int count, int blocklength, A_MPI_Aint stride,
   int ret_tmp = LOCAL_MPI_Type_hvector(count, blocklength, stride_tmp,
                                        oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_hvector_print)
@@ -3788,7 +3788,7 @@ int R_MPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride,
   int ret_tmp =
       LOCAL_MPI_Type_hvector(count, blocklength, stride, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3856,7 +3856,7 @@ int A_MPI_Type_indexed(int count, int *array_of_blocklengths,
       LOCAL_MPI_Type_indexed(count, array_of_blocklengths,
                              array_of_displacements, oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_indexed_print)
@@ -3881,7 +3881,7 @@ int R_MPI_Type_indexed(int count, int *array_of_blocklengths,
   int ret_tmp = LOCAL_MPI_Type_indexed(
       count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3956,7 +3956,7 @@ int A_MPI_Type_hindexed(int count, int *array_of_blocklengths,
                                         newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
   wi4mpi_free(array_of_displacements_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_hindexed_print)
@@ -3981,7 +3981,7 @@ int R_MPI_Type_hindexed(int count, int *array_of_blocklengths,
   int ret_tmp = LOCAL_MPI_Type_hindexed(
       count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4062,7 +4062,7 @@ int A_MPI_Type_struct(int count, int *array_of_blocklengths,
   datatype_conv_r2a(newtype, newtype_tmp);
   wi4mpi_free(array_of_displacements_tmp);
   wi4mpi_free(array_of_types_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_struct_print)
@@ -4089,7 +4089,7 @@ int R_MPI_Type_struct(int count, int *array_of_blocklengths,
       LOCAL_MPI_Type_struct(count, array_of_blocklengths,
                             array_of_displacements, array_of_types, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4144,7 +4144,7 @@ int A_MPI_Address(void *location, A_MPI_Aint *address) {
   R_MPI_Aint *address_tmp = &address_ltmp;
   int ret_tmp = LOCAL_MPI_Address(location_tmp, address_tmp);
   *address = (A_MPI_Aint)*address_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Address_print)
@@ -4164,7 +4164,7 @@ int R_MPI_Address(void *location, R_MPI_Aint *address) {
 #endif
   int ret_tmp = LOCAL_MPI_Address(location, address);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4219,7 +4219,7 @@ int A_MPI_Type_extent(A_MPI_Datatype datatype, A_MPI_Aint *extent) {
   R_MPI_Aint *extent_tmp = &extent_ltmp;
   int ret_tmp = LOCAL_MPI_Type_extent(datatype_tmp, extent_tmp);
   *extent = (A_MPI_Aint)*extent_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_extent_print)
@@ -4239,7 +4239,7 @@ int R_MPI_Type_extent(R_MPI_Datatype datatype, R_MPI_Aint *extent) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_extent(datatype, extent);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4293,7 +4293,7 @@ int A_MPI_Type_size(A_MPI_Datatype datatype, int *size) {
 
   int ret_tmp = LOCAL_MPI_Type_size(datatype_tmp, size);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_size_print)
@@ -4313,7 +4313,7 @@ int R_MPI_Type_size(R_MPI_Datatype datatype, int *size) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_size(datatype, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4368,7 +4368,7 @@ int A_MPI_Type_lb(A_MPI_Datatype datatype, A_MPI_Aint *displacement) {
   R_MPI_Aint *displacement_tmp = &displacement_ltmp;
   int ret_tmp = LOCAL_MPI_Type_lb(datatype_tmp, displacement_tmp);
   *displacement = (A_MPI_Aint)*displacement_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_lb_print)
@@ -4388,7 +4388,7 @@ int R_MPI_Type_lb(R_MPI_Datatype datatype, R_MPI_Aint *displacement) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_lb(datatype, displacement);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4443,7 +4443,7 @@ int A_MPI_Type_ub(A_MPI_Datatype datatype, A_MPI_Aint *displacement) {
   R_MPI_Aint *displacement_tmp = &displacement_ltmp;
   int ret_tmp = LOCAL_MPI_Type_ub(datatype_tmp, displacement_tmp);
   *displacement = (A_MPI_Aint)*displacement_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_ub_print)
@@ -4463,7 +4463,7 @@ int R_MPI_Type_ub(R_MPI_Datatype datatype, R_MPI_Aint *displacement) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_ub(datatype, displacement);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4515,7 +4515,7 @@ int A_MPI_Type_commit(A_MPI_Datatype *datatype) {
   datatype_conv_a2r(datatype, datatype_tmp);
   int ret_tmp = LOCAL_MPI_Type_commit(datatype_tmp);
   datatype_conv_r2a(datatype, datatype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_commit_print)
@@ -4535,7 +4535,7 @@ int R_MPI_Type_commit(R_MPI_Datatype *datatype) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_commit(datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4587,7 +4587,7 @@ int A_MPI_Type_free(A_MPI_Datatype *datatype) {
   datatype_conv_a2r(datatype, datatype_tmp);
   int ret_tmp = LOCAL_MPI_Type_free(datatype_tmp);
   datatype_conv_r2a(datatype, datatype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_free_print)
@@ -4607,7 +4607,7 @@ int R_MPI_Type_free(R_MPI_Datatype *datatype) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_free(datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4667,7 +4667,7 @@ int A_MPI_Get_elements(A_MPI_Status *status, A_MPI_Datatype datatype,
 
   int ret_tmp = LOCAL_MPI_Get_elements(status_tmp, datatype_tmp, count);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_elements_print)
@@ -4688,7 +4688,7 @@ int R_MPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_Get_elements(status, datatype, count);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4762,7 +4762,7 @@ int A_MPI_Pack(void *inbuf, int incount, A_MPI_Datatype datatype, void *outbuf,
                                outsize, position, comm_tmp);
   buffer_conv_r2a(&outbuf, &outbuf_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Pack_print)
@@ -4786,7 +4786,7 @@ int R_MPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype, void *outbuf,
   int ret_tmp =
       LOCAL_MPI_Pack(inbuf, incount, datatype, outbuf, outsize, position, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4860,7 +4860,7 @@ int A_MPI_Unpack(void *inbuf, int insize, int *position, void *outbuf,
                                  outcount, datatype_tmp, comm_tmp);
 
   buffer_conv_r2a(&outbuf, &outbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Unpack_print)
@@ -4884,7 +4884,7 @@ int R_MPI_Unpack(void *inbuf, int insize, int *position, void *outbuf,
   int ret_tmp = LOCAL_MPI_Unpack(inbuf, insize, position, outbuf, outcount,
                                  datatype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4946,7 +4946,7 @@ int A_MPI_Pack_size(int incount, A_MPI_Datatype datatype, A_MPI_Comm comm,
 
   int ret_tmp = LOCAL_MPI_Pack_size(incount, datatype_tmp, comm_tmp, size);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Pack_size_print)
@@ -4967,7 +4967,7 @@ int R_MPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm,
 #endif
   int ret_tmp = LOCAL_MPI_Pack_size(incount, datatype, comm, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5017,7 +5017,7 @@ int A_MPI_Barrier(A_MPI_Comm comm) {
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
   int ret_tmp = LOCAL_MPI_Barrier(comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Barrier_print)
@@ -5036,7 +5036,7 @@ int R_MPI_Barrier(R_MPI_Comm comm) {
 #endif
   int ret_tmp = LOCAL_MPI_Barrier(comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5104,7 +5104,7 @@ int A_MPI_Bcast(void *buffer, int count, A_MPI_Datatype datatype, int root,
   int ret_tmp =
       LOCAL_MPI_Bcast(buffer_tmp, count, datatype_tmp, root, comm_tmp);
   buffer_conv_r2a(&buffer, &buffer_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Bcast_print)
@@ -5125,7 +5125,7 @@ int R_MPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype, int root,
 #endif
   int ret_tmp = LOCAL_MPI_Bcast(buffer, count, datatype, root, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5204,7 +5204,7 @@ int A_MPI_Gather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
       LOCAL_MPI_Gather(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
                        recvcount, recvtype_tmp, root, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Gather_print)
@@ -5229,7 +5229,7 @@ int R_MPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Gather(sendbuf, sendcount, sendtype, recvbuf,
                                  recvcount, recvtype, root, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5308,7 +5308,7 @@ int A_MPI_Gatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
       LOCAL_MPI_Gatherv(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
                         recvcounts, displs, recvtype_tmp, root, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Gatherv_print)
@@ -5334,7 +5334,7 @@ int R_MPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Gatherv(sendbuf, sendcount, sendtype, recvbuf,
                                   recvcounts, displs, recvtype, root, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5413,7 +5413,7 @@ int A_MPI_Scatter(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
       LOCAL_MPI_Scatter(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
                         recvcount, recvtype_tmp, root, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scatter_print)
@@ -5438,7 +5438,7 @@ int R_MPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Scatter(sendbuf, sendcount, sendtype, recvbuf,
                                   recvcount, recvtype, root, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5517,7 +5517,7 @@ int A_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
       LOCAL_MPI_Scatterv(sendbuf_tmp, sendcounts, displs, sendtype_tmp,
                          recvbuf_tmp, recvcount, recvtype_tmp, root, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scatterv_print)
@@ -5543,7 +5543,7 @@ int R_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
   int ret_tmp = LOCAL_MPI_Scatterv(sendbuf, sendcounts, displs, sendtype,
                                    recvbuf, recvcount, recvtype, root, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5621,7 +5621,7 @@ int A_MPI_Allgather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
       LOCAL_MPI_Allgather(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
                           recvcount, recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Allgather_print)
@@ -5646,7 +5646,7 @@ int R_MPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Allgather(sendbuf, sendcount, sendtype, recvbuf,
                                     recvcount, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5724,7 +5724,7 @@ int A_MPI_Allgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
       LOCAL_MPI_Allgatherv(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
                            recvcounts, displs, recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Allgatherv_print)
@@ -5750,7 +5750,7 @@ int R_MPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Allgatherv(sendbuf, sendcount, sendtype, recvbuf,
                                      recvcounts, displs, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5828,7 +5828,7 @@ int A_MPI_Alltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
       LOCAL_MPI_Alltoall(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
                          recvcount, recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoall_print)
@@ -5853,7 +5853,7 @@ int R_MPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Alltoall(sendbuf, sendcount, sendtype, recvbuf,
                                    recvcount, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5931,7 +5931,7 @@ int A_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                                     sendtype_tmp, recvbuf_tmp, recvcounts,
                                     rdispls, recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoallv_print)
@@ -5958,7 +5958,7 @@ int R_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
       LOCAL_MPI_Alltoallv(sendbuf, sendcounts, sdispls, sendtype, recvbuf,
                           recvcounts, rdispls, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6032,7 +6032,7 @@ int A_MPI_Exscan(void *sendbuf, void *recvbuf, int count,
   int ret_tmp = LOCAL_MPI_Exscan(sendbuf_tmp, recvbuf_tmp, count, datatype_tmp,
                                  op_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Exscan_print)
@@ -6054,7 +6054,7 @@ int R_MPI_Exscan(void *sendbuf, void *recvbuf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_Exscan(sendbuf, recvbuf, count, datatype, op, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6130,7 +6130,7 @@ int A_MPI_Reduce(void *sendbuf, void *recvbuf, int count,
   int ret_tmp = LOCAL_MPI_Reduce(sendbuf_tmp, recvbuf_tmp, count, datatype_tmp,
                                  op_tmp, root, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_print)
@@ -6154,7 +6154,7 @@ int R_MPI_Reduce(void *sendbuf, void *recvbuf, int count,
   int ret_tmp =
       LOCAL_MPI_Reduce(sendbuf, recvbuf, count, datatype, op, root, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6212,7 +6212,7 @@ int A_MPI_Op_create(A_MPI_User_function *user_fn, int commute, A_MPI_Op *op) {
   R_MPI_Op *op_tmp = &op_ltmp;
   int ret_tmp = LOCAL_MPI_Op_create(user_fn_tmp, commute, op_tmp);
   op_conv_r2a(op, op_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Op_create_print)
@@ -6232,7 +6232,7 @@ int R_MPI_Op_create(R_MPI_User_function *user_fn, int commute, R_MPI_Op *op) {
 #endif
   int ret_tmp = LOCAL_MPI_Op_create(user_fn, commute, op);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6284,7 +6284,7 @@ int A_MPI_Op_free(A_MPI_Op *op) {
   op_conv_a2r(op, op_tmp);
   int ret_tmp = LOCAL_MPI_Op_free(op_tmp);
   op_conv_r2a(op, op_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Op_free_print)
@@ -6303,7 +6303,7 @@ int R_MPI_Op_free(R_MPI_Op *op) {
 #endif
   int ret_tmp = LOCAL_MPI_Op_free(op);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6377,7 +6377,7 @@ int A_MPI_Allreduce(void *sendbuf, void *recvbuf, int count,
   int ret_tmp = LOCAL_MPI_Allreduce(sendbuf_tmp, recvbuf_tmp, count,
                                     datatype_tmp, op_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Allreduce_print)
@@ -6400,7 +6400,7 @@ int R_MPI_Allreduce(void *sendbuf, void *recvbuf, int count,
   int ret_tmp =
       LOCAL_MPI_Allreduce(sendbuf, recvbuf, count, datatype, op, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6474,7 +6474,7 @@ int A_MPI_Scan(void *sendbuf, void *recvbuf, int count, A_MPI_Datatype datatype,
   int ret_tmp = LOCAL_MPI_Scan(sendbuf_tmp, recvbuf_tmp, count, datatype_tmp,
                                op_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scan_print)
@@ -6496,7 +6496,7 @@ int R_MPI_Scan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_Scan(sendbuf, recvbuf, count, datatype, op, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6550,7 +6550,7 @@ int A_MPI_Group_size(A_MPI_Group group, int *size) {
 
   int ret_tmp = LOCAL_MPI_Group_size(group_tmp, size);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_size_print)
@@ -6570,7 +6570,7 @@ int R_MPI_Group_size(R_MPI_Group group, int *size) {
 #endif
   int ret_tmp = LOCAL_MPI_Group_size(group, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6624,7 +6624,7 @@ int A_MPI_Group_rank(A_MPI_Group group, int *rank) {
 
   int ret_tmp = LOCAL_MPI_Group_rank(group_tmp, rank);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_rank_print)
@@ -6644,7 +6644,7 @@ int R_MPI_Group_rank(R_MPI_Group group, int *rank) {
 #endif
   int ret_tmp = LOCAL_MPI_Group_rank(group, rank);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6702,7 +6702,7 @@ int A_MPI_Group_compare(A_MPI_Group group1, A_MPI_Group group2, int *result) {
 
   int ret_tmp = LOCAL_MPI_Group_compare(group1_tmp, group2_tmp, result);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_compare_print)
@@ -6722,7 +6722,7 @@ int R_MPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result) {
 #endif
   int ret_tmp = LOCAL_MPI_Group_compare(group1, group2, result);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6777,7 +6777,7 @@ int A_MPI_Comm_group(A_MPI_Comm comm, A_MPI_Group *group) {
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_group(comm_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_group_print)
@@ -6797,7 +6797,7 @@ int R_MPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_group(comm, group);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6858,7 +6858,7 @@ int A_MPI_Group_union(A_MPI_Group group1, A_MPI_Group group2,
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_union(group1_tmp, group2_tmp, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_union_print)
@@ -6879,7 +6879,7 @@ int R_MPI_Group_union(R_MPI_Group group1, R_MPI_Group group2,
 #endif
   int ret_tmp = LOCAL_MPI_Group_union(group1, group2, newgroup);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -6941,7 +6941,7 @@ int A_MPI_Group_intersection(A_MPI_Group group1, A_MPI_Group group2,
   int ret_tmp =
       LOCAL_MPI_Group_intersection(group1_tmp, group2_tmp, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_intersection_print)
@@ -6962,7 +6962,7 @@ int R_MPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2,
 #endif
   int ret_tmp = LOCAL_MPI_Group_intersection(group1, group2, newgroup);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7024,7 +7024,7 @@ int A_MPI_Group_difference(A_MPI_Group group1, A_MPI_Group group2,
   int ret_tmp =
       LOCAL_MPI_Group_difference(group1_tmp, group2_tmp, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_difference_print)
@@ -7045,7 +7045,7 @@ int R_MPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2,
 #endif
   int ret_tmp = LOCAL_MPI_Group_difference(group1, group2, newgroup);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7097,7 +7097,7 @@ int A_MPI_Group_free(A_MPI_Group *group) {
   group_conv_a2r(group, group_tmp);
   int ret_tmp = LOCAL_MPI_Group_free(group_tmp);
   group_conv_r2a(group, group_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_free_print)
@@ -7116,7 +7116,7 @@ int R_MPI_Group_free(R_MPI_Group *group) {
 #endif
   int ret_tmp = LOCAL_MPI_Group_free(group);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7170,7 +7170,7 @@ int A_MPI_Comm_size(A_MPI_Comm comm, int *size) {
 
   int ret_tmp = LOCAL_MPI_Comm_size(comm_tmp, size);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_size_print)
@@ -7190,7 +7190,7 @@ int R_MPI_Comm_size(R_MPI_Comm comm, int *size) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_size(comm, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7244,7 +7244,7 @@ int A_MPI_Comm_rank(A_MPI_Comm comm, int *rank) {
 
   int ret_tmp = LOCAL_MPI_Comm_rank(comm_tmp, rank);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_rank_print)
@@ -7264,7 +7264,7 @@ int R_MPI_Comm_rank(R_MPI_Comm comm, int *rank) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_rank(comm, rank);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7322,7 +7322,7 @@ int A_MPI_Comm_compare(A_MPI_Comm comm1, A_MPI_Comm comm2, int *result) {
 
   int ret_tmp = LOCAL_MPI_Comm_compare(comm1_tmp, comm2_tmp, result);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_compare_print)
@@ -7342,7 +7342,7 @@ int R_MPI_Comm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_compare(comm1, comm2, result);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7397,7 +7397,7 @@ int A_MPI_Comm_dup(A_MPI_Comm comm, A_MPI_Comm *newcomm) {
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_dup(comm_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_dup_print)
@@ -7417,7 +7417,7 @@ int R_MPI_Comm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_dup(comm, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7478,7 +7478,7 @@ int A_MPI_Comm_dup_with_info(A_MPI_Comm comm, A_MPI_Info info,
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_dup_with_info(comm_tmp, info_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_dup_with_info_print)
@@ -7499,7 +7499,7 @@ int R_MPI_Comm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info,
 #endif
   int ret_tmp = LOCAL_MPI_Comm_dup_with_info(comm, info, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7558,7 +7558,7 @@ int A_MPI_Comm_create(A_MPI_Comm comm, A_MPI_Group group, A_MPI_Comm *newcomm) {
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_create(comm_tmp, group_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_create_print)
@@ -7578,7 +7578,7 @@ int R_MPI_Comm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_create(comm, group, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7638,7 +7638,7 @@ int A_MPI_Comm_split(A_MPI_Comm comm, int color, int key, A_MPI_Comm *newcomm) {
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_split(comm_tmp, color, key, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_split_print)
@@ -7658,7 +7658,7 @@ int R_MPI_Comm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_split(comm, color, key, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7713,7 +7713,7 @@ int A_MPI_Comm_free(A_MPI_Comm *comm) {
     comm_conv_r2a(comm, comm_tmp);
     communicator_translation_del(comm);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_free_print)
@@ -7732,7 +7732,7 @@ int R_MPI_Comm_free(R_MPI_Comm *comm) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_free(comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7786,7 +7786,7 @@ int A_MPI_Comm_test_inter(A_MPI_Comm comm, int *flag) {
 
   int ret_tmp = LOCAL_MPI_Comm_test_inter(comm_tmp, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_test_inter_print)
@@ -7806,7 +7806,7 @@ int R_MPI_Comm_test_inter(R_MPI_Comm comm, int *flag) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_test_inter(comm, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7860,7 +7860,7 @@ int A_MPI_Comm_remote_size(A_MPI_Comm comm, int *size) {
 
   int ret_tmp = LOCAL_MPI_Comm_remote_size(comm_tmp, size);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_remote_size_print)
@@ -7880,7 +7880,7 @@ int R_MPI_Comm_remote_size(R_MPI_Comm comm, int *size) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_remote_size(comm, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7935,7 +7935,7 @@ int A_MPI_Comm_remote_group(A_MPI_Comm comm, A_MPI_Group *group) {
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_remote_group(comm_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_remote_group_print)
@@ -7955,7 +7955,7 @@ int R_MPI_Comm_remote_group(R_MPI_Comm comm, R_MPI_Group *group) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_remote_group(comm, group);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8031,7 +8031,7 @@ int A_MPI_Intercomm_create(A_MPI_Comm local_comm, int local_leader,
       LOCAL_MPI_Intercomm_create(local_comm_tmp, local_leader, peer_comm_tmp,
                                  remote_leader, tag_tmp, newintercomm_tmp);
   comm_conv_r2a(newintercomm, newintercomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Intercomm_create_print)
@@ -8056,7 +8056,7 @@ int R_MPI_Intercomm_create(R_MPI_Comm local_comm, int local_leader,
   int ret_tmp = LOCAL_MPI_Intercomm_create(local_comm, local_leader, peer_comm,
                                            remote_leader, tag, newintercomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8117,7 +8117,7 @@ int A_MPI_Intercomm_merge(A_MPI_Comm intercomm, int high,
   int ret_tmp =
       LOCAL_MPI_Intercomm_merge(intercomm_tmp, high, newintracomm_tmp);
   comm_conv_r2a(newintracomm, newintracomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Intercomm_merge_print)
@@ -8138,7 +8138,7 @@ int R_MPI_Intercomm_merge(R_MPI_Comm intercomm, int high,
 #endif
   int ret_tmp = LOCAL_MPI_Intercomm_merge(intercomm, high, newintracomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8198,7 +8198,7 @@ int A_MPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val) {
   if (tt = myKeyval_translation_get(keyval))
     tt->ref++;
   int ret_tmp = LOCAL_MPI_Attr_put(comm_tmp, keyval_tmp, attribute_val);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Attr_put_print)
@@ -8218,7 +8218,7 @@ int R_MPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val) {
 #endif
   int ret_tmp = LOCAL_MPI_Attr_put(comm, keyval, attribute_val);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8279,7 +8279,7 @@ int A_MPI_Attr_get(A_MPI_Comm comm, int keyval, void *attribute_val,
 
   int ret_tmp = LOCAL_MPI_Attr_get(comm_tmp, keyval_tmp, attribute_val, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Attr_get_print)
@@ -8300,7 +8300,7 @@ int R_MPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val,
 #endif
   int ret_tmp = LOCAL_MPI_Attr_get(comm, keyval, attribute_val, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8354,7 +8354,7 @@ int A_MPI_Attr_delete(A_MPI_Comm comm, int keyval) {
   int keyval_tmp;
   my_keyval_a2r(&keyval, &keyval_tmp);
   int ret_tmp = LOCAL_MPI_Attr_delete(comm_tmp, keyval_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Attr_delete_print)
@@ -8374,7 +8374,7 @@ int R_MPI_Attr_delete(R_MPI_Comm comm, int keyval) {
 #endif
   int ret_tmp = LOCAL_MPI_Attr_delete(comm, keyval);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8429,7 +8429,7 @@ int A_MPI_Topo_test(A_MPI_Comm comm, int *status) {
   int *status_tmp = &status_ltmp;
   int ret_tmp = LOCAL_MPI_Topo_test(comm_tmp, status_tmp);
   topo_status_mapper(status, status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Topo_test_print)
@@ -8449,7 +8449,7 @@ int R_MPI_Topo_test(R_MPI_Comm comm, int *status) {
 #endif
   int ret_tmp = LOCAL_MPI_Topo_test(comm, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8505,7 +8505,7 @@ int A_MPI_Graphdims_get(A_MPI_Comm comm, int *nnodes, int *nedges) {
 
   int ret_tmp = LOCAL_MPI_Graphdims_get(comm_tmp, nnodes, nedges);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graphdims_get_print)
@@ -8525,7 +8525,7 @@ int R_MPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges) {
 #endif
   int ret_tmp = LOCAL_MPI_Graphdims_get(comm, nnodes, nedges);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8579,7 +8579,7 @@ int A_MPI_Cartdim_get(A_MPI_Comm comm, int *ndims) {
 
   int ret_tmp = LOCAL_MPI_Cartdim_get(comm_tmp, ndims);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cartdim_get_print)
@@ -8599,7 +8599,7 @@ int R_MPI_Cartdim_get(R_MPI_Comm comm, int *ndims) {
 #endif
   int ret_tmp = LOCAL_MPI_Cartdim_get(comm, ndims);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8655,7 +8655,7 @@ int A_MPI_Graph_neighbors_count(A_MPI_Comm comm, int rank, int *nneighbors) {
 
   int ret_tmp = LOCAL_MPI_Graph_neighbors_count(comm_tmp, rank, nneighbors);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_neighbors_count_print)
@@ -8675,7 +8675,7 @@ int R_MPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors) {
 #endif
   int ret_tmp = LOCAL_MPI_Graph_neighbors_count(comm, rank, nneighbors);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8742,7 +8742,7 @@ int A_MPI_Cart_shift(A_MPI_Comm comm, int direction, int disp, int *rank_source,
                                      rank_dest);
   source_conv_r2a(rank_source, rank_source_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_shift_print)
@@ -8765,7 +8765,7 @@ int R_MPI_Cart_shift(R_MPI_Comm comm, int direction, int disp, int *rank_source,
   int ret_tmp =
       LOCAL_MPI_Cart_shift(comm, direction, disp, rank_source, rank_dest);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8816,7 +8816,7 @@ int A_MPI_Get_processor_name(char *name, int *resultlen) {
 
   int ret_tmp = LOCAL_MPI_Get_processor_name(name, resultlen);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_processor_name_print)
@@ -8836,7 +8836,7 @@ int R_MPI_Get_processor_name(char *name, int *resultlen) {
 #endif
   int ret_tmp = LOCAL_MPI_Get_processor_name(name, resultlen);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8887,7 +8887,7 @@ int A_MPI_Get_version(int *version, int *subversion) {
 
   int ret_tmp = LOCAL_MPI_Get_version(version, subversion);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_version_print)
@@ -8907,7 +8907,7 @@ int R_MPI_Get_version(int *version, int *subversion) {
 #endif
   int ret_tmp = LOCAL_MPI_Get_version(version, subversion);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8958,7 +8958,7 @@ int A_MPI_Get_library_version(char *version, int *resultlen) {
 
   int ret_tmp = LOCAL_MPI_Get_library_version(version, resultlen);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_library_version_print)
@@ -8978,7 +8978,7 @@ int R_MPI_Get_library_version(char *version, int *resultlen) {
 #endif
   int ret_tmp = LOCAL_MPI_Get_library_version(version, resultlen);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9038,7 +9038,7 @@ int A_MPI_Errhandler_create(A_MPI_Handler_function *function,
       (R_MPI_Handler_function *)wrapper_handler_function, errhandler_tmp);
   errhandler_ptr_conv_r2a(&errhandler, &errhandler_tmp);
   errhandler_locks_re();
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Errhandler_create_print)
@@ -9059,7 +9059,7 @@ int R_MPI_Errhandler_create(R_MPI_Handler_function *function,
 #endif
   int ret_tmp = LOCAL_MPI_Errhandler_create(function, errhandler);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9346,7 +9346,7 @@ int A_MPI_Error_string(int errorcode, char *string, int *resultlen) {
 
   int ret_tmp = LOCAL_MPI_Error_string(errorcode, string, resultlen);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Error_string_print)
@@ -9366,7 +9366,7 @@ int R_MPI_Error_string(int errorcode, char *string, int *resultlen) {
 #endif
   int ret_tmp = LOCAL_MPI_Error_string(errorcode, string, resultlen);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9417,7 +9417,7 @@ int A_MPI_Error_class(int errorcode, int *errorclass) {
 
   int ret_tmp = LOCAL_MPI_Error_class(errorcode, errorclass);
   *errorclass = error_code_conv_r2a(*errorclass);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Error_class_print)
@@ -9437,7 +9437,7 @@ int R_MPI_Error_class(int errorcode, int *errorclass) {
 #endif
   int ret_tmp = LOCAL_MPI_Error_class(errorcode, errorclass);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9486,7 +9486,7 @@ int A_MPI_Initialized(int *flag) {
 
   int ret_tmp = LOCAL_MPI_Initialized(flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Initialized_print)
@@ -9505,7 +9505,7 @@ int R_MPI_Initialized(int *flag) {
 #endif
   int ret_tmp = LOCAL_MPI_Initialized(flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9558,7 +9558,7 @@ int A_MPI_Abort(A_MPI_Comm comm, int errorcode) {
   comm_conv_a2r(&comm, &comm_tmp);
 
   int ret_tmp = LOCAL_MPI_Abort(comm_tmp, errorcode);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Abort_print)
@@ -9578,7 +9578,7 @@ int R_MPI_Abort(R_MPI_Comm comm, int errorcode) {
 #endif
   int ret_tmp = LOCAL_MPI_Abort(comm, errorcode);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9635,7 +9635,7 @@ int A_MPI_Init(int *argc, char ***argv) {
             "You are using Wi4MPI-%s with the mode interface From Interface To "
             "%s\n",
             getenv("WI4MPI_VERSION"), getenv("WI4MPI_TO"));
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Init_print)
@@ -9655,7 +9655,7 @@ int R_MPI_Init(int *argc, char ***argv) {
 #endif
   int ret_tmp = LOCAL_MPI_Init(argc, argv);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9703,7 +9703,7 @@ int A_MPI_Close_port(char *port_name) {
   in_w = 1;
 
   int ret_tmp = LOCAL_MPI_Close_port(port_name);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Close_port_print)
@@ -9723,7 +9723,7 @@ int R_MPI_Close_port(char *port_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Close_port(port_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9790,7 +9790,7 @@ int A_MPI_Comm_accept(char *port_name, A_MPI_Info info, int root,
   int ret_tmp =
       LOCAL_MPI_Comm_accept(port_name, info_tmp, root, comm_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_accept_print)
@@ -9811,7 +9811,7 @@ int R_MPI_Comm_accept(char *port_name, R_MPI_Info info, int root,
 #endif
   int ret_tmp = LOCAL_MPI_Comm_accept(port_name, info, root, comm, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9879,7 +9879,7 @@ int A_MPI_Comm_connect(char *port_name, A_MPI_Info info, int root,
   int ret_tmp =
       LOCAL_MPI_Comm_connect(port_name, info_tmp, root, comm_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_connect_print)
@@ -9900,7 +9900,7 @@ int R_MPI_Comm_connect(char *port_name, R_MPI_Info info, int root,
 #endif
   int ret_tmp = LOCAL_MPI_Comm_connect(port_name, info, root, comm, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9952,7 +9952,7 @@ int A_MPI_Comm_disconnect(A_MPI_Comm *comm) {
   comm_conv_a2r(comm, comm_tmp);
   int ret_tmp = LOCAL_MPI_Comm_disconnect(comm_tmp);
   comm_conv_r2a(comm, comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_disconnect_print)
@@ -9972,7 +9972,7 @@ int R_MPI_Comm_disconnect(R_MPI_Comm *comm) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_disconnect(comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10023,7 +10023,7 @@ int A_MPI_Comm_get_parent(A_MPI_Comm *parent) {
   R_MPI_Comm *parent_tmp = &parent_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_get_parent(parent_tmp);
   comm_conv_r2a(parent, parent_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_parent_print)
@@ -10043,7 +10043,7 @@ int R_MPI_Comm_get_parent(R_MPI_Comm *parent) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_get_parent(parent);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10096,7 +10096,7 @@ int A_MPI_Comm_join(int fd, A_MPI_Comm *intercomm) {
   R_MPI_Comm *intercomm_tmp = &intercomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_join(fd, intercomm_tmp);
   comm_conv_r2a(intercomm, intercomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_join_print)
@@ -10116,7 +10116,7 @@ int R_MPI_Comm_join(int fd, R_MPI_Comm *intercomm) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_join(fd, intercomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10172,7 +10172,7 @@ int A_MPI_Lookup_name(char *service_name, A_MPI_Info info, char *port_name) {
 
   int ret_tmp = LOCAL_MPI_Lookup_name(service_name, info_tmp, port_name);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Lookup_name_print)
@@ -10192,7 +10192,7 @@ int R_MPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Lookup_name(service_name, info, port_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10246,7 +10246,7 @@ int A_MPI_Open_port(A_MPI_Info info, char *port_name) {
 
   int ret_tmp = LOCAL_MPI_Open_port(info_tmp, port_name);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Open_port_print)
@@ -10266,7 +10266,7 @@ int R_MPI_Open_port(R_MPI_Info info, char *port_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Open_port(info, port_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10321,7 +10321,7 @@ int A_MPI_Publish_name(char *service_name, A_MPI_Info info, char *port_name) {
   info_conv_a2r(&info, &info_tmp);
 
   int ret_tmp = LOCAL_MPI_Publish_name(service_name, info_tmp, port_name);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Publish_name_print)
@@ -10341,7 +10341,7 @@ int R_MPI_Publish_name(char *service_name, R_MPI_Info info, char *port_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Publish_name(service_name, info, port_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10396,7 +10396,7 @@ int A_MPI_Unpublish_name(char *service_name, A_MPI_Info info, char *port_name) {
   info_conv_a2r(&info, &info_tmp);
 
   int ret_tmp = LOCAL_MPI_Unpublish_name(service_name, info_tmp, port_name);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Unpublish_name_print)
@@ -10416,7 +10416,7 @@ int R_MPI_Unpublish_name(char *service_name, R_MPI_Info info, char *port_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Unpublish_name(service_name, info, port_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10471,7 +10471,7 @@ int A_MPI_Comm_set_info(A_MPI_Comm comm, A_MPI_Info info) {
   info_conv_a2r(&info, &info_tmp);
   int ret_tmp = LOCAL_MPI_Comm_set_info(comm_tmp, info_tmp);
   comm_conv_r2a(&comm, &comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_set_info_print)
@@ -10491,7 +10491,7 @@ int R_MPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_set_info(comm, info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10546,7 +10546,7 @@ int A_MPI_Comm_get_info(A_MPI_Comm comm, A_MPI_Info *info) {
   R_MPI_Info *info_tmp = &info_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_get_info(comm_tmp, info_tmp);
   info_conv_r2a(info, info_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_info_print)
@@ -10566,7 +10566,7 @@ int R_MPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_get_info(comm, info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10650,7 +10650,7 @@ int A_MPI_Accumulate(void *origin_addr, int origin_count,
   int ret_tmp = LOCAL_MPI_Accumulate(
       origin_addr_tmp, origin_count, origin_datatype_tmp, target_rank_tmp,
       target_disp_tmp, target_count, target_datatype_tmp, op_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Accumulate_print)
@@ -10679,7 +10679,7 @@ int R_MPI_Accumulate(void *origin_addr, int origin_count,
                                      target_rank, target_disp, target_count,
                                      target_datatype, op, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10760,7 +10760,7 @@ int A_MPI_Get(void *origin_addr, int origin_count,
   int ret_tmp = LOCAL_MPI_Get(
       origin_addr_tmp, origin_count, origin_datatype_tmp, target_rank_tmp,
       target_disp_tmp, target_count_tmp, target_datatype_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_print)
@@ -10788,7 +10788,7 @@ int R_MPI_Get(void *origin_addr, int origin_count,
       LOCAL_MPI_Get(origin_addr, origin_count, origin_datatype, target_rank,
                     target_disp, target_count, target_datatype, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10868,7 +10868,7 @@ int A_MPI_Put(void *origin_addr, int origin_count,
   int ret_tmp = LOCAL_MPI_Put(
       origin_addr_tmp, origin_count, origin_datatype_tmp, target_rank_tmp,
       target_disp_tmp, target_count, target_datatype_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Put_print)
@@ -10896,7 +10896,7 @@ int R_MPI_Put(void *origin_addr, int origin_count,
       LOCAL_MPI_Put(origin_addr, origin_count, origin_datatype, target_rank,
                     target_disp, target_count, target_datatype, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10946,7 +10946,7 @@ int A_MPI_Win_complete(A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_complete(win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_complete_print)
@@ -10965,7 +10965,7 @@ int R_MPI_Win_complete(R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_complete(win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11039,7 +11039,7 @@ int A_MPI_Win_create(void *base, A_MPI_Aint size, int disp_unit,
   int ret_tmp = LOCAL_MPI_Win_create(base_tmp, size_tmp, disp_unit, info_tmp,
                                      comm_tmp, win_tmp);
   win_conv_r2a(win, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_create_print)
@@ -11061,7 +11061,7 @@ int R_MPI_Win_create(void *base, R_MPI_Aint size, int disp_unit,
 #endif
   int ret_tmp = LOCAL_MPI_Win_create(base, size, disp_unit, info, comm, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11115,7 +11115,7 @@ int A_MPI_Win_fence(int assert, A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_fence(assert_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_fence_print)
@@ -11135,7 +11135,7 @@ int R_MPI_Win_fence(int assert, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_fence(assert, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11187,7 +11187,7 @@ int A_MPI_Win_free(A_MPI_Win *win) {
   win_conv_a2r(win, win_tmp);
   int ret_tmp = LOCAL_MPI_Win_free(win_tmp);
   win_conv_r2a(win, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_free_print)
@@ -11206,7 +11206,7 @@ int R_MPI_Win_free(R_MPI_Win *win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_free(win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11261,7 +11261,7 @@ int A_MPI_Win_get_group(A_MPI_Win win, A_MPI_Group *group) {
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_Win_get_group(win_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_get_group_print)
@@ -11281,7 +11281,7 @@ int R_MPI_Win_get_group(R_MPI_Win win, R_MPI_Group *group) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_get_group(win, group);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11344,7 +11344,7 @@ int A_MPI_Win_lock(int lock_type, int rank, int assert, A_MPI_Win win) {
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp =
       LOCAL_MPI_Win_lock(lock_type_tmp, rank_tmp, assert_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_lock_print)
@@ -11364,7 +11364,7 @@ int R_MPI_Win_lock(int lock_type, int rank, int assert, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_lock(lock_type, rank, assert, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11422,7 +11422,7 @@ int A_MPI_Win_post(A_MPI_Group group, int assert, A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_post(group_tmp, assert_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_post_print)
@@ -11442,7 +11442,7 @@ int R_MPI_Win_post(R_MPI_Group group, int assert, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_post(group, assert, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11500,7 +11500,7 @@ int A_MPI_Win_start(A_MPI_Group group, int assert, A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_start(group_tmp, assert_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_start_print)
@@ -11520,7 +11520,7 @@ int R_MPI_Win_start(R_MPI_Group group, int assert, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_start(group, assert, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11574,7 +11574,7 @@ int A_MPI_Win_test(A_MPI_Win win, int *flag) {
 
   int ret_tmp = LOCAL_MPI_Win_test(win_tmp, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_test_print)
@@ -11594,7 +11594,7 @@ int R_MPI_Win_test(R_MPI_Win win, int *flag) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_test(win, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11648,7 +11648,7 @@ int A_MPI_Win_unlock(int rank, A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_unlock(rank_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_unlock_print)
@@ -11668,7 +11668,7 @@ int R_MPI_Win_unlock(int rank, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_unlock(rank, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11718,7 +11718,7 @@ int A_MPI_Win_wait(A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_wait(win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_wait_print)
@@ -11737,7 +11737,7 @@ int R_MPI_Win_wait(R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_wait(win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11812,7 +11812,7 @@ int A_MPI_Win_allocate(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
                                        baseptr_tmp, win_tmp);
   buffer_conv_r2a(&baseptr, &baseptr_tmp);
   win_conv_r2a(win, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_allocate_print)
@@ -11835,7 +11835,7 @@ int R_MPI_Win_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
   int ret_tmp =
       LOCAL_MPI_Win_allocate(size, disp_unit, info, comm, baseptr, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -11910,7 +11910,7 @@ int A_MPI_Win_allocate_shared(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
                                               comm_tmp, baseptr_tmp, win_tmp);
   buffer_conv_r2a(&baseptr, &baseptr_tmp);
   win_conv_r2a(win, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_allocate_shared_print)
@@ -11933,7 +11933,7 @@ int R_MPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
   int ret_tmp =
       LOCAL_MPI_Win_allocate_shared(size, disp_unit, info, comm, baseptr, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12003,7 +12003,7 @@ int A_MPI_Win_shared_query(A_MPI_Win win, int rank, A_MPI_Aint *size,
   *size = (A_MPI_Aint)*size_tmp;
 
   buffer_conv_r2a(&baseptr, &baseptr_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_shared_query_print)
@@ -12025,7 +12025,7 @@ int R_MPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size,
 #endif
   int ret_tmp = LOCAL_MPI_Win_shared_query(win, rank, size, disp_unit, baseptr);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12084,7 +12084,7 @@ int A_MPI_Win_create_dynamic(A_MPI_Info info, A_MPI_Comm comm, A_MPI_Win *win) {
   R_MPI_Win *win_tmp = &win_ltmp;
   int ret_tmp = LOCAL_MPI_Win_create_dynamic(info_tmp, comm_tmp, win_tmp);
   win_conv_r2a(win, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_create_dynamic_print)
@@ -12104,7 +12104,7 @@ int R_MPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_create_dynamic(info, comm, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12162,7 +12162,7 @@ int A_MPI_Win_attach(A_MPI_Win win, void *base, A_MPI_Aint size) {
   R_MPI_Aint size_tmp;
   size_tmp = (R_MPI_Aint)size;
   int ret_tmp = LOCAL_MPI_Win_attach(win_tmp, base_tmp, size_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_attach_print)
@@ -12182,7 +12182,7 @@ int R_MPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_attach(win, base, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12236,7 +12236,7 @@ int A_MPI_Win_detach(A_MPI_Win win, void *base) {
   void *base_tmp;
   buffer_conv_a2r(&base, &base_tmp);
   int ret_tmp = LOCAL_MPI_Win_detach(win_tmp, base_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_detach_print)
@@ -12256,7 +12256,7 @@ int R_MPI_Win_detach(R_MPI_Win win, void *base) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_detach(win, base);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12311,7 +12311,7 @@ int A_MPI_Win_get_info(A_MPI_Win win, A_MPI_Info *info_used) {
   R_MPI_Info *info_used_tmp = &info_used_ltmp;
   int ret_tmp = LOCAL_MPI_Win_get_info(win_tmp, info_used_tmp);
   info_conv_r2a(info_used, info_used_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_get_info_print)
@@ -12331,7 +12331,7 @@ int R_MPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_get_info(win, info_used);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12386,7 +12386,7 @@ int A_MPI_Win_set_info(A_MPI_Win win, A_MPI_Info info) {
   info_conv_a2r(&info, &info_tmp);
   int ret_tmp = LOCAL_MPI_Win_set_info(win_tmp, info_tmp);
   win_conv_r2a(&win, &win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_set_info_print)
@@ -12406,7 +12406,7 @@ int R_MPI_Win_set_info(R_MPI_Win win, R_MPI_Info info) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_set_info(win, info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12501,7 +12501,7 @@ int A_MPI_Get_accumulate(void *origin_addr, int origin_count,
       result_count, result_datatype_tmp, target_rank_tmp, target_disp_tmp,
       target_count, target_datatype_tmp, op_tmp, win_tmp);
   buffer_conv_r2a(&result_addr, &result_addr_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_accumulate_print)
@@ -12535,7 +12535,7 @@ int R_MPI_Get_accumulate(void *origin_addr, int origin_count,
       result_datatype, target_rank, target_disp, target_count, target_datatype,
       op, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12615,7 +12615,7 @@ int A_MPI_Fetch_and_op(void *origin_addr, void *result_addr,
       LOCAL_MPI_Fetch_and_op(origin_addr_tmp, result_addr_tmp, datatype_tmp,
                              target_rank_tmp, target_disp_tmp, op_tmp, win_tmp);
   buffer_conv_r2a(&result_addr, &result_addr_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Fetch_and_op_print)
@@ -12640,7 +12640,7 @@ int R_MPI_Fetch_and_op(void *origin_addr, void *result_addr,
   int ret_tmp = LOCAL_MPI_Fetch_and_op(origin_addr, result_addr, datatype,
                                        target_rank, target_disp, op, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12721,7 +12721,7 @@ int A_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
   int ret_tmp = LOCAL_MPI_Compare_and_swap(
       origin_addr_tmp, compare_addr_tmp, result_addr_tmp, datatype_tmp,
       target_rank_tmp, target_disp_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Compare_and_swap_print)
@@ -12748,7 +12748,7 @@ int R_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
       LOCAL_MPI_Compare_and_swap(origin_addr, compare_addr, result_addr,
                                  datatype, target_rank, target_disp, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12836,7 +12836,7 @@ int A_MPI_Rput(void *origin_addr, int origin_count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rput_print)
@@ -12866,7 +12866,7 @@ int R_MPI_Rput(void *origin_addr, int origin_count,
       LOCAL_MPI_Rput(origin_addr, origin_count, origin_datatype, target_rank,
                      target_disp, target_count, target_datatype, win, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12955,7 +12955,7 @@ int A_MPI_Rget(void *origin_addr, int origin_count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rget_print)
@@ -12985,7 +12985,7 @@ int R_MPI_Rget(void *origin_addr, int origin_count,
       LOCAL_MPI_Rget(origin_addr, origin_count, origin_datatype, target_rank,
                      target_disp, target_count, target_datatype, win, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13077,7 +13077,7 @@ int A_MPI_Raccumulate(void *origin_addr, int origin_count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Raccumulate_print)
@@ -13107,7 +13107,7 @@ int R_MPI_Raccumulate(void *origin_addr, int origin_count,
       origin_addr, origin_count, origin_datatype, target_rank, target_disp,
       target_count, target_datatype, op, win, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13208,7 +13208,7 @@ int A_MPI_Rget_accumulate(void *origin_addr, int origin_count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rget_accumulate_print)
@@ -13242,7 +13242,7 @@ int R_MPI_Rget_accumulate(void *origin_addr, int origin_count,
       result_datatype, target_rank, target_disp, target_count, target_datatype,
       op, win, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13296,7 +13296,7 @@ int A_MPI_Win_lock_all(int assert, A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_lock_all(assert_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_lock_all_print)
@@ -13316,7 +13316,7 @@ int R_MPI_Win_lock_all(int assert, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_lock_all(assert, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13366,7 +13366,7 @@ int A_MPI_Win_unlock_all(A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_unlock_all(win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_unlock_all_print)
@@ -13385,7 +13385,7 @@ int R_MPI_Win_unlock_all(R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_unlock_all(win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13439,7 +13439,7 @@ int A_MPI_Win_flush(int rank, A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_flush(rank_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_flush_print)
@@ -13459,7 +13459,7 @@ int R_MPI_Win_flush(int rank, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_flush(rank, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13509,7 +13509,7 @@ int A_MPI_Win_flush_all(A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_flush_all(win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_flush_all_print)
@@ -13528,7 +13528,7 @@ int R_MPI_Win_flush_all(R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_flush_all(win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13582,7 +13582,7 @@ int A_MPI_Win_flush_local(int rank, A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_flush_local(rank_tmp, win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_flush_local_print)
@@ -13602,7 +13602,7 @@ int R_MPI_Win_flush_local(int rank, R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_flush_local(rank, win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13652,7 +13652,7 @@ int A_MPI_Win_flush_local_all(A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_flush_local_all(win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_flush_local_all_print)
@@ -13672,7 +13672,7 @@ int R_MPI_Win_flush_local_all(R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_flush_local_all(win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13722,7 +13722,7 @@ int A_MPI_Win_sync(A_MPI_Win win) {
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Win_sync(win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_sync_print)
@@ -13741,7 +13741,7 @@ int R_MPI_Win_sync(R_MPI_Win win) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_sync(win);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13790,7 +13790,7 @@ int A_MPI_Add_error_class(int *errorclass) {
 
   int ret_tmp = LOCAL_MPI_Add_error_class(errorclass);
   *errorclass = error_code_conv_r2a(*errorclass);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Add_error_class_print)
@@ -13810,7 +13810,7 @@ int R_MPI_Add_error_class(int *errorclass) {
 #endif
   int ret_tmp = LOCAL_MPI_Add_error_class(errorclass);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13861,7 +13861,7 @@ int A_MPI_Add_error_code(int errorclass, int *errorcode) {
 
   int ret_tmp = LOCAL_MPI_Add_error_code(errorclass, errorcode);
   *errorcode = error_code_conv_r2a(*errorcode);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Add_error_code_print)
@@ -13881,7 +13881,7 @@ int R_MPI_Add_error_code(int errorclass, int *errorcode) {
 #endif
   int ret_tmp = LOCAL_MPI_Add_error_code(errorclass, errorcode);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13931,7 +13931,7 @@ int A_MPI_Add_error_string(int errorcode, char *string) {
   in_w = 1;
 
   int ret_tmp = LOCAL_MPI_Add_error_string(errorcode, string);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Add_error_string_print)
@@ -13951,7 +13951,7 @@ int R_MPI_Add_error_string(int errorcode, char *string) {
 #endif
   int ret_tmp = LOCAL_MPI_Add_error_string(errorcode, string);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14005,7 +14005,7 @@ int A_MPI_Comm_call_errhandler(A_MPI_Comm comm, int errorcode) {
   int errorcode_tmp;
   errorcode_tmp = error_code_conv_a2r(errorcode);
   int ret_tmp = LOCAL_MPI_Comm_call_errhandler(comm_tmp, errorcode_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_call_errhandler_print)
@@ -14025,7 +14025,7 @@ int R_MPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_call_errhandler(comm, errorcode);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14078,7 +14078,7 @@ int A_MPI_Comm_delete_attr(A_MPI_Comm comm, int comm_keyval) {
   comm_conv_a2r(&comm, &comm_tmp);
 
   int ret_tmp = LOCAL_MPI_Comm_delete_attr(comm_tmp, comm_keyval);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_delete_attr_print)
@@ -14098,7 +14098,7 @@ int R_MPI_Comm_delete_attr(R_MPI_Comm comm, int comm_keyval) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_delete_attr(comm, comm_keyval);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14161,7 +14161,7 @@ int A_MPI_Comm_get_attr(A_MPI_Comm comm, int comm_keyval, void *attribute_val,
   int ret_tmp =
       LOCAL_MPI_Comm_get_attr(comm_tmp, comm_keyval_tmp, attribute_val, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_attr_print)
@@ -14183,7 +14183,7 @@ int R_MPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val,
 #endif
   int ret_tmp = LOCAL_MPI_Comm_get_attr(comm, comm_keyval, attribute_val, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14239,7 +14239,7 @@ int A_MPI_Comm_get_name(A_MPI_Comm comm, char *comm_name, int *resultlen) {
 
   int ret_tmp = LOCAL_MPI_Comm_get_name(comm_tmp, comm_name, resultlen);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_name_print)
@@ -14259,7 +14259,7 @@ int R_MPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_get_name(comm, comm_name, resultlen);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14314,7 +14314,7 @@ int A_MPI_Comm_set_attr(A_MPI_Comm comm, int comm_keyval, void *attribute_val) {
   comm_conv_a2r(&comm, &comm_tmp);
 
   int ret_tmp = LOCAL_MPI_Comm_set_attr(comm_tmp, comm_keyval, attribute_val);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_set_attr_print)
@@ -14334,7 +14334,7 @@ int R_MPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_set_attr(comm, comm_keyval, attribute_val);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14388,7 +14388,7 @@ int A_MPI_Comm_set_name(A_MPI_Comm comm, char *comm_name) {
 
   int ret_tmp = LOCAL_MPI_Comm_set_name(comm_tmp, comm_name);
   comm_conv_r2a(&comm, &comm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_set_name_print)
@@ -14408,7 +14408,7 @@ int R_MPI_Comm_set_name(R_MPI_Comm comm, char *comm_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Comm_set_name(comm, comm_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14459,7 +14459,7 @@ int A_MPI_Grequest_complete(A_MPI_Request request) {
   request_tab_conv_a2r(&request, &request_tmp);
   int ret_tmp = LOCAL_MPI_Grequest_complete(request_tmp);
   request_tab_conv_r2a(&request, &request_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Grequest_complete_print)
@@ -14479,7 +14479,7 @@ int R_MPI_Grequest_complete(R_MPI_Request request) {
 #endif
   int ret_tmp = LOCAL_MPI_Grequest_complete(request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14555,7 +14555,7 @@ int A_MPI_Grequest_start(A_MPI_Grequest_query_function *query_fn,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Grequest_start_print)
@@ -14580,7 +14580,7 @@ int R_MPI_Grequest_start(R_MPI_Grequest_query_function *query_fn,
   int ret_tmp = LOCAL_MPI_Grequest_start(query_fn, free_fn, cancel_fn,
                                          extra_state, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14635,7 +14635,7 @@ int A_MPI_Init_thread(int *argc, char ***argv, int required, int *provided) {
 
   int ret_tmp = LOCAL_MPI_Init_thread(argc, argv, required, provided);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Init_thread_print)
@@ -14655,7 +14655,7 @@ int R_MPI_Init_thread(int *argc, char ***argv, int required, int *provided) {
 #endif
   int ret_tmp = LOCAL_MPI_Init_thread(argc, argv, required, provided);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14704,7 +14704,7 @@ int A_MPI_Is_thread_main(int *flag) {
 
   int ret_tmp = LOCAL_MPI_Is_thread_main(flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Is_thread_main_print)
@@ -14724,7 +14724,7 @@ int R_MPI_Is_thread_main(int *flag) {
 #endif
   int ret_tmp = LOCAL_MPI_Is_thread_main(flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14773,7 +14773,7 @@ int A_MPI_Query_thread(int *provided) {
 
   int ret_tmp = LOCAL_MPI_Query_thread(provided);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Query_thread_print)
@@ -14793,7 +14793,7 @@ int R_MPI_Query_thread(int *provided) {
 #endif
   int ret_tmp = LOCAL_MPI_Query_thread(provided);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14848,7 +14848,7 @@ int A_MPI_Status_set_cancelled(A_MPI_Status *status, int flag) {
 
   int ret_tmp = LOCAL_MPI_Status_set_cancelled(status_tmp, flag);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Status_set_cancelled_print)
@@ -14868,7 +14868,7 @@ int R_MPI_Status_set_cancelled(R_MPI_Status *status, int flag) {
 #endif
   int ret_tmp = LOCAL_MPI_Status_set_cancelled(status, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -14929,7 +14929,7 @@ int A_MPI_Status_set_elements(A_MPI_Status *status, A_MPI_Datatype datatype,
 
   int ret_tmp = LOCAL_MPI_Status_set_elements(status_tmp, datatype_tmp, count);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Status_set_elements_print)
@@ -14950,7 +14950,7 @@ int R_MPI_Status_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_Status_set_elements(status, datatype, count);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15021,7 +15021,7 @@ int A_MPI_Type_create_keyval(
       (R_MPI_Type_delete_attr_function *)wrapper_type_delete_attr_fn,
       type_keyval, extra_state_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_keyval_print)
@@ -15047,7 +15047,7 @@ int R_MPI_Type_create_keyval(
   int ret_tmp = LOCAL_MPI_Type_create_keyval(
       type_copy_attr_fn, type_delete_attr_fn, type_keyval, extra_state);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15102,7 +15102,7 @@ int A_MPI_Type_delete_attr(A_MPI_Datatype datatype, int type_keyval) {
   my_keyval_a2r(&type_keyval, &type_keyval_tmp);
   int ret_tmp = LOCAL_MPI_Type_delete_attr(datatype_tmp, type_keyval_tmp);
   datatype_conv_r2a(&datatype, &datatype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_delete_attr_print)
@@ -15122,7 +15122,7 @@ int R_MPI_Type_delete_attr(R_MPI_Datatype datatype, int type_keyval) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_delete_attr(datatype, type_keyval);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15177,7 +15177,7 @@ int A_MPI_Type_dup(A_MPI_Datatype oldtype, A_MPI_Datatype *newtype) {
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_dup(oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_dup_print)
@@ -15197,7 +15197,7 @@ int R_MPI_Type_dup(R_MPI_Datatype oldtype, R_MPI_Datatype *newtype) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_dup(oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15249,7 +15249,7 @@ int A_MPI_Type_free_keyval(int *type_keyval) {
   my_keyval_a2r(type_keyval, type_keyval_tmp);
   int ret_tmp = LOCAL_MPI_Type_free_keyval(type_keyval_tmp);
   my_keyval_r2a(type_keyval, type_keyval_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_free_keyval_print)
@@ -15269,7 +15269,7 @@ int R_MPI_Type_free_keyval(int *type_keyval) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_free_keyval(type_keyval);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15334,7 +15334,7 @@ int A_MPI_Type_get_attr(A_MPI_Datatype datatype, int type_keyval,
                                         attribute_val_tmp, flag);
   buffer_conv_r2a(&attribute_val, &attribute_val_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_attr_print)
@@ -15357,7 +15357,7 @@ int R_MPI_Type_get_attr(R_MPI_Datatype datatype, int type_keyval,
   int ret_tmp =
       LOCAL_MPI_Type_get_attr(datatype, type_keyval, attribute_val, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15422,7 +15422,7 @@ int A_MPI_Type_get_envelope(A_MPI_Datatype datatype, int *num_integers,
   int ret_tmp = LOCAL_MPI_Type_get_envelope(
       datatype_tmp, num_integers, num_addresses, num_datatypes, combiner);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_envelope_print)
@@ -15447,7 +15447,7 @@ int R_MPI_Type_get_envelope(R_MPI_Datatype datatype, int *num_integers,
   int ret_tmp = LOCAL_MPI_Type_get_envelope(
       datatype, num_integers, num_addresses, num_datatypes, combiner);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15504,7 +15504,7 @@ int A_MPI_Type_get_name(A_MPI_Datatype datatype, char *type_name,
 
   int ret_tmp = LOCAL_MPI_Type_get_name(datatype_tmp, type_name, resultlen);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_name_print)
@@ -15525,7 +15525,7 @@ int R_MPI_Type_get_name(R_MPI_Datatype datatype, char *type_name,
 #endif
   int ret_tmp = LOCAL_MPI_Type_get_name(datatype, type_name, resultlen);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15587,7 +15587,7 @@ int A_MPI_Type_set_attr(A_MPI_Datatype datatype, int type_keyval,
   int ret_tmp =
       LOCAL_MPI_Type_set_attr(datatype_tmp, type_keyval_tmp, attribute_val_tmp);
   datatype_conv_r2a(&datatype, &datatype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_set_attr_print)
@@ -15608,7 +15608,7 @@ int R_MPI_Type_set_attr(R_MPI_Datatype datatype, int type_keyval,
 #endif
   int ret_tmp = LOCAL_MPI_Type_set_attr(datatype, type_keyval, attribute_val);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15662,7 +15662,7 @@ int A_MPI_Type_set_name(A_MPI_Datatype datatype, char *type_name) {
 
   int ret_tmp = LOCAL_MPI_Type_set_name(datatype_tmp, type_name);
   datatype_conv_r2a(&datatype, &datatype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_set_name_print)
@@ -15682,7 +15682,7 @@ int R_MPI_Type_set_name(R_MPI_Datatype datatype, char *type_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_set_name(datatype, type_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15740,7 +15740,7 @@ int A_MPI_Type_match_size(int typeclass, int size, A_MPI_Datatype *datatype) {
   R_MPI_Datatype *datatype_tmp = &datatype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_match_size(typeclass_tmp, size, datatype_tmp);
   datatype_conv_r2a(datatype, datatype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_match_size_print)
@@ -15760,7 +15760,7 @@ int R_MPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *datatype) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_match_size(typeclass, size, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15830,7 +15830,7 @@ int A_MPI_Win_create_keyval(A_MPI_Win_copy_attr_function *win_copy_attr_fn,
       (R_MPI_Win_delete_attr_function *)wrapper_win_delete_function, win_keyval,
       extra_state_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_create_keyval_print)
@@ -15854,7 +15854,7 @@ int R_MPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
   int ret_tmp = LOCAL_MPI_Win_create_keyval(
       win_copy_attr_fn, win_delete_attr_fn, win_keyval, extra_state);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15909,7 +15909,7 @@ int A_MPI_Win_delete_attr(A_MPI_Win win, int win_keyval) {
   my_keyval_a2r(&win_keyval, &win_keyval_tmp);
   int ret_tmp = LOCAL_MPI_Win_delete_attr(win_tmp, win_keyval_tmp);
   win_conv_r2a(&win, &win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_delete_attr_print)
@@ -15929,7 +15929,7 @@ int R_MPI_Win_delete_attr(R_MPI_Win win, int win_keyval) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_delete_attr(win, win_keyval);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -15981,7 +15981,7 @@ int A_MPI_Win_free_keyval(int *win_keyval) {
   my_keyval_a2r(win_keyval, win_keyval_tmp);
   int ret_tmp = LOCAL_MPI_Win_free_keyval(win_keyval_tmp);
   my_keyval_r2a(win_keyval, win_keyval_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_free_keyval_print)
@@ -16001,7 +16001,7 @@ int R_MPI_Win_free_keyval(int *win_keyval) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_free_keyval(win_keyval);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16057,7 +16057,7 @@ int A_MPI_Win_get_name(A_MPI_Win win, char *win_name, int *resultlen) {
 
   int ret_tmp = LOCAL_MPI_Win_get_name(win_tmp, win_name, resultlen);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_get_name_print)
@@ -16077,7 +16077,7 @@ int R_MPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_get_name(win, win_name, resultlen);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16131,7 +16131,7 @@ int A_MPI_Win_set_name(A_MPI_Win win, char *win_name) {
 
   int ret_tmp = LOCAL_MPI_Win_set_name(win_tmp, win_name);
   win_conv_r2a(&win, &win_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_set_name_print)
@@ -16151,7 +16151,7 @@ int R_MPI_Win_set_name(R_MPI_Win win, char *win_name) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_set_name(win, win_name);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16210,7 +16210,7 @@ int A_MPI_Alloc_mem(A_MPI_Aint size, A_MPI_Info info, void *baseptr) {
   buffer_conv_a2r(&baseptr, &baseptr_tmp);
   int ret_tmp = LOCAL_MPI_Alloc_mem(size_tmp, info_tmp, baseptr_tmp);
   buffer_conv_r2a(&baseptr, &baseptr_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alloc_mem_print)
@@ -16230,7 +16230,7 @@ int R_MPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info, void *baseptr) {
 #endif
   int ret_tmp = LOCAL_MPI_Alloc_mem(size, info, baseptr);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16452,7 +16452,7 @@ int A_MPI_File_get_errhandler(A_MPI_File file, A_MPI_Errhandler *errhandler) {
   if (ret_tmp == R_MPI_SUCCESS) {
     errhandler_ptr_conv_r2a(&errhandler, &errhandler_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_errhandler_print)
@@ -16472,7 +16472,7 @@ int R_MPI_File_get_errhandler(R_MPI_File file, R_MPI_Errhandler *errhandler) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_errhandler(file, errhandler);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16527,7 +16527,7 @@ int A_MPI_File_set_errhandler(A_MPI_File file, A_MPI_Errhandler errhandler) {
   errhandler_conv_a2r(&errhandler, &errhandler_tmp);
   int ret_tmp = LOCAL_MPI_File_set_errhandler(file_tmp, errhandler_tmp);
   file_conv_r2a(&file, &file_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_set_errhandler_print)
@@ -16547,7 +16547,7 @@ int R_MPI_File_set_errhandler(R_MPI_File file, R_MPI_Errhandler errhandler) {
 #endif
   int ret_tmp = LOCAL_MPI_File_set_errhandler(file, errhandler);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16596,7 +16596,7 @@ int A_MPI_Finalized(int *flag) {
 
   int ret_tmp = LOCAL_MPI_Finalized(flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Finalized_print)
@@ -16615,7 +16615,7 @@ int R_MPI_Finalized(int *flag) {
 #endif
   int ret_tmp = LOCAL_MPI_Finalized(flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16665,7 +16665,7 @@ int A_MPI_Free_mem(void *base) {
   void *base_tmp;
   buffer_conv_a2r(&base, &base_tmp);
   int ret_tmp = LOCAL_MPI_Free_mem(base_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Free_mem_print)
@@ -16684,7 +16684,7 @@ int R_MPI_Free_mem(void *base) {
 #endif
   int ret_tmp = LOCAL_MPI_Free_mem(base);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16739,7 +16739,7 @@ int A_MPI_Get_address(void *location, A_MPI_Aint *address) {
   R_MPI_Aint *address_tmp = &address_ltmp;
   int ret_tmp = LOCAL_MPI_Get_address(location_tmp, address_tmp);
   *address = (A_MPI_Aint)*address_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_address_print)
@@ -16759,7 +16759,7 @@ int R_MPI_Get_address(void *location, R_MPI_Aint *address) {
 #endif
   int ret_tmp = LOCAL_MPI_Get_address(location, address);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16810,7 +16810,7 @@ int A_MPI_Info_create(A_MPI_Info *info) {
   R_MPI_Info *info_tmp = &info_ltmp;
   int ret_tmp = LOCAL_MPI_Info_create(info_tmp);
   info_conv_r2a(info, info_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_create_print)
@@ -16829,7 +16829,7 @@ int R_MPI_Info_create(R_MPI_Info *info) {
 #endif
   int ret_tmp = LOCAL_MPI_Info_create(info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16883,7 +16883,7 @@ int A_MPI_Info_delete(A_MPI_Info info, char *key) {
 
   int ret_tmp = LOCAL_MPI_Info_delete(info_tmp, key);
   info_conv_r2a(&info, &info_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_delete_print)
@@ -16903,7 +16903,7 @@ int R_MPI_Info_delete(R_MPI_Info info, char *key) {
 #endif
   int ret_tmp = LOCAL_MPI_Info_delete(info, key);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -16958,7 +16958,7 @@ int A_MPI_Info_dup(A_MPI_Info info, A_MPI_Info *newinfo) {
   R_MPI_Info *newinfo_tmp = &newinfo_ltmp;
   int ret_tmp = LOCAL_MPI_Info_dup(info_tmp, newinfo_tmp);
   info_conv_r2a(newinfo, newinfo_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_dup_print)
@@ -16978,7 +16978,7 @@ int R_MPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo) {
 #endif
   int ret_tmp = LOCAL_MPI_Info_dup(info, newinfo);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17029,7 +17029,7 @@ int A_MPI_Info_free(A_MPI_Info *info) {
   R_MPI_Info *info_tmp = &info_ltmp;
   info_conv_a2r(info, info_tmp);
   int ret_tmp = LOCAL_MPI_Info_free(info_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_free_print)
@@ -17048,7 +17048,7 @@ int R_MPI_Info_free(R_MPI_Info *info) {
 #endif
   int ret_tmp = LOCAL_MPI_Info_free(info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17110,7 +17110,7 @@ int A_MPI_Info_get(A_MPI_Info info, char *key, int valuelen, char *value,
 
   int ret_tmp = LOCAL_MPI_Info_get(info_tmp, key, valuelen, value, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_get_print)
@@ -17131,7 +17131,7 @@ int R_MPI_Info_get(R_MPI_Info info, char *key, int valuelen, char *value,
 #endif
   int ret_tmp = LOCAL_MPI_Info_get(info, key, valuelen, value, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17185,7 +17185,7 @@ int A_MPI_Info_get_nkeys(A_MPI_Info info, int *nkeys) {
 
   int ret_tmp = LOCAL_MPI_Info_get_nkeys(info_tmp, nkeys);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_get_nkeys_print)
@@ -17205,7 +17205,7 @@ int R_MPI_Info_get_nkeys(R_MPI_Info info, int *nkeys) {
 #endif
   int ret_tmp = LOCAL_MPI_Info_get_nkeys(info, nkeys);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17261,7 +17261,7 @@ int A_MPI_Info_get_nthkey(A_MPI_Info info, int n, char *key) {
 
   int ret_tmp = LOCAL_MPI_Info_get_nthkey(info_tmp, n, key);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_get_nthkey_print)
@@ -17281,7 +17281,7 @@ int R_MPI_Info_get_nthkey(R_MPI_Info info, int n, char *key) {
 #endif
   int ret_tmp = LOCAL_MPI_Info_get_nthkey(info, n, key);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17340,7 +17340,7 @@ int A_MPI_Info_get_valuelen(A_MPI_Info info, char *key, int *valuelen,
 
   int ret_tmp = LOCAL_MPI_Info_get_valuelen(info_tmp, key, valuelen, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_get_valuelen_print)
@@ -17361,7 +17361,7 @@ int R_MPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen,
 #endif
   int ret_tmp = LOCAL_MPI_Info_get_valuelen(info, key, valuelen, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17417,7 +17417,7 @@ int A_MPI_Info_set(A_MPI_Info info, char *key, char *value) {
 
   int ret_tmp = LOCAL_MPI_Info_set(info_tmp, key, value);
   info_conv_r2a(&info, &info_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_set_print)
@@ -17437,7 +17437,7 @@ int R_MPI_Info_set(R_MPI_Info info, char *key, char *value) {
 #endif
   int ret_tmp = LOCAL_MPI_Info_set(info, key, value);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17498,7 +17498,7 @@ int A_MPI_Request_get_status(A_MPI_Request request, int *flag,
   int ret_tmp = LOCAL_MPI_Request_get_status(request_tmp, flag, status_tmp);
 
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Request_get_status_print)
@@ -17519,7 +17519,7 @@ int R_MPI_Request_get_status(R_MPI_Request request, int *flag,
 #endif
   int ret_tmp = LOCAL_MPI_Request_get_status(request, flag, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17586,7 +17586,7 @@ int A_MPI_Type_create_hvector(int count, int blocklength, A_MPI_Aint stride,
   int ret_tmp = LOCAL_MPI_Type_create_hvector(count, blocklength, stride_tmp,
                                               oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_hvector_print)
@@ -17609,7 +17609,7 @@ int R_MPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride,
   int ret_tmp = LOCAL_MPI_Type_create_hvector(count, blocklength, stride,
                                               oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17676,7 +17676,7 @@ int A_MPI_Type_create_resized(A_MPI_Datatype oldtype, A_MPI_Aint lb,
   int ret_tmp = LOCAL_MPI_Type_create_resized(oldtype_tmp, lb_tmp, extent_tmp,
                                               newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_resized_print)
@@ -17697,7 +17697,7 @@ int R_MPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb,
 #endif
   int ret_tmp = LOCAL_MPI_Type_create_resized(oldtype, lb, extent, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17759,7 +17759,7 @@ int A_MPI_Type_get_extent(A_MPI_Datatype datatype, A_MPI_Aint *lb,
   int ret_tmp = LOCAL_MPI_Type_get_extent(datatype_tmp, lb_tmp, extent_tmp);
   *lb = (A_MPI_Aint)*lb_tmp;
   *extent = (A_MPI_Aint)*extent_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_extent_print)
@@ -17780,7 +17780,7 @@ int R_MPI_Type_get_extent(R_MPI_Datatype datatype, R_MPI_Aint *lb,
 #endif
   int ret_tmp = LOCAL_MPI_Type_get_extent(datatype, lb, extent);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17844,7 +17844,7 @@ int A_MPI_Type_get_true_extent(A_MPI_Datatype datatype, A_MPI_Aint *true_lb,
                                                true_extent_tmp);
   *true_lb = (A_MPI_Aint)*true_lb_tmp;
   *true_extent = (A_MPI_Aint)*true_extent_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_true_extent_print)
@@ -17865,7 +17865,7 @@ int R_MPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb,
 #endif
   int ret_tmp = LOCAL_MPI_Type_get_true_extent(datatype, true_lb, true_extent);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17920,7 +17920,7 @@ int A_MPI_Win_get_errhandler(A_MPI_Win win, A_MPI_Errhandler *errhandler) {
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   int ret_tmp = LOCAL_MPI_Win_get_errhandler(win_tmp, errhandler_tmp);
   errhandler_ptr_conv_r2a(&errhandler, &errhandler_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_get_errhandler_print)
@@ -17940,7 +17940,7 @@ int R_MPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler) {
 #endif
   int ret_tmp = LOCAL_MPI_Win_get_errhandler(win, errhandler);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -17993,7 +17993,7 @@ int A_MPI_Type_create_f90_integer(int range, A_MPI_Datatype *newtype) {
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_f90_integer(range, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_f90_integer_print)
@@ -18013,7 +18013,7 @@ int R_MPI_Type_create_f90_integer(int range, R_MPI_Datatype *newtype) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_create_f90_integer(range, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18069,7 +18069,7 @@ int A_MPI_Type_create_f90_real(int precision, int range,
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_f90_real(precision, range, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_f90_real_print)
@@ -18090,7 +18090,7 @@ int R_MPI_Type_create_f90_real(int precision, int range,
 #endif
   int ret_tmp = LOCAL_MPI_Type_create_f90_real(precision, range, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18148,7 +18148,7 @@ int A_MPI_Type_create_f90_complex(int precision, int range,
   int ret_tmp =
       LOCAL_MPI_Type_create_f90_complex(precision, range, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_f90_complex_print)
@@ -18169,7 +18169,7 @@ int R_MPI_Type_create_f90_complex(int precision, int range,
 #endif
   int ret_tmp = LOCAL_MPI_Type_create_f90_complex(precision, range, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18238,7 +18238,7 @@ int A_MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
   int ret_tmp = LOCAL_MPI_Reduce_local(inbuf_tmp, inoutbuf_tmp, count,
                                        datatype_tmp, op_tmp);
   buffer_conv_r2a(&inoutbuf, &inoutbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_local_print)
@@ -18259,7 +18259,7 @@ int R_MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_Reduce_local(inbuf, inoutbuf, count, datatype, op);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18313,7 +18313,7 @@ int A_MPI_Op_commutative(A_MPI_Op op, int *commute) {
 
   int ret_tmp = LOCAL_MPI_Op_commutative(op_tmp, commute);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Op_commutative_print)
@@ -18333,7 +18333,7 @@ int R_MPI_Op_commutative(R_MPI_Op op, int *commute) {
 #endif
   int ret_tmp = LOCAL_MPI_Op_commutative(op, commute);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18408,7 +18408,7 @@ int A_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   int ret_tmp = LOCAL_MPI_Reduce_scatter_block(
       sendbuf_tmp, recvbuf_tmp, recvcount, datatype_tmp, op_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_scatter_block_print)
@@ -18432,7 +18432,7 @@ int R_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   int ret_tmp = LOCAL_MPI_Reduce_scatter_block(sendbuf, recvbuf, recvcount,
                                                datatype, op, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18493,7 +18493,7 @@ int A_MPI_Dist_graph_neighbors_count(A_MPI_Comm comm, int *indegree,
   int ret_tmp = LOCAL_MPI_Dist_graph_neighbors_count(comm_tmp, indegree,
                                                      outdegree, weighted);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_neighbors_count_print)
@@ -18516,7 +18516,7 @@ int R_MPI_Dist_graph_neighbors_count(R_MPI_Comm comm, int *indegree,
   int ret_tmp =
       LOCAL_MPI_Dist_graph_neighbors_count(comm, indegree, outdegree, weighted);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18592,7 +18592,7 @@ int A_MPI_Improbe(int source, int tag, A_MPI_Comm comm, int *flag,
 
   message_conv_r2a(message, message_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Improbe_print)
@@ -18614,7 +18614,7 @@ int R_MPI_Improbe(int source, int tag, R_MPI_Comm comm, int *flag,
 #endif
   int ret_tmp = LOCAL_MPI_Improbe(source, tag, comm, flag, message, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18688,7 +18688,7 @@ int A_MPI_Imrecv(void *buf, int count, A_MPI_Datatype datatype,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Imrecv_print)
@@ -18709,7 +18709,7 @@ int R_MPI_Imrecv(void *buf, int count, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_Imrecv(buf, count, datatype, message, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18780,7 +18780,7 @@ int A_MPI_Mprobe(int source, int tag, A_MPI_Comm comm, A_MPI_Message *message,
       LOCAL_MPI_Mprobe(source_tmp, tag_tmp, comm_tmp, message_tmp, status_tmp);
   message_conv_r2a(message, message_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Mprobe_print)
@@ -18801,7 +18801,7 @@ int R_MPI_Mprobe(int source, int tag, R_MPI_Comm comm, R_MPI_Message *message,
 #endif
   int ret_tmp = LOCAL_MPI_Mprobe(source, tag, comm, message, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18874,7 +18874,7 @@ int A_MPI_Mrecv(void *buf, int count, A_MPI_Datatype datatype,
   buffer_conv_r2a(&buf, &buf_tmp);
   message_conv_r2a(message, message_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Mrecv_print)
@@ -18895,7 +18895,7 @@ int R_MPI_Mrecv(void *buf, int count, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_Mrecv(buf, count, datatype, message, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -18958,7 +18958,7 @@ int A_MPI_Comm_idup(A_MPI_Comm comm, A_MPI_Comm *newcomm,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_idup_print)
@@ -18979,7 +18979,7 @@ int R_MPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm,
 #endif
   int ret_tmp = LOCAL_MPI_Comm_idup(comm, newcomm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19036,7 +19036,7 @@ int A_MPI_Ibarrier(A_MPI_Comm comm, A_MPI_Request *request) {
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ibarrier_print)
@@ -19056,7 +19056,7 @@ int R_MPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request) {
 #endif
   int ret_tmp = LOCAL_MPI_Ibarrier(comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19132,7 +19132,7 @@ int A_MPI_Ibcast(void *buffer, int count, A_MPI_Datatype datatype, int root,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ibcast_print)
@@ -19154,7 +19154,7 @@ int R_MPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype, int root,
 #endif
   int ret_tmp = LOCAL_MPI_Ibcast(buffer, count, datatype, root, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19238,7 +19238,7 @@ int A_MPI_Igather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Igather_print)
@@ -19263,7 +19263,7 @@ int R_MPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Igather(sendbuf, sendcount, sendtype, recvbuf,
                                   recvcount, recvtype, root, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19347,7 +19347,7 @@ int A_MPI_Iscatter(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iscatter_print)
@@ -19373,7 +19373,7 @@ int R_MPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Iscatter(sendbuf, sendcount, sendtype, recvbuf,
                                    recvcount, recvtype, root, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19456,7 +19456,7 @@ int A_MPI_Iallgather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallgather_print)
@@ -19482,7 +19482,7 @@ int R_MPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Iallgather(sendbuf, sendcount, sendtype, recvbuf,
                                      recvcount, recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19565,7 +19565,7 @@ int A_MPI_Ialltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ialltoall_print)
@@ -19591,7 +19591,7 @@ int R_MPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
   int ret_tmp = LOCAL_MPI_Ialltoall(sendbuf, sendcount, sendtype, recvbuf,
                                     recvcount, recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19673,7 +19673,7 @@ int A_MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ireduce_print)
@@ -19698,7 +19698,7 @@ int R_MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
   int ret_tmp = LOCAL_MPI_Ireduce(sendbuf, recvbuf, count, datatype, op, root,
                                   comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19780,7 +19780,7 @@ int A_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallreduce_print)
@@ -19804,7 +19804,7 @@ int R_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
   int ret_tmp = LOCAL_MPI_Iallreduce(sendbuf, recvbuf, count, datatype, op,
                                      comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19886,7 +19886,7 @@ int A_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ireduce_scatter_block_print)
@@ -19911,7 +19911,7 @@ int R_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   int ret_tmp = LOCAL_MPI_Ireduce_scatter_block(sendbuf, recvbuf, recvcount,
                                                 datatype, op, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -19991,7 +19991,7 @@ int A_MPI_Iscan(void *sendbuf, void *recvbuf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iscan_print)
@@ -20015,7 +20015,7 @@ int R_MPI_Iscan(void *sendbuf, void *recvbuf, int count,
   int ret_tmp =
       LOCAL_MPI_Iscan(sendbuf, recvbuf, count, datatype, op, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20096,7 +20096,7 @@ int A_MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iexscan_print)
@@ -20120,7 +20120,7 @@ int R_MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
   int ret_tmp =
       LOCAL_MPI_Iexscan(sendbuf, recvbuf, count, datatype, op, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20205,7 +20205,7 @@ int A_MPI_Ineighbor_allgather(void *sendbuf, int sendcount,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_allgather_print)
@@ -20233,7 +20233,7 @@ int R_MPI_Ineighbor_allgather(void *sendbuf, int sendcount,
       LOCAL_MPI_Ineighbor_allgather(sendbuf, sendcount, sendtype, recvbuf,
                                     recvcount, recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20319,7 +20319,7 @@ int A_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_alltoall_print)
@@ -20347,7 +20347,7 @@ int R_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount,
       LOCAL_MPI_Ineighbor_alltoall(sendbuf, sendcount, sendtype, recvbuf,
                                    recvcount, recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20427,7 +20427,7 @@ int A_MPI_Neighbor_allgather(void *sendbuf, int sendcount,
                                              sendtype_tmp, recvbuf_tmp,
                                              recvcount, recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_allgather_print)
@@ -20453,7 +20453,7 @@ int R_MPI_Neighbor_allgather(void *sendbuf, int sendcount,
   int ret_tmp = LOCAL_MPI_Neighbor_allgather(
       sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20532,7 +20532,7 @@ int A_MPI_Neighbor_alltoall(void *sendbuf, int sendcount,
                                             sendtype_tmp, recvbuf_tmp,
                                             recvcount, recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_alltoall_print)
@@ -20558,7 +20558,7 @@ int R_MPI_Neighbor_alltoall(void *sendbuf, int sendcount,
   int ret_tmp = LOCAL_MPI_Neighbor_alltoall(sendbuf, sendcount, sendtype,
                                             recvbuf, recvcount, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20628,7 +20628,7 @@ int A_MPI_Comm_split_type(A_MPI_Comm comm, int split_type, int key,
   int ret_tmp = LOCAL_MPI_Comm_split_type(comm_tmp, split_type_tmp, key,
                                           info_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_split_type_print)
@@ -20650,7 +20650,7 @@ int R_MPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key,
 #endif
   int ret_tmp = LOCAL_MPI_Comm_split_type(comm, split_type, key, info, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20711,7 +20711,7 @@ int A_MPI_Get_elements_x(A_MPI_Status *status, A_MPI_Datatype datatype,
 
   int ret_tmp = LOCAL_MPI_Get_elements_x(status_tmp, datatype_tmp, count);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_elements_x_print)
@@ -20732,7 +20732,7 @@ int R_MPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_Get_elements_x(status, datatype, count);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20795,7 +20795,7 @@ int A_MPI_Status_set_elements_x(A_MPI_Status *status, A_MPI_Datatype datatype,
   int ret_tmp =
       LOCAL_MPI_Status_set_elements_x(status_tmp, datatype_tmp, count);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Status_set_elements_x_print)
@@ -20816,7 +20816,7 @@ int R_MPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_Status_set_elements_x(status, datatype, count);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20875,7 +20875,7 @@ int A_MPI_Type_get_extent_x(A_MPI_Datatype datatype, A_MPI_Count *lb,
 
   int ret_tmp = LOCAL_MPI_Type_get_extent_x(datatype_tmp, lb, extent);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_extent_x_print)
@@ -20896,7 +20896,7 @@ int R_MPI_Type_get_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb,
 #endif
   int ret_tmp = LOCAL_MPI_Type_get_extent_x(datatype, lb, extent);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -20955,7 +20955,7 @@ int A_MPI_Type_get_true_extent_x(A_MPI_Datatype datatype, A_MPI_Count *lb,
 
   int ret_tmp = LOCAL_MPI_Type_get_true_extent_x(datatype_tmp, lb, extent);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_true_extent_x_print)
@@ -20976,7 +20976,7 @@ int R_MPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb,
 #endif
   int ret_tmp = LOCAL_MPI_Type_get_true_extent_x(datatype, lb, extent);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21030,7 +21030,7 @@ int A_MPI_Type_size_x(A_MPI_Datatype datatype, A_MPI_Count *size) {
 
   int ret_tmp = LOCAL_MPI_Type_size_x(datatype_tmp, size);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_size_x_print)
@@ -21050,7 +21050,7 @@ int R_MPI_Type_size_x(R_MPI_Datatype datatype, R_MPI_Count *size) {
 #endif
   int ret_tmp = LOCAL_MPI_Type_size_x(datatype, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21116,7 +21116,7 @@ int A_MPI_Comm_create_group(A_MPI_Comm comm, A_MPI_Group group, int tag,
   int ret_tmp =
       LOCAL_MPI_Comm_create_group(comm_tmp, group_tmp, tag_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_create_group_print)
@@ -21137,7 +21137,7 @@ int R_MPI_Comm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag,
 #endif
   int ret_tmp = LOCAL_MPI_Comm_create_group(comm, group, tag, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21188,7 +21188,7 @@ int A_MPI_T_init_thread(int required, int *provided) {
 
   int ret_tmp = LOCAL_MPI_T_init_thread(required, provided);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_init_thread_print)
@@ -21208,7 +21208,7 @@ int R_MPI_T_init_thread(int required, int *provided) {
 #endif
   int ret_tmp = LOCAL_MPI_T_init_thread(required, provided);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21268,7 +21268,7 @@ int A_MPI_T_enum_get_info(A_MPI_T_enum enumtype, int *num, char *name,
 
   int ret_tmp = LOCAL_MPI_T_enum_get_info(enumtype_tmp, num, name, name_len);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_enum_get_info_print)
@@ -21289,7 +21289,7 @@ int R_MPI_T_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name,
 #endif
   int ret_tmp = LOCAL_MPI_T_enum_get_info(enumtype, num, name, name_len);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21352,7 +21352,7 @@ int A_MPI_T_enum_get_item(A_MPI_T_enum enumtype, int indx, int *value,
   int ret_tmp =
       LOCAL_MPI_T_enum_get_item(enumtype_tmp, indx, value, name, name_len);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_enum_get_item_print)
@@ -21375,7 +21375,7 @@ int R_MPI_T_enum_get_item(R_MPI_T_enum enumtype, int indx, int *value,
   int ret_tmp =
       LOCAL_MPI_T_enum_get_item(enumtype, indx, value, name, name_len);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21424,7 +21424,7 @@ int A_MPI_T_cvar_get_num(int *num_cvar) {
 
   int ret_tmp = LOCAL_MPI_T_cvar_get_num(num_cvar);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_cvar_get_num_print)
@@ -21444,7 +21444,7 @@ int R_MPI_T_cvar_get_num(int *num_cvar) {
 #endif
   int ret_tmp = LOCAL_MPI_T_cvar_get_num(num_cvar);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21520,7 +21520,7 @@ int A_MPI_T_cvar_get_info(int cvar_index, char *name, int *name_len,
   datatype_conv_r2a(datatype, datatype_tmp);
   t_enum_conv_r2a(enumtype, enumtype_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_cvar_get_info_print)
@@ -21548,7 +21548,7 @@ int R_MPI_T_cvar_get_info(int cvar_index, char *name, int *name_len,
       LOCAL_MPI_T_cvar_get_info(cvar_index, name, name_len, verbosity, datatype,
                                 enumtype, desc, desc_len, binding, scope);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21612,7 +21612,7 @@ int A_MPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle,
                                               handle_tmp, count);
   cvar_handle_conv_r2a(handle, handle_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_cvar_handle_alloc_print)
@@ -21634,7 +21634,7 @@ int R_MPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle,
   int ret_tmp =
       LOCAL_MPI_T_cvar_handle_alloc(cvar_index, obj_handle, handle, count);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21686,7 +21686,7 @@ int A_MPI_T_cvar_handle_free(A_MPI_T_cvar_handle *handle) {
   cvar_handle_conv_a2r(handle, handle_tmp);
   int ret_tmp = LOCAL_MPI_T_cvar_handle_free(handle_tmp);
   cvar_handle_conv_r2a(handle, handle_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_cvar_handle_free_print)
@@ -21706,7 +21706,7 @@ int R_MPI_T_cvar_handle_free(R_MPI_T_cvar_handle *handle) {
 #endif
   int ret_tmp = LOCAL_MPI_T_cvar_handle_free(handle);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21760,7 +21760,7 @@ int A_MPI_T_cvar_read(A_MPI_T_cvar_handle handle, void *buf) {
   void *buf_tmp;
   int ret_tmp = LOCAL_MPI_T_cvar_read(handle_tmp, buf_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_cvar_read_print)
@@ -21779,7 +21779,7 @@ int R_MPI_T_cvar_read(R_MPI_T_cvar_handle handle, void *buf) {
 #endif
   int ret_tmp = LOCAL_MPI_T_cvar_read(handle, buf);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21833,7 +21833,7 @@ int A_MPI_T_cvar_write(A_MPI_T_cvar_handle handle, void *buf) {
   void *buf_tmp;
   const_buffer_conv_a2r(&buf, &buf_tmp);
   int ret_tmp = LOCAL_MPI_T_cvar_write(handle_tmp, buf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_cvar_write_print)
@@ -21852,7 +21852,7 @@ int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle, void *buf) {
 #endif
   int ret_tmp = LOCAL_MPI_T_cvar_write(handle, buf);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -21901,7 +21901,7 @@ int A_MPI_T_pvar_get_num(int *num_pvar) {
 
   int ret_tmp = LOCAL_MPI_T_pvar_get_num(num_pvar);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_pvar_get_num_print)
@@ -21921,7 +21921,7 @@ int R_MPI_T_pvar_get_num(int *num_pvar) {
 #endif
   int ret_tmp = LOCAL_MPI_T_pvar_get_num(num_pvar);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22000,7 +22000,7 @@ int A_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
   datatype_conv_r2a(datatype, datatype_tmp);
   t_enum_conv_r2a(enumtype, enumtype_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_pvar_get_info_print)
@@ -22030,7 +22030,7 @@ int R_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
       pvar_index, name, name_len, verbosity, var_class, datatype, enumtype,
       desc, desc_len, binding, readonly, continuous, atomic);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22079,7 +22079,7 @@ int A_MPI_T_category_get_num(int *num_cat) {
 
   int ret_tmp = LOCAL_MPI_T_category_get_num(num_cat);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_category_get_num_print)
@@ -22099,7 +22099,7 @@ int R_MPI_T_category_get_num(int *num_cat) {
 #endif
   int ret_tmp = LOCAL_MPI_T_category_get_num(num_cat);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22165,7 +22165,7 @@ int A_MPI_T_category_get_info(int cat_index, char *name, int *name_len,
       LOCAL_MPI_T_category_get_info(cat_index, name, name_len, desc, desc_len,
                                     num_cvars, num_pvars, num_categories);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_category_get_info_print)
@@ -22192,7 +22192,7 @@ int R_MPI_T_category_get_info(int cat_index, char *name, int *name_len,
       LOCAL_MPI_T_category_get_info(cat_index, name, name_len, desc, desc_len,
                                     num_cvars, num_pvars, num_categories);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22261,7 +22261,7 @@ int A_MPI_File_open(A_MPI_Comm comm, char *filename, int amode, A_MPI_Info info,
   int ret_tmp =
       LOCAL_MPI_File_open(comm_tmp, filename, amode_tmp, info_tmp, fh_tmp);
   file_conv_r2a(fh, fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_open_print)
@@ -22282,7 +22282,7 @@ int R_MPI_File_open(R_MPI_Comm comm, char *filename, int amode, R_MPI_Info info,
 #endif
   int ret_tmp = LOCAL_MPI_File_open(comm, filename, amode, info, fh);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22334,7 +22334,7 @@ int A_MPI_File_close(A_MPI_File *fh) {
   file_conv_a2r(fh, fh_tmp);
   int ret_tmp = LOCAL_MPI_File_close(fh_tmp);
   file_conv_r2a(fh, fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_close_print)
@@ -22353,7 +22353,7 @@ int R_MPI_File_close(R_MPI_File *fh) {
 #endif
   int ret_tmp = LOCAL_MPI_File_close(fh);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22406,7 +22406,7 @@ int A_MPI_File_delete(char *filename, A_MPI_Info info) {
   info_conv_a2r(&info, &info_tmp);
   int ret_tmp = LOCAL_MPI_File_delete(filename, info_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_delete_print)
@@ -22426,7 +22426,7 @@ int R_MPI_File_delete(char *filename, R_MPI_Info info) {
 #endif
   int ret_tmp = LOCAL_MPI_File_delete(filename, info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22481,7 +22481,7 @@ int A_MPI_File_set_size(A_MPI_File fh, A_MPI_Offset size) {
   size_tmp = (R_MPI_Offset)size;
   int ret_tmp = LOCAL_MPI_File_set_size(fh_tmp, size_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_set_size_print)
@@ -22501,7 +22501,7 @@ int R_MPI_File_set_size(R_MPI_File fh, R_MPI_Offset size) {
 #endif
   int ret_tmp = LOCAL_MPI_File_set_size(fh, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22556,7 +22556,7 @@ int A_MPI_File_preallocate(A_MPI_File fh, A_MPI_Offset size) {
   size_tmp = (R_MPI_Offset)size;
   int ret_tmp = LOCAL_MPI_File_preallocate(fh_tmp, size_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_preallocate_print)
@@ -22576,7 +22576,7 @@ int R_MPI_File_preallocate(R_MPI_File fh, R_MPI_Offset size) {
 #endif
   int ret_tmp = LOCAL_MPI_File_preallocate(fh, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22631,7 +22631,7 @@ int A_MPI_File_get_size(A_MPI_File fh, A_MPI_Offset *size) {
   R_MPI_Offset *size_tmp = &size_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_size(fh_tmp, size_tmp);
   *size = (A_MPI_Offset)*size_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_size_print)
@@ -22651,7 +22651,7 @@ int R_MPI_File_get_size(R_MPI_File fh, R_MPI_Offset *size) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_size(fh, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22706,7 +22706,7 @@ int A_MPI_File_get_group(A_MPI_File fh, A_MPI_Group *group) {
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_group(fh_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_group_print)
@@ -22726,7 +22726,7 @@ int R_MPI_File_get_group(R_MPI_File fh, R_MPI_Group *group) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_group(fh, group);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22781,7 +22781,7 @@ int A_MPI_File_get_amode(A_MPI_File fh, int *amode) {
   int *amode_tmp = &amode_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_amode(fh_tmp, amode_tmp);
   amode_conv_r2a(amode, amode_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_amode_print)
@@ -22801,7 +22801,7 @@ int R_MPI_File_get_amode(R_MPI_File fh, int *amode) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_amode(fh, amode);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22856,7 +22856,7 @@ int A_MPI_File_set_info(A_MPI_File fh, A_MPI_Info info) {
   info_conv_a2r(&info, &info_tmp);
   int ret_tmp = LOCAL_MPI_File_set_info(fh_tmp, info_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_set_info_print)
@@ -22876,7 +22876,7 @@ int R_MPI_File_set_info(R_MPI_File fh, R_MPI_Info info) {
 #endif
   int ret_tmp = LOCAL_MPI_File_set_info(fh, info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -22932,7 +22932,7 @@ int A_MPI_File_get_info(A_MPI_File fh, A_MPI_Info *info_used) {
   int ret_tmp = LOCAL_MPI_File_get_info(fh_tmp, info_used_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   info_conv_r2a(info_used, info_used_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_info_print)
@@ -22952,7 +22952,7 @@ int R_MPI_File_get_info(R_MPI_File fh, R_MPI_Info *info_used) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_info(fh, info_used);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23027,7 +23027,7 @@ int A_MPI_File_set_view(A_MPI_File fh, A_MPI_Offset disp, A_MPI_Datatype etype,
   int ret_tmp = LOCAL_MPI_File_set_view(fh_tmp, disp_tmp, etype_tmp,
                                         filetype_tmp, datarep, info_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_set_view_print)
@@ -23051,7 +23051,7 @@ int R_MPI_File_set_view(R_MPI_File fh, R_MPI_Offset disp, R_MPI_Datatype etype,
   int ret_tmp =
       LOCAL_MPI_File_set_view(fh, disp, etype, filetype, datarep, info);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23125,7 +23125,7 @@ int A_MPI_File_get_view(A_MPI_File fh, A_MPI_Offset *disp,
   datatype_conv_r2a(etype, etype_tmp);
   datatype_conv_r2a(filetype, filetype_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_view_print)
@@ -23148,7 +23148,7 @@ int R_MPI_File_get_view(R_MPI_File fh, R_MPI_Offset *disp,
 #endif
   int ret_tmp = LOCAL_MPI_File_get_view(fh, disp, etype, filetype, datarep);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23223,7 +23223,7 @@ int A_MPI_File_read_at(A_MPI_File fh, A_MPI_Offset offset, void *buf, int count,
                                        datatype_tmp, status_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_at_print)
@@ -23246,7 +23246,7 @@ int R_MPI_File_read_at(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count,
   int ret_tmp =
       LOCAL_MPI_File_read_at(fh, offset, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23323,7 +23323,7 @@ int A_MPI_File_read_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                                            datatype_tmp, status_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_at_all_print)
@@ -23347,7 +23347,7 @@ int R_MPI_File_read_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_read_at_all(fh, offset, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23423,7 +23423,7 @@ int A_MPI_File_write_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                                         datatype_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_at_print)
@@ -23447,7 +23447,7 @@ int R_MPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_write_at(fh, offset, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23524,7 +23524,7 @@ int A_MPI_File_write_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
                                             datatype_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_at_all_print)
@@ -23548,7 +23548,7 @@ int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_write_at_all(fh, offset, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23626,7 +23626,7 @@ int A_MPI_File_iread_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_at_print)
@@ -23650,7 +23650,7 @@ int R_MPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_iread_at(fh, offset, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23728,7 +23728,7 @@ int A_MPI_File_iwrite_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_at_print)
@@ -23752,7 +23752,7 @@ int R_MPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_iwrite_at(fh, offset, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23824,7 +23824,7 @@ int A_MPI_File_read(A_MPI_File fh, void *buf, int count,
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_print)
@@ -23845,7 +23845,7 @@ int R_MPI_File_read(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_read(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -23917,7 +23917,7 @@ int A_MPI_File_read_all(A_MPI_File fh, void *buf, int count,
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_all_print)
@@ -23938,7 +23938,7 @@ int R_MPI_File_read_all(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_read_all(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24009,7 +24009,7 @@ int A_MPI_File_write(A_MPI_File fh, void *buf, int count,
       LOCAL_MPI_File_write(fh_tmp, buf_tmp, count, datatype_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_print)
@@ -24030,7 +24030,7 @@ int R_MPI_File_write(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_write(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24101,7 +24101,7 @@ int A_MPI_File_write_all(A_MPI_File fh, void *buf, int count,
                                          status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_all_print)
@@ -24122,7 +24122,7 @@ int R_MPI_File_write_all(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_write_all(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24196,7 +24196,7 @@ int A_MPI_File_iread(A_MPI_File fh, void *buf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_print)
@@ -24217,7 +24217,7 @@ int R_MPI_File_iread(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_iread(fh, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24290,7 +24290,7 @@ int A_MPI_File_iwrite(A_MPI_File fh, void *buf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_print)
@@ -24311,7 +24311,7 @@ int R_MPI_File_iwrite(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_iwrite(fh, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24369,7 +24369,7 @@ int A_MPI_File_seek(A_MPI_File fh, A_MPI_Offset offset, int whence) {
 
   int ret_tmp = LOCAL_MPI_File_seek(fh_tmp, offset_tmp, whence);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_seek_print)
@@ -24389,7 +24389,7 @@ int R_MPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence) {
 #endif
   int ret_tmp = LOCAL_MPI_File_seek(fh, offset, whence);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24444,7 +24444,7 @@ int A_MPI_File_get_position(A_MPI_File fh, A_MPI_Offset *offset) {
   R_MPI_Offset *offset_tmp = &offset_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_position(fh_tmp, offset_tmp);
   *offset = (A_MPI_Offset)*offset_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_position_print)
@@ -24464,7 +24464,7 @@ int R_MPI_File_get_position(R_MPI_File fh, R_MPI_Offset *offset) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_position(fh, offset);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24525,7 +24525,7 @@ int A_MPI_File_get_byte_offset(A_MPI_File fh, A_MPI_Offset offset,
   R_MPI_Offset *disp_tmp = &disp_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_byte_offset(fh_tmp, offset_tmp, disp_tmp);
   *disp = (A_MPI_Offset)*disp_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_byte_offset_print)
@@ -24546,7 +24546,7 @@ int R_MPI_File_get_byte_offset(R_MPI_File fh, R_MPI_Offset offset,
 #endif
   int ret_tmp = LOCAL_MPI_File_get_byte_offset(fh, offset, disp);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24618,7 +24618,7 @@ int A_MPI_File_read_shared(A_MPI_File fh, void *buf, int count,
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_shared_print)
@@ -24639,7 +24639,7 @@ int R_MPI_File_read_shared(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_read_shared(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24710,7 +24710,7 @@ int A_MPI_File_write_shared(A_MPI_File fh, void *buf, int count,
                                             datatype_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_shared_print)
@@ -24731,7 +24731,7 @@ int R_MPI_File_write_shared(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_write_shared(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24805,7 +24805,7 @@ int A_MPI_File_iread_shared(A_MPI_File fh, void *buf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_shared_print)
@@ -24826,7 +24826,7 @@ int R_MPI_File_iread_shared(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_iread_shared(fh, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24899,7 +24899,7 @@ int A_MPI_File_iwrite_shared(A_MPI_File fh, void *buf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_shared_print)
@@ -24920,7 +24920,7 @@ int R_MPI_File_iwrite_shared(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_iwrite_shared(fh, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -24992,7 +24992,7 @@ int A_MPI_File_read_ordered(A_MPI_File fh, void *buf, int count,
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_ordered_print)
@@ -25013,7 +25013,7 @@ int R_MPI_File_read_ordered(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_read_ordered(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25084,7 +25084,7 @@ int A_MPI_File_write_ordered(A_MPI_File fh, void *buf, int count,
                                              datatype_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_ordered_print)
@@ -25105,7 +25105,7 @@ int R_MPI_File_write_ordered(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_write_ordered(fh, buf, count, datatype, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25163,7 +25163,7 @@ int A_MPI_File_seek_shared(A_MPI_File fh, A_MPI_Offset offset, int whence) {
 
   int ret_tmp = LOCAL_MPI_File_seek_shared(fh_tmp, offset_tmp, whence);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_seek_shared_print)
@@ -25183,7 +25183,7 @@ int R_MPI_File_seek_shared(R_MPI_File fh, R_MPI_Offset offset, int whence) {
 #endif
   int ret_tmp = LOCAL_MPI_File_seek_shared(fh, offset, whence);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25238,7 +25238,7 @@ int A_MPI_File_get_position_shared(A_MPI_File fh, A_MPI_Offset *offset) {
   R_MPI_Offset *offset_tmp = &offset_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_position_shared(fh_tmp, offset_tmp);
   *offset = (A_MPI_Offset)*offset_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_position_shared_print)
@@ -25258,7 +25258,7 @@ int R_MPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_position_shared(fh, offset);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25328,7 +25328,7 @@ int A_MPI_File_read_at_all_begin(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   int ret_tmp = LOCAL_MPI_File_read_at_all_begin(fh_tmp, offset_tmp, buf_tmp,
                                                  count, datatype_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_at_all_begin_print)
@@ -25351,7 +25351,7 @@ int R_MPI_File_read_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_read_at_all_begin(fh, offset, buf, count, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25411,7 +25411,7 @@ int A_MPI_File_read_at_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status) {
   int ret_tmp = LOCAL_MPI_File_read_at_all_end(fh_tmp, buf_tmp, status_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_at_all_end_print)
@@ -25431,7 +25431,7 @@ int R_MPI_File_read_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status) {
 #endif
   int ret_tmp = LOCAL_MPI_File_read_at_all_end(fh, buf, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25501,7 +25501,7 @@ int A_MPI_File_write_at_all_begin(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   int ret_tmp = LOCAL_MPI_File_write_at_all_begin(fh_tmp, offset_tmp, buf_tmp,
                                                   count, datatype_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_at_all_begin_print)
@@ -25524,7 +25524,7 @@ int R_MPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_write_at_all_begin(fh, offset, buf, count, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25585,7 +25585,7 @@ int A_MPI_File_write_at_all_end(A_MPI_File fh, void *buf,
   int ret_tmp = LOCAL_MPI_File_write_at_all_end(fh_tmp, buf_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_at_all_end_print)
@@ -25606,7 +25606,7 @@ int R_MPI_File_write_at_all_end(R_MPI_File fh, void *buf,
 #endif
   int ret_tmp = LOCAL_MPI_File_write_at_all_end(fh, buf, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25672,7 +25672,7 @@ int A_MPI_File_read_all_begin(A_MPI_File fh, void *buf, int count,
       LOCAL_MPI_File_read_all_begin(fh_tmp, buf_tmp, count, datatype_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_all_begin_print)
@@ -25693,7 +25693,7 @@ int R_MPI_File_read_all_begin(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_read_all_begin(fh, buf, count, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25754,7 +25754,7 @@ int A_MPI_File_read_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status) {
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_all_end_print)
@@ -25774,7 +25774,7 @@ int R_MPI_File_read_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status) {
 #endif
   int ret_tmp = LOCAL_MPI_File_read_all_end(fh, buf, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25839,7 +25839,7 @@ int A_MPI_File_write_all_begin(A_MPI_File fh, void *buf, int count,
   int ret_tmp =
       LOCAL_MPI_File_write_all_begin(fh_tmp, buf_tmp, count, datatype_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_all_begin_print)
@@ -25860,7 +25860,7 @@ int R_MPI_File_write_all_begin(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_write_all_begin(fh, buf, count, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -25920,7 +25920,7 @@ int A_MPI_File_write_all_end(A_MPI_File fh, void *buf, A_MPI_Status *status) {
   int ret_tmp = LOCAL_MPI_File_write_all_end(fh_tmp, buf_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_all_end_print)
@@ -25940,7 +25940,7 @@ int R_MPI_File_write_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status) {
 #endif
   int ret_tmp = LOCAL_MPI_File_write_all_end(fh, buf, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26007,7 +26007,7 @@ int A_MPI_File_read_ordered_begin(A_MPI_File fh, void *buf, int count,
       LOCAL_MPI_File_read_ordered_begin(fh_tmp, buf_tmp, count, datatype_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_ordered_begin_print)
@@ -26028,7 +26028,7 @@ int R_MPI_File_read_ordered_begin(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_read_ordered_begin(fh, buf, count, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26090,7 +26090,7 @@ int A_MPI_File_read_ordered_end(A_MPI_File fh, void *buf,
   file_conv_r2a(&fh, &fh_tmp);
   buffer_conv_r2a(&buf, &buf_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_ordered_end_print)
@@ -26111,7 +26111,7 @@ int R_MPI_File_read_ordered_end(R_MPI_File fh, void *buf,
 #endif
   int ret_tmp = LOCAL_MPI_File_read_ordered_end(fh, buf, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26177,7 +26177,7 @@ int A_MPI_File_write_ordered_begin(A_MPI_File fh, void *buf, int count,
   int ret_tmp =
       LOCAL_MPI_File_write_ordered_begin(fh_tmp, buf_tmp, count, datatype_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_ordered_begin_print)
@@ -26198,7 +26198,7 @@ int R_MPI_File_write_ordered_begin(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_write_ordered_begin(fh, buf, count, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26259,7 +26259,7 @@ int A_MPI_File_write_ordered_end(A_MPI_File fh, void *buf,
   int ret_tmp = LOCAL_MPI_File_write_ordered_end(fh_tmp, buf_tmp, status_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   status_prt_conv_r2a(&status, &status_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_ordered_end_print)
@@ -26280,7 +26280,7 @@ int R_MPI_File_write_ordered_end(R_MPI_File fh, void *buf,
 #endif
   int ret_tmp = LOCAL_MPI_File_write_ordered_end(fh, buf, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26342,7 +26342,7 @@ int A_MPI_File_get_type_extent(A_MPI_File fh, A_MPI_Datatype datatype,
   int ret_tmp =
       LOCAL_MPI_File_get_type_extent(fh_tmp, datatype_tmp, extent_tmp);
   *extent = (A_MPI_Aint)*extent_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_type_extent_print)
@@ -26363,7 +26363,7 @@ int R_MPI_File_get_type_extent(R_MPI_File fh, R_MPI_Datatype datatype,
 #endif
   int ret_tmp = LOCAL_MPI_File_get_type_extent(fh, datatype, extent);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26440,7 +26440,7 @@ int A_MPI_Register_datarep(
   int ret_tmp = LOCAL_MPI_Register_datarep(
       datarep, read_conversion_fn_tmp, write_conversion_fn_tmp,
       dtype_file_extent_fn_tmp, extra_state_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Register_datarep_print)
@@ -26468,7 +26468,7 @@ int R_MPI_Register_datarep(
                                            write_conversion_fn,
                                            dtype_file_extent_fn, extra_state);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26522,7 +26522,7 @@ int A_MPI_File_set_atomicity(A_MPI_File fh, int flag) {
 
   int ret_tmp = LOCAL_MPI_File_set_atomicity(fh_tmp, flag);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_set_atomicity_print)
@@ -26542,7 +26542,7 @@ int R_MPI_File_set_atomicity(R_MPI_File fh, int flag) {
 #endif
   int ret_tmp = LOCAL_MPI_File_set_atomicity(fh, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26596,7 +26596,7 @@ int A_MPI_File_get_atomicity(A_MPI_File fh, int *flag) {
 
   int ret_tmp = LOCAL_MPI_File_get_atomicity(fh_tmp, flag);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_get_atomicity_print)
@@ -26616,7 +26616,7 @@ int R_MPI_File_get_atomicity(R_MPI_File fh, int *flag) {
 #endif
   int ret_tmp = LOCAL_MPI_File_get_atomicity(fh, flag);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26667,7 +26667,7 @@ int A_MPI_File_sync(A_MPI_File fh) {
   file_conv_a2r(&fh, &fh_tmp);
   int ret_tmp = LOCAL_MPI_File_sync(fh_tmp);
   file_conv_r2a(&fh, &fh_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_sync_print)
@@ -26686,7 +26686,7 @@ int R_MPI_File_sync(R_MPI_File fh) {
 #endif
   int ret_tmp = LOCAL_MPI_File_sync(fh);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26731,7 +26731,7 @@ int A_MPI_T_finalize() {
   in_w = 1;
 
   int ret_tmp = LOCAL_MPI_T_finalize();
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_finalize_print)
@@ -26749,7 +26749,7 @@ int R_MPI_T_finalize() {
 #endif
   int ret_tmp = LOCAL_MPI_T_finalize();
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26794,7 +26794,7 @@ double A_MPI_Wtime() {
   in_w = 1;
 
   double ret_tmp = LOCAL_MPI_Wtime();
-  double ret = ret_tmp;
+  A_double ret = ret_tmp;
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Wtime_print)
@@ -26812,7 +26812,7 @@ double R_MPI_Wtime() {
 #endif
   double ret_tmp = LOCAL_MPI_Wtime();
 
-  double ret = ret_tmp;
+  R_double ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26857,7 +26857,7 @@ double A_MPI_Wtick() {
   in_w = 1;
 
   double ret_tmp = LOCAL_MPI_Wtick();
-  double ret = ret_tmp;
+  A_double ret = ret_tmp;
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Wtick_print)
@@ -26875,7 +26875,7 @@ double R_MPI_Wtick() {
 #endif
   double ret_tmp = LOCAL_MPI_Wtick();
 
-  double ret = ret_tmp;
+  R_double ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -26920,7 +26920,7 @@ int A_MPI_Finalize() {
   in_w = 1;
 
   int ret_tmp = LOCAL_MPI_Finalize();
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Finalize_print)
@@ -26938,7 +26938,7 @@ int R_MPI_Finalize() {
 #endif
   int ret_tmp = LOCAL_MPI_Finalize();
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27013,7 +27013,7 @@ int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
 
   status_prt_conv_r2a(&status, &status_tmp);
   wi4mpi_free(array_of_requests_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Waitany_print)
@@ -27034,7 +27034,7 @@ int R_MPI_Waitany(int count, R_MPI_Request array_of_requests[], int *indx,
 #endif
   int ret_tmp = LOCAL_MPI_Waitany(count, array_of_requests, indx, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27112,7 +27112,7 @@ int A_MPI_Testany(int count, A_MPI_Request array_of_requests[], int *indx,
 
   status_prt_conv_r2a(&status, &status_tmp);
   wi4mpi_free(array_of_requests_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Testany_print)
@@ -27134,7 +27134,7 @@ int R_MPI_Testany(int count, R_MPI_Request array_of_requests[], int *indx,
 #endif
   int ret_tmp = LOCAL_MPI_Testany(count, array_of_requests, indx, flag, status);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27217,7 +27217,7 @@ int A_MPI_Waitall(int count, A_MPI_Request array_of_requests[],
   wi4mpi_free(array_of_requests_tmp);
   if (array_of_statuses != A_MPI_STATUSES_IGNORE)
     wi4mpi_free(array_of_statuses_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Waitall_print)
@@ -27239,7 +27239,7 @@ int R_MPI_Waitall(int count, R_MPI_Request array_of_requests[],
 #endif
   int ret_tmp = LOCAL_MPI_Waitall(count, array_of_requests, array_of_statuses);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27327,7 +27327,7 @@ int A_MPI_Testall(int count, A_MPI_Request array_of_requests[], int *flag,
   wi4mpi_free(array_of_requests_tmp);
   if (array_of_statuses != A_MPI_STATUSES_IGNORE)
     wi4mpi_free(array_of_statuses_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Testall_print)
@@ -27350,7 +27350,7 @@ int R_MPI_Testall(int count, R_MPI_Request array_of_requests[], int *flag,
   int ret_tmp =
       LOCAL_MPI_Testall(count, array_of_requests, flag, array_of_statuses);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27440,7 +27440,7 @@ int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
   wi4mpi_free(array_of_requests_tmp);
   if (array_of_statuses != A_MPI_STATUSES_IGNORE)
     wi4mpi_free(array_of_statuses_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Waitsome_print)
@@ -27465,7 +27465,7 @@ int R_MPI_Waitsome(int incount, R_MPI_Request array_of_requests[],
   int ret_tmp = LOCAL_MPI_Waitsome(incount, array_of_requests, outcount,
                                    array_of_indices, array_of_statuses);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27555,7 +27555,7 @@ int A_MPI_Testsome(int incount, A_MPI_Request array_of_requests[],
   wi4mpi_free(array_of_requests_tmp);
   if (array_of_statuses != A_MPI_STATUSES_IGNORE)
     wi4mpi_free(array_of_statuses_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Testsome_print)
@@ -27580,7 +27580,7 @@ int R_MPI_Testsome(int incount, R_MPI_Request array_of_requests[],
   int ret_tmp = LOCAL_MPI_Testsome(incount, array_of_requests, outcount,
                                    array_of_indices, array_of_statuses);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27637,7 +27637,7 @@ int A_MPI_Startall(int count, A_MPI_Request array_of_requests[]) {
   }
   int ret_tmp = LOCAL_MPI_Startall(count, array_of_requests_tmp);
   wi4mpi_free(array_of_requests_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Startall_print)
@@ -27657,7 +27657,7 @@ int R_MPI_Startall(int count, R_MPI_Request array_of_requests[]) {
 #endif
   int ret_tmp = LOCAL_MPI_Startall(count, array_of_requests);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27749,7 +27749,7 @@ int A_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
   wi4mpi_free(sendtypes_tmp);
   wi4mpi_free(recvtypes_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoallw_print)
@@ -27777,7 +27777,7 @@ int R_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
       LOCAL_MPI_Alltoallw(sendbuf, sendcounts, sdispls, sendtypes, recvbuf,
                           recvcounts, rdispls, recvtypes, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27852,7 +27852,7 @@ int A_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   int ret_tmp = LOCAL_MPI_Reduce_scatter(sendbuf_tmp, recvbuf_tmp, recvcounts,
                                          datatype_tmp, op_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_scatter_print)
@@ -27876,7 +27876,7 @@ int R_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   int ret_tmp = LOCAL_MPI_Reduce_scatter(sendbuf, recvbuf, recvcounts, datatype,
                                          op, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -27943,7 +27943,7 @@ int A_MPI_Group_translate_ranks(A_MPI_Group group1, int n, int ranks1[],
   int ret_tmp = LOCAL_MPI_Group_translate_ranks(group1_tmp, n, ranks1,
                                                 group2_tmp, ranks2);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_translate_ranks_print)
@@ -27966,7 +27966,7 @@ int R_MPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[],
   int ret_tmp =
       LOCAL_MPI_Group_translate_ranks(group1, n, ranks1, group2, ranks2);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28028,7 +28028,7 @@ int A_MPI_Group_incl(A_MPI_Group group, int n, int ranks[],
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_incl(group_tmp, n, ranks, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_incl_print)
@@ -28049,7 +28049,7 @@ int R_MPI_Group_incl(R_MPI_Group group, int n, int ranks[],
 #endif
   int ret_tmp = LOCAL_MPI_Group_incl(group, n, ranks, newgroup);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28111,7 +28111,7 @@ int A_MPI_Group_excl(A_MPI_Group group, int n, int ranks[],
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_excl(group_tmp, n, ranks, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_excl_print)
@@ -28132,7 +28132,7 @@ int R_MPI_Group_excl(R_MPI_Group group, int n, int ranks[],
 #endif
   int ret_tmp = LOCAL_MPI_Group_excl(group, n, ranks, newgroup);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28194,7 +28194,7 @@ int A_MPI_Group_range_incl(A_MPI_Group group, int n, int ranges[][3],
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_range_incl(group_tmp, n, ranges, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_range_incl_print)
@@ -28215,7 +28215,7 @@ int R_MPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3],
 #endif
   int ret_tmp = LOCAL_MPI_Group_range_incl(group, n, ranges, newgroup);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28277,7 +28277,7 @@ int A_MPI_Group_range_excl(A_MPI_Group group, int n, int ranges[][3],
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_range_excl(group_tmp, n, ranges, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_range_excl_print)
@@ -28298,7 +28298,7 @@ int R_MPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3],
 #endif
   int ret_tmp = LOCAL_MPI_Group_range_excl(group, n, ranges, newgroup);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28365,7 +28365,7 @@ int A_MPI_Cart_create(A_MPI_Comm comm_old, int ndims, int dims[], int periods[],
   int ret_tmp = LOCAL_MPI_Cart_create(comm_old_tmp, ndims, dims, periods,
                                       reorder, comm_cart_tmp);
   comm_conv_r2a(comm_cart, comm_cart_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_create_print)
@@ -28389,7 +28389,7 @@ int R_MPI_Cart_create(R_MPI_Comm comm_old, int ndims, int dims[], int periods[],
   int ret_tmp =
       LOCAL_MPI_Cart_create(comm_old, ndims, dims, periods, reorder, comm_cart);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28442,7 +28442,7 @@ int A_MPI_Dims_create(int nnodes, int ndims, int dims[]) {
 
   int ret_tmp = LOCAL_MPI_Dims_create(nnodes, ndims, dims);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dims_create_print)
@@ -28462,7 +28462,7 @@ int R_MPI_Dims_create(int nnodes, int ndims, int dims[]) {
 #endif
   int ret_tmp = LOCAL_MPI_Dims_create(nnodes, ndims, dims);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28529,7 +28529,7 @@ int A_MPI_Graph_create(A_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
   int ret_tmp = LOCAL_MPI_Graph_create(comm_old_tmp, nnodes, indx, edges,
                                        reorder, comm_graph_tmp);
   comm_conv_r2a(comm_graph, comm_graph_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_create_print)
@@ -28553,7 +28553,7 @@ int R_MPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
   int ret_tmp = LOCAL_MPI_Graph_create(comm_old, nnodes, indx, edges, reorder,
                                        comm_graph);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28615,7 +28615,7 @@ int A_MPI_Graph_get(A_MPI_Comm comm, int maxindex, int maxedges, int indx[],
 
   int ret_tmp = LOCAL_MPI_Graph_get(comm_tmp, maxindex, maxedges, indx, edges);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_get_print)
@@ -28637,7 +28637,7 @@ int R_MPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges, int indx[],
 #endif
   int ret_tmp = LOCAL_MPI_Graph_get(comm, maxindex, maxedges, indx, edges);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28699,7 +28699,7 @@ int A_MPI_Cart_get(A_MPI_Comm comm, int maxdims, int dims[], int periods[],
 
   int ret_tmp = LOCAL_MPI_Cart_get(comm_tmp, maxdims, dims, periods, coords);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_get_print)
@@ -28721,7 +28721,7 @@ int R_MPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[], int periods[],
 #endif
   int ret_tmp = LOCAL_MPI_Cart_get(comm, maxdims, dims, periods, coords);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28777,7 +28777,7 @@ int A_MPI_Cart_rank(A_MPI_Comm comm, int coords[], int *rank) {
 
   int ret_tmp = LOCAL_MPI_Cart_rank(comm_tmp, coords, rank);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_rank_print)
@@ -28797,7 +28797,7 @@ int R_MPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank) {
 #endif
   int ret_tmp = LOCAL_MPI_Cart_rank(comm, coords, rank);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28855,7 +28855,7 @@ int A_MPI_Cart_coords(A_MPI_Comm comm, int rank, int maxdims, int coords[]) {
 
   int ret_tmp = LOCAL_MPI_Cart_coords(comm_tmp, rank, maxdims, coords);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_coords_print)
@@ -28875,7 +28875,7 @@ int R_MPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]) {
 #endif
   int ret_tmp = LOCAL_MPI_Cart_coords(comm, rank, maxdims, coords);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -28936,7 +28936,7 @@ int A_MPI_Graph_neighbors(A_MPI_Comm comm, int rank, int maxneighbors,
   int ret_tmp =
       LOCAL_MPI_Graph_neighbors(comm_tmp, rank, maxneighbors, neighbors);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_neighbors_print)
@@ -28958,7 +28958,7 @@ int R_MPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors,
 #endif
   int ret_tmp = LOCAL_MPI_Graph_neighbors(comm, rank, maxneighbors, neighbors);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29016,7 +29016,7 @@ int A_MPI_Cart_sub(A_MPI_Comm comm, int remain_dims[], A_MPI_Comm *newcomm) {
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Cart_sub(comm_tmp, remain_dims, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_sub_print)
@@ -29036,7 +29036,7 @@ int R_MPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *newcomm) {
 #endif
   int ret_tmp = LOCAL_MPI_Cart_sub(comm, remain_dims, newcomm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29098,7 +29098,7 @@ int A_MPI_Cart_map(A_MPI_Comm comm, int ndims, int dims[], int periods[],
 
   int ret_tmp = LOCAL_MPI_Cart_map(comm_tmp, ndims, dims, periods, newrank);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_map_print)
@@ -29119,7 +29119,7 @@ int R_MPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[], int periods[],
 #endif
   int ret_tmp = LOCAL_MPI_Cart_map(comm, ndims, dims, periods, newrank);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29181,7 +29181,7 @@ int A_MPI_Graph_map(A_MPI_Comm comm, int nnodes, int indx[], int edges[],
 
   int ret_tmp = LOCAL_MPI_Graph_map(comm_tmp, nnodes, indx, edges, newrank);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_map_print)
@@ -29202,7 +29202,7 @@ int R_MPI_Graph_map(R_MPI_Comm comm, int nnodes, int indx[], int edges[],
 #endif
   int ret_tmp = LOCAL_MPI_Graph_map(comm, nnodes, indx, edges, newrank);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29277,7 +29277,7 @@ int A_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, A_MPI_Info info,
                            intercomm_tmp, array_of_errcodes);
   comm_conv_r2a(intercomm, intercomm_tmp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_spawn_print)
@@ -29302,7 +29302,7 @@ int R_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info,
   int ret_tmp = LOCAL_MPI_Comm_spawn(command, argv, maxprocs, info, root, comm,
                                      intercomm, array_of_errcodes);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29386,7 +29386,7 @@ int A_MPI_Comm_spawn_multiple(int count, char *array_of_commands[],
   comm_conv_r2a(intercomm, intercomm_tmp);
 
   wi4mpi_free(array_of_info_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_spawn_multiple_print)
@@ -29416,7 +29416,7 @@ int R_MPI_Comm_spawn_multiple(int count, char *array_of_commands[],
       count, array_of_commands, array_of_argv, array_of_maxprocs, array_of_info,
       root, comm, intercomm, array_of_errcodes);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29503,7 +29503,7 @@ int A_MPI_Type_get_contents(A_MPI_Datatype datatype, int max_integers,
   }
   wi4mpi_free(array_of_addresses_tmp);
   wi4mpi_free(array_of_datatypes_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_contents_print)
@@ -29533,7 +29533,7 @@ int R_MPI_Type_get_contents(R_MPI_Datatype datatype, int max_integers,
       datatype, max_integers, max_addresses, max_datatypes, array_of_integers,
       array_of_addresses, array_of_datatypes);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29610,7 +29610,7 @@ int A_MPI_Pack_external(char datarep[], void *inbuf, int incount,
                               outbuf_tmp, outsize_tmp, position_tmp);
   buffer_conv_r2a(&outbuf, &outbuf_tmp);
   *position = (A_MPI_Aint)*position_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Pack_external_print)
@@ -29635,7 +29635,7 @@ int R_MPI_Pack_external(char datarep[], void *inbuf, int incount,
   int ret_tmp = LOCAL_MPI_Pack_external(datarep, inbuf, incount, datatype,
                                         outbuf, outsize, position);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29697,7 +29697,7 @@ int A_MPI_Pack_external_size(char datarep[], int incount,
   int ret_tmp =
       LOCAL_MPI_Pack_external_size(datarep, incount, datatype_tmp, size_tmp);
   *size = (A_MPI_Aint)*size_tmp;
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Pack_external_size_print)
@@ -29718,7 +29718,7 @@ int R_MPI_Pack_external_size(char datarep[], int incount,
 #endif
   int ret_tmp = LOCAL_MPI_Pack_external_size(datarep, incount, datatype, size);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29793,7 +29793,7 @@ int A_MPI_Type_create_darray(int size, int rank, int ndims,
       size, rank, ndims, array_of_gsizes, array_of_distribs, array_of_dargs,
       array_of_psizes, order_tmp, oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_darray_print)
@@ -29823,7 +29823,7 @@ int R_MPI_Type_create_darray(int size, int rank, int ndims,
       size, rank, ndims, array_of_gsizes, array_of_distribs, array_of_dargs,
       array_of_psizes, order, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29899,7 +29899,7 @@ int A_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
                                                oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
   wi4mpi_free(array_of_displacements_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_hindexed_print)
@@ -29925,7 +29925,7 @@ int R_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
   int ret_tmp = LOCAL_MPI_Type_create_hindexed(
       count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -29995,7 +29995,7 @@ int A_MPI_Type_create_indexed_block(int count, int blocklength,
       count, blocklength, array_of_displacements, oldtype_tmp, newtype_tmp);
 
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_indexed_block_print)
@@ -30021,7 +30021,7 @@ int R_MPI_Type_create_indexed_block(int count, int blocklength,
   int ret_tmp = LOCAL_MPI_Type_create_indexed_block(
       count, blocklength, array_of_displacements, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30097,7 +30097,7 @@ int A_MPI_Type_create_hindexed_block(int count, int blocklength,
       count, blocklength, array_of_displacements_tmp, oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
   wi4mpi_free(array_of_displacements_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_hindexed_block_print)
@@ -30123,7 +30123,7 @@ int R_MPI_Type_create_hindexed_block(int count, int blocklength,
   int ret_tmp = LOCAL_MPI_Type_create_hindexed_block(
       count, blocklength, array_of_displacements, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30205,7 +30205,7 @@ int A_MPI_Type_create_struct(int count, int array_of_blocklengths[],
   datatype_conv_r2a(newtype, newtype_tmp);
   wi4mpi_free(array_of_displacements_tmp);
   wi4mpi_free(array_of_types_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_struct_print)
@@ -30233,7 +30233,7 @@ int R_MPI_Type_create_struct(int count, int array_of_blocklengths[],
                                              array_of_displacements,
                                              array_of_types, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30307,7 +30307,7 @@ int A_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
       ndims, array_of_sizes, array_of_subsizes, array_of_starts, order_tmp,
       oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_subarray_print)
@@ -30335,7 +30335,7 @@ int R_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
       LOCAL_MPI_Type_create_subarray(ndims, array_of_sizes, array_of_subsizes,
                                      array_of_starts, order, oldtype, newtype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30413,7 +30413,7 @@ int A_MPI_Unpack_external(char datarep[], void *inbuf, A_MPI_Aint insize,
                                 outbuf_tmp, outcount, datatype_tmp);
   *position = (A_MPI_Aint)*position_tmp;
   buffer_conv_r2a(&outbuf, &outbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Unpack_external_print)
@@ -30438,7 +30438,7 @@ int R_MPI_Unpack_external(char datarep[], void *inbuf, R_MPI_Aint insize,
   int ret_tmp = LOCAL_MPI_Unpack_external(datarep, inbuf, insize, position,
                                           outbuf, outcount, datatype);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30522,7 +30522,7 @@ int A_MPI_Dist_graph_create_adjacent(A_MPI_Comm comm_old, int indegree,
       comm_old_tmp, indegree, sources, sourceweights_tmp, outdegree,
       destinations, destweights_tmp, info_tmp, reorder, comm_dist_graph_tmp);
   comm_conv_r2a(comm_dist_graph, comm_dist_graph_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_create_adjacent_print)
@@ -30553,7 +30553,7 @@ int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old, int indegree,
       comm_old, indegree, sources, sourceweights, outdegree, destinations,
       destweights, info, reorder, comm_dist_graph);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30631,7 +30631,7 @@ int A_MPI_Dist_graph_create(A_MPI_Comm comm_old, int n, int sources[],
                                             destinations, weights_tmp, info_tmp,
                                             reorder, comm_dist_graph_tmp);
   comm_conv_r2a(comm_dist_graph, comm_dist_graph_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_create_print)
@@ -30659,7 +30659,7 @@ int R_MPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int sources[],
       LOCAL_MPI_Dist_graph_create(comm_old, n, sources, degrees, destinations,
                                   weights, info, reorder, comm_dist_graph);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30734,7 +30734,7 @@ int A_MPI_Dist_graph_neighbors(A_MPI_Comm comm, int maxindegree, int sources[],
   weight_conv_r2a(&sourceweights, &sourceweights_tmp);
 
   weight_conv_r2a(&destweights, &destweights_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_neighbors_print)
@@ -30761,7 +30761,7 @@ int R_MPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree, int sources[],
       LOCAL_MPI_Dist_graph_neighbors(comm, maxindegree, sources, sourceweights,
                                      maxoutdegree, destinations, destweights);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30847,7 +30847,7 @@ int A_MPI_Igatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Igatherv_print)
@@ -30875,7 +30875,7 @@ int R_MPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
       LOCAL_MPI_Igatherv(sendbuf, sendcount, sendtype, recvbuf, recvcounts,
                          displs, recvtype, root, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -30961,7 +30961,7 @@ int A_MPI_Iscatterv(void *sendbuf, int sendcounts[], int *displs,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iscatterv_print)
@@ -30989,7 +30989,7 @@ int R_MPI_Iscatterv(void *sendbuf, int sendcounts[], int *displs,
       LOCAL_MPI_Iscatterv(sendbuf, sendcounts, displs, sendtype, recvbuf,
                           recvcount, recvtype, root, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31074,7 +31074,7 @@ int A_MPI_Iallgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallgatherv_print)
@@ -31102,7 +31102,7 @@ int R_MPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
       LOCAL_MPI_Iallgatherv(sendbuf, sendcount, sendtype, recvbuf, recvcounts,
                             displs, recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31188,7 +31188,7 @@ int A_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ialltoallv_print)
@@ -31216,7 +31216,7 @@ int R_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
       LOCAL_MPI_Ialltoallv(sendbuf, sendcounts, sdispls, sendtype, recvbuf,
                            recvcounts, rdispls, recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31316,7 +31316,7 @@ int A_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   }
   wi4mpi_free(sendtypes_tmp);
   wi4mpi_free(recvtypes_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ialltoallw_print)
@@ -31346,7 +31346,7 @@ int R_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
       LOCAL_MPI_Ialltoallw(sendbuf, sendcounts, sdispls, sendtypes, recvbuf,
                            recvcounts, rdispls, recvtypes, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31428,7 +31428,7 @@ int A_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ireduce_scatter_print)
@@ -31453,7 +31453,7 @@ int R_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   int ret_tmp = LOCAL_MPI_Ireduce_scatter(sendbuf, recvbuf, recvcounts,
                                           datatype, op, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31541,7 +31541,7 @@ int A_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_allgatherv_print)
@@ -31570,7 +31570,7 @@ int R_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount,
                                                recvbuf, recvcounts, displs,
                                                recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31658,7 +31658,7 @@ int A_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_alltoallv_print)
@@ -31687,7 +31687,7 @@ int R_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                                               sendtype, recvbuf, recvcounts,
                                               rdispls, recvtype, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31802,7 +31802,7 @@ int A_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
   wi4mpi_free(sendtypes_tmp);
   wi4mpi_free(rdispls_tmp);
   wi4mpi_free(recvtypes_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_alltoallw_print)
@@ -31832,7 +31832,7 @@ int R_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
       sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls,
       recvtypes, comm, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -31912,7 +31912,7 @@ int A_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount,
       sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp, recvcounts, displs,
       recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_allgatherv_print)
@@ -31940,7 +31940,7 @@ int R_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount,
       LOCAL_MPI_Neighbor_allgatherv(sendbuf, sendcount, sendtype, recvbuf,
                                     recvcounts, displs, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32021,7 +32021,7 @@ int A_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
       sendbuf_tmp, sendcounts, sdispls, sendtype_tmp, recvbuf_tmp, recvcounts,
       rdispls, recvtype_tmp, comm_tmp);
   buffer_conv_r2a(&recvbuf, &recvbuf_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_alltoallv_print)
@@ -32049,7 +32049,7 @@ int R_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                                              sendtype, recvbuf, recvcounts,
                                              rdispls, recvtype, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32158,7 +32158,7 @@ int A_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[],
   wi4mpi_free(sendtypes_tmp);
   wi4mpi_free(rdispls_tmp);
   wi4mpi_free(recvtypes_tmp);
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_alltoallw_print)
@@ -32188,7 +32188,7 @@ int R_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[],
                                              sendtypes, recvbuf, recvcounts,
                                              rdispls, recvtypes, comm);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32241,7 +32241,7 @@ int A_MPI_T_category_get_cvars(int cat_index, int len, int indices[]) {
 
   int ret_tmp = LOCAL_MPI_T_category_get_cvars(cat_index, len, indices);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_category_get_cvars_print)
@@ -32261,7 +32261,7 @@ int R_MPI_T_category_get_cvars(int cat_index, int len, int indices[]) {
 #endif
   int ret_tmp = LOCAL_MPI_T_category_get_cvars(cat_index, len, indices);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32314,7 +32314,7 @@ int A_MPI_T_category_get_pvars(int cat_index, int len, int indices[]) {
 
   int ret_tmp = LOCAL_MPI_T_category_get_pvars(cat_index, len, indices);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_category_get_pvars_print)
@@ -32334,7 +32334,7 @@ int R_MPI_T_category_get_pvars(int cat_index, int len, int indices[]) {
 #endif
   int ret_tmp = LOCAL_MPI_T_category_get_pvars(cat_index, len, indices);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32387,7 +32387,7 @@ int A_MPI_T_category_get_categories(int cat_index, int len, int indices[]) {
 
   int ret_tmp = LOCAL_MPI_T_category_get_categories(cat_index, len, indices);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_category_get_categories_print)
@@ -32407,7 +32407,7 @@ int R_MPI_T_category_get_categories(int cat_index, int len, int indices[]) {
 #endif
   int ret_tmp = LOCAL_MPI_T_category_get_categories(cat_index, len, indices);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32480,7 +32480,7 @@ int A_MPI_File_iwrite_all(A_MPI_File fh, void *buf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_all_print)
@@ -32501,7 +32501,7 @@ int R_MPI_File_iwrite_all(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_iwrite_all(fh, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32580,7 +32580,7 @@ int A_MPI_File_iwrite_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_at_all_print)
@@ -32604,7 +32604,7 @@ int R_MPI_File_iwrite_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_iwrite_at_all(fh, offset, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32655,7 +32655,7 @@ int A_MPI_T_category_get_index(char *name, int *cat_index) {
 
   int ret_tmp = LOCAL_MPI_T_category_get_index(name, cat_index);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_category_get_index_print)
@@ -32675,7 +32675,7 @@ int R_MPI_T_category_get_index(char *name, int *cat_index) {
 #endif
   int ret_tmp = LOCAL_MPI_T_category_get_index(name, cat_index);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32726,7 +32726,7 @@ int A_MPI_T_cvar_get_index(char *name, int *cvar_index) {
 
   int ret_tmp = LOCAL_MPI_T_cvar_get_index(name, cvar_index);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_cvar_get_index_print)
@@ -32746,7 +32746,7 @@ int R_MPI_T_cvar_get_index(char *name, int *cvar_index) {
 #endif
   int ret_tmp = LOCAL_MPI_T_cvar_get_index(name, cvar_index);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32799,7 +32799,7 @@ int A_MPI_T_pvar_get_index(char *name, int var_class, int *pvar_index) {
 
   int ret_tmp = LOCAL_MPI_T_pvar_get_index(name, var_class, pvar_index);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_pvar_get_index_print)
@@ -32819,7 +32819,7 @@ int R_MPI_T_pvar_get_index(char *name, int var_class, int *pvar_index) {
 #endif
   int ret_tmp = LOCAL_MPI_T_pvar_get_index(name, var_class, pvar_index);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32873,7 +32873,7 @@ A_MPI_Aint A_MPI_Aint_add(A_MPI_Aint base, A_MPI_Aint disp) {
   R_MPI_Aint disp_tmp;
   disp_tmp = (R_MPI_Aint)disp;
   R_MPI_Aint ret_tmp = LOCAL_MPI_Aint_add(base_tmp, disp_tmp);
-  MPI_Aint ret = (A_MPI_Aint)ret_tmp;
+  A_MPI_Aint ret = (A_MPI_Aint)ret_tmp;
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Aint_add_print)
@@ -32893,7 +32893,7 @@ R_MPI_Aint R_MPI_Aint_add(R_MPI_Aint base, R_MPI_Aint disp) {
 #endif
   R_MPI_Aint ret_tmp = LOCAL_MPI_Aint_add(base, disp);
 
-  MPI_Aint ret = ret_tmp;
+  R_MPI_Aint ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -32947,7 +32947,7 @@ A_MPI_Aint A_MPI_Aint_diff(A_MPI_Aint addr1, A_MPI_Aint addr2) {
   R_MPI_Aint addr2_tmp;
   addr2_tmp = (R_MPI_Aint)addr2;
   R_MPI_Aint ret_tmp = LOCAL_MPI_Aint_diff(addr1_tmp, addr2_tmp);
-  MPI_Aint ret = (A_MPI_Aint)ret_tmp;
+  A_MPI_Aint ret = (A_MPI_Aint)ret_tmp;
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Aint_diff_print)
@@ -32967,7 +32967,7 @@ R_MPI_Aint R_MPI_Aint_diff(R_MPI_Aint addr1, R_MPI_Aint addr2) {
 #endif
   R_MPI_Aint ret_tmp = LOCAL_MPI_Aint_diff(addr1, addr2);
 
-  MPI_Aint ret = ret_tmp;
+  R_MPI_Aint ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -33041,7 +33041,7 @@ int A_MPI_File_iread_all(A_MPI_File fh, void *buf, int count,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_all_print)
@@ -33062,7 +33062,7 @@ int R_MPI_File_iread_all(R_MPI_File fh, void *buf, int count,
 #endif
   int ret_tmp = LOCAL_MPI_File_iread_all(fh, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -33141,7 +33141,7 @@ int A_MPI_File_iread_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
   if (ret_tmp == R_MPI_SUCCESS) {
     request_ptr_conv_r2a(&request, &request_tmp);
   }
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_at_all_print)
@@ -33165,7 +33165,7 @@ int R_MPI_File_iread_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
   int ret_tmp =
       LOCAL_MPI_File_iread_at_all(fh, offset, buf, count, datatype, request);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -33214,7 +33214,7 @@ int A_MPI_T_category_changed(int *stamp) {
 
   int ret_tmp = LOCAL_MPI_T_category_changed(stamp);
 
-  int ret = error_code_conv_r2a(ret_tmp);
+  A_int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_T_category_changed_print)
@@ -33234,7 +33234,7 @@ int R_MPI_T_category_changed(int *stamp) {
 #endif
   int ret_tmp = LOCAL_MPI_T_category_changed(stamp);
 
-  int ret = ret_tmp;
+  R_int ret = ret_tmp;
 #ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT

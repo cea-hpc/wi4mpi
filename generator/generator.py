@@ -95,9 +95,9 @@ class generator:
         string=''
         if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C':
             if app_side:
-                string=string+'\n'+self.mappers[func_dict['ret']['name']]['type']+' ret='+self.print_return_conv_c(func_dict)
+                string=string+'\nA_'+self.mappers[func_dict['ret']['name']]['type']+' ret='+self.print_return_conv_c(func_dict)
             else:
-                string=string+'\n'+self.mappers[func_dict['ret']['name']]['type']+' ret='+func_dict['ret']['var']+'_tmp;\n'
+                string=string+'\nR_'+self.mappers[func_dict['ret']['name']]['type']+' ret='+func_dict['ret']['var']+'_tmp;\n'
         elif self.name == 'Interface_C':
                 string=string+'\n'+self.mappers[func_dict['ret']['name']]['type']+' ret='+func_dict['ret']['var']+'_tmp;\n'
        
