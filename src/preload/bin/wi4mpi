@@ -20,6 +20,7 @@
 # Authors:                                                             #
 #   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
 #   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#   - Adrien Cotte <adrien.cotte.tgcc@cea.fr>                          #
 #                                                                      #
 ########################################################################
 
@@ -39,13 +40,15 @@ Option:
     -v           controls the verbosity
 
 Supported values:
-    FROM         openmpi,intelmpi  (no default value)
-    TARGET       openmpi,intelmpi,mpc  (no default value)
+    FROM         openmpi,intelmpi,mpich  (no default value)
+    TARGET       openmpi,intelmpi,mpc,mpich  (no default value)
 
 Influential environment variables:
 
   OPENMPI_ROOT
   INTELMPI_ROOT
+  MPICH_ROOT
+  MPC_ROOT
 
 EOF
 
@@ -67,6 +70,7 @@ WI4MPI_UCONFIG="$HOME/.wi4mpi.cfg"
 OPENMPI_ROOT=${OPENMPI_ROOT:-${OPENMPI_DEFAULT_ROOT}}
 INTELMPI_ROOT=${INTELMPI_ROOT:-${INTELMPI_DEFAULT_ROOT}}
 MPC_ROOT=${MPC_ROOT:-${MPC_DEFAULT_ROOT}}
+MPICH_ROOT=${MPICH_ROOT:-${MPICH_DEFAULT_ROOT}}
 export WI4MPI_VERSION
 
 while getopts "f:t:hv" Option; do
@@ -107,8 +111,8 @@ if [[ -z $FROM ]]; then
       mpich)
         TARGET_FAMILY="MPICH"
         WI4MPI_FAMILY=${WI4MPI_MPICH}
-        WI4MPI_RUN_MPI_C_LIB="$INTELMPI_ROOT/lib64/libmpi.so"
-        WI4MPI_RUN_MPI_F_LIB="$INTELMPI_ROOT/lib64/libmpifort.so"
+        WI4MPI_RUN_MPI_C_LIB="$MPICH_ROOT/lib/libmpi.so"
+        WI4MPI_RUN_MPI_F_LIB="$MPICH_ROOT/lib/libmpifort.so"
         ;;
       mpc)
         TARGET_FAMILY="MPC"
@@ -157,6 +161,7 @@ else
     case $FROM in
     openmpi)  FROM_FAMILY="OMPI" ;;
     intelmpi) FROM_FAMILY="INTEL" ;;
+    mpich) FROM_FAMILY="MPICH" ;;
     *) echo "Error: Unsupported Origin MPI stack." >&2 ; exit 1;
     esac
 
@@ -170,6 +175,11 @@ else
         TARGET_FAMILY="INTEL"
         WI4MPI_RUN_MPI_C_LIB="$INTELMPI_ROOT/lib64/libmpi.so"
         WI4MPI_RUN_MPI_F_LIB="$INTELMPI_ROOT/lib64/libmpifort.so"
+        ;;
+      mpich)
+        TARGET_FAMILY="MPICH"
+        WI4MPI_RUN_MPI_C_LIB="$MPICH_ROOT/lib/libmpi.so"
+        WI4MPI_RUN_MPI_F_LIB="$MPICH_ROOT/lib/libmpifort.so"
         ;;
       *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
     esac
