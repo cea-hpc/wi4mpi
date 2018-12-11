@@ -150,7 +150,8 @@ int PMPI_Send(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Co
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Send( buf, count, datatype, dest, tag, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -169,7 +170,8 @@ int PMPI_Recv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Recv( buf, count, datatype, source, tag, comm, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -188,7 +190,8 @@ int PMPI_Get_count(MPI_Status * status,MPI_Datatype datatype,int * count)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_count( status, datatype, count);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -207,7 +210,8 @@ int PMPI_Bsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_C
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Bsend( buf, count, datatype, dest, tag, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -226,7 +230,8 @@ int PMPI_Ssend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_C
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ssend( buf, count, datatype, dest, tag, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -245,7 +250,8 @@ int PMPI_Rsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_C
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rsend( buf, count, datatype, dest, tag, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -264,7 +270,8 @@ int PMPI_Buffer_attach(void * buffer,int size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Buffer_attach( buffer, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -283,7 +290,8 @@ int PMPI_Buffer_detach(void * buffer_addr,int * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Buffer_detach( buffer_addr, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -302,7 +310,8 @@ int PMPI_Isend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_C
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Isend( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -321,7 +330,8 @@ int PMPI_Ibsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ibsend( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -340,7 +350,8 @@ int PMPI_Issend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Issend( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -359,7 +370,8 @@ int PMPI_Irsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Irsend( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -378,7 +390,8 @@ int PMPI_Irecv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Irecv( buf, count, datatype, source, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -397,7 +410,8 @@ int PMPI_Wait(MPI_Request * request,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Wait( request, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -416,7 +430,8 @@ int PMPI_Test(MPI_Request * request,int * flag,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Test( request, flag, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -435,7 +450,8 @@ int PMPI_Request_free(MPI_Request * request)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Request_free( request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -454,7 +470,8 @@ int PMPI_Iprobe(int source,int tag,MPI_Comm comm,int * flag,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iprobe( source, tag, comm, flag, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -473,7 +490,8 @@ int PMPI_Probe(int source,int tag,MPI_Comm comm,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Probe( source, tag, comm, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -492,7 +510,8 @@ int PMPI_Cancel(MPI_Request * request)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cancel( request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -511,7 +530,8 @@ int PMPI_Test_cancelled(MPI_Status * status,int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Test_cancelled( status, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -530,7 +550,8 @@ int PMPI_Send_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Send_init( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -549,7 +570,8 @@ int PMPI_Bsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Bsend_init( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -568,7 +590,8 @@ int PMPI_Ssend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ssend_init( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -587,7 +610,8 @@ int PMPI_Rsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rsend_init( buf, count, datatype, dest, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -606,7 +630,8 @@ int PMPI_Recv_init(void * buf,int count,MPI_Datatype datatype,int source,int tag
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Recv_init( buf, count, datatype, source, tag, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -625,7 +650,8 @@ int PMPI_Start(MPI_Request * request)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Start( request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -644,7 +670,8 @@ int PMPI_Sendrecv(void * sendbuf,int sendcount,MPI_Datatype sendtype,int dest,in
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Sendrecv( sendbuf, sendcount, sendtype, dest, sendtag, recvbuf, recvcount, recvtype, source, recvtag, comm, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -663,7 +690,8 @@ int PMPI_Sendrecv_replace(void * buf,int count,MPI_Datatype datatype,int dest,in
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Sendrecv_replace( buf, count, datatype, dest, sendtag, source, recvtag, comm, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -682,7 +710,8 @@ int PMPI_Type_contiguous(int count,MPI_Datatype oldtype,MPI_Datatype * newtype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_contiguous( count, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -701,7 +730,8 @@ int PMPI_Type_vector(int count,int blocklength,int stride,MPI_Datatype oldtype,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_vector( count, blocklength, stride, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -720,7 +750,8 @@ int PMPI_Type_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datatype old
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_hvector( count, blocklength, stride, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -739,7 +770,8 @@ int PMPI_Type_indexed(int count,int * array_of_blocklengths,int * array_of_displ
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_indexed( count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -758,7 +790,8 @@ int PMPI_Type_hindexed(int count,int * array_of_blocklengths,MPI_Aint * array_of
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_hindexed( count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -777,7 +810,8 @@ int PMPI_Type_struct(int count,int * array_of_blocklengths,MPI_Aint * array_of_d
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_struct( count, array_of_blocklengths, array_of_displacements, array_of_types, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -796,7 +830,8 @@ int PMPI_Address(void * location,MPI_Aint * address)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Address( location, address);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -815,7 +850,8 @@ int PMPI_Type_extent(MPI_Datatype datatype,MPI_Aint * extent)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_extent( datatype, extent);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -834,7 +870,8 @@ int PMPI_Type_size(MPI_Datatype datatype,int * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_size( datatype, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -853,7 +890,8 @@ int PMPI_Type_lb(MPI_Datatype datatype,MPI_Aint * displacement)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_lb( datatype, displacement);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -872,7 +910,8 @@ int PMPI_Type_ub(MPI_Datatype datatype,MPI_Aint * displacement)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_ub( datatype, displacement);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -891,7 +930,8 @@ int PMPI_Type_commit(MPI_Datatype * datatype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_commit( datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -910,7 +950,8 @@ int PMPI_Type_free(MPI_Datatype * datatype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_free( datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -929,7 +970,8 @@ int PMPI_Get_elements(MPI_Status * status,MPI_Datatype datatype,int * count)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_elements( status, datatype, count);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -948,7 +990,8 @@ int PMPI_Pack(void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,int o
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack( inbuf, incount, datatype, outbuf, outsize, position, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -967,7 +1010,8 @@ int PMPI_Unpack(void * inbuf,int insize,int * position,void * outbuf,int outcoun
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Unpack( inbuf, insize, position, outbuf, outcount, datatype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -986,7 +1030,8 @@ int PMPI_Pack_size(int incount,MPI_Datatype datatype,MPI_Comm comm,int * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack_size( incount, datatype, comm, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1005,7 +1050,8 @@ int PMPI_Barrier(MPI_Comm comm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Barrier( comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1024,7 +1070,8 @@ int PMPI_Bcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm c
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Bcast( buffer, count, datatype, root, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1043,7 +1090,8 @@ int PMPI_Gather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbu
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Gather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1062,7 +1110,8 @@ int PMPI_Gatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvb
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Gatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, root, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1081,7 +1130,8 @@ int PMPI_Scatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvb
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Scatter( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1100,7 +1150,8 @@ int PMPI_Scatterv(void * sendbuf,int * sendcounts,int * displs,MPI_Datatype send
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Scatterv( sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount, recvtype, root, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1119,7 +1170,8 @@ int PMPI_Allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * rec
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Allgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1138,7 +1190,8 @@ int PMPI_Allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * re
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Allgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1157,7 +1210,8 @@ int PMPI_Alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recv
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1176,7 +1230,8 @@ int PMPI_Alltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype se
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1195,7 +1250,8 @@ int PMPI_Exscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MP
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Exscan( sendbuf, recvbuf, count, datatype, op, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1214,7 +1270,8 @@ int PMPI_Reduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MP
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce( sendbuf, recvbuf, count, datatype, op, root, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1233,7 +1290,8 @@ int PMPI_Op_create(MPI_User_function * user_fn,int commute,MPI_Op * op)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Op_create( user_fn, commute, op);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1252,7 +1310,8 @@ int PMPI_Op_free(MPI_Op * op)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Op_free( op);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1271,7 +1330,8 @@ int PMPI_Allreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Allreduce( sendbuf, recvbuf, count, datatype, op, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1290,7 +1350,8 @@ int PMPI_Scan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Scan( sendbuf, recvbuf, count, datatype, op, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1309,7 +1370,8 @@ int PMPI_Group_size(MPI_Group group,int * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_size( group, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1328,7 +1390,8 @@ int PMPI_Group_rank(MPI_Group group,int * rank)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_rank( group, rank);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1347,7 +1410,8 @@ int PMPI_Group_compare(MPI_Group group1,MPI_Group group2,int * result)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_compare( group1, group2, result);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1366,7 +1430,8 @@ int PMPI_Comm_group(MPI_Comm comm,MPI_Group * group)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_group( comm, group);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1385,7 +1450,8 @@ int PMPI_Group_union(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_union( group1, group2, newgroup);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1404,7 +1470,8 @@ int PMPI_Group_intersection(MPI_Group group1,MPI_Group group2,MPI_Group * newgro
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_intersection( group1, group2, newgroup);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1423,7 +1490,8 @@ int PMPI_Group_difference(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_difference( group1, group2, newgroup);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1442,7 +1510,8 @@ int PMPI_Group_free(MPI_Group * group)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_free( group);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1461,7 +1530,8 @@ int PMPI_Comm_size(MPI_Comm comm,int * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_size( comm, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1480,7 +1550,8 @@ int PMPI_Comm_rank(MPI_Comm comm,int * rank)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_rank( comm, rank);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1499,7 +1570,8 @@ int PMPI_Comm_compare(MPI_Comm comm1,MPI_Comm comm2,int * result)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_compare( comm1, comm2, result);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1518,7 +1590,8 @@ int PMPI_Comm_dup(MPI_Comm comm,MPI_Comm * newcomm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_dup( comm, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1537,7 +1610,8 @@ int PMPI_Comm_dup_with_info(MPI_Comm comm,MPI_Info info,MPI_Comm * newcomm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_dup_with_info( comm, info, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1556,7 +1630,8 @@ int PMPI_Comm_create(MPI_Comm comm,MPI_Group group,MPI_Comm * newcomm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_create( comm, group, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1575,7 +1650,8 @@ int PMPI_Comm_split(MPI_Comm comm,int color,int key,MPI_Comm * newcomm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_split( comm, color, key, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1594,7 +1670,8 @@ int PMPI_Comm_free(MPI_Comm * comm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_free( comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1613,7 +1690,8 @@ int PMPI_Comm_test_inter(MPI_Comm comm,int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_test_inter( comm, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1632,7 +1710,8 @@ int PMPI_Comm_remote_size(MPI_Comm comm,int * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_remote_size( comm, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1651,7 +1730,8 @@ int PMPI_Comm_remote_group(MPI_Comm comm,MPI_Group * group)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_remote_group( comm, group);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1670,7 +1750,8 @@ int PMPI_Intercomm_create(MPI_Comm local_comm,int local_leader,MPI_Comm peer_com
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Intercomm_create( local_comm, local_leader, peer_comm, remote_leader, tag, newintercomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1689,7 +1770,8 @@ int PMPI_Intercomm_merge(MPI_Comm intercomm,int high,MPI_Comm * newintracomm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Intercomm_merge( intercomm, high, newintracomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1708,7 +1790,8 @@ int PMPI_Attr_put(MPI_Comm comm,int keyval,void * attribute_val)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Attr_put( comm, keyval, attribute_val);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1727,7 +1810,8 @@ int PMPI_Attr_get(MPI_Comm comm,int keyval,void * attribute_val,int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Attr_get( comm, keyval, attribute_val, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1746,7 +1830,8 @@ int PMPI_Attr_delete(MPI_Comm comm,int keyval)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Attr_delete( comm, keyval);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1765,7 +1850,8 @@ int PMPI_Topo_test(MPI_Comm comm,int * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Topo_test( comm, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1784,7 +1870,8 @@ int PMPI_Graphdims_get(MPI_Comm comm,int * nnodes,int * nedges)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graphdims_get( comm, nnodes, nedges);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1803,7 +1890,8 @@ int PMPI_Cartdim_get(MPI_Comm comm,int * ndims)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cartdim_get( comm, ndims);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1822,7 +1910,8 @@ int PMPI_Graph_neighbors_count(MPI_Comm comm,int rank,int * nneighbors)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_neighbors_count( comm, rank, nneighbors);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1841,7 +1930,8 @@ int PMPI_Cart_shift(MPI_Comm comm,int direction,int disp,int * rank_source,int *
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_shift( comm, direction, disp, rank_source, rank_dest);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1860,7 +1950,8 @@ int PMPI_Get_processor_name(char * name,int * resultlen)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_processor_name( name, resultlen);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1879,7 +1970,8 @@ int PMPI_Get_version(int * version,int * subversion)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_version( version, subversion);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1898,7 +1990,8 @@ int PMPI_Get_library_version(char * version,int * resultlen)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_library_version( version, resultlen);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1917,7 +2010,8 @@ int PMPI_Errhandler_create(MPI_Handler_function * function,MPI_Errhandler * errh
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_create( function, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1936,7 +2030,8 @@ int PMPI_Errhandler_set(MPI_Comm comm,MPI_Errhandler errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_set( comm, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1955,7 +2050,8 @@ int PMPI_Errhandler_get(MPI_Comm comm,MPI_Errhandler * errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_get( comm, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1974,7 +2070,8 @@ int PMPI_Errhandler_free(MPI_Errhandler * errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_free( errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -1993,7 +2090,8 @@ int PMPI_Error_string(int errorcode,char * string,int * resultlen)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Error_string( errorcode, string, resultlen);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2012,7 +2110,8 @@ int PMPI_Error_class(int errorcode,int * errorclass)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Error_class( errorcode, errorclass);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2031,7 +2130,8 @@ int PMPI_Initialized(int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Initialized( flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2050,7 +2150,8 @@ int PMPI_Abort(MPI_Comm comm,int errorcode)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Abort( comm, errorcode);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2069,7 +2170,8 @@ int PMPI_Init(int * argc,char *** argv)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Init( argc, argv);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2088,7 +2190,8 @@ int PMPI_Close_port(char * port_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Close_port( port_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2107,7 +2210,8 @@ int PMPI_Comm_accept(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_C
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_accept( port_name, info, root, comm, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2126,7 +2230,8 @@ int PMPI_Comm_connect(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_connect( port_name, info, root, comm, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2145,7 +2250,8 @@ int PMPI_Comm_disconnect(MPI_Comm * comm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_disconnect( comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2164,7 +2270,8 @@ int PMPI_Comm_get_parent(MPI_Comm * parent)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_parent( parent);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2183,7 +2290,8 @@ int PMPI_Comm_join(int fd,MPI_Comm * intercomm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_join( fd, intercomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2202,7 +2310,8 @@ int PMPI_Lookup_name(char * service_name,MPI_Info info,char * port_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Lookup_name( service_name, info, port_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2221,7 +2330,8 @@ int PMPI_Open_port(MPI_Info info,char * port_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Open_port( info, port_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2240,7 +2350,8 @@ int PMPI_Publish_name(char * service_name,MPI_Info info,char * port_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Publish_name( service_name, info, port_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2259,7 +2370,8 @@ int PMPI_Unpublish_name(char * service_name,MPI_Info info,char * port_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Unpublish_name( service_name, info, port_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2278,7 +2390,8 @@ int PMPI_Comm_set_info(MPI_Comm comm,MPI_Info info)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_info( comm, info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2297,7 +2410,8 @@ int PMPI_Comm_get_info(MPI_Comm comm,MPI_Info * info)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_info( comm, info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2316,7 +2430,8 @@ int PMPI_Accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_data
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Accumulate( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, op, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2335,7 +2450,8 @@ int PMPI_Get(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,in
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2354,7 +2470,8 @@ int PMPI_Put(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,in
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Put( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2373,7 +2490,8 @@ int PMPI_Win_complete(MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_complete( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2392,7 +2510,8 @@ int PMPI_Win_create(void * base,MPI_Aint size,int disp_unit,MPI_Info info,MPI_Co
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create( base, size, disp_unit, info, comm, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2411,7 +2530,8 @@ int PMPI_Win_fence(int assert,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_fence( assert, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2430,7 +2550,8 @@ int PMPI_Win_free(MPI_Win * win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_free( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2449,7 +2570,8 @@ int PMPI_Win_get_group(MPI_Win win,MPI_Group * group)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_group( win, group);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2468,7 +2590,8 @@ int PMPI_Win_lock(int lock_type,int rank,int assert,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_lock( lock_type, rank, assert, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2487,7 +2610,8 @@ int PMPI_Win_post(MPI_Group group,int assert,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_post( group, assert, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2506,7 +2630,8 @@ int PMPI_Win_start(MPI_Group group,int assert,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_start( group, assert, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2525,7 +2650,8 @@ int PMPI_Win_test(MPI_Win win,int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_test( win, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2544,7 +2670,8 @@ int PMPI_Win_unlock(int rank,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_unlock( rank, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2563,7 +2690,8 @@ int PMPI_Win_wait(MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_wait( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2582,7 +2710,8 @@ int PMPI_Win_allocate(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,vo
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_allocate( size, disp_unit, info, comm, baseptr, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2601,7 +2730,8 @@ int PMPI_Win_allocate_shared(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_allocate_shared( size, disp_unit, info, comm, baseptr, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2620,7 +2750,8 @@ int PMPI_Win_shared_query(MPI_Win win,int rank,MPI_Aint * size,int * disp_unit,v
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_shared_query( win, rank, size, disp_unit, baseptr);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2639,7 +2770,8 @@ int PMPI_Win_create_dynamic(MPI_Info info,MPI_Comm comm,MPI_Win * win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create_dynamic( info, comm, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2658,7 +2790,8 @@ int PMPI_Win_attach(MPI_Win win,void * base,MPI_Aint size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_attach( win, base, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2677,7 +2810,8 @@ int PMPI_Win_detach(MPI_Win win,void * base)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_detach( win, base);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2696,7 +2830,8 @@ int PMPI_Win_get_info(MPI_Win win,MPI_Info * info_used)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_info( win, info_used);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2715,7 +2850,8 @@ int PMPI_Win_set_info(MPI_Win win,MPI_Info info)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_set_info( win, info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2734,7 +2870,8 @@ int PMPI_Get_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_accumulate( origin_addr, origin_count, origin_datatype, result_addr, result_count, result_datatype, target_rank, target_disp, target_count, target_datatype, op, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2753,7 +2890,8 @@ int PMPI_Fetch_and_op(void * origin_addr,void * result_addr,MPI_Datatype datatyp
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Fetch_and_op( origin_addr, result_addr, datatype, target_rank, target_disp, op, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2772,7 +2910,8 @@ int PMPI_Compare_and_swap(void * origin_addr,void * compare_addr,void * result_a
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Compare_and_swap( origin_addr, compare_addr, result_addr, datatype, target_rank, target_disp, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2791,7 +2930,8 @@ int PMPI_Rput(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,i
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rput( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2810,7 +2950,8 @@ int PMPI_Rget(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,i
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rget( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2829,7 +2970,8 @@ int PMPI_Raccumulate(void * origin_addr,int origin_count,MPI_Datatype origin_dat
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Raccumulate( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, op, win, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2848,7 +2990,8 @@ int PMPI_Rget_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rget_accumulate( origin_addr, origin_count, origin_datatype, result_addr, result_count, result_datatype, target_rank, target_disp, target_count, target_datatype, op, win, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2867,7 +3010,8 @@ int PMPI_Win_lock_all(int assert,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_lock_all( assert, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2886,7 +3030,8 @@ int PMPI_Win_unlock_all(MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_unlock_all( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2905,7 +3050,8 @@ int PMPI_Win_flush(int rank,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush( rank, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2924,7 +3070,8 @@ int PMPI_Win_flush_all(MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush_all( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2943,7 +3090,8 @@ int PMPI_Win_flush_local(int rank,MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush_local( rank, win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2962,7 +3110,8 @@ int PMPI_Win_flush_local_all(MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush_local_all( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -2981,7 +3130,8 @@ int PMPI_Win_sync(MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_sync( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3000,7 +3150,8 @@ int PMPI_Add_error_class(int * errorclass)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Add_error_class( errorclass);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3019,7 +3170,8 @@ int PMPI_Add_error_code(int errorclass,int * errorcode)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Add_error_code( errorclass, errorcode);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3038,7 +3190,8 @@ int PMPI_Add_error_string(int errorcode,char * string)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Add_error_string( errorcode, string);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3057,7 +3210,8 @@ int PMPI_Comm_call_errhandler(MPI_Comm comm,int errorcode)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_call_errhandler( comm, errorcode);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3076,7 +3230,8 @@ int PMPI_Comm_delete_attr(MPI_Comm comm,int comm_keyval)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_delete_attr( comm, comm_keyval);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3095,7 +3250,8 @@ int PMPI_Comm_get_attr(MPI_Comm comm,int comm_keyval,void * attribute_val,int * 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_attr( comm, comm_keyval, attribute_val, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3114,7 +3270,8 @@ int PMPI_Comm_get_name(MPI_Comm comm,char * comm_name,int * resultlen)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_name( comm, comm_name, resultlen);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3133,7 +3290,8 @@ int PMPI_Comm_set_attr(MPI_Comm comm,int comm_keyval,void * attribute_val)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_attr( comm, comm_keyval, attribute_val);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3152,7 +3310,8 @@ int PMPI_Comm_set_name(MPI_Comm comm,char * comm_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_name( comm, comm_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3171,7 +3330,8 @@ int PMPI_File_call_errhandler(MPI_File fh,int errorcode)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_call_errhandler( fh, errorcode);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3190,7 +3350,8 @@ int PMPI_Grequest_complete(MPI_Request request)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Grequest_complete( request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3209,7 +3370,8 @@ int PMPI_Grequest_start(MPI_Grequest_query_function * query_fn,MPI_Grequest_free
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Grequest_start( query_fn, free_fn, cancel_fn, extra_state, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3228,7 +3390,8 @@ int PMPI_Init_thread(int * argc,char *** argv,int required,int * provided)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Init_thread( argc, argv, required, provided);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3247,7 +3410,8 @@ int PMPI_Is_thread_main(int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Is_thread_main( flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3266,7 +3430,8 @@ int PMPI_Query_thread(int * provided)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Query_thread( provided);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3285,7 +3450,8 @@ int PMPI_Status_set_cancelled(MPI_Status * status,int flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_set_cancelled( status, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3304,7 +3470,8 @@ int PMPI_Status_set_elements(MPI_Status * status,MPI_Datatype datatype,int count
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_set_elements( status, datatype, count);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3323,7 +3490,8 @@ int PMPI_Type_create_keyval(MPI_Type_copy_attr_function * type_copy_attr_fn,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_keyval( type_copy_attr_fn, type_delete_attr_fn, type_keyval, extra_state);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3342,7 +3510,8 @@ int PMPI_Type_delete_attr(MPI_Datatype datatype,int type_keyval)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_delete_attr( datatype, type_keyval);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3361,7 +3530,8 @@ int PMPI_Type_dup(MPI_Datatype oldtype,MPI_Datatype * newtype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_dup( oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3380,7 +3550,8 @@ int PMPI_Type_free_keyval(int * type_keyval)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_free_keyval( type_keyval);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3399,7 +3570,8 @@ int PMPI_Type_get_attr(MPI_Datatype datatype,int type_keyval,void * attribute_va
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_attr( datatype, type_keyval, attribute_val, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3418,7 +3590,8 @@ int PMPI_Type_get_envelope(MPI_Datatype datatype,int * num_integers,int * num_ad
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_envelope( datatype, num_integers, num_addresses, num_datatypes, combiner);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3437,7 +3610,8 @@ int PMPI_Type_get_name(MPI_Datatype datatype,char * type_name,int * resultlen)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_name( datatype, type_name, resultlen);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3456,7 +3630,8 @@ int PMPI_Type_set_attr(MPI_Datatype datatype,int type_keyval,void * attribute_va
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_set_attr( datatype, type_keyval, attribute_val);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3475,7 +3650,8 @@ int PMPI_Type_set_name(MPI_Datatype datatype,char * type_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_set_name( datatype, type_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3494,7 +3670,8 @@ int PMPI_Type_match_size(int typeclass,int size,MPI_Datatype * datatype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_match_size( typeclass, size, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3513,7 +3690,8 @@ int PMPI_Win_call_errhandler(MPI_Win win,int errorcode)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_call_errhandler( win, errorcode);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3532,7 +3710,8 @@ int PMPI_Win_create_keyval(MPI_Win_copy_attr_function * win_copy_attr_fn,MPI_Win
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create_keyval( win_copy_attr_fn, win_delete_attr_fn, win_keyval, extra_state);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3551,7 +3730,8 @@ int PMPI_Win_delete_attr(MPI_Win win,int win_keyval)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_delete_attr( win, win_keyval);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3570,7 +3750,8 @@ int PMPI_Win_free_keyval(int * win_keyval)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_free_keyval( win_keyval);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3589,7 +3770,8 @@ int PMPI_Win_get_name(MPI_Win win,char * win_name,int * resultlen)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_name( win, win_name, resultlen);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3608,7 +3790,8 @@ int PMPI_Win_set_name(MPI_Win win,char * win_name)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_set_name( win, win_name);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3627,7 +3810,8 @@ int PMPI_Alloc_mem(MPI_Aint size,MPI_Info info,void * baseptr)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alloc_mem( size, info, baseptr);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3646,7 +3830,8 @@ int PMPI_Comm_create_errhandler(MPI_Comm_errhandler_function * comm_errhandler_f
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_create_errhandler( comm_errhandler_fn, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3665,7 +3850,8 @@ int PMPI_Comm_get_errhandler(MPI_Comm comm,MPI_Errhandler * errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_errhandler( comm, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3684,7 +3870,8 @@ int PMPI_Comm_set_errhandler(MPI_Comm comm,MPI_Errhandler errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_errhandler( comm, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3703,7 +3890,8 @@ int PMPI_File_create_errhandler(MPI_File_errhandler_function * file_errhandler_f
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_create_errhandler( file_errhandler_fn, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3722,7 +3910,8 @@ int PMPI_File_get_errhandler(MPI_File file,MPI_Errhandler * errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_errhandler( file, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3741,7 +3930,8 @@ int PMPI_File_set_errhandler(MPI_File file,MPI_Errhandler errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_errhandler( file, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3760,7 +3950,8 @@ int PMPI_Finalized(int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Finalized( flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3779,7 +3970,8 @@ int PMPI_Free_mem(void * base)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Free_mem( base);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3798,7 +3990,8 @@ int PMPI_Get_address(void * location,MPI_Aint * address)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_address( location, address);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3817,7 +4010,8 @@ int PMPI_Info_create(MPI_Info * info)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_create( info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3836,7 +4030,8 @@ int PMPI_Info_delete(MPI_Info info,char * key)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_delete( info, key);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3855,7 +4050,8 @@ int PMPI_Info_dup(MPI_Info info,MPI_Info * newinfo)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_dup( info, newinfo);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3874,7 +4070,8 @@ int PMPI_Info_free(MPI_Info * info)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_free( info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3893,7 +4090,8 @@ int PMPI_Info_get(MPI_Info info,char * key,int valuelen,char * value,int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get( info, key, valuelen, value, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3912,7 +4110,8 @@ int PMPI_Info_get_nkeys(MPI_Info info,int * nkeys)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get_nkeys( info, nkeys);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3931,7 +4130,8 @@ int PMPI_Info_get_nthkey(MPI_Info info,int n,char * key)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get_nthkey( info, n, key);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3950,7 +4150,8 @@ int PMPI_Info_get_valuelen(MPI_Info info,char * key,int * valuelen,int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get_valuelen( info, key, valuelen, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3969,7 +4170,8 @@ int PMPI_Info_set(MPI_Info info,char * key,char * value)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_set( info, key, value);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -3988,7 +4190,8 @@ int PMPI_Request_get_status(MPI_Request request,int * flag,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Request_get_status( request, flag, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4007,7 +4210,8 @@ int PMPI_Type_create_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datat
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_hvector( count, blocklength, stride, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4026,7 +4230,8 @@ int PMPI_Type_create_resized(MPI_Datatype oldtype,MPI_Aint lb,MPI_Aint extent,MP
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_resized( oldtype, lb, extent, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4045,7 +4250,8 @@ int PMPI_Type_get_extent(MPI_Datatype datatype,MPI_Aint * lb,MPI_Aint * extent)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_extent( datatype, lb, extent);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4064,7 +4270,8 @@ int PMPI_Type_get_true_extent(MPI_Datatype datatype,MPI_Aint * true_lb,MPI_Aint 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_true_extent( datatype, true_lb, true_extent);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4083,7 +4290,8 @@ int PMPI_Win_create_errhandler(MPI_Win_errhandler_function * win_errhandler_fn,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create_errhandler( win_errhandler_fn, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4102,7 +4310,8 @@ int PMPI_Win_get_errhandler(MPI_Win win,MPI_Errhandler * errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_errhandler( win, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4121,7 +4330,8 @@ int PMPI_Win_set_errhandler(MPI_Win win,MPI_Errhandler errhandler)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_set_errhandler( win, errhandler);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4140,7 +4350,8 @@ int PMPI_Type_create_f90_integer(int range,MPI_Datatype * newtype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_f90_integer( range, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4159,7 +4370,8 @@ int PMPI_Type_create_f90_real(int precision,int range,MPI_Datatype * newtype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_f90_real( precision, range, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4178,7 +4390,8 @@ int PMPI_Type_create_f90_complex(int precision,int range,MPI_Datatype * newtype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_f90_complex( precision, range, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4197,7 +4410,8 @@ int PMPI_Reduce_local(void * inbuf,void * inoutbuf,int count,MPI_Datatype dataty
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce_local( inbuf, inoutbuf, count, datatype, op);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4216,7 +4430,8 @@ int PMPI_Op_commutative(MPI_Op op,int * commute)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Op_commutative( op, commute);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4235,7 +4450,8 @@ int PMPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Da
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce_scatter_block( sendbuf, recvbuf, recvcount, datatype, op, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4254,7 +4470,8 @@ int PMPI_Dist_graph_neighbors_count(MPI_Comm comm,int * indegree,int * outdegree
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_neighbors_count( comm, indegree, outdegree, weighted);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4273,7 +4490,8 @@ int PMPI_Status_c2f(MPI_Status * c_status,MPI_Fint * f_status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_c2f( c_status, f_status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4292,7 +4510,8 @@ int PMPI_Status_f2c(MPI_Fint * f_status,MPI_Status * c_status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_f2c( f_status, c_status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4311,7 +4530,8 @@ int PMPI_Improbe(int source,int tag,MPI_Comm comm,int * flag,MPI_Message * messa
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Improbe( source, tag, comm, flag, message, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4330,7 +4550,8 @@ int PMPI_Imrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Imrecv( buf, count, datatype, message, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4349,7 +4570,8 @@ int PMPI_Mprobe(int source,int tag,MPI_Comm comm,MPI_Message * message,MPI_Statu
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Mprobe( source, tag, comm, message, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4368,7 +4590,8 @@ int PMPI_Mrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message,
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Mrecv( buf, count, datatype, message, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4387,7 +4610,8 @@ int PMPI_Comm_idup(MPI_Comm comm,MPI_Comm * newcomm,MPI_Request * request)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_idup( comm, newcomm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4406,7 +4630,8 @@ int PMPI_Ibarrier(MPI_Comm comm,MPI_Request * request)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ibarrier( comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4425,7 +4650,8 @@ int PMPI_Ibcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ibcast( buffer, count, datatype, root, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4444,7 +4670,8 @@ int PMPI_Igather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvb
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Igather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4463,7 +4690,8 @@ int PMPI_Iscatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recv
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iscatter( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4482,7 +4710,8 @@ int PMPI_Iallgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * re
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iallgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4501,7 +4730,8 @@ int PMPI_Ialltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * rec
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ialltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4520,7 +4750,8 @@ int PMPI_Ireduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ireduce( sendbuf, recvbuf, count, datatype, op, root, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4539,7 +4770,8 @@ int PMPI_Iallreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatyp
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iallreduce( sendbuf, recvbuf, count, datatype, op, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4558,7 +4790,8 @@ int PMPI_Ireduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_D
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ireduce_scatter_block( sendbuf, recvbuf, recvcount, datatype, op, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4577,7 +4810,8 @@ int PMPI_Iscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iscan( sendbuf, recvbuf, count, datatype, op, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4596,7 +4830,8 @@ int PMPI_Iexscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iexscan( sendbuf, recvbuf, count, datatype, op, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4615,7 +4850,8 @@ int PMPI_Ineighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_allgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4634,7 +4870,8 @@ int PMPI_Ineighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,v
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_alltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4653,7 +4890,8 @@ int PMPI_Neighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,v
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_allgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4672,7 +4910,8 @@ int PMPI_Neighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,vo
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_alltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4691,7 +4930,8 @@ int PMPI_Comm_split_type(MPI_Comm comm,int split_type,int key,MPI_Info info,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_split_type( comm, split_type, key, info, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4710,7 +4950,8 @@ int PMPI_Get_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Count * co
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_elements_x( status, datatype, count);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4729,7 +4970,8 @@ int PMPI_Status_set_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Cou
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_set_elements_x( status, datatype, count);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4748,7 +4990,8 @@ int PMPI_Type_get_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count * exte
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_extent_x( datatype, lb, extent);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4767,7 +5010,8 @@ int PMPI_Type_get_true_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count *
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_true_extent_x( datatype, lb, extent);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4786,7 +5030,8 @@ int PMPI_Type_size_x(MPI_Datatype datatype,MPI_Count * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_size_x( datatype, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4805,7 +5050,8 @@ int PMPI_Comm_create_group(MPI_Comm comm,MPI_Group group,int tag,MPI_Comm * newc
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_create_group( comm, group, tag, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4824,7 +5070,8 @@ int PMPI_T_init_thread(int required,int * provided)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_init_thread( required, provided);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4843,7 +5090,8 @@ int PMPI_T_enum_get_info(MPI_T_enum enumtype,int * num,char * name,int * name_le
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_enum_get_info( enumtype, num, name, name_len);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4862,7 +5110,8 @@ int PMPI_T_enum_get_item(MPI_T_enum enumtype,int indx,int * value,char * name,in
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_enum_get_item( enumtype, indx, value, name, name_len);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4881,7 +5130,8 @@ int PMPI_T_cvar_get_num(int * num_cvar)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_get_num( num_cvar);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4900,7 +5150,8 @@ int PMPI_T_cvar_get_info(int cvar_index,char * name,int * name_len,int * verbosi
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_get_info( cvar_index, name, name_len, verbosity, datatype, enumtype, desc, desc_len, binding, scope);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4919,7 +5170,8 @@ int PMPI_T_cvar_handle_alloc(int cvar_index,void * obj_handle,MPI_T_cvar_handle 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_handle_alloc( cvar_index, obj_handle, handle, count);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4938,7 +5190,8 @@ int PMPI_T_cvar_handle_free(MPI_T_cvar_handle * handle)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_handle_free( handle);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4957,7 +5210,8 @@ int PMPI_T_cvar_read(MPI_T_cvar_handle handle,void * buf)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_read( handle, buf);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4976,7 +5230,8 @@ int PMPI_T_cvar_write(MPI_T_cvar_handle handle,void * buf)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_write( handle, buf);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -4995,7 +5250,8 @@ int PMPI_T_pvar_get_num(int * num_pvar)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_get_num( num_pvar);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5014,7 +5270,8 @@ int PMPI_T_pvar_get_info(int pvar_index,char * name,int * name_len,int * verbosi
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_get_info( pvar_index, name, name_len, verbosity, var_class, datatype, enumtype, desc, desc_len, binding, readonly, continuous, atomic);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5033,7 +5290,8 @@ int PMPI_T_pvar_session_create(MPI_T_pvar_session * session)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_session_create( session);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5052,7 +5310,8 @@ int PMPI_T_pvar_session_free(MPI_T_pvar_session * session)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_session_free( session);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5071,7 +5330,8 @@ int PMPI_T_pvar_handle_alloc(MPI_T_pvar_session session,int pvar_index,void * ob
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_handle_alloc( session, pvar_index, obj_handle, handle, count);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5090,7 +5350,8 @@ int PMPI_T_pvar_handle_free(MPI_T_pvar_session session,MPI_T_pvar_handle * handl
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_handle_free( session, handle);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5109,7 +5370,8 @@ int PMPI_T_pvar_start(MPI_T_pvar_session session,MPI_T_pvar_handle handle)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_start( session, handle);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5128,7 +5390,8 @@ int PMPI_T_pvar_stop(MPI_T_pvar_session session,MPI_T_pvar_handle handle)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_stop( session, handle);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5147,7 +5410,8 @@ int PMPI_T_pvar_read(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_read( session, handle, buf);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5166,7 +5430,8 @@ int PMPI_T_pvar_write(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void *
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_write( session, handle, buf);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5185,7 +5450,8 @@ int PMPI_T_pvar_reset(MPI_T_pvar_session session,MPI_T_pvar_handle handle)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_reset( session, handle);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5204,7 +5470,8 @@ int PMPI_T_pvar_readreset(MPI_T_pvar_session session,MPI_T_pvar_handle handle,vo
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_readreset( session, handle, buf);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5223,7 +5490,8 @@ int PMPI_T_category_get_num(int * num_cat)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_num( num_cat);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5242,7 +5510,8 @@ int PMPI_T_category_get_info(int cat_index,char * name,int * name_len,char * des
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_info( cat_index, name, name_len, desc, desc_len, num_cvars, num_pvars, num_categories);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5261,7 +5530,8 @@ int PMPI_File_open(MPI_Comm comm,char * filename,int amode,MPI_Info info,MPI_Fil
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_open( comm, filename, amode, info, fh);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5280,7 +5550,8 @@ int PMPI_File_close(MPI_File * fh)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_close( fh);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5299,7 +5570,8 @@ int PMPI_File_delete(char * filename,MPI_Info info)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_delete( filename, info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5318,7 +5590,8 @@ int PMPI_File_set_size(MPI_File fh,MPI_Offset size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_size( fh, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5337,7 +5610,8 @@ int PMPI_File_preallocate(MPI_File fh,MPI_Offset size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_preallocate( fh, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5356,7 +5630,8 @@ int PMPI_File_get_size(MPI_File fh,MPI_Offset * size)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_size( fh, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5375,7 +5650,8 @@ int PMPI_File_get_group(MPI_File fh,MPI_Group * group)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_group( fh, group);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5394,7 +5670,8 @@ int PMPI_File_get_amode(MPI_File fh,int * amode)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_amode( fh, amode);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5413,7 +5690,8 @@ int PMPI_File_set_info(MPI_File fh,MPI_Info info)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_info( fh, info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5432,7 +5710,8 @@ int PMPI_File_get_info(MPI_File fh,MPI_Info * info_used)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_info( fh, info_used);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5451,7 +5730,8 @@ int PMPI_File_set_view(MPI_File fh,MPI_Offset disp,MPI_Datatype etype,MPI_Dataty
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_view( fh, disp, etype, filetype, datarep, info);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5470,7 +5750,8 @@ int PMPI_File_get_view(MPI_File fh,MPI_Offset * disp,MPI_Datatype * etype,MPI_Da
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_view( fh, disp, etype, filetype, datarep);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5489,7 +5770,8 @@ int PMPI_File_read_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Dat
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at( fh, offset, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5508,7 +5790,8 @@ int PMPI_File_read_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at_all( fh, offset, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5527,7 +5810,8 @@ int PMPI_File_write_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Da
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at( fh, offset, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5546,7 +5830,8 @@ int PMPI_File_write_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MP
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at_all( fh, offset, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5565,7 +5850,8 @@ int PMPI_File_iread_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Da
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_at( fh, offset, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5584,7 +5870,8 @@ int PMPI_File_iwrite_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_D
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_at( fh, offset, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5603,7 +5890,8 @@ int PMPI_File_read(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_St
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5622,7 +5910,8 @@ int PMPI_File_read_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MP
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_all( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5641,7 +5930,8 @@ int PMPI_File_write(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_S
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5660,7 +5950,8 @@ int PMPI_File_write_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_all( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5679,7 +5970,8 @@ int PMPI_File_iread(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_R
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread( fh, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5698,7 +5990,8 @@ int PMPI_File_iwrite(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite( fh, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5717,7 +6010,8 @@ int PMPI_File_seek(MPI_File fh,MPI_Offset offset,int whence)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_seek( fh, offset, whence);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5736,7 +6030,8 @@ int PMPI_File_get_position(MPI_File fh,MPI_Offset * offset)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_position( fh, offset);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5755,7 +6050,8 @@ int PMPI_File_get_byte_offset(MPI_File fh,MPI_Offset offset,MPI_Offset * disp)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_byte_offset( fh, offset, disp);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5774,7 +6070,8 @@ int PMPI_File_read_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_shared( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5793,7 +6090,8 @@ int PMPI_File_write_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatyp
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_shared( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5812,7 +6110,8 @@ int PMPI_File_iread_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatyp
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_shared( fh, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5831,7 +6130,8 @@ int PMPI_File_iwrite_shared(MPI_File fh,void * buf,int count,MPI_Datatype dataty
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_shared( fh, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5850,7 +6150,8 @@ int PMPI_File_read_ordered(MPI_File fh,void * buf,int count,MPI_Datatype datatyp
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_ordered( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5869,7 +6170,8 @@ int PMPI_File_write_ordered(MPI_File fh,void * buf,int count,MPI_Datatype dataty
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_ordered( fh, buf, count, datatype, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5888,7 +6190,8 @@ int PMPI_File_seek_shared(MPI_File fh,MPI_Offset offset,int whence)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_seek_shared( fh, offset, whence);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5907,7 +6210,8 @@ int PMPI_File_get_position_shared(MPI_File fh,MPI_Offset * offset)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_position_shared( fh, offset);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5926,7 +6230,8 @@ int PMPI_File_read_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int cou
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at_all_begin( fh, offset, buf, count, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5945,7 +6250,8 @@ int PMPI_File_read_at_all_end(MPI_File fh,void * buf,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at_all_end( fh, buf, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5964,7 +6270,8 @@ int PMPI_File_write_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int co
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at_all_begin( fh, offset, buf, count, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -5983,7 +6290,8 @@ int PMPI_File_write_at_all_end(MPI_File fh,void * buf,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at_all_end( fh, buf, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6002,7 +6310,8 @@ int PMPI_File_read_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype datat
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_all_begin( fh, buf, count, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6021,7 +6330,8 @@ int PMPI_File_read_all_end(MPI_File fh,void * buf,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_all_end( fh, buf, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6040,7 +6350,8 @@ int PMPI_File_write_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype data
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_all_begin( fh, buf, count, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6059,7 +6370,8 @@ int PMPI_File_write_all_end(MPI_File fh,void * buf,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_all_end( fh, buf, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6078,7 +6390,8 @@ int PMPI_File_read_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype d
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_ordered_begin( fh, buf, count, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6097,7 +6410,8 @@ int PMPI_File_read_ordered_end(MPI_File fh,void * buf,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_ordered_end( fh, buf, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6116,7 +6430,8 @@ int PMPI_File_write_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_ordered_begin( fh, buf, count, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6135,7 +6450,8 @@ int PMPI_File_write_ordered_end(MPI_File fh,void * buf,MPI_Status * status)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_ordered_end( fh, buf, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6154,7 +6470,8 @@ int PMPI_File_get_type_extent(MPI_File fh,MPI_Datatype datatype,MPI_Aint * exten
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_type_extent( fh, datatype, extent);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6173,7 +6490,8 @@ int PMPI_Register_datarep(char * datarep,MPI_Datarep_conversion_function * read_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Register_datarep( datarep, read_conversion_fn, write_conversion_fn, dtype_file_extent_fn, extra_state);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6192,7 +6510,8 @@ int PMPI_File_set_atomicity(MPI_File fh,int flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_atomicity( fh, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6211,7 +6530,8 @@ int PMPI_File_get_atomicity(MPI_File fh,int * flag)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_atomicity( fh, flag);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6230,7 +6550,8 @@ int PMPI_File_sync(MPI_File fh)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_sync( fh);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6249,7 +6570,8 @@ int PMPI_T_finalize( )
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_finalize( );
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6268,7 +6590,8 @@ double PMPI_Wtime( )
 #endif
 double ret_tmp= INTERFACE_LOCAL_MPI_Wtime( );
 
-double ret=ret_tmp;#ifdef DEBUG
+double ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6287,7 +6610,8 @@ double PMPI_Wtick( )
 #endif
 double ret_tmp= INTERFACE_LOCAL_MPI_Wtick( );
 
-double ret=ret_tmp;#ifdef DEBUG
+double ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6306,7 +6630,8 @@ int PMPI_Finalize( )
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Finalize( );
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6325,7 +6650,8 @@ int PMPI_Waitany(int count,MPI_Request array_of_requests[],int * indx,MPI_Status
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Waitany( count, array_of_requests, indx, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6344,7 +6670,8 @@ int PMPI_Testany(int count,MPI_Request array_of_requests[],int * indx,int * flag
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Testany( count, array_of_requests, indx, flag, status);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6363,7 +6690,8 @@ int PMPI_Waitall(int count,MPI_Request array_of_requests[],MPI_Status array_of_s
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Waitall( count, array_of_requests, array_of_statuses);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6382,7 +6710,8 @@ int PMPI_Testall(int count,MPI_Request array_of_requests[],int * flag,MPI_Status
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Testall( count, array_of_requests, flag, array_of_statuses);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6401,7 +6730,8 @@ int PMPI_Waitsome(int incount,MPI_Request array_of_requests[],int * outcount,int
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Waitsome( incount, array_of_requests, outcount, array_of_indices, array_of_statuses);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6420,7 +6750,8 @@ int PMPI_Testsome(int incount,MPI_Request array_of_requests[],int * outcount,int
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Testsome( incount, array_of_requests, outcount, array_of_indices, array_of_statuses);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6439,7 +6770,8 @@ int PMPI_Startall(int count,MPI_Request array_of_requests[])
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Startall( count, array_of_requests);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6458,7 +6790,8 @@ int PMPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype se
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6477,7 +6810,8 @@ int PMPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datat
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce_scatter( sendbuf, recvbuf, recvcounts, datatype, op, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6496,7 +6830,8 @@ int PMPI_Group_translate_ranks(MPI_Group group1,int n,int ranks1[],MPI_Group gro
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_translate_ranks( group1, n, ranks1, group2, ranks2);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6515,7 +6850,8 @@ int PMPI_Group_incl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_incl( group, n, ranks, newgroup);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6534,7 +6870,8 @@ int PMPI_Group_excl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_excl( group, n, ranks, newgroup);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6553,7 +6890,8 @@ int PMPI_Group_range_incl(MPI_Group group,int n,int ranges[][3],MPI_Group * newg
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_range_incl( group, n, ranges, newgroup);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6572,7 +6910,8 @@ int PMPI_Group_range_excl(MPI_Group group,int n,int ranges[][3],MPI_Group * newg
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_range_excl( group, n, ranges, newgroup);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6591,7 +6930,8 @@ int PMPI_Cart_create(MPI_Comm comm_old,int ndims,int dims[],int periods[],int re
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_create( comm_old, ndims, dims, periods, reorder, comm_cart);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6610,7 +6950,8 @@ int PMPI_Dims_create(int nnodes,int ndims,int dims[])
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dims_create( nnodes, ndims, dims);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6629,7 +6970,8 @@ int PMPI_Graph_create(MPI_Comm comm_old,int nnodes,int indx[],int edges[],int re
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_create( comm_old, nnodes, indx, edges, reorder, comm_graph);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6648,7 +6990,8 @@ int PMPI_Graph_get(MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_get( comm, maxindex, maxedges, indx, edges);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6667,7 +7010,8 @@ int PMPI_Cart_get(MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_get( comm, maxdims, dims, periods, coords);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6686,7 +7030,8 @@ int PMPI_Cart_rank(MPI_Comm comm,int coords[],int * rank)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_rank( comm, coords, rank);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6705,7 +7050,8 @@ int PMPI_Cart_coords(MPI_Comm comm,int rank,int maxdims,int coords[])
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_coords( comm, rank, maxdims, coords);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6724,7 +7070,8 @@ int PMPI_Graph_neighbors(MPI_Comm comm,int rank,int maxneighbors,int neighbors[]
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_neighbors( comm, rank, maxneighbors, neighbors);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6743,7 +7090,8 @@ int PMPI_Cart_sub(MPI_Comm comm,int remain_dims[],MPI_Comm * newcomm)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_sub( comm, remain_dims, newcomm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6762,7 +7110,8 @@ int PMPI_Cart_map(MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_map( comm, ndims, dims, periods, newrank);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6781,7 +7130,8 @@ int PMPI_Graph_map(MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_map( comm, nnodes, indx, edges, newrank);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6800,7 +7150,8 @@ int PMPI_Comm_spawn(char * command,char * argv[],int maxprocs,MPI_Info info,int 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_spawn( command, argv, maxprocs, info, root, comm, intercomm, array_of_errcodes);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6819,7 +7170,8 @@ int PMPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_spawn_multiple( count, array_of_commands, array_of_argv, array_of_maxprocs, array_of_info, root, comm, intercomm, array_of_errcodes);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6838,7 +7190,8 @@ int PMPI_Type_get_contents(MPI_Datatype datatype,int max_integers,int max_addres
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_contents( datatype, max_integers, max_addresses, max_datatypes, array_of_integers, array_of_addresses, array_of_datatypes);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6857,7 +7210,8 @@ int PMPI_Pack_external(char datarep[],void * inbuf,int incount,MPI_Datatype data
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack_external( datarep, inbuf, incount, datatype, outbuf, outsize, position);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6876,7 +7230,8 @@ int PMPI_Pack_external_size(char datarep[],int incount,MPI_Datatype datatype,MPI
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack_external_size( datarep, incount, datatype, size);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6895,7 +7250,8 @@ int PMPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],in
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_darray( size, rank, ndims, array_of_gsizes, array_of_distribs, array_of_dargs, array_of_psizes, order, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6914,7 +7270,8 @@ int PMPI_Type_create_hindexed(int count,int array_of_blocklengths[],MPI_Aint arr
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_hindexed( count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6933,7 +7290,8 @@ int PMPI_Type_create_indexed_block(int count,int blocklength,int array_of_displa
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_indexed_block( count, blocklength, array_of_displacements, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6952,7 +7310,8 @@ int PMPI_Type_create_hindexed_block(int count,int blocklength,MPI_Aint array_of_
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_hindexed_block( count, blocklength, array_of_displacements, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6971,7 +7330,8 @@ int PMPI_Type_create_struct(int count,int array_of_blocklengths[],MPI_Aint array
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_struct( count, array_of_blocklengths, array_of_displacements, array_of_types, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -6990,7 +7350,8 @@ int PMPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsiz
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_subarray( ndims, array_of_sizes, array_of_subsizes, array_of_starts, order, oldtype, newtype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7009,7 +7370,8 @@ int PMPI_Unpack_external(char datarep[],void * inbuf,MPI_Aint insize,MPI_Aint * 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Unpack_external( datarep, inbuf, insize, position, outbuf, outcount, datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7028,7 +7390,8 @@ int PMPI_Dist_graph_create_adjacent(MPI_Comm comm_old,int indegree,int sources[]
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_create_adjacent( comm_old, indegree, sources, sourceweights, outdegree, destinations, destweights, info, reorder, comm_dist_graph);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7047,7 +7410,8 @@ int PMPI_Dist_graph_create(MPI_Comm comm_old,int n,int sources[],int degrees[],i
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_create( comm_old, n, sources, degrees, destinations, weights, info, reorder, comm_dist_graph);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7066,7 +7430,8 @@ int PMPI_Dist_graph_neighbors(MPI_Comm comm,int maxindegree,int sources[],int * 
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_neighbors( comm, maxindegree, sources, sourceweights, maxoutdegree, destinations, destweights);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7085,7 +7450,8 @@ int PMPI_Igatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recv
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Igatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, root, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7104,7 +7470,8 @@ int PMPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,MPI_Datatype sen
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iscatterv( sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount, recvtype, root, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7123,7 +7490,8 @@ int PMPI_Iallgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * r
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iallgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7142,7 +7510,8 @@ int PMPI_Ialltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype s
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ialltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7161,7 +7530,8 @@ int PMPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype s
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ialltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7180,7 +7550,8 @@ int PMPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Data
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ireduce_scatter( sendbuf, recvbuf, recvcounts, datatype, op, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7199,7 +7570,8 @@ int PMPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_allgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7218,7 +7590,8 @@ int PMPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_D
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_alltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7237,7 +7610,8 @@ int PMPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_alltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7256,7 +7630,8 @@ int PMPI_Neighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_allgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7275,7 +7650,8 @@ int PMPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Da
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_alltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7294,7 +7670,8 @@ int PMPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_alltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7313,7 +7690,8 @@ int PMPI_T_category_get_cvars(int cat_index,int len,int indices[])
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_cvars( cat_index, len, indices);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7332,7 +7710,8 @@ int PMPI_T_category_get_pvars(int cat_index,int len,int indices[])
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_pvars( cat_index, len, indices);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7351,7 +7730,8 @@ int PMPI_T_category_get_categories(int cat_index,int len,int indices[])
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_categories( cat_index, len, indices);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7370,7 +7750,8 @@ int PMPI_File_iwrite_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_all( fh, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7389,7 +7770,8 @@ int PMPI_File_iwrite_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_at_all( fh, offset, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7408,7 +7790,8 @@ MPI_Fint PMPI_Group_c2f(MPI_Group group)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Group_c2f( group);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7427,7 +7810,8 @@ MPI_Group PMPI_Group_f2c(MPI_Fint group)
 #endif
 MPI_Group ret_tmp= INTERFACE_LOCAL_MPI_Group_f2c( group);
 
-MPI_Group ret=ret_tmp;#ifdef DEBUG
+MPI_Group ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7446,7 +7830,8 @@ MPI_Fint PMPI_Info_c2f(MPI_Info info)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Info_c2f( info);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7465,7 +7850,8 @@ MPI_Info PMPI_Info_f2c(MPI_Fint info)
 #endif
 MPI_Info ret_tmp= INTERFACE_LOCAL_MPI_Info_f2c( info);
 
-MPI_Info ret=ret_tmp;#ifdef DEBUG
+MPI_Info ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7484,7 +7870,8 @@ MPI_Fint PMPI_Errhandler_c2f(MPI_Errhandler errhandler)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_c2f( errhandler);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7503,7 +7890,8 @@ MPI_Errhandler PMPI_Errhandler_f2c(MPI_Fint errhandler)
 #endif
 MPI_Errhandler ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_f2c( errhandler);
 
-MPI_Errhandler ret=ret_tmp;#ifdef DEBUG
+MPI_Errhandler ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7522,7 +7910,8 @@ MPI_Fint PMPI_Message_c2f(MPI_Message message)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Message_c2f( message);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7541,7 +7930,8 @@ MPI_Message PMPI_Message_f2c(MPI_Fint message)
 #endif
 MPI_Message ret_tmp= INTERFACE_LOCAL_MPI_Message_f2c( message);
 
-MPI_Message ret=ret_tmp;#ifdef DEBUG
+MPI_Message ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7560,7 +7950,8 @@ MPI_Fint PMPI_Op_c2f(MPI_Op op)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Op_c2f( op);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7579,7 +7970,8 @@ MPI_Op PMPI_Op_f2c(MPI_Fint op)
 #endif
 MPI_Op ret_tmp= INTERFACE_LOCAL_MPI_Op_f2c( op);
 
-MPI_Op ret=ret_tmp;#ifdef DEBUG
+MPI_Op ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7598,7 +7990,8 @@ MPI_Fint PMPI_Request_c2f(MPI_Request request)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Request_c2f( request);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7617,7 +8010,8 @@ MPI_Request PMPI_Request_f2c(MPI_Fint request)
 #endif
 MPI_Request ret_tmp= INTERFACE_LOCAL_MPI_Request_f2c( request);
 
-MPI_Request ret=ret_tmp;#ifdef DEBUG
+MPI_Request ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7636,7 +8030,8 @@ int PMPI_T_category_get_index(char * name,int * cat_index)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_index( name, cat_index);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7655,7 +8050,8 @@ int PMPI_T_cvar_get_index(char * name,int * cvar_index)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_get_index( name, cvar_index);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7674,7 +8070,8 @@ int PMPI_T_pvar_get_index(char * name,int var_class,int * pvar_index)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_get_index( name, var_class, pvar_index);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7693,7 +8090,8 @@ int PMPI_Type_c2f(MPI_Datatype datatype)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_c2f( datatype);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7712,7 +8110,8 @@ MPI_Datatype PMPI_Type_f2c(MPI_Fint datatype)
 #endif
 MPI_Datatype ret_tmp= INTERFACE_LOCAL_MPI_Type_f2c( datatype);
 
-MPI_Datatype ret=ret_tmp;#ifdef DEBUG
+MPI_Datatype ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7731,7 +8130,8 @@ int PMPI_Win_c2f(MPI_Win win)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_c2f( win);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7750,7 +8150,8 @@ MPI_Win PMPI_Win_f2c(MPI_Fint win)
 #endif
 MPI_Win ret_tmp= INTERFACE_LOCAL_MPI_Win_f2c( win);
 
-MPI_Win ret=ret_tmp;#ifdef DEBUG
+MPI_Win ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7769,7 +8170,8 @@ MPI_Aint PMPI_Aint_add(MPI_Aint base,MPI_Aint disp)
 #endif
 MPI_Aint ret_tmp= INTERFACE_LOCAL_MPI_Aint_add( base, disp);
 
-MPI_Aint ret=ret_tmp;#ifdef DEBUG
+MPI_Aint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7788,7 +8190,8 @@ MPI_Aint PMPI_Aint_diff(MPI_Aint addr1,MPI_Aint addr2)
 #endif
 MPI_Aint ret_tmp= INTERFACE_LOCAL_MPI_Aint_diff( addr1, addr2);
 
-MPI_Aint ret=ret_tmp;#ifdef DEBUG
+MPI_Aint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7807,7 +8210,8 @@ MPI_Fint PMPI_Comm_c2f(MPI_Comm comm)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Comm_c2f( comm);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7826,7 +8230,8 @@ MPI_Comm PMPI_Comm_f2c(MPI_Fint comm)
 #endif
 MPI_Comm ret_tmp= INTERFACE_LOCAL_MPI_Comm_f2c( comm);
 
-MPI_Comm ret=ret_tmp;#ifdef DEBUG
+MPI_Comm ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7845,7 +8250,8 @@ MPI_Fint PMPI_File_c2f(MPI_File file)
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_File_c2f( file);
 
-MPI_Fint ret=ret_tmp;#ifdef DEBUG
+MPI_Fint ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7864,7 +8270,8 @@ MPI_File PMPI_File_f2c(MPI_Fint file)
 #endif
 MPI_File ret_tmp= INTERFACE_LOCAL_MPI_File_f2c( file);
 
-MPI_File ret=ret_tmp;#ifdef DEBUG
+MPI_File ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7883,7 +8290,8 @@ int PMPI_File_iread_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,M
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_all( fh, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7902,7 +8310,8 @@ int PMPI_File_iread_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MP
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_at_all( fh, offset, buf, count, datatype, request);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
@@ -7921,7 +8330,8 @@ int PMPI_T_category_changed(int * stamp)
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_changed( stamp);
 
-int ret=ret_tmp;#ifdef DEBUG
+int ret=ret_tmp;
+#ifdef DEBUG
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
