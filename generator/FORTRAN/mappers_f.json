@@ -124,7 +124,7 @@
     "type": "int ", 
     "r2a": "status_r2a",
     "status_size":1
-  ,"debug_type":"%*d"
+  ,"debug_type":"%S"
 }, 
   "count_ptr_converter": {
     "local_alloc": 0, 
@@ -516,7 +516,7 @@
     "type": "int ",
     "r2a": "status_r2a",
     "status_size":1
-  ,"debug_type":"%*d"
+  ,"debug_type":"%S"
 }, 
   "com_errhadler_fct_ptr_converter": {
     "local_alloc": 0, 
@@ -666,7 +666,7 @@
     "type": "int ", 
     "r2a": "status_r2a",
     "status_size":1
-  ,"debug_type":"%*d"
+  ,"debug_type":"%S"
 }, 
   "const_char_ptr_converter": {
     "local_alloc": 0, 
