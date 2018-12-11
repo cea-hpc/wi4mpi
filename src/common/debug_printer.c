@@ -36,7 +36,26 @@ void print_status(A_MPI_Status);
                     }\
                     printf("\n]\n");\
                     }\
+ #define print_named_type(type,printf_string,func)\
+                    debug_act=0;\
+                    if(nb_elt==0){\
+                    type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
+                    func(dat,cname,&namelen);\
+                   printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
+                    }else\
+                    {\
+                    type *s=pointer_disp?*va_arg(ap,type **):va_arg(ap,type*);\
+                    printf("[\n");\
+                    for(ii=0;ii<nb_elt;ii++)\
+                    {\
+                        func(s[ii],cname,2048,&namelen);\
+                        if(ii) printf(",\n");\
+             printf("{ value : "#printf_string ", name :%s }" ,s[ii],cname);\
+                    }\
+                    printf("\n]\n");\
+                    }\
                     debug_act=1;
+v                   debug_act=1;
 void debug_printer(const char *ctr_str,...)
 {
     if(debug_act!=0)
@@ -221,7 +240,7 @@ void debug_printer_f(const char *ctr_str,...)
                     debug_act=1;
                     printf("{ \nvalue :%p ,\n name: %s\n}",dat,cname);
                     }*/
-                    print_named_type(int,%d,A_f_MPI_Type_get_name)
+                    print_named_type_f(int,%d,A_f_MPI_Type_get_name)
                     break; 
                 case 'a':
                     nb_elt=va_arg(ap,int);
