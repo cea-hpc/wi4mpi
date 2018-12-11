@@ -44,8 +44,6 @@ class generator:
     def debug_string(self,func_dict): 
         out_str=func_dict['name']+" : \\n{\\n"
         out_arg_list=""
-        if(func_dict['name']=='MPI_Init'):
-            pprint (func_dict)
         for i in func_dict['args']:
             if('debug_type' in self.mappers[i['name']]):
                 ii=i['var']
@@ -58,7 +56,7 @@ class generator:
                     out_arg_list=out_arg_list+i['arg_dep'] +","
                 out_arg_list=out_arg_list+ii+","
         if func_dict['ret'] is not None:
-            out_arg_list=out_arg_list+"ret_tmp"
+            out_arg_list=out_arg_list+"ret"
             out_str=out_str+"error/return : "+self.mappers[func_dict['ret']['name']]['debug_type']+"\\n}\\n"
         return [out_str,out_arg_list] 
 
@@ -95,6 +93,14 @@ class generator:
     def footer_func(self, func_dict, app_side=True):
         #handle reentrency only if in Wrapper_Preload_C or Wrapper_Interface_C Wrapper_Preload_Fortran Wrapper_Interface_Fortran
         string=''
+        if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C':
+            if app_side:
+                string=string+'\n'+self.mappers[func_dict['ret']['name']]['type']+' ret='+self.print_return_conv_c(func_dict)
+            else:
+                string=string+'\n'+self.mappers[func_dict['ret']['name']]['type']+' ret='+func_dict['ret']['var']+'_tmp;'
+        elif self.name == 'Interface_C':
+                string=string+'\n'+self.mappers[func_dict['ret']['name']]['type']+' ret='+func_dict['ret']['var']+'_tmp;'
+       
         if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C' or self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
             if app_side:
                 string=string+'\nin_w=0;\n'
@@ -115,15 +121,8 @@ class generator:
         if app_side:
                 string=string+'\nwi4mpi_unset_timeout();'
         string=string+'\n#endif'
-        if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C':
-            if app_side:
-                string=string+'\n'+self.print_return_conv_c(func_dict)
-            else:
-                string=string+'\nreturn '+func_dict['ret']['var']+'_tmp;'
-        elif self.name == 'Interface_C':
-                string=string+'\nreturn '+func_dict['ret']['var']+'_tmp;'
         if self.name == 'Wrapper_Preload_C' or self.name=='Wrapper_Interface_C':
-            string=string+'\n}'
+            string=string+'\nreturn ret;}'
         else:
             string=string+'\n}'
         return string
@@ -874,11 +873,11 @@ class generator:
 ###                   ###
     def print_return_conv_c(self,func_dict):
         if self.mappers[func_dict['ret']['name']]['r2a'] == 'fint_conv_r2a' or self.mappers[func_dict['ret']['name']]['r2a'] == 'aint_conv_r2a' :
-            return 'return (A_'+self.mappers[func_dict['ret']['name']]['type']+')'+func_dict['ret']['var']+'_tmp;'
+            return ' (A_'+self.mappers[func_dict['ret']['name']]['type']+')'+func_dict['ret']['var']+'_tmp;'
         elif self.mappers[func_dict['ret']['name']]['r2a'] != 'double_conv_r2a':
-            return 'return '+self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+'_tmp);'
+            return ' '+self.mappers[func_dict['ret']['name']]['r2a']+'('+func_dict['ret']['var']+'_tmp);'
         else:
-            return 'return '+func_dict['ret']['var']+'_tmp;'
+            return ' '+func_dict['ret']['var']+'_tmp;'
 ###                   ###
 #  print_return_conv_f  #
 ###                   ###
