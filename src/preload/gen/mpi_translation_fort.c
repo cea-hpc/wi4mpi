@@ -73,8 +73,8 @@ void A_f_MPI_Send(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Send_print)
-    debug_printer("MPI_Send : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nerror/return : "
+    debug_printer("MPI_Send : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
                   "%*d\n}\n",
                   buf, count, datatype, dest, tag, comm, ret);
 #endif
@@ -134,8 +134,8 @@ void A_f_MPI_Recv(void *buf, int *count, int *datatype, int *source, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Recv_print)
-    debug_printer("MPI_Recv : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\nsource : %*d,\ntag : %*d,\ncomm : %*d,\nstatus : "
+    debug_printer("MPI_Recv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\nsource : %*d,\ntag : %*d,\ncomm : %*C,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   buf, count, datatype, source, tag, comm, status, ret);
 #endif
@@ -231,8 +231,8 @@ void A_f_MPI_Bsend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Bsend_print)
-    debug_printer("MPI_Bsend : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nerror/return : "
+    debug_printer("MPI_Bsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
                   "%*d\n}\n",
                   buf, count, datatype, dest, tag, comm, ret);
 #endif
@@ -283,8 +283,8 @@ void A_f_MPI_Ssend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ssend_print)
-    debug_printer("MPI_Ssend : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nerror/return : "
+    debug_printer("MPI_Ssend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
                   "%*d\n}\n",
                   buf, count, datatype, dest, tag, comm, ret);
 #endif
@@ -335,8 +335,8 @@ void A_f_MPI_Rsend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rsend_print)
-    debug_printer("MPI_Rsend : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nerror/return : "
+    debug_printer("MPI_Rsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
                   "%*d\n}\n",
                   buf, count, datatype, dest, tag, comm, ret);
 #endif
@@ -377,7 +377,7 @@ void A_f_MPI_Buffer_attach(void *buffer, int *size, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Buffer_attach_print)
-    debug_printer("MPI_Buffer_attach : \n{\nbuffer : %*d,\nsize : "
+    debug_printer("MPI_Buffer_attach : \n{\nbuffer : %p,\nsize : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buffer, size, ret);
 #endif
@@ -419,7 +419,7 @@ void A_f_MPI_Buffer_detach(void *buffer_addr, int *size, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Buffer_detach_print)
-    debug_printer("MPI_Buffer_detach : \n{\nbuffer_addr : %*d,\nsize : "
+    debug_printer("MPI_Buffer_detach : \n{\nbuffer_addr : %p,\nsize : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buffer_addr, size, ret);
 #endif
@@ -474,8 +474,8 @@ void A_f_MPI_Isend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Isend_print)
-    debug_printer("MPI_Isend : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Isend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -530,8 +530,8 @@ void A_f_MPI_Ibsend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ibsend_print)
-    debug_printer("MPI_Ibsend : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Ibsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -586,8 +586,8 @@ void A_f_MPI_Issend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Issend_print)
-    debug_printer("MPI_Issend : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Issend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -642,8 +642,8 @@ void A_f_MPI_Irsend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Irsend_print)
-    debug_printer("MPI_Irsend : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Irsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -699,8 +699,8 @@ void A_f_MPI_Irecv(void *buf, int *count, int *datatype, int *source, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Irecv_print)
-    debug_printer("MPI_Irecv : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\nsource : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Irecv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\nsource : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, source, tag, comm, request, ret);
 #endif
@@ -895,7 +895,7 @@ void A_f_MPI_Iprobe(int *source, int *tag, int *comm, int *flag, int *status,
 #ifdef DEBUG
   if (WI4MPI_Iprobe_print)
     debug_printer("MPI_Iprobe : \n{\nsource : %*d,\ntag : %*d,\ncomm : "
-                  "%*d,\nflag : %*d,\nstatus : %S,\nerror/return : %*d\n}\n",
+                  "%*C,\nflag : %*d,\nstatus : %S,\nerror/return : %*d\n}\n",
                   source, tag, comm, flag, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -946,7 +946,7 @@ void A_f_MPI_Probe(int *source, int *tag, int *comm, int *status, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_Probe_print)
     debug_printer("MPI_Probe : \n{\nsource : %*d,\ntag : %*d,\ncomm : "
-                  "%*d,\nstatus : %S,\nerror/return : %*d\n}\n",
+                  "%*C,\nstatus : %S,\nerror/return : %*d\n}\n",
                   source, tag, comm, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -1083,8 +1083,8 @@ void A_f_MPI_Send_init(void *buf, int *count, int *datatype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Send_init_print)
-    debug_printer("MPI_Send_init : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Send_init : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -1139,8 +1139,8 @@ void A_f_MPI_Bsend_init(void *buf, int *count, int *datatype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Bsend_init_print)
-    debug_printer("MPI_Bsend_init : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Bsend_init : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -1195,8 +1195,8 @@ void A_f_MPI_Ssend_init(void *buf, int *count, int *datatype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ssend_init_print)
-    debug_printer("MPI_Ssend_init : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Ssend_init : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -1251,8 +1251,8 @@ void A_f_MPI_Rsend_init(void *buf, int *count, int *datatype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rsend_init_print)
-    debug_printer("MPI_Rsend_init : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Rsend_init : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, tag, comm, request, ret);
 #endif
@@ -1308,8 +1308,8 @@ void A_f_MPI_Recv_init(void *buf, int *count, int *datatype, int *source,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Recv_init_print)
-    debug_printer("MPI_Recv_init : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\nsource : %*d,\ntag : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Recv_init : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\nsource : %*d,\ntag : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buf, count, datatype, source, tag, comm, request, ret);
 #endif
@@ -1427,10 +1427,10 @@ void A_f_MPI_Sendrecv(void *sendbuf, int *sendcount, int *sendtype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Sendrecv_print)
-    debug_printer("MPI_Sendrecv : \n{\nsendbuf : %*d,\nsendcount : "
+    debug_printer("MPI_Sendrecv : \n{\nsendbuf : %p,\nsendcount : "
                   "%*d,\nsendtype : %*D,\ndest : %*d,\nsendtag : %*d,\nrecvbuf "
-                  ": %*d,\nrecvcount : %*d,\nrecvtype : %*D,\nsource : "
-                  "%*d,\nrecvtag : %*d,\ncomm : %*d,\nstatus : "
+                  ": %p,\nrecvcount : %*d,\nrecvtype : %*D,\nsource : "
+                  "%*d,\nrecvtag : %*d,\ncomm : %*C,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, dest, sendtag, recvbuf,
                   recvcount, recvtype, source, recvtag, comm, status, ret);
@@ -1502,9 +1502,9 @@ void A_f_MPI_Sendrecv_replace(void *buf, int *count, int *datatype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Sendrecv_replace_print)
-    debug_printer("MPI_Sendrecv_replace : \n{\nbuf : %*d,\ncount : "
+    debug_printer("MPI_Sendrecv_replace : \n{\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\ndest : %*d,\nsendtag : %*d,\nsource "
-                  ": %*d,\nrecvtag : %*d,\ncomm : %*d,\nstatus : "
+                  ": %*d,\nrecvtag : %*d,\ncomm : %*C,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   buf, count, datatype, dest, sendtag, source, recvtag, comm,
                   status, ret);
@@ -1834,7 +1834,7 @@ void A_f_MPI_Address(void *location, size_t *address, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Address_print)
-    debug_printer("MPI_Address : \n{\nlocation : %*d,\naddress : "
+    debug_printer("MPI_Address : \n{\nlocation : %p,\naddress : "
                   "%*d,\nerror/return : %*d\n}\n",
                   location, address, ret);
 #endif
@@ -2178,9 +2178,9 @@ void A_f_MPI_Pack(void *inbuf, int *incount, int *datatype, void *outbuf,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Pack_print)
-    debug_printer("MPI_Pack : \n{\ninbuf : %*d,\nincount : %*d,\ndatatype : "
-                  "%*D,\noutbuf : %*d,\noutsize : %*d,\nposition : %*d,\ncomm "
-                  ": %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Pack : \n{\ninbuf : %p,\nincount : %*d,\ndatatype : "
+                  "%*D,\noutbuf : %p,\noutsize : %*d,\nposition : %*d,\ncomm : "
+                  "%*C,\nerror/return : %*d\n}\n",
                   inbuf, incount, datatype, outbuf, outsize, position, comm,
                   ret);
 #endif
@@ -2231,9 +2231,9 @@ void A_f_MPI_Unpack(void *inbuf, int *insize, int *position, void *outbuf,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Unpack_print)
-    debug_printer("MPI_Unpack : \n{\ninbuf : %*d,\ninsize : %*d,\nposition : "
-                  "%*d,\noutbuf : %*d,\noutcount : %*d,\ndatatype : %*D,\ncomm "
-                  ": %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Unpack : \n{\ninbuf : %p,\ninsize : %*d,\nposition : "
+                  "%*d,\noutbuf : %p,\noutcount : %*d,\ndatatype : %*D,\ncomm "
+                  ": %*C,\nerror/return : %*d\n}\n",
                   inbuf, insize, position, outbuf, outcount, datatype, comm,
                   ret);
 #endif
@@ -2278,7 +2278,7 @@ void A_f_MPI_Pack_size(int *incount, int *datatype, int *comm, int *size,
 #ifdef DEBUG
   if (WI4MPI_Pack_size_print)
     debug_printer("MPI_Pack_size : \n{\nincount : %*d,\ndatatype : %*D,\ncomm "
-                  ": %*d,\nsize : %*d,\nerror/return : %*d\n}\n",
+                  ": %*C,\nsize : %*d,\nerror/return : %*d\n}\n",
                   incount, datatype, comm, size, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2318,7 +2318,7 @@ void A_f_MPI_Barrier(int *comm, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Barrier_print)
-    debug_printer("MPI_Barrier : \n{\ncomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Barrier : \n{\ncomm : %*C,\nerror/return : %*d\n}\n",
                   comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2365,8 +2365,8 @@ void A_f_MPI_Bcast(void *buffer, int *count, int *datatype, int *root,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Bcast_print)
-    debug_printer("MPI_Bcast : \n{\nbuffer : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\nroot : %*d,\ncomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Bcast : \n{\nbuffer : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\nroot : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   buffer, count, datatype, root, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -2425,10 +2425,9 @@ void A_f_MPI_Gather(void *sendbuf, int *sendcount, int *sendtype, void *recvbuf,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Gather_print)
-    debug_printer("MPI_Gather : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Gather : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype "
+                  ": %*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : "
+                  "%*D,\nroot : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   root, comm, ret);
 #endif
@@ -2489,10 +2488,10 @@ void A_f_MPI_Gatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Gatherv_print)
-    debug_printer("MPI_Gatherv : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcounts : "
+    debug_printer("MPI_Gatherv : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
                   "%*d,\ndispls : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                   recvtype, root, comm, ret);
 #endif
@@ -2552,10 +2551,10 @@ void A_f_MPI_Scatter(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scatter_print)
-    debug_printer("MPI_Scatter : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
+    debug_printer("MPI_Scatter : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
                   "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   root, comm, ret);
 #endif
@@ -2616,10 +2615,10 @@ void A_f_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scatterv_print)
-    debug_printer("MPI_Scatterv : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Scatterv : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\ndispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%*d,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm "
-                  ": %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount,
                   recvtype, root, comm, ret);
 #endif
@@ -2674,9 +2673,9 @@ void A_f_MPI_Allgather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Allgather_print)
-    debug_printer("MPI_Allgather : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Allgather : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, ret);
 #endif
@@ -2736,10 +2735,10 @@ void A_f_MPI_Allgatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Allgatherv_print)
-    debug_printer("MPI_Allgatherv : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcounts : "
+    debug_printer("MPI_Allgatherv : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
                   "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                   recvtype, comm, ret);
 #endif
@@ -2794,9 +2793,9 @@ void A_f_MPI_Alltoall(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoall_print)
-    debug_printer("MPI_Alltoall : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Alltoall : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, ret);
 #endif
@@ -2857,10 +2856,10 @@ void A_f_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoallv_print)
-    debug_printer("MPI_Alltoallv : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
-                  "%*D,\ncomm : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
+                  "%*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts,
                   rdispls, recvtype, comm, ret);
 #endif
@@ -2912,8 +2911,8 @@ void A_f_MPI_Exscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Exscan_print)
-    debug_printer("MPI_Exscan : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount : "
-                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*d,\nerror/return "
+    debug_printer("MPI_Exscan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*C,\nerror/return "
                   ": %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, comm, ret);
 #endif
@@ -2967,9 +2966,9 @@ void A_f_MPI_Reduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_print)
-    debug_printer("MPI_Reduce : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount : "
+    debug_printer("MPI_Reduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nop : %*d,\nroot : %*d,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, root, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3012,7 +3011,7 @@ void A_f_MPI_Op_create(void *user_fn, int *commute, int *op, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Op_create_print)
-    debug_printer("MPI_Op_create : \n{\nuser_fn : %*d,\ncommute : %*d,\nop : "
+    debug_printer("MPI_Op_create : \n{\nuser_fn : %p,\ncommute : %*d,\nop : "
                   "%*d,\nerror/return : %*d\n}\n",
                   user_fn, commute, op, ret);
 #endif
@@ -3107,9 +3106,9 @@ void A_f_MPI_Allreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Allreduce_print)
-    debug_printer("MPI_Allreduce : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount "
-                  ": %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Allreduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*C,\nerror/return "
+                  ": %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3160,8 +3159,8 @@ void A_f_MPI_Scan(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scan_print)
-    debug_printer("MPI_Scan : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount : "
-                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*d,\nerror/return "
+    debug_printer("MPI_Scan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*C,\nerror/return "
                   ": %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, comm, ret);
 #endif
@@ -3330,7 +3329,7 @@ void A_f_MPI_Comm_group(int *comm, int *group, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_group_print)
-    debug_printer("MPI_Comm_group : \n{\ncomm : %*d,\ngroup : "
+    debug_printer("MPI_Comm_group : \n{\ncomm : %*C,\ngroup : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, group, ret);
 #endif
@@ -3555,7 +3554,7 @@ void A_f_MPI_Comm_size(int *comm, int *size, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_size_print)
-    debug_printer("MPI_Comm_size : \n{\ncomm : %*d,\nsize : %*d,\nerror/return "
+    debug_printer("MPI_Comm_size : \n{\ncomm : %*C,\nsize : %*d,\nerror/return "
                   ": %*d\n}\n",
                   comm, size, ret);
 #endif
@@ -3596,7 +3595,7 @@ void A_f_MPI_Comm_rank(int *comm, int *rank, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_rank_print)
-    debug_printer("MPI_Comm_rank : \n{\ncomm : %*d,\nrank : %*d,\nerror/return "
+    debug_printer("MPI_Comm_rank : \n{\ncomm : %*C,\nrank : %*d,\nerror/return "
                   ": %*d\n}\n",
                   comm, rank, ret);
 #endif
@@ -3639,7 +3638,7 @@ void A_f_MPI_Comm_compare(int *comm1, int *comm2, int *result, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_compare_print)
-    debug_printer("MPI_Comm_compare : \n{\ncomm1 : %*d,\ncomm2 : %*d,\nresult "
+    debug_printer("MPI_Comm_compare : \n{\ncomm1 : %*C,\ncomm2 : %*C,\nresult "
                   ": %*d,\nerror/return : %*d\n}\n",
                   comm1, comm2, result, ret);
 #endif
@@ -3683,8 +3682,8 @@ void A_f_MPI_Comm_dup(int *comm, int *newcomm, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_dup_print)
-    debug_printer("MPI_Comm_dup : \n{\ncomm : %*d,\nnewcomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Comm_dup : \n{\ncomm : %*C,\nnewcomm : "
+                  "%*C,\nerror/return : %*d\n}\n",
                   comm, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3729,8 +3728,8 @@ void A_f_MPI_Comm_dup_with_info(int *comm, int *info, int *newcomm, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_dup_with_info_print)
-    debug_printer("MPI_Comm_dup_with_info : \n{\ncomm : %*d,\ninfo : "
-                  "%*d,\nnewcomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Comm_dup_with_info : \n{\ncomm : %*C,\ninfo : "
+                  "%*d,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
                   comm, info, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3775,8 +3774,8 @@ void A_f_MPI_Comm_create(int *comm, int *group, int *newcomm, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_create_print)
-    debug_printer("MPI_Comm_create : \n{\ncomm : %*d,\ngroup : %*d,\nnewcomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Comm_create : \n{\ncomm : %*C,\ngroup : %*d,\nnewcomm : "
+                  "%*C,\nerror/return : %*d\n}\n",
                   comm, group, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3820,8 +3819,8 @@ void A_f_MPI_Comm_split(int *comm, int *color, int *key, int *newcomm,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_split_print)
-    debug_printer("MPI_Comm_split : \n{\ncomm : %*d,\ncolor : %*d,\nkey : "
-                  "%*d,\nnewcomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Comm_split : \n{\ncomm : %*C,\ncolor : %*d,\nkey : "
+                  "%*d,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
                   comm, color, key, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3863,7 +3862,7 @@ void A_f_MPI_Comm_free(int *comm, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_free_print)
-    debug_printer("MPI_Comm_free : \n{\ncomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Comm_free : \n{\ncomm : %*C,\nerror/return : %*d\n}\n",
                   comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -3903,7 +3902,7 @@ void A_f_MPI_Comm_test_inter(int *comm, int *flag, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_test_inter_print)
-    debug_printer("MPI_Comm_test_inter : \n{\ncomm : %*d,\nflag : "
+    debug_printer("MPI_Comm_test_inter : \n{\ncomm : %*C,\nflag : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, flag, ret);
 #endif
@@ -3944,7 +3943,7 @@ void A_f_MPI_Comm_remote_size(int *comm, int *size, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_remote_size_print)
-    debug_printer("MPI_Comm_remote_size : \n{\ncomm : %*d,\nsize : "
+    debug_printer("MPI_Comm_remote_size : \n{\ncomm : %*C,\nsize : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, size, ret);
 #endif
@@ -3988,7 +3987,7 @@ void A_f_MPI_Comm_remote_group(int *comm, int *group, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_remote_group_print)
-    debug_printer("MPI_Comm_remote_group : \n{\ncomm : %*d,\ngroup : "
+    debug_printer("MPI_Comm_remote_group : \n{\ncomm : %*C,\ngroup : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, group, ret);
 #endif
@@ -4041,9 +4040,9 @@ void A_f_MPI_Intercomm_create(int *local_comm, int *local_leader,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Intercomm_create_print)
-    debug_printer("MPI_Intercomm_create : \n{\nlocal_comm : %*d,\nlocal_leader "
-                  ": %*d,\npeer_comm : %*d,\nremote_leader : %*d,\ntag : "
-                  "%*d,\nnewintercomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Intercomm_create : \n{\nlocal_comm : %*C,\nlocal_leader "
+                  ": %*d,\npeer_comm : %*C,\nremote_leader : %*d,\ntag : "
+                  "%*d,\nnewintercomm : %*C,\nerror/return : %*d\n}\n",
                   local_comm, local_leader, peer_comm, remote_leader, tag,
                   newintercomm, ret);
 #endif
@@ -4088,8 +4087,8 @@ void A_f_MPI_Intercomm_merge(int *intercomm, int *high, int *newintracomm,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Intercomm_merge_print)
-    debug_printer("MPI_Intercomm_merge : \n{\nintercomm : %*d,\nhigh : "
-                  "%*d,\nnewintracomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Intercomm_merge : \n{\nintercomm : %*C,\nhigh : "
+                  "%*d,\nnewintracomm : %*C,\nerror/return : %*d\n}\n",
                   intercomm, high, newintracomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -4135,8 +4134,8 @@ void A_f_MPI_Keyval_create(void *copy_fn, void *delete_fn, int *keyval,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Keyval_create_print)
-    debug_printer("MPI_Keyval_create : \n{\ncopy_fn : %*d,\ndelete_fn : "
-                  "%*d,\nkeyval : %*d,\nextra_state : %*d,\nerror/return : "
+    debug_printer("MPI_Keyval_create : \n{\ncopy_fn : %p,\ndelete_fn : "
+                  "%p,\nkeyval : %*d,\nextra_state : %p,\nerror/return : "
                   "%*d\n}\n",
                   copy_fn, delete_fn, keyval, extra_state, ret);
 #endif
@@ -4220,7 +4219,7 @@ void A_f_MPI_Attr_put(int *comm, int *keyval, int *attribute_val, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Attr_put_print)
-    debug_printer("MPI_Attr_put : \n{\ncomm : %*d,\nkeyval : "
+    debug_printer("MPI_Attr_put : \n{\ncomm : %*C,\nkeyval : "
                   "%*d,\nattribute_val : %*d,\nerror/return : %*d\n}\n",
                   comm, keyval, attribute_val, ret);
 #endif
@@ -4264,7 +4263,7 @@ void A_f_MPI_Attr_get(int *comm, int *keyval, int *attribute_val, int *flag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Attr_get_print)
-    debug_printer("MPI_Attr_get : \n{\ncomm : %*d,\nkeyval : "
+    debug_printer("MPI_Attr_get : \n{\ncomm : %*C,\nkeyval : "
                   "%*d,\nattribute_val : %*d,\nflag : %*d,\nerror/return : "
                   "%*d\n}\n",
                   comm, keyval, attribute_val, flag, ret);
@@ -4308,7 +4307,7 @@ void A_f_MPI_Attr_delete(int *comm, int *keyval, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Attr_delete_print)
-    debug_printer("MPI_Attr_delete : \n{\ncomm : %*d,\nkeyval : "
+    debug_printer("MPI_Attr_delete : \n{\ncomm : %*C,\nkeyval : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, keyval, ret);
 #endif
@@ -4355,7 +4354,7 @@ void A_f_MPI_Topo_test(int *comm, int *status, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Topo_test_print)
-    debug_printer("MPI_Topo_test : \n{\ncomm : %*d,\nstatus : "
+    debug_printer("MPI_Topo_test : \n{\ncomm : %*C,\nstatus : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, status, ret);
 #endif
@@ -4396,7 +4395,7 @@ void A_f_MPI_Graphdims_get(int *comm, int *nnodes, int *nedges, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graphdims_get_print)
-    debug_printer("MPI_Graphdims_get : \n{\ncomm : %*d,\nnnodes : %*d,\nnedges "
+    debug_printer("MPI_Graphdims_get : \n{\ncomm : %*C,\nnnodes : %*d,\nnedges "
                   ": %*d,\nerror/return : %*d\n}\n",
                   comm, nnodes, nedges, ret);
 #endif
@@ -4437,7 +4436,7 @@ void A_f_MPI_Cartdim_get(int *comm, int *ndims, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cartdim_get_print)
-    debug_printer("MPI_Cartdim_get : \n{\ncomm : %*d,\nndims : "
+    debug_printer("MPI_Cartdim_get : \n{\ncomm : %*C,\nndims : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, ndims, ret);
 #endif
@@ -4479,7 +4478,7 @@ void A_f_MPI_Graph_neighbors_count(int *comm, int *rank, int *nneighbors,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_neighbors_count_print)
-    debug_printer("MPI_Graph_neighbors_count : \n{\ncomm : %*d,\nrank : "
+    debug_printer("MPI_Graph_neighbors_count : \n{\ncomm : %*C,\nrank : "
                   "%*d,\nnneighbors : %*d,\nerror/return : %*d\n}\n",
                   comm, rank, nneighbors, ret);
 #endif
@@ -4522,7 +4521,7 @@ void A_f_MPI_Cart_shift(int *comm, int *direction, int *disp, int *rank_source,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_shift_print)
-    debug_printer("MPI_Cart_shift : \n{\ncomm : %*d,\ndirection : %*d,\ndisp : "
+    debug_printer("MPI_Cart_shift : \n{\ncomm : %*C,\ndirection : %*d,\ndisp : "
                   "%*d,\nrank_source : %*d,\nrank_dest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   comm, direction, disp, rank_source, rank_dest, ret);
@@ -4607,7 +4606,7 @@ void A_f_MPI_Errhandler_create(void *function, int *errhandler, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Errhandler_create_print)
-    debug_printer("MPI_Errhandler_create : \n{\nfunction : %*d,\nerrhandler : "
+    debug_printer("MPI_Errhandler_create : \n{\nfunction : %p,\nerrhandler : "
                   "%*d,\nerror/return : %*d\n}\n",
                   function, errhandler, ret);
 #endif
@@ -4651,7 +4650,7 @@ void A_f_MPI_Errhandler_set(int *comm, int *errhandler, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Errhandler_set_print)
-    debug_printer("MPI_Errhandler_set : \n{\ncomm : %*d,\nerrhandler : "
+    debug_printer("MPI_Errhandler_set : \n{\ncomm : %*C,\nerrhandler : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, errhandler, ret);
 #endif
@@ -4695,7 +4694,7 @@ void A_f_MPI_Errhandler_get(int *comm, int *errhandler, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Errhandler_get_print)
-    debug_printer("MPI_Errhandler_get : \n{\ncomm : %*d,\nerrhandler : "
+    debug_printer("MPI_Errhandler_get : \n{\ncomm : %*C,\nerrhandler : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, errhandler, ret);
 #endif
@@ -4865,7 +4864,7 @@ void A_f_MPI_Abort(int *comm, int *errorcode, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Abort_print)
-    debug_printer("MPI_Abort : \n{\ncomm : %*d,\nerrorcode : "
+    debug_printer("MPI_Abort : \n{\ncomm : %*C,\nerrorcode : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, errorcode, ret);
 #endif
@@ -4953,7 +4952,7 @@ void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
 #ifdef DEBUG
   if (WI4MPI_Comm_accept_print)
     debug_printer("MPI_Comm_accept : \n{\nport_name : %*d,\ninfo : %*d,\nroot "
-                  ": %*d,\ncomm : %*d,\nnewcomm : %*d,\nerror/return : "
+                  ": %*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : "
                   "%*d\n}\n",
                   port_name, info, root, comm, newcomm, ret);
 #endif
@@ -5004,7 +5003,7 @@ void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
 #ifdef DEBUG
   if (WI4MPI_Comm_connect_print)
     debug_printer("MPI_Comm_connect : \n{\nport_name : %*d,\ninfo : %*d,\nroot "
-                  ": %*d,\ncomm : %*d,\nnewcomm : %*d,\nerror/return : "
+                  ": %*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : "
                   "%*d\n}\n",
                   port_name, info, root, comm, newcomm, ret);
 #endif
@@ -5048,7 +5047,7 @@ void A_f_MPI_Comm_disconnect(int *comm, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_Comm_disconnect_print)
     debug_printer(
-        "MPI_Comm_disconnect : \n{\ncomm : %*d,\nerror/return : %*d\n}\n", comm,
+        "MPI_Comm_disconnect : \n{\ncomm : %*C,\nerror/return : %*d\n}\n", comm,
         ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5090,7 +5089,7 @@ void A_f_MPI_Comm_get_parent(int *parent, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_Comm_get_parent_print)
     debug_printer(
-        "MPI_Comm_get_parent : \n{\nparent : %*d,\nerror/return : %*d\n}\n",
+        "MPI_Comm_get_parent : \n{\nparent : %*C,\nerror/return : %*d\n}\n",
         parent, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5132,7 +5131,7 @@ void A_f_MPI_Comm_join(int *fd, int *intercomm, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_Comm_join_print)
     debug_printer("MPI_Comm_join : \n{\nfd : %*d,\nintercomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   fd, intercomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -5174,7 +5173,7 @@ void A_f_MPI_Comm_set_info(int *comm, int *info, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_set_info_print)
-    debug_printer("MPI_Comm_set_info : \n{\ncomm : %*d,\ninfo : "
+    debug_printer("MPI_Comm_set_info : \n{\ncomm : %*C,\ninfo : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, info, ret);
 #endif
@@ -5218,7 +5217,7 @@ void A_f_MPI_Comm_get_info(int *comm, int *info, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_info_print)
-    debug_printer("MPI_Comm_get_info : \n{\ncomm : %*d,\ninfo : "
+    debug_printer("MPI_Comm_get_info : \n{\ncomm : %*C,\ninfo : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, info, ret);
 #endif
@@ -5280,7 +5279,7 @@ void A_f_MPI_Accumulate(void *origin_addr, int *origin_count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Accumulate_print)
-    debug_printer("MPI_Accumulate : \n{\norigin_addr : %*d,\norigin_count : "
+    debug_printer("MPI_Accumulate : \n{\norigin_addr : %p,\norigin_count : "
                   "%*d,\norigin_datatype : %*D,\ntarget_rank : "
                   "%*d,\ntarget_disp : %*d,\ntarget_count : "
                   "%*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
@@ -5344,7 +5343,7 @@ void A_f_MPI_Get(void *origin_addr, int *origin_count, int *origin_datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_print)
-    debug_printer("MPI_Get : \n{\norigin_addr : %*d,\norigin_count : "
+    debug_printer("MPI_Get : \n{\norigin_addr : %p,\norigin_count : "
                   "%*d,\norigin_datatype : %*D,\ntarget_rank : "
                   "%*d,\ntarget_disp : %*d,\ntarget_count : "
                   "%*d,\ntarget_datatype : %*D,\nwin : %*d,\nerror/return : "
@@ -5407,7 +5406,7 @@ void A_f_MPI_Put(void *origin_addr, int *origin_count, int *origin_datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Put_print)
-    debug_printer("MPI_Put : \n{\norigin_addr : %*d,\norigin_count : "
+    debug_printer("MPI_Put : \n{\norigin_addr : %p,\norigin_count : "
                   "%*d,\norigin_datatype : %*D,\ntarget_rank : "
                   "%*d,\ntarget_disp : %*d,\ntarget_count : "
                   "%*d,\ntarget_datatype : %*D,\nwin : %*d,\nerror/return : "
@@ -5502,8 +5501,8 @@ void A_f_MPI_Win_create(void *base, size_t *size, int *disp_unit, int *info,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_create_print)
-    debug_printer("MPI_Win_create : \n{\nbase : %*d,\nsize : %*d,\ndisp_unit : "
-                  "%*d,\ninfo : %*d,\ncomm : %*d,\nwin : %*d,\nerror/return : "
+    debug_printer("MPI_Win_create : \n{\nbase : %p,\nsize : %*d,\ndisp_unit : "
+                  "%*d,\ninfo : %*d,\ncomm : %*C,\nwin : %*d,\nerror/return : "
                   "%*d\n}\n",
                   base, size, disp_unit, info, comm, win, ret);
 #endif
@@ -5946,7 +5945,7 @@ void A_f_MPI_Win_allocate(size_t *size, int *disp_unit, int *info, int *comm,
 #ifdef DEBUG
   if (WI4MPI_Win_allocate_print)
     debug_printer("MPI_Win_allocate : \n{\nsize : %*d,\ndisp_unit : %*d,\ninfo "
-                  ": %*d,\ncomm : %*d,\nbaseptr : %*d,\nwin : "
+                  ": %*d,\ncomm : %*C,\nbaseptr : %p,\nwin : "
                   "%*d,\nerror/return : %*d\n}\n",
                   size, disp_unit, info, comm, baseptr, win, ret);
 #endif
@@ -6004,7 +6003,7 @@ void A_f_MPI_Win_allocate_shared(size_t *size, int *disp_unit, int *info,
 #ifdef DEBUG
   if (WI4MPI_Win_allocate_shared_print)
     debug_printer("MPI_Win_allocate_shared : \n{\nsize : %*d,\ndisp_unit : "
-                  "%*d,\ninfo : %*d,\ncomm : %*d,\nbaseptr : %*d,\nwin : "
+                  "%*d,\ninfo : %*d,\ncomm : %*C,\nbaseptr : %p,\nwin : "
                   "%*d,\nerror/return : %*d\n}\n",
                   size, disp_unit, info, comm, baseptr, win, ret);
 #endif
@@ -6052,7 +6051,7 @@ void A_f_MPI_Win_shared_query(int *win, int *rank, size_t *size, int *disp_unit,
 #ifdef DEBUG
   if (WI4MPI_Win_shared_query_print)
     debug_printer("MPI_Win_shared_query : \n{\nwin : %*d,\nrank : %*d,\nsize : "
-                  "%*d,\ndisp_unit : %*d,\nbaseptr : %*d,\nerror/return : "
+                  "%*d,\ndisp_unit : %*d,\nbaseptr : %p,\nerror/return : "
                   "%*d\n}\n",
                   win, rank, size, disp_unit, baseptr, ret);
 #endif
@@ -6098,7 +6097,7 @@ void A_f_MPI_Win_create_dynamic(int *info, int *comm, int *win, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_create_dynamic_print)
-    debug_printer("MPI_Win_create_dynamic : \n{\ninfo : %*d,\ncomm : %*d,\nwin "
+    debug_printer("MPI_Win_create_dynamic : \n{\ninfo : %*d,\ncomm : %*C,\nwin "
                   ": %*d,\nerror/return : %*d\n}\n",
                   info, comm, win, ret);
 #endif
@@ -6141,7 +6140,7 @@ void A_f_MPI_Win_attach(int *win, void *base, size_t *size, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_attach_print)
-    debug_printer("MPI_Win_attach : \n{\nwin : %*d,\nbase : %*d,\nsize : "
+    debug_printer("MPI_Win_attach : \n{\nwin : %*d,\nbase : %p,\nsize : "
                   "%*d,\nerror/return : %*d\n}\n",
                   win, base, size, ret);
 #endif
@@ -6184,9 +6183,9 @@ void A_f_MPI_Win_detach(int *win, void *base, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_detach_print)
-    debug_printer("MPI_Win_detach : \n{\nwin : %*d,\nbase : %*d,\nerror/return "
-                  ": %*d\n}\n",
-                  win, base, ret);
+    debug_printer(
+        "MPI_Win_detach : \n{\nwin : %*d,\nbase : %p,\nerror/return : %*d\n}\n",
+        win, base, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6341,9 +6340,9 @@ void A_f_MPI_Get_accumulate(void *origin_addr, int *origin_count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_accumulate_print)
-    debug_printer("MPI_Get_accumulate : \n{\norigin_addr : %*d,\norigin_count "
-                  ": %*d,\norigin_datatype : %*D,\nresult_addr : "
-                  "%*d,\nresult_count : %*d,\nresult_datatype : "
+    debug_printer("MPI_Get_accumulate : \n{\norigin_addr : %p,\norigin_count : "
+                  "%*d,\norigin_datatype : %*D,\nresult_addr : "
+                  "%p,\nresult_count : %*d,\nresult_datatype : "
                   "%*D,\ntarget_rank : %*d,\ntarget_disp : %*d,\ntarget_count "
                   ": %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
                   "%*d,\nerror/return : %*d\n}\n",
@@ -6410,8 +6409,8 @@ void A_f_MPI_Fetch_and_op(void *origin_addr, void *result_addr, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Fetch_and_op_print)
-    debug_printer("MPI_Fetch_and_op : \n{\norigin_addr : %*d,\nresult_addr : "
-                  "%*d,\ndatatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
+    debug_printer("MPI_Fetch_and_op : \n{\norigin_addr : %p,\nresult_addr : "
+                  "%p,\ndatatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
                   "%*d,\nop : %*d,\nwin : %*d,\nerror/return : %*d\n}\n",
                   origin_addr, result_addr, datatype, target_rank, target_disp,
                   op, win, ret);
@@ -6476,10 +6475,10 @@ void A_f_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Compare_and_swap_print)
-    debug_printer("MPI_Compare_and_swap : \n{\norigin_addr : "
-                  "%*d,\ncompare_addr : %*d,\nresult_addr : %*d,\ndatatype : "
-                  "%*D,\ntarget_rank : %*d,\ntarget_disp : %*d,\nwin : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Compare_and_swap : \n{\norigin_addr : %p,\ncompare_addr "
+                  ": %p,\nresult_addr : %p,\ndatatype : %*D,\ntarget_rank : "
+                  "%*d,\ntarget_disp : %*d,\nwin : %*d,\nerror/return : "
+                  "%*d\n}\n",
                   origin_addr, compare_addr, result_addr, datatype, target_rank,
                   target_disp, win, ret);
 #endif
@@ -6542,7 +6541,7 @@ void A_f_MPI_Rput(void *origin_addr, int *origin_count, int *origin_datatype,
 #ifdef DEBUG
   if (WI4MPI_Rput_print)
     debug_printer(
-        "MPI_Rput : \n{\norigin_addr : %*d,\norigin_count : "
+        "MPI_Rput : \n{\norigin_addr : %p,\norigin_count : "
         "%*d,\norigin_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
         "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nwin : "
         "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
@@ -6608,7 +6607,7 @@ void A_f_MPI_Rget(void *origin_addr, int *origin_count, int *origin_datatype,
 #ifdef DEBUG
   if (WI4MPI_Rget_print)
     debug_printer(
-        "MPI_Rget : \n{\norigin_addr : %*d,\norigin_count : "
+        "MPI_Rget : \n{\norigin_addr : %p,\norigin_count : "
         "%*d,\norigin_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
         "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nwin : "
         "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
@@ -6679,7 +6678,7 @@ void A_f_MPI_Raccumulate(void *origin_addr, int *origin_count,
 #ifdef DEBUG
   if (WI4MPI_Raccumulate_print)
     debug_printer(
-        "MPI_Raccumulate : \n{\norigin_addr : %*d,\norigin_count : "
+        "MPI_Raccumulate : \n{\norigin_addr : %p,\norigin_count : "
         "%*d,\norigin_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
         "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
         "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
@@ -6756,9 +6755,9 @@ void A_f_MPI_Rget_accumulate(void *origin_addr, int *origin_count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rget_accumulate_print)
-    debug_printer("MPI_Rget_accumulate : \n{\norigin_addr : %*d,\norigin_count "
+    debug_printer("MPI_Rget_accumulate : \n{\norigin_addr : %p,\norigin_count "
                   ": %*d,\norigin_datatype : %*D,\nresult_addr : "
-                  "%*d,\nresult_count : %*d,\nresult_datatype : "
+                  "%p,\nresult_count : %*d,\nresult_datatype : "
                   "%*D,\ntarget_rank : %*d,\ntarget_disp : %*d,\ntarget_count "
                   ": %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
                   "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
@@ -7181,7 +7180,7 @@ void A_f_MPI_Comm_call_errhandler(int *comm, int *errorcode, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_call_errhandler_print)
-    debug_printer("MPI_Comm_call_errhandler : \n{\ncomm : %*d,\nerrorcode : "
+    debug_printer("MPI_Comm_call_errhandler : \n{\ncomm : %*C,\nerrorcode : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, errorcode, ret);
 #endif
@@ -7224,7 +7223,7 @@ void A_f_MPI_Comm_delete_attr(int *comm, int *comm_keyval, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_delete_attr_print)
-    debug_printer("MPI_Comm_delete_attr : \n{\ncomm : %*d,\ncomm_keyval : "
+    debug_printer("MPI_Comm_delete_attr : \n{\ncomm : %*C,\ncomm_keyval : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, comm_keyval, ret);
 #endif
@@ -7272,8 +7271,8 @@ void A_f_MPI_Comm_get_attr(int *comm, int *comm_keyval, void *attribute_val,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_attr_print)
-    debug_printer("MPI_Comm_get_attr : \n{\ncomm : %*d,\ncomm_keyval : "
-                  "%*d,\nattribute_val : %*d,\nflag : %*d,\nerror/return : "
+    debug_printer("MPI_Comm_get_attr : \n{\ncomm : %*C,\ncomm_keyval : "
+                  "%*d,\nattribute_val : %p,\nflag : %*d,\nerror/return : "
                   "%*d\n}\n",
                   comm, comm_keyval, attribute_val, flag, ret);
 #endif
@@ -7320,8 +7319,8 @@ void A_f_MPI_Comm_set_attr(int *comm, int *comm_keyval, void *attribute_val,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_set_attr_print)
-    debug_printer("MPI_Comm_set_attr : \n{\ncomm : %*d,\ncomm_keyval : "
-                  "%*d,\nattribute_val : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Comm_set_attr : \n{\ncomm : %*C,\ncomm_keyval : "
+                  "%*d,\nattribute_val : %p,\nerror/return : %*d\n}\n",
                   comm, comm_keyval, attribute_val, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7705,7 +7704,7 @@ void A_f_MPI_Type_get_attr(int *datatype, int *type_keyval, void *attribute_val,
 #ifdef DEBUG
   if (WI4MPI_Type_get_attr_print)
     debug_printer("MPI_Type_get_attr : \n{\ndatatype : %*D,\ntype_keyval : "
-                  "%*d,\nattribute_val : %*d,\nflag : %*d,\nerror/return : "
+                  "%*d,\nattribute_val : %p,\nflag : %*d,\nerror/return : "
                   "%*d\n}\n",
                   datatype, type_keyval, attribute_val, flag, ret);
 #endif
@@ -7799,7 +7798,7 @@ void A_f_MPI_Type_set_attr(int *datatype, int *type_keyval, void *attribute_val,
 #ifdef DEBUG
   if (WI4MPI_Type_set_attr_print)
     debug_printer("MPI_Type_set_attr : \n{\ndatatype : %*D,\ntype_keyval : "
-                  "%*d,\nattribute_val : %*d,\nerror/return : %*d\n}\n",
+                  "%*d,\nattribute_val : %p,\nerror/return : %*d\n}\n",
                   datatype, type_keyval, attribute_val, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7886,7 +7885,7 @@ void A_f_MPI_Alloc_mem(size_t *size, int *info, void *baseptr, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_Alloc_mem_print)
     debug_printer("MPI_Alloc_mem : \n{\nsize : %*d,\ninfo : %*d,\nbaseptr : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%p,\nerror/return : %*d\n}\n",
                   size, info, baseptr, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7933,7 +7932,7 @@ void A_f_MPI_Comm_create_errhandler(void *comm_errhandler_fn, int *errhandler,
 #ifdef DEBUG
   if (WI4MPI_Comm_create_errhandler_print)
     debug_printer("MPI_Comm_create_errhandler : \n{\ncomm_errhandler_fn : "
-                  "%*d,\nerrhandler : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nerrhandler : %*d,\nerror/return : %*d\n}\n",
                   comm_errhandler_fn, errhandler, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -7976,7 +7975,7 @@ void A_f_MPI_Comm_get_errhandler(int *comm, int *errhandler, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_errhandler_print)
-    debug_printer("MPI_Comm_get_errhandler : \n{\ncomm : %*d,\nerrhandler : "
+    debug_printer("MPI_Comm_get_errhandler : \n{\ncomm : %*C,\nerrhandler : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, errhandler, ret);
 #endif
@@ -8020,7 +8019,7 @@ void A_f_MPI_Comm_set_errhandler(int *comm, int *errhandler, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_set_errhandler_print)
-    debug_printer("MPI_Comm_set_errhandler : \n{\ncomm : %*d,\nerrhandler : "
+    debug_printer("MPI_Comm_set_errhandler : \n{\ncomm : %*C,\nerrhandler : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, errhandler, ret);
 #endif
@@ -8182,7 +8181,7 @@ void A_f_MPI_Free_mem(void *base, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Free_mem_print)
-    debug_printer("MPI_Free_mem : \n{\nbase : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Free_mem : \n{\nbase : %p,\nerror/return : %*d\n}\n",
                   base, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8222,7 +8221,7 @@ void A_f_MPI_Get_address(void *location, size_t *address, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_address_print)
-    debug_printer("MPI_Get_address : \n{\nlocation : %*d,\naddress : "
+    debug_printer("MPI_Get_address : \n{\nlocation : %p,\naddress : "
                   "%*d,\nerror/return : %*d\n}\n",
                   location, address, ret);
 #endif
@@ -8796,9 +8795,8 @@ void A_f_MPI_Reduce_local(void *inbuf, void *inoutbuf, int *count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_local_print)
-    debug_printer("MPI_Reduce_local : \n{\ninbuf : %*d,\ninoutbuf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nop : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Reduce_local : \n{\ninbuf : %p,\ninoutbuf : %p,\ncount "
+                  ": %*d,\ndatatype : %*D,\nop : %*d,\nerror/return : %*d\n}\n",
                   inbuf, inoutbuf, count, datatype, op, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8896,9 +8894,9 @@ void A_f_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int *recvcount,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_scatter_block_print)
-    debug_printer("MPI_Reduce_scatter_block : \n{\nsendbuf : %*d,\nrecvbuf : "
-                  "%*d,\nrecvcount : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Reduce_scatter_block : \n{\nsendbuf : %p,\nrecvbuf : "
+                  "%p,\nrecvcount : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, recvcount, datatype, op, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -8943,7 +8941,7 @@ void A_f_MPI_Dist_graph_neighbors_count(int *comm, int *indegree,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_neighbors_count_print)
-    debug_printer("MPI_Dist_graph_neighbors_count : \n{\ncomm : %*d,\nindegree "
+    debug_printer("MPI_Dist_graph_neighbors_count : \n{\ncomm : %*C,\nindegree "
                   ": %*d,\noutdegree : %*d,\nweighted : %*d,\nerror/return : "
                   "%*d\n}\n",
                   comm, indegree, outdegree, weighted, ret);
@@ -9001,7 +8999,7 @@ void A_f_MPI_Improbe(int *source, int *tag, int *comm, int *flag, int *message,
 #ifdef DEBUG
   if (WI4MPI_Improbe_print)
     debug_printer("MPI_Improbe : \n{\nsource : %*d,\ntag : %*d,\ncomm : "
-                  "%*d,\nflag : %*d,\nmessage : %*d,\nstatus : "
+                  "%*C,\nflag : %*d,\nmessage : %*d,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   source, tag, comm, flag, message, status, ret);
 #endif
@@ -9054,7 +9052,7 @@ void A_f_MPI_Imrecv(void *buf, int *count, int *datatype, int *message,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Imrecv_print)
-    debug_printer("MPI_Imrecv : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
+    debug_printer("MPI_Imrecv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
                   "%*D,\nmessage : %*d,\nrequest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   buf, count, datatype, message, request, ret);
@@ -9112,7 +9110,7 @@ void A_f_MPI_Mprobe(int *source, int *tag, int *comm, int *message, int *status,
 #ifdef DEBUG
   if (WI4MPI_Mprobe_print)
     debug_printer("MPI_Mprobe : \n{\nsource : %*d,\ntag : %*d,\ncomm : "
-                  "%*d,\nmessage : %*d,\nstatus : %S,\nerror/return : %*d\n}\n",
+                  "%*C,\nmessage : %*d,\nstatus : %S,\nerror/return : %*d\n}\n",
                   source, tag, comm, message, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -9167,7 +9165,7 @@ void A_f_MPI_Mrecv(void *buf, int *count, int *datatype, int *message,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Mrecv_print)
-    debug_printer("MPI_Mrecv : \n{\nbuf : %*d,\ncount : %*d,\ndatatype : "
+    debug_printer("MPI_Mrecv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
                   "%*D,\nmessage : %*d,\nstatus : %S,\nerror/return : %*d\n}\n",
                   buf, count, datatype, message, status, ret);
 #endif
@@ -9214,7 +9212,7 @@ void A_f_MPI_Comm_idup(int *comm, int *newcomm, int *request, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_idup_print)
-    debug_printer("MPI_Comm_idup : \n{\ncomm : %*d,\nnewcomm : %*d,\nrequest : "
+    debug_printer("MPI_Comm_idup : \n{\ncomm : %*C,\nnewcomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, newcomm, request, ret);
 #endif
@@ -9258,7 +9256,7 @@ void A_f_MPI_Ibarrier(int *comm, int *request, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ibarrier_print)
-    debug_printer("MPI_Ibarrier : \n{\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Ibarrier : \n{\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, request, ret);
 #endif
@@ -9310,8 +9308,8 @@ void A_f_MPI_Ibcast(void *buffer, int *count, int *datatype, int *root,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ibcast_print)
-    debug_printer("MPI_Ibcast : \n{\nbuffer : %*d,\ncount : %*d,\ndatatype : "
-                  "%*D,\nroot : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Ibcast : \n{\nbuffer : %p,\ncount : %*d,\ndatatype : "
+                  "%*D,\nroot : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   buffer, count, datatype, root, comm, request, ret);
 #endif
@@ -9375,9 +9373,9 @@ void A_f_MPI_Igather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Igather_print)
-    debug_printer("MPI_Igather : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Igather : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   root, comm, request, ret);
@@ -9442,9 +9440,9 @@ void A_f_MPI_Iscatter(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iscatter_print)
-    debug_printer("MPI_Iscatter : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Iscatter : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   root, comm, request, ret);
@@ -9509,9 +9507,9 @@ void A_f_MPI_Iallgather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallgather_print)
-    debug_printer("MPI_Iallgather : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Iallgather : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, request, ret);
@@ -9576,9 +9574,9 @@ void A_f_MPI_Ialltoall(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ialltoall_print)
-    debug_printer("MPI_Ialltoall : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Ialltoall : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, request, ret);
@@ -9641,9 +9639,9 @@ void A_f_MPI_Ireduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ireduce_print)
-    debug_printer("MPI_Ireduce : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount : "
+    debug_printer("MPI_Ireduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nop : %*d,\nroot : %*d,\ncomm : "
-                  "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, root, comm, request,
                   ret);
 #endif
@@ -9701,8 +9699,8 @@ void A_f_MPI_Iallreduce(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallreduce_print)
-    debug_printer("MPI_Iallreduce : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount "
-                  ": %*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Iallreduce : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, comm, request, ret);
 #endif
@@ -9767,9 +9765,9 @@ void A_f_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int *recvcount,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ireduce_scatter_block_print)
-    debug_printer("MPI_Ireduce_scatter_block : \n{\nsendbuf : %*d,\nrecvbuf : "
-                  "%*d,\nrecvcount : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
-                  "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Ireduce_scatter_block : \n{\nsendbuf : %p,\nrecvbuf : "
+                  "%p,\nrecvcount : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
+                  "%*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, recvcount, datatype, op, comm, request,
                   ret);
 #endif
@@ -9825,8 +9823,8 @@ void A_f_MPI_Iscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iscan_print)
-    debug_printer("MPI_Iscan : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount : "
-                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Iscan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, comm, request, ret);
 #endif
@@ -9882,8 +9880,8 @@ void A_f_MPI_Iexscan(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iexscan_print)
-    debug_printer("MPI_Iexscan : \n{\nsendbuf : %*d,\nrecvbuf : %*d,\ncount : "
-                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Iexscan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, count, datatype, op, comm, request, ret);
 #endif
@@ -9946,9 +9944,9 @@ void A_f_MPI_Ineighbor_allgather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_allgather_print)
-    debug_printer("MPI_Ineighbor_allgather : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Ineighbor_allgather : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, request, ret);
@@ -10012,9 +10010,9 @@ void A_f_MPI_Ineighbor_alltoall(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_alltoall_print)
-    debug_printer("MPI_Ineighbor_alltoall : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nrequest : "
+    debug_printer("MPI_Ineighbor_alltoall : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, request, ret);
@@ -10075,9 +10073,9 @@ void A_f_MPI_Neighbor_allgather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_allgather_print)
-    debug_printer("MPI_Neighbor_allgather : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Neighbor_allgather : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, ret);
 #endif
@@ -10137,9 +10135,9 @@ void A_f_MPI_Neighbor_alltoall(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_alltoall_print)
-    debug_printer("MPI_Neighbor_alltoall : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Neighbor_alltoall : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
+                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
                   comm, ret);
 #endif
@@ -10187,8 +10185,8 @@ void A_f_MPI_Comm_split_type(int *comm, int *split_type, int *key, int *info,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_split_type_print)
-    debug_printer("MPI_Comm_split_type : \n{\ncomm : %*d,\nsplit_type : "
-                  "%*d,\nkey : %*d,\ninfo : %*d,\nnewcomm : %*d,\nerror/return "
+    debug_printer("MPI_Comm_split_type : \n{\ncomm : %*C,\nsplit_type : "
+                  "%*d,\nkey : %*d,\ninfo : %*d,\nnewcomm : %*C,\nerror/return "
                   ": %*d\n}\n",
                   comm, split_type, key, info, newcomm, ret);
 #endif
@@ -10456,8 +10454,8 @@ void A_f_MPI_Comm_create_group(int *comm, int *group, int *tag, int *newcomm,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_create_group_print)
-    debug_printer("MPI_Comm_create_group : \n{\ncomm : %*d,\ngroup : %*d,\ntag "
-                  ": %*d,\nnewcomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Comm_create_group : \n{\ncomm : %*C,\ngroup : %*d,\ntag "
+                  ": %*d,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
                   comm, group, tag, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -10829,7 +10827,7 @@ void A_f_MPI_File_read_at(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_read_at_print)
     debug_printer("MPI_File_read_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nstatus : "
+                  "%p,\ncount : %*d,\ndatatype : %*D,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, status, ret);
 #endif
@@ -10883,7 +10881,7 @@ void A_f_MPI_File_read_at_all(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_read_at_all_print)
     debug_printer("MPI_File_read_at_all : \n{\nfh : %*d,\noffset : %*d,\n buf "
-                  ": %*d,\ncount : %*d,\ndatatype : %*D,\nstatus : "
+                  ": %p,\ncount : %*d,\ndatatype : %*D,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, status, ret);
 #endif
@@ -10936,7 +10934,7 @@ void A_f_MPI_File_write_at(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_write_at_print)
     debug_printer("MPI_File_write_at : \n{\nfh : %*d,\noffset : %*d,\n buf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nstatus : "
+                  "%p,\ncount : %*d,\ndatatype : %*D,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, status, ret);
 #endif
@@ -10989,7 +10987,7 @@ void A_f_MPI_File_write_at_all(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_write_at_all_print)
     debug_printer("MPI_File_write_at_all : \n{\nfh : %*d,\noffset : %*d,\nbuf "
-                  ": %*d,\ncount : %*d,\ndatatype : %*D,\nstatus : "
+                  ": %p,\ncount : %*d,\ndatatype : %*D,\nstatus : "
                   "%S,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, status, ret);
 #endif
@@ -11040,7 +11038,7 @@ void A_f_MPI_File_iread_at(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_iread_at_print)
     debug_printer("MPI_File_iread_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nrequest : "
+                  "%p,\ncount : %*d,\ndatatype : %*D,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, request, ret);
 #endif
@@ -11090,7 +11088,7 @@ void A_f_MPI_File_iwrite_at(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_at_print)
     debug_printer("MPI_File_iwrite_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nrequest : "
+                  "%p,\ncount : %*d,\ndatatype : %*D,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, request, ret);
 #endif
@@ -11141,7 +11139,7 @@ void A_f_MPI_File_read(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_print)
-    debug_printer("MPI_File_read : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_read : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
@@ -11194,7 +11192,7 @@ void A_f_MPI_File_read_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_all_print)
-    debug_printer("MPI_File_read_all : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_read_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
@@ -11246,7 +11244,7 @@ void A_f_MPI_File_write(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_print)
-    debug_printer("MPI_File_write : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_write : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
@@ -11298,7 +11296,7 @@ void A_f_MPI_File_write_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_all_print)
-    debug_printer("MPI_File_write_all : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_write_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
@@ -11348,7 +11346,7 @@ void A_f_MPI_File_iread(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_print)
-    debug_printer("MPI_File_iread : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_iread : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, request, ret);
@@ -11399,7 +11397,7 @@ void A_f_MPI_File_iwrite(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_print)
-    debug_printer("MPI_File_iwrite : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_iwrite : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, request, ret);
@@ -11569,7 +11567,7 @@ void A_f_MPI_File_read_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_shared_print)
-    debug_printer("MPI_File_read_shared : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_read_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
@@ -11621,7 +11619,7 @@ void A_f_MPI_File_write_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_shared_print)
-    debug_printer("MPI_File_write_shared : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_write_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
@@ -11671,7 +11669,7 @@ void A_f_MPI_File_iread_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_shared_print)
-    debug_printer("MPI_File_iread_shared : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_iread_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, request, ret);
@@ -11721,8 +11719,8 @@ void A_f_MPI_File_iwrite_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_shared_print)
-    debug_printer("MPI_File_iwrite_shared : \n{\nfh : %*d,\nbuf : %*d,\ncount "
-                  ": %*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
+    debug_printer("MPI_File_iwrite_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, request, ret);
 #endif
@@ -11774,7 +11772,7 @@ void A_f_MPI_File_read_ordered(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_ordered_print)
-    debug_printer("MPI_File_read_ordered : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_read_ordered : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
@@ -11827,8 +11825,8 @@ void A_f_MPI_File_write_ordered(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_ordered_print)
-    debug_printer("MPI_File_write_ordered : \n{\nfh : %*d,\nbuf : %*d,\ncount "
-                  ": %*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
+    debug_printer("MPI_File_write_ordered : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+                  "%*d,\ndatatype : %*D,\nstatus : %S,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, status, ret);
 #endif
@@ -11954,7 +11952,7 @@ void A_f_MPI_File_read_at_all_begin(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_read_at_all_begin_print)
     debug_printer("MPI_File_read_at_all_begin : \n{\nfh : %*d,\noffset : "
-                  "%*d,\nbuf : %*d,\ncount : %*d,\ndatatype : "
+                  "%*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
                   "%*D,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, ret);
 #endif
@@ -12003,7 +12001,7 @@ void A_f_MPI_File_read_at_all_end(int *fh, void *buf, int *status, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_File_read_at_all_end_print)
     debug_printer("MPI_File_read_at_all_end : \n{\nfh : %*d,\nbuf : "
-                  "%*d,\nstatus : %S,\nerror/return : %*d\n}\n",
+                  "%p,\nstatus : %S,\nerror/return : %*d\n}\n",
                   fh, buf, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12049,7 +12047,7 @@ void A_f_MPI_File_write_at_all_begin(int *fh, int *offset, void *buf,
 #ifdef DEBUG
   if (WI4MPI_File_write_at_all_begin_print)
     debug_printer("MPI_File_write_at_all_begin : \n{\nfh : %*d,\noffset : "
-                  "%*d,\nbuf : %*d,\ncount : %*d,\ndatatype : "
+                  "%*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
                   "%*D,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, ret);
 #endif
@@ -12097,7 +12095,7 @@ void A_f_MPI_File_write_at_all_end(int *fh, void *buf, int *status, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_File_write_at_all_end_print)
     debug_printer("MPI_File_write_at_all_end : \n{\nfh : %*d,\nbuf : "
-                  "%*d,\nstatus : %S,\nerror/return : %*d\n}\n",
+                  "%p,\nstatus : %S,\nerror/return : %*d\n}\n",
                   fh, buf, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12141,7 +12139,7 @@ void A_f_MPI_File_read_all_begin(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_all_begin_print)
-    debug_printer("MPI_File_read_all_begin : \n{\nfh : %*d,\nbuf : %*d,\ncount "
+    debug_printer("MPI_File_read_all_begin : \n{\nfh : %*d,\nbuf : %p,\ncount "
                   ": %*d,\ndatatype : %*D,\nerror/return : %*d\n}\n",
                   fh, buf, count, datatype, ret);
 #endif
@@ -12189,8 +12187,8 @@ void A_f_MPI_File_read_all_end(int *fh, void *buf, int *status, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_all_end_print)
-    debug_printer("MPI_File_read_all_end : \n{\nfh : %*d,\nbuf : %*d,\nstatus "
-                  ": %S,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_File_read_all_end : \n{\nfh : %*d,\nbuf : %p,\nstatus : "
+                  "%S,\nerror/return : %*d\n}\n",
                   fh, buf, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12236,9 +12234,8 @@ void A_f_MPI_File_write_all_begin(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_all_begin_print)
-    debug_printer("MPI_File_write_all_begin : \n{\nfh : %*d,\nbuf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nerror/return : "
-                  "%*d\n}\n",
+    debug_printer("MPI_File_write_all_begin : \n{\nfh : %*d,\nbuf : %p,\ncount "
+                  ": %*d,\ndatatype : %*D,\nerror/return : %*d\n}\n",
                   fh, buf, count, datatype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12284,7 +12281,7 @@ void A_f_MPI_File_write_all_end(int *fh, void *buf, int *status, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_all_end_print)
-    debug_printer("MPI_File_write_all_end : \n{\nfh : %*d,\nbuf : %*d,\nstatus "
+    debug_printer("MPI_File_write_all_end : \n{\nfh : %*d,\nbuf : %p,\nstatus "
                   ": %S,\nerror/return : %*d\n}\n",
                   fh, buf, status, ret);
 #endif
@@ -12331,8 +12328,7 @@ void A_f_MPI_File_read_ordered_begin(int *fh, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_read_ordered_begin_print)
     debug_printer("MPI_File_read_ordered_begin : \n{\nfh : %*d,\nbuf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nerror/return : "
-                  "%*d\n}\n",
+                  "%p,\ncount : %*d,\ndatatype : %*D,\nerror/return : %*d\n}\n",
                   fh, buf, count, datatype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12380,7 +12376,7 @@ void A_f_MPI_File_read_ordered_end(int *fh, void *buf, int *status, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_File_read_ordered_end_print)
     debug_printer("MPI_File_read_ordered_end : \n{\nfh : %*d,\nbuf : "
-                  "%*d,\nstatus : %S,\nerror/return : %*d\n}\n",
+                  "%p,\nstatus : %S,\nerror/return : %*d\n}\n",
                   fh, buf, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12426,8 +12422,7 @@ void A_f_MPI_File_write_ordered_begin(int *fh, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_write_ordered_begin_print)
     debug_printer("MPI_File_write_ordered_begin : \n{\nfh : %*d,\nbuf : "
-                  "%*d,\ncount : %*d,\ndatatype : %*D,\nerror/return : "
-                  "%*d\n}\n",
+                  "%p,\ncount : %*d,\ndatatype : %*D,\nerror/return : %*d\n}\n",
                   fh, buf, count, datatype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -12474,7 +12469,7 @@ void A_f_MPI_File_write_ordered_end(int *fh, void *buf, int *status, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_File_write_ordered_end_print)
     debug_printer("MPI_File_write_ordered_end : \n{\nfh : %*d,\nbuf : "
-                  "%*d,\nstatus : %S,\nerror/return : %*d\n}\n",
+                  "%p,\nstatus : %S,\nerror/return : %*d\n}\n",
                   fh, buf, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13206,10 +13201,10 @@ void A_f_MPI_Alltoallw(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoallw_print)
-    debug_printer("MPI_Alltoallw : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Alltoallw : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtypes : %aD,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
-                  "%aD,\ncomm : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
+                  "%aD,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts,
                   rdispls, recvtypes, comm, ret);
 #endif
@@ -13263,9 +13258,9 @@ void A_f_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int *recvcounts,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Reduce_scatter_print)
-    debug_printer("MPI_Reduce_scatter : \n{\nsendbuf : %*d,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Reduce_scatter : \n{\nsendbuf : %p,\nrecvbuf : "
+                  "%p,\nrecvcounts : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, recvcounts, datatype, op, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13537,9 +13532,9 @@ void A_f_MPI_Cart_create(int *comm_old, int *ndims, int *dims, int *periods,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_create_print)
-    debug_printer("MPI_Cart_create : \n{\ncomm_old : %*d,\nndims : %*d,\ndims "
+    debug_printer("MPI_Cart_create : \n{\ncomm_old : %*C,\nndims : %*d,\ndims "
                   ": %*d,\nperiods : %*d,\nreorder : %*d,\ncomm_cart : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   comm_old, ndims, ndims, dims, ndims, periods, reorder,
                   comm_cart, ret);
 #endif
@@ -13625,9 +13620,9 @@ void A_f_MPI_Graph_create(int *comm_old, int *nnodes, int *indx, int *edges,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_create_print)
-    debug_printer("MPI_Graph_create : \n{\ncomm_old : %*d,\nnnodes : "
+    debug_printer("MPI_Graph_create : \n{\ncomm_old : %*C,\nnnodes : "
                   "%*d,\nindx : %*d,\nedges : %*d,\nreorder : %*d,\ncomm_graph "
-                  ": %*d,\nerror/return : %*d\n}\n",
+                  ": %*C,\nerror/return : %*d\n}\n",
                   comm_old, nnodes, nnodes, indx, nnodes, edges, reorder,
                   comm_graph, ret);
 #endif
@@ -13669,7 +13664,7 @@ void A_f_MPI_Graph_get(int *comm, int *maxindex, int *maxedges, int *indx,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_get_print)
-    debug_printer("MPI_Graph_get : \n{\ncomm : %*d,\nmaxindex : %*d,\nmaxedges "
+    debug_printer("MPI_Graph_get : \n{\ncomm : %*C,\nmaxindex : %*d,\nmaxedges "
                   ": %*d,\nindx : %*d,\nedges : %*d,\nerror/return : %*d\n}\n",
                   comm, maxindex, maxedges, maxindex, indx, maxedges, edges,
                   ret);
@@ -13713,7 +13708,7 @@ void A_f_MPI_Cart_get(int *comm, int *maxdims, int *dims, int *periods,
 #ifdef DEBUG
   if (WI4MPI_Cart_get_print)
     debug_printer(
-        "MPI_Cart_get : \n{\ncomm : %*d,\nmaxdims : %*d,\ndims : %*d,\nperiods "
+        "MPI_Cart_get : \n{\ncomm : %*C,\nmaxdims : %*d,\ndims : %*d,\nperiods "
         ": %*d,\ncoords : %*d,\nerror/return : %*d\n}\n",
         comm, maxdims, maxdims, dims, maxdims, periods, maxdims, coords, ret);
 #endif
@@ -13754,7 +13749,7 @@ void A_f_MPI_Cart_rank(int *comm, int *coords, int *rank, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_rank_print)
-    debug_printer("MPI_Cart_rank : \n{\ncomm : %*d,\ncoords : %*d,\nrank : "
+    debug_printer("MPI_Cart_rank : \n{\ncomm : %*C,\ncoords : %*d,\nrank : "
                   "%*d,\nerror/return : %*d\n}\n",
                   comm, coords, rank, ret);
 #endif
@@ -13796,7 +13791,7 @@ void A_f_MPI_Cart_coords(int *comm, int *rank, int *maxdims, int *coords,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_coords_print)
-    debug_printer("MPI_Cart_coords : \n{\ncomm : %*d,\nrank : %*d,\nmaxdims : "
+    debug_printer("MPI_Cart_coords : \n{\ncomm : %*C,\nrank : %*d,\nmaxdims : "
                   "%*d,\ncoords : %*d,\nerror/return : %*d\n}\n",
                   comm, rank, maxdims, maxdims, coords, ret);
 #endif
@@ -13839,7 +13834,7 @@ void A_f_MPI_Graph_neighbors(int *comm, int *rank, int *maxneighbors,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_neighbors_print)
-    debug_printer("MPI_Graph_neighbors : \n{\ncomm : %*d,\nrank : "
+    debug_printer("MPI_Graph_neighbors : \n{\ncomm : %*C,\nrank : "
                   "%*d,\nmaxneighbors : %*d,\nneighbors : %*d,\nerror/return : "
                   "%*d\n}\n",
                   comm, rank, maxneighbors, maxneighbors, neighbors, ret);
@@ -13884,8 +13879,8 @@ void A_f_MPI_Cart_sub(int *comm, int *remain_dims, int *newcomm, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_sub_print)
-    debug_printer("MPI_Cart_sub : \n{\ncomm : %*d,\nremain_dims : "
-                  "%*d,\nnewcomm : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Cart_sub : \n{\ncomm : %*C,\nremain_dims : "
+                  "%*d,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
                   comm, remain_dims, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
@@ -13926,7 +13921,7 @@ void A_f_MPI_Cart_map(int *comm, int *ndims, int *dims, int *periods,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_map_print)
-    debug_printer("MPI_Cart_map : \n{\ncomm : %*d,\nndims : %*d,\ndims : "
+    debug_printer("MPI_Cart_map : \n{\ncomm : %*C,\nndims : %*d,\ndims : "
                   "%*d,\nperiods : %*d,\nnewrank : %*d,\nerror/return : "
                   "%*d\n}\n",
                   comm, ndims, ndims, dims, ndims, periods, newrank, ret);
@@ -13969,7 +13964,7 @@ void A_f_MPI_Graph_map(int *comm, int *nnodes, int *indx, int *edges,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_map_print)
-    debug_printer("MPI_Graph_map : \n{\ncomm : %*d,\nnnodes : %*d,\nindx : "
+    debug_printer("MPI_Graph_map : \n{\ncomm : %*C,\nnnodes : %*d,\nindx : "
                   "%*d,\nedges : %*d,\nnewrank : %*d,\nerror/return : %*d\n}\n",
                   comm, nnodes, nnodes, indx, nnodes, edges, newrank, ret);
 #endif
@@ -14437,10 +14432,10 @@ void A_f_MPI_Dist_graph_create_adjacent(int *comm_old, int *indegree,
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_create_adjacent_print)
     debug_printer("MPI_Dist_graph_create_adjacent : \n{\ncomm_old : "
-                  "%*d,\nindegree : %*d,\nsources : %*d,\nsourceweights : "
+                  "%*C,\nindegree : %*d,\nsources : %*d,\nsourceweights : "
                   "%*d,\noutdegree : %*d,\ndestinations : %*d,\ndestweights : "
                   "%*d,\ninfo : %*d,\nreorder : %*d,\ncomm_dist_graph : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   comm_old, indegree, indegree, sources, sourceweights,
                   outdegree, outdegree, destinations, destweights, info,
                   reorder, comm_dist_graph, ret);
@@ -14500,10 +14495,10 @@ void A_f_MPI_Dist_graph_create(int *comm_old, int *n, int *sources,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_create_print)
-    debug_printer("MPI_Dist_graph_create : \n{\ncomm_old : %*d,\nn : "
+    debug_printer("MPI_Dist_graph_create : \n{\ncomm_old : %*C,\nn : "
                   "%*d,\nsources : %*d,\ndegrees : %*d,\ndestinations : "
                   "%*d,\nweights : %*d,\ninfo : %*d,\nreorder : "
-                  "%*d,\ncomm_dist_graph : %*d,\nerror/return : %*d\n}\n",
+                  "%*d,\ncomm_dist_graph : %*C,\nerror/return : %*d\n}\n",
                   comm_old, n, n, sources, n, degrees, n, destinations, weights,
                   info, reorder, comm_dist_graph, ret);
 #endif
@@ -14561,7 +14556,7 @@ void A_f_MPI_Dist_graph_neighbors(int *comm, int *maxindegree, int *sources,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_neighbors_print)
-    debug_printer("MPI_Dist_graph_neighbors : \n{\ncomm : %*d,\nmaxindegree : "
+    debug_printer("MPI_Dist_graph_neighbors : \n{\ncomm : %*C,\nmaxindegree : "
                   "%*d,\nsources : %*d,\nsourceweights : %*d,\nmaxoutdegree : "
                   "%*d,\ndestinations : %*d,\ndestweights : %*d,\nerror/return "
                   ": %*d\n}\n",
@@ -14629,10 +14624,10 @@ void A_f_MPI_Igatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Igatherv_print)
-    debug_printer("MPI_Igatherv : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcounts : "
+    debug_printer("MPI_Igatherv : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
                   "%*d,\ndispls : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
-                  "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                   recvtype, root, comm, request, ret);
 #endif
@@ -14697,10 +14692,10 @@ void A_f_MPI_Iscatterv(void *sendbuf, int *sendcounts, int *displs,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iscatterv_print)
-    debug_printer("MPI_Iscatterv : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Iscatterv : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\ndispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%*d,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm "
-                  ": %*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
+                  "%*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount,
                   recvtype, root, comm, request, ret);
 #endif
@@ -14764,9 +14759,9 @@ void A_f_MPI_Iallgatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallgatherv_print)
-    debug_printer("MPI_Iallgatherv : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcounts : "
-                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : %*d,\nrequest "
+    debug_printer("MPI_Iallgatherv : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
+                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest "
                   ": %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                   recvtype, comm, request, ret);
@@ -14834,10 +14829,10 @@ void A_f_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ialltoallv_print)
-    debug_printer("MPI_Ialltoallv : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Ialltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
-                  "%*D,\ncomm : %*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
+                  "%*D,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts,
                   rdispls, recvtype, comm, request, ret);
 #endif
@@ -14909,10 +14904,10 @@ void A_f_MPI_Ialltoallw(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ialltoallw_print)
-    debug_printer("MPI_Ialltoallw : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Ialltoallw : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtypes : %aD,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
-                  "%aD,\ncomm : %*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
+                  "%aD,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, Comm_size, sendtypes, recvbuf,
                   recvcounts, rdispls, Comm_size, recvtypes, comm, request,
                   ret);
@@ -14976,9 +14971,9 @@ void A_f_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int *recvcounts,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ireduce_scatter_print)
-    debug_printer("MPI_Ireduce_scatter : \n{\nsendbuf : %*d,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
-                  "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Ireduce_scatter : \n{\nsendbuf : %p,\nrecvbuf : "
+                  "%p,\nrecvcounts : %*d,\ndatatype : %*D,\nop : %*d,\ncomm : "
+                  "%*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, recvbuf, recvcounts, datatype, op, comm, request,
                   ret);
 #endif
@@ -15042,9 +15037,9 @@ void A_f_MPI_Ineighbor_allgatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_allgatherv_print)
-    debug_printer("MPI_Ineighbor_allgatherv : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcounts : "
-                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : %*d,\nrequest "
+    debug_printer("MPI_Ineighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
+                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest "
                   ": %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                   recvtype, comm, request, ret);
@@ -15110,10 +15105,10 @@ void A_f_MPI_Ineighbor_alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_alltoallv_print)
-    debug_printer("MPI_Ineighbor_alltoallv : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Ineighbor_alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
-                  "%*D,\ncomm : %*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
+                  "%*D,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts,
                   rdispls, recvtype, comm, request, ret);
 #endif
@@ -15183,10 +15178,10 @@ void A_f_MPI_Ineighbor_alltoallw(void *sendbuf, int *sendcounts,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_alltoallw_print)
-    debug_printer("MPI_Ineighbor_alltoallw : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Ineighbor_alltoallw : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtypes : %aD,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
-                  "%aD,\ncomm : %*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
+                  "%aD,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts,
                   rdispls, recvtypes, comm, request, ret);
 #endif
@@ -15246,10 +15241,10 @@ void A_f_MPI_Neighbor_allgatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_allgatherv_print)
-    debug_printer("MPI_Neighbor_allgatherv : \n{\nsendbuf : %*d,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %*d,\nrecvcounts : "
+    debug_printer("MPI_Neighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
+                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
                   "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : "
-                  "%*d,\nerror/return : %*d\n}\n",
+                  "%*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
                   recvtype, comm, ret);
 #endif
@@ -15310,10 +15305,10 @@ void A_f_MPI_Neighbor_alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_alltoallv_print)
-    debug_printer("MPI_Neighbor_alltoallv : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Neighbor_alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
-                  "%*D,\ncomm : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
+                  "%*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts,
                   rdispls, recvtype, comm, ret);
 #endif
@@ -15382,10 +15377,10 @@ void A_f_MPI_Neighbor_alltoallw(void *sendbuf, int *sendcounts, size_t *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_alltoallw_print)
-    debug_printer("MPI_Neighbor_alltoallw : \n{\nsendbuf : %*d,\nsendcounts : "
+    debug_printer("MPI_Neighbor_alltoallw : \n{\nsendbuf : %p,\nsendcounts : "
                   "%*d,\nsdispls : %*d,\nsendtypes : %aD,\nrecvbuf : "
-                  "%*d,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
-                  "%aD,\ncomm : %*d,\nerror/return : %*d\n}\n",
+                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
+                  "%aD,\ncomm : %*C,\nerror/return : %*d\n}\n",
                   sendbuf, sendcounts, sdispls, outdegree, sendtypes, recvbuf,
                   recvcounts, rdispls, indegree, recvtypes, comm, ret);
 #endif
@@ -15435,7 +15430,7 @@ void A_f_MPI_File_iwrite_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_all_print)
-    debug_printer("MPI_File_iwrite_all : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_iwrite_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, request, ret);
@@ -15489,7 +15484,7 @@ void A_f_MPI_File_iwrite_at_all(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_at_all_print)
     debug_printer("MPI_File_iwrite_at_all : \n{\nfh : %*d,\noffset : %*d,\nbuf "
-                  ": %*d,\ncount : %*d,\ndatatype : %*D,\nrequest : "
+                  ": %p,\ncount : %*d,\ndatatype : %*D,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, request, ret);
 #endif
@@ -15615,7 +15610,7 @@ void A_f_MPI_File_iread_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_all_print)
-    debug_printer("MPI_File_iread_all : \n{\nfh : %*d,\nbuf : %*d,\ncount : "
+    debug_printer("MPI_File_iread_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
                   "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
                   "%*d\n}\n",
                   fh, buf, count, datatype, request, ret);
@@ -15668,7 +15663,7 @@ void A_f_MPI_File_iread_at_all(int *fh, int *offset, void *buf, int *count,
 #ifdef DEBUG
   if (WI4MPI_File_iread_at_all_print)
     debug_printer("MPI_File_iread_at_all : \n{\nfh : %*d,\noffset : %*d,\nbuf "
-                  ": %*d,\ncount : %*d,\ndatatype : %*D,\nrequest : "
+                  ": %p,\ncount : %*d,\ndatatype : %*D,\nrequest : "
                   "%*d,\nerror/return : %*d\n}\n",
                   fh, offset, buf, count, datatype, request, ret);
 #endif

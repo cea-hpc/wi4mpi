@@ -52,7 +52,7 @@
     "a2r": "delete_ptr_converter_a2r", 
     "type": "void ",
     "r2a": "delete_ptr_converter_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "message_ptr_converter": {
     "local_alloc": 0, 
@@ -80,7 +80,7 @@
     "a2r": "buffer_a2r", 
     "type": "void ", 
     "r2a": "buffer_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "fint_converter": {
     "local_alloc": 0, 
@@ -94,7 +94,7 @@
     "a2r": "comm_a2r", 
     "type": "int ", 
     "r2a": "comm_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%*C"
 }, 
   "op_converter": {
     "local_alloc": 0, 
@@ -160,7 +160,7 @@
     "a2r": "comm_a2r", 
     "type": "int ", 
     "r2a": "comm_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%*C"
 }, 
   "t_pvar_session_converter": {
     "local_alloc": 0, 
@@ -320,21 +320,21 @@
     "a2r": "type_cpy_attr_ptr_conv_a2r", 
     "type": "void *",
     "r2a": "type_cpy_attr_ptr_conv_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%*p"
 }, 
   "file_errh_fct_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "file_errh_fct_ptr_conv_a2r", 
     "type": "void ",
     "r2a": "file_errh_fct_ptr_conv_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "comm_del_attr_fct_ptr": {
     "local_alloc": 0, 
     "a2r": "comm_del_attr_fct_ptr_conv_a2r", 
     "type": "MPI_Comm_delete_attr_function *", 
     "r2a": "comm_del_attr_fct_ptr_conv_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 },
   "topo_status_converter": {
      "local_alloc": 0,
@@ -442,7 +442,7 @@
     "a2r": "user_fct_ptr_conv_a2r", 
     "type": "void ",
     "r2a": "user_fct_ptr_conv_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "const_info_converter": {
     "local_alloc": 0, 
@@ -471,7 +471,7 @@
     "a2r": "handler_fct_ptr_conv_a2r", 
     "type": "void ",
     "r2a": "handler_fct_ptr_conv_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "const_fint_ptr_converter": {
     "local_alloc": 0, 
@@ -508,7 +508,7 @@
     "type": "void ", 
     "r2a": "char_ptr_conv_r2a",
     "nomap":"true"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "Status_ptr_converter": {
     "local_alloc": 0, 
@@ -565,7 +565,7 @@
     "a2r": "buffer_a2r", 
     "type": "void ", 
     "r2a": "buffer_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "cont_int_ptr_mapper": {
     "local_alloc": 0, 
@@ -644,7 +644,7 @@
     "a2r": "copy_ptr_converter_a2r", 
     "type": "void ",
     "r2a": "copy_ptr_converter_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%p"
 }, 
   "errhandler_ptr_mapper": {
     "local_alloc": 0, 
