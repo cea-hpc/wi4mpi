@@ -28,8 +28,8 @@ usage() {
     cat <<EOF
 Usage: [MPIRUN] [MPIRUN_OPTION]... wi4mpi [option].. PROGRAM [PROGRAM_OPTION]...
 
-Dynamically substitute in PROGRAM 
-all MPI calls from the MPI implementation "FROM" 
+Dynamically substitute in PROGRAM
+all MPI calls from the MPI implementation "FROM"
 with their corresponding call in the "TARGET" MPI implementation.
 
 Option:
@@ -56,6 +56,7 @@ WI4MPI_LIBEXEC=$( readlink -e $(dirname $0)/../libexec/wi4mpi )
 WI4MPI_INTEL=$( readlink -e $(dirname $0)/../lib_INTEL )
 WI4MPI_OMPI=$( readlink -e $(dirname $0)/../lib_OMPI )
 WI4MPI_MPC=$( readlink -e $(dirname $0)/../lib_MPC )
+WI4MPI_MPICH=$( readlink -e $(dirname $0)/../lib_MPICH )
 WI4MPI_INTERFACE=$( readlink -e $(dirname $0)/../lib )
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
 WI4MPI_UCONFIG="$HOME/.wi4mpi.cfg"
@@ -74,7 +75,7 @@ while getopts "f:t:hv" Option; do
     v ) VERBOSE="1" ;;
     f ) FROM=$OPTARG ;;
     t ) TARGET=$OPTARG ;;
-    * ) echo "$0: unrecognised option -${Option}." >&2 
+    * ) echo "$0: unrecognised option -${Option}." >&2
       usage
       exit 1 ;;
   esac
@@ -82,114 +83,120 @@ done
 shift $(($OPTIND - 1))
 
 # No argument print help and exit
-[[ $# -eq 0 ]] && usage && exit 0 
+[[ $# -eq 0 ]] && usage && exit 0
 
 # INTERFACE MODE
 if [[ -z $FROM ]]; then
-	if [[ -n "$VERBOSE" ]]; then
-		echo "INTERFACE MODE"
-	fi
-	FROM_FAMILY="CCC"
-	case $TARGET in
-  	  openmpi)  
-		TARGET_FAMILY="OMPI"
-		WI4MPI_FAMILY=${WI4MPI_OMPI}
-		WI4MPI_RUN_MPI_C_LIB="$OPENMPI_ROOT/lib/libmpi.so"
-		WI4MPI_RUN_MPI_F_LIB="$OPENMPI_ROOT/lib/libmpi_mpifh.so"
-		;;
-  	  intelmpi) 
-		TARGET_FAMILY="INTEL"
-		WI4MPI_FAMILY=${WI4MPI_INTEL}
-		WI4MPI_RUN_MPI_C_LIB="$INTELMPI_ROOT/lib64/libmpi.so"
-		WI4MPI_RUN_MPI_F_LIB="$INTELMPI_ROOT/lib64/libmpifort.so"
-		;;
-  	  mpc) 
-		TARGET_FAMILY="MPC"
-		WI4MPI_FAMILY=${WI4MPI_MPC}
-		WI4MPI_RUN_MPI_C_LIB="$MPC_ROOT/lib/libmpc_framework.so"
-		WI4MPI_RUN_MPI_F_LIB="$MPC_ROOT/lib/libmpc_frameworkf.so"
+    if [[ -n "$VERBOSE" ]]; then
+        echo "INTERFACE MODE"
+    fi
+    FROM_FAMILY="CCC"
+    case $TARGET in
+      openmpi)
+        TARGET_FAMILY="OMPI"
+        WI4MPI_FAMILY=${WI4MPI_OMPI}
+        WI4MPI_RUN_MPI_C_LIB="$OPENMPI_ROOT/lib/libmpi.so"
+        WI4MPI_RUN_MPI_F_LIB="$OPENMPI_ROOT/lib/libmpi_mpifh.so"
+        ;;
+      intelmpi)
+        TARGET_FAMILY="INTEL"
+        WI4MPI_FAMILY=${WI4MPI_INTEL}
+        WI4MPI_RUN_MPI_C_LIB="$INTELMPI_ROOT/lib64/libmpi.so"
+        WI4MPI_RUN_MPI_F_LIB="$INTELMPI_ROOT/lib64/libmpifort.so"
+        ;;
+      mpich)
+        TARGET_FAMILY="MPICH"
+        WI4MPI_FAMILY=${WI4MPI_MPICH}
+        WI4MPI_RUN_MPI_C_LIB="$INTELMPI_ROOT/lib64/libmpi.so"
+        WI4MPI_RUN_MPI_F_LIB="$INTELMPI_ROOT/lib64/libmpifort.so"
+        ;;
+      mpc)
+        TARGET_FAMILY="MPC"
+        WI4MPI_FAMILY=${WI4MPI_MPC}
+        WI4MPI_RUN_MPI_C_LIB="$MPC_ROOT/lib/libmpc_framework.so"
+        WI4MPI_RUN_MPI_F_LIB="$MPC_ROOT/lib/libmpc_frameworkf.so"
         WI4MPI_MPIIO_LIB="$MPC_ROOT/lib/libromio.so"
         WI4MPI_MPC_HOOK_MAIN_LIB="$MPC_ROOT/lib/libmpc_hookmain.so"
-	    WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
+        WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
         LD_PRELOAD="${WI4MPI_WRAPPER_LIB} ${WI4MPI_INTERFACE}/libmpi.so ${WI4MPI_RUN_MPI_C_LIB} ${WI4MPI_MPC_HOOK_MAIN_LIB}"
-	    [[ -n "$VERBOSE" ]] && echo $WI4MPI_MPC_HOOK_MAIN_LIB && echo $LD_PRELOAD
-	    [[ ! -e ${WI4MPI_MPC_HOOK_MAIN_LIB} ]] && { echo "Error: could not find the HOOK_MAIN library for MPC support." >&2 ; exit 1; }
+        [[ -n "$VERBOSE" ]] && echo $WI4MPI_MPC_HOOK_MAIN_LIB && echo $LD_PRELOAD
+        [[ ! -e ${WI4MPI_MPC_HOOK_MAIN_LIB} ]] && { echo "Error: could not find the HOOK_MAIN library for MPC support." >&2 ; exit 1; }
         export WI4MPI_MPC_HOOK_MAIN_LIB
         export LD_PRELOAD
-		;;
-  	  *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
-	esac
-	WI4MPI_FROM="INTERFACE"
-	WI4MPI_TO=${TARGET_FAMILY}
-	WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
+        ;;
+      *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
+    esac
+    WI4MPI_FROM="INTERFACE"
+    WI4MPI_TO=${TARGET_FAMILY}
+    WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
     WI4MPI_MPIIO_LIB="${WI4MPI_MPIIO_LIB:-$WI4MPI_RUN_MPI_C_LIB}"
-	LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
-	if [[ -n "$VERBOSE" ]]; then
-		echo ${WI4MPI_WRAPPER_LIB}
-		echo ${WI4MPI_RUN_MPI_C_LIB}
-		echo ${WI4MPI_RUN_MPI_F_LIB}
-		echo $LD_LIBRARY_PATH
+    LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
+    if [[ -n "$VERBOSE" ]]; then
+        echo ${WI4MPI_WRAPPER_LIB}
+        echo ${WI4MPI_RUN_MPI_C_LIB}
+        echo ${WI4MPI_RUN_MPI_F_LIB}
+        echo $LD_LIBRARY_PATH
         echo $LD_PRELOAD
-	fi
-	[[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
-	[[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
-	[[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
-	[[ ! -e ${WI4MPI_MPIIO_LIB} ]] && { echo "Error: could not find the MPI-IO target mpi library." >&2 ; exit 1; }
+    fi
+    [[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_MPIIO_LIB} ]] && { echo "Error: could not find the MPI-IO target mpi library." >&2 ; exit 1; }
     export LD_LIBRARY_PATH
-	export WI4MPI_FROM
-	export WI4MPI_TO
-	export WI4MPI_WRAPPER_LIB
-	export WI4MPI_RUN_MPI_C_LIB
-	export WI4MPI_RUN_MPI_F_LIB
+    export WI4MPI_FROM
+    export WI4MPI_TO
+    export WI4MPI_WRAPPER_LIB
+    export WI4MPI_RUN_MPI_C_LIB
+    export WI4MPI_RUN_MPI_F_LIB
     export WI4MPI_MPIIO_LIB
-#PRELOAD	
+#PRELOAD
 else
-	if [[ -n "$VERBOSE" ]]; then
-		echo "PRELOAD MODE"
-	fi
-	case $FROM in
+    if [[ -n "$VERBOSE" ]]; then
+        echo "PRELOAD MODE"
+    fi
+    case $FROM in
     openmpi)  FROM_FAMILY="OMPI" ;;
     intelmpi) FROM_FAMILY="INTEL" ;;
     *) echo "Error: Unsupported Origin MPI stack." >&2 ; exit 1;
-	esac
+    esac
 
-	case $TARGET in
-  	  openmpi)  
-		TARGET_FAMILY="OMPI" 
-		WI4MPI_RUN_MPI_C_LIB="$OPENMPI_ROOT/lib/libmpi.so"
-		WI4MPI_RUN_MPI_F_LIB="$OPENMPI_ROOT/lib/libmpi_mpifh.so"
-		;;
-  	  intelmpi) 
-		TARGET_FAMILY="INTEL"
-		WI4MPI_RUN_MPI_C_LIB="$INTELMPI_ROOT/lib64/libmpi.so"
-		WI4MPI_RUN_MPI_F_LIB="$INTELMPI_ROOT/lib64/libmpifort.so"
-		;;
-  	  *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
-	esac
-	WI4MPI_FROM=$FROM_FAMILY
-	WI4MPI_TO=$TARGET_FAMILY
-	libwi4mpi="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
-	[[ ! -e $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; } 
-	[[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
-	[[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
-	export WI4MPI_FROM
-	export WI4MPI_TO
-	export WI4MPI_RUN_MPI_F_LIB
-	export WI4MPI_RUN_MPI_C_LIB
-	export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
-	if [[ -n "$VERBOSE" ]]; then
-	    echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
-	    echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
-	    echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
-	fi
-	libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
-	[[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; } 
-	export LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
-	if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
-	    libfakedir="${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/"
-	    [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdir." >&2 ; exit 1; } 
-	          export LD_LIBRARY_PATH="${libfakedir}:$LD_LIBRARY_PATH"
-	fi
+    case $TARGET in
+      openmpi)
+        TARGET_FAMILY="OMPI"
+        WI4MPI_RUN_MPI_C_LIB="$OPENMPI_ROOT/lib/libmpi.so"
+        WI4MPI_RUN_MPI_F_LIB="$OPENMPI_ROOT/lib/libmpi_mpifh.so"
+        ;;
+      intelmpi)
+        TARGET_FAMILY="INTEL"
+        WI4MPI_RUN_MPI_C_LIB="$INTELMPI_ROOT/lib64/libmpi.so"
+        WI4MPI_RUN_MPI_F_LIB="$INTELMPI_ROOT/lib64/libmpifort.so"
+        ;;
+      *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
+    esac
+    WI4MPI_FROM=$FROM_FAMILY
+    WI4MPI_TO=$TARGET_FAMILY
+    libwi4mpi="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
+    [[ ! -e $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
+    export WI4MPI_FROM
+    export WI4MPI_TO
+    export WI4MPI_RUN_MPI_F_LIB
+    export WI4MPI_RUN_MPI_C_LIB
+    export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
+    if [[ -n "$VERBOSE" ]]; then
+        echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
+        echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
+        echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+    fi
+    libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
+    [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; }
+    export LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
+    if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
+        libfakedir="${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/"
+        [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdir." >&2 ; exit 1; }
+        export LD_LIBRARY_PATH="${libfakedir}:$LD_LIBRARY_PATH"
+    fi
 
 fi
 
