@@ -124,7 +124,7 @@
     "type": "int ", 
     "r2a": "status_r2a",
     "status_size":1
-  ,"debug_type":"%S"
+  ,"debug_type":"%n"
 }, 
   "count_ptr_converter": {
     "local_alloc": 0, 
@@ -342,7 +342,7 @@
     "type":"int ",
     "r2a":"topo_status_r2a",
     "status_size":1
-,"debug_type":"%*d"
+,"debug_type":"%n"
 }, 
   "request_array_converter": {
     "local_alloc": 0, 
@@ -516,7 +516,7 @@
     "type": "int ",
     "r2a": "status_r2a",
     "status_size":1
-  ,"debug_type":"%S"
+  ,"debug_type":"%n"
 }, 
   "com_errhadler_fct_ptr_converter": {
     "local_alloc": 0, 
@@ -666,7 +666,7 @@
     "type": "int ", 
     "r2a": "status_r2a",
     "status_size":1
-  ,"debug_type":"%S"
+  ,"debug_type":"%n"
 }, 
   "const_char_ptr_converter": {
     "local_alloc": 0, 
