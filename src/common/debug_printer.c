@@ -40,16 +40,17 @@ void print_status(A_MPI_Status);
  #define print_named_type_f(type,printf_string,func)\
                     debug_act=0;\
                     if(nb_elt==0){\
+                    int err;\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
-                    func(dat,cname,&namelen);\
+                    func(dat,cname,&namelen,&err,2048);\
                    printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
                     }else\
                     {\
                     type *s=pointer_disp?*va_arg(ap,type **):va_arg(ap,type*);\
                     printf("[\n");\
                     for(ii=0;ii<nb_elt;ii++)\
-                    {\
-                        func(s[ii],cname,2048,&namelen);\
+                    { int err;\
+                        func(s[ii],cname,&namelen,&err,2048);\
                         if(ii) printf(",\n");\
              printf("{ value : "#printf_string ", name :%s }" ,s[ii],cname);\
                     }\
