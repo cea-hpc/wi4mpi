@@ -271,7 +271,7 @@ void debug_printer_f(const char *ctr_str,...)
                     printf("{ \nvalue :%p ,\n name: %s\n}",cc,cname);
                     break;
 */
-                    print_named_type(int,%d,A_f_MPI_Comm_get_name)
+                    print_named_type_f(int,%d,A_f_MPI_Comm_get_name)
                     break;
                  case 'p':
                   //  printf("%p",va_arg(ap,void*)); 
