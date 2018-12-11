@@ -195,7 +195,7 @@
     "a2r": "datatype_a2r", 
     "type": "int ", 
     "r2a": "datatype_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%*D"
 }, 
   "t_pvar_handle_ptr_converter": {
     "local_alloc": 0, 
@@ -551,7 +551,7 @@
     "a2r": "datatype_a2r", 
     "type": "int ", 
     "r2a": "datatype_r2a"
-  ,"debug_type":"%*d"
+  ,"debug_type":"%aD"
 }, 
   "no_args_converter": {
     "local_alloc": 0, 
