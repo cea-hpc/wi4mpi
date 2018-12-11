@@ -36,7 +36,8 @@ void print_status(A_MPI_Status);
                     }\
                     printf("\n]\n");\
                     }\
- #define print_named_type(type,printf_string,func)\
+                    debug_act=1;
+ #define print_named_type_f(type,printf_string,func)\
                     debug_act=0;\
                     if(nb_elt==0){\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
@@ -55,7 +56,6 @@ void print_status(A_MPI_Status);
                     printf("\n]\n");\
                     }\
                     debug_act=1;
-v                   debug_act=1;
 void debug_printer(const char *ctr_str,...)
 {
     if(debug_act!=0)
