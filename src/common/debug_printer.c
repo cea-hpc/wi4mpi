@@ -43,6 +43,7 @@ void print_status(A_MPI_Status);
                     int err;\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
                     func(&dat,cname,&namelen,&err,2048);\
+                    cname[namelen]='\0';\
                    printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
                     }else\
                     {\
@@ -51,6 +52,7 @@ void print_status(A_MPI_Status);
                     for(ii=0;ii<nb_elt;ii++)\
                     { int err;\
                         func(&s[ii],cname,&namelen,&err,2048);\
+                        cname[namelen]='\0';\
                         if(ii) printf(",\n");\
              printf("{ value : "#printf_string ", name :%s }" ,s[ii],cname);\
                     }\
