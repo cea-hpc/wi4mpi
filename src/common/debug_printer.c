@@ -177,7 +177,7 @@ void debug_printer_f(const char *ctr_str,...)
     char print_str[4096];
     
     va_list ap;
-    int it,i,ii;
+    int it,i,ii,err;
     va_start(ap,ctr_str);
     int pointer_disp;
     it=0;i=0;
@@ -237,7 +237,7 @@ void debug_printer_f(const char *ctr_str,...)
                     debug_act=1;
                     printf("{ \nvalue :%p ,\n name: %s\n}",dat,cname);
                     }*/
-                    print_named_type_f(int,%d,A_f_MPI_Type_get_name)
+                    print_named_type_f(int,%d,A_f_MPI_Type_get_name);
                     break; 
                 case 'a':
                     nb_elt=va_arg(ap,int);
