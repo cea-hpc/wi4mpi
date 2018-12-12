@@ -3565,14 +3565,14 @@ void A_f_MPI_Comm_free(int *comm, int *ret) {
   comm_a2r(comm, &comm_tmp);
   _LOCAL_MPI_Comm_free(&comm_tmp, &ret_tmp);
   if (ret_tmp == R_f_MPI_SUCCESS)
-    comm=A_f_MPI_COMM_NULL;//comm_r2au(comm, &comm_tmp);
+    comm_r2au(comm, &comm_tmp);
   error_r2a(ret, &ret_tmp);
 
   in_w = 0;
 #ifdef DEBUG
-  if (WI4MPI_Comm_free_print)
-    debug_printer("MPI_Comm_free : \n{\ncomm : %*C,\nerror/return : %*d\n}\n",
-                  comm, ret);
+  //if (WI4MPI_Comm_free_print)
+    //debug_printer("MPI_Comm_free : \n{\ncomm : %*C,\nerror/return : %*d\n}\n",
+      //            comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
