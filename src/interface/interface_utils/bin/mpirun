@@ -24,28 +24,106 @@
 #                                                                      #
 ########################################################################
 
+version() {
+    echo "mpirun (Wi4MPI-$WI4MPI_VERSION)"
+}
+
+usage() {
+    version
+    cat <<EOF
+
+Usage: mpirun [MPIRUN_TARGET_OPTIONS] -- [PROGRAM] [PROGRAM_OPTIONS]
+
+Option:
+    -E | -extra | --extra "extra_opts..."   Extra parameters to pass directly to the underlying mpirun
+    -h | -help | --help                     This help message
+    -f | -hostfile | --hostfile {file}      File containing the host names
+    -n | -np {value}                        Number of processes to run
+    -v | -verbose | --verbose               Be verbose
+    -V | -version | --version               Print version and exit
+    -- | -end | --end                       Separate options and program to run
+
+Advanced options:
+    -F | -from | --from {FROM}      The MPI implentation from which PROGRAM was compiled with
+    -T | -to | --to {TARGET}        The MPI implentation to which PROGRAM will be run
+
+Supported values:
+    FROM         openmpi,intelmpi,mpich  (no default value)
+    TARGET       openmpi,intelmpi,mpc,mpich  (no default value)
+
+EOF
+
+}
+
+mpirun_opts=()
+wi4mpi_opts=()
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -F|-from|--from)
+            wi4mpi_opts="$wi4mpi_opts -f $2"
+            export WI4MPI_FROM=$2
+            shift 2 ;;
+        -T|-to|--to)
+            wi4mpi_opts="$wi4mpi_opts -t $2"
+            export WI4MPI_TO=$2
+            shift 2 ;;
+        -E|-extra|--extra)
+            mpirun_opts="$mpirun_opts $2"
+            shift 2 ;;
+        -h|-help|--help)
+            usage
+            exit 0 ;;
+        -f|-hostfile|--hostfile)
+            mpirun_opts="$mpirun_opts -hostfile $2"
+            shift 2 ;;
+        -n|-np)
+            mpirun_opts="$mpirun_opts -n $2"
+            shift 2 ;;
+        -v|-verbose|--verbose)
+            mpirun_opts="$mpirun_opts -v"
+            shift ;;
+        -V|-version|--version)
+            version
+            exit 0 ;;
+        --|-end|--end)
+            shift
+            cmd=$@
+            break ;;
+        -?*)
+            version >&2
+            echo "Error: unrecognised option $1" >&2
+            echo "Help: take a look at --extra option (mpirun -h)" >&2
+            exit 1 ;;
+        *)
+            cmd_type=$(type -t $1)
+            if [[ ${cmd_type} = "file" ]]; then
+                cmd=$@
+                break
+            elif [[ ${cmd_type} = "builtin" ]]; then
+                if [[ -e /bin/$1 ]]; then
+                    cmd=$@
+                    break
+                fi
+            else
+                version >&2
+                echo "Error: unrecognised option $1" >&2
+                exit 1
+            fi
+    esac
+done
+
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
 WI4MPI_UCONFIG="~/.wi4mpi.cfg"
 
-progname=$(basename $0)
-
-[[ -z $WI4MPI_ROOT ]] && (>&2 echo "$progname error: please set WI4MPI_ROOT") && exit 1
-[[ -z $WI4MPI_TO ]] && (>&2 echo "$progname error: please set WI4MPI_TO") && exit 1
+[[ -z $WI4MPI_ROOT ]] && (>&2 echo "Error: please set WI4MPI_ROOT") && exit 1
+[[ -z $WI4MPI_TO ]] && (>&2 echo "Error: please set WI4MPI_TO") && exit 1
 [[ -f $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
 [[ -f $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
 
-MPIRUN_OPT=()
-while [[ $# -gt 1 ]]; do
-    MPIRUN_OPT="$MPIRUN_OPT $1"
-    shift
-done
-
 if [[ ${WI4MPI_TO,,} = *"openmpi"* ]]; then
-    echo "$OPENMPI_DEFAULT_ROOT/bin/mpirun $MPIRUN_OPT wi4mpi -t openmpi $@"
-    $OPENMPI_DEFAULT_ROOT/bin/mpirun $MPIRUN_OPT wi4mpi -t openmpi $@
-elif [[ ${WI4MPI_TO,,} == *"intelmpi"* ]]; then
-    echo "$INTELMPI_DEFAULT_ROOT/bin64/mpirun $MPIRUN_OPT wi4mpi -t intelmpi $@"
-    $INTELMPI_DEFAULT_ROOT/bin64/mpirun $MPIRUN_OPT wi4mpi -t intelmpi $@
+    $OPENMPI_DEFAULT_ROOT/bin/mpirun $mpirun_opts wi4mpi -t openmpi $cmd
+elif [[ ${WI4MPI_TO,,} = *"intelmpi"* ]]; then
+    $INTELMPI_DEFAULT_ROOT/bin64/mpirun $mpirun_opts wi4mpi -t intelmpi $cmd
 else
-    (>&2 echo "$progname error: wi4mpirun not implemented for $WI4MPI_TO") && exit 1
+    (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
 fi
