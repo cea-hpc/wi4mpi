@@ -3565,7 +3565,7 @@ void A_f_MPI_Comm_free(int *comm, int *ret) {
   comm_a2r(comm, &comm_tmp);
   _LOCAL_MPI_Comm_free(&comm_tmp, &ret_tmp);
   if (ret_tmp == R_f_MPI_SUCCESS)
-    comm_r2au(comm, &comm_tmp);
+    comm=A_f_MPI_COMM_NULL;//comm_r2au(comm, &comm_tmp);
   error_r2a(ret, &ret_tmp);
 
   in_w = 0;
