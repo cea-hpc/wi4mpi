@@ -10,21 +10,21 @@ void print_status(A_MPI_Status);
 #define eprintf(...)\
     printf(__VA_ARGS__)
 #define print_array(nb_elt,print_function)\
-                    printf("[\n");\
+                    eprintf("[\n");\
     for(ii=0;ii<min(nb_elt,WI4MPI_debug_max_array_elt);ii++)\
-        {if(ii) printf(","); print_function;}\
+        {if(ii) eprintf(","); print_function;}\
         if(ii==WI4MPI_debug_max_array_elt)\
-        printf(",...");\
+        eprintf(",...");\
     for(ii=nb_elt-WI4MPI_debug_max_array_elt;ii<nb_elt;ii++)\
-        { printf(","); print_function;}\
-       printf("\n]\n");
+        { eprintf(","); print_function;}\
+       eprintf("\n]\n");
         
 #define print_named(elt,name_function,print_str)\
         name_function(elt,cname,&namelen);\
         eprintf("{ value: " #print_str ",name :%s}",elt,cname);
 #define print_named_f(elt,name_function,print_str)\
         name_function(elt,cname,&namelen,&err,2048);\
-        cname[namelen]=\0;\
+        cname[namelen]='\0';\
         eprintf("{ value: " #print_str ",name :%s}",elt,cname);
 
 
@@ -111,7 +111,7 @@ void debug_printer(const char *ctr_str,...)
                     else
                     {
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
-                    print_array(nb_elt,eprinf("%d",s[ii]))                   
+                    print_array(nb_elt,eprintf("%d",s[ii]))                   
                     //print_type(int,%d)
                     break;
                 case 'D':
@@ -213,7 +213,7 @@ void debug_printer_f(const char *ctr_str,...)
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
                     eprintf("[\n");
                     for(ii=0;ii<nb_elt;ii++)
-                    {if(!ii) printf(",");print_status_f(&s[ii*A_f_MPI_STATUS_SIZE]);}
+                    {if(!ii) eprintf(",");print_status_f(&s[ii*A_f_MPI_STATUS_SIZE]);}
                     eprintf("]\n");
                     }
                     break;
