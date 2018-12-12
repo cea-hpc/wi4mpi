@@ -1,10 +1,51 @@
 #!/bin/bash
 
-cat << EOF
-= INFO =
-WI4MPI doesn't provide its own launcher, you need to use another MPI launcher with wi4mpi executable.
-= EXAMPLES =
-OpenMPI: \${OPENMPI_ROOT}/bin/mpirun wi4mpi -t openmpi ./exe
-Bridge: ccc_mprun wi4mpi -t openmpi ./exe
-MPC: wi4mpi -t mpc mpcrun ./exe
-EOF
+############################# Wi4MPI License ###########################
+# `04/04/2016`                                                         #
+# Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
+#                                                                      #
+# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #
+# This file is part of the Wi4MPI library.                             #
+#                                                                      #
+# This software is governed by the CeCILL-C license under French law   #
+# and abiding by the rules of distribution of free software. You can   #
+# use, modify and/ or redistribute the software under the terms of     #
+# the CeCILL-C license as circulated by CEA, CNRS and INRIA at the     #
+# following URL http://www.cecill.info.                                #
+#                                                                      #
+# The fact that you are presently reading this means that you have     #
+# had knowledge of the CeCILL-C license and that you accept its        #
+# terms.                                                               #
+#                                                                      #
+# Authors:                                                             #
+#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
+#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#   - Adrien Cotte <adrien.cotte.tgcc@cea.fr>                          #
+#                                                                      #
+########################################################################
+
+WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
+WI4MPI_UCONFIG="~/.wi4mpi.cfg"
+
+progname=$(basename $0)
+
+[[ -z $WI4MPI_ROOT ]] && (>&2 echo "$progname error: please set WI4MPI_ROOT") && exit 1
+[[ -z $WI4MPI_TO ]] && (>&2 echo "$progname error: please set WI4MPI_TO") && exit 1
+[[ -f $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
+[[ -f $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
+
+MPIRUN_OPT=()
+while [[ $# -gt 1 ]]; do
+    MPIRUN_OPT="$MPIRUN_OPT $1"
+    shift
+done
+
+if [[ ${WI4MPI_TO,,} = *"openmpi"* ]]; then
+    echo "$OPENMPI_DEFAULT_ROOT/bin/mpirun $MPIRUN_OPT wi4mpi -t openmpi $@"
+    $OPENMPI_DEFAULT_ROOT/bin/mpirun $MPIRUN_OPT wi4mpi -t openmpi $@
+elif [[ ${WI4MPI_TO,,} == *"intelmpi"* ]]; then
+    echo "$INTELMPI_DEFAULT_ROOT/bin64/mpirun $MPIRUN_OPT wi4mpi -t intelmpi $@"
+    $INTELMPI_DEFAULT_ROOT/bin64/mpirun $MPIRUN_OPT wi4mpi -t intelmpi $@
+else
+    (>&2 echo "$progname error: wi4mpirun not implemented for $WI4MPI_TO") && exit 1
+fi

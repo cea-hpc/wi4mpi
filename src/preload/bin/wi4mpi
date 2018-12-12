@@ -130,8 +130,7 @@ if [[ -z $FROM ]]; then
         ;;
       *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
     esac
-    WI4MPI_FROM="INTERFACE"
-    WI4MPI_TO=${TARGET_FAMILY}
+    [[ -z $WI4MPI_TO ]] && (>&2 echo "$progname error: please set WI4MPI_TO") && exit 1
     WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
     WI4MPI_MPIIO_LIB="${WI4MPI_MPIIO_LIB:-$WI4MPI_RUN_MPI_C_LIB}"
     LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
@@ -147,8 +146,6 @@ if [[ -z $FROM ]]; then
     [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
     [[ ! -e ${WI4MPI_MPIIO_LIB} ]] && { echo "Error: could not find the MPI-IO target mpi library." >&2 ; exit 1; }
     export LD_LIBRARY_PATH
-    export WI4MPI_FROM
-    export WI4MPI_TO
     export WI4MPI_WRAPPER_LIB
     export WI4MPI_RUN_MPI_C_LIB
     export WI4MPI_RUN_MPI_F_LIB
@@ -183,14 +180,12 @@ else
         ;;
       *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
     esac
-    WI4MPI_FROM=$FROM_FAMILY
-    WI4MPI_TO=$TARGET_FAMILY
+    [[ -z $WI4MPI_FROM ]] && (>&2 echo "$progname error: please set WI4MPI_FROM") && exit 1
+    [[ -z $WI4MPI_TO ]] && (>&2 echo "$progname error: please set WI4MPI_TO") && exit 1
     libwi4mpi="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
     [[ ! -e $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; }
     [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library." >&2 ; exit 1; }
     [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library." >&2 ; exit 1; }
-    export WI4MPI_FROM
-    export WI4MPI_TO
     export WI4MPI_RUN_MPI_F_LIB
     export WI4MPI_RUN_MPI_C_LIB
     export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
