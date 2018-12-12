@@ -4,3 +4,4 @@ OPENMPI_DEFAULT_ROOT="@OPENMPI_ROOT@"
 #Please provide the following variables to use the launcher
 INTELMPI_DEFAULT_ROOT=""
 MPC_DEFAULT_ROOT=""
+MPICH_DEFAULT_ROOT=""

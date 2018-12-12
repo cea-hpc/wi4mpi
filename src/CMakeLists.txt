@@ -63,6 +63,7 @@ file(GLOB SOURCE_WI4MPI_PROFILING
 
 add_library(wi4mpi_profiling_OMPI SHARED ${SOURCE_WI4MPI_PROFILING})
 add_library(wi4mpi_profiling_INTEL SHARED ${SOURCE_WI4MPI_PROFILING})
+add_library(wi4mpi_profiling_MPICH SHARED ${SOURCE_WI4MPI_PROFILING})
 add_library(wi4mpi_profiling_MPC SHARED ${SOURCE_WI4MPI_PROFILING})
 
 target_include_directories(wi4mpi_profiling_OMPI 
@@ -71,6 +72,9 @@ target_include_directories(wi4mpi_profiling_OMPI
 target_include_directories(wi4mpi_profiling_INTEL
                                                      PRIVATE common
                                                      PRIVATE interface/header/_INTEL)
+target_include_directories(wi4mpi_profiling_MPICH
+                                                     PRIVATE common
+                                                     PRIVATE interface/header/_MPICH)
 target_include_directories(wi4mpi_profiling_MPC
                                                      PRIVATE common
                                                      PRIVATE
@@ -80,6 +84,9 @@ set_target_properties(wi4mpi_profiling_OMPI
                                             PROPERTIES
                                             COMPILE_FLAGS "${WI4MPI_FLAGS}")
 set_target_properties(wi4mpi_profiling_INTEL 
+                                            PROPERTIES
+                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
+set_target_properties(wi4mpi_profiling_MPICH 
                                             PROPERTIES
                                             COMPILE_FLAGS "${WI4MPI_FLAGS}")
 set_target_properties(wi4mpi_profiling_MPC 
@@ -94,6 +101,11 @@ install(TARGETS
 )
 install(TARGETS 
         wi4mpi_profiling_INTEL
+        LIBRARY DESTINATION lib
+        PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(TARGETS 
+        wi4mpi_profiling_MPICH
         LIBRARY DESTINATION lib
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
@@ -113,18 +125,21 @@ install(TARGETS
 add_library(mpi SHARED ${SOURCE_WI4MPI_SO})
 add_library(wi4mpi_OMPI SHARED ${SOURCE_WI4MPI_INTERFACE}) 
 add_library(wi4mpi_INTEL SHARED  ${SOURCE_WI4MPI_INTERFACE})
+add_library(wi4mpi_MPICH SHARED  ${SOURCE_WI4MPI_INTERFACE})
 add_library(wi4mpi_MPC SHARED  ${SOURCE_WI4MPI_INTERFACE})
 add_library(mpi_mod MODULE ${SOURCE_WI4MPI_MODULE})
 
 add_library(mpi_a STATIC ${SOURCE_WI4MPI_SO})
 add_library(wi4mpi_OMPI_a STATIC ${SOURCE_WI4MPI_INTERFACE}) 
 add_library(wi4mpi_INTEL_a STATIC  ${SOURCE_WI4MPI_INTERFACE})
+add_library(wi4mpi_MPICH_a STATIC  ${SOURCE_WI4MPI_INTERFACE})
 add_library(wi4mpi_MPC_a STATIC  ${SOURCE_WI4MPI_INTERFACE})
 
 #dependencies
 #-----------
 
 add_dependencies(mpi_a wi4mpi_INTEL_a)
+add_dependencies(mpi_a wi4mpi_MPICH_a)
 add_dependencies(mpi_a wi4mpi_OMPI_a)
 add_dependencies(mpi_a wi4mpi_MPC_a)
 
@@ -140,6 +155,10 @@ target_include_directories(wi4mpi_INTEL
                            PRIVATE common
                            PRIVATE interface/header/_INTEL
                           )
+target_include_directories(wi4mpi_MPICH
+                           PRIVATE common
+                           PRIVATE interface/header/_MPICH
+                          )
 target_include_directories(wi4mpi_MPC
                            PRIVATE common
                            PRIVATE interface/header/_MPC
@@ -153,6 +172,10 @@ target_include_directories(wi4mpi_OMPI_a
 target_include_directories(wi4mpi_INTEL_a
                            PRIVATE common
                            PRIVATE interface/header/_INTEL
+                          )
+target_include_directories(wi4mpi_MPICH_a
+                           PRIVATE common
+                           PRIVATE interface/header/_MPICH
                           )
 target_include_directories(wi4mpi_MPC_a
                            PRIVATE common
@@ -175,34 +198,7 @@ set_target_properties(wi4mpi_INTEL
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
                      )
-set_target_properties(wi4mpi_MPC
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE"
-                     )
-
-set_target_properties(mpi_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_OMPI_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_INTEL_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPC_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-endif()
-if(CMAKE_C_COMPILER STREQUAL "gcc") 
-set_target_properties(wi4mpi_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_INTEL
+set_target_properties(wi4mpi_MPICH
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
                      )
@@ -223,6 +219,49 @@ set_target_properties(wi4mpi_INTEL_a
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
+set_target_properties(wi4mpi_MPICH_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_MPC_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+endif()
+if(CMAKE_C_COMPILER STREQUAL "gcc") 
+set_target_properties(wi4mpi_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
+                     )
+set_target_properties(wi4mpi_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
+                     )
+set_target_properties(wi4mpi_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
+                     )
+set_target_properties(wi4mpi_MPC
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE"
+                     )
+
+set_target_properties(mpi_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_OMPI_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_INTEL_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_MPICH_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
 set_target_properties(wi4mpi_MPC_a
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
@@ -234,6 +273,10 @@ set_target_properties(wi4mpi_OMPI
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
                      )
 set_target_properties(wi4mpi_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE"
+                     )
+set_target_properties(wi4mpi_MPICH
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE"
                      )
@@ -254,6 +297,10 @@ set_target_properties(wi4mpi_INTEL_a
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
+set_target_properties(wi4mpi_MPICH_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
 set_target_properties(wi4mpi_MPC_a
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
@@ -265,6 +312,10 @@ set_target_properties(wi4mpi_OMPI
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
                      )
 set_target_properties(wi4mpi_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
+                     )
+set_target_properties(wi4mpi_MPICH
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
                      )
@@ -282,6 +333,10 @@ set_target_properties(wi4mpi_OMPI_a
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
 set_target_properties(wi4mpi_INTEL_a
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
+                     )
+set_target_properties(wi4mpi_MPICH_a
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
@@ -303,9 +358,11 @@ endif()
 
 target_link_libraries(wi4mpi_OMPI ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_INTEL ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_MPICH ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_MPC ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_OMPI_a ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_INTEL_a ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_MPICH_a ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_MPC_a ${CMAKE_THREAD_LIBS_INIT})
 
 #Custom command
@@ -315,6 +372,11 @@ message(status ${CMAKE_CURRENT_BINARY_DIR})
 add_custom_command(TARGET wi4mpi_INTEL_a 
                     POST_BUILD
                    COMMAND  ${CMAKE_SOURCE_DIR}/scripts/rename_sym.sh libwi4mpi_INTEL_a.a "INTEL"
+                   #WORKING_DIRECTORY ${CMAKE_BUILD_FILES_DIRECTORY}
+                    )
+add_custom_command(TARGET wi4mpi_MPICH_a 
+                    POST_BUILD
+                   COMMAND  ${CMAKE_SOURCE_DIR}/scripts/rename_sym.sh libwi4mpi_MPICH_a.a "MPICH"
                    #WORKING_DIRECTORY ${CMAKE_BUILD_FILES_DIRECTORY}
                     )
 message(status ${CMAKE_CURRENT_BINARY_DIR})
@@ -334,7 +396,7 @@ add_custom_command(TARGET wi4mpi_MPC_a
 message(status ${CMAKE_CURRENT_BINARY_DIR})
 add_custom_command(TARGET mpi_a 
                 POST_BUILD
-                COMMAND ${CMAKE_SOURCE_DIR}/scripts/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_INTEL_a.a libwi4mpi_OMPI_a.a libwi4mpi_MPC_a.a
+                COMMAND ${CMAKE_SOURCE_DIR}/scripts/assemble_sym.sh libmpi.a libmpi_a.a libwi4mpi_INTEL_a.a libwi4mpi_MPICH_a.a libwi4mpi_OMPI_a.a libwi4mpi_MPC_a.a
                     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                 )
 
@@ -348,8 +410,13 @@ add_custom_command(TARGET mpi_a
 
 add_library(wi4mpi_INTEL_INTEL SHARED ${SOURCE_WI4MPI_PRELOAD})
 add_library(wi4mpi_INTEL_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
-add_library(wi4mpi_OMPI_INTEL SHARED ${SOURCE_WI4MPI_PRELOAD})
+add_library(wi4mpi_INTEL_MPICH SHARED ${SOURCE_WI4MPI_PRELOAD})
 add_library(wi4mpi_OMPI_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
+add_library(wi4mpi_OMPI_INTEL SHARED ${SOURCE_WI4MPI_PRELOAD})
+add_library(wi4mpi_OMPI_MPICH SHARED ${SOURCE_WI4MPI_PRELOAD})
+add_library(wi4mpi_MPICH_MPICH SHARED ${SOURCE_WI4MPI_PRELOAD})
+add_library(wi4mpi_MPICH_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
+add_library(wi4mpi_MPICH_INTEL SHARED ${SOURCE_WI4MPI_PRELOAD})
 #Empty libraries
 set(LIST_FAKEINTEL mpi mpifort mpigf mpi_mt)
 set(LIST_FAKEINTEL_SOEXT so.4 so.5 so.12)
@@ -379,15 +446,30 @@ endforeach(LIB)
 target_include_directories(wi4mpi_INTEL_INTEL
                            PRIVATE common
                            PRIVATE preload/header/INTEL_INTEL)
+target_include_directories(wi4mpi_INTEL_MPICH
+                           PRIVATE common
+                           PRIVATE preload/header/INTEL_MPICH)
 target_include_directories(wi4mpi_INTEL_OMPI
                            PRIVATE common
                            PRIVATE preload/header/INTEL_OMPI)
-target_include_directories(wi4mpi_OMPI_INTEL
+target_include_directories(wi4mpi_MPICH_INTEL
                            PRIVATE common
-                           PRIVATE preload/header/OMPI_INTEL)
+                           PRIVATE preload/header/MPICH_INTEL)
+target_include_directories(wi4mpi_MPICH_MPICH
+                           PRIVATE common
+                           PRIVATE preload/header/MPICH_MPICH)
+target_include_directories(wi4mpi_MPICH_OMPI
+                           PRIVATE common
+                           PRIVATE preload/header/MPICH_OMPI)
 target_include_directories(wi4mpi_OMPI_OMPI
                            PRIVATE common
                            PRIVATE preload/header/OMPI_OMPI)
+target_include_directories(wi4mpi_OMPI_INTEL
+                           PRIVATE common
+                           PRIVATE preload/header/OMPI_INTEL)
+target_include_directories(wi4mpi_OMPI_MPICH
+                           PRIVATE common
+                           PRIVATE preload/header/OMPI_MPICH)
 
 #Flags
 #-----
@@ -401,8 +483,29 @@ set_target_properties(wi4mpi_INTEL_OMPI
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
 )
+set_target_properties(wi4mpi_INTEL_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
+)
+
+set_target_properties(wi4mpi_MPICH_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
+)
+set_target_properties(wi4mpi_MPICH_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
+)
+set_target_properties(wi4mpi_MPICH_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
+)
 
 set_target_properties(wi4mpi_OMPI_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
+)
+set_target_properties(wi4mpi_OMPI_MPICH
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
 )
@@ -420,8 +523,29 @@ set_target_properties(wi4mpi_INTEL_OMPI
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
 )
+set_target_properties(wi4mpi_INTEL_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
+)
+
+set_target_properties(wi4mpi_MPICH_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
+)
+set_target_properties(wi4mpi_MPICH_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
+)
+set_target_properties(wi4mpi_MPICH_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
+)
 
 set_target_properties(wi4mpi_OMPI_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
+)
+set_target_properties(wi4mpi_OMPI_MPICH
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
 )
@@ -439,8 +563,29 @@ set_target_properties(wi4mpi_INTEL_OMPI
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_OMPI "
 )
+set_target_properties(wi4mpi_INTEL_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_INTEL "
+)
+
+set_target_properties(wi4mpi_MPICH_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_INTEL"
+)
+set_target_properties(wi4mpi_MPICH_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_OMPI "
+)
+set_target_properties(wi4mpi_MPICH_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_INTEL "
+)
 
 set_target_properties(wi4mpi_OMPI_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DOMPI_INTEL"
+)
+set_target_properties(wi4mpi_OMPI_MPICH
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DOMPI_INTEL"
 )
@@ -458,8 +603,29 @@ set_target_properties(wi4mpi_INTEL_OMPI
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_OMPI "
 )
+set_target_properties(wi4mpi_INTEL_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL "
+)
+
+set_target_properties(wi4mpi_MPICH_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL"
+)
+set_target_properties(wi4mpi_MPICH_OMPI
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_OMPI "
+)
+set_target_properties(wi4mpi_MPICH_MPICH
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL "
+)
 
 set_target_properties(wi4mpi_OMPI_INTEL
+                      PROPERTIES
+                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DOMPI_INTEL"
+)
+set_target_properties(wi4mpi_OMPI_MPICH
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DOMPI_INTEL"
 )
@@ -490,8 +656,13 @@ endforeach(LIB)
 
 target_link_libraries(wi4mpi_INTEL_OMPI ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_INTEL_INTEL ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_INTEL_MPICH ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_MPICH_OMPI ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_MPICH_INTEL ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_MPICH_MPICH ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_OMPI_OMPI ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(wi4mpi_OMPI_INTEL ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wi4mpi_OMPI_MPICH ${CMAKE_THREAD_LIBS_INIT})
 
 # Installation specs
 #-------------------
@@ -519,6 +690,11 @@ list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/inte
 list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_INTEL/app_mpi.h")
 list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_INTEL/run_mpi.h")
 list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_INTEL/run_mpio.h")
+    #_MPICH
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/app_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/run_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/run_mpio.h")
     #_MPC
 list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/wrapper_f.h")
 list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/app_mpi.h")
@@ -530,6 +706,7 @@ list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/inte
 
 install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_O} DESTINATION INTERNAL/interface/include/_OMPI)
 install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_I} DESTINATION INTERNAL/interface/include/_INTEL)
+install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_II} DESTINATION INTERNAL/interface/include/_MPICH)
 install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_M} DESTINATION INTERNAL/interface/include/_MPC)
 #PRELOAD
     #OMPI_OMPI
@@ -541,6 +718,11 @@ list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preloa
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/app_mpi.h")
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/run_mpi.h")
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/run_mpio.h")
+    #OMPI_MPICH
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/run_mpio.h")
     #INTEL_OMPI
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/wrapper_f.h")
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/app_mpi.h")
@@ -552,18 +734,51 @@ list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preloa
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpio.h")
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpi.h")
 list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpio.h")
+    #INTEL_INTEL
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpio.h")
+    #MPICH_INTEL
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpio.h")
+    #MPICH_INTEL
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpio.h")
+    #MPICH_OMPI
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/run_mpi.h")
                 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_O} DESTINATION INTERNAL/preload/include/OMPI_OMPI) 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_I} DESTINATION INTERNAL/preload/include/OMPI_INTEL) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_II} DESTINATION INTERNAL/preload/include/OMPI_MPICH) 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_I_O} DESTINATION INTERNAL/preload/include/INTEL_OMPI) 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_I_I} DESTINATION INTERNAL/preload/include/INTEL_INTEL) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_I_II} DESTINATION INTERNAL/preload/include/INTEL_MPICH) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_II_O} DESTINATION INTERNAL/preload/include/MPICH_OMPI) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_II_I} DESTINATION INTERNAL/preload/include/MPICH_INTEL) 
+install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_II_II} DESTINATION INTERNAL/preload/include/MPICH_MPICH) 
 
 #Preload libraries
 #-----------------
 install(TARGETS 
         wi4mpi_INTEL_INTEL
+        wi4mpi_INTEL_MPICH
         wi4mpi_INTEL_OMPI
+        wi4mpi_MPICH_INTEL
+        wi4mpi_MPICH_MPICH
+        wi4mpi_MPICH_OMPI
         wi4mpi_OMPI_INTEL
+        wi4mpi_OMPI_MPICH
         wi4mpi_OMPI_OMPI
         LIBRARY DESTINATION libexec/wi4mpi
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
@@ -580,6 +795,14 @@ endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
     foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
         install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibINTEL
+                RENAME lib${LIB}.${SOEXT}
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+                )
+    endforeach(SOEXT)
+endforeach(LIB)
+foreach(LIB ${LIST_FAKEINTEL})
+    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibMPICH
                 RENAME lib${LIB}.${SOEXT}
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
                 )
@@ -609,6 +832,11 @@ install(TARGETS
 install(TARGETS
         wi4mpi_INTEL
         LIBRARY DESTINATION lib_INTEL
+                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
+)
+install(TARGETS
+        wi4mpi_MPICH
+        LIBRARY DESTINATION lib_MPICH
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 install(TARGETS

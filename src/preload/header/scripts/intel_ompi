@@ -1,5 +1,0 @@
-app: 
-  cp
-
-run:
-   sed 's/MPI_/R_MPI_/g' ompi_mpi.h | sed 's/PR_MPI_/R_PMPI_/g' | sed 's/#    include "mpi_portable_platform.h"/\/\/#    include "mpi_portable_platform.h"/g' | sed 's/const //g' | sed 's/MPIO_/R_MPIO_/g' | sed 's/OR_MPI_C_R_/OMPI_C_/g' > run_mpi_2.h

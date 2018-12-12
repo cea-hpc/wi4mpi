@@ -51,6 +51,7 @@ Option:
                                 accepted values :
                                   - OMPI
                                   - INTEL
+                                  - MPICH
 Influencable variables:
   - WI4MPI_$COMPILER_SUFFIX                   $COMPILER_LANG compiler
   - WI4MPI_ROOT                 WI4MPI installation root
@@ -137,6 +138,11 @@ case $key in
 						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_INTEL.so
 						WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpi.so}
 						WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpifort.so}
+					elif [[ "$2" == "MPICH" ]]; then
+						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_MPICH.so
+						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_MPICH.so
+						WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${MPICH_DEFAULT_ROOT}/lib64/libmpi.so}
+						WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${MPICH_DEFAULT_ROOT}/lib64/libmpifort.so}
 					else
 						usage; exit 0;
 					fi
