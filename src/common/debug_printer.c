@@ -27,7 +27,7 @@ void print_status(A_MPI_Status);
   name_function(elt, cname, &namelen);                                         \
   eprintf("{ value: " #print_str ",name :%s}", elt, cname);
 #define print_named_f(elt, name_function, print_str)                           \
-  name_function(elt, cname, &namelen, &err, 2048);                             \
+  name_function(&elt, cname, &namelen, &err, 2048);                             \
   cname[namelen] = '\0';                                                       \
   eprintf("{ value: " #print_str ",name :%s}", elt, cname);
 
