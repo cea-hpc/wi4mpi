@@ -4,59 +4,62 @@
 #include "app_mpi.h"
 #include <stdarg.h>
 __thread int debug_act;
+unsigned int WI4MPI_debug_max_array_elt;
 void print_status(A_MPI_Status);
+#define eprintf(...)\
+    printf(__VA_ARGS__)
+#define print_array(nb_elt,print_function)\
+                    printf("[\n");\
+    for(ii=0;ii<min(nb_elt,WI4MPI_debug_max_array_elt);ii++)\
+        {if(ii) printf(","); print_function;}\
+        if(ii==WI4MPI_debug_max_array_elt)\
+        printf(",...");\
+    for(ii=nb_elt-WI4MPI_debug_max_array_elt;ii<nb_elt;ii++)\
+        { printf(","); print_function;}\
+       printf("\n]\n");
+        
+#define print_named(elt,name_function,print_str)\
+        name_function(elt,cname,&namelen);\
+        eprintf("{ value: " #print_str ",name :%s}",elt,cname);
+#define print_named_f(elt,name_function,print_str)\
+        name_function(elt,cname,&namelen,&err,2048);\
+        cname[namelen]=\0;\
+        eprintf("{ value: " #print_str ",name :%s}",elt,cname);
+
 
 #define print_type(type,printf_string) \
                     if(nb_elt==0)\
-                   printf(#printf_string ,pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type)));\
+                   eprintf(#printf_string ,pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type)));\
                     else\
                     {\
                     type *s=pointer_disp?*va_arg(ap,type **):va_arg(ap,type*);\
-                    printf("[\n");\
-                    for(ii=0;ii<nb_elt;ii++)\
-                    {if(ii) printf(",\n"); printf( #printf_string,s[ii]);}\
-                    printf("\n]\n");\
+                    print_array(nb_elt,eprintf(#printf_string ,s[ii])) \
                     }
 
 #define print_named_type(type,printf_string,func)\
                     debug_act=0;\
                     if(nb_elt==0){\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
-                    func(dat,cname,&namelen);\
-                   printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
+                    print_named(dat,func,printf_string);\
                     }else\
                     {\
                     type *s=pointer_disp?*va_arg(ap,type **):va_arg(ap,type*);\
-                    printf("[\n");\
-                    for(ii=0;ii<nb_elt;ii++)\
-                    {\
-                        func(s[ii],cname,&namelen);\
-                        if(ii) printf(",\n");\
-             printf("{ value : "#printf_string ", name :%s }" ,s[ii],cname);\
-                    }\
-                    printf("\n]\n");\
+                    print_array(nb_elt,print_named(s[ii],func,printf_string));\
                     }\
                     debug_act=1;
+
+
+
  #define print_named_type_f(type,printf_string,func)\
                     debug_act=0;\
                     if(nb_elt==0){\
                     int err;\
                     type dat=pointer_disp?*(va_arg(ap,type*)):(va_arg(ap,type));\
-                    func(&dat,cname,&namelen,&err,2048);\
-                    cname[namelen]='\0';\
-                   printf("{ value : "#printf_string ", name :%s }" ,dat,cname);\
+                    print_named_f(dat,func,printf_string);\
                     }else\
                     {\
                     type *s=pointer_disp?*va_arg(ap,type **):va_arg(ap,type*);\
-                    printf("[\n");\
-                    for(ii=0;ii<nb_elt;ii++)\
-                    { int err;\
-                        func(&s[ii],cname,&namelen,&err,2048);\
-                        cname[namelen]='\0';\
-                        if(ii) printf(",\n");\
-             printf("{ value : "#printf_string ", name :%s }" ,s[ii],cname);\
-                    }\
-                    printf("\n]\n");\
+                    print_array(nb_elt,print_named_f(s[ii],func,printf_string));\
                     }\
                     debug_act=1;
 void debug_printer(const char *ctr_str,...)
@@ -79,7 +82,7 @@ void debug_printer(const char *ctr_str,...)
         {
             int to_dec;
             print_str[i]='\0';
-            printf("%s",print_str);
+            eprintf("%s",print_str);
             pointer_disp=0;
             to_dec=1;
             void *parg;
@@ -99,24 +102,15 @@ void debug_printer(const char *ctr_str,...)
                     else
                     {
                     A_MPI_Status *s=pointer_disp?*va_arg(ap,A_MPI_Status **):va_arg(ap,A_MPI_Status*);
-                    printf("[\n");
-                    for(ii=0;ii<nb_elt;ii++)
-                    {if(!ii) printf(",");print_status(s[ii]);}
-                    printf("]\n");
-                    }
+                    print_array(nb_elt,print_status(s[ii])); 
                     break;
                 case 'd':
                     if(nb_elt==0)
-                   printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
+                   eprintf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     else
                     {
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
-                    printf("[\n");
-                    for(ii=0;ii<nb_elt;ii++)
-                    {if(ii) printf(",\n%d",s[ii]);else printf("%d",s[ii]);}
-                    printf("]\n");
-                    }
-                    
+                    print_array(nb_elt,eprinf("%d",s[ii]))                   
                     //print_type(int,%d)
                     break;
                 case 'D':
@@ -196,7 +190,7 @@ void debug_printer_f(const char *ctr_str,...)
         {
             int to_dec;
             print_str[i]='\0';
-            printf("%s",print_str);
+            eprintf("%s",print_str);
             pointer_disp=0;
             to_dec=1;
             void *parg;
@@ -216,22 +210,22 @@ void debug_printer_f(const char *ctr_str,...)
                     else
                     {
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
-                    printf("[\n");
+                    eprintf("[\n");
                     for(ii=0;ii<nb_elt;ii++)
                     {if(!ii) printf(",");print_status_f(&s[ii*A_f_MPI_STATUS_SIZE]);}
-                    printf("]\n");
+                    eprintf("]\n");
                     }
                     break;
                 case 'd':
                     if(nb_elt==0)
-                   printf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
+                   eprintf("%d",pointer_disp?*(va_arg(ap,int*)):(va_arg(ap,int)));
                     else
                     {
                     int *s=pointer_disp?*va_arg(ap,int **):va_arg(ap,int*);
-                    printf("[\n");
+                    eprintf("[\n");
                     for(ii=0;ii<nb_elt;ii++)
-                    {if(ii) printf(",\n%d",s[ii]);else printf("%d",s[ii]);}
-                    printf("]\n");
+                    {if(ii) eprintf(",\n%d",s[ii]);else eprintf("%d",s[ii]);}
+                    eprintf("]\n");
                     }
                     
                     //print_type(int,%d)
@@ -288,21 +282,26 @@ void debug_printer_f(const char *ctr_str,...)
         it++;
     } 
     print_str[i]='\0';
-    printf("%s",print_str);
+    eprintf("%s",print_str);
     va_end(ap);       
     
 }}
 __attribute__((constructor)) void init_debug(void)
 {
+    char *tmp;
     debug_act=1;
+    WI4MPI_debug_max_array_elt=0xFFFFFFFF;
+    if(tmp=getenv("WI4MPI_DEBUG_MAX_ARRAY"))
+        WI4MPI_debug_max_array_elt=strtol(tmp,NULL,10);
+
 }
 void print_status(A_MPI_Status stat)
 {
-    printf("{ source :%d, tag : %d ,error :%d}",stat.A_MPI_SOURCE,stat.A_MPI_TAG,stat.A_MPI_ERROR);
+    eprintf("{ source :%d, tag : %d ,error :%d}",stat.A_MPI_SOURCE,stat.A_MPI_TAG,stat.A_MPI_ERROR);
 }
 
 void print_status_f(int *stat)
 {
     
-    printf("{ source :%d, tag : %d ,error :%d}",stat[A_f_MPI_SOURCE],stat[A_f_MPI_TAG],stat[A_f_MPI_ERROR]);
+    eprintf("{ source :%d, tag : %d ,error :%d}",stat[A_f_MPI_SOURCE],stat[A_f_MPI_TAG],stat[A_f_MPI_ERROR]);
 }
