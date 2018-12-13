@@ -1,1 +1,0 @@
-sed s/A_MPI_/MPI_/g mpi.h | sed 's/A_PMPI_/PMPI_/g' | sed '4,7 d' | sed '405,422 s/0x0/((size_t)0x0)/g' | sed '432,446 s/0x0/((size_t)0x0)/g' | sed '462,467 s/\(.* \)\(.* \)\(0x.\)/\1\2((size_t)\3)/g' > mpi2.h
