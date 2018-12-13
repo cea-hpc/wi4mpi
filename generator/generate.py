@@ -65,6 +65,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     string=string+'#include <dlfcn.h>'+'\n'
     string=string+"/*ompi constante*/"+'\n'
     string=string+'int WI4MPI_errhandler_key;\n'
+    string=string+'void debug_printer(const char *,...);\n'
     if not wrapper:
         string=string+ '#if defined(OMPI_OMPI) || defined(_OMPI)'+'\n'
         for i in ompi_const:
@@ -88,6 +89,7 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     for i in data:
         if i['name'] in def_list:
             string=string+'unsigned long long WI4'+i['name']+'_timeout=WI4MPI_MAX_TIME;\n'
+            string=string+'unsigned int WI4'+i['name']+'_print=0;\n'
             string=string+object_gen.print_symbol_c(i,name_arg=True,retval_name=False,type_prefix='A_')+';\n'
             string=string+object_gen.print_symbol_c(i,func_ptr=True,prefix='LOCAL_',type_prefix='R_')+';\n\n'
             if wrapper:
@@ -153,10 +155,11 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
     for conf in init_conf:
         string=string+conf
     string=string+'}\n'
-    string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;timeout_config_file();\n'
+    string=string+'__attribute__((constructor)) void wi4mpi_timeout_config(void){\n char *current_str;size_t current_val;int current_deb;timeout_config_file();\nint default_debug;if(current_str=getenv(\"WI4MPI_DEFAULT_PRINT\")) {default_debug=strtol(current_str,NULL,10);} else default_debug=0;'
     for i in data:
         if (i['name'] in def_list):
             string=string+'if(current_str=getenv(\"WI4'+i['name']+'_timeout\")){ current_val=strtoll(current_str,NULL,10);if (current_val>0) WI4'+i['name']+'_timeout=current_val;}\n'
+            string=string+'if(current_str=getenv(\"WI4'+i['name']+'_debug\")){ current_deb=strtol(current_str,NULL,10);if (current_deb>0) WI4'+i['name']+'_print=current_deb;}else WI4'+i['name']+'_print=default_debug;\n'
     string=string+'}\n'
     return string
 
@@ -165,6 +168,8 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
     if not wrapper:
         string=string+'#include \"mappers.h\"\n'
         string=string+'#include \"run_mpi.h\"\n'
+        string=string+'#include \"helper.h\"\n'
+    string=string+'#define debug_printer debug_printer_f\nvoid debug_printer(const char *,...);\n'
     #overiding json dictionary
     for idx,j in enumerate(data_f):
         for i in data_f_overide:
@@ -190,8 +195,8 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
         string=string+'#endif\n'
     string=string+'extern __thread int in_w;'+'\n'
     for i in data_f:
-        for j in def_list_f:
-            if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
+        if i['name'] in def_list_f:
+     #       if i['name'].lstrip().rstrip() == j.lstrip().rstrip():
                 string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='_',type_prefix='R_',lower=True)+';\n\n'
                 string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='',postfix='__',type_prefix='R_',lower=True)+';\n\n'
                 string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=False,prefix='p',postfix='_',type_prefix='R_',lower=True)+';\n\n'
@@ -203,7 +208,6 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
                     string=string+'#pragma weak '+i['name'].lower()+'_=_P'+i['name']+'\n'
                     string=string+'#pragma weak '+i['name'].lower()+'__=_P'+i['name']+'\n'
                     string=string+'#pragma weak p'+i['name'].lower()+'__=_P'+i['name']+'\n'
-                string=string+'extern unsigned long long WI4'+i['name']+'_timeout;\n'
                 if not wrapper:
                     if i['name'] in list_not_gen:
                         string_file=root+'/FORTRAN/'+i['name']
@@ -211,9 +215,13 @@ def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_n
                         for not_gen_func in file_to_open:
                             string=string+not_gen_func 
                     else: 
+                        string=string+'extern unsigned long long WI4'+i['name']+'_timeout;\n'
+                        string=string+'extern unsigned int WI4'+i['name']+'_print;\n'
                         string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
                         string=string+object_gen.generate_func_f(i)+'\n'
                 else:
+                    string=string+'extern unsigned long long WI4'+i['name']+'_timeout;\n'
+                    string=string+'extern unsigned int WI4'+i['name']+'_print;\n'
                     string=string+object_gen.print_symbol_f(i,app_side=True,func_ptr=True,prefix='_LOCAL_',type_prefix='R_')+';\n\n'
                     string=string+object_gen.generate_func_f(i)+'\n'
     if not wrapper:

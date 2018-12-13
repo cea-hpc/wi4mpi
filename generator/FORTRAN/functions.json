@@ -1622,14 +1622,14 @@
       }, 
       {
         "var": "array_of_blocklengths", 
-        "arg_dep": "", 
+        "arg_dep": "count", 
         "Out": 0, 
         "name": "cont_int_ptr_mapper", 
         "In": 1
       }, 
       {
         "var": "array_of_displacements", 
-        "arg_dep": "", 
+        "arg_dep": "count", 
         "Out": 0, 
         "name": "Aint_const_ptr_converter", 
         "In": 1
@@ -4102,22 +4102,7 @@
     }
   }, 
   {
-    "args": [
-      {
-        "var": "argc", 
-        "arg_dep": "", 
-        "Out": 0, 
-        "name": "int_ptr_mapper", 
-        "In": 1
-      }, 
-      {
-        "var": "argv", 
-        "arg_dep": "", 
-        "Out": 0, 
-        "name": "char_ppp_converter", 
-        "In": 1
-      }
-    ], 
+    "args": [], 
     "name": "MPI_Init", 
     "ret": {
       "var": "ret", 
@@ -9204,7 +9189,7 @@
       }, 
       {
         "var": "lb", 
-        "arg_ dep": "", 
+        "arg_dep": "", 
         "Out" : 1, 
         "name": "count_ptr_converter", 
         "In": 0
@@ -11935,14 +11920,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "Out": 0, 
-        "name": "no_args_converter", 
-        "In": 0
-      }
-    ], 
+        ], 
     "name": "MPI_T_finalize", 
     "ret": {
       "var": "ret", 
@@ -11953,14 +11931,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "In": 0, 
-        "name": "no_args_converter", 
-        "Out": 0
-      }
-    ], 
+          ], 
     "name": "MPI_Wtime", 
     "ret": {
       "var": "ret", 
@@ -11971,14 +11942,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "In": 0, 
-        "name": "no_args_converter", 
-        "Out": 0
-      }
-    ], 
+          ], 
     "name": "MPI_Wtick", 
     "ret": {
       "var": "ret", 
@@ -11989,14 +11953,7 @@
   }, 
   {
     "args": [
-      {
-        "var": "", 
-        "arg_dep": "", 
-        "In": 0, 
-        "name": "no_args_converter", 
-        "Out": 0
-      }
-    ], 
+          ], 
     "name": "MPI_Finalize", 
     "ret": {
       "var": "ret", 
@@ -12023,7 +11980,7 @@
       }, 
       {
         "var": "indx", 
-        "arg_dep": "count", 
+        "arg_dep": "", 
         "Out": 1, 
         "name": "int_ptr_mapper", 
         "In": 0
@@ -12063,7 +12020,7 @@
       }, 
       {
         "var": "indx", 
-        "arg_dep": "count", 
+        "arg_dep": "", 
         "Out": 1, 
         "name": "int_ptr_mapper", 
         "In": 0
@@ -12787,7 +12744,7 @@
       }, 
       {
         "var": "indx", 
-        "arg_dep": "mmaxindex", 
+        "arg_dep": "maxindex", 
         "In": 0, 
         "name": "int_mapper", 
         "Out": 1
@@ -13682,21 +13639,21 @@
       }, 
       {
         "var": "array_of_sizes", 
-        "arg_dep": "count", 
+        "arg_dep": "ndims", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "array_of_subsizes", 
-        "arg_dep": "count", 
+        "arg_dep": "ndims", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "array_of_starts", 
-        "arg_dep": "count", 
+        "arg_dep": "", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0

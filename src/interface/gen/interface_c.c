@@ -146,18 +146,15 @@ extern int INTERF_2_INTEL_CCMPI_Send(void *,int,MPI_Datatype,int,int,MPI_Comm);
 
 int PMPI_Send(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Send (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Send( buf, count, datatype, dest, tag, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Send (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Recv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Status * status);
 #pragma weak MPI_Recv=PMPI_Recv
@@ -169,18 +166,15 @@ extern int INTERF_2_INTEL_CCMPI_Recv(void *,int,MPI_Datatype,int,int,MPI_Comm,MP
 
 int PMPI_Recv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Recv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Recv( buf, count, datatype, source, tag, comm, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Recv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_count(MPI_Status * status,MPI_Datatype datatype,int * count);
 #pragma weak MPI_Get_count=PMPI_Get_count
@@ -192,18 +186,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_count(MPI_Status *,MPI_Datatype,int *);
 
 int PMPI_Get_count(MPI_Status * status,MPI_Datatype datatype,int * count)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_count (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_count( status, datatype, count);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_count (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Bsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
 #pragma weak MPI_Bsend=PMPI_Bsend
@@ -215,18 +206,15 @@ extern int INTERF_2_INTEL_CCMPI_Bsend(void *,int,MPI_Datatype,int,int,MPI_Comm);
 
 int PMPI_Bsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Bsend (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Bsend( buf, count, datatype, dest, tag, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Bsend (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ssend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
 #pragma weak MPI_Ssend=PMPI_Ssend
@@ -238,18 +226,15 @@ extern int INTERF_2_INTEL_CCMPI_Ssend(void *,int,MPI_Datatype,int,int,MPI_Comm);
 
 int PMPI_Ssend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ssend (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ssend( buf, count, datatype, dest, tag, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ssend (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Rsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm);
 #pragma weak MPI_Rsend=PMPI_Rsend
@@ -261,18 +246,15 @@ extern int INTERF_2_INTEL_CCMPI_Rsend(void *,int,MPI_Datatype,int,int,MPI_Comm);
 
 int PMPI_Rsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Rsend (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rsend( buf, count, datatype, dest, tag, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Rsend (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Buffer_attach(void * buffer,int size);
 #pragma weak MPI_Buffer_attach=PMPI_Buffer_attach
@@ -284,18 +266,15 @@ extern int INTERF_2_INTEL_CCMPI_Buffer_attach(void *,int);
 
 int PMPI_Buffer_attach(void * buffer,int size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Buffer_attach (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Buffer_attach( buffer, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Buffer_attach (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Buffer_detach(void * buffer_addr,int * size);
 #pragma weak MPI_Buffer_detach=PMPI_Buffer_detach
@@ -307,18 +286,15 @@ extern int INTERF_2_INTEL_CCMPI_Buffer_detach(void *,int *);
 
 int PMPI_Buffer_detach(void * buffer_addr,int * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Buffer_detach (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Buffer_detach( buffer_addr, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Buffer_detach (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Isend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Isend=PMPI_Isend
@@ -330,18 +306,15 @@ extern int INTERF_2_INTEL_CCMPI_Isend(void *,int,MPI_Datatype,int,int,MPI_Comm,M
 
 int PMPI_Isend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Isend (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Isend( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Isend (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ibsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ibsend=PMPI_Ibsend
@@ -353,18 +326,15 @@ extern int INTERF_2_INTEL_CCMPI_Ibsend(void *,int,MPI_Datatype,int,int,MPI_Comm,
 
 int PMPI_Ibsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ibsend (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ibsend( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ibsend (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Issend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Issend=PMPI_Issend
@@ -376,18 +346,15 @@ extern int INTERF_2_INTEL_CCMPI_Issend(void *,int,MPI_Datatype,int,int,MPI_Comm,
 
 int PMPI_Issend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Issend (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Issend( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Issend (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Irsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Irsend=PMPI_Irsend
@@ -399,18 +366,15 @@ extern int INTERF_2_INTEL_CCMPI_Irsend(void *,int,MPI_Datatype,int,int,MPI_Comm,
 
 int PMPI_Irsend(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Irsend (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Irsend( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Irsend (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Irecv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Irecv=PMPI_Irecv
@@ -422,18 +386,15 @@ extern int INTERF_2_INTEL_CCMPI_Irecv(void *,int,MPI_Datatype,int,int,MPI_Comm,M
 
 int PMPI_Irecv(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Irecv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Irecv( buf, count, datatype, source, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Irecv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Wait(MPI_Request * request,MPI_Status * status);
 #pragma weak MPI_Wait=PMPI_Wait
@@ -445,18 +406,15 @@ extern int INTERF_2_INTEL_CCMPI_Wait(MPI_Request *,MPI_Status *);
 
 int PMPI_Wait(MPI_Request * request,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Wait (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Wait( request, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Wait (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Test(MPI_Request * request,int * flag,MPI_Status * status);
 #pragma weak MPI_Test=PMPI_Test
@@ -468,18 +426,15 @@ extern int INTERF_2_INTEL_CCMPI_Test(MPI_Request *,int *,MPI_Status *);
 
 int PMPI_Test(MPI_Request * request,int * flag,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Test (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Test( request, flag, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Test (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Request_free(MPI_Request * request);
 #pragma weak MPI_Request_free=PMPI_Request_free
@@ -491,18 +446,15 @@ extern int INTERF_2_INTEL_CCMPI_Request_free(MPI_Request *);
 
 int PMPI_Request_free(MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Request_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Request_free( request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Request_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iprobe(int source,int tag,MPI_Comm comm,int * flag,MPI_Status * status);
 #pragma weak MPI_Iprobe=PMPI_Iprobe
@@ -514,18 +466,15 @@ extern int INTERF_2_INTEL_CCMPI_Iprobe(int,int,MPI_Comm,int *,MPI_Status *);
 
 int PMPI_Iprobe(int source,int tag,MPI_Comm comm,int * flag,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iprobe (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iprobe( source, tag, comm, flag, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iprobe (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Probe(int source,int tag,MPI_Comm comm,MPI_Status * status);
 #pragma weak MPI_Probe=PMPI_Probe
@@ -537,18 +486,15 @@ extern int INTERF_2_INTEL_CCMPI_Probe(int,int,MPI_Comm,MPI_Status *);
 
 int PMPI_Probe(int source,int tag,MPI_Comm comm,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Probe (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Probe( source, tag, comm, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Probe (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cancel(MPI_Request * request);
 #pragma weak MPI_Cancel=PMPI_Cancel
@@ -560,18 +506,15 @@ extern int INTERF_2_INTEL_CCMPI_Cancel(MPI_Request *);
 
 int PMPI_Cancel(MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cancel (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cancel( request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cancel (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Test_cancelled(MPI_Status * status,int * flag);
 #pragma weak MPI_Test_cancelled=PMPI_Test_cancelled
@@ -583,18 +526,15 @@ extern int INTERF_2_INTEL_CCMPI_Test_cancelled(MPI_Status *,int *);
 
 int PMPI_Test_cancelled(MPI_Status * status,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Test_cancelled (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Test_cancelled( status, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Test_cancelled (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Send_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Send_init=PMPI_Send_init
@@ -606,18 +546,15 @@ extern int INTERF_2_INTEL_CCMPI_Send_init(void *,int,MPI_Datatype,int,int,MPI_Co
 
 int PMPI_Send_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Send_init (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Send_init( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Send_init (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Bsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Bsend_init=PMPI_Bsend_init
@@ -629,18 +566,15 @@ extern int INTERF_2_INTEL_CCMPI_Bsend_init(void *,int,MPI_Datatype,int,int,MPI_C
 
 int PMPI_Bsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Bsend_init (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Bsend_init( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Bsend_init (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ssend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ssend_init=PMPI_Ssend_init
@@ -652,18 +586,15 @@ extern int INTERF_2_INTEL_CCMPI_Ssend_init(void *,int,MPI_Datatype,int,int,MPI_C
 
 int PMPI_Ssend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ssend_init (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ssend_init( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ssend_init (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Rsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Rsend_init=PMPI_Rsend_init
@@ -675,18 +606,15 @@ extern int INTERF_2_INTEL_CCMPI_Rsend_init(void *,int,MPI_Datatype,int,int,MPI_C
 
 int PMPI_Rsend_init(void * buf,int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Rsend_init (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rsend_init( buf, count, datatype, dest, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Rsend_init (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Recv_init(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Recv_init=PMPI_Recv_init
@@ -698,18 +626,15 @@ extern int INTERF_2_INTEL_CCMPI_Recv_init(void *,int,MPI_Datatype,int,int,MPI_Co
 
 int PMPI_Recv_init(void * buf,int count,MPI_Datatype datatype,int source,int tag,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Recv_init (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Recv_init( buf, count, datatype, source, tag, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Recv_init (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Start(MPI_Request * request);
 #pragma weak MPI_Start=PMPI_Start
@@ -721,18 +646,15 @@ extern int INTERF_2_INTEL_CCMPI_Start(MPI_Request *);
 
 int PMPI_Start(MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Start (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Start( request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Start (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Sendrecv(void * sendbuf,int sendcount,MPI_Datatype sendtype,int dest,int sendtag,void * recvbuf,int recvcount,MPI_Datatype recvtype,int source,int recvtag,MPI_Comm comm,MPI_Status * status);
 #pragma weak MPI_Sendrecv=PMPI_Sendrecv
@@ -744,18 +666,15 @@ extern int INTERF_2_INTEL_CCMPI_Sendrecv(void *,int,MPI_Datatype,int,int,void *,
 
 int PMPI_Sendrecv(void * sendbuf,int sendcount,MPI_Datatype sendtype,int dest,int sendtag,void * recvbuf,int recvcount,MPI_Datatype recvtype,int source,int recvtag,MPI_Comm comm,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Sendrecv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Sendrecv( sendbuf, sendcount, sendtype, dest, sendtag, recvbuf, recvcount, recvtype, source, recvtag, comm, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Sendrecv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Sendrecv_replace(void * buf,int count,MPI_Datatype datatype,int dest,int sendtag,int source,int recvtag,MPI_Comm comm,MPI_Status * status);
 #pragma weak MPI_Sendrecv_replace=PMPI_Sendrecv_replace
@@ -767,18 +686,15 @@ extern int INTERF_2_INTEL_CCMPI_Sendrecv_replace(void *,int,MPI_Datatype,int,int
 
 int PMPI_Sendrecv_replace(void * buf,int count,MPI_Datatype datatype,int dest,int sendtag,int source,int recvtag,MPI_Comm comm,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Sendrecv_replace (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Sendrecv_replace( buf, count, datatype, dest, sendtag, source, recvtag, comm, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Sendrecv_replace (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_contiguous(int count,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_contiguous=PMPI_Type_contiguous
@@ -790,18 +706,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_contiguous(int,MPI_Datatype,MPI_Datatype *)
 
 int PMPI_Type_contiguous(int count,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_contiguous (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_contiguous( count, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_contiguous (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_vector(int count,int blocklength,int stride,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_vector=PMPI_Type_vector
@@ -813,18 +726,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_vector(int,int,int,MPI_Datatype,MPI_Datatyp
 
 int PMPI_Type_vector(int count,int blocklength,int stride,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_vector (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_vector( count, blocklength, stride, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_vector (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_hvector=PMPI_Type_hvector
@@ -836,18 +746,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_hvector(int,int,MPI_Aint,MPI_Datatype,MPI_D
 
 int PMPI_Type_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_hvector (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_hvector( count, blocklength, stride, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_hvector (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_indexed(int count,int * array_of_blocklengths,int * array_of_displacements,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_indexed=PMPI_Type_indexed
@@ -859,18 +766,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_indexed(int,int *,int *,MPI_Datatype,MPI_Da
 
 int PMPI_Type_indexed(int count,int * array_of_blocklengths,int * array_of_displacements,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_indexed (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_indexed( count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_indexed (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_hindexed(int count,int * array_of_blocklengths,MPI_Aint * array_of_displacements,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_hindexed=PMPI_Type_hindexed
@@ -882,18 +786,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_hindexed(int,int *,MPI_Aint *,MPI_Datatype,
 
 int PMPI_Type_hindexed(int count,int * array_of_blocklengths,MPI_Aint * array_of_displacements,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_hindexed (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_hindexed( count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_hindexed (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_struct(int count,int * array_of_blocklengths,MPI_Aint * array_of_displacements,MPI_Datatype array_of_types[],MPI_Datatype * newtype);
 #pragma weak MPI_Type_struct=PMPI_Type_struct
@@ -905,18 +806,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_struct(int,int *,MPI_Aint *,MPI_Datatype *,
 
 int PMPI_Type_struct(int count,int * array_of_blocklengths,MPI_Aint * array_of_displacements,MPI_Datatype array_of_types[],MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_struct (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_struct( count, array_of_blocklengths, array_of_displacements, array_of_types, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_struct (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Address(void * location,MPI_Aint * address);
 #pragma weak MPI_Address=PMPI_Address
@@ -928,18 +826,15 @@ extern int INTERF_2_INTEL_CCMPI_Address(void *,MPI_Aint *);
 
 int PMPI_Address(void * location,MPI_Aint * address)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Address (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Address( location, address);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Address (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_extent(MPI_Datatype datatype,MPI_Aint * extent);
 #pragma weak MPI_Type_extent=PMPI_Type_extent
@@ -951,18 +846,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_extent(MPI_Datatype,MPI_Aint *);
 
 int PMPI_Type_extent(MPI_Datatype datatype,MPI_Aint * extent)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_extent (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_extent( datatype, extent);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_extent (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_size(MPI_Datatype datatype,int * size);
 #pragma weak MPI_Type_size=PMPI_Type_size
@@ -974,18 +866,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_size(MPI_Datatype,int *);
 
 int PMPI_Type_size(MPI_Datatype datatype,int * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_size( datatype, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_lb(MPI_Datatype datatype,MPI_Aint * displacement);
 #pragma weak MPI_Type_lb=PMPI_Type_lb
@@ -997,18 +886,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_lb(MPI_Datatype,MPI_Aint *);
 
 int PMPI_Type_lb(MPI_Datatype datatype,MPI_Aint * displacement)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_lb (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_lb( datatype, displacement);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_lb (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_ub(MPI_Datatype datatype,MPI_Aint * displacement);
 #pragma weak MPI_Type_ub=PMPI_Type_ub
@@ -1020,18 +906,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_ub(MPI_Datatype,MPI_Aint *);
 
 int PMPI_Type_ub(MPI_Datatype datatype,MPI_Aint * displacement)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_ub (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_ub( datatype, displacement);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_ub (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_commit(MPI_Datatype * datatype);
 #pragma weak MPI_Type_commit=PMPI_Type_commit
@@ -1043,18 +926,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_commit(MPI_Datatype *);
 
 int PMPI_Type_commit(MPI_Datatype * datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_commit (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_commit( datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_commit (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_free(MPI_Datatype * datatype);
 #pragma weak MPI_Type_free=PMPI_Type_free
@@ -1066,18 +946,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_free(MPI_Datatype *);
 
 int PMPI_Type_free(MPI_Datatype * datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_free( datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_elements(MPI_Status * status,MPI_Datatype datatype,int * count);
 #pragma weak MPI_Get_elements=PMPI_Get_elements
@@ -1089,18 +966,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_elements(MPI_Status *,MPI_Datatype,int *);
 
 int PMPI_Get_elements(MPI_Status * status,MPI_Datatype datatype,int * count)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_elements (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_elements( status, datatype, count);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_elements (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Pack(void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,int outsize,int * position,MPI_Comm comm);
 #pragma weak MPI_Pack=PMPI_Pack
@@ -1112,18 +986,15 @@ extern int INTERF_2_INTEL_CCMPI_Pack(void *,int,MPI_Datatype,void *,int,int *,MP
 
 int PMPI_Pack(void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,int outsize,int * position,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Pack (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack( inbuf, incount, datatype, outbuf, outsize, position, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Pack (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Unpack(void * inbuf,int insize,int * position,void * outbuf,int outcount,MPI_Datatype datatype,MPI_Comm comm);
 #pragma weak MPI_Unpack=PMPI_Unpack
@@ -1135,18 +1006,15 @@ extern int INTERF_2_INTEL_CCMPI_Unpack(void *,int,int *,void *,int,MPI_Datatype,
 
 int PMPI_Unpack(void * inbuf,int insize,int * position,void * outbuf,int outcount,MPI_Datatype datatype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Unpack (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Unpack( inbuf, insize, position, outbuf, outcount, datatype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Unpack (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Pack_size(int incount,MPI_Datatype datatype,MPI_Comm comm,int * size);
 #pragma weak MPI_Pack_size=PMPI_Pack_size
@@ -1158,18 +1026,15 @@ extern int INTERF_2_INTEL_CCMPI_Pack_size(int,MPI_Datatype,MPI_Comm,int *);
 
 int PMPI_Pack_size(int incount,MPI_Datatype datatype,MPI_Comm comm,int * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Pack_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack_size( incount, datatype, comm, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Pack_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Barrier(MPI_Comm comm);
 #pragma weak MPI_Barrier=PMPI_Barrier
@@ -1181,18 +1046,15 @@ extern int INTERF_2_INTEL_CCMPI_Barrier(MPI_Comm);
 
 int PMPI_Barrier(MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Barrier (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Barrier( comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Barrier (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Bcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm comm);
 #pragma weak MPI_Bcast=PMPI_Bcast
@@ -1204,18 +1066,15 @@ extern int INTERF_2_INTEL_CCMPI_Bcast(void *,int,MPI_Datatype,int,MPI_Comm);
 
 int PMPI_Bcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Bcast (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Bcast( buffer, count, datatype, root, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Bcast (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Gather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm);
 #pragma weak MPI_Gather=PMPI_Gather
@@ -1227,18 +1086,15 @@ extern int INTERF_2_INTEL_CCMPI_Gather(void *,int,MPI_Datatype,void *,int,MPI_Da
 
 int PMPI_Gather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Gather (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Gather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Gather (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Gatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,MPI_Datatype recvtype,int root,MPI_Comm comm);
 #pragma weak MPI_Gatherv=PMPI_Gatherv
@@ -1250,18 +1106,15 @@ extern int INTERF_2_INTEL_CCMPI_Gatherv(void *,int,MPI_Datatype,void *,int *,int
 
 int PMPI_Gatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,MPI_Datatype recvtype,int root,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Gatherv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Gatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, root, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Gatherv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Scatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm);
 #pragma weak MPI_Scatter=PMPI_Scatter
@@ -1273,18 +1126,15 @@ extern int INTERF_2_INTEL_CCMPI_Scatter(void *,int,MPI_Datatype,void *,int,MPI_D
 
 int PMPI_Scatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Scatter (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Scatter( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Scatter (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Scatterv(void * sendbuf,int * sendcounts,int * displs,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm);
 #pragma weak MPI_Scatterv=PMPI_Scatterv
@@ -1296,18 +1146,15 @@ extern int INTERF_2_INTEL_CCMPI_Scatterv(void *,int *,int *,MPI_Datatype,void *,
 
 int PMPI_Scatterv(void * sendbuf,int * sendcounts,int * displs,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Scatterv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Scatterv( sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount, recvtype, root, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Scatterv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Allgather=PMPI_Allgather
@@ -1319,18 +1166,15 @@ extern int INTERF_2_INTEL_CCMPI_Allgather(void *,int,MPI_Datatype,void *,int,MPI
 
 int PMPI_Allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Allgather (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Allgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Allgather (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Allgatherv=PMPI_Allgatherv
@@ -1342,18 +1186,15 @@ extern int INTERF_2_INTEL_CCMPI_Allgatherv(void *,int,MPI_Datatype,void *,int *,
 
 int PMPI_Allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * displs,MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Allgatherv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Allgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Allgatherv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Alltoall=PMPI_Alltoall
@@ -1365,18 +1206,15 @@ extern int INTERF_2_INTEL_CCMPI_Alltoall(void *,int,MPI_Datatype,void *,int,MPI_
 
 int PMPI_Alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Alltoall (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Alltoall (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Alltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Alltoallv=PMPI_Alltoallv
@@ -1388,18 +1226,15 @@ extern int INTERF_2_INTEL_CCMPI_Alltoallv(void *,int *,int *,MPI_Datatype,void *
 
 int PMPI_Alltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Alltoallv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Alltoallv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Exscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
 #pragma weak MPI_Exscan=PMPI_Exscan
@@ -1411,18 +1246,15 @@ extern int INTERF_2_INTEL_CCMPI_Exscan(void *,void *,int,MPI_Datatype,MPI_Op,MPI
 
 int PMPI_Exscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Exscan (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Exscan( sendbuf, recvbuf, count, datatype, op, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Exscan (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Reduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,int root,MPI_Comm comm);
 #pragma weak MPI_Reduce=PMPI_Reduce
@@ -1434,18 +1266,15 @@ extern int INTERF_2_INTEL_CCMPI_Reduce(void *,void *,int,MPI_Datatype,MPI_Op,int
 
 int PMPI_Reduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,int root,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Reduce (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce( sendbuf, recvbuf, count, datatype, op, root, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Reduce (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Op_create(MPI_User_function * user_fn,int commute,MPI_Op * op);
 #pragma weak MPI_Op_create=PMPI_Op_create
@@ -1457,18 +1286,15 @@ extern int INTERF_2_INTEL_CCMPI_Op_create(MPI_User_function *,int,MPI_Op *);
 
 int PMPI_Op_create(MPI_User_function * user_fn,int commute,MPI_Op * op)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Op_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Op_create( user_fn, commute, op);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Op_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Op_free(MPI_Op * op);
 #pragma weak MPI_Op_free=PMPI_Op_free
@@ -1480,18 +1306,15 @@ extern int INTERF_2_INTEL_CCMPI_Op_free(MPI_Op *);
 
 int PMPI_Op_free(MPI_Op * op)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Op_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Op_free( op);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Op_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Allreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
 #pragma weak MPI_Allreduce=PMPI_Allreduce
@@ -1503,18 +1326,15 @@ extern int INTERF_2_INTEL_CCMPI_Allreduce(void *,void *,int,MPI_Datatype,MPI_Op,
 
 int PMPI_Allreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Allreduce (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Allreduce( sendbuf, recvbuf, count, datatype, op, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Allreduce (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Scan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
 #pragma weak MPI_Scan=PMPI_Scan
@@ -1526,18 +1346,15 @@ extern int INTERF_2_INTEL_CCMPI_Scan(void *,void *,int,MPI_Datatype,MPI_Op,MPI_C
 
 int PMPI_Scan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Scan (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Scan( sendbuf, recvbuf, count, datatype, op, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Scan (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_size(MPI_Group group,int * size);
 #pragma weak MPI_Group_size=PMPI_Group_size
@@ -1549,18 +1366,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_size(MPI_Group,int *);
 
 int PMPI_Group_size(MPI_Group group,int * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_size( group, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_rank(MPI_Group group,int * rank);
 #pragma weak MPI_Group_rank=PMPI_Group_rank
@@ -1572,18 +1386,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_rank(MPI_Group,int *);
 
 int PMPI_Group_rank(MPI_Group group,int * rank)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_rank (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_rank( group, rank);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_rank (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_compare(MPI_Group group1,MPI_Group group2,int * result);
 #pragma weak MPI_Group_compare=PMPI_Group_compare
@@ -1595,18 +1406,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_compare(MPI_Group,MPI_Group,int *);
 
 int PMPI_Group_compare(MPI_Group group1,MPI_Group group2,int * result)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_compare (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_compare( group1, group2, result);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_compare (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_group(MPI_Comm comm,MPI_Group * group);
 #pragma weak MPI_Comm_group=PMPI_Comm_group
@@ -1618,18 +1426,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_group(MPI_Comm,MPI_Group *);
 
 int PMPI_Comm_group(MPI_Comm comm,MPI_Group * group)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_group (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_group( comm, group);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_group (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_union(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup);
 #pragma weak MPI_Group_union=PMPI_Group_union
@@ -1641,18 +1446,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_union(MPI_Group,MPI_Group,MPI_Group *);
 
 int PMPI_Group_union(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_union (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_union( group1, group2, newgroup);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_union (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_intersection(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup);
 #pragma weak MPI_Group_intersection=PMPI_Group_intersection
@@ -1664,18 +1466,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_intersection(MPI_Group,MPI_Group,MPI_Group
 
 int PMPI_Group_intersection(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_intersection (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_intersection( group1, group2, newgroup);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_intersection (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_difference(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup);
 #pragma weak MPI_Group_difference=PMPI_Group_difference
@@ -1687,18 +1486,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_difference(MPI_Group,MPI_Group,MPI_Group *
 
 int PMPI_Group_difference(MPI_Group group1,MPI_Group group2,MPI_Group * newgroup)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_difference (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_difference( group1, group2, newgroup);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_difference (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_free(MPI_Group * group);
 #pragma weak MPI_Group_free=PMPI_Group_free
@@ -1710,18 +1506,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_free(MPI_Group *);
 
 int PMPI_Group_free(MPI_Group * group)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_free( group);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_size(MPI_Comm comm,int * size);
 #pragma weak MPI_Comm_size=PMPI_Comm_size
@@ -1733,18 +1526,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_size(MPI_Comm,int *);
 
 int PMPI_Comm_size(MPI_Comm comm,int * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_size( comm, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_rank(MPI_Comm comm,int * rank);
 #pragma weak MPI_Comm_rank=PMPI_Comm_rank
@@ -1756,18 +1546,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_rank(MPI_Comm,int *);
 
 int PMPI_Comm_rank(MPI_Comm comm,int * rank)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_rank (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_rank( comm, rank);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_rank (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_compare(MPI_Comm comm1,MPI_Comm comm2,int * result);
 #pragma weak MPI_Comm_compare=PMPI_Comm_compare
@@ -1779,18 +1566,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_compare(MPI_Comm,MPI_Comm,int *);
 
 int PMPI_Comm_compare(MPI_Comm comm1,MPI_Comm comm2,int * result)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_compare (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_compare( comm1, comm2, result);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_compare (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_dup(MPI_Comm comm,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_dup=PMPI_Comm_dup
@@ -1802,18 +1586,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_dup(MPI_Comm,MPI_Comm *);
 
 int PMPI_Comm_dup(MPI_Comm comm,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_dup (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_dup( comm, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_dup (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_dup_with_info(MPI_Comm comm,MPI_Info info,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_dup_with_info=PMPI_Comm_dup_with_info
@@ -1825,18 +1606,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_dup_with_info(MPI_Comm,MPI_Info,MPI_Comm *)
 
 int PMPI_Comm_dup_with_info(MPI_Comm comm,MPI_Info info,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_dup_with_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_dup_with_info( comm, info, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_dup_with_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_create(MPI_Comm comm,MPI_Group group,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_create=PMPI_Comm_create
@@ -1848,18 +1626,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_create(MPI_Comm,MPI_Group,MPI_Comm *);
 
 int PMPI_Comm_create(MPI_Comm comm,MPI_Group group,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_create( comm, group, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_split(MPI_Comm comm,int color,int key,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_split=PMPI_Comm_split
@@ -1871,18 +1646,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_split(MPI_Comm,int,int,MPI_Comm *);
 
 int PMPI_Comm_split(MPI_Comm comm,int color,int key,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_split (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_split( comm, color, key, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_split (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_free(MPI_Comm * comm);
 #pragma weak MPI_Comm_free=PMPI_Comm_free
@@ -1894,18 +1666,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_free(MPI_Comm *);
 
 int PMPI_Comm_free(MPI_Comm * comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_free( comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_test_inter(MPI_Comm comm,int * flag);
 #pragma weak MPI_Comm_test_inter=PMPI_Comm_test_inter
@@ -1917,18 +1686,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_test_inter(MPI_Comm,int *);
 
 int PMPI_Comm_test_inter(MPI_Comm comm,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_test_inter (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_test_inter( comm, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_test_inter (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_remote_size(MPI_Comm comm,int * size);
 #pragma weak MPI_Comm_remote_size=PMPI_Comm_remote_size
@@ -1940,18 +1706,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_remote_size(MPI_Comm,int *);
 
 int PMPI_Comm_remote_size(MPI_Comm comm,int * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_remote_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_remote_size( comm, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_remote_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_remote_group(MPI_Comm comm,MPI_Group * group);
 #pragma weak MPI_Comm_remote_group=PMPI_Comm_remote_group
@@ -1963,18 +1726,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_remote_group(MPI_Comm,MPI_Group *);
 
 int PMPI_Comm_remote_group(MPI_Comm comm,MPI_Group * group)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_remote_group (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_remote_group( comm, group);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_remote_group (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Intercomm_create(MPI_Comm local_comm,int local_leader,MPI_Comm peer_comm,int remote_leader,int tag,MPI_Comm * newintercomm);
 #pragma weak MPI_Intercomm_create=PMPI_Intercomm_create
@@ -1986,18 +1746,15 @@ extern int INTERF_2_INTEL_CCMPI_Intercomm_create(MPI_Comm,int,MPI_Comm,int,int,M
 
 int PMPI_Intercomm_create(MPI_Comm local_comm,int local_leader,MPI_Comm peer_comm,int remote_leader,int tag,MPI_Comm * newintercomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Intercomm_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Intercomm_create( local_comm, local_leader, peer_comm, remote_leader, tag, newintercomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Intercomm_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Intercomm_merge(MPI_Comm intercomm,int high,MPI_Comm * newintracomm);
 #pragma weak MPI_Intercomm_merge=PMPI_Intercomm_merge
@@ -2009,18 +1766,15 @@ extern int INTERF_2_INTEL_CCMPI_Intercomm_merge(MPI_Comm,int,MPI_Comm *);
 
 int PMPI_Intercomm_merge(MPI_Comm intercomm,int high,MPI_Comm * newintracomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Intercomm_merge (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Intercomm_merge( intercomm, high, newintracomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Intercomm_merge (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Attr_put(MPI_Comm comm,int keyval,void * attribute_val);
 #pragma weak MPI_Attr_put=PMPI_Attr_put
@@ -2032,18 +1786,15 @@ extern int INTERF_2_INTEL_CCMPI_Attr_put(MPI_Comm,int,void *);
 
 int PMPI_Attr_put(MPI_Comm comm,int keyval,void * attribute_val)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Attr_put (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Attr_put( comm, keyval, attribute_val);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Attr_put (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Attr_get(MPI_Comm comm,int keyval,void * attribute_val,int * flag);
 #pragma weak MPI_Attr_get=PMPI_Attr_get
@@ -2055,18 +1806,15 @@ extern int INTERF_2_INTEL_CCMPI_Attr_get(MPI_Comm,int,void *,int *);
 
 int PMPI_Attr_get(MPI_Comm comm,int keyval,void * attribute_val,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Attr_get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Attr_get( comm, keyval, attribute_val, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Attr_get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Attr_delete(MPI_Comm comm,int keyval);
 #pragma weak MPI_Attr_delete=PMPI_Attr_delete
@@ -2078,18 +1826,15 @@ extern int INTERF_2_INTEL_CCMPI_Attr_delete(MPI_Comm,int);
 
 int PMPI_Attr_delete(MPI_Comm comm,int keyval)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Attr_delete (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Attr_delete( comm, keyval);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Attr_delete (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Topo_test(MPI_Comm comm,int * status);
 #pragma weak MPI_Topo_test=PMPI_Topo_test
@@ -2101,18 +1846,15 @@ extern int INTERF_2_INTEL_CCMPI_Topo_test(MPI_Comm,int *);
 
 int PMPI_Topo_test(MPI_Comm comm,int * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Topo_test (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Topo_test( comm, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Topo_test (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Graphdims_get(MPI_Comm comm,int * nnodes,int * nedges);
 #pragma weak MPI_Graphdims_get=PMPI_Graphdims_get
@@ -2124,18 +1866,15 @@ extern int INTERF_2_INTEL_CCMPI_Graphdims_get(MPI_Comm,int *,int *);
 
 int PMPI_Graphdims_get(MPI_Comm comm,int * nnodes,int * nedges)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Graphdims_get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graphdims_get( comm, nnodes, nedges);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Graphdims_get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cartdim_get(MPI_Comm comm,int * ndims);
 #pragma weak MPI_Cartdim_get=PMPI_Cartdim_get
@@ -2147,18 +1886,15 @@ extern int INTERF_2_INTEL_CCMPI_Cartdim_get(MPI_Comm,int *);
 
 int PMPI_Cartdim_get(MPI_Comm comm,int * ndims)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cartdim_get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cartdim_get( comm, ndims);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cartdim_get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Graph_neighbors_count(MPI_Comm comm,int rank,int * nneighbors);
 #pragma weak MPI_Graph_neighbors_count=PMPI_Graph_neighbors_count
@@ -2170,18 +1906,15 @@ extern int INTERF_2_INTEL_CCMPI_Graph_neighbors_count(MPI_Comm,int,int *);
 
 int PMPI_Graph_neighbors_count(MPI_Comm comm,int rank,int * nneighbors)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Graph_neighbors_count (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_neighbors_count( comm, rank, nneighbors);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Graph_neighbors_count (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cart_shift(MPI_Comm comm,int direction,int disp,int * rank_source,int * rank_dest);
 #pragma weak MPI_Cart_shift=PMPI_Cart_shift
@@ -2193,18 +1926,15 @@ extern int INTERF_2_INTEL_CCMPI_Cart_shift(MPI_Comm,int,int,int *,int *);
 
 int PMPI_Cart_shift(MPI_Comm comm,int direction,int disp,int * rank_source,int * rank_dest)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cart_shift (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_shift( comm, direction, disp, rank_source, rank_dest);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cart_shift (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_processor_name(char * name,int * resultlen);
 #pragma weak MPI_Get_processor_name=PMPI_Get_processor_name
@@ -2216,18 +1946,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_processor_name(char *,int *);
 
 int PMPI_Get_processor_name(char * name,int * resultlen)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_processor_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_processor_name( name, resultlen);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_processor_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_version(int * version,int * subversion);
 #pragma weak MPI_Get_version=PMPI_Get_version
@@ -2239,18 +1966,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_version(int *,int *);
 
 int PMPI_Get_version(int * version,int * subversion)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_version (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_version( version, subversion);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_version (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_library_version(char * version,int * resultlen);
 #pragma weak MPI_Get_library_version=PMPI_Get_library_version
@@ -2262,18 +1986,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_library_version(char *,int *);
 
 int PMPI_Get_library_version(char * version,int * resultlen)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_library_version (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_library_version( version, resultlen);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_library_version (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Errhandler_create(MPI_Handler_function * function,MPI_Errhandler * errhandler);
 #pragma weak MPI_Errhandler_create=PMPI_Errhandler_create
@@ -2285,18 +2006,15 @@ extern int INTERF_2_INTEL_CCMPI_Errhandler_create(MPI_Handler_function *,MPI_Err
 
 int PMPI_Errhandler_create(MPI_Handler_function * function,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Errhandler_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_create( function, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Errhandler_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Errhandler_set(MPI_Comm comm,MPI_Errhandler errhandler);
 #pragma weak MPI_Errhandler_set=PMPI_Errhandler_set
@@ -2308,18 +2026,15 @@ extern int INTERF_2_INTEL_CCMPI_Errhandler_set(MPI_Comm,MPI_Errhandler);
 
 int PMPI_Errhandler_set(MPI_Comm comm,MPI_Errhandler errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Errhandler_set (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_set( comm, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Errhandler_set (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Errhandler_get(MPI_Comm comm,MPI_Errhandler * errhandler);
 #pragma weak MPI_Errhandler_get=PMPI_Errhandler_get
@@ -2331,18 +2046,15 @@ extern int INTERF_2_INTEL_CCMPI_Errhandler_get(MPI_Comm,MPI_Errhandler *);
 
 int PMPI_Errhandler_get(MPI_Comm comm,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Errhandler_get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_get( comm, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Errhandler_get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Errhandler_free(MPI_Errhandler * errhandler);
 #pragma weak MPI_Errhandler_free=PMPI_Errhandler_free
@@ -2354,18 +2066,15 @@ extern int INTERF_2_INTEL_CCMPI_Errhandler_free(MPI_Errhandler *);
 
 int PMPI_Errhandler_free(MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Errhandler_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_free( errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Errhandler_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Error_string(int errorcode,char * string,int * resultlen);
 #pragma weak MPI_Error_string=PMPI_Error_string
@@ -2377,18 +2086,15 @@ extern int INTERF_2_INTEL_CCMPI_Error_string(int,char *,int *);
 
 int PMPI_Error_string(int errorcode,char * string,int * resultlen)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Error_string (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Error_string( errorcode, string, resultlen);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Error_string (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Error_class(int errorcode,int * errorclass);
 #pragma weak MPI_Error_class=PMPI_Error_class
@@ -2400,18 +2106,15 @@ extern int INTERF_2_INTEL_CCMPI_Error_class(int,int *);
 
 int PMPI_Error_class(int errorcode,int * errorclass)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Error_class (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Error_class( errorcode, errorclass);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Error_class (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Initialized(int * flag);
 #pragma weak MPI_Initialized=PMPI_Initialized
@@ -2423,18 +2126,15 @@ extern int INTERF_2_INTEL_CCMPI_Initialized(int *);
 
 int PMPI_Initialized(int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Initialized (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Initialized( flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Initialized (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Abort(MPI_Comm comm,int errorcode);
 #pragma weak MPI_Abort=PMPI_Abort
@@ -2446,18 +2146,15 @@ extern int INTERF_2_INTEL_CCMPI_Abort(MPI_Comm,int);
 
 int PMPI_Abort(MPI_Comm comm,int errorcode)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Abort (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Abort( comm, errorcode);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Abort (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Init(int * argc,char *** argv);
 #pragma weak MPI_Init=PMPI_Init
@@ -2469,18 +2166,15 @@ extern int INTERF_2_INTEL_CCMPI_Init(int *,char ***);
 
 int PMPI_Init(int * argc,char *** argv)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Init (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Init( argc, argv);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Init (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Close_port(char * port_name);
 #pragma weak MPI_Close_port=PMPI_Close_port
@@ -2492,18 +2186,15 @@ extern int INTERF_2_INTEL_CCMPI_Close_port(char *);
 
 int PMPI_Close_port(char * port_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Close_port (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Close_port( port_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Close_port (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_accept(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_accept=PMPI_Comm_accept
@@ -2515,18 +2206,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_accept(char *,MPI_Info,int,MPI_Comm,MPI_Com
 
 int PMPI_Comm_accept(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_accept (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_accept( port_name, info, root, comm, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_accept (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_connect(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_connect=PMPI_Comm_connect
@@ -2538,18 +2226,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_connect(char *,MPI_Info,int,MPI_Comm,MPI_Co
 
 int PMPI_Comm_connect(char * port_name,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_connect (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_connect( port_name, info, root, comm, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_connect (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_disconnect(MPI_Comm * comm);
 #pragma weak MPI_Comm_disconnect=PMPI_Comm_disconnect
@@ -2561,18 +2246,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_disconnect(MPI_Comm *);
 
 int PMPI_Comm_disconnect(MPI_Comm * comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_disconnect (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_disconnect( comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_disconnect (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_get_parent(MPI_Comm * parent);
 #pragma weak MPI_Comm_get_parent=PMPI_Comm_get_parent
@@ -2584,18 +2266,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_get_parent(MPI_Comm *);
 
 int PMPI_Comm_get_parent(MPI_Comm * parent)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_get_parent (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_parent( parent);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_get_parent (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_join(int fd,MPI_Comm * intercomm);
 #pragma weak MPI_Comm_join=PMPI_Comm_join
@@ -2607,18 +2286,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_join(int,MPI_Comm *);
 
 int PMPI_Comm_join(int fd,MPI_Comm * intercomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_join (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_join( fd, intercomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_join (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Lookup_name(char * service_name,MPI_Info info,char * port_name);
 #pragma weak MPI_Lookup_name=PMPI_Lookup_name
@@ -2630,18 +2306,15 @@ extern int INTERF_2_INTEL_CCMPI_Lookup_name(char *,MPI_Info,char *);
 
 int PMPI_Lookup_name(char * service_name,MPI_Info info,char * port_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Lookup_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Lookup_name( service_name, info, port_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Lookup_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Open_port(MPI_Info info,char * port_name);
 #pragma weak MPI_Open_port=PMPI_Open_port
@@ -2653,18 +2326,15 @@ extern int INTERF_2_INTEL_CCMPI_Open_port(MPI_Info,char *);
 
 int PMPI_Open_port(MPI_Info info,char * port_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Open_port (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Open_port( info, port_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Open_port (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Publish_name(char * service_name,MPI_Info info,char * port_name);
 #pragma weak MPI_Publish_name=PMPI_Publish_name
@@ -2676,18 +2346,15 @@ extern int INTERF_2_INTEL_CCMPI_Publish_name(char *,MPI_Info,char *);
 
 int PMPI_Publish_name(char * service_name,MPI_Info info,char * port_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Publish_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Publish_name( service_name, info, port_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Publish_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Unpublish_name(char * service_name,MPI_Info info,char * port_name);
 #pragma weak MPI_Unpublish_name=PMPI_Unpublish_name
@@ -2699,18 +2366,15 @@ extern int INTERF_2_INTEL_CCMPI_Unpublish_name(char *,MPI_Info,char *);
 
 int PMPI_Unpublish_name(char * service_name,MPI_Info info,char * port_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Unpublish_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Unpublish_name( service_name, info, port_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Unpublish_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_set_info(MPI_Comm comm,MPI_Info info);
 #pragma weak MPI_Comm_set_info=PMPI_Comm_set_info
@@ -2722,18 +2386,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_set_info(MPI_Comm,MPI_Info);
 
 int PMPI_Comm_set_info(MPI_Comm comm,MPI_Info info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_set_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_info( comm, info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_set_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_get_info(MPI_Comm comm,MPI_Info * info);
 #pragma weak MPI_Comm_get_info=PMPI_Comm_get_info
@@ -2745,18 +2406,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_get_info(MPI_Comm,MPI_Info *);
 
 int PMPI_Comm_get_info(MPI_Comm comm,MPI_Info * info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_get_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_info( comm, info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_get_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win);
 #pragma weak MPI_Accumulate=PMPI_Accumulate
@@ -2768,18 +2426,15 @@ extern int INTERF_2_INTEL_CCMPI_Accumulate(void *,int,MPI_Datatype,int,MPI_Aint,
 
 int PMPI_Accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Accumulate (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Accumulate( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, op, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Accumulate (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win);
 #pragma weak MPI_Get=PMPI_Get
@@ -2791,18 +2446,15 @@ extern int INTERF_2_INTEL_CCMPI_Get(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI
 
 int PMPI_Get(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Put(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win);
 #pragma weak MPI_Put=PMPI_Put
@@ -2814,18 +2466,15 @@ extern int INTERF_2_INTEL_CCMPI_Put(void *,int,MPI_Datatype,int,MPI_Aint,int,MPI
 
 int PMPI_Put(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Put (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Put( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Put (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_complete(MPI_Win win);
 #pragma weak MPI_Win_complete=PMPI_Win_complete
@@ -2837,18 +2486,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_complete(MPI_Win);
 
 int PMPI_Win_complete(MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_complete (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_complete( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_complete (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_create(void * base,MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,MPI_Win * win);
 #pragma weak MPI_Win_create=PMPI_Win_create
@@ -2860,18 +2506,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_create(void *,MPI_Aint,int,MPI_Info,MPI_Comm
 
 int PMPI_Win_create(void * base,MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,MPI_Win * win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create( base, size, disp_unit, info, comm, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_fence(int assert,MPI_Win win);
 #pragma weak MPI_Win_fence=PMPI_Win_fence
@@ -2883,18 +2526,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_fence(int,MPI_Win);
 
 int PMPI_Win_fence(int assert,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_fence (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_fence( assert, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_fence (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_free(MPI_Win * win);
 #pragma weak MPI_Win_free=PMPI_Win_free
@@ -2906,18 +2546,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_free(MPI_Win *);
 
 int PMPI_Win_free(MPI_Win * win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_free( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_get_group(MPI_Win win,MPI_Group * group);
 #pragma weak MPI_Win_get_group=PMPI_Win_get_group
@@ -2929,18 +2566,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_get_group(MPI_Win,MPI_Group *);
 
 int PMPI_Win_get_group(MPI_Win win,MPI_Group * group)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_get_group (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_group( win, group);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_get_group (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_lock(int lock_type,int rank,int assert,MPI_Win win);
 #pragma weak MPI_Win_lock=PMPI_Win_lock
@@ -2952,18 +2586,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_lock(int,int,int,MPI_Win);
 
 int PMPI_Win_lock(int lock_type,int rank,int assert,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_lock (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_lock( lock_type, rank, assert, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_lock (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_post(MPI_Group group,int assert,MPI_Win win);
 #pragma weak MPI_Win_post=PMPI_Win_post
@@ -2975,18 +2606,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_post(MPI_Group,int,MPI_Win);
 
 int PMPI_Win_post(MPI_Group group,int assert,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_post (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_post( group, assert, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_post (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_start(MPI_Group group,int assert,MPI_Win win);
 #pragma weak MPI_Win_start=PMPI_Win_start
@@ -2998,18 +2626,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_start(MPI_Group,int,MPI_Win);
 
 int PMPI_Win_start(MPI_Group group,int assert,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_start (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_start( group, assert, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_start (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_test(MPI_Win win,int * flag);
 #pragma weak MPI_Win_test=PMPI_Win_test
@@ -3021,18 +2646,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_test(MPI_Win,int *);
 
 int PMPI_Win_test(MPI_Win win,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_test (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_test( win, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_test (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_unlock(int rank,MPI_Win win);
 #pragma weak MPI_Win_unlock=PMPI_Win_unlock
@@ -3044,18 +2666,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_unlock(int,MPI_Win);
 
 int PMPI_Win_unlock(int rank,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_unlock (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_unlock( rank, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_unlock (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_wait(MPI_Win win);
 #pragma weak MPI_Win_wait=PMPI_Win_wait
@@ -3067,18 +2686,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_wait(MPI_Win);
 
 int PMPI_Win_wait(MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_wait (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_wait( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_wait (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_allocate(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,void * baseptr,MPI_Win * win);
 #pragma weak MPI_Win_allocate=PMPI_Win_allocate
@@ -3090,18 +2706,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_allocate(MPI_Aint,int,MPI_Info,MPI_Comm,void
 
 int PMPI_Win_allocate(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,void * baseptr,MPI_Win * win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_allocate (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_allocate( size, disp_unit, info, comm, baseptr, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_allocate (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_allocate_shared(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,void * baseptr,MPI_Win * win);
 #pragma weak MPI_Win_allocate_shared=PMPI_Win_allocate_shared
@@ -3113,18 +2726,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_allocate_shared(MPI_Aint,int,MPI_Info,MPI_Co
 
 int PMPI_Win_allocate_shared(MPI_Aint size,int disp_unit,MPI_Info info,MPI_Comm comm,void * baseptr,MPI_Win * win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_allocate_shared (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_allocate_shared( size, disp_unit, info, comm, baseptr, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_allocate_shared (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_shared_query(MPI_Win win,int rank,MPI_Aint * size,int * disp_unit,void * baseptr);
 #pragma weak MPI_Win_shared_query=PMPI_Win_shared_query
@@ -3136,18 +2746,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_shared_query(MPI_Win,int,MPI_Aint *,int *,vo
 
 int PMPI_Win_shared_query(MPI_Win win,int rank,MPI_Aint * size,int * disp_unit,void * baseptr)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_shared_query (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_shared_query( win, rank, size, disp_unit, baseptr);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_shared_query (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_create_dynamic(MPI_Info info,MPI_Comm comm,MPI_Win * win);
 #pragma weak MPI_Win_create_dynamic=PMPI_Win_create_dynamic
@@ -3159,18 +2766,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_create_dynamic(MPI_Info,MPI_Comm,MPI_Win *);
 
 int PMPI_Win_create_dynamic(MPI_Info info,MPI_Comm comm,MPI_Win * win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_create_dynamic (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create_dynamic( info, comm, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_create_dynamic (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_attach(MPI_Win win,void * base,MPI_Aint size);
 #pragma weak MPI_Win_attach=PMPI_Win_attach
@@ -3182,18 +2786,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_attach(MPI_Win,void *,MPI_Aint);
 
 int PMPI_Win_attach(MPI_Win win,void * base,MPI_Aint size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_attach (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_attach( win, base, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_attach (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_detach(MPI_Win win,void * base);
 #pragma weak MPI_Win_detach=PMPI_Win_detach
@@ -3205,18 +2806,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_detach(MPI_Win,void *);
 
 int PMPI_Win_detach(MPI_Win win,void * base)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_detach (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_detach( win, base);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_detach (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_get_info(MPI_Win win,MPI_Info * info_used);
 #pragma weak MPI_Win_get_info=PMPI_Win_get_info
@@ -3228,18 +2826,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_get_info(MPI_Win,MPI_Info *);
 
 int PMPI_Win_get_info(MPI_Win win,MPI_Info * info_used)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_get_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_info( win, info_used);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_get_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_set_info(MPI_Win win,MPI_Info info);
 #pragma weak MPI_Win_set_info=PMPI_Win_set_info
@@ -3251,18 +2846,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_set_info(MPI_Win,MPI_Info);
 
 int PMPI_Win_set_info(MPI_Win win,MPI_Info info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_set_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_set_info( win, info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_set_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,void * result_addr,int result_count,MPI_Datatype result_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win);
 #pragma weak MPI_Get_accumulate=PMPI_Get_accumulate
@@ -3274,18 +2866,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_accumulate(void *,int,MPI_Datatype,void *,in
 
 int PMPI_Get_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,void * result_addr,int result_count,MPI_Datatype result_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_accumulate (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_accumulate( origin_addr, origin_count, origin_datatype, result_addr, result_count, result_datatype, target_rank, target_disp, target_count, target_datatype, op, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_accumulate (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Fetch_and_op(void * origin_addr,void * result_addr,MPI_Datatype datatype,int target_rank,MPI_Aint target_disp,MPI_Op op,MPI_Win win);
 #pragma weak MPI_Fetch_and_op=PMPI_Fetch_and_op
@@ -3297,18 +2886,15 @@ extern int INTERF_2_INTEL_CCMPI_Fetch_and_op(void *,void *,MPI_Datatype,int,MPI_
 
 int PMPI_Fetch_and_op(void * origin_addr,void * result_addr,MPI_Datatype datatype,int target_rank,MPI_Aint target_disp,MPI_Op op,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Fetch_and_op (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Fetch_and_op( origin_addr, result_addr, datatype, target_rank, target_disp, op, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Fetch_and_op (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Compare_and_swap(void * origin_addr,void * compare_addr,void * result_addr,MPI_Datatype datatype,int target_rank,MPI_Aint target_disp,MPI_Win win);
 #pragma weak MPI_Compare_and_swap=PMPI_Compare_and_swap
@@ -3320,18 +2906,15 @@ extern int INTERF_2_INTEL_CCMPI_Compare_and_swap(void *,void *,void *,MPI_Dataty
 
 int PMPI_Compare_and_swap(void * origin_addr,void * compare_addr,void * result_addr,MPI_Datatype datatype,int target_rank,MPI_Aint target_disp,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Compare_and_swap (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Compare_and_swap( origin_addr, compare_addr, result_addr, datatype, target_rank, target_disp, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Compare_and_swap (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Rput(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win,MPI_Request * request);
 #pragma weak MPI_Rput=PMPI_Rput
@@ -3343,18 +2926,15 @@ extern int INTERF_2_INTEL_CCMPI_Rput(void *,int,MPI_Datatype,int,MPI_Aint,int,MP
 
 int PMPI_Rput(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Rput (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rput( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Rput (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Rget(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win,MPI_Request * request);
 #pragma weak MPI_Rget=PMPI_Rget
@@ -3366,18 +2946,15 @@ extern int INTERF_2_INTEL_CCMPI_Rget(void *,int,MPI_Datatype,int,MPI_Aint,int,MP
 
 int PMPI_Rget(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Win win,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Rget (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rget( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, win, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Rget (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Raccumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win,MPI_Request * request);
 #pragma weak MPI_Raccumulate=PMPI_Raccumulate
@@ -3389,18 +2966,15 @@ extern int INTERF_2_INTEL_CCMPI_Raccumulate(void *,int,MPI_Datatype,int,MPI_Aint
 
 int PMPI_Raccumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Raccumulate (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Raccumulate( origin_addr, origin_count, origin_datatype, target_rank, target_disp, target_count, target_datatype, op, win, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Raccumulate (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Rget_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,void * result_addr,int result_count,MPI_Datatype result_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win,MPI_Request * request);
 #pragma weak MPI_Rget_accumulate=PMPI_Rget_accumulate
@@ -3412,18 +2986,15 @@ extern int INTERF_2_INTEL_CCMPI_Rget_accumulate(void *,int,MPI_Datatype,void *,i
 
 int PMPI_Rget_accumulate(void * origin_addr,int origin_count,MPI_Datatype origin_datatype,void * result_addr,int result_count,MPI_Datatype result_datatype,int target_rank,MPI_Aint target_disp,int target_count,MPI_Datatype target_datatype,MPI_Op op,MPI_Win win,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Rget_accumulate (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Rget_accumulate( origin_addr, origin_count, origin_datatype, result_addr, result_count, result_datatype, target_rank, target_disp, target_count, target_datatype, op, win, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Rget_accumulate (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_lock_all(int assert,MPI_Win win);
 #pragma weak MPI_Win_lock_all=PMPI_Win_lock_all
@@ -3435,18 +3006,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_lock_all(int,MPI_Win);
 
 int PMPI_Win_lock_all(int assert,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_lock_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_lock_all( assert, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_lock_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_unlock_all(MPI_Win win);
 #pragma weak MPI_Win_unlock_all=PMPI_Win_unlock_all
@@ -3458,18 +3026,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_unlock_all(MPI_Win);
 
 int PMPI_Win_unlock_all(MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_unlock_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_unlock_all( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_unlock_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_flush(int rank,MPI_Win win);
 #pragma weak MPI_Win_flush=PMPI_Win_flush
@@ -3481,18 +3046,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_flush(int,MPI_Win);
 
 int PMPI_Win_flush(int rank,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_flush (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush( rank, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_flush (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_flush_all(MPI_Win win);
 #pragma weak MPI_Win_flush_all=PMPI_Win_flush_all
@@ -3504,18 +3066,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_flush_all(MPI_Win);
 
 int PMPI_Win_flush_all(MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_flush_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush_all( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_flush_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_flush_local(int rank,MPI_Win win);
 #pragma weak MPI_Win_flush_local=PMPI_Win_flush_local
@@ -3527,18 +3086,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_flush_local(int,MPI_Win);
 
 int PMPI_Win_flush_local(int rank,MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_flush_local (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush_local( rank, win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_flush_local (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_flush_local_all(MPI_Win win);
 #pragma weak MPI_Win_flush_local_all=PMPI_Win_flush_local_all
@@ -3550,18 +3106,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_flush_local_all(MPI_Win);
 
 int PMPI_Win_flush_local_all(MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_flush_local_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_flush_local_all( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_flush_local_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_sync(MPI_Win win);
 #pragma weak MPI_Win_sync=PMPI_Win_sync
@@ -3573,18 +3126,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_sync(MPI_Win);
 
 int PMPI_Win_sync(MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_sync (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_sync( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_sync (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Add_error_class(int * errorclass);
 #pragma weak MPI_Add_error_class=PMPI_Add_error_class
@@ -3596,18 +3146,15 @@ extern int INTERF_2_INTEL_CCMPI_Add_error_class(int *);
 
 int PMPI_Add_error_class(int * errorclass)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Add_error_class (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Add_error_class( errorclass);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Add_error_class (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Add_error_code(int errorclass,int * errorcode);
 #pragma weak MPI_Add_error_code=PMPI_Add_error_code
@@ -3619,18 +3166,15 @@ extern int INTERF_2_INTEL_CCMPI_Add_error_code(int,int *);
 
 int PMPI_Add_error_code(int errorclass,int * errorcode)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Add_error_code (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Add_error_code( errorclass, errorcode);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Add_error_code (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Add_error_string(int errorcode,char * string);
 #pragma weak MPI_Add_error_string=PMPI_Add_error_string
@@ -3642,18 +3186,15 @@ extern int INTERF_2_INTEL_CCMPI_Add_error_string(int,char *);
 
 int PMPI_Add_error_string(int errorcode,char * string)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Add_error_string (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Add_error_string( errorcode, string);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Add_error_string (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_call_errhandler(MPI_Comm comm,int errorcode);
 #pragma weak MPI_Comm_call_errhandler=PMPI_Comm_call_errhandler
@@ -3665,18 +3206,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_call_errhandler(MPI_Comm,int);
 
 int PMPI_Comm_call_errhandler(MPI_Comm comm,int errorcode)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_call_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_call_errhandler( comm, errorcode);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_call_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_delete_attr(MPI_Comm comm,int comm_keyval);
 #pragma weak MPI_Comm_delete_attr=PMPI_Comm_delete_attr
@@ -3688,18 +3226,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_delete_attr(MPI_Comm,int);
 
 int PMPI_Comm_delete_attr(MPI_Comm comm,int comm_keyval)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_delete_attr (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_delete_attr( comm, comm_keyval);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_delete_attr (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_get_attr(MPI_Comm comm,int comm_keyval,void * attribute_val,int * flag);
 #pragma weak MPI_Comm_get_attr=PMPI_Comm_get_attr
@@ -3711,18 +3246,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_get_attr(MPI_Comm,int,void *,int *);
 
 int PMPI_Comm_get_attr(MPI_Comm comm,int comm_keyval,void * attribute_val,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_get_attr (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_attr( comm, comm_keyval, attribute_val, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_get_attr (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_get_name(MPI_Comm comm,char * comm_name,int * resultlen);
 #pragma weak MPI_Comm_get_name=PMPI_Comm_get_name
@@ -3734,18 +3266,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_get_name(MPI_Comm,char *,int *);
 
 int PMPI_Comm_get_name(MPI_Comm comm,char * comm_name,int * resultlen)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_get_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_name( comm, comm_name, resultlen);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_get_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_set_attr(MPI_Comm comm,int comm_keyval,void * attribute_val);
 #pragma weak MPI_Comm_set_attr=PMPI_Comm_set_attr
@@ -3757,18 +3286,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_set_attr(MPI_Comm,int,void *);
 
 int PMPI_Comm_set_attr(MPI_Comm comm,int comm_keyval,void * attribute_val)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_set_attr (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_attr( comm, comm_keyval, attribute_val);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_set_attr (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_set_name(MPI_Comm comm,char * comm_name);
 #pragma weak MPI_Comm_set_name=PMPI_Comm_set_name
@@ -3780,18 +3306,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_set_name(MPI_Comm,char *);
 
 int PMPI_Comm_set_name(MPI_Comm comm,char * comm_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_set_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_name( comm, comm_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_set_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_call_errhandler(MPI_File fh,int errorcode);
 #pragma weak MPI_File_call_errhandler=PMPI_File_call_errhandler
@@ -3803,18 +3326,15 @@ extern int INTERF_2_INTEL_CCMPI_File_call_errhandler(MPI_File,int);
 
 int PMPI_File_call_errhandler(MPI_File fh,int errorcode)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_call_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_call_errhandler( fh, errorcode);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_call_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Grequest_complete(MPI_Request request);
 #pragma weak MPI_Grequest_complete=PMPI_Grequest_complete
@@ -3826,18 +3346,15 @@ extern int INTERF_2_INTEL_CCMPI_Grequest_complete(MPI_Request);
 
 int PMPI_Grequest_complete(MPI_Request request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Grequest_complete (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Grequest_complete( request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Grequest_complete (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Grequest_start(MPI_Grequest_query_function * query_fn,MPI_Grequest_free_function * free_fn,MPI_Grequest_cancel_function * cancel_fn,void * extra_state,MPI_Request * request);
 #pragma weak MPI_Grequest_start=PMPI_Grequest_start
@@ -3849,18 +3366,15 @@ extern int INTERF_2_INTEL_CCMPI_Grequest_start(MPI_Grequest_query_function *,MPI
 
 int PMPI_Grequest_start(MPI_Grequest_query_function * query_fn,MPI_Grequest_free_function * free_fn,MPI_Grequest_cancel_function * cancel_fn,void * extra_state,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Grequest_start (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Grequest_start( query_fn, free_fn, cancel_fn, extra_state, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Grequest_start (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Init_thread(int * argc,char *** argv,int required,int * provided);
 #pragma weak MPI_Init_thread=PMPI_Init_thread
@@ -3872,18 +3386,15 @@ extern int INTERF_2_INTEL_CCMPI_Init_thread(int *,char ***,int,int *);
 
 int PMPI_Init_thread(int * argc,char *** argv,int required,int * provided)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Init_thread (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Init_thread( argc, argv, required, provided);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Init_thread (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Is_thread_main(int * flag);
 #pragma weak MPI_Is_thread_main=PMPI_Is_thread_main
@@ -3895,18 +3406,15 @@ extern int INTERF_2_INTEL_CCMPI_Is_thread_main(int *);
 
 int PMPI_Is_thread_main(int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Is_thread_main (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Is_thread_main( flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Is_thread_main (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Query_thread(int * provided);
 #pragma weak MPI_Query_thread=PMPI_Query_thread
@@ -3918,18 +3426,15 @@ extern int INTERF_2_INTEL_CCMPI_Query_thread(int *);
 
 int PMPI_Query_thread(int * provided)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Query_thread (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Query_thread( provided);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Query_thread (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Status_set_cancelled(MPI_Status * status,int flag);
 #pragma weak MPI_Status_set_cancelled=PMPI_Status_set_cancelled
@@ -3941,18 +3446,15 @@ extern int INTERF_2_INTEL_CCMPI_Status_set_cancelled(MPI_Status *,int);
 
 int PMPI_Status_set_cancelled(MPI_Status * status,int flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Status_set_cancelled (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_set_cancelled( status, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Status_set_cancelled (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Status_set_elements(MPI_Status * status,MPI_Datatype datatype,int count);
 #pragma weak MPI_Status_set_elements=PMPI_Status_set_elements
@@ -3964,18 +3466,15 @@ extern int INTERF_2_INTEL_CCMPI_Status_set_elements(MPI_Status *,MPI_Datatype,in
 
 int PMPI_Status_set_elements(MPI_Status * status,MPI_Datatype datatype,int count)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Status_set_elements (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_set_elements( status, datatype, count);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Status_set_elements (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_keyval(MPI_Type_copy_attr_function * type_copy_attr_fn,MPI_Type_delete_attr_function * type_delete_attr_fn,int * type_keyval,void * extra_state);
 #pragma weak MPI_Type_create_keyval=PMPI_Type_create_keyval
@@ -3987,18 +3486,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_keyval(MPI_Type_copy_attr_function *
 
 int PMPI_Type_create_keyval(MPI_Type_copy_attr_function * type_copy_attr_fn,MPI_Type_delete_attr_function * type_delete_attr_fn,int * type_keyval,void * extra_state)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_keyval (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_keyval( type_copy_attr_fn, type_delete_attr_fn, type_keyval, extra_state);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_keyval (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_delete_attr(MPI_Datatype datatype,int type_keyval);
 #pragma weak MPI_Type_delete_attr=PMPI_Type_delete_attr
@@ -4010,18 +3506,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_delete_attr(MPI_Datatype,int);
 
 int PMPI_Type_delete_attr(MPI_Datatype datatype,int type_keyval)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_delete_attr (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_delete_attr( datatype, type_keyval);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_delete_attr (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_dup(MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_dup=PMPI_Type_dup
@@ -4033,18 +3526,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_dup(MPI_Datatype,MPI_Datatype *);
 
 int PMPI_Type_dup(MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_dup (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_dup( oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_dup (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_free_keyval(int * type_keyval);
 #pragma weak MPI_Type_free_keyval=PMPI_Type_free_keyval
@@ -4056,18 +3546,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_free_keyval(int *);
 
 int PMPI_Type_free_keyval(int * type_keyval)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_free_keyval (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_free_keyval( type_keyval);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_free_keyval (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_attr(MPI_Datatype datatype,int type_keyval,void * attribute_val,int * flag);
 #pragma weak MPI_Type_get_attr=PMPI_Type_get_attr
@@ -4079,18 +3566,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_attr(MPI_Datatype,int,void *,int *);
 
 int PMPI_Type_get_attr(MPI_Datatype datatype,int type_keyval,void * attribute_val,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_attr (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_attr( datatype, type_keyval, attribute_val, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_attr (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_envelope(MPI_Datatype datatype,int * num_integers,int * num_addresses,int * num_datatypes,int * combiner);
 #pragma weak MPI_Type_get_envelope=PMPI_Type_get_envelope
@@ -4102,18 +3586,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_envelope(MPI_Datatype,int *,int *,int *
 
 int PMPI_Type_get_envelope(MPI_Datatype datatype,int * num_integers,int * num_addresses,int * num_datatypes,int * combiner)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_envelope (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_envelope( datatype, num_integers, num_addresses, num_datatypes, combiner);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_envelope (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_name(MPI_Datatype datatype,char * type_name,int * resultlen);
 #pragma weak MPI_Type_get_name=PMPI_Type_get_name
@@ -4125,18 +3606,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_name(MPI_Datatype,char *,int *);
 
 int PMPI_Type_get_name(MPI_Datatype datatype,char * type_name,int * resultlen)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_name( datatype, type_name, resultlen);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_set_attr(MPI_Datatype datatype,int type_keyval,void * attribute_val);
 #pragma weak MPI_Type_set_attr=PMPI_Type_set_attr
@@ -4148,18 +3626,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_set_attr(MPI_Datatype,int,void *);
 
 int PMPI_Type_set_attr(MPI_Datatype datatype,int type_keyval,void * attribute_val)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_set_attr (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_set_attr( datatype, type_keyval, attribute_val);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_set_attr (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_set_name(MPI_Datatype datatype,char * type_name);
 #pragma weak MPI_Type_set_name=PMPI_Type_set_name
@@ -4171,18 +3646,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_set_name(MPI_Datatype,char *);
 
 int PMPI_Type_set_name(MPI_Datatype datatype,char * type_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_set_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_set_name( datatype, type_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_set_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_match_size(int typeclass,int size,MPI_Datatype * datatype);
 #pragma weak MPI_Type_match_size=PMPI_Type_match_size
@@ -4194,18 +3666,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_match_size(int,int,MPI_Datatype *);
 
 int PMPI_Type_match_size(int typeclass,int size,MPI_Datatype * datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_match_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_match_size( typeclass, size, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_match_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_call_errhandler(MPI_Win win,int errorcode);
 #pragma weak MPI_Win_call_errhandler=PMPI_Win_call_errhandler
@@ -4217,18 +3686,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_call_errhandler(MPI_Win,int);
 
 int PMPI_Win_call_errhandler(MPI_Win win,int errorcode)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_call_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_call_errhandler( win, errorcode);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_call_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_create_keyval(MPI_Win_copy_attr_function * win_copy_attr_fn,MPI_Win_delete_attr_function * win_delete_attr_fn,int * win_keyval,void * extra_state);
 #pragma weak MPI_Win_create_keyval=PMPI_Win_create_keyval
@@ -4240,18 +3706,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_create_keyval(MPI_Win_copy_attr_function *,M
 
 int PMPI_Win_create_keyval(MPI_Win_copy_attr_function * win_copy_attr_fn,MPI_Win_delete_attr_function * win_delete_attr_fn,int * win_keyval,void * extra_state)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_create_keyval (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create_keyval( win_copy_attr_fn, win_delete_attr_fn, win_keyval, extra_state);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_create_keyval (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_delete_attr(MPI_Win win,int win_keyval);
 #pragma weak MPI_Win_delete_attr=PMPI_Win_delete_attr
@@ -4263,18 +3726,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_delete_attr(MPI_Win,int);
 
 int PMPI_Win_delete_attr(MPI_Win win,int win_keyval)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_delete_attr (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_delete_attr( win, win_keyval);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_delete_attr (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_free_keyval(int * win_keyval);
 #pragma weak MPI_Win_free_keyval=PMPI_Win_free_keyval
@@ -4286,18 +3746,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_free_keyval(int *);
 
 int PMPI_Win_free_keyval(int * win_keyval)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_free_keyval (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_free_keyval( win_keyval);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_free_keyval (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_get_name(MPI_Win win,char * win_name,int * resultlen);
 #pragma weak MPI_Win_get_name=PMPI_Win_get_name
@@ -4309,18 +3766,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_get_name(MPI_Win,char *,int *);
 
 int PMPI_Win_get_name(MPI_Win win,char * win_name,int * resultlen)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_get_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_name( win, win_name, resultlen);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_get_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_set_name(MPI_Win win,char * win_name);
 #pragma weak MPI_Win_set_name=PMPI_Win_set_name
@@ -4332,18 +3786,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_set_name(MPI_Win,char *);
 
 int PMPI_Win_set_name(MPI_Win win,char * win_name)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_set_name (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_set_name( win, win_name);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_set_name (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Alloc_mem(MPI_Aint size,MPI_Info info,void * baseptr);
 #pragma weak MPI_Alloc_mem=PMPI_Alloc_mem
@@ -4355,18 +3806,15 @@ extern int INTERF_2_INTEL_CCMPI_Alloc_mem(MPI_Aint,MPI_Info,void *);
 
 int PMPI_Alloc_mem(MPI_Aint size,MPI_Info info,void * baseptr)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Alloc_mem (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alloc_mem( size, info, baseptr);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Alloc_mem (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_create_errhandler(MPI_Comm_errhandler_function * comm_errhandler_fn,MPI_Errhandler * errhandler);
 #pragma weak MPI_Comm_create_errhandler=PMPI_Comm_create_errhandler
@@ -4378,18 +3826,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_create_errhandler(MPI_Comm_errhandler_funct
 
 int PMPI_Comm_create_errhandler(MPI_Comm_errhandler_function * comm_errhandler_fn,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_create_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_create_errhandler( comm_errhandler_fn, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_create_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_get_errhandler(MPI_Comm comm,MPI_Errhandler * errhandler);
 #pragma weak MPI_Comm_get_errhandler=PMPI_Comm_get_errhandler
@@ -4401,18 +3846,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_get_errhandler(MPI_Comm,MPI_Errhandler *);
 
 int PMPI_Comm_get_errhandler(MPI_Comm comm,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_get_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_get_errhandler( comm, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_get_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_set_errhandler(MPI_Comm comm,MPI_Errhandler errhandler);
 #pragma weak MPI_Comm_set_errhandler=PMPI_Comm_set_errhandler
@@ -4424,18 +3866,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_set_errhandler(MPI_Comm,MPI_Errhandler);
 
 int PMPI_Comm_set_errhandler(MPI_Comm comm,MPI_Errhandler errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_set_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_set_errhandler( comm, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_set_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_create_errhandler(MPI_File_errhandler_function * file_errhandler_fn,MPI_Errhandler * errhandler);
 #pragma weak MPI_File_create_errhandler=PMPI_File_create_errhandler
@@ -4447,18 +3886,15 @@ extern int INTERF_2_INTEL_CCMPI_File_create_errhandler(MPI_File_errhandler_funct
 
 int PMPI_File_create_errhandler(MPI_File_errhandler_function * file_errhandler_fn,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_create_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_create_errhandler( file_errhandler_fn, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_create_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_errhandler(MPI_File file,MPI_Errhandler * errhandler);
 #pragma weak MPI_File_get_errhandler=PMPI_File_get_errhandler
@@ -4470,18 +3906,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_errhandler(MPI_File,MPI_Errhandler *);
 
 int PMPI_File_get_errhandler(MPI_File file,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_errhandler( file, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_set_errhandler(MPI_File file,MPI_Errhandler errhandler);
 #pragma weak MPI_File_set_errhandler=PMPI_File_set_errhandler
@@ -4493,18 +3926,15 @@ extern int INTERF_2_INTEL_CCMPI_File_set_errhandler(MPI_File,MPI_Errhandler);
 
 int PMPI_File_set_errhandler(MPI_File file,MPI_Errhandler errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_set_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_errhandler( file, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_set_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Finalized(int * flag);
 #pragma weak MPI_Finalized=PMPI_Finalized
@@ -4516,18 +3946,15 @@ extern int INTERF_2_INTEL_CCMPI_Finalized(int *);
 
 int PMPI_Finalized(int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Finalized (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Finalized( flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Finalized (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Free_mem(void * base);
 #pragma weak MPI_Free_mem=PMPI_Free_mem
@@ -4539,18 +3966,15 @@ extern int INTERF_2_INTEL_CCMPI_Free_mem(void *);
 
 int PMPI_Free_mem(void * base)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Free_mem (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Free_mem( base);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Free_mem (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_address(void * location,MPI_Aint * address);
 #pragma weak MPI_Get_address=PMPI_Get_address
@@ -4562,18 +3986,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_address(void *,MPI_Aint *);
 
 int PMPI_Get_address(void * location,MPI_Aint * address)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_address (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_address( location, address);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_address (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_create(MPI_Info * info);
 #pragma weak MPI_Info_create=PMPI_Info_create
@@ -4585,18 +4006,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_create(MPI_Info *);
 
 int PMPI_Info_create(MPI_Info * info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_create( info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_delete(MPI_Info info,char * key);
 #pragma weak MPI_Info_delete=PMPI_Info_delete
@@ -4608,18 +4026,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_delete(MPI_Info,char *);
 
 int PMPI_Info_delete(MPI_Info info,char * key)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_delete (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_delete( info, key);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_delete (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_dup(MPI_Info info,MPI_Info * newinfo);
 #pragma weak MPI_Info_dup=PMPI_Info_dup
@@ -4631,18 +4046,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_dup(MPI_Info,MPI_Info *);
 
 int PMPI_Info_dup(MPI_Info info,MPI_Info * newinfo)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_dup (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_dup( info, newinfo);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_dup (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_free(MPI_Info * info);
 #pragma weak MPI_Info_free=PMPI_Info_free
@@ -4654,18 +4066,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_free(MPI_Info *);
 
 int PMPI_Info_free(MPI_Info * info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_free( info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_get(MPI_Info info,char * key,int valuelen,char * value,int * flag);
 #pragma weak MPI_Info_get=PMPI_Info_get
@@ -4677,18 +4086,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_get(MPI_Info,char *,int,char *,int *);
 
 int PMPI_Info_get(MPI_Info info,char * key,int valuelen,char * value,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get( info, key, valuelen, value, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_get_nkeys(MPI_Info info,int * nkeys);
 #pragma weak MPI_Info_get_nkeys=PMPI_Info_get_nkeys
@@ -4700,18 +4106,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_get_nkeys(MPI_Info,int *);
 
 int PMPI_Info_get_nkeys(MPI_Info info,int * nkeys)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_get_nkeys (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get_nkeys( info, nkeys);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_get_nkeys (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_get_nthkey(MPI_Info info,int n,char * key);
 #pragma weak MPI_Info_get_nthkey=PMPI_Info_get_nthkey
@@ -4723,18 +4126,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_get_nthkey(MPI_Info,int,char *);
 
 int PMPI_Info_get_nthkey(MPI_Info info,int n,char * key)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_get_nthkey (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get_nthkey( info, n, key);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_get_nthkey (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_get_valuelen(MPI_Info info,char * key,int * valuelen,int * flag);
 #pragma weak MPI_Info_get_valuelen=PMPI_Info_get_valuelen
@@ -4746,18 +4146,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_get_valuelen(MPI_Info,char *,int *,int *);
 
 int PMPI_Info_get_valuelen(MPI_Info info,char * key,int * valuelen,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_get_valuelen (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_get_valuelen( info, key, valuelen, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_get_valuelen (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Info_set(MPI_Info info,char * key,char * value);
 #pragma weak MPI_Info_set=PMPI_Info_set
@@ -4769,18 +4166,15 @@ extern int INTERF_2_INTEL_CCMPI_Info_set(MPI_Info,char *,char *);
 
 int PMPI_Info_set(MPI_Info info,char * key,char * value)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_set (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Info_set( info, key, value);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_set (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Request_get_status(MPI_Request request,int * flag,MPI_Status * status);
 #pragma weak MPI_Request_get_status=PMPI_Request_get_status
@@ -4792,18 +4186,15 @@ extern int INTERF_2_INTEL_CCMPI_Request_get_status(MPI_Request,int *,MPI_Status 
 
 int PMPI_Request_get_status(MPI_Request request,int * flag,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Request_get_status (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Request_get_status( request, flag, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Request_get_status (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_hvector=PMPI_Type_create_hvector
@@ -4815,18 +4206,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_hvector(int,int,MPI_Aint,MPI_Datatyp
 
 int PMPI_Type_create_hvector(int count,int blocklength,MPI_Aint stride,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_hvector (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_hvector( count, blocklength, stride, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_hvector (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_resized(MPI_Datatype oldtype,MPI_Aint lb,MPI_Aint extent,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_resized=PMPI_Type_create_resized
@@ -4838,18 +4226,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_resized(MPI_Datatype,MPI_Aint,MPI_Ai
 
 int PMPI_Type_create_resized(MPI_Datatype oldtype,MPI_Aint lb,MPI_Aint extent,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_resized (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_resized( oldtype, lb, extent, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_resized (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_extent(MPI_Datatype datatype,MPI_Aint * lb,MPI_Aint * extent);
 #pragma weak MPI_Type_get_extent=PMPI_Type_get_extent
@@ -4861,18 +4246,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_extent(MPI_Datatype,MPI_Aint *,MPI_Aint
 
 int PMPI_Type_get_extent(MPI_Datatype datatype,MPI_Aint * lb,MPI_Aint * extent)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_extent (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_extent( datatype, lb, extent);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_extent (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_true_extent(MPI_Datatype datatype,MPI_Aint * true_lb,MPI_Aint * true_extent);
 #pragma weak MPI_Type_get_true_extent=PMPI_Type_get_true_extent
@@ -4884,18 +4266,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_true_extent(MPI_Datatype,MPI_Aint *,MPI
 
 int PMPI_Type_get_true_extent(MPI_Datatype datatype,MPI_Aint * true_lb,MPI_Aint * true_extent)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_true_extent (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_true_extent( datatype, true_lb, true_extent);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_true_extent (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_create_errhandler(MPI_Win_errhandler_function * win_errhandler_fn,MPI_Errhandler * errhandler);
 #pragma weak MPI_Win_create_errhandler=PMPI_Win_create_errhandler
@@ -4907,18 +4286,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_create_errhandler(MPI_Win_errhandler_functio
 
 int PMPI_Win_create_errhandler(MPI_Win_errhandler_function * win_errhandler_fn,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_create_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_create_errhandler( win_errhandler_fn, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_create_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_get_errhandler(MPI_Win win,MPI_Errhandler * errhandler);
 #pragma weak MPI_Win_get_errhandler=PMPI_Win_get_errhandler
@@ -4930,18 +4306,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_get_errhandler(MPI_Win,MPI_Errhandler *);
 
 int PMPI_Win_get_errhandler(MPI_Win win,MPI_Errhandler * errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_get_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_get_errhandler( win, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_get_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_set_errhandler(MPI_Win win,MPI_Errhandler errhandler);
 #pragma weak MPI_Win_set_errhandler=PMPI_Win_set_errhandler
@@ -4953,18 +4326,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_set_errhandler(MPI_Win,MPI_Errhandler);
 
 int PMPI_Win_set_errhandler(MPI_Win win,MPI_Errhandler errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_set_errhandler (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_set_errhandler( win, errhandler);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_set_errhandler (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_f90_integer(int range,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_f90_integer=PMPI_Type_create_f90_integer
@@ -4976,18 +4346,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_f90_integer(int,MPI_Datatype *);
 
 int PMPI_Type_create_f90_integer(int range,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_f90_integer (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_f90_integer( range, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_f90_integer (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_f90_real(int precision,int range,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_f90_real=PMPI_Type_create_f90_real
@@ -4999,18 +4366,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_f90_real(int,int,MPI_Datatype *);
 
 int PMPI_Type_create_f90_real(int precision,int range,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_f90_real (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_f90_real( precision, range, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_f90_real (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_f90_complex(int precision,int range,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_f90_complex=PMPI_Type_create_f90_complex
@@ -5022,18 +4386,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_f90_complex(int,int,MPI_Datatype *);
 
 int PMPI_Type_create_f90_complex(int precision,int range,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_f90_complex (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_f90_complex( precision, range, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_f90_complex (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Reduce_local(void * inbuf,void * inoutbuf,int count,MPI_Datatype datatype,MPI_Op op);
 #pragma weak MPI_Reduce_local=PMPI_Reduce_local
@@ -5045,18 +4406,15 @@ extern int INTERF_2_INTEL_CCMPI_Reduce_local(void *,void *,int,MPI_Datatype,MPI_
 
 int PMPI_Reduce_local(void * inbuf,void * inoutbuf,int count,MPI_Datatype datatype,MPI_Op op)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Reduce_local (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce_local( inbuf, inoutbuf, count, datatype, op);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Reduce_local (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Op_commutative(MPI_Op op,int * commute);
 #pragma weak MPI_Op_commutative=PMPI_Op_commutative
@@ -5068,18 +4426,15 @@ extern int INTERF_2_INTEL_CCMPI_Op_commutative(MPI_Op,int *);
 
 int PMPI_Op_commutative(MPI_Op op,int * commute)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Op_commutative (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Op_commutative( op, commute);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Op_commutative (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
 #pragma weak MPI_Reduce_scatter_block=PMPI_Reduce_scatter_block
@@ -5091,18 +4446,15 @@ extern int INTERF_2_INTEL_CCMPI_Reduce_scatter_block(void *,void *,int,MPI_Datat
 
 int PMPI_Reduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Reduce_scatter_block (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce_scatter_block( sendbuf, recvbuf, recvcount, datatype, op, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Reduce_scatter_block (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Dist_graph_neighbors_count(MPI_Comm comm,int * indegree,int * outdegree,int * weighted);
 #pragma weak MPI_Dist_graph_neighbors_count=PMPI_Dist_graph_neighbors_count
@@ -5114,18 +4466,15 @@ extern int INTERF_2_INTEL_CCMPI_Dist_graph_neighbors_count(MPI_Comm,int *,int *,
 
 int PMPI_Dist_graph_neighbors_count(MPI_Comm comm,int * indegree,int * outdegree,int * weighted)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Dist_graph_neighbors_count (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_neighbors_count( comm, indegree, outdegree, weighted);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Dist_graph_neighbors_count (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Status_c2f(MPI_Status * c_status,MPI_Fint * f_status);
 #pragma weak MPI_Status_c2f=PMPI_Status_c2f
@@ -5137,18 +4486,15 @@ extern int INTERF_2_INTEL_CCMPI_Status_c2f(MPI_Status *,MPI_Fint *);
 
 int PMPI_Status_c2f(MPI_Status * c_status,MPI_Fint * f_status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Status_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_c2f( c_status, f_status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Status_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Status_f2c(MPI_Fint * f_status,MPI_Status * c_status);
 #pragma weak MPI_Status_f2c=PMPI_Status_f2c
@@ -5160,18 +4506,15 @@ extern int INTERF_2_INTEL_CCMPI_Status_f2c(MPI_Fint *,MPI_Status *);
 
 int PMPI_Status_f2c(MPI_Fint * f_status,MPI_Status * c_status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Status_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_f2c( f_status, c_status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Status_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Improbe(int source,int tag,MPI_Comm comm,int * flag,MPI_Message * message,MPI_Status * status);
 #pragma weak MPI_Improbe=PMPI_Improbe
@@ -5183,18 +4526,15 @@ extern int INTERF_2_INTEL_CCMPI_Improbe(int,int,MPI_Comm,int *,MPI_Message *,MPI
 
 int PMPI_Improbe(int source,int tag,MPI_Comm comm,int * flag,MPI_Message * message,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Improbe (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Improbe( source, tag, comm, flag, message, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Improbe (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Imrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message,MPI_Request * request);
 #pragma weak MPI_Imrecv=PMPI_Imrecv
@@ -5206,18 +4546,15 @@ extern int INTERF_2_INTEL_CCMPI_Imrecv(void *,int,MPI_Datatype,MPI_Message *,MPI
 
 int PMPI_Imrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Imrecv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Imrecv( buf, count, datatype, message, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Imrecv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Mprobe(int source,int tag,MPI_Comm comm,MPI_Message * message,MPI_Status * status);
 #pragma weak MPI_Mprobe=PMPI_Mprobe
@@ -5229,18 +4566,15 @@ extern int INTERF_2_INTEL_CCMPI_Mprobe(int,int,MPI_Comm,MPI_Message *,MPI_Status
 
 int PMPI_Mprobe(int source,int tag,MPI_Comm comm,MPI_Message * message,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Mprobe (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Mprobe( source, tag, comm, message, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Mprobe (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Mrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message,MPI_Status * status);
 #pragma weak MPI_Mrecv=PMPI_Mrecv
@@ -5252,18 +4586,15 @@ extern int INTERF_2_INTEL_CCMPI_Mrecv(void *,int,MPI_Datatype,MPI_Message *,MPI_
 
 int PMPI_Mrecv(void * buf,int count,MPI_Datatype datatype,MPI_Message * message,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Mrecv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Mrecv( buf, count, datatype, message, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Mrecv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_idup(MPI_Comm comm,MPI_Comm * newcomm,MPI_Request * request);
 #pragma weak MPI_Comm_idup=PMPI_Comm_idup
@@ -5275,18 +4606,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_idup(MPI_Comm,MPI_Comm *,MPI_Request *);
 
 int PMPI_Comm_idup(MPI_Comm comm,MPI_Comm * newcomm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_idup (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_idup( comm, newcomm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_idup (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ibarrier(MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ibarrier=PMPI_Ibarrier
@@ -5298,18 +4626,15 @@ extern int INTERF_2_INTEL_CCMPI_Ibarrier(MPI_Comm,MPI_Request *);
 
 int PMPI_Ibarrier(MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ibarrier (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ibarrier( comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ibarrier (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ibcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ibcast=PMPI_Ibcast
@@ -5321,18 +4646,15 @@ extern int INTERF_2_INTEL_CCMPI_Ibcast(void *,int,MPI_Datatype,int,MPI_Comm,MPI_
 
 int PMPI_Ibcast(void * buffer,int count,MPI_Datatype datatype,int root,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ibcast (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ibcast( buffer, count, datatype, root, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ibcast (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Igather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Igather=PMPI_Igather
@@ -5344,18 +4666,15 @@ extern int INTERF_2_INTEL_CCMPI_Igather(void *,int,MPI_Datatype,void *,int,MPI_D
 
 int PMPI_Igather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Igather (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Igather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Igather (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iscatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Iscatter=PMPI_Iscatter
@@ -5367,18 +4686,15 @@ extern int INTERF_2_INTEL_CCMPI_Iscatter(void *,int,MPI_Datatype,void *,int,MPI_
 
 int PMPI_Iscatter(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iscatter (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iscatter( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iscatter (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iallgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Iallgather=PMPI_Iallgather
@@ -5390,18 +4706,15 @@ extern int INTERF_2_INTEL_CCMPI_Iallgather(void *,int,MPI_Datatype,void *,int,MP
 
 int PMPI_Iallgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iallgather (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iallgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iallgather (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ialltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ialltoall=PMPI_Ialltoall
@@ -5413,18 +4726,15 @@ extern int INTERF_2_INTEL_CCMPI_Ialltoall(void *,int,MPI_Datatype,void *,int,MPI
 
 int PMPI_Ialltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ialltoall (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ialltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ialltoall (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ireduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,int root,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ireduce=PMPI_Ireduce
@@ -5436,18 +4746,15 @@ extern int INTERF_2_INTEL_CCMPI_Ireduce(void *,void *,int,MPI_Datatype,MPI_Op,in
 
 int PMPI_Ireduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,int root,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ireduce (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ireduce( sendbuf, recvbuf, count, datatype, op, root, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ireduce (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iallreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Iallreduce=PMPI_Iallreduce
@@ -5459,18 +4766,15 @@ extern int INTERF_2_INTEL_CCMPI_Iallreduce(void *,void *,int,MPI_Datatype,MPI_Op
 
 int PMPI_Iallreduce(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iallreduce (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iallreduce( sendbuf, recvbuf, count, datatype, op, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iallreduce (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ireduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ireduce_scatter_block=PMPI_Ireduce_scatter_block
@@ -5482,18 +4786,15 @@ extern int INTERF_2_INTEL_CCMPI_Ireduce_scatter_block(void *,void *,int,MPI_Data
 
 int PMPI_Ireduce_scatter_block(void * sendbuf,void * recvbuf,int recvcount,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ireduce_scatter_block (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ireduce_scatter_block( sendbuf, recvbuf, recvcount, datatype, op, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ireduce_scatter_block (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Iscan=PMPI_Iscan
@@ -5505,18 +4806,15 @@ extern int INTERF_2_INTEL_CCMPI_Iscan(void *,void *,int,MPI_Datatype,MPI_Op,MPI_
 
 int PMPI_Iscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iscan (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iscan( sendbuf, recvbuf, count, datatype, op, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iscan (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iexscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Iexscan=PMPI_Iexscan
@@ -5528,18 +4826,15 @@ extern int INTERF_2_INTEL_CCMPI_Iexscan(void *,void *,int,MPI_Datatype,MPI_Op,MP
 
 int PMPI_Iexscan(void * sendbuf,void * recvbuf,int count,MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iexscan (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iexscan( sendbuf, recvbuf, count, datatype, op, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iexscan (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ineighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ineighbor_allgather=PMPI_Ineighbor_allgather
@@ -5551,18 +4846,15 @@ extern int INTERF_2_INTEL_CCMPI_Ineighbor_allgather(void *,int,MPI_Datatype,void
 
 int PMPI_Ineighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ineighbor_allgather (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_allgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ineighbor_allgather (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ineighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ineighbor_alltoall=PMPI_Ineighbor_alltoall
@@ -5574,18 +4866,15 @@ extern int INTERF_2_INTEL_CCMPI_Ineighbor_alltoall(void *,int,MPI_Datatype,void 
 
 int PMPI_Ineighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ineighbor_alltoall (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_alltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ineighbor_alltoall (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Neighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Neighbor_allgather=PMPI_Neighbor_allgather
@@ -5597,18 +4886,15 @@ extern int INTERF_2_INTEL_CCMPI_Neighbor_allgather(void *,int,MPI_Datatype,void 
 
 int PMPI_Neighbor_allgather(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Neighbor_allgather (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_allgather( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Neighbor_allgather (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Neighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Neighbor_alltoall=PMPI_Neighbor_alltoall
@@ -5620,18 +4906,15 @@ extern int INTERF_2_INTEL_CCMPI_Neighbor_alltoall(void *,int,MPI_Datatype,void *
 
 int PMPI_Neighbor_alltoall(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Neighbor_alltoall (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_alltoall( sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Neighbor_alltoall (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_split_type(MPI_Comm comm,int split_type,int key,MPI_Info info,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_split_type=PMPI_Comm_split_type
@@ -5643,18 +4926,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_split_type(MPI_Comm,int,int,MPI_Info,MPI_Co
 
 int PMPI_Comm_split_type(MPI_Comm comm,int split_type,int key,MPI_Info info,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_split_type (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_split_type( comm, split_type, key, info, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_split_type (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Get_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Count * count);
 #pragma weak MPI_Get_elements_x=PMPI_Get_elements_x
@@ -5666,18 +4946,15 @@ extern int INTERF_2_INTEL_CCMPI_Get_elements_x(MPI_Status *,MPI_Datatype,MPI_Cou
 
 int PMPI_Get_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Count * count)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Get_elements_x (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Get_elements_x( status, datatype, count);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Get_elements_x (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Status_set_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Count count);
 #pragma weak MPI_Status_set_elements_x=PMPI_Status_set_elements_x
@@ -5689,18 +4966,15 @@ extern int INTERF_2_INTEL_CCMPI_Status_set_elements_x(MPI_Status *,MPI_Datatype,
 
 int PMPI_Status_set_elements_x(MPI_Status * status,MPI_Datatype datatype,MPI_Count count)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Status_set_elements_x (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Status_set_elements_x( status, datatype, count);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Status_set_elements_x (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count * extent);
 #pragma weak MPI_Type_get_extent_x=PMPI_Type_get_extent_x
@@ -5712,18 +4986,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_extent_x(MPI_Datatype,MPI_Count *,MPI_C
 
 int PMPI_Type_get_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count * extent)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_extent_x (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_extent_x( datatype, lb, extent);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_extent_x (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_true_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count * extent);
 #pragma weak MPI_Type_get_true_extent_x=PMPI_Type_get_true_extent_x
@@ -5735,18 +5006,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_true_extent_x(MPI_Datatype,MPI_Count *,
 
 int PMPI_Type_get_true_extent_x(MPI_Datatype datatype,MPI_Count * lb,MPI_Count * extent)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_true_extent_x (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_true_extent_x( datatype, lb, extent);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_true_extent_x (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_size_x(MPI_Datatype datatype,MPI_Count * size);
 #pragma weak MPI_Type_size_x=PMPI_Type_size_x
@@ -5758,18 +5026,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_size_x(MPI_Datatype,MPI_Count *);
 
 int PMPI_Type_size_x(MPI_Datatype datatype,MPI_Count * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_size_x (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_size_x( datatype, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_size_x (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_create_group(MPI_Comm comm,MPI_Group group,int tag,MPI_Comm * newcomm);
 #pragma weak MPI_Comm_create_group=PMPI_Comm_create_group
@@ -5781,18 +5046,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_create_group(MPI_Comm,MPI_Group,int,MPI_Com
 
 int PMPI_Comm_create_group(MPI_Comm comm,MPI_Group group,int tag,MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_create_group (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_create_group( comm, group, tag, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_create_group (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_init_thread(int required,int * provided);
 #pragma weak MPI_T_init_thread=PMPI_T_init_thread
@@ -5804,18 +5066,15 @@ extern int INTERF_2_INTEL_CCMPI_T_init_thread(int,int *);
 
 int PMPI_T_init_thread(int required,int * provided)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_init_thread (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_init_thread( required, provided);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_init_thread (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_enum_get_info(MPI_T_enum enumtype,int * num,char * name,int * name_len);
 #pragma weak MPI_T_enum_get_info=PMPI_T_enum_get_info
@@ -5827,18 +5086,15 @@ extern int INTERF_2_INTEL_CCMPI_T_enum_get_info(MPI_T_enum,int *,char *,int *);
 
 int PMPI_T_enum_get_info(MPI_T_enum enumtype,int * num,char * name,int * name_len)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_enum_get_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_enum_get_info( enumtype, num, name, name_len);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_enum_get_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_enum_get_item(MPI_T_enum enumtype,int indx,int * value,char * name,int * name_len);
 #pragma weak MPI_T_enum_get_item=PMPI_T_enum_get_item
@@ -5850,18 +5106,15 @@ extern int INTERF_2_INTEL_CCMPI_T_enum_get_item(MPI_T_enum,int,int *,char *,int 
 
 int PMPI_T_enum_get_item(MPI_T_enum enumtype,int indx,int * value,char * name,int * name_len)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_enum_get_item (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_enum_get_item( enumtype, indx, value, name, name_len);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_enum_get_item (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_cvar_get_num(int * num_cvar);
 #pragma weak MPI_T_cvar_get_num=PMPI_T_cvar_get_num
@@ -5873,18 +5126,15 @@ extern int INTERF_2_INTEL_CCMPI_T_cvar_get_num(int *);
 
 int PMPI_T_cvar_get_num(int * num_cvar)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_cvar_get_num (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_get_num( num_cvar);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_cvar_get_num (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_cvar_get_info(int cvar_index,char * name,int * name_len,int * verbosity,MPI_Datatype * datatype,MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * scope);
 #pragma weak MPI_T_cvar_get_info=PMPI_T_cvar_get_info
@@ -5896,18 +5146,15 @@ extern int INTERF_2_INTEL_CCMPI_T_cvar_get_info(int,char *,int *,int *,MPI_Datat
 
 int PMPI_T_cvar_get_info(int cvar_index,char * name,int * name_len,int * verbosity,MPI_Datatype * datatype,MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * scope)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_cvar_get_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_get_info( cvar_index, name, name_len, verbosity, datatype, enumtype, desc, desc_len, binding, scope);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_cvar_get_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_cvar_handle_alloc(int cvar_index,void * obj_handle,MPI_T_cvar_handle * handle,int * count);
 #pragma weak MPI_T_cvar_handle_alloc=PMPI_T_cvar_handle_alloc
@@ -5919,18 +5166,15 @@ extern int INTERF_2_INTEL_CCMPI_T_cvar_handle_alloc(int,void *,MPI_T_cvar_handle
 
 int PMPI_T_cvar_handle_alloc(int cvar_index,void * obj_handle,MPI_T_cvar_handle * handle,int * count)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_cvar_handle_alloc (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_handle_alloc( cvar_index, obj_handle, handle, count);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_cvar_handle_alloc (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_cvar_handle_free(MPI_T_cvar_handle * handle);
 #pragma weak MPI_T_cvar_handle_free=PMPI_T_cvar_handle_free
@@ -5942,18 +5186,15 @@ extern int INTERF_2_INTEL_CCMPI_T_cvar_handle_free(MPI_T_cvar_handle *);
 
 int PMPI_T_cvar_handle_free(MPI_T_cvar_handle * handle)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_cvar_handle_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_handle_free( handle);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_cvar_handle_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_cvar_read(MPI_T_cvar_handle handle,void * buf);
 #pragma weak MPI_T_cvar_read=PMPI_T_cvar_read
@@ -5965,18 +5206,15 @@ extern int INTERF_2_INTEL_CCMPI_T_cvar_read(MPI_T_cvar_handle,void *);
 
 int PMPI_T_cvar_read(MPI_T_cvar_handle handle,void * buf)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_cvar_read (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_read( handle, buf);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_cvar_read (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_cvar_write(MPI_T_cvar_handle handle,void * buf);
 #pragma weak MPI_T_cvar_write=PMPI_T_cvar_write
@@ -5988,18 +5226,15 @@ extern int INTERF_2_INTEL_CCMPI_T_cvar_write(MPI_T_cvar_handle,void *);
 
 int PMPI_T_cvar_write(MPI_T_cvar_handle handle,void * buf)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_cvar_write (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_write( handle, buf);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_cvar_write (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_get_num(int * num_pvar);
 #pragma weak MPI_T_pvar_get_num=PMPI_T_pvar_get_num
@@ -6011,18 +5246,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_get_num(int *);
 
 int PMPI_T_pvar_get_num(int * num_pvar)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_get_num (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_get_num( num_pvar);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_get_num (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_get_info(int pvar_index,char * name,int * name_len,int * verbosity,int * var_class,MPI_Datatype * datatype,MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * readonly,int * continuous,int * atomic);
 #pragma weak MPI_T_pvar_get_info=PMPI_T_pvar_get_info
@@ -6034,18 +5266,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_get_info(int,char *,int *,int *,int *,MPI
 
 int PMPI_T_pvar_get_info(int pvar_index,char * name,int * name_len,int * verbosity,int * var_class,MPI_Datatype * datatype,MPI_T_enum * enumtype,char * desc,int * desc_len,int * binding,int * readonly,int * continuous,int * atomic)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_get_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_get_info( pvar_index, name, name_len, verbosity, var_class, datatype, enumtype, desc, desc_len, binding, readonly, continuous, atomic);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_get_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_session_create(MPI_T_pvar_session * session);
 #pragma weak MPI_T_pvar_session_create=PMPI_T_pvar_session_create
@@ -6057,18 +5286,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_session_create(MPI_T_pvar_session *);
 
 int PMPI_T_pvar_session_create(MPI_T_pvar_session * session)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_session_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_session_create( session);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_session_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_session_free(MPI_T_pvar_session * session);
 #pragma weak MPI_T_pvar_session_free=PMPI_T_pvar_session_free
@@ -6080,18 +5306,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_session_free(MPI_T_pvar_session *);
 
 int PMPI_T_pvar_session_free(MPI_T_pvar_session * session)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_session_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_session_free( session);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_session_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_handle_alloc(MPI_T_pvar_session session,int pvar_index,void * obj_handle,MPI_T_pvar_handle * handle,int * count);
 #pragma weak MPI_T_pvar_handle_alloc=PMPI_T_pvar_handle_alloc
@@ -6103,18 +5326,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_handle_alloc(MPI_T_pvar_session,int,void 
 
 int PMPI_T_pvar_handle_alloc(MPI_T_pvar_session session,int pvar_index,void * obj_handle,MPI_T_pvar_handle * handle,int * count)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_handle_alloc (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_handle_alloc( session, pvar_index, obj_handle, handle, count);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_handle_alloc (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_handle_free(MPI_T_pvar_session session,MPI_T_pvar_handle * handle);
 #pragma weak MPI_T_pvar_handle_free=PMPI_T_pvar_handle_free
@@ -6126,18 +5346,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_handle_free(MPI_T_pvar_session,MPI_T_pvar
 
 int PMPI_T_pvar_handle_free(MPI_T_pvar_session session,MPI_T_pvar_handle * handle)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_handle_free (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_handle_free( session, handle);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_handle_free (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_start(MPI_T_pvar_session session,MPI_T_pvar_handle handle);
 #pragma weak MPI_T_pvar_start=PMPI_T_pvar_start
@@ -6149,18 +5366,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_start(MPI_T_pvar_session,MPI_T_pvar_handl
 
 int PMPI_T_pvar_start(MPI_T_pvar_session session,MPI_T_pvar_handle handle)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_start (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_start( session, handle);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_start (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_stop(MPI_T_pvar_session session,MPI_T_pvar_handle handle);
 #pragma weak MPI_T_pvar_stop=PMPI_T_pvar_stop
@@ -6172,18 +5386,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_stop(MPI_T_pvar_session,MPI_T_pvar_handle
 
 int PMPI_T_pvar_stop(MPI_T_pvar_session session,MPI_T_pvar_handle handle)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_stop (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_stop( session, handle);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_stop (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_read(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf);
 #pragma weak MPI_T_pvar_read=PMPI_T_pvar_read
@@ -6195,18 +5406,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_read(MPI_T_pvar_session,MPI_T_pvar_handle
 
 int PMPI_T_pvar_read(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_read (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_read( session, handle, buf);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_read (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_write(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf);
 #pragma weak MPI_T_pvar_write=PMPI_T_pvar_write
@@ -6218,18 +5426,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_write(MPI_T_pvar_session,MPI_T_pvar_handl
 
 int PMPI_T_pvar_write(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_write (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_write( session, handle, buf);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_write (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_reset(MPI_T_pvar_session session,MPI_T_pvar_handle handle);
 #pragma weak MPI_T_pvar_reset=PMPI_T_pvar_reset
@@ -6241,18 +5446,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_reset(MPI_T_pvar_session,MPI_T_pvar_handl
 
 int PMPI_T_pvar_reset(MPI_T_pvar_session session,MPI_T_pvar_handle handle)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_reset (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_reset( session, handle);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_reset (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_readreset(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf);
 #pragma weak MPI_T_pvar_readreset=PMPI_T_pvar_readreset
@@ -6264,18 +5466,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_readreset(MPI_T_pvar_session,MPI_T_pvar_h
 
 int PMPI_T_pvar_readreset(MPI_T_pvar_session session,MPI_T_pvar_handle handle,void * buf)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_readreset (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_readreset( session, handle, buf);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_readreset (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_category_get_num(int * num_cat);
 #pragma weak MPI_T_category_get_num=PMPI_T_category_get_num
@@ -6287,18 +5486,15 @@ extern int INTERF_2_INTEL_CCMPI_T_category_get_num(int *);
 
 int PMPI_T_category_get_num(int * num_cat)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_category_get_num (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_num( num_cat);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_category_get_num (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_category_get_info(int cat_index,char * name,int * name_len,char * desc,int * desc_len,int * num_cvars,int * num_pvars,int * num_categories);
 #pragma weak MPI_T_category_get_info=PMPI_T_category_get_info
@@ -6310,18 +5506,15 @@ extern int INTERF_2_INTEL_CCMPI_T_category_get_info(int,char *,int *,char *,int 
 
 int PMPI_T_category_get_info(int cat_index,char * name,int * name_len,char * desc,int * desc_len,int * num_cvars,int * num_pvars,int * num_categories)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_category_get_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_info( cat_index, name, name_len, desc, desc_len, num_cvars, num_pvars, num_categories);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_category_get_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_open(MPI_Comm comm,char * filename,int amode,MPI_Info info,MPI_File * fh);
 #pragma weak MPI_File_open=PMPI_File_open
@@ -6333,18 +5526,15 @@ extern int INTERF_2_INTEL_CCMPI_File_open(MPI_Comm,char *,int,MPI_Info,MPI_File 
 
 int PMPI_File_open(MPI_Comm comm,char * filename,int amode,MPI_Info info,MPI_File * fh)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_open (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_open( comm, filename, amode, info, fh);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_open (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_close(MPI_File * fh);
 #pragma weak MPI_File_close=PMPI_File_close
@@ -6356,18 +5546,15 @@ extern int INTERF_2_INTEL_CCMPI_File_close(MPI_File *);
 
 int PMPI_File_close(MPI_File * fh)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_close (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_close( fh);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_close (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_delete(char * filename,MPI_Info info);
 #pragma weak MPI_File_delete=PMPI_File_delete
@@ -6379,18 +5566,15 @@ extern int INTERF_2_INTEL_CCMPI_File_delete(char *,MPI_Info);
 
 int PMPI_File_delete(char * filename,MPI_Info info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_delete (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_delete( filename, info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_delete (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_set_size(MPI_File fh,MPI_Offset size);
 #pragma weak MPI_File_set_size=PMPI_File_set_size
@@ -6402,18 +5586,15 @@ extern int INTERF_2_INTEL_CCMPI_File_set_size(MPI_File,MPI_Offset);
 
 int PMPI_File_set_size(MPI_File fh,MPI_Offset size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_set_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_size( fh, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_set_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_preallocate(MPI_File fh,MPI_Offset size);
 #pragma weak MPI_File_preallocate=PMPI_File_preallocate
@@ -6425,18 +5606,15 @@ extern int INTERF_2_INTEL_CCMPI_File_preallocate(MPI_File,MPI_Offset);
 
 int PMPI_File_preallocate(MPI_File fh,MPI_Offset size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_preallocate (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_preallocate( fh, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_preallocate (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_size(MPI_File fh,MPI_Offset * size);
 #pragma weak MPI_File_get_size=PMPI_File_get_size
@@ -6448,18 +5626,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_size(MPI_File,MPI_Offset *);
 
 int PMPI_File_get_size(MPI_File fh,MPI_Offset * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_size( fh, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_group(MPI_File fh,MPI_Group * group);
 #pragma weak MPI_File_get_group=PMPI_File_get_group
@@ -6471,18 +5646,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_group(MPI_File,MPI_Group *);
 
 int PMPI_File_get_group(MPI_File fh,MPI_Group * group)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_group (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_group( fh, group);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_group (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_amode(MPI_File fh,int * amode);
 #pragma weak MPI_File_get_amode=PMPI_File_get_amode
@@ -6494,18 +5666,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_amode(MPI_File,int *);
 
 int PMPI_File_get_amode(MPI_File fh,int * amode)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_amode (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_amode( fh, amode);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_amode (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_set_info(MPI_File fh,MPI_Info info);
 #pragma weak MPI_File_set_info=PMPI_File_set_info
@@ -6517,18 +5686,15 @@ extern int INTERF_2_INTEL_CCMPI_File_set_info(MPI_File,MPI_Info);
 
 int PMPI_File_set_info(MPI_File fh,MPI_Info info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_set_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_info( fh, info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_set_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_info(MPI_File fh,MPI_Info * info_used);
 #pragma weak MPI_File_get_info=PMPI_File_get_info
@@ -6540,18 +5706,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_info(MPI_File,MPI_Info *);
 
 int PMPI_File_get_info(MPI_File fh,MPI_Info * info_used)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_info (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_info( fh, info_used);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_info (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_set_view(MPI_File fh,MPI_Offset disp,MPI_Datatype etype,MPI_Datatype filetype,char * datarep,MPI_Info info);
 #pragma weak MPI_File_set_view=PMPI_File_set_view
@@ -6563,18 +5726,15 @@ extern int INTERF_2_INTEL_CCMPI_File_set_view(MPI_File,MPI_Offset,MPI_Datatype,M
 
 int PMPI_File_set_view(MPI_File fh,MPI_Offset disp,MPI_Datatype etype,MPI_Datatype filetype,char * datarep,MPI_Info info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_set_view (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_view( fh, disp, etype, filetype, datarep, info);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_set_view (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_view(MPI_File fh,MPI_Offset * disp,MPI_Datatype * etype,MPI_Datatype * filetype,char * datarep);
 #pragma weak MPI_File_get_view=PMPI_File_get_view
@@ -6586,18 +5746,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_view(MPI_File,MPI_Offset *,MPI_Datatype
 
 int PMPI_File_get_view(MPI_File fh,MPI_Offset * disp,MPI_Datatype * etype,MPI_Datatype * filetype,char * datarep)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_view (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_view( fh, disp, etype, filetype, datarep);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_view (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_read_at=PMPI_File_read_at
@@ -6609,18 +5766,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_at(MPI_File,MPI_Offset,void *,int,MPI_
 
 int PMPI_File_read_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_at (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at( fh, offset, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_at (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_read_at_all=PMPI_File_read_at_all
@@ -6632,18 +5786,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_at_all(MPI_File,MPI_Offset,void *,int,
 
 int PMPI_File_read_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_at_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at_all( fh, offset, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_at_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_write_at=PMPI_File_write_at
@@ -6655,18 +5806,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_at(MPI_File,MPI_Offset,void *,int,MPI
 
 int PMPI_File_write_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_at (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at( fh, offset, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_at (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_write_at_all=PMPI_File_write_at_all
@@ -6678,18 +5826,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_at_all(MPI_File,MPI_Offset,void *,int
 
 int PMPI_File_write_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_at_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at_all( fh, offset, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_at_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iread_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iread_at=PMPI_File_iread_at
@@ -6701,18 +5846,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iread_at(MPI_File,MPI_Offset,void *,int,MPI
 
 int PMPI_File_iread_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iread_at (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_at( fh, offset, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iread_at (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iwrite_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iwrite_at=PMPI_File_iwrite_at
@@ -6724,18 +5866,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iwrite_at(MPI_File,MPI_Offset,void *,int,MP
 
 int PMPI_File_iwrite_at(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iwrite_at (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_at( fh, offset, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iwrite_at (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_read=PMPI_File_read
@@ -6747,18 +5886,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read(MPI_File,void *,int,MPI_Datatype,MPI_S
 
 int PMPI_File_read(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_read_all=PMPI_File_read_all
@@ -6770,18 +5906,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_all(MPI_File,void *,int,MPI_Datatype,M
 
 int PMPI_File_read_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_all( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_write=PMPI_File_write
@@ -6793,18 +5926,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write(MPI_File,void *,int,MPI_Datatype,MPI_
 
 int PMPI_File_write(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_write_all=PMPI_File_write_all
@@ -6816,18 +5946,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_all(MPI_File,void *,int,MPI_Datatype,
 
 int PMPI_File_write_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_all( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iread(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iread=PMPI_File_iread
@@ -6839,18 +5966,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iread(MPI_File,void *,int,MPI_Datatype,MPI_
 
 int PMPI_File_iread(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iread (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread( fh, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iread (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iwrite(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iwrite=PMPI_File_iwrite
@@ -6862,18 +5986,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iwrite(MPI_File,void *,int,MPI_Datatype,MPI
 
 int PMPI_File_iwrite(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iwrite (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite( fh, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iwrite (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_seek(MPI_File fh,MPI_Offset offset,int whence);
 #pragma weak MPI_File_seek=PMPI_File_seek
@@ -6885,18 +6006,15 @@ extern int INTERF_2_INTEL_CCMPI_File_seek(MPI_File,MPI_Offset,int);
 
 int PMPI_File_seek(MPI_File fh,MPI_Offset offset,int whence)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_seek (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_seek( fh, offset, whence);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_seek (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_position(MPI_File fh,MPI_Offset * offset);
 #pragma weak MPI_File_get_position=PMPI_File_get_position
@@ -6908,18 +6026,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_position(MPI_File,MPI_Offset *);
 
 int PMPI_File_get_position(MPI_File fh,MPI_Offset * offset)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_position (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_position( fh, offset);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_position (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_byte_offset(MPI_File fh,MPI_Offset offset,MPI_Offset * disp);
 #pragma weak MPI_File_get_byte_offset=PMPI_File_get_byte_offset
@@ -6931,18 +6046,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_byte_offset(MPI_File,MPI_Offset,MPI_Off
 
 int PMPI_File_get_byte_offset(MPI_File fh,MPI_Offset offset,MPI_Offset * disp)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_byte_offset (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_byte_offset( fh, offset, disp);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_byte_offset (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_read_shared=PMPI_File_read_shared
@@ -6954,18 +6066,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_shared(MPI_File,void *,int,MPI_Datatyp
 
 int PMPI_File_read_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_shared (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_shared( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_shared (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_write_shared=PMPI_File_write_shared
@@ -6977,18 +6086,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_shared(MPI_File,void *,int,MPI_Dataty
 
 int PMPI_File_write_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_shared (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_shared( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_shared (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iread_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iread_shared=PMPI_File_iread_shared
@@ -7000,18 +6106,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iread_shared(MPI_File,void *,int,MPI_Dataty
 
 int PMPI_File_iread_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iread_shared (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_shared( fh, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iread_shared (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iwrite_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iwrite_shared=PMPI_File_iwrite_shared
@@ -7023,18 +6126,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iwrite_shared(MPI_File,void *,int,MPI_Datat
 
 int PMPI_File_iwrite_shared(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iwrite_shared (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_shared( fh, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iwrite_shared (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_ordered(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_read_ordered=PMPI_File_read_ordered
@@ -7046,18 +6146,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_ordered(MPI_File,void *,int,MPI_Dataty
 
 int PMPI_File_read_ordered(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_ordered (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_ordered( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_ordered (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_ordered(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status);
 #pragma weak MPI_File_write_ordered=PMPI_File_write_ordered
@@ -7069,18 +6166,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_ordered(MPI_File,void *,int,MPI_Datat
 
 int PMPI_File_write_ordered(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_ordered (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_ordered( fh, buf, count, datatype, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_ordered (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_seek_shared(MPI_File fh,MPI_Offset offset,int whence);
 #pragma weak MPI_File_seek_shared=PMPI_File_seek_shared
@@ -7092,18 +6186,15 @@ extern int INTERF_2_INTEL_CCMPI_File_seek_shared(MPI_File,MPI_Offset,int);
 
 int PMPI_File_seek_shared(MPI_File fh,MPI_Offset offset,int whence)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_seek_shared (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_seek_shared( fh, offset, whence);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_seek_shared (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_position_shared(MPI_File fh,MPI_Offset * offset);
 #pragma weak MPI_File_get_position_shared=PMPI_File_get_position_shared
@@ -7115,18 +6206,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_position_shared(MPI_File,MPI_Offset *);
 
 int PMPI_File_get_position_shared(MPI_File fh,MPI_Offset * offset)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_position_shared (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_position_shared( fh, offset);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_position_shared (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype);
 #pragma weak MPI_File_read_at_all_begin=PMPI_File_read_at_all_begin
@@ -7138,18 +6226,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_at_all_begin(MPI_File,MPI_Offset,void 
 
 int PMPI_File_read_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_at_all_begin (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at_all_begin( fh, offset, buf, count, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_at_all_begin (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_at_all_end(MPI_File fh,void * buf,MPI_Status * status);
 #pragma weak MPI_File_read_at_all_end=PMPI_File_read_at_all_end
@@ -7161,18 +6246,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_at_all_end(MPI_File,void *,MPI_Status 
 
 int PMPI_File_read_at_all_end(MPI_File fh,void * buf,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_at_all_end (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_at_all_end( fh, buf, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_at_all_end (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype);
 #pragma weak MPI_File_write_at_all_begin=PMPI_File_write_at_all_begin
@@ -7184,18 +6266,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_at_all_begin(MPI_File,MPI_Offset,void
 
 int PMPI_File_write_at_all_begin(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_at_all_begin (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at_all_begin( fh, offset, buf, count, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_at_all_begin (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_at_all_end(MPI_File fh,void * buf,MPI_Status * status);
 #pragma weak MPI_File_write_at_all_end=PMPI_File_write_at_all_end
@@ -7207,18 +6286,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_at_all_end(MPI_File,void *,MPI_Status
 
 int PMPI_File_write_at_all_end(MPI_File fh,void * buf,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_at_all_end (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_at_all_end( fh, buf, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_at_all_end (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
 #pragma weak MPI_File_read_all_begin=PMPI_File_read_all_begin
@@ -7230,18 +6306,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_all_begin(MPI_File,void *,int,MPI_Data
 
 int PMPI_File_read_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_all_begin (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_all_begin( fh, buf, count, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_all_begin (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_all_end(MPI_File fh,void * buf,MPI_Status * status);
 #pragma weak MPI_File_read_all_end=PMPI_File_read_all_end
@@ -7253,18 +6326,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_all_end(MPI_File,void *,MPI_Status *);
 
 int PMPI_File_read_all_end(MPI_File fh,void * buf,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_all_end (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_all_end( fh, buf, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_all_end (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
 #pragma weak MPI_File_write_all_begin=PMPI_File_write_all_begin
@@ -7276,18 +6346,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_all_begin(MPI_File,void *,int,MPI_Dat
 
 int PMPI_File_write_all_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_all_begin (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_all_begin( fh, buf, count, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_all_begin (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_all_end(MPI_File fh,void * buf,MPI_Status * status);
 #pragma weak MPI_File_write_all_end=PMPI_File_write_all_end
@@ -7299,18 +6366,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_all_end(MPI_File,void *,MPI_Status *)
 
 int PMPI_File_write_all_end(MPI_File fh,void * buf,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_all_end (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_all_end( fh, buf, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_all_end (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
 #pragma weak MPI_File_read_ordered_begin=PMPI_File_read_ordered_begin
@@ -7322,18 +6386,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_ordered_begin(MPI_File,void *,int,MPI_
 
 int PMPI_File_read_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_ordered_begin (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_ordered_begin( fh, buf, count, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_ordered_begin (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_read_ordered_end(MPI_File fh,void * buf,MPI_Status * status);
 #pragma weak MPI_File_read_ordered_end=PMPI_File_read_ordered_end
@@ -7345,18 +6406,15 @@ extern int INTERF_2_INTEL_CCMPI_File_read_ordered_end(MPI_File,void *,MPI_Status
 
 int PMPI_File_read_ordered_end(MPI_File fh,void * buf,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_read_ordered_end (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_read_ordered_end( fh, buf, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_read_ordered_end (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype);
 #pragma weak MPI_File_write_ordered_begin=PMPI_File_write_ordered_begin
@@ -7368,18 +6426,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_ordered_begin(MPI_File,void *,int,MPI
 
 int PMPI_File_write_ordered_begin(MPI_File fh,void * buf,int count,MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_ordered_begin (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_ordered_begin( fh, buf, count, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_ordered_begin (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_write_ordered_end(MPI_File fh,void * buf,MPI_Status * status);
 #pragma weak MPI_File_write_ordered_end=PMPI_File_write_ordered_end
@@ -7391,18 +6446,15 @@ extern int INTERF_2_INTEL_CCMPI_File_write_ordered_end(MPI_File,void *,MPI_Statu
 
 int PMPI_File_write_ordered_end(MPI_File fh,void * buf,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_write_ordered_end (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_write_ordered_end( fh, buf, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_write_ordered_end (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_type_extent(MPI_File fh,MPI_Datatype datatype,MPI_Aint * extent);
 #pragma weak MPI_File_get_type_extent=PMPI_File_get_type_extent
@@ -7414,18 +6466,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_type_extent(MPI_File,MPI_Datatype,MPI_A
 
 int PMPI_File_get_type_extent(MPI_File fh,MPI_Datatype datatype,MPI_Aint * extent)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_type_extent (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_type_extent( fh, datatype, extent);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_type_extent (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Register_datarep(char * datarep,MPI_Datarep_conversion_function * read_conversion_fn,MPI_Datarep_conversion_function * write_conversion_fn,MPI_Datarep_extent_function * dtype_file_extent_fn,void * extra_state);
 #pragma weak MPI_Register_datarep=PMPI_Register_datarep
@@ -7437,18 +6486,15 @@ extern int INTERF_2_INTEL_CCMPI_Register_datarep(char *,MPI_Datarep_conversion_f
 
 int PMPI_Register_datarep(char * datarep,MPI_Datarep_conversion_function * read_conversion_fn,MPI_Datarep_conversion_function * write_conversion_fn,MPI_Datarep_extent_function * dtype_file_extent_fn,void * extra_state)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Register_datarep (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Register_datarep( datarep, read_conversion_fn, write_conversion_fn, dtype_file_extent_fn, extra_state);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Register_datarep (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_set_atomicity(MPI_File fh,int flag);
 #pragma weak MPI_File_set_atomicity=PMPI_File_set_atomicity
@@ -7460,18 +6506,15 @@ extern int INTERF_2_INTEL_CCMPI_File_set_atomicity(MPI_File,int);
 
 int PMPI_File_set_atomicity(MPI_File fh,int flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_set_atomicity (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_set_atomicity( fh, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_set_atomicity (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_get_atomicity(MPI_File fh,int * flag);
 #pragma weak MPI_File_get_atomicity=PMPI_File_get_atomicity
@@ -7483,18 +6526,15 @@ extern int INTERF_2_INTEL_CCMPI_File_get_atomicity(MPI_File,int *);
 
 int PMPI_File_get_atomicity(MPI_File fh,int * flag)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_get_atomicity (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_get_atomicity( fh, flag);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_get_atomicity (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_sync(MPI_File fh);
 #pragma weak MPI_File_sync=PMPI_File_sync
@@ -7506,18 +6546,15 @@ extern int INTERF_2_INTEL_CCMPI_File_sync(MPI_File);
 
 int PMPI_File_sync(MPI_File fh)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_sync (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_sync( fh);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_sync (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_finalize( );
 #pragma weak MPI_T_finalize=PMPI_T_finalize
@@ -7529,18 +6566,15 @@ extern int INTERF_2_INTEL_CCMPI_T_finalize();
 
 int PMPI_T_finalize( )
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_finalize (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_finalize( );
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_finalize (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 double MPI_Wtime( );
 #pragma weak MPI_Wtime=PMPI_Wtime
@@ -7552,18 +6586,15 @@ extern double INTERF_2_INTEL_CCMPI_Wtime();
 
 double PMPI_Wtime( )
 {
-#ifdef DEBUG
-printf("entre : PMPI_Wtime (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 double ret_tmp= INTERFACE_LOCAL_MPI_Wtime( );
+
+double ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Wtime (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 double MPI_Wtick( );
 #pragma weak MPI_Wtick=PMPI_Wtick
@@ -7575,18 +6606,15 @@ extern double INTERF_2_INTEL_CCMPI_Wtick();
 
 double PMPI_Wtick( )
 {
-#ifdef DEBUG
-printf("entre : PMPI_Wtick (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 double ret_tmp= INTERFACE_LOCAL_MPI_Wtick( );
+
+double ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Wtick (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Finalize( );
 #pragma weak MPI_Finalize=PMPI_Finalize
@@ -7598,18 +6626,15 @@ extern int INTERF_2_INTEL_CCMPI_Finalize();
 
 int PMPI_Finalize( )
 {
-#ifdef DEBUG
-printf("entre : PMPI_Finalize (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Finalize( );
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Finalize (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Waitany(int count,MPI_Request array_of_requests[],int * indx,MPI_Status * status);
 #pragma weak MPI_Waitany=PMPI_Waitany
@@ -7621,18 +6646,15 @@ extern int INTERF_2_INTEL_CCMPI_Waitany(int,MPI_Request *,int *,MPI_Status *);
 
 int PMPI_Waitany(int count,MPI_Request array_of_requests[],int * indx,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Waitany (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Waitany( count, array_of_requests, indx, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Waitany (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Testany(int count,MPI_Request array_of_requests[],int * indx,int * flag,MPI_Status * status);
 #pragma weak MPI_Testany=PMPI_Testany
@@ -7644,18 +6666,15 @@ extern int INTERF_2_INTEL_CCMPI_Testany(int,MPI_Request *,int *,int *,MPI_Status
 
 int PMPI_Testany(int count,MPI_Request array_of_requests[],int * indx,int * flag,MPI_Status * status)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Testany (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Testany( count, array_of_requests, indx, flag, status);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Testany (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Waitall(int count,MPI_Request array_of_requests[],MPI_Status array_of_statuses[]);
 #pragma weak MPI_Waitall=PMPI_Waitall
@@ -7667,18 +6686,15 @@ extern int INTERF_2_INTEL_CCMPI_Waitall(int,MPI_Request *,MPI_Status *);
 
 int PMPI_Waitall(int count,MPI_Request array_of_requests[],MPI_Status array_of_statuses[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Waitall (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Waitall( count, array_of_requests, array_of_statuses);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Waitall (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Testall(int count,MPI_Request array_of_requests[],int * flag,MPI_Status array_of_statuses[]);
 #pragma weak MPI_Testall=PMPI_Testall
@@ -7690,18 +6706,15 @@ extern int INTERF_2_INTEL_CCMPI_Testall(int,MPI_Request *,int *,MPI_Status *);
 
 int PMPI_Testall(int count,MPI_Request array_of_requests[],int * flag,MPI_Status array_of_statuses[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Testall (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Testall( count, array_of_requests, flag, array_of_statuses);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Testall (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Waitsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[]);
 #pragma weak MPI_Waitsome=PMPI_Waitsome
@@ -7713,18 +6726,15 @@ extern int INTERF_2_INTEL_CCMPI_Waitsome(int,MPI_Request *,int *,int *,MPI_Statu
 
 int PMPI_Waitsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Waitsome (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Waitsome( incount, array_of_requests, outcount, array_of_indices, array_of_statuses);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Waitsome (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Testsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[]);
 #pragma weak MPI_Testsome=PMPI_Testsome
@@ -7736,18 +6746,15 @@ extern int INTERF_2_INTEL_CCMPI_Testsome(int,MPI_Request *,int *,int *,MPI_Statu
 
 int PMPI_Testsome(int incount,MPI_Request array_of_requests[],int * outcount,int array_of_indices[],MPI_Status array_of_statuses[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Testsome (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Testsome( incount, array_of_requests, outcount, array_of_indices, array_of_statuses);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Testsome (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Startall(int count,MPI_Request array_of_requests[]);
 #pragma weak MPI_Startall=PMPI_Startall
@@ -7759,18 +6766,15 @@ extern int INTERF_2_INTEL_CCMPI_Startall(int,MPI_Request *);
 
 int PMPI_Startall(int count,MPI_Request array_of_requests[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Startall (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Startall( count, array_of_requests);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Startall (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm);
 #pragma weak MPI_Alltoallw=PMPI_Alltoallw
@@ -7782,18 +6786,15 @@ extern int INTERF_2_INTEL_CCMPI_Alltoallw(void *,int *,int *,MPI_Datatype *,void
 
 int PMPI_Alltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Alltoallw (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Alltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Alltoallw (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm);
 #pragma weak MPI_Reduce_scatter=PMPI_Reduce_scatter
@@ -7805,18 +6806,15 @@ extern int INTERF_2_INTEL_CCMPI_Reduce_scatter(void *,void *,int *,MPI_Datatype,
 
 int PMPI_Reduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Reduce_scatter (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Reduce_scatter( sendbuf, recvbuf, recvcounts, datatype, op, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Reduce_scatter (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_translate_ranks(MPI_Group group1,int n,int ranks1[],MPI_Group group2,int ranks2[]);
 #pragma weak MPI_Group_translate_ranks=PMPI_Group_translate_ranks
@@ -7828,18 +6826,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_translate_ranks(MPI_Group,int,int *,MPI_Gr
 
 int PMPI_Group_translate_ranks(MPI_Group group1,int n,int ranks1[],MPI_Group group2,int ranks2[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_translate_ranks (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_translate_ranks( group1, n, ranks1, group2, ranks2);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_translate_ranks (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_incl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup);
 #pragma weak MPI_Group_incl=PMPI_Group_incl
@@ -7851,18 +6846,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_incl(MPI_Group,int,int *,MPI_Group *);
 
 int PMPI_Group_incl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_incl (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_incl( group, n, ranks, newgroup);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_incl (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_excl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup);
 #pragma weak MPI_Group_excl=PMPI_Group_excl
@@ -7874,18 +6866,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_excl(MPI_Group,int,int *,MPI_Group *);
 
 int PMPI_Group_excl(MPI_Group group,int n,int ranks[],MPI_Group * newgroup)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_excl (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_excl( group, n, ranks, newgroup);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_excl (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_range_incl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup);
 #pragma weak MPI_Group_range_incl=PMPI_Group_range_incl
@@ -7897,18 +6886,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_range_incl(MPI_Group,int,int[][3],MPI_Grou
 
 int PMPI_Group_range_incl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_range_incl (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_range_incl( group, n, ranges, newgroup);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_range_incl (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Group_range_excl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup);
 #pragma weak MPI_Group_range_excl=PMPI_Group_range_excl
@@ -7920,18 +6906,15 @@ extern int INTERF_2_INTEL_CCMPI_Group_range_excl(MPI_Group,int,int[][3],MPI_Grou
 
 int PMPI_Group_range_excl(MPI_Group group,int n,int ranges[][3],MPI_Group * newgroup)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_range_excl (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Group_range_excl( group, n, ranges, newgroup);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_range_excl (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cart_create(MPI_Comm comm_old,int ndims,int dims[],int periods[],int reorder,MPI_Comm * comm_cart);
 #pragma weak MPI_Cart_create=PMPI_Cart_create
@@ -7943,18 +6926,15 @@ extern int INTERF_2_INTEL_CCMPI_Cart_create(MPI_Comm,int,int *,int *,int,MPI_Com
 
 int PMPI_Cart_create(MPI_Comm comm_old,int ndims,int dims[],int periods[],int reorder,MPI_Comm * comm_cart)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cart_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_create( comm_old, ndims, dims, periods, reorder, comm_cart);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cart_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Dims_create(int nnodes,int ndims,int dims[]);
 #pragma weak MPI_Dims_create=PMPI_Dims_create
@@ -7966,18 +6946,15 @@ extern int INTERF_2_INTEL_CCMPI_Dims_create(int,int,int *);
 
 int PMPI_Dims_create(int nnodes,int ndims,int dims[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Dims_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dims_create( nnodes, ndims, dims);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Dims_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Graph_create(MPI_Comm comm_old,int nnodes,int indx[],int edges[],int reorder,MPI_Comm * comm_graph);
 #pragma weak MPI_Graph_create=PMPI_Graph_create
@@ -7989,18 +6966,15 @@ extern int INTERF_2_INTEL_CCMPI_Graph_create(MPI_Comm,int,int *,int *,int,MPI_Co
 
 int PMPI_Graph_create(MPI_Comm comm_old,int nnodes,int indx[],int edges[],int reorder,MPI_Comm * comm_graph)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Graph_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_create( comm_old, nnodes, indx, edges, reorder, comm_graph);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Graph_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Graph_get(MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[]);
 #pragma weak MPI_Graph_get=PMPI_Graph_get
@@ -8012,18 +6986,15 @@ extern int INTERF_2_INTEL_CCMPI_Graph_get(MPI_Comm,int,int,int *,int *);
 
 int PMPI_Graph_get(MPI_Comm comm,int maxindex,int maxedges,int indx[],int edges[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Graph_get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_get( comm, maxindex, maxedges, indx, edges);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Graph_get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cart_get(MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[]);
 #pragma weak MPI_Cart_get=PMPI_Cart_get
@@ -8035,18 +7006,15 @@ extern int INTERF_2_INTEL_CCMPI_Cart_get(MPI_Comm,int,int *,int *,int *);
 
 int PMPI_Cart_get(MPI_Comm comm,int maxdims,int dims[],int periods[],int coords[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cart_get (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_get( comm, maxdims, dims, periods, coords);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cart_get (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cart_rank(MPI_Comm comm,int coords[],int * rank);
 #pragma weak MPI_Cart_rank=PMPI_Cart_rank
@@ -8058,18 +7026,15 @@ extern int INTERF_2_INTEL_CCMPI_Cart_rank(MPI_Comm,int *,int *);
 
 int PMPI_Cart_rank(MPI_Comm comm,int coords[],int * rank)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cart_rank (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_rank( comm, coords, rank);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cart_rank (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cart_coords(MPI_Comm comm,int rank,int maxdims,int coords[]);
 #pragma weak MPI_Cart_coords=PMPI_Cart_coords
@@ -8081,18 +7046,15 @@ extern int INTERF_2_INTEL_CCMPI_Cart_coords(MPI_Comm,int,int,int *);
 
 int PMPI_Cart_coords(MPI_Comm comm,int rank,int maxdims,int coords[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cart_coords (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_coords( comm, rank, maxdims, coords);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cart_coords (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Graph_neighbors(MPI_Comm comm,int rank,int maxneighbors,int neighbors[]);
 #pragma weak MPI_Graph_neighbors=PMPI_Graph_neighbors
@@ -8104,18 +7066,15 @@ extern int INTERF_2_INTEL_CCMPI_Graph_neighbors(MPI_Comm,int,int,int *);
 
 int PMPI_Graph_neighbors(MPI_Comm comm,int rank,int maxneighbors,int neighbors[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Graph_neighbors (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_neighbors( comm, rank, maxneighbors, neighbors);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Graph_neighbors (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cart_sub(MPI_Comm comm,int remain_dims[],MPI_Comm * newcomm);
 #pragma weak MPI_Cart_sub=PMPI_Cart_sub
@@ -8127,18 +7086,15 @@ extern int INTERF_2_INTEL_CCMPI_Cart_sub(MPI_Comm,int *,MPI_Comm *);
 
 int PMPI_Cart_sub(MPI_Comm comm,int remain_dims[],MPI_Comm * newcomm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cart_sub (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_sub( comm, remain_dims, newcomm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cart_sub (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Cart_map(MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank);
 #pragma weak MPI_Cart_map=PMPI_Cart_map
@@ -8150,18 +7106,15 @@ extern int INTERF_2_INTEL_CCMPI_Cart_map(MPI_Comm,int,int *,int *,int *);
 
 int PMPI_Cart_map(MPI_Comm comm,int ndims,int dims[],int periods[],int * newrank)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Cart_map (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Cart_map( comm, ndims, dims, periods, newrank);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Cart_map (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Graph_map(MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank);
 #pragma weak MPI_Graph_map=PMPI_Graph_map
@@ -8173,18 +7126,15 @@ extern int INTERF_2_INTEL_CCMPI_Graph_map(MPI_Comm,int,int *,int *,int *);
 
 int PMPI_Graph_map(MPI_Comm comm,int nnodes,int indx[],int edges[],int * newrank)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Graph_map (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Graph_map( comm, nnodes, indx, edges, newrank);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Graph_map (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_spawn(char * command,char * argv[],int maxprocs,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[]);
 #pragma weak MPI_Comm_spawn=PMPI_Comm_spawn
@@ -8196,18 +7146,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_spawn(char *,char * *,int,MPI_Info,int,MPI_
 
 int PMPI_Comm_spawn(char * command,char * argv[],int maxprocs,MPI_Info info,int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_spawn (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_spawn( command, argv, maxprocs, info, root, comm, intercomm, array_of_errcodes);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_spawn (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_of_argv[],int array_of_maxprocs[],MPI_Info array_of_info[],int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[]);
 #pragma weak MPI_Comm_spawn_multiple=PMPI_Comm_spawn_multiple
@@ -8219,18 +7166,15 @@ extern int INTERF_2_INTEL_CCMPI_Comm_spawn_multiple(int,char * *,char ** *,int *
 
 int PMPI_Comm_spawn_multiple(int count,char * array_of_commands[],char ** array_of_argv[],int array_of_maxprocs[],MPI_Info array_of_info[],int root,MPI_Comm comm,MPI_Comm * intercomm,int array_of_errcodes[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_spawn_multiple (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Comm_spawn_multiple( count, array_of_commands, array_of_argv, array_of_maxprocs, array_of_info, root, comm, intercomm, array_of_errcodes);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_spawn_multiple (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_get_contents(MPI_Datatype datatype,int max_integers,int max_addresses,int max_datatypes,int array_of_integers[],MPI_Aint array_of_addresses[],MPI_Datatype array_of_datatypes[]);
 #pragma weak MPI_Type_get_contents=PMPI_Type_get_contents
@@ -8242,18 +7186,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_get_contents(MPI_Datatype,int,int,int,int *
 
 int PMPI_Type_get_contents(MPI_Datatype datatype,int max_integers,int max_addresses,int max_datatypes,int array_of_integers[],MPI_Aint array_of_addresses[],MPI_Datatype array_of_datatypes[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_get_contents (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_get_contents( datatype, max_integers, max_addresses, max_datatypes, array_of_integers, array_of_addresses, array_of_datatypes);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_get_contents (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Pack_external(char datarep[],void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,MPI_Aint outsize,MPI_Aint * position);
 #pragma weak MPI_Pack_external=PMPI_Pack_external
@@ -8265,18 +7206,15 @@ extern int INTERF_2_INTEL_CCMPI_Pack_external(char *,void *,int,MPI_Datatype,voi
 
 int PMPI_Pack_external(char datarep[],void * inbuf,int incount,MPI_Datatype datatype,void * outbuf,MPI_Aint outsize,MPI_Aint * position)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Pack_external (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack_external( datarep, inbuf, incount, datatype, outbuf, outsize, position);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Pack_external (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Pack_external_size(char datarep[],int incount,MPI_Datatype datatype,MPI_Aint * size);
 #pragma weak MPI_Pack_external_size=PMPI_Pack_external_size
@@ -8288,18 +7226,15 @@ extern int INTERF_2_INTEL_CCMPI_Pack_external_size(char *,int,MPI_Datatype,MPI_A
 
 int PMPI_Pack_external_size(char datarep[],int incount,MPI_Datatype datatype,MPI_Aint * size)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Pack_external_size (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Pack_external_size( datarep, incount, datatype, size);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Pack_external_size (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],int array_of_distribs[],int array_of_dargs[],int array_of_psizes[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_darray=PMPI_Type_create_darray
@@ -8311,18 +7246,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_darray(int,int,int,int *,int *,int *
 
 int PMPI_Type_create_darray(int size,int rank,int ndims,int array_of_gsizes[],int array_of_distribs[],int array_of_dargs[],int array_of_psizes[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_darray (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_darray( size, rank, ndims, array_of_gsizes, array_of_distribs, array_of_dargs, array_of_psizes, order, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_darray (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_hindexed(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_hindexed=PMPI_Type_create_hindexed
@@ -8334,18 +7266,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_hindexed(int,int *,MPI_Aint *,MPI_Da
 
 int PMPI_Type_create_hindexed(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_hindexed (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_hindexed( count, array_of_blocklengths, array_of_displacements, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_hindexed (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_indexed_block(int count,int blocklength,int array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_indexed_block=PMPI_Type_create_indexed_block
@@ -8357,18 +7286,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_indexed_block(int,int,int *,MPI_Data
 
 int PMPI_Type_create_indexed_block(int count,int blocklength,int array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_indexed_block (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_indexed_block( count, blocklength, array_of_displacements, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_indexed_block (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_hindexed_block(int count,int blocklength,MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_hindexed_block=PMPI_Type_create_hindexed_block
@@ -8380,18 +7306,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_hindexed_block(int,int,MPI_Aint *,MP
 
 int PMPI_Type_create_hindexed_block(int count,int blocklength,MPI_Aint array_of_displacements[],MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_hindexed_block (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_hindexed_block( count, blocklength, array_of_displacements, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_hindexed_block (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_struct(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype array_of_types[],MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_struct=PMPI_Type_create_struct
@@ -8403,18 +7326,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_struct(int,int *,MPI_Aint *,MPI_Data
 
 int PMPI_Type_create_struct(int count,int array_of_blocklengths[],MPI_Aint array_of_displacements[],MPI_Datatype array_of_types[],MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_struct (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_struct( count, array_of_blocklengths, array_of_displacements, array_of_types, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_struct (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsizes[],int array_of_starts[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype);
 #pragma weak MPI_Type_create_subarray=PMPI_Type_create_subarray
@@ -8426,18 +7346,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_create_subarray(int,int *,int *,int *,int,M
 
 int PMPI_Type_create_subarray(int ndims,int array_of_sizes[],int array_of_subsizes[],int array_of_starts[],int order,MPI_Datatype oldtype,MPI_Datatype * newtype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_create_subarray (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_create_subarray( ndims, array_of_sizes, array_of_subsizes, array_of_starts, order, oldtype, newtype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_create_subarray (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Unpack_external(char datarep[],void * inbuf,MPI_Aint insize,MPI_Aint * position,void * outbuf,int outcount,MPI_Datatype datatype);
 #pragma weak MPI_Unpack_external=PMPI_Unpack_external
@@ -8449,18 +7366,15 @@ extern int INTERF_2_INTEL_CCMPI_Unpack_external(char *,void *,MPI_Aint,MPI_Aint 
 
 int PMPI_Unpack_external(char datarep[],void * inbuf,MPI_Aint insize,MPI_Aint * position,void * outbuf,int outcount,MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Unpack_external (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Unpack_external( datarep, inbuf, insize, position, outbuf, outcount, datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Unpack_external (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Dist_graph_create_adjacent(MPI_Comm comm_old,int indegree,int sources[],int * sourceweights,int outdegree,int destinations[],int * destweights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph);
 #pragma weak MPI_Dist_graph_create_adjacent=PMPI_Dist_graph_create_adjacent
@@ -8472,18 +7386,15 @@ extern int INTERF_2_INTEL_CCMPI_Dist_graph_create_adjacent(MPI_Comm,int,int *,in
 
 int PMPI_Dist_graph_create_adjacent(MPI_Comm comm_old,int indegree,int sources[],int * sourceweights,int outdegree,int destinations[],int * destweights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Dist_graph_create_adjacent (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_create_adjacent( comm_old, indegree, sources, sourceweights, outdegree, destinations, destweights, info, reorder, comm_dist_graph);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Dist_graph_create_adjacent (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Dist_graph_create(MPI_Comm comm_old,int n,int sources[],int degrees[],int destinations[],int * weights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph);
 #pragma weak MPI_Dist_graph_create=PMPI_Dist_graph_create
@@ -8495,18 +7406,15 @@ extern int INTERF_2_INTEL_CCMPI_Dist_graph_create(MPI_Comm,int,int *,int *,int *
 
 int PMPI_Dist_graph_create(MPI_Comm comm_old,int n,int sources[],int degrees[],int destinations[],int * weights,MPI_Info info,int reorder,MPI_Comm * comm_dist_graph)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Dist_graph_create (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_create( comm_old, n, sources, degrees, destinations, weights, info, reorder, comm_dist_graph);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Dist_graph_create (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Dist_graph_neighbors(MPI_Comm comm,int maxindegree,int sources[],int * sourceweights,int maxoutdegree,int destinations[],int * destweights);
 #pragma weak MPI_Dist_graph_neighbors=PMPI_Dist_graph_neighbors
@@ -8518,18 +7426,15 @@ extern int INTERF_2_INTEL_CCMPI_Dist_graph_neighbors(MPI_Comm,int,int *,int *,in
 
 int PMPI_Dist_graph_neighbors(MPI_Comm comm,int maxindegree,int sources[],int * sourceweights,int maxoutdegree,int destinations[],int * destweights)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Dist_graph_neighbors (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Dist_graph_neighbors( comm, maxindegree, sources, sourceweights, maxoutdegree, destinations, destweights);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Dist_graph_neighbors (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Igatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Igatherv=PMPI_Igatherv
@@ -8541,18 +7446,15 @@ extern int INTERF_2_INTEL_CCMPI_Igatherv(void *,int,MPI_Datatype,void *,int *,in
 
 int PMPI_Igatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Igatherv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Igatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, root, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Igatherv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Iscatterv=PMPI_Iscatterv
@@ -8564,18 +7466,15 @@ extern int INTERF_2_INTEL_CCMPI_Iscatterv(void *,int *,int *,MPI_Datatype,void *
 
 int PMPI_Iscatterv(void * sendbuf,int sendcounts[],int * displs,MPI_Datatype sendtype,void * recvbuf,int recvcount,MPI_Datatype recvtype,int root,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iscatterv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iscatterv( sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount, recvtype, root, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iscatterv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Iallgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Iallgatherv=PMPI_Iallgatherv
@@ -8587,18 +7486,15 @@ extern int INTERF_2_INTEL_CCMPI_Iallgatherv(void *,int,MPI_Datatype,void *,int *
 
 int PMPI_Iallgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Iallgatherv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Iallgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Iallgatherv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ialltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ialltoallv=PMPI_Ialltoallv
@@ -8610,18 +7506,15 @@ extern int INTERF_2_INTEL_CCMPI_Ialltoallv(void *,int *,int *,MPI_Datatype,void 
 
 int PMPI_Ialltoallv(void * sendbuf,int * sendcounts,int * sdispls,MPI_Datatype sendtype,void * recvbuf,int * recvcounts,int * rdispls,MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ialltoallv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ialltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ialltoallv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ialltoallw=PMPI_Ialltoallw
@@ -8633,18 +7526,15 @@ extern int INTERF_2_INTEL_CCMPI_Ialltoallw(void *,int *,int *,MPI_Datatype *,voi
 
 int PMPI_Ialltoallw(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ialltoallw (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ialltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ialltoallw (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ireduce_scatter=PMPI_Ireduce_scatter
@@ -8656,18 +7546,15 @@ extern int INTERF_2_INTEL_CCMPI_Ireduce_scatter(void *,void *,int *,MPI_Datatype
 
 int PMPI_Ireduce_scatter(void * sendbuf,void * recvbuf,int recvcounts[],MPI_Datatype datatype,MPI_Op op,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ireduce_scatter (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ireduce_scatter( sendbuf, recvbuf, recvcounts, datatype, op, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ireduce_scatter (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ineighbor_allgatherv=PMPI_Ineighbor_allgatherv
@@ -8679,18 +7566,15 @@ extern int INTERF_2_INTEL_CCMPI_Ineighbor_allgatherv(void *,int,MPI_Datatype,voi
 
 int PMPI_Ineighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ineighbor_allgatherv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_allgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ineighbor_allgatherv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ineighbor_alltoallv=PMPI_Ineighbor_alltoallv
@@ -8702,18 +7586,15 @@ extern int INTERF_2_INTEL_CCMPI_Ineighbor_alltoallv(void *,int *,int *,MPI_Datat
 
 int PMPI_Ineighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ineighbor_alltoallv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_alltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ineighbor_alltoallv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request);
 #pragma weak MPI_Ineighbor_alltoallw=PMPI_Ineighbor_alltoallw
@@ -8725,18 +7606,15 @@ extern int INTERF_2_INTEL_CCMPI_Ineighbor_alltoallw(void *,int *,MPI_Aint *,MPI_
 
 int PMPI_Ineighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Ineighbor_alltoallw (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Ineighbor_alltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Ineighbor_alltoallw (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Neighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Neighbor_allgatherv=PMPI_Neighbor_allgatherv
@@ -8748,18 +7626,15 @@ extern int INTERF_2_INTEL_CCMPI_Neighbor_allgatherv(void *,int,MPI_Datatype,void
 
 int PMPI_Neighbor_allgatherv(void * sendbuf,int sendcount,MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int displs[],MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Neighbor_allgatherv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_allgatherv( sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Neighbor_allgatherv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm);
 #pragma weak MPI_Neighbor_alltoallv=PMPI_Neighbor_alltoallv
@@ -8771,18 +7646,15 @@ extern int INTERF_2_INTEL_CCMPI_Neighbor_alltoallv(void *,int *,int *,MPI_Dataty
 
 int PMPI_Neighbor_alltoallv(void * sendbuf,int sendcounts[],int sdispls[],MPI_Datatype sendtype,void * recvbuf,int recvcounts[],int rdispls[],MPI_Datatype recvtype,MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Neighbor_alltoallv (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_alltoallv( sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Neighbor_alltoallv (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm);
 #pragma weak MPI_Neighbor_alltoallw=PMPI_Neighbor_alltoallw
@@ -8794,18 +7666,15 @@ extern int INTERF_2_INTEL_CCMPI_Neighbor_alltoallw(void *,int *,MPI_Aint *,MPI_D
 
 int PMPI_Neighbor_alltoallw(void * sendbuf,int sendcounts[],MPI_Aint sdispls[],MPI_Datatype sendtypes[],void * recvbuf,int recvcounts[],MPI_Aint rdispls[],MPI_Datatype recvtypes[],MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Neighbor_alltoallw (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Neighbor_alltoallw( sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls, recvtypes, comm);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Neighbor_alltoallw (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_category_get_cvars(int cat_index,int len,int indices[]);
 #pragma weak MPI_T_category_get_cvars=PMPI_T_category_get_cvars
@@ -8817,18 +7686,15 @@ extern int INTERF_2_INTEL_CCMPI_T_category_get_cvars(int,int,int *);
 
 int PMPI_T_category_get_cvars(int cat_index,int len,int indices[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_category_get_cvars (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_cvars( cat_index, len, indices);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_category_get_cvars (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_category_get_pvars(int cat_index,int len,int indices[]);
 #pragma weak MPI_T_category_get_pvars=PMPI_T_category_get_pvars
@@ -8840,18 +7706,15 @@ extern int INTERF_2_INTEL_CCMPI_T_category_get_pvars(int,int,int *);
 
 int PMPI_T_category_get_pvars(int cat_index,int len,int indices[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_category_get_pvars (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_pvars( cat_index, len, indices);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_category_get_pvars (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_category_get_categories(int cat_index,int len,int indices[]);
 #pragma weak MPI_T_category_get_categories=PMPI_T_category_get_categories
@@ -8863,18 +7726,15 @@ extern int INTERF_2_INTEL_CCMPI_T_category_get_categories(int,int,int *);
 
 int PMPI_T_category_get_categories(int cat_index,int len,int indices[])
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_category_get_categories (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_categories( cat_index, len, indices);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_category_get_categories (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iwrite_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iwrite_all=PMPI_File_iwrite_all
@@ -8886,18 +7746,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iwrite_all(MPI_File,void *,int,MPI_Datatype
 
 int PMPI_File_iwrite_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iwrite_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_all( fh, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iwrite_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iwrite_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iwrite_at_all=PMPI_File_iwrite_at_all
@@ -8909,18 +7766,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iwrite_at_all(MPI_File,MPI_Offset,void *,in
 
 int PMPI_File_iwrite_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iwrite_at_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iwrite_at_all( fh, offset, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iwrite_at_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_Group_c2f(MPI_Group group);
 #pragma weak MPI_Group_c2f=PMPI_Group_c2f
@@ -8932,18 +7786,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_Group_c2f(MPI_Group);
 
 MPI_Fint PMPI_Group_c2f(MPI_Group group)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Group_c2f( group);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Group MPI_Group_f2c(MPI_Fint group);
 #pragma weak MPI_Group_f2c=PMPI_Group_f2c
@@ -8955,18 +7806,15 @@ extern MPI_Group INTERF_2_INTEL_CCMPI_Group_f2c(MPI_Fint);
 
 MPI_Group PMPI_Group_f2c(MPI_Fint group)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Group_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Group ret_tmp= INTERFACE_LOCAL_MPI_Group_f2c( group);
+
+MPI_Group ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Group_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_Info_c2f(MPI_Info info);
 #pragma weak MPI_Info_c2f=PMPI_Info_c2f
@@ -8978,18 +7826,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_Info_c2f(MPI_Info);
 
 MPI_Fint PMPI_Info_c2f(MPI_Info info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Info_c2f( info);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Info MPI_Info_f2c(MPI_Fint info);
 #pragma weak MPI_Info_f2c=PMPI_Info_f2c
@@ -9001,18 +7846,15 @@ extern MPI_Info INTERF_2_INTEL_CCMPI_Info_f2c(MPI_Fint);
 
 MPI_Info PMPI_Info_f2c(MPI_Fint info)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Info_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Info ret_tmp= INTERFACE_LOCAL_MPI_Info_f2c( info);
+
+MPI_Info ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Info_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_Errhandler_c2f(MPI_Errhandler errhandler);
 #pragma weak MPI_Errhandler_c2f=PMPI_Errhandler_c2f
@@ -9024,18 +7866,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_Errhandler_c2f(MPI_Errhandler);
 
 MPI_Fint PMPI_Errhandler_c2f(MPI_Errhandler errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Errhandler_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_c2f( errhandler);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Errhandler_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Errhandler MPI_Errhandler_f2c(MPI_Fint errhandler);
 #pragma weak MPI_Errhandler_f2c=PMPI_Errhandler_f2c
@@ -9047,18 +7886,15 @@ extern MPI_Errhandler INTERF_2_INTEL_CCMPI_Errhandler_f2c(MPI_Fint);
 
 MPI_Errhandler PMPI_Errhandler_f2c(MPI_Fint errhandler)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Errhandler_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Errhandler ret_tmp= INTERFACE_LOCAL_MPI_Errhandler_f2c( errhandler);
+
+MPI_Errhandler ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Errhandler_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_Message_c2f(MPI_Message message);
 #pragma weak MPI_Message_c2f=PMPI_Message_c2f
@@ -9070,18 +7906,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_Message_c2f(MPI_Message);
 
 MPI_Fint PMPI_Message_c2f(MPI_Message message)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Message_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Message_c2f( message);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Message_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Message MPI_Message_f2c(MPI_Fint message);
 #pragma weak MPI_Message_f2c=PMPI_Message_f2c
@@ -9093,18 +7926,15 @@ extern MPI_Message INTERF_2_INTEL_CCMPI_Message_f2c(MPI_Fint);
 
 MPI_Message PMPI_Message_f2c(MPI_Fint message)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Message_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Message ret_tmp= INTERFACE_LOCAL_MPI_Message_f2c( message);
+
+MPI_Message ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Message_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_Op_c2f(MPI_Op op);
 #pragma weak MPI_Op_c2f=PMPI_Op_c2f
@@ -9116,18 +7946,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_Op_c2f(MPI_Op);
 
 MPI_Fint PMPI_Op_c2f(MPI_Op op)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Op_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Op_c2f( op);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Op_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Op MPI_Op_f2c(MPI_Fint op);
 #pragma weak MPI_Op_f2c=PMPI_Op_f2c
@@ -9139,18 +7966,15 @@ extern MPI_Op INTERF_2_INTEL_CCMPI_Op_f2c(MPI_Fint);
 
 MPI_Op PMPI_Op_f2c(MPI_Fint op)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Op_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Op ret_tmp= INTERFACE_LOCAL_MPI_Op_f2c( op);
+
+MPI_Op ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Op_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_Request_c2f(MPI_Request request);
 #pragma weak MPI_Request_c2f=PMPI_Request_c2f
@@ -9162,18 +7986,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_Request_c2f(MPI_Request);
 
 MPI_Fint PMPI_Request_c2f(MPI_Request request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Request_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Request_c2f( request);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Request_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Request MPI_Request_f2c(MPI_Fint request);
 #pragma weak MPI_Request_f2c=PMPI_Request_f2c
@@ -9185,18 +8006,15 @@ extern MPI_Request INTERF_2_INTEL_CCMPI_Request_f2c(MPI_Fint);
 
 MPI_Request PMPI_Request_f2c(MPI_Fint request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Request_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Request ret_tmp= INTERFACE_LOCAL_MPI_Request_f2c( request);
+
+MPI_Request ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Request_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_category_get_index(char * name,int * cat_index);
 #pragma weak MPI_T_category_get_index=PMPI_T_category_get_index
@@ -9208,18 +8026,15 @@ extern int INTERF_2_INTEL_CCMPI_T_category_get_index(char *,int *);
 
 int PMPI_T_category_get_index(char * name,int * cat_index)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_category_get_index (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_get_index( name, cat_index);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_category_get_index (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_cvar_get_index(char * name,int * cvar_index);
 #pragma weak MPI_T_cvar_get_index=PMPI_T_cvar_get_index
@@ -9231,18 +8046,15 @@ extern int INTERF_2_INTEL_CCMPI_T_cvar_get_index(char *,int *);
 
 int PMPI_T_cvar_get_index(char * name,int * cvar_index)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_cvar_get_index (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_cvar_get_index( name, cvar_index);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_cvar_get_index (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_pvar_get_index(char * name,int var_class,int * pvar_index);
 #pragma weak MPI_T_pvar_get_index=PMPI_T_pvar_get_index
@@ -9254,18 +8066,15 @@ extern int INTERF_2_INTEL_CCMPI_T_pvar_get_index(char *,int,int *);
 
 int PMPI_T_pvar_get_index(char * name,int var_class,int * pvar_index)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_pvar_get_index (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_pvar_get_index( name, var_class, pvar_index);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_pvar_get_index (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Type_c2f(MPI_Datatype datatype);
 #pragma weak MPI_Type_c2f=PMPI_Type_c2f
@@ -9277,18 +8086,15 @@ extern int INTERF_2_INTEL_CCMPI_Type_c2f(MPI_Datatype);
 
 int PMPI_Type_c2f(MPI_Datatype datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Type_c2f( datatype);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Datatype MPI_Type_f2c(MPI_Fint datatype);
 #pragma weak MPI_Type_f2c=PMPI_Type_f2c
@@ -9300,18 +8106,15 @@ extern MPI_Datatype INTERF_2_INTEL_CCMPI_Type_f2c(MPI_Fint);
 
 MPI_Datatype PMPI_Type_f2c(MPI_Fint datatype)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Type_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Datatype ret_tmp= INTERFACE_LOCAL_MPI_Type_f2c( datatype);
+
+MPI_Datatype ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Type_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_Win_c2f(MPI_Win win);
 #pragma weak MPI_Win_c2f=PMPI_Win_c2f
@@ -9323,18 +8126,15 @@ extern int INTERF_2_INTEL_CCMPI_Win_c2f(MPI_Win);
 
 int PMPI_Win_c2f(MPI_Win win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Win_c2f( win);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Win MPI_Win_f2c(MPI_Fint win);
 #pragma weak MPI_Win_f2c=PMPI_Win_f2c
@@ -9346,18 +8146,15 @@ extern MPI_Win INTERF_2_INTEL_CCMPI_Win_f2c(MPI_Fint);
 
 MPI_Win PMPI_Win_f2c(MPI_Fint win)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Win_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Win ret_tmp= INTERFACE_LOCAL_MPI_Win_f2c( win);
+
+MPI_Win ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Win_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Aint MPI_Aint_add(MPI_Aint base,MPI_Aint disp);
 #pragma weak MPI_Aint_add=PMPI_Aint_add
@@ -9369,18 +8166,15 @@ extern MPI_Aint INTERF_2_INTEL_CCMPI_Aint_add(MPI_Aint,MPI_Aint);
 
 MPI_Aint PMPI_Aint_add(MPI_Aint base,MPI_Aint disp)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Aint_add (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Aint ret_tmp= INTERFACE_LOCAL_MPI_Aint_add( base, disp);
+
+MPI_Aint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Aint_add (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Aint MPI_Aint_diff(MPI_Aint addr1,MPI_Aint addr2);
 #pragma weak MPI_Aint_diff=PMPI_Aint_diff
@@ -9392,18 +8186,15 @@ extern MPI_Aint INTERF_2_INTEL_CCMPI_Aint_diff(MPI_Aint,MPI_Aint);
 
 MPI_Aint PMPI_Aint_diff(MPI_Aint addr1,MPI_Aint addr2)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Aint_diff (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Aint ret_tmp= INTERFACE_LOCAL_MPI_Aint_diff( addr1, addr2);
+
+MPI_Aint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Aint_diff (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_Comm_c2f(MPI_Comm comm);
 #pragma weak MPI_Comm_c2f=PMPI_Comm_c2f
@@ -9415,18 +8206,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_Comm_c2f(MPI_Comm);
 
 MPI_Fint PMPI_Comm_c2f(MPI_Comm comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_Comm_c2f( comm);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Comm MPI_Comm_f2c(MPI_Fint comm);
 #pragma weak MPI_Comm_f2c=PMPI_Comm_f2c
@@ -9438,18 +8226,15 @@ extern MPI_Comm INTERF_2_INTEL_CCMPI_Comm_f2c(MPI_Fint);
 
 MPI_Comm PMPI_Comm_f2c(MPI_Fint comm)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Comm_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Comm ret_tmp= INTERFACE_LOCAL_MPI_Comm_f2c( comm);
+
+MPI_Comm ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_Comm_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_Fint MPI_File_c2f(MPI_File file);
 #pragma weak MPI_File_c2f=PMPI_File_c2f
@@ -9461,18 +8246,15 @@ extern MPI_Fint INTERF_2_INTEL_CCMPI_File_c2f(MPI_File);
 
 MPI_Fint PMPI_File_c2f(MPI_File file)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_c2f (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_Fint ret_tmp= INTERFACE_LOCAL_MPI_File_c2f( file);
+
+MPI_Fint ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_c2f (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 MPI_File MPI_File_f2c(MPI_Fint file);
 #pragma weak MPI_File_f2c=PMPI_File_f2c
@@ -9484,18 +8266,15 @@ extern MPI_File INTERF_2_INTEL_CCMPI_File_f2c(MPI_Fint);
 
 MPI_File PMPI_File_f2c(MPI_Fint file)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_f2c (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 MPI_File ret_tmp= INTERFACE_LOCAL_MPI_File_f2c( file);
+
+MPI_File ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_f2c (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iread_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iread_all=PMPI_File_iread_all
@@ -9507,18 +8286,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iread_all(MPI_File,void *,int,MPI_Datatype,
 
 int PMPI_File_iread_all(MPI_File fh,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iread_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_all( fh, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iread_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_File_iread_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request);
 #pragma weak MPI_File_iread_at_all=PMPI_File_iread_at_all
@@ -9530,18 +8306,15 @@ extern int INTERF_2_INTEL_CCMPI_File_iread_at_all(MPI_File,MPI_Offset,void *,int
 
 int PMPI_File_iread_at_all(MPI_File fh,MPI_Offset offset,void * buf,int count,MPI_Datatype datatype,MPI_Request * request)
 {
-#ifdef DEBUG
-printf("entre : PMPI_File_iread_at_all (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_File_iread_at_all( fh, offset, buf, count, datatype, request);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_File_iread_at_all (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 int MPI_T_category_changed(int * stamp);
 #pragma weak MPI_T_category_changed=PMPI_T_category_changed
@@ -9553,18 +8326,15 @@ extern int INTERF_2_INTEL_CCMPI_T_category_changed(int *);
 
 int PMPI_T_category_changed(int * stamp)
 {
-#ifdef DEBUG
-printf("entre : PMPI_T_category_changed (interface) \n");
-#endif
 #ifdef TIMEOUT_SUPPORT
 #endif
 int ret_tmp= INTERFACE_LOCAL_MPI_T_category_changed( stamp);
+
+int ret=ret_tmp;
 #ifdef DEBUG
-printf("sort : PMPI_T_category_changed (interface)\n");
 #endif
 #ifdef TIMEOUT_SUPPORT
 #endif
-return ret_tmp;
 }
 #ifdef WI4MPI_STATIC
 extern int INTERF_2_OMPI_CCMPI_Keyval_create(MPI_Copy_function *copy_fn,MPI_Delete_function *delete_fn,int *keyval, void *extra_state);
