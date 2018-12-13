@@ -129,6 +129,8 @@ case ${WI4MPI_FROM,,} in
         wi4mpi_opts="-f openmpi" ;;
     *intelmpi*)
         wi4mpi_opts="-f intelmpi" ;;
+    *mpich*)
+        wi4mpi_opts="-f mpich" ;;
 esac
 
 WI4MPI_PM=${WI4MPI_PM:-"mpirun"}
