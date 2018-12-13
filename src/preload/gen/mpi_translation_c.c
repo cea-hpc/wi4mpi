@@ -355,6 +355,16 @@ __asm__(
 ".type PMPI_Comm_create_keyval,@function\n"
 ".text\n"
 "PMPI_Comm_create_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_create_keyval\n"
+"b A_MPI_Comm_create_keyval\n"
+"inwrap_MPI_Comm_create_keyval:\n"
+"b R_MPI_Comm_create_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -377,6 +387,7 @@ __asm__(
 "jmp *A_MPI_Comm_create_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_create_keyval:\n"
 "jmp *R_MPI_Comm_create_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_create_keyval,.-PMPI_Comm_create_keyval\n"
 );
 
@@ -448,6 +459,16 @@ __asm__(
 ".type PMPI_Keyval_create,@function\n"
 ".text\n"
 "PMPI_Keyval_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Keyval_create\n"
+"b A_MPI_Keyval_create\n"
+"inwrap_MPI_Keyval_create:\n"
+"b R_MPI_Keyval_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -470,6 +491,7 @@ __asm__(
 "jmp *A_MPI_Keyval_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Keyval_create:\n"
 "jmp *R_MPI_Keyval_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Keyval_create,.-PMPI_Keyval_create\n"
 );
 
@@ -541,6 +563,16 @@ __asm__(
 ".type PMPI_Comm_free_keyval,@function\n"
 ".text\n"
 "PMPI_Comm_free_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_free_keyval\n"
+"b A_MPI_Comm_free_keyval\n"
+"inwrap_MPI_Comm_free_keyval:\n"
+"b R_MPI_Comm_free_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x08, %rsp\n"
@@ -557,6 +589,7 @@ __asm__(
 "jmp *A_MPI_Comm_free_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_free_keyval:\n"
 "jmp *R_MPI_Comm_free_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_free_keyval,.-PMPI_Comm_free_keyval\n"
 );
 
@@ -602,6 +635,16 @@ __asm__(
 ".type PMPI_Keyval_free,@function\n"
 ".text\n"
 "PMPI_Keyval_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Keyval_free\n"
+"b A_MPI_Keyval_free\n"
+"inwrap_MPI_Keyval_free:\n"
+"b R_MPI_Keyval_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x08, %rsp\n"
@@ -618,6 +661,7 @@ __asm__(
 "jmp *A_MPI_Keyval_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Keyval_free:\n"
 "jmp *R_MPI_Keyval_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Keyval_free,.-PMPI_Keyval_free\n"
 );
 
@@ -691,6 +735,16 @@ __asm__(
 ".type PMPI_Win_get_attr,@function\n"
 ".text\n"
 "PMPI_Win_get_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_get_attr\n"
+"b A_MPI_Win_get_attr\n"
+"inwrap_MPI_Win_get_attr:\n"
+"b R_MPI_Win_get_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -713,6 +767,7 @@ __asm__(
 "jmp *A_MPI_Win_get_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_get_attr:\n"
 "jmp *R_MPI_Win_get_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_get_attr,.-PMPI_Win_get_attr\n"
 );
 
@@ -772,6 +827,16 @@ __asm__(
 ".type PMPI_Win_set_attr,@function\n"
 ".text\n"
 "PMPI_Win_set_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_set_attr\n"
+"b A_MPI_Win_set_attr\n"
+"inwrap_MPI_Win_set_attr:\n"
+"b R_MPI_Win_set_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -792,6 +857,7 @@ __asm__(
 "jmp *A_MPI_Win_set_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_set_attr:\n"
 "jmp *R_MPI_Win_set_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_set_attr,.-PMPI_Win_set_attr\n"
 
 );
@@ -852,6 +918,16 @@ __asm__(
 ".type PMPI_Send,@function\n"
 ".text\n"
 "PMPI_Send:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Send\n"
+"b A_MPI_Send\n"
+"inwrap_MPI_Send:\n"
+"b R_MPI_Send\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -878,6 +954,7 @@ __asm__(
 "jmp *A_MPI_Send@GOTPCREL(%rip)\n"
 "inwrap_MPI_Send:\n"
 "jmp *R_MPI_Send@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Send,.-PMPI_Send\n"
 
 );
@@ -935,6 +1012,16 @@ __asm__(
 ".type PMPI_Recv,@function\n"
 ".text\n"
 "PMPI_Recv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Recv\n"
+"b A_MPI_Recv\n"
+"inwrap_MPI_Recv:\n"
+"b R_MPI_Recv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -961,6 +1048,7 @@ __asm__(
 "jmp *A_MPI_Recv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Recv:\n"
 "jmp *R_MPI_Recv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Recv,.-PMPI_Recv\n"
 
 );
@@ -1022,6 +1110,16 @@ __asm__(
 ".type PMPI_Get_count,@function\n"
 ".text\n"
 "PMPI_Get_count:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_count\n"
+"b A_MPI_Get_count\n"
+"inwrap_MPI_Get_count:\n"
+"b R_MPI_Get_count\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -1042,6 +1140,7 @@ __asm__(
 "jmp *A_MPI_Get_count@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_count:\n"
 "jmp *R_MPI_Get_count@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_count,.-PMPI_Get_count\n"
 
 );
@@ -1094,6 +1193,16 @@ __asm__(
 ".type PMPI_Bsend,@function\n"
 ".text\n"
 "PMPI_Bsend:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Bsend\n"
+"b A_MPI_Bsend\n"
+"inwrap_MPI_Bsend:\n"
+"b R_MPI_Bsend\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1120,6 +1229,7 @@ __asm__(
 "jmp *A_MPI_Bsend@GOTPCREL(%rip)\n"
 "inwrap_MPI_Bsend:\n"
 "jmp *R_MPI_Bsend@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Bsend,.-PMPI_Bsend\n"
 
 );
@@ -1177,6 +1287,16 @@ __asm__(
 ".type PMPI_Ssend,@function\n"
 ".text\n"
 "PMPI_Ssend:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ssend\n"
+"b A_MPI_Ssend\n"
+"inwrap_MPI_Ssend:\n"
+"b R_MPI_Ssend\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1203,6 +1323,7 @@ __asm__(
 "jmp *A_MPI_Ssend@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ssend:\n"
 "jmp *R_MPI_Ssend@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ssend,.-PMPI_Ssend\n"
 
 );
@@ -1260,6 +1381,16 @@ __asm__(
 ".type PMPI_Rsend,@function\n"
 ".text\n"
 "PMPI_Rsend:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Rsend\n"
+"b A_MPI_Rsend\n"
+"inwrap_MPI_Rsend:\n"
+"b R_MPI_Rsend\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1286,6 +1417,7 @@ __asm__(
 "jmp *A_MPI_Rsend@GOTPCREL(%rip)\n"
 "inwrap_MPI_Rsend:\n"
 "jmp *R_MPI_Rsend@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Rsend,.-PMPI_Rsend\n"
 
 );
@@ -1343,6 +1475,16 @@ __asm__(
 ".type PMPI_Buffer_attach,@function\n"
 ".text\n"
 "PMPI_Buffer_attach:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Buffer_attach\n"
+"b A_MPI_Buffer_attach\n"
+"inwrap_MPI_Buffer_attach:\n"
+"b R_MPI_Buffer_attach\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1361,6 +1503,7 @@ __asm__(
 "jmp *A_MPI_Buffer_attach@GOTPCREL(%rip)\n"
 "inwrap_MPI_Buffer_attach:\n"
 "jmp *R_MPI_Buffer_attach@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Buffer_attach,.-PMPI_Buffer_attach\n"
 
 );
@@ -1410,6 +1553,16 @@ __asm__(
 ".type PMPI_Buffer_detach,@function\n"
 ".text\n"
 "PMPI_Buffer_detach:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Buffer_detach\n"
+"b A_MPI_Buffer_detach\n"
+"inwrap_MPI_Buffer_detach:\n"
+"b R_MPI_Buffer_detach\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1428,6 +1581,7 @@ __asm__(
 "jmp *A_MPI_Buffer_detach@GOTPCREL(%rip)\n"
 "inwrap_MPI_Buffer_detach:\n"
 "jmp *R_MPI_Buffer_detach@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Buffer_detach,.-PMPI_Buffer_detach\n"
 
 );
@@ -1478,6 +1632,16 @@ __asm__(
 ".type PMPI_Isend,@function\n"
 ".text\n"
 "PMPI_Isend:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Isend\n"
+"b A_MPI_Isend\n"
+"inwrap_MPI_Isend:\n"
+"b R_MPI_Isend\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1504,6 +1668,7 @@ __asm__(
 "jmp *A_MPI_Isend@GOTPCREL(%rip)\n"
 "inwrap_MPI_Isend:\n"
 "jmp *R_MPI_Isend@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Isend,.-PMPI_Isend\n"
 
 );
@@ -1566,6 +1731,16 @@ __asm__(
 ".type PMPI_Ibsend,@function\n"
 ".text\n"
 "PMPI_Ibsend:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ibsend\n"
+"b A_MPI_Ibsend\n"
+"inwrap_MPI_Ibsend:\n"
+"b R_MPI_Ibsend\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1592,6 +1767,7 @@ __asm__(
 "jmp *A_MPI_Ibsend@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ibsend:\n"
 "jmp *R_MPI_Ibsend@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ibsend,.-PMPI_Ibsend\n"
 
 );
@@ -1654,6 +1830,16 @@ __asm__(
 ".type PMPI_Issend,@function\n"
 ".text\n"
 "PMPI_Issend:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Issend\n"
+"b A_MPI_Issend\n"
+"inwrap_MPI_Issend:\n"
+"b R_MPI_Issend\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1680,6 +1866,7 @@ __asm__(
 "jmp *A_MPI_Issend@GOTPCREL(%rip)\n"
 "inwrap_MPI_Issend:\n"
 "jmp *R_MPI_Issend@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Issend,.-PMPI_Issend\n"
 
 );
@@ -1742,6 +1929,16 @@ __asm__(
 ".type PMPI_Irsend,@function\n"
 ".text\n"
 "PMPI_Irsend:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Irsend\n"
+"b A_MPI_Irsend\n"
+"inwrap_MPI_Irsend:\n"
+"b R_MPI_Irsend\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1768,6 +1965,7 @@ __asm__(
 "jmp *A_MPI_Irsend@GOTPCREL(%rip)\n"
 "inwrap_MPI_Irsend:\n"
 "jmp *R_MPI_Irsend@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Irsend,.-PMPI_Irsend\n"
 
 );
@@ -1830,6 +2028,16 @@ __asm__(
 ".type PMPI_Irecv,@function\n"
 ".text\n"
 "PMPI_Irecv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Irecv\n"
+"b A_MPI_Irecv\n"
+"inwrap_MPI_Irecv:\n"
+"b R_MPI_Irecv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -1856,6 +2064,7 @@ __asm__(
 "jmp *A_MPI_Irecv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Irecv:\n"
 "jmp *R_MPI_Irecv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Irecv,.-PMPI_Irecv\n"
 
 );
@@ -1919,6 +2128,16 @@ __asm__(
 ".type PMPI_Wait,@function\n"
 ".text\n"
 "PMPI_Wait:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Wait\n"
+"b A_MPI_Wait\n"
+"inwrap_MPI_Wait:\n"
+"b R_MPI_Wait\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1937,6 +2156,7 @@ __asm__(
 "jmp *A_MPI_Wait@GOTPCREL(%rip)\n"
 "inwrap_MPI_Wait:\n"
 "jmp *R_MPI_Wait@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Wait,.-PMPI_Wait\n"
 
 );
@@ -1993,6 +2213,16 @@ __asm__(
 ".type PMPI_Test,@function\n"
 ".text\n"
 "PMPI_Test:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Test\n"
+"b A_MPI_Test\n"
+"inwrap_MPI_Test:\n"
+"b R_MPI_Test\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -2013,6 +2243,7 @@ __asm__(
 "jmp *A_MPI_Test@GOTPCREL(%rip)\n"
 "inwrap_MPI_Test:\n"
 "jmp *R_MPI_Test@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Test,.-PMPI_Test\n"
 
 );
@@ -2072,6 +2303,16 @@ __asm__(
 ".type PMPI_Request_free,@function\n"
 ".text\n"
 "PMPI_Request_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Request_free\n"
+"b A_MPI_Request_free\n"
+"inwrap_MPI_Request_free:\n"
+"b R_MPI_Request_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -2088,6 +2329,7 @@ __asm__(
 "jmp *A_MPI_Request_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_free:\n"
 "jmp *R_MPI_Request_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Request_free,.-PMPI_Request_free\n"
 
 );
@@ -2139,6 +2381,16 @@ __asm__(
 ".type PMPI_Iprobe,@function\n"
 ".text\n"
 "PMPI_Iprobe:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iprobe\n"
+"b A_MPI_Iprobe\n"
+"inwrap_MPI_Iprobe:\n"
+"b R_MPI_Iprobe\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -2163,6 +2415,7 @@ __asm__(
 "jmp *A_MPI_Iprobe@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iprobe:\n"
 "jmp *R_MPI_Iprobe@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iprobe,.-PMPI_Iprobe\n"
 
 );
@@ -2219,6 +2472,16 @@ __asm__(
 ".type PMPI_Probe,@function\n"
 ".text\n"
 "PMPI_Probe:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Probe\n"
+"b A_MPI_Probe\n"
+"inwrap_MPI_Probe:\n"
+"b R_MPI_Probe\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -2241,6 +2504,7 @@ __asm__(
 "jmp *A_MPI_Probe@GOTPCREL(%rip)\n"
 "inwrap_MPI_Probe:\n"
 "jmp *R_MPI_Probe@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Probe,.-PMPI_Probe\n"
 
 );
@@ -2295,6 +2559,16 @@ __asm__(
 ".type PMPI_Cancel,@function\n"
 ".text\n"
 "PMPI_Cancel:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cancel\n"
+"b A_MPI_Cancel\n"
+"inwrap_MPI_Cancel:\n"
+"b R_MPI_Cancel\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -2311,6 +2585,7 @@ __asm__(
 "jmp *A_MPI_Cancel@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cancel:\n"
 "jmp *R_MPI_Cancel@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cancel,.-PMPI_Cancel\n"
 
 );
@@ -2362,6 +2637,16 @@ __asm__(
 ".type PMPI_Test_cancelled,@function\n"
 ".text\n"
 "PMPI_Test_cancelled:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Test_cancelled\n"
+"b A_MPI_Test_cancelled\n"
+"inwrap_MPI_Test_cancelled:\n"
+"b R_MPI_Test_cancelled\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -2380,6 +2665,7 @@ __asm__(
 "jmp *A_MPI_Test_cancelled@GOTPCREL(%rip)\n"
 "inwrap_MPI_Test_cancelled:\n"
 "jmp *R_MPI_Test_cancelled@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Test_cancelled,.-PMPI_Test_cancelled\n"
 
 );
@@ -2430,6 +2716,16 @@ __asm__(
 ".type PMPI_Send_init,@function\n"
 ".text\n"
 "PMPI_Send_init:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Send_init\n"
+"b A_MPI_Send_init\n"
+"inwrap_MPI_Send_init:\n"
+"b R_MPI_Send_init\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -2456,6 +2752,7 @@ __asm__(
 "jmp *A_MPI_Send_init@GOTPCREL(%rip)\n"
 "inwrap_MPI_Send_init:\n"
 "jmp *R_MPI_Send_init@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Send_init,.-PMPI_Send_init\n"
 
 );
@@ -2518,6 +2815,16 @@ __asm__(
 ".type PMPI_Bsend_init,@function\n"
 ".text\n"
 "PMPI_Bsend_init:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Bsend_init\n"
+"b A_MPI_Bsend_init\n"
+"inwrap_MPI_Bsend_init:\n"
+"b R_MPI_Bsend_init\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -2544,6 +2851,7 @@ __asm__(
 "jmp *A_MPI_Bsend_init@GOTPCREL(%rip)\n"
 "inwrap_MPI_Bsend_init:\n"
 "jmp *R_MPI_Bsend_init@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Bsend_init,.-PMPI_Bsend_init\n"
 
 );
@@ -2606,6 +2914,16 @@ __asm__(
 ".type PMPI_Ssend_init,@function\n"
 ".text\n"
 "PMPI_Ssend_init:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ssend_init\n"
+"b A_MPI_Ssend_init\n"
+"inwrap_MPI_Ssend_init:\n"
+"b R_MPI_Ssend_init\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -2632,6 +2950,7 @@ __asm__(
 "jmp *A_MPI_Ssend_init@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ssend_init:\n"
 "jmp *R_MPI_Ssend_init@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ssend_init,.-PMPI_Ssend_init\n"
 
 );
@@ -2694,6 +3013,16 @@ __asm__(
 ".type PMPI_Rsend_init,@function\n"
 ".text\n"
 "PMPI_Rsend_init:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Rsend_init\n"
+"b A_MPI_Rsend_init\n"
+"inwrap_MPI_Rsend_init:\n"
+"b R_MPI_Rsend_init\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -2720,6 +3049,7 @@ __asm__(
 "jmp *A_MPI_Rsend_init@GOTPCREL(%rip)\n"
 "inwrap_MPI_Rsend_init:\n"
 "jmp *R_MPI_Rsend_init@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Rsend_init,.-PMPI_Rsend_init\n"
 
 );
@@ -2782,6 +3112,16 @@ __asm__(
 ".type PMPI_Recv_init,@function\n"
 ".text\n"
 "PMPI_Recv_init:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Recv_init\n"
+"b A_MPI_Recv_init\n"
+"inwrap_MPI_Recv_init:\n"
+"b R_MPI_Recv_init\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -2808,6 +3148,7 @@ __asm__(
 "jmp *A_MPI_Recv_init@GOTPCREL(%rip)\n"
 "inwrap_MPI_Recv_init:\n"
 "jmp *R_MPI_Recv_init@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Recv_init,.-PMPI_Recv_init\n"
 
 );
@@ -2871,6 +3212,16 @@ __asm__(
 ".type PMPI_Start,@function\n"
 ".text\n"
 "PMPI_Start:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Start\n"
+"b A_MPI_Start\n"
+"inwrap_MPI_Start:\n"
+"b R_MPI_Start\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -2887,6 +3238,7 @@ __asm__(
 "jmp *A_MPI_Start@GOTPCREL(%rip)\n"
 "inwrap_MPI_Start:\n"
 "jmp *R_MPI_Start@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Start,.-PMPI_Start\n"
 
 );
@@ -2936,6 +3288,16 @@ __asm__(
 ".type PMPI_Sendrecv,@function\n"
 ".text\n"
 "PMPI_Sendrecv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Sendrecv\n"
+"b A_MPI_Sendrecv\n"
+"inwrap_MPI_Sendrecv:\n"
+"b R_MPI_Sendrecv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -2962,6 +3324,7 @@ __asm__(
 "jmp *A_MPI_Sendrecv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Sendrecv:\n"
 "jmp *R_MPI_Sendrecv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Sendrecv,.-PMPI_Sendrecv\n"
 
 );
@@ -3033,6 +3396,16 @@ __asm__(
 ".type PMPI_Sendrecv_replace,@function\n"
 ".text\n"
 "PMPI_Sendrecv_replace:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Sendrecv_replace\n"
+"b A_MPI_Sendrecv_replace\n"
+"inwrap_MPI_Sendrecv_replace:\n"
+"b R_MPI_Sendrecv_replace\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -3059,6 +3432,7 @@ __asm__(
 "jmp *A_MPI_Sendrecv_replace@GOTPCREL(%rip)\n"
 "inwrap_MPI_Sendrecv_replace:\n"
 "jmp *R_MPI_Sendrecv_replace@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Sendrecv_replace,.-PMPI_Sendrecv_replace\n"
 
 );
@@ -3124,6 +3498,16 @@ __asm__(
 ".type PMPI_Type_contiguous,@function\n"
 ".text\n"
 "PMPI_Type_contiguous:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_contiguous\n"
+"b A_MPI_Type_contiguous\n"
+"inwrap_MPI_Type_contiguous:\n"
+"b R_MPI_Type_contiguous\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -3144,6 +3528,7 @@ __asm__(
 "jmp *A_MPI_Type_contiguous@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_contiguous:\n"
 "jmp *R_MPI_Type_contiguous@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_contiguous,.-PMPI_Type_contiguous\n"
 
 );
@@ -3196,6 +3581,16 @@ __asm__(
 ".type PMPI_Type_vector,@function\n"
 ".text\n"
 "PMPI_Type_vector:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_vector\n"
+"b A_MPI_Type_vector\n"
+"inwrap_MPI_Type_vector:\n"
+"b R_MPI_Type_vector\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -3220,6 +3615,7 @@ __asm__(
 "jmp *A_MPI_Type_vector@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_vector:\n"
 "jmp *R_MPI_Type_vector@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_vector,.-PMPI_Type_vector\n"
 
 );
@@ -3276,6 +3672,16 @@ __asm__(
 ".type PMPI_Type_hvector,@function\n"
 ".text\n"
 "PMPI_Type_hvector:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_hvector\n"
+"b A_MPI_Type_hvector\n"
+"inwrap_MPI_Type_hvector:\n"
+"b R_MPI_Type_hvector\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -3300,6 +3706,7 @@ __asm__(
 "jmp *A_MPI_Type_hvector@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_hvector:\n"
 "jmp *R_MPI_Type_hvector@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_hvector,.-PMPI_Type_hvector\n"
 
 );
@@ -3356,6 +3763,16 @@ __asm__(
 ".type PMPI_Type_indexed,@function\n"
 ".text\n"
 "PMPI_Type_indexed:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_indexed\n"
+"b A_MPI_Type_indexed\n"
+"inwrap_MPI_Type_indexed:\n"
+"b R_MPI_Type_indexed\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -3380,6 +3797,7 @@ __asm__(
 "jmp *A_MPI_Type_indexed@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_indexed:\n"
 "jmp *R_MPI_Type_indexed@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_indexed,.-PMPI_Type_indexed\n"
 
 );
@@ -3436,6 +3854,16 @@ __asm__(
 ".type PMPI_Type_hindexed,@function\n"
 ".text\n"
 "PMPI_Type_hindexed:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_hindexed\n"
+"b A_MPI_Type_hindexed\n"
+"inwrap_MPI_Type_hindexed:\n"
+"b R_MPI_Type_hindexed\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -3460,6 +3888,7 @@ __asm__(
 "jmp *A_MPI_Type_hindexed@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_hindexed:\n"
 "jmp *R_MPI_Type_hindexed@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_hindexed,.-PMPI_Type_hindexed\n"
 
 );
@@ -3520,6 +3949,16 @@ __asm__(
 ".type PMPI_Type_struct,@function\n"
 ".text\n"
 "PMPI_Type_struct:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_struct\n"
+"b A_MPI_Type_struct\n"
+"inwrap_MPI_Type_struct:\n"
+"b R_MPI_Type_struct\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -3544,6 +3983,7 @@ __asm__(
 "jmp *A_MPI_Type_struct@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_struct:\n"
 "jmp *R_MPI_Type_struct@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_struct,.-PMPI_Type_struct\n"
 
 );
@@ -3608,6 +4048,16 @@ __asm__(
 ".type PMPI_Address,@function\n"
 ".text\n"
 "PMPI_Address:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Address\n"
+"b A_MPI_Address\n"
+"inwrap_MPI_Address:\n"
+"b R_MPI_Address\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -3626,6 +4076,7 @@ __asm__(
 "jmp *A_MPI_Address@GOTPCREL(%rip)\n"
 "inwrap_MPI_Address:\n"
 "jmp *R_MPI_Address@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Address,.-PMPI_Address\n"
 
 );
@@ -3676,6 +4127,16 @@ __asm__(
 ".type PMPI_Type_extent,@function\n"
 ".text\n"
 "PMPI_Type_extent:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_extent\n"
+"b A_MPI_Type_extent\n"
+"inwrap_MPI_Type_extent:\n"
+"b R_MPI_Type_extent\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -3694,6 +4155,7 @@ __asm__(
 "jmp *A_MPI_Type_extent@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_extent:\n"
 "jmp *R_MPI_Type_extent@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_extent,.-PMPI_Type_extent\n"
 
 );
@@ -3744,6 +4206,16 @@ __asm__(
 ".type PMPI_Type_size,@function\n"
 ".text\n"
 "PMPI_Type_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_size\n"
+"b A_MPI_Type_size\n"
+"inwrap_MPI_Type_size:\n"
+"b R_MPI_Type_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -3762,6 +4234,7 @@ __asm__(
 "jmp *A_MPI_Type_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_size:\n"
 "jmp *R_MPI_Type_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_size,.-PMPI_Type_size\n"
 
 );
@@ -3811,6 +4284,16 @@ __asm__(
 ".type PMPI_Type_lb,@function\n"
 ".text\n"
 "PMPI_Type_lb:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_lb\n"
+"b A_MPI_Type_lb\n"
+"inwrap_MPI_Type_lb:\n"
+"b R_MPI_Type_lb\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -3829,6 +4312,7 @@ __asm__(
 "jmp *A_MPI_Type_lb@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_lb:\n"
 "jmp *R_MPI_Type_lb@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_lb,.-PMPI_Type_lb\n"
 
 );
@@ -3879,6 +4363,16 @@ __asm__(
 ".type PMPI_Type_ub,@function\n"
 ".text\n"
 "PMPI_Type_ub:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_ub\n"
+"b A_MPI_Type_ub\n"
+"inwrap_MPI_Type_ub:\n"
+"b R_MPI_Type_ub\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -3897,6 +4391,7 @@ __asm__(
 "jmp *A_MPI_Type_ub@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_ub:\n"
 "jmp *R_MPI_Type_ub@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_ub,.-PMPI_Type_ub\n"
 
 );
@@ -3947,6 +4442,16 @@ __asm__(
 ".type PMPI_Type_commit,@function\n"
 ".text\n"
 "PMPI_Type_commit:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_commit\n"
+"b A_MPI_Type_commit\n"
+"inwrap_MPI_Type_commit:\n"
+"b R_MPI_Type_commit\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -3963,6 +4468,7 @@ __asm__(
 "jmp *A_MPI_Type_commit@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_commit:\n"
 "jmp *R_MPI_Type_commit@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_commit,.-PMPI_Type_commit\n"
 
 );
@@ -4012,6 +4518,16 @@ __asm__(
 ".type PMPI_Type_free,@function\n"
 ".text\n"
 "PMPI_Type_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_free\n"
+"b A_MPI_Type_free\n"
+"inwrap_MPI_Type_free:\n"
+"b R_MPI_Type_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -4028,6 +4544,7 @@ __asm__(
 "jmp *A_MPI_Type_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_free:\n"
 "jmp *R_MPI_Type_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_free,.-PMPI_Type_free\n"
 
 );
@@ -4077,6 +4594,16 @@ __asm__(
 ".type PMPI_Get_elements,@function\n"
 ".text\n"
 "PMPI_Get_elements:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_elements\n"
+"b A_MPI_Get_elements\n"
+"inwrap_MPI_Get_elements:\n"
+"b R_MPI_Get_elements\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -4097,6 +4624,7 @@ __asm__(
 "jmp *A_MPI_Get_elements@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_elements:\n"
 "jmp *R_MPI_Get_elements@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_elements,.-PMPI_Get_elements\n"
 
 );
@@ -4149,6 +4677,16 @@ __asm__(
 ".type PMPI_Pack,@function\n"
 ".text\n"
 "PMPI_Pack:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Pack\n"
+"b A_MPI_Pack\n"
+"inwrap_MPI_Pack:\n"
+"b R_MPI_Pack\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4175,6 +4713,7 @@ __asm__(
 "jmp *A_MPI_Pack@GOTPCREL(%rip)\n"
 "inwrap_MPI_Pack:\n"
 "jmp *R_MPI_Pack@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Pack,.-PMPI_Pack\n"
 
 );
@@ -4236,6 +4775,16 @@ __asm__(
 ".type PMPI_Unpack,@function\n"
 ".text\n"
 "PMPI_Unpack:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Unpack\n"
+"b A_MPI_Unpack\n"
+"inwrap_MPI_Unpack:\n"
+"b R_MPI_Unpack\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4262,6 +4811,7 @@ __asm__(
 "jmp *A_MPI_Unpack@GOTPCREL(%rip)\n"
 "inwrap_MPI_Unpack:\n"
 "jmp *R_MPI_Unpack@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Unpack,.-PMPI_Unpack\n"
 
 );
@@ -4323,6 +4873,16 @@ __asm__(
 ".type PMPI_Pack_size,@function\n"
 ".text\n"
 "PMPI_Pack_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Pack_size\n"
+"b A_MPI_Pack_size\n"
+"inwrap_MPI_Pack_size:\n"
+"b R_MPI_Pack_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -4345,6 +4905,7 @@ __asm__(
 "jmp *A_MPI_Pack_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_Pack_size:\n"
 "jmp *R_MPI_Pack_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Pack_size,.-PMPI_Pack_size\n"
 
 );
@@ -4398,6 +4959,16 @@ __asm__(
 ".type PMPI_Barrier,@function\n"
 ".text\n"
 "PMPI_Barrier:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Barrier\n"
+"b A_MPI_Barrier\n"
+"inwrap_MPI_Barrier:\n"
+"b R_MPI_Barrier\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -4414,6 +4985,7 @@ __asm__(
 "jmp *A_MPI_Barrier@GOTPCREL(%rip)\n"
 "inwrap_MPI_Barrier:\n"
 "jmp *R_MPI_Barrier@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Barrier,.-PMPI_Barrier\n"
 
 );
@@ -4461,6 +5033,16 @@ __asm__(
 ".type PMPI_Bcast,@function\n"
 ".text\n"
 "PMPI_Bcast:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Bcast\n"
+"b A_MPI_Bcast\n"
+"inwrap_MPI_Bcast:\n"
+"b R_MPI_Bcast\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4485,6 +5067,7 @@ __asm__(
 "jmp *A_MPI_Bcast@GOTPCREL(%rip)\n"
 "inwrap_MPI_Bcast:\n"
 "jmp *R_MPI_Bcast@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Bcast,.-PMPI_Bcast\n"
 
 );
@@ -4541,6 +5124,16 @@ __asm__(
 ".type PMPI_Gather,@function\n"
 ".text\n"
 "PMPI_Gather:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Gather\n"
+"b A_MPI_Gather\n"
+"inwrap_MPI_Gather:\n"
+"b R_MPI_Gather\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4567,6 +5160,7 @@ __asm__(
 "jmp *A_MPI_Gather@GOTPCREL(%rip)\n"
 "inwrap_MPI_Gather:\n"
 "jmp *R_MPI_Gather@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Gather,.-PMPI_Gather\n"
 
 );
@@ -4629,6 +5223,16 @@ __asm__(
 ".type PMPI_Gatherv,@function\n"
 ".text\n"
 "PMPI_Gatherv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Gatherv\n"
+"b A_MPI_Gatherv\n"
+"inwrap_MPI_Gatherv:\n"
+"b R_MPI_Gatherv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4655,6 +5259,7 @@ __asm__(
 "jmp *A_MPI_Gatherv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Gatherv:\n"
 "jmp *R_MPI_Gatherv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Gatherv,.-PMPI_Gatherv\n"
 
 );
@@ -4719,6 +5324,16 @@ __asm__(
 ".type PMPI_Scatter,@function\n"
 ".text\n"
 "PMPI_Scatter:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Scatter\n"
+"b A_MPI_Scatter\n"
+"inwrap_MPI_Scatter:\n"
+"b R_MPI_Scatter\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4745,6 +5360,7 @@ __asm__(
 "jmp *A_MPI_Scatter@GOTPCREL(%rip)\n"
 "inwrap_MPI_Scatter:\n"
 "jmp *R_MPI_Scatter@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Scatter,.-PMPI_Scatter\n"
 
 );
@@ -4807,6 +5423,16 @@ __asm__(
 ".type PMPI_Scatterv,@function\n"
 ".text\n"
 "PMPI_Scatterv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Scatterv\n"
+"b A_MPI_Scatterv\n"
+"inwrap_MPI_Scatterv:\n"
+"b R_MPI_Scatterv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4833,6 +5459,7 @@ __asm__(
 "jmp *A_MPI_Scatterv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Scatterv:\n"
 "jmp *R_MPI_Scatterv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Scatterv,.-PMPI_Scatterv\n"
 
 );
@@ -4897,6 +5524,16 @@ __asm__(
 ".type PMPI_Allgather,@function\n"
 ".text\n"
 "PMPI_Allgather:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Allgather\n"
+"b A_MPI_Allgather\n"
+"inwrap_MPI_Allgather:\n"
+"b R_MPI_Allgather\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -4923,6 +5560,7 @@ __asm__(
 "jmp *A_MPI_Allgather@GOTPCREL(%rip)\n"
 "inwrap_MPI_Allgather:\n"
 "jmp *R_MPI_Allgather@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Allgather,.-PMPI_Allgather\n"
 
 );
@@ -4983,6 +5621,16 @@ __asm__(
 ".type PMPI_Allgatherv,@function\n"
 ".text\n"
 "PMPI_Allgatherv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Allgatherv\n"
+"b A_MPI_Allgatherv\n"
+"inwrap_MPI_Allgatherv:\n"
+"b R_MPI_Allgatherv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -5009,6 +5657,7 @@ __asm__(
 "jmp *A_MPI_Allgatherv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Allgatherv:\n"
 "jmp *R_MPI_Allgatherv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Allgatherv,.-PMPI_Allgatherv\n"
 
 );
@@ -5071,6 +5720,16 @@ __asm__(
 ".type PMPI_Alltoall,@function\n"
 ".text\n"
 "PMPI_Alltoall:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Alltoall\n"
+"b A_MPI_Alltoall\n"
+"inwrap_MPI_Alltoall:\n"
+"b R_MPI_Alltoall\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -5097,6 +5756,7 @@ __asm__(
 "jmp *A_MPI_Alltoall@GOTPCREL(%rip)\n"
 "inwrap_MPI_Alltoall:\n"
 "jmp *R_MPI_Alltoall@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Alltoall,.-PMPI_Alltoall\n"
 
 );
@@ -5157,6 +5817,16 @@ __asm__(
 ".type PMPI_Alltoallv,@function\n"
 ".text\n"
 "PMPI_Alltoallv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Alltoallv\n"
+"b A_MPI_Alltoallv\n"
+"inwrap_MPI_Alltoallv:\n"
+"b R_MPI_Alltoallv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -5183,6 +5853,7 @@ __asm__(
 "jmp *A_MPI_Alltoallv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Alltoallv:\n"
 "jmp *R_MPI_Alltoallv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Alltoallv,.-PMPI_Alltoallv\n"
 
 );
@@ -5247,6 +5918,16 @@ __asm__(
 ".type PMPI_Exscan,@function\n"
 ".text\n"
 "PMPI_Exscan:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Exscan\n"
+"b A_MPI_Exscan\n"
+"inwrap_MPI_Exscan:\n"
+"b R_MPI_Exscan\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -5273,6 +5954,7 @@ __asm__(
 "jmp *A_MPI_Exscan@GOTPCREL(%rip)\n"
 "inwrap_MPI_Exscan:\n"
 "jmp *R_MPI_Exscan@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Exscan,.-PMPI_Exscan\n"
 
 );
@@ -5331,6 +6013,16 @@ __asm__(
 ".type PMPI_Reduce,@function\n"
 ".text\n"
 "PMPI_Reduce:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Reduce\n"
+"b A_MPI_Reduce\n"
+"inwrap_MPI_Reduce:\n"
+"b R_MPI_Reduce\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -5357,6 +6049,7 @@ __asm__(
 "jmp *A_MPI_Reduce@GOTPCREL(%rip)\n"
 "inwrap_MPI_Reduce:\n"
 "jmp *R_MPI_Reduce@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Reduce,.-PMPI_Reduce\n"
 
 );
@@ -5417,6 +6110,16 @@ __asm__(
 ".type PMPI_Op_create,@function\n"
 ".text\n"
 "PMPI_Op_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Op_create\n"
+"b A_MPI_Op_create\n"
+"inwrap_MPI_Op_create:\n"
+"b R_MPI_Op_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -5437,6 +6140,7 @@ __asm__(
 "jmp *A_MPI_Op_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Op_create:\n"
 "jmp *R_MPI_Op_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Op_create,.-PMPI_Op_create\n"
 
 );
@@ -5489,6 +6193,16 @@ __asm__(
 ".type PMPI_Op_free,@function\n"
 ".text\n"
 "PMPI_Op_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Op_free\n"
+"b A_MPI_Op_free\n"
+"inwrap_MPI_Op_free:\n"
+"b R_MPI_Op_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -5505,6 +6219,7 @@ __asm__(
 "jmp *A_MPI_Op_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Op_free:\n"
 "jmp *R_MPI_Op_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Op_free,.-PMPI_Op_free\n"
 
 );
@@ -5554,6 +6269,16 @@ __asm__(
 ".type PMPI_Allreduce,@function\n"
 ".text\n"
 "PMPI_Allreduce:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Allreduce\n"
+"b A_MPI_Allreduce\n"
+"inwrap_MPI_Allreduce:\n"
+"b R_MPI_Allreduce\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -5580,6 +6305,7 @@ __asm__(
 "jmp *A_MPI_Allreduce@GOTPCREL(%rip)\n"
 "inwrap_MPI_Allreduce:\n"
 "jmp *R_MPI_Allreduce@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Allreduce,.-PMPI_Allreduce\n"
 
 );
@@ -5638,6 +6364,16 @@ __asm__(
 ".type PMPI_Scan,@function\n"
 ".text\n"
 "PMPI_Scan:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Scan\n"
+"b A_MPI_Scan\n"
+"inwrap_MPI_Scan:\n"
+"b R_MPI_Scan\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -5664,6 +6400,7 @@ __asm__(
 "jmp *A_MPI_Scan@GOTPCREL(%rip)\n"
 "inwrap_MPI_Scan:\n"
 "jmp *R_MPI_Scan@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Scan,.-PMPI_Scan\n"
 
 );
@@ -5722,6 +6459,16 @@ __asm__(
 ".type PMPI_Group_size,@function\n"
 ".text\n"
 "PMPI_Group_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_size\n"
+"b A_MPI_Group_size\n"
+"inwrap_MPI_Group_size:\n"
+"b R_MPI_Group_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -5740,6 +6487,7 @@ __asm__(
 "jmp *A_MPI_Group_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_size:\n"
 "jmp *R_MPI_Group_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_size,.-PMPI_Group_size\n"
 
 );
@@ -5789,6 +6537,16 @@ __asm__(
 ".type PMPI_Group_rank,@function\n"
 ".text\n"
 "PMPI_Group_rank:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_rank\n"
+"b A_MPI_Group_rank\n"
+"inwrap_MPI_Group_rank:\n"
+"b R_MPI_Group_rank\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -5807,6 +6565,7 @@ __asm__(
 "jmp *A_MPI_Group_rank@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_rank:\n"
 "jmp *R_MPI_Group_rank@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_rank,.-PMPI_Group_rank\n"
 
 );
@@ -5856,6 +6615,16 @@ __asm__(
 ".type PMPI_Group_compare,@function\n"
 ".text\n"
 "PMPI_Group_compare:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_compare\n"
+"b A_MPI_Group_compare\n"
+"inwrap_MPI_Group_compare:\n"
+"b R_MPI_Group_compare\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -5876,6 +6645,7 @@ __asm__(
 "jmp *A_MPI_Group_compare@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_compare:\n"
 "jmp *R_MPI_Group_compare@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_compare,.-PMPI_Group_compare\n"
 
 );
@@ -5927,6 +6697,16 @@ __asm__(
 ".type PMPI_Comm_group,@function\n"
 ".text\n"
 "PMPI_Comm_group:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_group\n"
+"b A_MPI_Comm_group\n"
+"inwrap_MPI_Comm_group:\n"
+"b R_MPI_Comm_group\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -5945,6 +6725,7 @@ __asm__(
 "jmp *A_MPI_Comm_group@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_group:\n"
 "jmp *R_MPI_Comm_group@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_group,.-PMPI_Comm_group\n"
 
 );
@@ -5995,6 +6776,16 @@ __asm__(
 ".type PMPI_Group_union,@function\n"
 ".text\n"
 "PMPI_Group_union:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_union\n"
+"b A_MPI_Group_union\n"
+"inwrap_MPI_Group_union:\n"
+"b R_MPI_Group_union\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -6015,6 +6806,7 @@ __asm__(
 "jmp *A_MPI_Group_union@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_union:\n"
 "jmp *R_MPI_Group_union@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_union,.-PMPI_Group_union\n"
 
 );
@@ -6067,6 +6859,16 @@ __asm__(
 ".type PMPI_Group_intersection,@function\n"
 ".text\n"
 "PMPI_Group_intersection:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_intersection\n"
+"b A_MPI_Group_intersection\n"
+"inwrap_MPI_Group_intersection:\n"
+"b R_MPI_Group_intersection\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -6087,6 +6889,7 @@ __asm__(
 "jmp *A_MPI_Group_intersection@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_intersection:\n"
 "jmp *R_MPI_Group_intersection@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_intersection,.-PMPI_Group_intersection\n"
 
 );
@@ -6139,6 +6942,16 @@ __asm__(
 ".type PMPI_Group_difference,@function\n"
 ".text\n"
 "PMPI_Group_difference:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_difference\n"
+"b A_MPI_Group_difference\n"
+"inwrap_MPI_Group_difference:\n"
+"b R_MPI_Group_difference\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -6159,6 +6972,7 @@ __asm__(
 "jmp *A_MPI_Group_difference@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_difference:\n"
 "jmp *R_MPI_Group_difference@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_difference,.-PMPI_Group_difference\n"
 
 );
@@ -6211,6 +7025,16 @@ __asm__(
 ".type PMPI_Group_free,@function\n"
 ".text\n"
 "PMPI_Group_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_free\n"
+"b A_MPI_Group_free\n"
+"inwrap_MPI_Group_free:\n"
+"b R_MPI_Group_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6227,6 +7051,7 @@ __asm__(
 "jmp *A_MPI_Group_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_free:\n"
 "jmp *R_MPI_Group_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_free,.-PMPI_Group_free\n"
 
 );
@@ -6276,6 +7101,16 @@ __asm__(
 ".type PMPI_Comm_size,@function\n"
 ".text\n"
 "PMPI_Comm_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_size\n"
+"b A_MPI_Comm_size\n"
+"inwrap_MPI_Comm_size:\n"
+"b R_MPI_Comm_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6294,6 +7129,7 @@ __asm__(
 "jmp *A_MPI_Comm_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_size:\n"
 "jmp *R_MPI_Comm_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_size,.-PMPI_Comm_size\n"
 
 );
@@ -6343,6 +7179,16 @@ __asm__(
 ".type PMPI_Comm_rank,@function\n"
 ".text\n"
 "PMPI_Comm_rank:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_rank\n"
+"b A_MPI_Comm_rank\n"
+"inwrap_MPI_Comm_rank:\n"
+"b R_MPI_Comm_rank\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6361,6 +7207,7 @@ __asm__(
 "jmp *A_MPI_Comm_rank@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_rank:\n"
 "jmp *R_MPI_Comm_rank@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_rank,.-PMPI_Comm_rank\n"
 
 );
@@ -6410,6 +7257,16 @@ __asm__(
 ".type PMPI_Comm_compare,@function\n"
 ".text\n"
 "PMPI_Comm_compare:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_compare\n"
+"b A_MPI_Comm_compare\n"
+"inwrap_MPI_Comm_compare:\n"
+"b R_MPI_Comm_compare\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -6430,6 +7287,7 @@ __asm__(
 "jmp *A_MPI_Comm_compare@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_compare:\n"
 "jmp *R_MPI_Comm_compare@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_compare,.-PMPI_Comm_compare\n"
 
 );
@@ -6481,6 +7339,16 @@ __asm__(
 ".type PMPI_Comm_dup,@function\n"
 ".text\n"
 "PMPI_Comm_dup:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_dup\n"
+"b A_MPI_Comm_dup\n"
+"inwrap_MPI_Comm_dup:\n"
+"b R_MPI_Comm_dup\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6499,6 +7367,7 @@ __asm__(
 "jmp *A_MPI_Comm_dup@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_dup:\n"
 "jmp *R_MPI_Comm_dup@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_dup,.-PMPI_Comm_dup\n"
 
 );
@@ -6549,6 +7418,16 @@ __asm__(
 ".type PMPI_Comm_dup_with_info,@function\n"
 ".text\n"
 "PMPI_Comm_dup_with_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_dup_with_info\n"
+"b A_MPI_Comm_dup_with_info\n"
+"inwrap_MPI_Comm_dup_with_info:\n"
+"b R_MPI_Comm_dup_with_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -6569,6 +7448,7 @@ __asm__(
 "jmp *A_MPI_Comm_dup_with_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_dup_with_info:\n"
 "jmp *R_MPI_Comm_dup_with_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_dup_with_info,.-PMPI_Comm_dup_with_info\n"
 
 );
@@ -6621,6 +7501,16 @@ __asm__(
 ".type PMPI_Comm_create,@function\n"
 ".text\n"
 "PMPI_Comm_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_create\n"
+"b A_MPI_Comm_create\n"
+"inwrap_MPI_Comm_create:\n"
+"b R_MPI_Comm_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -6641,6 +7531,7 @@ __asm__(
 "jmp *A_MPI_Comm_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_create:\n"
 "jmp *R_MPI_Comm_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_create,.-PMPI_Comm_create\n"
 
 );
@@ -6693,6 +7584,16 @@ __asm__(
 ".type PMPI_Comm_split,@function\n"
 ".text\n"
 "PMPI_Comm_split:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_split\n"
+"b A_MPI_Comm_split\n"
+"inwrap_MPI_Comm_split:\n"
+"b R_MPI_Comm_split\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -6715,6 +7616,7 @@ __asm__(
 "jmp *A_MPI_Comm_split@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_split:\n"
 "jmp *R_MPI_Comm_split@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_split,.-PMPI_Comm_split\n"
 
 );
@@ -6769,6 +7671,16 @@ __asm__(
 ".type PMPI_Comm_free,@function\n"
 ".text\n"
 "PMPI_Comm_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_free\n"
+"b A_MPI_Comm_free\n"
+"inwrap_MPI_Comm_free:\n"
+"b R_MPI_Comm_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6785,6 +7697,7 @@ __asm__(
 "jmp *A_MPI_Comm_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_free:\n"
 "jmp *R_MPI_Comm_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_free,.-PMPI_Comm_free\n"
 
 );
@@ -6837,6 +7750,16 @@ __asm__(
 ".type PMPI_Comm_test_inter,@function\n"
 ".text\n"
 "PMPI_Comm_test_inter:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_test_inter\n"
+"b A_MPI_Comm_test_inter\n"
+"inwrap_MPI_Comm_test_inter:\n"
+"b R_MPI_Comm_test_inter\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6855,6 +7778,7 @@ __asm__(
 "jmp *A_MPI_Comm_test_inter@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_test_inter:\n"
 "jmp *R_MPI_Comm_test_inter@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_test_inter,.-PMPI_Comm_test_inter\n"
 
 );
@@ -6904,6 +7828,16 @@ __asm__(
 ".type PMPI_Comm_remote_size,@function\n"
 ".text\n"
 "PMPI_Comm_remote_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_remote_size\n"
+"b A_MPI_Comm_remote_size\n"
+"inwrap_MPI_Comm_remote_size:\n"
+"b R_MPI_Comm_remote_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6922,6 +7856,7 @@ __asm__(
 "jmp *A_MPI_Comm_remote_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_remote_size:\n"
 "jmp *R_MPI_Comm_remote_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_remote_size,.-PMPI_Comm_remote_size\n"
 
 );
@@ -6971,6 +7906,16 @@ __asm__(
 ".type PMPI_Comm_remote_group,@function\n"
 ".text\n"
 "PMPI_Comm_remote_group:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_remote_group\n"
+"b A_MPI_Comm_remote_group\n"
+"inwrap_MPI_Comm_remote_group:\n"
+"b R_MPI_Comm_remote_group\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -6989,6 +7934,7 @@ __asm__(
 "jmp *A_MPI_Comm_remote_group@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_remote_group:\n"
 "jmp *R_MPI_Comm_remote_group@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_remote_group,.-PMPI_Comm_remote_group\n"
 
 );
@@ -7039,6 +7985,16 @@ __asm__(
 ".type PMPI_Intercomm_create,@function\n"
 ".text\n"
 "PMPI_Intercomm_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Intercomm_create\n"
+"b A_MPI_Intercomm_create\n"
+"inwrap_MPI_Intercomm_create:\n"
+"b R_MPI_Intercomm_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -7065,6 +8021,7 @@ __asm__(
 "jmp *A_MPI_Intercomm_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Intercomm_create:\n"
 "jmp *R_MPI_Intercomm_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Intercomm_create,.-PMPI_Intercomm_create\n"
 
 );
@@ -7123,6 +8080,16 @@ __asm__(
 ".type PMPI_Intercomm_merge,@function\n"
 ".text\n"
 "PMPI_Intercomm_merge:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Intercomm_merge\n"
+"b A_MPI_Intercomm_merge\n"
+"inwrap_MPI_Intercomm_merge:\n"
+"b R_MPI_Intercomm_merge\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -7143,6 +8110,7 @@ __asm__(
 "jmp *A_MPI_Intercomm_merge@GOTPCREL(%rip)\n"
 "inwrap_MPI_Intercomm_merge:\n"
 "jmp *R_MPI_Intercomm_merge@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Intercomm_merge,.-PMPI_Intercomm_merge\n"
 
 );
@@ -7195,6 +8163,16 @@ __asm__(
 ".type PMPI_Attr_put,@function\n"
 ".text\n"
 "PMPI_Attr_put:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Attr_put\n"
+"b A_MPI_Attr_put\n"
+"inwrap_MPI_Attr_put:\n"
+"b R_MPI_Attr_put\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -7215,6 +8193,7 @@ __asm__(
 "jmp *A_MPI_Attr_put@GOTPCREL(%rip)\n"
 "inwrap_MPI_Attr_put:\n"
 "jmp *R_MPI_Attr_put@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Attr_put,.-PMPI_Attr_put\n"
 
 );
@@ -7266,6 +8245,16 @@ __asm__(
 ".type PMPI_Attr_get,@function\n"
 ".text\n"
 "PMPI_Attr_get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Attr_get\n"
+"b A_MPI_Attr_get\n"
+"inwrap_MPI_Attr_get:\n"
+"b R_MPI_Attr_get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -7288,6 +8277,7 @@ __asm__(
 "jmp *A_MPI_Attr_get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Attr_get:\n"
 "jmp *R_MPI_Attr_get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Attr_get,.-PMPI_Attr_get\n"
 
 );
@@ -7341,6 +8331,16 @@ __asm__(
 ".type PMPI_Attr_delete,@function\n"
 ".text\n"
 "PMPI_Attr_delete:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Attr_delete\n"
+"b A_MPI_Attr_delete\n"
+"inwrap_MPI_Attr_delete:\n"
+"b R_MPI_Attr_delete\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -7359,6 +8359,7 @@ __asm__(
 "jmp *A_MPI_Attr_delete@GOTPCREL(%rip)\n"
 "inwrap_MPI_Attr_delete:\n"
 "jmp *R_MPI_Attr_delete@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Attr_delete,.-PMPI_Attr_delete\n"
 
 );
@@ -7408,6 +8409,16 @@ __asm__(
 ".type PMPI_Topo_test,@function\n"
 ".text\n"
 "PMPI_Topo_test:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Topo_test\n"
+"b A_MPI_Topo_test\n"
+"inwrap_MPI_Topo_test:\n"
+"b R_MPI_Topo_test\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -7426,6 +8437,7 @@ __asm__(
 "jmp *A_MPI_Topo_test@GOTPCREL(%rip)\n"
 "inwrap_MPI_Topo_test:\n"
 "jmp *R_MPI_Topo_test@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Topo_test,.-PMPI_Topo_test\n"
 
 );
@@ -7476,6 +8488,16 @@ __asm__(
 ".type PMPI_Graphdims_get,@function\n"
 ".text\n"
 "PMPI_Graphdims_get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Graphdims_get\n"
+"b A_MPI_Graphdims_get\n"
+"inwrap_MPI_Graphdims_get:\n"
+"b R_MPI_Graphdims_get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -7496,6 +8518,7 @@ __asm__(
 "jmp *A_MPI_Graphdims_get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Graphdims_get:\n"
 "jmp *R_MPI_Graphdims_get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Graphdims_get,.-PMPI_Graphdims_get\n"
 
 );
@@ -7547,6 +8570,16 @@ __asm__(
 ".type PMPI_Cartdim_get,@function\n"
 ".text\n"
 "PMPI_Cartdim_get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cartdim_get\n"
+"b A_MPI_Cartdim_get\n"
+"inwrap_MPI_Cartdim_get:\n"
+"b R_MPI_Cartdim_get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -7565,6 +8598,7 @@ __asm__(
 "jmp *A_MPI_Cartdim_get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cartdim_get:\n"
 "jmp *R_MPI_Cartdim_get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cartdim_get,.-PMPI_Cartdim_get\n"
 
 );
@@ -7614,6 +8648,16 @@ __asm__(
 ".type PMPI_Graph_neighbors_count,@function\n"
 ".text\n"
 "PMPI_Graph_neighbors_count:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Graph_neighbors_count\n"
+"b A_MPI_Graph_neighbors_count\n"
+"inwrap_MPI_Graph_neighbors_count:\n"
+"b R_MPI_Graph_neighbors_count\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -7634,6 +8678,7 @@ __asm__(
 "jmp *A_MPI_Graph_neighbors_count@GOTPCREL(%rip)\n"
 "inwrap_MPI_Graph_neighbors_count:\n"
 "jmp *R_MPI_Graph_neighbors_count@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Graph_neighbors_count,.-PMPI_Graph_neighbors_count\n"
 
 );
@@ -7685,6 +8730,16 @@ __asm__(
 ".type PMPI_Cart_shift,@function\n"
 ".text\n"
 "PMPI_Cart_shift:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cart_shift\n"
+"b A_MPI_Cart_shift\n"
+"inwrap_MPI_Cart_shift:\n"
+"b R_MPI_Cart_shift\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -7709,6 +8764,7 @@ __asm__(
 "jmp *A_MPI_Cart_shift@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cart_shift:\n"
 "jmp *R_MPI_Cart_shift@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cart_shift,.-PMPI_Cart_shift\n"
 
 );
@@ -7765,6 +8821,16 @@ __asm__(
 ".type PMPI_Get_processor_name,@function\n"
 ".text\n"
 "PMPI_Get_processor_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_processor_name\n"
+"b A_MPI_Get_processor_name\n"
+"inwrap_MPI_Get_processor_name:\n"
+"b R_MPI_Get_processor_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -7783,6 +8849,7 @@ __asm__(
 "jmp *A_MPI_Get_processor_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_processor_name:\n"
 "jmp *R_MPI_Get_processor_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_processor_name,.-PMPI_Get_processor_name\n"
 
 );
@@ -7832,6 +8899,16 @@ __asm__(
 ".type PMPI_Get_version,@function\n"
 ".text\n"
 "PMPI_Get_version:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_version\n"
+"b A_MPI_Get_version\n"
+"inwrap_MPI_Get_version:\n"
+"b R_MPI_Get_version\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -7850,6 +8927,7 @@ __asm__(
 "jmp *A_MPI_Get_version@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_version:\n"
 "jmp *R_MPI_Get_version@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_version,.-PMPI_Get_version\n"
 
 );
@@ -7899,6 +8977,16 @@ __asm__(
 ".type PMPI_Get_library_version,@function\n"
 ".text\n"
 "PMPI_Get_library_version:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_library_version\n"
+"b A_MPI_Get_library_version\n"
+"inwrap_MPI_Get_library_version:\n"
+"b R_MPI_Get_library_version\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -7917,6 +9005,7 @@ __asm__(
 "jmp *A_MPI_Get_library_version@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_library_version:\n"
 "jmp *R_MPI_Get_library_version@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_library_version,.-PMPI_Get_library_version\n"
 
 );
@@ -7966,6 +9055,16 @@ __asm__(
 ".type PMPI_Errhandler_create,@function\n"
 ".text\n"
 "PMPI_Errhandler_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_create\n"
+"b A_MPI_Errhandler_create\n"
+"inwrap_MPI_Errhandler_create:\n"
+"b R_MPI_Errhandler_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -7984,6 +9083,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_create:\n"
 "jmp *R_MPI_Errhandler_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_create,.-PMPI_Errhandler_create\n"
 
 );
@@ -8034,6 +9134,16 @@ __asm__(
 ".type PMPI_Errhandler_set,@function\n"
 ".text\n"
 "PMPI_Errhandler_set:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_set\n"
+"b A_MPI_Errhandler_set\n"
+"inwrap_MPI_Errhandler_set:\n"
+"b R_MPI_Errhandler_set\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8052,6 +9162,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_set@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_set:\n"
 "jmp *R_MPI_Errhandler_set@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_set,.-PMPI_Errhandler_set\n"
 
 );
@@ -8106,6 +9217,16 @@ __asm__(
 ".type PMPI_Errhandler_get,@function\n"
 ".text\n"
 "PMPI_Errhandler_get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_get\n"
+"b A_MPI_Errhandler_get\n"
+"inwrap_MPI_Errhandler_get:\n"
+"b R_MPI_Errhandler_get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8124,6 +9245,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_get:\n"
 "jmp *R_MPI_Errhandler_get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_get,.-PMPI_Errhandler_get\n"
 
 );
@@ -8176,6 +9298,16 @@ __asm__(
 ".type PMPI_Errhandler_free,@function\n"
 ".text\n"
 "PMPI_Errhandler_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_free\n"
+"b A_MPI_Errhandler_free\n"
+"inwrap_MPI_Errhandler_free:\n"
+"b R_MPI_Errhandler_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8192,6 +9324,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_free:\n"
 "jmp *R_MPI_Errhandler_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_free,.-PMPI_Errhandler_free\n"
 
 );
@@ -8243,6 +9376,16 @@ __asm__(
 ".type PMPI_Error_string,@function\n"
 ".text\n"
 "PMPI_Error_string:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Error_string\n"
+"b A_MPI_Error_string\n"
+"inwrap_MPI_Error_string:\n"
+"b R_MPI_Error_string\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -8263,6 +9406,7 @@ __asm__(
 "jmp *A_MPI_Error_string@GOTPCREL(%rip)\n"
 "inwrap_MPI_Error_string:\n"
 "jmp *R_MPI_Error_string@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Error_string,.-PMPI_Error_string\n"
 
 );
@@ -8314,6 +9458,16 @@ __asm__(
 ".type PMPI_Error_class,@function\n"
 ".text\n"
 "PMPI_Error_class:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Error_class\n"
+"b A_MPI_Error_class\n"
+"inwrap_MPI_Error_class:\n"
+"b R_MPI_Error_class\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8332,6 +9486,7 @@ __asm__(
 "jmp *A_MPI_Error_class@GOTPCREL(%rip)\n"
 "inwrap_MPI_Error_class:\n"
 "jmp *R_MPI_Error_class@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Error_class,.-PMPI_Error_class\n"
 
 );
@@ -8381,6 +9536,16 @@ __asm__(
 ".type PMPI_Initialized,@function\n"
 ".text\n"
 "PMPI_Initialized:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Initialized\n"
+"b A_MPI_Initialized\n"
+"inwrap_MPI_Initialized:\n"
+"b R_MPI_Initialized\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8397,6 +9562,7 @@ __asm__(
 "jmp *A_MPI_Initialized@GOTPCREL(%rip)\n"
 "inwrap_MPI_Initialized:\n"
 "jmp *R_MPI_Initialized@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Initialized,.-PMPI_Initialized\n"
 
 );
@@ -8444,6 +9610,16 @@ __asm__(
 ".type PMPI_Abort,@function\n"
 ".text\n"
 "PMPI_Abort:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Abort\n"
+"b A_MPI_Abort\n"
+"inwrap_MPI_Abort:\n"
+"b R_MPI_Abort\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8462,6 +9638,7 @@ __asm__(
 "jmp *A_MPI_Abort@GOTPCREL(%rip)\n"
 "inwrap_MPI_Abort:\n"
 "jmp *R_MPI_Abort@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Abort,.-PMPI_Abort\n"
 
 );
@@ -8511,6 +9688,16 @@ __asm__(
 ".type PMPI_Init,@function\n"
 ".text\n"
 "PMPI_Init:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Init\n"
+"b A_MPI_Init\n"
+"inwrap_MPI_Init:\n"
+"b R_MPI_Init\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8529,6 +9716,7 @@ __asm__(
 "jmp *A_MPI_Init@GOTPCREL(%rip)\n"
 "inwrap_MPI_Init:\n"
 "jmp *R_MPI_Init@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Init,.-PMPI_Init\n"
 
 );
@@ -8582,6 +9770,16 @@ __asm__(
 ".type PMPI_Close_port,@function\n"
 ".text\n"
 "PMPI_Close_port:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Close_port\n"
+"b A_MPI_Close_port\n"
+"inwrap_MPI_Close_port:\n"
+"b R_MPI_Close_port\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8598,6 +9796,7 @@ __asm__(
 "jmp *A_MPI_Close_port@GOTPCREL(%rip)\n"
 "inwrap_MPI_Close_port:\n"
 "jmp *R_MPI_Close_port@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Close_port,.-PMPI_Close_port\n"
 
 );
@@ -8645,6 +9844,16 @@ __asm__(
 ".type PMPI_Comm_accept,@function\n"
 ".text\n"
 "PMPI_Comm_accept:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_accept\n"
+"b A_MPI_Comm_accept\n"
+"inwrap_MPI_Comm_accept:\n"
+"b R_MPI_Comm_accept\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -8669,6 +9878,7 @@ __asm__(
 "jmp *A_MPI_Comm_accept@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_accept:\n"
 "jmp *R_MPI_Comm_accept@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_accept,.-PMPI_Comm_accept\n"
 
 );
@@ -8725,6 +9935,16 @@ __asm__(
 ".type PMPI_Comm_connect,@function\n"
 ".text\n"
 "PMPI_Comm_connect:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_connect\n"
+"b A_MPI_Comm_connect\n"
+"inwrap_MPI_Comm_connect:\n"
+"b R_MPI_Comm_connect\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -8749,6 +9969,7 @@ __asm__(
 "jmp *A_MPI_Comm_connect@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_connect:\n"
 "jmp *R_MPI_Comm_connect@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_connect,.-PMPI_Comm_connect\n"
 
 );
@@ -8805,6 +10026,16 @@ __asm__(
 ".type PMPI_Comm_disconnect,@function\n"
 ".text\n"
 "PMPI_Comm_disconnect:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_disconnect\n"
+"b A_MPI_Comm_disconnect\n"
+"inwrap_MPI_Comm_disconnect:\n"
+"b R_MPI_Comm_disconnect\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8821,6 +10052,7 @@ __asm__(
 "jmp *A_MPI_Comm_disconnect@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_disconnect:\n"
 "jmp *R_MPI_Comm_disconnect@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_disconnect,.-PMPI_Comm_disconnect\n"
 
 );
@@ -8870,6 +10102,16 @@ __asm__(
 ".type PMPI_Comm_get_parent,@function\n"
 ".text\n"
 "PMPI_Comm_get_parent:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_get_parent\n"
+"b A_MPI_Comm_get_parent\n"
+"inwrap_MPI_Comm_get_parent:\n"
+"b R_MPI_Comm_get_parent\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8886,6 +10128,7 @@ __asm__(
 "jmp *A_MPI_Comm_get_parent@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_get_parent:\n"
 "jmp *R_MPI_Comm_get_parent@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_get_parent,.-PMPI_Comm_get_parent\n"
 
 );
@@ -8934,6 +10177,16 @@ __asm__(
 ".type PMPI_Comm_join,@function\n"
 ".text\n"
 "PMPI_Comm_join:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_join\n"
+"b A_MPI_Comm_join\n"
+"inwrap_MPI_Comm_join:\n"
+"b R_MPI_Comm_join\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -8952,6 +10205,7 @@ __asm__(
 "jmp *A_MPI_Comm_join@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_join:\n"
 "jmp *R_MPI_Comm_join@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_join,.-PMPI_Comm_join\n"
 
 );
@@ -9002,6 +10256,16 @@ __asm__(
 ".type PMPI_Lookup_name,@function\n"
 ".text\n"
 "PMPI_Lookup_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Lookup_name\n"
+"b A_MPI_Lookup_name\n"
+"inwrap_MPI_Lookup_name:\n"
+"b R_MPI_Lookup_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -9022,6 +10286,7 @@ __asm__(
 "jmp *A_MPI_Lookup_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Lookup_name:\n"
 "jmp *R_MPI_Lookup_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Lookup_name,.-PMPI_Lookup_name\n"
 
 );
@@ -9073,6 +10338,16 @@ __asm__(
 ".type PMPI_Open_port,@function\n"
 ".text\n"
 "PMPI_Open_port:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Open_port\n"
+"b A_MPI_Open_port\n"
+"inwrap_MPI_Open_port:\n"
+"b R_MPI_Open_port\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -9091,6 +10366,7 @@ __asm__(
 "jmp *A_MPI_Open_port@GOTPCREL(%rip)\n"
 "inwrap_MPI_Open_port:\n"
 "jmp *R_MPI_Open_port@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Open_port,.-PMPI_Open_port\n"
 
 );
@@ -9140,6 +10416,16 @@ __asm__(
 ".type PMPI_Publish_name,@function\n"
 ".text\n"
 "PMPI_Publish_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Publish_name\n"
+"b A_MPI_Publish_name\n"
+"inwrap_MPI_Publish_name:\n"
+"b R_MPI_Publish_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -9160,6 +10446,7 @@ __asm__(
 "jmp *A_MPI_Publish_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Publish_name:\n"
 "jmp *R_MPI_Publish_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Publish_name,.-PMPI_Publish_name\n"
 
 );
@@ -9211,6 +10498,16 @@ __asm__(
 ".type PMPI_Unpublish_name,@function\n"
 ".text\n"
 "PMPI_Unpublish_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Unpublish_name\n"
+"b A_MPI_Unpublish_name\n"
+"inwrap_MPI_Unpublish_name:\n"
+"b R_MPI_Unpublish_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -9231,6 +10528,7 @@ __asm__(
 "jmp *A_MPI_Unpublish_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Unpublish_name:\n"
 "jmp *R_MPI_Unpublish_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Unpublish_name,.-PMPI_Unpublish_name\n"
 
 );
@@ -9282,6 +10580,16 @@ __asm__(
 ".type PMPI_Comm_set_info,@function\n"
 ".text\n"
 "PMPI_Comm_set_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_set_info\n"
+"b A_MPI_Comm_set_info\n"
+"inwrap_MPI_Comm_set_info:\n"
+"b R_MPI_Comm_set_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -9300,6 +10608,7 @@ __asm__(
 "jmp *A_MPI_Comm_set_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_set_info:\n"
 "jmp *R_MPI_Comm_set_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_set_info,.-PMPI_Comm_set_info\n"
 
 );
@@ -9350,6 +10659,16 @@ __asm__(
 ".type PMPI_Comm_get_info,@function\n"
 ".text\n"
 "PMPI_Comm_get_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_get_info\n"
+"b A_MPI_Comm_get_info\n"
+"inwrap_MPI_Comm_get_info:\n"
+"b R_MPI_Comm_get_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -9368,6 +10687,7 @@ __asm__(
 "jmp *A_MPI_Comm_get_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_get_info:\n"
 "jmp *R_MPI_Comm_get_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_get_info,.-PMPI_Comm_get_info\n"
 
 );
@@ -9418,6 +10738,16 @@ __asm__(
 ".type PMPI_Accumulate,@function\n"
 ".text\n"
 "PMPI_Accumulate:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Accumulate\n"
+"b A_MPI_Accumulate\n"
+"inwrap_MPI_Accumulate:\n"
+"b R_MPI_Accumulate\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -9444,6 +10774,7 @@ __asm__(
 "jmp *A_MPI_Accumulate@GOTPCREL(%rip)\n"
 "inwrap_MPI_Accumulate:\n"
 "jmp *R_MPI_Accumulate@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Accumulate,.-PMPI_Accumulate\n"
 
 );
@@ -9507,6 +10838,16 @@ __asm__(
 ".type PMPI_Get,@function\n"
 ".text\n"
 "PMPI_Get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get\n"
+"b A_MPI_Get\n"
+"inwrap_MPI_Get:\n"
+"b R_MPI_Get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -9533,6 +10874,7 @@ __asm__(
 "jmp *A_MPI_Get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get:\n"
 "jmp *R_MPI_Get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get,.-PMPI_Get\n"
 
 );
@@ -9594,6 +10936,16 @@ __asm__(
 ".type PMPI_Put,@function\n"
 ".text\n"
 "PMPI_Put:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Put\n"
+"b A_MPI_Put\n"
+"inwrap_MPI_Put:\n"
+"b R_MPI_Put\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -9620,6 +10972,7 @@ __asm__(
 "jmp *A_MPI_Put@GOTPCREL(%rip)\n"
 "inwrap_MPI_Put:\n"
 "jmp *R_MPI_Put@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Put,.-PMPI_Put\n"
 
 );
@@ -9681,6 +11034,16 @@ __asm__(
 ".type PMPI_Win_complete,@function\n"
 ".text\n"
 "PMPI_Win_complete:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_complete\n"
+"b A_MPI_Win_complete\n"
+"inwrap_MPI_Win_complete:\n"
+"b R_MPI_Win_complete\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -9697,6 +11060,7 @@ __asm__(
 "jmp *A_MPI_Win_complete@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_complete:\n"
 "jmp *R_MPI_Win_complete@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_complete,.-PMPI_Win_complete\n"
 
 );
@@ -9744,6 +11108,16 @@ __asm__(
 ".type PMPI_Win_create,@function\n"
 ".text\n"
 "PMPI_Win_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_create\n"
+"b A_MPI_Win_create\n"
+"inwrap_MPI_Win_create:\n"
+"b R_MPI_Win_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -9770,6 +11144,7 @@ __asm__(
 "jmp *A_MPI_Win_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_create:\n"
 "jmp *R_MPI_Win_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_create,.-PMPI_Win_create\n"
 
 );
@@ -9828,6 +11203,16 @@ __asm__(
 ".type PMPI_Win_fence,@function\n"
 ".text\n"
 "PMPI_Win_fence:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_fence\n"
+"b A_MPI_Win_fence\n"
+"inwrap_MPI_Win_fence:\n"
+"b R_MPI_Win_fence\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -9846,6 +11231,7 @@ __asm__(
 "jmp *A_MPI_Win_fence@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_fence:\n"
 "jmp *R_MPI_Win_fence@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_fence,.-PMPI_Win_fence\n"
 
 );
@@ -9895,6 +11281,16 @@ __asm__(
 ".type PMPI_Win_free,@function\n"
 ".text\n"
 "PMPI_Win_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_free\n"
+"b A_MPI_Win_free\n"
+"inwrap_MPI_Win_free:\n"
+"b R_MPI_Win_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -9911,6 +11307,7 @@ __asm__(
 "jmp *A_MPI_Win_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_free:\n"
 "jmp *R_MPI_Win_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_free,.-PMPI_Win_free\n"
 
 );
@@ -9960,6 +11357,16 @@ __asm__(
 ".type PMPI_Win_get_group,@function\n"
 ".text\n"
 "PMPI_Win_get_group:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_get_group\n"
+"b A_MPI_Win_get_group\n"
+"inwrap_MPI_Win_get_group:\n"
+"b R_MPI_Win_get_group\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -9978,6 +11385,7 @@ __asm__(
 "jmp *A_MPI_Win_get_group@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_get_group:\n"
 "jmp *R_MPI_Win_get_group@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_get_group,.-PMPI_Win_get_group\n"
 
 );
@@ -10028,6 +11436,16 @@ __asm__(
 ".type PMPI_Win_lock,@function\n"
 ".text\n"
 "PMPI_Win_lock:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_lock\n"
+"b A_MPI_Win_lock\n"
+"inwrap_MPI_Win_lock:\n"
+"b R_MPI_Win_lock\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -10050,6 +11468,7 @@ __asm__(
 "jmp *A_MPI_Win_lock@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_lock:\n"
 "jmp *R_MPI_Win_lock@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_lock,.-PMPI_Win_lock\n"
 
 );
@@ -10103,6 +11522,16 @@ __asm__(
 ".type PMPI_Win_post,@function\n"
 ".text\n"
 "PMPI_Win_post:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_post\n"
+"b A_MPI_Win_post\n"
+"inwrap_MPI_Win_post:\n"
+"b R_MPI_Win_post\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -10123,6 +11552,7 @@ __asm__(
 "jmp *A_MPI_Win_post@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_post:\n"
 "jmp *R_MPI_Win_post@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_post,.-PMPI_Win_post\n"
 
 );
@@ -10174,6 +11604,16 @@ __asm__(
 ".type PMPI_Win_start,@function\n"
 ".text\n"
 "PMPI_Win_start:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_start\n"
+"b A_MPI_Win_start\n"
+"inwrap_MPI_Win_start:\n"
+"b R_MPI_Win_start\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -10194,6 +11634,7 @@ __asm__(
 "jmp *A_MPI_Win_start@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_start:\n"
 "jmp *R_MPI_Win_start@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_start,.-PMPI_Win_start\n"
 
 );
@@ -10245,6 +11686,16 @@ __asm__(
 ".type PMPI_Win_test,@function\n"
 ".text\n"
 "PMPI_Win_test:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_test\n"
+"b A_MPI_Win_test\n"
+"inwrap_MPI_Win_test:\n"
+"b R_MPI_Win_test\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -10263,6 +11714,7 @@ __asm__(
 "jmp *A_MPI_Win_test@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_test:\n"
 "jmp *R_MPI_Win_test@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_test,.-PMPI_Win_test\n"
 
 );
@@ -10312,6 +11764,16 @@ __asm__(
 ".type PMPI_Win_unlock,@function\n"
 ".text\n"
 "PMPI_Win_unlock:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_unlock\n"
+"b A_MPI_Win_unlock\n"
+"inwrap_MPI_Win_unlock:\n"
+"b R_MPI_Win_unlock\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -10330,6 +11792,7 @@ __asm__(
 "jmp *A_MPI_Win_unlock@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_unlock:\n"
 "jmp *R_MPI_Win_unlock@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_unlock,.-PMPI_Win_unlock\n"
 
 );
@@ -10379,6 +11842,16 @@ __asm__(
 ".type PMPI_Win_wait,@function\n"
 ".text\n"
 "PMPI_Win_wait:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_wait\n"
+"b A_MPI_Win_wait\n"
+"inwrap_MPI_Win_wait:\n"
+"b R_MPI_Win_wait\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -10395,6 +11868,7 @@ __asm__(
 "jmp *A_MPI_Win_wait@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_wait:\n"
 "jmp *R_MPI_Win_wait@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_wait,.-PMPI_Win_wait\n"
 
 );
@@ -10442,6 +11916,16 @@ __asm__(
 ".type PMPI_Win_allocate,@function\n"
 ".text\n"
 "PMPI_Win_allocate:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_allocate\n"
+"b A_MPI_Win_allocate\n"
+"inwrap_MPI_Win_allocate:\n"
+"b R_MPI_Win_allocate\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -10468,6 +11952,7 @@ __asm__(
 "jmp *A_MPI_Win_allocate@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_allocate:\n"
 "jmp *R_MPI_Win_allocate@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_allocate,.-PMPI_Win_allocate\n"
 
 );
@@ -10527,6 +12012,16 @@ __asm__(
 ".type PMPI_Win_allocate_shared,@function\n"
 ".text\n"
 "PMPI_Win_allocate_shared:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_allocate_shared\n"
+"b A_MPI_Win_allocate_shared\n"
+"inwrap_MPI_Win_allocate_shared:\n"
+"b R_MPI_Win_allocate_shared\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -10553,6 +12048,7 @@ __asm__(
 "jmp *A_MPI_Win_allocate_shared@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_allocate_shared:\n"
 "jmp *R_MPI_Win_allocate_shared@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_allocate_shared,.-PMPI_Win_allocate_shared\n"
 
 );
@@ -10612,6 +12108,16 @@ __asm__(
 ".type PMPI_Win_shared_query,@function\n"
 ".text\n"
 "PMPI_Win_shared_query:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_shared_query\n"
+"b A_MPI_Win_shared_query\n"
+"inwrap_MPI_Win_shared_query:\n"
+"b R_MPI_Win_shared_query\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -10636,6 +12142,7 @@ __asm__(
 "jmp *A_MPI_Win_shared_query@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_shared_query:\n"
 "jmp *R_MPI_Win_shared_query@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_shared_query,.-PMPI_Win_shared_query\n"
 
 );
@@ -10692,6 +12199,16 @@ __asm__(
 ".type PMPI_Win_create_dynamic,@function\n"
 ".text\n"
 "PMPI_Win_create_dynamic:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_create_dynamic\n"
+"b A_MPI_Win_create_dynamic\n"
+"inwrap_MPI_Win_create_dynamic:\n"
+"b R_MPI_Win_create_dynamic\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -10712,6 +12229,7 @@ __asm__(
 "jmp *A_MPI_Win_create_dynamic@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_create_dynamic:\n"
 "jmp *R_MPI_Win_create_dynamic@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_create_dynamic,.-PMPI_Win_create_dynamic\n"
 
 );
@@ -10764,6 +12282,16 @@ __asm__(
 ".type PMPI_Win_attach,@function\n"
 ".text\n"
 "PMPI_Win_attach:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_attach\n"
+"b A_MPI_Win_attach\n"
+"inwrap_MPI_Win_attach:\n"
+"b R_MPI_Win_attach\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -10784,6 +12312,7 @@ __asm__(
 "jmp *A_MPI_Win_attach@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_attach:\n"
 "jmp *R_MPI_Win_attach@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_attach,.-PMPI_Win_attach\n"
 
 );
@@ -10835,6 +12364,16 @@ __asm__(
 ".type PMPI_Win_detach,@function\n"
 ".text\n"
 "PMPI_Win_detach:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_detach\n"
+"b A_MPI_Win_detach\n"
+"inwrap_MPI_Win_detach:\n"
+"b R_MPI_Win_detach\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -10853,6 +12392,7 @@ __asm__(
 "jmp *A_MPI_Win_detach@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_detach:\n"
 "jmp *R_MPI_Win_detach@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_detach,.-PMPI_Win_detach\n"
 
 );
@@ -10902,6 +12442,16 @@ __asm__(
 ".type PMPI_Win_get_info,@function\n"
 ".text\n"
 "PMPI_Win_get_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_get_info\n"
+"b A_MPI_Win_get_info\n"
+"inwrap_MPI_Win_get_info:\n"
+"b R_MPI_Win_get_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -10920,6 +12470,7 @@ __asm__(
 "jmp *A_MPI_Win_get_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_get_info:\n"
 "jmp *R_MPI_Win_get_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_get_info,.-PMPI_Win_get_info\n"
 
 );
@@ -10970,6 +12521,16 @@ __asm__(
 ".type PMPI_Win_set_info,@function\n"
 ".text\n"
 "PMPI_Win_set_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_set_info\n"
+"b A_MPI_Win_set_info\n"
+"inwrap_MPI_Win_set_info:\n"
+"b R_MPI_Win_set_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -10988,6 +12549,7 @@ __asm__(
 "jmp *A_MPI_Win_set_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_set_info:\n"
 "jmp *R_MPI_Win_set_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_set_info,.-PMPI_Win_set_info\n"
 
 );
@@ -11038,6 +12600,16 @@ __asm__(
 ".type PMPI_Get_accumulate,@function\n"
 ".text\n"
 "PMPI_Get_accumulate:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_accumulate\n"
+"b A_MPI_Get_accumulate\n"
+"inwrap_MPI_Get_accumulate:\n"
+"b R_MPI_Get_accumulate\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -11064,6 +12636,7 @@ __asm__(
 "jmp *A_MPI_Get_accumulate@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_accumulate:\n"
 "jmp *R_MPI_Get_accumulate@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_accumulate,.-PMPI_Get_accumulate\n"
 
 );
@@ -11134,6 +12707,16 @@ __asm__(
 ".type PMPI_Fetch_and_op,@function\n"
 ".text\n"
 "PMPI_Fetch_and_op:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Fetch_and_op\n"
+"b A_MPI_Fetch_and_op\n"
+"inwrap_MPI_Fetch_and_op:\n"
+"b R_MPI_Fetch_and_op\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -11160,6 +12743,7 @@ __asm__(
 "jmp *A_MPI_Fetch_and_op@GOTPCREL(%rip)\n"
 "inwrap_MPI_Fetch_and_op:\n"
 "jmp *R_MPI_Fetch_and_op@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Fetch_and_op,.-PMPI_Fetch_and_op\n"
 
 );
@@ -11220,6 +12804,16 @@ __asm__(
 ".type PMPI_Compare_and_swap,@function\n"
 ".text\n"
 "PMPI_Compare_and_swap:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Compare_and_swap\n"
+"b A_MPI_Compare_and_swap\n"
+"inwrap_MPI_Compare_and_swap:\n"
+"b R_MPI_Compare_and_swap\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -11246,6 +12840,7 @@ __asm__(
 "jmp *A_MPI_Compare_and_swap@GOTPCREL(%rip)\n"
 "inwrap_MPI_Compare_and_swap:\n"
 "jmp *R_MPI_Compare_and_swap@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Compare_and_swap,.-PMPI_Compare_and_swap\n"
 
 );
@@ -11305,6 +12900,16 @@ __asm__(
 ".type PMPI_Rput,@function\n"
 ".text\n"
 "PMPI_Rput:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Rput\n"
+"b A_MPI_Rput\n"
+"inwrap_MPI_Rput:\n"
+"b R_MPI_Rput\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -11331,6 +12936,7 @@ __asm__(
 "jmp *A_MPI_Rput@GOTPCREL(%rip)\n"
 "inwrap_MPI_Rput:\n"
 "jmp *R_MPI_Rput@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Rput,.-PMPI_Rput\n"
 
 );
@@ -11397,6 +13003,16 @@ __asm__(
 ".type PMPI_Rget,@function\n"
 ".text\n"
 "PMPI_Rget:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Rget\n"
+"b A_MPI_Rget\n"
+"inwrap_MPI_Rget:\n"
+"b R_MPI_Rget\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -11423,6 +13039,7 @@ __asm__(
 "jmp *A_MPI_Rget@GOTPCREL(%rip)\n"
 "inwrap_MPI_Rget:\n"
 "jmp *R_MPI_Rget@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Rget,.-PMPI_Rget\n"
 
 );
@@ -11490,6 +13107,16 @@ __asm__(
 ".type PMPI_Raccumulate,@function\n"
 ".text\n"
 "PMPI_Raccumulate:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Raccumulate\n"
+"b A_MPI_Raccumulate\n"
+"inwrap_MPI_Raccumulate:\n"
+"b R_MPI_Raccumulate\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -11516,6 +13143,7 @@ __asm__(
 "jmp *A_MPI_Raccumulate@GOTPCREL(%rip)\n"
 "inwrap_MPI_Raccumulate:\n"
 "jmp *R_MPI_Raccumulate@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Raccumulate,.-PMPI_Raccumulate\n"
 
 );
@@ -11584,6 +13212,16 @@ __asm__(
 ".type PMPI_Rget_accumulate,@function\n"
 ".text\n"
 "PMPI_Rget_accumulate:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Rget_accumulate\n"
+"b A_MPI_Rget_accumulate\n"
+"inwrap_MPI_Rget_accumulate:\n"
+"b R_MPI_Rget_accumulate\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -11610,6 +13248,7 @@ __asm__(
 "jmp *A_MPI_Rget_accumulate@GOTPCREL(%rip)\n"
 "inwrap_MPI_Rget_accumulate:\n"
 "jmp *R_MPI_Rget_accumulate@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Rget_accumulate,.-PMPI_Rget_accumulate\n"
 
 );
@@ -11685,6 +13324,16 @@ __asm__(
 ".type PMPI_Win_lock_all,@function\n"
 ".text\n"
 "PMPI_Win_lock_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_lock_all\n"
+"b A_MPI_Win_lock_all\n"
+"inwrap_MPI_Win_lock_all:\n"
+"b R_MPI_Win_lock_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -11703,6 +13352,7 @@ __asm__(
 "jmp *A_MPI_Win_lock_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_lock_all:\n"
 "jmp *R_MPI_Win_lock_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_lock_all,.-PMPI_Win_lock_all\n"
 
 );
@@ -11752,6 +13402,16 @@ __asm__(
 ".type PMPI_Win_unlock_all,@function\n"
 ".text\n"
 "PMPI_Win_unlock_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_unlock_all\n"
+"b A_MPI_Win_unlock_all\n"
+"inwrap_MPI_Win_unlock_all:\n"
+"b R_MPI_Win_unlock_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -11768,6 +13428,7 @@ __asm__(
 "jmp *A_MPI_Win_unlock_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_unlock_all:\n"
 "jmp *R_MPI_Win_unlock_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_unlock_all,.-PMPI_Win_unlock_all\n"
 
 );
@@ -11815,6 +13476,16 @@ __asm__(
 ".type PMPI_Win_flush,@function\n"
 ".text\n"
 "PMPI_Win_flush:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_flush\n"
+"b A_MPI_Win_flush\n"
+"inwrap_MPI_Win_flush:\n"
+"b R_MPI_Win_flush\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -11833,6 +13504,7 @@ __asm__(
 "jmp *A_MPI_Win_flush@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_flush:\n"
 "jmp *R_MPI_Win_flush@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_flush,.-PMPI_Win_flush\n"
 
 );
@@ -11882,6 +13554,16 @@ __asm__(
 ".type PMPI_Win_flush_all,@function\n"
 ".text\n"
 "PMPI_Win_flush_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_flush_all\n"
+"b A_MPI_Win_flush_all\n"
+"inwrap_MPI_Win_flush_all:\n"
+"b R_MPI_Win_flush_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -11898,6 +13580,7 @@ __asm__(
 "jmp *A_MPI_Win_flush_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_flush_all:\n"
 "jmp *R_MPI_Win_flush_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_flush_all,.-PMPI_Win_flush_all\n"
 
 );
@@ -11945,6 +13628,16 @@ __asm__(
 ".type PMPI_Win_flush_local,@function\n"
 ".text\n"
 "PMPI_Win_flush_local:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_flush_local\n"
+"b A_MPI_Win_flush_local\n"
+"inwrap_MPI_Win_flush_local:\n"
+"b R_MPI_Win_flush_local\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -11963,6 +13656,7 @@ __asm__(
 "jmp *A_MPI_Win_flush_local@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_flush_local:\n"
 "jmp *R_MPI_Win_flush_local@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_flush_local,.-PMPI_Win_flush_local\n"
 
 );
@@ -12012,6 +13706,16 @@ __asm__(
 ".type PMPI_Win_flush_local_all,@function\n"
 ".text\n"
 "PMPI_Win_flush_local_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_flush_local_all\n"
+"b A_MPI_Win_flush_local_all\n"
+"inwrap_MPI_Win_flush_local_all:\n"
+"b R_MPI_Win_flush_local_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12028,6 +13732,7 @@ __asm__(
 "jmp *A_MPI_Win_flush_local_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_flush_local_all:\n"
 "jmp *R_MPI_Win_flush_local_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_flush_local_all,.-PMPI_Win_flush_local_all\n"
 
 );
@@ -12075,6 +13780,16 @@ __asm__(
 ".type PMPI_Win_sync,@function\n"
 ".text\n"
 "PMPI_Win_sync:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_sync\n"
+"b A_MPI_Win_sync\n"
+"inwrap_MPI_Win_sync:\n"
+"b R_MPI_Win_sync\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12091,6 +13806,7 @@ __asm__(
 "jmp *A_MPI_Win_sync@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_sync:\n"
 "jmp *R_MPI_Win_sync@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_sync,.-PMPI_Win_sync\n"
 
 );
@@ -12138,6 +13854,16 @@ __asm__(
 ".type PMPI_Add_error_class,@function\n"
 ".text\n"
 "PMPI_Add_error_class:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Add_error_class\n"
+"b A_MPI_Add_error_class\n"
+"inwrap_MPI_Add_error_class:\n"
+"b R_MPI_Add_error_class\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12154,6 +13880,7 @@ __asm__(
 "jmp *A_MPI_Add_error_class@GOTPCREL(%rip)\n"
 "inwrap_MPI_Add_error_class:\n"
 "jmp *R_MPI_Add_error_class@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Add_error_class,.-PMPI_Add_error_class\n"
 
 );
@@ -12201,6 +13928,16 @@ __asm__(
 ".type PMPI_Add_error_code,@function\n"
 ".text\n"
 "PMPI_Add_error_code:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Add_error_code\n"
+"b A_MPI_Add_error_code\n"
+"inwrap_MPI_Add_error_code:\n"
+"b R_MPI_Add_error_code\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12219,6 +13956,7 @@ __asm__(
 "jmp *A_MPI_Add_error_code@GOTPCREL(%rip)\n"
 "inwrap_MPI_Add_error_code:\n"
 "jmp *R_MPI_Add_error_code@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Add_error_code,.-PMPI_Add_error_code\n"
 
 );
@@ -12268,6 +14006,16 @@ __asm__(
 ".type PMPI_Add_error_string,@function\n"
 ".text\n"
 "PMPI_Add_error_string:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Add_error_string\n"
+"b A_MPI_Add_error_string\n"
+"inwrap_MPI_Add_error_string:\n"
+"b R_MPI_Add_error_string\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12286,6 +14034,7 @@ __asm__(
 "jmp *A_MPI_Add_error_string@GOTPCREL(%rip)\n"
 "inwrap_MPI_Add_error_string:\n"
 "jmp *R_MPI_Add_error_string@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Add_error_string,.-PMPI_Add_error_string\n"
 
 );
@@ -12335,6 +14084,16 @@ __asm__(
 ".type PMPI_Comm_call_errhandler,@function\n"
 ".text\n"
 "PMPI_Comm_call_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_call_errhandler\n"
+"b A_MPI_Comm_call_errhandler\n"
+"inwrap_MPI_Comm_call_errhandler:\n"
+"b R_MPI_Comm_call_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12353,6 +14112,7 @@ __asm__(
 "jmp *A_MPI_Comm_call_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_call_errhandler:\n"
 "jmp *R_MPI_Comm_call_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_call_errhandler,.-PMPI_Comm_call_errhandler\n"
 
 );
@@ -12402,6 +14162,16 @@ __asm__(
 ".type PMPI_Comm_delete_attr,@function\n"
 ".text\n"
 "PMPI_Comm_delete_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_delete_attr\n"
+"b A_MPI_Comm_delete_attr\n"
+"inwrap_MPI_Comm_delete_attr:\n"
+"b R_MPI_Comm_delete_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12420,6 +14190,7 @@ __asm__(
 "jmp *A_MPI_Comm_delete_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_delete_attr:\n"
 "jmp *R_MPI_Comm_delete_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_delete_attr,.-PMPI_Comm_delete_attr\n"
 
 );
@@ -12469,6 +14240,16 @@ __asm__(
 ".type PMPI_Comm_get_attr,@function\n"
 ".text\n"
 "PMPI_Comm_get_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_get_attr\n"
+"b A_MPI_Comm_get_attr\n"
+"inwrap_MPI_Comm_get_attr:\n"
+"b R_MPI_Comm_get_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -12491,6 +14272,7 @@ __asm__(
 "jmp *A_MPI_Comm_get_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_get_attr:\n"
 "jmp *R_MPI_Comm_get_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_get_attr,.-PMPI_Comm_get_attr\n"
 
 );
@@ -12544,6 +14326,16 @@ __asm__(
 ".type PMPI_Comm_get_name,@function\n"
 ".text\n"
 "PMPI_Comm_get_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_get_name\n"
+"b A_MPI_Comm_get_name\n"
+"inwrap_MPI_Comm_get_name:\n"
+"b R_MPI_Comm_get_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -12564,6 +14356,7 @@ __asm__(
 "jmp *A_MPI_Comm_get_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_get_name:\n"
 "jmp *R_MPI_Comm_get_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_get_name,.-PMPI_Comm_get_name\n"
 
 );
@@ -12615,6 +14408,16 @@ __asm__(
 ".type PMPI_Comm_set_attr,@function\n"
 ".text\n"
 "PMPI_Comm_set_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_set_attr\n"
+"b A_MPI_Comm_set_attr\n"
+"inwrap_MPI_Comm_set_attr:\n"
+"b R_MPI_Comm_set_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -12635,6 +14438,7 @@ __asm__(
 "jmp *A_MPI_Comm_set_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_set_attr:\n"
 "jmp *R_MPI_Comm_set_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_set_attr,.-PMPI_Comm_set_attr\n"
 
 );
@@ -12686,6 +14490,16 @@ __asm__(
 ".type PMPI_Comm_set_name,@function\n"
 ".text\n"
 "PMPI_Comm_set_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_set_name\n"
+"b A_MPI_Comm_set_name\n"
+"inwrap_MPI_Comm_set_name:\n"
+"b R_MPI_Comm_set_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12704,6 +14518,7 @@ __asm__(
 "jmp *A_MPI_Comm_set_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_set_name:\n"
 "jmp *R_MPI_Comm_set_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_set_name,.-PMPI_Comm_set_name\n"
 
 );
@@ -12754,6 +14569,16 @@ __asm__(
 ".type PMPI_Grequest_complete,@function\n"
 ".text\n"
 "PMPI_Grequest_complete:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Grequest_complete\n"
+"b A_MPI_Grequest_complete\n"
+"inwrap_MPI_Grequest_complete:\n"
+"b R_MPI_Grequest_complete\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12770,6 +14595,7 @@ __asm__(
 "jmp *A_MPI_Grequest_complete@GOTPCREL(%rip)\n"
 "inwrap_MPI_Grequest_complete:\n"
 "jmp *R_MPI_Grequest_complete@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Grequest_complete,.-PMPI_Grequest_complete\n"
 
 );
@@ -12818,6 +14644,16 @@ __asm__(
 ".type PMPI_Grequest_start,@function\n"
 ".text\n"
 "PMPI_Grequest_start:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Grequest_start\n"
+"b A_MPI_Grequest_start\n"
+"inwrap_MPI_Grequest_start:\n"
+"b R_MPI_Grequest_start\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -12842,6 +14678,7 @@ __asm__(
 "jmp *A_MPI_Grequest_start@GOTPCREL(%rip)\n"
 "inwrap_MPI_Grequest_start:\n"
 "jmp *R_MPI_Grequest_start@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Grequest_start,.-PMPI_Grequest_start\n"
 
 );
@@ -12900,6 +14737,16 @@ __asm__(
 ".type PMPI_Init_thread,@function\n"
 ".text\n"
 "PMPI_Init_thread:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Init_thread\n"
+"b A_MPI_Init_thread\n"
+"inwrap_MPI_Init_thread:\n"
+"b R_MPI_Init_thread\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -12922,6 +14769,7 @@ __asm__(
 "jmp *A_MPI_Init_thread@GOTPCREL(%rip)\n"
 "inwrap_MPI_Init_thread:\n"
 "jmp *R_MPI_Init_thread@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Init_thread,.-PMPI_Init_thread\n"
 
 );
@@ -12975,6 +14823,16 @@ __asm__(
 ".type PMPI_Is_thread_main,@function\n"
 ".text\n"
 "PMPI_Is_thread_main:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Is_thread_main\n"
+"b A_MPI_Is_thread_main\n"
+"inwrap_MPI_Is_thread_main:\n"
+"b R_MPI_Is_thread_main\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -12991,6 +14849,7 @@ __asm__(
 "jmp *A_MPI_Is_thread_main@GOTPCREL(%rip)\n"
 "inwrap_MPI_Is_thread_main:\n"
 "jmp *R_MPI_Is_thread_main@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Is_thread_main,.-PMPI_Is_thread_main\n"
 
 );
@@ -13038,6 +14897,16 @@ __asm__(
 ".type PMPI_Query_thread,@function\n"
 ".text\n"
 "PMPI_Query_thread:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Query_thread\n"
+"b A_MPI_Query_thread\n"
+"inwrap_MPI_Query_thread:\n"
+"b R_MPI_Query_thread\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -13054,6 +14923,7 @@ __asm__(
 "jmp *A_MPI_Query_thread@GOTPCREL(%rip)\n"
 "inwrap_MPI_Query_thread:\n"
 "jmp *R_MPI_Query_thread@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Query_thread,.-PMPI_Query_thread\n"
 
 );
@@ -13101,6 +14971,16 @@ __asm__(
 ".type PMPI_Status_set_cancelled,@function\n"
 ".text\n"
 "PMPI_Status_set_cancelled:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Status_set_cancelled\n"
+"b A_MPI_Status_set_cancelled\n"
+"inwrap_MPI_Status_set_cancelled:\n"
+"b R_MPI_Status_set_cancelled\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -13119,6 +14999,7 @@ __asm__(
 "jmp *A_MPI_Status_set_cancelled@GOTPCREL(%rip)\n"
 "inwrap_MPI_Status_set_cancelled:\n"
 "jmp *R_MPI_Status_set_cancelled@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Status_set_cancelled,.-PMPI_Status_set_cancelled\n"
 
 );
@@ -13170,6 +15051,16 @@ __asm__(
 ".type PMPI_Status_set_elements,@function\n"
 ".text\n"
 "PMPI_Status_set_elements:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Status_set_elements\n"
+"b A_MPI_Status_set_elements\n"
+"inwrap_MPI_Status_set_elements:\n"
+"b R_MPI_Status_set_elements\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -13190,6 +15081,7 @@ __asm__(
 "jmp *A_MPI_Status_set_elements@GOTPCREL(%rip)\n"
 "inwrap_MPI_Status_set_elements:\n"
 "jmp *R_MPI_Status_set_elements@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Status_set_elements,.-PMPI_Status_set_elements\n"
 
 );
@@ -13243,6 +15135,16 @@ __asm__(
 ".type PMPI_Type_create_keyval,@function\n"
 ".text\n"
 "PMPI_Type_create_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_keyval\n"
+"b A_MPI_Type_create_keyval\n"
+"inwrap_MPI_Type_create_keyval:\n"
+"b R_MPI_Type_create_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -13265,6 +15167,7 @@ __asm__(
 "jmp *A_MPI_Type_create_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_keyval:\n"
 "jmp *R_MPI_Type_create_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_keyval,.-PMPI_Type_create_keyval\n"
 
 );
@@ -13318,6 +15221,16 @@ __asm__(
 ".type PMPI_Type_delete_attr,@function\n"
 ".text\n"
 "PMPI_Type_delete_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_delete_attr\n"
+"b A_MPI_Type_delete_attr\n"
+"inwrap_MPI_Type_delete_attr:\n"
+"b R_MPI_Type_delete_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -13336,6 +15249,7 @@ __asm__(
 "jmp *A_MPI_Type_delete_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_delete_attr:\n"
 "jmp *R_MPI_Type_delete_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_delete_attr,.-PMPI_Type_delete_attr\n"
 
 );
@@ -13386,6 +15300,16 @@ __asm__(
 ".type PMPI_Type_dup,@function\n"
 ".text\n"
 "PMPI_Type_dup:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_dup\n"
+"b A_MPI_Type_dup\n"
+"inwrap_MPI_Type_dup:\n"
+"b R_MPI_Type_dup\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -13404,6 +15328,7 @@ __asm__(
 "jmp *A_MPI_Type_dup@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_dup:\n"
 "jmp *R_MPI_Type_dup@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_dup,.-PMPI_Type_dup\n"
 
 );
@@ -13454,6 +15379,16 @@ __asm__(
 ".type PMPI_Type_free_keyval,@function\n"
 ".text\n"
 "PMPI_Type_free_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_free_keyval\n"
+"b A_MPI_Type_free_keyval\n"
+"inwrap_MPI_Type_free_keyval:\n"
+"b R_MPI_Type_free_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -13470,6 +15405,7 @@ __asm__(
 "jmp *A_MPI_Type_free_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_free_keyval:\n"
 "jmp *R_MPI_Type_free_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_free_keyval,.-PMPI_Type_free_keyval\n"
 
 );
@@ -13519,6 +15455,16 @@ __asm__(
 ".type PMPI_Type_get_attr,@function\n"
 ".text\n"
 "PMPI_Type_get_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_attr\n"
+"b A_MPI_Type_get_attr\n"
+"inwrap_MPI_Type_get_attr:\n"
+"b R_MPI_Type_get_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -13541,6 +15487,7 @@ __asm__(
 "jmp *A_MPI_Type_get_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_attr:\n"
 "jmp *R_MPI_Type_get_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_attr,.-PMPI_Type_get_attr\n"
 
 );
@@ -13594,6 +15541,16 @@ __asm__(
 ".type PMPI_Type_get_envelope,@function\n"
 ".text\n"
 "PMPI_Type_get_envelope:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_envelope\n"
+"b A_MPI_Type_get_envelope\n"
+"inwrap_MPI_Type_get_envelope:\n"
+"b R_MPI_Type_get_envelope\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -13618,6 +15575,7 @@ __asm__(
 "jmp *A_MPI_Type_get_envelope@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_envelope:\n"
 "jmp *R_MPI_Type_get_envelope@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_envelope,.-PMPI_Type_get_envelope\n"
 
 );
@@ -13673,6 +15631,16 @@ __asm__(
 ".type PMPI_Type_get_name,@function\n"
 ".text\n"
 "PMPI_Type_get_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_name\n"
+"b A_MPI_Type_get_name\n"
+"inwrap_MPI_Type_get_name:\n"
+"b R_MPI_Type_get_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -13693,6 +15661,7 @@ __asm__(
 "jmp *A_MPI_Type_get_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_name:\n"
 "jmp *R_MPI_Type_get_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_name,.-PMPI_Type_get_name\n"
 
 );
@@ -13744,6 +15713,16 @@ __asm__(
 ".type PMPI_Type_set_attr,@function\n"
 ".text\n"
 "PMPI_Type_set_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_set_attr\n"
+"b A_MPI_Type_set_attr\n"
+"inwrap_MPI_Type_set_attr:\n"
+"b R_MPI_Type_set_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -13764,6 +15743,7 @@ __asm__(
 "jmp *A_MPI_Type_set_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_set_attr:\n"
 "jmp *R_MPI_Type_set_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_set_attr,.-PMPI_Type_set_attr\n"
 
 );
@@ -13816,6 +15796,16 @@ __asm__(
 ".type PMPI_Type_set_name,@function\n"
 ".text\n"
 "PMPI_Type_set_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_set_name\n"
+"b A_MPI_Type_set_name\n"
+"inwrap_MPI_Type_set_name:\n"
+"b R_MPI_Type_set_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -13834,6 +15824,7 @@ __asm__(
 "jmp *A_MPI_Type_set_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_set_name:\n"
 "jmp *R_MPI_Type_set_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_set_name,.-PMPI_Type_set_name\n"
 
 );
@@ -13884,6 +15875,16 @@ __asm__(
 ".type PMPI_Type_match_size,@function\n"
 ".text\n"
 "PMPI_Type_match_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_match_size\n"
+"b A_MPI_Type_match_size\n"
+"inwrap_MPI_Type_match_size:\n"
+"b R_MPI_Type_match_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -13904,6 +15905,7 @@ __asm__(
 "jmp *A_MPI_Type_match_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_match_size:\n"
 "jmp *R_MPI_Type_match_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_match_size,.-PMPI_Type_match_size\n"
 
 );
@@ -13956,6 +15958,16 @@ __asm__(
 ".type PMPI_Win_create_keyval,@function\n"
 ".text\n"
 "PMPI_Win_create_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_create_keyval\n"
+"b A_MPI_Win_create_keyval\n"
+"inwrap_MPI_Win_create_keyval:\n"
+"b R_MPI_Win_create_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -13978,6 +15990,7 @@ __asm__(
 "jmp *A_MPI_Win_create_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_create_keyval:\n"
 "jmp *R_MPI_Win_create_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_create_keyval,.-PMPI_Win_create_keyval\n"
 
 );
@@ -14031,6 +16044,16 @@ __asm__(
 ".type PMPI_Win_delete_attr,@function\n"
 ".text\n"
 "PMPI_Win_delete_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_delete_attr\n"
+"b A_MPI_Win_delete_attr\n"
+"inwrap_MPI_Win_delete_attr:\n"
+"b R_MPI_Win_delete_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14049,6 +16072,7 @@ __asm__(
 "jmp *A_MPI_Win_delete_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_delete_attr:\n"
 "jmp *R_MPI_Win_delete_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_delete_attr,.-PMPI_Win_delete_attr\n"
 
 );
@@ -14099,6 +16123,16 @@ __asm__(
 ".type PMPI_Win_free_keyval,@function\n"
 ".text\n"
 "PMPI_Win_free_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_free_keyval\n"
+"b A_MPI_Win_free_keyval\n"
+"inwrap_MPI_Win_free_keyval:\n"
+"b R_MPI_Win_free_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14115,6 +16149,7 @@ __asm__(
 "jmp *A_MPI_Win_free_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_free_keyval:\n"
 "jmp *R_MPI_Win_free_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_free_keyval,.-PMPI_Win_free_keyval\n"
 
 );
@@ -14164,6 +16199,16 @@ __asm__(
 ".type PMPI_Win_get_name,@function\n"
 ".text\n"
 "PMPI_Win_get_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_get_name\n"
+"b A_MPI_Win_get_name\n"
+"inwrap_MPI_Win_get_name:\n"
+"b R_MPI_Win_get_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -14184,6 +16229,7 @@ __asm__(
 "jmp *A_MPI_Win_get_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_get_name:\n"
 "jmp *R_MPI_Win_get_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_get_name,.-PMPI_Win_get_name\n"
 
 );
@@ -14235,6 +16281,16 @@ __asm__(
 ".type PMPI_Win_set_name,@function\n"
 ".text\n"
 "PMPI_Win_set_name:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_set_name\n"
+"b A_MPI_Win_set_name\n"
+"inwrap_MPI_Win_set_name:\n"
+"b R_MPI_Win_set_name\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14253,6 +16309,7 @@ __asm__(
 "jmp *A_MPI_Win_set_name@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_set_name:\n"
 "jmp *R_MPI_Win_set_name@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_set_name,.-PMPI_Win_set_name\n"
 
 );
@@ -14303,6 +16360,16 @@ __asm__(
 ".type PMPI_Alloc_mem,@function\n"
 ".text\n"
 "PMPI_Alloc_mem:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Alloc_mem\n"
+"b A_MPI_Alloc_mem\n"
+"inwrap_MPI_Alloc_mem:\n"
+"b R_MPI_Alloc_mem\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -14323,6 +16390,7 @@ __asm__(
 "jmp *A_MPI_Alloc_mem@GOTPCREL(%rip)\n"
 "inwrap_MPI_Alloc_mem:\n"
 "jmp *R_MPI_Alloc_mem@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Alloc_mem,.-PMPI_Alloc_mem\n"
 
 );
@@ -14375,6 +16443,16 @@ __asm__(
 ".type PMPI_Comm_create_errhandler,@function\n"
 ".text\n"
 "PMPI_Comm_create_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_create_errhandler\n"
+"b A_MPI_Comm_create_errhandler\n"
+"inwrap_MPI_Comm_create_errhandler:\n"
+"b R_MPI_Comm_create_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14393,6 +16471,7 @@ __asm__(
 "jmp *A_MPI_Comm_create_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_create_errhandler:\n"
 "jmp *R_MPI_Comm_create_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_create_errhandler,.-PMPI_Comm_create_errhandler\n"
 
 );
@@ -14443,6 +16522,16 @@ __asm__(
 ".type PMPI_Comm_get_errhandler,@function\n"
 ".text\n"
 "PMPI_Comm_get_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_get_errhandler\n"
+"b A_MPI_Comm_get_errhandler\n"
+"inwrap_MPI_Comm_get_errhandler:\n"
+"b R_MPI_Comm_get_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14461,6 +16550,7 @@ __asm__(
 "jmp *A_MPI_Comm_get_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_get_errhandler:\n"
 "jmp *R_MPI_Comm_get_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_get_errhandler,.-PMPI_Comm_get_errhandler\n"
 
 );
@@ -14515,6 +16605,16 @@ __asm__(
 ".type PMPI_Comm_set_errhandler,@function\n"
 ".text\n"
 "PMPI_Comm_set_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_set_errhandler\n"
+"b A_MPI_Comm_set_errhandler\n"
+"inwrap_MPI_Comm_set_errhandler:\n"
+"b R_MPI_Comm_set_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14533,6 +16633,7 @@ __asm__(
 "jmp *A_MPI_Comm_set_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_set_errhandler:\n"
 "jmp *R_MPI_Comm_set_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_set_errhandler,.-PMPI_Comm_set_errhandler\n"
 
 );
@@ -14587,6 +16688,16 @@ __asm__(
 ".type PMPI_File_get_errhandler,@function\n"
 ".text\n"
 "PMPI_File_get_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_errhandler\n"
+"b A_MPI_File_get_errhandler\n"
+"inwrap_MPI_File_get_errhandler:\n"
+"b R_MPI_File_get_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14605,6 +16716,7 @@ __asm__(
 "jmp *A_MPI_File_get_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_errhandler:\n"
 "jmp *R_MPI_File_get_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_errhandler,.-PMPI_File_get_errhandler\n"
 
 );
@@ -14657,6 +16769,16 @@ __asm__(
 ".type PMPI_File_set_errhandler,@function\n"
 ".text\n"
 "PMPI_File_set_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_set_errhandler\n"
+"b A_MPI_File_set_errhandler\n"
+"inwrap_MPI_File_set_errhandler:\n"
+"b R_MPI_File_set_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14675,6 +16797,7 @@ __asm__(
 "jmp *A_MPI_File_set_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_set_errhandler:\n"
 "jmp *R_MPI_File_set_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_set_errhandler,.-PMPI_File_set_errhandler\n"
 
 );
@@ -14725,6 +16848,16 @@ __asm__(
 ".type PMPI_Finalized,@function\n"
 ".text\n"
 "PMPI_Finalized:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Finalized\n"
+"b A_MPI_Finalized\n"
+"inwrap_MPI_Finalized:\n"
+"b R_MPI_Finalized\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14741,6 +16874,7 @@ __asm__(
 "jmp *A_MPI_Finalized@GOTPCREL(%rip)\n"
 "inwrap_MPI_Finalized:\n"
 "jmp *R_MPI_Finalized@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Finalized,.-PMPI_Finalized\n"
 
 );
@@ -14788,6 +16922,16 @@ __asm__(
 ".type PMPI_Free_mem,@function\n"
 ".text\n"
 "PMPI_Free_mem:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Free_mem\n"
+"b A_MPI_Free_mem\n"
+"inwrap_MPI_Free_mem:\n"
+"b R_MPI_Free_mem\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14804,6 +16948,7 @@ __asm__(
 "jmp *A_MPI_Free_mem@GOTPCREL(%rip)\n"
 "inwrap_MPI_Free_mem:\n"
 "jmp *R_MPI_Free_mem@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Free_mem,.-PMPI_Free_mem\n"
 
 );
@@ -14851,6 +16996,16 @@ __asm__(
 ".type PMPI_Get_address,@function\n"
 ".text\n"
 "PMPI_Get_address:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_address\n"
+"b A_MPI_Get_address\n"
+"inwrap_MPI_Get_address:\n"
+"b R_MPI_Get_address\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14869,6 +17024,7 @@ __asm__(
 "jmp *A_MPI_Get_address@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_address:\n"
 "jmp *R_MPI_Get_address@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_address,.-PMPI_Get_address\n"
 
 );
@@ -14919,6 +17075,16 @@ __asm__(
 ".type PMPI_Info_create,@function\n"
 ".text\n"
 "PMPI_Info_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_create\n"
+"b A_MPI_Info_create\n"
+"inwrap_MPI_Info_create:\n"
+"b R_MPI_Info_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -14935,6 +17101,7 @@ __asm__(
 "jmp *A_MPI_Info_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_create:\n"
 "jmp *R_MPI_Info_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_create,.-PMPI_Info_create\n"
 
 );
@@ -14983,6 +17150,16 @@ __asm__(
 ".type PMPI_Info_delete,@function\n"
 ".text\n"
 "PMPI_Info_delete:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_delete\n"
+"b A_MPI_Info_delete\n"
+"inwrap_MPI_Info_delete:\n"
+"b R_MPI_Info_delete\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -15001,6 +17178,7 @@ __asm__(
 "jmp *A_MPI_Info_delete@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_delete:\n"
 "jmp *R_MPI_Info_delete@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_delete,.-PMPI_Info_delete\n"
 
 );
@@ -15051,6 +17229,16 @@ __asm__(
 ".type PMPI_Info_dup,@function\n"
 ".text\n"
 "PMPI_Info_dup:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_dup\n"
+"b A_MPI_Info_dup\n"
+"inwrap_MPI_Info_dup:\n"
+"b R_MPI_Info_dup\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -15069,6 +17257,7 @@ __asm__(
 "jmp *A_MPI_Info_dup@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_dup:\n"
 "jmp *R_MPI_Info_dup@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_dup,.-PMPI_Info_dup\n"
 
 );
@@ -15119,6 +17308,16 @@ __asm__(
 ".type PMPI_Info_free,@function\n"
 ".text\n"
 "PMPI_Info_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_free\n"
+"b A_MPI_Info_free\n"
+"inwrap_MPI_Info_free:\n"
+"b R_MPI_Info_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -15135,6 +17334,7 @@ __asm__(
 "jmp *A_MPI_Info_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_free:\n"
 "jmp *R_MPI_Info_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_free,.-PMPI_Info_free\n"
 
 );
@@ -15183,6 +17383,16 @@ __asm__(
 ".type PMPI_Info_get,@function\n"
 ".text\n"
 "PMPI_Info_get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_get\n"
+"b A_MPI_Info_get\n"
+"inwrap_MPI_Info_get:\n"
+"b R_MPI_Info_get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -15207,6 +17417,7 @@ __asm__(
 "jmp *A_MPI_Info_get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_get:\n"
 "jmp *R_MPI_Info_get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_get,.-PMPI_Info_get\n"
 
 );
@@ -15262,6 +17473,16 @@ __asm__(
 ".type PMPI_Info_get_nkeys,@function\n"
 ".text\n"
 "PMPI_Info_get_nkeys:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_get_nkeys\n"
+"b A_MPI_Info_get_nkeys\n"
+"inwrap_MPI_Info_get_nkeys:\n"
+"b R_MPI_Info_get_nkeys\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -15280,6 +17501,7 @@ __asm__(
 "jmp *A_MPI_Info_get_nkeys@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_get_nkeys:\n"
 "jmp *R_MPI_Info_get_nkeys@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_get_nkeys,.-PMPI_Info_get_nkeys\n"
 
 );
@@ -15329,6 +17551,16 @@ __asm__(
 ".type PMPI_Info_get_nthkey,@function\n"
 ".text\n"
 "PMPI_Info_get_nthkey:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_get_nthkey\n"
+"b A_MPI_Info_get_nthkey\n"
+"inwrap_MPI_Info_get_nthkey:\n"
+"b R_MPI_Info_get_nthkey\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -15349,6 +17581,7 @@ __asm__(
 "jmp *A_MPI_Info_get_nthkey@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_get_nthkey:\n"
 "jmp *R_MPI_Info_get_nthkey@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_get_nthkey,.-PMPI_Info_get_nthkey\n"
 
 );
@@ -15400,6 +17633,16 @@ __asm__(
 ".type PMPI_Info_get_valuelen,@function\n"
 ".text\n"
 "PMPI_Info_get_valuelen:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_get_valuelen\n"
+"b A_MPI_Info_get_valuelen\n"
+"inwrap_MPI_Info_get_valuelen:\n"
+"b R_MPI_Info_get_valuelen\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -15422,6 +17665,7 @@ __asm__(
 "jmp *A_MPI_Info_get_valuelen@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_get_valuelen:\n"
 "jmp *R_MPI_Info_get_valuelen@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_get_valuelen,.-PMPI_Info_get_valuelen\n"
 
 );
@@ -15475,6 +17719,16 @@ __asm__(
 ".type PMPI_Info_set,@function\n"
 ".text\n"
 "PMPI_Info_set:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_set\n"
+"b A_MPI_Info_set\n"
+"inwrap_MPI_Info_set:\n"
+"b R_MPI_Info_set\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -15495,6 +17749,7 @@ __asm__(
 "jmp *A_MPI_Info_set@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_set:\n"
 "jmp *R_MPI_Info_set@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Info_set,.-PMPI_Info_set\n"
 
 );
@@ -15547,6 +17802,16 @@ __asm__(
 ".type PMPI_Request_get_status,@function\n"
 ".text\n"
 "PMPI_Request_get_status:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Request_get_status\n"
+"b A_MPI_Request_get_status\n"
+"inwrap_MPI_Request_get_status:\n"
+"b R_MPI_Request_get_status\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -15567,6 +17832,7 @@ __asm__(
 "jmp *A_MPI_Request_get_status@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_get_status:\n"
 "jmp *R_MPI_Request_get_status@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Request_get_status,.-PMPI_Request_get_status\n"
 
 );
@@ -15619,6 +17885,16 @@ __asm__(
 ".type PMPI_Type_create_hvector,@function\n"
 ".text\n"
 "PMPI_Type_create_hvector:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_hvector\n"
+"b A_MPI_Type_create_hvector\n"
+"inwrap_MPI_Type_create_hvector:\n"
+"b R_MPI_Type_create_hvector\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -15643,6 +17919,7 @@ __asm__(
 "jmp *A_MPI_Type_create_hvector@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_hvector:\n"
 "jmp *R_MPI_Type_create_hvector@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_hvector,.-PMPI_Type_create_hvector\n"
 
 );
@@ -15699,6 +17976,16 @@ __asm__(
 ".type PMPI_Type_create_resized,@function\n"
 ".text\n"
 "PMPI_Type_create_resized:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_resized\n"
+"b A_MPI_Type_create_resized\n"
+"inwrap_MPI_Type_create_resized:\n"
+"b R_MPI_Type_create_resized\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -15721,6 +18008,7 @@ __asm__(
 "jmp *A_MPI_Type_create_resized@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_resized:\n"
 "jmp *R_MPI_Type_create_resized@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_resized,.-PMPI_Type_create_resized\n"
 
 );
@@ -15775,6 +18063,16 @@ __asm__(
 ".type PMPI_Type_get_extent,@function\n"
 ".text\n"
 "PMPI_Type_get_extent:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_extent\n"
+"b A_MPI_Type_get_extent\n"
+"inwrap_MPI_Type_get_extent:\n"
+"b R_MPI_Type_get_extent\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -15795,6 +18093,7 @@ __asm__(
 "jmp *A_MPI_Type_get_extent@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_extent:\n"
 "jmp *R_MPI_Type_get_extent@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_extent,.-PMPI_Type_get_extent\n"
 
 );
@@ -15848,6 +18147,16 @@ __asm__(
 ".type PMPI_Type_get_true_extent,@function\n"
 ".text\n"
 "PMPI_Type_get_true_extent:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_true_extent\n"
+"b A_MPI_Type_get_true_extent\n"
+"inwrap_MPI_Type_get_true_extent:\n"
+"b R_MPI_Type_get_true_extent\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -15868,6 +18177,7 @@ __asm__(
 "jmp *A_MPI_Type_get_true_extent@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_true_extent:\n"
 "jmp *R_MPI_Type_get_true_extent@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_true_extent,.-PMPI_Type_get_true_extent\n"
 
 );
@@ -15921,6 +18231,16 @@ __asm__(
 ".type PMPI_Win_get_errhandler,@function\n"
 ".text\n"
 "PMPI_Win_get_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_get_errhandler\n"
+"b A_MPI_Win_get_errhandler\n"
+"inwrap_MPI_Win_get_errhandler:\n"
+"b R_MPI_Win_get_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -15939,6 +18259,7 @@ __asm__(
 "jmp *A_MPI_Win_get_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_get_errhandler:\n"
 "jmp *R_MPI_Win_get_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_get_errhandler,.-PMPI_Win_get_errhandler\n"
 
 );
@@ -15989,6 +18310,16 @@ __asm__(
 ".type PMPI_Type_create_f90_integer,@function\n"
 ".text\n"
 "PMPI_Type_create_f90_integer:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_f90_integer\n"
+"b A_MPI_Type_create_f90_integer\n"
+"inwrap_MPI_Type_create_f90_integer:\n"
+"b R_MPI_Type_create_f90_integer\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -16007,6 +18338,7 @@ __asm__(
 "jmp *A_MPI_Type_create_f90_integer@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_f90_integer:\n"
 "jmp *R_MPI_Type_create_f90_integer@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_f90_integer,.-PMPI_Type_create_f90_integer\n"
 
 );
@@ -16057,6 +18389,16 @@ __asm__(
 ".type PMPI_Type_create_f90_real,@function\n"
 ".text\n"
 "PMPI_Type_create_f90_real:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_f90_real\n"
+"b A_MPI_Type_create_f90_real\n"
+"inwrap_MPI_Type_create_f90_real:\n"
+"b R_MPI_Type_create_f90_real\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -16077,6 +18419,7 @@ __asm__(
 "jmp *A_MPI_Type_create_f90_real@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_f90_real:\n"
 "jmp *R_MPI_Type_create_f90_real@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_f90_real,.-PMPI_Type_create_f90_real\n"
 
 );
@@ -16129,6 +18472,16 @@ __asm__(
 ".type PMPI_Type_create_f90_complex,@function\n"
 ".text\n"
 "PMPI_Type_create_f90_complex:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_f90_complex\n"
+"b A_MPI_Type_create_f90_complex\n"
+"inwrap_MPI_Type_create_f90_complex:\n"
+"b R_MPI_Type_create_f90_complex\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -16149,6 +18502,7 @@ __asm__(
 "jmp *A_MPI_Type_create_f90_complex@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_f90_complex:\n"
 "jmp *R_MPI_Type_create_f90_complex@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_f90_complex,.-PMPI_Type_create_f90_complex\n"
 
 );
@@ -16201,6 +18555,16 @@ __asm__(
 ".type PMPI_Reduce_local,@function\n"
 ".text\n"
 "PMPI_Reduce_local:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Reduce_local\n"
+"b A_MPI_Reduce_local\n"
+"inwrap_MPI_Reduce_local:\n"
+"b R_MPI_Reduce_local\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -16225,6 +18589,7 @@ __asm__(
 "jmp *A_MPI_Reduce_local@GOTPCREL(%rip)\n"
 "inwrap_MPI_Reduce_local:\n"
 "jmp *R_MPI_Reduce_local@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Reduce_local,.-PMPI_Reduce_local\n"
 
 );
@@ -16281,6 +18646,16 @@ __asm__(
 ".type PMPI_Op_commutative,@function\n"
 ".text\n"
 "PMPI_Op_commutative:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Op_commutative\n"
+"b A_MPI_Op_commutative\n"
+"inwrap_MPI_Op_commutative:\n"
+"b R_MPI_Op_commutative\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -16299,6 +18674,7 @@ __asm__(
 "jmp *A_MPI_Op_commutative@GOTPCREL(%rip)\n"
 "inwrap_MPI_Op_commutative:\n"
 "jmp *R_MPI_Op_commutative@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Op_commutative,.-PMPI_Op_commutative\n"
 
 );
@@ -16348,6 +18724,16 @@ __asm__(
 ".type PMPI_Reduce_scatter_block,@function\n"
 ".text\n"
 "PMPI_Reduce_scatter_block:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Reduce_scatter_block\n"
+"b A_MPI_Reduce_scatter_block\n"
+"inwrap_MPI_Reduce_scatter_block:\n"
+"b R_MPI_Reduce_scatter_block\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -16374,6 +18760,7 @@ __asm__(
 "jmp *A_MPI_Reduce_scatter_block@GOTPCREL(%rip)\n"
 "inwrap_MPI_Reduce_scatter_block:\n"
 "jmp *R_MPI_Reduce_scatter_block@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Reduce_scatter_block,.-PMPI_Reduce_scatter_block\n"
 
 );
@@ -16431,6 +18818,16 @@ __asm__(
 ".type PMPI_Dist_graph_neighbors_count,@function\n"
 ".text\n"
 "PMPI_Dist_graph_neighbors_count:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Dist_graph_neighbors_count\n"
+"b A_MPI_Dist_graph_neighbors_count\n"
+"inwrap_MPI_Dist_graph_neighbors_count:\n"
+"b R_MPI_Dist_graph_neighbors_count\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -16453,6 +18850,7 @@ __asm__(
 "jmp *A_MPI_Dist_graph_neighbors_count@GOTPCREL(%rip)\n"
 "inwrap_MPI_Dist_graph_neighbors_count:\n"
 "jmp *R_MPI_Dist_graph_neighbors_count@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Dist_graph_neighbors_count,.-PMPI_Dist_graph_neighbors_count\n"
 
 );
@@ -16506,6 +18904,16 @@ __asm__(
 ".type PMPI_Improbe,@function\n"
 ".text\n"
 "PMPI_Improbe:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Improbe\n"
+"b A_MPI_Improbe\n"
+"inwrap_MPI_Improbe:\n"
+"b R_MPI_Improbe\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -16532,6 +18940,7 @@ __asm__(
 "jmp *A_MPI_Improbe@GOTPCREL(%rip)\n"
 "inwrap_MPI_Improbe:\n"
 "jmp *R_MPI_Improbe@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Improbe,.-PMPI_Improbe\n"
 
 );
@@ -16591,6 +19000,16 @@ __asm__(
 ".type PMPI_Imrecv,@function\n"
 ".text\n"
 "PMPI_Imrecv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Imrecv\n"
+"b A_MPI_Imrecv\n"
+"inwrap_MPI_Imrecv:\n"
+"b R_MPI_Imrecv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -16615,6 +19034,7 @@ __asm__(
 "jmp *A_MPI_Imrecv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Imrecv:\n"
 "jmp *R_MPI_Imrecv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Imrecv,.-PMPI_Imrecv\n"
 
 );
@@ -16675,6 +19095,16 @@ __asm__(
 ".type PMPI_Mprobe,@function\n"
 ".text\n"
 "PMPI_Mprobe:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Mprobe\n"
+"b A_MPI_Mprobe\n"
+"inwrap_MPI_Mprobe:\n"
+"b R_MPI_Mprobe\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -16699,6 +19129,7 @@ __asm__(
 "jmp *A_MPI_Mprobe@GOTPCREL(%rip)\n"
 "inwrap_MPI_Mprobe:\n"
 "jmp *R_MPI_Mprobe@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Mprobe,.-PMPI_Mprobe\n"
 
 );
@@ -16756,6 +19187,16 @@ __asm__(
 ".type PMPI_Mrecv,@function\n"
 ".text\n"
 "PMPI_Mrecv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Mrecv\n"
+"b A_MPI_Mrecv\n"
+"inwrap_MPI_Mrecv:\n"
+"b R_MPI_Mrecv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -16780,6 +19221,7 @@ __asm__(
 "jmp *A_MPI_Mrecv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Mrecv:\n"
 "jmp *R_MPI_Mrecv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Mrecv,.-PMPI_Mrecv\n"
 
 );
@@ -16839,6 +19281,16 @@ __asm__(
 ".type PMPI_Comm_idup,@function\n"
 ".text\n"
 "PMPI_Comm_idup:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_idup\n"
+"b A_MPI_Comm_idup\n"
+"inwrap_MPI_Comm_idup:\n"
+"b R_MPI_Comm_idup\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -16859,6 +19311,7 @@ __asm__(
 "jmp *A_MPI_Comm_idup@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_idup:\n"
 "jmp *R_MPI_Comm_idup@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_idup,.-PMPI_Comm_idup\n"
 
 );
@@ -16914,6 +19367,16 @@ __asm__(
 ".type PMPI_Ibarrier,@function\n"
 ".text\n"
 "PMPI_Ibarrier:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ibarrier\n"
+"b A_MPI_Ibarrier\n"
+"inwrap_MPI_Ibarrier:\n"
+"b R_MPI_Ibarrier\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -16932,6 +19395,7 @@ __asm__(
 "jmp *A_MPI_Ibarrier@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ibarrier:\n"
 "jmp *R_MPI_Ibarrier@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ibarrier,.-PMPI_Ibarrier\n"
 
 );
@@ -16984,6 +19448,16 @@ __asm__(
 ".type PMPI_Ibcast,@function\n"
 ".text\n"
 "PMPI_Ibcast:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ibcast\n"
+"b A_MPI_Ibcast\n"
+"inwrap_MPI_Ibcast:\n"
+"b R_MPI_Ibcast\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17010,6 +19484,7 @@ __asm__(
 "jmp *A_MPI_Ibcast@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ibcast:\n"
 "jmp *R_MPI_Ibcast@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ibcast,.-PMPI_Ibcast\n"
 
 );
@@ -17071,6 +19546,16 @@ __asm__(
 ".type PMPI_Igather,@function\n"
 ".text\n"
 "PMPI_Igather:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Igather\n"
+"b A_MPI_Igather\n"
+"inwrap_MPI_Igather:\n"
+"b R_MPI_Igather\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17097,6 +19582,7 @@ __asm__(
 "jmp *A_MPI_Igather@GOTPCREL(%rip)\n"
 "inwrap_MPI_Igather:\n"
 "jmp *R_MPI_Igather@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Igather,.-PMPI_Igather\n"
 
 );
@@ -17164,6 +19650,16 @@ __asm__(
 ".type PMPI_Iscatter,@function\n"
 ".text\n"
 "PMPI_Iscatter:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iscatter\n"
+"b A_MPI_Iscatter\n"
+"inwrap_MPI_Iscatter:\n"
+"b R_MPI_Iscatter\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17190,6 +19686,7 @@ __asm__(
 "jmp *A_MPI_Iscatter@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iscatter:\n"
 "jmp *R_MPI_Iscatter@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iscatter,.-PMPI_Iscatter\n"
 
 );
@@ -17257,6 +19754,16 @@ __asm__(
 ".type PMPI_Iallgather,@function\n"
 ".text\n"
 "PMPI_Iallgather:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iallgather\n"
+"b A_MPI_Iallgather\n"
+"inwrap_MPI_Iallgather:\n"
+"b R_MPI_Iallgather\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17283,6 +19790,7 @@ __asm__(
 "jmp *A_MPI_Iallgather@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iallgather:\n"
 "jmp *R_MPI_Iallgather@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iallgather,.-PMPI_Iallgather\n"
 
 );
@@ -17348,6 +19856,16 @@ __asm__(
 ".type PMPI_Ialltoall,@function\n"
 ".text\n"
 "PMPI_Ialltoall:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ialltoall\n"
+"b A_MPI_Ialltoall\n"
+"inwrap_MPI_Ialltoall:\n"
+"b R_MPI_Ialltoall\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17374,6 +19892,7 @@ __asm__(
 "jmp *A_MPI_Ialltoall@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ialltoall:\n"
 "jmp *R_MPI_Ialltoall@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ialltoall,.-PMPI_Ialltoall\n"
 
 );
@@ -17439,6 +19958,16 @@ __asm__(
 ".type PMPI_Ireduce,@function\n"
 ".text\n"
 "PMPI_Ireduce:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ireduce\n"
+"b A_MPI_Ireduce\n"
+"inwrap_MPI_Ireduce:\n"
+"b R_MPI_Ireduce\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17465,6 +19994,7 @@ __asm__(
 "jmp *A_MPI_Ireduce@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ireduce:\n"
 "jmp *R_MPI_Ireduce@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ireduce,.-PMPI_Ireduce\n"
 
 );
@@ -17530,6 +20060,16 @@ __asm__(
 ".type PMPI_Iallreduce,@function\n"
 ".text\n"
 "PMPI_Iallreduce:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iallreduce\n"
+"b A_MPI_Iallreduce\n"
+"inwrap_MPI_Iallreduce:\n"
+"b R_MPI_Iallreduce\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17556,6 +20096,7 @@ __asm__(
 "jmp *A_MPI_Iallreduce@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iallreduce:\n"
 "jmp *R_MPI_Iallreduce@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iallreduce,.-PMPI_Iallreduce\n"
 
 );
@@ -17619,6 +20160,16 @@ __asm__(
 ".type PMPI_Ireduce_scatter_block,@function\n"
 ".text\n"
 "PMPI_Ireduce_scatter_block:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ireduce_scatter_block\n"
+"b A_MPI_Ireduce_scatter_block\n"
+"inwrap_MPI_Ireduce_scatter_block:\n"
+"b R_MPI_Ireduce_scatter_block\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17645,6 +20196,7 @@ __asm__(
 "jmp *A_MPI_Ireduce_scatter_block@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ireduce_scatter_block:\n"
 "jmp *R_MPI_Ireduce_scatter_block@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ireduce_scatter_block,.-PMPI_Ireduce_scatter_block\n"
 
 );
@@ -17708,6 +20260,16 @@ __asm__(
 ".type PMPI_Iscan,@function\n"
 ".text\n"
 "PMPI_Iscan:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iscan\n"
+"b A_MPI_Iscan\n"
+"inwrap_MPI_Iscan:\n"
+"b R_MPI_Iscan\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17734,6 +20296,7 @@ __asm__(
 "jmp *A_MPI_Iscan@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iscan:\n"
 "jmp *R_MPI_Iscan@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iscan,.-PMPI_Iscan\n"
 
 );
@@ -17797,6 +20360,16 @@ __asm__(
 ".type PMPI_Iexscan,@function\n"
 ".text\n"
 "PMPI_Iexscan:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iexscan\n"
+"b A_MPI_Iexscan\n"
+"inwrap_MPI_Iexscan:\n"
+"b R_MPI_Iexscan\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17823,6 +20396,7 @@ __asm__(
 "jmp *A_MPI_Iexscan@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iexscan:\n"
 "jmp *R_MPI_Iexscan@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iexscan,.-PMPI_Iexscan\n"
 
 );
@@ -17886,6 +20460,16 @@ __asm__(
 ".type PMPI_Ineighbor_allgather,@function\n"
 ".text\n"
 "PMPI_Ineighbor_allgather:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ineighbor_allgather\n"
+"b A_MPI_Ineighbor_allgather\n"
+"inwrap_MPI_Ineighbor_allgather:\n"
+"b R_MPI_Ineighbor_allgather\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -17912,6 +20496,7 @@ __asm__(
 "jmp *A_MPI_Ineighbor_allgather@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ineighbor_allgather:\n"
 "jmp *R_MPI_Ineighbor_allgather@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ineighbor_allgather,.-PMPI_Ineighbor_allgather\n"
 
 );
@@ -17976,6 +20561,16 @@ __asm__(
 ".type PMPI_Ineighbor_alltoall,@function\n"
 ".text\n"
 "PMPI_Ineighbor_alltoall:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ineighbor_alltoall\n"
+"b A_MPI_Ineighbor_alltoall\n"
+"inwrap_MPI_Ineighbor_alltoall:\n"
+"b R_MPI_Ineighbor_alltoall\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -18002,6 +20597,7 @@ __asm__(
 "jmp *A_MPI_Ineighbor_alltoall@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ineighbor_alltoall:\n"
 "jmp *R_MPI_Ineighbor_alltoall@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ineighbor_alltoall,.-PMPI_Ineighbor_alltoall\n"
 
 );
@@ -18067,6 +20663,16 @@ __asm__(
 ".type PMPI_Neighbor_allgather,@function\n"
 ".text\n"
 "PMPI_Neighbor_allgather:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Neighbor_allgather\n"
+"b A_MPI_Neighbor_allgather\n"
+"inwrap_MPI_Neighbor_allgather:\n"
+"b R_MPI_Neighbor_allgather\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -18093,6 +20699,7 @@ __asm__(
 "jmp *A_MPI_Neighbor_allgather@GOTPCREL(%rip)\n"
 "inwrap_MPI_Neighbor_allgather:\n"
 "jmp *R_MPI_Neighbor_allgather@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Neighbor_allgather,.-PMPI_Neighbor_allgather\n"
 
 );
@@ -18153,6 +20760,16 @@ __asm__(
 ".type PMPI_Neighbor_alltoall,@function\n"
 ".text\n"
 "PMPI_Neighbor_alltoall:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Neighbor_alltoall\n"
+"b A_MPI_Neighbor_alltoall\n"
+"inwrap_MPI_Neighbor_alltoall:\n"
+"b R_MPI_Neighbor_alltoall\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -18179,6 +20796,7 @@ __asm__(
 "jmp *A_MPI_Neighbor_alltoall@GOTPCREL(%rip)\n"
 "inwrap_MPI_Neighbor_alltoall:\n"
 "jmp *R_MPI_Neighbor_alltoall@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Neighbor_alltoall,.-PMPI_Neighbor_alltoall\n"
 
 );
@@ -18239,6 +20857,16 @@ __asm__(
 ".type PMPI_Comm_split_type,@function\n"
 ".text\n"
 "PMPI_Comm_split_type:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_split_type\n"
+"b A_MPI_Comm_split_type\n"
+"inwrap_MPI_Comm_split_type:\n"
+"b R_MPI_Comm_split_type\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -18263,6 +20891,7 @@ __asm__(
 "jmp *A_MPI_Comm_split_type@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_split_type:\n"
 "jmp *R_MPI_Comm_split_type@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_split_type,.-PMPI_Comm_split_type\n"
 
 );
@@ -18319,6 +20948,16 @@ __asm__(
 ".type PMPI_Get_elements_x,@function\n"
 ".text\n"
 "PMPI_Get_elements_x:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Get_elements_x\n"
+"b A_MPI_Get_elements_x\n"
+"inwrap_MPI_Get_elements_x:\n"
+"b R_MPI_Get_elements_x\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -18339,6 +20978,7 @@ __asm__(
 "jmp *A_MPI_Get_elements_x@GOTPCREL(%rip)\n"
 "inwrap_MPI_Get_elements_x:\n"
 "jmp *R_MPI_Get_elements_x@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Get_elements_x,.-PMPI_Get_elements_x\n"
 
 );
@@ -18391,6 +21031,16 @@ __asm__(
 ".type PMPI_Status_set_elements_x,@function\n"
 ".text\n"
 "PMPI_Status_set_elements_x:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Status_set_elements_x\n"
+"b A_MPI_Status_set_elements_x\n"
+"inwrap_MPI_Status_set_elements_x:\n"
+"b R_MPI_Status_set_elements_x\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -18411,6 +21061,7 @@ __asm__(
 "jmp *A_MPI_Status_set_elements_x@GOTPCREL(%rip)\n"
 "inwrap_MPI_Status_set_elements_x:\n"
 "jmp *R_MPI_Status_set_elements_x@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Status_set_elements_x,.-PMPI_Status_set_elements_x\n"
 
 );
@@ -18464,6 +21115,16 @@ __asm__(
 ".type PMPI_Type_get_extent_x,@function\n"
 ".text\n"
 "PMPI_Type_get_extent_x:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_extent_x\n"
+"b A_MPI_Type_get_extent_x\n"
+"inwrap_MPI_Type_get_extent_x:\n"
+"b R_MPI_Type_get_extent_x\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -18484,6 +21145,7 @@ __asm__(
 "jmp *A_MPI_Type_get_extent_x@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_extent_x:\n"
 "jmp *R_MPI_Type_get_extent_x@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_extent_x,.-PMPI_Type_get_extent_x\n"
 
 );
@@ -18535,6 +21197,16 @@ __asm__(
 ".type PMPI_Type_get_true_extent_x,@function\n"
 ".text\n"
 "PMPI_Type_get_true_extent_x:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_true_extent_x\n"
+"b A_MPI_Type_get_true_extent_x\n"
+"inwrap_MPI_Type_get_true_extent_x:\n"
+"b R_MPI_Type_get_true_extent_x\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -18555,6 +21227,7 @@ __asm__(
 "jmp *A_MPI_Type_get_true_extent_x@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_true_extent_x:\n"
 "jmp *R_MPI_Type_get_true_extent_x@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_true_extent_x,.-PMPI_Type_get_true_extent_x\n"
 
 );
@@ -18606,6 +21279,16 @@ __asm__(
 ".type PMPI_Type_size_x,@function\n"
 ".text\n"
 "PMPI_Type_size_x:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_size_x\n"
+"b A_MPI_Type_size_x\n"
+"inwrap_MPI_Type_size_x:\n"
+"b R_MPI_Type_size_x\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -18624,6 +21307,7 @@ __asm__(
 "jmp *A_MPI_Type_size_x@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_size_x:\n"
 "jmp *R_MPI_Type_size_x@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_size_x,.-PMPI_Type_size_x\n"
 
 );
@@ -18673,6 +21357,16 @@ __asm__(
 ".type PMPI_Comm_create_group,@function\n"
 ".text\n"
 "PMPI_Comm_create_group:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_create_group\n"
+"b A_MPI_Comm_create_group\n"
+"inwrap_MPI_Comm_create_group:\n"
+"b R_MPI_Comm_create_group\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -18695,6 +21389,7 @@ __asm__(
 "jmp *A_MPI_Comm_create_group@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_create_group:\n"
 "jmp *R_MPI_Comm_create_group@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_create_group,.-PMPI_Comm_create_group\n"
 
 );
@@ -18749,6 +21444,16 @@ __asm__(
 ".type PMPI_T_init_thread,@function\n"
 ".text\n"
 "PMPI_T_init_thread:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_init_thread\n"
+"b A_MPI_T_init_thread\n"
+"inwrap_MPI_T_init_thread:\n"
+"b R_MPI_T_init_thread\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -18767,6 +21472,7 @@ __asm__(
 "jmp *A_MPI_T_init_thread@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_init_thread:\n"
 "jmp *R_MPI_T_init_thread@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_init_thread,.-PMPI_T_init_thread\n"
 
 );
@@ -18816,6 +21522,16 @@ __asm__(
 ".type PMPI_T_enum_get_info,@function\n"
 ".text\n"
 "PMPI_T_enum_get_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_enum_get_info\n"
+"b A_MPI_T_enum_get_info\n"
+"inwrap_MPI_T_enum_get_info:\n"
+"b R_MPI_T_enum_get_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -18838,6 +21554,7 @@ __asm__(
 "jmp *A_MPI_T_enum_get_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_enum_get_info:\n"
 "jmp *R_MPI_T_enum_get_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_enum_get_info,.-PMPI_T_enum_get_info\n"
 
 );
@@ -18892,6 +21609,16 @@ __asm__(
 ".type PMPI_T_enum_get_item,@function\n"
 ".text\n"
 "PMPI_T_enum_get_item:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_enum_get_item\n"
+"b A_MPI_T_enum_get_item\n"
+"inwrap_MPI_T_enum_get_item:\n"
+"b R_MPI_T_enum_get_item\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -18916,6 +21643,7 @@ __asm__(
 "jmp *A_MPI_T_enum_get_item@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_enum_get_item:\n"
 "jmp *R_MPI_T_enum_get_item@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_enum_get_item,.-PMPI_T_enum_get_item\n"
 
 );
@@ -18972,6 +21700,16 @@ __asm__(
 ".type PMPI_T_cvar_get_num,@function\n"
 ".text\n"
 "PMPI_T_cvar_get_num:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_cvar_get_num\n"
+"b A_MPI_T_cvar_get_num\n"
+"inwrap_MPI_T_cvar_get_num:\n"
+"b R_MPI_T_cvar_get_num\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -18988,6 +21726,7 @@ __asm__(
 "jmp *A_MPI_T_cvar_get_num@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_cvar_get_num:\n"
 "jmp *R_MPI_T_cvar_get_num@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_cvar_get_num,.-PMPI_T_cvar_get_num\n"
 
 );
@@ -19035,6 +21774,16 @@ __asm__(
 ".type PMPI_T_cvar_get_info,@function\n"
 ".text\n"
 "PMPI_T_cvar_get_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_cvar_get_info\n"
+"b A_MPI_T_cvar_get_info\n"
+"inwrap_MPI_T_cvar_get_info:\n"
+"b R_MPI_T_cvar_get_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -19061,6 +21810,7 @@ __asm__(
 "jmp *A_MPI_T_cvar_get_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_cvar_get_info:\n"
 "jmp *R_MPI_T_cvar_get_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_cvar_get_info,.-PMPI_T_cvar_get_info\n"
 
 );
@@ -19130,6 +21880,16 @@ __asm__(
 ".type PMPI_T_cvar_handle_alloc,@function\n"
 ".text\n"
 "PMPI_T_cvar_handle_alloc:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_cvar_handle_alloc\n"
+"b A_MPI_T_cvar_handle_alloc\n"
+"inwrap_MPI_T_cvar_handle_alloc:\n"
+"b R_MPI_T_cvar_handle_alloc\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -19152,6 +21912,7 @@ __asm__(
 "jmp *A_MPI_T_cvar_handle_alloc@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_cvar_handle_alloc:\n"
 "jmp *R_MPI_T_cvar_handle_alloc@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_cvar_handle_alloc,.-PMPI_T_cvar_handle_alloc\n"
 
 );
@@ -19206,6 +21967,16 @@ __asm__(
 ".type PMPI_T_cvar_handle_free,@function\n"
 ".text\n"
 "PMPI_T_cvar_handle_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_cvar_handle_free\n"
+"b A_MPI_T_cvar_handle_free\n"
+"inwrap_MPI_T_cvar_handle_free:\n"
+"b R_MPI_T_cvar_handle_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19222,6 +21993,7 @@ __asm__(
 "jmp *A_MPI_T_cvar_handle_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_cvar_handle_free:\n"
 "jmp *R_MPI_T_cvar_handle_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_cvar_handle_free,.-PMPI_T_cvar_handle_free\n"
 
 );
@@ -19271,6 +22043,16 @@ __asm__(
 ".type PMPI_T_cvar_read,@function\n"
 ".text\n"
 "PMPI_T_cvar_read:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_cvar_read\n"
+"b A_MPI_T_cvar_read\n"
+"inwrap_MPI_T_cvar_read:\n"
+"b R_MPI_T_cvar_read\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19289,6 +22071,7 @@ __asm__(
 "jmp *A_MPI_T_cvar_read@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_cvar_read:\n"
 "jmp *R_MPI_T_cvar_read@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_cvar_read,.-PMPI_T_cvar_read\n"
 
 );
@@ -19338,6 +22121,16 @@ __asm__(
 ".type PMPI_T_cvar_write,@function\n"
 ".text\n"
 "PMPI_T_cvar_write:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_cvar_write\n"
+"b A_MPI_T_cvar_write\n"
+"inwrap_MPI_T_cvar_write:\n"
+"b R_MPI_T_cvar_write\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19356,6 +22149,7 @@ __asm__(
 "jmp *A_MPI_T_cvar_write@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_cvar_write:\n"
 "jmp *R_MPI_T_cvar_write@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_cvar_write,.-PMPI_T_cvar_write\n"
 
 );
@@ -19405,6 +22199,16 @@ __asm__(
 ".type PMPI_T_pvar_get_num,@function\n"
 ".text\n"
 "PMPI_T_pvar_get_num:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_get_num\n"
+"b A_MPI_T_pvar_get_num\n"
+"inwrap_MPI_T_pvar_get_num:\n"
+"b R_MPI_T_pvar_get_num\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19421,6 +22225,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_get_num@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_get_num:\n"
 "jmp *R_MPI_T_pvar_get_num@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_get_num,.-PMPI_T_pvar_get_num\n"
 
 );
@@ -19468,6 +22273,16 @@ __asm__(
 ".type PMPI_T_pvar_get_info,@function\n"
 ".text\n"
 "PMPI_T_pvar_get_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_get_info\n"
+"b A_MPI_T_pvar_get_info\n"
+"inwrap_MPI_T_pvar_get_info:\n"
+"b R_MPI_T_pvar_get_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -19494,6 +22309,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_get_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_get_info:\n"
 "jmp *R_MPI_T_pvar_get_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_get_info,.-PMPI_T_pvar_get_info\n"
 
 );
@@ -19569,6 +22385,16 @@ __asm__(
 ".type PMPI_T_category_get_num,@function\n"
 ".text\n"
 "PMPI_T_category_get_num:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_category_get_num\n"
+"b A_MPI_T_category_get_num\n"
+"inwrap_MPI_T_category_get_num:\n"
+"b R_MPI_T_category_get_num\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19585,6 +22411,7 @@ __asm__(
 "jmp *A_MPI_T_category_get_num@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_category_get_num:\n"
 "jmp *R_MPI_T_category_get_num@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_category_get_num,.-PMPI_T_category_get_num\n"
 
 );
@@ -19632,6 +22459,16 @@ __asm__(
 ".type PMPI_T_category_get_info,@function\n"
 ".text\n"
 "PMPI_T_category_get_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_category_get_info\n"
+"b A_MPI_T_category_get_info\n"
+"inwrap_MPI_T_category_get_info:\n"
+"b R_MPI_T_category_get_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -19658,6 +22495,7 @@ __asm__(
 "jmp *A_MPI_T_category_get_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_category_get_info:\n"
 "jmp *R_MPI_T_category_get_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_category_get_info,.-PMPI_T_category_get_info\n"
 
 );
@@ -19721,6 +22559,16 @@ __asm__(
 ".type PMPI_File_open,@function\n"
 ".text\n"
 "PMPI_File_open:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_open\n"
+"b A_MPI_File_open\n"
+"inwrap_MPI_File_open:\n"
+"b R_MPI_File_open\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -19745,6 +22593,7 @@ __asm__(
 "jmp *A_MPI_File_open@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_open:\n"
 "jmp *R_MPI_File_open@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_open,.-PMPI_File_open\n"
 
 );
@@ -19801,6 +22650,16 @@ __asm__(
 ".type PMPI_File_close,@function\n"
 ".text\n"
 "PMPI_File_close:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_close\n"
+"b A_MPI_File_close\n"
+"inwrap_MPI_File_close:\n"
+"b R_MPI_File_close\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19817,6 +22676,7 @@ __asm__(
 "jmp *A_MPI_File_close@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_close:\n"
 "jmp *R_MPI_File_close@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_close,.-PMPI_File_close\n"
 
 );
@@ -19866,6 +22726,16 @@ __asm__(
 ".type PMPI_File_delete,@function\n"
 ".text\n"
 "PMPI_File_delete:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_delete\n"
+"b A_MPI_File_delete\n"
+"inwrap_MPI_File_delete:\n"
+"b R_MPI_File_delete\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19884,6 +22754,7 @@ __asm__(
 "jmp *A_MPI_File_delete@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_delete:\n"
 "jmp *R_MPI_File_delete@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_delete,.-PMPI_File_delete\n"
 
 );
@@ -19934,6 +22805,16 @@ __asm__(
 ".type PMPI_File_set_size,@function\n"
 ".text\n"
 "PMPI_File_set_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_set_size\n"
+"b A_MPI_File_set_size\n"
+"inwrap_MPI_File_set_size:\n"
+"b R_MPI_File_set_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -19952,6 +22833,7 @@ __asm__(
 "jmp *A_MPI_File_set_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_set_size:\n"
 "jmp *R_MPI_File_set_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_set_size,.-PMPI_File_set_size\n"
 
 );
@@ -20002,6 +22884,16 @@ __asm__(
 ".type PMPI_File_preallocate,@function\n"
 ".text\n"
 "PMPI_File_preallocate:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_preallocate\n"
+"b A_MPI_File_preallocate\n"
+"inwrap_MPI_File_preallocate:\n"
+"b R_MPI_File_preallocate\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -20020,6 +22912,7 @@ __asm__(
 "jmp *A_MPI_File_preallocate@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_preallocate:\n"
 "jmp *R_MPI_File_preallocate@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_preallocate,.-PMPI_File_preallocate\n"
 
 );
@@ -20070,6 +22963,16 @@ __asm__(
 ".type PMPI_File_get_size,@function\n"
 ".text\n"
 "PMPI_File_get_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_size\n"
+"b A_MPI_File_get_size\n"
+"inwrap_MPI_File_get_size:\n"
+"b R_MPI_File_get_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -20088,6 +22991,7 @@ __asm__(
 "jmp *A_MPI_File_get_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_size:\n"
 "jmp *R_MPI_File_get_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_size,.-PMPI_File_get_size\n"
 
 );
@@ -20138,6 +23042,16 @@ __asm__(
 ".type PMPI_File_get_group,@function\n"
 ".text\n"
 "PMPI_File_get_group:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_group\n"
+"b A_MPI_File_get_group\n"
+"inwrap_MPI_File_get_group:\n"
+"b R_MPI_File_get_group\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -20156,6 +23070,7 @@ __asm__(
 "jmp *A_MPI_File_get_group@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_group:\n"
 "jmp *R_MPI_File_get_group@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_group,.-PMPI_File_get_group\n"
 
 );
@@ -20206,6 +23121,16 @@ __asm__(
 ".type PMPI_File_get_amode,@function\n"
 ".text\n"
 "PMPI_File_get_amode:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_amode\n"
+"b A_MPI_File_get_amode\n"
+"inwrap_MPI_File_get_amode:\n"
+"b R_MPI_File_get_amode\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -20224,6 +23149,7 @@ __asm__(
 "jmp *A_MPI_File_get_amode@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_amode:\n"
 "jmp *R_MPI_File_get_amode@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_amode,.-PMPI_File_get_amode\n"
 
 );
@@ -20274,6 +23200,16 @@ __asm__(
 ".type PMPI_File_set_info,@function\n"
 ".text\n"
 "PMPI_File_set_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_set_info\n"
+"b A_MPI_File_set_info\n"
+"inwrap_MPI_File_set_info:\n"
+"b R_MPI_File_set_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -20292,6 +23228,7 @@ __asm__(
 "jmp *A_MPI_File_set_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_set_info:\n"
 "jmp *R_MPI_File_set_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_set_info,.-PMPI_File_set_info\n"
 
 );
@@ -20342,6 +23279,16 @@ __asm__(
 ".type PMPI_File_get_info,@function\n"
 ".text\n"
 "PMPI_File_get_info:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_info\n"
+"b A_MPI_File_get_info\n"
+"inwrap_MPI_File_get_info:\n"
+"b R_MPI_File_get_info\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -20360,6 +23307,7 @@ __asm__(
 "jmp *A_MPI_File_get_info@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_info:\n"
 "jmp *R_MPI_File_get_info@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_info,.-PMPI_File_get_info\n"
 
 );
@@ -20411,6 +23359,16 @@ __asm__(
 ".type PMPI_File_set_view,@function\n"
 ".text\n"
 "PMPI_File_set_view:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_set_view\n"
+"b A_MPI_File_set_view\n"
+"inwrap_MPI_File_set_view:\n"
+"b R_MPI_File_set_view\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -20437,6 +23395,7 @@ __asm__(
 "jmp *A_MPI_File_set_view@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_set_view:\n"
 "jmp *R_MPI_File_set_view@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_set_view,.-PMPI_File_set_view\n"
 
 );
@@ -20495,6 +23454,16 @@ __asm__(
 ".type PMPI_File_get_view,@function\n"
 ".text\n"
 "PMPI_File_get_view:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_view\n"
+"b A_MPI_File_get_view\n"
+"inwrap_MPI_File_get_view:\n"
+"b R_MPI_File_get_view\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -20519,6 +23488,7 @@ __asm__(
 "jmp *A_MPI_File_get_view@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_view:\n"
 "jmp *R_MPI_File_get_view@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_view,.-PMPI_File_get_view\n"
 
 );
@@ -20577,6 +23547,16 @@ __asm__(
 ".type PMPI_File_read_at,@function\n"
 ".text\n"
 "PMPI_File_read_at:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_at\n"
+"b A_MPI_File_read_at\n"
+"inwrap_MPI_File_read_at:\n"
+"b R_MPI_File_read_at\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -20603,6 +23583,7 @@ __asm__(
 "jmp *A_MPI_File_read_at@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_at:\n"
 "jmp *R_MPI_File_read_at@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_at,.-PMPI_File_read_at\n"
 
 );
@@ -20662,6 +23643,16 @@ __asm__(
 ".type PMPI_File_read_at_all,@function\n"
 ".text\n"
 "PMPI_File_read_at_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_at_all\n"
+"b A_MPI_File_read_at_all\n"
+"inwrap_MPI_File_read_at_all:\n"
+"b R_MPI_File_read_at_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -20688,6 +23679,7 @@ __asm__(
 "jmp *A_MPI_File_read_at_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_at_all:\n"
 "jmp *R_MPI_File_read_at_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_at_all,.-PMPI_File_read_at_all\n"
 
 );
@@ -20747,6 +23739,16 @@ __asm__(
 ".type PMPI_File_write_at,@function\n"
 ".text\n"
 "PMPI_File_write_at:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_at\n"
+"b A_MPI_File_write_at\n"
+"inwrap_MPI_File_write_at:\n"
+"b R_MPI_File_write_at\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -20773,6 +23775,7 @@ __asm__(
 "jmp *A_MPI_File_write_at@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_at:\n"
 "jmp *R_MPI_File_write_at@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_at,.-PMPI_File_write_at\n"
 
 );
@@ -20832,6 +23835,16 @@ __asm__(
 ".type PMPI_File_write_at_all,@function\n"
 ".text\n"
 "PMPI_File_write_at_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_at_all\n"
+"b A_MPI_File_write_at_all\n"
+"inwrap_MPI_File_write_at_all:\n"
+"b R_MPI_File_write_at_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -20858,6 +23871,7 @@ __asm__(
 "jmp *A_MPI_File_write_at_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_at_all:\n"
 "jmp *R_MPI_File_write_at_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_at_all,.-PMPI_File_write_at_all\n"
 
 );
@@ -20917,6 +23931,16 @@ __asm__(
 ".type PMPI_File_iread_at,@function\n"
 ".text\n"
 "PMPI_File_iread_at:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iread_at\n"
+"b A_MPI_File_iread_at\n"
+"inwrap_MPI_File_iread_at:\n"
+"b R_MPI_File_iread_at\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -20943,6 +23967,7 @@ __asm__(
 "jmp *A_MPI_File_iread_at@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iread_at:\n"
 "jmp *R_MPI_File_iread_at@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iread_at,.-PMPI_File_iread_at\n"
 
 );
@@ -21004,6 +24029,16 @@ __asm__(
 ".type PMPI_File_iwrite_at,@function\n"
 ".text\n"
 "PMPI_File_iwrite_at:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iwrite_at\n"
+"b A_MPI_File_iwrite_at\n"
+"inwrap_MPI_File_iwrite_at:\n"
+"b R_MPI_File_iwrite_at\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21030,6 +24065,7 @@ __asm__(
 "jmp *A_MPI_File_iwrite_at@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iwrite_at:\n"
 "jmp *R_MPI_File_iwrite_at@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iwrite_at,.-PMPI_File_iwrite_at\n"
 
 );
@@ -21091,6 +24127,16 @@ __asm__(
 ".type PMPI_File_read,@function\n"
 ".text\n"
 "PMPI_File_read:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read\n"
+"b A_MPI_File_read\n"
+"inwrap_MPI_File_read:\n"
+"b R_MPI_File_read\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21115,6 +24161,7 @@ __asm__(
 "jmp *A_MPI_File_read@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read:\n"
 "jmp *R_MPI_File_read@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read,.-PMPI_File_read\n"
 
 );
@@ -21173,6 +24220,16 @@ __asm__(
 ".type PMPI_File_read_all,@function\n"
 ".text\n"
 "PMPI_File_read_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_all\n"
+"b A_MPI_File_read_all\n"
+"inwrap_MPI_File_read_all:\n"
+"b R_MPI_File_read_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21197,6 +24254,7 @@ __asm__(
 "jmp *A_MPI_File_read_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_all:\n"
 "jmp *R_MPI_File_read_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_all,.-PMPI_File_read_all\n"
 
 );
@@ -21255,6 +24313,16 @@ __asm__(
 ".type PMPI_File_write,@function\n"
 ".text\n"
 "PMPI_File_write:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write\n"
+"b A_MPI_File_write\n"
+"inwrap_MPI_File_write:\n"
+"b R_MPI_File_write\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21279,6 +24347,7 @@ __asm__(
 "jmp *A_MPI_File_write@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write:\n"
 "jmp *R_MPI_File_write@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write,.-PMPI_File_write\n"
 
 );
@@ -21336,6 +24405,16 @@ __asm__(
 ".type PMPI_File_write_all,@function\n"
 ".text\n"
 "PMPI_File_write_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_all\n"
+"b A_MPI_File_write_all\n"
+"inwrap_MPI_File_write_all:\n"
+"b R_MPI_File_write_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21360,6 +24439,7 @@ __asm__(
 "jmp *A_MPI_File_write_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_all:\n"
 "jmp *R_MPI_File_write_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_all,.-PMPI_File_write_all\n"
 
 );
@@ -21417,6 +24497,16 @@ __asm__(
 ".type PMPI_File_iread,@function\n"
 ".text\n"
 "PMPI_File_iread:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iread\n"
+"b A_MPI_File_iread\n"
+"inwrap_MPI_File_iread:\n"
+"b R_MPI_File_iread\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21441,6 +24531,7 @@ __asm__(
 "jmp *A_MPI_File_iread@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iread:\n"
 "jmp *R_MPI_File_iread@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iread,.-PMPI_File_iread\n"
 
 );
@@ -21501,6 +24592,16 @@ __asm__(
 ".type PMPI_File_iwrite,@function\n"
 ".text\n"
 "PMPI_File_iwrite:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iwrite\n"
+"b A_MPI_File_iwrite\n"
+"inwrap_MPI_File_iwrite:\n"
+"b R_MPI_File_iwrite\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21525,6 +24626,7 @@ __asm__(
 "jmp *A_MPI_File_iwrite@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iwrite:\n"
 "jmp *R_MPI_File_iwrite@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iwrite,.-PMPI_File_iwrite\n"
 
 );
@@ -21584,6 +24686,16 @@ __asm__(
 ".type PMPI_File_seek,@function\n"
 ".text\n"
 "PMPI_File_seek:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_seek\n"
+"b A_MPI_File_seek\n"
+"inwrap_MPI_File_seek:\n"
+"b R_MPI_File_seek\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -21604,6 +24716,7 @@ __asm__(
 "jmp *A_MPI_File_seek@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_seek:\n"
 "jmp *R_MPI_File_seek@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_seek,.-PMPI_File_seek\n"
 
 );
@@ -21656,6 +24769,16 @@ __asm__(
 ".type PMPI_File_get_position,@function\n"
 ".text\n"
 "PMPI_File_get_position:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_position\n"
+"b A_MPI_File_get_position\n"
+"inwrap_MPI_File_get_position:\n"
+"b R_MPI_File_get_position\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -21674,6 +24797,7 @@ __asm__(
 "jmp *A_MPI_File_get_position@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_position:\n"
 "jmp *R_MPI_File_get_position@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_position,.-PMPI_File_get_position\n"
 
 );
@@ -21724,6 +24848,16 @@ __asm__(
 ".type PMPI_File_get_byte_offset,@function\n"
 ".text\n"
 "PMPI_File_get_byte_offset:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_byte_offset\n"
+"b A_MPI_File_get_byte_offset\n"
+"inwrap_MPI_File_get_byte_offset:\n"
+"b R_MPI_File_get_byte_offset\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -21744,6 +24878,7 @@ __asm__(
 "jmp *A_MPI_File_get_byte_offset@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_byte_offset:\n"
 "jmp *R_MPI_File_get_byte_offset@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_byte_offset,.-PMPI_File_get_byte_offset\n"
 
 );
@@ -21796,6 +24931,16 @@ __asm__(
 ".type PMPI_File_read_shared,@function\n"
 ".text\n"
 "PMPI_File_read_shared:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_shared\n"
+"b A_MPI_File_read_shared\n"
+"inwrap_MPI_File_read_shared:\n"
+"b R_MPI_File_read_shared\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21820,6 +24965,7 @@ __asm__(
 "jmp *A_MPI_File_read_shared@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_shared:\n"
 "jmp *R_MPI_File_read_shared@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_shared,.-PMPI_File_read_shared\n"
 
 );
@@ -21878,6 +25024,16 @@ __asm__(
 ".type PMPI_File_write_shared,@function\n"
 ".text\n"
 "PMPI_File_write_shared:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_shared\n"
+"b A_MPI_File_write_shared\n"
+"inwrap_MPI_File_write_shared:\n"
+"b R_MPI_File_write_shared\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21902,6 +25058,7 @@ __asm__(
 "jmp *A_MPI_File_write_shared@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_shared:\n"
 "jmp *R_MPI_File_write_shared@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_shared,.-PMPI_File_write_shared\n"
 
 );
@@ -21959,6 +25116,16 @@ __asm__(
 ".type PMPI_File_iread_shared,@function\n"
 ".text\n"
 "PMPI_File_iread_shared:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iread_shared\n"
+"b A_MPI_File_iread_shared\n"
+"inwrap_MPI_File_iread_shared:\n"
+"b R_MPI_File_iread_shared\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -21983,6 +25150,7 @@ __asm__(
 "jmp *A_MPI_File_iread_shared@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iread_shared:\n"
 "jmp *R_MPI_File_iread_shared@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iread_shared,.-PMPI_File_iread_shared\n"
 
 );
@@ -22043,6 +25211,16 @@ __asm__(
 ".type PMPI_File_iwrite_shared,@function\n"
 ".text\n"
 "PMPI_File_iwrite_shared:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iwrite_shared\n"
+"b A_MPI_File_iwrite_shared\n"
+"inwrap_MPI_File_iwrite_shared:\n"
+"b R_MPI_File_iwrite_shared\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -22067,6 +25245,7 @@ __asm__(
 "jmp *A_MPI_File_iwrite_shared@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iwrite_shared:\n"
 "jmp *R_MPI_File_iwrite_shared@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iwrite_shared,.-PMPI_File_iwrite_shared\n"
 
 );
@@ -22126,6 +25305,16 @@ __asm__(
 ".type PMPI_File_read_ordered,@function\n"
 ".text\n"
 "PMPI_File_read_ordered:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_ordered\n"
+"b A_MPI_File_read_ordered\n"
+"inwrap_MPI_File_read_ordered:\n"
+"b R_MPI_File_read_ordered\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -22150,6 +25339,7 @@ __asm__(
 "jmp *A_MPI_File_read_ordered@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_ordered:\n"
 "jmp *R_MPI_File_read_ordered@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_ordered,.-PMPI_File_read_ordered\n"
 
 );
@@ -22208,6 +25398,16 @@ __asm__(
 ".type PMPI_File_write_ordered,@function\n"
 ".text\n"
 "PMPI_File_write_ordered:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_ordered\n"
+"b A_MPI_File_write_ordered\n"
+"inwrap_MPI_File_write_ordered:\n"
+"b R_MPI_File_write_ordered\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -22232,6 +25432,7 @@ __asm__(
 "jmp *A_MPI_File_write_ordered@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_ordered:\n"
 "jmp *R_MPI_File_write_ordered@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_ordered,.-PMPI_File_write_ordered\n"
 
 );
@@ -22289,6 +25490,16 @@ __asm__(
 ".type PMPI_File_seek_shared,@function\n"
 ".text\n"
 "PMPI_File_seek_shared:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_seek_shared\n"
+"b A_MPI_File_seek_shared\n"
+"inwrap_MPI_File_seek_shared:\n"
+"b R_MPI_File_seek_shared\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -22309,6 +25520,7 @@ __asm__(
 "jmp *A_MPI_File_seek_shared@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_seek_shared:\n"
 "jmp *R_MPI_File_seek_shared@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_seek_shared,.-PMPI_File_seek_shared\n"
 
 );
@@ -22361,6 +25573,16 @@ __asm__(
 ".type PMPI_File_get_position_shared,@function\n"
 ".text\n"
 "PMPI_File_get_position_shared:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_position_shared\n"
+"b A_MPI_File_get_position_shared\n"
+"inwrap_MPI_File_get_position_shared:\n"
+"b R_MPI_File_get_position_shared\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -22379,6 +25601,7 @@ __asm__(
 "jmp *A_MPI_File_get_position_shared@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_position_shared:\n"
 "jmp *R_MPI_File_get_position_shared@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_position_shared,.-PMPI_File_get_position_shared\n"
 
 );
@@ -22429,6 +25652,16 @@ __asm__(
 ".type PMPI_File_read_at_all_begin,@function\n"
 ".text\n"
 "PMPI_File_read_at_all_begin:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_at_all_begin\n"
+"b A_MPI_File_read_at_all_begin\n"
+"inwrap_MPI_File_read_at_all_begin:\n"
+"b R_MPI_File_read_at_all_begin\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -22453,6 +25686,7 @@ __asm__(
 "jmp *A_MPI_File_read_at_all_begin@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_at_all_begin:\n"
 "jmp *R_MPI_File_read_at_all_begin@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_at_all_begin,.-PMPI_File_read_at_all_begin\n"
 
 );
@@ -22509,6 +25743,16 @@ __asm__(
 ".type PMPI_File_read_at_all_end,@function\n"
 ".text\n"
 "PMPI_File_read_at_all_end:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_at_all_end\n"
+"b A_MPI_File_read_at_all_end\n"
+"inwrap_MPI_File_read_at_all_end:\n"
+"b R_MPI_File_read_at_all_end\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -22529,6 +25773,7 @@ __asm__(
 "jmp *A_MPI_File_read_at_all_end@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_at_all_end:\n"
 "jmp *R_MPI_File_read_at_all_end@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_at_all_end,.-PMPI_File_read_at_all_end\n"
 
 );
@@ -22582,6 +25827,16 @@ __asm__(
 ".type PMPI_File_write_at_all_begin,@function\n"
 ".text\n"
 "PMPI_File_write_at_all_begin:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_at_all_begin\n"
+"b A_MPI_File_write_at_all_begin\n"
+"inwrap_MPI_File_write_at_all_begin:\n"
+"b R_MPI_File_write_at_all_begin\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -22606,6 +25861,7 @@ __asm__(
 "jmp *A_MPI_File_write_at_all_begin@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_at_all_begin:\n"
 "jmp *R_MPI_File_write_at_all_begin@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_at_all_begin,.-PMPI_File_write_at_all_begin\n"
 
 );
@@ -22662,6 +25918,16 @@ __asm__(
 ".type PMPI_File_write_at_all_end,@function\n"
 ".text\n"
 "PMPI_File_write_at_all_end:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_at_all_end\n"
+"b A_MPI_File_write_at_all_end\n"
+"inwrap_MPI_File_write_at_all_end:\n"
+"b R_MPI_File_write_at_all_end\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -22682,6 +25948,7 @@ __asm__(
 "jmp *A_MPI_File_write_at_all_end@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_at_all_end:\n"
 "jmp *R_MPI_File_write_at_all_end@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_at_all_end,.-PMPI_File_write_at_all_end\n"
 
 );
@@ -22735,6 +26002,16 @@ __asm__(
 ".type PMPI_File_read_all_begin,@function\n"
 ".text\n"
 "PMPI_File_read_all_begin:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_all_begin\n"
+"b A_MPI_File_read_all_begin\n"
+"inwrap_MPI_File_read_all_begin:\n"
+"b R_MPI_File_read_all_begin\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -22757,6 +26034,7 @@ __asm__(
 "jmp *A_MPI_File_read_all_begin@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_all_begin:\n"
 "jmp *R_MPI_File_read_all_begin@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_all_begin,.-PMPI_File_read_all_begin\n"
 
 );
@@ -22812,6 +26090,16 @@ __asm__(
 ".type PMPI_File_read_all_end,@function\n"
 ".text\n"
 "PMPI_File_read_all_end:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_all_end\n"
+"b A_MPI_File_read_all_end\n"
+"inwrap_MPI_File_read_all_end:\n"
+"b R_MPI_File_read_all_end\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -22832,6 +26120,7 @@ __asm__(
 "jmp *A_MPI_File_read_all_end@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_all_end:\n"
 "jmp *R_MPI_File_read_all_end@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_all_end,.-PMPI_File_read_all_end\n"
 
 );
@@ -22886,6 +26175,16 @@ __asm__(
 ".type PMPI_File_write_all_begin,@function\n"
 ".text\n"
 "PMPI_File_write_all_begin:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_all_begin\n"
+"b A_MPI_File_write_all_begin\n"
+"inwrap_MPI_File_write_all_begin:\n"
+"b R_MPI_File_write_all_begin\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -22908,6 +26207,7 @@ __asm__(
 "jmp *A_MPI_File_write_all_begin@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_all_begin:\n"
 "jmp *R_MPI_File_write_all_begin@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_all_begin,.-PMPI_File_write_all_begin\n"
 
 );
@@ -22962,6 +26262,16 @@ __asm__(
 ".type PMPI_File_write_all_end,@function\n"
 ".text\n"
 "PMPI_File_write_all_end:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_all_end\n"
+"b A_MPI_File_write_all_end\n"
+"inwrap_MPI_File_write_all_end:\n"
+"b R_MPI_File_write_all_end\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -22982,6 +26292,7 @@ __asm__(
 "jmp *A_MPI_File_write_all_end@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_all_end:\n"
 "jmp *R_MPI_File_write_all_end@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_all_end,.-PMPI_File_write_all_end\n"
 
 );
@@ -23035,6 +26346,16 @@ __asm__(
 ".type PMPI_File_read_ordered_begin,@function\n"
 ".text\n"
 "PMPI_File_read_ordered_begin:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_ordered_begin\n"
+"b A_MPI_File_read_ordered_begin\n"
+"inwrap_MPI_File_read_ordered_begin:\n"
+"b R_MPI_File_read_ordered_begin\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -23057,6 +26378,7 @@ __asm__(
 "jmp *A_MPI_File_read_ordered_begin@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_ordered_begin:\n"
 "jmp *R_MPI_File_read_ordered_begin@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_ordered_begin,.-PMPI_File_read_ordered_begin\n"
 
 );
@@ -23112,6 +26434,16 @@ __asm__(
 ".type PMPI_File_read_ordered_end,@function\n"
 ".text\n"
 "PMPI_File_read_ordered_end:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_read_ordered_end\n"
+"b A_MPI_File_read_ordered_end\n"
+"inwrap_MPI_File_read_ordered_end:\n"
+"b R_MPI_File_read_ordered_end\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -23132,6 +26464,7 @@ __asm__(
 "jmp *A_MPI_File_read_ordered_end@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_read_ordered_end:\n"
 "jmp *R_MPI_File_read_ordered_end@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_read_ordered_end,.-PMPI_File_read_ordered_end\n"
 
 );
@@ -23186,6 +26519,16 @@ __asm__(
 ".type PMPI_File_write_ordered_begin,@function\n"
 ".text\n"
 "PMPI_File_write_ordered_begin:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_ordered_begin\n"
+"b A_MPI_File_write_ordered_begin\n"
+"inwrap_MPI_File_write_ordered_begin:\n"
+"b R_MPI_File_write_ordered_begin\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -23208,6 +26551,7 @@ __asm__(
 "jmp *A_MPI_File_write_ordered_begin@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_ordered_begin:\n"
 "jmp *R_MPI_File_write_ordered_begin@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_ordered_begin,.-PMPI_File_write_ordered_begin\n"
 
 );
@@ -23262,6 +26606,16 @@ __asm__(
 ".type PMPI_File_write_ordered_end,@function\n"
 ".text\n"
 "PMPI_File_write_ordered_end:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_write_ordered_end\n"
+"b A_MPI_File_write_ordered_end\n"
+"inwrap_MPI_File_write_ordered_end:\n"
+"b R_MPI_File_write_ordered_end\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -23282,6 +26636,7 @@ __asm__(
 "jmp *A_MPI_File_write_ordered_end@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_write_ordered_end:\n"
 "jmp *R_MPI_File_write_ordered_end@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_write_ordered_end,.-PMPI_File_write_ordered_end\n"
 
 );
@@ -23335,6 +26690,16 @@ __asm__(
 ".type PMPI_File_get_type_extent,@function\n"
 ".text\n"
 "PMPI_File_get_type_extent:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_type_extent\n"
+"b A_MPI_File_get_type_extent\n"
+"inwrap_MPI_File_get_type_extent:\n"
+"b R_MPI_File_get_type_extent\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -23355,6 +26720,7 @@ __asm__(
 "jmp *A_MPI_File_get_type_extent@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_type_extent:\n"
 "jmp *R_MPI_File_get_type_extent@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_type_extent,.-PMPI_File_get_type_extent\n"
 
 );
@@ -23407,6 +26773,16 @@ __asm__(
 ".type PMPI_Register_datarep,@function\n"
 ".text\n"
 "PMPI_Register_datarep:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Register_datarep\n"
+"b A_MPI_Register_datarep\n"
+"inwrap_MPI_Register_datarep:\n"
+"b R_MPI_Register_datarep\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -23431,6 +26807,7 @@ __asm__(
 "jmp *A_MPI_Register_datarep@GOTPCREL(%rip)\n"
 "inwrap_MPI_Register_datarep:\n"
 "jmp *R_MPI_Register_datarep@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Register_datarep,.-PMPI_Register_datarep\n"
 
 );
@@ -23486,6 +26863,16 @@ __asm__(
 ".type PMPI_File_set_atomicity,@function\n"
 ".text\n"
 "PMPI_File_set_atomicity:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_set_atomicity\n"
+"b A_MPI_File_set_atomicity\n"
+"inwrap_MPI_File_set_atomicity:\n"
+"b R_MPI_File_set_atomicity\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -23504,6 +26891,7 @@ __asm__(
 "jmp *A_MPI_File_set_atomicity@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_set_atomicity:\n"
 "jmp *R_MPI_File_set_atomicity@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_set_atomicity,.-PMPI_File_set_atomicity\n"
 
 );
@@ -23554,6 +26942,16 @@ __asm__(
 ".type PMPI_File_get_atomicity,@function\n"
 ".text\n"
 "PMPI_File_get_atomicity:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_get_atomicity\n"
+"b A_MPI_File_get_atomicity\n"
+"inwrap_MPI_File_get_atomicity:\n"
+"b R_MPI_File_get_atomicity\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -23572,6 +26970,7 @@ __asm__(
 "jmp *A_MPI_File_get_atomicity@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_get_atomicity:\n"
 "jmp *R_MPI_File_get_atomicity@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_get_atomicity,.-PMPI_File_get_atomicity\n"
 
 );
@@ -23621,6 +27020,16 @@ __asm__(
 ".type PMPI_File_sync,@function\n"
 ".text\n"
 "PMPI_File_sync:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_sync\n"
+"b A_MPI_File_sync\n"
+"inwrap_MPI_File_sync:\n"
+"b R_MPI_File_sync\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -23637,6 +27046,7 @@ __asm__(
 "jmp *A_MPI_File_sync@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_sync:\n"
 "jmp *R_MPI_File_sync@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_sync,.-PMPI_File_sync\n"
 
 );
@@ -23685,6 +27095,16 @@ __asm__(
 ".type PMPI_T_finalize,@function\n"
 ".text\n"
 "PMPI_T_finalize:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_finalize\n"
+"b A_MPI_T_finalize\n"
+"inwrap_MPI_T_finalize:\n"
+"b R_MPI_T_finalize\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 ".byte 0x66\n"
@@ -23698,6 +27118,7 @@ __asm__(
 "jmp *A_MPI_T_finalize@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_finalize:\n"
 "jmp *R_MPI_T_finalize@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_finalize,.-PMPI_T_finalize\n"
 
 );
@@ -23743,6 +27164,16 @@ __asm__(
 ".type PMPI_Wtime,@function\n"
 ".text\n"
 "PMPI_Wtime:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Wtime\n"
+"b A_MPI_Wtime\n"
+"inwrap_MPI_Wtime:\n"
+"b R_MPI_Wtime\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 ".byte 0x66\n"
@@ -23756,6 +27187,7 @@ __asm__(
 "jmp *A_MPI_Wtime@GOTPCREL(%rip)\n"
 "inwrap_MPI_Wtime:\n"
 "jmp *R_MPI_Wtime@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Wtime,.-PMPI_Wtime\n"
 
 );
@@ -23801,6 +27233,16 @@ __asm__(
 ".type PMPI_Wtick,@function\n"
 ".text\n"
 "PMPI_Wtick:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Wtick\n"
+"b A_MPI_Wtick\n"
+"inwrap_MPI_Wtick:\n"
+"b R_MPI_Wtick\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 ".byte 0x66\n"
@@ -23814,6 +27256,7 @@ __asm__(
 "jmp *A_MPI_Wtick@GOTPCREL(%rip)\n"
 "inwrap_MPI_Wtick:\n"
 "jmp *R_MPI_Wtick@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Wtick,.-PMPI_Wtick\n"
 
 );
@@ -23859,6 +27302,16 @@ __asm__(
 ".type PMPI_Finalize,@function\n"
 ".text\n"
 "PMPI_Finalize:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Finalize\n"
+"b A_MPI_Finalize\n"
+"inwrap_MPI_Finalize:\n"
+"b R_MPI_Finalize\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 ".byte 0x66\n"
@@ -23872,6 +27325,7 @@ __asm__(
 "jmp *A_MPI_Finalize@GOTPCREL(%rip)\n"
 "inwrap_MPI_Finalize:\n"
 "jmp *R_MPI_Finalize@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Finalize,.-PMPI_Finalize\n"
 
 );
@@ -23917,6 +27371,16 @@ __asm__(
 ".type PMPI_Waitany,@function\n"
 ".text\n"
 "PMPI_Waitany:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Waitany\n"
+"b A_MPI_Waitany\n"
+"inwrap_MPI_Waitany:\n"
+"b R_MPI_Waitany\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -23939,6 +27403,7 @@ __asm__(
 "jmp *A_MPI_Waitany@GOTPCREL(%rip)\n"
 "inwrap_MPI_Waitany:\n"
 "jmp *R_MPI_Waitany@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Waitany,.-PMPI_Waitany\n"
 
 );
@@ -24002,6 +27467,16 @@ __asm__(
 ".type PMPI_Testany,@function\n"
 ".text\n"
 "PMPI_Testany:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Testany\n"
+"b A_MPI_Testany\n"
+"inwrap_MPI_Testany:\n"
+"b R_MPI_Testany\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -24026,6 +27501,7 @@ __asm__(
 "jmp *A_MPI_Testany@GOTPCREL(%rip)\n"
 "inwrap_MPI_Testany:\n"
 "jmp *R_MPI_Testany@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Testany,.-PMPI_Testany\n"
 
 );
@@ -24092,6 +27568,16 @@ __asm__(
 ".type PMPI_Waitall,@function\n"
 ".text\n"
 "PMPI_Waitall:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Waitall\n"
+"b A_MPI_Waitall\n"
+"inwrap_MPI_Waitall:\n"
+"b R_MPI_Waitall\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -24112,6 +27598,7 @@ __asm__(
 "jmp *A_MPI_Waitall@GOTPCREL(%rip)\n"
 "inwrap_MPI_Waitall:\n"
 "jmp *R_MPI_Waitall@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Waitall,.-PMPI_Waitall\n"
 
 );
@@ -24183,6 +27670,16 @@ __asm__(
 ".type PMPI_Testall,@function\n"
 ".text\n"
 "PMPI_Testall:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Testall\n"
+"b A_MPI_Testall\n"
+"inwrap_MPI_Testall:\n"
+"b R_MPI_Testall\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -24205,6 +27702,7 @@ __asm__(
 "jmp *A_MPI_Testall@GOTPCREL(%rip)\n"
 "inwrap_MPI_Testall:\n"
 "jmp *R_MPI_Testall@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Testall,.-PMPI_Testall\n"
 
 );
@@ -24279,6 +27777,16 @@ __asm__(
 ".type PMPI_Waitsome,@function\n"
 ".text\n"
 "PMPI_Waitsome:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Waitsome\n"
+"b A_MPI_Waitsome\n"
+"inwrap_MPI_Waitsome:\n"
+"b R_MPI_Waitsome\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -24303,6 +27811,7 @@ __asm__(
 "jmp *A_MPI_Waitsome@GOTPCREL(%rip)\n"
 "inwrap_MPI_Waitsome:\n"
 "jmp *R_MPI_Waitsome@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Waitsome,.-PMPI_Waitsome\n"
 
 );
@@ -24378,6 +27887,16 @@ __asm__(
 ".type PMPI_Testsome,@function\n"
 ".text\n"
 "PMPI_Testsome:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Testsome\n"
+"b A_MPI_Testsome\n"
+"inwrap_MPI_Testsome:\n"
+"b R_MPI_Testsome\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -24402,6 +27921,7 @@ __asm__(
 "jmp *A_MPI_Testsome@GOTPCREL(%rip)\n"
 "inwrap_MPI_Testsome:\n"
 "jmp *R_MPI_Testsome@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Testsome,.-PMPI_Testsome\n"
 
 );
@@ -24477,6 +27997,16 @@ __asm__(
 ".type PMPI_Startall,@function\n"
 ".text\n"
 "PMPI_Startall:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Startall\n"
+"b A_MPI_Startall\n"
+"inwrap_MPI_Startall:\n"
+"b R_MPI_Startall\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -24495,6 +28025,7 @@ __asm__(
 "jmp *A_MPI_Startall@GOTPCREL(%rip)\n"
 "inwrap_MPI_Startall:\n"
 "jmp *R_MPI_Startall@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Startall,.-PMPI_Startall\n"
 
 );
@@ -24548,6 +28079,16 @@ __asm__(
 ".type PMPI_Alltoallw,@function\n"
 ".text\n"
 "PMPI_Alltoallw:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Alltoallw\n"
+"b A_MPI_Alltoallw\n"
+"inwrap_MPI_Alltoallw:\n"
+"b R_MPI_Alltoallw\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -24574,6 +28115,7 @@ __asm__(
 "jmp *A_MPI_Alltoallw@GOTPCREL(%rip)\n"
 "inwrap_MPI_Alltoallw:\n"
 "jmp *R_MPI_Alltoallw@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Alltoallw,.-PMPI_Alltoallw\n"
 
 );
@@ -24649,6 +28191,16 @@ __asm__(
 ".type PMPI_Reduce_scatter,@function\n"
 ".text\n"
 "PMPI_Reduce_scatter:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Reduce_scatter\n"
+"b A_MPI_Reduce_scatter\n"
+"inwrap_MPI_Reduce_scatter:\n"
+"b R_MPI_Reduce_scatter\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -24675,6 +28227,7 @@ __asm__(
 "jmp *A_MPI_Reduce_scatter@GOTPCREL(%rip)\n"
 "inwrap_MPI_Reduce_scatter:\n"
 "jmp *R_MPI_Reduce_scatter@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Reduce_scatter,.-PMPI_Reduce_scatter\n"
 
 );
@@ -24733,6 +28286,16 @@ __asm__(
 ".type PMPI_Group_translate_ranks,@function\n"
 ".text\n"
 "PMPI_Group_translate_ranks:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_translate_ranks\n"
+"b A_MPI_Group_translate_ranks\n"
+"inwrap_MPI_Group_translate_ranks:\n"
+"b R_MPI_Group_translate_ranks\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -24757,6 +28320,7 @@ __asm__(
 "jmp *A_MPI_Group_translate_ranks@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_translate_ranks:\n"
 "jmp *R_MPI_Group_translate_ranks@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_translate_ranks,.-PMPI_Group_translate_ranks\n"
 
 );
@@ -24812,6 +28376,16 @@ __asm__(
 ".type PMPI_Group_incl,@function\n"
 ".text\n"
 "PMPI_Group_incl:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_incl\n"
+"b A_MPI_Group_incl\n"
+"inwrap_MPI_Group_incl:\n"
+"b R_MPI_Group_incl\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -24834,6 +28408,7 @@ __asm__(
 "jmp *A_MPI_Group_incl@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_incl:\n"
 "jmp *R_MPI_Group_incl@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_incl,.-PMPI_Group_incl\n"
 
 );
@@ -24888,6 +28463,16 @@ __asm__(
 ".type PMPI_Group_excl,@function\n"
 ".text\n"
 "PMPI_Group_excl:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_excl\n"
+"b A_MPI_Group_excl\n"
+"inwrap_MPI_Group_excl:\n"
+"b R_MPI_Group_excl\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -24910,6 +28495,7 @@ __asm__(
 "jmp *A_MPI_Group_excl@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_excl:\n"
 "jmp *R_MPI_Group_excl@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_excl,.-PMPI_Group_excl\n"
 
 );
@@ -24964,6 +28550,16 @@ __asm__(
 ".type PMPI_Group_range_incl,@function\n"
 ".text\n"
 "PMPI_Group_range_incl:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_range_incl\n"
+"b A_MPI_Group_range_incl\n"
+"inwrap_MPI_Group_range_incl:\n"
+"b R_MPI_Group_range_incl\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -24986,6 +28582,7 @@ __asm__(
 "jmp *A_MPI_Group_range_incl@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_range_incl:\n"
 "jmp *R_MPI_Group_range_incl@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_range_incl,.-PMPI_Group_range_incl\n"
 
 );
@@ -25040,6 +28637,16 @@ __asm__(
 ".type PMPI_Group_range_excl,@function\n"
 ".text\n"
 "PMPI_Group_range_excl:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_range_excl\n"
+"b A_MPI_Group_range_excl\n"
+"inwrap_MPI_Group_range_excl:\n"
+"b R_MPI_Group_range_excl\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -25062,6 +28669,7 @@ __asm__(
 "jmp *A_MPI_Group_range_excl@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_range_excl:\n"
 "jmp *R_MPI_Group_range_excl@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Group_range_excl,.-PMPI_Group_range_excl\n"
 
 );
@@ -25116,6 +28724,16 @@ __asm__(
 ".type PMPI_Cart_create,@function\n"
 ".text\n"
 "PMPI_Cart_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cart_create\n"
+"b A_MPI_Cart_create\n"
+"inwrap_MPI_Cart_create:\n"
+"b R_MPI_Cart_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -25142,6 +28760,7 @@ __asm__(
 "jmp *A_MPI_Cart_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cart_create:\n"
 "jmp *R_MPI_Cart_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cart_create,.-PMPI_Cart_create\n"
 
 );
@@ -25200,6 +28819,16 @@ __asm__(
 ".type PMPI_Dims_create,@function\n"
 ".text\n"
 "PMPI_Dims_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Dims_create\n"
+"b A_MPI_Dims_create\n"
+"inwrap_MPI_Dims_create:\n"
+"b R_MPI_Dims_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -25220,6 +28849,7 @@ __asm__(
 "jmp *A_MPI_Dims_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Dims_create:\n"
 "jmp *R_MPI_Dims_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Dims_create,.-PMPI_Dims_create\n"
 
 );
@@ -25272,6 +28902,16 @@ __asm__(
 ".type PMPI_Graph_create,@function\n"
 ".text\n"
 "PMPI_Graph_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Graph_create\n"
+"b A_MPI_Graph_create\n"
+"inwrap_MPI_Graph_create:\n"
+"b R_MPI_Graph_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -25298,6 +28938,7 @@ __asm__(
 "jmp *A_MPI_Graph_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Graph_create:\n"
 "jmp *R_MPI_Graph_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Graph_create,.-PMPI_Graph_create\n"
 
 );
@@ -25356,6 +28997,16 @@ __asm__(
 ".type PMPI_Graph_get,@function\n"
 ".text\n"
 "PMPI_Graph_get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Graph_get\n"
+"b A_MPI_Graph_get\n"
+"inwrap_MPI_Graph_get:\n"
+"b R_MPI_Graph_get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -25380,6 +29031,7 @@ __asm__(
 "jmp *A_MPI_Graph_get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Graph_get:\n"
 "jmp *R_MPI_Graph_get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Graph_get,.-PMPI_Graph_get\n"
 
 );
@@ -25435,6 +29087,16 @@ __asm__(
 ".type PMPI_Cart_get,@function\n"
 ".text\n"
 "PMPI_Cart_get:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cart_get\n"
+"b A_MPI_Cart_get\n"
+"inwrap_MPI_Cart_get:\n"
+"b R_MPI_Cart_get\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -25459,6 +29121,7 @@ __asm__(
 "jmp *A_MPI_Cart_get@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cart_get:\n"
 "jmp *R_MPI_Cart_get@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cart_get,.-PMPI_Cart_get\n"
 
 );
@@ -25514,6 +29177,16 @@ __asm__(
 ".type PMPI_Cart_rank,@function\n"
 ".text\n"
 "PMPI_Cart_rank:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cart_rank\n"
+"b A_MPI_Cart_rank\n"
+"inwrap_MPI_Cart_rank:\n"
+"b R_MPI_Cart_rank\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -25534,6 +29207,7 @@ __asm__(
 "jmp *A_MPI_Cart_rank@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cart_rank:\n"
 "jmp *R_MPI_Cart_rank@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cart_rank,.-PMPI_Cart_rank\n"
 
 );
@@ -25585,6 +29259,16 @@ __asm__(
 ".type PMPI_Cart_coords,@function\n"
 ".text\n"
 "PMPI_Cart_coords:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cart_coords\n"
+"b A_MPI_Cart_coords\n"
+"inwrap_MPI_Cart_coords:\n"
+"b R_MPI_Cart_coords\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -25607,6 +29291,7 @@ __asm__(
 "jmp *A_MPI_Cart_coords@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cart_coords:\n"
 "jmp *R_MPI_Cart_coords@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cart_coords,.-PMPI_Cart_coords\n"
 
 );
@@ -25660,6 +29345,16 @@ __asm__(
 ".type PMPI_Graph_neighbors,@function\n"
 ".text\n"
 "PMPI_Graph_neighbors:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Graph_neighbors\n"
+"b A_MPI_Graph_neighbors\n"
+"inwrap_MPI_Graph_neighbors:\n"
+"b R_MPI_Graph_neighbors\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -25682,6 +29377,7 @@ __asm__(
 "jmp *A_MPI_Graph_neighbors@GOTPCREL(%rip)\n"
 "inwrap_MPI_Graph_neighbors:\n"
 "jmp *R_MPI_Graph_neighbors@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Graph_neighbors,.-PMPI_Graph_neighbors\n"
 
 );
@@ -25735,6 +29431,16 @@ __asm__(
 ".type PMPI_Cart_sub,@function\n"
 ".text\n"
 "PMPI_Cart_sub:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cart_sub\n"
+"b A_MPI_Cart_sub\n"
+"inwrap_MPI_Cart_sub:\n"
+"b R_MPI_Cart_sub\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -25755,6 +29461,7 @@ __asm__(
 "jmp *A_MPI_Cart_sub@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cart_sub:\n"
 "jmp *R_MPI_Cart_sub@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cart_sub,.-PMPI_Cart_sub\n"
 
 );
@@ -25807,6 +29514,16 @@ __asm__(
 ".type PMPI_Cart_map,@function\n"
 ".text\n"
 "PMPI_Cart_map:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Cart_map\n"
+"b A_MPI_Cart_map\n"
+"inwrap_MPI_Cart_map:\n"
+"b R_MPI_Cart_map\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -25831,6 +29548,7 @@ __asm__(
 "jmp *A_MPI_Cart_map@GOTPCREL(%rip)\n"
 "inwrap_MPI_Cart_map:\n"
 "jmp *R_MPI_Cart_map@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Cart_map,.-PMPI_Cart_map\n"
 
 );
@@ -25886,6 +29604,16 @@ __asm__(
 ".type PMPI_Graph_map,@function\n"
 ".text\n"
 "PMPI_Graph_map:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Graph_map\n"
+"b A_MPI_Graph_map\n"
+"inwrap_MPI_Graph_map:\n"
+"b R_MPI_Graph_map\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -25910,6 +29638,7 @@ __asm__(
 "jmp *A_MPI_Graph_map@GOTPCREL(%rip)\n"
 "inwrap_MPI_Graph_map:\n"
 "jmp *R_MPI_Graph_map@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Graph_map,.-PMPI_Graph_map\n"
 
 );
@@ -25965,6 +29694,16 @@ __asm__(
 ".type PMPI_Comm_spawn,@function\n"
 ".text\n"
 "PMPI_Comm_spawn:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_spawn\n"
+"b A_MPI_Comm_spawn\n"
+"inwrap_MPI_Comm_spawn:\n"
+"b R_MPI_Comm_spawn\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -25991,6 +29730,7 @@ __asm__(
 "jmp *A_MPI_Comm_spawn@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_spawn:\n"
 "jmp *R_MPI_Comm_spawn@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_spawn,.-PMPI_Comm_spawn\n"
 
 );
@@ -26053,6 +29793,16 @@ __asm__(
 ".type PMPI_Comm_spawn_multiple,@function\n"
 ".text\n"
 "PMPI_Comm_spawn_multiple:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_spawn_multiple\n"
+"b A_MPI_Comm_spawn_multiple\n"
+"inwrap_MPI_Comm_spawn_multiple:\n"
+"b R_MPI_Comm_spawn_multiple\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26079,6 +29829,7 @@ __asm__(
 "jmp *A_MPI_Comm_spawn_multiple@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_spawn_multiple:\n"
 "jmp *R_MPI_Comm_spawn_multiple@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_spawn_multiple,.-PMPI_Comm_spawn_multiple\n"
 
 );
@@ -26147,6 +29898,16 @@ __asm__(
 ".type PMPI_Type_get_contents,@function\n"
 ".text\n"
 "PMPI_Type_get_contents:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_get_contents\n"
+"b A_MPI_Type_get_contents\n"
+"inwrap_MPI_Type_get_contents:\n"
+"b R_MPI_Type_get_contents\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26173,6 +29934,7 @@ __asm__(
 "jmp *A_MPI_Type_get_contents@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_get_contents:\n"
 "jmp *R_MPI_Type_get_contents@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_get_contents,.-PMPI_Type_get_contents\n"
 
 );
@@ -26240,6 +30002,16 @@ __asm__(
 ".type PMPI_Pack_external,@function\n"
 ".text\n"
 "PMPI_Pack_external:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Pack_external\n"
+"b A_MPI_Pack_external\n"
+"inwrap_MPI_Pack_external:\n"
+"b R_MPI_Pack_external\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26266,6 +30038,7 @@ __asm__(
 "jmp *A_MPI_Pack_external@GOTPCREL(%rip)\n"
 "inwrap_MPI_Pack_external:\n"
 "jmp *R_MPI_Pack_external@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Pack_external,.-PMPI_Pack_external\n"
 
 );
@@ -26326,6 +30099,16 @@ __asm__(
 ".type PMPI_Pack_external_size,@function\n"
 ".text\n"
 "PMPI_Pack_external_size:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Pack_external_size\n"
+"b A_MPI_Pack_external_size\n"
+"inwrap_MPI_Pack_external_size:\n"
+"b R_MPI_Pack_external_size\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -26348,6 +30131,7 @@ __asm__(
 "jmp *A_MPI_Pack_external_size@GOTPCREL(%rip)\n"
 "inwrap_MPI_Pack_external_size:\n"
 "jmp *R_MPI_Pack_external_size@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Pack_external_size,.-PMPI_Pack_external_size\n"
 
 );
@@ -26402,6 +30186,16 @@ __asm__(
 ".type PMPI_Type_create_darray,@function\n"
 ".text\n"
 "PMPI_Type_create_darray:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_darray\n"
+"b A_MPI_Type_create_darray\n"
+"inwrap_MPI_Type_create_darray:\n"
+"b R_MPI_Type_create_darray\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26428,6 +30222,7 @@ __asm__(
 "jmp *A_MPI_Type_create_darray@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_darray:\n"
 "jmp *R_MPI_Type_create_darray@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_darray,.-PMPI_Type_create_darray\n"
 
 );
@@ -26494,6 +30289,16 @@ __asm__(
 ".type PMPI_Type_create_hindexed,@function\n"
 ".text\n"
 "PMPI_Type_create_hindexed:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_hindexed\n"
+"b A_MPI_Type_create_hindexed\n"
+"inwrap_MPI_Type_create_hindexed:\n"
+"b R_MPI_Type_create_hindexed\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26518,6 +30323,7 @@ __asm__(
 "jmp *A_MPI_Type_create_hindexed@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_hindexed:\n"
 "jmp *R_MPI_Type_create_hindexed@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_hindexed,.-PMPI_Type_create_hindexed\n"
 
 );
@@ -26578,6 +30384,16 @@ __asm__(
 ".type PMPI_Type_create_indexed_block,@function\n"
 ".text\n"
 "PMPI_Type_create_indexed_block:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_indexed_block\n"
+"b A_MPI_Type_create_indexed_block\n"
+"inwrap_MPI_Type_create_indexed_block:\n"
+"b R_MPI_Type_create_indexed_block\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26602,6 +30418,7 @@ __asm__(
 "jmp *A_MPI_Type_create_indexed_block@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_indexed_block:\n"
 "jmp *R_MPI_Type_create_indexed_block@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_indexed_block,.-PMPI_Type_create_indexed_block\n"
 
 );
@@ -26659,6 +30476,16 @@ __asm__(
 ".type PMPI_Type_create_hindexed_block,@function\n"
 ".text\n"
 "PMPI_Type_create_hindexed_block:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_hindexed_block\n"
+"b A_MPI_Type_create_hindexed_block\n"
+"inwrap_MPI_Type_create_hindexed_block:\n"
+"b R_MPI_Type_create_hindexed_block\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26683,6 +30510,7 @@ __asm__(
 "jmp *A_MPI_Type_create_hindexed_block@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_hindexed_block:\n"
 "jmp *R_MPI_Type_create_hindexed_block@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_hindexed_block,.-PMPI_Type_create_hindexed_block\n"
 
 );
@@ -26743,6 +30571,16 @@ __asm__(
 ".type PMPI_Type_create_struct,@function\n"
 ".text\n"
 "PMPI_Type_create_struct:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_struct\n"
+"b A_MPI_Type_create_struct\n"
+"inwrap_MPI_Type_create_struct:\n"
+"b R_MPI_Type_create_struct\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26767,6 +30605,7 @@ __asm__(
 "jmp *A_MPI_Type_create_struct@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_struct:\n"
 "jmp *R_MPI_Type_create_struct@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_struct,.-PMPI_Type_create_struct\n"
 
 );
@@ -26831,6 +30670,16 @@ __asm__(
 ".type PMPI_Type_create_subarray,@function\n"
 ".text\n"
 "PMPI_Type_create_subarray:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_create_subarray\n"
+"b A_MPI_Type_create_subarray\n"
+"inwrap_MPI_Type_create_subarray:\n"
+"b R_MPI_Type_create_subarray\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26857,6 +30706,7 @@ __asm__(
 "jmp *A_MPI_Type_create_subarray@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_create_subarray:\n"
 "jmp *R_MPI_Type_create_subarray@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Type_create_subarray,.-PMPI_Type_create_subarray\n"
 
 );
@@ -26917,6 +30767,16 @@ __asm__(
 ".type PMPI_Unpack_external,@function\n"
 ".text\n"
 "PMPI_Unpack_external:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Unpack_external\n"
+"b A_MPI_Unpack_external\n"
+"inwrap_MPI_Unpack_external:\n"
+"b R_MPI_Unpack_external\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -26943,6 +30803,7 @@ __asm__(
 "jmp *A_MPI_Unpack_external@GOTPCREL(%rip)\n"
 "inwrap_MPI_Unpack_external:\n"
 "jmp *R_MPI_Unpack_external@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Unpack_external,.-PMPI_Unpack_external\n"
 
 );
@@ -27004,6 +30865,16 @@ __asm__(
 ".type PMPI_Dist_graph_create_adjacent,@function\n"
 ".text\n"
 "PMPI_Dist_graph_create_adjacent:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Dist_graph_create_adjacent\n"
+"b A_MPI_Dist_graph_create_adjacent\n"
+"inwrap_MPI_Dist_graph_create_adjacent:\n"
+"b R_MPI_Dist_graph_create_adjacent\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27030,6 +30901,7 @@ __asm__(
 "jmp *A_MPI_Dist_graph_create_adjacent@GOTPCREL(%rip)\n"
 "inwrap_MPI_Dist_graph_create_adjacent:\n"
 "jmp *R_MPI_Dist_graph_create_adjacent@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Dist_graph_create_adjacent,.-PMPI_Dist_graph_create_adjacent\n"
 
 );
@@ -27096,6 +30968,16 @@ __asm__(
 ".type PMPI_Dist_graph_create,@function\n"
 ".text\n"
 "PMPI_Dist_graph_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Dist_graph_create\n"
+"b A_MPI_Dist_graph_create\n"
+"inwrap_MPI_Dist_graph_create:\n"
+"b R_MPI_Dist_graph_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27122,6 +31004,7 @@ __asm__(
 "jmp *A_MPI_Dist_graph_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Dist_graph_create:\n"
 "jmp *R_MPI_Dist_graph_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Dist_graph_create,.-PMPI_Dist_graph_create\n"
 
 );
@@ -27186,6 +31069,16 @@ __asm__(
 ".type PMPI_Dist_graph_neighbors,@function\n"
 ".text\n"
 "PMPI_Dist_graph_neighbors:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Dist_graph_neighbors\n"
+"b A_MPI_Dist_graph_neighbors\n"
+"inwrap_MPI_Dist_graph_neighbors:\n"
+"b R_MPI_Dist_graph_neighbors\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27212,6 +31105,7 @@ __asm__(
 "jmp *A_MPI_Dist_graph_neighbors@GOTPCREL(%rip)\n"
 "inwrap_MPI_Dist_graph_neighbors:\n"
 "jmp *R_MPI_Dist_graph_neighbors@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Dist_graph_neighbors,.-PMPI_Dist_graph_neighbors\n"
 
 );
@@ -27271,6 +31165,16 @@ __asm__(
 ".type PMPI_Igatherv,@function\n"
 ".text\n"
 "PMPI_Igatherv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Igatherv\n"
+"b A_MPI_Igatherv\n"
+"inwrap_MPI_Igatherv:\n"
+"b R_MPI_Igatherv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27297,6 +31201,7 @@ __asm__(
 "jmp *A_MPI_Igatherv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Igatherv:\n"
 "jmp *R_MPI_Igatherv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Igatherv,.-PMPI_Igatherv\n"
 
 );
@@ -27366,6 +31271,16 @@ __asm__(
 ".type PMPI_Iscatterv,@function\n"
 ".text\n"
 "PMPI_Iscatterv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iscatterv\n"
+"b A_MPI_Iscatterv\n"
+"inwrap_MPI_Iscatterv:\n"
+"b R_MPI_Iscatterv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27392,6 +31307,7 @@ __asm__(
 "jmp *A_MPI_Iscatterv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iscatterv:\n"
 "jmp *R_MPI_Iscatterv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iscatterv,.-PMPI_Iscatterv\n"
 
 );
@@ -27459,6 +31375,16 @@ __asm__(
 ".type PMPI_Iallgatherv,@function\n"
 ".text\n"
 "PMPI_Iallgatherv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Iallgatherv\n"
+"b A_MPI_Iallgatherv\n"
+"inwrap_MPI_Iallgatherv:\n"
+"b R_MPI_Iallgatherv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27485,6 +31411,7 @@ __asm__(
 "jmp *A_MPI_Iallgatherv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Iallgatherv:\n"
 "jmp *R_MPI_Iallgatherv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Iallgatherv,.-PMPI_Iallgatherv\n"
 
 );
@@ -27552,6 +31479,16 @@ __asm__(
 ".type PMPI_Ialltoallv,@function\n"
 ".text\n"
 "PMPI_Ialltoallv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ialltoallv\n"
+"b A_MPI_Ialltoallv\n"
+"inwrap_MPI_Ialltoallv:\n"
+"b R_MPI_Ialltoallv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27578,6 +31515,7 @@ __asm__(
 "jmp *A_MPI_Ialltoallv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ialltoallv:\n"
 "jmp *R_MPI_Ialltoallv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ialltoallv,.-PMPI_Ialltoallv\n"
 
 );
@@ -27646,6 +31584,16 @@ __asm__(
 ".type PMPI_Ialltoallw,@function\n"
 ".text\n"
 "PMPI_Ialltoallw:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ialltoallw\n"
+"b A_MPI_Ialltoallw\n"
+"inwrap_MPI_Ialltoallw:\n"
+"b R_MPI_Ialltoallw\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27672,6 +31620,7 @@ __asm__(
 "jmp *A_MPI_Ialltoallw@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ialltoallw:\n"
 "jmp *R_MPI_Ialltoallw@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ialltoallw,.-PMPI_Ialltoallw\n"
 
 );
@@ -27752,6 +31701,16 @@ __asm__(
 ".type PMPI_Ireduce_scatter,@function\n"
 ".text\n"
 "PMPI_Ireduce_scatter:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ireduce_scatter\n"
+"b A_MPI_Ireduce_scatter\n"
+"inwrap_MPI_Ireduce_scatter:\n"
+"b R_MPI_Ireduce_scatter\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27778,6 +31737,7 @@ __asm__(
 "jmp *A_MPI_Ireduce_scatter@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ireduce_scatter:\n"
 "jmp *R_MPI_Ireduce_scatter@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ireduce_scatter,.-PMPI_Ireduce_scatter\n"
 
 );
@@ -27841,6 +31801,16 @@ __asm__(
 ".type PMPI_Ineighbor_allgatherv,@function\n"
 ".text\n"
 "PMPI_Ineighbor_allgatherv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ineighbor_allgatherv\n"
+"b A_MPI_Ineighbor_allgatherv\n"
+"inwrap_MPI_Ineighbor_allgatherv:\n"
+"b R_MPI_Ineighbor_allgatherv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27867,6 +31837,7 @@ __asm__(
 "jmp *A_MPI_Ineighbor_allgatherv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ineighbor_allgatherv:\n"
 "jmp *R_MPI_Ineighbor_allgatherv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ineighbor_allgatherv,.-PMPI_Ineighbor_allgatherv\n"
 
 );
@@ -27934,6 +31905,16 @@ __asm__(
 ".type PMPI_Ineighbor_alltoallv,@function\n"
 ".text\n"
 "PMPI_Ineighbor_alltoallv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ineighbor_alltoallv\n"
+"b A_MPI_Ineighbor_alltoallv\n"
+"inwrap_MPI_Ineighbor_alltoallv:\n"
+"b R_MPI_Ineighbor_alltoallv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -27960,6 +31941,7 @@ __asm__(
 "jmp *A_MPI_Ineighbor_alltoallv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ineighbor_alltoallv:\n"
 "jmp *R_MPI_Ineighbor_alltoallv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ineighbor_alltoallv,.-PMPI_Ineighbor_alltoallv\n"
 
 );
@@ -28029,6 +32011,16 @@ __asm__(
 ".type PMPI_Ineighbor_alltoallw,@function\n"
 ".text\n"
 "PMPI_Ineighbor_alltoallw:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Ineighbor_alltoallw\n"
+"b A_MPI_Ineighbor_alltoallw\n"
+"inwrap_MPI_Ineighbor_alltoallw:\n"
+"b R_MPI_Ineighbor_alltoallw\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -28055,6 +32047,7 @@ __asm__(
 "jmp *A_MPI_Ineighbor_alltoallw@GOTPCREL(%rip)\n"
 "inwrap_MPI_Ineighbor_alltoallw:\n"
 "jmp *R_MPI_Ineighbor_alltoallw@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Ineighbor_alltoallw,.-PMPI_Ineighbor_alltoallw\n"
 
 );
@@ -28143,6 +32136,16 @@ __asm__(
 ".type PMPI_Neighbor_allgatherv,@function\n"
 ".text\n"
 "PMPI_Neighbor_allgatherv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Neighbor_allgatherv\n"
+"b A_MPI_Neighbor_allgatherv\n"
+"inwrap_MPI_Neighbor_allgatherv:\n"
+"b R_MPI_Neighbor_allgatherv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -28169,6 +32172,7 @@ __asm__(
 "jmp *A_MPI_Neighbor_allgatherv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Neighbor_allgatherv:\n"
 "jmp *R_MPI_Neighbor_allgatherv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Neighbor_allgatherv,.-PMPI_Neighbor_allgatherv\n"
 
 );
@@ -28231,6 +32235,16 @@ __asm__(
 ".type PMPI_Neighbor_alltoallv,@function\n"
 ".text\n"
 "PMPI_Neighbor_alltoallv:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Neighbor_alltoallv\n"
+"b A_MPI_Neighbor_alltoallv\n"
+"inwrap_MPI_Neighbor_alltoallv:\n"
+"b R_MPI_Neighbor_alltoallv\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -28257,6 +32271,7 @@ __asm__(
 "jmp *A_MPI_Neighbor_alltoallv@GOTPCREL(%rip)\n"
 "inwrap_MPI_Neighbor_alltoallv:\n"
 "jmp *R_MPI_Neighbor_alltoallv@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Neighbor_alltoallv,.-PMPI_Neighbor_alltoallv\n"
 
 );
@@ -28321,6 +32336,16 @@ __asm__(
 ".type PMPI_Neighbor_alltoallw,@function\n"
 ".text\n"
 "PMPI_Neighbor_alltoallw:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Neighbor_alltoallw\n"
+"b A_MPI_Neighbor_alltoallw\n"
+"inwrap_MPI_Neighbor_alltoallw:\n"
+"b R_MPI_Neighbor_alltoallw\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -28347,6 +32372,7 @@ __asm__(
 "jmp *A_MPI_Neighbor_alltoallw@GOTPCREL(%rip)\n"
 "inwrap_MPI_Neighbor_alltoallw:\n"
 "jmp *R_MPI_Neighbor_alltoallw@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Neighbor_alltoallw,.-PMPI_Neighbor_alltoallw\n"
 
 );
@@ -28430,6 +32456,16 @@ __asm__(
 ".type PMPI_T_category_get_cvars,@function\n"
 ".text\n"
 "PMPI_T_category_get_cvars:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_category_get_cvars\n"
+"b A_MPI_T_category_get_cvars\n"
+"inwrap_MPI_T_category_get_cvars:\n"
+"b R_MPI_T_category_get_cvars\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -28450,6 +32486,7 @@ __asm__(
 "jmp *A_MPI_T_category_get_cvars@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_category_get_cvars:\n"
 "jmp *R_MPI_T_category_get_cvars@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_category_get_cvars,.-PMPI_T_category_get_cvars\n"
 
 );
@@ -28501,6 +32538,16 @@ __asm__(
 ".type PMPI_T_category_get_pvars,@function\n"
 ".text\n"
 "PMPI_T_category_get_pvars:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_category_get_pvars\n"
+"b A_MPI_T_category_get_pvars\n"
+"inwrap_MPI_T_category_get_pvars:\n"
+"b R_MPI_T_category_get_pvars\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -28521,6 +32568,7 @@ __asm__(
 "jmp *A_MPI_T_category_get_pvars@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_category_get_pvars:\n"
 "jmp *R_MPI_T_category_get_pvars@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_category_get_pvars,.-PMPI_T_category_get_pvars\n"
 
 );
@@ -28572,6 +32620,16 @@ __asm__(
 ".type PMPI_T_category_get_categories,@function\n"
 ".text\n"
 "PMPI_T_category_get_categories:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_category_get_categories\n"
+"b A_MPI_T_category_get_categories\n"
+"inwrap_MPI_T_category_get_categories:\n"
+"b R_MPI_T_category_get_categories\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -28592,6 +32650,7 @@ __asm__(
 "jmp *A_MPI_T_category_get_categories@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_category_get_categories:\n"
 "jmp *R_MPI_T_category_get_categories@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_category_get_categories,.-PMPI_T_category_get_categories\n"
 
 );
@@ -28643,6 +32702,16 @@ __asm__(
 ".type PMPI_File_iwrite_all,@function\n"
 ".text\n"
 "PMPI_File_iwrite_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iwrite_all\n"
+"b A_MPI_File_iwrite_all\n"
+"inwrap_MPI_File_iwrite_all:\n"
+"b R_MPI_File_iwrite_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -28667,6 +32736,7 @@ __asm__(
 "jmp *A_MPI_File_iwrite_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iwrite_all:\n"
 "jmp *R_MPI_File_iwrite_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iwrite_all,.-PMPI_File_iwrite_all\n"
 
 );
@@ -28726,6 +32796,16 @@ __asm__(
 ".type PMPI_File_iwrite_at_all,@function\n"
 ".text\n"
 "PMPI_File_iwrite_at_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iwrite_at_all\n"
+"b A_MPI_File_iwrite_at_all\n"
+"inwrap_MPI_File_iwrite_at_all:\n"
+"b R_MPI_File_iwrite_at_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -28752,6 +32832,7 @@ __asm__(
 "jmp *A_MPI_File_iwrite_at_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iwrite_at_all:\n"
 "jmp *R_MPI_File_iwrite_at_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iwrite_at_all,.-PMPI_File_iwrite_at_all\n"
 
 );
@@ -28813,6 +32894,16 @@ __asm__(
 ".type PMPI_T_category_get_index,@function\n"
 ".text\n"
 "PMPI_T_category_get_index:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_category_get_index\n"
+"b A_MPI_T_category_get_index\n"
+"inwrap_MPI_T_category_get_index:\n"
+"b R_MPI_T_category_get_index\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -28831,6 +32922,7 @@ __asm__(
 "jmp *A_MPI_T_category_get_index@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_category_get_index:\n"
 "jmp *R_MPI_T_category_get_index@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_category_get_index,.-PMPI_T_category_get_index\n"
 
 );
@@ -28880,6 +32972,16 @@ __asm__(
 ".type PMPI_T_cvar_get_index,@function\n"
 ".text\n"
 "PMPI_T_cvar_get_index:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_cvar_get_index\n"
+"b A_MPI_T_cvar_get_index\n"
+"inwrap_MPI_T_cvar_get_index:\n"
+"b R_MPI_T_cvar_get_index\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -28898,6 +33000,7 @@ __asm__(
 "jmp *A_MPI_T_cvar_get_index@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_cvar_get_index:\n"
 "jmp *R_MPI_T_cvar_get_index@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_cvar_get_index,.-PMPI_T_cvar_get_index\n"
 
 );
@@ -28947,6 +33050,16 @@ __asm__(
 ".type PMPI_T_pvar_get_index,@function\n"
 ".text\n"
 "PMPI_T_pvar_get_index:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_get_index\n"
+"b A_MPI_T_pvar_get_index\n"
+"inwrap_MPI_T_pvar_get_index:\n"
+"b R_MPI_T_pvar_get_index\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -28967,6 +33080,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_get_index@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_get_index:\n"
 "jmp *R_MPI_T_pvar_get_index@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_get_index,.-PMPI_T_pvar_get_index\n"
 
 );
@@ -29018,6 +33132,16 @@ __asm__(
 ".type PMPI_Aint_add,@function\n"
 ".text\n"
 "PMPI_Aint_add:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Aint_add\n"
+"b A_MPI_Aint_add\n"
+"inwrap_MPI_Aint_add:\n"
+"b R_MPI_Aint_add\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29036,6 +33160,7 @@ __asm__(
 "jmp *A_MPI_Aint_add@GOTPCREL(%rip)\n"
 "inwrap_MPI_Aint_add:\n"
 "jmp *R_MPI_Aint_add@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Aint_add,.-PMPI_Aint_add\n"
 
 );
@@ -29085,6 +33210,16 @@ __asm__(
 ".type PMPI_Aint_diff,@function\n"
 ".text\n"
 "PMPI_Aint_diff:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Aint_diff\n"
+"b A_MPI_Aint_diff\n"
+"inwrap_MPI_Aint_diff:\n"
+"b R_MPI_Aint_diff\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29103,6 +33238,7 @@ __asm__(
 "jmp *A_MPI_Aint_diff@GOTPCREL(%rip)\n"
 "inwrap_MPI_Aint_diff:\n"
 "jmp *R_MPI_Aint_diff@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Aint_diff,.-PMPI_Aint_diff\n"
 
 );
@@ -29152,6 +33288,16 @@ __asm__(
 ".type PMPI_File_iread_all,@function\n"
 ".text\n"
 "PMPI_File_iread_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iread_all\n"
+"b A_MPI_File_iread_all\n"
+"inwrap_MPI_File_iread_all:\n"
+"b R_MPI_File_iread_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -29176,6 +33322,7 @@ __asm__(
 "jmp *A_MPI_File_iread_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iread_all:\n"
 "jmp *R_MPI_File_iread_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iread_all,.-PMPI_File_iread_all\n"
 
 );
@@ -29236,6 +33383,16 @@ __asm__(
 ".type PMPI_File_iread_at_all,@function\n"
 ".text\n"
 "PMPI_File_iread_at_all:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_iread_at_all\n"
+"b A_MPI_File_iread_at_all\n"
+"inwrap_MPI_File_iread_at_all:\n"
+"b R_MPI_File_iread_at_all\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -29262,6 +33419,7 @@ __asm__(
 "jmp *A_MPI_File_iread_at_all@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_iread_at_all:\n"
 "jmp *R_MPI_File_iread_at_all@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_iread_at_all,.-PMPI_File_iread_at_all\n"
 
 );
@@ -29323,6 +33481,16 @@ __asm__(
 ".type PMPI_T_category_changed,@function\n"
 ".text\n"
 "PMPI_T_category_changed:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_category_changed\n"
+"b A_MPI_T_category_changed\n"
+"inwrap_MPI_T_category_changed:\n"
+"b R_MPI_T_category_changed\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29339,6 +33507,7 @@ __asm__(
 "jmp *A_MPI_T_category_changed@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_category_changed:\n"
 "jmp *R_MPI_T_category_changed@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_category_changed,.-PMPI_T_category_changed\n"
 
 );
@@ -29386,6 +33555,16 @@ __asm__(
 ".type PMPI_Pcontrol,@function\n"
 ".text\n"
 "PMPI_Pcontrol:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Pcontrol\n"
+"b A_MPI_Pcontrol\n"
+"inwrap_MPI_Pcontrol:\n"
+"b R_MPI_Pcontrol\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29402,6 +33581,7 @@ __asm__(
 "jmp *A_MPI_Pcontrol@GOTPCREL(%rip)\n"
 "inwrap_MPI_Pcontrol:\n"
 "jmp *R_MPI_Pcontrol@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Pcontrol,.-PMPI_Pcontrol\n"
 
 );
@@ -29445,6 +33625,16 @@ __asm__(
 ".type PMPI_Win_create_errhandler,@function\n"
 ".text\n"
 "PMPI_Win_create_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_create_errhandler\n"
+"b A_MPI_Win_create_errhandler\n"
+"inwrap_MPI_Win_create_errhandler:\n"
+"b R_MPI_Win_create_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29463,6 +33653,7 @@ __asm__(
 "jmp *A_MPI_Win_create_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_create_errhandler:\n"
 "jmp *R_MPI_Win_create_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_create_errhandler,.-PMPI_Win_create_errhandler\n"
 
 );
@@ -29505,6 +33696,16 @@ __asm__(
 ".type PMPI_Win_call_errhandler,@function\n"
 ".text\n"
 "PMPI_Win_call_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_call_errhandler\n"
+"b A_MPI_Win_call_errhandler\n"
+"inwrap_MPI_Win_call_errhandler:\n"
+"b R_MPI_Win_call_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29523,6 +33724,7 @@ __asm__(
 "jmp *A_MPI_Win_call_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_call_errhandler:\n"
 "jmp *R_MPI_Win_call_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_call_errhandler,.-PMPI_Win_call_errhandler\n"
 
 );
@@ -29565,6 +33767,16 @@ __asm__(
 ".type PMPI_Win_set_errhandler,@function\n"
 ".text\n"
 "PMPI_Win_set_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_set_errhandler\n"
+"b A_MPI_Win_set_errhandler\n"
+"inwrap_MPI_Win_set_errhandler:\n"
+"b R_MPI_Win_set_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29583,6 +33795,7 @@ __asm__(
 "jmp *A_MPI_Win_set_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_set_errhandler:\n"
 "jmp *R_MPI_Win_set_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_set_errhandler,.-PMPI_Win_set_errhandler\n"
 
 );
@@ -29625,6 +33838,16 @@ __asm__(
 ".type PMPI_File_call_errhandler,@function\n"
 ".text\n"
 "PMPI_File_call_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_call_errhandler\n"
+"b A_MPI_File_call_errhandler\n"
+"inwrap_MPI_File_call_errhandler:\n"
+"b R_MPI_File_call_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29643,6 +33866,7 @@ __asm__(
 "jmp *A_MPI_File_call_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_call_errhandler:\n"
 "jmp *R_MPI_File_call_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_call_errhandler,.-PMPI_File_call_errhandler\n"
 
 );
@@ -29686,6 +33910,16 @@ __asm__(
 ".type PMPI_File_create_errhandler,@function\n"
 ".text\n"
 "PMPI_File_create_errhandler:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_create_errhandler\n"
+"b A_MPI_File_create_errhandler\n"
+"inwrap_MPI_File_create_errhandler:\n"
+"b R_MPI_File_create_errhandler\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29704,6 +33938,7 @@ __asm__(
 "jmp *A_MPI_File_create_errhandler@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_create_errhandler:\n"
 "jmp *R_MPI_File_create_errhandler@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_File_create_errhandler,.-PMPI_File_create_errhandler\n"
 
 );
@@ -29746,6 +33981,16 @@ __asm__(
 ".type PMPI_T_pvar_read,@function\n"
 ".text\n"
 "PMPI_T_pvar_read:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_read\n"
+"b A_MPI_T_pvar_read\n"
+"inwrap_MPI_T_pvar_read:\n"
+"b R_MPI_T_pvar_read\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -29766,6 +34011,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_read@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_read:\n"
 "jmp *R_MPI_T_pvar_read@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_read,.-PMPI_T_pvar_read\n"
 
 );
@@ -29808,6 +34054,16 @@ __asm__(
 ".type PMPI_T_pvar_readreset,@function\n"
 ".text\n"
 "PMPI_T_pvar_readreset:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_readreset\n"
+"b A_MPI_T_pvar_readreset\n"
+"inwrap_MPI_T_pvar_readreset:\n"
+"b R_MPI_T_pvar_readreset\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -29828,6 +34084,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_readreset@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_readreset:\n"
 "jmp *R_MPI_T_pvar_readreset@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_readreset,.-PMPI_T_pvar_readreset\n"
 
 );
@@ -29870,6 +34127,16 @@ __asm__(
 ".type PMPI_T_pvar_reset,@function\n"
 ".text\n"
 "PMPI_T_pvar_reset:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_reset\n"
+"b A_MPI_T_pvar_reset\n"
+"inwrap_MPI_T_pvar_reset:\n"
+"b R_MPI_T_pvar_reset\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29888,6 +34155,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_reset@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_reset:\n"
 "jmp *R_MPI_T_pvar_reset@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_reset,.-PMPI_T_pvar_reset\n"
 
 );
@@ -29930,6 +34198,16 @@ __asm__(
 ".type PMPI_T_pvar_session_create,@function\n"
 ".text\n"
 "PMPI_T_pvar_session_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_session_create\n"
+"b A_MPI_T_pvar_session_create\n"
+"inwrap_MPI_T_pvar_session_create:\n"
+"b R_MPI_T_pvar_session_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -29946,6 +34224,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_session_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_session_create:\n"
 "jmp *R_MPI_T_pvar_session_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_session_create,.-PMPI_T_pvar_session_create\n"
 
 );
@@ -29988,6 +34267,16 @@ __asm__(
 ".type PMPI_T_pvar_session_free,@function\n"
 ".text\n"
 "PMPI_T_pvar_session_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_session_free\n"
+"b A_MPI_T_pvar_session_free\n"
+"inwrap_MPI_T_pvar_session_free:\n"
+"b R_MPI_T_pvar_session_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30004,6 +34293,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_session_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_session_free:\n"
 "jmp *R_MPI_T_pvar_session_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_session_free,.-PMPI_T_pvar_session_free\n"
 
 );
@@ -30046,6 +34336,16 @@ __asm__(
 ".type PMPI_T_pvar_start,@function\n"
 ".text\n"
 "PMPI_T_pvar_start:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_start\n"
+"b A_MPI_T_pvar_start\n"
+"inwrap_MPI_T_pvar_start:\n"
+"b R_MPI_T_pvar_start\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30064,6 +34364,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_start@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_start:\n"
 "jmp *R_MPI_T_pvar_start@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_start,.-PMPI_T_pvar_start\n"
 
 );
@@ -30106,6 +34407,16 @@ __asm__(
 ".type PMPI_T_pvar_stop,@function\n"
 ".text\n"
 "PMPI_T_pvar_stop:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_stop\n"
+"b A_MPI_T_pvar_stop\n"
+"inwrap_MPI_T_pvar_stop:\n"
+"b R_MPI_T_pvar_stop\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30124,6 +34435,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_stop@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_stop:\n"
 "jmp *R_MPI_T_pvar_stop@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_stop,.-PMPI_T_pvar_stop\n"
 
 );
@@ -30166,6 +34478,16 @@ __asm__(
 ".type PMPI_T_pvar_write,@function\n"
 ".text\n"
 "PMPI_T_pvar_write:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_write\n"
+"b A_MPI_T_pvar_write\n"
+"inwrap_MPI_T_pvar_write:\n"
+"b R_MPI_T_pvar_write\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -30186,6 +34508,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_write@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_write:\n"
 "jmp *R_MPI_T_pvar_write@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_write,.-PMPI_T_pvar_write\n"
 
 );
@@ -30228,6 +34551,16 @@ __asm__(
 ".type PMPI_T_pvar_handle_alloc,@function\n"
 ".text\n"
 "PMPI_T_pvar_handle_alloc:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_handle_alloc\n"
+"b A_MPI_T_pvar_handle_alloc\n"
+"inwrap_MPI_T_pvar_handle_alloc:\n"
+"b R_MPI_T_pvar_handle_alloc\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x30, %rsp\n"
@@ -30252,6 +34585,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_handle_alloc@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_handle_alloc:\n"
 "jmp *R_MPI_T_pvar_handle_alloc@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_handle_alloc,.-PMPI_T_pvar_handle_alloc\n"
 
 );
@@ -30294,6 +34628,16 @@ __asm__(
 ".type PMPI_T_pvar_handle_free,@function\n"
 ".text\n"
 "PMPI_T_pvar_handle_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_T_pvar_handle_free\n"
+"b A_MPI_T_pvar_handle_free\n"
+"inwrap_MPI_T_pvar_handle_free:\n"
+"b R_MPI_T_pvar_handle_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30312,6 +34656,7 @@ __asm__(
 "jmp *A_MPI_T_pvar_handle_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_T_pvar_handle_free:\n"
 "jmp *R_MPI_T_pvar_handle_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_T_pvar_handle_free,.-PMPI_T_pvar_handle_free\n"
 
 );
@@ -30353,6 +34698,16 @@ __asm__(
 ".type PMPI_Errhandler_f2c,@function\n"
 ".text\n"
 "PMPI_Errhandler_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_f2c\n"
+"b A_MPI_Errhandler_f2c\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"b R_MPI_Errhandler_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30369,6 +34724,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_f2c:\n"
 "jmp *R_MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_f2c,.-PMPI_Errhandler_f2c\n"
 );
 
@@ -30411,6 +34767,16 @@ __asm__(
 ".type PMPI_Errhandler_c2f,@function\n"
 ".text\n"
 "PMPI_Errhandler_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_c2f\n"
+"b A_MPI_Errhandler_c2f\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"b R_MPI_Errhandler_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30427,6 +34793,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_c2f:\n"
 "jmp *R_MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_c2f,.-PMPI_Errhandler_c2f\n"
 );
 
@@ -30471,6 +34838,16 @@ __asm__(
 ".type PMPI_Errhandler_f2c,@function\n"
 ".text\n"
 "PMPI_Errhandler_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_f2c\n"
+"b A__MPI_Errhandler_f2c\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"b R__MPI_Errhandler_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30487,6 +34864,7 @@ __asm__(
 "jmp *A__MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_f2c:\n"
 "jmp *R__MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_f2c,.-PMPI_Errhandler_f2c\n"
 );
 
@@ -30530,6 +34908,16 @@ __asm__(
 ".type PMPI_Errhandler_c2f,@function\n"
 ".text\n"
 "PMPI_Errhandler_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_c2f\n"
+"b A__MPI_Errhandler_c2f\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"b R__MPI_Errhandler_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -30546,6 +34934,7 @@ __asm__(
 "jmp *A__MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_c2f:\n"
 "jmp *R__MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Errhandler_c2f,.-PMPI_Errhandler_c2f\n"
 );
 

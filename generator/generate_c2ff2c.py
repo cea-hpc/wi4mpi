@@ -44,6 +44,18 @@ def generate_func_asmK_tls(func_name, nargs):
             str=str+'\".type P'+func_name+',@function\\n\"\n'
             str=str+'\".text\\n\"\n'
             str=str+'\"P'+func_name+':\\n\"\n'
+            # generate AARCH64 code
+            str=str+'#ifdef __aarch64__\n'
+            str=str+'\"adrp x8, :gottprel:in_w\\n\"\n'
+            str=str+'\"ldr x8, [x8, :gottprel_lo12:in_w]\\n\"\n'
+            str=str+'\"mrs x9, TPIDR_EL0\\n\"\n'
+            str=str+'\"ldr w8, [x9, x8]\\n\"\n'
+            str=str+'\"cbnz w8, inwrap_'+func_name+'\\n\"\n'
+            str=str+'\"b A_'+func_name+'\\n\"\n'
+            str=str+'\"inwrap_'+func_name+':\\n\"\n'
+            str=str+'\"b R_'+func_name+'\\n\"\n'
+            str=str+'#else\n'
+            # generate x86_64
             for i in range(nb_args):
                   if i < 6:
                         count_hexa=count_hexa+8
@@ -99,6 +111,7 @@ def generate_func_asmK_tls(func_name, nargs):
             str=str+'\"jmp *A_'+func_name+'@GOTPCREL(%rip)\\n\"\n'
             str=str+'\"inwrap_'+func_name+':\\n\"\n'
             str=str+'\"jmp *R_'+func_name+'@GOTPCREL(%rip)\\n\"\n'
+            str=str+'#endif\n'
             str=str+'\".size P'+func_name+',.-P'+func_name+'\\n\"\n'
             str=str+'\n);\n'
             return str
@@ -119,6 +132,18 @@ def generate_func_asmK_tls_updated_for_interface(func_name, nargs):
             str=str+'\".type CC'+func_name+',@function\\n\"\n'
             str=str+'\".text\\n\"\n'
             str=str+'\"CC'+func_name+':\\n\"\n'
+            # generate AARCH64 code
+            str=str+'#ifdef __aarch64__\n'
+            str=str+'\"adrp x8, :gottprel:in_w\\n\"\n'
+            str=str+'\"ldr x8, [x8, :gottprel_lo12:in_w]\\n\"\n'
+            str=str+'\"mrs x9, TPIDR_EL0\\n\"\n'
+            str=str+'\"ldr w8, [x9, x8]\\n\"\n'
+            str=str+'\"cbnz w8, inwrap_'+func_name+'\\n\"\n'
+            str=str+'\"b A_'+func_name+'\\n\"\n'
+            str=str+'\"inwrap_'+func_name+':\\n\"\n'
+            str=str+'\"b R_'+func_name+'\\n\"\n'
+            str=str+'#else\n'
+            # generate x86_64
             for i in range(nb_args):
                   if i < 6:
                         count_hexa=count_hexa+8
@@ -174,6 +199,7 @@ def generate_func_asmK_tls_updated_for_interface(func_name, nargs):
             str=str+'\"jmp *A_'+func_name+'@GOTPCREL(%rip)\\n\"\n'
             str=str+'\"inwrap_'+func_name+':\\n\"\n'
             str=str+'\"jmp *R_'+func_name+'@GOTPCREL(%rip)\\n\"\n'
+            str=str+'#endif\n'
             #str=str+'\".size P'+func_name+',.-P'+func_name+'\\n\"\n'
             str=str+'\n);\n'
             return str
@@ -196,6 +222,18 @@ def generate_func_asmK_tls_(func_name, nargs):
             str=str+'\".type P'+func_name+',@function\\n\"\n'
             str=str+'\".text\\n\"\n'
             str=str+'\"P'+func_name+':\\n\"\n'
+            # generate AARCH64 code
+            str=str+'#ifdef __aarch64__\n'
+            str=str+'\"adrp x8, :gottprel:in_w\\n\"\n'
+            str=str+'\"ldr x8, [x8, :gottprel_lo12:in_w]\\n\"\n'
+            str=str+'\"mrs x9, TPIDR_EL0\\n\"\n'
+            str=str+'\"ldr w8, [x9, x8]\\n\"\n'
+            str=str+'\"cbnz w8, inwrap_'+func_name+'\\n\"\n'
+            str=str+'\"b A_'+func_name+'\\n\"\n'
+            str=str+'\"inwrap_'+func_name+':\\n\"\n'
+            str=str+'\"b R_'+func_name+'\\n\"\n'
+            str=str+'#else\n'
+            # generate x86_64
             for i in range(nb_args):
                   if i < 6:
                         count_hexa=count_hexa+8
@@ -251,6 +289,7 @@ def generate_func_asmK_tls_(func_name, nargs):
             str=str+'\"jmp *A__'+func_name+'@GOTPCREL(%rip)\\n\"\n'
             str=str+'\"inwrap_'+func_name+':\\n\"\n'
             str=str+'\"jmp *R__'+func_name+'@GOTPCREL(%rip)\\n\"\n'
+            str=str+'#endif\n'
             str=str+'\".size P'+func_name+',.-P'+func_name+'\\n\"\n'
             str=str+'\n);\n'
             return str
@@ -270,6 +309,18 @@ def generate_func_asmK_tls_updated_for_interface_(func_name, nargs):
             str=str+'\".type CC'+func_name+',@function\\n\"\n'
             str=str+'\".text\\n\"\n'
             str=str+'\"CC'+func_name+':\\n\"\n'
+            # generate AARCH64 code
+            str=str+'#ifdef __aarch64__\n'
+            str=str+'\"adrp x8, :gottprel:in_w\\n\"\n'
+            str=str+'\"ldr x8, [x8, :gottprel_lo12:in_w]\\n\"\n'
+            str=str+'\"mrs x9, TPIDR_EL0\\n\"\n'
+            str=str+'\"ldr w8, [x9, x8]\\n\"\n'
+            str=str+'\"cbnz w8, inwrap_'+func_name+'\\n\"\n'
+            str=str+'\"b A_'+func_name+'\\n\"\n'
+            str=str+'\"inwrap_'+func_name+':\\n\"\n'
+            str=str+'\"b R_'+func_name+'\\n\"\n'
+            str=str+'#else\n'
+            # generate x86_64
             for i in range(nb_args):
                   if i < 6:
                         count_hexa=count_hexa+8
@@ -325,6 +376,7 @@ def generate_func_asmK_tls_updated_for_interface_(func_name, nargs):
             str=str+'\"jmp *A__'+func_name+'@GOTPCREL(%rip)\\n\"\n'
             str=str+'\"inwrap_'+func_name+':\\n\"\n'
             str=str+'\"jmp *R__'+func_name+'@GOTPCREL(%rip)\\n\"\n'
+            str=str+'#endif\n'
             #str=str+'\".size P'+func_name+',.-P'+func_name+'\\n\"\n'
             str=str+'\n);\n'
             return str
