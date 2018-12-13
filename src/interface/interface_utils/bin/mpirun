@@ -39,6 +39,7 @@ Option:
     -h | -help | --help                     This help message
     -f | -hostfile | --hostfile {file}      File containing the host names
     -n | -np {value}                        Number of processes to run
+    -p | -pm | --pm {value}                 Select processes manager (mpiexec, hydra...)
     -v | -verbose | --verbose               Be verbose
     -V | -version | --version               Print version and exit
     -- | -end | --end                       Separate options and program to run
@@ -74,6 +75,9 @@ while [[ $# -gt 0 ]]; do
             shift 2 ;;
         -n|-np)
             mpirun_opts="$mpirun_opts -n $2"
+            shift 2 ;;
+        -p|-pm|--pm)
+            WI4MPI_PM=$2
             shift 2 ;;
         -v|-verbose|--verbose)
             mpirun_opts="$mpirun_opts -v"
@@ -116,7 +120,6 @@ WI4MPI_UCONFIG="~/.wi4mpi.cfg"
 [[ -f "$WI4MPI_GCONFIG" ]] && source "$WI4MPI_GCONFIG"
 [[ -f "$WI4MPI_UCONFIG" ]] && source "$WI4MPI_UCONFIG"
 
-
 case ${WI4MPI_FROM,,} in
     *openmpi*)
         wi4mpi_opts="-f openmpi" ;;
@@ -124,13 +127,14 @@ case ${WI4MPI_FROM,,} in
         wi4mpi_opts="-f intelmpi" ;;
 esac
 
+WI4MPI_PM=${WI4MPI_PM:-"mpirun"}
 case ${WI4MPI_TO,,} in
     *openmpi*)
         wi4mpi_opts="$wi4mpi_opts -t openmpi"
-        _mpirun=$OPENMPI_DEFAULT_ROOT/bin/mpirun ;;
+        _mpirun=$OPENMPI_DEFAULT_ROOT/bin/$WI4MPI_PM ;;
     *intelmpi*)
         wi4mpi_opts="$wi4mpi_opts -t intelmpi"
-        _mpirun=$INTELMPI_DEFAULT_ROOT/bin64/mpirun ;;
+        _mpirun=$INTELMPI_DEFAULT_ROOT/bin64/$WI4MPI_PM ;;
     *)
         (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
 esac
