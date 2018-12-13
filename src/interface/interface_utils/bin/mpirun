@@ -145,6 +145,11 @@ case ${WI4MPI_TO,,} in
         [[ -z "$MPICH_ROOT" ]] && (>&2 echo "Error: please set MPICH_ROOT or MPICH_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
         wi4mpi_opts="$wi4mpi_opts -t mpich"
         _mpirun=$MPICH_ROOT/bin/$WI4MPI_PM ;;
+    *mpc*)
+        [[ -z "$MPC_ROOT" ]] && (>&2 echo "Error: please set MPC_ROOT or MPC_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
+        wi4mpi_opts="$wi4mpi_opts -t mpc $MPC_ROOT/x86_64/x86_64/bin/mpcrun $mpirun_opts"
+        mpirun_opts=""
+        _mpirun="" ;;
     *)
         (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
 esac
