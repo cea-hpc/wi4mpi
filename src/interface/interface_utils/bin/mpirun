@@ -55,16 +55,12 @@ EOF
 
 }
 
-mpirun_opts=()
-wi4mpi_opts=()
 while [[ $# -gt 0 ]]; do
     case $1 in
         -F|-from|--from)
-            wi4mpi_opts="$wi4mpi_opts -f $2"
             export WI4MPI_FROM=$2
             shift 2 ;;
         -T|-to|--to)
-            wi4mpi_opts="$wi4mpi_opts -t $2"
             export WI4MPI_TO=$2
             shift 2 ;;
         -E|-extra|--extra)
@@ -115,15 +111,28 @@ done
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
 WI4MPI_UCONFIG="~/.wi4mpi.cfg"
 
-[[ -z $WI4MPI_ROOT ]] && (>&2 echo "Error: please set WI4MPI_ROOT") && exit 1
-[[ -z $WI4MPI_TO ]] && (>&2 echo "Error: please set WI4MPI_TO") && exit 1
-[[ -f $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
-[[ -f $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
+[[ -z "$WI4MPI_ROOT" ]] && (>&2 echo "Error: please set WI4MPI_ROOT") && exit 1
+[[ -z "$WI4MPI_TO" ]] && (>&2 echo "Error: please set WI4MPI_TO") && exit 1
+[[ -f "$WI4MPI_GCONFIG" ]] && source "$WI4MPI_GCONFIG"
+[[ -f "$WI4MPI_UCONFIG" ]] && source "$WI4MPI_UCONFIG"
 
-if [[ ${WI4MPI_TO,,} = *"openmpi"* ]]; then
-    $OPENMPI_DEFAULT_ROOT/bin/mpirun $mpirun_opts wi4mpi -t openmpi $cmd
-elif [[ ${WI4MPI_TO,,} = *"intelmpi"* ]]; then
-    $INTELMPI_DEFAULT_ROOT/bin64/mpirun $mpirun_opts wi4mpi -t intelmpi $cmd
-else
-    (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
-fi
+
+case ${WI4MPI_FROM,,} in
+    *openmpi*)
+        wi4mpi_opts="-f openmpi" ;;
+    *intelmpi*)
+        wi4mpi_opts="-f intelmpi" ;;
+esac
+
+case ${WI4MPI_TO,,} in
+    *openmpi*)
+        wi4mpi_opts="$wi4mpi_opts -t openmpi"
+        _mpirun=$OPENMPI_DEFAULT_ROOT/bin/mpirun ;;
+    *intelmpi*)
+        wi4mpi_opts="$wi4mpi_opts -t intelmpi"
+        _mpirun=$INTELMPI_DEFAULT_ROOT/bin64/mpirun ;;
+    *)
+        (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
+esac
+
+$_mpirun $mpirun_opts wi4mpi $wi4mpi_opts $cmd
