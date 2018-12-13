@@ -120,6 +120,10 @@ WI4MPI_UCONFIG="~/.wi4mpi.cfg"
 [[ -f "$WI4MPI_GCONFIG" ]] && source "$WI4MPI_GCONFIG"
 [[ -f "$WI4MPI_UCONFIG" ]] && source "$WI4MPI_UCONFIG"
 
+export OPENMPI_ROOT=${OPENMPI_ROOT:-"$OPENMPI_DEFAULT_ROOT"}
+export INTELMPI_ROOT=${INTELMPI_ROOT:-"$INTELMPI_DEFAULT_ROOT"}
+export MPICH_ROOT=${MPICH_ROOT:-"$MPICH_DEFAULT_ROOT"}
+
 case ${WI4MPI_FROM,,} in
     *openmpi*)
         wi4mpi_opts="-f openmpi" ;;
@@ -130,11 +134,17 @@ esac
 WI4MPI_PM=${WI4MPI_PM:-"mpirun"}
 case ${WI4MPI_TO,,} in
     *openmpi*)
+        [[ -z "$OPENMPI_ROOT" ]] && (>&2 echo "Error: please set OPENMPI_ROOT or OPENMPI_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
         wi4mpi_opts="$wi4mpi_opts -t openmpi"
-        _mpirun=$OPENMPI_DEFAULT_ROOT/bin/$WI4MPI_PM ;;
+        _mpirun=$OPENMPI_ROOT/bin/$WI4MPI_PM ;;
     *intelmpi*)
+        [[ -z "$INTELMPI_ROOT" ]] && (>&2 echo "Error: please set INTELMPI_ROOT or INTELMPI_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
         wi4mpi_opts="$wi4mpi_opts -t intelmpi"
-        _mpirun=$INTELMPI_DEFAULT_ROOT/bin64/$WI4MPI_PM ;;
+        _mpirun=$INTELMPI_ROOT/bin64/$WI4MPI_PM ;;
+    *mpich*)
+        [[ -z "$MPICH_ROOT" ]] && (>&2 echo "Error: please set MPICH_ROOT or MPICH_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
+        wi4mpi_opts="$wi4mpi_opts -t mpich"
+        _mpirun=$MPICH_ROOT/bin/$WI4MPI_PM ;;
     *)
         (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
 esac
