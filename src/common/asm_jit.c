@@ -59,6 +59,18 @@ __asm__(
 "nop\n"
 "nop\n"
 "user_fn_wrapper_template:\n"
+#ifdef __aarch64__
+    "stp x9, x30, [sp, #-16]!\n"
+    "bl peip_user_fn\n"
+"peip_user_fn:\n"
+    "mov x10, x30\n"
+    "sub x10, x10, #0x18\n"
+    "ldr x3, [x10]\n"
+    "ldr x11, [x10,#0x8]\n"
+    "blr x11\n"
+    "ldp x9, x30, [sp], #16\n"
+    "ret\n"
+#else
 "  call peip_user_fn\n"
 "peip_user_fn:\n"
 "  pop %rax\n"
@@ -77,6 +89,7 @@ __asm__(
 "  callq  *0x8(%r9)\n"
 "  leaveq \n"
 "  retq \n"
+#endif
 );     
 int user_func_resolved(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type))
 {
@@ -105,6 +118,18 @@ __asm__(
 "nop\n"
 "nop\n"
 "user_fn_wrapper_template_fort:\n"
+#ifdef __aarch64__
+    "stp x9, x30, [sp, #-16]!\n"
+    "bl peip_user_fn_fort\n"
+"peip_user_fn_fort:\n"
+    "mov x10, x30\n"
+    "sub x10, x10, #0x18\n"
+    "ldr x4, [x10]\n"
+    "ldr x11, [x10,#0x8]\n"
+    "blr x11\n"
+    "ldp x9, x30, [sp], #16\n"
+    "ret\n"
+#else
 "  call peip_user_fn_fort\n"
 "peip_user_fn_fort:\n"
 "  pop %rax\n"
@@ -123,6 +148,7 @@ __asm__(
 "  callq  *0x8(%r9)\n"
 "  leaveq \n"
 "  retq \n"
+#endif
 );     
 int user_func_resolved_fort(void *a,void *b,int *c,int *d,void (*pf)(void *in,void *out,int *len,int *data_type))
 {
@@ -152,6 +178,18 @@ __asm__(
 "nop\n"
 "nop\n"
 "user_datarep_extent_function_template:\n"
+#ifdef __aarch64__
+    "stp x9, x30, [sp, #-16]!\n"
+    "bl peip_datarep_extent_func\n"
+"peip_datarep_extent_func:\n"
+    "mov x10, x30\n"
+    "sub x10, x10, #0x18\n"
+    "ldr x3, [x10]\n"
+    "ldr x11, [x10,#0x8]\n"
+    "blr x11\n"
+    "ldp x9, x30, [sp], #16\n"
+    "ret\n"
+#else
 "  call peip_datarep_extent_func\n"
 "peip_datarep_extent_func:\n"
 "  pop %rax\n"
@@ -169,6 +207,7 @@ __asm__(
 "  callq  *0x8(%r9)\n"
 "  leaveq \n"
 "  retq \n"
+#endif
 );     
 int datarep_extent_func_resolved(R_MPI_Datatype a, R_MPI_Aint *b, void *c, int (*pf)(A_MPI_Datatype data_type, A_MPI_Aint *file_extent, void *extra_state))
 {
@@ -198,6 +237,18 @@ __asm__(
 "nop\n"
 "nop\n"
 "user_datarep_conversion_function_template:\n"
+#ifdef __aarch64__
+    "stp x9, x30, [sp, #-16]!\n"
+    "bl peip_datarep_conversion_func\n"
+"peip_datarep_conversion_func:\n"
+    "mov x10, x30\n"
+    "sub x10, x10, #0x18\n"
+    "ldr x6, [x10]\n"
+    "ldr x11, [x10,#0x8]\n"
+    "blr x11\n"
+    "ldp x9, x30, [sp], #16\n"
+    "ret\n"
+#else
 "  call peip_datarep_conversion_func\n"
 "peip_datarep_conversion_func:\n"
 "  pop %rax\n"
@@ -217,6 +268,7 @@ __asm__(
 "  callq  *0x8(%r15)\n"
 "  leaveq \n"
 "  retq \n"
+#endif
 );     
 int datarep_conversion_func_resolved(void *a, R_MPI_Datatype b, int c, void *d, R_MPI_Offset e, void *f, int (*pf)(void *userbuf, A_MPI_Datatype datatype, int count, void *filebuf, A_MPI_Offset posistion, void *extra_state))
 {
@@ -247,6 +299,18 @@ __asm__(
 "nop\n"
 "nop\n"
 "user_qrequest_query_function_template:\n"
+#ifdef __aarch64__
+    "stp x9, x30, [sp, #-16]!\n"
+    "bl peip_qrequest_query_func\n"
+"peip_qrequest_query_func:\n"
+    "mov x10, x30\n"
+    "sub x10, x10, #0x18\n"
+    "ldr x2, [x10]\n"
+    "ldr x11, [x10,#0x8]\n"
+    "blr x11\n"
+    "ldp x9, x30, [sp], #16\n"
+    "ret\n"
+#else
 "  call peip_qrequest_query_func\n"
 "peip_qrequest_query_func:\n"
 "  pop %rax\n"
@@ -262,6 +326,7 @@ __asm__(
 "  callq  *0x8(%r9)\n"
 "  leaveq \n"
 "  retq \n"
+#endif
 );     
 int qrequest_query_func_resolved(void *a, R_MPI_Status *b, int (*pf)(void *extra_state, A_MPI_Status *status))
 {

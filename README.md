@@ -23,7 +23,7 @@ WI4MPI has been tested on GNU/Linux only
 
 ```
 $ mkdir BUILD ; cd BUILD
-$ cmake -DCMAKE_INSTALL_PREFIX=/path-install/wi4mpi-%version /path/to/wi4mpi/src
+$ cmake -DCMAKE_INSTALL_PREFIX=/path-install/wi4mpi-%version /path/to/wi4mpi/source/root
 $ make -j 4 && make install                          
 ```                                                           
 

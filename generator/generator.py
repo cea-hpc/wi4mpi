@@ -737,6 +737,18 @@ class generator:
         str=str+'\".type P'+func_dict['name']+',@function\\n\"\n'
         str=str+'\".text\\n\"\n'
         str=str+'\"P'+func_dict['name']+':\\n\"\n'
+        # generate AARCH64 code
+        str=str+'#ifdef __aarch64__\n'
+        str=str+'\"adrp x8, :gottprel:in_w\\n\"\n'
+        str=str+'\"ldr x8, [x8, :gottprel_lo12:in_w]\\n\"\n'
+        str=str+'\"mrs x9, TPIDR_EL0\\n\"\n'
+        str=str+'\"ldr w8, [x9, x8]\\n\"\n'
+        str=str+'\"cbnz w8, inwrap_'+func_dict['name']+'\\n\"\n'
+        str=str+'\"b A_'+func_dict['name']+'\\n\"\n'
+        str=str+'\"inwrap_'+func_dict['name']+':\\n\"\n'
+        str=str+'\"b R_'+func_dict['name']+'\\n\"\n'
+        str=str+'#else\n'
+        # generate x86_64
         for i in range(nb_args):
             if i < 6:
                 count_hexa=count_hexa+8
@@ -793,6 +805,7 @@ class generator:
         str=str+'\"jmp *A_'+func_dict['name']+'@GOTPCREL(%rip)\\n\"\n'
         str=str+'\"inwrap_'+func_dict['name']+':\\n\"\n'
         str=str+'\"jmp *R_'+func_dict['name']+'@GOTPCREL(%rip)\\n\"\n'
+        str=str+'#endif\n'
         str=str+'\".size P'+func_dict['name']+',.-P'+func_dict['name']+'\\n\"\n'
         str=str+'\n);\n'
         return str
@@ -815,6 +828,18 @@ class generator:
         str=str+'\".type CC'+func_dict['name']+',@function\\n\"\n'
         str=str+'\".text\\n\"\n'
         str=str+'\"CC'+func_dict['name']+':\\n\"\n'
+        # generate AARCH64 code
+        str=str+'#ifdef __aarch64__\n'
+        str=str+'\"adrp x8, :gottprel:in_w\\n\"\n'
+        str=str+'\"ldr x8, [x8, :gottprel_lo12:in_w]\\n\"\n'
+        str=str+'\"mrs x9, TPIDR_EL0\\n\"\n'
+        str=str+'\"ldr w8, [x9, x8]\\n\"\n'
+        str=str+'\"cbnz w8, inwrap_'+func_dict['name']+'\\n\"\n'
+        str=str+'\"b A_'+func_dict['name']+'\\n\"\n'
+        str=str+'\"inwrap_'+func_dict['name']+':\\n\"\n'
+        str=str+'\"b R_'+func_dict['name']+'\\n\"\n'
+        str=str+'#else\n'
+        # generate x86_64
         for i in range(nb_args):
             if i < 6:
                 count_hexa=count_hexa+8
@@ -871,6 +896,7 @@ class generator:
         str=str+'\"jmp *A_'+func_dict['name']+'@GOTPCREL(%rip)\\n\"\n'
         str=str+'\"inwrap_'+func_dict['name']+':\\n\"\n'
         str=str+'\"jmp *R_'+func_dict['name']+'@GOTPCREL(%rip)\\n\"\n'
+        str=str+'#endif\n'
         str=str+'\n);\n'
         return str
 

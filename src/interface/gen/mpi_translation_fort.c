@@ -3570,9 +3570,9 @@ void A_f_MPI_Comm_free(int *comm, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  //if (WI4MPI_Comm_free_print)
-    //debug_printer("MPI_Comm_free : \n{\ncomm : %*C,\nerror/return : %*d\n}\n",
-      //            comm, ret);
+  if (WI4MPI_Comm_free_print)
+    debug_printer("MPI_Comm_free : \n{\ncomm : %*C,\nerror/return : %*d\n}\n",
+                  comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
