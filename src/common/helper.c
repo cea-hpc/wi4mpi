@@ -104,7 +104,7 @@ int wi4mpi_timeout_main_loop(void *felement) {
 
           fflush(stderr);
           kill(tmp->tid, SIGABRT);
-          return;
+          return 0;
         } else {
           /*this elt reference a thread who had released the slot*/
           /* last position is protected to avoid a data corruption in case of

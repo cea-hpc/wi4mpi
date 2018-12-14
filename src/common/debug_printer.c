@@ -6,6 +6,7 @@
 __thread int debug_act;
 unsigned int WI4MPI_debug_max_array_elt;
 void print_status(A_MPI_Status);
+void print_status_f(int *stat);
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define eprintf(...) printf(__VA_ARGS__)
 #define print_array(nb_elt, print_function)                                    \
