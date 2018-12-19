@@ -68,11 +68,20 @@ usage() {
 Usage: $progname [${progname^^}_OPTION]... SOURCE...
 
 Option:
-    -h                          the help message
-    -show                       show the compilations options
-    -wi4mpi_default_run_path    set a default MPI conversion
-                                for the user application.
-                                accepted values :
+    -h                          Display the help message.
+    -show | -showme             Show all the wrapper-supplied flags.
+    -showme:compile             Output the compiler flags that would have been supplied to the C compiler.
+    -showme:link                Output the linker flags that would have been supplied to the C compiler.
+    -show_static                Show all the wrapper-supplied flags for static compile.
+    -shared                     Tells the compiler to produce a dynamic shared object instead of an executable.
+                                This option is passed to the compiler.
+    -c                          Prevents linking. This option is passed to the compiler.
+    -static                     Use this option to link the MPI Library statically.
+                                This option is passed to the compiler.
+    -wi4mpi_static              Use this option to link the MPI Library statically.
+                                This option does not affect the default linkage method for other libraries.
+    -wi4mpi_default_run_path    Set a default MPI conversion for the user application.
+                                Accepted values :
                                   - OMPI
                                   - INTEL
                                   - MPICH
@@ -95,6 +104,22 @@ EOF
 
 }
 
+showme_link() {
+
+cat <<EOF
+${WI4MPI_LDFLAGS}
+EOF
+
+}
+
+showme_compile() {
+
+cat <<EOF
+${WI4MPI_FLAGS}
+EOF
+
+}
+
 showme_static() {
 
 cat <<EOF
@@ -104,25 +129,25 @@ EOF
 }
 
 default_mode() {
-	
-	echo "char wi4mpi_mode[]=\"$wi4mpi_mode\";"	> wi4mpi_libs_default_paths.c
-	echo "char wi4mpi_mode_f[]=\"$wi4mpi_mode_f\";"	>> wi4mpi_libs_default_paths.c
+    
+    echo "char wi4mpi_mode[]=\"$wi4mpi_mode\";" > wi4mpi_libs_default_paths.c
+    echo "char wi4mpi_mode_f[]=\"$wi4mpi_mode_f\";" >> wi4mpi_libs_default_paths.c
 
 }
 
 source_default_mode() {
-	
-	echo "export WI4MPI_RUN_MPI_C_LIB=\"$WI4MPI_RUN_MPI_C_LIB\"" > run_settings.sh
+    
+    echo "export WI4MPI_RUN_MPI_C_LIB=\"$WI4MPI_RUN_MPI_C_LIB\"" > run_settings.sh
     echo "export WI4MPI_RUN_MPI_F_LIB=\"$WI4MPI_RUN_MPI_F_LIB\"" >> run_settings.sh
-	echo $LD_LIBRARY_PATH
-	echo "export OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH"					>> run_settings.sh
-	echo "export LD_LIBRARY_PATH=$WI4MPI_ROOT/lib:$LD_LIBRARY_PATH" >> run_settings.sh
+    echo $LD_LIBRARY_PATH
+    echo "export OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH"                  >> run_settings.sh
+    echo "export LD_LIBRARY_PATH=$WI4MPI_ROOT/lib:$LD_LIBRARY_PATH" >> run_settings.sh
 
-	echo "Please source run_settings.sh to export WI4MPI_RUN_MPI_C_LIB, WI4MPI_RUN_MPI_F_LIB and LD_LIBRARY_PATH ;)"
-	echo "To retrieve an healthy environment:"
-	echo "unset WI4MPI_RUN_MPI_C_LIB"
-	echo "unset WI4MPI_RUN_MPI_F_LIB"
-	echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+    echo "Please source run_settings.sh to export WI4MPI_RUN_MPI_C_LIB, WI4MPI_RUN_MPI_F_LIB and LD_LIBRARY_PATH ;)"
+    echo "To retrieve an healthy environment:"
+    echo "unset WI4MPI_RUN_MPI_C_LIB"
+    echo "unset WI4MPI_RUN_MPI_F_LIB"
+    echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 
 }
 
@@ -141,65 +166,71 @@ do
 key=$1
 
 case $key in
-      -h | --help)
-      usage; exit 0;;
-      -show )
-      showme; exit 0;;
-			-show_static )
-			showme_static; exit 0;;
-			-wi4mpi_default_run_path )
-				if [[ $default_mode_activated -eq 0 ]]; then
-					default_mode_activated=1
-					#exclude -wi4mpi_default_run_path from arg list passed to COMPILER
-					#Testing the argument after the option -wi4mpi_default_run_path
-					if [[ "$2" == "OMPI" ]]; then
-						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_OMPI.so
-						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_OMPI.so
-						WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${OPENMPI_DEFAULT_ROOT}/lib/libmpi.so}
-						WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${OPENMPI_DEFAULT_ROOT}/lib/libmpi_mpifh.so}
-					elif [[ "$2" == "INTEL" ]]; then
-						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_INTEL.so
-						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_INTEL.so
-						WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpi.so}
-						WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpifort.so}
-					elif [[ "$2" == "MPICH" ]]; then
-						wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_MPICH.so
-						wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_MPICH.so
-						WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${MPICH_DEFAULT_ROOT}/lib64/libmpi.so}
-						WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${MPICH_DEFAULT_ROOT}/lib64/libmpifort.so}
-					else
-						usage; exit 0;
-					fi
-                    shift
-				fi
-				;;
-			-shared )
-                arg=( "${arg[@]}" "$1" )
-				default_mode_activated=-1;;
-			-c )
-                arg=( "${arg[@]}" "$1" )
-				default_mode_activated=-1;;
-			-static )
-                arg=( "${arg[@]}" "$1" )
-				default_mode_activated=-1;;
-			-wi4mpi_static )
-				default_mode_activated=-1
-				static_compilation=1;;
-			-showme:compile | -showme:link | showme )
-				showme; exit 0
-				;;
-            *)
-                arg=( "${arg[@]}" "$1" )
-            ;;
+    -h | --help)
+        usage; exit 0;;
+    -show )
+        showme; exit 0;;
+    -show_static )
+        showme_static; exit 0;;
+    -wi4mpi_default_run_path )
+        if [[ $default_mode_activated -eq 0 ]]; then
+            default_mode_activated=1
+            #exclude -wi4mpi_default_run_path from arg list passed to COMPILER
+            #Testing the argument after the option -wi4mpi_default_run_path
+            if [[ "$2" == "OMPI" ]]; then
+                wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_OMPI.so
+                wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_OMPI.so
+                WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${OPENMPI_DEFAULT_ROOT}/lib/libmpi.so}
+                WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${OPENMPI_DEFAULT_ROOT}/lib/libmpi_mpifh.so}
+            elif [[ "$2" == "INTEL" ]]; then
+                wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_INTEL.so
+                wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_INTEL.so
+                WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpi.so}
+                WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${INTELMPI_DEFAULT_ROOT}/lib64/libmpifort.so}
+            elif [[ "$2" == "MPICH" ]]; then
+                wi4mpi_mode=$WI4MPI_ROOT/lib_$2/libwi4mpi_MPICH.so
+                wi4mpi_mode_f=$WI4MPI_ROOT/lib_$2/libwi4mpi_MPICH.so
+                WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-${MPICH_DEFAULT_ROOT}/lib64/libmpi.so}
+                WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-${MPICH_DEFAULT_ROOT}/lib64/libmpifort.so}
+            else
+                usage; exit 0;
+            fi
+            shift
+        fi
+        ;;
+    -shared )
+        arg=( "${arg[@]}" "$1" )
+        default_mode_activated=-1;;
+    -c )
+        arg=( "${arg[@]}" "$1" )
+        default_mode_activated=-1;;
+    -static )
+        arg=( "${arg[@]}" "$1" )
+        default_mode_activated=-1;;
+    -wi4mpi_static )
+        default_mode_activated=-1
+        static_compilation=1;;
+    -showme )
+        showme; exit 0
+        ;;
+    -showme:link )
+        showme_link; exit 0
+        ;;
+    -showme:compile )
+        showme_compile; exit 0
+        ;;
+    *)
+        arg=( "${arg[@]}" "$1" )
+    ;;
 esac
 shift
 done
 extra_arg=""
 if [[ default_mode_activated -eq 1 ]];then
-	default_mode
-	${COMPILER} -c wi4mpi_libs_default_paths.c -o wi4mpi_libs_default_paths.o
-	extra_arg=wi4mpi_libs_default_paths.o
-	source_default_mode
+    default_mode
+    ${COMPILER} -c wi4mpi_libs_default_paths.c -o wi4mpi_libs_default_paths.o
+    extra_arg=wi4mpi_libs_default_paths.o
+    source_default_mode
 fi
 if [[ static_compilation -eq 0 ]];then
 ${COMPILER}  "${arg[@]}" $extra_arg -ldl ${WI4MPI_FLAGS} ${WI4MPI_LDFLAGS}
