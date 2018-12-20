@@ -308,7 +308,7 @@ set_target_properties(wi4mpi_MPC_a
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
                      )
 endif()
-if(CMAKE_C_COMPILER STREQUAL "clang") 
+if(CMAKE_C_COMPILER MATCHES ".*clang")
 set_target_properties(wi4mpi_OMPI
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
@@ -596,7 +596,7 @@ set_target_properties(wi4mpi_OMPI_OMPI
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DOMPI_OMPI"
 )
 endif()
-if(CMAKE_C_COMPILER STREQUAL "clang")
+if(CMAKE_C_COMPILER MATCHES ".*clang")
 set_target_properties(wi4mpi_INTEL_INTEL
                       PROPERTIES
                       COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL"
