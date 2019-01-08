@@ -1,7 +1,8 @@
 set(CMAKE_C_COMPILER ${CC})
+set(CMAKE_CXX_COMPILER ${CXX})
 set(CMAKE_Fortran_COMPILER ${FC})
 
-message(STATUS "Project compiler C : ${CC} && Fortran: ${FC}")
+message(STATUS "Project compiler C/C++ : ${CC}/${CXX} && Fortran: ${FC}")
 
 #Sources list
 #------------
@@ -885,6 +886,7 @@ install(FILES
         interface/interface_utils/bin/mpicc
         interface/interface_utils/bin/mpicxx
         interface/interface_utils/bin/mpic++
+        interface/interface_utils/bin/mpifort
         interface/interface_utils/bin/mpif77
         interface/interface_utils/bin/mpif90
         interface/interface_utils/bin/mpirun DESTINATION bin

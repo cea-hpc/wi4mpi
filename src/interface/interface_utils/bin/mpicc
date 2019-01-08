@@ -51,7 +51,7 @@ case $progname in
         COMPILER_LANG=C++
         WI4MPI_FLAGS=${WI4MPI_CXXFLAGS}
     ;;
-    mpif77|mpif90)
+    mpif77|mpif90|mpifort)
         COMPILER=${WI4MPI_FC}
         COMPILER_SUFFIX=FC
         COMPILER_LANG=Fortran
