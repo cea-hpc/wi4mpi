@@ -19,3 +19,4 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/etc/batch.cfg.in
 add_subdirectory (compile)
 add_subdirectory (mpirun)
 add_subdirectory (mpi_init)
+add_subdirectory (timeout)
