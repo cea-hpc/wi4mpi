@@ -17,3 +17,4 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/etc/batch.cfg.in
     ${CMAKE_CURRENT_BINARY_DIR}/etc/batch.cfg)
 
 add_subdirectory (compile)
+add_subdirectory (mpirun)
