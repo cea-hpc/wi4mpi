@@ -131,3 +131,5 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BIN
 
 #Source subdirectory
 add_subdirectory(src)
+enable_testing ()
+add_subdirectory(tests)

@@ -1,0 +1,19 @@
+if (NOT WI4MPI_BATCH_SCHEDULER)
+    set (WI4MPI_BATCH_SCHEDULER "mpirun")
+endif ()
+if (WI4MPI_BATCH_SCHEDULER MATCHES "mpirun")
+    set (WI4MPI_MPRUN "mpirun")
+    set (WI4MPI_NPROC "'-n 4'")
+endif ()
+if (WI4MPI_BATCH_SCHEDULER MATCHES "bridge")
+    set (WI4MPI_MPRUN "ccc_mprun")
+    set (WI4MPI_PARTITION "'-p haswell'")
+    set (WI4MPI_NPROC "'-n 64'")
+    set (WI4MPI_NCORE "'-c 1'")
+    set (WI4MPI_OPT "'-T 7200 -Q test'")
+endif ()
+
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/etc/batch.cfg.in
+    ${CMAKE_CURRENT_BINARY_DIR}/etc/batch.cfg)
+
+add_subdirectory (compile)
