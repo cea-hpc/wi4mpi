@@ -72,6 +72,12 @@ Option:
     -show | -showme             Show all the wrapper-supplied flags.
     -showme:compile             Output the compiler flags that would have been supplied to the C compiler.
     -showme:link                Output the linker flags that would have been supplied to the C compiler.
+    -showme:libdirs             List of directories that the wrapper compiler would have provided to the
+                                underlying linker to indicate where relevant libraries are located.
+    -showme:incdirs             List of directories that the wrapper compiler would have provided to the
+                                underlying C compiler to indicate where relevant header files are located.
+    -showme:version             Outputs the version number of Wi4MPI.
+    -showme:help                Display the help message.
     -show_static                Show all the wrapper-supplied flags for static compile.
     -shared                     Tells the compiler to produce a dynamic shared object instead of an executable.
                                 This option is passed to the compiler.
@@ -120,12 +126,40 @@ EOF
 
 }
 
+showme_libdirs() {
+
+cat <<EOF
+${WI4MPI_ROOT}/lib
+EOF
+
+}
+
+showme_incdirs() {
+
+cat <<EOF
+${WI4MPI_ROOT}/include
+EOF
+
+}
+
 showme_static() {
 
 cat <<EOF
 ${COMPILER} ${WI4MPI_FLAGS} ${WI4MPI_ROOT}/lib/libmpi.a
 EOF
 
+}
+
+showme_version() {
+
+cat <<EOF
+Wi4MPI-${WI4MPI_VERSION}
+EOF
+
+}
+
+showme_help() {
+    usage
 }
 
 default_mode() {
@@ -218,6 +252,18 @@ case $key in
         ;;
     -showme:compile )
         showme_compile; exit 0
+        ;;
+    -showme:libdirs )
+        showme_libdirs; exit 0
+        ;;
+    -showme:incdirs )
+        showme_incdirs; exit 0
+        ;;
+    -showme:version )
+        showme_version; exit 0
+        ;;
+    -showme:help )
+        showme_help; exit 0
         ;;
     *)
         arg=( "${arg[@]}" "$1" )
