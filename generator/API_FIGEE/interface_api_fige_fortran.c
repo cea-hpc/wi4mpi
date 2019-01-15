@@ -647,13 +647,31 @@ printf("sort : A_f_MPI_Comm_spawn_multiple\n");
 #define WATTR __attribute__((constructor)) 
 #endif
 WATTR void wrapper_init_f(void) {
-dlopen(getenv("WI4MPI_RUN_MPI_LIB"),RTLD_NOW|RTLD_GLOBAL);
-void *lib_handle_f=dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"),RTLD_NOW|RTLD_GLOBAL);
-void *lib_handle_io_f=dlopen(getenv("WI4MPI_MPIIO_LIB"),RTLD_NOW|RTLD_GLOBAL);
 
-#if !defined(_MPC)
-if(!lib_handle_f) {printf("%s not loaded \nerror : %s\n",getenv("WI4MPI_RUN_MPI_F_LIB"),dlerror());exit(1);}
-#endif
+char *filename = getenv("WI4MPI_RUN_MPI_F_LIB");
+if (!filename) {
+   fprintf(stderr , "WI4MPI_RUN_MPI_F_LIB error: undefined variable!\n");
+   exit(1);
+}
+
+void *lib_handle_f=dlopen(filename,RTLD_NOW|RTLD_GLOBAL);
+if (!lib_handle_f) {
+   fprintf(stderr , "WI4MPI_RUN_MPI_F_LIB error: %s\n", dlerror());
+   exit(1);
+}
+
+filename = getenv("WI4MPI_RUN_MPIIO_F_LIB");
+if (!filename) {
+   fprintf(stderr , "WI4MPI_RUN_MPIIO_F_LIB error: undefined variable!\n");
+   exit(1);
+}
+
+void *lib_handle_io_f=dlopen(filename,RTLD_NOW|RTLD_GLOBAL);
+if (!lib_handle_io_f) {
+   fprintf(stderr , "WI4MPI_RUN_MPIIO_F_LIB error: %s\n", dlerror());
+   exit(1);
+}
+
 /* ABI FIGE */
 _LOCAL_MPI_Win_free_keyval=dlsym(lib_handle_f,"pmpi_win_free_keyval_");
 _LOCAL_MPI_Win_delete_attr=dlsym(lib_handle_f,"pmpi_win_delete_attr_");

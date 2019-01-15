@@ -1437,8 +1437,31 @@ void wrapper_init_f(void);
 #endif
 
 WATTR void wrapper_init(void) {
-void *lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW|RTLD_GLOBAL);
-void *lib_handle_io=dlopen(getenv("WI4MPI_RUN_MPIIO_LIB"),RTLD_NOW|RTLD_GLOBAL);
+
+char *filename = getenv("WI4MPI_RUN_MPI_C_LIB");
+if (!filename) {
+   fprintf(stderr , "WI4MPI_RUN_MPI_C_LIB error: undefined variable!\n");
+   exit(1);
+}
+
+void *lib_handle=dlopen(filename,RTLD_NOW|RTLD_GLOBAL);
+if (!lib_handle) {
+   fprintf(stderr , "WI4MPI_RUN_MPI_C_LIB error: %s\n", dlerror());
+   exit(1);
+}
+
+filename = getenv("WI4MPI_RUN_MPIIO_C_LIB");
+if (!filename) {
+   fprintf(stderr , "WI4MPI_RUN_MPIIO_C_LIB error: undefined variable!\n");
+   exit(1);
+}
+
+void *lib_handle_io=dlopen(filename,RTLD_NOW|RTLD_GLOBAL);
+if (!lib_handle_io) {
+   fprintf(stderr , "WI4MPI_RUN_MPIIO_C_LIB error: %s\n", dlerror());
+   exit(1);
+}
+
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 LOCAL_MPI_Errhandler_f2c=dlsym(lib_handle,"PMPI_Errhandler_f2c");
 LOCAL_MPI_Errhandler_c2f=dlsym(lib_handle,"PMPI_Errhandler_c2f");
