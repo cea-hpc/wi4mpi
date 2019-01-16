@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ../etc/batch.cfg || exit 1
+source ../etc/mpivars.sh || exit 1
 
-export WI4MPI_ROOT
-export WI4MPI_FC
 ${WI4MPI_ROOT}/bin/mpif90 mpi_init.f90

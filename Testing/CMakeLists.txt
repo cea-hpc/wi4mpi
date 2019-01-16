@@ -1,4 +1,4 @@
-# Select your batch scheduler configuration here (Testing/etc/batch.cfg)
+# Select your batch scheduler configuration here (Testing/etc/mpivars.sh)
 if (NOT WI4MPI_BATCH_SCHEDULER)
     set (WI4MPI_BATCH_SCHEDULER "mpirun")
 endif ()
@@ -14,8 +14,9 @@ if (WI4MPI_BATCH_SCHEDULER MATCHES "bridge")
     set (WI4MPI_EXTRA_OPTS "'-T 600'")
 endif ()
 
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/etc/batch.cfg.in
-    ${CMAKE_CURRENT_BINARY_DIR}/etc/batch.cfg)
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/etc/mpivars.sh.in
+    ${CMAKE_CURRENT_BINARY_DIR}/etc/mpivars.sh
+    @ONLY)
 
 # Testing subdirectories
 add_subdirectory (compile)
