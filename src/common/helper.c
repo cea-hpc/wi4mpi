@@ -99,7 +99,7 @@ int wi4mpi_timeout_main_loop(void *felement) {
           /* effective timeout kill the responsible thread*/
           char hostname[2048];
           gethostname(hostname, 2048);
-          fprintf(stderr, "processus %d on host %s has reached a timeout\n",
+          fprintf(stderr, "Wi4MPI error: processus %d on host %s has reached a timeout!\n",
                   getpid(), hostname);
 
           fflush(stderr);
