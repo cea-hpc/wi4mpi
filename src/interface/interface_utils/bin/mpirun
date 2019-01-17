@@ -1,10 +1,159 @@
 #!/bin/bash
 
-cat << EOF
-= INFO =
-WI4MPI doesn't provide its own launcher, you need to use another MPI launcher with wi4mpi executable.
-= EXAMPLES =
-OpenMPI: \${OPENMPI_ROOT}/bin/mpirun wi4mpi -t openmpi ./exe
-Bridge: ccc_mprun wi4mpi -t openmpi ./exe
-MPC: wi4mpi -t mpc mpcrun ./exe
+############################# Wi4MPI License ###########################
+# `04/04/2016`                                                         #
+# Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
+#                                                                      #
+# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #
+# This file is part of the Wi4MPI library.                             #
+#                                                                      #
+# This software is governed by the CeCILL-C license under French law   #
+# and abiding by the rules of distribution of free software. You can   #
+# use, modify and/ or redistribute the software under the terms of     #
+# the CeCILL-C license as circulated by CEA, CNRS and INRIA at the     #
+# following URL http://www.cecill.info.                                #
+#                                                                      #
+# The fact that you are presently reading this means that you have     #
+# had knowledge of the CeCILL-C license and that you accept its        #
+# terms.                                                               #
+#                                                                      #
+# Authors:                                                             #
+#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
+#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#   - Adrien Cotte <adrien.cotte.tgcc@cea.fr>                          #
+#                                                                      #
+########################################################################
+
+version() {
+    echo "mpirun (Wi4MPI-$WI4MPI_VERSION)"
+}
+
+usage() {
+    version
+    cat <<EOF
+
+Usage: mpirun [MPIRUN_TARGET_OPTIONS] -- [PROGRAM] [PROGRAM_OPTIONS]
+
+Option:
+    -E | -extra | --extra "extra_opts..."   Extra parameters to pass directly to the underlying mpirun
+    -h | -help | --help                     This help message
+    -f | -hostfile | --hostfile {file}      File containing the host names
+    -n | -np {value}                        Number of processes to run
+    -p | -pm | --pm {value}                 Select processes manager (mpiexec, hydra...)
+    -v | -verbose | --verbose               Be verbose
+    -V | -version | --version               Print version and exit
+    -- | -end | --end                       Separate options and program to run
+
+Advanced options:
+    -F | -from | --from {FROM}      The MPI implentation from which PROGRAM was compiled with
+    -T | -to | --to {TARGET}        The MPI implentation to which PROGRAM will be run
+
+Supported values:
+    FROM         openmpi,intelmpi,mpich  (no default value)
+    TARGET       openmpi,intelmpi,mpc,mpich  (no default value)
+
 EOF
+
+}
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -F|-from|--from)
+            export WI4MPI_FROM=$2
+            shift 2 ;;
+        -T|-to|--to)
+            export WI4MPI_TO=$2
+            shift 2 ;;
+        -E|-extra|--extra)
+            mpirun_opts="$mpirun_opts $2"
+            shift 2 ;;
+        -h|-help|--help)
+            usage
+            exit 0 ;;
+        -f|-hostfile|--hostfile)
+            mpirun_opts="$mpirun_opts -hostfile $2"
+            shift 2 ;;
+        -n|-np)
+            mpirun_opts="$mpirun_opts -n $2"
+            shift 2 ;;
+        -p|-pm|--pm)
+            WI4MPI_PM=$2
+            shift 2 ;;
+        -v|-verbose|--verbose)
+            mpirun_opts="$mpirun_opts -v"
+            shift ;;
+        -V|-version|--version)
+            version
+            exit 0 ;;
+        --|-end|--end)
+            shift
+            cmd=$@
+            break ;;
+        -?*)
+            version >&2
+            echo "Error: unrecognised option $1" >&2
+            echo "Help: take a look at --extra option (mpirun -h)" >&2
+            exit 1 ;;
+        *)
+            cmd_type=$(type -t $1)
+            if [[ ${cmd_type} = "file" ]]; then
+                cmd=$@
+                break
+            elif [[ ${cmd_type} = "builtin" ]]; then
+                if [[ -e /bin/$1 ]]; then
+                    cmd=$@
+                    break
+                fi
+            else
+                version >&2
+                echo "Error: unrecognised option $1" >&2
+                exit 1
+            fi
+    esac
+done
+
+WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
+WI4MPI_UCONFIG="~/.wi4mpi.cfg"
+
+[[ -z "$WI4MPI_ROOT" ]] && (>&2 echo "Error: please set WI4MPI_ROOT") && exit 1
+[[ -z "$WI4MPI_TO" ]] && (>&2 echo "Error: please set WI4MPI_TO") && exit 1
+[[ -f "$WI4MPI_GCONFIG" ]] && source "$WI4MPI_GCONFIG"
+[[ -f "$WI4MPI_UCONFIG" ]] && source "$WI4MPI_UCONFIG"
+
+export OPENMPI_ROOT=${OPENMPI_ROOT:-"$OPENMPI_DEFAULT_ROOT"}
+export INTELMPI_ROOT=${INTELMPI_ROOT:-"$INTELMPI_DEFAULT_ROOT"}
+export MPICH_ROOT=${MPICH_ROOT:-"$MPICH_DEFAULT_ROOT"}
+
+case ${WI4MPI_FROM,,} in
+    *openmpi*)
+        wi4mpi_opts="-f openmpi" ;;
+    *intelmpi*)
+        wi4mpi_opts="-f intelmpi" ;;
+    *mpich*)
+        wi4mpi_opts="-f mpich" ;;
+esac
+
+WI4MPI_PM=${WI4MPI_PM:-"mpirun"}
+case ${WI4MPI_TO,,} in
+    *openmpi*)
+        [[ -z "$OPENMPI_ROOT" ]] && (>&2 echo "Error: please set OPENMPI_ROOT or OPENMPI_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
+        wi4mpi_opts="$wi4mpi_opts -t openmpi"
+        _mpirun=$OPENMPI_ROOT/bin/$WI4MPI_PM ;;
+    *intelmpi*)
+        [[ -z "$INTELMPI_ROOT" ]] && (>&2 echo "Error: please set INTELMPI_ROOT or INTELMPI_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
+        wi4mpi_opts="$wi4mpi_opts -t intelmpi"
+        _mpirun=$INTELMPI_ROOT/bin64/$WI4MPI_PM ;;
+    *mpich*)
+        [[ -z "$MPICH_ROOT" ]] && (>&2 echo "Error: please set MPICH_ROOT or MPICH_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
+        wi4mpi_opts="$wi4mpi_opts -t mpich"
+        _mpirun=$MPICH_ROOT/bin/$WI4MPI_PM ;;
+    *mpc*)
+        [[ -z "$MPC_ROOT" ]] && (>&2 echo "Error: please set MPC_ROOT or MPC_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
+        wi4mpi_opts="$wi4mpi_opts -t mpc $MPC_ROOT/x86_64/x86_64/bin/mpcrun $mpirun_opts"
+        mpirun_opts=""
+        _mpirun="" ;;
+    *)
+        (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
+esac
+
+$_mpirun $mpirun_opts wi4mpi $wi4mpi_opts $cmd

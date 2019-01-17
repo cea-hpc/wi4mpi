@@ -4183,7 +4183,7 @@
       }, 
       {
         "var": "argv", 
-        "arg_dep": "", 
+        "arg_dep": "*argc", 
         "In": 1, 
         "name": "char_ppp_converter", 
         "Out": 0
@@ -6512,7 +6512,7 @@
       }, 
       {
         "var": "argv", 
-        "arg_dep": "", 
+        "arg_dep": "*argc", 
         "In": 1, 
         "name": "char_ppp_converter", 
         "Out": 0
@@ -13481,7 +13481,7 @@
       }, 
       {
         "var": "indx[]", 
-        "arg_dep": "mmaxindex", 
+        "arg_dep": "maxindex", 
         "In": 0, 
         "name": "int_mapper", 
         "Out": 1
@@ -14376,21 +14376,21 @@
       }, 
       {
         "var": "array_of_sizes[]", 
-        "arg_dep": "count", 
+        "arg_dep": "ndims", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "array_of_subsizes[]", 
-        "arg_dep": "count", 
+        "arg_dep": "ndims", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0
       }, 
       {
         "var": "array_of_starts[]", 
-        "arg_dep": "count", 
+        "arg_dep": "ndims", 
         "In": 1, 
         "name": "const_int_converter", 
         "Out": 0

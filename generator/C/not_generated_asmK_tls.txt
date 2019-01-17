@@ -213,6 +213,16 @@ __asm__(
 ".type PMPI_Comm_create_keyval,@function\n"
 ".text\n"
 "PMPI_Comm_create_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_create_keyval\n"
+"b A_MPI_Comm_create_keyval\n"
+"inwrap_MPI_Comm_create_keyval:\n"
+"b R_MPI_Comm_create_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -235,6 +245,7 @@ __asm__(
 "jmp *A_MPI_Comm_create_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_create_keyval:\n"
 "jmp *R_MPI_Comm_create_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_create_keyval,.-PMPI_Comm_create_keyval\n"
 );
 
@@ -306,6 +317,16 @@ __asm__(
 ".type PMPI_Keyval_create,@function\n"
 ".text\n"
 "PMPI_Keyval_create:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Keyval_create\n"
+"b A_MPI_Keyval_create\n"
+"inwrap_MPI_Keyval_create:\n"
+"b R_MPI_Keyval_create\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -328,12 +349,13 @@ __asm__(
 "jmp *A_MPI_Keyval_create@GOTPCREL(%rip)\n"
 "inwrap_MPI_Keyval_create:\n"
 "jmp *R_MPI_Keyval_create@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Keyval_create,.-PMPI_Keyval_create\n"
 );
 
 
 int (*LOCAL_MPI_Keyval_create)(R_MPI_Copy_function *,R_MPI_Delete_function *,int *,void *);
-
+unsigned long long WI4MPI_Keyval_create_timeout=WI4MPI_MAX_TIME;
 int A_MPI_Keyval_create(A_MPI_Copy_function * copy_fn,A_MPI_Delete_function * delete_fn,int * keyval,void * extra_state)
 {
 in_w=1;   
@@ -399,6 +421,16 @@ __asm__(
 ".type PMPI_Comm_free_keyval,@function\n"
 ".text\n"
 "PMPI_Comm_free_keyval:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_free_keyval\n"
+"b A_MPI_Comm_free_keyval\n"
+"inwrap_MPI_Comm_free_keyval:\n"
+"b R_MPI_Comm_free_keyval\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x08, %rsp\n"
@@ -415,6 +447,7 @@ __asm__(
 "jmp *A_MPI_Comm_free_keyval@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_free_keyval:\n"
 "jmp *R_MPI_Comm_free_keyval@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Comm_free_keyval,.-PMPI_Comm_free_keyval\n"
 );
 
@@ -460,6 +493,16 @@ __asm__(
 ".type PMPI_Keyval_free,@function\n"
 ".text\n"
 "PMPI_Keyval_free:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Keyval_free\n"
+"b A_MPI_Keyval_free\n"
+"inwrap_MPI_Keyval_free:\n"
+"b R_MPI_Keyval_free\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x08, %rsp\n"
@@ -476,10 +519,12 @@ __asm__(
 "jmp *A_MPI_Keyval_free@GOTPCREL(%rip)\n"
 "inwrap_MPI_Keyval_free:\n"
 "jmp *R_MPI_Keyval_free@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Keyval_free,.-PMPI_Keyval_free\n"
 );
 
 int (*LOCAL_MPI_Keyval_free)(int *);
+unsigned long long WI4MPI_Keyval_free_timeout=WI4MPI_MAX_TIME;
 
 int A_MPI_Keyval_free(int * keyval)
 {
@@ -549,6 +594,16 @@ __asm__(
 ".type PMPI_Win_get_attr,@function\n"
 ".text\n"
 "PMPI_Win_get_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_get_attr\n"
+"b A_MPI_Win_get_attr\n"
+"inwrap_MPI_Win_get_attr:\n"
+"b R_MPI_Win_get_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -571,6 +626,7 @@ __asm__(
 "jmp *A_MPI_Win_get_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_get_attr:\n"
 "jmp *R_MPI_Win_get_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_get_attr,.-PMPI_Win_get_attr\n"
 );
 
@@ -630,6 +686,16 @@ __asm__(
 ".type PMPI_Win_set_attr,@function\n"
 ".text\n"
 "PMPI_Win_set_attr:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_set_attr\n"
+"b A_MPI_Win_set_attr\n"
+"inwrap_MPI_Win_set_attr:\n"
+"b R_MPI_Win_set_attr\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x20, %rsp\n"
@@ -650,6 +716,7 @@ __asm__(
 "jmp *A_MPI_Win_set_attr@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_set_attr:\n"
 "jmp *R_MPI_Win_set_attr@GOTPCREL(%rip)\n"
+#endif
 ".size PMPI_Win_set_attr,.-PMPI_Win_set_attr\n"
 
 );

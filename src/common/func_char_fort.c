@@ -857,7 +857,6 @@ void  A_f_MPI_Type_get_name(int * datatype,char * type_name, int type_name_len, 
 #endif
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Type_get_name\n");
 #endif
 in_w=1;
 
@@ -873,7 +872,6 @@ datatype_a2r(datatype,&datatype_tmp);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Type_get_name\n");
 #endif
 
 }

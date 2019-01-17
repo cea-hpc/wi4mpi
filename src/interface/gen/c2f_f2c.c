@@ -40,6 +40,16 @@ __asm__(
 ".type CCMPI_Win_f2c,@function\n"
 ".text\n"
 "CCMPI_Win_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_f2c\n"
+"b A_MPI_Win_f2c\n"
+"inwrap_MPI_Win_f2c:\n"
+"b R_MPI_Win_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -56,6 +66,7 @@ __asm__(
 "jmp *A_MPI_Win_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_f2c:\n"
 "jmp *R_MPI_Win_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -70,6 +81,16 @@ __asm__(
 ".type CCMPI_Win_c2f,@function\n"
 ".text\n"
 "CCMPI_Win_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_c2f\n"
+"b A_MPI_Win_c2f\n"
+"inwrap_MPI_Win_c2f:\n"
+"b R_MPI_Win_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -86,6 +107,7 @@ __asm__(
 "jmp *A_MPI_Win_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_c2f:\n"
 "jmp *R_MPI_Win_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -100,6 +122,16 @@ __asm__(
 ".type CCMPI_Message_f2c,@function\n"
 ".text\n"
 "CCMPI_Message_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Message_f2c\n"
+"b A_MPI_Message_f2c\n"
+"inwrap_MPI_Message_f2c:\n"
+"b R_MPI_Message_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -116,6 +148,7 @@ __asm__(
 "jmp *A_MPI_Message_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Message_f2c:\n"
 "jmp *R_MPI_Message_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -130,6 +163,16 @@ __asm__(
 ".type CCMPI_Message_c2f,@function\n"
 ".text\n"
 "CCMPI_Message_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Message_c2f\n"
+"b A_MPI_Message_c2f\n"
+"inwrap_MPI_Message_c2f:\n"
+"b R_MPI_Message_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -146,6 +189,7 @@ __asm__(
 "jmp *A_MPI_Message_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Message_c2f:\n"
 "jmp *R_MPI_Message_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -158,6 +202,16 @@ __asm__(
 ".type CCMPI_File_f2c,@function\n"
 ".text\n"
 "CCMPI_File_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_f2c\n"
+"b A_MPI_File_f2c\n"
+"inwrap_MPI_File_f2c:\n"
+"b R_MPI_File_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -174,6 +228,7 @@ __asm__(
 "jmp *A_MPI_File_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_f2c:\n"
 "jmp *R_MPI_File_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -187,6 +242,16 @@ __asm__(
 ".type CCMPI_File_c2f,@function\n"
 ".text\n"
 "CCMPI_File_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_c2f\n"
+"b A_MPI_File_c2f\n"
+"inwrap_MPI_File_c2f:\n"
+"b R_MPI_File_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -203,6 +268,7 @@ __asm__(
 "jmp *A_MPI_File_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_c2f:\n"
 "jmp *R_MPI_File_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -215,6 +281,16 @@ __asm__(
 ".type CCMPI_Op_f2c,@function\n"
 ".text\n"
 "CCMPI_Op_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Op_f2c\n"
+"b A_MPI_Op_f2c\n"
+"inwrap_MPI_Op_f2c:\n"
+"b R_MPI_Op_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -231,6 +307,7 @@ __asm__(
 "jmp *A_MPI_Op_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Op_f2c:\n"
 "jmp *R_MPI_Op_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -243,6 +320,16 @@ __asm__(
 ".type CCMPI_Op_c2f,@function\n"
 ".text\n"
 "CCMPI_Op_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Op_c2f\n"
+"b A_MPI_Op_c2f\n"
+"inwrap_MPI_Op_c2f:\n"
+"b R_MPI_Op_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -259,6 +346,7 @@ __asm__(
 "jmp *A_MPI_Op_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Op_c2f:\n"
 "jmp *R_MPI_Op_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -274,6 +362,16 @@ __asm__(
 ".type CCMPI_Info_f2c,@function\n"
 ".text\n"
 "CCMPI_Info_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_f2c\n"
+"b A_MPI_Info_f2c\n"
+"inwrap_MPI_Info_f2c:\n"
+"b R_MPI_Info_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -290,6 +388,7 @@ __asm__(
 "jmp *A_MPI_Info_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_f2c:\n"
 "jmp *R_MPI_Info_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -303,6 +402,16 @@ __asm__(
 ".type CCMPI_Info_c2f,@function\n"
 ".text\n"
 "CCMPI_Info_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_c2f\n"
+"b A_MPI_Info_c2f\n"
+"inwrap_MPI_Info_c2f:\n"
+"b R_MPI_Info_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -319,6 +428,7 @@ __asm__(
 "jmp *A_MPI_Info_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_c2f:\n"
 "jmp *R_MPI_Info_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -333,6 +443,16 @@ __asm__(
 ".type CCMPI_Errhandler_f2c,@function\n"
 ".text\n"
 "CCMPI_Errhandler_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_f2c\n"
+"b A_MPI_Errhandler_f2c\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"b R_MPI_Errhandler_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -349,6 +469,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_f2c:\n"
 "jmp *R_MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -395,6 +516,16 @@ __asm__(
 ".type CCMPI_Errhandler_c2f,@function\n"
 ".text\n"
 "CCMPI_Errhandler_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_c2f\n"
+"b A_MPI_Errhandler_c2f\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"b R_MPI_Errhandler_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -411,6 +542,7 @@ __asm__(
 "jmp *A_MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_c2f:\n"
 "jmp *R_MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -459,6 +591,16 @@ __asm__(
 ".type CCMPI_Group_f2c,@function\n"
 ".text\n"
 "CCMPI_Group_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_f2c\n"
+"b A_MPI_Group_f2c\n"
+"inwrap_MPI_Group_f2c:\n"
+"b R_MPI_Group_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -475,6 +617,7 @@ __asm__(
 "jmp *A_MPI_Group_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_f2c:\n"
 "jmp *R_MPI_Group_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -488,6 +631,16 @@ __asm__(
 ".type CCMPI_Group_c2f,@function\n"
 ".text\n"
 "CCMPI_Group_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_c2f\n"
+"b A_MPI_Group_c2f\n"
+"inwrap_MPI_Group_c2f:\n"
+"b R_MPI_Group_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -504,6 +657,7 @@ __asm__(
 "jmp *A_MPI_Group_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_c2f:\n"
 "jmp *R_MPI_Group_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 /**/__asm__(
@@ -516,6 +670,16 @@ __asm__(
 ".type CCMPI_Request_f2c,@function\n"
 ".text\n"
 "CCMPI_Request_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Request_f2c\n"
+"b A_MPI_Request_f2c\n"
+"inwrap_MPI_Request_f2c:\n"
+"b R_MPI_Request_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -532,6 +696,7 @@ __asm__(
 "jmp *A_MPI_Request_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_f2c:\n"
 "jmp *R_MPI_Request_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -544,6 +709,16 @@ __asm__(
 ".type CCMPI_Request_c2f,@function\n"
 ".text\n"
 "CCMPI_Request_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Request_c2f\n"
+"b A_MPI_Request_c2f\n"
+"inwrap_MPI_Request_c2f:\n"
+"b R_MPI_Request_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -560,6 +735,7 @@ __asm__(
 "jmp *A_MPI_Request_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_c2f:\n"
 "jmp *R_MPI_Request_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -573,6 +749,16 @@ __asm__(
 ".type CCMPI_Type_f2c,@function\n"
 ".text\n"
 "CCMPI_Type_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_f2c\n"
+"b A_MPI_Type_f2c\n"
+"inwrap_MPI_Type_f2c:\n"
+"b R_MPI_Type_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -589,6 +775,7 @@ __asm__(
 "jmp *A_MPI_Type_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_f2c:\n"
 "jmp *R_MPI_Type_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -601,6 +788,16 @@ __asm__(
 ".type CCMPI_Type_c2f,@function\n"
 ".text\n"
 "CCMPI_Type_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_c2f\n"
+"b A_MPI_Type_c2f\n"
+"inwrap_MPI_Type_c2f:\n"
+"b R_MPI_Type_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -617,6 +814,7 @@ __asm__(
 "jmp *A_MPI_Type_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_c2f:\n"
 "jmp *R_MPI_Type_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -629,6 +827,16 @@ __asm__(
 ".type CCMPI_Comm_f2c,@function\n"
 ".text\n"
 "CCMPI_Comm_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_f2c\n"
+"b A_MPI_Comm_f2c\n"
+"inwrap_MPI_Comm_f2c:\n"
+"b R_MPI_Comm_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -645,6 +853,7 @@ __asm__(
 "jmp *A_MPI_Comm_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_f2c:\n"
 "jmp *R_MPI_Comm_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -657,6 +866,16 @@ __asm__(
 ".type CCMPI_Comm_c2f,@function\n"
 ".text\n"
 "CCMPI_Comm_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_c2f\n"
+"b A_MPI_Comm_c2f\n"
+"inwrap_MPI_Comm_c2f:\n"
+"b R_MPI_Comm_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -673,6 +892,7 @@ __asm__(
 "jmp *A_MPI_Comm_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_c2f:\n"
 "jmp *R_MPI_Comm_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -686,6 +906,16 @@ __asm__(
 ".type CCMPI_Status_c2f,@function\n"
 ".text\n"
 "CCMPI_Status_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Status_c2f\n"
+"b A_MPI_Status_c2f\n"
+"inwrap_MPI_Status_c2f:\n"
+"b R_MPI_Status_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -704,6 +934,7 @@ __asm__(
 "jmp *A_MPI_Status_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Status_c2f:\n"
 "jmp *R_MPI_Status_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 __asm__(
@@ -716,6 +947,16 @@ __asm__(
 ".type CCMPI_Status_f2c,@function\n"
 ".text\n"
 "CCMPI_Status_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Status_f2c\n"
+"b A_MPI_Status_f2c\n"
+"inwrap_MPI_Status_f2c:\n"
+"b R_MPI_Status_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -734,6 +975,7 @@ __asm__(
 "jmp *A_MPI_Status_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Status_f2c:\n"
 "jmp *R_MPI_Status_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 #elif defined(OMPI_INTEL) || defined(_INTEL)
@@ -750,6 +992,16 @@ __asm__(
 ".type CCMPI_Win_f2c,@function\n"
 ".text\n"
 "CCMPI_Win_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_f2c\n"
+"b A_MPI_Win_f2c\n"
+"inwrap_MPI_Win_f2c:\n"
+"b R__MPI_Win_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -766,6 +1018,7 @@ __asm__(
 "jmp *A_MPI_Win_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_f2c:\n"
 "jmp *R__MPI_Win_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -791,6 +1044,16 @@ __asm__(
 ".type CCMPI_Win_c2f,@function\n"
 ".text\n"
 "CCMPI_Win_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Win_c2f\n"
+"b A_MPI_Win_c2f\n"
+"inwrap_MPI_Win_c2f:\n"
+"b R__MPI_Win_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -807,6 +1070,7 @@ __asm__(
 "jmp *A_MPI_Win_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Win_c2f:\n"
 "jmp *R__MPI_Win_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -833,6 +1097,16 @@ __asm__(
 ".type CCMPI_Message_f2c,@function\n"
 ".text\n"
 "CCMPI_Message_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Message_f2c\n"
+"b A_MPI_Message_f2c\n"
+"inwrap_MPI_Message_f2c:\n"
+"b R__MPI_Message_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -849,6 +1123,7 @@ __asm__(
 "jmp *A_MPI_Message_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Message_f2c:\n"
 "jmp *R__MPI_Message_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -874,6 +1149,16 @@ __asm__(
 ".type CCMPI_Message_c2f,@function\n"
 ".text\n"
 "CCMPI_Message_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Message_c2f\n"
+"b A_MPI_Message_c2f\n"
+"inwrap_MPI_Message_c2f:\n"
+"b R__MPI_Message_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -890,6 +1175,7 @@ __asm__(
 "jmp *A_MPI_Message_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Message_c2f:\n"
 "jmp *R__MPI_Message_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -915,6 +1201,16 @@ __asm__(
 ".type CCMPI_Op_f2c,@function\n"
 ".text\n"
 "CCMPI_Op_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Op_f2c\n"
+"b A_MPI_Op_f2c\n"
+"inwrap_MPI_Op_f2c:\n"
+"b R__MPI_Op_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -931,6 +1227,7 @@ __asm__(
 "jmp *A_MPI_Op_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Op_f2c:\n"
 "jmp *R__MPI_Op_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -956,6 +1253,16 @@ __asm__(
 ".type CCMPI_Op_c2f,@function\n"
 ".text\n"
 "CCMPI_Op_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Op_c2f\n"
+"b A_MPI_Op_c2f\n"
+"inwrap_MPI_Op_c2f:\n"
+"b R__MPI_Op_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -972,6 +1279,7 @@ __asm__(
 "jmp *A_MPI_Op_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Op_c2f:\n"
 "jmp *R__MPI_Op_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -999,6 +1307,16 @@ __asm__(
 ".type CCMPI_Info_f2c,@function\n"
 ".text\n"
 "CCMPI_Info_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_f2c\n"
+"b A_MPI_Info_f2c\n"
+"inwrap_MPI_Info_f2c:\n"
+"b R__MPI_Info_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1015,6 +1333,7 @@ __asm__(
 "jmp *A_MPI_Info_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_f2c:\n"
 "jmp *R__MPI_Info_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1041,6 +1360,16 @@ __asm__(
 ".type CCMPI_Info_c2f,@function\n"
 ".text\n"
 "CCMPI_Info_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Info_c2f\n"
+"b A_MPI_Info_c2f\n"
+"inwrap_MPI_Info_c2f:\n"
+"b R__MPI_Info_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1057,6 +1386,7 @@ __asm__(
 "jmp *A_MPI_Info_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Info_c2f:\n"
 "jmp *R__MPI_Info_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1084,6 +1414,16 @@ return R_MPI_Info_c2f(op);
 ".type CCMPI_Errhandler_f2c,@function\n"
 ".text\n"
 "CCMPI_Errhandler_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_f2c\n"
+"b A_MPI_Errhandler_f2c\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"b R__MPI_Errhandler_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1100,6 +1440,7 @@ return R_MPI_Info_c2f(op);
 "jmp *A_MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_f2c:\n"
 "jmp *R__MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1143,6 +1484,16 @@ __asm__(
 ".type CCMPI_Errhandler_c2f,@function\n"
 ".text\n"
 "CCMPI_Errhandler_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_c2f\n"
+"b A__MPI_Errhandler_c2f\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"b R__MPI_Errhandler_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1159,6 +1510,7 @@ __asm__(
 "jmp *A__MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Errhandler_c2f:\n"
 "jmp *R__MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1204,6 +1556,16 @@ __asm__(
 ".type CCMPI_Group_f2c,@function\n"
 ".text\n"
 "CCMPI_Group_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_f2c\n"
+"b A_MPI_Group_f2c\n"
+"inwrap_MPI_Group_f2c:\n"
+"b R__MPI_Group_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1220,6 +1582,7 @@ __asm__(
 "jmp *A_MPI_Group_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_f2c:\n"
 "jmp *R__MPI_Group_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1263,6 +1626,16 @@ __asm__(
 ".type CCMPI_Group_c2f,@function\n"
 ".text\n"
 "CCMPI_Group_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Group_c2f\n"
+"b A_MPI_Group_c2f\n"
+"inwrap_MPI_Group_c2f:\n"
+"b R__MPI_Group_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1279,6 +1652,7 @@ __asm__(
 "jmp *A_MPI_Group_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Group_c2f:\n"
 "jmp *R__MPI_Group_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1324,6 +1698,16 @@ __asm__(
 ".type CCMPI_Request_f2c,@function\n"
 ".text\n"
 "CCMPI_Request_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Request_f2c\n"
+"b A_MPI_Request_f2c\n"
+"inwrap_MPI_Request_f2c:\n"
+"b R__MPI_Request_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1340,6 +1724,7 @@ __asm__(
 "jmp *A_MPI_Request_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_f2c:\n"
 "jmp *R__MPI_Request_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1383,6 +1768,16 @@ __asm__(
 ".type CCMPI_Request_c2f,@function\n"
 ".text\n"
 "CCMPI_Request_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Request_c2f\n"
+"b A_MPI_Request_c2f\n"
+"inwrap_MPI_Request_c2f:\n"
+"b R__MPI_Request_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1399,6 +1794,7 @@ __asm__(
 "jmp *A_MPI_Request_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Request_c2f:\n"
 "jmp *R__MPI_Request_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 /*
@@ -1444,6 +1840,16 @@ __asm__(
 ".type CCMPI_Type_f2c,@function\n"
 ".text\n"
 "CCMPI_Type_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_f2c\n"
+"b A_MPI_Type_f2c\n"
+"inwrap_MPI_Type_f2c:\n"
+"b R__MPI_Type_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1460,6 +1866,7 @@ __asm__(
 "jmp *A_MPI_Type_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_f2c:\n"
 "jmp *R__MPI_Type_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1503,6 +1910,16 @@ __asm__(
 ".type CCMPI_Type_c2f,@function\n"
 ".text\n"
 "CCMPI_Type_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Type_c2f\n"
+"b A_MPI_Type_c2f\n"
+"inwrap_MPI_Type_c2f:\n"
+"b R__MPI_Type_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1519,6 +1936,7 @@ __asm__(
 "jmp *A_MPI_Type_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Type_c2f:\n"
 "jmp *R__MPI_Type_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 /*
@@ -1564,6 +1982,16 @@ __asm__(
 ".type CCMPI_Comm_f2c,@function\n"
 ".text\n"
 "CCMPI_Comm_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_f2c\n"
+"b A_MPI_Comm_f2c\n"
+"inwrap_MPI_Comm_f2c:\n"
+"b R__MPI_Comm_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1580,6 +2008,7 @@ __asm__(
 "jmp *A_MPI_Comm_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_f2c:\n"
 "jmp *R__MPI_Comm_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1623,6 +2052,16 @@ __asm__(
 ".type CCMPI_Comm_c2f,@function\n"
 ".text\n"
 "CCMPI_Comm_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Comm_c2f\n"
+"b A_MPI_Comm_c2f\n"
+"inwrap_MPI_Comm_c2f:\n"
+"b R__MPI_Comm_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1639,6 +2078,7 @@ __asm__(
 "jmp *A_MPI_Comm_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Comm_c2f:\n"
 "jmp *R__MPI_Comm_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 /*
@@ -1682,6 +2122,16 @@ __asm__(
 ".type CCMPI_File_f2c,@function\n"
 ".text\n"
 "CCMPI_File_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_f2c\n"
+"b A_MPI_File_f2c\n"
+"inwrap_MPI_File_f2c:\n"
+"b R__MPI_File_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1698,6 +2148,7 @@ __asm__(
 "jmp *A_MPI_File_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_f2c:\n"
 "jmp *R__MPI_File_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1742,6 +2193,16 @@ __asm__(
 ".type CCMPI_File_c2f,@function\n"
 ".text\n"
 "CCMPI_File_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_File_c2f\n"
+"b A_MPI_File_c2f\n"
+"inwrap_MPI_File_c2f:\n"
+"b R__MPI_File_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1758,6 +2219,7 @@ __asm__(
 "jmp *A_MPI_File_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_c2f:\n"
 "jmp *R__MPI_File_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 
@@ -1817,6 +2279,16 @@ __asm__(
 ".type CCMPI_Status_c2f,@function\n"
 ".text\n"
 "CCMPI_Status_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Status_c2f\n"
+"b A_MPI_Status_c2f\n"
+"inwrap_MPI_Status_c2f:\n"
+"b R__MPI_Status_c2f\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1835,6 +2307,7 @@ __asm__(
 "jmp *A_MPI_Status_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_Status_c2f:\n"
 "jmp *R__MPI_Status_c2f@GOTPCREL(%rip)\n"
+#endif
 
 );
 int R__MPI_Status_c2f(R_MPI_Status *in,R_MPI_Fint *op)
@@ -1860,6 +2333,16 @@ __asm__(
 ".type CCMPI_Status_f2c,@function\n"
 ".text\n"
 "CCMPI_Status_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Status_f2c\n"
+"b A_MPI_Status_f2c\n"
+"inwrap_MPI_Status_f2c:\n"
+"b R__MPI_Status_f2c\n"
+#else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
 "sub $0x10, %rsp\n"
@@ -1878,6 +2361,7 @@ __asm__(
 "jmp *A_MPI_Status_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_Status_f2c:\n"
 "jmp *R__MPI_Status_f2c@GOTPCREL(%rip)\n"
+#endif
 
 );
 int R__MPI_Status_f2c(R_MPI_Fint *in,R_MPI_Status *op)

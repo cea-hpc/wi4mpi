@@ -18,12 +18,14 @@
 # Authors:                                                             #
 #   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
 #   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #
 #                                                                      #
 ########################################################################
 
 :Authors:
     Tony Delforge (tony.delforge.tgcc@cea.fr)
     Vincent Ducrot (vincent.ducrot.tgcc@cea.fr)
+    Adrien Cotte (adrien.cotte.tgcc@cea.fr)
 
 Generator Documentation
 =======================
@@ -32,9 +34,9 @@ Contents
 --------
 
 1. Introduction to the generators
-	1. Generation template
-	2. Function and mappers dictionnary
-	3. Frozen API
+    1. Generation template
+    2. Function and mappers dictionnary
+    3. Frozen API
 2. Quick generation
 
 Introduction to the generators
@@ -58,16 +60,16 @@ File template handling C MPI routines for interface and preload version:
 3) Function pointer to the underlying runtime MPI routine declaration
 4) ASM code chooser
 5) A_MPI_...  declaration + function construction
-	1. Header
-	2. Temporary variable assignement, and translation
-	3. Call to the MPI runtime function
-	4. Footer
-	5. return 
+    1. Header
+    2. Temporary variable assignement, and translation
+    3. Call to the MPI runtime function
+    4. Footer
+    5. return
 6) R_MPI_... declaration + function contstruction
-	1. Header
-	2. Call to the MPI runtime function
-	3. Footer
-	4. return
+    1. Header
+    2. Call to the MPI runtime function
+    3. Footer
+    4. return
 7) Attribute constructor init generation
 
 Generating function connection:
@@ -76,14 +78,14 @@ Generating function connection:
 3) print_symbol_c
 4) object_gen.generate_func_asmK_tls / generate_func_asmK_tls_updated_for_interface
 5) generate_func_c
-	1. header_func
-	2. print_temporary_decl_c + affect_temp_conv_c 
-	3. print_symbol_c + affect_val_conv_c
-	4. footer_func
+    1. header_func
+    2. print_temporary_decl_c + affect_temp_conv_c
+    3. print_symbol_c + affect_val_conv_c
+    4. footer_func
 6) generate_func_r
-	1. header_func
-	2. print_symbol_c
-	3. footer_func
+    1. header_func
+    2. print_symbol_c
+    3. footer_func
 
 The Fortran MPI routines template is quite similar. The step 6 and 4 are specific to this version.
 
@@ -91,33 +93,33 @@ Function and mappers dictionaries
 ---------------------------------
 functions.json -- C
 ~~~~~~~~~~~~~~~~~~
-Exemple: MPI_Init(int *, char***); 
+Exemple: MPI_Init(int *, char***);
 {
 "args": [
 { **1st argument**
 
-	"var": "argc", **name**
+    "var": "argc", **name**
 
-	"arg_dep": "", **dependency**
+    "arg_dep": "", **dependency**
 
-	"In": 1, **The argument need to be converted before any call to the underlying MPI runtime call**
+    "In": 1, **The argument need to be converted before any call to the underlying MPI runtime call**
 
-	"name": "int_ptr_mapper", **name of the mapper corresponding to that argument (mappers are responsible for the traslation)**
+    "name": "int_ptr_mapper", **name of the mapper corresponding to that argument (mappers are responsible for the traslation)**
 
-	"Out": 0 **The argument do not need to be converted after the MPI runtime call**
+    "Out": 0 **The argument do not need to be converted after the MPI runtime call**
 
 },
 { **2nd argument**
 
-	"var": "argv",
+    "var": "argv",
 
-	"arg_dep": "",
+    "arg_dep": "",
 
-	"In": 1,
+    "In": 1,
 
-	"name": "char_ppp_converter",
+    "name": "char_ppp_converter",
 
-	"Out": 0
+    "Out": 0
 
 }
 
@@ -125,19 +127,19 @@ Exemple: MPI_Init(int *, char***);
 
   "name": "MPI_Init",
 
-  "ret": 
+  "ret":
 
   {
 
-		"var": "ret",
+        "var": "ret",
 
-		"arg_dep": "",
+        "arg_dep": "",
 
-		"In": 0,
+        "In": 0,
 
-		"name": "error_converter",
+        "name": "error_converter",
 
-		"Out": 1
+        "Out": 1
 
   }
 
@@ -150,7 +152,7 @@ Some additional key words to deal with some special cases:
 - if_null : Same as 'if' keyword but dedicated to NULL constants.
 - if_null_dep : Same as 'if_dep' but works with 'if_null'
 - if_err: Handle special case MPI_Errhandler_set.
-- del : The argument needs to be deleted from the mechanism managing the database (hashtable) 
+- del : The argument needs to be deleted from the mechanism managing the database (hashtable)
 - del2 : Same as 'del'.
 - arg_dep: Same as 'if_dep' but works on its own.
 
@@ -177,19 +179,19 @@ mappers.json -- C
 ~~~~~~~~~~~~~~~~~
 
 This file contains all differents metada about mappers that needs to be called to performed any conversion.
-Each entry is corresponding to the mappers name which is referenced in the function.json "name" keywords within any arguments function. Those entries provide metadata relevent for the generator as represented bellow: 
+Each entry is corresponding to the mappers name which is referenced in the function.json "name" keywords within any arguments function. Those entries provide metadata relevent for the generator as represented bellow:
 
-"int_ptr_mapper": {		**name**
+"int_ptr_mapper": {     **name**
 
-	"local_alloc": 0, **Does the variable needs to be allocated locally. 0=no; 1=yes**
+    "local_alloc": 0, **Does the variable needs to be allocated locally. 0=no; 1=yes**
 
-	"a2r": "int_ptr_conv_a2r", **If 'in=1' from functions.json is set, then this function nedds to be called**
+    "a2r": "int_ptr_conv_a2r", **If 'in=1' from functions.json is set, then this function nedds to be called**
 
-	"type": "int (*)", **type de l'argument**
+    "type": "int (*)", **type de l'argument**
 
-	"r2a": "int_ptr_conv_r2a", **If 'out=1' from functions.json is set, then this function nedds to be calle**
+    "r2a": "int_ptr_conv_r2a", **If 'out=1' from functions.json is set, then this function nedds to be calle**
 
-	"no_map": "TRUE" **The argument does not need to be converted if 'TRUE'**
+    "no_map": "TRUE" **The argument does not need to be converted if 'TRUE'**
 
 }
 
@@ -208,25 +210,25 @@ When a call to  A_MPI_Op_create(A_MPI_User_function * user_fn,int commute,A_MPI_
 int A_MPI_Op_create(A_MPI_User_function * user_fn,int commute,A_MPI_Op * op)
 {
 
-	in_w=1;
+    in_w=1;
 
-	ptr_user_func=(A_MPI_User_function * )user_fn;
+    ptr_user_func=(A_MPI_User_function * )user_fn;
 
-	R_MPI_Op  op_ltmp;
+    R_MPI_Op  op_ltmp;
 
-	R_MPI_Op * op_tmp=&op_ltmp; 
+    R_MPI_Op * op_tmp=&op_ltmp;
 
-	int ret_tmp= LOCAL_MPI_Op_create( (R_MPI_User_function * ) wrapper_user_function, commute, op_tmp);
+    int ret_tmp= LOCAL_MPI_Op_create( (R_MPI_User_function * ) wrapper_user_function, commute, op_tmp);
 
-	op_conv_r2a(op,op_tmp); **conversion de op**
+    op_conv_r2a(op,op_tmp); **conversion de op**
 
-	in_w=0;
+    in_w=0;
 
-	return error_code_conv_r2a(ret_tmp);
+    return error_code_conv_r2a(ret_tmp);
 
 }
 
-**user_fn** is a function pointer where (MPI_Datatype * ) is referenced:    
+**user_fn** is a function pointer where (MPI_Datatype * ) is referenced:
 
 **typedef void (MPI_User_function) (void * , void * , int * , MPI_Datatype * );**
 
@@ -235,9 +237,9 @@ int A_MPI_Op_create(A_MPI_User_function * user_fn,int commute,A_MPI_Op * op)
 void wrapper_user_function(void * invec, void * inoutvec, int * len,R_MPI_Datatype * type)
 {
 
-	A_MPI_Datatype datatype_tmp;
-	datatype_conv_r2a( &datatype_tmp,type);
-	(ptr_user_func)(invec, inoutvec, len, & datatype_tmp);
+    A_MPI_Datatype datatype_tmp;
+    datatype_conv_r2a( &datatype_tmp,type);
+    (ptr_user_func)(invec, inoutvec, len, & datatype_tmp);
 
 }
 
@@ -253,12 +255,12 @@ Some special cases are handle thanks to the "assoc" field which allow to make so
 
 Exemple:
 
-"assoc":[                               
-    {                                   
+"assoc":[
+    {
         "func":"Keyval_translation_del",
-        "key":"keyval_tmp"              
-    }                                   
-]                                       
+        "key":"keyval_tmp"
+    }
+]
 
 
 mappers.json -- Fortran special cases
@@ -272,15 +274,16 @@ Frozen API
 In order to get the frozen API proceed as follow:
 
 Just copy the contents of A the file into the B file:
-_________________________________________________________________________________________
-|									A											|     |									B												|						
------------------------------------------------------------------------------------------
-|				interface_api_fige.c		 				|<--->|	interface/gen/test_wrapper_generation.c	|	
-|		interface_api_fige_fortran.c 				|<--->|	interface/gen/wrapper.c								 	| 
-|	interface_api_fige_fortran_interface.c|<--->|	interface/gen/interface_fort.c				 	| 
-|				preload_api_fige.c 							|<--->|	preload/gen/test_wrapper_generation.c	 	| 
-|		preload_api_fige_fortran.c 					|<--->|	preload/gen/wrapper.c									 	| 
------------------------------------------------------------------------------------------
+
++----------------------------------------+-----+-----------------------------------------+
+|                     A                  |     |                     B                   |
++----------------------------------------+-----+-----------------------------------------+
+| interface_api_fige.c                   |<--->| interface/gen/test_wrapper_generation.c |
+| interface_api_fige_fortran.c           |<--->| interface/gen/wrapper.c                 |
+| interface_api_fige_fortran_interface.c |<--->| interface/gen/interface_fort.c          |
+| preload_api_fige.c                     |<--->| preload/gen/test_wrapper_generation.c   |
+| preload_api_fige_fortran.c             |<--->| preload/gen/wrapper.c                   |
++----------------------------------------+-----+-----------------------------------------+
 
 Quick generation:
 =================
@@ -296,7 +299,7 @@ python generate.py will generate the following files:
         Done.
 >>>>> Generating interface/gen/interface_test.c
         Done.
->>>>> Generating interface/gen/interface_fort.c 
+>>>>> Generating interface/gen/interface_fort.c
 
 python generate_header_f.py will generate the following files:
 preload/header/INTEL_INTEL:

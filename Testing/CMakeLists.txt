@@ -1,0 +1,26 @@
+# Select your batch scheduler configuration here (Testing/etc/mpivars.sh)
+if (NOT WI4MPI_BATCH_SCHEDULER)
+    set (WI4MPI_BATCH_SCHEDULER "mpirun")
+endif ()
+if (WI4MPI_BATCH_SCHEDULER MATCHES "mpirun")
+    set (WI4MPI_MPRUN "mpirun")
+    set (WI4MPI_NPROC "'-n 4'")
+endif ()
+if (WI4MPI_BATCH_SCHEDULER MATCHES "bridge")
+    set (WI4MPI_MPRUN "ccc_mprun")
+    set (WI4MPI_PARTITION "'-p haswell'")
+    set (WI4MPI_NPROC "'-n 4'")
+    set (WI4MPI_NCORE "'-c 1'")
+    set (WI4MPI_EXTRA_OPTS "'-T 600'")
+endif ()
+
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/etc/mpivars.sh.in
+    ${CMAKE_CURRENT_BINARY_DIR}/etc/mpivars.sh
+    @ONLY)
+
+# Testing subdirectories
+add_subdirectory (compile)
+add_subdirectory (mpirun)
+add_subdirectory (mpi_init)
+add_subdirectory (timeout)
+add_subdirectory (mpiio)

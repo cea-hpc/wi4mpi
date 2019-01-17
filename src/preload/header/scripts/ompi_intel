@@ -1,7 +1,0 @@
-app:
-
-sed 's/MPI_/A_MPI_/g' ompi_mpi.h | sed 's/OA_MPI_/OMPI_/g' | sed 's/OMPI_OFFSET_DATATYPE/A_OMPI_OFFSET_DATATYPE/g' | sed 's/#    include "mpi_portable_platform.h"/\/\/#    include "mpi_portable_platform.h"/g' | sed 's/OMPI_C_A_MPI_/OMPI_C_MPI_/g' | sed 's/const //g' | sed 's/PA_MPI_/A_PMPI_/g' | sed '883,1015 s/^/\/\//g' | sed '813,874 s/OMPI_DECLSPEC int/\/\*OMPI_DECLSPEC int\*\/ void/g' | sed '813,874 s/(/;\/\*(/g' | sed '813,874 s/);/);\*\//g' | sed '813,874 s/OMPI_C_MPI_/\* OMPI_C_MPI_/g' > app_mpi_2.h
-
-run:
-
-sed 's/MPI_/R_MPI_/g' intel_mpi.h | sed 's/const //g' | sed 's/PR_MPI_/R_PMPI_/g' | sed 's/#include "mpio.h" /#include "run_mpio.h" /g'> run_mpi_2.h
