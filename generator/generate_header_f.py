@@ -29,6 +29,7 @@ def lisence_header():
 	print '//# Authors:                                                             #'
 	print '//#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #'
 	print '//#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #'
+	print '//#   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #'
 	print '//#                                                                      #'
 	print '//########################################################################'
 

@@ -20,6 +20,7 @@
 # Authors:                                                             #
 #   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
 #   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #
 #                                                                      #
 ######################################################################## 
 

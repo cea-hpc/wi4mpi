@@ -19,6 +19,7 @@
 # Authors:                                                             #
 #   - Delforge Tony <tony.delforge.tgccAcea.fr>                        #
 #   - Ducrot Vincent <vincent.ducrot.tgccAcea.fr>                      #
+#   - Cotte Adrien <adrien.cotte.tgccAcea.fr>                          #
 #                                                                      #
 ########################################################################
 
