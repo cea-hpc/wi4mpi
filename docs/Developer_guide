@@ -18,6 +18,7 @@
 # Authors:                                                             #
 #   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
 #   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
+#   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #
 #                                                                      #
 ########################################################################
 
@@ -25,6 +26,7 @@
 :Authors:
     Tony Delforge (tony.delforge.tgcc@cea.fr)
     Vincent Ducrot (vincent.ducrot.tgcc@cea.fr)
+    Adrien Cotte (adrien.cotte.tgcc@cea.fr)
 
 Developer Guide
 ===============
@@ -40,9 +42,9 @@ Sommaire:
         3. Code chooser ASM
         4. A_MPI_Function
         5. R_MPI_Function
-				6. Hashtable
+        6. Hashtable
         7. Thread safety
-				8. Jit handling user function
+        8. Jit handling user function
         9. The interface
     3. Files
 3. Get Involved in WI4MPI
@@ -66,19 +68,19 @@ To perform a translation, all original MPI call from the application is intercep
 For example, with an OpenMPI ---> IntelMPI conversion:
 
 
-Application: MPI_Init (OpenMPI)													MPI_Init (IntelMPI)
-															\         						   /
-							Phase 1					 \        						  /    Phase 3
-																\       						 /
-																|--------------------|
-																| WI4MPI: A_MPI_Init |
-																|--------------------|
-																					 |
-																					 |	Phase 2 
-																					 | 
-																			Translation		
+Application: MPI_Init (OpenMPI)                         MPI_Init (IntelMPI)
+                              \                         /
+                      Phase 1  \                       /  Phase 3
+                                \                     /
+                                |--------------------|
+                                | WI4MPI: A_MPI_Init |
+                                |--------------------|
+                                          |
+                                          | Phase 2 
+                                          | 
+                                      Translation
 
-Implémentation
+Implementation
 --------------
 
 Library settings
@@ -89,9 +91,9 @@ The library is set during its loading time, when the program start. All runtime 
 void __attribute__((constructor)) wrapper_init
 {
 
-	void (*)lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW); 
-	LOCAL_MPI_Function=dlsym(lib_handle,"PMPI_Function") 
-	....
+    void (*)lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW); 
+    LOCAL_MPI_Function=dlsym(lib_handle,"PMPI_Function") 
+    ....
 }
 
 The library contain three constructor:
@@ -116,17 +118,17 @@ The MPI-IO implémentation (ROMIO) present within the most MPI implementation tr
 
 Example:
 
-Application:MPI_File_open (OpenMPI)											MPI_File_open(IntelMPI)
-															\         						   /											\
-							Phase 1					 \        						  /    Phase 3						 \
-																\       						 /													\
-																|-------------------------|											|----------------------------------------------------|
-																| WI4MPI: A_MPI_File_open |											| WI4MPI: A_MPI_Allreduce but with runtime arguments |
-																|-------------------------|											| instead of application arguments (R_ instead of A_)|
-																					 |																		|----------------------------------------------------|
-																					 |	Phase 2 																										|
-																					 | 																															|
-																			Translation																											Translation ----> Crash
+Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
+                             \                               /                      \
+              Phase 1         \                             /         Phase 3        \
+                               \                           /                          \
+                                |-------------------------|                      |----------------------------------------------------|
+                                | WI4MPI: A_MPI_File_open |                      | WI4MPI: A_MPI_Allreduce but with runtime arguments |
+                                |-------------------------|                      | instead of application arguments (R_ instead of A_)|
+                                            |                                    |----------------------------------------------------|
+                                            |   Phase 2                                                     |
+                                            |                                                               |
+                                       Translation                                                     Translation ----> Crash
 
 
 
@@ -136,7 +138,7 @@ To overcome this issue, we used an ASM code chooser.
 Code chooser ASM
 ~~~~~~~~~~~~~~~~
 
-The ASM code chooser does the simpl following things:
+The ASM code chooser does the simple following things:
 
 If we alreday are in the wrapper:
 
@@ -188,17 +190,17 @@ ASM Code chooser implementation (generated for each function):
 - jmp (*)R_MPI_Function@GOTPCREL(%rip) 
 - .size PMPI_Function,.-PMPI_Function
 
-Application:MPI_File_open (OpenMPI)											MPI_File_open(IntelMPI)
-															\         						   /											\
-							Phase 1					 \        						  /    Phase 3						 \
-																\       						 /													\
-																|-------------------------|											|-------------------------|
-																| WI4MPI: PMPI_File_open  |											| WI4MPI: PMPI_Allreduce  |
-																| Testing in_w: in_w=0    |											| Testing in_w: in_w=1    |
-																|-------------------------|											| ------------------------|
-																					 |	Phase 2 																			|
-																					 | 																								|
-																A_MPI_File_open:Translation											R_MPI_Allreduce:No Translation
+Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
+                             \                               /                      \
+              Phase 1         \                             /         Phase 3        \
+                               \                           /                          \
+                                |-------------------------|                     |-------------------------|
+                                | WI4MPI: PMPI_File_open  |                     | WI4MPI: PMPI_Allreduce  |
+                                | Testing in_w: in_w=0    |                     | Testing in_w: in_w=1    |
+                                |-------------------------|                     | ------------------------|
+                                           |    Phase 2                                      |
+                                           |                                                 |
+                                A_MPI_File_open:Translation                     R_MPI_Allreduce:No Translation
 
 A_MPI_Function
 ~~~~~~~~~~~~~~
@@ -206,7 +208,7 @@ A_MPI_Function
 All translations are executed thanks to some mappers defined within mappers.h using an underlying hash table mechanism named uthash (https://troydhanson.github.io/uthash/)
 The mappers (see example below) always have the same syntax : 
 
- - mapper_name_a2r/r2a(&buf,	&buf_tmp);
+ - mapper_name_a2r/r2a(&buf, &buf_tmp);
 
 In case of an a2r translation, buf_tmp represent the translation of buf and vice versa for an r2a translation.
 
@@ -216,29 +218,29 @@ A_MPI_Send(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_C
 
 {
 
-	void * buf_tmp;
+    void * buf_tmp;
 
-	const_buffer_conv_a2r(&buf,&buf_tmp); **mapper**
+    const_buffer_conv_a2r(&buf,&buf_tmp); **mapper**
 
-	R_MPI_Datatype datatype_tmp;
+    R_MPI_Datatype datatype_tmp;
 
-	datatype_conv_a2r(&datatype,&datatype_tmp); **mapper**
+    datatype_conv_a2r(&datatype,&datatype_tmp); **mapper**
 
-	int dest_tmp;
+    int dest_tmp;
 
-	dest_conv_a2r(&dest,&dest_tmp); **mapper**
+    dest_conv_a2r(&dest,&dest_tmp); **mapper**
 
-	int tag_tmp;
+    int tag_tmp;
 
-	tag_conv_a2r(&tag,&tag_tmp); **mapper**
+    tag_conv_a2r(&tag,&tag_tmp); **mapper**
 
-	R_MPI_Comm comm_tmp;
+    R_MPI_Comm comm_tmp;
 
-	comm_conv_a2r(&comm,&comm_tmp); **mapper**
+    comm_conv_a2r(&comm,&comm_tmp); **mapper**
 
-	int ret_tmp= LOCAL_MPI_Send( buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp, comm_tmp); **Runtime MPI_Send call**
+    int ret_tmp= LOCAL_MPI_Send( buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp, comm_tmp); **Runtime MPI_Send call**
 
-	return error_code_conv_r2a(ret_tmp); 
+    return error_code_conv_r2a(ret_tmp); 
 
 }
 
@@ -250,9 +252,9 @@ For an R_MPI_Function, the arguments are directly passed to the MPI runtime call
 int R_MPI_Send(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm)
 {
 
-	int ret_tmp= LOCAL_MPI_Send( buf, count, datatype, dest, tag, comm);
+    int ret_tmp= LOCAL_MPI_Send( buf, count, datatype, dest, tag, comm);
 
-	return ret_tmp;
+    return ret_tmp;
 
 }
 
@@ -298,8 +300,8 @@ The table are spinlock protected. (cf :thread_safety.h):
 - #define unlock(a) pthread_spin_unlock(a)
 - typedef  pthread_spinlock_t (*)table_lock_t;
 
-L'interface:
-------------
+Interface:
+----------
 
 The interface version of WI4MPI propose the promise as the preload version (one compilation, several run over different MPI implementation), but this time WI4MPI had to be seen as a fully MPI Library. 
 All the previously section are still relevent for the interface, the only things that changed is the new level name INTERFACE (see the schema below). This level has to be considered as a "libmpi.so" which is linked to the user application.
@@ -329,13 +331,7 @@ int (*INTERFACE_LOCAL_MPI_Init)(int *,char ***);
 
 int PMPI_Init(int * argc,char *** argv)
 {
-#ifdef DEBUG
-printf("entre : PMPI_Init (interface) \n");
-#endif
 int ret_tmp= INTERFACE_LOCAL_MPI_Init( argc, argv);
-#ifdef DEBUG
-printf("sort : PMPI_Init (interface)\n");
-#endif
 return ret_tmp;
 }
 __attribute__((constructor)) void wrapper_interface(void) {
@@ -347,24 +343,29 @@ if(!interface_handle)
 }
 INTERFACE_LOCAL_MPI_Init=dlsym(interface_handle,"CCMPI_MPI_Init");
 }
-Le mode static
---------------
-une librairie statique permettant de construire un executable intégrant directement les traductions est aussi fournie : elle est basée sur le même principe que le mode interface mais pour eviter les conflits de symbole les differents symbole et constantes interne sont renomée sous la forme : INTERF2_{TARGET}_{Symbol_name}. L'initialisation ne s'appuie plus sur un dlopen mais sur un choix de pointeur de fonction en fonction de 2 variables d'environnement : WI4MPI_STATIC_TARGET_TYPE_F et WI4MPI_STATIC_TARGET_TYPE. Les valeurs acceptées sont pour le moment : OMPI et INTEL.
-Les parties spécifiques au mode statique(ou classique) sont discréminés par un #if(n)def WI4MPI_STATIC / #endif
-Les fichiers
+
+Static mode
+-----------
+The static mode builds an executable with every targets translation. To avoid conflicts, symbols are renamed as follow: INTERF2_{TARGET}_{Symbol_name}.
+No more dlopen is needed (cf. Interface), functions pointer are choosen by 2 variables: WI4MPI_STATIC_TARGET_TYPE_F et WI4MPI_STATIC_TARGET_TYPE.
+Static sections are controled by directives: #if(n)def WI4MPI_STATIC / #endif
 ------------
 
 Common files for both version of WI4MPI:
 
  - func_char_fort.*: 
-Contain all Fortran MPI functions that deal with some character arguments. Since in Fortran a character argument always reference is len (character(len=*) :: dark_side) and since the len argument is not passed in the same order  according to the compiler (Intel or GNU) used, WI4MPI had to implement both.
-Example --
-					 #ifdef IFORT_CALL
-							void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen) **The character length is add at the end**
-					 #elif GFORT_CALL
-							void  A_f_MPI_Get_processor_name(char * name,int namelen,int * resultlen,int * ret) **The character length is add after the argument character**
-					 #endif
-				--
+    Contain all Fortran MPI functions that deal with some character arguments.
+    Since in Fortran a character argument always reference is len (character(len=*) :: dark_side) and since the len argument is not passed in the same order according to the compiler (Intel or GNU) used,
+    WI4MPI had to implement both.
+
+    Example --
+           #ifdef IFORT_CALL
+                  void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen) **The character length is add at the end**
+           #elif GFORT_CALL
+                  void  A_f_MPI_Get_processor_name(char * name,int namelen,int * resultlen,int * ret) **The character length is add after the argument character**
+           #endif
+           --
+
  - manual_wrapper.h: Contain some manual mappers for Fortran translation
  - mappers.h: Contain the a2r/r2a mappers for C translattion
  - new_utils.*, new_utils_fn.*, and uthash.h: Contain all table routines
@@ -375,32 +376,32 @@ Preload files:
 - bin/wi4mpi: see User_Guide 
 - etc/wi4mpi.cfg: see User_Guide
 - gen:
-	- c2f_f2c.c:
-	- lib_empty.c: Empty file to create empty Libraries made to remplace the one from MPI use for the compilation
-	- test_generation_wrapper.c: contain all C MPI function within WI4MPI which deal with the translation
-  - wrapper.c: contain all the Fortran MPI function within WI4MPI which deal with the translation
+    - c2f_f2c.c:
+    - lib_empty.c: Empty file to create empty Libraries made to remplace the one from MPI use for the compilation
+    - test_generation_wrapper.c: contain all C MPI function within WI4MPI which deal with the translation
+    - wrapper.c: contain all the Fortran MPI function within WI4MPI which deal with the translation
 - header:
-	- INTEL_INTEL: app_mpi.h app_mpio.h run_mpi.h run_mpio.h wrapper_f.h
-	- INTEL_OMPI: app_mpi.h  app_mpio.h run_mpi.h wrapper_f.h
-  - OMPI_INTEL: app_mpi.h  run_mpi.h  run_mpio.h wrapper_f.h
-  - OMPI_OMPI: app_mpi.h run_mpi.h wrapper_f.h
+    - INTEL_INTEL: app_mpi.h app_mpio.h run_mpi.h run_mpio.h wrapper_f.h
+    - INTEL_OMPI: app_mpi.h  app_mpio.h run_mpi.h wrapper_f.h
+    - OMPI_INTEL: app_mpi.h  run_mpi.h  run_mpio.h wrapper_f.h
+    - OMPI_OMPI: app_mpi.h run_mpi.h wrapper_f.h
 
 Interface files:
 
 - gen: 
-	- c2f_f2c.c: 
-	- test_generation_wrapper.c: Same as the preload version
-  - wrapper.c: Same as the preload version
-	- interface_fort.c: Contain the overload symbol mechanism for Fortran MPI Function 
-	- interface_test.c: Contain the overload symbol mechanism for C MPI Function and rerooting to CodeChooser
+    - c2f_f2c.c: 
+    - test_generation_wrapper.c: Same as the preload version
+    - wrapper.c: Same as the preload version
+    - interface_fort.c: Contain the overload symbol mechanism for Fortran MPI Function 
+    - interface_test.c: Contain the overload symbol mechanism for C MPI Function and rerooting to CodeChooser
 - header:
-  - OMPI_INTEL: app_mpi.h  run_mpi.h  run_mpio.h wrapper_f.h
-  - OMPI_OMPI: pp_mpi.h run_mpi.h wrapper_f.h
+    - OMPI_INTEL: app_mpi.h  run_mpi.h  run_mpio.h wrapper_f.h
+    - OMPI_OMPI: pp_mpi.h run_mpi.h wrapper_f.h
 - lib_cccmpi:
-	- bin: Contain all mpi wrapper for compilation
-	- include: Contain all include exposed to users
+    - bin: Contain all mpi wrapper for compilation
+    - include: Contain all include exposed to users
 - manual:
-	- dlsym_global.c : Get runtime MPI constantes 
+    - dlsym_global.c : Get runtime MPI constantes 
 - module: Contain all elements to create a descent module
 
 Get involved in WI4MPI
@@ -432,7 +433,6 @@ Expand WI4MPI conversion capability
 -----------------------------------
 
 - In mappers.h, you have to make sure that the status mapper translate the MPI_Status.count in the right way since its implementation is developer dependent.
-
 - Generate the associated app_mpi.h and run_mpi.h to new conversion
 
 
