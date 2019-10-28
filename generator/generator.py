@@ -620,6 +620,8 @@ class generator:
                 if func_dict['name'] == 'MPI_Attr_put' and self.name == 'Wrapper_Interface_C':
                     str=str+'myKeyval_functions_t *tt;\nif(tt=myKeyval_translation_get(keyval)) tt->ref++;'
                 str=str+'\n'+self.print_symbol_c(func_dict,prefix='LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True, type_prefix='R_')+';'
+                if func_dict['name'] == 'MPI_Attr_put' and self.name == 'Wrapper_Interface_C':
+                    str=str+'if(tt&&ret_tmp!=R_MPI_SUCCESS) tt->ref--;'
                 if func_dict['name'] == 'MPI_Init':
                     str=str+"\nint wi4mpi_rank;\n"
                     str=str+"R_MPI_Comm_rank(R_MPI_COMM_WORLD,&wi4mpi_rank);\n"

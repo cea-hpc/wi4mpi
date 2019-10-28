@@ -412,8 +412,8 @@ myKeyval_functions_t *myKeyval_translation_get(int keyval) {
   HASH_FIND_INT(get_myKeyval_table()->table, &keyval, conv);
   if (conv != NULL) {
     functions = conv->functions;
-    print(stderr, "\t\tkeyval %d -> (%p, %p)\n", keyval, functions->cp_function,
-          functions->del_function);
+    print(stderr, "\t\tkeyval %d -> (%p, %p) %d\n", keyval,
+          functions->cp_function, functions->del_function, functions->ref);
   } else {
     myKeyval_read_unlock();
 
@@ -441,10 +441,9 @@ int wrapper_copy_function(R_MPI_Comm comm, int keyval, void *extra_state,
   myKeyval_functions_t *fns = myKeyval_translation_get(keyval);
 
   A_MPI_Copy_function *ptr_copy_func =
-      (fns ? myKeyval_translation_get(keyval)->cp_function
-           : (A_MPI_Copy_function *)A_MPI_COMM_DUP_FN);
+      (fns ? fns->cp_function : (A_MPI_Copy_function *)A_MPI_COMM_DUP_FN);
   if (fns)
-    myKeyval_translation_get(keyval)->ref++;
+    fns->ref++;
   //    printf("duped %d %p %d %p\n",
   //    keyval,comm,myKeyval_translation_get(keyval)->ref,ptr_copy_func);
   if (ptr_copy_func == (A_MPI_Copy_function *)A_MPI_NULL_COPY_FN ||
@@ -460,6 +459,9 @@ int wrapper_copy_function(R_MPI_Comm comm, int keyval, void *extra_state,
   }
   int res = (ptr_copy_func)(comm_tmp, keyval, extra_state, attribute_val_in,
                             attribute_val_out, flag);
+  // if copy is unsuccessful, should not have incremented ref counter
+  if (res != R_MPI_SUCCESS && fns)
+    fns->ref--;
   errhandler_locks_re();
   //    ptr_copy_func = NULL;
   return error_code_conv_r2a(res);
@@ -478,11 +480,12 @@ int wrapper_delete_function(R_MPI_Comm comm, int keyval, void *attribute_val,
     res = (ptr_delete_func)(comm_tmp, keyval, attribute_val, extra_state);
   else
     res = R_MPI_SUCCESS;
-  if (fns) {
-    myKeyval_translation_get(keyval)->ref--;
+  // Only decrement on success
+  if (fns && res == R_MPI_SUCCESS) {
+    fns->ref--;
     //    printf("deleted %d %p %d\n",
     //    keyval,comm,myKeyval_translation_get(keyval)->ref);
-    if (myKeyval_translation_get(keyval)->ref == 0)
+    if (fns->ref == 0)
       myKeyval_translation_del(keyval);
   } // ptr_delete_func = NULL;
   errhandler_locks_re();
@@ -9178,6 +9181,8 @@ int A_MPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val) {
   if (tt = myKeyval_translation_get(keyval))
     tt->ref++;
   int ret_tmp = LOCAL_MPI_Attr_put(comm_tmp, keyval_tmp, attribute_val);
+  if (tt && ret_tmp != R_MPI_SUCCESS)
+    tt->ref--;
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
