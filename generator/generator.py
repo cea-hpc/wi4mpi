@@ -328,7 +328,17 @@ class generator:
               str=''
         else:
               if self.mappers[arg['name']]['local_alloc'] == 1 :
-                    str=self.add_prefix(self.mappers[arg['name']]['type'][:-1],prefix)+' '+arg['var']+'_ltmp;\n'+self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp=&'+arg['var']+'_ltmp;'
+                    str=self.add_prefix(self.mappers[arg['name']]['type'][:-1],prefix)+' '+arg['var']+'_ltmp'
+                    if 'MPI' in self.mappers[arg['name']]['type']:
+                        if 'Aint' in self.mappers[arg['name']]['type']:
+                            pass
+                        elif 'Status' in self.mappers[arg['name']]['type']:
+                            pass
+                        elif 'Offset' in self.mappers[arg['name']]['type']:
+                            pass
+                        else:
+                            str+=' = ' + self.add_prefix(self.mappers[arg['name']]['type'][:-2],prefix).upper()+'_NULL'
+                    str+=';\n'+self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp=&'+arg['var']+'_ltmp;'
               elif 'init_alloc' in self.mappers[arg['name']]:
                     str=self.mappers[arg['name']]['type']+' '+arg['var']+'_tmp ='+self.mappers[arg['name']]['init_alloc']+';'
               elif arg['arg_dep'] != '':

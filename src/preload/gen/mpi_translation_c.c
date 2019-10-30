@@ -1758,7 +1758,7 @@ int A_MPI_Isend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Isend(buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp,
                                 comm_tmp, request_tmp);
@@ -1870,7 +1870,7 @@ int A_MPI_Ibsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ibsend(buf_tmp, count, datatype_tmp, dest_tmp,
                                  tag_tmp, comm_tmp, request_tmp);
@@ -1983,7 +1983,7 @@ int A_MPI_Issend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Issend(buf_tmp, count, datatype_tmp, dest_tmp,
                                  tag_tmp, comm_tmp, request_tmp);
@@ -2096,7 +2096,7 @@ int A_MPI_Irsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Irsend(buf_tmp, count, datatype_tmp, dest_tmp,
                                  tag_tmp, comm_tmp, request_tmp);
@@ -2209,7 +2209,7 @@ int A_MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Irecv(buf_tmp, count, datatype_tmp, source_tmp,
                                 tag_tmp, comm_tmp, request_tmp);
@@ -2301,7 +2301,7 @@ int A_MPI_Wait(A_MPI_Request *request, A_MPI_Status *status) {
 #endif
   in_w = 1;
 
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   request_ptr_conv_a2r(&request, &request_tmp);
   R_MPI_Status status_ltmp;
@@ -2396,7 +2396,7 @@ int A_MPI_Test(A_MPI_Request *request, int *flag, A_MPI_Status *status) {
 #endif
   in_w = 1;
 
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   request_ptr_conv_a2r(&request, &request_tmp);
 
@@ -2490,7 +2490,7 @@ int A_MPI_Request_free(A_MPI_Request *request) {
 #endif
   in_w = 1;
 
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   request_ptr_conv_a2r(&request, &request_tmp);
   int ret_tmp = LOCAL_MPI_Request_free(request_tmp);
@@ -2774,7 +2774,7 @@ int A_MPI_Cancel(A_MPI_Request *request) {
 #endif
   in_w = 1;
 
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   request_ptr_conv_a2r(&request, &request_tmp);
   int ret_tmp = LOCAL_MPI_Cancel(request_tmp);
@@ -2970,7 +2970,7 @@ int A_MPI_Send_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Send_init(buf_tmp, count, datatype_tmp, dest_tmp,
                                     tag_tmp, comm_tmp, request_tmp);
@@ -3083,7 +3083,7 @@ int A_MPI_Bsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Bsend_init(buf_tmp, count, datatype_tmp, dest_tmp,
                                      tag_tmp, comm_tmp, request_tmp);
@@ -3196,7 +3196,7 @@ int A_MPI_Ssend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ssend_init(buf_tmp, count, datatype_tmp, dest_tmp,
                                      tag_tmp, comm_tmp, request_tmp);
@@ -3309,7 +3309,7 @@ int A_MPI_Rsend_init(void *buf, int count, A_MPI_Datatype datatype, int dest,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Rsend_init(buf_tmp, count, datatype_tmp, dest_tmp,
                                      tag_tmp, comm_tmp, request_tmp);
@@ -3422,7 +3422,7 @@ int A_MPI_Recv_init(void *buf, int count, A_MPI_Datatype datatype, int source,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Recv_init(buf_tmp, count, datatype_tmp, source_tmp,
                                     tag_tmp, comm_tmp, request_tmp);
@@ -3512,7 +3512,7 @@ int A_MPI_Start(A_MPI_Request *request) {
 #endif
   in_w = 1;
 
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   request_pers_ptr_conv_a2r(&request, &request_tmp);
   int ret_tmp = LOCAL_MPI_Start(request_tmp);
@@ -3856,7 +3856,7 @@ int A_MPI_Type_contiguous(int count, A_MPI_Datatype oldtype,
 
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_contiguous(count, oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
@@ -3952,7 +3952,7 @@ int A_MPI_Type_vector(int count, int blocklength, int stride,
 
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_vector(count, blocklength, stride, oldtype_tmp,
                                       newtype_tmp);
@@ -4054,7 +4054,7 @@ int A_MPI_Type_hvector(int count, int blocklength, A_MPI_Aint stride,
   stride_tmp = (R_MPI_Aint)stride;
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_hvector(count, blocklength, stride_tmp,
                                        oldtype_tmp, newtype_tmp);
@@ -4156,7 +4156,7 @@ int A_MPI_Type_indexed(int count, int *array_of_blocklengths,
 
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp =
       LOCAL_MPI_Type_indexed(count, array_of_blocklengths,
@@ -4267,7 +4267,7 @@ int A_MPI_Type_hindexed(int count, int *array_of_blocklengths,
   }
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_hindexed(count, array_of_blocklengths,
                                         array_of_displacements_tmp, oldtype_tmp,
@@ -4384,7 +4384,7 @@ int A_MPI_Type_struct(int count, int *array_of_blocklengths,
   for (i2 = 0; i2 < count; i2++) {
     datatype_conv_a2r(&array_of_types[i2], &array_of_types_tmp[i2]);
   }
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_struct(count, array_of_blocklengths,
                                       array_of_displacements_tmp,
@@ -4912,7 +4912,7 @@ int A_MPI_Type_commit(A_MPI_Datatype *datatype) {
 #endif
   in_w = 1;
 
-  R_MPI_Datatype datatype_ltmp;
+  R_MPI_Datatype datatype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *datatype_tmp = &datatype_ltmp;
   datatype_conv_a2r(datatype, datatype_tmp);
   int ret_tmp = LOCAL_MPI_Type_commit(datatype_tmp);
@@ -4996,7 +4996,7 @@ int A_MPI_Type_free(A_MPI_Datatype *datatype) {
 #endif
   in_w = 1;
 
-  R_MPI_Datatype datatype_ltmp;
+  R_MPI_Datatype datatype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *datatype_tmp = &datatype_ltmp;
   datatype_conv_a2r(datatype, datatype_tmp);
   int ret_tmp = LOCAL_MPI_Type_free(datatype_tmp);
@@ -6826,7 +6826,7 @@ int A_MPI_Op_create(A_MPI_User_function *user_fn, int commute, A_MPI_Op *op) {
   R_MPI_User_function *user_fn_tmp;
   reduce_user_fn_a2r(&user_fn, &user_fn_tmp);
 
-  R_MPI_Op op_ltmp;
+  R_MPI_Op op_ltmp = R_MPI_OP_NULL;
   R_MPI_Op *op_tmp = &op_ltmp;
   int ret_tmp = LOCAL_MPI_Op_create(user_fn_tmp, commute, op_tmp);
   op_conv_r2a(op, op_tmp);
@@ -6909,7 +6909,7 @@ int A_MPI_Op_free(A_MPI_Op *op) {
 #endif
   in_w = 1;
 
-  R_MPI_Op op_ltmp;
+  R_MPI_Op op_ltmp = R_MPI_OP_NULL;
   R_MPI_Op *op_tmp = &op_ltmp;
   op_conv_a2r(op, op_tmp);
   int ret_tmp = LOCAL_MPI_Op_free(op_tmp);
@@ -7475,7 +7475,7 @@ int A_MPI_Comm_group(A_MPI_Comm comm, A_MPI_Group *group) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Group group_ltmp;
+  R_MPI_Group group_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_group(comm_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
@@ -7568,7 +7568,7 @@ int A_MPI_Group_union(A_MPI_Group group1, A_MPI_Group group2,
   group_conv_a2r(&group1, &group1_tmp);
   R_MPI_Group group2_tmp;
   group_conv_a2r(&group2, &group2_tmp);
-  R_MPI_Group newgroup_ltmp;
+  R_MPI_Group newgroup_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_union(group1_tmp, group2_tmp, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
@@ -7662,7 +7662,7 @@ int A_MPI_Group_intersection(A_MPI_Group group1, A_MPI_Group group2,
   group_conv_a2r(&group1, &group1_tmp);
   R_MPI_Group group2_tmp;
   group_conv_a2r(&group2, &group2_tmp);
-  R_MPI_Group newgroup_ltmp;
+  R_MPI_Group newgroup_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp =
       LOCAL_MPI_Group_intersection(group1_tmp, group2_tmp, newgroup_tmp);
@@ -7757,7 +7757,7 @@ int A_MPI_Group_difference(A_MPI_Group group1, A_MPI_Group group2,
   group_conv_a2r(&group1, &group1_tmp);
   R_MPI_Group group2_tmp;
   group_conv_a2r(&group2, &group2_tmp);
-  R_MPI_Group newgroup_ltmp;
+  R_MPI_Group newgroup_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp =
       LOCAL_MPI_Group_difference(group1_tmp, group2_tmp, newgroup_tmp);
@@ -7842,7 +7842,7 @@ int A_MPI_Group_free(A_MPI_Group *group) {
 #endif
   in_w = 1;
 
-  R_MPI_Group group_ltmp;
+  R_MPI_Group group_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *group_tmp = &group_ltmp;
   group_conv_a2r(group, group_tmp);
   int ret_tmp = LOCAL_MPI_Group_free(group_tmp);
@@ -8191,7 +8191,7 @@ int A_MPI_Comm_dup(A_MPI_Comm comm, A_MPI_Comm *newcomm) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_dup(comm_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
@@ -8284,7 +8284,7 @@ int A_MPI_Comm_dup_with_info(A_MPI_Comm comm, A_MPI_Info info,
   comm_conv_a2r(&comm, &comm_tmp);
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_dup_with_info(comm_tmp, info_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
@@ -8376,7 +8376,7 @@ int A_MPI_Comm_create(A_MPI_Comm comm, A_MPI_Group group, A_MPI_Comm *newcomm) {
   comm_conv_a2r(&comm, &comm_tmp);
   R_MPI_Group group_tmp;
   group_conv_a2r(&group, &group_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_create(comm_tmp, group_tmp, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
@@ -8468,7 +8468,7 @@ int A_MPI_Comm_split(A_MPI_Comm comm, int color, int key, A_MPI_Comm *newcomm) {
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
 
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_split(comm_tmp, color, key, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
@@ -8551,7 +8551,7 @@ int A_MPI_Comm_free(A_MPI_Comm *comm) {
 #endif
   in_w = 1;
 
-  R_MPI_Comm comm_ltmp;
+  R_MPI_Comm comm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *comm_tmp = &comm_ltmp;
   comm_conv_a2r(comm, comm_tmp);
   int ret_tmp = LOCAL_MPI_Comm_free(comm_tmp);
@@ -8813,7 +8813,7 @@ int A_MPI_Comm_remote_group(A_MPI_Comm comm, A_MPI_Group *group) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Group group_ltmp;
+  R_MPI_Group group_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_remote_group(comm_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
@@ -8919,7 +8919,7 @@ int A_MPI_Intercomm_create(A_MPI_Comm local_comm, int local_leader,
 
   int tag_tmp;
   tag_conv_a2r(&tag, &tag_tmp);
-  R_MPI_Comm newintercomm_ltmp;
+  R_MPI_Comm newintercomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newintercomm_tmp = &newintercomm_ltmp;
   int ret_tmp =
       LOCAL_MPI_Intercomm_create(local_comm_tmp, local_leader, peer_comm_tmp,
@@ -9018,7 +9018,7 @@ int A_MPI_Intercomm_merge(A_MPI_Comm intercomm, int high,
   R_MPI_Comm intercomm_tmp;
   comm_conv_a2r(&intercomm, &intercomm_tmp);
 
-  R_MPI_Comm newintracomm_ltmp;
+  R_MPI_Comm newintracomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newintracomm_tmp = &newintracomm_ltmp;
   int ret_tmp =
       LOCAL_MPI_Intercomm_merge(intercomm_tmp, high, newintracomm_tmp);
@@ -10078,7 +10078,7 @@ int A_MPI_Errhandler_create(A_MPI_Handler_function *function,
   in_w = 1;
 
   ptr_handler_fn = (A_MPI_Handler_function *)function;
-  R_MPI_Errhandler errhandler_ltmp;
+  R_MPI_Errhandler errhandler_ltmp = R_MPI_ERRHANDLER_NULL;
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   int ret_tmp = LOCAL_MPI_Errhandler_create(
       (R_MPI_Handler_function *)wrapper_handler_function, errhandler_tmp);
@@ -10258,7 +10258,7 @@ int A_MPI_Errhandler_get(A_MPI_Comm comm, A_MPI_Errhandler *errhandler) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Errhandler errhandler_ltmp;
+  R_MPI_Errhandler errhandler_ltmp = R_MPI_ERRHANDLER_NULL;
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   int ret_tmp = LOCAL_MPI_Errhandler_get(comm_tmp, errhandler_tmp);
   if (ret_tmp == R_MPI_SUCCESS) {
@@ -10343,7 +10343,7 @@ int A_MPI_Errhandler_free(A_MPI_Errhandler *errhandler) {
 #endif
   in_w = 1;
 
-  R_MPI_Errhandler errhandler_ltmp;
+  R_MPI_Errhandler errhandler_ltmp = R_MPI_ERRHANDLER_NULL;
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   errhandler_conv_a2r(errhandler, errhandler_tmp);
   int ret_tmp = LOCAL_MPI_Errhandler_free(errhandler_tmp);
@@ -10945,7 +10945,7 @@ int A_MPI_Comm_accept(char *port_name, A_MPI_Info info, int root,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp =
       LOCAL_MPI_Comm_accept(port_name, info_tmp, root, comm_tmp, newcomm_tmp);
@@ -11046,7 +11046,7 @@ int A_MPI_Comm_connect(char *port_name, A_MPI_Info info, int root,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp =
       LOCAL_MPI_Comm_connect(port_name, info_tmp, root, comm_tmp, newcomm_tmp);
@@ -11131,7 +11131,7 @@ int A_MPI_Comm_disconnect(A_MPI_Comm *comm) {
 #endif
   in_w = 1;
 
-  R_MPI_Comm comm_ltmp;
+  R_MPI_Comm comm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *comm_tmp = &comm_ltmp;
   comm_conv_a2r(comm, comm_tmp);
   int ret_tmp = LOCAL_MPI_Comm_disconnect(comm_tmp);
@@ -11215,7 +11215,7 @@ int A_MPI_Comm_get_parent(A_MPI_Comm *parent) {
 #endif
   in_w = 1;
 
-  R_MPI_Comm parent_ltmp;
+  R_MPI_Comm parent_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *parent_tmp = &parent_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_get_parent(parent_tmp);
   comm_conv_r2a(parent, parent_tmp);
@@ -11300,7 +11300,7 @@ int A_MPI_Comm_join(int fd, A_MPI_Comm *intercomm) {
 #endif
   in_w = 1;
 
-  R_MPI_Comm intercomm_ltmp;
+  R_MPI_Comm intercomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *intercomm_tmp = &intercomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_join(fd, intercomm_tmp);
   comm_conv_r2a(intercomm, intercomm_tmp);
@@ -11822,7 +11822,7 @@ int A_MPI_Comm_get_info(A_MPI_Comm comm, A_MPI_Info *info) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Info info_ltmp;
+  R_MPI_Info info_ltmp = R_MPI_INFO_NULL;
   R_MPI_Info *info_tmp = &info_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_get_info(comm_tmp, info_tmp);
   info_conv_r2a(info, info_tmp);
@@ -12374,7 +12374,7 @@ int A_MPI_Win_create(void *base, A_MPI_Aint size, int disp_unit,
   info_conv_a2r(&info, &info_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Win win_ltmp;
+  R_MPI_Win win_ltmp = R_MPI_WIN_NULL;
   R_MPI_Win *win_tmp = &win_ltmp;
   int ret_tmp = LOCAL_MPI_Win_create(base_tmp, size_tmp, disp_unit, info_tmp,
                                      comm_tmp, win_tmp);
@@ -12546,7 +12546,7 @@ int A_MPI_Win_free(A_MPI_Win *win) {
 #endif
   in_w = 1;
 
-  R_MPI_Win win_ltmp;
+  R_MPI_Win win_ltmp = R_MPI_WIN_NULL;
   R_MPI_Win *win_tmp = &win_ltmp;
   win_conv_a2r(win, win_tmp);
   int ret_tmp = LOCAL_MPI_Win_free(win_tmp);
@@ -12633,7 +12633,7 @@ int A_MPI_Win_get_group(A_MPI_Win win, A_MPI_Group *group) {
 
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-  R_MPI_Group group_ltmp;
+  R_MPI_Group group_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_Win_get_group(win_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
@@ -13266,7 +13266,7 @@ int A_MPI_Win_allocate(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
   comm_conv_a2r(&comm, &comm_tmp);
   void *baseptr_tmp;
   buffer_conv_a2r(&baseptr, &baseptr_tmp);
-  R_MPI_Win win_ltmp;
+  R_MPI_Win win_ltmp = R_MPI_WIN_NULL;
   R_MPI_Win *win_tmp = &win_ltmp;
   int ret_tmp = LOCAL_MPI_Win_allocate(size_tmp, disp_unit, info_tmp, comm_tmp,
                                        baseptr_tmp, win_tmp);
@@ -13376,7 +13376,7 @@ int A_MPI_Win_allocate_shared(A_MPI_Aint size, int disp_unit, A_MPI_Info info,
   comm_conv_a2r(&comm, &comm_tmp);
   void *baseptr_tmp;
   buffer_conv_a2r(&baseptr, &baseptr_tmp);
-  R_MPI_Win win_ltmp;
+  R_MPI_Win win_ltmp = R_MPI_WIN_NULL;
   R_MPI_Win *win_tmp = &win_ltmp;
   int ret_tmp = LOCAL_MPI_Win_allocate_shared(size_tmp, disp_unit, info_tmp,
                                               comm_tmp, baseptr_tmp, win_tmp);
@@ -13576,7 +13576,7 @@ int A_MPI_Win_create_dynamic(A_MPI_Info info, A_MPI_Comm comm, A_MPI_Win *win) {
   info_conv_a2r(&info, &info_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Win win_ltmp;
+  R_MPI_Win win_ltmp = R_MPI_WIN_NULL;
   R_MPI_Win *win_tmp = &win_ltmp;
   int ret_tmp = LOCAL_MPI_Win_create_dynamic(info_tmp, comm_tmp, win_tmp);
   win_conv_r2a(win, win_tmp);
@@ -13839,7 +13839,7 @@ int A_MPI_Win_get_info(A_MPI_Win win, A_MPI_Info *info_used) {
 
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-  R_MPI_Info info_used_ltmp;
+  R_MPI_Info info_used_ltmp = R_MPI_INFO_NULL;
   R_MPI_Info *info_used_tmp = &info_used_ltmp;
   int ret_tmp = LOCAL_MPI_Win_get_info(win_tmp, info_used_tmp);
   info_conv_r2a(info_used, info_used_tmp);
@@ -14420,7 +14420,7 @@ int A_MPI_Rput(void *origin_addr, int origin_count,
   datatype_conv_a2r(&target_datatype, &target_datatype_tmp);
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Rput(
       origin_addr_tmp, origin_count, origin_datatype_tmp, target_rank_tmp,
@@ -14550,7 +14550,7 @@ int A_MPI_Rget(void *origin_addr, int origin_count,
   datatype_conv_a2r(&target_datatype, &target_datatype_tmp);
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Rget(
       origin_addr_tmp, origin_count, origin_datatype_tmp, target_rank_tmp,
@@ -14684,7 +14684,7 @@ int A_MPI_Raccumulate(void *origin_addr, int origin_count,
   op_conv_a2r(&op, &op_tmp);
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Raccumulate(origin_addr_tmp, origin_count, origin_datatype_tmp,
@@ -14826,7 +14826,7 @@ int A_MPI_Rget_accumulate(void *origin_addr, int origin_count,
   op_conv_a2r(&op, &op_tmp);
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Rget_accumulate(
       origin_addr_tmp, origin_count, origin_datatype_tmp, result_addr_tmp,
@@ -16392,7 +16392,7 @@ int A_MPI_Grequest_start(A_MPI_Grequest_query_function *query_fn,
 
   void *extra_state_tmp;
   buffer_conv_a2r(&extra_state, &extra_state_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Grequest_start(query_fn_tmp, free_fn, cancel_fn,
                                          extra_state_tmp, request_tmp);
@@ -17113,7 +17113,7 @@ int A_MPI_Type_dup(A_MPI_Datatype oldtype, A_MPI_Datatype *newtype) {
 
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_dup(oldtype_tmp, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
@@ -17760,7 +17760,7 @@ int A_MPI_Type_match_size(int typeclass, int size, A_MPI_Datatype *datatype) {
   int typeclass_tmp;
   typeclass_conv_a2r(&typeclass, &typeclass_tmp);
 
-  R_MPI_Datatype datatype_ltmp;
+  R_MPI_Datatype datatype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *datatype_tmp = &datatype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_match_size(typeclass_tmp, size, datatype_tmp);
   datatype_conv_r2a(datatype, datatype_tmp);
@@ -18393,7 +18393,7 @@ int A_MPI_Comm_create_errhandler(
   in_w = 1;
 
   ptr_comm_fn_handler = (A_MPI_Comm_errhandler_function *)comm_errhandler_fn;
-  R_MPI_Errhandler errhandler_ltmp;
+  R_MPI_Errhandler errhandler_ltmp = R_MPI_ERRHANDLER_NULL;
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_create_errhandler(
       (R_MPI_Comm_errhandler_function *)wrapper_comm_handler_function,
@@ -18485,7 +18485,7 @@ int A_MPI_Comm_get_errhandler(A_MPI_Comm comm, A_MPI_Errhandler *errhandler) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Errhandler errhandler_ltmp;
+  R_MPI_Errhandler errhandler_ltmp = R_MPI_ERRHANDLER_NULL;
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_get_errhandler(comm_tmp, errhandler_tmp);
   if (ret_tmp == R_MPI_SUCCESS) {
@@ -18667,7 +18667,7 @@ int A_MPI_File_get_errhandler(A_MPI_File file, A_MPI_Errhandler *errhandler) {
 
   R_MPI_File file_tmp;
   file_conv_a2r(&file, &file_tmp);
-  R_MPI_Errhandler errhandler_ltmp;
+  R_MPI_Errhandler errhandler_ltmp = R_MPI_ERRHANDLER_NULL;
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_errhandler(file_tmp, errhandler_tmp);
   if (ret_tmp == R_MPI_SUCCESS) {
@@ -19087,7 +19087,7 @@ int A_MPI_Info_create(A_MPI_Info *info) {
 #endif
   in_w = 1;
 
-  R_MPI_Info info_ltmp;
+  R_MPI_Info info_ltmp = R_MPI_INFO_NULL;
   R_MPI_Info *info_tmp = &info_ltmp;
   int ret_tmp = LOCAL_MPI_Info_create(info_tmp);
   info_conv_r2a(info, info_tmp);
@@ -19259,7 +19259,7 @@ int A_MPI_Info_dup(A_MPI_Info info, A_MPI_Info *newinfo) {
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-  R_MPI_Info newinfo_ltmp;
+  R_MPI_Info newinfo_ltmp = R_MPI_INFO_NULL;
   R_MPI_Info *newinfo_tmp = &newinfo_ltmp;
   int ret_tmp = LOCAL_MPI_Info_dup(info_tmp, newinfo_tmp);
   info_conv_r2a(newinfo, newinfo_tmp);
@@ -19342,7 +19342,7 @@ int A_MPI_Info_free(A_MPI_Info *info) {
 #endif
   in_w = 1;
 
-  R_MPI_Info info_ltmp;
+  R_MPI_Info info_ltmp = R_MPI_INFO_NULL;
   R_MPI_Info *info_tmp = &info_ltmp;
   info_conv_a2r(info, info_tmp);
   int ret_tmp = LOCAL_MPI_Info_free(info_tmp);
@@ -19982,7 +19982,7 @@ int A_MPI_Type_create_hvector(int count, int blocklength, A_MPI_Aint stride,
   stride_tmp = (R_MPI_Aint)stride;
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_hvector(count, blocklength, stride_tmp,
                                               oldtype_tmp, newtype_tmp);
@@ -20084,7 +20084,7 @@ int A_MPI_Type_create_resized(A_MPI_Datatype oldtype, A_MPI_Aint lb,
   lb_tmp = (R_MPI_Aint)lb;
   R_MPI_Aint extent_tmp;
   extent_tmp = (R_MPI_Aint)extent;
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_resized(oldtype_tmp, lb_tmp, extent_tmp,
                                               newtype_tmp);
@@ -20365,7 +20365,7 @@ int A_MPI_Win_get_errhandler(A_MPI_Win win, A_MPI_Errhandler *errhandler) {
 
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-  R_MPI_Errhandler errhandler_ltmp;
+  R_MPI_Errhandler errhandler_ltmp = R_MPI_ERRHANDLER_NULL;
   R_MPI_Errhandler *errhandler_tmp = &errhandler_ltmp;
   int ret_tmp = LOCAL_MPI_Win_get_errhandler(win_tmp, errhandler_tmp);
   errhandler_ptr_conv_r2a(&errhandler, &errhandler_tmp);
@@ -20450,7 +20450,7 @@ int A_MPI_Type_create_f90_integer(int range, A_MPI_Datatype *newtype) {
 #endif
   in_w = 1;
 
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_f90_integer(range, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
@@ -20538,7 +20538,7 @@ int A_MPI_Type_create_f90_real(int precision, int range,
 #endif
   in_w = 1;
 
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_f90_real(precision, range, newtype_tmp);
   datatype_conv_r2a(newtype, newtype_tmp);
@@ -20628,7 +20628,7 @@ int A_MPI_Type_create_f90_complex(int precision, int range,
 #endif
   in_w = 1;
 
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp =
       LOCAL_MPI_Type_create_f90_complex(precision, range, newtype_tmp);
@@ -21129,7 +21129,7 @@ int A_MPI_Improbe(int source, int tag, A_MPI_Comm comm, int *flag,
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
 
-  R_MPI_Message message_ltmp;
+  R_MPI_Message message_ltmp = R_MPI_MESSAGE_NULL;
   R_MPI_Message *message_tmp = &message_ltmp;
   R_MPI_Status status_ltmp;
   R_MPI_Status *status_tmp = &status_ltmp;
@@ -21234,10 +21234,10 @@ int A_MPI_Imrecv(void *buf, int count, A_MPI_Datatype datatype,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Message message_ltmp;
+  R_MPI_Message message_ltmp = R_MPI_MESSAGE_NULL;
   R_MPI_Message *message_tmp = &message_ltmp;
   message_conv_a2r(message, message_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Imrecv(buf_tmp, count, datatype_tmp, message_tmp, request_tmp);
@@ -21342,7 +21342,7 @@ int A_MPI_Mprobe(int source, int tag, A_MPI_Comm comm, A_MPI_Message *message,
   tag_conv_a2r(&tag, &tag_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Message message_ltmp;
+  R_MPI_Message message_ltmp = R_MPI_MESSAGE_NULL;
   R_MPI_Message *message_tmp = &message_ltmp;
   R_MPI_Status status_ltmp;
   R_MPI_Status *status_tmp = &status_ltmp;
@@ -21446,7 +21446,7 @@ int A_MPI_Mrecv(void *buf, int count, A_MPI_Datatype datatype,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Message message_ltmp;
+  R_MPI_Message message_ltmp = R_MPI_MESSAGE_NULL;
   R_MPI_Message *message_tmp = &message_ltmp;
   message_conv_a2r(message, message_tmp);
   R_MPI_Status status_ltmp;
@@ -21543,9 +21543,9 @@ int A_MPI_Comm_idup(A_MPI_Comm comm, A_MPI_Comm *newcomm,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_idup(comm_tmp, newcomm_tmp, request_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
@@ -21636,7 +21636,7 @@ int A_MPI_Ibarrier(A_MPI_Comm comm, A_MPI_Request *request) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ibarrier(comm_tmp, request_tmp);
   if (ret_tmp == R_MPI_SUCCESS) {
@@ -21742,7 +21742,7 @@ int A_MPI_Ibcast(void *buffer, int count, A_MPI_Datatype datatype, int root,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ibcast(buffer_tmp, count, datatype_tmp, root,
                                  comm_tmp, request_tmp);
@@ -21859,7 +21859,7 @@ int A_MPI_Igather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Igather(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
@@ -21980,7 +21980,7 @@ int A_MPI_Iscatter(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Iscatter(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
@@ -22101,7 +22101,7 @@ int A_MPI_Iallgather(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Iallgather(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
@@ -22222,7 +22222,7 @@ int A_MPI_Ialltoall(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Ialltoall(sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp,
@@ -22343,7 +22343,7 @@ int A_MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ireduce(sendbuf_tmp, recvbuf_tmp, count, datatype_tmp,
                                   op_tmp, root, comm_tmp, request_tmp);
@@ -22461,7 +22461,7 @@ int A_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
   op_conv_a2r(&op, &op_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Iallreduce(sendbuf_tmp, recvbuf_tmp, count, datatype_tmp,
@@ -22579,7 +22579,7 @@ int A_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
   op_conv_a2r(&op, &op_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ireduce_scatter_block(sendbuf_tmp, recvbuf_tmp,
                                                 recvcount, datatype_tmp, op_tmp,
@@ -22697,7 +22697,7 @@ int A_MPI_Iscan(void *sendbuf, void *recvbuf, int count,
   op_conv_a2r(&op, &op_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Iscan(sendbuf_tmp, recvbuf_tmp, count, datatype_tmp,
                                 op_tmp, comm_tmp, request_tmp);
@@ -22814,7 +22814,7 @@ int A_MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
   op_conv_a2r(&op, &op_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Iexscan(sendbuf_tmp, recvbuf_tmp, count, datatype_tmp,
                                   op_tmp, comm_tmp, request_tmp);
@@ -22934,7 +22934,7 @@ int A_MPI_Ineighbor_allgather(void *sendbuf, int sendcount,
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ineighbor_allgather(
       sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp, recvcount,
@@ -23060,7 +23060,7 @@ int A_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount,
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ineighbor_alltoall(
       sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp, recvcount,
@@ -23409,7 +23409,7 @@ int A_MPI_Comm_split_type(A_MPI_Comm comm, int split_type, int key,
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Comm_split_type(comm_tmp, split_type_tmp, key,
                                           info_tmp, newcomm_tmp);
@@ -23969,7 +23969,7 @@ int A_MPI_Comm_create_group(A_MPI_Comm comm, A_MPI_Group group, int tag,
   group_conv_a2r(&group, &group_tmp);
   int tag_tmp;
   tag_conv_a2r(&tag, &tag_tmp);
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp =
       LOCAL_MPI_Comm_create_group(comm_tmp, group_tmp, tag_tmp, newcomm_tmp);
@@ -24426,9 +24426,9 @@ int A_MPI_T_cvar_get_info(int cvar_index, char *name, int *name_len,
 #endif
   in_w = 1;
 
-  R_MPI_Datatype datatype_ltmp;
+  R_MPI_Datatype datatype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *datatype_tmp = &datatype_ltmp;
-  R_MPI_T_enum enumtype_ltmp;
+  R_MPI_T_enum enumtype_ltmp = R_MPI_T_ENUM_NULL;
   R_MPI_T_enum *enumtype_tmp = &enumtype_ltmp;
 
   int ret_tmp = LOCAL_MPI_T_cvar_get_info(cvar_index, name, name_len, verbosity,
@@ -24535,7 +24535,7 @@ int A_MPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle,
 
   void *obj_handle_tmp;
   buffer_conv_a2r(&obj_handle, &obj_handle_tmp);
-  R_MPI_T_cvar_handle handle_ltmp;
+  R_MPI_T_cvar_handle handle_ltmp = R_MPI_T_CVAR_HANDLE_NULL;
   R_MPI_T_cvar_handle *handle_tmp = &handle_ltmp;
 
   int ret_tmp = LOCAL_MPI_T_cvar_handle_alloc(cvar_index, obj_handle_tmp,
@@ -24623,7 +24623,7 @@ int A_MPI_T_cvar_handle_free(A_MPI_T_cvar_handle *handle) {
 #endif
   in_w = 1;
 
-  R_MPI_T_cvar_handle handle_ltmp;
+  R_MPI_T_cvar_handle handle_ltmp = R_MPI_T_CVAR_HANDLE_NULL;
   R_MPI_T_cvar_handle *handle_tmp = &handle_ltmp;
   cvar_handle_conv_a2r(handle, handle_tmp);
   int ret_tmp = LOCAL_MPI_T_cvar_handle_free(handle_tmp);
@@ -24978,9 +24978,9 @@ int A_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
 #endif
   in_w = 1;
 
-  R_MPI_Datatype datatype_ltmp;
+  R_MPI_Datatype datatype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *datatype_tmp = &datatype_ltmp;
-  R_MPI_T_enum enumtype_ltmp;
+  R_MPI_T_enum enumtype_ltmp = R_MPI_T_ENUM_NULL;
   R_MPI_T_enum *enumtype_tmp = &enumtype_ltmp;
 
   int ret_tmp = LOCAL_MPI_T_pvar_get_info(
@@ -25282,7 +25282,7 @@ int A_MPI_File_open(A_MPI_Comm comm, char *filename, int amode, A_MPI_Info info,
   amode_conv_a2r(&amode, &amode_tmp);
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-  R_MPI_File fh_ltmp;
+  R_MPI_File fh_ltmp = R_MPI_FILE_NULL;
   R_MPI_File *fh_tmp = &fh_ltmp;
   int ret_tmp =
       LOCAL_MPI_File_open(comm_tmp, filename, amode_tmp, info_tmp, fh_tmp);
@@ -25367,7 +25367,7 @@ int A_MPI_File_close(A_MPI_File *fh) {
 #endif
   in_w = 1;
 
-  R_MPI_File fh_ltmp;
+  R_MPI_File fh_ltmp = R_MPI_FILE_NULL;
   R_MPI_File *fh_tmp = &fh_ltmp;
   file_conv_a2r(fh, fh_tmp);
   int ret_tmp = LOCAL_MPI_File_close(fh_tmp);
@@ -25800,7 +25800,7 @@ int A_MPI_File_get_group(A_MPI_File fh, A_MPI_Group *group) {
 
   R_MPI_File fh_tmp;
   file_conv_a2r(&fh, &fh_tmp);
-  R_MPI_Group group_ltmp;
+  R_MPI_Group group_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *group_tmp = &group_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_group(fh_tmp, group_tmp);
   group_conv_r2a(group, group_tmp);
@@ -26061,7 +26061,7 @@ int A_MPI_File_get_info(A_MPI_File fh, A_MPI_Info *info_used) {
 
   R_MPI_File fh_tmp;
   file_conv_a2r(&fh, &fh_tmp);
-  R_MPI_Info info_used_ltmp;
+  R_MPI_Info info_used_ltmp = R_MPI_INFO_NULL;
   R_MPI_Info *info_used_tmp = &info_used_ltmp;
   int ret_tmp = LOCAL_MPI_File_get_info(fh_tmp, info_used_tmp);
   file_conv_r2a(&fh, &fh_tmp);
@@ -26272,9 +26272,9 @@ int A_MPI_File_get_view(A_MPI_File fh, A_MPI_Offset *disp,
   file_conv_a2r(&fh, &fh_tmp);
   R_MPI_Offset disp_ltmp;
   R_MPI_Offset *disp_tmp = &disp_ltmp;
-  R_MPI_Datatype etype_ltmp;
+  R_MPI_Datatype etype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *etype_tmp = &etype_ltmp;
-  R_MPI_Datatype filetype_ltmp;
+  R_MPI_Datatype filetype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *filetype_tmp = &filetype_ltmp;
 
   int ret_tmp = LOCAL_MPI_File_get_view(fh_tmp, disp_tmp, etype_tmp,
@@ -26836,7 +26836,7 @@ int A_MPI_File_iread_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iread_at(fh_tmp, offset_tmp, buf_tmp, count,
                                         datatype_tmp, request_tmp);
@@ -26950,7 +26950,7 @@ int A_MPI_File_iwrite_at(A_MPI_File fh, A_MPI_Offset offset, void *buf,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iwrite_at(fh_tmp, offset_tmp, buf_tmp, count,
                                          datatype_tmp, request_tmp);
@@ -27477,7 +27477,7 @@ int A_MPI_File_iread(A_MPI_File fh, void *buf, int count,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_File_iread(fh_tmp, buf_tmp, count, datatype_tmp, request_tmp);
@@ -27584,7 +27584,7 @@ int A_MPI_File_iwrite(A_MPI_File fh, void *buf, int count,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_File_iwrite(fh_tmp, buf_tmp, count, datatype_tmp, request_tmp);
@@ -28170,7 +28170,7 @@ int A_MPI_File_iread_shared(A_MPI_File fh, void *buf, int count,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iread_shared(fh_tmp, buf_tmp, count,
                                             datatype_tmp, request_tmp);
@@ -28277,7 +28277,7 @@ int A_MPI_File_iwrite_shared(A_MPI_File fh, void *buf, int count,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iwrite_shared(fh_tmp, buf_tmp, count,
                                              datatype_tmp, request_tmp);
@@ -31842,7 +31842,7 @@ int A_MPI_Group_incl(A_MPI_Group group, int n, int ranks[],
   R_MPI_Group group_tmp;
   group_conv_a2r(&group, &group_tmp);
 
-  R_MPI_Group newgroup_ltmp;
+  R_MPI_Group newgroup_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_incl(group_tmp, n, ranks, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
@@ -31937,7 +31937,7 @@ int A_MPI_Group_excl(A_MPI_Group group, int n, int ranks[],
   R_MPI_Group group_tmp;
   group_conv_a2r(&group, &group_tmp);
 
-  R_MPI_Group newgroup_ltmp;
+  R_MPI_Group newgroup_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_excl(group_tmp, n, ranks, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
@@ -32032,7 +32032,7 @@ int A_MPI_Group_range_incl(A_MPI_Group group, int n, int ranges[][3],
   R_MPI_Group group_tmp;
   group_conv_a2r(&group, &group_tmp);
 
-  R_MPI_Group newgroup_ltmp;
+  R_MPI_Group newgroup_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_range_incl(group_tmp, n, ranges, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
@@ -32127,7 +32127,7 @@ int A_MPI_Group_range_excl(A_MPI_Group group, int n, int ranges[][3],
   R_MPI_Group group_tmp;
   group_conv_a2r(&group, &group_tmp);
 
-  R_MPI_Group newgroup_ltmp;
+  R_MPI_Group newgroup_ltmp = R_MPI_GROUP_NULL;
   R_MPI_Group *newgroup_tmp = &newgroup_ltmp;
   int ret_tmp = LOCAL_MPI_Group_range_excl(group_tmp, n, ranges, newgroup_tmp);
   group_conv_r2a(newgroup, newgroup_tmp);
@@ -32226,7 +32226,7 @@ int A_MPI_Cart_create(A_MPI_Comm comm_old, int ndims, int dims[], int periods[],
   R_MPI_Comm comm_old_tmp;
   comm_conv_a2r(&comm_old, &comm_old_tmp);
 
-  R_MPI_Comm comm_cart_ltmp;
+  R_MPI_Comm comm_cart_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *comm_cart_tmp = &comm_cart_ltmp;
   int ret_tmp = LOCAL_MPI_Cart_create(comm_old_tmp, ndims, dims, periods,
                                       reorder, comm_cart_tmp);
@@ -32414,7 +32414,7 @@ int A_MPI_Graph_create(A_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
   R_MPI_Comm comm_old_tmp;
   comm_conv_a2r(&comm_old, &comm_old_tmp);
 
-  R_MPI_Comm comm_graph_ltmp;
+  R_MPI_Comm comm_graph_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *comm_graph_tmp = &comm_graph_ltmp;
   int ret_tmp = LOCAL_MPI_Graph_create(comm_old_tmp, nnodes, indx, edges,
                                        reorder, comm_graph_tmp);
@@ -32974,7 +32974,7 @@ int A_MPI_Cart_sub(A_MPI_Comm comm, int remain_dims[], A_MPI_Comm *newcomm) {
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
 
-  R_MPI_Comm newcomm_ltmp;
+  R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
   int ret_tmp = LOCAL_MPI_Cart_sub(comm_tmp, remain_dims, newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
@@ -33267,7 +33267,7 @@ int A_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, A_MPI_Info info,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Comm intercomm_ltmp;
+  R_MPI_Comm intercomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *intercomm_tmp = &intercomm_ltmp;
 
   int ret_tmp =
@@ -33387,7 +33387,7 @@ int A_MPI_Comm_spawn_multiple(int count, char *array_of_commands[],
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Comm intercomm_ltmp;
+  R_MPI_Comm intercomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *intercomm_tmp = &intercomm_ltmp;
 
   int ret_tmp = LOCAL_MPI_Comm_spawn_multiple(
@@ -33845,7 +33845,7 @@ int A_MPI_Type_create_darray(int size, int rank, int ndims,
   order2_conv_a2r(&order, &order_tmp);
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_darray(
       size, rank, ndims, array_of_gsizes, array_of_distribs, array_of_dargs,
@@ -33962,7 +33962,7 @@ int A_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
   }
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_hindexed(count, array_of_blocklengths,
                                                array_of_displacements_tmp,
@@ -34072,7 +34072,7 @@ int A_MPI_Type_create_indexed_block(int count, int blocklength,
 
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_indexed_block(
       count, blocklength, array_of_displacements, oldtype_tmp, newtype_tmp);
@@ -34187,7 +34187,7 @@ int A_MPI_Type_create_hindexed_block(int count, int blocklength,
   }
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_hindexed_block(
       count, blocklength, array_of_displacements_tmp, oldtype_tmp, newtype_tmp);
@@ -34305,7 +34305,7 @@ int A_MPI_Type_create_struct(int count, int array_of_blocklengths[],
   for (i3 = 0; i3 < count; i3++) {
     datatype_conv_a2r(&array_of_types[i3], &array_of_types_tmp[i3]);
   }
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_struct(count, array_of_blocklengths,
                                              array_of_displacements_tmp,
@@ -34421,7 +34421,7 @@ int A_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
   order_conv_a2r(&order, &order_tmp);
   R_MPI_Datatype oldtype_tmp;
   datatype_conv_a2r(&oldtype, &oldtype_tmp);
-  R_MPI_Datatype newtype_ltmp;
+  R_MPI_Datatype newtype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *newtype_tmp = &newtype_ltmp;
   int ret_tmp = LOCAL_MPI_Type_create_subarray(
       ndims, array_of_sizes, array_of_subsizes, array_of_starts, order_tmp,
@@ -34661,7 +34661,7 @@ int A_MPI_Dist_graph_create_adjacent(A_MPI_Comm comm_old, int indegree,
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
 
-  R_MPI_Comm comm_dist_graph_ltmp;
+  R_MPI_Comm comm_dist_graph_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *comm_dist_graph_tmp = &comm_dist_graph_ltmp;
   int ret_tmp = LOCAL_MPI_Dist_graph_create_adjacent(
       comm_old_tmp, indegree, sources, sourceweights_tmp, outdegree,
@@ -34782,7 +34782,7 @@ int A_MPI_Dist_graph_create(A_MPI_Comm comm_old, int n, int sources[],
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
 
-  R_MPI_Comm comm_dist_graph_ltmp;
+  R_MPI_Comm comm_dist_graph_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *comm_dist_graph_tmp = &comm_dist_graph_ltmp;
   int ret_tmp = LOCAL_MPI_Dist_graph_create(comm_old_tmp, n, sources, degrees,
                                             destinations, weights_tmp, info_tmp,
@@ -35019,7 +35019,7 @@ int A_MPI_Igatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Igatherv(sendbuf_tmp, sendcount, sendtype_tmp,
                                    recvbuf_tmp, recvcounts, displs,
@@ -35145,7 +35145,7 @@ int A_MPI_Iscatterv(void *sendbuf, int sendcounts[], int *displs,
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Iscatterv(sendbuf_tmp, sendcounts, displs,
                                     sendtype_tmp, recvbuf_tmp, recvcount,
@@ -35270,7 +35270,7 @@ int A_MPI_Iallgatherv(void *sendbuf, int sendcount, A_MPI_Datatype sendtype,
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Iallgatherv(sendbuf_tmp, sendcount, sendtype_tmp,
                                       recvbuf_tmp, recvcounts, displs,
@@ -35395,7 +35395,7 @@ int A_MPI_Ialltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ialltoallv(
       sendbuf_tmp, sendcounts, sdispls, sendtype_tmp, recvbuf_tmp, recvcounts,
@@ -35534,7 +35534,7 @@ int A_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
   }
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ialltoallw(
       sendbuf_tmp, sendcounts, sdispls, sendtypes_tmp, recvbuf_tmp, recvcounts,
@@ -35660,7 +35660,7 @@ int A_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
   op_conv_a2r(&op, &op_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp =
       LOCAL_MPI_Ireduce_scatter(sendbuf_tmp, recvbuf_tmp, recvcounts,
@@ -35785,7 +35785,7 @@ int A_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount,
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ineighbor_allgatherv(
       sendbuf_tmp, sendcount, sendtype_tmp, recvbuf_tmp, recvcounts, displs,
@@ -35914,7 +35914,7 @@ int A_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
   datatype_conv_a2r(&recvtype, &recvtype_tmp);
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ineighbor_alltoallv(
       sendbuf_tmp, sendcounts, sdispls, sendtype_tmp, recvbuf_tmp, recvcounts,
@@ -36066,7 +36066,7 @@ int A_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
   }
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_Ineighbor_alltoallw(
       sendbuf_tmp, sendcounts, sdispls_tmp, sendtypes_tmp, recvbuf_tmp,
@@ -36834,7 +36834,7 @@ int A_MPI_File_iwrite_all(A_MPI_File fh, void *buf, int count,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iwrite_all(fh_tmp, buf_tmp, count, datatype_tmp,
                                           request_tmp);
@@ -36946,7 +36946,7 @@ int A_MPI_File_iwrite_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iwrite_at_all(fh_tmp, offset_tmp, buf_tmp, count,
                                              datatype_tmp, request_tmp);
@@ -37478,7 +37478,7 @@ int A_MPI_File_iread_all(A_MPI_File fh, void *buf, int count,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iread_all(fh_tmp, buf_tmp, count, datatype_tmp,
                                          request_tmp);
@@ -37591,7 +37591,7 @@ int A_MPI_File_iread_at_all(A_MPI_File fh, A_MPI_Offset offset, void *buf,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-  R_MPI_Request request_ltmp;
+  R_MPI_Request request_ltmp = R_MPI_REQUEST_NULL;
   R_MPI_Request *request_tmp = &request_ltmp;
   int ret_tmp = LOCAL_MPI_File_iread_at_all(fh_tmp, offset_tmp, buf_tmp, count,
                                             datatype_tmp, request_tmp);
