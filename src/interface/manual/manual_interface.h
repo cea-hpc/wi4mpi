@@ -151,9 +151,9 @@ void (*INTERFACE_F_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, int
 void (*INTERFACE_F_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, int filenamelen)
+void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, int filenamelen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, size_t filenamelen)
+void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, size_t filenamelen)
 #endif
 {
 #ifdef DEBUG
@@ -200,9 +200,9 @@ void (*INTERFACE_F_LOCAL_MPI_File_set_view)(int *,int*,int *,int *,char *,int *,
 void (*INTERFACE_F_LOCAL_MPI_File_set_view)(int *,int*,int *,int *,char *,int *,int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,int datareplen)
+void A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,int datareplen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,size_t datareplen)
+void A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,size_t datareplen)
 #endif
 {
 #ifdef DEBUG
@@ -250,9 +250,9 @@ void (*INTERFACE_F_LOCAL_MPI_File_get_view)(int *,int*,int *,int *,char *,int *,
 void (*INTERFACE_F_LOCAL_MPI_File_get_view)(int *,int*,int *,int *,char *,int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,int datareplen)
+void A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,int datareplen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,size_t datareplen)
+void A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,size_t datareplen)
 #endif
 {
 #ifdef DEBUG
@@ -300,9 +300,9 @@ void (*INTERFACE_F_LOCAL_MPI_File_delete)(char *,int *,int *,int);
 void (*INTERFACE_F_LOCAL_MPI_File_delete)(char *,int *,int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_File_delete(char * filename,int * info,int * ret,int filenamelen)
+void A_f_MPI_File_delete(char * filename,int * info,int * ret,int filenamelen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_File_delete(char * filename,int * info,int * ret,size_t filenamelen)
+void A_f_MPI_File_delete(char * filename,int * info,int * ret,size_t filenamelen)
 #endif
 {
 #ifdef DEBUG
@@ -349,9 +349,9 @@ void (*INTERFACE_F_LOCAL_MPI_Info_get)(int *,char *,int *,char *,int *,int *, in
 void (*INTERFACE_F_LOCAL_MPI_Info_get)(int *,char *,int *,char *,int *,int *, size_t, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Info_get(int * info,char * key,int * valuelen,char * value,int * flag,int * ret, int keylen, int valuelen_)
+void A_f_MPI_Info_get(int * info,char * key,int * valuelen,char * value,int * flag,int * ret, int keylen, int valuelen_)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Info_get(int * info,char * key,int * valuelen,char * value,int * flag,int * ret, size_t keylen, size_t valuelen_)
+void A_f_MPI_Info_get(int * info,char * key,int * valuelen,char * value,int * flag,int * ret, size_t keylen, size_t valuelen_)
 #endif
 {
 #ifdef DEBUG
@@ -398,9 +398,9 @@ void (*INTERFACE_F_LOCAL_MPI_Info_get_nthkey)(int *,int *,char *,int *, int);
 void (*INTERFACE_F_LOCAL_MPI_Info_get_nthkey)(int *,int *,char *,int *, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,int keylen)
+void A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,int keylen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,size_t keylen)
+void A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,size_t keylen)
 #endif
 {
 #ifdef DEBUG
@@ -447,9 +447,9 @@ void (*INTERFACE_F_LOCAL_MPI_Info_get_valuelen)(int *,char *,int *,int *,int *,i
 void (*INTERFACE_F_LOCAL_MPI_Info_get_valuelen)(int *,char *,int *,int *,int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,int keylen)
+void A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,int keylen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,size_t keylen)
+void A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,size_t keylen)
 #endif
 {
 #ifdef DEBUG
@@ -497,9 +497,9 @@ void (*INTERFACE_F_LOCAL_MPI_Info_set)(int *,char *,char *,int *, int, int);
 void (*INTERFACE_F_LOCAL_MPI_Info_set)(int *,char *,char *,int *, size_t, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,int keylen,int valuelen)
+void A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,int keylen,int valuelen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,size_t keylen,size_t valuelen)
+void A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,size_t keylen,size_t valuelen)
 #endif
 {
 #ifdef DEBUG
@@ -547,9 +547,9 @@ void (*INTERFACE_F_LOCAL_MPI_Win_get_name)(int *,char *,int *, int *, int);
 void (*INTERFACE_F_LOCAL_MPI_Win_get_name)(int *,char *,int *, int *, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Win_get_name(int * win,char * win_name, int *resultlen, int *ret, int win_name_len)
+void A_f_MPI_Win_get_name(int * win,char * win_name, int *resultlen, int *ret, int win_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Win_get_name(int * win,char * win_name, int *resultlen, int *ret, size_t win_name_len)
+void A_f_MPI_Win_get_name(int * win,char * win_name, int *resultlen, int *ret, size_t win_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -596,9 +596,9 @@ void (*INTERFACE_F_LOCAL_MPI_Comm_get_name)(int *,char *,int *, int *, int);
 void (*INTERFACE_F_LOCAL_MPI_Comm_get_name)(int *,char *,int *, int *, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, int comm_name_len)
+void A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, int comm_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, size_t comm_name_len)
+void A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, size_t comm_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -645,9 +645,9 @@ void (*INTERFACE_F_LOCAL_MPI_Comm_set_name)(int *,char *,int *, int);
 void (*INTERFACE_F_LOCAL_MPI_Comm_set_name)(int *,char *,int *, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, int comm_name_len)
+void A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, int comm_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, size_t comm_name_len)
+void A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, size_t comm_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -695,9 +695,9 @@ void (*INTERFACE_F_LOCAL_MPI_Comm_spawn)(char *, char *, int *, int *, int *, in
 void (*INTERFACE_F_LOCAL_MPI_Comm_spawn)(char *, char *, int *, int *, int *, int *, int *, int*, int*,size_t,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Comm_spawn(char *command, char *argv, int *maxprocs, int *info, int *root, int *comm, int *intercomm, int *array_of_errcodes, int *ret,int command_len, int argv_len)
+void A_f_MPI_Comm_spawn(char *command, char *argv, int *maxprocs, int *info, int *root, int *comm, int *intercomm, int *array_of_errcodes, int *ret,int command_len, int argv_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Comm_spawn(char *command, char *argv, int *maxprocs, int *info, int *root, int *comm, int *intercomm, int *array_of_errcodes, int *ret,size_t command_len, size_t argv_len)
+void A_f_MPI_Comm_spawn(char *command, char *argv, int *maxprocs, int *info, int *root, int *comm, int *intercomm, int *array_of_errcodes, int *ret,size_t command_len, size_t argv_len)
 #endif
 {
 #ifdef DEBUG
@@ -745,9 +745,9 @@ void (*INTERFACE_F_LOCAL_MPI_Type_get_name)(int *,char *,int *, int *,int);
 void (*INTERFACE_F_LOCAL_MPI_Type_get_name)(int *,char *,int *, int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Type_get_name(int * datatype,char * type_name, int *resultlen, int *ret, int type_name_len)
+void A_f_MPI_Type_get_name(int * datatype,char * type_name, int *resultlen, int *ret, int type_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Type_get_name(int * datatype,char * type_name, int *resultlen, int *ret, size_t type_name_len)
+void A_f_MPI_Type_get_name(int * datatype,char * type_name, int *resultlen, int *ret, size_t type_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -795,9 +795,9 @@ void (*INTERFACE_F_LOCAL_MPI_Type_set_name)(int *,char *,int *,int);
 void (*INTERFACE_F_LOCAL_MPI_Type_set_name)(int *,char *,int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Type_set_name(int * datatype,char * type_name, int *ret, int type_name_len)
+void A_f_MPI_Type_set_name(int * datatype,char * type_name, int *ret, int type_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Type_set_name(int * datatype,char * type_name, int *ret, size_t type_name_len)
+void A_f_MPI_Type_set_name(int * datatype,char * type_name, int *ret, size_t type_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -845,9 +845,9 @@ void (*INTERFACE_F_LOCAL_MPI_Add_error_string)(int *,char *,int *,int);
 void (*INTERFACE_F_LOCAL_MPI_Add_error_string)(int *,char *,int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Add_error_string(int * errorcode,char * string, int *ret, int string_len)
+void A_f_MPI_Add_error_string(int * errorcode,char * string, int *ret, int string_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Add_error_string(int * errorcode,char * string, int *ret, size_t string_len)
+void A_f_MPI_Add_error_string(int * errorcode,char * string, int *ret, size_t string_len)
 #endif
 {
 #ifdef DEBUG
@@ -895,9 +895,9 @@ void (*INTERFACE_F_LOCAL_MPI_Close_port)(char *,int *,int);
 void (*INTERFACE_F_LOCAL_MPI_Close_port)(char *,int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Close_port(char * string, int *ret, int string_len)
+void A_f_MPI_Close_port(char * string, int *ret, int string_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Close_port(char * string, int *ret, size_t string_len)
+void A_f_MPI_Close_port(char * string, int *ret, size_t string_len)
 #endif
 {
 #ifdef DEBUG
@@ -945,9 +945,9 @@ void (*INTERFACE_F_LOCAL_MPI_Get_library_version)(char *, int*, int*, int);
 void (*INTERFACE_F_LOCAL_MPI_Get_library_version)(char *, int*, int*, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, int version_len)
+void A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, int version_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, size_t version_len)
+void A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, size_t version_len)
 #endif
 {
 #ifdef DEBUG
@@ -995,9 +995,9 @@ void (*INTERFACE_F_LOCAL_MPI_Open_port)(int *,char*,int*,int);
 void (*INTERFACE_F_LOCAL_MPI_Open_port)(int *,char*,int*,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Open_port(int * info, char *port_name, int *ret, int port_name_len)
+void A_f_MPI_Open_port(int * info, char *port_name, int *ret, int port_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Open_port(int * info, char *port_name, int *ret, size_t port_name_len)
+void A_f_MPI_Open_port(int * info, char *port_name, int *ret, size_t port_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -1045,9 +1045,9 @@ void (*INTERFACE_F_LOCAL_MPI_Publish_name)(char*,int*,char*,int*,int,int);
 void (*INTERFACE_F_LOCAL_MPI_Publish_name)(char*,int*,char*,int*,size_t,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Publish_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
+void A_f_MPI_Publish_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Publish_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
+void A_f_MPI_Publish_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -1095,9 +1095,9 @@ void (*INTERFACE_F_LOCAL_MPI_Unpublish_name)(char*,int*,char*,int*,int,int);
 void (*INTERFACE_F_LOCAL_MPI_Unpublish_name)(char*,int*,char*,int*,size_t,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Unpublish_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
+void A_f_MPI_Unpublish_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Unpublish_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
+void A_f_MPI_Unpublish_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -1145,9 +1145,9 @@ void (*INTERFACE_F_LOCAL_MPI_Win_set_name)(int *, char *, int*, int);
 void (*INTERFACE_F_LOCAL_MPI_Win_set_name)(int *, char *, int*, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Win_set_name(int *win, char *win_name, int *ret, int win_name_len)
+void A_f_MPI_Win_set_name(int *win, char *win_name, int *ret, int win_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Win_set_name(int *win, char *win_name, int *ret, size_t win_name_len)
+void A_f_MPI_Win_set_name(int *win, char *win_name, int *ret, size_t win_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -1195,9 +1195,9 @@ void (*INTERFACE_F_LOCAL_MPI_Lookup_name)(char *, int*, char *, int*, int, int);
 void (*INTERFACE_F_LOCAL_MPI_Lookup_name)(char *, int*, char *, int*, size_t, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Lookup_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
+void A_f_MPI_Lookup_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Lookup_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
+void A_f_MPI_Lookup_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
 #endif
 {
 #ifdef DEBUG
@@ -1245,9 +1245,9 @@ void (*INTERFACE_F_LOCAL_MPI_Pack_external)(char *, void*, int, int*, void*, siz
 void (*INTERFACE_F_LOCAL_MPI_Pack_external)(char *, void*, int, int*, void*, size_t, size_t *, int*,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Pack_external(char *datarep, void *inbuf, int count, int *datatype, void *outbuf, size_t outsize, size_t *position, int *ret, int datarep_len)
+void A_f_MPI_Pack_external(char *datarep, void *inbuf, int count, int *datatype, void *outbuf, size_t outsize, size_t *position, int *ret, int datarep_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Pack_external(char *datarep, void *inbuf, int count, int *datatype, void *outbuf, size_t outsize, size_t *position, int *ret, size_t datarep_len)
+void A_f_MPI_Pack_external(char *datarep, void *inbuf, int count, int *datatype, void *outbuf, size_t outsize, size_t *position, int *ret, size_t datarep_len)
 #endif
 {
 #ifdef DEBUG
@@ -1295,9 +1295,9 @@ void (*INTERFACE_F_LOCAL_MPI_Pack_external_size)(char *, int, int *, size_t *, i
 void (*INTERFACE_F_LOCAL_MPI_Pack_external_size)(char *, int, int *, size_t *, int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Pack_external_size(char *datarep, int count, int *datatype, size_t *size, int *ret, int datarep_len)
+void A_f_MPI_Pack_external_size(char *datarep, int count, int *datatype, size_t *size, int *ret, int datarep_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Pack_external_size(char *datarep, int count, int *datatype, size_t *size, int *ret, size_t datarep_len)
+void A_f_MPI_Pack_external_size(char *datarep, int count, int *datatype, size_t *size, int *ret, size_t datarep_len)
 #endif
 {
 #ifdef DEBUG
@@ -1345,9 +1345,9 @@ void (*INTERFACE_F_LOCAL_MPI_Unpack_external)(char *, void *, size_t, size_t *, 
 void (*INTERFACE_F_LOCAL_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *,size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Unpack_external(char *datarep, void *inbuf, size_t insize, size_t *position, void *outbuf, int outcount, int *datatype, int *ret, int datarep_len)
+void A_f_MPI_Unpack_external(char *datarep, void *inbuf, size_t insize, size_t *position, void *outbuf, int outcount, int *datatype, int *ret, int datarep_len)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Unpack_external(char *datarep, void *inbuf, size_t insize, size_t *position, void *outbuf, int outcount, int *datatype, int *ret, size_t datarep_len)
+void A_f_MPI_Unpack_external(char *datarep, void *inbuf, size_t insize, size_t *position, void *outbuf, int outcount, int *datatype, int *ret, size_t datarep_len)
 #endif
 {
 #ifdef DEBUG
@@ -1395,9 +1395,9 @@ void (*INTERFACE_F_LOCAL_MPI_Info_delete)(int *,char *,int *, int);
 void (*INTERFACE_F_LOCAL_MPI_Info_delete)(int *,char *,int *, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_Info_delete(int * info,char * key,int * ret,int keylen)
+void A_f_MPI_Info_delete(int * info,char * key,int * ret,int keylen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_Info_delete(int * info,char * key,int * ret,size_t keylen)
+void A_f_MPI_Info_delete(int * info,char * key,int * ret,size_t keylen)
 #endif
 {
 #ifdef DEBUG
