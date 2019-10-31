@@ -16282,27 +16282,28 @@ void A_f_MPI_Register_datarep(char **datarep, void *read_conversion_fn,
 #endif
 }
 
-void mpi_comm_spawn_multiple_(int, char **, char ***, int *, int *, int, int,
-                              int *, int *, int *, int, int);
+void mpi_comm_spawn_multiple_(int, char **, char ***, int *, int *, int *,
+                              int *, int *, int *, int *, int, int);
 
-void mpi_comm_spawn_multiple__(int, char **, char ***, int *, int *, int, int,
-                               int *, int *, int *, int, int);
+void mpi_comm_spawn_multiple__(int, char **, char ***, int *, int *, int *,
+                               int *, int *, int *, int *, int, int);
 
-void pmpi_comm_spawn_multiple_(int, char **, char ***, int *, int *, int, int,
-                               int *, int *, int *, int, int);
+void pmpi_comm_spawn_multiple_(int, char **, char ***, int *, int *, int *,
+                               int *, int *, int *, int *, int, int);
 
-void pmpi_comm_spawn_multiple__(int, char **, char ***, int *, int *, int, int,
-                                int *, int *, int *, int, int);
+void pmpi_comm_spawn_multiple__(int, char **, char ***, int *, int *, int *,
+                                int *, int *, int *, int *, int, int);
 
-void pmpi_comm_spawn_multiple_(int, char **, char ***, int *, int *, int, int,
-                               int *, int *, int *, int, int);
+void pmpi_comm_spawn_multiple_(int, char **, char ***, int *, int *, int *,
+                               int *, int *, int *, int *, int, int);
 
 #define A_f_MPI_Comm_spawn_multiple _PMPI_Comm_spawn_multiple
 #pragma weak mpi_comm_spawn_multiple_ = _PMPI_Comm_spawn_multiple
 #pragma weak mpi_comm_spawn_multiple__ = _PMPI_Comm_spawn_multiple
 #pragma weak pmpi_comm_spawn_multiple__ = _PMPI_Comm_spawn_multiple
 void (*_LOCAL_MPI_Comm_spawn_multiple)(int, char **, char ***, int *, int *,
-                                       int, int, int *, int *, int *, int, int);
+                                       int *, int *, int *, int *, int *, int,
+                                       int);
 
 void A_f_MPI_Comm_spawn_multiple(int count, char **command, char ***argv,
                                  int *maxprocs, int *info, int *root, int *comm,

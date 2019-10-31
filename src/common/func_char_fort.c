@@ -186,16 +186,29 @@ mlen=(R_MPI_MAX_ERROR_STRING>A_MPI_MAX_ERROR_STRING?A_MPI_MAX_ERROR_STRING:R_MPI
 printf("end MPI_Error_string %d %d\n",*ret,ret_tmp);
 */}
 
-void  mpi_file_open_(int*, char *,int *,int *,int*,int);
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+void  mpi_file_open_(int*, char *,int *,int *,int*, int *,int);
 
-void  mpi_file_open__(int*, char *,int *,int *,int*,int);
+void  mpi_file_open__(int*, char *,int *,int *,int*, int *,int);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*,int);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,int);
 
-void  pmpi_file_open__(int*, char *,int *,int *,int*,int);
+void  pmpi_file_open__(int*, char *,int *,int *,int*, int *,int);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*,int);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,int);
 
+#elif defined(GFORT_CALL) && __GNUC__ >= 8
+void  mpi_file_open_(int*, char *,int *,int *,int*, int *,size_t);
+
+void  mpi_file_open__(int*, char *,int *,int *,int*, int *,size_t);
+
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,size_t);
+
+void  pmpi_file_open__(int*, char *,int *,int *,int*, int *,size_t);
+
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,size_t);
+
+#endif
 //#define A_f_MPI_File_open _PMPI_File_open
 //#pragma weak mpi_file_open_=_PMPI_File_open
 //#pragma weak mpi_file_open__=_PMPI_File_open

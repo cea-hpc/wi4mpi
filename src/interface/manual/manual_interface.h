@@ -117,27 +117,27 @@ printf("sort : f_MPI_Error_string (interface) \n");
 
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
 
-void  mpi_file_open__(int*, char *,int *,int *,int*,int);
+void  mpi_file_open__(int*, char *,int *,int *,int*, int*,int);
 
-void  mpi_file_open_(int*, char *,int *,int *,int*,int);
+void  mpi_file_open_(int*, char *,int *,int *,int*, int*,int);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*,int);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int*,int);
 
-void  pmpi_file_open__(int*, char *,int *,int *,int*,int);
+void  pmpi_file_open__(int*, char *,int *,int *,int*, int*,int);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*,int);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int*,int);
 
 #elif defined(GFORT_CALL)
 
-void  mpi_file_open__(int*, char *,int *,int *,int*,size_t);
+void  mpi_file_open__(int*, char *,int *,int *,int*, int*,size_t);
 
-void  mpi_file_open_(int*, char *,int *,int *,int*,size_t);
+void  mpi_file_open_(int*, char *,int *,int *,int*, int*,size_t);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*,size_t);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int*,size_t);
 
-void  pmpi_file_open__(int*, char *,int *,int *,int*,size_t);
+void  pmpi_file_open__(int*, char *,int *,int *,int*, int*,size_t);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*,size_t);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int*,size_t);
 
 #endif
 #define A_f_MPI_File_open _PMPI_File_open
