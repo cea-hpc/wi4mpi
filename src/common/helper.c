@@ -209,7 +209,7 @@ void timeout_config_file(void) {
   FILE *ff;
   char *buff = (char *)malloc(1024 * sizeof(char));
   long long *vv;
-  int *n;
+  size_t n = 1024;
   char *fname = getenv("WI4MPI_TIMEOUT_CONFIG_FILE");
   if (!fname)
     return;
