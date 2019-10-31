@@ -206,9 +206,9 @@ void (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, int);
 void (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, int filenamelen)
+void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, int filenamelen)
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
-A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, size_t filenamelen)
+void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, size_t filenamelen)
 #endif
 {
 #ifdef DEBUG
