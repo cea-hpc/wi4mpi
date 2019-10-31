@@ -45,6 +45,7 @@ def header_license_file():
     string=string+'//#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #'+'\n'
     string=string+'//#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #'+'\n'
     string=string+'//#   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #'+'\n'
+    string=string+'//#   - Juilly Kevin <kevin.juilly.tgcc@cea.fr>                          #'+'\n'
     string=string+'//#                                                                      #'+'\n'
     string=string+'//########################################################################'+'\n'
     
