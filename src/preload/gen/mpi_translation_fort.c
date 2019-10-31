@@ -25,6 +25,7 @@
 /*
  * This code is fully generated
  */
+#include "helper.h"
 #define debug_printer debug_printer_f
 void debug_printer(const char *, ...);
 #include "wrapper_f.h"
