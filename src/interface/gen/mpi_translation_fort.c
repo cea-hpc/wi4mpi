@@ -3950,7 +3950,7 @@ void A_f_MPI_Attr_put(int *comm, int *keyval, int *attribute_val, int *ret) {
   */
   A_MPI_Comm ct = A_MPI_Comm_f2c(*comm);
   intptr_t tv = *(attribute_val);
-  ret_tmp = A_MPI_Attr_put(ct, *keyval, tv);
+  ret_tmp = A_MPI_Attr_put(ct, *keyval, (void *)tv);
   error_r2a(ret, &ret_tmp);
 
 // in_w=0;
