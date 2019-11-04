@@ -337,7 +337,7 @@ void varname##_translation_init(void) {\
       int i;\
         char *envvar;\
         char varname1[256],varname2[256];\
-        strcat(varname1,"WI4");\
+        strcpy(varname1,"WI4");\
         strcat(varname1,#type);\
         strcpy(varname2,varname1);\
         strcat(varname1,"_OFFSET");\
