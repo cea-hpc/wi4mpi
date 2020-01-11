@@ -3,7 +3,7 @@ project(wi4mpi)
 enable_language(C CXX Fortran)
 
 set(VERSION_MAJOR 3)
-set(VERSION_MINOR 3)
+set(VERSION_MINOR 4)
 set(VERSION_PATCH 0)
 
 set(WI4MPI_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
