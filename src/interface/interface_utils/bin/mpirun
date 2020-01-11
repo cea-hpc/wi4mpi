@@ -87,7 +87,7 @@ while [[ $# -gt 0 ]]; do
             exit 0 ;;
         --|-end|--end)
             shift
-            cmd=$@
+            cmd=("$@")
             break ;;
         -?*)
             version >&2
@@ -97,11 +97,11 @@ while [[ $# -gt 0 ]]; do
         *)
             cmd_type=$(type -t $1)
             if [[ ${cmd_type} = "file" ]]; then
-                cmd=$@
+                cmd=("$@")
                 break
             elif [[ ${cmd_type} = "builtin" ]]; then
                 if [[ -e /bin/$1 ]]; then
-                    cmd=$@
+                    cmd=("$@")
                     break
                 fi
             else
@@ -156,4 +156,4 @@ case ${WI4MPI_TO,,} in
         (>&2 echo "Error: mpirun not implemented for $WI4MPI_TO") && exit 1
 esac
 
-$_mpirun $mpirun_opts wi4mpi $wi4mpi_opts $cmd
+$_mpirun $mpirun_opts wi4mpi $wi4mpi_opts "${cmd[@]}"
