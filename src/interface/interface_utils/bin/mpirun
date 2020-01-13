@@ -123,6 +123,7 @@ WI4MPI_UCONFIG="~/.wi4mpi.cfg"
 export OPENMPI_ROOT=${OPENMPI_ROOT:-"$OPENMPI_DEFAULT_ROOT"}
 export INTELMPI_ROOT=${INTELMPI_ROOT:-"$INTELMPI_DEFAULT_ROOT"}
 export MPICH_ROOT=${MPICH_ROOT:-"$MPICH_DEFAULT_ROOT"}
+export MPC_ROOT=${MPC_ROOT:-"$MPC_DEFAULT_ROOT"}
 
 case ${WI4MPI_FROM,,} in
     *openmpi*)
@@ -149,7 +150,7 @@ case ${WI4MPI_TO,,} in
         _mpirun=$MPICH_ROOT/bin/$WI4MPI_PM ;;
     *mpc*)
         [[ -z "$MPC_ROOT" ]] && (>&2 echo "Error: please set MPC_ROOT or MPC_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
-        wi4mpi_opts="$wi4mpi_opts -t mpc $MPC_ROOT/x86_64/x86_64/bin/mpcrun $mpirun_opts"
+        wi4mpi_opts="$wi4mpi_opts -t mpc $MPC_ROOT/bin/mpcrun $mpirun_opts"
         mpirun_opts=""
         _mpirun="" ;;
     *)
