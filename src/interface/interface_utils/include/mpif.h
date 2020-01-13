@@ -58,8 +58,4 @@
       include "mpif-io-handles.h"
       include 'mpif-externals.h'
       include 'mpif-sentinels.h'
-#ifdef __INTEL_COMPILER
-      include 'intel/mpif-sizeof.h'
-#else
-#warning "MPI_SIZEOF is unsupported with this Fortran compiler"
-#endif
+      include 'mpif-sizeof.h'

@@ -56,6 +56,14 @@ case $progname in
         COMPILER_SUFFIX=FC
         COMPILER_LANG=Fortran
         WI4MPI_FLAGS=${WI4MPI_FCFLAGS}
+        # Check if an Intel family compiler is used. If so, add its specific headers, else use GNU ones
+        # Reason : 'intel' headers features Fortran 2008 characteristics,
+        # that are not handled by GCC (up to 6.x) or PGI compilers.
+        if [ `basename $COMPILER` == 'ifort' ]; then
+            WI4MPI_FLAGS="-I${WI4MPI_ROOT}/include/intel $WI4MPI_FLAGS"
+        else
+            WI4MPI_FLAGS="-I${WI4MPI_ROOT}/include/gnu $WI4MPI_FLAGS"
+        fi
     ;;
 esac
 
