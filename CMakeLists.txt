@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.8.0)
 project(wi4mpi)
 enable_language(C CXX Fortran)
 
+if(POLICY CMP0054)
+    cmake_policy(SET CMP0054 NEW)
+endif()
+
 set(VERSION_MAJOR 3)
 set(VERSION_MINOR 3)
 set(VERSION_PATCH 0)
