@@ -23,6 +23,7 @@
 
 
 #include "engine.h"
+#include <stdio.h>
 /*
 static void dump(void * src, size_t size) {
     unsigned char * tab = (unsigned char*) malloc(size);

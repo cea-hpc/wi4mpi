@@ -31,9 +31,15 @@ int wi4mpi_timeout_main_loop(void *);
 void wi4mpi_timeout_thread_register(int th);
 void wi4mpi_timeout_thread_unregister();
 unsigned long long gettimestamp(void) {
+#ifdef __aarch64__
+  int64_t t;
+  __asm__ volatile("mrs %0, cntvct_el0" : "=r"(t));
+  return t;
+#else
   int a, d;
   __asm__ volatile("rdtsc" : "=a"(a), "=d"(d));
   return ((unsigned long long)a) | (((long long)d) << 32);
+#endif
 }
 /*libc clone is a weak symbol of __clone, we use a wrapper function to clone in
  * order to do the registration/unregistration of the threads*/
@@ -203,7 +209,7 @@ void timeout_config_file(void) {
   FILE *ff;
   char *buff = (char *)malloc(1024 * sizeof(char));
   long long *vv;
-  int *n;
+  size_t n = 1024;
   char *fname = getenv("WI4MPI_TIMEOUT_CONFIG_FILE");
   if (!fname)
     return;

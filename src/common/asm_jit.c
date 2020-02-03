@@ -65,7 +65,7 @@ __asm__(
 "peip_user_fn:\n"
     "mov x10, x30\n"
     "sub x10, x10, #0x18\n"
-    "ldr x3, [x10]\n"
+    "ldr x4, [x10]\n"
     "ldr x11, [x10,#0x8]\n"
     "blr x11\n"
     "ldp x9, x30, [sp], #16\n"

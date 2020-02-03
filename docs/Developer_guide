@@ -19,6 +19,7 @@
 #   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
 #   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 #   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #
+#   - Juilly Kevin <kevin.juilly.tgcc@cea.fr>                          #
 #                                                                      #
 ########################################################################
 
@@ -27,6 +28,7 @@
     Tony Delforge (tony.delforge.tgcc@cea.fr)
     Vincent Ducrot (vincent.ducrot.tgcc@cea.fr)
     Adrien Cotte (adrien.cotte.tgcc@cea.fr)
+    Juilly Kevin (kevin.juilly.tgcc@cea.fr)
 
 Developer Guide
 ===============
@@ -355,14 +357,14 @@ Common files for both version of WI4MPI:
 
  - func_char_fort.*: 
     Contain all Fortran MPI functions that deal with some character arguments.
-    Since in Fortran a character argument always reference is len (character(len=*) :: dark_side) and since the len argument is not passed in the same order according to the compiler (Intel or GNU) used,
+    Since in Fortran a character argument always reference is len (character(len=*) :: dark_side) and since the len argument is not the same size according to the compiler (Intel/GNU < 8 or GNU >= 8) used,
     WI4MPI had to implement both.
 
     Example --
            #ifdef IFORT_CALL
-                  void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen) **The character length is add at the end**
+                  void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen) **The character length is of type int**
            #elif GFORT_CALL
-                  void  A_f_MPI_Get_processor_name(char * name,int namelen,int * resultlen,int * ret) **The character length is add after the argument character**
+                  void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,size_t namelen) **The character length is of type size_t**
            #endif
            --
 

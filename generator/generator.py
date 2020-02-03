@@ -20,6 +20,7 @@
 #   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
 #   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 #   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #
+#   - Juilly Kevin <kevin.juilly.tgcc@cea.fr>                          #
 #                                                                      #
 ########################################################################
 
@@ -328,7 +329,17 @@ class generator:
               str=''
         else:
               if self.mappers[arg['name']]['local_alloc'] == 1 :
-                    str=self.add_prefix(self.mappers[arg['name']]['type'][:-1],prefix)+' '+arg['var']+'_ltmp;\n'+self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp=&'+arg['var']+'_ltmp;'
+                    str=self.add_prefix(self.mappers[arg['name']]['type'][:-1],prefix)+' '+arg['var']+'_ltmp'
+                    if 'MPI' in self.mappers[arg['name']]['type']:
+                        if 'Aint' in self.mappers[arg['name']]['type']:
+                            pass
+                        elif 'Status' in self.mappers[arg['name']]['type']:
+                            pass
+                        elif 'Offset' in self.mappers[arg['name']]['type']:
+                            pass
+                        else:
+                            str+=' = ' + self.add_prefix(self.mappers[arg['name']]['type'][:-2],prefix).upper()+'_NULL'
+                    str+=';\n'+self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp=&'+arg['var']+'_ltmp;'
               elif 'init_alloc' in self.mappers[arg['name']]:
                     str=self.mappers[arg['name']]['type']+' '+arg['var']+'_tmp ='+self.mappers[arg['name']]['init_alloc']+';'
               elif arg['arg_dep'] != '':
@@ -620,6 +631,8 @@ class generator:
                 if func_dict['name'] == 'MPI_Attr_put' and self.name == 'Wrapper_Interface_C':
                     str=str+'myKeyval_functions_t *tt;\nif(tt=myKeyval_translation_get(keyval)) tt->ref++;'
                 str=str+'\n'+self.print_symbol_c(func_dict,prefix='LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True, type_prefix='R_')+';'
+                if func_dict['name'] == 'MPI_Attr_put' and self.name == 'Wrapper_Interface_C':
+                    str=str+'if(tt&&ret_tmp!=R_MPI_SUCCESS) tt->ref--;'
                 if func_dict['name'] == 'MPI_Init':
                     str=str+"\nint wi4mpi_rank;\n"
                     str=str+"R_MPI_Comm_rank(R_MPI_COMM_WORLD,&wi4mpi_rank);\n"

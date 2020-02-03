@@ -19,6 +19,7 @@
 //#   - Delforge Tony <tony.delforge.tgcc@cea.fr>                        #
 //#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 //#   - Cotte Adrien <adrien.cotte.tgcc@cea.fr>                          #
+//#   - Juilly Kevin <kevin.juilly.tgcc@cea.fr>                          #
 //#                                                                      #
 //########################################################################
 /*
@@ -3949,8 +3950,8 @@ void A_f_MPI_Attr_put(int *comm, int *keyval, int *attribute_val, int *ret) {
   //if(*keyval==R_F_MPI_INVALID) *keyval=A_F_MPI_INVALID;
   */
   A_MPI_Comm ct = A_MPI_Comm_f2c(*comm);
-  long tv = *(attribute_val);
-  ret_tmp = A_MPI_Attr_put(ct, *keyval, &tv);
+  intptr_t tv = *(attribute_val);
+  ret_tmp = A_MPI_Attr_put(ct, *keyval, (void *)tv);
   error_r2a(ret, &ret_tmp);
 
 // in_w=0;
@@ -3985,12 +3986,12 @@ void A_f_MPI_Attr_get(int *comm, int *keyval, int *attribute_val, int *flag,
    _LOCAL_MPI_Attr_get( &comm_tmp, &keyval_tmp, attribute_val, flag, &ret_tmp);
   */
   A_MPI_Comm ct = A_MPI_Comm_f2c(*comm);
-  long kt = 0;
+  intptr_t kt = 0;
   *attribute_val = 0;
   // printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
   ret_tmp = A_MPI_Attr_get(ct, *keyval, &kt, flag);
-  if (kt >> 32)
-    kt = (int)(((long)(1 << 31)) - 1);
+  // if (kt >> 32)
+  //   kt = (int)(((long)(1 << 31)) - 1);
   *attribute_val = (int)kt;
   // printf("val %d %p %d %d\n",*attribute_val,ct,*keyval,*flag);
   error_r2a(ret, &ret_tmp);
