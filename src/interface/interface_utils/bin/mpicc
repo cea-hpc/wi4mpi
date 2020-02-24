@@ -25,7 +25,7 @@
 ########################################################################
 
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
-WI4MPI_UCONFIG="~/.wi4mpi.cfg"
+WI4MPI_UCONFIG="${HOME}/.wi4mpi.cfg"
 
 progname=$(basename $0)
 
