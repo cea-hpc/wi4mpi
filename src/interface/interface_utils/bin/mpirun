@@ -113,7 +113,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
-WI4MPI_UCONFIG="~/.wi4mpi.cfg"
+WI4MPI_UCONFIG="${HOME}/.wi4mpi.cfg"
 
 [[ -z "$WI4MPI_ROOT" ]] && (>&2 echo "Error: please set WI4MPI_ROOT") && exit 1
 [[ -z "$WI4MPI_TO" ]] && (>&2 echo "Error: please set WI4MPI_TO") && exit 1
