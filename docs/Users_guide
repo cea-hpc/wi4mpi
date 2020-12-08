@@ -88,6 +88,13 @@ WI4MPI specific variables
 
     Indicate which compilateur is used to compiled WI4MPI. Possible options: INTEL(default), GNU, PGI, LLVM, ARMCLANG
 
+- OPENMPI_ROOT
+    If CMAKE is not able to find OPENMPI_ROOT, one must add -DOPENMPI_ROOT=/path/to/openmpi option.
+    ```
+    CMake Error at CMakeLists.txt:xxx (message):
+    Be sure to have an OpenMPI librarie in your PATH or set -DOPENMPI_ROOT=...
+    ```
+
 - WI4MPI_REALEASE
 
     Indicate the WI4MPI state set for the installation:

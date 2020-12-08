@@ -105,6 +105,7 @@ endif()
 
 find_package(MPI REQUIRED) 
 if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
+  if(NOT DEFINED OPENMPI_ROOT)
     execute_process(COMMAND "${MPI_C_COMPILER}" -show
                     OUTPUT_VARIABLE ERR_VAR1
                     OUTPUT_FILE "compiler_out"
@@ -119,9 +120,10 @@ if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
     #                 RESULT_VARIABLE RV)
     #message(STATUS "res command : ${ERR_VAR2}")
     if(NOT ERR_VAR2)
-      message(FATAL_ERROR "Be sure to have an OpenMPI librarie in your PATH")
+      message(FATAL_ERROR "Be sure to have an OpenMPI librarie in your PATH or set -DOPENMPI_ROOT=...")
     endif()
         get_filename_component(OPENMPI_ROOT ${MPI_C_INCLUDE_PATH} DIRECTORY)
+  endif()
 endif()
 
 find_package(Threads)
