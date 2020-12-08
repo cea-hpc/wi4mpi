@@ -86,7 +86,8 @@ WI4MPI specific variables
 
 - WI4MPI_COMPILER:string
 
-    Indicate which compilateur is used to compiled WI4MPI. Possible options: INTEL(default), GNU, PGI, LLVM, ARMCLANG
+    Indicate which compilateur is used to compiled WI4MPI.
+    Possible options: INTEL(default), GNU, PGI, LLVM, ARMCLANG, FUJITSU
 
 - OPENMPI_ROOT
     If CMAKE is not able to find OPENMPI_ROOT, one must add -DOPENMPI_ROOT=/path/to/openmpi option.

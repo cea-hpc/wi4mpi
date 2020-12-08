@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8.0)
 project(wi4mpi)
-enable_language(C CXX Fortran)
 
 if(POLICY CMP0054)
     cmake_policy(SET CMP0054 NEW)
@@ -90,7 +89,24 @@ elseif(WI4MPI_COMPILER MATCHES ARMCLANG)
     set(CC "armclang")
     set(CXX "armclang++")
     set(FC "armflang")
+elseif(WI4MPI_COMPILER MATCHES FUJITSU)
+    set(CMAKE_C_FLAGS_NORMAL  "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread")
+    set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread -DDEBUG")
+    set(CMAKE_C_FLAGS_GCC_JIT "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread -D_WI4MPI_GCC_JIT")
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3 -fPIC -shared -pthread")
+    set(WI4MPI_FORT_CALL "-DGFORT_CALL")
+    set(CC "fcc")
+    set(CXX "FCC")
+    set(FC "frt")
+    # Force CMake to detect Fujitsu compilers, must be called BEFORE enable_language(Fortran)
+    set(CMAKE_Fortran_COMPILER "frt" CACHE STRING "" FORCE)
+    # Force CMake to detect Fujitsu MPI Library, must be called BEFORE Find MPI
+    set(MPI_C_COMPILER "mpifcc" CACHE STRING "" FORCE)
+    set(MPI_CXX_COMPILER "mpiFCC" CACHE STRING "" FORCE)
+    set(MPI_Fortran_COMPILER "mpifrt" CACHE STRING "" FORCE)
 endif()
+
+enable_language(C CXX Fortran)
 
 #Define the compiling option according to the choosen realease
 if(WI4MPI_REALEASE MATCHES DEBUG)
