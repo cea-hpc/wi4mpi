@@ -87,22 +87,24 @@ All variable used by WI4MPI to configure the library according to the different 
 
 WI4MPI environment variables:
 
-  **WI4MPI_ROOT**             : reference to root wi4mpi installation
-  **WI4MPI_CC**               : reference C compiler used by wi4mpi
-  **WI4MPI_FC**               : reference Fortran compiler used by wi4mpi
-  **WI4MPI_CXX**              : reference C++ compiler used by wi4mpi
-  **WI4MPI_RUN_MPI_C_LIB**    : reference the path to the underlying run MPI implementation path C library
-  **WI4MPI_RUN_MPI_F_LIB**    : reference the path to the underlying run MPI implementation path Fortran library
-  **WI4MPI_RUN_MPIIO_C_LIB**  : reference the path to the underlying run MPI-IO implementation path C library
-  **WI4MPI_RUN_MPIIO_F_LIB**  : reference the path to the underlying run MPI-IO implementation path Fortran library
-  **WI4MPI_WRAPPER_LIB**      : reference the path to the wrapper library call by the interface
-  **WI4MPI_APP_INCLUDES**     : reference the path to the internal include used by the jit trick to handle user function
-  **WI4MPI_COMPILE_OPT**      : reference the option passed during jit compilation
-  **WI4MPI_INTERNAL_INCLUDE** : reference the path to the internal include necessary to jit
-  **WI4MPI_FROM**             : reference FROM which MPI implementation the application has been compiled
-  **WI4MPI_TO**               : reference the desired Runtime MPI implementation
-  **LD_PRELOAD**              : see man
-  **LD_LIBRARY_PATH**         : see man
+* **WI4MPI_ROOT**             : reference to root wi4mpi installation
+* **WI4MPI_CC**               : reference C compiler used by wi4mpi
+* **WI4MPI_FC**               : reference Fortran compiler used by wi4mpi
+* **WI4MPI_CXX**              : reference C++ compiler used by wi4mpi
+* **WI4MPI_RUN_MPI_C_LIB**    : reference the path to the underlying run MPI implementation path C library
+* **WI4MPI_RUN_MPI_F_LIB**    : reference the path to the underlying run MPI implementation path Fortran library
+* **WI4MPI_RUN_MPIIO_C_LIB**  : reference the path to the underlying run MPI-IO implementation path C library
+* **WI4MPI_RUN_MPIIO_F_LIB**  : reference the path to the underlying run MPI-IO implementation path Fortran library
+* **WI4MPI_WRAPPER_LIB**      : reference the path to the wrapper library call by the interface
+* **WI4MPI_APP_INCLUDES**     : reference the path to the internal include used by the jit trick to handle user function
+* **WI4MPI_COMPILE_OPT**      : reference the option passed during jit compilation
+* **WI4MPI_INTERNAL_INCLUDE** : reference the path to the internal include necessary to jit
+* **WI4MPI_FROM**             : reference FROM which MPI implementation the application has been compiled
+* **WI4MPI_TO**               : reference the desired Runtime MPI implementation
+* **LD_PRELOAD**              : see [`man 8 ld.so`][MANLDSO]
+* **LD_LIBRARY_PATH**         : see [`man 8 ld.so`][MANLDSO]
+
+  [MANLDSO]: https://man7.org/linux/man-pages/man8/ld.so.8.html
 
 Preload settings:
 
