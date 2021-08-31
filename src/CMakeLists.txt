@@ -422,25 +422,28 @@ add_library(wi4mpi_MPICH_OMPI SHARED ${SOURCE_WI4MPI_PRELOAD})
 add_library(wi4mpi_MPICH_INTEL SHARED ${SOURCE_WI4MPI_PRELOAD})
 #Empty libraries
 set(LIST_FAKEINTEL mpi mpifort mpigf mpi_mt)
-set(LIST_FAKEINTEL_SOEXT so.4 so.5 so.12)
+set(LIST_FAKEINTEL_MAJOR 4 5 12)
 set(LIST_FAKEOMPI mpi mpi_mpifh mpi_usempif08 mpi_usempi_ignore_tkr)
-set(LIST_FAKEOMPI_SOEXT so.1 so.20 so.40)
+set(LIST_FAKEOMPI_MAJOR 1 20 40)
 set(LIST_FAKECXX mpicxx mpi_cxx)
-set(LIST_FAKECXX_SOEXT ${LIST_FAKEINTEL_SOEXT} ${LIST_FAKEOMPI_SOEXT})
+set(LIST_FAKECXX_MAJOR ${LIST_FAKEINTEL_MAJOR} ${LIST_FAKEOMPI_MAJOR})
 foreach(LIB ${LIST_FAKECXX})
-    foreach(SOEXT ${LIST_FAKECXX_SOEXT})
-        add_library(${LIB}.${SOEXT} SHARED ${SOURCE_WI4MPI_EMPTY})
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKECXX_MAJOR})
+        add_library(${LIB}${MAJOR} SHARED ${SOURCE_WI4MPI_EMPTY})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES OUTPUT_NAME ${LIB} SOVERSION ${MAJOR})
+    endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
-    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
-        add_library(${LIB}.${SOEXT} SHARED ${SOURCE_WI4MPI_EMPTY})
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKEINTEL_MAJOR})
+        add_library(${LIB}${MAJOR} SHARED ${SOURCE_WI4MPI_EMPTY})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES OUTPUT_NAME ${LIB} SOVERSION ${MAJOR})
+    endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEOMPI})
-    foreach(SOEXT ${LIST_FAKEOMPI_SOEXT})
-        add_library(${LIB}.${SOEXT} SHARED ${SOURCE_WI4MPI_EMPTY})
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKEOMPI_MAJOR})
+        add_library(${LIB}${MAJOR} SHARED ${SOURCE_WI4MPI_EMPTY})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES OUTPUT_NAME ${LIB} SOVERSION ${MAJOR})
+    endforeach(MAJOR)
 endforeach(LIB)
 
 #Headers
@@ -639,19 +642,19 @@ set_target_properties(wi4mpi_OMPI_OMPI
 endif()
 
 foreach(LIB ${LIST_FAKECXX})
-    foreach(SOEXT ${LIST_FAKECXX_SOEXT})
-        set_target_properties(${LIB}.${SOEXT} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKECXX_MAJOR})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
+    endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
-    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
-        set_target_properties(${LIB}.${SOEXT} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKEINTEL_MAJOR})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
+    endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEOMPI})
-    foreach(SOEXT ${LIST_FAKEOMPI_SOEXT})
-        set_target_properties(${LIB}.${SOEXT} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKEOMPI_MAJOR})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES COMPILE_FLAGS "-shared -fPIC")
+    endforeach(MAJOR)
 endforeach(LIB)
 
 # Link options
@@ -788,36 +791,45 @@ install(TARGETS
 )
 
 foreach(LIB ${LIST_FAKECXX})
-    foreach(SOEXT ${LIST_FAKECXX_SOEXT})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibCXX
-                RENAME lib${LIB}.${SOEXT}
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-                )
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKECXX_MAJOR})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR}
+            DESTINATION libexec/wi4mpi/fakelibCXX
+            RENAME lib${LIB}.so.${MAJOR}
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                OWNER_READ OWNER_EXECUTE OWNER_WRITE
+                GROUP_WRITE GROUP_READ GROUP_EXECUTE
+        )
+    endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
-    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibINTEL
-                RENAME lib${LIB}.${SOEXT}
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-                )
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKEINTEL_MAJOR})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR}
+            DESTINATION libexec/wi4mpi/fakelibINTEL
+            RENAME lib${LIB}.so.${MAJOR}
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                OWNER_READ OWNER_EXECUTE OWNER_WRITE
+                GROUP_WRITE GROUP_READ GROUP_EXECUTE
+        )
+    endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
-    foreach(SOEXT ${LIST_FAKEINTEL_SOEXT})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibMPICH
-                RENAME lib${LIB}.${SOEXT}
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-                )
-    endforeach(SOEXT)
+    foreach(MAJOR ${LIST_FAKEINTEL_MAJOR})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR}
+            DESTINATION libexec/wi4mpi/fakelibMPICH
+            RENAME lib${LIB}.so.${MAJOR}
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                OWNER_READ OWNER_EXECUTE OWNER_WRITE
+                GROUP_WRITE GROUP_READ GROUP_EXECUTE
+        )
+    endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEOMPI})
-    foreach(SOEXT ${LIST_FAKEOMPI_SOEXT})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.${SOEXT}.so DESTINATION libexec/wi4mpi/fakelibOMPI
-                RENAME lib${LIB}.${SOEXT}
+    foreach(MAJOR ${LIST_FAKEOMPI_MAJOR})
+        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR} DESTINATION libexec/wi4mpi/fakelibOMPI
+            RENAME lib${LIB}.so.${MAJOR}
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
                 )
-    endforeach(SOEXT)
+        endforeach(MAJOR)
 endforeach(LIB)
 
 #Interface libraries
