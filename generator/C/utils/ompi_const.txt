@@ -93,6 +93,7 @@ ompi_predefined_op_t ompi_mpi_op_maxloc;
 ompi_predefined_op_t ompi_mpi_op_min;
 ompi_predefined_op_t ompi_mpi_op_minloc;
 ompi_predefined_op_t ompi_mpi_op_null;
+ompi_predefined_op_t ompi_mpi_op_no_op;
 ompi_predefined_op_t ompi_mpi_op_prod;
 ompi_predefined_op_t ompi_mpi_op_replace;
 ompi_predefined_op_t ompi_mpi_op_sum;
