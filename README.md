@@ -179,7 +179,4 @@ else if Interface --> MPC
 
 Copyright 2015-2017 CEA/DAM/DIF<br />
 <br />
-WI4MPI is distributed under the CeCILL-C. See the included files <br />
-Licence_CeCILL-C_V1-en.txt (English version) and <br />
-Licence_CeCILL-C_V1-fr.txt (French version) or visit  <br />
-http://www.cecill.info for details.
+WI4MPI is distributed under the BSD-3-Clause OR CeCILL-B.
