@@ -4,6 +4,9 @@ project(wi4mpi)
 if(POLICY CMP0054)
     cmake_policy(SET CMP0054 NEW)
 endif()
+if(POLICY CMP0057)
+    CMAKE_POLICY(SET CMP0057 NEW)
+endif()
 
 set(VERSION_MAJOR 3)
 set(VERSION_MINOR 5)
@@ -118,6 +121,14 @@ elseif(WI4MPI_REALEASE MATCHES GCC_JIT)
 else()
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_NORMAL})
 endif()
+
+#if supported, use -Wl,--allow-multiple-definition
+INCLUDE(CheckLinkerFlag)
+CHECK_LINKER_FLAG( C "-Wl,--allow-multiple-definition" LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION )
+if(LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION)
+    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--allow-multiple-definition")
+endif()
+    
 
 find_package(MPI REQUIRED) 
 if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
