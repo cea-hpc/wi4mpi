@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.0)
+cmake_minimum_required(VERSION 3.0.0)
 project(wi4mpi)
 
 if(POLICY CMP0054)
@@ -123,10 +123,14 @@ else()
 endif()
 
 #if supported, use -Wl,--allow-multiple-definition
-INCLUDE(CheckLinkerFlag)
-CHECK_LINKER_FLAG( C "-Wl,--allow-multiple-definition" LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION )
-if(LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION)
+if (${CMAKE_VERSION} VERSION_LESS "3.18.0") # if support check is not supported, just use flags and cross fingers
+  set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--allow-multiple-definition")
+else ()
+  INCLUDE(CheckLinkerFlag)
+  CHECK_LINKER_FLAG( C "-Wl,--allow-multiple-definition" LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION )
+  if(LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION)
     set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--allow-multiple-definition")
+  endif()
 endif()
     
 
@@ -149,7 +153,12 @@ if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
     if(NOT ERR_VAR2)
       message(FATAL_ERROR "Be sure to have an OpenMPI librarie in your PATH or set -DOPENMPI_ROOT=...")
     endif()
-        get_filename_component(OPENMPI_ROOT ${MPI_C_INCLUDE_PATH} DIRECTORY)
+    foreach(p ${MPI_C_INCLUDE_PATH})
+      get_filename_component(OPENMPI_ROOT_TEST ${p} DIRECTORY)
+      if(EXISTS "${OPENMPI_ROOT_TEST}/lib")
+        set(OPENMPI_ROOT ${OPENMPI_ROOT_TEST})
+      endif ()
+    endforeach(p) 
   endif()
 endif()
 
