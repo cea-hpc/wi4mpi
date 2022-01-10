@@ -108,12 +108,12 @@ endif()
 
 enable_language(C CXX Fortran)
 
-#Define the compiling option according to the choosen realease
-if(WI4MPI_REALEASE MATCHES DEBUG)
+#Define the compiling option according to the choosen release
+if(WI4MPI_RELEASE MATCHES DEBUG)
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_DEBUG})
-elseif(WI4MPI_REALEASE MATCHES RELEASE)
+elseif(WI4MPI_RELEASE MATCHES RELEASE)
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_RELEASE})
-elseif(WI4MPI_REALEASE MATCHES GCC_JIT)
+elseif(WI4MPI_RELEASE MATCHES GCC_JIT)
      set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_GCC_JIT})
 else()
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_NORMAL})
