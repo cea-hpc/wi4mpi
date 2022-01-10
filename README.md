@@ -161,16 +161,20 @@ else if Interface --> MPC
 
 
 ## Contributing
-## Authors
+## Authors/contributors
 
 * vincent.ducrot.tgcc@cea.fr
 * tony.delforge.tgcc@cea.fr
 * adrien.cotte.tgcc@cea.fr
+* clement.fontenaille.tgcc@cea.fr
+* kevin.juilly.tgcc@cea.fr
+* marc.joos@cea.fr
 
 ## Contact
 
 * bruno.froge@cea.fr
 * marc.perache@cea.fr
+* marc.joos@cea.fr
 
 ## Website
 
