@@ -122,17 +122,7 @@ else()
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_NORMAL})
 endif()
 
-#if supported, use -Wl,--allow-multiple-definition
-if (${CMAKE_VERSION} VERSION_LESS "3.18.0") # if support check is not supported, just use flags and cross fingers
-  set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--allow-multiple-definition")
-else ()
-  INCLUDE(CheckLinkerFlag)
-  CHECK_LINKER_FLAG( C "-Wl,--allow-multiple-definition" LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION )
-  if(LINKER_SUPPORTS_ALLOW_MULTIPLE_DEFINITION)
-    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--allow-multiple-definition")
-  endif()
-endif()
-    
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
 
 find_package(MPI REQUIRED) 
 if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
