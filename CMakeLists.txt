@@ -127,19 +127,16 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
 find_package(MPI REQUIRED) 
 if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
   if(NOT DEFINED OPENMPI_ROOT)
-    execute_process(COMMAND "${MPI_C_COMPILER}" -show
+    execute_process(COMMAND "${MPI_C_COMPILER}" --showme:version
                     OUTPUT_VARIABLE ERR_VAR1
-                    OUTPUT_FILE "compiler_out"
+                    OUTPUT_FILE "compiler_version"
                     ERROR_QUIET)
-    execute_process(COMMAND "grep" openmpi
-                    INPUT_FILE "compiler_out"
+    execute_process(COMMAND "grep" -i "Open MPI"
+                    INPUT_FILE "compiler_version"
                     OUTPUT_VARIABLE ERR_VAR2
                     RESULT_VARIABLE COMMAND_RESULT1
                     ERROR_QUIET)
-    #execute_process(COMMAND "${MPI_C_COMPILER}" -show
-    #                COMMAND "grep" -io openmpi
-    #                 RESULT_VARIABLE RV)
-    #message(STATUS "res command : ${ERR_VAR2}")
+    message(STATUS "res command : ${ERR_VAR2}")
     if(NOT ERR_VAR2)
       message(FATAL_ERROR "Be sure to have an OpenMPI librarie in your PATH or set -DOPENMPI_ROOT=...")
     endif()
