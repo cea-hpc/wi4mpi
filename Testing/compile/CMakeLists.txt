@@ -1,5 +1,5 @@
 project (compile)
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.0.0)
 
 # Copy source files
 set (LIST_FILES mpi_init.c mpi_init.cpp mpi_init.f mpi_init.f90)

@@ -1,5 +1,5 @@
 project (mpiio)
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.0.0)
 
 # Add tests
 file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/run_mpi_file_open_tests.sh

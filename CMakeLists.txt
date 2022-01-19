@@ -1,8 +1,11 @@
-cmake_minimum_required(VERSION 2.8.0)
+cmake_minimum_required(VERSION 3.0.0)
 project(wi4mpi)
 
 if(POLICY CMP0054)
     cmake_policy(SET CMP0054 NEW)
+endif()
+if(POLICY CMP0057)
+    CMAKE_POLICY(SET CMP0057 NEW)
 endif()
 
 set(VERSION_MAJOR 3)
@@ -119,26 +122,30 @@ else()
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_NORMAL})
 endif()
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
+
 find_package(MPI REQUIRED) 
 if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
   if(NOT DEFINED OPENMPI_ROOT)
-    execute_process(COMMAND "${MPI_C_COMPILER}" -show
+    execute_process(COMMAND "${MPI_C_COMPILER}" --showme:version
                     OUTPUT_VARIABLE ERR_VAR1
-                    OUTPUT_FILE "compiler_out"
+                    OUTPUT_FILE "compiler_version"
                     ERROR_QUIET)
-    execute_process(COMMAND "grep" openmpi
-                    INPUT_FILE "compiler_out"
+    execute_process(COMMAND "grep" -i "Open MPI"
+                    INPUT_FILE "compiler_version"
                     OUTPUT_VARIABLE ERR_VAR2
                     RESULT_VARIABLE COMMAND_RESULT1
                     ERROR_QUIET)
-    #execute_process(COMMAND "${MPI_C_COMPILER}" -show
-    #                COMMAND "grep" -io openmpi
-    #                 RESULT_VARIABLE RV)
-    #message(STATUS "res command : ${ERR_VAR2}")
+    message(STATUS "res command : ${ERR_VAR2}")
     if(NOT ERR_VAR2)
       message(FATAL_ERROR "Be sure to have an OpenMPI librarie in your PATH or set -DOPENMPI_ROOT=...")
     endif()
-        get_filename_component(OPENMPI_ROOT ${MPI_C_INCLUDE_PATH} DIRECTORY)
+    foreach(p ${MPI_C_INCLUDE_PATH})
+      get_filename_component(OPENMPI_ROOT_TEST ${p} DIRECTORY)
+      if(EXISTS "${OPENMPI_ROOT_TEST}/lib")
+        set(OPENMPI_ROOT ${OPENMPI_ROOT_TEST})
+      endif ()
+    endforeach(p) 
   endif()
 endif()
 
