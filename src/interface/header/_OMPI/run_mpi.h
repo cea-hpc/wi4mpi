@@ -931,6 +931,8 @@ ccc_linkage void *ccc_ompi_mpi_op_sum;
 ccc_linkage void *ccc_ompi_mpi_op_prod;
 ccc_linkage void *ccc_ompi_mpi_op_land;
 ccc_linkage void *ccc_ompi_mpi_op_band;
+#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 ccc_linkage void *ccc_ompi_mpi_op_lor;
 ccc_linkage void *ccc_ompi_mpi_op_bor;
 ccc_linkage void *ccc_ompi_mpi_op_lxor;

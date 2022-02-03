@@ -931,6 +931,8 @@ enum {
   int A_MPI_Intercomm_merge(A_MPI_Comm intercomm, int high,
                                        A_MPI_Comm *newintercomm);
   int A_MPI_Iprobe(int source, int tag, A_MPI_Comm comm, int *flag,
+#define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
                               A_MPI_Status *status);
   int A_MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
                              int tag, A_MPI_Comm comm, A_MPI_Request *request);

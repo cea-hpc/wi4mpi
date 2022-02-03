@@ -931,6 +931,8 @@ enum {
 //OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_wchar;
 //OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
 //
+#define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 ///*
 // * Following are the C++/C99 datatypes
 // */

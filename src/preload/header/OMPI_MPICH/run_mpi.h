@@ -1,23 +1,13 @@
-/*
-    Copyright (C) 2003-2015 Intel Corporation.  All Rights Reserved.
-    
-    The source code contained or described herein and all documents
-    related to the source code ("Material") are owned by Intel Corporation
-    or its suppliers or licensors.  Title to the Material remains with
-    Intel Corporation or its suppliers and licensors.  The Material is
-    protected by worldwide copyright and trade secret laws and treaty
-    provisions.  No part of the Material may be used, copied, reproduced,
-    modified, published, uploaded, posted, transmitted, distributed, or
-    disclosed in any way without Intel's prior express written permission.
-    
-    No license under any patent, copyright, trade secret or other
-    intellectual property right is granted to or conferred upon you by
-    disclosure or delivery of the Materials, either expressly, by
-    implication, inducement, estoppel or otherwise.  Any license under
-    such intellectual property rights must be express and approved by
-    Intel in writing.
-*/
 /* -*- Mode: C; c-basic-offset:4 ; -*- */
+//############################# Wi4MPI License ###########################
+//# Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
+//#                                                                      #
+//# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #
+//# This file is part of the Wi4MPI library.                             #
+//#                                                                      #
+//# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
+//#                                                                      #
+//########################################################################
 /*  
  *  (C) 2001 by Argonne National Laboratory.
     
@@ -59,16 +49,6 @@
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
-    Portions of this code were written by Microsoft. Those portions are
-    Copyright (c) 2007 Microsoft Corporation. Microsoft grants permission to
-    use, reproduce, prepare derivative works, and to redistribute to
-    others. The code is licensed "as is." The User bears the risk of using
-    it. Microsoft gives no express warranties, guarantees or
-    conditions. To the extent permitted by law, Microsoft excludes the
-    implied warranties of merchantability, fitness for a particular
-    purpose and non-infringement.
-    
     
  *      
  */
@@ -570,32 +550,6 @@ typedef int (R_MPI_Delete_function) ( R_MPI_Comm, int, void *, void * );
 #define MPICH_CALC_VERSION(MAJOR, MINOR, REVISION, TYPE, PATCH) \
     (((MAJOR) * 10000000) + ((MINOR) * 100000) + ((REVISION) * 1000) + ((TYPE) * 100) + (PATCH))
 
-/* I_R_MPI_VERSION is the version string. I_R_MPI_NUMVERSION is the
- * numeric version that can be used in numeric comparisons.
- *
- * I_R_MPI_VERSION uses the following format:
- * Version: [MAJ].[MIN].[REV][EXT][EXT_NUMBER]
- * Example: 1.0.7rc1 has
- *          MAJ = 1
- *          MIN = 0
- *          REV = 7
- *          EXT = rc
- *          EXT_NUMBER = 1 
- *
- * I_R_MPI_NUMVERSION will convert EXT to a format number:
- *          ALPHA (a) = 0
- *          BETA (b)  = 1
- *          RC (rc)   = 2
- *          PATCH (p) = 3
- * Regular releases are treated as patch 0
- *
- * Numeric version will have 1 digit for MAJ, 2 digits for MIN, 2
- * digits for REV, 1 digit for EXT and 2 digits for EXT_NUMBER. So,
- * 1.0.7rc1 will have the numeric version 10007201.
- */
-#define I_R_MPI_VERSION "5.1.3"
-#define I_R_MPI_NUMVERSION 50103300
-
 /* for the datatype decoders */
 enum MPIR_Combiner_enum {
     R_MPI_COMBINER_NAMED            = 1,
@@ -977,9 +931,11 @@ typedef int (MPIX_Grequest_wait_function)(int, void **, double, R_MPI_Status *);
 #define R_MPI_T_ERR_PVAR_NO_ATOMIC    72  /* Pvar can't be R/W atomically */
 
 #define R_MPI_ERR_LASTCODE    0x3fffffff  /* Last valid error code for a 
+#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 					   predefined error class */
 /* WARNING: this is also defined in mpishared.h.  Update both locations */
-#define MPICH_ERR_LAST_CLASS 72     /* It is also helpful to know the
+#define MPICH_ERR_LAST_CLASS 74     /* It is also helpful to know the
 				       last valid class */
 /* End of MPI's error classes */
 

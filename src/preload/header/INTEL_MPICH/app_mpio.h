@@ -1,23 +1,13 @@
-/*
-    Copyright (C) 2003-2015 Intel Corporation.  All Rights Reserved.
-    
-    The source code contained or described herein and all documents
-    related to the source code ("Material") are owned by Intel Corporation
-    or its suppliers or licensors.  Title to the Material remains with
-    Intel Corporation or its suppliers and licensors.  The Material is
-    protected by worldwide copyright and trade secret laws and treaty
-    provisions.  No part of the Material may be used, copied, reproduced,
-    modified, published, uploaded, posted, transmitted, distributed, or
-    disclosed in any way without Intel's prior express written permission.
-    
-    No license under any patent, copyright, trade secret or other
-    intellectual property right is granted to or conferred upon you by
-    disclosure or delivery of the Materials, either expressly, by
-    implication, inducement, estoppel or otherwise.  Any license under
-    such intellectual property rights must be express and approved by
-    Intel in writing.
-*/
 /* -*- Mode: C; c-basic-offset:4 ; -*- */
+//############################# Wi4MPI License ###########################
+//# Copyright or (C) or Copr. Commissariat a l'Energie Atomique          #
+//#                                                                      #
+//# IDDN.FR.001.210022.000.S.P.2014.000.10800                            #
+//# This file is part of the Wi4MPI library.                             #
+//#                                                                      #
+//# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
+//#                                                                      #
+//########################################################################
 /* 
  *
  *   Copyright (C) 1997 University of Chicago. 
@@ -60,16 +50,6 @@
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
-    Portions of this code were written by Microsoft. Those portions are
-    Copyright (c) 2007 Microsoft Corporation. Microsoft grants permission to
-    use, reproduce, prepare derivative works, and to redistribute to
-    others. The code is licensed "as is." The User bears the risk of using
-    it. Microsoft gives no express warranties, guarantees or
-    conditions. To the extent permitted by law, Microsoft excludes the
-    implied warranties of merchantability, fitness for a particular
-    purpose and non-infringement.
-    
     
  *   
  */
