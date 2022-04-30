@@ -132,6 +132,9 @@ endif()
 #Setting wi4mpi.cfg
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg)
 
+#Copy share
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/share DESTINATION .)
+
 #Source subdirectory
 add_subdirectory(src)
 enable_testing ()
