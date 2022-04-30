@@ -124,31 +124,6 @@ endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
 
-find_package(MPI REQUIRED) 
-if(MPI_C_FOUND AND MPI_Fortran_FOUND) #Need to be OpenMPI
-  if(NOT DEFINED OPENMPI_ROOT)
-    execute_process(COMMAND "${MPI_C_COMPILER}" --showme:version
-                    OUTPUT_VARIABLE ERR_VAR1
-                    OUTPUT_FILE "compiler_version"
-                    ERROR_QUIET)
-    execute_process(COMMAND "grep" -i "Open MPI"
-                    INPUT_FILE "compiler_version"
-                    OUTPUT_VARIABLE ERR_VAR2
-                    RESULT_VARIABLE COMMAND_RESULT1
-                    ERROR_QUIET)
-    message(STATUS "res command : ${ERR_VAR2}")
-    if(NOT ERR_VAR2)
-      message(FATAL_ERROR "Be sure to have an OpenMPI librarie in your PATH or set -DOPENMPI_ROOT=...")
-    endif()
-    foreach(p ${MPI_C_INCLUDE_PATH})
-      get_filename_component(OPENMPI_ROOT_TEST ${p} DIRECTORY)
-      if(EXISTS "${OPENMPI_ROOT_TEST}/lib")
-        set(OPENMPI_ROOT ${OPENMPI_ROOT_TEST})
-      endif ()
-    endforeach(p) 
-  endif()
-endif()
-
 find_package(Threads)
 if(NOT CMAKE_THREAD_LIBS_INIT)
     message(FATAL_ERROR "Be sure to have Pthread available on you system")
@@ -156,7 +131,6 @@ endif()
 
 #Setting wi4mpi.cfg
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg)
-
 
 #Source subdirectory
 add_subdirectory(src)

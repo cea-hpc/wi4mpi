@@ -1,3 +1,9 @@
+# For now, testing requires cmake -DOPENMPI_ROOT=/path/to/ompi/
+if [[ ! -n "@OPENMPI_ROOT@" ]]; then
+    echo "Error: tests require 'cmake -DOPENMPI_ROOT=/path/to/ompi/' option!"
+    exit 1
+fi
+
 # Batch scheduler configuration to running tests
 export WI4MPI_MPRUN=@WI4MPI_MPRUN@
 export WI4MPI_PARTITION=@WI4MPI_PARTITION@

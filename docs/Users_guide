@@ -83,11 +83,17 @@ WI4MPI specific variables
     Possible options: INTEL(default), GNU, PGI, LLVM, ARMCLANG, FUJITSU
 
 - OPENMPI_ROOT
-    If CMAKE is not able to find OPENMPI_ROOT, one must add -DOPENMPI_ROOT=/path/to/openmpi option.
-    ```
-    CMake Error at CMakeLists.txt:xxx (message):
-    Be sure to have an OpenMPI librarie in your PATH or set -DOPENMPI_ROOT=...
-    ```
+    Open MPI root dir, put in wi4mpi.cfg, could be added manually, optionnal value.
+    This variable is required for Testing, one must add -DOPENMPI_ROOT=/path/to/openmpi option.
+
+- INTELMPI_ROOT
+    Intel MPI root dir, put in wi4mpi.cfg, could be added manually, optionnal value.
+
+- MPC_ROOT
+    MPC root dir, put in wi4mpi.cfg, could be added manually, optionnal value.
+
+- MPICH_ROOT
+    MPICH root dir, put in wi4mpi.cfg, could be added manually, optionnal value.
 
 - WI4MPI_REALEASE
 

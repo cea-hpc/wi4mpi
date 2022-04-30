@@ -15,7 +15,6 @@ Interface :
 ### Prerequisites
 
 * C and Fortran compiler
-* [OpenMPI](https://www.open-mpi.org/)
 
 WI4MPI has been tested on GNU/Linux only
 
