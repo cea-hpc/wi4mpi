@@ -81,10 +81,10 @@ void A_f_MPI_Send(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Send_print)
-    debug_printer("MPI_Send : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
-                  "%*d\n}\n",
-                  buf, count, datatype, dest, tag, comm, ret);
+    debug_printer(
+        "MPI_Send : \n{\nbuf : %p,\ncount : %*d,\ndatatype : %*D,\ndest : "
+        "%*d,\ntag : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        buf, count, datatype, dest, tag, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -138,10 +138,10 @@ void A_f_MPI_Recv(void *buf, int *count, int *datatype, int *source, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Recv_print)
-    debug_printer("MPI_Recv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\nsource : %*d,\ntag : %*d,\ncomm : %*C,\nstatus : "
-                  "%n,\nerror/return : %*d\n}\n",
-                  buf, count, datatype, source, tag, comm, status, ret);
+    debug_printer(
+        "MPI_Recv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : %*D,\nsource : "
+        "%*d,\ntag : %*d,\ncomm : %*C,\nstatus : %n,\nerror/return : %*d\n}\n",
+        buf, count, datatype, source, tag, comm, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -227,10 +227,10 @@ void A_f_MPI_Bsend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Bsend_print)
-    debug_printer("MPI_Bsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
-                  "%*d\n}\n",
-                  buf, count, datatype, dest, tag, comm, ret);
+    debug_printer(
+        "MPI_Bsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : %*D,\ndest : "
+        "%*d,\ntag : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        buf, count, datatype, dest, tag, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -275,10 +275,10 @@ void A_f_MPI_Ssend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ssend_print)
-    debug_printer("MPI_Ssend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
-                  "%*d\n}\n",
-                  buf, count, datatype, dest, tag, comm, ret);
+    debug_printer(
+        "MPI_Ssend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : %*D,\ndest : "
+        "%*d,\ntag : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        buf, count, datatype, dest, tag, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -323,10 +323,10 @@ void A_f_MPI_Rsend(void *buf, int *count, int *datatype, int *dest, int *tag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rsend_print)
-    debug_printer("MPI_Rsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\ndest : %*d,\ntag : %*d,\ncomm : %*C,\nerror/return : "
-                  "%*d\n}\n",
-                  buf, count, datatype, dest, tag, comm, ret);
+    debug_printer(
+        "MPI_Rsend : \n{\nbuf : %p,\ncount : %*d,\ndatatype : %*D,\ndest : "
+        "%*d,\ntag : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        buf, count, datatype, dest, tag, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1331,13 +1331,13 @@ void A_f_MPI_Sendrecv(void *sendbuf, int *sendcount, int *sendtype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Sendrecv_print)
-    debug_printer("MPI_Sendrecv : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\ndest : %*d,\nsendtag : %*d,\nrecvbuf "
-                  ": %p,\nrecvcount : %*d,\nrecvtype : %*D,\nsource : "
-                  "%*d,\nrecvtag : %*d,\ncomm : %*C,\nstatus : "
-                  "%n,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, dest, sendtag, recvbuf,
-                  recvcount, recvtype, source, recvtag, comm, status, ret);
+    debug_printer(
+        "MPI_Sendrecv : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\ndest : %*d,\nsendtag : %*d,\nrecvbuf : %p,\nrecvcount : "
+        "%*d,\nrecvtype : %*D,\nsource : %*d,\nrecvtag : %*d,\ncomm : "
+        "%*C,\nstatus : %n,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, dest, sendtag, recvbuf, recvcount,
+        recvtype, source, recvtag, comm, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1402,12 +1402,12 @@ void A_f_MPI_Sendrecv_replace(void *buf, int *count, int *datatype, int *dest,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Sendrecv_replace_print)
-    debug_printer("MPI_Sendrecv_replace : \n{\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\ndest : %*d,\nsendtag : %*d,\nsource "
-                  ": %*d,\nrecvtag : %*d,\ncomm : %*C,\nstatus : "
-                  "%n,\nerror/return : %*d\n}\n",
-                  buf, count, datatype, dest, sendtag, source, recvtag, comm,
-                  status, ret);
+    debug_printer(
+        "MPI_Sendrecv_replace : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
+        "%*D,\ndest : %*d,\nsendtag : %*d,\nsource : %*d,\nrecvtag : "
+        "%*d,\ncomm : %*C,\nstatus : %n,\nerror/return : %*d\n}\n",
+        buf, count, datatype, dest, sendtag, source, recvtag, comm, status,
+        ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1487,10 +1487,10 @@ void A_f_MPI_Type_vector(int *count, int *blocklength, int *stride,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_vector_print)
-    debug_printer("MPI_Type_vector : \n{\ncount : %*d,\nblocklength : "
-                  "%*d,\nstride : %*d,\noldtype : %*D,\nnewtype : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  count, blocklength, stride, oldtype, newtype, ret);
+    debug_printer(
+        "MPI_Type_vector : \n{\ncount : %*d,\nblocklength : %*d,\nstride : "
+        "%*d,\noldtype : %*D,\nnewtype : %*d,\nerror/return : %*d\n}\n",
+        count, blocklength, stride, oldtype, newtype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1530,10 +1530,10 @@ void A_f_MPI_Type_hvector(int *count, int *blocklength, size_t *stride,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_hvector_print)
-    debug_printer("MPI_Type_hvector : \n{\ncount : %*d,\nblocklength : "
-                  "%*d,\nstride : %*d,\noldtype : %*D,\nnewtype : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  count, blocklength, stride, oldtype, newtype, ret);
+    debug_printer(
+        "MPI_Type_hvector : \n{\ncount : %*d,\nblocklength : %*d,\nstride : "
+        "%*d,\noldtype : %*D,\nnewtype : %*d,\nerror/return : %*d\n}\n",
+        count, blocklength, stride, oldtype, newtype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -1619,12 +1619,12 @@ void A_f_MPI_Type_hindexed(int *count, int *array_of_blocklengths,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_hindexed_print)
-    debug_printer("MPI_Type_hindexed : \n{\ncount : "
-                  "%*d,\narray_of_blocklengths : %*d,\narray_of_displacements "
-                  ": %*d,\noldtype : %*D,\nnewtype : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  count, array_of_blocklengths, array_of_displacements, oldtype,
-                  newtype, ret);
+    debug_printer(
+        "MPI_Type_hindexed : \n{\ncount : %*d,\narray_of_blocklengths : "
+        "%*d,\narray_of_displacements : %*d,\noldtype : %*D,\nnewtype : "
+        "%*d,\nerror/return : %*d\n}\n",
+        count, array_of_blocklengths, array_of_displacements, oldtype, newtype,
+        ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2304,12 +2304,12 @@ void A_f_MPI_Gatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Gatherv_print)
-    debug_printer("MPI_Gatherv : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
-                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
-                  "%*C,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
-                  recvtype, root, comm, ret);
+    debug_printer(
+        "MPI_Gatherv : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcounts : %*d,\ndispls : %*d,\nrecvtype : "
+        "%*D,\nroot : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype,
+        root, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2363,12 +2363,12 @@ void A_f_MPI_Scatter(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scatter_print)
-    debug_printer("MPI_Scatter : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
-                  "%*C,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
-                  root, comm, ret);
+    debug_printer(
+        "MPI_Scatter : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : "
+        "%*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm,
+        ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2423,12 +2423,12 @@ void A_f_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scatterv_print)
-    debug_printer("MPI_Scatterv : \n{\nsendbuf : %p,\nsendcounts : "
-                  "%*d,\ndispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%p,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : "
-                  "%*C,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount,
-                  recvtype, root, comm, ret);
+    debug_printer(
+        "MPI_Scatterv : \n{\nsendbuf : %p,\nsendcounts : %*d,\ndispls : "
+        "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : "
+        "%*D,\nroot : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, sendcounts, displs, sendtype, recvbuf, recvcount, recvtype,
+        root, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2535,12 +2535,12 @@ void A_f_MPI_Allgatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Allgatherv_print)
-    debug_printer("MPI_Allgatherv : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
-                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : "
-                  "%*C,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
-                  recvtype, comm, ret);
+    debug_printer(
+        "MPI_Allgatherv : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcounts : %*d,\ndispls : %*d,\nrecvtype : "
+        "%*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype,
+        comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2648,12 +2648,12 @@ void A_f_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoallv_print)
-    debug_printer("MPI_Alltoallv : \n{\nsendbuf : %p,\nsendcounts : "
-                  "%*d,\nsdispls : %*d,\nsendtype : %*D,\nrecvbuf : "
-                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtype : "
-                  "%*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts,
-                  rdispls, recvtype, comm, ret);
+    debug_printer(
+        "MPI_Alltoallv : \n{\nsendbuf : %p,\nsendcounts : %*d,\nsdispls : "
+        "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : %*d,\nrdispls : "
+        "%*d,\nrecvtype : %*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, sendcounts, sdispls, sendtype, recvbuf, recvcounts, rdispls,
+        recvtype, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -2927,10 +2927,10 @@ void A_f_MPI_Scan(void *sendbuf, void *recvbuf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Scan_print)
-    debug_printer("MPI_Scan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nop : %*d,\ncomm : %*C,\nerror/return "
-                  ": %*d\n}\n",
-                  sendbuf, recvbuf, count, datatype, op, comm, ret);
+    debug_printer(
+        "MPI_Scan : \n{\nsendbuf : %p,\nrecvbuf : %p,\ncount : %*d,\ndatatype "
+        ": %*D,\nop : %*d,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, recvbuf, count, datatype, op, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4212,10 +4212,10 @@ void A_f_MPI_Cart_shift(int *comm, int *direction, int *disp, int *rank_source,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_shift_print)
-    debug_printer("MPI_Cart_shift : \n{\ncomm : %*C,\ndirection : %*d,\ndisp : "
-                  "%*d,\nrank_source : %*d,\nrank_dest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  comm, direction, disp, rank_source, rank_dest, ret);
+    debug_printer(
+        "MPI_Cart_shift : \n{\ncomm : %*C,\ndirection : %*d,\ndisp : "
+        "%*d,\nrank_source : %*d,\nrank_dest : %*d,\nerror/return : %*d\n}\n",
+        comm, direction, disp, rank_source, rank_dest, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4308,9 +4308,9 @@ void A_f_MPI_Errhandler_create(void *function, int *errhandler, int *ret) {
   in_w = 0;
 
 /*A_MPI_Errhandler errhandler_tmp;
-*ret=A_MPI_Errhandler_create(function,&errhandler_tmp);
-*errhandler=(int)errhandler_tmp;
-*/ // in_w=0;
+ *ret=A_MPI_Errhandler_create(function,&errhandler_tmp);
+ *errhandler=(int)errhandler_tmp;
+ *///in_w=0;
 #ifdef DEBUG
   printf("sort : A_f_MPI_Errhandler_create %d\n", *errhandler);
 #endif
@@ -4617,10 +4617,10 @@ void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_accept_print)
-    debug_printer("MPI_Comm_accept : \n{\nport_name : %*d,\ninfo : %*d,\nroot "
-                  ": %*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : "
-                  "%*d\n}\n",
-                  port_name, info, root, comm, newcomm, ret);
+    debug_printer(
+        "MPI_Comm_accept : \n{\nport_name : %*d,\ninfo : %*d,\nroot : "
+        "%*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
+        port_name, info, root, comm, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4664,10 +4664,10 @@ void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_connect_print)
-    debug_printer("MPI_Comm_connect : \n{\nport_name : %*d,\ninfo : %*d,\nroot "
-                  ": %*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : "
-                  "%*d\n}\n",
-                  port_name, info, root, comm, newcomm, ret);
+    debug_printer(
+        "MPI_Comm_connect : \n{\nport_name : %*d,\ninfo : %*d,\nroot : "
+        "%*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
+        port_name, info, root, comm, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4917,13 +4917,13 @@ void A_f_MPI_Accumulate(void *origin_addr, int *origin_count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Accumulate_print)
-    debug_printer("MPI_Accumulate : \n{\norigin_addr : %p,\norigin_count : "
-                  "%*d,\norigin_datatype : %*D,\ntarget_rank : "
-                  "%*d,\ntarget_disp : %*d,\ntarget_count : "
-                  "%*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  origin_addr, origin_count, origin_datatype, target_rank,
-                  target_disp, target_count, target_datatype, op, win, ret);
+    debug_printer(
+        "MPI_Accumulate : \n{\norigin_addr : %p,\norigin_count : "
+        "%*d,\norigin_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
+        "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
+        "%*d,\nerror/return : %*d\n}\n",
+        origin_addr, origin_count, origin_datatype, target_rank, target_disp,
+        target_count, target_datatype, op, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -4977,13 +4977,13 @@ void A_f_MPI_Get(void *origin_addr, int *origin_count, int *origin_datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_print)
-    debug_printer("MPI_Get : \n{\norigin_addr : %p,\norigin_count : "
-                  "%*d,\norigin_datatype : %*D,\ntarget_rank : "
-                  "%*d,\ntarget_disp : %*d,\ntarget_count : "
-                  "%*d,\ntarget_datatype : %*D,\nwin : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  origin_addr, origin_count, origin_datatype, target_rank,
-                  target_disp, target_count, target_datatype, win, ret);
+    debug_printer(
+        "MPI_Get : \n{\norigin_addr : %p,\norigin_count : "
+        "%*d,\norigin_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
+        "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nwin : "
+        "%*d,\nerror/return : %*d\n}\n",
+        origin_addr, origin_count, origin_datatype, target_rank, target_disp,
+        target_count, target_datatype, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5036,13 +5036,13 @@ void A_f_MPI_Put(void *origin_addr, int *origin_count, int *origin_datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Put_print)
-    debug_printer("MPI_Put : \n{\norigin_addr : %p,\norigin_count : "
-                  "%*d,\norigin_datatype : %*D,\ntarget_rank : "
-                  "%*d,\ntarget_disp : %*d,\ntarget_count : "
-                  "%*d,\ntarget_datatype : %*D,\nwin : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  origin_addr, origin_count, origin_datatype, target_rank,
-                  target_disp, target_count, target_datatype, win, ret);
+    debug_printer(
+        "MPI_Put : \n{\norigin_addr : %p,\norigin_count : "
+        "%*d,\norigin_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
+        "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nwin : "
+        "%*d,\nerror/return : %*d\n}\n",
+        origin_addr, origin_count, origin_datatype, target_rank, target_disp,
+        target_count, target_datatype, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5123,10 +5123,10 @@ void A_f_MPI_Win_create(void *base, size_t *size, int *disp_unit, int *info,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_create_print)
-    debug_printer("MPI_Win_create : \n{\nbase : %p,\nsize : %*d,\ndisp_unit : "
-                  "%*d,\ninfo : %*d,\ncomm : %*C,\nwin : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  base, size, disp_unit, info, comm, win, ret);
+    debug_printer(
+        "MPI_Win_create : \n{\nbase : %p,\nsize : %*d,\ndisp_unit : %*d,\ninfo "
+        ": %*d,\ncomm : %*C,\nwin : %*d,\nerror/return : %*d\n}\n",
+        base, size, disp_unit, info, comm, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5526,10 +5526,10 @@ void A_f_MPI_Win_allocate(size_t *size, int *disp_unit, int *info, int *comm,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_allocate_print)
-    debug_printer("MPI_Win_allocate : \n{\nsize : %*d,\ndisp_unit : %*d,\ninfo "
-                  ": %*d,\ncomm : %*C,\nbaseptr : %p,\nwin : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  size, disp_unit, info, comm, baseptr, win, ret);
+    debug_printer(
+        "MPI_Win_allocate : \n{\nsize : %*d,\ndisp_unit : %*d,\ninfo : "
+        "%*d,\ncomm : %*C,\nbaseptr : %p,\nwin : %*d,\nerror/return : %*d\n}\n",
+        size, disp_unit, info, comm, baseptr, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5580,10 +5580,10 @@ void A_f_MPI_Win_allocate_shared(size_t *size, int *disp_unit, int *info,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_allocate_shared_print)
-    debug_printer("MPI_Win_allocate_shared : \n{\nsize : %*d,\ndisp_unit : "
-                  "%*d,\ninfo : %*d,\ncomm : %*C,\nbaseptr : %p,\nwin : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  size, disp_unit, info, comm, baseptr, win, ret);
+    debug_printer(
+        "MPI_Win_allocate_shared : \n{\nsize : %*d,\ndisp_unit : %*d,\ninfo : "
+        "%*d,\ncomm : %*C,\nbaseptr : %p,\nwin : %*d,\nerror/return : %*d\n}\n",
+        size, disp_unit, info, comm, baseptr, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5624,10 +5624,10 @@ void A_f_MPI_Win_shared_query(int *win, int *rank, size_t *size, int *disp_unit,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Win_shared_query_print)
-    debug_printer("MPI_Win_shared_query : \n{\nwin : %*d,\nrank : %*d,\nsize : "
-                  "%*d,\ndisp_unit : %*d,\nbaseptr : %p,\nerror/return : "
-                  "%*d\n}\n",
-                  win, rank, size, disp_unit, baseptr, ret);
+    debug_printer(
+        "MPI_Win_shared_query : \n{\nwin : %*d,\nrank : %*d,\nsize : "
+        "%*d,\ndisp_unit : %*d,\nbaseptr : %p,\nerror/return : %*d\n}\n",
+        win, rank, size, disp_unit, baseptr, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -5890,15 +5890,15 @@ void A_f_MPI_Get_accumulate(void *origin_addr, int *origin_count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Get_accumulate_print)
-    debug_printer("MPI_Get_accumulate : \n{\norigin_addr : %p,\norigin_count : "
-                  "%*d,\norigin_datatype : %*D,\nresult_addr : "
-                  "%p,\nresult_count : %*d,\nresult_datatype : "
-                  "%*D,\ntarget_rank : %*d,\ntarget_disp : %*d,\ntarget_count "
-                  ": %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  origin_addr, origin_count, origin_datatype, result_addr,
-                  result_count, result_datatype, target_rank, target_disp,
-                  target_count, target_datatype, op, win, ret);
+    debug_printer(
+        "MPI_Get_accumulate : \n{\norigin_addr : %p,\norigin_count : "
+        "%*d,\norigin_datatype : %*D,\nresult_addr : %p,\nresult_count : "
+        "%*d,\nresult_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
+        "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
+        "%*d,\nerror/return : %*d\n}\n",
+        origin_addr, origin_count, origin_datatype, result_addr, result_count,
+        result_datatype, target_rank, target_disp, target_count,
+        target_datatype, op, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6017,12 +6017,12 @@ void A_f_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Compare_and_swap_print)
-    debug_printer("MPI_Compare_and_swap : \n{\norigin_addr : %p,\ncompare_addr "
-                  ": %p,\nresult_addr : %p,\ndatatype : %*D,\ntarget_rank : "
-                  "%*d,\ntarget_disp : %*d,\nwin : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  origin_addr, compare_addr, result_addr, datatype, target_rank,
-                  target_disp, win, ret);
+    debug_printer(
+        "MPI_Compare_and_swap : \n{\norigin_addr : %p,\ncompare_addr : "
+        "%p,\nresult_addr : %p,\ndatatype : %*D,\ntarget_rank : "
+        "%*d,\ntarget_disp : %*d,\nwin : %*d,\nerror/return : %*d\n}\n",
+        origin_addr, compare_addr, result_addr, datatype, target_rank,
+        target_disp, win, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6281,15 +6281,15 @@ void A_f_MPI_Rget_accumulate(void *origin_addr, int *origin_count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Rget_accumulate_print)
-    debug_printer("MPI_Rget_accumulate : \n{\norigin_addr : %p,\norigin_count "
-                  ": %*d,\norigin_datatype : %*D,\nresult_addr : "
-                  "%p,\nresult_count : %*d,\nresult_datatype : "
-                  "%*D,\ntarget_rank : %*d,\ntarget_disp : %*d,\ntarget_count "
-                  ": %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
-                  "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
-                  origin_addr, origin_count, origin_datatype, result_addr,
-                  result_count, result_datatype, target_rank, target_disp,
-                  target_count, target_datatype, op, win, request, ret);
+    debug_printer(
+        "MPI_Rget_accumulate : \n{\norigin_addr : %p,\norigin_count : "
+        "%*d,\norigin_datatype : %*D,\nresult_addr : %p,\nresult_count : "
+        "%*d,\nresult_datatype : %*D,\ntarget_rank : %*d,\ntarget_disp : "
+        "%*d,\ntarget_count : %*d,\ntarget_datatype : %*D,\nop : %*d,\nwin : "
+        "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        origin_addr, origin_count, origin_datatype, result_addr, result_count,
+        result_datatype, target_rank, target_disp, target_count,
+        target_datatype, op, win, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -6749,10 +6749,10 @@ void A_f_MPI_Comm_get_attr(int *comm, int *comm_keyval, void *attribute_val,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_get_attr_print)
-    debug_printer("MPI_Comm_get_attr : \n{\ncomm : %*C,\ncomm_keyval : "
-                  "%*d,\nattribute_val : %p,\nflag : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  comm, comm_keyval, attribute_val, flag, ret);
+    debug_printer(
+        "MPI_Comm_get_attr : \n{\ncomm : %*C,\ncomm_keyval : "
+        "%*d,\nattribute_val : %p,\nflag : %*d,\nerror/return : %*d\n}\n",
+        comm, comm_keyval, attribute_val, flag, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7141,10 +7141,10 @@ void A_f_MPI_Type_get_attr(int *datatype, int *type_keyval, void *attribute_val,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_get_attr_print)
-    debug_printer("MPI_Type_get_attr : \n{\ndatatype : %*D,\ntype_keyval : "
-                  "%*d,\nattribute_val : %p,\nflag : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  datatype, type_keyval, attribute_val, flag, ret);
+    debug_printer(
+        "MPI_Type_get_attr : \n{\ndatatype : %*D,\ntype_keyval : "
+        "%*d,\nattribute_val : %p,\nflag : %*d,\nerror/return : %*d\n}\n",
+        datatype, type_keyval, attribute_val, flag, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -7866,10 +7866,10 @@ void A_f_MPI_Type_create_resized(int *oldtype, size_t *lb, size_t *extent,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_resized_print)
-    debug_printer("MPI_Type_create_resized : \n{\noldtype : %*D,\nlb : "
-                  "%*d,\nextent : %*d,\nnewtype : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  oldtype, lb, extent, newtype, ret);
+    debug_printer(
+        "MPI_Type_create_resized : \n{\noldtype : %*D,\nlb : %*d,\nextent : "
+        "%*d,\nnewtype : %*d,\nerror/return : %*d\n}\n",
+        oldtype, lb, extent, newtype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8239,10 +8239,10 @@ void A_f_MPI_Dist_graph_neighbors_count(int *comm, int *indegree,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_neighbors_count_print)
-    debug_printer("MPI_Dist_graph_neighbors_count : \n{\ncomm : %*C,\nindegree "
-                  ": %*d,\noutdegree : %*d,\nweighted : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  comm, indegree, outdegree, weighted, ret);
+    debug_printer(
+        "MPI_Dist_graph_neighbors_count : \n{\ncomm : %*C,\nindegree : "
+        "%*d,\noutdegree : %*d,\nweighted : %*d,\nerror/return : %*d\n}\n",
+        comm, indegree, outdegree, weighted, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8292,10 +8292,10 @@ void A_f_MPI_Improbe(int *source, int *tag, int *comm, int *flag, int *message,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Improbe_print)
-    debug_printer("MPI_Improbe : \n{\nsource : %*d,\ntag : %*d,\ncomm : "
-                  "%*C,\nflag : %*d,\nmessage : %*d,\nstatus : "
-                  "%n,\nerror/return : %*d\n}\n",
-                  source, tag, comm, flag, message, status, ret);
+    debug_printer(
+        "MPI_Improbe : \n{\nsource : %*d,\ntag : %*d,\ncomm : %*C,\nflag : "
+        "%*d,\nmessage : %*d,\nstatus : %n,\nerror/return : %*d\n}\n",
+        source, tag, comm, flag, message, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8342,10 +8342,10 @@ void A_f_MPI_Imrecv(void *buf, int *count, int *datatype, int *message,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Imrecv_print)
-    debug_printer("MPI_Imrecv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\nmessage : %*d,\nrequest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  buf, count, datatype, message, request, ret);
+    debug_printer(
+        "MPI_Imrecv : \n{\nbuf : %p,\ncount : %*d,\ndatatype : %*D,\nmessage : "
+        "%*d,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        buf, count, datatype, message, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8578,10 +8578,10 @@ void A_f_MPI_Ibcast(void *buffer, int *count, int *datatype, int *root,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ibcast_print)
-    debug_printer("MPI_Ibcast : \n{\nbuffer : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\nroot : %*d,\ncomm : %*C,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  buffer, count, datatype, root, comm, request, ret);
+    debug_printer(
+        "MPI_Ibcast : \n{\nbuffer : %p,\ncount : %*d,\ndatatype : %*D,\nroot : "
+        "%*d,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        buffer, count, datatype, root, comm, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8639,12 +8639,12 @@ void A_f_MPI_Igather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Igather_print)
-    debug_printer("MPI_Igather : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : %*C,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
-                  root, comm, request, ret);
+    debug_printer(
+        "MPI_Igather : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : "
+        "%*d,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm,
+        request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8702,12 +8702,12 @@ void A_f_MPI_Iscatter(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iscatter_print)
-    debug_printer("MPI_Iscatter : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\nroot : %*d,\ncomm : %*C,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
-                  root, comm, request, ret);
+    debug_printer(
+        "MPI_Iscatter : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : %*D,\nroot : "
+        "%*d,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, root, comm,
+        request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8765,12 +8765,12 @@ void A_f_MPI_Iallgather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallgather_print)
-    debug_printer("MPI_Iallgather : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
-                  comm, request, ret);
+    debug_printer(
+        "MPI_Iallgather : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : %*D,\ncomm : "
+        "%*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm,
+        request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -8828,12 +8828,12 @@ void A_f_MPI_Ialltoall(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ialltoall_print)
-    debug_printer("MPI_Ialltoall : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
-                  comm, request, ret);
+    debug_printer(
+        "MPI_Ialltoall : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : %*D,\ncomm : "
+        "%*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm,
+        request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9174,12 +9174,12 @@ void A_f_MPI_Ineighbor_allgather(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_allgather_print)
-    debug_printer("MPI_Ineighbor_allgather : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
-                  comm, request, ret);
+    debug_printer(
+        "MPI_Ineighbor_allgather : \n{\nsendbuf : %p,\nsendcount : "
+        "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : "
+        "%*D,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm,
+        request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9236,12 +9236,12 @@ void A_f_MPI_Ineighbor_alltoall(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Ineighbor_alltoall_print)
-    debug_printer("MPI_Ineighbor_alltoall : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : "
-                  "%*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype,
-                  comm, request, ret);
+    debug_printer(
+        "MPI_Ineighbor_alltoall : \n{\nsendbuf : %p,\nsendcount : "
+        "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcount : %*d,\nrecvtype : "
+        "%*D,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcount, recvtype, comm,
+        request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9399,10 +9399,10 @@ void A_f_MPI_Comm_split_type(int *comm, int *split_type, int *key, int *info,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Comm_split_type_print)
-    debug_printer("MPI_Comm_split_type : \n{\ncomm : %*C,\nsplit_type : "
-                  "%*d,\nkey : %*d,\ninfo : %*d,\nnewcomm : %*C,\nerror/return "
-                  ": %*d\n}\n",
-                  comm, split_type, key, info, newcomm, ret);
+    debug_printer(
+        "MPI_Comm_split_type : \n{\ncomm : %*C,\nsplit_type : %*d,\nkey : "
+        "%*d,\ninfo : %*d,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
+        comm, split_type, key, info, newcomm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -9980,10 +9980,10 @@ void A_f_MPI_File_read_at(int *fh, int *offset, void *buf, int *count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_at_print)
-    debug_printer("MPI_File_read_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
-                  "%p,\ncount : %*d,\ndatatype : %*D,\nstatus : "
-                  "%n,\nerror/return : %*d\n}\n",
-                  fh, offset, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_read_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, offset, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10079,10 +10079,10 @@ void A_f_MPI_File_write_at(int *fh, int *offset, void *buf, int *count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_at_print)
-    debug_printer("MPI_File_write_at : \n{\nfh : %*d,\noffset : %*d,\n buf : "
-                  "%p,\ncount : %*d,\ndatatype : %*D,\nstatus : "
-                  "%n,\nerror/return : %*d\n}\n",
-                  fh, offset, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_write_at : \n{\nfh : %*d,\noffset : %*d,\n buf : %p,\ncount "
+        ": %*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, offset, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10175,10 +10175,10 @@ void A_f_MPI_File_iread_at(int *fh, int *offset, void *buf, int *count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_at_print)
-    debug_printer("MPI_File_iread_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
-                  "%p,\ncount : %*d,\ndatatype : %*D,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  fh, offset, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iread_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, offset, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10221,10 +10221,10 @@ void A_f_MPI_File_iwrite_at(int *fh, int *offset, void *buf, int *count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_at_print)
-    debug_printer("MPI_File_iwrite_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
-                  "%p,\ncount : %*d,\ndatatype : %*D,\nrequest : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  fh, offset, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iwrite_at : \n{\nfh : %*d,\noffset : %*d,\nbuf : %p,\ncount "
+        ": %*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, offset, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10269,10 +10269,10 @@ void A_f_MPI_File_read(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_print)
-    debug_printer("MPI_File_read : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_read : \n{\nfh : %*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
+        "%*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10318,10 +10318,10 @@ void A_f_MPI_File_read_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_all_print)
-    debug_printer("MPI_File_read_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_read_all : \n{\nfh : %*d,\nbuf : %p,\ncount : %*d,\ndatatype "
+        ": %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10366,10 +10366,10 @@ void A_f_MPI_File_write(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_print)
-    debug_printer("MPI_File_write : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_write : \n{\nfh : %*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
+        "%*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10414,10 +10414,10 @@ void A_f_MPI_File_write_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_all_print)
-    debug_printer("MPI_File_write_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_write_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10460,10 +10460,10 @@ void A_f_MPI_File_iread(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_print)
-    debug_printer("MPI_File_iread : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iread : \n{\nfh : %*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
+        "%*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10507,10 +10507,10 @@ void A_f_MPI_File_iwrite(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_print)
-    debug_printer("MPI_File_iwrite : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iwrite : \n{\nfh : %*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
+        "%*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10661,10 +10661,10 @@ void A_f_MPI_File_read_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_shared_print)
-    debug_printer("MPI_File_read_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_read_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10709,10 +10709,10 @@ void A_f_MPI_File_write_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_shared_print)
-    debug_printer("MPI_File_write_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_write_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10755,10 +10755,10 @@ void A_f_MPI_File_iread_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_shared_print)
-    debug_printer("MPI_File_iread_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iread_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10801,10 +10801,10 @@ void A_f_MPI_File_iwrite_shared(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_shared_print)
-    debug_printer("MPI_File_iwrite_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iwrite_shared : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10850,10 +10850,10 @@ void A_f_MPI_File_read_ordered(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_ordered_print)
-    debug_printer("MPI_File_read_ordered : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_read_ordered : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -10899,10 +10899,10 @@ void A_f_MPI_File_write_ordered(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_ordered_print)
-    debug_printer("MPI_File_write_ordered : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, status, ret);
+    debug_printer(
+        "MPI_File_write_ordered : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nstatus : %n,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11013,10 +11013,10 @@ void A_f_MPI_File_read_at_all_begin(int *fh, int *offset, void *buf, int *count,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_read_at_all_begin_print)
-    debug_printer("MPI_File_read_at_all_begin : \n{\nfh : %*d,\noffset : "
-                  "%*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\nerror/return : %*d\n}\n",
-                  fh, offset, buf, count, datatype, ret);
+    debug_printer(
+        "MPI_File_read_at_all_begin : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
+        "%p,\ncount : %*d,\ndatatype : %*D,\nerror/return : %*d\n}\n",
+        fh, offset, buf, count, datatype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11100,10 +11100,10 @@ void A_f_MPI_File_write_at_all_begin(int *fh, int *offset, void *buf,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_write_at_all_begin_print)
-    debug_printer("MPI_File_write_at_all_begin : \n{\nfh : %*d,\noffset : "
-                  "%*d,\nbuf : %p,\ncount : %*d,\ndatatype : "
-                  "%*D,\nerror/return : %*d\n}\n",
-                  fh, offset, buf, count, datatype, ret);
+    debug_printer(
+        "MPI_File_write_at_all_begin : \n{\nfh : %*d,\noffset : %*d,\nbuf : "
+        "%p,\ncount : %*d,\ndatatype : %*D,\nerror/return : %*d\n}\n",
+        fh, offset, buf, count, datatype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -11824,10 +11824,10 @@ void A_f_MPI_Testany(int *count, int *array_of_requests, int *indx, int *flag,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Testany_print)
-    debug_printer("MPI_Testany : \n{\ncount : %*d,\narray_of_requests : "
-                  "%*d,\nindx : %*d,\nflag : %*d,\nstatus : %n,\nerror/return "
-                  ": %*d\n}\n",
-                  count, count, array_of_requests, indx, flag, status, ret);
+    debug_printer(
+        "MPI_Testany : \n{\ncount : %*d,\narray_of_requests : %*d,\nindx : "
+        "%*d,\nflag : %*d,\nstatus : %n,\nerror/return : %*d\n}\n",
+        count, count, array_of_requests, indx, flag, status, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12159,12 +12159,12 @@ void A_f_MPI_Alltoallw(void *sendbuf, int *sendcounts, int *sdispls,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Alltoallw_print)
-    debug_printer("MPI_Alltoallw : \n{\nsendbuf : %p,\nsendcounts : "
-                  "%*d,\nsdispls : %*d,\nsendtypes : %aD,\nrecvbuf : "
-                  "%p,\nrecvcounts : %*d,\nrdispls : %*d,\nrecvtypes : "
-                  "%aD,\ncomm : %*C,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts,
-                  rdispls, recvtypes, comm, ret);
+    debug_printer(
+        "MPI_Alltoallw : \n{\nsendbuf : %p,\nsendcounts : %*d,\nsdispls : "
+        "%*d,\nsendtypes : %aD,\nrecvbuf : %p,\nrecvcounts : %*d,\nrdispls : "
+        "%*d,\nrecvtypes : %aD,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, sendcounts, sdispls, sendtypes, recvbuf, recvcounts, rdispls,
+        recvtypes, comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12255,10 +12255,10 @@ void A_f_MPI_Group_translate_ranks(int *group1, int *n, int *ranks1,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Group_translate_ranks_print)
-    debug_printer("MPI_Group_translate_ranks : \n{\ngroup1 : %*d,\nn : "
-                  "%*d,\nranks1 : %*d,\ngroup2 : %*d,\nranks2 : "
-                  "%*d,\nerror/return : %*d\n}\n",
-                  group1, n, n, ranks1, group2, n, ranks2, ret);
+    debug_printer(
+        "MPI_Group_translate_ranks : \n{\ngroup1 : %*d,\nn : %*d,\nranks1 : "
+        "%*d,\ngroup2 : %*d,\nranks2 : %*d,\nerror/return : %*d\n}\n",
+        group1, n, n, ranks1, group2, n, ranks2, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12736,10 +12736,10 @@ void A_f_MPI_Graph_neighbors(int *comm, int *rank, int *maxneighbors,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Graph_neighbors_print)
-    debug_printer("MPI_Graph_neighbors : \n{\ncomm : %*C,\nrank : "
-                  "%*d,\nmaxneighbors : %*d,\nneighbors : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  comm, rank, maxneighbors, maxneighbors, neighbors, ret);
+    debug_printer(
+        "MPI_Graph_neighbors : \n{\ncomm : %*C,\nrank : %*d,\nmaxneighbors : "
+        "%*d,\nneighbors : %*d,\nerror/return : %*d\n}\n",
+        comm, rank, maxneighbors, maxneighbors, neighbors, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -12815,10 +12815,10 @@ void A_f_MPI_Cart_map(int *comm, int *ndims, int *dims, int *periods,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Cart_map_print)
-    debug_printer("MPI_Cart_map : \n{\ncomm : %*C,\nndims : %*d,\ndims : "
-                  "%*d,\nperiods : %*d,\nnewrank : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  comm, ndims, ndims, dims, ndims, periods, newrank, ret);
+    debug_printer(
+        "MPI_Cart_map : \n{\ncomm : %*C,\nndims : %*d,\ndims : %*d,\nperiods : "
+        "%*d,\nnewrank : %*d,\nerror/return : %*d\n}\n",
+        comm, ndims, ndims, dims, ndims, periods, newrank, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13016,12 +13016,12 @@ void A_f_MPI_Type_create_hindexed(int *count, int *array_of_blocklengths,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_hindexed_print)
-    debug_printer("MPI_Type_create_hindexed : \n{\ncount : "
-                  "%*d,\narray_of_blocklengths : %*d,\narray_of_displacements "
-                  ": %*d,\noldtype : %*D,\nnewtype : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  count, count, array_of_blocklengths, count,
-                  array_of_displacements, oldtype, newtype, ret);
+    debug_printer(
+        "MPI_Type_create_hindexed : \n{\ncount : %*d,\narray_of_blocklengths : "
+        "%*d,\narray_of_displacements : %*d,\noldtype : %*D,\nnewtype : "
+        "%*d,\nerror/return : %*d\n}\n",
+        count, count, array_of_blocklengths, count, array_of_displacements,
+        oldtype, newtype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13064,12 +13064,12 @@ void A_f_MPI_Type_create_indexed_block(int *count, int *blocklength,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_indexed_block_print)
-    debug_printer("MPI_Type_create_indexed_block : \n{\ncount : "
-                  "%*d,\nblocklength : %*d,\narray_of_displacements : "
-                  "%*d,\noldtype : %*D,\nnewtype : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  count, blocklength, count, array_of_displacements, oldtype,
-                  newtype, ret);
+    debug_printer(
+        "MPI_Type_create_indexed_block : \n{\ncount : %*d,\nblocklength : "
+        "%*d,\narray_of_displacements : %*d,\noldtype : %*D,\nnewtype : "
+        "%*d,\nerror/return : %*d\n}\n",
+        count, blocklength, count, array_of_displacements, oldtype, newtype,
+        ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13117,12 +13117,12 @@ void A_f_MPI_Type_create_hindexed_block(int *count, int *blocklength,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_hindexed_block_print)
-    debug_printer("MPI_Type_create_hindexed_block : \n{\ncount : "
-                  "%*d,\nblocklength : %*d,\narray_of_displacements : "
-                  "%*d,\noldtype : %*D,\nnewtype : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  count, blocklength, count, array_of_displacements, oldtype,
-                  newtype, ret);
+    debug_printer(
+        "MPI_Type_create_hindexed_block : \n{\ncount : %*d,\nblocklength : "
+        "%*d,\narray_of_displacements : %*d,\noldtype : %*D,\nnewtype : "
+        "%*d,\nerror/return : %*d\n}\n",
+        count, blocklength, count, array_of_displacements, oldtype, newtype,
+        ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13167,12 +13167,12 @@ void A_f_MPI_Type_create_struct(int *count, int *array_of_blocklengths,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_struct_print)
-    debug_printer("MPI_Type_create_struct : \n{\ncount : "
-                  "%*d,\narray_of_blocklengths : %*d,\narray_of_displacements "
-                  ": %*d,\narray_of_types : %aD,\nnewtype : %*d,\nerror/return "
-                  ": %*d\n}\n",
-                  count, count, array_of_blocklengths, count,
-                  array_of_displacements, count, array_of_types, newtype, ret);
+    debug_printer(
+        "MPI_Type_create_struct : \n{\ncount : %*d,\narray_of_blocklengths : "
+        "%*d,\narray_of_displacements : %*d,\narray_of_types : %aD,\nnewtype : "
+        "%*d,\nerror/return : %*d\n}\n",
+        count, count, array_of_blocklengths, count, array_of_displacements,
+        count, array_of_types, newtype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13223,12 +13223,12 @@ void A_f_MPI_Type_create_subarray(int *ndims, int *array_of_sizes,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_subarray_print)
-    debug_printer("MPI_Type_create_subarray : \n{\nndims : "
-                  "%*d,\narray_of_sizes : %*d,\narray_of_subsizes : "
-                  "%*d,\narray_of_starts : %*d,\norder : %*d,\noldtype : "
-                  "%*D,\nnewtype : %*d,\nerror/return : %*d\n}\n",
-                  ndims, ndims, array_of_sizes, ndims, array_of_subsizes,
-                  array_of_starts, order, oldtype, newtype, ret);
+    debug_printer(
+        "MPI_Type_create_subarray : \n{\nndims : %*d,\narray_of_sizes : "
+        "%*d,\narray_of_subsizes : %*d,\narray_of_starts : %*d,\norder : "
+        "%*d,\noldtype : %*D,\nnewtype : %*d,\nerror/return : %*d\n}\n",
+        ndims, ndims, array_of_sizes, ndims, array_of_subsizes, array_of_starts,
+        order, oldtype, newtype, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13287,14 +13287,14 @@ void A_f_MPI_Dist_graph_create_adjacent(int *comm_old, int *indegree,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_create_adjacent_print)
-    debug_printer("MPI_Dist_graph_create_adjacent : \n{\ncomm_old : "
-                  "%*C,\nindegree : %*d,\nsources : %*d,\nsourceweights : "
-                  "%*d,\noutdegree : %*d,\ndestinations : %*d,\ndestweights : "
-                  "%*d,\ninfo : %*d,\nreorder : %*d,\ncomm_dist_graph : "
-                  "%*C,\nerror/return : %*d\n}\n",
-                  comm_old, indegree, indegree, sources, sourceweights,
-                  outdegree, outdegree, destinations, destweights, info,
-                  reorder, comm_dist_graph, ret);
+    debug_printer(
+        "MPI_Dist_graph_create_adjacent : \n{\ncomm_old : %*C,\nindegree : "
+        "%*d,\nsources : %*d,\nsourceweights : %*d,\noutdegree : "
+        "%*d,\ndestinations : %*d,\ndestweights : %*d,\ninfo : %*d,\nreorder : "
+        "%*d,\ncomm_dist_graph : %*C,\nerror/return : %*d\n}\n",
+        comm_old, indegree, indegree, sources, sourceweights, outdegree,
+        outdegree, destinations, destweights, info, reorder, comm_dist_graph,
+        ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13347,12 +13347,12 @@ void A_f_MPI_Dist_graph_create(int *comm_old, int *n, int *sources,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Dist_graph_create_print)
-    debug_printer("MPI_Dist_graph_create : \n{\ncomm_old : %*C,\nn : "
-                  "%*d,\nsources : %*d,\ndegrees : %*d,\ndestinations : "
-                  "%*d,\nweights : %*d,\ninfo : %*d,\nreorder : "
-                  "%*d,\ncomm_dist_graph : %*C,\nerror/return : %*d\n}\n",
-                  comm_old, n, n, sources, n, degrees, n, destinations, weights,
-                  info, reorder, comm_dist_graph, ret);
+    debug_printer(
+        "MPI_Dist_graph_create : \n{\ncomm_old : %*C,\nn : %*d,\nsources : "
+        "%*d,\ndegrees : %*d,\ndestinations : %*d,\nweights : %*d,\ninfo : "
+        "%*d,\nreorder : %*d,\ncomm_dist_graph : %*C,\nerror/return : %*d\n}\n",
+        comm_old, n, n, sources, n, degrees, n, destinations, weights, info,
+        reorder, comm_dist_graph, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -13595,12 +13595,12 @@ void A_f_MPI_Iallgatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Iallgatherv_print)
-    debug_printer("MPI_Iallgatherv : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
-                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : %*C,\nrequest "
-                  ": %*d,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
-                  recvtype, comm, request, ret);
+    debug_printer(
+        "MPI_Iallgatherv : \n{\nsendbuf : %p,\nsendcount : %*d,\nsendtype : "
+        "%*D,\nrecvbuf : %p,\nrecvcounts : %*d,\ndispls : %*d,\nrecvtype : "
+        "%*D,\ncomm : %*C,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype,
+        comm, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -14049,12 +14049,12 @@ void A_f_MPI_Neighbor_allgatherv(void *sendbuf, int *sendcount, int *sendtype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Neighbor_allgatherv_print)
-    debug_printer("MPI_Neighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
-                  "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : "
-                  "%*d,\ndispls : %*d,\nrecvtype : %*D,\ncomm : "
-                  "%*C,\nerror/return : %*d\n}\n",
-                  sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs,
-                  recvtype, comm, ret);
+    debug_printer(
+        "MPI_Neighbor_allgatherv : \n{\nsendbuf : %p,\nsendcount : "
+        "%*d,\nsendtype : %*D,\nrecvbuf : %p,\nrecvcounts : %*d,\ndispls : "
+        "%*d,\nrecvtype : %*D,\ncomm : %*C,\nerror/return : %*d\n}\n",
+        sendbuf, sendcount, sendtype, recvbuf, recvcounts, displs, recvtype,
+        comm, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -14226,10 +14226,10 @@ void A_f_MPI_File_iwrite_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iwrite_all_print)
-    debug_printer("MPI_File_iwrite_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iwrite_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
@@ -14390,10 +14390,10 @@ void A_f_MPI_File_iread_all(int *fh, void *buf, int *count, int *datatype,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_File_iread_all_print)
-    debug_printer("MPI_File_iread_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
-                  "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : "
-                  "%*d\n}\n",
-                  fh, buf, count, datatype, request, ret);
+    debug_printer(
+        "MPI_File_iread_all : \n{\nfh : %*d,\nbuf : %p,\ncount : "
+        "%*d,\ndatatype : %*D,\nrequest : %*d,\nerror/return : %*d\n}\n",
+        fh, buf, count, datatype, request, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();
