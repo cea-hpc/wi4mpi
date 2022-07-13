@@ -466,27 +466,27 @@ MPI_Unpack_external
 
 
 #MPI_Pcontrol
-MPI_Win_create_errhandler
-MPI_Win_call_errhandler
-MPI_Win_set_errhandler
-MPI_Iallreduce
-MPI_Ireduce
-MPI_Ireduce_scatter
-MPI_Ireduce_scatter_block
-MPI_Iscan
-MPI_Iexscan
-MPI_File_call_errhandler
-MPI_File_create_errhandler
-MPI_T_pvar_read
-MPI_T_pvar_readreset
-MPI_T_pvar_reset
-MPI_T_pvar_session_create
-MPI_T_pvar_session_free
-MPI_T_pvar_start
-MPI_T_pvar_stop
-MPI_T_pvar_write
-MPI_T_pvar_handle_alloc
-MPI_T_pvar_handle_free
+#MPI_Win_create_errhandler
+#MPI_Win_call_errhandler
+#MPI_Win_set_errhandler
+#MPI_Iallreduce
+#MPI_Ireduce
+#MPI_Ireduce_scatter
+#MPI_Ireduce_scatter_block
+#MPI_Iscan
+#MPI_Iexscan
+#MPI_File_call_errhandler
+#MPI_File_create_errhandler
+#MPI_T_pvar_read
+#MPI_T_pvar_readreset
+#MPI_T_pvar_reset
+#MPI_T_pvar_session_create
+#MPI_T_pvar_session_free
+#MPI_T_pvar_start
+#MPI_T_pvar_stop
+#MPI_T_pvar_write
+#MPI_T_pvar_handle_alloc
+#MPI_T_pvar_handle_free
 #MPI_Errhandler_c2f
 #MPI_Errhandler_f2c
 
@@ -495,19 +495,19 @@ MPI_T_pvar_handle_free
 # Win #
 ######
 
-MPI_Win_get_attr
-MPI_Win_set_attr
+#MPI_Win_get_attr
+#MPI_Win_set_attr
 
 
 #C2ff2c#
 #------#
 
-MPI_File_f2c
-MPI_File_c2f
+#MPI_File_f2c
+#MPI_File_c2f
 #MPI_Op_f2c
 #MPI_Op_c2f
-MPI_Info_f2c
-MPI_Info_c2f
+#MPI_Info_f2c
+#MPI_Info_c2f
 ###MPI_Errhandler_c2f
 ###MPI_Errhandler_f2c
 #MPI_Group_c2f
