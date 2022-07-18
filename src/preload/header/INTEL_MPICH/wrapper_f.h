@@ -1294,8 +1294,28 @@ if(R_f_MPI_ANY_SOURCE==*cr){
 *ca=(int )A_f_MPI_ANY_SOURCE;return;}
 else
 *ca=*cr;
-
 }
+
+static inline void dest_a2r(int *ca,int *cr){
+if(A_f_MPI_ANY_SOURCE==*ca){
+*cr=(int )R_f_MPI_ANY_SOURCE;return;}
+else
+if(A_f_MPI_PROC_NULL==*ca){
+*cr=(int )R_f_MPI_PROC_NULL;return;}
+else
+*cr=*ca;
+}
+
+static inline void dest_r2a(int *ca,int *cr){
+if(R_f_MPI_ANY_SOURCE==*cr){
+*ca=(int )A_f_MPI_ANY_SOURCE;return;}
+else
+if(R_f_MPI_PROC_NULL==*cr){
+*ca=(int )A_f_MPI_PROC_NULL;return;}
+else
+*ca=*cr;
+}
+
 #define A_f_MPI_ANY_TAG -1
 
 #define R_f_MPI_ANY_TAG -1
