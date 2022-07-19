@@ -247,26 +247,12 @@
     "r2a": "topo_status_mapper",
     "debug_type":"%*d"
   },
-  "dest_converter":{
-    "local_alloc" : 0,
-    "a2r": "dest_conv_a2r",
-    "type": "int",
-    "r2a": "dest_conv_r2a",
-    "debug_type":"%d"
-  },
   "Aint_ptr_converter": {
     "local_alloc": 1, 
     "a2r": "aint_converter_a2r", 
     "type": "MPI_Aint *", 
     "r2a": "aint_converter_r2a",
     "assign": "TRUE",
-    "debug_type":"%*d"
-  }, 
-  "source_ptr_converter": {
-    "local_alloc": 1, 
-    "a2r": "source_conv_a2r", 
-    "type": "int *", 
-    "r2a": "source_conv_r2a",
     "debug_type":"%*d"
   }, 
   "op_ptr_converter": {
@@ -633,7 +619,28 @@
     "type": "int", 
     "r2a": "source_conv_r2a",
     "debug_type": "%d"
-}, 
+  }, 
+  "source_ptr_converter": {
+    "local_alloc": 1, 
+    "a2r": "source_conv_a2r", 
+    "type": "int *", 
+    "r2a": "source_conv_r2a",
+    "debug_type":"%*d"
+  }, 
+  "dest_converter":{
+    "local_alloc" : 0,
+    "a2r": "dest_conv_a2r",
+    "type": "int",
+    "r2a": "dest_conv_r2a",
+    "debug_type":"%d"
+  },
+  "dest_ptr_converter":{
+    "local_alloc" : 1,
+    "a2r": "dest_conv_a2r",
+    "type": "int *",
+    "r2a": "dest_conv_r2a",
+    "debug_type":"%*d"
+  },
   "datarep_conversion_re_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "datarep_conversion_ptr_conv_a2r", 
