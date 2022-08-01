@@ -931,9 +931,9 @@ typedef int (R_MPIX_Grequest_wait_function)(int, void **, double, R_MPI_Status *
 #define R_MPI_T_ERR_PVAR_NO_ATOMIC    72  /* Pvar can't be R/W atomically */
 
 #define R_MPI_ERR_LASTCODE    0x3fffffff  /* Last valid error code for a 
+					   predefined error class */
 #define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
-					   predefined error class */
 /* WARNING: this is also defined in mpishared.h.  Update both locations */
 #define MPICH_ERR_LAST_CLASS 74     /* It is also helpful to know the
 				       last valid class */

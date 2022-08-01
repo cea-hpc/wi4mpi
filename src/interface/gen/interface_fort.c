@@ -1251,7 +1251,7 @@ void  (*INTERFACE_F_LOCAL_MPI_Cart_shift)(int *,int *,int *,int *,int *,int *);
 
 void pmpi_cart_shift_(int * comm,int * direction,int * disp,int * rank_source,int * rank_dest,int * ret){
 
-return  INTERFACE_F_LOCAL_MPI_Cart_shift(comm, direction, disp, rank_source, rank_dest, ret);
+return  INTERFACE_F_LOCAL_MPI_Cart_shift(comm, direction, disp,rank_source,rank_dest, ret);
 }
 
 #ifdef WI4MPI_STATIC

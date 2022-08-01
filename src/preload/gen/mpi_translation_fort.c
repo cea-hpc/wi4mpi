@@ -4509,9 +4509,15 @@ void A_f_MPI_Cart_shift(int *comm, int *direction, int *disp, int *rank_source,
   int ret_tmp = 0;
 
   int comm_tmp;
+  int rank_source_tmp;
+  int rank_dest_tmp;
   comm_a2r(comm, &comm_tmp);
-  _LOCAL_MPI_Cart_shift(&comm_tmp, direction, disp, rank_source, rank_dest,
-                        &ret_tmp);
+  _LOCAL_MPI_Cart_shift(&comm_tmp, direction, disp, &rank_source_tmp,
+                        &rank_dest_tmp, &ret_tmp);
+  if (ret_tmp == R_f_MPI_SUCCESS)
+    source_r2a(rank_source, &rank_source_tmp);
+  if (ret_tmp == R_f_MPI_SUCCESS)
+    dest_r2a(rank_dest, &rank_dest_tmp);
   error_r2a(ret, &ret_tmp);
 
   in_w = 0;
