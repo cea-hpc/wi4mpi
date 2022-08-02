@@ -922,6 +922,8 @@ typedef enum {
 } MPC_T_binding;
 
 /** Initialization and Finalization */
+#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 
 /** Initialize the R_MPI_T environment
 * @arg required The level of thread safety required
@@ -931,8 +933,6 @@ typedef enum {
 int R_MPI_T_init_thread(int required, int *provided);
 
 /** Close the R_MPI_T Context
-#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
-#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 * @note R_MPI_T does refcounting
 * @return MPI Error
 */

@@ -26,6 +26,13 @@ $ cmake -DCMAKE_INSTALL_PREFIX=/path-install/wi4mpi-%version /path/to/wi4mpi/sou
 $ make -j 4 && make install
 ```
 
+You may use the following environment variables to customize the configure and build steps :
+WI4MPI_COMPILER=<INTEL, GNU, PGI, LLVM, ARMCLANG, FUJITSU>
+
+WI4MPI_RELEASE=<DEBUG, RELEASE, GCC_JITI>
+
+
+
 ## Quick start
 
 WI4MPI dedicated launcher available in /path-install/wi4mpi-%version/bin/mpirun allow an easy use of the
