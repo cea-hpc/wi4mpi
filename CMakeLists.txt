@@ -142,8 +142,14 @@ endif()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
 
 find_package(Threads)
-if(NOT CMAKE_THREAD_LIBS_INIT)
-    message(FATAL_ERROR "Be sure to have Pthread available on you system")
+if(${CMAKE_VERSION} VERSION_LESS "3.17.0")
+    if(NOT CMAKE_THREAD_LIBS_INIT)
+        message(FATAL_ERROR "Be sure to have Pthread available on your system")
+    endif()
+else()
+    if(NOT Threads_FOUND)
+        message(FATAL_ERROR "Be sure to have Pthread available on your system")
+    endif()
 endif()
 
 #Setting wi4mpi.cfg
