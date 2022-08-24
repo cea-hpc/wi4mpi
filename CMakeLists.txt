@@ -109,6 +109,23 @@ elseif(WI4MPI_COMPILER MATCHES FUJITSU)
     set(MPI_Fortran_COMPILER "mpifrt" CACHE STRING "" FORCE)
 endif()
 
+# Check presence of CC, CXX and FC compilers
+# If nothing is found, the result will be <VAR>-NOTFOUND
+find_program(CC_PATH "${CC}")
+if("${CC_PATH}" MATCHES "CC_PATH-NOTFOUND")
+    message(FATAL_ERROR "C compiler not found in PATH!
+    Current value of CC is: ${CC}")
+endif()
+find_program(CXX_PATH "${CXX}")
+if("${CXX_PATH}" MATCHES "CXX_PATH-NOTFOUND")
+    message(FATAL_ERROR "C++ compiler not found in PATH!
+    Current value of CXX is: ${CXX}")
+endif()
+find_program(FC_PATH "${FC}")
+if("${FC_PATH}" MATCHES "FC_PATH-NOTFOUND")
+    message(FATAL_ERROR "Fortran compiler not found in PATH!
+    Current value of FC is: ${FC}")
+endif()
 enable_language(C CXX Fortran)
 
 #Define the compiling option according to the choosen release
