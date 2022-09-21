@@ -4,11 +4,11 @@
 <svg
    width="301.32874mm"
    height="128.35042mm"
-   viewBox="0 0 301.32873 128.35039"
+   viewBox="0 0 301.32873 128.35041"
    version="1.1"
    id="svg2492"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   sodipodi:docname="logo-blue.svg"
+   sodipodi:docname="logo-green.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.6502679"
-     inkscape:cx="566.68951"
-     inkscape:cy="240.67004"
+     inkscape:cx="568.22734"
+     inkscape:cy="242.20787"
      inkscape:document-units="mm"
      inkscape:current-layer="g3161"
      showgrid="false"
@@ -60,7 +60,7 @@
      transform="translate(3.4518826,-143.04011)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80.0671px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:5.0042"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80.0671px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#5aa02c;fill-opacity:1;stroke:none;stroke-width:5.0042"
        x="179.5894"
        y="225.55194"
        id="text3076"><tspan
@@ -68,7 +68,7 @@
          id="tspan3074"
          x="179.5894"
          y="225.55194"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:64.0532px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:-7.65969px;fill:#0088aa;fill-opacity:1;stroke-width:5.0042">MPI</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:64.0532px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:-7.65969px;fill:#5aa02c;fill-opacity:1;stroke-width:5.0042">MPI</tspan></text>
     <g
        id="g3161"
        transform="translate(-5.7637232,0.75178998)">
@@ -98,7 +98,7 @@
          d="m 167.64917,178.21719 -29.5704,35.83532 -0.5012,10.27446 41.84964,0.7518 11.27686,-7.5179 -40.59667,0.50119 17.04058,-23.80669 z"
          style="fill:#999999;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
-         style="fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="fill:#5aa02c;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 130.2541,250.04122 h 2.06423 v 11.27387 l -2.06423,0.15879 z"
          id="path3862"
          inkscape:connector-curvature="0" />
@@ -123,26 +123,26 @@
          inkscape:connector-curvature="0"
          id="path2412"
          d="m 145.5422,206.91484 c 1.62509,12.2426 2.34081,36.15111 15.8073,36.68335 l 13.56697,0.0247 c -16.82213,-8.19786 -15.16555,-24.03827 -16.03819,-36.8377 l -5.94148,5.82921 z"
-         style="fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+         style="fill:#5aa02c;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          sodipodi:nodetypes="cccccc"
          inkscape:connector-curvature="0"
          id="path2414-2"
          d="m 180.65876,239.94822 c -0.66601,-3.26268 -4.88935,-19.67676 -10.40592,-20.18925 l 11.56214,0.0889 c 4.12828,0.19121 6.02646,22.64862 12.09576,24.10259 l -10.18357,-0.0445 c -2.34589,-0.0705 -2.10111,-1.23778 -3.06841,-3.95781 z"
-         style="fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+         style="fill:#5aa02c;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          sodipodi:nodetypes="ccccccccc"
          inkscape:connector-curvature="0"
          id="path2414-2-3"
          d="m 191.12164,219.80056 11.56214,0.0889 c 4.12828,0.19121 11.2953,29.26108 11.2953,29.26108 l 2.41249,0.14448 -6.21464,7.08176 -7.99344,-7.32644 2.94612,-0.0334 c -2.69352,-7.57935 -5.99892,-27.62999 -14.00797,-29.21654 z"
-         style="fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+         style="fill:#5aa02c;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <ellipse
          ry="6.8928089"
          rx="6.9372787"
          cy="210.50636"
          cx="196.28941"
          id="path2461"
-         style="fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:2.64583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="fill:#5aa02c;fill-opacity:1;stroke:none;stroke-width:2.64583;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
   </g>
 </svg>
