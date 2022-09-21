@@ -469,19 +469,28 @@ set(LIST_FAKECXX_MAJOR ${LIST_FAKEINTEL_MAJOR} ${LIST_FAKEOMPI_MAJOR})
 foreach(LIB ${LIST_FAKECXX})
     foreach(MAJOR ${LIST_FAKECXX_MAJOR})
         add_library(${LIB}${MAJOR} SHARED ${SOURCE_WI4MPI_EMPTY})
-        set_target_properties(${LIB}${MAJOR} PROPERTIES OUTPUT_NAME ${LIB} SOVERSION ${MAJOR})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES
+            LIBRARY_OUTPUT_NAME ${LIB}
+            LIBRARY_OUTPUT_DIRECTORY MAJOR_${MAJOR}
+            SOVERSION ${MAJOR})
     endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
     foreach(MAJOR ${LIST_FAKEINTEL_MAJOR})
         add_library(${LIB}${MAJOR} SHARED ${SOURCE_WI4MPI_EMPTY})
-        set_target_properties(${LIB}${MAJOR} PROPERTIES OUTPUT_NAME ${LIB} SOVERSION ${MAJOR})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES
+            LIBRARY_OUTPUT_NAME ${LIB}
+            LIBRARY_OUTPUT_DIRECTORY MAJOR_${MAJOR}
+            SOVERSION ${MAJOR})
     endforeach(MAJOR)
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEOMPI})
     foreach(MAJOR ${LIST_FAKEOMPI_MAJOR})
         add_library(${LIB}${MAJOR} SHARED ${SOURCE_WI4MPI_EMPTY})
-        set_target_properties(${LIB}${MAJOR} PROPERTIES OUTPUT_NAME ${LIB} SOVERSION ${MAJOR})
+        set_target_properties(${LIB}${MAJOR} PROPERTIES
+            LIBRARY_OUTPUT_NAME ${LIB}
+            LIBRARY_OUTPUT_DIRECTORY MAJOR_${MAJOR}
+            SOVERSION ${MAJOR})
     endforeach(MAJOR)
 endforeach(LIB)
 
@@ -871,7 +880,7 @@ install(TARGETS
 
 foreach(LIB ${LIST_FAKECXX})
     foreach(MAJOR ${LIST_FAKECXX_MAJOR})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR}
+        install(FILES ${CMAKE_BINARY_DIR}/src/MAJOR_${MAJOR}/lib${LIB}.so.${MAJOR}
             DESTINATION libexec/wi4mpi/fakelibCXX
             RENAME lib${LIB}.so.${MAJOR}
             PERMISSIONS WORLD_READ WORLD_EXECUTE
@@ -882,7 +891,7 @@ foreach(LIB ${LIST_FAKECXX})
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
     foreach(MAJOR ${LIST_FAKEINTEL_MAJOR})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR}
+        install(FILES ${CMAKE_BINARY_DIR}/src/MAJOR_${MAJOR}/lib${LIB}.so.${MAJOR}
             DESTINATION libexec/wi4mpi/fakelibINTEL
             RENAME lib${LIB}.so.${MAJOR}
             PERMISSIONS WORLD_READ WORLD_EXECUTE
@@ -893,7 +902,7 @@ foreach(LIB ${LIST_FAKEINTEL})
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEINTEL})
     foreach(MAJOR ${LIST_FAKEINTEL_MAJOR})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR}
+        install(FILES ${CMAKE_BINARY_DIR}/src/MAJOR_${MAJOR}/lib${LIB}.so.${MAJOR}
             DESTINATION libexec/wi4mpi/fakelibMPICH
             RENAME lib${LIB}.so.${MAJOR}
             PERMISSIONS WORLD_READ WORLD_EXECUTE
@@ -904,11 +913,14 @@ foreach(LIB ${LIST_FAKEINTEL})
 endforeach(LIB)
 foreach(LIB ${LIST_FAKEOMPI})
     foreach(MAJOR ${LIST_FAKEOMPI_MAJOR})
-        install(FILES ${CMAKE_BINARY_DIR}/src/lib${LIB}.so.${MAJOR} DESTINATION libexec/wi4mpi/fakelibOMPI
+        install(FILES ${CMAKE_BINARY_DIR}/src/MAJOR_${MAJOR}/lib${LIB}.so.${MAJOR}
+            DESTINATION libexec/wi4mpi/fakelibOMPI
             RENAME lib${LIB}.so.${MAJOR}
-                PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
-                )
-        endforeach(MAJOR)
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                OWNER_READ OWNER_EXECUTE OWNER_WRITE
+                GROUP_WRITE GROUP_READ GROUP_EXECUTE
+        )
+    endforeach(MAJOR)
 endforeach(LIB)
 
 #Interface libraries
