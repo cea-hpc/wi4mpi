@@ -33,7 +33,16 @@ WI4MPI_COMPILER=<INTEL, GNU, PGI, LLVM, ARMCLANG, FUJITSU>
 
 WI4MPI_RELEASE=<DEBUG, RELEASE, GCC_JITI>
 
+### Documentation
 
+Wi4MPI documentation is built with `Sphinx`, choose your prefered format.
+Example with `html`:
+
+```
+$ cd doc/
+$ make html
+$ firefox build/html/index.html
+```
 
 ## Quick start
 
