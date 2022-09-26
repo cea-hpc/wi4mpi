@@ -1,16 +1,16 @@
 # WI4MPI
 
-![alt tag](docs/logo-full-blue.png)
+![alt tag](doc/logo-full-blue.png)
 
 This is **WI4MPI**, Wrapper Interface For MPI performing a light translation between MPI constants and MPI objects from an MPI implementation to another one.
 
 WI4MPI provides two different mode:
 
 Preload :
-![alt tag](docs/Preload.png)
+![alt tag](doc/Preload.png)
 
 Interface :
-![alt tag](docs/Interface.png)
+![alt tag](doc/Interface.png)
 
 ## Installation
 
