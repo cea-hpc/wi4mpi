@@ -426,7 +426,7 @@ Interface files:
 Get involved in WI4MPI
 ======================
 
-Generator\_guide is prerequisites to this part
+Generator Guide is prerequisites to this part
 
 Expand MPI cover of WI4MPI
 --------------------------
