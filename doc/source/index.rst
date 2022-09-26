@@ -11,6 +11,7 @@ Welcome to Wi4MPI's documentation!
    :caption: Contents:
 
    user_guide
+   tutorial
    developer_guide
    generator_guide
 
