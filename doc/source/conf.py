@@ -26,6 +26,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'sphinx_rtd_theme'
+html_logo = '../img/logo-full-blue.png'
+html_favicon = '../img/logo-square-blue.svg'
 
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
