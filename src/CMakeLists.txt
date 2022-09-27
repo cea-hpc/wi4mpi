@@ -980,6 +980,7 @@ install(FILES
         interface/interface_utils/bin/mpifort
         interface/interface_utils/bin/mpif77
         interface/interface_utils/bin/mpif90
+        interface/interface_utils/bin/mpiexec
         interface/interface_utils/bin/mpirun DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
