@@ -462,7 +462,7 @@ add_library(wi4mpi_MPICH_INTEL SHARED ${SOURCE_WI4MPI_PRELOAD})
 #Empty libraries
 set(LIST_FAKEINTEL mpi mpifort mpigf mpi_mt)
 set(LIST_FAKEINTEL_MAJOR 4 5 12)
-set(LIST_FAKEOMPI mpi mpi_mpifh mpi_usempif08 mpi_usempi_ignore_tkr)
+set(LIST_FAKEOMPI mpi mpi_mpifh mpi_usempif08 mpi_usempi_ignore_tkr libopen-rte libopen-pal)
 set(LIST_FAKEOMPI_MAJOR 1 20 40)
 set(LIST_FAKECXX mpicxx mpi_cxx)
 set(LIST_FAKECXX_MAJOR ${LIST_FAKEINTEL_MAJOR} ${LIST_FAKEOMPI_MAJOR})
