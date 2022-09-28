@@ -156,10 +156,6 @@ if [[ -z $FROM ]]; then
     [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
     [[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && { echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
     [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
-  WI4MPI_RUN_MPI_C_LIB=/path/to/libmpi.so
-  WI4MPI_RUN_MPI_F_LIB=/path/to/libmpifort.so
-  WI4MPI_RUN_MPIIO_C_LIB=/path/to/libmpi.so
-  WI4MPI_RUN_MPIIO_F_LIB=/path/to/libmpifort.so 
 
 
 
