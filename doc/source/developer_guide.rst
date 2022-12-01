@@ -141,38 +141,45 @@ there is no side effect, the code chooser analyze the stack itself.
 
 ASM Code chooser implementation (generated for each function):
 
--  .global PMPI\_Function
--  .weak MPI\_Function
--  .set MPI\_function,PMPI\_Function
--  .extern in\_w
--  .extern A\_MPI\_Function
--  .extern R\_MPI\_Function
--  .type PMPI\_Function,@function
--  .text
--  PMPI\_Function:
--  push %rbp
--  mov %rsp, %rbp
--  sub $0x20, %rsp
--  mov %rdi, -0x8(%rbp)
--  mov %rsi, -0x10(%rbp)
--  mov %rdx, -0x18(%rbp)
--  mov %rcx, -0x20(%rbp)
--  .byte 0x66
--  leaq in\_w@tlsgd(%rip), %rdi
--  .value 0x6666
--  rex64
--  call \_\_tls\_get\_addr@PLT
--  mov -0x8(%rbp), %rdi
--  mov -0x10(%rbp), %rsi
--  mov -0x18(%rbp), %rdx
--  mov -0x20(%rbp), %rcx
--  leave
--  cmpl $0x0, 0x0(%rax)
--  jne inwrap\_MPI\_Function
--  jmp (\*)A\_MPI\_Function@GOTPCREL(%rip)
--  inwrap\_MPI\_Function:
--  jmp (\*)R\_MPI\_Function@GOTPCREL(%rip)
--  .size PMPI\_Function,.-PMPI\_Function
+.. code-block:: asm
+
+    .global PMPI_Function                   # Define global PMPI_Function symbol
+    .weak MPI_Function                      # Define a weak MPI_Function symbol
+    .set MPI_function,PMPI_Function         # Set contents of MPI_function to PMPI_Function
+    .extern in_w
+    .extern A_MPI_Function
+    .extern R_MPI_Function
+    .type PMPI_Function,@function           # Set PMPI_Function type to function
+    .text
+    PMPI_Function:
+    push %rbp
+    mov %rsp, %rbp
+    ; ------------- Put arguments on stack for safekeeping
+    sub $0x20, %rsp
+    mov %rdi, -0x8(%rbp)
+    mov %rsi, -0x10(%rbp)
+    mov %rdx, -0x18(%rbp)
+    mov %rcx, -0x20(%rbp)
+    ; ------------- Access thread-local variable in_w
+    .byte 0x66
+    leaq in_w@tlsgd(%rip), %rdi             # Load address of in_w into %rdi
+    .value 0x6666
+    rex64
+    call __tls_get_addr@PLT                 # Get contents of address in %rdi into %rax
+    ; ------------- Put arguments back where we found them
+    mov -0x8(%rbp), %rdi
+    mov -0x10(%rbp), %rsi
+    mov -0x18(%rbp), %rdx
+    mov -0x20(%rbp), %rcx
+    leave                                   # Set %rsp to %rbp, then pop top of stack into %rbp
+    ; ------------ Jump to the target function
+    cmpl $0x0, 0x0(%rax)
+    jne inwrap_MPI_Function
+    jmp (*)A_MPI_Function@GOTPCREL(%rip)    # If not in wrapper call application method
+    inwrap_MPI_Function:
+    jmp (*)R_MPI_Function@GOTPCREL(%rip)    # If in wrapper call run method
+    ; ------------ Calculate symbol size
+    .size PMPI_Function,.-PMPI_Function     # Declares symbol size to be the size of the above
 
 .. code-block::
 
