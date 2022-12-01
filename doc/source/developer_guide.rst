@@ -377,7 +377,7 @@ Common files for both version of WI4MPI:
 
 - manual_wrapper.h: Contain some manual mappers for Fortran translation
 - mappers.h: Contain the a2r/r2a mappers for C translation
-- new_utils.*, new_utils_fn.*, and uthash.h: Contain all table routines
+- engine.*, engine_fn.*, and uthash.h: Contain all table routines
 - thread_safety.h: Contain the spinlock protection
 
 Preload files:
@@ -419,7 +419,7 @@ Interface files:
    -  OMPI\_INTEL: app\_mpi.h run\_mpi.h run\_mpio.h wrapper\_f.h
    -  OMPI\_OMPI: pp\_mpi.h run\_mpi.h wrapper\_f.h
 
--  lib\_cccmpi:
+-  interface\_utils:
 
    -  bin: Contain all mpi wrapper for compilation
    -  include: Contain all include exposed to users
@@ -456,7 +456,7 @@ On the library side
 -  Code the new mappers in mappers.h, new\_utils\*
 -  Update app\_mpi.h app\_mpio.h run\_mpi.h run\_mpio.h for all
    conversion of both version
--  Update headers within src/interface/lib\_cccmpi/include
+-  Update headers within src/interface/interface\_utils/include
 -  Make sure to respect the MPI norm
 
 Expand WI4MPI conversion capability
