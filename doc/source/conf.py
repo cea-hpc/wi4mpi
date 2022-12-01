@@ -9,7 +9,7 @@ import sphinx_rtd_theme
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Wi4MPI'
-copyright = '2016-2022, CEA - Commissariat de l\'Énerge Atomique'
+copyright = '2016-2022, CEA - Commissariat à l\'Énerge Atomique et aux Énergies Alternatives'
 author = 'Adrien Cotte, Vincent Ducrot, Tony Delforge'
 
 # -- General configuration ---------------------------------------------------

@@ -210,6 +210,6 @@ If you are referencing Wi4MPI in a publication, you can cite the following paper
 
 ## License
 
-Copyright 2015-2017 CEA/DAM/DIF<br />
+Copyright 2015-2022 CEA/DAM/DIF<br />
 <br />
 WI4MPI is distributed under the BSD-3-Clause OR CeCILL-B.
