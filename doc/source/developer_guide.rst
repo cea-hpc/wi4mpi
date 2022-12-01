@@ -61,12 +61,9 @@ constant object, and the spinlocks are initialized. To do so, we used
 the following syntax:
 
 .. code-block:: c++
-
     void **attribute** ((constructor)) wrapper_init {
-
-        void (*)lib_handle=dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"),RTLD_NOW); 
-        LOCAL_MPI_Function=dlsym(lib_handle,"PMPI_Function") 
-        ....
+      void(*) lib_handle = dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"), RTLD_NOW);
+      LOCAL_MPI_Function = dlsym(lib_handle, "PMPI_Function")
     }
 
 The library contain three constructor:
@@ -213,20 +210,21 @@ Example:
 
 .. code-block:: c++
 
-    A_MPI_Send(void * buf,int count,A_MPI_Datatype datatype,int dest,int tag,A_MPI_Comm comm)
-    {
-        void * buf_tmp;
-        const_buffer_conv_a2r(&buf,&buf_tmp); **mapper**
-        R_MPI_Datatype datatype_tmp;
-        datatype_conv_a2r(&datatype,&datatype_tmp); **mapper**
-        int dest_tmp;
-        dest_conv_a2r(&dest,&dest_tmp); **mapper**
-        int tag_tmp;
-        tag_conv_a2r(&tag,&tag_tmp); **mapper**
-        R_MPI_Comm comm_tmp;
-        comm_conv_a2r(&comm,&comm_tmp); **mapper**
-        int ret_tmp= LOCAL_MPI_Send( buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp, comm_tmp); **Runtime MPI_Send call**
-        return error_code_conv_r2a(ret_tmp); 
+    A_MPI_Send(void *buf, int count, A_MPI_Datatype datatype, int dest, int tag,
+               A_MPI_Comm comm) {
+      void *buf_tmp;
+      const_buffer_conv_a2r(&buf, &buf_tmp); // mapper
+      R_MPI_Datatype datatype_tmp;
+      datatype_conv_a2r(&datatype, &datatype_tmp); // mapper
+      int dest_tmp;
+      dest_conv_a2r(&dest, &dest_tmp); // mapper
+      int tag_tmp;
+      tag_conv_a2r(&tag, &tag_tmp); // mapper
+      R_MPI_Comm comm_tmp;
+      comm_conv_a2r(&comm, &comm_tmp); // mapper
+      int ret_tmp = LOCAL_MPI_Send(buf_tmp, count, datatype_tmp, dest_tmp, tag_tmp,
+                                   comm_tmp); // Runtime MPI_Send call
+      return error_code_conv_r2a(ret_tmp);
     }
 
 R\_MPI\_Function
@@ -237,11 +235,10 @@ call
 
 .. code-block:: c++
 
-    int R_MPI_Send(void * buf,int count,R_MPI_Datatype datatype,int dest,int tag,R_MPI_Comm comm) {
-
-        int ret_tmp= LOCAL_MPI_Send( buf, count, datatype, dest, tag, comm);
-
-        return ret_tmp;
+    int R_MPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+                   R_MPI_Comm comm) {
+      int ret_tmp = LOCAL_MPI_Send(buf, count, datatype, dest, tag, comm);
+      return ret_tmp;
     }
 
 Hash table
@@ -326,27 +323,24 @@ MPI\_Init example
 
 .. code-block:: c++
 
-    int MPI_Init(int * argc,char *** argv);
+    int MPI_Init(int *argc, char ***argv);
     #define MPI_Init PMPI_Init
-    #pragma weak MPI_Init=PMPI_Init
-    int (*INTERFACE_LOCAL_MPI_Init)(int *,char ***);
-    
-    int PMPI_Init(int * argc,char *** argv)
-    {
-    int ret_tmp= INTERFACE_LOCAL_MPI_Init( argc, argv);
-    return ret_tmp;
+    #pragma weak MPI_Init = PMPI_Init
+    int (*INTERFACE_LOCAL_MPI_Init)(int *, char ***);
+
+    int PMPI_Init(int *argc, char ***argv) {
+      int ret_tmp = INTERFACE_LOCAL_MPI_Init(argc, argv);
+      return ret_tmp;
     }
     __attribute__((constructor)) void wrapper_interface(void) {
-    void *interface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
-    if(!interface_handle)
-    {
-        printf("no true IC lib defined\nerror :%s\n",dlerror());
+      void *interface_handle =
+          dlopen(getenv("WI4MPI_WRAPPER_LIB"), RTLD_NOW | RTLD_GLOBAL);
+      if (!interface_handle) {
+        printf("no true IC lib defined\nerror :%s\n", dlerror());
         exit(1);
+      }
+      INTERFACE_LOCAL_MPI_Init = dlsym(interface_handle, "CCMPI_MPI_Init");
     }
-    INTERFACE_LOCAL_MPI_Init=dlsym(interface_handle,"CCMPI_MPI_Init");
-    }
-
-#*
 
 Static mode
 -----------
@@ -370,11 +364,15 @@ Common files for both version of WI4MPI:
 
 .. code-block:: c++
 
-           #ifdef IFORT_CALL
-                  void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen) **The character length is of type int**
-           #elif GFORT_CALL
-                  void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,size_t namelen) **The character length is of type size_t**
-           #endif
+    #ifdef IFORT_CALL
+    void A_f_MPI_Get_processor_name(
+        char *name, int *resultlen, int *ret,
+        int namelen) // The character length is of type int
+    #elif GFORT_CALL
+    void A_f_MPI_Get_processor_name(
+        char *name, int *resultlen, int *ret,
+        size_t namelen) // The character length is of type size_t
+    #endif
 
 - manual_wrapper.h: Contain some manual mappers for Fortran translation
 - mappers.h: Contain the a2r/r2a mappers for C translation
