@@ -37,15 +37,15 @@ prefixed by A\_. For example, with an OpenMPI ---> IntelMPI conversion.
 .. code-block::
 
     Application: MPI_Init (OpenMPI)                         MPI_Init (IntelMPI)
-                                  \                         /
+                                  \                         ^
                           Phase 1  \                       /  Phase 3
-                                    \                     /
+                                    v                     /
                                     |--------------------|
                                     | WI4MPI: A_MPI_Init |
                                     |--------------------|
-                                              |
+                                              ^
                                               | Phase 2 
-                                              | 
+                                              v 
                                           Translation
 
 Implementation
@@ -102,15 +102,15 @@ Example:
 .. code-block::
 
     Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
-                                 \                               /                      \
+                                 \                               ^                      \
                   Phase 1         \                             /         Phase 3        \
-                                   \                           /                          \
+                                   v                           /                          v
                                     |-------------------------|                      |----------------------------------------------------|
                                     | WI4MPI: A_MPI_File_open |                      | WI4MPI: A_MPI_Allreduce but with runtime arguments |
                                     |-------------------------|                      | instead of application arguments (R_ instead of A_)|
-                                                |                                    |----------------------------------------------------|
+                                                ^                                    |----------------------------------------------------|
                                                 |   Phase 2                                                     |
-                                                |                                                               |
+                                                v                                                               v
                                            Translation                                                     Translation ----> Crash
 
 To overcome this issue, we used an ASM code chooser.
@@ -184,15 +184,16 @@ ASM Code chooser implementation (generated for each function):
 .. code-block::
 
     Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
-                                 \                               /                      \
+                                 \                               ^                      \
                   Phase 1         \                             /         Phase 3        \
-                                   \                           /                          \
+                                   v                           /                          v
                                     |-------------------------|                     |-------------------------|
                                     | WI4MPI: PMPI_File_open  |                     | WI4MPI: PMPI_Allreduce  |
                                     | Testing in_w: in_w=0    |                     | Testing in_w: in_w=1    |
                                     |-------------------------|                     | ------------------------|
-                                               |    Phase 2                                      |
+                                               ^    Phase 2                                      |
                                                |                                                 |
+                                               v                                                 v
                                     A_MPI_File_open:Translation                     R_MPI_Allreduce:No Translation
 
 A\_MPI\_Function
