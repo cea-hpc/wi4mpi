@@ -9,7 +9,7 @@ Introduction
 ============
 
 MPI is a standard in HPC community which allows a simple use of
-clusters. Nowoaday, there are several implementation (OpenMPI, BullxMPI,
+clusters. Nowadays, there are several implementation (OpenMPI, BullxMPI,
 MPT, IntelMPI, MPC, ...) each of which involves a specific ABI
 (Application Binary Interface) for an application compiled with a
 specific MPI implementation. With wi4mpi, an application compiled with
@@ -17,7 +17,7 @@ an alpha MPI implementation can be run under a beta MPI implementation
 without any compilation protocol and any concern about the ABI (Preload
 version). WI4MPI can also be seen as a dedicated MPI implementation;
 This time, the application is compiled against the wi4mpi library
-(libmpi.so) whith the dedicated wrapper (mpicc,mpif90...) meant for that
+(libmpi.so) with the dedicated wrapper (mpicc,mpif90...) meant for that
 purpose, and can be run under any other MPI implementation (Interface
 Version).
 
@@ -31,7 +31,7 @@ Before performing any translation we need to distinguish the application
 side from the runtime side. To do that, any MPI object from the
 application side are prefixed by A\_ and those from the application are
 prefixed by R\_. To perform a translation, all original MPI call from
-the application is intercepted by WI4MPI and remplaced by the same call
+the application is intercepted by WI4MPI and replaced by the same call
 prefixed by A\_. For example, with an OpenMPI ---> IntelMPI conversion.
 
 .. code-block::
@@ -71,10 +71,10 @@ the following syntax:
 
 The library contain three constructor:
 
--  wrapper\_init dans test\_generation\_wrapper.c (API C) (preload and
+-  wrapper\_init in test\_generation\_wrapper.c (API C) (preload and
    interface)
--  wrapper\_init\_f dans wrapper.c (API Fortran) (preload and interface)
--  wrapper\_init\_c2ff2c dans c2f\_f2c.c (API c2f/f2c)
+-  wrapper\_init\_f in wrapper.c (API Fortran) (preload and interface)
+-  wrapper\_init\_c2ff2c in c2f\_f2c.c (API c2f/f2c)
 
 Symbol overload
 ~~~~~~~~~~~~~~~
@@ -87,9 +87,9 @@ The mpi called are intercept thanks to the following rerouting:
 (See interface\_test.c in src/interface/gen/interface\_test.c and
 src/interface/gen/interface\_fort.c) This syntax is also present but
 hidden in test\_generation\_wrapper.c (src/{preload,interface}/gen/)
-whithin an asm code chooser for the next reason.
+within an asm code chooser for the next reason.
 
-The MPI-IO implémentation (ROMIO) present within the most MPI
+The MPI-IO implementation (ROMIO) present within the most MPI
 implementation trigger some call to the MPI user interface that WI4MPI
 intercept thanks to its symbols overload protocol. It means that during
 the runtime (phase 3 above), some MPI calls are made, forcing WI4MPI to
@@ -120,7 +120,7 @@ Code chooser ASM
 
 The ASM code chooser does the simple following things:
 
-If we alreday are in the wrapper:
+If we already are in the wrapper:
 
 -  The arguments are passed without any translation protocol to the
    underlying MPI runtime call (LOCAL\_MPI\_function)
@@ -201,7 +201,7 @@ always have the same syntax :
 In case of an a2r translation, buf\_tmp represent the translation of buf
 and vice versa for an r2a translation.
 
-Exemple:
+Example:
 
 .. code-block:: c++
 
@@ -239,20 +239,20 @@ call
 Hash table
 ~~~~~~~~~~
 
-The underlying hashtable mechanism presented earlier are contained in
+The underlying hash table mechanism presented earlier are contained in
 the new\_utils.\*, new\_utils\_fn.\* and utash.h. For each MPI objects,
 two tables are created. One for the constants, and one for the MPI\_Type
-created bby the application.
+created by the application.
 
-The differents type being:
+The different type being:
 
 -  MPI\_Comm
 -  MPI\_Datatype
 -  MPI\_Errhandler
 -  MPI\_Group
 -  MPI\_Op
--  MPI\_Request **Séparé en 2 tables, afin de dissocier les requêtes
-   persistantes des requêtes non-bloquantes**
+-  MPI\_Request **Split en 2 tables, in order to dissociate the requests
+   blocking from requests non-blocking**
 -  MPI\_File
 
 The table within new\_utils\_fn.\* contain the following translation:
@@ -287,7 +287,7 @@ Interface
 The interface version of WI4MPI propose the promise as the preload
 version (one compilation, several run over different MPI
 implementation), but this time WI4MPI had to be seen as a fully MPI
-Library. All the previously section are still relevent for the
+Library. All the previously section are still relevant for the
 interface, the only things that changed is the new level name INTERFACE
 (see the schema below). This level has to be considered as a "libmpi.so"
 which is linked to the user application.
@@ -311,7 +311,7 @@ which is linked to the user application.
 The files interface\_test.c and interface\_fort.c, deal with the
 overload symbol mechanism see earlier for respectively the C and Fortran
 API, then according the conversion a dlopen is made to the appropriate
-library (WI4MPI\_WRAPPER\_LIB) responsible for the traduction (ASM code
+library (WI4MPI\_WRAPPER\_LIB) responsible for the translation (ASM code
 chooser + A\_MPI\_Function + R\_MPI\_Function).
 
 MPI\_Init example
@@ -347,8 +347,8 @@ The static mode builds an executable with every targets translation. To
 avoid conflicts, symbols are renamed as follow:
 INTERF2\_{TARGET}\_{Symbol\_name}. No more dlopen is needed (cf.
 Interface), functions pointer are choosen by 2 variables:
-WI4MPI\_STATIC\_TARGET\_TYPE\_F et WI4MPI\_STATIC\_TARGET\_TYPE. Static
-sections are controled by directives: #if(n)def WI4MPI\_STATIC / #endif
+WI4MPI\_STATIC\_TARGET\_TYPE\_F and WI4MPI\_STATIC\_TARGET\_TYPE. Static
+sections are controlled by directives: #if(n)def WI4MPI\_STATIC / #endif
 
 Common files for both version of WI4MPI:
 
@@ -369,7 +369,7 @@ Common files for both version of WI4MPI:
            #endif
 
 - manual_wrapper.h: Contain some manual mappers for Fortran translation
-- mappers.h: Contain the a2r/r2a mappers for C translattion
+- mappers.h: Contain the a2r/r2a mappers for C translation
 - new_utils.*, new_utils_fn.*, and uthash.h: Contain all table routines
 - thread_safety.h: Contain the spinlock protection
 
@@ -381,7 +381,7 @@ Preload files:
 
    -  c2f\_f2c.c:
    -  lib\_empty.c: Empty file to create empty Libraries made to
-      remplace the one from MPI use for the compilation
+      replace the one from MPI use for the compilation
    -  test\_generation\_wrapper.c: contain all C MPI function within
       WI4MPI which deal with the translation
    -  wrapper.c: contain all the Fortran MPI function within WI4MPI
@@ -405,7 +405,7 @@ Interface files:
    -  interface\_fort.c: Contain the overload symbol mechanism for
       Fortran MPI Function
    -  interface\_test.c: Contain the overload symbol mechanism for C MPI
-      Function and rerooting to CodeChooser
+      Function and rerouting to CodeChooser
 
 -  header:
 
@@ -419,7 +419,7 @@ Interface files:
 
 -  manual:
 
-   -  dlsym\_global.c : Get runtime MPI constantes
+   -  dlsym\_global.c : Get runtime MPI constants
 
 -  module: Contain all elements to create a descent module
 
@@ -437,7 +437,7 @@ On the generator side
 -  Add the function name to the func\_list\_....txt files
 -  Add the function description in the dictionary functions.json
 -  Add the new mappers (if needed) to convert the arguments in the
-   dictionay mappers.json
+   dictionary mappers.json
 -  Get involved in the generator code if some special case have to be
    handled
 -  Generate the new Fortran header for both interface and preload
@@ -450,7 +450,7 @@ On the library side
 -  Update app\_mpi.h app\_mpio.h run\_mpi.h run\_mpio.h for all
    conversion of both version
 -  Update headers within src/interface/lib\_cccmpi/include
--  Make sure to respect the MPI norme
+-  Make sure to respect the MPI norm
 
 Expand WI4MPI conversion capability
 -----------------------------------
