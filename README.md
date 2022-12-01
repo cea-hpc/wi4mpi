@@ -201,6 +201,12 @@ else if Interface --> MPC
 
 [CEA-HPC](http://www-hpc.cea.fr/)
 
+## Publications
+
+If you are referencing Wi4MPI in a publication, you can cite the following paper:
+
+* E. A. León, M. Joos et al., "On-the-Fly, Robust Translation of MPI Libraries," 2021 IEEE International Conference on Cluster Computing (CLUSTER), 2021, pp. 504-515, doi: 10.1109/Cluster48925.2021.00026.
+
 
 ## License
 
