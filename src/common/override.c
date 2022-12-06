@@ -14,6 +14,14 @@
 //#                                                                      #
 //########################################################################
 
+#include "override.h"
+#include "app_mpi.h"
+#include "engine.h"
+#include "mappers.h"
+#include "run_mpi.h"
+
+extern __thread int in_w;
+
 #ifdef MPI_WAITANY_OVERRIDE
 int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
                   A_MPI_Status *status) {
