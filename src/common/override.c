@@ -336,3 +336,22 @@ int A_MPI_Testsome(int incount, A_MPI_Request array_of_requests[],
   return error_code_conv_r2a(ret_tmp);
 }
 #endif
+
+#ifdef MPI_AINT_ADD_OVERRIDE
+A_MPI_Aint A_MPI_Aint_add(A_MPI_Aint lhs, A_MPI_Aint rhs) {
+  // The MPI 3.1 addition MPI_Aint_add is defined in MPICH as a symbol by the
+  // library, but is compiled as a macro by OpenMPI. This leads to an unresolved
+  // symbol crash when running MPICH-compiled binaries with OpenMPI.
+  //
+  // This function is meant to override the default ASM symbol chooser and
+  // reimplement the OpenMPI macro when running with OpenMPI as the R_MPI.
+
+  return lhs + rhs;
+}
+#endif
+
+#ifdef MPI_AINT_DIFF_OVERRIDE
+A_MPI_Aint A_MPI_Aint_diff(A_MPI_Aint lhs, A_MPI_Aint rhs) { // Same as above
+  return lhs - rhs;
+}
+#endif
