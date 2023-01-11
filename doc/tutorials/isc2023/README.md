@@ -16,7 +16,7 @@
 * [Translating MPI dynamically using Interface mode](interface.md)
 * [Applying Wi4MPI to distributed Python](mpi4py.md)
 * Applying Wi4MPI to containers
-   * US Exascale Computing Project: [e4s-cl](e4scl.md)
    * RedHat container runtime: [podman](podman.md)
    * CEA container runtime: [pcocc](pcocc.md)
+   * US Exascale Computing Project: [e4s-cl](e4scl.md)
 
