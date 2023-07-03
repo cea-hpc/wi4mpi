@@ -5,6 +5,10 @@
 #define A_MPI_ MPI_
 #define A_PMPI_ PMPI_
 #endif
+
+#define MPI_AINT_ADD_OVERRIDE
+#define MPI_AINT_DIFF_OVERRIDE
+
 typedef unsigned long size_t;
 typedef size_t A_MPI_Aint;
 typedef size_t A_MPI_Offset;

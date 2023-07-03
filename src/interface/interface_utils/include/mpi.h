@@ -1258,6 +1258,9 @@ enum {
   double MPI_Wtick(void);
   double MPI_Wtime(void);
 
+  MPI_Aint MPI_Aint_add(MPI_Aint, MPI_Aint);
+  MPI_Aint MPI_Aint_diff(MPI_Aint, MPI_Aint);
+
   /*
    * Profiling MPI API
    */

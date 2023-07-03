@@ -16,11 +16,8 @@
 
 #ifndef NO_OVERRIDE
 
-#define MPI_WAITANY_OVERRRIDE
-#define MPI_WAITALL_OVERRRIDE
-#define MPI_WAITSOME_OVERRRIDE
-#define MPI_TESTANY_OVERRRIDE
-#define MPI_TESTALL_OVERRRIDE
-#define MPI_TESTSOME_OVERRRIDE
+// Override a function globally by setting a macro definition here
+// Must have a matching function definition in common/override.c
+// #define MPI_XXX_OVERRIDE
 
 #endif

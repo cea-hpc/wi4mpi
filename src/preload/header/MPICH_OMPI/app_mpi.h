@@ -56,6 +56,9 @@
 #ifndef A_MPI_INCLUDED
 #define A_MPI_INCLUDED
 
+#define MPI_AINT_ADD_OVERRIDE
+#define MPI_AINT_DIFF_OVERRIDE
+
 /* user include file for MPI programs */
 #if !defined(_WIN32) && !defined(_WIN64)  /* Linux only */
 #	include <stdint.h> /* for __WORDSIZE definition */
