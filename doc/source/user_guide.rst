@@ -40,7 +40,7 @@ CMAKE specific variables
 -  WI4MPI\_COMPILER:string
 
    Indicate which compiler is used to compiled WI4MPI. Possible
-   options: INTEL(default), GNU, PGI, LLVM, ARMCLANG, FUJITSU
+   options: GCC(default), INTEL, PGI, LLVM, ARMCLANG, FUJITSU
 
 -  OPENMPI\_ROOT
    

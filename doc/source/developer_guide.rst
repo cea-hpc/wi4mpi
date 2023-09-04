@@ -29,7 +29,7 @@ How it works
 
 Before performing any translation we need to distinguish the application
 side from the runtime side. To do that, any MPI object from the
-application side are prefixed by :code:`A_` and those from the application are
+application side are prefixed by :code:`A_` and those from the runtime side are
 prefixed by :code:`R_`. To perform a translation, all original MPI calls from
 the application are intercepted by WI4MPI and replaced by the same call
 prefixed by :code:`A_`. For example, with an OpenMPI ---> IntelMPI conversion.

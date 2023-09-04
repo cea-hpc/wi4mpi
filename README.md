@@ -29,9 +29,12 @@ $ make -j 4 && make install
 ```
 
 You may use the following environment variables to customize the configure and build steps :
-WI4MPI_COMPILER=<INTEL, GNU, PGI, LLVM, ARMCLANG, FUJITSU>
-
-WI4MPI_RELEASE=<DEBUG, RELEASE, GCC_JITI>
+* `WI4MPI_COMPILER` : `<INTEL, GCC, PGI, LLVM, ARMCLANG, FUJITSU>`
+* `WI4MPI_RELEASE`  : `<DEBUG, RELEASE, GCC_JITI>`
+* `OPENMPI_ROOT`    : path to the openmpi installation root
+* `INTELMPI_ROOT`   : path to the intelmpi installation root
+* `MPC_ROOT`        : path to the mpc installation root
+* `MPICH_ROOT`      : path to the mpich installation root
 
 ### Documentation
 
@@ -48,7 +51,8 @@ $ firefox build/html/index.html
 
 WI4MPI dedicated launcher available in /path-install/wi4mpi-%version/bin/mpirun allow an easy use of the
  library. To work, users only have to set the path to the different MPI implementation installation in /
-path-install/wi4mpi-%version/etc/wi4mpi.cfg configuration file.
+path-install/wi4mpi-%version/etc/wi4mpi.cfg configuration file. This stage could be perform during the b
+uild (cf. the section **Installation/Compilation**).
 
 ```
 Usage: mpirun [MPIRUN_TARGET_OPTIONS] -- [PROGRAM] [PROGRAM_OPTIONS]

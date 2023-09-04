@@ -42,12 +42,24 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)                                  #
 
 #Default compiler for wi4mpi
 if(NOT WI4MPI_COMPILER)
-   set(WI4MPI_COMPILER INTEL)
+    set(WI4MPI_COMPILER GCC)
 endif()
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTIMEOUT_SUPPORT")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTIMEOUT_SUPPORT")
 #Define common options according to the selected compiler
-if(WI4MPI_COMPILER MATCHES GNU)
+if(WI4MPI_COMPILER MATCHES GCC)
+    set(CMAKE_C_FLAGS_NORMAL  "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread")
+    set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread -DDEBUG")
+    set(CMAKE_C_FLAGS_GCC_JIT "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread -D_WI4MPI_GCC_JIT")
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3 -fPIC -shared -pthread")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
+    set(WI4MPI_FORT_CALL "-DGFORT_CALL")
+    set(CC "gcc")
+    set(CXX "g++")
+    set(FC "gfortran")
+elseif(WI4MPI_COMPILER MATCHES GNU)
+    # GNU value is deprecated
+    message(DEPRECATION "The GNU value for WI4MPI_COMPILER is deprecated and will be removed in the future; use GCC instead. However, for reasons of backward compatibility, the GNU syntax is still valid for now.")
     set(CMAKE_C_FLAGS_NORMAL  "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread")
     set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread -DDEBUG")
     set(CMAKE_C_FLAGS_GCC_JIT "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread -D_WI4MPI_GCC_JIT")
