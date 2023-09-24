@@ -35,7 +35,7 @@ WI4MPI_RELEASE=<DEBUG, RELEASE, GCC_JITI>
 
 ### Documentation
 
-Wi4MPI documentation is built with `Sphinx`, choose your prefered format.
+Wi4MPI documentation is built with `Sphinx`, choose your preferred format.
 Example with `html`:
 
 ```
@@ -53,10 +53,10 @@ path-install/wi4mpi-%version/etc/wi4mpi.cfg configuration file.
 ```
 Usage: mpirun [MPIRUN_TARGET_OPTIONS] -- [PROGRAM] [PROGRAM_OPTIONS]
 Advanced options:
-    -F | -from | --from {FROM}      The MPI implentation from which PROGRAM was compiled with
-    -T | -to | --to {TARGET}        The MPI implentation to which PROGRAM will be run
+    -F | -from | --from {FROM}      The MPI implementation from which PROGRAM was compiled with
+    -T | -to | --to {TARGET}        The MPI implementation to which PROGRAM will be run
 
-The -F FROM option is optionnal. If not provided, the interface mode is choosen.
+The -F FROM option is optional. If not provided, the interface mode is chosen.
 ```
 
 ```
@@ -92,7 +92,7 @@ With the Interface mode a default conversion can be set during the compilation o
                               - MPC
                               - MPICH
 ```
-To set the conversion Interface to OpenMPI please preceed as follow:
+To set the conversion Interface to OpenMPI please proceed as follow:
 
 ```
 $ WI4MPI_CC=icc/gcc WI4MPI_ROOT=/path/to/wi4mpi/root mpicc -wi4mpi_default_run_path OMPI test.c -o init
@@ -129,7 +129,7 @@ WI4MPI environment variables:
 
 Preload settings:
 
-{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen conversion.
+{FROM} and {TO} can take as value OMPI or INTEL depending on the chosen conversion.
 
 ```
 export WI4MPI_RUN_MPI_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
@@ -157,7 +157,7 @@ ibINTEL:$LD_LIBRARY_PATH"
 
 Interface settings:
 
-{FROM} and {TO} can take as value OMPI, INTEL or MPC depending on the choosen conversion.
+{FROM} and {TO} can take as value OMPI, INTEL or MPC depending on the chosen conversion.
 
 ```
 export WI4MPI_INTERNAL_INCLUDES="path_to_install/INTERNAL/include"
