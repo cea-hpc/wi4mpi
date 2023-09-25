@@ -16486,6 +16486,13 @@ int A_MPI_Init_thread(int *argc, char ***argv, int required, int *provided) {
   in_w = 1;
 
   int ret_tmp = LOCAL_MPI_Init_thread(argc, argv, required, provided);
+  int wi4mpi_rank;
+  R_MPI_Comm_rank(R_MPI_COMM_WORLD, &wi4mpi_rank);
+  if (wi4mpi_rank == 0)
+    fprintf(stdout,
+            "You are using Wi4MPI-%s with the mode interface From Interface To "
+            "%s\n",
+            getenv("WI4MPI_VERSION"), getenv("WI4MPI_TO"));
 
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
