@@ -626,7 +626,7 @@ class generator:
                 str=str+'\n'+self.print_symbol_c(func_dict,prefix='LOCAL_',name_arg_postfix='_tmp',name_arg=True,retval_name=True,app_side=False,call=True, type_prefix='R_')+';'
                 if func_dict['name'] == 'MPI_Attr_put' and self.name == 'Wrapper_Interface_C':
                     str=str+'if(tt&&ret_tmp!=R_MPI_SUCCESS) tt->ref--;'
-                if func_dict['name'] == 'MPI_Init':
+                if func_dict['name'] == 'MPI_Init' or func_dict['name'] == 'MPI_Init_thread':
                     str=str+"\nint wi4mpi_rank;\n"
                     str=str+"R_MPI_Comm_rank(R_MPI_COMM_WORLD,&wi4mpi_rank);\n"
                     str=str+"if(wi4mpi_rank==0)\n"
@@ -723,6 +723,14 @@ class generator:
                         string=string+','+assoc['value']
                     string=string+');'
         string=string+'\n'+self.print_return_conv_f(func_dict)
+        if func_dict['name'] == 'MPI_Init' or func_dict['name'] == 'MPI_Init_thread':
+            string=string+"\nint wi4mpi_rank;\n"
+            string=string+"R_MPI_Comm_rank(R_MPI_COMM_WORLD,&wi4mpi_rank);\n"
+            string=string+"if(wi4mpi_rank==0)\n"
+            if self.name == 'Wrapper_Interface_F':
+                string=string+"\tfprintf(stdout,\"You are using Wi4MPI-%s with the mode interface From Interface To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_TO\"));"
+            else:
+                string=string+"\tfprintf(stdout,\"You are using Wi4MPI-%s with the mode preload From %s To %s\\n\", getenv(\"WI4MPI_VERSION\"), getenv(\"WI4MPI_FROM\"), getenv(\"WI4MPI_TO\"));"
         string=string+self.footer_func(func_dict)
         return string
     
