@@ -165,7 +165,7 @@ int *p_##varname;\
 int l##varname;\
 int max##varname;\
 int varname##_size;\
-pthread_spinlock_t varname##_vLock=1;\
+pthread_spinlock_t varname##_vLock;\
 table_lock_t varname##_Lock=&varname##_vLock;\
 size_t *varname##cte_list;\
 int  varname##cte_list_size;\
@@ -318,7 +318,7 @@ int *p_##varname;\
 int l##varname;\
 int max##varname;\
 int varname##_size;\
-pthread_spinlock_t varname##_vLock=1;\
+pthread_spinlock_t varname##_vLock;\
 table_lock_t varname##_Lock=&varname##_vLock;\
 size_t *varname##cte_list;\
 int  varname##cte_list_size;\
@@ -554,7 +554,7 @@ int *p_##varname;\
 int l##varname;\
 int max##varname;\
 int varname##_size;\
-pthread_spinlock_t varname##_vLock=1;\
+pthread_spinlock_t varname##_vLock;\
 table_lock_t varname##_Lock=&varname##_vLock;\
 size_t *varname##cte_list;\
 int  varname##cte_list_size;\
@@ -712,7 +712,7 @@ int *p_##varname;\
 int l##varname;\
 int max##varname;\
 int varname##_size;\
-pthread_spinlock_t varname##_vLock=1;\
+pthread_spinlock_t varname##_vLock;\
 table_lock_t varname##_Lock=&varname##_vLock;\
 size_t *varname##cte_list;\
 int  varname##cte_list_size;\
