@@ -1246,7 +1246,7 @@
         "var": "dest", 
         "arg_dep": "", 
         "Out": 0, 
-        "name": "rank_mapper", 
+        "name": "dest_converter", 
         "In": 1
       }, 
       {
@@ -6659,7 +6659,7 @@
         "var": "combiner", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "int_ptr_mapper", 
+        "name": "combiner_mapper", 
         "Out": 1
       }
     ], 

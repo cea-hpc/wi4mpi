@@ -430,6 +430,13 @@
     "r2a": "dest_r2a"
   ,"debug_type":"%*d"
 }, 
+  "combiner_converter": {
+    "local_alloc": 0, 
+    "a2r": "combiner_a2r", 
+    "type": "int ", 
+    "r2a": "combiner_r2a"
+  ,"debug_type":"%*d"
+}, 
   "datarep_conversion_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "datarep_conversion_ptr_conv_a2r", 
