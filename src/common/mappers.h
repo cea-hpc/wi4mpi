@@ -505,7 +505,7 @@ static inline void dest_conv_r2a(int *dest,int *dest_tmp)
 }
 
 
-/*Mappers Dest a2r - r2a*/
+/*Mappers combiner a2r - r2a*/
 
 static inline void combiner_conv_a2r(int *combiner,int *combiner_tmp)
 {
@@ -525,9 +525,7 @@ static inline void combiner_conv_a2r(int *combiner,int *combiner_tmp)
         case A_MPI_COMBINER_F90_COMPLEX    : *combiner_tmp = R_MPI_COMBINER_F90_COMPLEX   ; break;
         case A_MPI_COMBINER_F90_INTEGER    : *combiner_tmp = R_MPI_COMBINER_F90_INTEGER   ; break;
         case A_MPI_COMBINER_RESIZED        : *combiner_tmp = R_MPI_COMBINER_RESIZED       ; break;
-        default:
-            *combiner_tmp = *combiner;
-            break;
+        default                            : *combiner_tmp = *combiner                    ; break;
     }
 }
 
@@ -535,23 +533,21 @@ static inline void combiner_conv_r2a(int *combiner,int *combiner_tmp)
 {
     switch(*combiner_tmp)
     {
-        case R_MPI_COMBINER_NAMED          : *combiner_tmp = A_MPI_COMBINER_NAMED         ; break;
-        case R_MPI_COMBINER_DUP            : *combiner_tmp = A_MPI_COMBINER_DUP           ; break;
-        case R_MPI_COMBINER_CONTIGUOUS     : *combiner_tmp = A_MPI_COMBINER_CONTIGUOUS    ; break;
-        case R_MPI_COMBINER_VECTOR         : *combiner_tmp = A_MPI_COMBINER_VECTOR        ; break;
-        case R_MPI_COMBINER_HVECTOR        : *combiner_tmp = A_MPI_COMBINER_HVECTOR       ; break;
-        case R_MPI_COMBINER_INDEXED        : *combiner_tmp = A_MPI_COMBINER_INDEXED       ; break;
-        case R_MPI_COMBINER_HINDEXED       : *combiner_tmp = A_MPI_COMBINER_HINDEXED      ; break;
-        case R_MPI_COMBINER_INDEXED_BLOCK  : *combiner_tmp = A_MPI_COMBINER_INDEXED_BLOCK ; break;
-        case R_MPI_COMBINER_STRUCT         : *combiner_tmp = A_MPI_COMBINER_STRUCT        ; break;
-        case R_MPI_COMBINER_DARRAY         : *combiner_tmp = A_MPI_COMBINER_DARRAY        ; break;
-        case R_MPI_COMBINER_F90_REAL       : *combiner_tmp = A_MPI_COMBINER_F90_REAL      ; break;
-        case R_MPI_COMBINER_F90_COMPLEX    : *combiner_tmp = A_MPI_COMBINER_F90_COMPLEX   ; break;
-        case R_MPI_COMBINER_F90_INTEGER    : *combiner_tmp = A_MPI_COMBINER_F90_INTEGER   ; break;
-        case R_MPI_COMBINER_RESIZED        : *combiner_tmp = A_MPI_COMBINER_RESIZED       ; break;
-        default:
-            *combiner = *combiner_tmp; //OpenMPI
-            break;
+        case R_MPI_COMBINER_NAMED          : *combiner = A_MPI_COMBINER_NAMED         ; break;
+        case R_MPI_COMBINER_DUP            : *combiner = A_MPI_COMBINER_DUP           ; break;
+        case R_MPI_COMBINER_CONTIGUOUS     : *combiner = A_MPI_COMBINER_CONTIGUOUS    ; break;
+        case R_MPI_COMBINER_VECTOR         : *combiner = A_MPI_COMBINER_VECTOR        ; break;
+        case R_MPI_COMBINER_HVECTOR        : *combiner = A_MPI_COMBINER_HVECTOR       ; break;
+        case R_MPI_COMBINER_INDEXED        : *combiner = A_MPI_COMBINER_INDEXED       ; break;
+        case R_MPI_COMBINER_HINDEXED       : *combiner = A_MPI_COMBINER_HINDEXED      ; break;
+        case R_MPI_COMBINER_INDEXED_BLOCK  : *combiner = A_MPI_COMBINER_INDEXED_BLOCK ; break;
+        case R_MPI_COMBINER_STRUCT         : *combiner = A_MPI_COMBINER_STRUCT        ; break;
+        case R_MPI_COMBINER_DARRAY         : *combiner = A_MPI_COMBINER_DARRAY        ; break;
+        case R_MPI_COMBINER_F90_REAL       : *combiner = A_MPI_COMBINER_F90_REAL      ; break;
+        case R_MPI_COMBINER_F90_COMPLEX    : *combiner = A_MPI_COMBINER_F90_COMPLEX   ; break;
+        case R_MPI_COMBINER_F90_INTEGER    : *combiner = A_MPI_COMBINER_F90_INTEGER   ; break;
+        case R_MPI_COMBINER_RESIZED        : *combiner = A_MPI_COMBINER_RESIZED       ; break;
+        default                            : *combiner = *combiner_tmp                ; break;
     }
 }
 

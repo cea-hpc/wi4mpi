@@ -1414,6 +1414,80 @@ static inline void dest_r2a(int *ca, int *cr) {
     *ca = *cr;
 }
 
+#define A_f_MPI_COMBINER_NAMED          (  1)
+#define A_f_MPI_COMBINER_DUP            (  2)
+#define A_f_MPI_COMBINER_CONTIGUOUS     (  3)
+#define A_f_MPI_COMBINER_VECTOR         (  4)
+#define A_f_MPI_COMBINER_HVECTOR        (  6)
+#define A_f_MPI_COMBINER_INDEXED        (  7)
+#define A_f_MPI_COMBINER_HINDEXED       (  9)
+#define A_f_MPI_COMBINER_INDEXED_BLOCK  ( 10)
+#define A_f_MPI_COMBINER_STRUCT         ( 12)
+#define A_f_MPI_COMBINER_DARRAY         ( 14)
+#define A_f_MPI_COMBINER_F90_REAL       ( 15)
+#define A_f_MPI_COMBINER_F90_COMPLEX    ( 16)
+#define A_f_MPI_COMBINER_F90_INTEGER    ( 17)
+#define A_f_MPI_COMBINER_RESIZED        ( 18)
+
+#define R_f_MPI_COMBINER_NAMED          (  1)
+#define R_f_MPI_COMBINER_DUP            (  2)
+#define R_f_MPI_COMBINER_CONTIGUOUS     (  3)
+#define R_f_MPI_COMBINER_VECTOR         (  4)
+#define R_f_MPI_COMBINER_HVECTOR        (  6)
+#define R_f_MPI_COMBINER_INDEXED        (  7)
+#define R_f_MPI_COMBINER_HINDEXED       (  9)
+#define R_f_MPI_COMBINER_INDEXED_BLOCK  ( 10)
+#define R_f_MPI_COMBINER_STRUCT         ( 12)
+#define R_f_MPI_COMBINER_DARRAY         ( 14)
+#define R_f_MPI_COMBINER_F90_REAL       ( 15)
+#define R_f_MPI_COMBINER_F90_COMPLEX    ( 16)
+#define R_f_MPI_COMBINER_F90_INTEGER    ( 17)
+#define R_f_MPI_COMBINER_RESIZED        ( 18)
+
+
+static inline void combiner_a2r(int *ca, int *cr) {
+    switch(*ca)
+    {
+        case A_f_MPI_COMBINER_NAMED          : *cr = R_f_MPI_COMBINER_NAMED         ; break;
+        case A_f_MPI_COMBINER_DUP            : *cr = R_f_MPI_COMBINER_DUP           ; break;
+        case A_f_MPI_COMBINER_CONTIGUOUS     : *cr = R_f_MPI_COMBINER_CONTIGUOUS    ; break;
+        case A_f_MPI_COMBINER_VECTOR         : *cr = R_f_MPI_COMBINER_VECTOR        ; break;
+        case A_f_MPI_COMBINER_HVECTOR        : *cr = R_f_MPI_COMBINER_HVECTOR       ; break;
+        case A_f_MPI_COMBINER_INDEXED        : *cr = R_f_MPI_COMBINER_INDEXED       ; break;
+        case A_f_MPI_COMBINER_HINDEXED       : *cr = R_f_MPI_COMBINER_HINDEXED      ; break;
+        case A_f_MPI_COMBINER_INDEXED_BLOCK  : *cr = R_f_MPI_COMBINER_INDEXED_BLOCK ; break;
+        case A_f_MPI_COMBINER_STRUCT         : *cr = R_f_MPI_COMBINER_STRUCT        ; break;
+        case A_f_MPI_COMBINER_DARRAY         : *cr = R_f_MPI_COMBINER_DARRAY        ; break;
+        case A_f_MPI_COMBINER_F90_REAL       : *cr = R_f_MPI_COMBINER_F90_REAL      ; break;
+        case A_f_MPI_COMBINER_F90_COMPLEX    : *cr = R_f_MPI_COMBINER_F90_COMPLEX   ; break;
+        case A_f_MPI_COMBINER_F90_INTEGER    : *cr = R_f_MPI_COMBINER_F90_INTEGER   ; break;
+        case A_f_MPI_COMBINER_RESIZED        : *cr = R_f_MPI_COMBINER_RESIZED       ; break;
+        default                              : *cr = *ca                            ; break;
+    }
+}
+
+
+static inline void combiner_r2a(int *ca, int *cr) {
+    switch(*cr)
+    {
+        case R_f_MPI_COMBINER_NAMED          : *ca = A_f_MPI_COMBINER_NAMED         ; break;
+        case R_f_MPI_COMBINER_DUP            : *ca = A_f_MPI_COMBINER_DUP           ; break;
+        case R_f_MPI_COMBINER_CONTIGUOUS     : *ca = A_f_MPI_COMBINER_CONTIGUOUS    ; break;
+        case R_f_MPI_COMBINER_VECTOR         : *ca = A_f_MPI_COMBINER_VECTOR        ; break;
+        case R_f_MPI_COMBINER_HVECTOR        : *ca = A_f_MPI_COMBINER_HVECTOR       ; break;
+        case R_f_MPI_COMBINER_INDEXED        : *ca = A_f_MPI_COMBINER_INDEXED       ; break;
+        case R_f_MPI_COMBINER_HINDEXED       : *ca = A_f_MPI_COMBINER_HINDEXED      ; break;
+        case R_f_MPI_COMBINER_INDEXED_BLOCK  : *ca = A_f_MPI_COMBINER_INDEXED_BLOCK ; break;
+        case R_f_MPI_COMBINER_STRUCT         : *ca = A_f_MPI_COMBINER_STRUCT        ; break;
+        case R_f_MPI_COMBINER_DARRAY         : *ca = A_f_MPI_COMBINER_DARRAY        ; break;
+        case R_f_MPI_COMBINER_F90_REAL       : *ca = A_f_MPI_COMBINER_F90_REAL      ; break;
+        case R_f_MPI_COMBINER_F90_COMPLEX    : *ca = A_f_MPI_COMBINER_F90_COMPLEX   ; break;
+        case R_f_MPI_COMBINER_F90_INTEGER    : *ca = A_f_MPI_COMBINER_F90_INTEGER   ; break;
+        case R_f_MPI_COMBINER_RESIZED        : *ca = A_f_MPI_COMBINER_RESIZED       ; break;
+        default                              : *ca = *cr                            ; break;
+    }
+}
+
 #define A_f_MPI_ANY_TAG -1
 
 #define R_f_MPI_ANY_TAG -1

@@ -2,22 +2,22 @@
   {
     "args": [
       {
-         "var":"level",
-         "arg_dep": "",
-         "In": 0,
-         "name": "int_mapper",
-         "Out": 0
+        "var":"level",
+        "arg_dep": "",
+        "In": 0,
+        "name": "int_mapper",
+        "Out": 0
       }
     ],
     "name": "MPI_Pcontrol",
     "ret": {
-           "var": "ret",
-            "arg_dep": "",
-            "In": 0,
-            "name": "error_converter",
-            "Out": 1
-        }
-    },
+      "var": "ret",
+      "arg_dep": "",
+      "In": 0,
+      "name": "error_converter",
+      "Out": 1
+    }
+  },
   {
     "args": [
       {
@@ -31,7 +31,7 @@
         "var": "count", 
         "arg_dep": "", 
         "In": 1, 
-	  "name": "int_mapper", 
+        "name": "int_mapper", 
         "Out": 0
       }, 
       {
@@ -6823,7 +6823,7 @@
         "var": "combiner", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "combiner_ptr_mapper", 
+        "name": "combiner_ptr_converter", 
         "Out": 1
       }
     ], 

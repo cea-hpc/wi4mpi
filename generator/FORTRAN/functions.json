@@ -1,23 +1,23 @@
 [
-   {
+  {
     "args": [
       {
-         "var":"level",
-         "arg_dep": "",
-         "In": 0,
-         "name": "int_mapper",
-         "Out": 0
+        "var":"level",
+        "arg_dep": "",
+        "In": 0,
+        "name": "int_mapper",
+        "Out": 0
       }
     ],
     "name": "MPI_Pcontrol",
     "ret": {
-           "var": "ret",
-            "arg_dep": "",
-            "In": 0,
-            "name": "error_converter",
-            "Out": 1
-        }
-    },
+      "var": "ret",
+      "arg_dep": "",
+      "In": 0,
+      "name": "error_converter",
+      "Out": 1
+    }
+  },
   {
     "args": [
       {
@@ -3944,9 +3944,9 @@
       "In": 0
     },
     "assoc": [{
-        "func":"errhandler_f_fn_translation_update",
-        "key":"errhandler_tmp",
-        "value":"function"
+      "func":"errhandler_f_fn_translation_update",
+      "key":"errhandler_tmp",
+      "value":"function"
     }]
   }, 
   {
@@ -3974,10 +3974,10 @@
       "name": "error_converter", 
       "In": 0
     },
-     "assoc": [{
-        "func":"errhandler_set_func",
-        "key":"comm_tmp",
-        "value":"errhandler_tmp"
+    "assoc": [{
+      "func":"errhandler_set_func",
+      "key":"comm_tmp",
+      "value":"errhandler_tmp"
     }]
   }, 
   {
@@ -4024,9 +4024,9 @@
       "name": "error_converter", 
       "In": 0
     },
-     "assoc": [{
-        "func":"errhandler_f_fn_translation_del",
-        "key":"errhandler_tmp"
+    "assoc": [{
+      "func":"errhandler_f_fn_translation_del",
+      "key":"errhandler_tmp"
     }]
 
   }, 
@@ -6659,7 +6659,7 @@
         "var": "combiner", 
         "arg_dep": "", 
         "In": 0, 
-        "name": "combiner_mapper", 
+        "name": "combiner_converter", 
         "Out": 1
       }
     ], 
@@ -7083,10 +7083,10 @@
       "name": "error_converter", 
       "Out": 1
     },
-   "assoc": [{
-        "func":"errhandler_f_fn_translation_update",
-        "key":"errhandler_tmp",
-        "value":"comm_errhandler_fn"
+    "assoc": [{
+      "func":"errhandler_f_fn_translation_update",
+      "key":"errhandler_tmp",
+      "value":"comm_errhandler_fn"
     }]
   }, 
   {
@@ -7138,10 +7138,10 @@
       "name": "error_converter", 
       "Out": 1
     },
-     "assoc": [{
-        "func":"errhandler_set_func",
-        "key":"comm_tmp",
-        "value":"errhandler_tmp"
+    "assoc": [{
+      "func":"errhandler_set_func",
+      "key":"comm_tmp",
+      "value":"errhandler_tmp"
     }]
   }, 
   {
@@ -11920,7 +11920,7 @@
   }, 
   {
     "args": [
-        ], 
+    ], 
     "name": "MPI_T_finalize", 
     "ret": {
       "var": "ret", 
@@ -11931,7 +11931,7 @@
   }, 
   {
     "args": [
-          ], 
+    ], 
     "name": "MPI_Wtime", 
     "ret": {
       "var": "ret", 
@@ -11942,7 +11942,7 @@
   }, 
   {
     "args": [
-          ], 
+    ], 
     "name": "MPI_Wtick", 
     "ret": {
       "var": "ret", 
@@ -11953,7 +11953,7 @@
   }, 
   {
     "args": [
-          ], 
+    ], 
     "name": "MPI_Finalize", 
     "ret": {
       "var": "ret", 

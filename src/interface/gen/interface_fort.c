@@ -2213,7 +2213,7 @@ void  (*INTERFACE_F_LOCAL_MPI_Type_get_envelope)(int *,int *,int *,int *,int *,i
 
 void pmpi_type_get_envelope_(int * datatype,int * num_integers,int * num_addresses,int * num_datatypes,int * combiner,int * ret){
 
-return  INTERFACE_F_LOCAL_MPI_Type_get_envelope(datatype, num_integers, num_addresses, num_datatypes, combiner, ret);
+return  INTERFACE_F_LOCAL_MPI_Type_get_envelope(datatype, num_integers, num_addresses, num_datatypes,combiner, ret);
 }
 
 #ifdef WI4MPI_STATIC

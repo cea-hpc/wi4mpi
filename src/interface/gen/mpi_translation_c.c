@@ -17381,9 +17381,12 @@ int A_MPI_Type_get_envelope(A_MPI_Datatype datatype, int *num_integers,
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
 
+  int combiner_ltmp;
+  int *combiner_tmp = &combiner_ltmp;
   int ret_tmp = LOCAL_MPI_Type_get_envelope(
-      datatype_tmp, num_integers, num_addresses, num_datatypes, combiner);
+      datatype_tmp, num_integers, num_addresses, num_datatypes, combiner_tmp);
 
+  combiner_conv_r2a(combiner, combiner_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
