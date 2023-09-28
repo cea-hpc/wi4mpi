@@ -9,7 +9,7 @@ Introduction
 ============
 
 MPI is a standard in HPC community which allows a simple use of
-clusters. Nowoaday, there are several implementation (OpenMPI, BullxMPI,
+clusters. Nowadays, there are several implementation (OpenMPI, BullxMPI,
 MPT, IntelMPI, MPC, ...) each of which involves a specific ABI
 (Application Binary Interface) for an application compiled with a
 specific MPI implementation. With wi4mpi, an application compiled with
@@ -17,14 +17,14 @@ an alpha MPI implementation can be run under a beta MPI implementation
 without any compilation protocol and any concern about the ABI (Preload
 version). WI4MPI can also be seen as a dedicated MPI implementation;
 This time, the application is compiled against the wi4mpi library
-(libmpi.so) whith the dedicated wrapper (mpicc,mpif90...) meant for that
+(libmpi.so) with the dedicated wrapper (mpicc,mpif90...) meant for that
 purpose, and can be run under any other MPI implementation (Interface
 Version).
 
 Installation
 ============
 
-The installation procedureis simply consists of a cmake make install
+The installation procedure is simply consists of a CMake make install
 sequence.
 
 .. code-block:: console
@@ -39,29 +39,29 @@ CMAKE specific variables
 
 -  WI4MPI\_COMPILER:string
 
-   Indicate which compilateur is used to compiled WI4MPI. Possible
+   Indicate which compiler is used to compiled WI4MPI. Possible
    options: INTEL(default), GNU, PGI, LLVM, ARMCLANG, FUJITSU
 
 -  OPENMPI\_ROOT
    
    Open MPI root dir, put in wi4mpi.cfg, could be added
-   manually, optionnal value. This variable is required for Testing, one
+   manually, optional value. This variable is required for Testing, one
    must add -DOPENMPI\_ROOT=/path/to/openmpi option.
 
 -  INTELMPI\_ROOT
    
    Intel MPI root dir, put in wi4mpi.cfg, could be added
-   manually, optionnal value.
+   manually, optional value.
 
 -  MPC\_ROOT
    
    MPC root dir, put in wi4mpi.cfg, could be added manually,
-   optionnal value.
+   optional value.
 
 -  MPICH\_ROOT
    
    MPICH root dir, put in wi4mpi.cfg, could be added
-   manually, optionnal value.
+   manually, optional value.
 
 -  WI4MPI\_RELEASE
 
@@ -73,7 +73,7 @@ CMAKE specific variables
 
 Both version (interface and preload) of wi4mpi are compiled and
 installed into the CMAKE\_INSTALL\_PREFIX directory provided during the
-cmake initialisation.
+CMake initialisation.
 
 Usage
 =====
@@ -128,10 +128,10 @@ But, an mpirun command is also provided for more use.
 
     Usage: mpirun [MPIRUN_TARGET_OPTIONS] -- [PROGRAM] [PROGRAM_OPTIONS]
     Advanced options:
-        -F | -from | --from {FROM}      The MPI implentation from which PROGRAM was compiled with
-        -T | -to | --to {TARGET}        The MPI implentation to which PROGRAM will be run
+        -F | -from | --from {FROM}      The MPI implementation from which PROGRAM was compiled with
+        -T | -to | --to {TARGET}        The MPI implementation to which PROGRAM will be run
 
-    The -F FROM option is optionnal. If not provided, the interface mode is choosen.
+    The -F FROM option is optional. If not provided, the interface mode is chosen.
 
 Example
 
@@ -139,7 +139,7 @@ Example
 
     mpirun -np 4 -F openmpi -T intelmpi mpi_hello.exe
 
-In this exemple wi4mpi understand that mpi_hello.exe is a binary file compiled with OpenMPI, which is run under IntelMPI.
+In this example wi4mpi understand that mpi_hello.exe is a binary file compiled with OpenMPI, which is run under IntelMPI.
 
 TGCC integration
 ----------------
@@ -147,8 +147,8 @@ TGCC integration
 WI4MPI is available on the TGCC via its module environment. All the
 environment settings detailed in the next section is hide by a system of
 flavor and features specific to the center. The flavor indicates the
-kind of the installation choosen by the users, on the other hand, the
-features are used to set one of the choosen conversion we highlight in
+kind of the installation chosen by the users, on the other hand, the
+features are used to set one of the chosen conversion we highlight in
 the previous section.
 
 (Flavors et features are modulefiles) Concerning the flavors:
@@ -171,7 +171,7 @@ Default behavior example:
     $ module load mpi/wi4mpi/%version
     load module flavor/wi4mpi/standard (wi4mpi flavor)                                                  #Default installation is standard
     load module feature/wi4mpi/to/openmpi/1.8.8 (WI4MPI feature to openmpi 1.8.8)                       #Default conversion is Interface -> OpenMPI/1.8.8 (since no module feature/wi4mpi/from is loaded, the wi4mpi mode is interface)
-    load module feature/wi4mpi/mpi_compiler/intel (Wi4MPI compiler feature)                             #Default compilator use by mpi wrapper (mpicc,mpicxx,mpif90,...) within WI4MPI are Intel compilers
+    load module feature/wi4mpi/mpi_compiler/intel (Wi4MPI compiler feature)                             #Default compiler use by mpi wrapper (mpicc,mpicxx,mpif90,...) within WI4MPI are Intel compilers
     load module wi4mpi/3.3.0 (Wi4MPI with openmpi/1.8.8)
 
     In this example, WI4MPI assume that the application is compiled with its own library libmpi.so
@@ -212,7 +212,7 @@ different modes and conversions.
 Preload settings
 ~~~~~~~~~~~~~~~~
 
-{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen
+{FROM} and {TO} can take as value OMPI or INTEL depending on the chosen
 conversion.
 
 .. code-block:: bash
@@ -239,7 +239,7 @@ conversion.
 Interface settings
 ~~~~~~~~~~~~~~~~~~
 
-{FROM} and {TO} can take as value OMPI or INTEL depending on the choosen
+{FROM} and {TO} can take as value OMPI or INTEL depending on the chosen
 conversion
 
 .. code-block:: bash
@@ -281,7 +281,7 @@ Two values can be passed with -wi4mpi\_default\_run\_path:
     - IMPI : set the default conversion to \_OMPI
 
 The runtime MPI library used is the ones referenced in the
-etc/wi4mpi.cfg file, but be aware that they can be overided using the
+etc/wi4mpi.cfg file, but be aware that they can be overidden using the
 WI4MPI\_RUN\_MPI\_C\_LIB, and WI4MPI\_RUN\_MPI\_F\_LIB environment
 variables as follow.
 
@@ -293,19 +293,19 @@ account.
 Static Mode
 ~~~~~~~~~~~
 
-There is a static mode in wi4mpi : this mode need to use the interface header and link to libmpi.a. All conversion are embedded and two environement variable specify the conversion type : WI4MPI_STATIC_TARGET_TYPE_F for fortran conversion and WI4MPI_STATIC_TARGET_TYPE for C/C++ conversion; supported value are : OMPI and INTEL.
+There is a static mode in wi4mpi : this mode need to use the interface header and link to libmpi.a. All conversion are embedded and two environment variable specify the conversion type : WI4MPI_STATIC_TARGET_TYPE_F for Fortran conversion and WI4MPI_STATIC_TARGET_TYPE for C/C++ conversion; supported value are : OMPI and INTEL.
 
 Use is the following
 
     set WI4MPI_RUN_MPI_C_LIB,WI4MPI_RUN_MPI_F_LIB to respective target library
-    set WI4MPI_STATIC_TARGET_TYPE,WI4MPI_STATIC_TARGET_TYPE_F to conversion typeaccording to target library.
+    set WI4MPI_STATIC_TARGET_TYPE,WI4MPI_STATIC_TARGET_TYPE_F to conversion type according to target library.
     run executable.
 
 Extended Debug Mode
 ~~~~~~~~~~~~~~~~~~~
 
 As seen before, one is able to compile Wi4MPI with debug symbols thanks
-to "-DWI4MPI\_REALEASE=DEBUG". Moreover, this setting enable an extended
+to "-DWI4MPI\_RELEASE=DEBUG". Moreover, this setting enable an extended
 debug mode. This feature allow to select any MPI function and print
 input/ouput values after each call. One can select functions with
 "WI4\_debug=1" environment variable (WI4MPI\_Init\_debut,
@@ -351,7 +351,7 @@ Examples:
     Hello from 1/1
 
     $ WI4MPI_Init_timeout=1 mpirun -n 1 ./hello
-    Wi4MPI error: processus 25572 on host r0login has reached a timeout!
+    Wi4MPI error: process 25572 on host r0login has reached a timeout!
     Aborted
 
 Developers words

@@ -131,7 +131,7 @@ if("${FC_PATH}" MATCHES "FC_PATH-NOTFOUND")
 endif()
 enable_language(C CXX Fortran)
 
-#Define the compiling option according to the choosen release
+#Define the compiling option according to the chosen release
 if(WI4MPI_RELEASE MATCHES DEBUG)
    set(WI4MPI_FLAGS ${CMAKE_C_FLAGS_DEBUG})
 elseif(WI4MPI_RELEASE MATCHES RELEASE)

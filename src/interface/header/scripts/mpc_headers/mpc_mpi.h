@@ -1045,14 +1045,14 @@ typedef enum {
 } MPC_T_cvar_scope;
 
 /** Retrieve the infos from a CVAR
-* @arg cvar_index The CVAR to querry
+* @arg cvar_index The CVAR to query
 * @arg name The name of the CVAR
 * @arg name_len Length of the target buffer
 * @arg verbosity The verbosity level of this CVAR \ref MPC_T_Verbosity
 * @arg datatype The datatype returned by the CVAR
-* @arg enumtype The enumtype (optionnal) for description
+* @arg enumtype The enumtype (optional) for description
 * @arg desc The description of the control variable
-* @arg desc_len THe length of the desc buffer
+* @arg desc_len The length of the desc buffer
 * @arg bind Type of MPI object the variable is bound (see \ref MPC_T_Bind)
 * @arg scope Scope in which this variable can be manipulated (\ref
 * MPC_T_CVAR_scope)
@@ -1282,14 +1282,14 @@ int MPI_T_category_get_info(int cat_index, char *name, int *name_len,
                             int *num_pvars, int *num_categories);
 
 /** Get index of a category by name
- * @arg name Name to querry
+ * @arg name Name to query
  * @arg Index of the category
  * @return MPI_T_ERR_INVALID_NAME if not found
  */
 int MPI_T_category_get_index(char *name, int *cat_index);
 
 /** Get the CVARS in a given category
- * @arg cat_index THe index of the target category
+ * @arg cat_index The index of the target category
  * @arg len The length of the indices array
  * @arg indices Array filled with the indices of the CVARS
  * @return MPI Error
@@ -1297,7 +1297,7 @@ int MPI_T_category_get_index(char *name, int *cat_index);
 int MPI_T_category_get_cvars(int cat_index, int len, int indices[]);
 
 /** Get the PVARS in a given category
- * @arg cat_index THe index of the target category
+ * @arg cat_index The index of the target category
  * @arg len The length of the indices array
  * @arg indices Array filled with the indices of the PVARS
  * @return MPI Error
@@ -1305,7 +1305,7 @@ int MPI_T_category_get_cvars(int cat_index, int len, int indices[]);
 int MPI_T_category_get_pvars(int cat_index, int len, int indices[]);
 
 /** Get the categories in a given category
- * @arg cat_index THe index of the target category
+ * @arg cat_index The index of the target category
  * @arg len The length of the indices array
  * @arg indices Array filled with the indices of the categories
  * @return MPI Error

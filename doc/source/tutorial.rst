@@ -12,7 +12,7 @@ Install wi4mpi with Spack PM
 
  git clone https://github.com/spack/spack
  source spack/share/spack/setup-env.sh
- spack compiler find    # /!\ gfortran is required for this tuto (openmpi dep)
+ spack compiler find    # /!\ gfortran is required for this tutorial (openmpi dep)
  spack install wi4mpi
  spack install mpich
  spack install openmpi

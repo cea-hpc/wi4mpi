@@ -9644,7 +9644,7 @@ handle_loader(MPI_T_category_changed,INTERF_2_INTEL_CC);
 INTERF_2_INTEL_wrapper_init();
 INTERF_2_INTEL_wrapper_init_f();
 }else{
-printf("no target library defined conversion cannot be choosen\n" );
+printf("no target library defined conversion cannot be chosen\n" );
 exit(1);
 
 }
