@@ -6,7 +6,7 @@ Introduction to the generators
 
 The main generator within WI4MPI is responsible of the MPI functions generation used to pass the appropriate arguments to the underlying runtime MPI function. It handle the generation of MPI C and Fortran routines for the interface and preload version of WI4MPI, performed by both python script generator.py (which contain the class) and generate.py (which contain the generation pattern).
 
-Since all Fortran MPI object are constant or int type, most of the traduction from an MPI implementation to another one are handle by some switch case statements, which can then be easily generated. To do so, there is generated_header_f.py which generate the fortran header file for each available conversion.
+Since all Fortran MPI object are constant or int type, most of the translation from an MPI implementation to another one are handle by some switch case statements, which can then be easily generated. To do so, there is generated_header_f.py which generate the Fortran header file for each available conversion.
 
 The last generator was made for handling c2f/f2c function. Since the underlying translation system is under a rework mechanism, any use of this generator would lead to some deprecated file.
 
@@ -17,19 +17,19 @@ Generation template
 
 File template handling C MPI routines for interface and preload version:
 
-#. Non generated funtion integration
+#. Non generated function integration
 #. Normal MPI\_... declaration
 #. Function pointer to the underlying runtime MPI routine declaration
 #. ASM code chooser
 #. A_MPI\_...  declaration + function construction
 
     #. Header
-    #. Temporary variable assignement, and translation
+    #. Temporary variable assignment, and translation
     #. Call to the MPI runtime function
     #. Footer
     #. return
 
-#. R_MPI\_... declaration + function contstruction
+#. R_MPI\_... declaration + function construction
 
     #. Header
     #. Call to the MPI runtime function
@@ -79,7 +79,7 @@ Example:
     
         "In": 1, **The argument need to be converted before any call to the underlying MPI runtime call**
     
-        "name": "int_ptr_mapper", **name of the mapper corresponding to that argument (mappers are responsible for the traslation)**
+        "name": "int_ptr_mapper", **name of the mapper corresponding to that argument (mappers are responsible for the translation)**
     
         "Out": 0 **The argument do not need to be converted after the MPI runtime call**
     
@@ -123,7 +123,7 @@ Example:
 Some additional key words to deal with some special cases:
 
 - if : Tell to the generating process that the argument needs to be translated only if the condition within the if statements is true.
-- if_dep : If provided, then the generator automaticly understand that the argument tested in the "if" condition is an array, and so a boucle is generated from 0 to "if_dep" ('if_dep' works hand in hand with 'if').
+- if_dep : If provided, then the generator automatically understand that the argument tested in the "if" condition is an array, and so a loop is generated from 0 to "if_dep" ('if_dep' works hand in hand with 'if').
 - if_null : Same as 'if' keyword but dedicated to NULL constants.
 - if_null_dep : Same as 'if_dep' but works with 'if_null'
 - if_err: Handle special case MPI_Errhandler_set.
@@ -152,8 +152,8 @@ Association keywords:
 mappers.json -- C
 ~~~~~~~~~~~~~~~~~
 
-This file contains all differents metada about mappers that needs to be called to performed any conversion.
-Each entry is corresponding to the mappers name which is referenced in the function.json "name" keywords within any arguments function. Those entries provide metadata relevent for the generator as represented bellow:
+This file contains all different metadata about mappers that needs to be called to performed any conversion.
+Each entry is corresponding to the mappers name which is referenced in the function.json "name" keywords within any arguments function. Those entries provide metadata relevant for the generator as represented bellow:
 
 .. code-block::
 
@@ -161,11 +161,11 @@ Each entry is corresponding to the mappers name which is referenced in the funct
     
         "local_alloc": 0, **Does the variable needs to be allocated locally. 0=no; 1=yes**
     
-        "a2r": "int_ptr_conv_a2r", **If 'in=1' from functions.json is set, then this function nedds to be called**
+        "a2r": "int_ptr_conv_a2r", **If 'in=1' from functions.json is set, then this function needs to be called**
     
-        "type": "int (*)", **type de l'argument**
+        "type": "int (*)", **type of the argument**
     
-        "r2a": "int_ptr_conv_r2a", **If 'out=1' from functions.json is set, then this function nedds to be calle**
+        "r2a": "int_ptr_conv_r2a", **If 'out=1' from functions.json is set, then this function needs to be called**
     
         "no_map": "TRUE" **The argument does not need to be converted if 'TRUE'**
     
@@ -176,7 +176,7 @@ All relevent keywords that a mappers can contain are:
 - no_map : indicate if the argument needs to be converted
 - assign : indicate that the arguments simply needs a cast
 - local_alloc : indicate that the variable needs to be allocated locally
-- wrap : Special case where the argument 'wrap' is a function pointeur. (example MPI_Op_create)
+- wrap : Special case where the argument 'wrap' is a function pointer. (example MPI_Op_create)
 - wrapped : 'wrapped' contain the function name which is called to translate the arguments of the function referenced by 'wrap'.
 
 Example of "wrap" and "wrapped": "wrapper_user_function"
@@ -253,7 +253,7 @@ Frozen API
 
 In order to get the frozen API proceed as follow:
 
-Just copy the contents of A the file into the B file:
+Just copy the contents of ``A`` the file into the ``B`` file:
 
 +----------------------------------------+-----+-----------------------------------------+
 |                     A                  |     |                     B                   |
@@ -301,7 +301,7 @@ wrapper_f.h
 preload/header/OMPI_OMPI:
 wrapper_f.h
 
-In order to generate the interface version of the fortran header please use following 'sed' command for generator directory:
+In order to generate the interface version of the Fortran header please use following 'sed' command for generator directory:
 
 .. code-block:: console
 

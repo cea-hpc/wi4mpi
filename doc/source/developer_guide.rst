@@ -29,7 +29,7 @@ How it works
 
 Before performing any translation we need to distinguish the application
 side from the runtime side. To do that, any MPI object from the
-application side are prefixed by :code:`A_` and those from the application are
+application side are prefixed by :code:`A_` and those from the runtime side are
 prefixed by :code:`R_`. To perform a translation, all original MPI calls from
 the application are intercepted by WI4MPI and replaced by the same call
 prefixed by :code:`A_`. For example, with an OpenMPI ---> IntelMPI conversion.
@@ -354,7 +354,7 @@ Static mode
 The static mode builds an executable with every targets translation. To
 avoid conflicts, symbols are renamed as follow:
 :code:`INTERF2_{TARGET}_{Symbol_name}`. No more dlopen is needed (cf.
-Interface), functions pointer are choosen by 2 variables:
+Interface), functions pointer are chosen by 2 variables:
 :code:`WI4MPI_STATIC_TARGET_TYPE_F` and :code:`WI4MPI_STATIC_TARGET_TYPE`. Static
 sections are controlled by directives: :code:`#if(n)def WI4MPI_STATIC` / :code:`#endif`
 
