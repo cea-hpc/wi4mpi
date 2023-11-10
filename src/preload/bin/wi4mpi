@@ -28,8 +28,8 @@ with their corresponding call in the "TARGET" MPI implementation.
 
 Option:
     -h           the help message
-    -f FROM      the MPI implentation from which PROGRAM was compiled with
-    -t TARGET    the MPI implentation to which PROGRAM will be run
+    -f FROM      the MPI implementation from which PROGRAM was compiled with
+    -t TARGET    the MPI implementation to which PROGRAM will be run
     -v           controls the verbosity
 
 Supported values:

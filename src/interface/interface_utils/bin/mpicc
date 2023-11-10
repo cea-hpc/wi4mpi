@@ -29,7 +29,12 @@ progname=$(basename $0)
 WI4MPI_CFLAGS="-I${WI4MPI_ROOT}/include"
 WI4MPI_CXXFLAGS="-I${WI4MPI_ROOT}/include"
 WI4MPI_FCFLAGS="-I${WI4MPI_ROOT}/include -cpp"
-WI4MPI_LDFLAGS="-L${WI4MPI_ROOT}/lib -lmpi"
+
+## LD_FLAGS - LD Hack - required for "./configure" simple C program ##
+# The ld "--as-needed -lmpi" only link libmpi.so if really needed.
+# "--push-state" and "--pop-state" is a trick to anly apply "--as-needed" to "-lmpi" option.
+# and not affect other libs.
+WI4MPI_LDFLAGS="-L${WI4MPI_ROOT}/lib -Wl,--push-state,--as-needed -lmpi -Wl,--pop-state"
 
 case $progname in
     mpicc)

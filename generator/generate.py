@@ -428,7 +428,7 @@ def generate_interface(object_gen, interface_key_gen, data, def_list, c2f_list,s
         string=string+'INTERF_2_'+j+'_wrapper_init();\n'
         string=string+'INTERF_2_'+j+'_wrapper_init_f();\n'
         string=string+'}else{\n'
-    string=string+'printf(\"no target library defined conversion cannot be choosen\\n\" );\nexit(1);\n\n'
+    string=string+'printf(\"no target library defined conversion cannot be chosen\\n\" );\nexit(1);\n\n'
     for j in static_list:
         string=string+'}\n'
     string=string+'#endif\n'
