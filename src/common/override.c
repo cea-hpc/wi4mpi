@@ -14,7 +14,15 @@
 //#                                                                      #
 //########################################################################
 
-#ifdef MPI_WAITANY_OVERRRIDE
+#include "override.h"
+#include "app_mpi.h"
+#include "engine.h"
+#include "mappers.h"
+#include "run_mpi.h"
+
+extern __thread int in_w;
+
+#ifdef MPI_WAITANY_OVERRIDE
 int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
                   A_MPI_Status *status) {
 #ifdef DEBUG
@@ -75,7 +83,7 @@ int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
 }
 #endif
 
-#ifdef MPI_WAITALL_OVERRRIDE
+#ifdef MPI_WAITALL_OVERRIDE
 int A_MPI_Waitall(int count, A_MPI_Request array_of_requests[],
                   A_MPI_Status array_of_statuses[]) {
 #ifdef DEBUG
@@ -146,7 +154,7 @@ int A_MPI_Waitall(int count, A_MPI_Request array_of_requests[],
 }
 #endif
 
-#ifdef MPI_WAITSOME_OVERRRIDE
+#ifdef MPI_WAITSOME_OVERRIDE
 int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
                    int *outcount, int array_of_indices[],
                    A_MPI_Status array_of_statuses[]) {
@@ -195,7 +203,7 @@ int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
 }
 #endif
 
-#ifdef MPI_TESTANY_OVERRRIDE
+#ifdef MPI_TESTANY_OVERRIDE
 int A_MPI_Testany(int count, A_MPI_Request array_of_requests[], int *indx,
                   int *flag, A_MPI_Status *status) {
 #ifdef DEBUG
@@ -231,7 +239,7 @@ int A_MPI_Testany(int count, A_MPI_Request array_of_requests[], int *indx,
 }
 #endif
 
-#ifdef MPI_TESTALL_OVERRRIDE
+#ifdef MPI_TESTALL_OVERRIDE
 int A_MPI_Testall(int count, A_MPI_Request array_of_requests[], int *flag,
                   A_MPI_Status array_of_statuses[]) {
 #ifdef DEBUG
@@ -280,7 +288,7 @@ int A_MPI_Testall(int count, A_MPI_Request array_of_requests[], int *flag,
 }
 #endif
 
-#ifdef MPI_TESTSOME_OVERRRIDE
+#ifdef MPI_TESTSOME_OVERRIDE
 int A_MPI_Testsome(int incount, A_MPI_Request array_of_requests[],
                    int *outcount, int array_of_indices[],
                    A_MPI_Status array_of_statuses[]) {
