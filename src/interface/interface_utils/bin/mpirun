@@ -74,6 +74,7 @@ while [[ $# -gt 0 ]]; do
             shift 2 ;;
         -v|-verbose|--verbose)
             mpirun_opts="$mpirun_opts -v"
+            wi4mpi_opts="$wi4mpi_opts -v"
             shift ;;
         -V|-version|--version)
             version
@@ -120,11 +121,11 @@ export MPC_ROOT=${MPC_ROOT:-"$MPC_DEFAULT_ROOT"}
 
 case ${WI4MPI_FROM,,} in
     *openmpi*)
-        wi4mpi_opts="-f openmpi" ;;
+        wi4mpi_opts="$wi4mpi_opts -f openmpi" ;;
     *intelmpi*)
-        wi4mpi_opts="-f intelmpi" ;;
+        wi4mpi_opts="$wi4mpi_opts -f intelmpi" ;;
     *mpich*)
-        wi4mpi_opts="-f mpich" ;;
+        wi4mpi_opts="$wi4mpi_opts -f mpich" ;;
 esac
 
 WI4MPI_PM=${WI4MPI_PM:-"mpirun"}
