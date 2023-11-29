@@ -21,15 +21,15 @@ int *ptr_mpifcmb5_;
 int *ptr_mpifcmb9_;
 #define R_f_MPI_WEIGHTS_EMPTY (((int*)ptr_mpifcmb9_))
 extern int *ptr_mpipriv1_;
-#define R_f_MPI_BOTTOM (((int*)ptr_mpipriv1_[0]))
-#define R_f_MPI_IN_PLACE (((int*)ptr_mpipriv1_[1]))
-#define R_f_MPI_STATUS_IGNORE (((int*)ptr_mpipriv1_[2]))
+#define R_f_MPI_BOTTOM (((int*)&ptr_mpipriv1_[0]))
+#define R_f_MPI_IN_PLACE (((int*)&ptr_mpipriv1_[1]))
+#define R_f_MPI_STATUS_IGNORE (((int*)&ptr_mpipriv1_[2]))
 extern int *ptr_mpipriv2_;
-#define R_f_MPI_STATUSES_IGNORE (((int*)ptr_mpipriv2_[0]))
-#define R_f_MPI_ERRCODES_IGNORE (((int*)ptr_mpipriv2_[1]))
+#define R_f_MPI_STATUSES_IGNORE (((int*)&ptr_mpipriv2_[0]))
+#define R_f_MPI_ERRCODES_IGNORE (((int*)&ptr_mpipriv2_[1]))
 extern int *ptr_mpiprivc_;
-#define R_f_MPI_ARGVS_NULL (((int*)ptr_mpiprivc_[0]))
-#define R_f_MPI_ARGV_NULL (((int*)ptr_mpiprivc_[1]))
+#define R_f_MPI_ARGVS_NULL (((int*)&ptr_mpiprivc_[0]))
+#define R_f_MPI_ARGV_NULL (((int*)&ptr_mpiprivc_[1]))
 //############################# Wi4MPI License ###########################
 //# `04/04/2016`                                                         #
 //# Copyright or (C) or Copr. Commissariat a l'Energie Atomique         #
