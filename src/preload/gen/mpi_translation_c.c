@@ -158,6 +158,8 @@ int *ptr_mpifcmb9_;
 int *ptr_mpipriv1_;
 int *ptr_mpipriv2_;
 int *ptr_mpiprivc_;
+int *MPI_UNWEIGHTED;
+int *MPI_WEIGHTS_EMPTY;
 #endif
 
 void wrapper_win_copy_function(R_MPI_Win oldwin, int win_keyval,
