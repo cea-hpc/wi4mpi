@@ -105,6 +105,14 @@ wi4mpi_set_target_vars() {
     esac
 }
 
+wi4mpi_check_target_lib() {
+    [[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper. You might want to set WI4MPI_WRAPPER_LIB" >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library. You might want to set WI4MPI_RUN_MPI_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && { echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
+}
+
 VERBOSE=""
 WI4MPI_LIBEXEC=$( readlink -e $(dirname $0)/../libexec/wi4mpi )
 WI4MPI_INTEL=$( readlink -e $(dirname $0)/../lib_INTEL )
@@ -160,13 +168,7 @@ if [[ -z $FROM ]]; then
         echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
         echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
     fi
-    [[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper. You might want to set WI4MPI_WRAPPER_LIB" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library. You might want to set WI4MPI_RUN_MPI_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && { echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
-
-
+    wi4mpi_check_target_lib
 
     export WI4MPI_FROM
     export WI4MPI_TO
@@ -191,19 +193,15 @@ else
     wi4mpi_set_target_vars $TARGET 1
     WI4MPI_FROM=$FROM_FAMILY
     WI4MPI_TO=$TARGET_FAMILY
-    libwi4mpi="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
-    [[ ! -e $libwi4mpi ]] && { echo "Error: could not find the wrapper." >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library. You might want to set WI4MPI_RUN_MPI_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && { echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
+    WI4MPI_WRAPPER_LIB="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
+    wi4mpi_check_target_lib
     export WI4MPI_FROM
     export WI4MPI_TO
     export WI4MPI_RUN_MPI_F_LIB
     export WI4MPI_RUN_MPI_C_LIB
     export WI4MPI_RUN_MPIIO_C_LIB
     export WI4MPI_RUN_MPIIO_F_LIB
-    export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${libwi4mpi} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
+    export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
     if [[ -n "$VERBOSE" ]]; then
         echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
         echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
