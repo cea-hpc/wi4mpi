@@ -1311,7 +1311,7 @@ void A_f_MPI_Sendrecv(void *sendbuf, int *sendcount, int *sendtype, int *dest,
       (status == A_f_MPI_STATUS_IGNORE ? R_f_MPI_STATUS_IGNORE : status_tmp1);
   buffer_a2r(&sendbuf, &sendbuf_tmp);
   datatype_a2r(sendtype, &sendtype_tmp);
-  rank_mapper_a2r(dest, &dest_tmp);
+  dest_a2r(dest, &dest_tmp);
   tag_a2r(sendtag, &sendtag_tmp);
   datatype_a2r(recvtype, &recvtype_tmp);
   source_a2r(source, &source_tmp);
@@ -7192,9 +7192,12 @@ void A_f_MPI_Type_get_envelope(int *datatype, int *num_integers,
   int ret_tmp = 0;
 
   int datatype_tmp;
+  int combiner_tmp;
   datatype_a2r(datatype, &datatype_tmp);
   _LOCAL_MPI_Type_get_envelope(&datatype_tmp, num_integers, num_addresses,
-                               num_datatypes, combiner, &ret_tmp);
+                               num_datatypes, &combiner_tmp, &ret_tmp);
+  if (ret_tmp == R_f_MPI_SUCCESS)
+    combiner_r2a(combiner, &combiner_tmp);
   error_r2a(ret, &ret_tmp);
 
   in_w = 0;
