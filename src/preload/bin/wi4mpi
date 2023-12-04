@@ -156,12 +156,22 @@ shift $(($OPTIND - 1))
 # No argument print help and exit
 [[ $# -eq 0 ]] && usage && exit 0
 
+if [[ -z $FROM ]]; then
+    FROM_FAMILY="CCC"
+else
+    case $FROM in
+    openmpi)  FROM_FAMILY="OMPI" ;;
+    intelmpi) FROM_FAMILY="INTEL" ;;
+    mpich) FROM_FAMILY="MPICH" ;;
+    *) echo "Error: Unsupported Origin MPI stack." >&2 ; exit 1;
+    esac
+fi
+
 # INTERFACE MODE
 if [[ -z $FROM ]]; then
     if [[ -n "$VERBOSE" ]]; then
         echo "INTERFACE MODE"
     fi
-    FROM_FAMILY="CCC"
     wi4mpi_set_target_vars $TARGET 0
     WI4MPI_FROM="INTERFACE"
     WI4MPI_TO=$TARGET_FAMILY
@@ -180,12 +190,6 @@ else
     if [[ -n "$VERBOSE" ]]; then
         echo "PRELOAD MODE"
     fi
-    case $FROM in
-    openmpi)  FROM_FAMILY="OMPI" ;;
-    intelmpi) FROM_FAMILY="INTEL" ;;
-    mpich) FROM_FAMILY="MPICH" ;;
-    *) echo "Error: Unsupported Origin MPI stack." >&2 ; exit 1;
-    esac
 
     wi4mpi_set_target_vars $TARGET 1
     WI4MPI_FROM=$FROM_FAMILY
