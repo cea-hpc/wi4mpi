@@ -113,6 +113,14 @@ wi4mpi_check_target_lib() {
     [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
 }
 
+wi4mpi_print_exports() {
+    echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
+    echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
+    echo "export WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB}"
+    echo "export WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB}"
+    echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+}
+
 VERBOSE=""
 WI4MPI_LIBEXEC=$( readlink -e $(dirname $0)/../libexec/wi4mpi )
 WI4MPI_INTEL=$( readlink -e $(dirname $0)/../lib_INTEL )
@@ -161,11 +169,7 @@ if [[ -z $FROM ]]; then
     LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
     if [[ -n "$VERBOSE" ]]; then
         echo "export WI4MPI_WRAPPER_LIB=${WI4MPI_WRAPPER_LIB}"
-        echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
-        echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
-        echo "export WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB}"
-        echo "export WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB}"
-        echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+        wi4mpi_print_exports
         echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
     fi
     wi4mpi_check_target_lib
@@ -203,11 +207,7 @@ else
     export WI4MPI_RUN_MPIIO_F_LIB
     export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
     if [[ -n "$VERBOSE" ]]; then
-        echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
-        echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
-        echo "export WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB}"
-        echo "export WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB}"
-        echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+        wi4mpi_print_exports
     fi
     libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
     [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; }
