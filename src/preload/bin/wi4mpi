@@ -159,6 +159,7 @@ shift $(($OPTIND - 1))
 if [[ -z $FROM ]]; then
     FROM_FAMILY="CCC"
     MODE="INTERFACE"
+    ispreload=0
 else
     case $FROM in
     openmpi)  FROM_FAMILY="OMPI" ;;
@@ -167,13 +168,15 @@ else
     *) echo "Error: Unsupported Origin MPI stack." >&2 ; exit 1;
     esac
     MODE="PRELOAD"
+    ispreload=1
 fi
 
 [[ -n "$VERBOSE" ]] && echo "${MODE} MODE"
 
+wi4mpi_set_target_vars $TARGET $ispreload
+
 # INTERFACE MODE
 if [[ -z $FROM ]]; then
-    wi4mpi_set_target_vars $TARGET 0
     WI4MPI_FROM="INTERFACE"
     WI4MPI_TO=$TARGET_FAMILY
     WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
@@ -188,7 +191,6 @@ if [[ -z $FROM ]]; then
     export WI4MPI_WRAPPER_LIB
 #PRELOAD
 else
-    wi4mpi_set_target_vars $TARGET 1
     WI4MPI_FROM=$FROM_FAMILY
     WI4MPI_TO=$TARGET_FAMILY
     WI4MPI_WRAPPER_LIB="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
