@@ -174,14 +174,7 @@ if [[ -z $FROM ]]; then
     fi
     wi4mpi_check_target_lib
 
-    export WI4MPI_FROM
-    export WI4MPI_TO
-    export LD_LIBRARY_PATH
     export WI4MPI_WRAPPER_LIB
-    export WI4MPI_RUN_MPI_C_LIB
-    export WI4MPI_RUN_MPI_F_LIB
-    export WI4MPI_RUN_MPIIO_C_LIB
-    export WI4MPI_RUN_MPIIO_F_LIB
 #PRELOAD
 else
     if [[ -n "$VERBOSE" ]]; then
@@ -199,25 +192,27 @@ else
     WI4MPI_TO=$TARGET_FAMILY
     WI4MPI_WRAPPER_LIB="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
     wi4mpi_check_target_lib
-    export WI4MPI_FROM
-    export WI4MPI_TO
-    export WI4MPI_RUN_MPI_F_LIB
-    export WI4MPI_RUN_MPI_C_LIB
-    export WI4MPI_RUN_MPIIO_C_LIB
-    export WI4MPI_RUN_MPIIO_F_LIB
     export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
     if [[ -n "$VERBOSE" ]]; then
         wi4mpi_print_exports
     fi
     libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
     [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; }
-    export LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
+    LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
     if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
         libfakedir="${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/"
         [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdir." >&2 ; exit 1; }
-        export LD_LIBRARY_PATH="${libfakedir}:$LD_LIBRARY_PATH"
+        LD_LIBRARY_PATH="${libfakedir}:$LD_LIBRARY_PATH"
     fi
 
 fi
+
+export WI4MPI_FROM
+export WI4MPI_TO
+export LD_LIBRARY_PATH
+export WI4MPI_RUN_MPI_C_LIB
+export WI4MPI_RUN_MPI_F_LIB
+export WI4MPI_RUN_MPIIO_C_LIB
+export WI4MPI_RUN_MPIIO_F_LIB
 
 exec "$@"
