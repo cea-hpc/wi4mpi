@@ -57,6 +57,7 @@ EOF
 wi4mpi_set_target_vars() {
     local TARGET="$1"
     local is_preload=$2
+    WI4MPI_FAMILY=${WI4MPI_LIBEXEC}
     case $TARGET in
       openmpi)
         TARGET_FAMILY="OMPI"
@@ -177,26 +178,21 @@ wi4mpi_set_target_vars $TARGET $ispreload
 WI4MPI_FROM=${FROM_FAMILY:-"INTERFACE"}
 WI4MPI_TO=$TARGET_FAMILY
 
-# INTERFACE MODE
+[[ -n $FROM_FAMILY ]] && wrapper_middle="_${FROM_FAMILY}"
+WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi${wrapper_middle}_${TARGET_FAMILY}.so"
+wi4mpi_check_target_lib
+[[ -n $VERBOSE ]] && wi4mpi_print_exports
+
 if [[ -z $FROM ]]; then
-    WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
     LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
     if [[ -n "$VERBOSE" ]]; then
         echo "export WI4MPI_WRAPPER_LIB=${WI4MPI_WRAPPER_LIB}"
-        wi4mpi_print_exports
         echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
     fi
-    wi4mpi_check_target_lib
 
     export WI4MPI_WRAPPER_LIB
-#PRELOAD
 else
-    WI4MPI_WRAPPER_LIB="${WI4MPI_LIBEXEC}/libwi4mpi_${FROM_FAMILY}_${TARGET_FAMILY}.so"
-    wi4mpi_check_target_lib
     export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
-    if [[ -n "$VERBOSE" ]]; then
-        wi4mpi_print_exports
-    fi
     libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
     [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; }
     LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
