@@ -16,7 +16,6 @@ file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
     interface/gen/mpi_translation_c.c
     interface/gen/mpi_translation_fort.c
     interface/gen/c2f_f2c.c
-    common/helper.c
     common/debug_printer.c
     common/override.c
     common/mpi_translation_c2f_f2c_init.c
@@ -40,7 +39,6 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     preload/gen/mpi_translation_fort.c
     preload/gen/c2f_f2c.c
     common/override.c
-    common/helper.c
     common/debug_printer.c
     common/mpi_translation_c2f_f2c_init.c
     common/engine.c
@@ -48,6 +46,11 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     common/func_char_fort.c
     common/asm_jit.c
 )
+
+if(WI4MPI_TIMEOUT)
+    list(APPEND SOURCE_WI4MPI_INTERFACE "common/helper.c")
+    list(APPEND SOURCE_WI4MPI_PRELOAD "common/helper.c")
+endif()
 
 #empty
 file(GLOB SOURCE_WI4MPI_EMPTY

@@ -44,8 +44,13 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)                                  #
 if(NOT WI4MPI_COMPILER)
     set(WI4MPI_COMPILER GCC)
 endif()
+if(CMAKE_SYSTEM_NAME MATCHES Linux)
+    set(WI4MPI_TIMEOUT ON)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTIMEOUT_SUPPORT")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTIMEOUT_SUPPORT")
+else()
+    set(WI4MPI_TIMEOUT OFF)
+endif()
 #Define common options according to the selected compiler
 if(WI4MPI_COMPILER MATCHES GCC)
     set(CMAKE_C_FLAGS_NORMAL  "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -pthread")
