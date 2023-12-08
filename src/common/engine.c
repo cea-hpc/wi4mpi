@@ -1024,7 +1024,6 @@ HASHTABLE_NO_OPT_NO_FORTRAN(MPI_T_pvar_handle, pvar_handle, MPI_T_PVAR_HANDLE_NU
 
 /* Request */
 static request_translation_t* request_const_table = NULL;
-/*table_lock_t*/ volatile int * request_Lock;
 
 /*  ADD  */
 void request_translation_add_const(A_MPI_Request a_mpi_request, R_MPI_Request mpi_request) {
@@ -1053,7 +1052,7 @@ int fnb=10000;
 int *counter_request=NULL;
 int *p_req;
 int req_size;
-table_lock_t request_Lock=&tt;
+volatile table_lock_t request_Lock=&tt;
 
 /*
 static void dump_hashtable(request_translation_t* conv) {
