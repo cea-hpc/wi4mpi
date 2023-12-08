@@ -391,7 +391,7 @@ set_target_properties(wi4mpi_MPC_a
                      )
 endif()
 
-if(CMAKE_Fortran_COMPILER STREQUAL gfortran) 
+if(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU") 
 set_target_properties(mpi_mod
                       PROPERTIES
                       COMPILE_FLAGS "-ffree-line-length-0"
