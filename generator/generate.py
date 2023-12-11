@@ -166,6 +166,9 @@ def generate_wrapper_c(object_gen, wrapper, ompi_const, not_generated, def_list,
 
 def generate_wrapper_f(object_gen, data_f, data_f_overide, wrapper, root, list_not_gen=['MPI_Keyval_create','MPI_Keyval_free','MPI_Attr_put','MPI_Attr_get','MPI_Attr_delete','MPI_Errhandler_create','MPI_Errhandler_set','MPI_Errhandler_get','MPI_Errhandler_free','MPI_Comm_create_errhandler','MPI_Comm_get_errhandler','MPI_Comm_set_errhandler','MPI_Info_free']):
     string=header_license_file()
+    string=string+'#ifndef _GNU_SOURCE'+'\n'
+    string=string+'#define _GNU_SOURCE'+'\n'
+    string=string+'#endif\n'
     if not wrapper:
         string=string+'#include \"mappers.h\"\n'
         string=string+'#include \"run_mpi.h\"\n'
