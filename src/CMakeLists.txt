@@ -243,14 +243,9 @@ endif()
 #Link options
 #------------
 
-target_link_libraries(wi4mpi_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPC ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_a ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL_a ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_a ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPC_a ${CMAKE_THREAD_LIBS_INIT})
+foreach(lib wi4mpi_OMPI wi4mpi_INTEL wi4mpi_MPICH wi4mpi_MPC wi4mpi_OMPI_a wi4mpi_INTEL_a wi4mpi_MPICH_a wi4mpi_MPC_a)
+    target_link_libraries(${lib} Threads::Threads)
+endforeach()
 
 #Custom command
 #--------------
@@ -431,15 +426,9 @@ endforeach(LIB)
 # Link options
 #-------------
 
-target_link_libraries(wi4mpi_INTEL_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL_MPICH ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_MPICH ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_MPICH ${CMAKE_THREAD_LIBS_INIT})
+foreach(lib wi4mpi_INTEL_OMPI wi4mpi_INTEL_INTEL wi4mpi_INTEL_MPICH wi4mpi_MPICH_OMPI wi4mpi_MPICH_INTEL wi4mpi_MPICH_MPICH wi4mpi_OMPI_OMPI wi4mpi_OMPI_INTEL wi4mpi_OMPI_MPICH)
+    target_link_libraries(${lib} Threads::Threads)
+endforeach()
 
 # Installation specs
 #-------------------
