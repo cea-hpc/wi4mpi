@@ -86,18 +86,6 @@ target_include_directories(wi4mpi_profiling_MPC
                                                      PRIVATE
                                                      interface/header/_MPC)
 
-set_target_properties(wi4mpi_profiling_OMPI 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
-set_target_properties(wi4mpi_profiling_INTEL 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
-set_target_properties(wi4mpi_profiling_MPICH 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
-set_target_properties(wi4mpi_profiling_MPC 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
 
 
 install(TARGETS 
@@ -191,47 +179,16 @@ target_include_directories(wi4mpi_MPC_a
 #Flags
 #-----
 
-set_target_properties(mpi
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS}"
-                     )
-set_target_properties(wi4mpi_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_OMPI -D__MPI__COMPILE__"
-                     )
-set_target_properties(wi4mpi_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_INTEL"
-                     )
-set_target_properties(wi4mpi_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_INTEL"
-                     )
-set_target_properties(wi4mpi_MPC
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_MPC"
-                     )
+target_compile_definitions(wi4mpi_OMPI PRIVATE _OMPI __MPI__COMPILE__)
+target_compile_definitions(wi4mpi_INTEL PRIVATE _INTEL)
+target_compile_definitions(wi4mpi_MPICH PRIVATE _INTEL)
+target_compile_definitions(wi4mpi_MPC PRIVATE _MPC)
 
-set_target_properties(mpi_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_OMPI_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_OMPI -D__MPI__COMPILE__ -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_INTEL_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_INTEL -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPICH_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_INTEL -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPC_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -D_MPC -DWI4MPI_STATIC"
-                     )
+target_compile_definitions(mpi_a PRIVATE WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_OMPI_a PRIVATE _OMPI __MPI__COMPILE__ WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_INTEL_a PRIVATE _INTEL WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_MPICH_a PRIVATE _INTEL WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_MPC_a PRIVATE _MPC WI4MPI_STATIC)
 
 if(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU") 
 set_target_properties(mpi_mod
@@ -368,44 +325,17 @@ target_include_directories(wi4mpi_OMPI_MPICH
 #Flags
 #-----
 
-set_target_properties(wi4mpi_INTEL_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_INTEL_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_INTEL_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DINTEL_INTEL "
-)
+target_compile_definitions(wi4mpi_INTEL_INTEL PRIVATE INTEL_INTEL)
+target_compile_definitions(wi4mpi_INTEL_OMPI PRIVATE INTEL_OMPI)
+target_compile_definitions(wi4mpi_INTEL_MPICH PRIVATE INTEL_INTEL)
 
-set_target_properties(wi4mpi_MPICH_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_MPICH_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_MPICH_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DINTEL_INTEL "
-)
+target_compile_definitions(wi4mpi_MPICH_INTEL PRIVATE INTEL_INTEL)
+target_compile_definitions(wi4mpi_MPICH_OMPI PRIVATE INTEL_OMPI)
+target_compile_definitions(wi4mpi_MPICH_MPICH PRIVATE INTEL_INTEL)
 
-set_target_properties(wi4mpi_OMPI_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} -DOMPI_OMPI"
-)
+target_compile_definitions(wi4mpi_OMPI_INTEL PRIVATE OMPI_INTEL)
+target_compile_definitions(wi4mpi_OMPI_MPICH PRIVATE OMPI_INTEL)
+target_compile_definitions(wi4mpi_OMPI_OMPI PRIVATE OMPI_OMPI)
 
 foreach(LIB ${LIST_FAKECXX})
     foreach(MAJOR ${LIST_FAKECXX_MAJOR})
