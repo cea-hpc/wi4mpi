@@ -1,14 +1,11 @@
 cmake_minimum_required(VERSION 3.1.0)
 #Default compiler for wi4mpi
-if(NOT WI4MPI_COMPILER)
-    set(WI4MPI_COMPILER GCC)
+if(WI4MPI_COMPILER)
+    message(DEPRECATION "WI4MPI_COMPILER is deprecated. Set environment variables CC, CXX and FC, or use CMAKE_<lang>_COMPILER cmake's option instead.")
 endif()
 #Define common options according to the selected compiler
 if(WI4MPI_COMPILER MATCHES GCC OR WI4MPI_COMPILER MATCHES GNU)
     # GNU value is deprecated
-    if(WI4MPI_COMPILER MATCHES GNU)
-    message(DEPRECATION "The GNU value for WI4MPI_COMPILER is deprecated and will be removed in the future; use GCC instead. However, for reasons of backward compatibility, the GNU syntax is still valid for now.")
-    endif()
     set(CMAKE_C_COMPILER "gcc")
     set(CMAKE_CXX_COMPILER "g++")
     set(CMAKE_Fortran_COMPILER "gfortran")
