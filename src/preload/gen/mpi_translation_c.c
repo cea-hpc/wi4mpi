@@ -39043,7 +39043,7 @@ A_MPI_Errhandler A__MPI_Errhandler_f2c(A_MPI_Fint op) {
 #ifdef DEBUG
   printf("sort : A_MPI_Errhandler_f2c\n");
 #endif
-  return ret_tmp;
+  return (A_MPI_Errhandler)ret_tmp;
 }
 R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);

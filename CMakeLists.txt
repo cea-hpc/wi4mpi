@@ -98,7 +98,9 @@ elseif(WI4MPI_COMPILER MATCHES LLVM)
     set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -DDEBUG")
     set(CMAKE_C_FLAGS_GCC_JIT "${CMAKE_C_FLAGS} -g -O3 -fPIC -shared -D_WI4MPI_GCC_JIT")
     set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3 -fPIC -shared")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon")
+    # Allow implicit declartion with clang
+    # FIXME: we should properly declare/include to not have to use that
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon -Wno-error=implicit-function-declaration")
     set(WI4MPI_FORT_CALL "-DFLANG_CALL")
     set(CC "clang")
     set(CXX "clang++")
