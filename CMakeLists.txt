@@ -161,6 +161,10 @@ endif()
 
 
 find_package(Threads)
+find_program(BASHPATH bash NO_DEFAULT_PATH PATHS /bin /usr/bin /usr/local/bin)
+if(BATHPATH STREQUAL "BATHPATH-NOTFOUND")
+    message(FATAL_ERROR "Bash shell not found. It is required for running wi4mpi.")
+endif()
 if(${CMAKE_VERSION} VERSION_LESS "3.17.0")
     if(NOT CMAKE_THREAD_LIBS_INIT)
         message(FATAL_ERROR "Be sure to have Pthread available on your system")

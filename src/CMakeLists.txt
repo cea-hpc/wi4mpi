@@ -1004,9 +1004,9 @@ install(FILES
         preload/bin/wi4mpi DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
-if(CMAKE_SYSTEM_NAME MATCHES FreeBSD)
+if(NOT BASHPATH STREQUAL "/bin/bash")
     # Ugly work-around bash install path on FreeBSD
-    install(CODE "execute_process(COMMAND sed -i \"\" s+bin/bash+usr/local/bin/bash+ wi4mpi mpicc mpirun WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)")
+    install(CODE "execute_process(COMMAND sed -i \"\" s+/bin/bash+${BASHPATH}+ wi4mpi mpicc mpirun WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)")
 endif()
 
 #Wi4mpi config
