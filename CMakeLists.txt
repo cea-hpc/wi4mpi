@@ -1,56 +1,7 @@
 cmake_minimum_required(VERSION 3.1.0)
-project(wi4mpi)
-
-if(POLICY CMP0054)
-    cmake_policy(SET CMP0054 NEW)
-endif()
-if(POLICY CMP0057)
-    CMAKE_POLICY(SET CMP0057 NEW)
-endif()
-
-set(VERSION_MAJOR 3)
-set(VERSION_MINOR 6)
-set(VERSION_PATCH 4)
-
-set(WI4MPI_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
-
-#Path to CMake Module
-set(CMAKE_MODULE_PATH
-     ${CMAKE_MODULE_PATH}
-     ${CMAKE_CURRENT_DIR}/cmake
-   )
-
-option(WI4MPI_DEBUG "Add debug printing in the wrapped calls")
-option(WI4MPI_JIT "Use JIT compilation for user-provided stuff (required gcc in the PATH at run time")
-
-#The Rpath Strikes Back
-set(CMAKE_SKIP_RPATH TRUE)
-#Default RPATH Settings 
-###############################################################################
-## use, i.e. don't skip the full RPATH for the build tree                     #
-set(CMAKE_SKIP_BUILD_RPATH  FALSE)                                            #
-#                                                                             #
-## when building, don't use the install RPATH already                         #
-## (but later on when installing)                                             #
-set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)                                     #
-#                                                                             #
-## the RPATH to be used when installing                                       #
-set(CMAKE_INSTALL_RPATH "")                                                   #
-#                                                                             #
-## don't add the automatically determined parts of the RPATH                  #
-## which point to directories outside the build tree to the install RPATH     #
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)                                  #
-###############################################################################
-
 #Default compiler for wi4mpi
 if(NOT WI4MPI_COMPILER)
     set(WI4MPI_COMPILER GCC)
-endif()
-if(CMAKE_SYSTEM_NAME MATCHES Linux)
-    set(WI4MPI_TIMEOUT ON)
-    add_definitions(-DTIMEOUT_SUPPORT)
-else()
-    set(WI4MPI_TIMEOUT OFF)
 endif()
 #Define common options according to the selected compiler
 if(WI4MPI_COMPILER MATCHES GCC OR WI4MPI_COMPILER MATCHES GNU)
@@ -106,7 +57,57 @@ if("${FC_PATH}" MATCHES "FC_PATH-NOTFOUND")
     message(FATAL_ERROR "Fortran compiler not found in PATH!
     Current value of FC is: ${FC}")
 endif()
+
+if(POLICY CMP0054)
+    cmake_policy(SET CMP0054 NEW)
+endif()
+if(POLICY CMP0057)
+    CMAKE_POLICY(SET CMP0057 NEW)
+endif()
+
 enable_language(C CXX Fortran)
+project(wi4mpi)
+
+set(VERSION_MAJOR 3)
+set(VERSION_MINOR 6)
+set(VERSION_PATCH 4)
+
+set(WI4MPI_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
+
+#Path to CMake Module
+set(CMAKE_MODULE_PATH
+     ${CMAKE_MODULE_PATH}
+     ${CMAKE_CURRENT_DIR}/cmake
+   )
+
+option(WI4MPI_DEBUG "Add debug printing in the wrapped calls")
+option(WI4MPI_JIT "Use JIT compilation for user-provided stuff (required gcc in the PATH at run time")
+
+#The Rpath Strikes Back
+set(CMAKE_SKIP_RPATH TRUE)
+#Default RPATH Settings 
+###############################################################################
+## use, i.e. don't skip the full RPATH for the build tree                     #
+set(CMAKE_SKIP_BUILD_RPATH  FALSE)                                            #
+#                                                                             #
+## when building, don't use the install RPATH already                         #
+## (but later on when installing)                                             #
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)                                     #
+#                                                                             #
+## the RPATH to be used when installing                                       #
+set(CMAKE_INSTALL_RPATH "")                                                   #
+#                                                                             #
+## don't add the automatically determined parts of the RPATH                  #
+## which point to directories outside the build tree to the install RPATH     #
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)                                  #
+###############################################################################
+
+if(CMAKE_SYSTEM_NAME MATCHES Linux)
+    set(WI4MPI_TIMEOUT ON)
+    add_definitions(-DTIMEOUT_SUPPORT)
+else()
+    set(WI4MPI_TIMEOUT OFF)
+endif()
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
