@@ -10056,8 +10056,15 @@ int A_MPI_Get_library_version(char *version, int *resultlen) {
 #endif
   in_w = 1;
 
-  int ret_tmp = LOCAL_MPI_Get_library_version(version, resultlen);
-
+  char version_tmp[R_MPI_MAX_LIBRARY_VERSION_STRING];
+  int resultlen_ltmp;
+  int *resultlen_tmp = &resultlen_ltmp;
+  int ret_tmp = LOCAL_MPI_Get_library_version(version_tmp, resultlen_tmp);
+  string_max_conv_r2a(version, version_tmp, A_MPI_MAX_LIBRARY_VERSION_STRING,
+                      R_MPI_MAX_LIBRARY_VERSION_STRING);
+  length_max_conv_r2a(resultlen, resultlen_tmp,
+                      A_MPI_MAX_LIBRARY_VERSION_STRING,
+                      R_MPI_MAX_LIBRARY_VERSION_STRING);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG

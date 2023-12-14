@@ -3945,16 +3945,16 @@
     "args": [
       {
         "var": "version", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_LIBRARY_VERSION_STRING", 
         "In": 0, 
-        "name": "char_ptr_mapper", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 1
       }, 
       {
         "var": "resultlen", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_LIBRARY_VERSION_STRING", 
         "In": 0, 
-        "name": "int_ptr_mapper", 
+        "name": "length_maxsize_ptr_mapper", 
         "Out": 1
       }
     ], 
