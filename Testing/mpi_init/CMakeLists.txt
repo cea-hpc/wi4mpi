@@ -14,6 +14,6 @@ foreach (COMP ${LIST_MPI_COMPILERS})
     file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/run_mpi_init_from_${COMP}_tests.sh
         DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     add_test (NAME mpi_init_from_${COMP}
-        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/run_mpi_init_from_${COMP}_tests.sh
+        COMMAND bash ${CMAKE_CURRENT_BINARY_DIR}/run_mpi_init_from_${COMP}_tests.sh
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 endforeach ()
