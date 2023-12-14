@@ -62,26 +62,29 @@ wi4mpi_set_target_vars() {
       openmpi)
         TARGET_FAMILY="OMPI"
         [[ $is_preload -eq 0 ]] && WI4MPI_FAMILY=${WI4MPI_OMPI}
-        WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-"$OPENMPI_ROOT/lib/libmpi.so"}
-        WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-"$OPENMPI_ROOT/lib/libmpi_mpifh.so"}
-        WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB:-"$OPENMPI_ROOT/lib/libmpi.so"}
-        WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB:-"$OPENMPI_ROOT/lib/libmpi_mpifh.so"}
+        TARGET_ROOT="$OPENMPI_ROOT"
+        TARGET_RUN_MPI_C_LIBNAME="libmpi.so"
+        TARGET_RUN_MPI_F_LIBNAME="libmpi_mpifh.so"
+        TARGET_RUN_MPIIO_C_LIBNAME="libmpi.so"
+        TARGET_RUN_MPIIO_F_LIBNAME="libmpi_mpifh.so"
         ;;
       intelmpi)
         TARGET_FAMILY="INTEL"
         [[ $is_preload -eq 0 ]] && WI4MPI_FAMILY=${WI4MPI_INTEL}
-        WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-"$INTELMPI_ROOT/lib64/libmpi.so"}
-        WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-"$INTELMPI_ROOT/lib64/libmpifort.so"}
-        WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB:-"$INTELMPI_ROOT/lib64/libmpi.so"}
-        WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB:-"$INTELMPI_ROOT/lib64/libmpifort.so"}
+        TARGET_ROOT="$INTELMPI_ROOT"
+        TARGET_RUN_MPI_C_LIBNAME="libmpi.so"
+        TARGET_RUN_MPI_F_LIBNAME="libmpifort.so"
+        TARGET_RUN_MPIIO_C_LIBNAME="libmpi.so"
+        TARGET_RUN_MPIIO_F_LIBNAME="libmpifort.so"
         ;;
       mpich)
         TARGET_FAMILY="MPICH"
         [[ $is_preload -eq 0 ]] && WI4MPI_FAMILY=${WI4MPI_MPICH}
-        WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-"$MPICH_ROOT/lib/libmpi.so"}
-        WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-"$MPICH_ROOT/lib/libmpifort.so"}
-        WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB:-"$MPICH_ROOT/lib/libmpi.so"}
-        WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB:-"$MPICH_ROOT/lib/libmpifort.so"}
+        TARGET_ROOT="$MPICH_ROOT"
+        TARGET_RUN_MPI_C_LIBNAME="libmpi.so"
+        TARGET_RUN_MPI_F_LIBNAME="libmpifort.so"
+        TARGET_RUN_MPIIO_C_LIBNAME="libmpi.so"
+        TARGET_RUN_MPIIO_F_LIBNAME="libmpifort.so"
         ;;
       mpc)
         if [[ $is_preload -eq 1 ]]; then
@@ -90,10 +93,11 @@ wi4mpi_set_target_vars() {
         source $MPC_ROOT/../../mpcvars.sh
         TARGET_FAMILY="MPC"
         WI4MPI_FAMILY=${WI4MPI_MPC}
-        WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-"$MPC_ROOT/lib/libmpc_framework.so"}
-        WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-"$MPC_ROOT/lib/libmpc_frameworkf.so"}
-        WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB:-"$MPC_ROOT/lib/libromio.so"}
-        WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB:-"$MPC_ROOT/lib/libromio.so"}
+        TARGET_ROOT="$MPC_ROOT"
+        TARGET_RUN_MPI_C_LIBNAME="libmpc_framework.so"
+        TARGET_RUN_MPI_F_LIBNAME="libmpc_frameworkf.so"
+        TARGET_RUN_MPIIO_C_LIBNAME="libromio.so"
+        TARGET_RUN_MPIIO_F_LIBNAME="libromio.so"
         WI4MPI_MPC_HOOK_MAIN_LIB="$MPC_ROOT/lib/libmpc_hookmain.so"
         WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
         LD_PRELOAD="${WI4MPI_WRAPPER_LIB} ${WI4MPI_INTERFACE}/libmpi.so ${WI4MPI_RUN_MPI_C_LIB} ${WI4MPI_MPC_HOOK_MAIN_LIB}"
@@ -104,6 +108,18 @@ wi4mpi_set_target_vars() {
         ;;
       *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
     esac
+    TARGET_RUN_MPI_C_LIB="${TARGET_ROOT}/lib/${TARGET_RUN_MPI_C_LIBNAME}"
+    TARGET_RUN_MPI_F_LIB="${TARGET_ROOT}/lib/${TARGET_RUN_MPI_F_LIBNAME}"
+    TARGET_RUN_MPIIO_C_LIB="${TARGET_ROOT}/lib/${TARGET_RUN_MPIIO_C_LIBNAME}"
+    TARGET_RUN_MPIIO_F_LIB="${TARGET_ROOT}/lib/${TARGET_RUN_MPIIO_F_LIBNAME}"
+    [[ ! -e ${TARGET_RUN_MPI_C_LIB} ]] && TARGET_RUN_MPI_C_LIB="${TARGET_ROOT}/lib64/${TARGET_RUN_MPI_C_LIBNAME}"
+    [[ ! -e ${TARGET_RUN_MPI_F_LIB} ]] && TARGET_RUN_MPI_F_LIB="${TARGET_ROOT}/lib64/${TARGET_RUN_MPI_F_LIBNAME}"
+    [[ ! -e ${TARGET_RUN_MPIIO_C_LIB} ]] && TARGET_RUN_MPIIO_C_LIB="${TARGET_ROOT}/lib64/${TARGET_RUN_MPI_C_LIBNAME}"
+    [[ ! -e ${TARGET_RUN_MPIIO_F_LIB} ]] && TARGET_RUN_MPIIO_F_LIB="${TARGET_ROOT}/lib64/${TARGET_RUN_MPI_F_LIBNAME}"
+    WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB:-"$TARGET_RUN_MPI_C_LIB"}
+    WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB:-"$TARGET_RUN_MPI_F_LIB"}
+    WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB:-"$TARGET_RUN_MPIIO_C_LIB"}
+    WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB:-"$TARGET_RUN_MPIIO_F_LIB"}
 }
 
 wi4mpi_check_target_lib() {
