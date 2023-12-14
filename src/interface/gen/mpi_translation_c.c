@@ -10506,8 +10506,17 @@ int A_MPI_Error_string(int errorcode, char *string, int *resultlen) {
 #endif
   in_w = 1;
 
-  int ret_tmp = LOCAL_MPI_Error_string(errorcode, string, resultlen);
-
+  int errorcode_tmp;
+  errorcode_tmp = error_code_conv_a2r(errorcode);
+  char string_tmp[R_MPI_MAX_ERROR_STRING];
+  int resultlen_ltmp;
+  int *resultlen_tmp = &resultlen_ltmp;
+  int ret_tmp =
+      LOCAL_MPI_Error_string(errorcode_tmp, string_tmp, resultlen_tmp);
+  string_max_conv_r2a(string, string_tmp, A_MPI_MAX_ERROR_STRING,
+                      R_MPI_MAX_ERROR_STRING);
+  length_max_conv_r2a(resultlen, resultlen_tmp, A_MPI_MAX_ERROR_STRING,
+                      R_MPI_MAX_ERROR_STRING);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG

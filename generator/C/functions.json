@@ -4074,21 +4074,21 @@
         "var": "errorcode", 
         "arg_dep": "", 
         "In": 1, 
-        "name": "int_mapper", 
+        "name": "error_converter", 
         "Out": 0
       }, 
       {
         "var": "string", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_ERROR_STRING", 
         "In": 0, 
-        "name": "char_ptr_mapper", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 1
       }, 
       {
         "var": "resultlen", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_ERROR_STRING", 
         "In": 0, 
-        "name": "int_ptr_mapper", 
+        "name": "length_maxsize_ptr_mapper", 
         "Out": 1
       }
     ], 

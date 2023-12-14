@@ -89,7 +89,7 @@ typedef int (A_MPI_Grequest_cancel_function)(void *, int);
 #define A_MPI_ROOT               -4                      /* special value for intercomms */
 #define A_MPI_ANY_TAG            -1                      /* match any message tag */
 #define A_MPI_MAX_PROCESSOR_NAME 512 /* max proc. name length */
-#define OPAL_MAX_ERROR_STRING  2048   /* max error message length */
+#define A_MPI_MAX_ERROR_STRING  2048   /* max error message length */
 #define OPAL_MAX_OBJECT_NAME   1024    /* max object name length */
 #define A_MPI_MAX_LIBRARY_VERSION_STRING 256             /* max length of library version string */
 #define A_MPI_UNDEFINED          -32766                  /* undefined stuff */
