@@ -101,10 +101,9 @@ wi4mpi_set_target_vars() {
         WI4MPI_MPC_HOOK_MAIN_LIB="$MPC_ROOT/lib/libmpc_hookmain.so"
         WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
         LD_PRELOAD="${WI4MPI_WRAPPER_LIB} ${WI4MPI_INTERFACE}/libmpi.so ${WI4MPI_RUN_MPI_C_LIB} ${WI4MPI_MPC_HOOK_MAIN_LIB}"
-        [[ -n "$VERBOSE" ]] && echo $WI4MPI_MPC_HOOK_MAIN_LIB && echo $LD_PRELOAD
+        [[ -n "$VERBOSE" ]] && echo $WI4MPI_MPC_HOOK_MAIN_LIB
         [[ ! -e ${WI4MPI_MPC_HOOK_MAIN_LIB} ]] && { echo "Error: could not find the HOOK_MAIN library for MPC support." >&2 ; exit 1; }
         export WI4MPI_MPC_HOOK_MAIN_LIB
-        export LD_PRELOAD
         ;;
       *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
     esac
@@ -136,7 +135,7 @@ wi4mpi_print_exports() {
     echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
     echo "export WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB}"
     echo "export WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB}"
-    [[ $1 -eq 1 ]] && echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+    [[ $1 -eq 1 || $2 == "mpc" ]] && echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
     echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 }
 
@@ -204,7 +203,7 @@ wi4mpi_check_target_lib
 if [[ -z $FROM ]]; then
     LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
 else
-    export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
+    LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
     libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
     [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; wi4mpi_error=1; }
     LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
@@ -220,7 +219,7 @@ if [[ wi4mpi_error -eq 1 ]]; then
     exit 1
 fi
 
-[[ -n $VERBOSE ]] && wi4mpi_print_exports $ispreload
+[[ -n $VERBOSE ]] && wi4mpi_print_exports $ispreload $TARGET_FAMILY
 
 [[ $ispreload -eq 0 ]] && export WI4MPI_WRAPPER_LIB
 export WI4MPI_FROM
@@ -230,5 +229,6 @@ export WI4MPI_RUN_MPI_C_LIB
 export WI4MPI_RUN_MPI_F_LIB
 export WI4MPI_RUN_MPIIO_C_LIB
 export WI4MPI_RUN_MPIIO_F_LIB
+[[ $ispreload -eq 1 || $TARGET_FAMILY == "mpc" ]] && export LD_PRELOAD
 
 exec "$@"
