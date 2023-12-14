@@ -1544,4 +1544,22 @@ static inline void order2_conv_a2r(int *order,int *order_tmp)
         *order_tmp=*order;
 }
 
+static inline void string_max_conv_r2a(char *name, char *name_tmp, int app_max_size, int run_max_size) {
+    if (run_max_size > app_max_size) {
+        strncpy(name, name_tmp, app_max_size);
+        name[app_max_size-1] = '\0';
+    } else {
+        strcpy(name, name_tmp);
+    }
+}
+
+static inline void length_max_conv_r2a(int *length, int *length_tmp, int app_max_size, int run_max_size) {
+    (void)run_max_size;
+    if (*length_tmp > (app_max_size-1)) {
+        *length = app_max_size-1;
+    } else {
+        *length = *length_tmp;
+    }
+}
+
 #endif /*MAPPERS_HEADERS */

@@ -88,7 +88,7 @@
 #define OPAL_MAX_PORT_NAME 1024
 
 /* Maximum length of processor names (default is 256) */
-//#define OPAL_MAX_PROCESSOR_NAME 256
+#define OPAL_MAX_PROCESSOR_NAME 256
 
 /* Whether we have FORTRAN LOGICAL*1 or not */
 #define OMPI_HAVE_FORTRAN_LOGICAL1 1

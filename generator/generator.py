@@ -47,7 +47,7 @@ class generator:
                     ii=ii[:idx]
                 out_str=out_str+ii+" : "+self.mappers[i['name']]['debug_type']+",\\n"
                 
-                if i['arg_dep'] !='':
+                if i['arg_dep'] !='' and 'max_mpi' not in self.mappers[i['name']]:
                     out_arg_list=out_arg_list+i['arg_dep'] +","
                 out_arg_list=out_arg_list+ii+","
         if func_dict['ret'] is not None:
@@ -110,7 +110,7 @@ class generator:
         if self.name == 'Wrapper_Preload_C' or self.name == 'Wrapper_Interface_C' or self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
             if app_side:
        #         string=string+'\nprintf(\"sort : A_'+func_dict['name']+'\\n\");'
-                string=string+'\nif (WI4'+func_dict['name']+'_print)\ndebug_printer(\"'+self.debug_string(func_dict)[0]+'\",'+self.debug_string(func_dict)[1]+');'
+                string=string+'\nif (WI4'+func_dict['name']+'_print)\ndebug_printer(\n\"'+self.debug_string(func_dict)[0]+'\",'+self.debug_string(func_dict)[1]+');'
         #    else:
         #        string=string+'\nprintf(\"sort : R_'+func_dict['name']+'\\n\");'
         #elif self.name == 'Wrapper_Preload_Fortran' or self.name == 'Wrapper_Interface_Fortran':
@@ -345,7 +345,14 @@ class generator:
                     else:
                         type_prefix = ''
                     if len(str_test.split('*')) > 1:
-                       str=type_prefix+str_test.split('*')[0]+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof('+type_prefix+str_test.split('*')[0]+')*'+str_test_out+');'
+                       if 'max_mpi' in self.mappers[arg['name']]:
+                           if 'char' in str_test:
+                               str='char '+arg['var']+'_tmp[R_'+arg['arg_dep']+'];'
+                           else:
+                               str=self.mappers[arg['name']]['type'][:-1]+arg['var']+'_ltmp;'
+                               str+=self.mappers[arg['name']]['type']+arg['var']+'_tmp = &'+arg['var']+'_ltmp;'
+                       else:
+                           str=type_prefix+str_test.split('*')[0]+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof('+type_prefix+str_test.split('*')[0]+')*'+str_test_out+');'
                     else:
                        if str_test == 'MPI_Status': #special case: where MPI_STATUSES_IGNORE is use as an argument for array_of_statuses in MPI_Waitall/Waitsome and MPI_Testall/Testsome
                           str='R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_'+self.mappers[arg['name']]['type']+')*'+str_test_out+'));'
@@ -474,7 +481,7 @@ class generator:
             str=self.mappers[arg['name']]['r2a']
         else:
             #Testing in which circonstances the value is set (cf Developer documentation)
-            if arg['arg_dep'] !='' and 'if' not in arg :
+            if arg['arg_dep'] !='' and 'if' not in arg and 'max_mpi' not in self.mappers[arg['name']]:
                 if 'if_status_ignore' in arg:
                     str= 'int i'+count_loop.__str__()+';\n'
                     str=str+'if (array_of_statuses!=A_MPI_STATUSES_IGNORE)\n{\n'
@@ -484,6 +491,8 @@ class generator:
                     str= 'int i'+count_loop.__str__()+';\n'
                     str=str+'for(i'+count_loop.__str__()+'=0; i'+count_loop.__str__()+' < '+arg['arg_dep']+';i'+count_loop.__str__()+'++){\n'
                     str=str+self.mappers[arg['name']]['r2a']+'(&'+arg['var'].split('[')[0]+'[i'+count_loop.__str__()+'],&'+arg['var'].split('[')[0]+'_tmp[i'+count_loop.__str__()+']);\n}'
+            elif arg['arg_dep'] != '' and 'max_mpi' in self.mappers[arg['name']]:
+                str= self.mappers[arg['name']]['r2a']+'('+arg['var']+','+arg['var']+'_tmp, A_'+arg['arg_dep']+', R_'+arg['arg_dep']+');'
             elif 'if' in arg:
                     if 'if_dep' in arg:
                         str='int i'+count_loop.__str__()+';\n'
@@ -644,7 +653,7 @@ class generator:
                             count_loop=count_loop+1
                         str=str+'\n'+self.affect_val_conv_c(arg,count_loop,func_dict['name'])
                 for arg in func_dict['args']:
-                    if arg['arg_dep'] and "no_map" not in self.mappers[arg['name']]:
+                    if arg['arg_dep'] and "no_map" not in self.mappers[arg['name']] and 'max_mpi' not in self.mappers[arg['name']]:
                         if arg['var'].split('[')[0] == 'array_of_statuses':
                             str=str+'\nif (array_of_statuses!=A_MPI_STATUSES_IGNORE)'
                             str=str+'\n'+'wi4mpi_free('+arg['var'].split('[')[0]+'_tmp'+');'
