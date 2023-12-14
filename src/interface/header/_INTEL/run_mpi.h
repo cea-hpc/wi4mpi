@@ -411,6 +411,7 @@ static R_MPI_Datatype mpich_mpi_datatype_null MPICH_ATTR_TYPE_TAG_MUST_BE_NULL()
 #define R_MPI_MAX_ERROR_STRING   512
 #define R_MPI_MAX_PORT_NAME      256
 #define R_MPI_MAX_OBJECT_NAME    128
+#define R_MPI_MAX_DATAREP_STRING 128
 
 /* Pre-defined constants */
 #define R_MPI_UNDEFINED      (-32766)

@@ -26140,13 +26140,14 @@ int A_MPI_File_get_view(A_MPI_File fh, A_MPI_Offset *disp,
   R_MPI_Datatype *etype_tmp = &etype_ltmp;
   R_MPI_Datatype filetype_ltmp = R_MPI_DATATYPE_NULL;
   R_MPI_Datatype *filetype_tmp = &filetype_ltmp;
-
+  char datarep_tmp[R_MPI_MAX_DATAREP_STRING];
   int ret_tmp = LOCAL_MPI_File_get_view(fh_tmp, disp_tmp, etype_tmp,
-                                        filetype_tmp, datarep);
+                                        filetype_tmp, datarep_tmp);
   *disp = (A_MPI_Offset)*disp_tmp;
   datatype_conv_r2a(etype, etype_tmp);
   datatype_conv_r2a(filetype, filetype_tmp);
-
+  string_max_conv_r2a(datarep, datarep_tmp, A_MPI_MAX_DATAREP_STRING,
+                      R_MPI_MAX_DATAREP_STRING);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
