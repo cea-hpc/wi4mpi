@@ -18255,9 +18255,14 @@ int A_MPI_Win_get_name(A_MPI_Win win, char *win_name, int *resultlen) {
 
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-
-  int ret_tmp = LOCAL_MPI_Win_get_name(win_tmp, win_name, resultlen);
-
+  char win_name_tmp[R_MPI_MAX_OBJECT_NAME];
+  int resultlen_ltmp;
+  int *resultlen_tmp = &resultlen_ltmp;
+  int ret_tmp = LOCAL_MPI_Win_get_name(win_tmp, win_name_tmp, resultlen_tmp);
+  string_max_conv_r2a(win_name, win_name_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
+  length_max_conv_r2a(resultlen, resultlen_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
