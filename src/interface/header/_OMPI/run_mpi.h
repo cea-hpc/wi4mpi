@@ -82,7 +82,7 @@
 #define OPAL_MAX_INFO_VAL 256
 
 /* Maximum length of object names (default is 64) */
-//#define OPAL_MAX_OBJECT_NAME 64
+#define OPAL_MAX_OBJECT_NAME 64
 
 /* Maximum length of port names (default is 1024) */
 #define OPAL_MAX_PORT_NAME 1024

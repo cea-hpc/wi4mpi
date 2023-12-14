@@ -16141,9 +16141,14 @@ int A_MPI_Comm_get_name(A_MPI_Comm comm, char *comm_name, int *resultlen) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-
-  int ret_tmp = LOCAL_MPI_Comm_get_name(comm_tmp, comm_name, resultlen);
-
+  char comm_name_tmp[R_MPI_MAX_OBJECT_NAME];
+  int resultlen_ltmp;
+  int *resultlen_tmp = &resultlen_ltmp;
+  int ret_tmp = LOCAL_MPI_Comm_get_name(comm_tmp, comm_name_tmp, resultlen_tmp);
+  string_max_conv_r2a(comm_name, comm_name_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
+  length_max_conv_r2a(resultlen, resultlen_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
