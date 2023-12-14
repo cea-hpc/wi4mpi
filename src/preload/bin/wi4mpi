@@ -101,9 +101,6 @@ wi4mpi_set_target_vars() {
         WI4MPI_MPC_HOOK_MAIN_LIB="$MPC_ROOT/lib/libmpc_hookmain.so"
         WI4MPI_WRAPPER_LIB="${WI4MPI_FAMILY}/libwi4mpi_${TARGET_FAMILY}.so"
         LD_PRELOAD="${WI4MPI_WRAPPER_LIB} ${WI4MPI_INTERFACE}/libmpi.so ${WI4MPI_RUN_MPI_C_LIB} ${WI4MPI_MPC_HOOK_MAIN_LIB}"
-        [[ -n "$VERBOSE" ]] && echo $WI4MPI_MPC_HOOK_MAIN_LIB
-        [[ ! -e ${WI4MPI_MPC_HOOK_MAIN_LIB} ]] && { echo "Error: could not find the HOOK_MAIN library for MPC support." >&2 ; exit 1; }
-        export WI4MPI_MPC_HOOK_MAIN_LIB
         ;;
       *) echo "Error: Unsupported Target MPI stack." >&2 ; exit 1;
     esac
@@ -127,6 +124,7 @@ wi4mpi_check_target_lib() {
     [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; wi4mpi_error=1; }
     [[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && { echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2 ; wi4mpi_error=1; }
     [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; wi4mpi_error=1; }
+    [[ -v WI4MPI_MPC_HOOK_MAIN_LIB && ! -e ${WI4MPI_MPC_HOOK_MAIN_LIB} ]] && { echo "Error: could not find the HOOK_MAIN library for MPC support." >&2 ; wi4mpi_error=1; }
 }
 
 wi4mpi_print_exports() {
@@ -136,6 +134,7 @@ wi4mpi_print_exports() {
     echo "export WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB}"
     echo "export WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB}"
     [[ $1 -eq 1 || $2 == "mpc" ]] && echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+    [[ $2 == "mpc" ]] && echo "export WI4MPI_MPC_HOOK_MAIN_LIB=\"$WI4MPI_MPC_HOOK_MAIN_LIB\""
     echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 }
 
@@ -229,6 +228,7 @@ export WI4MPI_RUN_MPI_C_LIB
 export WI4MPI_RUN_MPI_F_LIB
 export WI4MPI_RUN_MPIIO_C_LIB
 export WI4MPI_RUN_MPIIO_F_LIB
+[[ $TARGET_FAMILY == "mpc" ]] && export WI4MPI_MPC_HOOK_MAIN_LIB
 [[ $ispreload -eq 1 || $TARGET_FAMILY == "mpc" ]] && export LD_PRELOAD
 
 exec "$@"
