@@ -115,11 +115,13 @@ wi4mpi_check_target_lib() {
 }
 
 wi4mpi_print_exports() {
+    [[ $1 -eq 0 ]] && echo "export WI4MPI_WRAPPER_LIB=${WI4MPI_WRAPPER_LIB}"
     echo "export WI4MPI_RUN_MPI_F_LIB=${WI4MPI_RUN_MPI_F_LIB}"
     echo "export WI4MPI_RUN_MPI_C_LIB=${WI4MPI_RUN_MPI_C_LIB}"
     echo "export WI4MPI_RUN_MPIIO_F_LIB=${WI4MPI_RUN_MPIIO_F_LIB}"
     echo "export WI4MPI_RUN_MPIIO_C_LIB=${WI4MPI_RUN_MPIIO_C_LIB}"
-    echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+    [[ $1 -eq 1 ]] && echo "export LD_PRELOAD=\"${LD_PRELOAD}\""
+    echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 }
 
 VERBOSE=""
@@ -185,10 +187,6 @@ wi4mpi_check_target_lib
 
 if [[ -z $FROM ]]; then
     LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
-    if [[ -n "$VERBOSE" ]]; then
-        echo "export WI4MPI_WRAPPER_LIB=${WI4MPI_WRAPPER_LIB}"
-        echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
-    fi
 
     export WI4MPI_WRAPPER_LIB
 else
@@ -208,7 +206,7 @@ if [[ wi4mpi_error -eq 1 ]]; then
     exit 1
 fi
 
-[[ -n $VERBOSE ]] && wi4mpi_print_exports
+[[ -n $VERBOSE ]] && wi4mpi_print_exports $ispreload
 
 export WI4MPI_FROM
 export WI4MPI_TO
