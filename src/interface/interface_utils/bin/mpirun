@@ -137,7 +137,8 @@ case ${WI4MPI_TO,,} in
     *intelmpi*)
         [[ -z "$INTELMPI_ROOT" ]] && (>&2 echo "Error: please set INTELMPI_ROOT or INTELMPI_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
         wi4mpi_opts="$wi4mpi_opts -t intelmpi"
-        _mpirun=$INTELMPI_ROOT/bin64/$WI4MPI_PM ;;
+        _mpirun=$INTELMPI_ROOT/bin/$WI4MPI_PM
+        [[ ! -e $_mpirun ]] && _mpirun=$INTELMPI_ROOT/bin64/$WI4MPI_PM ;;
     *mpich*)
         [[ -z "$MPICH_ROOT" ]] && (>&2 echo "Error: please set MPICH_ROOT or MPICH_DEFAULT_ROOT in wi4mpi.cfg") && exit 1
         wi4mpi_opts="$wi4mpi_opts -t mpich"
