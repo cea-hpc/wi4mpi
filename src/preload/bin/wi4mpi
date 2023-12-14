@@ -187,8 +187,6 @@ wi4mpi_check_target_lib
 
 if [[ -z $FROM ]]; then
     LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
-
-    export WI4MPI_WRAPPER_LIB
 else
     export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
     libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
@@ -208,6 +206,7 @@ fi
 
 [[ -n $VERBOSE ]] && wi4mpi_print_exports $ispreload
 
+[[ $ispreload -eq 0 ]] && export WI4MPI_WRAPPER_LIB
 export WI4MPI_FROM
 export WI4MPI_TO
 export LD_LIBRARY_PATH
