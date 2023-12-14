@@ -107,11 +107,11 @@ wi4mpi_set_target_vars() {
 }
 
 wi4mpi_check_target_lib() {
-    [[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper. You might want to set WI4MPI_WRAPPER_LIB" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library. You might want to set WI4MPI_RUN_MPI_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && { echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2 ; exit 1; }
-    [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; exit 1; }
+    [[ ! -e ${WI4MPI_WRAPPER_LIB} ]] && { echo "Error: could not find the wrapper. You might want to set WI4MPI_WRAPPER_LIB" >&2 ; wi4mpi_error=1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && { echo "Error: could not find the C target mpi library. You might want to set WI4MPI_RUN_MPI_C_LIB such as /path/to/libmpi.so" >&2 ; wi4mpi_error=1; }
+    [[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; wi4mpi_error=1; }
+    [[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && { echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2 ; wi4mpi_error=1; }
+    [[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && { echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2 ; wi4mpi_error=1; }
 }
 
 wi4mpi_print_exports() {
@@ -131,6 +131,7 @@ WI4MPI_MPICH=$( readlink -e $(dirname $0)/../lib_MPICH )
 WI4MPI_INTERFACE=$( readlink -e $(dirname $0)/../lib )
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
 WI4MPI_UCONFIG="$HOME/.wi4mpi.cfg"
+wi4mpi_error=0
 
 [[ -e $WI4MPI_GCONFIG ]] && source $WI4MPI_GCONFIG
 [[ -e $WI4MPI_UCONFIG ]] && source $WI4MPI_UCONFIG
@@ -194,14 +195,18 @@ if [[ -z $FROM ]]; then
 else
     export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
     libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
-    [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; exit 1; }
+    [[ ! -d $libfakedir_cxx ]] && { echo "Error: could not find the wrapper extra libdircxx." >&2 ; wi4mpi_error=1; }
     LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
     if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
         libfakedir="${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/"
-        [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdir." >&2 ; exit 1; }
+        [[ ! -d $libfakedir ]] && { echo "Error: could not find the wrapper extra libdir." >&2 ; wi4mpi_error=1; }
         LD_LIBRARY_PATH="${libfakedir}:$LD_LIBRARY_PATH"
     fi
 
+fi
+
+if [[ wi4mpi_error -eq 1 ]]; then
+    exit 1
 fi
 
 export WI4MPI_FROM
