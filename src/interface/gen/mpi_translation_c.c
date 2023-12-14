@@ -17511,9 +17511,15 @@ int A_MPI_Type_get_name(A_MPI_Datatype datatype, char *type_name,
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-
-  int ret_tmp = LOCAL_MPI_Type_get_name(datatype_tmp, type_name, resultlen);
-
+  char type_name_tmp[R_MPI_MAX_OBJECT_NAME];
+  int resultlen_ltmp;
+  int *resultlen_tmp = &resultlen_ltmp;
+  int ret_tmp =
+      LOCAL_MPI_Type_get_name(datatype_tmp, type_name_tmp, resultlen_tmp);
+  string_max_conv_r2a(type_name, type_name_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
+  length_max_conv_r2a(resultlen, resultlen_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
