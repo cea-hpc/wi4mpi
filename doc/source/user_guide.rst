@@ -37,10 +37,19 @@ sequence.
 CMAKE specific variables
 -------------------------
 
--  WI4MPI\_COMPILER:string
+- WI4MPI\_DEBUG:boolean
+
+  | Activate some debug information. Useful for WI4MPI and applications developer.
+  | Replace deprecated use of WI4MPI\_RELEASE=DEBUG.
+
+-  WI4MPI\_COMPILER:string (deprecated)
 
    Indicate which compiler is used to compiled WI4MPI. Possible
-   options: GCC(default), INTEL, PGI, LLVM, ARMCLANG, FUJITSU
+   options: GCC(default), INTEL, PGI, LLVM, ARMCLANG, FUJITSU.
+
+   This option is deprecated. Standard CMake procedure for compiler detection can
+   now be used, by setting environment variable CC, CXX and FC or
+   by using CMake's CMAKE\_<lang>\_COMPILER options.
 
 -  OPENMPI\_ROOT
    
@@ -63,13 +72,20 @@ CMAKE specific variables
    MPICH root dir, put in wi4mpi.cfg, could be added
    manually, optional value.
 
--  WI4MPI\_RELEASE
+-  WI4MPI\_RELEASE (deprecated)
 
    Indicate the Wi4MPI state set for the installation:
 
     - DEBUG: -DDEBUG is provided to activate some debug information. Useful for WI4MPI and applications developer.
     - NORMAL: -g is provided
     - RELEASE: -g is not provided
+
+   This option is deprecated. Use of standard cmake build types and WI4MPI\_DEBUG option supersede this.
+   Here is the equivalent usage:
+
+        - DEBUG: ``-DWI4MPI_DEBUG=ON``
+        - NORMAL: default, equivalent to ``-DCMAKE_BUILD_TYPE=RelWithDebInfo``
+        - RELEASE: ``-DCMAKE_BUILD_TYPE=Release``
 
 Both version (interface and preload) of wi4mpi are compiled and
 installed into the CMAKE\_INSTALL\_PREFIX directory provided during the
@@ -341,6 +357,8 @@ For any reason you may want to kill a process which has passed too many
 time into a function. Wi4MPI allow you to add a timeout to any MPI
 function with "WI4\_timeout=" environment variables
 (WI4MPI\_Init\_timeout, WI4MPI\_Allreduce\_timeout...).
+
+This feature is only supported on GNU/Linux.
 
 Examples:
 
