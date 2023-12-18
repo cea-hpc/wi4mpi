@@ -12098,15 +12098,14 @@ int A_MPI_Get(void *origin_addr, int origin_count,
   source_conv_a2r(&target_rank, &target_rank_tmp);
   R_MPI_Aint target_disp_tmp;
   target_disp_tmp = (R_MPI_Aint)target_disp;
-  int target_count_tmp;
-  source_conv_a2r(&target_count, &target_count_tmp);
+
   R_MPI_Datatype target_datatype_tmp;
   datatype_conv_a2r(&target_datatype, &target_datatype_tmp);
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
   int ret_tmp = LOCAL_MPI_Get(
       origin_addr_tmp, origin_count, origin_datatype_tmp, target_rank_tmp,
-      target_disp_tmp, target_count_tmp, target_datatype_tmp, win_tmp);
+      target_disp_tmp, target_count, target_datatype_tmp, win_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
