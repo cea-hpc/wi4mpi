@@ -31515,12 +31515,22 @@ int A_MPI_Group_translate_ranks(A_MPI_Group group1, int n, int ranks1[],
   R_MPI_Group group1_tmp;
   group_conv_a2r(&group1, &group1_tmp);
 
+  int *ranks1_tmp = wi4mpi_alloc(sizeof(int) * n);
+  int i1;
+  for (i1 = 0; i1 < n; i1++) {
+    source_conv_a2r(&ranks1[i1], &ranks1_tmp[i1]);
+  }
   R_MPI_Group group2_tmp;
   group_conv_a2r(&group2, &group2_tmp);
-
-  int ret_tmp = LOCAL_MPI_Group_translate_ranks(group1_tmp, n, ranks1,
-                                                group2_tmp, ranks2);
-
+  int *ranks2_tmp = wi4mpi_alloc(sizeof(int) * n);
+  int ret_tmp = LOCAL_MPI_Group_translate_ranks(group1_tmp, n, ranks1_tmp,
+                                                group2_tmp, ranks2_tmp);
+  int i2;
+  for (i2 = 0; i2 < n; i2++) {
+    source_conv_r2a(&ranks2[i2], &ranks2_tmp[i2]);
+  }
+  wi4mpi_free(ranks1_tmp);
+  wi4mpi_free(ranks2_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG

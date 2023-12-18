@@ -340,13 +340,17 @@ class generator:
                     str_test_out=arg['arg_dep']
                     if str_test_out == '*outcount':
                           str_test_out='incount'
+                    if 'MPI' in self.mappers[arg['name']]['type']:
+                        type_prefix = 'R_'
+                    else:
+                        type_prefix = ''
                     if len(str_test.split('*')) > 1:
-                       str='R_'+str_test.split('*')[0]+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof(R_'+str_test.split('*')[0]+')*'+str_test_out+');'
+                       str=type_prefix+str_test.split('*')[0]+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof('+type_prefix+str_test.split('*')[0]+')*'+str_test_out+');'
                     else:
                        if str_test == 'MPI_Status': #special case: where MPI_STATUSES_IGNORE is use as an argument for array_of_statuses in MPI_Waitall/Waitsome and MPI_Testall/Testsome
                           str='R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof(R_'+self.mappers[arg['name']]['type']+')*'+str_test_out+'));'
                        else:
-                          str='R_'+str_test+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof(R_'+self.mappers[arg['name']]['type']+')*'+str_test_out+');'
+                          str=type_prefix+str_test+' *'+arg['var'].split('[')[0]+'_tmp = wi4mpi_alloc(sizeof('+type_prefix+self.mappers[arg['name']]['type']+')*'+str_test_out+');'
               else:
                     str=self.add_prefix(self.mappers[arg['name']]['type'],prefix)+' '+arg['var']+'_tmp;'
         return str
