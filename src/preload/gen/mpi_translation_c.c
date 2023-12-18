@@ -9737,11 +9737,12 @@ int A_MPI_Cart_shift(A_MPI_Comm comm, int direction, int disp, int *rank_source,
 
   int rank_source_ltmp;
   int *rank_source_tmp = &rank_source_ltmp;
-
+  int rank_dest_ltmp;
+  int *rank_dest_tmp = &rank_dest_ltmp;
   int ret_tmp = LOCAL_MPI_Cart_shift(comm_tmp, direction, disp, rank_source_tmp,
-                                     rank_dest);
+                                     rank_dest_tmp);
   source_conv_r2a(rank_source, rank_source_tmp);
-
+  dest_conv_r2a(rank_dest, rank_dest_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
