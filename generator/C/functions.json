@@ -4202,9 +4202,9 @@
     "args": [
       {
         "var": "port_name", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_PORT_NAME", 
         "In": 1, 
-        "name": "const_char_ptr_converter", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 0
       }
     ], 
@@ -4221,9 +4221,9 @@
     "args": [
       {
         "var": "port_name", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_PORT_NAME", 
         "In": 1, 
-        "name": "const_char_ptr_converter", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 0
       }, 
       {
@@ -4268,9 +4268,9 @@
     "args": [
       {
         "var": "port_name", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_PORT_NAME", 
         "In": 1, 
-        "name": "const_char_ptr_converter", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 0
       }, 
       {
@@ -4393,9 +4393,9 @@
       }, 
       {
         "var": "port_name", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_PORT_NAME", 
         "In": 0, 
-        "name": "char_ptr_mapper", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 1
       }
     ], 
@@ -4419,9 +4419,9 @@
       }, 
       {
         "var": "port_name", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_PORT_NAME", 
         "In": 0, 
-        "name": "char_ptr_mapper", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 1
       }
     ], 
@@ -4452,9 +4452,9 @@
       }, 
       {
         "var": "port_name", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_PORT_NAME", 
         "In": 1, 
-        "name": "const_char_ptr_converter", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 0
       }
     ], 
@@ -4485,9 +4485,9 @@
       }, 
       {
         "var": "port_name", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_PORT_NAME", 
         "In": 1, 
-        "name": "const_char_ptr_converter", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 0
       }
     ], 

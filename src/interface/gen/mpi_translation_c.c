@@ -10928,7 +10928,10 @@ int A_MPI_Close_port(char *port_name) {
 #endif
   in_w = 1;
 
-  int ret_tmp = LOCAL_MPI_Close_port(port_name);
+  char port_name_tmp[R_MPI_MAX_PORT_NAME];
+  string_max_conv_a2r(port_name, port_name_tmp, A_MPI_MAX_PORT_NAME,
+                      R_MPI_MAX_PORT_NAME);
+  int ret_tmp = LOCAL_MPI_Close_port(port_name_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
@@ -11017,6 +11020,9 @@ int A_MPI_Comm_accept(char *port_name, A_MPI_Info info, int root,
 #endif
   in_w = 1;
 
+  char port_name_tmp[R_MPI_MAX_PORT_NAME];
+  string_max_conv_a2r(port_name, port_name_tmp, A_MPI_MAX_PORT_NAME,
+                      R_MPI_MAX_PORT_NAME);
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
 
@@ -11024,8 +11030,8 @@ int A_MPI_Comm_accept(char *port_name, A_MPI_Info info, int root,
   comm_conv_a2r(&comm, &comm_tmp);
   R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
-  int ret_tmp =
-      LOCAL_MPI_Comm_accept(port_name, info_tmp, root, comm_tmp, newcomm_tmp);
+  int ret_tmp = LOCAL_MPI_Comm_accept(port_name_tmp, info_tmp, root, comm_tmp,
+                                      newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
@@ -11117,6 +11123,9 @@ int A_MPI_Comm_connect(char *port_name, A_MPI_Info info, int root,
 #endif
   in_w = 1;
 
+  char port_name_tmp[R_MPI_MAX_PORT_NAME];
+  string_max_conv_a2r(port_name, port_name_tmp, A_MPI_MAX_PORT_NAME,
+                      R_MPI_MAX_PORT_NAME);
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
 
@@ -11124,8 +11133,8 @@ int A_MPI_Comm_connect(char *port_name, A_MPI_Info info, int root,
   comm_conv_a2r(&comm, &comm_tmp);
   R_MPI_Comm newcomm_ltmp = R_MPI_COMM_NULL;
   R_MPI_Comm *newcomm_tmp = &newcomm_ltmp;
-  int ret_tmp =
-      LOCAL_MPI_Comm_connect(port_name, info_tmp, root, comm_tmp, newcomm_tmp);
+  int ret_tmp = LOCAL_MPI_Comm_connect(port_name_tmp, info_tmp, root, comm_tmp,
+                                       newcomm_tmp);
   comm_conv_r2a(newcomm, newcomm_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
@@ -11461,9 +11470,10 @@ int A_MPI_Lookup_name(char *service_name, A_MPI_Info info, char *port_name) {
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-
-  int ret_tmp = LOCAL_MPI_Lookup_name(service_name, info_tmp, port_name);
-
+  char port_name_tmp[R_MPI_MAX_PORT_NAME];
+  int ret_tmp = LOCAL_MPI_Lookup_name(service_name, info_tmp, port_name_tmp);
+  string_max_conv_r2a(port_name, port_name_tmp, A_MPI_MAX_PORT_NAME,
+                      R_MPI_MAX_PORT_NAME);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
@@ -11546,9 +11556,10 @@ int A_MPI_Open_port(A_MPI_Info info, char *port_name) {
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-
-  int ret_tmp = LOCAL_MPI_Open_port(info_tmp, port_name);
-
+  char port_name_tmp[R_MPI_MAX_PORT_NAME];
+  int ret_tmp = LOCAL_MPI_Open_port(info_tmp, port_name_tmp);
+  string_max_conv_r2a(port_name, port_name_tmp, A_MPI_MAX_PORT_NAME,
+                      R_MPI_MAX_PORT_NAME);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
@@ -11633,8 +11644,10 @@ int A_MPI_Publish_name(char *service_name, A_MPI_Info info, char *port_name) {
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-
-  int ret_tmp = LOCAL_MPI_Publish_name(service_name, info_tmp, port_name);
+  char port_name_tmp[R_MPI_MAX_PORT_NAME];
+  string_max_conv_a2r(port_name, port_name_tmp, A_MPI_MAX_PORT_NAME,
+                      R_MPI_MAX_PORT_NAME);
+  int ret_tmp = LOCAL_MPI_Publish_name(service_name, info_tmp, port_name_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
@@ -11719,8 +11732,10 @@ int A_MPI_Unpublish_name(char *service_name, A_MPI_Info info, char *port_name) {
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-
-  int ret_tmp = LOCAL_MPI_Unpublish_name(service_name, info_tmp, port_name);
+  char port_name_tmp[R_MPI_MAX_PORT_NAME];
+  string_max_conv_a2r(port_name, port_name_tmp, A_MPI_MAX_PORT_NAME,
+                      R_MPI_MAX_PORT_NAME);
+  int ret_tmp = LOCAL_MPI_Unpublish_name(service_name, info_tmp, port_name_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
