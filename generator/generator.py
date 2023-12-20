@@ -415,10 +415,12 @@ class generator:
         elif 'set' in self.mappers[arg['name']]:
             str=''
         else:
-            if arg['arg_dep'] !='':
+            if arg['arg_dep'] !='' and 'max_mpi' not in self.mappers[arg['name']]:
                 str='int i'+count_loop.__str__()+';\n'
                 str=str+'for(i'+count_loop.__str__()+'=0; i'+count_loop.__str__()+' < '+arg['arg_dep']+';i'+count_loop.__str__()+'++){\n'
                 str=str+self.mappers[arg['name']]['a2r']+'(&'+arg['var'].split('[')[0]+'[i'+count_loop.__str__()+'],&'+arg['var'].split('[')[0]+'_tmp[i'+count_loop.__str__()+']);\n}'
+            elif arg['arg_dep'] !='' and 'max_mpi' in self.mappers[arg['name']]:
+                str= self.mappers[arg['name']]['a2r']+'('+arg['var']+','+arg['var']+'_tmp, A_'+arg['arg_dep']+', R_'+arg['arg_dep']+');'
             else:
                 str_cmp= self.mappers[arg['name']]['type']
                 if len(str_cmp.split('*')) > 1 and self.mappers[arg['name']]['a2r'] != "status_prt_conv_a2r" and self.mappers[arg['name']]['a2r'] != "const_buffer_conv_a2r" and self.mappers[arg['name']]['a2r'] != "buffer_conv_a2r" and self.mappers[arg['name']]['a2r'] != "request_ptr_conv_a2r" and self.mappers[arg['name']]['a2r'] != "request_pers_ptr_conv_a2r" and self.mappers[arg['name']]['a2r'] !=  "weight_conv_a2r" and self.mappers[arg['name']]['a2r'] !=  "reduce_user_fn_a2r" and self.mappers[arg['name']]['a2r'] != "datarep_conversion_function_a2r" and self.mappers[arg['name']]['a2r'] != "datarep_extent_function_converter_a2r" and self.mappers[arg['name']]['a2r'] != "grequest_query_fn_a2r":

@@ -1544,6 +1544,15 @@ static inline void order2_conv_a2r(int *order,int *order_tmp)
         *order_tmp=*order;
 }
 
+static inline void string_max_conv_a2r(char *name, char *name_tmp, int app_max_size, int run_max_size) {
+    if (app_max_size > run_max_size) {
+        strncpy(name_tmp, name, run_max_size);
+        name_tmp[run_max_size-1] = '\0';
+    } else {
+        strcpy(name_tmp, name);
+    }
+}
+
 static inline void string_max_conv_r2a(char *name, char *name_tmp, int app_max_size, int run_max_size) {
     if (run_max_size > app_max_size) {
         strncpy(name, name_tmp, app_max_size);

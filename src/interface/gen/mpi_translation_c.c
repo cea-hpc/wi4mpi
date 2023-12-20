@@ -15705,7 +15705,10 @@ int A_MPI_Add_error_string(int errorcode, char *string) {
 #endif
   in_w = 1;
 
-  int ret_tmp = LOCAL_MPI_Add_error_string(errorcode, string);
+  char string_tmp[R_MPI_MAX_ERROR_STRING];
+  string_max_conv_a2r(string, string_tmp, A_MPI_MAX_ERROR_STRING,
+                      R_MPI_MAX_ERROR_STRING);
+  int ret_tmp = LOCAL_MPI_Add_error_string(errorcode, string_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
