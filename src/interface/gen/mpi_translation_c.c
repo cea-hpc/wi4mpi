@@ -16234,8 +16234,10 @@ int A_MPI_Comm_set_name(A_MPI_Comm comm, char *comm_name) {
 
   R_MPI_Comm comm_tmp;
   comm_conv_a2r(&comm, &comm_tmp);
-
-  int ret_tmp = LOCAL_MPI_Comm_set_name(comm_tmp, comm_name);
+  char comm_name_tmp[R_MPI_MAX_OBJECT_NAME];
+  string_max_conv_a2r(comm_name, comm_name_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
+  int ret_tmp = LOCAL_MPI_Comm_set_name(comm_tmp, comm_name_tmp);
   comm_conv_r2a(&comm, &comm_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
@@ -17700,8 +17702,10 @@ int A_MPI_Type_set_name(A_MPI_Datatype datatype, char *type_name) {
 
   R_MPI_Datatype datatype_tmp;
   datatype_conv_a2r(&datatype, &datatype_tmp);
-
-  int ret_tmp = LOCAL_MPI_Type_set_name(datatype_tmp, type_name);
+  char type_name_tmp[R_MPI_MAX_OBJECT_NAME];
+  string_max_conv_a2r(type_name, type_name_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
+  int ret_tmp = LOCAL_MPI_Type_set_name(datatype_tmp, type_name_tmp);
   datatype_conv_r2a(&datatype, &datatype_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
@@ -18240,8 +18244,10 @@ int A_MPI_Win_set_name(A_MPI_Win win, char *win_name) {
 
   R_MPI_Win win_tmp;
   win_conv_a2r(&win, &win_tmp);
-
-  int ret_tmp = LOCAL_MPI_Win_set_name(win_tmp, win_name);
+  char win_name_tmp[R_MPI_MAX_OBJECT_NAME];
+  string_max_conv_a2r(win_name, win_name_tmp, A_MPI_MAX_OBJECT_NAME,
+                      R_MPI_MAX_OBJECT_NAME);
+  int ret_tmp = LOCAL_MPI_Win_set_name(win_tmp, win_name_tmp);
   win_conv_r2a(&win, &win_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
