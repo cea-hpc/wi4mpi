@@ -26304,11 +26304,13 @@ int A_MPI_File_set_view(A_MPI_File fh, A_MPI_Offset disp, A_MPI_Datatype etype,
   datatype_conv_a2r(&etype, &etype_tmp);
   R_MPI_Datatype filetype_tmp;
   datatype_conv_a2r(&filetype, &filetype_tmp);
-
+  char datarep_tmp[R_MPI_MAX_DATAREP_STRING];
+  string_max_conv_a2r(datarep, datarep_tmp, A_MPI_MAX_DATAREP_STRING,
+                      R_MPI_MAX_DATAREP_STRING);
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
   int ret_tmp = LOCAL_MPI_File_set_view(fh_tmp, disp_tmp, etype_tmp,
-                                        filetype_tmp, datarep, info_tmp);
+                                        filetype_tmp, datarep_tmp, info_tmp);
   file_conv_r2a(&fh, &fh_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;

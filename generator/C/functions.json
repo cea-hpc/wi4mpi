@@ -10875,9 +10875,9 @@
       }, 
       {
         "var": "datarep", 
-        "arg_dep": "", 
+        "arg_dep": "MPI_MAX_DATAREP_STRING", 
         "In": 1, 
-        "name": "const_char_ptr_converter", 
+        "name": "string_maxsize_ptr_mapper", 
         "Out": 0
       }, 
       {
