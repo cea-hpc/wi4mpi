@@ -19331,8 +19331,9 @@ int A_MPI_Info_delete(A_MPI_Info info, char *key) {
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
-
-  int ret_tmp = LOCAL_MPI_Info_delete(info_tmp, key);
+  char key_tmp[R_MPI_MAX_INFO_KEY];
+  string_max_conv_a2r(key, key_tmp, A_MPI_MAX_INFO_KEY, R_MPI_MAX_INFO_KEY);
+  int ret_tmp = LOCAL_MPI_Info_delete(info_tmp, key_tmp);
   info_conv_r2a(&info, &info_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
@@ -19594,8 +19595,10 @@ int A_MPI_Info_get(A_MPI_Info info, char *key, int valuelen, char *value,
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
+  char key_tmp[R_MPI_MAX_INFO_KEY];
+  string_max_conv_a2r(key, key_tmp, A_MPI_MAX_INFO_KEY, R_MPI_MAX_INFO_KEY);
 
-  int ret_tmp = LOCAL_MPI_Info_get(info_tmp, key, valuelen, value, flag);
+  int ret_tmp = LOCAL_MPI_Info_get(info_tmp, key_tmp, valuelen, value, flag);
 
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
@@ -19770,8 +19773,9 @@ int A_MPI_Info_get_nthkey(A_MPI_Info info, int n, char *key) {
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
 
-  int ret_tmp = LOCAL_MPI_Info_get_nthkey(info_tmp, n, key);
-
+  char key_tmp[R_MPI_MAX_INFO_KEY];
+  int ret_tmp = LOCAL_MPI_Info_get_nthkey(info_tmp, n, key_tmp);
+  string_max_conv_r2a(key, key_tmp, A_MPI_MAX_INFO_KEY, R_MPI_MAX_INFO_KEY);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
 #ifdef DEBUG
@@ -19860,8 +19864,10 @@ int A_MPI_Info_get_valuelen(A_MPI_Info info, char *key, int *valuelen,
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
+  char key_tmp[R_MPI_MAX_INFO_KEY];
+  string_max_conv_a2r(key, key_tmp, A_MPI_MAX_INFO_KEY, R_MPI_MAX_INFO_KEY);
 
-  int ret_tmp = LOCAL_MPI_Info_get_valuelen(info_tmp, key, valuelen, flag);
+  int ret_tmp = LOCAL_MPI_Info_get_valuelen(info_tmp, key_tmp, valuelen, flag);
 
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
@@ -19949,8 +19955,10 @@ int A_MPI_Info_set(A_MPI_Info info, char *key, char *value) {
 
   R_MPI_Info info_tmp;
   info_conv_a2r(&info, &info_tmp);
+  char key_tmp[R_MPI_MAX_INFO_KEY];
+  string_max_conv_a2r(key, key_tmp, A_MPI_MAX_INFO_KEY, R_MPI_MAX_INFO_KEY);
 
-  int ret_tmp = LOCAL_MPI_Info_set(info_tmp, key, value);
+  int ret_tmp = LOCAL_MPI_Info_set(info_tmp, key_tmp, value);
   info_conv_r2a(&info, &info_tmp);
   int ret = error_code_conv_r2a(ret_tmp);
   in_w = 0;
