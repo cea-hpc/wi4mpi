@@ -18,6 +18,9 @@
 /*
  * This code is fully generated
  */
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
 #include "helper.h"
 #include "mappers.h"
 #include "run_mpi.h"

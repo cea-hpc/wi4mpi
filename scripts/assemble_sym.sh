@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #################################################################
 # Merge multiple static libraries into one.                     #
@@ -13,7 +13,7 @@ cd tmp_object_static
 
 lib_name=$1
 shift 1
-while (( "$#" )); do
+while [ $# -gt 0 ]; do
     mkdir $1
     cd $1
     ar -x ../../$1
