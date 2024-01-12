@@ -1670,7 +1670,7 @@ __asm__(
 "cbnz w8, inwrap_MPI_File_f2c\n"
 "b A__MPI_File_f2c\n"
 "inwrap_MPI_File_f2c:\n"
-"b R__MPI_File_f2c\n"
+"b R_MPI_File_f2c\n"
 #else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
@@ -1687,7 +1687,7 @@ __asm__(
 "jne inwrap_MPI_File_f2c\n"
 "jmp *A__MPI_File_f2c@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_f2c:\n"
-"jmp *R__MPI_File_f2c@GOTPCREL(%rip)\n"
+"jmp *R_MPI_File_f2c@GOTPCREL(%rip)\n"
 #endif
 ".size PMPI_File_f2c,.-PMPI_File_f2c\n"
 
@@ -1711,7 +1711,7 @@ return ret;
 }
 
 
-R_MPI_File R__MPI_File_f2c(R_MPI_Fint op)
+R_MPI_File R_MPI_File_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
 printf("entre : R_MPI_File_f2c\n");
@@ -1742,7 +1742,7 @@ __asm__(
 "cbnz w8, inwrap_MPI_File_c2f\n"
 "b A__MPI_File_c2f\n"
 "inwrap_MPI_File_c2f:\n"
-"b R__MPI_File_c2f\n"
+"b R_MPI_File_c2f\n"
 #else
 "push %rbp\n"
 "mov %rsp, %rbp\n"
@@ -1759,7 +1759,7 @@ __asm__(
 "jne inwrap_MPI_File_c2f\n"
 "jmp *A__MPI_File_c2f@GOTPCREL(%rip)\n"
 "inwrap_MPI_File_c2f:\n"
-"jmp *R__MPI_File_c2f@GOTPCREL(%rip)\n"
+"jmp *R_MPI_File_c2f@GOTPCREL(%rip)\n"
 #endif
 ".size PMPI_File_c2f,.-PMPI_File_c2f\n"
 
@@ -1784,7 +1784,7 @@ return ret_tmp;
 }
 
 
-int R__MPI_File_c2f(R_MPI_File op)
+int R_MPI_File_c2f(R_MPI_File op)
 {
 #ifdef DEBUG
 printf("entre : R_MPI_File_c2f\n");
