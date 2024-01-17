@@ -4,6 +4,7 @@ if [[ ! -n "@OPENMPI_ROOT@" ]]; then
     exit 1
 fi
 
+TESTMPI_ROOT="@OPENMPI_ROOT@"
 # Batch scheduler configuration to running tests
 export WI4MPI_MPRUN=@WI4MPI_MPRUN@
 export WI4MPI_PARTITION=@WI4MPI_PARTITION@

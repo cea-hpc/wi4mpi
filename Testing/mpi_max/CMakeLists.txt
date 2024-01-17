@@ -1,0 +1,24 @@
+project (mpiio)
+cmake_minimum_required (VERSION 3.0.0)
+
+# Add tests
+file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/run_mpi_max_tests.sh
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/main.c
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/info.c
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/fileview.c
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+add_test (NAME mpi_max_simple COMMAND ${CMAKE_CURRENT_BINARY_DIR}/run_mpi_max_tests.sh
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+if (WI4MPI_BATCH_SCHEDULER MATCHES "mpirun")
+    file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/run_mpi_max_port_tests.sh
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/port-client.c
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file (COPY ${CMAKE_CURRENT_SOURCE_DIR}/port-server.c
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    add_test (NAME mpi_max_port COMMAND ${CMAKE_CURRENT_BINARY_DIR}/run_mpi_max_port_tests.sh
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+endif()
