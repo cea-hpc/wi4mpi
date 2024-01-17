@@ -17,54 +17,35 @@
 
 #include "manual_wrapper.h"
 #include "engine.h"
+#include "mappers.h"
+#include "fort_common.h"
 
-void  mpi_get_processor_name_(char *,int *,int *,int);
 
-void  mpi_get_processor_name__(char *,int *,int *,int);
+static inline void fstring_max_conv_r2a(char *name, char *name_tmp, fort_string_length app_size, int resultlen) {
+    if (resultlen < app_size) {
+        strncpy(name, name_tmp, resultlen);
+        memset(name+resultlen, ' ', app_size-resultlen);
+    } else {
+        strncpy(name, name_tmp, app_size);
+    }
+}
 
-void  pmpi_get_processor_name_(char *,int *,int *,int);
 
-void  pmpi_get_processor_name__(char *,int *,int *,int);
+void  mpi_get_processor_name_(char *,int *,int *,fort_string_length);
 
-void  pmpi_get_processor_name_(char *,int *,int *,int);
+void  mpi_get_processor_name__(char *,int *,int *,fort_string_length);
 
-//#define A_f_MPI_Get_processor_name _PMPI_Get_processor_name
-//#pragma weak mpi_get_processor_name_=_PMPI_Get_processor_name
-//#pragma weak mpi_get_processor_name__=_PMPI_Get_processor_name
-//#pragma weak pmpi_get_processor_name__=_PMPI_Get_processor_name
-//void  (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,int);
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,size_t);
-#endif
+void  pmpi_get_processor_name_(char *,int *,int *,fort_string_length);
 
-#if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC) || defined(OMPI_MPC) || defined(MPC_MPC)
-#define R_f_MPI_MAX_PROCESSOR_NAME 512
-#define A_f_MPI_MAX_PROCESSOR_NAME 255
-#endif
+void  pmpi_get_processor_name__(char *,int *,int *,fort_string_length);
 
-#if defined(INTEL_INTEL) || defined(INTEL_MPC)
-#define R_f_MPI_MAX_PROCESSOR_NAME 512
-#define A_f_MPI_MAX_PROCESSOR_NAME 127
-#endif
+#pragma weak mpi_get_processor_name_=A_f_MPI_Get_processor_name
+#pragma weak mpi_get_processor_name__=A_f_MPI_Get_processor_name
+#pragma weak pmpi_get_processor_name_=A_f_MPI_Get_processor_name
+#pragma weak pmpi_get_processor_name__=A_f_MPI_Get_processor_name
+void (*_LOCAL_MPI_Get_processor_name)(char *,int *,int *i,fort_string_length);
 
-#if defined(OMPI_OMPI) || defined(_OMPI)
-#define R_f_MPI_MAX_PROCESSOR_NAME 512
-#define A_f_MPI_MAX_PROCESSOR_NAME 255
-#endif
-
-#if defined(INTEL_OMPI)
-#define R_f_MPI_MAX_PROCESSOR_NAME 512
-#define A_f_MPI_MAX_PROCESSOR_NAME 127
-#endif
-
-int (*LOCAL_MPI_Get_processor_name)(char *,int *);
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,int namelen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,size_t namelen)
-#endif
+void  A_f_MPI_Get_processor_name(char * name,int * resultlen,int * ret,fort_string_length namelen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Get_processor_name\n");
@@ -72,22 +53,15 @@ printf("entre : A_f_MPI_Get_processor_name\n");
 in_w=1;
 
 int  ret_tmp=0;
-char tmp_name[R_f_MPI_MAX_PROCESSOR_NAME+2];
-//printf("MPI_Get_processor_name\n");
-//#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL)
-//_LOCAL_MPI_Get_processor_name(tmp_name,resultlen,&ret_tmp,R_f_MPI_MAX_PROCESSOR_NAME);
-//#elif defined(GFORT_CALL)
-//_LOCAL_MPI_Get_processor_name(tmp_name,R_f_MPI_MAX_PROCESSOR_NAME,resultlen,&ret_tmp);
-//#endif
-////printf("before conv MPI_Get_processor_name %d %d\n",*ret,ret_tmp);
-//tmp_name[*resultlen]='\0';
-//strncpy(name,tmp_name,A_f_MPI_MAX_PROCESSOR_NAME);
-//error_r2a(ret,&ret_tmp);
-ret_tmp=LOCAL_MPI_Get_processor_name(tmp_name,resultlen);
-*resultlen=*resultlen<A_f_MPI_MAX_PROCESSOR_NAME?*resultlen:A_f_MPI_MAX_PROCESSOR_NAME;
-memcpy(name, tmp_name,*resultlen*sizeof(char));
+char tmp_name[R_MPI_MAX_PROCESSOR_NAME-1];
+int resultlen_tmp;
+
+_LOCAL_MPI_Get_processor_name(tmp_name,&resultlen_tmp, &ret_tmp, R_MPI_MAX_PROCESSOR_NAME - 1);
+
+fstring_max_conv_r2a(name, tmp_name, namelen, resultlen_tmp);
+length_max_conv_r2a(resultlen, &resultlen_tmp, A_MPI_MAX_PROCESSOR_NAME, R_MPI_MAX_PROCESSOR_NAME);
 error_r2a(ret,&ret_tmp);
-//printf("end MPI_Get_processor_name %d %d\n",*ret,ret_tmp);
+
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Get_processor_name\n");
