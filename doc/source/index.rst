@@ -14,6 +14,7 @@ Welcome to Wi4MPI's documentation!
    tutorial
    developer_guide
    generator_guide
+   limitations
 
 Indices and tables
 ==================
