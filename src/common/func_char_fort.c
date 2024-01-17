@@ -926,31 +926,20 @@ printf("sort : A_f_MPI_Close_port\n");
 
 }
 
-//MPI_Get_library_version(char *version, int *resultlen)
-void  mpi_get_library_version_(char *  ,int*,int*);
-                                                 
-void  mpi_get_library_version__(char * ,int*,int*);
-                                                 
-void  pmpi_get_library_version_(char * ,int*,int*);
-                                                 
-void  pmpi_get_library_version__(char *,int*,int*);
-                                                 
-void  pmpi_get_library_version_(char * ,int*,int*);
+void  mpi_get_library_version_(char *  ,int*,int*, fort_string_length);
 
-//#define A_f_MPI_Get_library_version _PMPI_Get_library_version
-//#pragma weak mpi_get_library_version_=_PMPI_Get_library_version
-//#pragma weak mpi_get_library_version__=_PMPI_Get_library_version
-//#pragma weak pmpi_get_library_version__=_PMPI_Get_library_version
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Get_library_version)(char *,int*,int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Get_library_version)(char *,int*,int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, int version_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, size_t version_len)
-#endif
+void  mpi_get_library_version__(char * ,int*,int*, fort_string_length);
+
+void  pmpi_get_library_version_(char * ,int*,int*, fort_string_length);
+
+void  pmpi_get_library_version__(char *,int*,int*, fort_string_length);
+
+#pragma weak mpi_get_library_version_=A_f_MPI_Get_library_version
+#pragma weak mpi_get_library_version__=A_f_MPI_Get_library_version
+#pragma weak pmpi_get_library_version_=A_f_MPI_Get_library_version
+#pragma weak pmpi_get_library_version__=A_f_MPI_Get_library_version
+void  (*_LOCAL_MPI_Get_library_version)(char *,int*,int*,fort_string_length);
+void  A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, fort_string_length version_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Get_library_version\n");
@@ -958,9 +947,15 @@ printf("entre : A_f_MPI_Get_library_version\n");
 in_w=1;
 
 int  ret_tmp=0;
+char tmp_version[R_MPI_MAX_LIBRARY_VERSION_STRING-1];
+int tmp_resultlen;
 
- _LOCAL_MPI_Get_library_version(version, resultlen,&ret_tmp, version_len);
+_LOCAL_MPI_Get_library_version(tmp_version, &tmp_resultlen, &ret_tmp, sizeof(tmp_version));
+
+fstring_max_conv_r2a(version, tmp_version, version_len, tmp_resultlen);
+length_max_conv_r2a(resultlen, &tmp_resultlen, A_MPI_MAX_LIBRARY_VERSION_STRING, R_MPI_MAX_LIBRARY_VERSION_STRING);
 error_r2a(ret,&ret_tmp);
+
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Get_library_version\n");
