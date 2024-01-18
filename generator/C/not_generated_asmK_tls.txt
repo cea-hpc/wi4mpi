@@ -831,7 +831,7 @@ int A_MPIX_Query_cuda_support() {
 }
 int R_MPIX_Query_cuda_support() {
   in_w = 1;
-#if defined(INTEL_INTEL)|| definede(OMPI_INTEL)
+#if defined(INTEL_INTEL)|| defined(OMPI_INTEL)
     int ret_tmp;
 #ifdef R_MPIX_GPU_SUPPORT_CUDA
     MPIX_GPU_query_support(R_MPIX_GPU_SUPPORT_CUDA,&ret_tmp);
