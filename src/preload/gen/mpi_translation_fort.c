@@ -18,6 +18,9 @@
 /*
  * This code is fully generated
  */
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
 #include "helper.h"
 #define debug_printer debug_printer_f
 void debug_printer(const char *, ...);

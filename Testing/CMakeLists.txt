@@ -22,5 +22,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/etc/mpivars.sh.in
 add_subdirectory (compile)
 add_subdirectory (mpirun)
 add_subdirectory (mpi_init)
-add_subdirectory (timeout)
+if(WI4MPI_TIMEOUT)
+    add_subdirectory (timeout)
+endif()
 add_subdirectory (mpiio)

@@ -1,8 +1,7 @@
-set(CMAKE_C_COMPILER ${CC})
-set(CMAKE_CXX_COMPILER ${CXX})
-set(CMAKE_Fortran_COMPILER ${FC})
-
-message(STATUS "Project compiler C/C++ : ${CC}/${CXX} && Fortran: ${FC}")
+get_filename_component(C_COMPILER_NAME ${CMAKE_C_COMPILER} NAME)
+get_filename_component(CXX_COMPILER_NAME ${CMAKE_CXX_COMPILER} NAME)
+get_filename_component(FC_COMPILER_NAME ${CMAKE_Fortran_COMPILER} NAME)
+message(STATUS "Project compiler C/C++ : ${C_COMPILER_NAME}/${CXX_COMPILER_NAME} && Fortran: ${FC_COMPILER_NAME}")
 
 #Sources list
 #------------
@@ -16,7 +15,6 @@ file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
     interface/gen/mpi_translation_c.c
     interface/gen/mpi_translation_fort.c
     interface/gen/c2f_f2c.c
-    common/helper.c
     common/debug_printer.c
     common/override.c
     common/mpi_translation_c2f_f2c_init.c
@@ -40,7 +38,6 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     preload/gen/mpi_translation_fort.c
     preload/gen/c2f_f2c.c
     common/override.c
-    common/helper.c
     common/debug_printer.c
     common/mpi_translation_c2f_f2c_init.c
     common/engine.c
@@ -48,6 +45,11 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     common/func_char_fort.c
     common/asm_jit.c
 )
+
+if(WI4MPI_TIMEOUT)
+    list(APPEND SOURCE_WI4MPI_INTERFACE "common/helper.c")
+    list(APPEND SOURCE_WI4MPI_PRELOAD "common/helper.c")
+endif()
 
 #empty
 file(GLOB SOURCE_WI4MPI_EMPTY
@@ -83,18 +85,6 @@ target_include_directories(wi4mpi_profiling_MPC
                                                      PRIVATE
                                                      interface/header/_MPC)
 
-set_target_properties(wi4mpi_profiling_OMPI 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
-set_target_properties(wi4mpi_profiling_INTEL 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
-set_target_properties(wi4mpi_profiling_MPICH 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
-set_target_properties(wi4mpi_profiling_MPC 
-                                            PROPERTIES
-                                            COMPILE_FLAGS "${WI4MPI_FLAGS}")
 
 
 install(TARGETS 
@@ -188,207 +178,18 @@ target_include_directories(wi4mpi_MPC_a
 #Flags
 #-----
 
-set_target_properties(mpi
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL}"
-                     )
-if(CMAKE_C_COMPILER STREQUAL "icc")
-set_target_properties(wi4mpi_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPC
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE"
-                     )
+target_compile_definitions(wi4mpi_OMPI PRIVATE _OMPI __MPI__COMPILE__)
+target_compile_definitions(wi4mpi_INTEL PRIVATE _INTEL)
+target_compile_definitions(wi4mpi_MPICH PRIVATE _INTEL)
+target_compile_definitions(wi4mpi_MPC PRIVATE _MPC)
 
-set_target_properties(mpi_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_OMPI_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_INTEL_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPICH_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPC_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-endif()
-if(CMAKE_C_COMPILER STREQUAL "gcc") 
-set_target_properties(wi4mpi_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPC
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE"
-                     )
+target_compile_definitions(mpi_a PRIVATE WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_OMPI_a PRIVATE _OMPI __MPI__COMPILE__ WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_INTEL_a PRIVATE _INTEL WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_MPICH_a PRIVATE _INTEL WI4MPI_STATIC)
+target_compile_definitions(wi4mpi_MPC_a PRIVATE _MPC WI4MPI_STATIC)
 
-set_target_properties(mpi_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_OMPI_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_INTEL_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPICH_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPC_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-endif()
-if(CMAKE_C_COMPILER STREQUAL "pgcc")
-set_target_properties(wi4mpi_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPC
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_MPC -D_GNU_SOURCE"
-                     )
-
-set_target_properties(mpi_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_OMPI_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_INTEL_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPICH_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPC_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c11 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-endif()
-if(CMAKE_C_COMPILER MATCHES ".*clang")
-set_target_properties(wi4mpi_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPC
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE"
-                     )
-
-set_target_properties(mpi_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_OMPI_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_INTEL_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPICH_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPC_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-endif()
-if(CMAKE_C_COMPILER STREQUAL "fcc")
-set_target_properties(wi4mpi_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE"
-                     )
-set_target_properties(wi4mpi_MPC
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE"
-                     )
-
-set_target_properties(mpi_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_OMPI_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_OMPI -D__MPI__COMPILE__ -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_INTEL_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPICH_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_INTEL -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-set_target_properties(wi4mpi_MPC_a
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_MPC -D_GNU_SOURCE -DWI4MPI_STATIC"
-                     )
-endif()
-
-if(CMAKE_Fortran_COMPILER STREQUAL gfortran) 
+if(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU") 
 set_target_properties(mpi_mod
                       PROPERTIES
                       COMPILE_FLAGS "-ffree-line-length-0"
@@ -398,14 +199,9 @@ endif()
 #Link options
 #------------
 
-target_link_libraries(wi4mpi_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPC ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_a ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL_a ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_a ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPC_a ${CMAKE_THREAD_LIBS_INIT})
+foreach(lib wi4mpi_OMPI wi4mpi_INTEL wi4mpi_MPICH wi4mpi_MPC wi4mpi_OMPI_a wi4mpi_INTEL_a wi4mpi_MPICH_a wi4mpi_MPC_a)
+    target_link_libraries(${lib} Threads::Threads)
+endforeach()
 
 #Custom command
 #--------------
@@ -528,206 +324,17 @@ target_include_directories(wi4mpi_OMPI_MPICH
 #Flags
 #-----
 
-if(CMAKE_C_COMPILER STREQUAL "icc")
-set_target_properties(wi4mpi_INTEL_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_INTEL_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_INTEL_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
+target_compile_definitions(wi4mpi_INTEL_INTEL PRIVATE INTEL_INTEL)
+target_compile_definitions(wi4mpi_INTEL_OMPI PRIVATE INTEL_OMPI)
+target_compile_definitions(wi4mpi_INTEL_MPICH PRIVATE INTEL_INTEL)
 
-set_target_properties(wi4mpi_MPICH_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_MPICH_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_MPICH_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
+target_compile_definitions(wi4mpi_MPICH_INTEL PRIVATE INTEL_INTEL)
+target_compile_definitions(wi4mpi_MPICH_OMPI PRIVATE INTEL_OMPI)
+target_compile_definitions(wi4mpi_MPICH_MPICH PRIVATE INTEL_INTEL)
 
-set_target_properties(wi4mpi_OMPI_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_OMPI"
-)
-endif()
-if(CMAKE_C_COMPILER STREQUAL "gcc")
-set_target_properties(wi4mpi_INTEL_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_INTEL_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_INTEL_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_MPICH_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_MPICH_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_MPICH_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_OMPI_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_OMPI"
-)
-endif()
-if(CMAKE_C_COMPILER STREQUAL "pgcc")
-set_target_properties(wi4mpi_INTEL_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_INTEL_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_INTEL_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_MPICH_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_MPICH_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_MPICH_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_OMPI_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -c99 -D_GNU_SOURCE -DOMPI_OMPI"
-)
-endif()
-if(CMAKE_C_COMPILER MATCHES ".*clang")
-set_target_properties(wi4mpi_INTEL_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_INTEL_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_INTEL_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_MPICH_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_MPICH_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_MPICH_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_OMPI_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c11 -D_GNU_SOURCE -DOMPI_OMPI"
-)
-endif()
-if(CMAKE_C_COMPILER STREQUAL "fcc")
-set_target_properties(wi4mpi_INTEL_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_INTEL_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_INTEL_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_MPICH_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL"
-)
-set_target_properties(wi4mpi_MPICH_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_OMPI "
-)
-set_target_properties(wi4mpi_MPICH_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DINTEL_INTEL "
-)
-
-set_target_properties(wi4mpi_OMPI_INTEL
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_MPICH
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_INTEL"
-)
-set_target_properties(wi4mpi_OMPI_OMPI
-                      PROPERTIES
-                      COMPILE_FLAGS "${WI4MPI_FLAGS} ${WI4MPI_FORT_CALL} -std=c99 -D_GNU_SOURCE -DOMPI_OMPI"
-)
-endif()
+target_compile_definitions(wi4mpi_OMPI_INTEL PRIVATE OMPI_INTEL)
+target_compile_definitions(wi4mpi_OMPI_MPICH PRIVATE OMPI_INTEL)
+target_compile_definitions(wi4mpi_OMPI_OMPI PRIVATE OMPI_OMPI)
 
 foreach(LIB ${LIST_FAKECXX})
     foreach(MAJOR ${LIST_FAKECXX_MAJOR})
@@ -748,15 +355,9 @@ endforeach(LIB)
 # Link options
 #-------------
 
-target_link_libraries(wi4mpi_INTEL_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_INTEL_MPICH ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_MPICH_MPICH ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_OMPI ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_INTEL ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(wi4mpi_OMPI_MPICH ${CMAKE_THREAD_LIBS_INIT})
+foreach(lib wi4mpi_INTEL_OMPI wi4mpi_INTEL_INTEL wi4mpi_INTEL_MPICH wi4mpi_MPICH_OMPI wi4mpi_MPICH_INTEL wi4mpi_MPICH_MPICH wi4mpi_OMPI_OMPI wi4mpi_OMPI_INTEL wi4mpi_OMPI_MPICH)
+    target_link_libraries(${lib} Threads::Threads)
+endforeach()
 
 # Installation specs
 #-------------------
@@ -1001,6 +602,10 @@ install(FILES
         preload/bin/wi4mpi DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
+if(NOT BASHPATH STREQUAL "/bin/bash")
+    # Ugly work-around bash install path on FreeBSD
+    install(CODE "execute_process(COMMAND sed -i \"\" s+/bin/bash+${BASHPATH}+ wi4mpi mpicc mpirun WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)")
+endif()
 
 #Wi4mpi config
 #-------------

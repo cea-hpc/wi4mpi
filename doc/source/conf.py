@@ -10,7 +10,7 @@ import sphinx_rtd_theme
 
 project = 'Wi4MPI'
 copyright = '2016-2022, CEA - Commissariat à l\'Énerge Atomique et aux Énergies Alternatives'
-author = 'Adrien Cotte, Vincent Ducrot, Tony Delforge'
+author = 'Adrien Cotte, Vincent Ducrot, Tony Delforge, Kevin Juilly'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
