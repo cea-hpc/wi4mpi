@@ -77,54 +77,21 @@ printf("sort : A_f_MPI_Get_processor_name\n");
 #endif
 
 }
-void  mpi_error_string_(int *,char *,int *,int *);
+void  mpi_error_string_(int *,char *,int *,int *, fort_string_length);
 
-void  mpi_error_string__(int *,char *,int *,int *);
+void  mpi_error_string__(int *,char *,int *,int *, fort_string_length);
 
-void  pmpi_error_string_(int *,char *,int *,int *);
+void  pmpi_error_string_(int *,char *,int *,int *, fort_string_length);
 
-void  pmpi_error_string__(int *,char *,int *,int *);
+void  pmpi_error_string__(int *,char *,int *,int *, fort_string_length);
 
-void  pmpi_error_string_(int *,char *,int *,int *);
+#pragma weak mpi_error_string_=A_f_MPI_Error_string
+#pragma weak mpi_error_string__=A_f_MPI_Error_string
+#pragma weak pmpi_error_string_=A_f_MPI_Error_string
+#pragma weak pmpi_error_string__=A_f_MPI_Error_string
+void  (*_LOCAL_MPI_Error_string)(int * errorcode,char * string,int * resultlen,int * ret,fort_string_length);
 
-#if defined(OMPI_INTEL) || defined(_INTEL) || defined(OMPI_OMPI) || defined(OMPI_MPC) || defined(_OMPI) || defined(_MPC)
-#define R_f_MPI_MAX_ERROR_STRING 2048
-#define A_f_MPI_MAX_ERROR_STRING 255
-#endif
-
-#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(INTEL_MPC)
-#define R_f_MPI_MAX_ERROR_STRING 2048
-#define A_f_MPI_MAX_ERROR_STRING 511
-#endif
-
-#if defined(MPC_INTEL) || defined(MPC_OMPI) || defined(MPC_MPC)
-#define R_f_MPI_MAX_ERROR_STRING 2048
-#define A_f_MPI_MAX_ERROR_STRING 512
-#endif
-
-//#define A_f_MPI_Error_string _PMPI_Error_string
-//#pragma weak mpi_error_string_=_PMPI_Error_string
-//#pragma weak mpi_error_string__=_PMPI_Error_string
-//#pragma weak pmpi_error_string__=_PMPI_Error_string
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Error_string)(int * errorcode,char * string,int * resultlen,int * ret,int reslen);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Error_string)(int * errorcode,char * string,int * resultlen,int * ret,size_t reslen);
-#endif
-//void  (*local_error_string_)(int *,char *,int,int *,int *);
-//void  (local_mpi_error_string_)(int *i,char *j,int n,int *k,int *l)
-//{
-//    printf("error_str_int\n");
-//    _LOCAL_MPI_Error_string(i,j,n,k,l);
-//    printf("error_str_out\n");
-//}
-//void  f_mpi_error_string_(int *,char *,int,int *,int *);
-
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Error_string(int * errorcode,char * string,int * resultlen,int * ret,int reslen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Error_string(int * errorcode,char * string,int * resultlen,int * ret,size_t reslen)
-#endif
+void  A_f_MPI_Error_string(int * errorcode,char * string,int * resultlen,int * ret,fort_string_length string_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Error_string\n");
@@ -133,34 +100,19 @@ in_w=1;
 
 int errorcode_tmp=*errorcode;
 int  ret_tmp=0;
-char string_tmp[R_f_MPI_MAX_ERROR_STRING+2];
-//error_a2r(errorcode,&errorcode_tmp);
-//printf("coucou\n");
-    _LOCAL_MPI_Error_string(&errorcode_tmp,string_tmp,resultlen,&ret_tmp,R_f_MPI_MAX_ERROR_STRING);
-//    f_mpi_error_string_(errorcode,string,resultlen,ret);
-string_tmp[*resultlen]='\0';
-strncpy(string,string_tmp,A_f_MPI_MAX_ERROR_STRING);
+char string_tmp[R_MPI_MAX_ERROR_STRING-1];
+int resultlen_tmp;
+error_a2r(errorcode,&errorcode_tmp);
+    _LOCAL_MPI_Error_string(&errorcode_tmp,string_tmp,&resultlen_tmp,&ret_tmp,R_MPI_MAX_ERROR_STRING-1);
+
+fstring_max_conv_r2a(string, string_tmp, string_len, resultlen_tmp);
+length_max_conv_r2a(resultlen, &resultlen_tmp, A_MPI_MAX_ERROR_STRING, R_MPI_MAX_ERROR_STRING);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Error_string\n");
 #endif
-
-/*int mlen=R_MPI_MAX_ERROR_STRING+1;
-printf("MPI_Error_string\n");
-int errorcode_tmp;
-//char string_tmp[R_MPI_MAX_ERROR_STRING+1];
-error_a2r(errorcode,&errorcode_tmp);
-printf("after alloc",*ret,ret_tmp);
-// _LOCAL_MPI_Error_string( &errorcode_tmp, gstr_tmp, resultlen, &ret_tmp);
-printf("before conv MPI_Error_string %d %d\n",*ret,ret_tmp);
-error_r2a(ret,&ret_tmp);
-mlen=(R_MPI_MAX_ERROR_STRING>A_MPI_MAX_ERROR_STRING?A_MPI_MAX_ERROR_STRING:R_MPI_MAX_ERROR_STRING);
-//str_r2a_(string,&mlen,gstr_tmp);
-//string_tmp[255]='\0';
-//strcpy(string,string_tmp);
-printf("end MPI_Error_string %d %d\n",*ret,ret_tmp);
-*/}
+}
 
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
 void  mpi_file_open_(int*, char *,int *,int *,int*, int *,int);
@@ -824,30 +776,20 @@ printf("sort : A_f_MPI_Type_set_name\n");
 
 }
 //MPI_Add_error_string(int errorcode, const char *string)
-void  mpi_add_error_string_(int *,char *,int *);
+void  mpi_add_error_string_(int *,char *,int *, fort_string_length);
 
-void  mpi_add_error_string__(int *,char *,int*);
+void  mpi_add_error_string__(int *,char *,int*, fort_string_length);
 
-void  pmpi_add_error_string_(int *,char *,int*);
+void  pmpi_add_error_string_(int *,char *,int*, fort_string_length);
 
-void  pmpi_add_error_string__(int *,char *,int*);
+void  pmpi_add_error_string__(int *,char *,int*, fort_string_length);
 
-void  pmpi_add_error_string_(int *,char *,int*);
-
-//#define A_f_MPI_Add_error_string _PMPI_Add_error_string
-//#pragma weak mpi_add_error_string_=_PMPI_Add_error_string
-//#pragma weak mpi_add_error_string__=_PMPI_Add_error_string
-//#pragma weak pmpi_add_error_string__=_PMPI_Add_error_string
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Add_error_string)(int *,char *,int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Add_error_string)(int *,char *,int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Add_error_string(int * errorcode,char * string, int *ret, int string_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Add_error_string(int * errorcode,char * string, int *ret, size_t string_len)
-#endif
+#pragma weak mpi_add_error_string_=A_f_MPI_Add_error_string
+#pragma weak mpi_add_error_string__=A_f_MPI_Add_error_string
+#pragma weak pmpi_add_error_string_=A_f_MPI_Add_error_string
+#pragma weak pmpi_add_error_string__=A_f_MPI_Add_error_string
+void  (*_LOCAL_MPI_Add_error_string)(int *,char *,int*,fort_string_length);
+void  A_f_MPI_Add_error_string(int * errorcode,char * string, int *ret, fort_string_length string_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Add_error_string\n");
@@ -858,7 +800,9 @@ int  ret_tmp=0;
 
 int errorcode_tmp;
 error_a2r(errorcode,&errorcode_tmp);
- _LOCAL_MPI_Add_error_string( &errorcode_tmp, string, &ret_tmp, string_len);
+char tmp_name[R_MPI_MAX_ERROR_STRING-1];
+fstring_max_conv_a2r(string, tmp_name, string_len, R_MPI_MAX_ERROR_STRING-1);
+ _LOCAL_MPI_Add_error_string( &errorcode_tmp, tmp_name, &ret_tmp, R_MPI_MAX_ERROR_STRING-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
