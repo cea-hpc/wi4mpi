@@ -140,9 +140,9 @@ int __svml_irem4;
 int __svml_irem8_l9;
 #endif
 #if defined(OMPI_INTEL) || defined(_INTEL) || defined(_MPC)
-char ompi_mpi_comm_null[1024];
-char ompi_mpi_comm_self[1024];
-char ompi_mpi_comm_world[1024];
+char ompi_mpi_comm_null[512];
+char ompi_mpi_comm_self[512];
+char ompi_mpi_comm_world[512];
 char ompi_mpi_2cplex[512];
 char ompi_mpi_2dblcplex[512];
 char ompi_mpi_2dblprec[512];
