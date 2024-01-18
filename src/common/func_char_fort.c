@@ -114,44 +114,22 @@ printf("sort : A_f_MPI_Error_string\n");
 #endif
 }
 
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  mpi_file_open_(int*, char *,int *,int *,int*, int *,int);
+void  mpi_file_open_(int*, char *,int *,int *,int*, int *,fort_string_length);
 
-void  mpi_file_open__(int*, char *,int *,int *,int*, int *,int);
+void  mpi_file_open__(int*, char *,int *,int *,int*, int *,fort_string_length);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,int);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,fort_string_length);
 
-void  pmpi_file_open__(int*, char *,int *,int *,int*, int *,int);
+void  pmpi_file_open__(int*, char *,int *,int *,int*, int *,fort_string_length);
 
-void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,int);
+void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,fort_string_length);
 
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  mpi_file_open_(int*, char *,int *,int *,int*, int *,size_t);
-
-void  mpi_file_open__(int*, char *,int *,int *,int*, int *,size_t);
-
-void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,size_t);
-
-void  pmpi_file_open__(int*, char *,int *,int *,int*, int *,size_t);
-
-void  pmpi_file_open_(int*, char *,int *,int *,int*, int *,size_t);
-
-#endif
-//#define A_f_MPI_File_open _PMPI_File_open
-//#pragma weak mpi_file_open_=_PMPI_File_open
-//#pragma weak mpi_file_open__=_PMPI_File_open
-//#pragma weak pmpi_file_open__=_PMPI_File_open
-//void  (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*, int*,int);
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, int filenamelen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, size_t filenamelen)
-#endif
+#pragma weak mpi_file_open_=A_f_MPI_File_open
+#pragma weak mpi_file_open__=A_f_MPI_File_open
+#pragma weak pmpi_file_open_=A_f_MPI_File_open
+#pragma weak pmpi_file_open__=A_f_MPI_File_open
+void (*_LOCAL_MPI_File_open)(int *, char*, int*, int*, int*,int*, fort_string_length);
+void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, fort_string_length filenamelen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_File_open\n");
