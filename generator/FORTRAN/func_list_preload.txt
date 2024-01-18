@@ -284,8 +284,8 @@ MPI_Rput
 ##########
 #- Comm -#
 ##########
-MPI_Comm_accept
-MPI_Comm_connect
+#MPI_Comm_accept
+#MPI_Comm_connect
 MPI_Comm_create_group
 MPI_Comm_disconnect
 MPI_Comm_get_info

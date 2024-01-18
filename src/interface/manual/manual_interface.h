@@ -1204,6 +1204,112 @@ printf("sort : f_MPI_Lookup_name (interface) \n");
 
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
 
+void  mpi_comm_accept_(char *, int *, int *, int *, int *, int *, int);
+
+void  mpi_comm_accept__(char *, int *, int *, int *, int *, int *, int);
+
+void  pmpi_comm_accept_(char *, int *, int *, int *, int *, int *, int);
+
+void  pmpi_comm_accept__(char *, int *, int *, int *, int *, int *, int);
+
+void  pmpi_comm_accept_(char *, int *, int *, int *, int *, int *, int);
+
+#elif defined(GFORT_CALL)
+
+void  mpi_comm_accept_(char *, int *, int *, int *, int *, int *, size_t);
+
+void  mpi_comm_accept__(char *, int *, int *, int *, int *, int *, size_t);
+
+void  pmpi_comm_accept_(char *, int *, int *, int *, int *, int *, size_t);
+
+void  pmpi_comm_accept__(char *, int *, int *, int *, int *, int *, size_t);
+
+void  pmpi_comm_accept_(char *, int *, int *, int *, int *, int *, size_t);
+
+#endif
+#define A_f_MPI_Comm_accept _PMPI_Comm_accept
+#pragma weak mpi_comm_accept_=_PMPI_Comm_accept
+#pragma weak mpi_comm_accept__=_PMPI_Comm_accept
+#pragma weak pmpi_comm_accept__=_PMPI_Comm_accept
+//void (*INTERFACE_F_LOCAL_MPI_Comm_accept)(int *,char*,int*,int);
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+void (*INTERFACE_F_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, int);
+#elif defined(GFORT_CALL) && __GNUC__ >= 8
+void (*INTERFACE_F_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, size_t);
+#endif
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
+                         int *newcomm, int *ret, int port_name_len)
+#elif defined(GFORT_CALL) && __GNUC__ >= 8
+void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
+                         int *newcomm, int *ret, size_t port_name_len)
+#endif
+{
+#ifdef DEBUG
+printf("entre : f_MPI_Comm_accept (interface) \n");
+#endif
+INTERFACE_F_LOCAL_MPI_Comm_accept(port_name, info, root, comm,
+                         newcomm, ret, port_name_len);
+#ifdef DEBUG
+printf("sort : f_MPI_Comm_accept (interface) \n");
+#endif
+}
+
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+
+void  mpi_comm_connect_(char *, int *, int *, int *, int *, int *, int);
+
+void  mpi_comm_connect__(char *, int *, int *, int *, int *, int *, int);
+
+void  pmpi_comm_connect_(char *, int *, int *, int *, int *, int *, int);
+
+void  pmpi_comm_connect__(char *, int *, int *, int *, int *, int *, int);
+
+void  pmpi_comm_connect_(char *, int *, int *, int *, int *, int *, int);
+
+#elif defined(GFORT_CALL)
+
+void  mpi_comm_connect_(char *, int *, int *, int *, int *, int *, size_t);
+
+void  mpi_comm_connect__(char *, int *, int *, int *, int *, int *, size_t);
+
+void  pmpi_comm_connect_(char *, int *, int *, int *, int *, int *, size_t);
+
+void  pmpi_comm_connect__(char *, int *, int *, int *, int *, int *, size_t);
+
+void  pmpi_comm_connect_(char *, int *, int *, int *, int *, int *, size_t);
+
+#endif
+#define A_f_MPI_Comm_connect _PMPI_Comm_connect
+#pragma weak mpi_comm_connect_=_PMPI_Comm_connect
+#pragma weak mpi_comm_connect__=_PMPI_Comm_connect
+#pragma weak pmpi_comm_connect__=_PMPI_Comm_connect
+//void (*INTERFACE_F_LOCAL_MPI_Comm_connect)(int *,char*,int*,int);
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+void (*INTERFACE_F_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, int);
+#elif defined(GFORT_CALL) && __GNUC__ >= 8
+void (*INTERFACE_F_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, size_t);
+#endif
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
+                          int *newcomm, int *ret, int port_name_len)
+#elif defined(GFORT_CALL) && __GNUC__ >= 8
+void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
+                          int *newcomm, int *ret, size_t port_name_len)
+#endif
+{
+#ifdef DEBUG
+printf("entre : f_MPI_Comm_connect (interface) \n");
+#endif
+INTERFACE_F_LOCAL_MPI_Comm_connect(port_name, info, root, comm,
+                          newcomm, ret, port_name_len);
+#ifdef DEBUG
+printf("sort : f_MPI_Comm_connect (interface) \n");
+#endif
+}
+
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+
 void  mpi_pack_external_(char *, void*, int, int*, void*, size_t, size_t *, int*,int);
 
 void  mpi_pack_external__(char *, void*, int, int*, void*, size_t, size_t *, int*,int);

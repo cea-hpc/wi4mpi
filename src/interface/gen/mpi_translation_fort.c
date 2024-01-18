@@ -4594,100 +4594,6 @@ void A_f_MPI_Init(int *ret) {
   wi4mpi_unset_timeout();
 #endif
 }
-void mpi_comm_accept_(char *, int *, int *, int *, int *, int *);
-
-void mpi_comm_accept__(char *, int *, int *, int *, int *, int *);
-
-void pmpi_comm_accept_(char *, int *, int *, int *, int *, int *);
-
-void pmpi_comm_accept__(char *, int *, int *, int *, int *, int *);
-
-void pmpi_comm_accept_(char *, int *, int *, int *, int *, int *);
-
-extern unsigned long long WI4MPI_Comm_accept_timeout;
-extern unsigned int WI4MPI_Comm_accept_print;
-void (*_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *);
-
-void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
-                         int *newcomm, int *ret) {
-#ifdef TIMEOUT_SUPPORT
-  wi4mpi_set_timeout(WI4MPI_Comm_accept_timeout);
-#endif
-  in_w = 1;
-  int ret_tmp = 0;
-
-  int info_tmp;
-  int root_tmp;
-  int comm_tmp;
-  int newcomm_tmp;
-  info_a2r(info, &info_tmp);
-  rank_mapper_a2r(root, &root_tmp);
-  comm_a2r(comm, &comm_tmp);
-  _LOCAL_MPI_Comm_accept(port_name, &info_tmp, &root_tmp, &comm_tmp,
-                         &newcomm_tmp, &ret_tmp);
-  if (ret_tmp == R_f_MPI_SUCCESS)
-    comm_r2a(newcomm, &newcomm_tmp);
-  error_r2a(ret, &ret_tmp);
-
-  in_w = 0;
-#ifdef DEBUG
-  if (WI4MPI_Comm_accept_print)
-    debug_printer(
-        "MPI_Comm_accept : \n{\nport_name : %*d,\ninfo : %*d,\nroot : "
-        "%*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
-        port_name, info, root, comm, newcomm, ret);
-#endif
-#ifdef TIMEOUT_SUPPORT
-  wi4mpi_unset_timeout();
-#endif
-}
-void mpi_comm_connect_(char *, int *, int *, int *, int *, int *);
-
-void mpi_comm_connect__(char *, int *, int *, int *, int *, int *);
-
-void pmpi_comm_connect_(char *, int *, int *, int *, int *, int *);
-
-void pmpi_comm_connect__(char *, int *, int *, int *, int *, int *);
-
-void pmpi_comm_connect_(char *, int *, int *, int *, int *, int *);
-
-extern unsigned long long WI4MPI_Comm_connect_timeout;
-extern unsigned int WI4MPI_Comm_connect_print;
-void (*_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *);
-
-void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
-                          int *newcomm, int *ret) {
-#ifdef TIMEOUT_SUPPORT
-  wi4mpi_set_timeout(WI4MPI_Comm_connect_timeout);
-#endif
-  in_w = 1;
-  int ret_tmp = 0;
-
-  int info_tmp;
-  int root_tmp;
-  int comm_tmp;
-  int newcomm_tmp;
-  info_a2r(info, &info_tmp);
-  rank_mapper_a2r(root, &root_tmp);
-  comm_a2r(comm, &comm_tmp);
-  _LOCAL_MPI_Comm_connect(port_name, &info_tmp, &root_tmp, &comm_tmp,
-                          &newcomm_tmp, &ret_tmp);
-  if (ret_tmp == R_f_MPI_SUCCESS)
-    comm_r2a(newcomm, &newcomm_tmp);
-  error_r2a(ret, &ret_tmp);
-
-  in_w = 0;
-#ifdef DEBUG
-  if (WI4MPI_Comm_connect_print)
-    debug_printer(
-        "MPI_Comm_connect : \n{\nport_name : %*d,\ninfo : %*d,\nroot : "
-        "%*d,\ncomm : %*C,\nnewcomm : %*C,\nerror/return : %*d\n}\n",
-        port_name, info, root, comm, newcomm, ret);
-#endif
-#ifdef TIMEOUT_SUPPORT
-  wi4mpi_unset_timeout();
-#endif
-}
 void mpi_comm_disconnect_(int *, int *);
 
 void mpi_comm_disconnect__(int *, int *);
@@ -15286,8 +15192,6 @@ WATTR void wrapper_init_f(void) {
   _LOCAL_MPI_Initialized = dlsym(lib_handle_f, "pmpi_initialized_");
   _LOCAL_MPI_Abort = dlsym(lib_handle_f, "pmpi_abort_");
   _LOCAL_MPI_Init = dlsym(lib_handle_f, "pmpi_init_");
-  _LOCAL_MPI_Comm_accept = dlsym(lib_handle_f, "pmpi_comm_accept_");
-  _LOCAL_MPI_Comm_connect = dlsym(lib_handle_f, "pmpi_comm_connect_");
   _LOCAL_MPI_Comm_disconnect = dlsym(lib_handle_f, "pmpi_comm_disconnect_");
   _LOCAL_MPI_Comm_get_parent = dlsym(lib_handle_f, "pmpi_comm_get_parent_");
   _LOCAL_MPI_Comm_join = dlsym(lib_handle_f, "pmpi_comm_join_");
@@ -15600,6 +15504,8 @@ WATTR void wrapper_init_f(void) {
   _LOCAL_MPI_Publish_name = dlsym(lib_handle_f, "pmpi_publish_name_");
   _LOCAL_MPI_Unpublish_name = dlsym(lib_handle_f, "pmpi_unpublish_name_");
   _LOCAL_MPI_Lookup_name = dlsym(lib_handle_f, "pmpi_lookup_name_");
+  _LOCAL_MPI_Comm_accept = dlsym(lib_handle_f, "pmpi_comm_accept_");
+  _LOCAL_MPI_Comm_connect = dlsym(lib_handle_f, "pmpi_comm_connect_");
   _LOCAL_MPI_Pack_external = dlsym(lib_handle_f, "pmpi_pack_external_");
   _LOCAL_MPI_Pack_external_size =
       dlsym(lib_handle_f, "pmpi_pack_external_size_");

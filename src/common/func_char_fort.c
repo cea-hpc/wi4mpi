@@ -745,30 +745,20 @@ printf("sort : A_f_MPI_Add_error_string\n");
 }
 
 //MPI_Close_port(const char *port_name)
-void  mpi_close_port_(char *,int *);
+void  mpi_close_port_(char *,int *, fort_string_length);
 
-void  mpi_close_port__(char *,int*);
+void  mpi_close_port__(char *,int*, fort_string_length);
 
-void  pmpi_close_port_(char *,int*);
+void  pmpi_close_port_(char *,int*, fort_string_length);
 
-void  pmpi_close_port__(char *,int*);
+void  pmpi_close_port__(char *,int*, fort_string_length);
 
-void  pmpi_close_port_(char *,int*);
-
-//#define A_f_MPI_Close_port _PMPI_Close_port
-///#pragma weak mpi_close_port_=_PMPI_Close_port
-///#pragma weak mpi_close_port__=_PMPI_Close_port
-///#pragma weak pmpi_close_port__=_PMPI_Close_port
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Close_port)(char *,int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Close_port)(char *,int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Close_port(char * string, int *ret, int string_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Close_port(char * string, int *ret, size_t string_len)
-#endif
+#pragma weak mpi_close_port_=A_f_MPI_Close_port
+#pragma weak mpi_close_port__=A_f_MPI_Close_port
+#pragma weak pmpi_close_port_=A_f_MPI_Close_port
+#pragma weak pmpi_close_port__=A_f_MPI_Close_port
+void  (*_LOCAL_MPI_Close_port)(char *,int*,fort_string_length);
+void  A_f_MPI_Close_port(char * string, int *ret, fort_string_length string_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Close_port\n");
@@ -776,8 +766,10 @@ printf("entre : A_f_MPI_Close_port\n");
 in_w=1;
 
 int  ret_tmp=0;
+char tmp_name[R_MPI_MAX_PORT_NAME-1];
+fstring_max_conv_a2r(string, tmp_name, string_len, R_MPI_MAX_PORT_NAME-1, false);
 
- _LOCAL_MPI_Close_port(string, &ret_tmp, string_len);
+ _LOCAL_MPI_Close_port(tmp_name, &ret_tmp, R_MPI_MAX_PORT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -824,30 +816,20 @@ printf("sort : A_f_MPI_Get_library_version\n");
 }
 
 //MPI_Open_port(MPI_Info info, char *port_name)
-void  mpi_open_port_(int *  ,char*,int*);
-                                                 
-void  mpi_open_port__(int * ,char*,int*);
-                                                 
-void  pmpi_open_port_(int * ,char*,int*);
-                                                 
-void  pmpi_open_port__(int *,char*,int*);
-                                                 
-void  pmpi_open_port_(int * ,char*,int*);
+void  mpi_open_port_(int *  ,char*,int*, fort_string_length);
 
-//#define A_f_MPI_Open_port _PMPI_Open_port
-//#pragma weak mpi_open_port_=_PMPI_Open_port
-//#pragma weak mpi_open_port__=_PMPI_Open_port
-//#pragma weak pmpi_open_port__=_PMPI_Open_port
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Open_port)(int *,char*, int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Open_port)(int *,char*, int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Open_port(int * info, char *port_name, int *ret, int port_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Open_port(int * info, char *port_name, int *ret, size_t port_name_len)
-#endif
+void  mpi_open_port__(int * ,char*,int*, fort_string_length);
+
+void  pmpi_open_port_(int * ,char*,int*, fort_string_length);
+
+void  pmpi_open_port__(int *,char*,int*, fort_string_length);
+
+#pragma weak mpi_open_port_=A_f_MPI_Open_port
+#pragma weak mpi_open_port__=A_f_MPI_Open_port
+#pragma weak pmpi_open_port_=A_f_MPI_Open_port
+#pragma weak pmpi_open_port__=A_f_MPI_Open_port
+void  (*_LOCAL_MPI_Open_port)(int *,char*, int*,fort_string_length);
+void  A_f_MPI_Open_port(int * info, char *port_name, int *ret, fort_string_length port_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Open_port\n");
@@ -857,8 +839,10 @@ in_w=1;
 int  ret_tmp=0;
 int info_tmp;
 info_a2r(info, &info_tmp);
+char tmp_name[R_MPI_MAX_PORT_NAME-1];
 
- _LOCAL_MPI_Open_port(&info_tmp, port_name, &ret_tmp, port_name_len);
+ _LOCAL_MPI_Open_port(&info_tmp, tmp_name, &ret_tmp, R_MPI_MAX_PORT_NAME-1);
+ fstring_max_conv_r2a(port_name, tmp_name, port_name_len, R_MPI_MAX_PORT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -868,30 +852,20 @@ printf("sort : A_f_MPI_Open_port\n");
 }
 
 //MPI_Publish_name(const char *service_name, MPI_Info info,const char *port_name)
-void  mpi_publish_name_(char*,int*,char*,int*);
-                                                 
-void  mpi_publish_name__(char*,int*,char*,int*);
-                                          
-void  pmpi_publish_name_(char*,int*,char*,int*);
-                                          
-void  pmpi_publish_name__(char*,int*,char*,int*);
-                                                 
-void  pmpi_publish_name_(char*,int*,char*,int*);
+void  mpi_publish_name_(char*,int*,char*,int*, fort_string_length, fort_string_length);
 
-//#define A_f_MPI_Publish_name _PMPI_Publish_name
-//#pragma weak mpi_publish_name_=_PMPI_Publish_name
-//#pragma weak mpi_publish_name__=_PMPI_Publish_name
-//#pragma weak pmpi_publish_name__=_PMPI_Publish_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Publish_name)(char *,int*, char*,int*,int,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Publish_name)(char *,int*, char*,int*,size_t,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Publish_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Publish_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
-#endif
+void  mpi_publish_name__(char*,int*,char*,int*, fort_string_length, fort_string_length);
+
+void  pmpi_publish_name_(char*,int*,char*,int*, fort_string_length, fort_string_length);
+
+void  pmpi_publish_name__(char*,int*,char*,int*, fort_string_length, fort_string_length);
+
+#pragma weak mpi_publish_name_=A_f_MPI_Publish_name
+#pragma weak mpi_publish_name__=A_f_MPI_Publish_name
+#pragma weak pmpi_publish_name_=A_f_MPI_Publish_name
+#pragma weak pmpi_publish_name__=A_f_MPI_Publish_name
+void  (*_LOCAL_MPI_Publish_name)(char *,int*, char*,int*,fort_string_length,fort_string_length);
+void  A_f_MPI_Publish_name(char *service_name, int *info, char *port_name, int *ret, fort_string_length service_name_len, fort_string_length port_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Publish_name\n");
@@ -901,8 +875,10 @@ in_w=1;
 int  ret_tmp=0;
 int info_tmp;
 info_a2r(info, &info_tmp);
+char tmp_name[R_MPI_MAX_PORT_NAME-1];
+fstring_max_conv_a2r(port_name, tmp_name, port_name_len, R_MPI_MAX_PORT_NAME-1, false);
 
- _LOCAL_MPI_Publish_name(service_name, &info_tmp, port_name, &ret_tmp,service_name_len, port_name_len);
+ _LOCAL_MPI_Publish_name(service_name, &info_tmp, tmp_name, &ret_tmp,service_name_len, R_MPI_MAX_PORT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -912,30 +888,20 @@ printf("sort : A_f_MPI_Publish_name\n");
 }
 
 //MPI_Unpublish_name(const char *service_name, MPI_Info info,const char *port_name)
-void  mpi_unpublish_name_(char*,int*,char*,int*);
-                                                 
-void  mpi_unpublish_name__(char*,int*,char*,int*);
-                                          
-void  pmpi_unpublish_name_(char*,int*,char*,int*);
-                                          
-void  pmpi_unpublish_name__(char*,int*,char*,int*);
-                                                 
-void  pmpi_unpublish_name_(char*,int*,char*,int*);
+void  mpi_unpublish_name_(char*,int*,char*,int*, fort_string_length, fort_string_length);
 
-//#define A_f_MPI_Unpublish_name _PMPI_Unpublish_name
-//#pragma weak mpi_unpublish_name_=_PMPI_Unpublish_name
-//#pragma weak mpi_unpublish_name__=_PMPI_Unpublish_name
-//#pragma weak pmpi_unpublish_name__=_PMPI_Unpublish_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Unpublish_name)(char *,int*, char*,int*,int,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Unpublish_name)(char *,int*, char*,int*,size_t,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Unpublish_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Unpublish_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
-#endif
+void  mpi_unpublish_name__(char*,int*,char*,int*, fort_string_length, fort_string_length);
+
+void  pmpi_unpublish_name_(char*,int*,char*,int*, fort_string_length, fort_string_length);
+
+void  pmpi_unpublish_name__(char*,int*,char*,int*, fort_string_length, fort_string_length);
+
+#pragma weak mpi_unpublish_name_=A_f_MPI_Unpublish_name
+#pragma weak mpi_unpublish_name__=A_f_MPI_Unpublish_name
+#pragma weak pmpi_unpublish_name_=A_f_MPI_Unpublish_name
+#pragma weak pmpi_unpublish_name__=A_f_MPI_Unpublish_name
+void  (*_LOCAL_MPI_Unpublish_name)(char *,int*, char*,int*,fort_string_length,fort_string_length);
+void  A_f_MPI_Unpublish_name(char *service_name, int *info, char *port_name, int *ret, fort_string_length service_name_len, fort_string_length port_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Unpublish_name\n");
@@ -945,8 +911,10 @@ in_w=1;
 int  ret_tmp=0;
 int info_tmp;
 info_a2r(info, &info_tmp);
+char tmp_name[R_MPI_MAX_PORT_NAME-1];
+fstring_max_conv_a2r(port_name, tmp_name, port_name_len, R_MPI_MAX_PORT_NAME-1, false);
 
- _LOCAL_MPI_Unpublish_name(service_name, &info_tmp, port_name, &ret_tmp,service_name_len, port_name_len);
+ _LOCAL_MPI_Unpublish_name(service_name, &info_tmp, tmp_name, &ret_tmp,service_name_len, R_MPI_MAX_PORT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -992,30 +960,20 @@ printf("sort : A_f_MPI_Win_set_name\n");
 }
 
 //MPI_Lookup_name(const char *service_name, MPI_Info info,char *port_name)
-void  mpi_lookup_name_(char *, int*, char *, int*);
-                                                 
-void  mpi_lookup_name__(char *, int*, char *, int*);
-                                          
-void  pmpi_lookup_name_(char *, int*, char *, int*);
-                                          
-void  pmpi_lookup_name__(char *, int*, char *, int*);
-                                                 
-void  pmpi_lookup_name_(char *, int*, char *, int*);
+void  mpi_lookup_name_(char *, int*, char *, int*, fort_string_length, fort_string_length);
 
-//#define A_f_MPI_Lookup_name _PMPI_Lookup_name
-//#pragma weak mpi_lookup_name_=_PMPI_Lookup_name
-//#pragma weak mpi_lookup_name__=_PMPI_Lookup_name
-//#pragma weak pmpi_lookup_name__=_PMPI_Lookup_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Lookup_name)(char*, int*, char *, int*, int, int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Lookup_name)(char*, int*, char *, int*, size_t, size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Lookup_name(char *service_name, int *info, char *port_name, int *ret, int service_name_len, int port_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Lookup_name(char *service_name, int *info, char *port_name, int *ret, size_t service_name_len, size_t port_name_len)
-#endif
+void  mpi_lookup_name__(char *, int*, char *, int*, fort_string_length, fort_string_length);
+
+void  pmpi_lookup_name_(char *, int*, char *, int*, fort_string_length, fort_string_length);
+
+void  pmpi_lookup_name__(char *, int*, char *, int*, fort_string_length, fort_string_length);
+
+#pragma weak mpi_lookup_name_=A_f_MPI_Lookup_name
+#pragma weak mpi_lookup_name__=A_f_MPI_Lookup_name
+#pragma weak pmpi_lookup_name_=A_f_MPI_Lookup_name
+#pragma weak pmpi_lookup_name__=A_f_MPI_Lookup_name
+void  (*_LOCAL_MPI_Lookup_name)(char*, int*, char *, int*, fort_string_length, fort_string_length);
+void  A_f_MPI_Lookup_name(char *service_name, int *info, char *port_name, int *ret, fort_string_length service_name_len, fort_string_length port_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Lookup_name\n");
@@ -1025,14 +983,101 @@ in_w=1;
 int  ret_tmp=0;
 int info_tmp;
 info_a2r(info, &info_tmp);
+char tmp_name[R_MPI_MAX_PORT_NAME-1];
 
- _LOCAL_MPI_Lookup_name(service_name, &info_tmp, port_name, &ret_tmp, service_name_len, port_name_len);
+ _LOCAL_MPI_Lookup_name(service_name, &info_tmp, tmp_name, &ret_tmp, service_name_len, R_MPI_MAX_PORT_NAME-1);
+ fstring_max_conv_r2a(port_name, tmp_name, port_name_len, R_MPI_MAX_PORT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
 printf("sort : A_f_MPI_Lookup_name\n");
 #endif
 
+}
+void mpi_comm_accept_(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void mpi_comm_accept__(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void pmpi_comm_accept_(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void pmpi_comm_accept__(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+#pragma weak mpi_comm_accept_ = A_f_MPI_Comm_accept
+#pragma weak mpi_comm_accept__ = A_f_MPI_Comm_accept
+#pragma weak pmpi_comm_accept_ = A_f_MPI_Comm_accept
+#pragma weak pmpi_comm_accept__ = A_f_MPI_Comm_accept
+void (*_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
+                         int *newcomm, int *ret, fort_string_length port_name_len) {
+#ifdef DEBUG
+printf("entre : A_f_MPI_Comm_accept\n");
+#endif
+  in_w = 1;
+  int ret_tmp = 0;
+
+  int info_tmp;
+  int root_tmp;
+  int comm_tmp;
+  int newcomm_tmp;
+  info_a2r(info, &info_tmp);
+  rank_mapper_a2r(root, &root_tmp);
+  comm_a2r(comm, &comm_tmp);
+  char tmp_name[R_MPI_MAX_PORT_NAME-1];
+  fstring_max_conv_a2r(port_name, tmp_name, port_name_len, R_MPI_MAX_PORT_NAME-1, false);
+  _LOCAL_MPI_Comm_accept(tmp_name, &info_tmp, &root_tmp, &comm_tmp,
+                         &newcomm_tmp, &ret_tmp, R_MPI_MAX_PORT_NAME-1);
+  if (ret_tmp == R_f_MPI_SUCCESS)
+    comm_r2a(newcomm, &newcomm_tmp);
+  error_r2a(ret, &ret_tmp);
+
+  in_w = 0;
+#ifdef DEBUG
+printf("sort : A_f_MPI_Comm_accept\n");
+#endif
+}
+
+void mpi_comm_connect_(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void mpi_comm_connect__(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void pmpi_comm_connect_(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void pmpi_comm_connect__(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+#pragma weak mpi_comm_connect_ = A_f_MPI_Comm_connect
+#pragma weak mpi_comm_connect__ = A_f_MPI_Comm_connect
+#pragma weak pmpi_comm_connect_ = A_f_MPI_Comm_connect
+#pragma weak pmpi_comm_connect__ = A_f_MPI_Comm_connect
+void (*_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, fort_string_length);
+
+void A_f_MPI_Comm_connect(char *port_name, int *info, int *root, int *comm,
+                          int *newcomm, int *ret, fort_string_length port_name_len) {
+#ifdef DEBUG
+printf("entre : A_f_MPI_Comm_connect\n");
+#endif
+  in_w = 1;
+  int ret_tmp = 0;
+
+  int info_tmp;
+  int root_tmp;
+  int comm_tmp;
+  int newcomm_tmp;
+  info_a2r(info, &info_tmp);
+  rank_mapper_a2r(root, &root_tmp);
+  comm_a2r(comm, &comm_tmp);
+  char tmp_name[R_MPI_MAX_PORT_NAME-1];
+  fstring_max_conv_a2r(port_name, tmp_name, port_name_len, R_MPI_MAX_PORT_NAME-1, false);
+  _LOCAL_MPI_Comm_connect(tmp_name, &info_tmp, &root_tmp, &comm_tmp,
+                          &newcomm_tmp, &ret_tmp, R_MPI_MAX_PORT_NAME-1);
+  if (ret_tmp == R_f_MPI_SUCCESS)
+    comm_r2a(newcomm, &newcomm_tmp);
+  error_r2a(ret, &ret_tmp);
+
+  in_w = 0;
+#ifdef DEBUG
+printf("sort : A_f_MPI_Comm_connect\n");
+#endif
 }
 //MPI_Pack_external(const char datarep[], const void *inbuf, int incount,MPI_Datatype datatype, void *outbuf, MPI_Aint outsize,MPI_Aint *position)
 void  mpi_pack_external_(char *, void*, int, int*, void*, size_t, size_t *, int*);

@@ -144,6 +144,16 @@ void  (*_LOCAL_MPI_Lookup_name)(char*, int*, char *, int*, int, int);
 void  (*_LOCAL_MPI_Lookup_name)(char*, int*, char *, int*, size_t, size_t);
 #endif
 #if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+void (*_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, int);
+#elif defined(GFORT_CALL) && __GNUC__ >= 8
+void (*_LOCAL_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, size_t);
+#endif
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
+void (*_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, int);
+#elif defined(GFORT_CALL) && __GNUC__ >= 8
+void (*_LOCAL_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, size_t);
+#endif
+#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
 void  (*_LOCAL_MPI_Pack_external)(char *, void*, int, int*, void*, size_t, size_t *, int *, int);
 #elif defined(GFORT_CALL) && __GNUC__ >= 8
 void  (*_LOCAL_MPI_Pack_external)(char *, void*, int, int*, void*, size_t, size_t *, int *, size_t);

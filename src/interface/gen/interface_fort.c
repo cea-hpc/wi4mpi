@@ -1375,32 +1375,6 @@ return  INTERFACE_F_LOCAL_MPI_Init( ret);
 extern void (*INTERF_2_OMPI_A_f_MPI_Init)(int *);
 extern void (*INTERF_2_INTEL_A_f_MPI_Init)(int *);
 #endif /*WI4MPI_STATIC*/
-void  mpi_comm_accept_(char * port_name,int * info,int * root,int * comm,int * newcomm,int * ret);
-#pragma weak mpi_comm_accept_=pmpi_comm_accept_
-void  (*INTERFACE_F_LOCAL_MPI_Comm_accept)(char *,int *,int *,int *,int *,int *);
-
-void pmpi_comm_accept_(char * port_name,int * info,int * root,int * comm,int * newcomm,int * ret){
-
-return  INTERFACE_F_LOCAL_MPI_Comm_accept( port_name,info,root,comm,newcomm, ret);
-}
-
-#ifdef WI4MPI_STATIC
-extern void (*INTERF_2_OMPI_A_f_MPI_Comm_accept)(char *,int *,int *,int *,int *,int *);
-extern void (*INTERF_2_INTEL_A_f_MPI_Comm_accept)(char *,int *,int *,int *,int *,int *);
-#endif /*WI4MPI_STATIC*/
-void  mpi_comm_connect_(char * port_name,int * info,int * root,int * comm,int * newcomm,int * ret);
-#pragma weak mpi_comm_connect_=pmpi_comm_connect_
-void  (*INTERFACE_F_LOCAL_MPI_Comm_connect)(char *,int *,int *,int *,int *,int *);
-
-void pmpi_comm_connect_(char * port_name,int * info,int * root,int * comm,int * newcomm,int * ret){
-
-return  INTERFACE_F_LOCAL_MPI_Comm_connect( port_name,info,root,comm,newcomm, ret);
-}
-
-#ifdef WI4MPI_STATIC
-extern void (*INTERF_2_OMPI_A_f_MPI_Comm_connect)(char *,int *,int *,int *,int *,int *);
-extern void (*INTERF_2_INTEL_A_f_MPI_Comm_connect)(char *,int *,int *,int *,int *,int *);
-#endif /*WI4MPI_STATIC*/
 void  mpi_comm_disconnect_(int * comm,int * ret);
 #pragma weak mpi_comm_disconnect_=pmpi_comm_disconnect_
 void  (*INTERFACE_F_LOCAL_MPI_Comm_disconnect)(int *,int *);
@@ -4418,6 +4392,8 @@ extern void (INTERF_2_OMPI_A_f_MPI_Open_port)(int *, char *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Publish_name)(char *, int *, char *, int *, int, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Unpublish_name)(char *, int *, char *, int *, int, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Lookup_name)(char *, int *, char *, int *, int, int);
+extern void (INTERF_2_OMPI_A_f_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, int);
+extern void (INTERF_2_OMPI_A_f_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external)(char *, void *, int, int *, void *, size_t, size_t *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, int);
 extern void (INTERF_2_OMPI_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);
@@ -4446,6 +4422,8 @@ extern void (INTERF_2_INTEL_A_f_MPI_Open_port)(int *, char *, int *, int);
 extern void (INTERF_2_INTEL_A_f_MPI_Publish_name)(char *, int *, char *, int *, int, int);
 extern void (INTERF_2_INTEL_A_f_MPI_Unpublish_name)(char *, int *, char *, int *, int, int);
 extern void (INTERF_2_INTEL_A_f_MPI_Lookup_name)(char *, int *, char *, int *, int, int);
+extern void (INTERF_2_INTEL_A_f_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, int);
+extern void (INTERF_2_INTEL_A_f_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, int);
 extern void (INTERF_2_INTEL_A_f_MPI_Pack_external)(char *, void *, int, int *, void *, size_t, size_t *, int *, int);
 extern void (INTERF_2_INTEL_A_f_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, int);
 extern void (INTERF_2_INTEL_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, int);
@@ -4476,6 +4454,8 @@ extern void (INTERF_2_OMPI_A_f_MPI_Open_port)(int *, char *, int *, size_t);
 extern void (INTERF_2_OMPI_A_f_MPI_Publish_name)(char *, int *, char *, int *, size_t, size_t);
 extern void (INTERF_2_OMPI_A_f_MPI_Unpublish_name)(char *, int *, char *, int *, size_t, size_t);
 extern void (INTERF_2_OMPI_A_f_MPI_Lookup_name)(char *, int *, char *, int *, size_t, size_t);
+extern void (INTERF_2_OMPI_A_f_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, size_t);
+extern void (INTERF_2_OMPI_A_f_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, size_t);
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external)(char *, void *, int, int *, void *, size_t, size_t *, int *, size_t);
 extern void (INTERF_2_OMPI_A_f_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, size_t);
 extern void (INTERF_2_OMPI_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, size_t);
@@ -4504,6 +4484,8 @@ extern void (INTERF_2_INTEL_A_f_MPI_Open_port)(int *, char *, int *, size_t);
 extern void (INTERF_2_INTEL_A_f_MPI_Publish_name)(char *, int *, char *, int *, size_t, size_t);
 extern void (INTERF_2_INTEL_A_f_MPI_Unpublish_name)(char *, int *, char *, int *, size_t, size_t);
 extern void (INTERF_2_INTEL_A_f_MPI_Lookup_name)(char *, int *, char *, int *, size_t, size_t);
+extern void (INTERF_2_INTEL_A_f_MPI_Comm_accept)(char *, int *, int *, int *, int *, int *, size_t);
+extern void (INTERF_2_INTEL_A_f_MPI_Comm_connect)(char *, int *, int *, int *, int *, int *, size_t);
 extern void (INTERF_2_INTEL_A_f_MPI_Pack_external)(char *, void *, int, int *, void *, size_t, size_t *, int *, size_t);
 extern void (INTERF_2_INTEL_A_f_MPI_Pack_external_size)(char *, int, int *, size_t *, int *, size_t);
 extern void (INTERF_2_INTEL_A_f_MPI_Unpack_external)(char *, void *, size_t, size_t *, void *, int, int *, int *, size_t);
@@ -4654,8 +4636,6 @@ INTERFACE_F_LOCAL_MPI_Error_class=dlsym(interface_handle_f,"A_f_MPI_Error_class"
 INTERFACE_F_LOCAL_MPI_Initialized=dlsym(interface_handle_f,"A_f_MPI_Initialized");
 INTERFACE_F_LOCAL_MPI_Abort=dlsym(interface_handle_f,"A_f_MPI_Abort");
 INTERFACE_F_LOCAL_MPI_Init=dlsym(interface_handle_f,"A_f_MPI_Init");
-INTERFACE_F_LOCAL_MPI_Comm_accept=dlsym(interface_handle_f,"A_f_MPI_Comm_accept");
-INTERFACE_F_LOCAL_MPI_Comm_connect=dlsym(interface_handle_f,"A_f_MPI_Comm_connect");
 INTERFACE_F_LOCAL_MPI_Comm_disconnect=dlsym(interface_handle_f,"A_f_MPI_Comm_disconnect");
 INTERFACE_F_LOCAL_MPI_Comm_get_parent=dlsym(interface_handle_f,"A_f_MPI_Comm_get_parent");
 INTERFACE_F_LOCAL_MPI_Comm_join=dlsym(interface_handle_f,"A_f_MPI_Comm_join");
@@ -4911,6 +4891,8 @@ INTERFACE_F_LOCAL_MPI_Open_port=dlsym(interface_handle_f, "A_f_MPI_Open_port");
 INTERFACE_F_LOCAL_MPI_Publish_name=dlsym(interface_handle_f, "A_f_MPI_Publish_name");
 INTERFACE_F_LOCAL_MPI_Unpublish_name=dlsym(interface_handle_f, "A_f_MPI_Unpublish_name");
 INTERFACE_F_LOCAL_MPI_Lookup_name=dlsym(interface_handle_f, "A_f_MPI_Lookup_name");
+INTERFACE_F_LOCAL_MPI_Comm_accept=dlsym(interface_handle_f, "A_f_MPI_Comm_accept");
+INTERFACE_F_LOCAL_MPI_Comm_connect=dlsym(interface_handle_f, "A_f_MPI_Comm_connect");
 INTERFACE_F_LOCAL_MPI_Pack_external=dlsym(interface_handle_f, "A_f_MPI_Pack_external");
 INTERFACE_F_LOCAL_MPI_Pack_external_size=dlsym(interface_handle_f, "A_f_MPI_Pack_external_size");
 INTERFACE_F_LOCAL_MPI_Unpack_external=dlsym(interface_handle_f, "A_f_MPI_Unpack_external");
@@ -5019,8 +5001,6 @@ handle_loader(MPI_Error_class,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Initialized,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Abort,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Init,INTERF_2_OMPI_A_f_);
-handle_loader(MPI_Comm_accept,INTERF_2_OMPI_A_f_);
-handle_loader(MPI_Comm_connect,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Comm_disconnect,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Comm_get_parent,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Comm_join,INTERF_2_OMPI_A_f_);
@@ -5276,6 +5256,8 @@ handle_loader(MPI_Open_port,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Publish_name,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Unpublish_name,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Lookup_name,INTERF_2_OMPI_A_f_);
+handle_loader(MPI_Comm_accept,INTERF_2_OMPI_A_f_);
+handle_loader(MPI_Comm_connect,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Pack_external,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Pack_external_size,INTERF_2_OMPI_A_f_);
 handle_loader(MPI_Unpack_external,INTERF_2_OMPI_A_f_);
@@ -5383,8 +5365,6 @@ handle_loader(MPI_Error_class,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Initialized,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Abort,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Init,INTERF_2_INTEL_A_f_);
-handle_loader(MPI_Comm_accept,INTERF_2_INTEL_A_f_);
-handle_loader(MPI_Comm_connect,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Comm_disconnect,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Comm_get_parent,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Comm_join,INTERF_2_INTEL_A_f_);
@@ -5640,6 +5620,8 @@ handle_loader(MPI_Open_port,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Publish_name,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Unpublish_name,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Lookup_name,INTERF_2_INTEL_A_f_);
+handle_loader(MPI_Comm_accept,INTERF_2_INTEL_A_f_);
+handle_loader(MPI_Comm_connect,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Pack_external,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Pack_external_size,INTERF_2_INTEL_A_f_);
 handle_loader(MPI_Unpack_external,INTERF_2_INTEL_A_f_);
