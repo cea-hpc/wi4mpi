@@ -19,7 +19,7 @@
 #include "engine.h"
 #include "mappers.h"
 #include "fort_common.h"
-
+#include <stdbool.h>
 
 static inline void fstring_max_conv_r2a(char *name, char *name_tmp, fort_string_length app_size, int resultlen) {
     if (resultlen < app_size) {
@@ -30,7 +30,15 @@ static inline void fstring_max_conv_r2a(char *name, char *name_tmp, fort_string_
     }
 }
 
-static inline void fstring_max_conv_a2r(char *name, char *name_tmp, fort_string_length app_size, fort_string_length run_size) {
+// spaces in keys and values for MPI_Info are ignored, but not in other strings.
+// remove_leading allow to ignore leading spaces for key/value, in case the actual string fit in the runtime when ignoring leading spaces but not with them.
+static inline void fstring_max_conv_a2r(char *name, char *name_tmp, fort_string_length app_size, fort_string_length run_size, bool remove_leading) {
+    if (remove_leading) {
+        int i=0;
+        while (i < app_size && name[i] == ' ') i++;
+        name+=i;
+        app_size-=i;
+    }
     if (run_size <= app_size) {
         strncpy(name_tmp, name, run_size);
     } else {
@@ -184,7 +192,7 @@ datatype_a2r(etype,&etype_tmp);
 datatype_a2r(filetype,&filetype_tmp);
 info_a2r(info,&info_tmp);
 char tmp_name[R_MPI_MAX_DATAREP_STRING-1];
-fstring_max_conv_a2r(datarep, tmp_name, datareplen, R_MPI_MAX_DATAREP_STRING-1);
+fstring_max_conv_a2r(datarep, tmp_name, datareplen, R_MPI_MAX_DATAREP_STRING-1, false);
  _LOCAL_MPI_File_set_view( fh, disp, &etype_tmp, &filetype_tmp, tmp_name, &info_tmp, &ret_tmp, R_MPI_MAX_DATAREP_STRING-1);
  error_r2a(ret,&ret_tmp);
 in_w=0;
@@ -276,30 +284,22 @@ printf("sort : A_f_MPI_File_delete\n");
 
 }
 
-void  mpi_info_delete_(int *,char *,int *);
+void  mpi_info_delete_(int *,char *,int *, fort_string_length);
 
-void  mpi_info_delete__(int *,char *,int *);
+void  mpi_info_delete__(int *,char *,int *, fort_string_length);
 
-void  pmpi_info_delete_(int *,char *,int *);
+void  pmpi_info_delete_(int *,char *,int *, fort_string_length);
 
-void  pmpi_info_delete__(int *,char *,int *);
+void  pmpi_info_delete__(int *,char *,int *, fort_string_length);
 
-void  pmpi_info_delete_(int *,char *,int *);
+void  pmpi_info_delete_(int *,char *,int *, fort_string_length);
 
-//#define A_f_MPI_Info_delete _PMPI_Info_delete
-//#pragma weak mpi_info_delete_=_PMPI_Info_delete
-//#pragma weak mpi_info_delete__=_PMPI_Info_delete
-//#pragma weak pmpi_info_delete__=_PMPI_Info_delete
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Info_delete)(int *,char *,int *,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Info_delete)(int *,char *,int *,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Info_delete(int * info,char * key,int * ret,int keylen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Info_delete(int * info,char * key,int * ret,size_t keylen)
-#endif
+#pragma weak mpi_info_delete_=A_f_MPI_Info_delete
+#pragma weak mpi_info_delete__=A_f_MPI_Info_delete
+#pragma weak pmpi_info_delete_=A_f_MPI_Info_delete
+#pragma weak pmpi_info_delete__=A_f_MPI_Info_delete
+void  (*_LOCAL_MPI_Info_delete)(int *,char *,int *,fort_string_length);
+void  A_f_MPI_Info_delete(int * info,char * key,int * ret,fort_string_length keylen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Info_delete\n");
@@ -307,10 +307,12 @@ printf("entre : A_f_MPI_Info_delete\n");
 in_w=1;
 
 int  ret_tmp=0;
+char key_tmp[R_MPI_MAX_INFO_KEY-1];
+fstring_max_conv_a2r(key, key_tmp, keylen, R_MPI_MAX_INFO_KEY-1, true);
 
 int info_tmp;
 info_a2r(info,&info_tmp);
- _LOCAL_MPI_Info_delete( &info_tmp, key, &ret_tmp,keylen);
+ _LOCAL_MPI_Info_delete( &info_tmp, key_tmp, &ret_tmp,R_MPI_MAX_INFO_KEY-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -319,31 +321,21 @@ printf("sort : A_f_MPI_Info_delete\n");
 
 }
 
-void  mpi_info_get_(int *,char *,int *,char *,int *,int *);
+void  mpi_info_get_(int *,char *,int *,char *,int *,int *, fort_string_length, fort_string_length);
 
-void  mpi_info_get__(int *,char *,int *,char *,int *,int *);
+void  mpi_info_get__(int *,char *,int *,char *,int *,int *, fort_string_length, fort_string_length);
 
-void  pmpi_info_get_(int *,char *,int *,char *,int *,int *);
+void  pmpi_info_get_(int *,char *,int *,char *,int *,int *, fort_string_length, fort_string_length);
 
-void  pmpi_info_get__(int *,char *,int *,char *,int *,int *);
+void  pmpi_info_get__(int *,char *,int *,char *,int *,int *, fort_string_length, fort_string_length);
 
-void  pmpi_info_get_(int *,char *,int *,char *,int *,int *);
+#pragma weak mpi_info_get_=A_f_MPI_Info_get
+#pragma weak mpi_info_get__=A_f_MPI_Info_get
+#pragma weak pmpi_info_get_=A_f_MPI_Info_get
+#pragma weak pmpi_info_get__=A_f_MPI_Info_get
+void  (*_LOCAL_MPI_Info_get)(int *,char *,int *,char *,int *,int *,fort_string_length,fort_string_length);
 
-//#define A_f_MPI_Info_get _PMPI_Info_get
-//#pragma weak mpi_info_get_=_PMPI_Info_get
-//#pragma weak mpi_info_get__=_PMPI_Info_get
-//#pragma weak pmpi_info_get__=_PMPI_Info_get
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Info_get)(int *,char *,int *,char *,int *,int *,int,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Info_get)(int *,char *,int *,char *,int *,int *,size_t,size_t);
-#endif
-
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Info_get(int * info,char * key,int * valuelen,char * value,int * flag,int * ret, int keylen, int valuelen_)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Info_get(int * info,char * key,int * valuelen,char * value,int * flag,int * ret, size_t keylen, size_t valuelen_)
-#endif
+void  A_f_MPI_Info_get(int * info,char * key,int * valuelen,char * value,int * flag,int * ret, fort_string_length keylen, fort_string_length valuelen_)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Info_get\n");
@@ -354,7 +346,10 @@ int  ret_tmp=0;
 
 int info_tmp;
 info_a2r(info,&info_tmp);
- _LOCAL_MPI_Info_get( &info_tmp, key, valuelen, value, flag, &ret_tmp, keylen, valuelen_);
+char key_tmp[R_MPI_MAX_INFO_KEY-1];
+fstring_max_conv_a2r(key, key_tmp, keylen, R_MPI_MAX_INFO_KEY-1, true);
+
+ _LOCAL_MPI_Info_get( &info_tmp, key_tmp, valuelen, value, flag, &ret_tmp, R_MPI_MAX_INFO_KEY-1, valuelen_);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -363,30 +358,20 @@ printf("sort : A_f_MPI_Info_get\n");
 
 }
 
-void  mpi_info_get_nthkey_(int *,int *,char *,int *);
+void  mpi_info_get_nthkey_(int *,int *,char *,int *, fort_string_length);
 
-void  mpi_info_get_nthkey__(int *,int *,char *,int *);
+void  mpi_info_get_nthkey__(int *,int *,char *,int *, fort_string_length);
 
-void  pmpi_info_get_nthkey_(int *,int *,char *,int *);
+void  pmpi_info_get_nthkey_(int *,int *,char *,int *, fort_string_length);
 
-void  pmpi_info_get_nthkey__(int *,int *,char *,int *);
+void  pmpi_info_get_nthkey__(int *,int *,char *,int *, fort_string_length);
 
-void  pmpi_info_get_nthkey_(int *,int *,char *,int *);
-
-//#define A_f_MPI_Info_get_nthkey _PMPI_Info_get_nthkey
-//#pragma weak mpi_info_get_nthkey_=_PMPI_Info_get_nthkey
-//#pragma weak mpi_info_get_nthkey__=_PMPI_Info_get_nthkey
-//#pragma weak pmpi_info_get_nthkey__=_PMPI_Info_get_nthkey
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Info_get_nthkey)(int *,int *,char *,int *,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Info_get_nthkey)(int *,int *,char *,int *,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,int keylen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,size_t keylen)
-#endif
+#pragma weak mpi_info_get_nthkey_=A_f_MPI_Info_get_nthkey
+#pragma weak mpi_info_get_nthkey__=A_f_MPI_Info_get_nthkey
+#pragma weak pmpi_info_get_nthkey_=A_f_MPI_Info_get_nthkey
+#pragma weak pmpi_info_get_nthkey__=A_f_MPI_Info_get_nthkey
+void  (*_LOCAL_MPI_Info_get_nthkey)(int *,int *,char *,int *,fort_string_length);
+void  A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,fort_string_length keylen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Info_get_nthkey\n");
@@ -397,8 +382,10 @@ in_w=1;
 int  ret_tmp=0;
 
 int info_tmp;
+char key_tmp[R_MPI_MAX_INFO_KEY-1];
 info_a2r(info,&info_tmp);
- _LOCAL_MPI_Info_get_nthkey( &info_tmp, n, key, &ret_tmp,keylen);
+ _LOCAL_MPI_Info_get_nthkey( &info_tmp, n, key_tmp, &ret_tmp,R_MPI_MAX_INFO_KEY-1);
+ fstring_max_conv_r2a(key, key_tmp, keylen, R_MPI_MAX_INFO_KEY-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -408,31 +395,21 @@ printf("sort : A_f_MPI_Info_get_nthkey\n");
 }
 
 
-void  mpi_info_get_valuelen_(int *,char *,int *,int *,int *);
+void  mpi_info_get_valuelen_(int *,char *,int *,int *,int *, fort_string_length);
 
-void  mpi_info_get_valuelen__(int *,char *,int *,int *,int *);
+void  mpi_info_get_valuelen__(int *,char *,int *,int *,int *, fort_string_length);
 
-void  pmpi_info_get_valuelen_(int *,char *,int *,int *,int *);
+void  pmpi_info_get_valuelen_(int *,char *,int *,int *,int *, fort_string_length);
 
-void  pmpi_info_get_valuelen__(int *,char *,int *,int *,int *);
+void  pmpi_info_get_valuelen__(int *,char *,int *,int *,int *, fort_string_length);
 
-void  pmpi_info_get_valuelen_(int *,char *,int *,int *,int *);
+#pragma weak mpi_info_get_valuelen_=A_f_MPI_Info_get_valuelen
+#pragma weak mpi_info_get_valuelen__=A_f_MPI_Info_get_valuelen
+#pragma weak pmpi_info_get_valuelen_=A_f_MPI_Info_get_valuelen
+#pragma weak pmpi_info_get_valuelen__=A_f_MPI_Info_get_valuelen
+void  (*_LOCAL_MPI_Info_get_valuelen)(int *,char *,int *,int *,int *,fort_string_length);
 
-//#define A_f_MPI_Info_get_valuelen _PMPI_Info_get_valuelen
-//#pragma weak mpi_info_get_valuelen_=_PMPI_Info_get_valuelen
-//#pragma weak mpi_info_get_valuelen__=_PMPI_Info_get_valuelen
-//#pragma weak pmpi_info_get_valuelen__=_PMPI_Info_get_valuelen
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Info_get_valuelen)(int *,char *,int *,int *,int *,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Info_get_valuelen)(int *,char *,int *,int *,int *,size_t);
-#endif
-
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,int keylen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,size_t keylen)
-#endif
+void  A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,fort_string_length keylen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Info_get_valuelen\n");
@@ -443,7 +420,9 @@ int  ret_tmp=0;
 
 int info_tmp;
 info_a2r(info,&info_tmp);
- _LOCAL_MPI_Info_get_valuelen( &info_tmp, key, valuelen, flag, &ret_tmp, keylen);
+char key_tmp[R_MPI_MAX_INFO_KEY-1];
+fstring_max_conv_a2r(key, key_tmp, keylen, R_MPI_MAX_INFO_KEY-1, true);
+ _LOCAL_MPI_Info_get_valuelen( &info_tmp, key_tmp, valuelen, flag, &ret_tmp, R_MPI_MAX_INFO_KEY-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -452,30 +431,20 @@ printf("sort : A_f_MPI_Info_get_valuelen\n");
 
 }
 
-void  mpi_info_set_(int *,char *,char *,int *);
+void  mpi_info_set_(int *,char *,char *,int *, fort_string_length, fort_string_length);
 
-void  mpi_info_set__(int *,char *,char*,int *);
+void  mpi_info_set__(int *,char *,char*,int *, fort_string_length, fort_string_length);
 
-void  pmpi_info_set_(int *,char *,char *,int *);
+void  pmpi_info_set_(int *,char *,char *,int *, fort_string_length, fort_string_length);
 
-void  pmpi_info_set__(int *,char *,char *,int *);
+void  pmpi_info_set__(int *,char *,char *,int *, fort_string_length, fort_string_length);
 
-void  pmpi_info_set_(int *,char *,char *,int *);
-
-//#define A_f_MPI_Info_set _PMPI_Info_set
-//#pragma weak mpi_info_set_=_PMPI_Info_set
-//#pragma weak mpi_info_set__=_PMPI_Info_set
-//#pragma weak pmpi_info_set__=_PMPI_Info_set
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Info_set)(int *,char *,char *,int *,int,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Info_set)(int *,char *,char *,int *,size_t,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,int keylen,int valuelen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,size_t keylen,size_t valuelen)
-#endif
+#pragma weak mpi_info_set_=A_f_MPI_Info_set
+#pragma weak mpi_info_set__=A_f_MPI_Info_set
+#pragma weak pmpi_info_set_=A_f_MPI_Info_set
+#pragma weak pmpi_info_set__=A_f_MPI_Info_set
+void  (*_LOCAL_MPI_Info_set)(int *,char *,char *,int *,fort_string_length,fort_string_length);
+void  A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,fort_string_length keylen,fort_string_length valuelen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Info_set\n");
@@ -483,10 +452,12 @@ printf("entre : A_f_MPI_Info_set\n");
 in_w=1;
 
 int  ret_tmp=0;
+char key_tmp[R_MPI_MAX_INFO_KEY-1];
+fstring_max_conv_a2r(key, key_tmp, keylen, R_MPI_MAX_INFO_KEY-1, true);
 
 int info_tmp;
 info_a2r(info,&info_tmp);
- _LOCAL_MPI_Info_set( &info_tmp, key, value, &ret_tmp, keylen, valuelen);
+ _LOCAL_MPI_Info_set( &info_tmp, key_tmp, value, &ret_tmp, R_MPI_MAX_INFO_KEY-1, valuelen);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -602,7 +573,7 @@ int  ret_tmp=0;
 int comm_tmp;
 comm_a2r(comm,&comm_tmp);
 char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
-fstring_max_conv_a2r(comm_name, tmp_name, comm_name_len, R_MPI_MAX_OBJECT_NAME-1);
+fstring_max_conv_a2r(comm_name, tmp_name, comm_name_len, R_MPI_MAX_OBJECT_NAME-1, false);
  _LOCAL_MPI_Comm_set_name( &comm_tmp, tmp_name, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
@@ -728,7 +699,7 @@ int  ret_tmp=0;
 int datatype_tmp;
 datatype_a2r(datatype,&datatype_tmp);
 char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
-fstring_max_conv_a2r(type_name, tmp_name, type_name_len, R_MPI_MAX_OBJECT_NAME-1);
+fstring_max_conv_a2r(type_name, tmp_name, type_name_len, R_MPI_MAX_OBJECT_NAME-1, false);
  _LOCAL_MPI_Type_set_name( &datatype_tmp, tmp_name, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
@@ -763,7 +734,7 @@ int  ret_tmp=0;
 int errorcode_tmp;
 error_a2r(errorcode,&errorcode_tmp);
 char tmp_name[R_MPI_MAX_ERROR_STRING-1];
-fstring_max_conv_a2r(string, tmp_name, string_len, R_MPI_MAX_ERROR_STRING-1);
+fstring_max_conv_a2r(string, tmp_name, string_len, R_MPI_MAX_ERROR_STRING-1, false);
  _LOCAL_MPI_Add_error_string( &errorcode_tmp, tmp_name, &ret_tmp, R_MPI_MAX_ERROR_STRING-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
@@ -1009,7 +980,7 @@ int  ret_tmp=0;
 int win_tmp;
 fwin_a2r(win, &win_tmp);
 char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
-fstring_max_conv_a2r(win_name, tmp_name, win_name_len, R_MPI_MAX_OBJECT_NAME-1);
+fstring_max_conv_a2r(win_name, tmp_name, win_name_len, R_MPI_MAX_OBJECT_NAME-1, false);
 
  _LOCAL_MPI_Win_set_name(&win_tmp, tmp_name, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
 error_r2a(ret,&ret_tmp);
