@@ -1072,8 +1072,6 @@ int R__MPI_Win_c2f(R_MPI_Win op)
 #ifdef DEBUG
 printf("entre : R_MPI_Win_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Win_c2f\n");
 #endif
@@ -1177,8 +1175,6 @@ int R__MPI_Message_c2f(R_MPI_Message op)
 #ifdef DEBUG
 printf("entre : R_MPI_Message_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Message_c2f\n");
 #endif
@@ -1281,8 +1277,6 @@ int R__MPI_Op_c2f(R_MPI_Op op)
 #ifdef DEBUG
 printf("entre : R_MPI_Op_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Op_c2f\n");
 #endif
@@ -1388,8 +1382,6 @@ int R__MPI_Info_c2f(R_MPI_Info op)
 #ifdef DEBUG
 printf("entre : R_MPI_Info_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Info_c2f\n");
 #endif
@@ -1672,8 +1664,6 @@ int R__MPI_Group_c2f(R_MPI_Group op)
 #ifdef DEBUG
 printf("entre : R_MPI_Group_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Group_c2f\n");
 #endif
@@ -1814,8 +1804,6 @@ int R__MPI_Request_c2f(R_MPI_Request op)
 #ifdef DEBUG
 printf("entre : R_MPI_Request_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Request_c2f\n");
 #endif
@@ -1956,8 +1944,6 @@ int R__MPI_Type_c2f(R_MPI_Datatype op)
 #ifdef DEBUG
 printf("entre : R_MPI_Type_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Type_c2f\n");
 #endif
@@ -2098,8 +2084,6 @@ int R__MPI_Comm_c2f(R_MPI_Comm op)
 #ifdef DEBUG
 printf("entre : R_MPI_Comm_c2f\n");
 #endif
-in_w=1;
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Comm_c2f\n");
 #endif
@@ -2240,9 +2224,7 @@ R_MPI_Fint R__MPI_File_c2f(R_MPI_File op)
 #ifdef DEBUG
 printf("entre : R_MPI_File_c2f\n");
 #endif
-in_w=1;
 R_MPI_Fint ret=LOCAL_MPI_File_c2f(op);
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_File_c2f\n");
 #endif
@@ -2308,9 +2290,7 @@ int R__MPI_Status_c2f(R_MPI_Status *in,R_MPI_Fint *op)
 #ifdef DEBUG
 printf("entre : R_MPI_Status_c2f\n");
 #endif
-in_w=1;
 int ret=LOCAL_MPI_Status_c2f(in,op);
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Status_c2f\n");
 #endif
@@ -2362,9 +2342,7 @@ int R__MPI_Status_f2c(R_MPI_Fint *in,R_MPI_Status *op)
 #ifdef DEBUG
 printf("entre : R_MPI_Status_f2c\n");
 #endif
-in_w=1;
 int ret=LOCAL_MPI_Status_f2c(in,op);
-in_w=0;
 #ifdef DEBUG
 printf("sort : R_MPI_Status_f2c\n");
 #endif
