@@ -55,12 +55,12 @@ EOF
 }
 
 VERBOSE=""
-WI4MPI_LIBEXEC=$( readlink -e $(dirname $0)/../libexec/wi4mpi )
-WI4MPI_INTEL=$( readlink -e $(dirname $0)/../lib_INTEL )
-WI4MPI_OMPI=$( readlink -e $(dirname $0)/../lib_OMPI )
-WI4MPI_MPC=$( readlink -e $(dirname $0)/../lib_MPC )
-WI4MPI_MPICH=$( readlink -e $(dirname $0)/../lib_MPICH )
-WI4MPI_INTERFACE=$( readlink -e $(dirname $0)/../lib )
+WI4MPI_LIBEXEC=$( readlink -f $(dirname $0)/../libexec/wi4mpi )
+WI4MPI_INTEL=$( readlink -f $(dirname $0)/../lib_INTEL )
+WI4MPI_OMPI=$( readlink -f $(dirname $0)/../lib_OMPI )
+WI4MPI_MPC=$( readlink -f $(dirname $0)/../lib_MPC )
+WI4MPI_MPICH=$( readlink -f $(dirname $0)/../lib_MPICH )
+WI4MPI_INTERFACE=$( readlink -f $(dirname $0)/../lib )
 WI4MPI_GCONFIG=$( readlink -f $(dirname $0)/../etc/wi4mpi.cfg )
 WI4MPI_UCONFIG="$HOME/.wi4mpi.cfg"
 

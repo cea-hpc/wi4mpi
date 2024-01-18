@@ -27,7 +27,7 @@ typedef struct thdat {
 } th_reg_list;
 int timeout_thread_end;
 
-int wi4mpi_timeout_main_loop(void *);
+void* wi4mpi_timeout_main_loop(void *);
 void wi4mpi_timeout_thread_register(int th);
 void wi4mpi_timeout_thread_unregister();
 unsigned long long gettimestamp(void) {
@@ -90,7 +90,7 @@ th_reg_list *last_elt;
 /* each thread has a pointer on is own control structure*/
 __thread th_reg_list *my_elt;
 static pthread_mutex_t mutex_list_lock = PTHREAD_MUTEX_INITIALIZER;
-int wi4mpi_timeout_main_loop(void *felement) {
+void* wi4mpi_timeout_main_loop(void *felement) {
   int mi, rank;
   /*first list element is the application main thread*/
   pthread_mutex_lock(&mutex_list_lock);
@@ -110,7 +110,7 @@ int wi4mpi_timeout_main_loop(void *felement) {
 
           fflush(stderr);
           kill(tmp->tid, SIGABRT);
-          return 0;
+          return NULL;
         } else {
           /*this elt reference a thread who had released the slot*/
           /* last position is protected to avoid a data corruption in case of
@@ -128,7 +128,7 @@ int wi4mpi_timeout_main_loop(void *felement) {
     }
     helper_sleep;
   }
-  return 0;
+  return NULL;
 }
 
 void wi4mpi_set_timeout(unsigned long long timeout_val) {
