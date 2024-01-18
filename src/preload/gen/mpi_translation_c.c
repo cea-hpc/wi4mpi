@@ -933,8 +933,7 @@ int A_MPIX_Query_cuda_support() {
 #endif
   in_w = 1;
 
-  int ret_tmp =
-      (LOCAL_MPIX_Query_cuda_support ? LOCAL_MPIX_Query_cuda_support() : 0);
+  int ret_tmp = R_MPIX_Query_cuda_support();
   int ret = ret_tmp;
   in_w = 0;
 #ifdef DEBUG
@@ -949,9 +948,20 @@ int A_MPIX_Query_cuda_support() {
 }
 int R_MPIX_Query_cuda_support() {
   in_w = 1;
-
+#if defined(INTEL_INTEL) || definede(OMPI_INTEL)
+  int ret_tmp;
+  printf("mpich\n");
+#ifdef R_MPIX_GPU_SUPPORT_CUDA
+  printf("mpich cuda\n");
+  MPIX_GPU_query_support(R_MPIX_GPU_SUPPORT_CUDA, &ret_tmp);
+#else
+  ret_tmp = 0;
+#endif
+#else
+  printf("other cuda\n");
   int ret_tmp =
       (LOCAL_MPIX_Query_cuda_support ? LOCAL_MPIX_Query_cuda_support() : 0);
+#endif
   int ret = ret_tmp;
   in_w = 0;
 #ifdef DEBUG
