@@ -154,31 +154,21 @@ printf("sort : A_f_MPI_File_open\n");
 
 }
 
-void  mpi_file_set_view_(int *,int*,int *,int *,char **,int *,int *);
+void  mpi_file_set_view_(int *,int*,int *,int *,char **,int *,int *, fort_string_length);
 
-void  mpi_file_set_view__(int *,int*,int *,int *,char **,int *,int *);
+void  mpi_file_set_view__(int *,int*,int *,int *,char **,int *,int *, fort_string_length);
 
-void  pmpi_file_set_view_(int *,int*,int *,int *,char **,int *,int *);
+void  pmpi_file_set_view_(int *,int*,int *,int *,char **,int *,int *, fort_string_length);
 
-void  pmpi_file_set_view__(int *,int*,int *,int *,char **,int *,int *);
+void  pmpi_file_set_view__(int *,int*,int *,int *,char **,int *,int *, fort_string_length);
 
-void  pmpi_file_set_view_(int *,int*,int *,int *,char **,int *,int *);
+#pragma weak mpi_file_set_view_=A_f_MPI_File_set_view
+#pragma weak mpi_file_set_view__=A_f_MPI_File_set_view
+#pragma weak pmpi_file_set_view_=A_f_MPI_File_set_view
+#pragma weak pmpi_file_set_view__=A_f_MPI_File_set_view
+void  (*_LOCAL_MPI_File_set_view)(int *,int*,int *,int *,char *,int *,int *,fort_string_length);
 
-//#define A_f_MPI_File_set_view _PMPI_File_set_view
-//#pragma weak mpi_file_set_view_=_PMPI_File_set_view
-//#pragma weak mpi_file_set_view__=_PMPI_File_set_view
-//#pragma weak pmpi_file_set_view__=_PMPI_File_set_view
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_File_set_view)(int *,int*,int *,int *,char *,int *,int *,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_File_set_view)(int *,int*,int *,int *,char *,int *,int *,size_t);
-#endif
-
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,int datareplen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,size_t datareplen)
-#endif
+void  A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,fort_string_length datareplen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_File_set_view\n");
@@ -193,7 +183,9 @@ int info_tmp;
 datatype_a2r(etype,&etype_tmp);
 datatype_a2r(filetype,&filetype_tmp);
 info_a2r(info,&info_tmp);
- _LOCAL_MPI_File_set_view( fh, disp, &etype_tmp, &filetype_tmp, datarep, &info_tmp, &ret_tmp, datareplen);
+char tmp_name[R_MPI_MAX_DATAREP_STRING-1];
+fstring_max_conv_a2r(datarep, tmp_name, datareplen, R_MPI_MAX_DATAREP_STRING-1);
+ _LOCAL_MPI_File_set_view( fh, disp, &etype_tmp, &filetype_tmp, tmp_name, &info_tmp, &ret_tmp, R_MPI_MAX_DATAREP_STRING-1);
  error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -202,31 +194,21 @@ printf("sort : A_f_MPI_File_set_view\n");
 
 }
 
-void  mpi_file_get_view_(int *,int*,int *,int *,char *,int*,int);
+void  mpi_file_get_view_(int *,int*,int *,int *,char *,int*,fort_string_length);
 
-void  mpi_file_get_view__(int *,int*,int *,int *,char*,int*,int);
+void  mpi_file_get_view__(int *,int*,int *,int *,char*,int*,fort_string_length);
 
-void  pmpi_file_get_view_(int *,int*,int *,int *,char *,int*,int );
+void  pmpi_file_get_view_(int *,int*,int *,int *,char *,int*,fort_string_length );
 
-void  pmpi_file_get_view__(int *,int*,int *,int *,char *,int*,int );
+void  pmpi_file_get_view__(int *,int*,int *,int *,char *,int*,fort_string_length );
 
-void  pmpi_file_get_view_(int *,int*,int *,int *,char *,int*,int );
+#pragma weak mpi_file_get_view_=A_f_MPI_File_get_view
+#pragma weak mpi_file_get_view__=A_f_MPI_File_get_view
+#pragma weak pmpi_file_get_view_=A_f_MPI_File_get_view
+#pragma weak pmpi_file_get_view__=A_f_MPI_File_get_view
+void  (*_LOCAL_MPI_File_get_view)(int *,int*,int *,int *,char *,int*,fort_string_length );
 
-//#define A_f_MPI_File_get_view _PMPI_File_get_view
-//#pragma weak mpi_file_get_view_=_PMPI_File_get_view
-//#pragma weak mpi_file_get_view__=_PMPI_File_get_view
-//#pragma weak pmpi_file_get_view__=_PMPI_File_get_view
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_File_get_view)(int *,int*,int *,int *,char *,int*,int );
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_File_get_view)(int *,int*,int *,int *,char *,int*,size_t );
-#endif
-
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,int datareplen)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,size_t datareplen)
-#endif
+void  A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,fort_string_length datareplen)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_File_get_view\n");
@@ -237,9 +219,11 @@ int  ret_tmp=0;
 
 int etype_tmp;
 int filetype_tmp;
-datatype_a2r(etype,&etype_tmp);
-datatype_a2r(filetype,&filetype_tmp);
- _LOCAL_MPI_File_get_view( fh, disp, &etype_tmp, &filetype_tmp, datarep, &ret_tmp, datareplen);
+char tmp_name[R_MPI_MAX_DATAREP_STRING-1];
+ _LOCAL_MPI_File_get_view( fh, disp, &etype_tmp, &filetype_tmp, tmp_name, &ret_tmp, R_MPI_MAX_DATAREP_STRING-1);
+datatype_r2a(etype,&etype_tmp);
+datatype_r2a(filetype,&filetype_tmp);
+ fstring_max_conv_r2a(datarep, tmp_name, datareplen, R_MPI_MAX_DATAREP_STRING-1);
  error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
