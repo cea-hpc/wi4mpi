@@ -768,3 +768,87 @@ printf("sort : R_MPI_Win_set_attr\n");
 #endif
 return ret_tmp;
 }
+unsigned long long WI4MPIX_Query_cuda_support_timeout = WI4MPI_MAX_TIME;
+unsigned int WI4MPIX_Query_cuda_support_print = 0;
+int MPIX_Query_cuda_support();
+int (*LOCAL_MPIX_Query_cuda_support)();
+
+__asm__(".global PMPIX_Query_cuda_support\n"
+        ".weak MPIX_Query_cuda_support\n"
+        ".set MPIX_Query_cuda_support,PMPIX_Query_cuda_support\n"
+        ".extern in_w\n"
+        ".extern A_MPIX_Query_cuda_support\n"
+        ".extern R_MPIX_Query_cuda_support\n"
+        ".type PMPIX_Query_cuda_support,@function\n"
+        ".text\n"
+        "PMPIX_Query_cuda_support:\n"
+#ifdef __aarch64__
+        "adrp x8, :gottprel:in_w\n"
+        "ldr x8, [x8, :gottprel_lo12:in_w]\n"
+        "mrs x9, TPIDR_EL0\n"
+        "ldr w8, [x9, x8]\n"
+        "cbnz w8, inwrap_MPIX_Query_cuda_support\n"
+        "b A_MPIX_Query_cuda_support\n"
+        "inwrap_MPIX_Query_cuda_support:\n"
+        "b R_MPIX_Query_cuda_support\n"
+#else
+        "push %rbp\n"
+        "mov %rsp, %rbp\n"
+        ".byte 0x66\n"
+        "leaq in_w@tlsgd(%rip), %rdi\n"
+        ".value 0x6666\n"
+        "rex64\n"
+        "call __tls_get_addr@PLT\n"
+        "leave\n"
+        "cmpl $0x0, 0x0(%rax)\n"
+        "jne inwrap_MPIX_Query_cuda_support\n"
+        "jmp *A_MPIX_Query_cuda_support@GOTPCREL(%rip)\n"
+        "inwrap_MPIX_Query_cuda_support:\n"
+        "jmp *R_MPIX_Query_cuda_support@GOTPCREL(%rip)\n"
+#endif
+        ".size PMPIX_Query_cuda_support,.-PMPIX_Query_cuda_support\n"
+
+);
+
+#ifndef MPIX_QUERY_CUDA_SUPPORT_OVERRIDE
+int A_MPIX_Query_cuda_support() {
+#ifdef TIMEOUT_SUPPORT
+  wi4mpi_set_timeout(WI4MPIX_Query_cuda_support_timeout);
+#endif
+  in_w = 1;
+   
+  int ret_tmp =R_MPIX_Query_cuda_support();
+  int ret = ret_tmp;
+  in_w = 0;
+#ifdef DEBUG
+  if (WI4MPIX_Query_cuda_support_print)
+    debug_printer("MPIX_Query_cuda_support : \n{\nerror/return : %lf\n}\n", ret);
+#endif
+#ifdef TIMEOUT_SUPPORT
+  wi4mpi_unset_timeout();
+#endif
+  return ret;
+}
+int R_MPIX_Query_cuda_support() {
+  in_w = 1;
+#if defined(INTEL_INTEL)|| definede(OMPI_INTEL)
+    int ret_tmp;
+#ifdef R_MPIX_GPU_SUPPORT_CUDA
+    MPIX_GPU_query_support(R_MPIX_GPU_SUPPORT_CUDA,&ret_tmp);
+#else
+    ret_tmp=0;
+#endif
+#else
+  int ret_tmp = (LOCAL_MPIX_Query_cuda_support?LOCAL_MPIX_Query_cuda_support():0);
+#endif
+  int ret = ret_tmp;
+  in_w = 0;
+#ifdef DEBUG
+  if (WI4MPIX_Query_cuda_support_print)
+    debug_printer("MPIX_Query_cuda_support : \n{\nerror/return : %lf\n}\n", ret);
+#endif
+  return ret;
+}
+
+#endif
+
