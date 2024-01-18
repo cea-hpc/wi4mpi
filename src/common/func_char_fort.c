@@ -30,6 +30,15 @@ static inline void fstring_max_conv_r2a(char *name, char *name_tmp, fort_string_
     }
 }
 
+static inline void fstring_max_conv_a2r(char *name, char *name_tmp, fort_string_length app_size, fort_string_length run_size) {
+    if (run_size <= app_size) {
+        strncpy(name_tmp, name, run_size);
+    } else {
+        strncpy(name_tmp, name, app_size);
+        memset(name_tmp+app_size, ' ', run_size-app_size);
+    }
+}
+
 
 void  mpi_get_processor_name_(char *,int *,int *,fort_string_length);
 
@@ -572,30 +581,21 @@ printf("sort : A_f_MPI_Info_set\n");
 
 }
 
-void  mpi_win_get_name_(int *,char *,int *, int *);
+void  mpi_win_get_name_(int *,char *,int *, int *, fort_string_length);
 
-void  mpi_win_get_name__(int *,char *,int*,int *);
+void  mpi_win_get_name__(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_win_get_name_(int *,char *,int*,int *);
+void  pmpi_win_get_name_(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_win_get_name__(int *,char *,int*,int *);
+void  pmpi_win_get_name__(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_win_get_name_(int *,char *,int*,int *);
 
-//#define A_f_MPI_Win_get_name _PMPI_Win_get_name
-//#pragma weak mpi_win_get_name_=_PMPI_Win_get_name
-//#pragma weak mpi_win_get_name__=_PMPI_Win_get_name
-//#pragma weak pmpi_win_get_name__=_PMPI_Win_get_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Win_get_name)(int *,char *,int *,int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Win_get_name)(int *,char *,int *,int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Win_get_name(int * win,char * win_name, int *resultlen, int *ret, int win_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Win_get_name(int * win,char * win_name, int *resultlen, int *ret, size_t win_name_len)
-#endif
+#pragma weak mpi_win_get_name_=A_f_MPI_Win_get_name
+#pragma weak mpi_win_get_name__=A_f_MPI_Win_get_name
+#pragma weak pmpi_win_get_name_=A_f_MPI_Win_get_name
+#pragma weak pmpi_win_get_name__=A_f_MPI_Win_get_name
+void  (*_LOCAL_MPI_Win_get_name)(int *,char *,int *,int*,fort_string_length);
+void  A_f_MPI_Win_get_name(int * win,char * win_name, int *resultlen, int *ret, fort_string_length win_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Win_get_name\n");
@@ -606,7 +606,13 @@ int  ret_tmp=0;
 
 int win_tmp;
 fwin_a2r(win,&win_tmp);
- _LOCAL_MPI_Win_get_name( &win_tmp, win_name, resultlen, &ret_tmp, win_name_len);
+char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
+int resultlen_tmp;
+
+ _LOCAL_MPI_Win_get_name( &win_tmp, tmp_name, &resultlen_tmp, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
+
+fstring_max_conv_r2a(win_name, tmp_name, win_name_len, resultlen_tmp);
+length_max_conv_r2a(resultlen, &resultlen_tmp, A_MPI_MAX_OBJECT_NAME, R_MPI_MAX_OBJECT_NAME);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -616,30 +622,20 @@ printf("sort : A_f_MPI_Win_get_name\n");
 }
 
 //MPI_Comm_get_name(MPI_Comm comm, char *comm_name, int *resultlen)
-void  mpi_comm_get_name_(int *,char *,int *, int *);
+void  mpi_comm_get_name_(int *,char *,int *, int *, fort_string_length);
 
-void  mpi_comm_get_name__(int *,char *,int*,int *);
+void  mpi_comm_get_name__(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_comm_get_name_(int *,char *,int*,int *);
+void  pmpi_comm_get_name_(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_comm_get_name__(int *,char *,int*,int *);
+void  pmpi_comm_get_name__(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_comm_get_name_(int *,char *,int*,int *);
-
-//#define A_f_MPI_Comm_get_name _PMPI_Comm_get_name
-//#pragma weak mpi_comm_get_name_=_PMPI_Comm_get_name
-//#pragma weak mpi_comm_get_name__=_PMPI_Comm_get_name
-//#pragma weak pmpi_comm_get_name__=_PMPI_Comm_get_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Comm_get_name)(int *,char *,int *,int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Comm_get_name)(int *,char *,int *,int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, int comm_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, size_t comm_name_len)
-#endif
+#pragma weak mpi_comm_get_name_=A_f_MPI_Comm_get_name
+#pragma weak mpi_comm_get_name__=A_f_MPI_Comm_get_name
+#pragma weak pmpi_comm_get_name_=A_f_MPI_Comm_get_name
+#pragma weak pmpi_comm_get_name__=A_f_MPI_Comm_get_name
+void  (*_LOCAL_MPI_Comm_get_name)(int *,char *,int *,int*,fort_string_length);
+void  A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, fort_string_length comm_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Comm_get_name\n");
@@ -650,7 +646,13 @@ int  ret_tmp=0;
 
 int comm_tmp;
 comm_a2r(comm,&comm_tmp);
- _LOCAL_MPI_Comm_get_name( &comm_tmp, comm_name, resultlen, &ret_tmp, comm_name_len);
+char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
+int resultlen_tmp;
+
+ _LOCAL_MPI_Comm_get_name( &comm_tmp, tmp_name, &resultlen_tmp, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
+
+fstring_max_conv_r2a(comm_name, tmp_name, comm_name_len, resultlen_tmp);
+length_max_conv_r2a(resultlen, &resultlen_tmp, A_MPI_MAX_OBJECT_NAME, R_MPI_MAX_OBJECT_NAME);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -660,30 +662,21 @@ printf("sort : A_f_MPI_Comm_get_name\n");
 }
 
 //MPI_Comm_set_name(MPI_Comm comm, const char *comm_name)
-void  mpi_comm_set_name_(int *,char *,int * );
+void  mpi_comm_set_name_(int *,char *,int * , fort_string_length);
 
-void  mpi_comm_set_name__(int *,char *,int* );
+void  mpi_comm_set_name__(int *,char *,int* , fort_string_length);
 
-void  pmpi_comm_set_name_(int *,char *,int* );
+void  pmpi_comm_set_name_(int *,char *,int* , fort_string_length);
 
-void  pmpi_comm_set_name__(int *,char *,int*);
+void  pmpi_comm_set_name__(int *,char *,int*, fort_string_length);
 
-void  pmpi_comm_set_name_(int *,char *,int* );
 
-//#define A_f_MPI_Comm_set_name _PMPI_Comm_set_name
-//#pragma weak mpi_comm_set_name_=_PMPI_Comm_set_name
-//#pragma weak mpi_comm_set_name__=_PMPI_Comm_set_name
-//#pragma weak pmpi_comm_set_name__=_PMPI_Comm_set_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Comm_set_name)(int *,char *,int *,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Comm_set_name)(int *,char *,int *,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, int comm_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, size_t comm_name_len)
-#endif
+#pragma weak mpi_comm_set_name_=A_f_MPI_Comm_set_name
+#pragma weak mpi_comm_set_name__=A_f_MPI_Comm_set_name
+#pragma weak pmpi_comm_set_name_=A_f_MPI_Comm_set_name
+#pragma weak pmpi_comm_set_name__=A_f_MPI_Comm_set_name
+void  (*_LOCAL_MPI_Comm_set_name)(int *,char *,int *,fort_string_length);
+void  A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, fort_string_length comm_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Comm_set_name\n");
@@ -694,7 +687,9 @@ int  ret_tmp=0;
 
 int comm_tmp;
 comm_a2r(comm,&comm_tmp);
- _LOCAL_MPI_Comm_set_name( &comm_tmp, comm_name, &ret_tmp, comm_name_len);
+char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
+fstring_max_conv_a2r(comm_name, tmp_name, comm_name_len, R_MPI_MAX_OBJECT_NAME-1);
+ _LOCAL_MPI_Comm_set_name( &comm_tmp, tmp_name, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -756,30 +751,20 @@ printf("sort : A_f_MPI_Comm_spawn\n");
 }
 
 //MPI_Type_get_name(MPI_Datatype datatype, char *type_name,int *resultlen)
-void  mpi_type_get_name_(int *,char *,int *, int *);
+void  mpi_type_get_name_(int *,char *,int *, int *, fort_string_length);
 
-void  mpi_type_get_name__(int *,char *,int*,int *);
+void  mpi_type_get_name__(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_type_get_name_(int *,char *,int*,int *);
+void  pmpi_type_get_name_(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_type_get_name__(int *,char *,int*,int *);
+void  pmpi_type_get_name__(int *,char *,int*,int *, fort_string_length);
 
-void  pmpi_type_get_name_(int *,char *,int*,int *);
-
-//#define A_f_MPI_Type_get_name _PMPI_Type_get_name
-//#pragma weak mpi_type_get_name_=_PMPI_Type_get_name
-//#pragma weak mpi_type_get_name__=_PMPI_Type_get_name
-//#pragma weak pmpi_type_get_name__=_PMPI_Type_get_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Type_get_name)(int *,char *,int *,int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Type_get_name)(int *,char *,int *,int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Type_get_name(int * datatype,char * type_name, int *resultlen, int *ret, int type_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Type_get_name(int * datatype,char * type_name, int *resultlen, int *ret, size_t type_name_len)
-#endif
+#pragma weak mpi_type_get_name_=A_f_MPI_Type_get_name
+#pragma weak mpi_type_get_name__=A_f_MPI_Type_get_name
+#pragma weak pmpi_type_get_name_=A_f_MPI_Type_get_name
+#pragma weak pmpi_type_get_name__=A_f_MPI_Type_get_name
+void  (*_LOCAL_MPI_Type_get_name)(int *,char *,int *,int*,fort_string_length);
+void  A_f_MPI_Type_get_name(int * datatype,char * type_name, int *resultlen, int *ret, fort_string_length type_name_len)
 {
 #ifdef DEBUG
 #endif
@@ -789,7 +774,13 @@ int  ret_tmp=0;
 
 int datatype_tmp;
 datatype_a2r(datatype,&datatype_tmp);
- _LOCAL_MPI_Type_get_name( &datatype_tmp, type_name, resultlen, &ret_tmp, type_name_len);
+char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
+int resultlen_tmp;
+
+ _LOCAL_MPI_Type_get_name( &datatype_tmp, tmp_name, &resultlen_tmp, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
+
+fstring_max_conv_r2a(type_name, tmp_name, type_name_len, resultlen_tmp);
+length_max_conv_r2a(resultlen, &resultlen_tmp, A_MPI_MAX_OBJECT_NAME, R_MPI_MAX_OBJECT_NAME);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -798,30 +789,20 @@ in_w=0;
 }
 
 //MPI_Type_set_name(MPI_Datatype datatype, const char *type_name)
-void  mpi_type_set_name_(int *,char *,int *);
+void  mpi_type_set_name_(int *,char *,int *, fort_string_length);
 
-void  mpi_type_set_name__(int *,char *,int*);
+void  mpi_type_set_name__(int *,char *,int*, fort_string_length);
 
-void  pmpi_type_set_name_(int *,char *,int*);
+void  pmpi_type_set_name_(int *,char *,int*, fort_string_length);
 
-void  pmpi_type_set_name__(int *,char *,int*);
+void  pmpi_type_set_name__(int *,char *,int*, fort_string_length);
 
-void  pmpi_type_set_name_(int *,char *,int*);
-
-//#define A_f_MPI_Type_set_name _PMPI_Type_set_name
-//#pragma weak mpi_type_set_name_=_PMPI_Type_set_name
-//#pragma weak mpi_type_set_name__=_PMPI_Type_set_name
-//#pragma weak pmpi_type_set_name__=_PMPI_Type_set_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Type_set_name)(int *,char *,int*,int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Type_set_name)(int *,char *,int*,size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Type_set_name(int * datatype,char * type_name, int *ret, int type_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Type_set_name(int * datatype,char * type_name, int *ret, size_t type_name_len)
-#endif
+#pragma weak mpi_type_set_name_=A_f_MPI_Type_set_name
+#pragma weak mpi_type_set_name__=A_f_MPI_Type_set_name
+#pragma weak pmpi_type_set_name_=A_f_MPI_Type_set_name
+#pragma weak pmpi_type_set_name__=A_f_MPI_Type_set_name
+void  (*_LOCAL_MPI_Type_set_name)(int *,char *,int*,fort_string_length);
+void  A_f_MPI_Type_set_name(int * datatype,char * type_name, int *ret, fort_string_length type_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Type_set_name\n");
@@ -832,7 +813,9 @@ int  ret_tmp=0;
 
 int datatype_tmp;
 datatype_a2r(datatype,&datatype_tmp);
- _LOCAL_MPI_Type_set_name( &datatype_tmp, type_name, &ret_tmp, type_name_len);
+char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
+fstring_max_conv_a2r(type_name, tmp_name, type_name_len, R_MPI_MAX_OBJECT_NAME-1);
+ _LOCAL_MPI_Type_set_name( &datatype_tmp, tmp_name, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
@@ -1096,30 +1079,20 @@ printf("sort : A_f_MPI_Unpublish_name\n");
 }
 
 //MPI_Win_set_name(MPI_Win win, const char *win_name)
-void  mpi_win_set_name_(int *, char *, int*);
-                                                 
-void  mpi_win_set_name__(int *, char *, int*);
-                                          
-void  pmpi_win_set_name_(int *, char *, int*);
-                                          
-void  pmpi_win_set_name__(int *, char *, int*);
-                                                 
-void  pmpi_win_set_name_(int *, char *, int*);
+void  mpi_win_set_name_(int *, char *, int*, fort_string_length);
 
-//#define A_f_MPI_Win_set_name _PMPI_Win_set_name
-//#pragma weak mpi_win_set_name_=_PMPI_Win_set_name
-//#pragma weak mpi_win_set_name__=_PMPI_Win_set_name
-//#pragma weak pmpi_win_set_name__=_PMPI_Win_set_name
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  (*_LOCAL_MPI_Win_set_name)(int *, char *, int*, int);
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  (*_LOCAL_MPI_Win_set_name)(int *, char *, int*, size_t);
-#endif
-#if defined(IFORT_CALL) || defined(PGI_CALL) || defined(FLANG_CALL) || (defined(GFORT_CALL) && __GNUC__ < 8)
-void  A_f_MPI_Win_set_name(int *win, char *win_name, int *ret, int win_name_len)
-#elif defined(GFORT_CALL) && __GNUC__ >= 8
-void  A_f_MPI_Win_set_name(int *win, char *win_name, int *ret, size_t win_name_len)
-#endif
+void  mpi_win_set_name__(int *, char *, int*, fort_string_length);
+
+void  pmpi_win_set_name_(int *, char *, int*, fort_string_length);
+
+void  pmpi_win_set_name__(int *, char *, int*, fort_string_length);
+
+#pragma weak mpi_win_set_name_=A_f_MPI_Win_set_name
+#pragma weak mpi_win_set_name__=A_f_MPI_Win_set_name
+#pragma weak pmpi_win_set_name_=A_f_MPI_Win_set_name
+#pragma weak pmpi_win_set_name__=A_f_MPI_Win_set_name
+void  (*_LOCAL_MPI_Win_set_name)(int *, char *, int*, fort_string_length);
+void  A_f_MPI_Win_set_name(int *win, char *win_name, int *ret, fort_string_length win_name_len)
 {
 #ifdef DEBUG
 printf("entre : A_f_MPI_Win_set_name\n");
@@ -1129,8 +1102,10 @@ in_w=1;
 int  ret_tmp=0;
 int win_tmp;
 fwin_a2r(win, &win_tmp);
+char tmp_name[R_MPI_MAX_OBJECT_NAME-1];
+fstring_max_conv_a2r(win_name, tmp_name, win_name_len, R_MPI_MAX_OBJECT_NAME-1);
 
- _LOCAL_MPI_Win_set_name(&win_tmp, win_name, &ret_tmp, win_name_len);
+ _LOCAL_MPI_Win_set_name(&win_tmp, tmp_name, &ret_tmp, R_MPI_MAX_OBJECT_NAME-1);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
