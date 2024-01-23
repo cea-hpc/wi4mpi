@@ -458,8 +458,6 @@ enum {
    must be able to be present, and therefore has to be in this
    conditional block in mpi.h. */
 #define A_MPI_CONVERSION_FN_NULL ((A_MPI_Datarep_conversion_function*) 0)
- //extern struct ompi_predefined_datatype_t ompi_mpi_cxx_cplex;
-
 
 /*
  * MPI predefined handles
