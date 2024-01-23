@@ -2,3 +2,4 @@
 *.so
 *.so.*
 /doc/build
+__pycache__
