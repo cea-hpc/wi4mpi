@@ -79,11 +79,6 @@ typedef struct ADIOI_RequestD *MPIO_Request;
 #else
 #define MPIO_Request A_MPI_Request
 #define MPIO_USES_A_MPI_REQUEST
-/* Also rename the MPIO routines to get the MPI versions */
-/*#define A_MPIO_Wait A_MPI_Wait
-#define A_MPIO_Test A_MPI_Test
-#define A_PMPIO_Wait A_PMPI_Wait
-#define A_MPIO_Test A_PMPI_Test*/
 #endif
 #define MPIO_REQUEST_DEFINED
 
@@ -325,13 +320,13 @@ A_MPI_Fint A_MPI_File_c2f(A_MPI_File file);
 int MPIO_Test(MPIO_Request *request, int *flag, A_MPI_Status *status);
 int MPIO_Wait(MPIO_Request *request, A_MPI_Status *status);
 int MPIO_Testall(int count, MPIO_Request array_of_requests[], int *flag,
-               A_MPI_Status array_of_statuses[]);
+                 A_MPI_Status array_of_statuses[]);
 int MPIO_Waitall(int count, MPIO_Request array_of_requests[], A_MPI_Status array_of_statuses[]);
 int MPIO_Testany(int count, MPIO_Request array_of_requests[], int *indx, int *flag,
-               A_MPI_Status *status);
+                 A_MPI_Status *status);
 int MPIO_Waitany(int count, MPIO_Request array_of_requests[], int *indx, A_MPI_Status *status);
 int MPIO_Waitsome(int incount, MPIO_Request array_of_requests[], int *outcount,
-                int array_of_indices[], A_MPI_Status array_of_statuses[]);
+                  int array_of_indices[], A_MPI_Status array_of_statuses[]);
 int MPIO_Testsome(int incount, MPIO_Request array_of_requests[], int *outcount,
                   int array_of_indices[], A_MPI_Status array_of_statuses[]);
 
