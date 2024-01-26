@@ -157,7 +157,8 @@ static inline void errhandler_set_func(int comm,int errhandler)
  #include <sys/mman.h>
 
 extern int user_func_resolved_fort(void *a,void *b,int *c,int *d,void (*pf)(void *in,void *out,int *len,int *data_type));
-extern void user_fn_wrapper_template_fort(void *a,void *b,int *c,int *d,void (*pf)(void *in,void *out,int *len,int *data_type));
+//extern void user_fn_wrapper_template_fort(void *a,void *b,int *c,int *d,void (*pf)(void *in,void *out,int *len,int *data_type));
+extern void *user_fn_wrapper_template_fort;
 #endif
 
 static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
@@ -200,12 +201,12 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
     void* ptr = mmap(0, 1024,
                    PROT_READ | PROT_WRITE | PROT_EXEC,
                    MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),user_fn_wrapper_template_fort,0x100);
+    memcpy(((char *)ptr+0x10),&user_fn_wrapper_template_fort,0x100);
 
     ((void **)ptr)[0]=*fa;
     
     ((void **)ptr)[1]=user_func_resolved_fort;
-    *fr=ptr+0x10;
+    *fr=(char*)ptr+0x10;
 #endif
 }
 
