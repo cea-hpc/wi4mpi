@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 
 import os
-from header import MpcHeaderGenerator, IntelHeaderGenerator, MpichHeaderGenerator, OmpiHeaderGenerator
-from header import IntelIntelHeaderGenerator, IntelMpichHeaderGenerator, MpichIntelHeaderGenerator, MpichMpichHeaderGenerator
-from header import IntelOmpiHeaderGenerator, MpichOmpiHeaderGenerator
-from header import OmpiIntelHeaderGenerator, OmpiMpichHeaderGenerator
-from header import OmpiOmpiHeaderGenerator
+from mpcheader import MpcHeaderGenerator
+from intelheader import IntelHeaderGenerator
+from mpichheader import MpichHeaderGenerator
+from ompiheader import OmpiHeaderGenerator
+from intelintelheader import IntelIntelHeaderGenerator
+from intelmpichheader import IntelMpichHeaderGenerator
+from mpichintelheader import MpichIntelHeaderGenerator
+from mpichmpichheader import MpichMpichHeaderGenerator
+from intelompiheader import IntelOmpiHeaderGenerator
+from mpichompiheader import MpichOmpiHeaderGenerator
+from ompiintelheader import OmpiIntelHeaderGenerator
+from ompimpichheader import OmpiMpichHeaderGenerator
+from ompiompiheader import OmpiOmpiHeaderGenerator
 from logging import getLogger
 from logging.config import fileConfig
 from docopt import docopt
