@@ -218,7 +218,7 @@ class IntelHeaderGenerator(HeaderGenerator):
 #define MPIU_DLL_SPEC
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE;
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE;
-/* The annotation MPIU_DLL_SPEC to the extern statements is used 
+/* The annotation MPIU_DLL_SPEC to the extern statements is used
    as a hook for systems that require C extensions to correctly construct
    DLLs, and is defined as an empty string otherwise
  */
