@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def delete_lines(lines_to_delete, text):
     """
     Delete specified lines from the given text.
@@ -17,7 +18,7 @@ def delete_lines(lines_to_delete, text):
     >>> delete_lines([2, "Line 4"], original_text)
     'Line 1\nLine 3\n'
     """
-    lines = text.split('\n')
+    lines = text.split("\n")
     if isinstance(lines_to_delete, int) or isinstance(lines_to_delete, str):
         lines_to_delete = [lines_to_delete]
     if isinstance(lines_to_delete[0], int):
@@ -30,7 +31,8 @@ def delete_lines(lines_to_delete, text):
                 del lines[lines.index(line)]
             except:
                 continue
-    return '\n'.join(lines)
+    return "\n".join(lines)
+
 
 def delete_line_from_pattern(pattern, text):
     """
@@ -48,7 +50,7 @@ def delete_line_from_pattern(pattern, text):
     >>> delete_line_from_pattern("ABC", original_text)
     'Line 1\nLine 3\n'
     """
-    lines = text.split('\n')
+    lines = text.split("\n")
     if isinstance(pattern, str):
         lines_to_delete = []
         for line in lines:
@@ -58,10 +60,11 @@ def delete_line_from_pattern(pattern, text):
             text = delete_lines(lines_to_delete, text)
     return text
 
+
 def insert_lines(lines_to_insert, line_number, text):
     """
     Inserts the specified lines at the given position in the text.
-    
+
     Args:
         text (str): The original text.
         lines_to_insert (list): List of lines to insert.
@@ -70,10 +73,11 @@ def insert_lines(lines_to_insert, line_number, text):
     Returns:
         str: The modified text with the new lines inserted.
     """
-    lines = text.split('\n')
+    lines = text.split("\n")
     if 1 <= line_number <= len(lines):
-        lines[line_number-1:line_number-1] = lines_to_insert
-    return '\n'.join(lines)
+        lines[line_number - 1 : line_number - 1] = lines_to_insert
+    return "\n".join(lines)
+
 
 def function_to_delete(text, function_to_delete):
     """
@@ -86,12 +90,12 @@ def function_to_delete(text, function_to_delete):
     Returns:
         str: The modified text with function prototypes removed.
     """
-    lines = text.split('\n')
-  
+    lines = text.split("\n")
+
     new_lines = []
     function_started = False
     function_ended = False
-  
+
     for line in lines:
         if function_to_delete in line and "(" in line:
             function_started = True
@@ -101,11 +105,11 @@ def function_to_delete(text, function_to_delete):
             function_ended = True
         if function_started:
             if ";" in line:
-              function_ended = True
+                function_ended = True
         if not function_started and not function_ended:
             new_lines.append(line)
         if function_ended:
             function_started = False
             function_ended = False
-  
-    return '\n'.join(new_lines)
+
+    return "\n".join(new_lines)

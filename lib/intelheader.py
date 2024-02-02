@@ -8,7 +8,7 @@ from logging.config import fileConfig
 from header import HeaderGenerator
 from textoperator import delete_lines, delete_line_from_pattern, insert_lines, function_to_delete
 
-fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)),"logging.conf"))
+fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 COPYRIGHT_MPICH_MPIH = """
@@ -124,17 +124,18 @@ COPYRIGHT_MPICH_MPIOH = """
  */
 """
 
-class IntelHeaderGenerator(HeaderGenerator):
 
+class IntelHeaderGenerator(HeaderGenerator):
     dir_output = ""
     dir_input = ""
-    
-    def __init__(self,
-                 dir_input = "src/interface/header/scripts/mpc_headers",
-                 dir_output = "src/interface/header/_INTEL_gen"
-                 ):
+
+    def __init__(
+        self,
+        dir_input="src/interface/header/scripts/mpc_headers",
+        dir_output="src/interface/header/_INTEL_gen",
+    ):
         log.info("Generation of INTEL headers in progress.")
-        self.dir_input = dir_input 
+        self.dir_input = dir_input
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
 
@@ -195,15 +196,17 @@ class IntelHeaderGenerator(HeaderGenerator):
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
-        text = re.sub(r"#define R_MPI_BSEND_OVERHEAD.*", "#define R_MPI_BSEND_OVERHEAD 95", text, flags=re.MULTILINE)
+        text = re.sub(
+            r"#define R_MPI_BSEND_OVERHEAD.*",
+            "#define R_MPI_BSEND_OVERHEAD 95",
+            text,
+            flags=re.MULTILINE,
+        )
 
-        lines_to_delete = [
-            "extern int * R_MPI_UNWEIGHTED;",
-            "extern int * R_MPI_WEIGHTS_EMPTY;"
-        ]
-        text = delete_lines(lines_to_delete, text)     
+        lines_to_delete = ["extern int * R_MPI_UNWEIGHTED;", "extern int * R_MPI_WEIGHTS_EMPTY;"]
+        text = delete_lines(lines_to_delete, text)
         text = re.sub(r"(#define R_MPI_DUP_FN.*)", r"//\1", text, flags=re.MULTILINE)
-        text = re.sub(r'([ \t$])MPI_', r'\1R_MPI_', text, flags=re.MULTILINE)
+        text = re.sub(r"([ \t$])MPI_", r"\1R_MPI_", text, flags=re.MULTILINE)
         text = re.sub(r"HAVE_MPI", "HAVE_R_MPI", text, re.MULTILINE)
         text = re.sub(r"BIND_MPI", "BIND_R_MPI", text, re.MULTILINE)
         text = re.sub(r"BIND_MPI", "BIND_R_MPI", text, re.MULTILINE)
@@ -249,12 +252,14 @@ int * MPI_WEIGHTS_EMPTY;
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
-        text = re.sub(r"(#define MPICH_ERR_LAST_CLASS) [0-9][0-9](.*)", r"\1 74\2", text, re.MULTILINE)
+        text = re.sub(
+            r"(#define MPICH_ERR_LAST_CLASS) [0-9][0-9](.*)", r"\1 74\2", text, re.MULTILINE
+        )
         text = re.sub(r"R_MPIX", "MPIX", text, re.MULTILINE)
         text = re.sub(r"R_PMPIX_Comm", "PMPIX_Comm", text, re.MULTILINE)
         text = re.sub(r"R_MPIX_Grequest", "MPIX_Grequest", text)
         text = re.sub(r"R_MPIX_Mutex", "MPIX_Mutex", text)
-        text = re.sub(r"R_PMPIX_Grequest", "PMPIX_Grequest", text)       
+        text = re.sub(r"R_PMPIX_Grequest", "PMPIX_Grequest", text)
         text = re.sub(r"R_PMPIX_Mutex", "PMPIX_Mutex", text)
 
         return text
@@ -266,7 +271,7 @@ int * MPI_WEIGHTS_EMPTY;
             _content = _file.read()
 
         _new_content = self._mpich_exceptions_run_mpih(_content)
-        with open(gen_file, 'w') as _file:
+        with open(gen_file, "w") as _file:
             _file.write(_new_content)
 
     def _generate_run_mpih(self, gen_file):
@@ -283,7 +288,7 @@ int * MPI_WEIGHTS_EMPTY;
 """
         _replacement_block = COPYRIGHT_MPICH_MPIOH
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        
+
         text = re.sub(r"const", "", text)
         text = re.sub(r"R_MPIO", "MPIO", text)
         text = re.sub(r"([^RN])_MPI", r"\1_R_MPI", text)
@@ -297,21 +302,21 @@ int * MPI_WEIGHTS_EMPTY;
             _content = _file.read()
 
         _new_content = self._mpich_exceptions_run_mpioh(_content)
-        with open(gen_file, 'w') as _file:
+        with open(gen_file, "w") as _file:
             _file.write(_new_content)
 
     def generate(self):
         shutil.copy2(
             os.path.join(self.dir_input, "mpich-3.1.2_mpi.h"),
-            os.path.join(self.dir_output, self._run_mpi_header_file)
-            )
+            os.path.join(self.dir_output, self._run_mpi_header_file),
+        )
         shutil.copy2(
             os.path.join(self.dir_input, "ompi-1.8.8_mpi.h"),
-            os.path.join(self.dir_output, self._app_mpi_header_file)
-            )
+            os.path.join(self.dir_output, self._app_mpi_header_file),
+        )
         shutil.copy2(
             os.path.join(self.dir_input, "mpich-3.1.2_mpio.h"),
-            os.path.join(self.dir_output, self._run_mpio_header_file)
-            )
+            os.path.join(self.dir_output, self._run_mpio_header_file),
+        )
         super().generate()
         log.debug("INTEL header has been generated.")
