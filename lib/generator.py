@@ -158,7 +158,7 @@ if "__main__" == __name__:
       -h --help                                                          Show this helper.
       --interface_header_dir=<interface_header_dir>                      Path to header interface generation folder.
       --preload_header_dir=<preload_header_dir>                          Path to header preload generation folder.
-    """
+    """  # noqa: E501
     arguments = docopt(usage)
     log.info("Starting to generate.")
 

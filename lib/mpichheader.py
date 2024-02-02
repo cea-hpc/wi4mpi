@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
-import re
 from logging import getLogger
 from logging.config import fileConfig
 from intelheader import IntelHeaderGenerator

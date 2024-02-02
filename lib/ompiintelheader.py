@@ -6,7 +6,7 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from intelompiheader import IntelOmpiHeaderGenerator
-from textoperator import delete_lines, delete_line_from_pattern, insert_lines, function_to_delete
+from textoperator import delete_lines, delete_line_from_pattern, function_to_delete
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")

@@ -6,7 +6,7 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from intelheader import IntelHeaderGenerator
-from textoperator import delete_lines, delete_line_from_pattern, insert_lines, function_to_delete
+from textoperator import delete_lines
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
@@ -183,7 +183,7 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
         :param gen_file: A string representing the path to the input file.
         :type gen_file: str
         :return: None
-        """
+        """  # noqa: E501
         log.debug("Running _generate_run_mpih (HeaderGenerator).")
         try:
             with open(gen_file, "r") as _file:

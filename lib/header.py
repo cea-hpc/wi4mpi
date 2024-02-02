@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 import re
 from logging import getLogger
 from logging.config import fileConfig
@@ -76,7 +75,7 @@ class HeaderGenerator:
         :param gen_file: A string representing the path to the input file.
         :type gen_file: str
         :return: None
-        """
+        """  # noqa: E501
         log.debug("Running _generate_run_mpih (HeaderGenerator).")
         try:
             with open(gen_file, "r") as _file:

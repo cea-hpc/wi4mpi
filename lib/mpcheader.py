@@ -6,7 +6,6 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from header import HeaderGenerator
-from textoperator import delete_lines, delete_line_from_pattern, insert_lines, function_to_delete
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
@@ -41,7 +40,8 @@ class MpcHeaderGenerator(HeaderGenerator):
             "#define R_MPI_ERR_RMA_ATTACH 75",
             "#define R_MPI_ERR_RMA_SHARED 76",
         ]
-        # Utiliser une expression régulière pour insérer les lignes avant "#define R_MPI_ERR_RMA_CONFLICT"
+        # Utiliser une expression régulière pour insérer les lignes
+        # avant "#define R_MPI_ERR_RMA_CONFLICT"
         pattern = r"(#define R_MPI_ERR_RMA_CONFLICT)"
         replacement = "\n".join(lines_to_insert) + r"\n\1"
         text = re.sub(pattern, replacement, text)
@@ -55,7 +55,8 @@ class MpcHeaderGenerator(HeaderGenerator):
             "#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in"
             " MPI-3.1 */",
         ]
-        # Utiliser une expression régulière pour insérer les lignes après "/** Initialization and Finalization */"
+        # Utiliser une expression régulière pour insérer les lignes
+        # après "/** Initialization and Finalization */"
         pattern = r"(/\*\* Initialization and Finalization \*/)"
         # Effectuer la substitution en utilisant re.sub()
         replacement = r"\1\n" + "\n".join(lines_to_insert)

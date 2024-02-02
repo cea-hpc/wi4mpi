@@ -6,7 +6,7 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from header import HeaderGenerator
-from textoperator import delete_lines, delete_line_from_pattern, insert_lines, function_to_delete
+from textoperator import delete_lines
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
@@ -21,40 +21,40 @@ COPYRIGHT_MPICH_MPIH = """
 //# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
 //#                                                                      #
 //########################################################################
-/*  
+/*
  *  (C) 2001 by Argonne National Laboratory.
-    
-    				  MPICH2 COPYRIGHT
-    
+
+                      MPICH2 COPYRIGHT
+
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
     of the code.
-    
+
     Copyright Notice
      + 2002 University of Chicago
-    
+
     Permission is hereby granted to use, reproduce, prepare derivative works, and
     to redistribute to others.  This software was authored by:
-    
+
     Mathematics and Computer Science Division
     Argonne National Laboratory, Argonne IL 60439
-    
+
     (and)
-    
+
     Department of Computer Science
     University of Illinois at Urbana-Champaign
-    
-    
-    			      GOVERNMENT LICENSE
-    
+
+
+                      GOVERNMENT LICENSE
+
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
     is granted for itself and others acting on its behalf a paid-up, nonexclusive,
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
-    
-    				  DISCLAIMER
-    
+
+                      DISCLAIMER
+
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
     States, nor the University of Chicago, nor any of their employees, makes any
@@ -62,8 +62,8 @@ COPYRIGHT_MPICH_MPIH = """
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
- *      
+
+ *
  */
 """
 
@@ -77,41 +77,41 @@ COPYRIGHT_MPICH_MPIOH = """
 //# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
 //#                                                                      #
 //########################################################################
-/* 
+/*
  *
- *   Copyright (C) 1997 University of Chicago. 
-    
-    				  MPICH2 COPYRIGHT
-    
+ *   Copyright (C) 1997 University of Chicago.
+
+                      MPICH2 COPYRIGHT
+
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
     of the code.
-    
+
     Copyright Notice
      + 2002 University of Chicago
-    
+
     Permission is hereby granted to use, reproduce, prepare derivative works, and
     to redistribute to others.  This software was authored by:
-    
+
     Mathematics and Computer Science Division
     Argonne National Laboratory, Argonne IL 60439
-    
+
     (and)
-    
+
     Department of Computer Science
     University of Illinois at Urbana-Champaign
-    
-    
-    			      GOVERNMENT LICENSE
-    
+
+
+                      GOVERNMENT LICENSE
+
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
     is granted for itself and others acting on its behalf a paid-up, nonexclusive,
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
-    
-    				  DISCLAIMER
-    
+
+                      DISCLAIMER
+
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
     States, nor the University of Chicago, nor any of their employees, makes any
@@ -119,8 +119,8 @@ COPYRIGHT_MPICH_MPIOH = """
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
- *   
+
+ *
  */
 """
 
@@ -150,7 +150,7 @@ class IntelHeaderGenerator(HeaderGenerator):
         log.debug("Running _mpich_exceptions_run_mpih (IntelHeaderGenerator).")
         text = re.sub(r"const ", "", text, flags=re.MULTILINE)
         _pattern_block = """
-/*  
+/*
  *  (C) 2001 by Argonne National Laboratory.
  *      See COPYRIGHT in top-level directory.
  */
@@ -164,11 +164,11 @@ class IntelHeaderGenerator(HeaderGenerator):
         _replacement_block = """
 /* user include file for MPI programs */
 #if !defined(_WIN32) && !defined(_WIN64)  /* Linux only */
-#	include <stdint.h> /* for __WORDSIZE definition */
+#    include <stdint.h> /* for __WORDSIZE definition */
 #   ifdef __WORDSIZE
-#	    if __WORDSIZE != 8*8 /* 32 or 64 */
-#		    error A wrong version of mpi.h file was included. Check include path.
-#	    endif
+#        if __WORDSIZE != 8*8 /* 32 or 64 */
+#            error A wrong version of mpi.h file was included. Check include path.
+#        endif
 #    endif
 #endif
 """
@@ -235,7 +235,7 @@ int * R_MPI_WEIGHTS_EMPTY;
 int * MPI_UNWEIGHTED;
 int * MPI_WEIGHTS_EMPTY;
 
-/* The annotation MPIU_DLL_SPEC to the extern statements is used 
+/* The annotation MPIU_DLL_SPEC to the extern statements is used
    as a hook for systems that require C extensions to correctly construct
    DLLs, and is defined as an empty string otherwise
  */
@@ -280,9 +280,9 @@ int * MPI_WEIGHTS_EMPTY;
     def _mpich_exceptions_run_mpioh(self, text):
         log.debug("Running _mpich_exceptions_run_mpioh (IntelHeaderGenerator).")
         _pattern_block = """
-/* 
+/*
  *
- *   Copyright (C) 1997 University of Chicago. 
+ *   Copyright (C) 1997 University of Chicago.
  *   See COPYRIGHT notice in top-level directory.
  */
 """

@@ -29,7 +29,7 @@ def delete_lines(lines_to_delete, text):
         for line in lines_to_delete:
             try:
                 del lines[lines.index(line)]
-            except:
+            except ValueError:
                 continue
     return "\n".join(lines)
 
