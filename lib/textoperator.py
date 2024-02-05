@@ -1,4 +1,34 @@
 #!/usr/bin/env python3
+"""
+This module provides functions for manipulating text by deleting, inserting lines, and removing fun
+ction prototypes.
+
+Functions:
+- delete_lines(lines_to_delete, text): Delete specified lines from the given text.
+- delete_line_from_pattern(pattern, text): Delete lines containing the specified pattern from the g
+iven text.
+- insert_lines(lines_to_insert, line_number, text): Inserts the specified lines at the given positi
+on in the text.
+- function_to_delete(text, pattern): Removes function prototypes containing the specified function 
+name from the given text.
+
+Examples:
+    original_text = "Line 1\nLine 2\nLine 3\nLine 4\n"
+    delete_lines([2, "Line 4"], original_text)
+    # Returns: 'Line 1\nLine 3\n'
+
+    original_text = "Line 1\nLine with pattern ABC\nLine 3\n"
+    delete_line_from_pattern("ABC", original_text)
+    # Returns: 'Line 1\nLine 3\n'
+
+    original_text = "Line 1\nLine 2\nLine 3\nLine 4\n"
+    insert_lines(["New Line 1", "New Line 2"], 2, original_text)
+    # Returns: 'Line 1\nNew Line 1\nNew Line 2\nLine 2\nLine 3\nLine 4\n'
+
+    original_text = "void function1();\nint main();\nvoid function2();\n"
+    function_to_delete(original_text, "function1")
+    # Returns: 'int main();\nvoid function2();\n'
+"""
 
 
 def delete_lines(lines_to_delete, text):
@@ -19,7 +49,7 @@ def delete_lines(lines_to_delete, text):
     'Line 1\nLine 3\n'
     """
     lines = text.split("\n")
-    if isinstance(lines_to_delete, int) or isinstance(lines_to_delete, str):
+    if isinstance(lines_to_delete, (int, str)):
         lines_to_delete = [lines_to_delete]
     if isinstance(lines_to_delete[0], int):
         for line_number_to_delete in sorted(lines_to_delete, reverse=True):
@@ -79,13 +109,13 @@ def insert_lines(lines_to_insert, line_number, text):
     return "\n".join(lines)
 
 
-def function_to_delete(text, function_to_delete):
+def function_to_delete(text, pattern):
     """
     Removes function prototypes containing the specified function name from the given text.
 
     Args:
         text (str): The original text.
-        function_to_delete (str): The name of the function whose prototypes are to be removed.
+        pattern (str): The name of the function whose prototypes are to be removed.
 
     Returns:
         str: The modified text with function prototypes removed.
@@ -97,7 +127,7 @@ def function_to_delete(text, function_to_delete):
     function_ended = False
 
     for line in lines:
-        if function_to_delete in line and "(" in line:
+        if pattern in line and "(" in line:
             function_started = True
             function_ended = False
         if function_started and line.strip() == ";":
