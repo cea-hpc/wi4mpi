@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+IntelHeader module for generating Intel-specific header files.
+"""
 
 import os
 import shutil
@@ -24,7 +27,7 @@ COPYRIGHT_MPICH_MPIH = """
 /*
  *  (C) 2001 by Argonne National Laboratory.
 
-                      MPICH2 COPYRIGHT
+              MPICH2 COPYRIGHT
 
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
@@ -45,7 +48,7 @@ COPYRIGHT_MPICH_MPIH = """
     University of Illinois at Urbana-Champaign
 
 
-                      GOVERNMENT LICENSE
+             GOVERNMENT LICENSE
 
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
@@ -53,7 +56,7 @@ COPYRIGHT_MPICH_MPIH = """
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
 
-                      DISCLAIMER
+             DISCLAIMER
 
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
@@ -81,7 +84,7 @@ COPYRIGHT_MPICH_MPIOH = """
  *
  *   Copyright (C) 1997 University of Chicago.
 
-                      MPICH2 COPYRIGHT
+             MPICH2 COPYRIGHT
 
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
@@ -102,7 +105,7 @@ COPYRIGHT_MPICH_MPIOH = """
     University of Illinois at Urbana-Champaign
 
 
-                      GOVERNMENT LICENSE
+             GOVERNMENT LICENSE
 
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
@@ -110,7 +113,7 @@ COPYRIGHT_MPICH_MPIOH = """
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
 
-                      DISCLAIMER
+             DISCLAIMER
 
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
@@ -126,6 +129,10 @@ COPYRIGHT_MPICH_MPIOH = """
 
 
 class IntelHeaderGenerator(HeaderGenerator):
+    """
+    IntelHeaderGenerator class for generating Intel-specific header files.
+    """
+
     dir_output = ""
     dir_input = ""
 
@@ -134,23 +141,46 @@ class IntelHeaderGenerator(HeaderGenerator):
         dir_input="src/interface/header/scripts/mpc_headers",
         dir_output="src/interface/header/_INTEL_gen",
     ):
+        """
+        Initializes the IntelHeaderGenerator.
+
+        Args:
+            dir_input (str): Input directory path.
+            dir_output (str): Output directory path.
+        """
         log.info("Generation of INTEL headers in progress.")
         self.dir_input = dir_input
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
 
     def _generate_wrapper_fh(self, gen_file):
+        """
+        Generates the wrapper_f.h file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_wrapper_fh (IntelHeaderGenerator).")
         super()._generate_wrapper_fh(gen_file)
         if not os.path.exists(os.path.join(self.dir_output, "wrapper_f.h")):
-            log.warning("Using {}".format(os.path.join(self.dir_input, "wrapper_f.h")))
+            wrapper_f = os.path.join(self.dir_input, "wrapper_f.h")
+            log.warning(lambda: f"Using {wrapper_f}")
             shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), self.dir_output)
 
     def _mpich_exceptions_run_mpih(self, text):
+        """
+        Applies MPICH-specific exceptions for run_mpih file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _mpich_exceptions_run_mpih (IntelHeaderGenerator).")
         text = re.sub(r"const ", "", text, flags=re.MULTILINE)
         _pattern_block = """
-/*
+/*  
  *  (C) 2001 by Argonne National Laboratory.
  *      See COPYRIGHT in top-level directory.
  */
@@ -218,7 +248,7 @@ class IntelHeaderGenerator(HeaderGenerator):
 #define MPIU_DLL_SPEC
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE;
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE;
-/* The annotation MPIU_DLL_SPEC to the extern statements is used
+/* The annotation MPIU_DLL_SPEC to the extern statements is used 
    as a hook for systems that require C extensions to correctly construct
    DLLs, and is defined as an empty string otherwise
  */
@@ -235,7 +265,7 @@ int * R_MPI_WEIGHTS_EMPTY;
 int * MPI_UNWEIGHTED;
 int * MPI_WEIGHTS_EMPTY;
 
-/* The annotation MPIU_DLL_SPEC to the extern statements is used
+/* The annotation MPIU_DLL_SPEC to the extern statements is used 
    as a hook for systems that require C extensions to correctly construct
    DLLs, and is defined as an empty string otherwise
  */
@@ -265,24 +295,45 @@ int * MPI_WEIGHTS_EMPTY;
         return text
 
     def _intel_generate_run_mpih(self, gen_file):
+        """
+        Generates the run_mpi.h file with Intel-specific modifications.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpih (IntelHeaderGenerator).")
         super()._generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._mpich_exceptions_run_mpih(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _generate_run_mpih(self, gen_file):
+        """
+        Generates the run_mpi.h file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         self._intel_generate_run_mpih(gen_file)
 
     def _mpich_exceptions_run_mpioh(self, text):
+        """
+        Applies MPICH-specific exceptions for run_mpioh file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _mpich_exceptions_run_mpioh (IntelHeaderGenerator).")
         _pattern_block = """
-/*
+/* 
  *
- *   Copyright (C) 1997 University of Chicago.
+ *   Copyright (C) 1997 University of Chicago. 
  *   See COPYRIGHT notice in top-level directory.
  */
 """
@@ -296,16 +347,25 @@ int * MPI_WEIGHTS_EMPTY;
         return text
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Generates the run_mpio.h file with Intel-specific modifications.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpioh (IntelHeaderGenerator).")
         super()._generate_run_mpioh(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._mpich_exceptions_run_mpioh(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def generate(self):
+        """
+        Generates Intel-specific header files.
+        """
         shutil.copy2(
             os.path.join(self.dir_input, "mpich-3.1.2_mpi.h"),
             os.path.join(self.dir_output, self._run_mpi_header_file),
