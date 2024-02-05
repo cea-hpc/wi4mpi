@@ -58,11 +58,11 @@
 
 /* user include file for MPI programs */
 #if !defined(_WIN32) && !defined(_WIN64)  /* Linux only */
-#	include <stdint.h> /* for __WORDSIZE definition */
+#    include <stdint.h> /* for __WORDSIZE definition */
 #   ifdef __WORDSIZE
-#	    if __WORDSIZE != 8*8 /* 32 or 64 */
-#		    error A wrong version of mpi.h file was included. Check include path.
-#	    endif
+#        if __WORDSIZE != 8*8 /* 32 or 64 */
+#            error A wrong version of mpi.h file was included. Check include path.
+#        endif
 #    endif
 #endif
 
