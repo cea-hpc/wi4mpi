@@ -1,6 +1,55 @@
 #!/usr/bin/env python3
+"""
+Wi4MPI Header Generator
+
+This script generates Wi4MPI's headers from OpenMPI 1.8.8 and MPICH 3.1.2 headers.
+
+Usage:
+  generator.py [--interface_header_dir=<interface_header_dir>]
+               [--preload_header_dir=<preload_header_dir>]
+  generator.py (-h | --help)
+
+Options:
+  -h --help                             Show this help message.
+  --interface_header_dir=<interface_header_dir>   Path to header interface generation folder.
+  --preload_header_dir=<preload_header_dir>       Path to header preload generation folder.
+
+Examples:
+  1. Generate headers using default directories:
+      ```
+      ./generator.py
+      ```
+  2. Specify custom directories for generated files:
+      ```
+      ./generator.py --interface_header_dir=interface_header_gen \
+                     --preload_header_dir=preload_header_gen
+      ```
+
+Description:
+  This script initializes the Wi4MPI Header Generator with optional directory parameters.
+  It launches the generation process for various header files by instantiating specific generators.
+
+  Default directories for generated files:
+  - interface_header_dir: "src/interface/header"
+  - preload_header_dir: "src/preload/header"
+
+  The generated headers are placed in subdirectories starting with underscores, such as "_MPC",
+  "_INTEL", etc.
+
+  The script can be run from the command line, and options can be provided to specify custom genera
+  tion directories.
+
+Authors:
+  Cotte Adrien - Alliance Service Plus - adrien.cotte.tgcc@cea.fr
+  Debusschère Lydéric - Alliance Service Plus - lyderic.debusschere.tgcc.@cea.fr
+  Ducrot Vincent - Alliance Service Plus - vincent.ducrot.tgcc@cea.fr
+  Joos Marc - CEA - marc.joos@cea.fr
+"""
 
 import os
+from logging import getLogger
+from logging.config import fileConfig
+from docopt import docopt
 from mpcheader import MpcHeaderGenerator
 from intelheader import IntelHeaderGenerator
 from mpichheader import MpichHeaderGenerator
@@ -14,9 +63,6 @@ from mpichompiheader import MpichOmpiHeaderGenerator
 from ompiintelheader import OmpiIntelHeaderGenerator
 from ompimpichheader import OmpiMpichHeaderGenerator
 from ompiompiheader import OmpiOmpiHeaderGenerator
-from logging import getLogger
-from logging.config import fileConfig
-from docopt import docopt
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("generator_logger")
@@ -37,17 +83,28 @@ class Generator:
     interface_header_dir = "src/interface/header"
     preload_header_dir = "src/preload/header"
 
-    def __init__(
-        self,
-        interface_header_dir=None,
-        preload_header_dir=None,
-    ):
-        self.interface_header_dir = (
-            interface_header_dir if interface_header_dir else self.interface_header_dir
-        )
-        self.preload_header_dir = (
-            preload_header_dir if preload_header_dir else self.preload_header_dir
-        )
+    def __init__(self, **kwargs):
+        self.set_directories(**kwargs)
+
+    def set_directories(self, **kwargs):
+        """
+        Sets the directory parameters for the Generator.
+
+        Args:
+            **kwargs (dict): A dictionary containing optional parameters.
+                - "interface_header_dir" (str, optional): Directory for interface headers.
+                - "preload_header_dir" (str, optional): Directory for preload headers.
+
+        Returns:
+            None
+
+        Example:
+            >>> my_generator = Generator()
+            >>> my_generator.set_directories(interface_header_dir="new_interface_dir",
+                    preload_header_dir="new_preload_dir")
+        """
+        self.interface_header_dir = kwargs.get("interface_header_dir", self.interface_header_dir)
+        self.preload_header_dir = kwargs.get("preload_header_dir", self.preload_header_dir)
 
     def generate(self):
         """
@@ -134,7 +191,7 @@ class Generator:
 
 
 if "__main__" == __name__:
-    usage = """
+    USAGE = """
     Generate Wi4MPI's headers frome OpenMPI 1.8.8 and MPICH 3.1.2 headers.
     The default directories of generated files are:
 
@@ -159,12 +216,11 @@ if "__main__" == __name__:
       --interface_header_dir=<interface_header_dir>                      Path to header interface generation folder.
       --preload_header_dir=<preload_header_dir>                          Path to header preload generation folder.
     """  # noqa: E501
-    arguments = docopt(usage)
+    arguments = docopt(USAGE)
     log.info("Starting to generate.")
-
-    run = Generator(
-        interface_header_dir=arguments["--interface_header_dir"],
-        preload_header_dir=arguments["--preload_header_dir"],
-    )
+    args = {"interface_header_dir": arguments["--interface_header_dir"],
+            "preload_header_dir": arguments["--preload_header_dir"]
+            }
+    run = Generator(**args)
     run.generate()
     log.info("End")
