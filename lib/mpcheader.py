@@ -21,9 +21,7 @@ class MpcHeaderGenerator(HeaderGenerator):
         dir_output="src/interface/header/_MPC",
     ):
         log.info("Generation of MPC headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _generate_wrapper_fh(self, gen_file):
         super()._generate_wrapper_fh(gen_file)

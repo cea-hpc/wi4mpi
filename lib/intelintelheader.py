@@ -6,22 +6,21 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from intelheader import IntelHeaderGenerator
-from textoperator import delete_lines, delete_line_from_pattern
+from textoperator import delete_lines, delete_line_from_pattern, list_pattern_replacement
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
 class IntelIntelHeaderGenerator(IntelHeaderGenerator):
+
     def __init__(
         self,
         dir_input="src/preload/header/scripts/intel_intel_headers",
         dir_output="src/preload/header/_INTEL_INTEL_gen",
     ):
         log.info("Generation of INTEL_INTEL headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _preload_exception_header_run_mpih(self, text):
         log.debug("Running _preload_exception_header_run_mpih (IntelIntelHeaderGenerator).")

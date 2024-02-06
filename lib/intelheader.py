@@ -133,9 +133,6 @@ class IntelHeaderGenerator(HeaderGenerator):
     IntelHeaderGenerator class for generating Intel-specific header files.
     """
 
-    dir_output = ""
-    dir_input = ""
-
     def __init__(
         self,
         dir_input="src/interface/header/scripts/mpc_headers",
@@ -149,9 +146,7 @@ class IntelHeaderGenerator(HeaderGenerator):
             dir_output (str): Output directory path.
         """
         log.info("Generation of INTEL headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _generate_wrapper_fh(self, gen_file):
         """

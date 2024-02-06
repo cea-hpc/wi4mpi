@@ -20,6 +20,25 @@ class HeaderGenerator:
     _app_mpio_header_file = "app_mpio.h"
     _wrapper_f_header_file = "wrapper_f.h"
     dir_output = ""
+    dir_input = ""
+
+    def set_directories(self, dir_input="", dir_output=""):
+        """
+        Set input and output directories for header generation.
+
+        Args:
+            dir_input (str, optional): The input directory path. Defaults to "".
+            dir_output (str, optional): The output directory path. Defaults to "".
+
+        Returns:
+            None
+        """
+        self.dir_input = dir_input
+        self.dir_output = dir_output
+        os.makedirs(self.dir_output, exist_ok=True)
+
+    def __init__(self, dir_input="", dir_output=""):
+        self.set_directories(dir_input=dir_input, dir_output=dir_output)
 
     def _generate_wrapper_fh(self, gen_file):
         log.warning(

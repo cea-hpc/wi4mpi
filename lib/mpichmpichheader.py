@@ -16,6 +16,4 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator):
         dir_output="src/preload/header/_MPICH_MPICH_gen",
     ):
         log.info("Generation of MPICH_MPICH headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)
