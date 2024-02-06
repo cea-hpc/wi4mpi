@@ -83,12 +83,15 @@ flake8_rc=0
 pylint_rc=0
 
 # Run flake8
+echo "== Running flake8 ..."
 flake8 --config "$FLAKE8_CONF" "$TARGET" || flake8_rc=$?
 
 # Run pylint
+echo "== Running pylint ..."
 pylint --rcfile="$PYPROJECT_TOML" "$TARGET" || pylint_rc=$?
 
 # Run black
+echo "== Running black ..."
 black --config "$PYPROJECT_TOML" --check "$TARGET" || black_rc=$?
 
 # Check return codes and display messages
