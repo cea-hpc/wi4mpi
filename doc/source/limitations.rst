@@ -1,6 +1,17 @@
 Known limitations
 *****************
 
+MPI C++ bindings
+================
+
+We do not support the obsolete C++ bindings of MPI, they were remove in MPI 3.0.
+
+| Even if your code is not using them, we encountered issue with OpenMPI and NVHPC where some symbols were still included in the binary and prevented the use of Wi4MPI because of undefined symbols.
+| Therefore, we recommend defining those macros when compiling C++ code to ensure none of the bindings leaks into the binary, even when you don't make use of it:
+
+    - OMPI_SKIP_MPICXX for OpenMPI
+    - MPICH_SKIP_MPICXX for MPICH and IntelMPI
+
 MPI_MAX_* constants for strings size
 ====================================
 
