@@ -1,0 +1,27 @@
+typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn\n@typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn;
+ompi_file_errhandler_fn@A_MPI_File_errhandler_fn
+^typedef A_MPI_Win_errhandler_function A_MPI_Win_errhandler_fn@typedef A_MPI_Win_errhandler_function A_MPI_Win_errhandler_fn;
+^  int A_MPI_Address\(void \*location, A_MPI_Aint \*address\)@  int A_MPI_Address(void *location, A_MPI_Aint *address);
+^  int A_MPI_Attr_delete\(A_MPI_Comm comm, int keyval\)@  int A_MPI_Attr_delete(A_MPI_Comm comm, int keyval);
+^  int A_MPI_Attr_get\(A_MPI_Comm comm, int keyval, void \*attribute_val, int \*flag\)@  int A_MPI_Attr_get(A_MPI_Comm comm, int keyval, void *attribute_val, int *flag);
+^  int A_MPI_Attr_put\(A_MPI_Comm comm, int keyval, void \*attribute_val\)@  int A_MPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val);
+A_MPI_Errhandler \*errhandler\)$@A_MPI_Errhandler *errhandler);
+A_MPI_Errhandler errhandler\)$@A_MPI_Errhandler errhandler);
+^                                     int \*keyval, void \*extra_state\)@                                     int *keyval, void *extra_state);
+^  int A_MPI_Keyval_free\(int \*keyval\)@  int A_MPI_Keyval_free(int *keyval);
+^  int A_MPI_Type_extent\(A_MPI_Datatype type, A_MPI_Aint \*extent\)@  int A_MPI_Type_extent(A_MPI_Datatype type, A_MPI_Aint *extent);
+^  int A_MPI_Type_lb\(A_MPI_Datatype type, A_MPI_Aint \*lb\)@  int A_MPI_Type_lb(A_MPI_Datatype type, A_MPI_Aint *lb);
+^                                   A_MPI_Datatype \*newtype\)@                                   A_MPI_Datatype *newtype);
+^  int A_MPI_Type_ub\(A_MPI_Datatype mtype, A_MPI_Aint \*ub\)@  int A_MPI_Type_ub(A_MPI_Datatype mtype, A_MPI_Aint *ub);
+^  int A_PMPI_Address\(void \*location, A_MPI_Aint \*address\)@  int A_PMPI_Address(void *location, A_MPI_Aint *address);
+^  int A_PMPI_Attr_delete\(A_MPI_Comm comm, int keyval\)@  int A_PMPI_Attr_delete(A_MPI_Comm comm, int keyval);
+^  int A_PMPI_Attr_get\(A_MPI_Comm comm, int keyval, void \*attribute_val, int \*flag\)@  int A_PMPI_Attr_get(A_MPI_Comm comm, int keyval, void *attribute_val, int *flag);
+^  int A_PMPI_Attr_put\(A_MPI_Comm comm, int keyval, void \*attribute_val\)@  int A_PMPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val);
+^                                      int \*keyval, void \*extra_state\)@                                      int *keyval, void *extra_state);
+^  int A_PMPI_Keyval_free\(int \*keyval\)@  int A_PMPI_Keyval_free(int *keyval);
+^                                      A_MPI_Datatype oldtype, A_MPI_Datatype \*newtype\)@                                      A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
+^  int A_PMPI_Type_lb\(A_MPI_Datatype type, A_MPI_Aint \*lb\)@  int A_PMPI_Type_lb(A_MPI_Datatype type, A_MPI_Aint *lb);
+^                                    A_MPI_Datatype \*newtype\)@                                    A_MPI_Datatype *newtype);
+^  int A_PMPI_Type_ub\(A_MPI_Datatype mtype, A_MPI_Aint \*ub\)@  int A_PMPI_Type_ub(A_MPI_Datatype mtype, A_MPI_Aint *ub);
+int A_PMPI_Type_extent\(A_MPI_Datatype type, A_MPI_Aint \*extent\)$@int A_PMPI_Type_extent(A_MPI_Datatype type, A_MPI_Aint *extent);
+A_MPI_Datatype oldtype, A_MPI_Datatype \*newtype\)$@A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);

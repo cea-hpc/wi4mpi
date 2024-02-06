@@ -1,10 +1,24 @@
 #!/usr/bin/env python3
+"""
+Module for generating MPI header files.
+
+This module provides classes and methods for generating MPI header files.
+
+"""
+
 
 import os
 import re
 from logging import getLogger
 from logging.config import fileConfig
-from textoperator import delete_lines, delete_line_from_pattern, insert_lines, function_to_delete
+from textoperator import (
+    delete_lines,
+    delete_line_from_pattern,
+    insert_lines,
+    function_to_delete,
+    replacement_from_conf_file,
+    delete_bloc_from_conf_file,
+)
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
@@ -14,6 +28,35 @@ wi4mpi_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class HeaderGenerator:
+    """
+    Class for generating MPI header files.
+
+    This class contains methods for generating MPI header files with specific modifications.
+
+    Attributes:
+        wi4mpi_root (str): Absolute path of the root directory.
+        _run_mpi_header_file (str): Name of the run MPI header file.
+        _run_mpio_header_file (str): Name of the run MPIO header file.
+        _app_mpi_header_file (str): Name of the app MPI header file.
+        _app_mpio_header_file (str): Name of the app MPIO header file.
+        _wrapper_f_header_file (str): Name of the wrapper F header file.
+        dir_output (str): Output directory path.
+        dir_input (str): Input directory path.
+
+    Methods:
+        set_directories: Set input and output directories for header generation.
+        __init__: Initialize the HeaderGenerator object.
+        _generate_wrapper_fh: Generate wrapper F header file.
+        _replace_mpi_with_rmpi: Replace occurrences of MPI_ with R_MPI_ in text.
+        _generate_run_mpih: Generate run MPI header file.
+        _common_generate_app_mpih: Generate common app MPI header content.
+        _generate_app_mpih: Generate app MPI header file.
+        _generate_run_mpioh: Generate run MPIO header file.
+        generate: Generate MPI header files.
+
+    """
+
+    wi4mpi_root = wi4mpi_root
     _run_mpi_header_file = "run_mpi.h"
     _run_mpio_header_file = "run_mpio.h"
     _app_mpi_header_file = "app_mpi.h"
@@ -41,11 +84,12 @@ class HeaderGenerator:
         self.set_directories(dir_input=dir_input, dir_output=dir_output)
 
     def _generate_wrapper_fh(self, gen_file):
-        log.warning(
-            "The generation of wrapper_f.h have to be done locally.\n\tA MPC program has to be"
-            " executed in order to catch MPI_MODE_XXX values.\n\tHave a look to"
-            " generator/FORTRAN/MPI_XXX_generator/MPC/gen_MPC_vars.sh"
+        wrapper_warning = (
+            f"The generation of '{gen_file}' have to be done locally.\n\tA MPC program has to be e"
+            "xecuted in order to catch MPI_MODE_XXX values.\n\tHave a look to generator/FORTRAN/MP"
+            "I_XXX_generator/MPC/gen_MPC_vars.sh"
         )
+        log.warning(wrapper_warning)
 
     def _replace_mpi_with_rmpi(self, text: str) -> str:
         """
@@ -97,15 +141,15 @@ class HeaderGenerator:
         """  # noqa: E501
         log.debug("Running _generate_run_mpih (HeaderGenerator).")
         try:
-            with open(gen_file, "r") as _file:
+            with open(gen_file, "r", encoding="utf-8") as _file:
                 _content = _file.read()
                 _new_content = self._replace_mpi_with_rmpi(_content)
-            with open(gen_file, "w") as _file:
+            with open(gen_file, "w", encoding="utf-8") as _file:
                 _file.write(_new_content)
         except FileNotFoundError:
-            log.error(f"The file '{gen_file}' does not exist.")
-        except Exception as e:
-            log.error(f"An error occurred: {str(e)}")
+            log.error(lambda: f"The file '{gen_file}' does not exist.")
+        except ValueError:
+            log.error("An error occurred during _generate_run_mpih.")
 
     def _common_generate_app_mpih(self, text):
         log.debug("Running _common_generate_app_mpih (HeaderGenerator)")
@@ -120,144 +164,11 @@ class HeaderGenerator:
             if "#if" in line or "#endif" in line or "#else" in line:
                 lines_to_delete.append(line)
         text = delete_lines(lines_to_delete, text)
-
-        pattern = []
-        replacement = []
-        decalage = 0
-
-        pattern.append(r"MPI_")
-        replacement.append(r"A_MPI_")
-        pattern.append(r"PA_MPI_")
-        replacement.append(r"A_PMPI_")
-
-        pattern.append(r"typedef OPAL.*A_")
-        replacement.append(r"typedef size_t A_")
-        pattern.append(r"typedef OA_MPI.*A_")
-        replacement.append(r"typedef size_t A_")
-        pattern.append(r"typedef struct.*A_")
-        replacement.append(r"typedef size_t A_")
-        pattern.append(r"typedef size_t A_MPI_Count;")
-        replacement.append(r"//typedef size_t A_MPI_Count;\ntypedef long long A_MPI_Count;")
-        pattern.append(r"typedef size_t A_MPI_Status;")
-        replacement.append(r"//typedef size_t A_MPI_Status;")
-        pattern.append(r"typedef size_t A_MPI_T_pvar_session;\n")
-        replacement.append(r"typedef size_t A_MPI_T_pvar_session;\n\ntypedef int A_MPI_Fint;")
-        pattern.append(r"struct ompi_status_public_t {")
-        replacement.append("struct CCC_mpi_status_struct {")
-        pattern.append(r"struct ompi_status_public_t {")
-        replacement.append("struct CCC_mpi_status_struct {")
-        pattern.append(r"typedef struct ompi_status_public_t ompi_status_public_t;")
-        replacement.append("typedef struct CCC_mpi_status_struct A_MPI_Status;")
-        pattern.append(r"OA_MPI_DECLSPEC")
-        replacement.append("")
-        pattern.append(r"const ")
-        replacement.append("")
-        pattern.append(r"A_MPI_MAX_PROCESSOR_NAME OPAL_MAX_PROCESSOR_NAME")
-        replacement.append("OPAL_MAX_PROCESSOR_NAME 512")
-        pattern.append(r"A_MPI_MAX_ERROR_STRING   OPAL_MAX_ERROR_STRING")
-        replacement.append("OPAL_MAX_ERROR_STRING  2048")
-        pattern.append(r"A_MPI_MAX_OBJECT_NAME    OPAL_MAX_OBJECT_NAME")
-        replacement.append("OPAL_MAX_OBJECT_NAME   1024")
-        pattern.append(r"A_MPI_MAX_INFO_KEY         OPAL_MAX_INFO_KEY")
-        replacement.append("A_MPI_MAX_INFO_KEY 256")
-        pattern.append(r"A_MPI_MAX_INFO_VAL         OPAL_MAX_INFO_VAL")
-        replacement.append("A_MPI_MAX_INFO_VAL 512")
-        pattern.append(r"A_MPI_MAX_PORT_NAME        OPAL_MAX_PORT_NAME")
-        replacement.append("A_MPI_MAX_PORT_NAME 512")
-        pattern.append(r"A_MPI_MAX_DATAREP_STRING OPAL_MAX_DATAREP_STRING\n")
-        replacement.append("A_MPI_MAX_DATAREP_STRING 512")
-        pattern.append(r"#define A_MPI_GROUP_NULL .*")
-        replacement.append(r"#define A_MPI_GROUP_NULL 0x0")
-        pattern.append(r"#define A_MPI_COMM_NULL .*")
-        replacement.append(r"#define A_MPI_COMM_NULL 0x0")
-        pattern.append(r"#define A_MPI_REQUEST_NULL .*")
-        replacement.append(r"#define A_MPI_REQUEST_NULL 0x0")
-        pattern.append(r"#define A_MPI_MESSAGE_NULL .*")
-        replacement.append(r"#define A_MPI_MESSAGE_NULL 0x0")
-
-        pattern.append(r"#define A_MPI_OP_NULL .*")
-        pattern.append(r"#define A_MPI_ERRHANDLER_NULL .*")
-        pattern.append(r"#define A_MPI_INFO_NULL .*")
-        pattern.append(r"#define A_MPI_WIN_NULL .*")
-        pattern.append(r"#define A_MPI_FILE_NULL .*")
-        pattern.append(r"#define A_MPI_T_ENUM_NULL .*")
-        pattern.append(r"#define A_MPI_INFO_ENV .*")
-        pattern.append(r"#define A_MPI_STATUS_IGNORE .*")
-        pattern.append(r"#define A_MPI_STATUSES_IGNORE .*")
-        pattern.append(r"#define A_MPI_NULL_DELETE_FN .*")
-        pattern.append(r"#define A_MPI_NULL_COPY_FN .*")
-        pattern.append(r"#define A_MPI_TYPE_NULL_DELETE_FN .*")
-        pattern.append(r"#define A_MPI_TYPE_NULL_COPY_FN .*")
-        pattern.append(r"#define A_MPI_COMM_NULL_DELETE_FN .*")
-        pattern.append(r"#define A_MPI_COMM_NULL_COPY_FN .*")
-        pattern.append(r"#define A_MPI_WIN_NULL_DELETE_FN .*")
-        pattern.append(r"#define A_MPI_WIN_NULL_COPY_FN .*")
-        replacement.append(r"#define A_MPI_OP_NULL 0x0")
-        replacement.append(r"#define A_MPI_ERRHANDLER_NULL 0x0")
-        replacement.append(r"#define A_MPI_INFO_NULL 0x0")
-        replacement.append(r"#define A_MPI_WIN_NULL 0x0")
-        replacement.append(r"#define A_MPI_FILE_NULL 0x0")
-        replacement.append(r"#define A_MPI_T_ENUM_NULL 0x0")
-        replacement.append(r"#define A_MPI_INFO_ENV 0x0 ")
-        replacement.append(r"#define A_MPI_STATUS_IGNORE 0x0")
-        replacement.append(r"#define A_MPI_STATUSES_IGNORE 0x0")
-        replacement.append(r"#define A_MPI_NULL_DELETE_FN  0x0")
-        replacement.append(r"#define A_MPI_NULL_COPY_FN  0x0")
-        replacement.append(r"#define A_MPI_TYPE_NULL_DELETE_FN  0x0")
-        replacement.append(r"#define A_MPI_TYPE_NULL_COPY_FN  0x0")
-        replacement.append(r"#define A_MPI_COMM_NULL_DELETE_FN  0x0")
-        replacement.append(r"#define A_MPI_COMM_NULL_COPY_FN  0x0")
-        replacement.append(r"#define A_MPI_WIN_NULL_DELETE_FN  0x0")
-        replacement.append(r"#define A_MPI_WIN_NULL_COPY_FN  0x0")
-
-        pattern.append(
-            r"A_MPI_COMM_WORLD OA_MPI_PREDEFINED_GLOBAL\( A_MPI_Comm, ompi_mpi_comm_world\)"
+        text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.replace"
         )
-        replacement.append("A_MPI_COMM_WORLD 0x1")
-        pattern.append(
-            r"A_MPI_COMM_SELF OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Comm, ompi_mpi_comm_self\)"
-        )
-        replacement.append("A_MPI_COMM_SELF 0x2")
-        pattern.append(
-            r"#define A_MPI_GROUP_EMPTY OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Group,"
-            r" ompi_mpi_group_empty\)"
-        )
-        replacement.append("#define A_MPI_GROUP_EMPTY 0x1")
-        pattern.append(
-            r"A_MPI_MESSAGE_NO_PROC OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Message, ompi_message_no_proc\)"
-        )
-        replacement.append("A_MPI_MESSAGE_NO_PROC 0x1")
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
-        text = insert_lines(
-            [
-                r"#ifndef CCC_MPI",
-                r"#define CCC_MPI",
-                r"",
-                r"#ifndef __MPI__COMPILE__",
-                r"#define A_MPI_ MPI_",
-                r"#define A_PMPI_ PMPI_",
-                r"#endif",
-                r"typedef unsigned long size_t;",
-            ],
-            1,
-            text,
-        )
-
-        _pattern_block = """
-#define OPAL_MAX_PROCESSOR_NAME 512 /* max proc. name length */
-#define OPAL_MAX_ERROR_STRING  2048   /* max error message length */
-#define OPAL_MAX_OBJECT_NAME   1024    /* max object name length */
-"""
-        _replacement_block = """
-#define A_MPI_MAX_PROCESSOR_NAME 512 /* max proc. name length */
-#define A_MPI_MAX_ERROR_STRING  2048   /* max error message length */
-#define A_MPI_MAX_OBJECT_NAME   1024    /* max object name length */
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        ##
+        text = replacement_from_conf_file(_conf_file, text)
         _pattern_block = """
 #define A_MPI_T_ERR_INVALID             72
 #define A_MPI_T_ERR_INVALID_NAME        73
@@ -280,173 +191,6 @@ class HeaderGenerator:
 #define A_MPI_ERR_LASTCODE              A_MPI_ERR_RMA_SHARED
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-
-        pattern = []
-        replacement = []
-
-        pattern.append(r"(^#define A_MPI_MAX) .*")
-        pattern.append(r"(^#define A_MPI_MIN) .*")
-        pattern.append(r"(^#define A_MPI_SUM) .*")
-        pattern.append(r"(^#define A_MPI_PROD) .*")
-        pattern.append(r"(^#define A_MPI_LAND) .*")
-        pattern.append(r"(^#define A_MPI_BAND) .*")
-        pattern.append(r"(^#define A_MPI_LOR) .*")
-        pattern.append(r"(^#define A_MPI_BOR) .*")
-        pattern.append(r"(^#define A_MPI_LXOR) .*")
-        pattern.append(r"(^#define A_MPI_BXOR) .*")
-        pattern.append(r"(^#define A_MPI_MAXLOC) .*")
-        pattern.append(r"(^#define A_MPI_MINLOC) .*")
-        pattern.append(r"(^#define A_MPI_REPLACE) .*")
-        pattern.append(r"(^#define A_MPI_NO_OP) .*")
-        for value in range(1, 15):
-            replacement.append(r"\1 " + f"{value}")
-
-        # /* C datatypes */
-        pattern.append(r"(^#define A_MPI_DATATYPE_NULL) .*")
-        pattern.append(r"(^#define A_MPI_BYTE) .*")
-        pattern.append(r"(^#define A_MPI_PACKED) .*")
-        pattern.append(r"(^#define A_MPI_CHAR) .*")
-        pattern.append(r"(^#define A_MPI_SHORT) .*")
-        pattern.append(r"(^#define A_MPI_INT) .*")
-        pattern.append(r"(^#define A_MPI_LONG) .*")
-        pattern.append(r"(^#define A_MPI_FLOAT) .*")
-        pattern.append(r"(^#define A_MPI_DOUBLE) .*")
-        pattern.append(r"(^#define A_MPI_LONG_DOUBLE) .*")
-        pattern.append(r"(^#define A_MPI_UNSIGNED_CHAR) .*")
-        pattern.append(r"(^#define A_MPI_SIGNED_CHAR) .*")
-        pattern.append(r"(^#define A_MPI_UNSIGNED_SHORT) .*")
-        pattern.append(r"(^#define A_MPI_UNSIGNED_LONG) .*")
-        pattern.append(r"(^#define A_MPI_UNSIGNED) .*")
-        pattern.append(r"(^#define A_MPI_FLOAT_INT) .*")
-        pattern.append(r"(^#define A_MPI_DOUBLE_INT) .*")
-        pattern.append(r"(^#define A_MPI_LONG_DOUBLE_INT) .*")
-        pattern.append(r"(^#define A_MPI_LONG_INT) .*")
-        pattern.append(r"(^#define A_MPI_SHORT_INT) .*")
-        pattern.append(r"(^#define A_MPI_2INT) .*")
-        pattern.append(r"(^#define A_MPI_UB) .*")
-        pattern.append(r"(^#define A_MPI_LB) .*")
-        pattern.append(r"(^#define A_MPI_WCHAR) .*")
-        pattern.append(r"(^#define A_MPI_LONG_LONG_INT) .*")
-        pattern.append(r"(^#define A_MPI_LONG_LONG) .*")
-        pattern.append(r"(^#define A_MPI_UNSIGNED_LONG_LONG) .*")
-        pattern.append(r"(^#define A_MPI_2COMPLEX) .*")
-        pattern.append(r"(^#define A_MPI_2DOUBLE_COMPLEX) .*")
-        # /* Fortran datatype bindings */
-        pattern.append(r"(^#define A_MPI_CHARACTER) .*")
-        pattern.append(r"(^#define A_MPI_LOGICAL) .*")
-        pattern.append(r"(^#define A_MPI_LOGICAL1) .*")
-        pattern.append(r"(^#define A_MPI_LOGICAL2) .*")
-        pattern.append(r"(^#define A_MPI_LOGICAL4) .*")
-        pattern.append(r"(^#define A_MPI_LOGICAL8) .*")
-        pattern.append(r"(^#define A_MPI_INTEGER) .*")
-        pattern.append(r"(^#define A_MPI_INTEGER1) .*")
-        pattern.append(r"(^#define A_MPI_INTEGER2) .*")
-        pattern.append(r"(^#define A_MPI_INTEGER4) .*")
-        pattern.append(r"(^#define A_MPI_INTEGER8) .*")
-        pattern.append(r"(^#define A_MPI_INTEGER16) .*")
-        pattern.append(r"(^#define A_MPI_REAL) .*")
-        pattern.append(r"(^#define A_MPI_REAL4) .*")
-        pattern.append(r"(^#define A_MPI_REAL8) .*")
-        pattern.append(r"(^#define A_MPI_REAL16) .*")
-        pattern.append(r"(^#define A_MPI_DOUBLE_PRECISION) .*")
-        pattern.append(r"(^#define A_MPI_COMPLEX) .*")
-        pattern.append(r"(^#define A_MPI_COMPLEX8) .*")
-        pattern.append(r"(^#define A_MPI_COMPLEX16) .*")
-        pattern.append(r"(^#define A_MPI_COMPLEX32) .*")
-        pattern.append(r"(^#define A_MPI_DOUBLE_COMPLEX) .*")
-        pattern.append(r"(^#define A_MPI_2REAL) .*")
-        pattern.append(r"(^#define A_MPI_2DOUBLE_PRECISION) .*")
-        pattern.append(r"(^#define A_MPI_2INTEGER) .*")
-        for value in range(54):
-            replacement.append(r"\1 " + f"{value}")
-        # /* New datatypes from the MPI 2.2 standard */
-        pattern.append(r"^#define A_MPI_INT8_T .*")
-        value = 54
-        padding = 36
-        replacement.append("#define A_MPI_INT8_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_UINT8_T .*")
-        value += 1
-        replacement.append("#define A_MPI_UINT8_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_INT16_T .*")
-        value += 1
-        replacement.append("#define A_MPI_INT16_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_UINT16_T .*")
-        value += 1
-        replacement.append("#define A_MPI_UINT16_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_INT32_T .*")
-        value += 1
-        replacement.append("#define A_MPI_INT32_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_UINT32_T .*")
-        value += 1
-        replacement.append("#define A_MPI_UINT32_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_INT64_T .*")
-        value += 1
-        replacement.append("#define A_MPI_INT64_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_UINT64_T .*")
-        value += 1
-        replacement.append("#define A_MPI_UINT64_T".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_AINT .*")
-        value += 1
-        replacement.append("#define A_MPI_AINT".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_OFFSET .*")
-        value += 1
-        replacement.append("#define A_MPI_OFFSET".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_C_BOOL .*")
-        value += 1
-        replacement.append("#define A_MPI_C_BOOL".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_C_COMPLEX .*")
-        value += 1
-        replacement.append("#define A_MPI_C_COMPLEX".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_C_FLOAT_COMPLEX .*")
-        value += 1
-        replacement.append("#define A_MPI_C_FLOAT_COMPLEX".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_C_DOUBLE_COMPLEX .*")
-        value += 1
-        replacement.append("#define A_MPI_C_DOUBLE_COMPLEX".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_C_LONG_DOUBLE_COMPLEX .*")
-        value += 1
-        replacement.append("#define A_MPI_C_LONG_DOUBLE_COMPLEX".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_CXX_BOOL .*")
-        value += 1
-        replacement.append("#define A_MPI_CXX_BOOL".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_CXX_FLOAT_COMPLEX .*")
-        value += 1
-        replacement.append("#define A_MPI_CXX_FLOAT_COMPLEX".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_CXX_DOUBLE_COMPLEX .*")
-        value += 1
-        replacement.append("#define A_MPI_CXX_DOUBLE_COMPLEX".ljust(padding) + f"{value}")
-        pattern.append(r"^#define A_MPI_CXX_LONG_DOUBLE_COMPLEX .*")
-        value += 1
-        padding += 2
-        replacement.append("#define A_MPI_CXX_LONG_DOUBLE_COMPLEX".ljust(padding) + f"{value}")
-        # /* New datatypes from the 3.0 standard */
-        pattern.append(r"^#define A_MPI_COUNT .*")
-        value += 1
-        replacement.append(f"#define A_MPI_COUNT {value} ")
-
-        pattern.append(r"(^#define A_MPI_ERRORS_ARE_FATAL) .*")
-        value = 1
-        replacement.append(r"\1 " + f"{value}")
-        pattern.append(r"(^#define A_MPI_ERRORS_RETURN) .*")
-        value += 1
-        replacement.append(r"\1 " + f"{value} ")
-
-        pattern.append(r"struct mca_base_pvar_session_t \*")
-        replacement.append(r"")
-
-        pattern.append(r"OA_MPI_C_A_MPI_DUP_FN\n")
-        pattern.append(r"OA_MPI_C_A_MPI_TYPE_DUP_FN\n")
-        pattern.append(r"OA_MPI_C_A_MPI_COMM_DUP_FN\n")
-        pattern.append(r"OA_MPI_C_A_MPI_WIN_DUP_FN\n")
-        replacement.append(r" 0x1\n")
-        replacement.append(r" 0x1\n")
-        replacement.append(r" 0x1\n")
-        replacement.append(r" 0x1\n")
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
-
         _pattern_block = """
 /* MPI-2 specifies that the name "A_MPI_TYPE_NULL_DELETE_FN" (and all
    related friends) must be accessible in C, C++, and Fortran. This is
@@ -466,46 +210,34 @@ class HeaderGenerator:
         _replacement_block = """
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_TYPE_NULL_DELETE_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_TYPE_NULL_COPY_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_TYPE_DUP_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_COMM_NULL_DELETE_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_COMM_NULL_COPY_F")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_COMM_DUP_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_NULL_DELETE_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_NULL_COPY_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_DUP_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_WIN_NULL_DELETE_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_WIN_NULL_COPY_FN")
-        text = function_to_delete(text, "int OA_MPI_C_A_MPI_WIN_DUP_FN")
-
-        _pattern_block = """
-/*
- * External variables
- *
- * The below externs use the ompi_predefined_xxx_t structures to maintain
- * back compatibility between MPI library versions.
- * See ompi/communicator/communicator.h comments with struct ompi_communicator_t
- * for full explanation why we chose to use the ompi_predefined_xxx_t structure.
- */
-"""
-        _replacement_block = """"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        _pattern_block = """
-/*
- * Following are the C++/C99 datatypes
- */
-"""
-        _replacement_block = """"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        _pattern_block = """
-/*
- * Following are the Fortran datatypes
- */
-"""
-        _replacement_block = """"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-
+        list_of_functions_to_delete = [
+            "int OA_MPI_C_A_MPI_TYPE_NULL_DELETE_FN",
+            "int OA_MPI_C_A_MPI_TYPE_NULL_COPY_FN",
+            "int OA_MPI_C_A_MPI_TYPE_DUP_FN",
+            "int OA_MPI_C_A_MPI_COMM_NULL_DELETE_FN",
+            "int OA_MPI_C_A_MPI_COMM_NULL_COPY_F",
+            "int OA_MPI_C_A_MPI_COMM_DUP_FN",
+            "int OA_MPI_C_A_MPI_NULL_DELETE_FN",
+            "int OA_MPI_C_A_MPI_NULL_COPY_FN",
+            "int OA_MPI_C_A_MPI_DUP_FN",
+            "int OA_MPI_C_A_MPI_WIN_NULL_DELETE_FN",
+            "int OA_MPI_C_A_MPI_WIN_NULL_COPY_FN",
+            "int OA_MPI_C_A_MPI_WIN_DUP_FN",
+        ]
+        for _function in list_of_functions_to_delete:
+            text = function_to_delete(text, _function)
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_0.replace"
+        )
+        text = delete_bloc_from_conf_file(_conf_file, text)
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_1.replace"
+        )
+        text = delete_bloc_from_conf_file(_conf_file, text)
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_2.replace"
+        )
+        text = delete_bloc_from_conf_file(_conf_file, text)
         text = delete_line_from_pattern(r"extern struct ompi_predefined_", text)
         text = delete_line_from_pattern(r"extern A_MPI_Fint *A_MPI_F_STATUS_IGNORE;", text)
         text = delete_line_from_pattern(r"extern A_MPI_Fint *A_MPI_F_STATUSES_IGNORE;", text)
@@ -515,27 +247,14 @@ class HeaderGenerator:
             r" A_MPI_LOGICAL1 */",
             text,
         )
-
-        _pattern_block = """
-    /* A_MPI_Handler_function is deprecated, but we don't mark it as
-       such because otherwise the A_MPI_Errhandler_create() declaration
-       would cause a warning to be issued */
-"""
-        _replacement_block = """
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-
-        text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
-
-        _pattern_block = """
-    /* This is a little hackish, but errhandler.h needs space for a
-       A_MPI_File_errhandler_fn.  While it could just be removed, this
-       allows us to maintain a stable ABI within OMPI, at least for
-       apps that don't use MPI I/O. */
-"""
-        _replacement_block = """
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_3.replace"
+        )
+        text = delete_bloc_from_conf_file(_conf_file, text)
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_4.replace"
+        )
+        text = delete_bloc_from_conf_file(_conf_file, text)
 
         _pattern_block = """
 }
@@ -570,142 +289,60 @@ class HeaderGenerator:
 #define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-
-        pattern = []
-        replacement = []
-        pattern.append(r"typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn\n")
-        replacement.append("typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn;")
-        pattern.append(r"ompi_file_errhandler_fn")
-        replacement.append(r"A_MPI_File_errhandler_fn")
-
-        pattern.append(r"^typedef A_MPI_Win_errhandler_function A_MPI_Win_errhandler_fn")
-        pattern.append(r"^  int A_MPI_Address\(void \*location, A_MPI_Aint \*address\)")
-        pattern.append(r"^  int A_MPI_Attr_delete\(A_MPI_Comm comm, int keyval\)")
-        pattern.append(
-            r"^  int A_MPI_Attr_get\(A_MPI_Comm comm, int keyval, void \*attribute_val, int"
-            r" \*flag\)"
-        )
-        pattern.append(
-            r"^  int A_MPI_Attr_put\(A_MPI_Comm comm, int keyval, void \*attribute_val\)"
-        )
-        pattern.append(r"A_MPI_Errhandler \*errhandler\)$")
-        pattern.append(r"A_MPI_Errhandler errhandler\)$")
-        pattern.append(r"^                                     int \*keyval, void \*extra_state\)")
-        pattern.append(r"^  int A_MPI_Keyval_free\(int \*keyval\)")
-        pattern.append(r"^  int A_MPI_Type_extent\(A_MPI_Datatype type, A_MPI_Aint \*extent\)")
-        pattern.append(r"^  int A_MPI_Type_lb\(A_MPI_Datatype type, A_MPI_Aint \*lb\)")
-        pattern.append(r"^                                   A_MPI_Datatype \*newtype\)")
-        pattern.append(r"^  int A_MPI_Type_ub\(A_MPI_Datatype mtype, A_MPI_Aint \*ub\)")
-        pattern.append(r"^  int A_PMPI_Address\(void \*location, A_MPI_Aint \*address\)")
-        pattern.append(r"^  int A_PMPI_Attr_delete\(A_MPI_Comm comm, int keyval\)")
-        pattern.append(
-            r"^  int A_PMPI_Attr_get\(A_MPI_Comm comm, int keyval, void \*attribute_val, int"
-            r" \*flag\)"
-        )
-        pattern.append(
-            r"^  int A_PMPI_Attr_put\(A_MPI_Comm comm, int keyval, void \*attribute_val\)"
-        )
-        pattern.append(r"^                                      int \*keyval, void \*extra_state\)")
-        pattern.append(r"^  int A_PMPI_Keyval_free\(int \*keyval\)")
-        pattern.append(
-            r"^                                      A_MPI_Datatype oldtype, A_MPI_Datatype"
-            r" \*newtype\)"
-        )
-        pattern.append(r"^  int A_PMPI_Type_lb\(A_MPI_Datatype type, A_MPI_Aint \*lb\)")
-        pattern.append(r"^                                    A_MPI_Datatype \*newtype\)")
-        pattern.append(r"^  int A_PMPI_Type_ub\(A_MPI_Datatype mtype, A_MPI_Aint \*ub\)")
-        pattern.append(r"int A_PMPI_Type_extent\(A_MPI_Datatype type, A_MPI_Aint \*extent\)$")
-        pattern.append(r"A_MPI_Datatype oldtype, A_MPI_Datatype \*newtype\)$")
-
-        replacement.append("typedef A_MPI_Win_errhandler_function A_MPI_Win_errhandler_fn;")
-        replacement.append("  int A_MPI_Address(void *location, A_MPI_Aint *address);")
-        replacement.append("  int A_MPI_Attr_delete(A_MPI_Comm comm, int keyval);")
-        replacement.append(
-            "  int A_MPI_Attr_get(A_MPI_Comm comm, int keyval, void *attribute_val, int *flag);"
-        )
-        replacement.append(
-            "  int A_MPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val);"
-        )
-        replacement.append("A_MPI_Errhandler *errhandler);")
-        replacement.append("A_MPI_Errhandler errhandler);")
-        replacement.append("                                     int *keyval, void *extra_state);")
-        replacement.append("  int A_MPI_Keyval_free(int *keyval);")
-        replacement.append("  int A_MPI_Type_extent(A_MPI_Datatype type, A_MPI_Aint *extent);")
-        replacement.append("  int A_MPI_Type_lb(A_MPI_Datatype type, A_MPI_Aint *lb);")
-        replacement.append("                                   A_MPI_Datatype *newtype);")
-        replacement.append("  int A_MPI_Type_ub(A_MPI_Datatype mtype, A_MPI_Aint *ub);")
-        replacement.append("  int A_PMPI_Address(void *location, A_MPI_Aint *address);")
-        replacement.append("  int A_PMPI_Attr_delete(A_MPI_Comm comm, int keyval);")
-        replacement.append(
-            "  int A_PMPI_Attr_get(A_MPI_Comm comm, int keyval, void *attribute_val, int *flag);"
-        )
-        replacement.append(
-            "  int A_PMPI_Attr_put(A_MPI_Comm comm, int keyval, void *attribute_val);"
-        )
-        replacement.append("                                      int *keyval, void *extra_state);")
-        replacement.append("  int A_PMPI_Keyval_free(int *keyval);")
-        replacement.append(
-            "                                      A_MPI_Datatype oldtype, A_MPI_Datatype"
-            " *newtype);"
-        )
-        replacement.append("  int A_PMPI_Type_lb(A_MPI_Datatype type, A_MPI_Aint *lb);")
-        replacement.append("                                    A_MPI_Datatype *newtype);")
-        replacement.append("  int A_PMPI_Type_ub(A_MPI_Datatype mtype, A_MPI_Aint *ub);")
-        replacement.append(r"int A_PMPI_Type_extent(A_MPI_Datatype type, A_MPI_Aint *extent);")
-        replacement.append("A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);")
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
-
         lines_to_delete = [
             "typedef A_MPI_File_errhandler_fn A_MPI_File_errhandler_fn",
             "struct ompi_file_t;",
             "typedef void (A_MPI_File_errhandler_fn)(struct ompi_file_t**, int *, ...);",
         ]
         text = delete_lines(lines_to_delete, text)
-        _pattern_block = """
-
-
-
-
-
-
-
-
-
-
-
-
-/* New datatypes from the MPI 2.2 standard */
-
-
-
-
-"""
-        _replacement_block = """"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_5.replace"
+        )
+        text = delete_bloc_from_conf_file(_conf_file, text)
+        text = insert_lines(
+            [
+                r"#ifndef CCC_MPI",
+                r"#define CCC_MPI",
+                r"",
+                r"#ifndef __MPI__COMPILE__",
+                r"#define A_MPI_ MPI_",
+                r"#define A_PMPI_ PMPI_",
+                r"#endif",
+                r"typedef unsigned long size_t;",
+            ],
+            1,
+            text,
+        )
         return text
 
     def _generate_app_mpih(self, gen_file):
         log.debug("Running _generate_app_mpih (HeaderGenerator)")
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._common_generate_app_mpih(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _generate_run_mpioh(self, gen_file):
         log.debug("Running _generate_run_mpioh (HeaderGenerator)")
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._replace_mpi_with_rmpi(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def generate(self):
+        """
+        Generate MPI header files.
+
+        This method generates MPI header files by calling specific methods.
+
+        Returns:
+            None
+
+        """
         log.debug("Running generate (HeaderGenerator)")
         self._generate_run_mpih(os.path.join(self.dir_output, self._run_mpi_header_file))
         self._generate_run_mpioh(os.path.join(self.dir_output, self._run_mpio_header_file))
