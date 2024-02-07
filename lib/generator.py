@@ -218,9 +218,10 @@ if "__main__" == __name__:
     """  # noqa: E501
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
-    args = {"interface_header_dir": arguments["--interface_header_dir"],
-            "preload_header_dir": arguments["--preload_header_dir"]
-            }
+    args = {
+        "interface_header_dir": arguments["--interface_header_dir"],
+        "preload_header_dir": arguments["--preload_header_dir"],
+    }
     run = Generator(**args)
     run.generate()
     log.info("End")
