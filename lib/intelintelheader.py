@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+IntelIntelHeader module for generating Intel-Intel preload header files.
+"""
 
 import os
 import shutil
@@ -6,13 +9,20 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from intelheader import IntelHeaderGenerator
-from textoperator import delete_lines, delete_line_from_pattern, list_pattern_replacement
+from textoperator import (
+    delete_lines,
+    delete_line_from_pattern,
+    replacement_from_conf_file,
+)
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
 class IntelIntelHeaderGenerator(IntelHeaderGenerator):
+    """
+    IntelIntelHeader class for generating Intel-Intel preload header files.
+    """
 
     def __init__(
         self,
@@ -24,71 +34,11 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
 
     def _preload_exception_header_run_mpih(self, text):
         log.debug("Running _preload_exception_header_run_mpih (IntelIntelHeaderGenerator).")
-        pattern = []
-        replacement = []
-        decalage = 0
-        pattern.append(r"MPIR_Win_flavor")
-        replacement.append(r"R_MPIR_Win_flavor")
-        pattern.append(r"MPIR_Win_model")
-        replacement.append(r"R_MPIR_Win_model")
-        pattern.append(r"MPIR_Topo_type")
-        replacement.append(r"R_MPIR_Topo_type")
-        pattern.append(r"MPIR_ERRORS_THROW_EXCEPTIONS")
-        replacement.append(r"R_MPIR_ERRORS_THROW_EXCEPTIONS")
-        pattern.append(r"MPIR_Combiner_enum")
-        replacement.append(r"R_MPIR_Combiner_enum")
-        pattern.append(r"MPIR_T_verbosity_t")
-        replacement.append(r"R_MPIR_T_verbosity_t")
-        pattern.append(r"MPIX_T_VERBOSITY_INVALID")
-        replacement.append(r"R_MPIX_T_VERBOSITY_INVALID")
-        pattern.append(r"MPIR_T_bind_t")
-        replacement.append(r"R_MPIR_T_bind_t")
-        pattern.append(r"MPIR_T_scope_t")
-        replacement.append(r"R_MPIR_T_scope_t")
-        pattern.append(r"MPIX_T_SCOPE_INVALID")
-        replacement.append(r"R_MPIX_T_SCOPE_INVALID")
-        pattern.append(r"MPIR_T_pvar_class_t")
-        replacement.append(r"R_MPIR_T_pvar_class_t")
-        pattern.append(r"MPIX_T_PVAR_CLASS_INVALID")
-        replacement.append(r"R_MPIX_T_PVAR_CLASS_INVALID")
-        pattern.append(r"MPIR_T_PVAR_CLASS_FIRST")
-        replacement.append(r"R_MPIR_T_PVAR_CLASS_FIRST")
-        pattern.append(r"MPIR_T_PVAR_CLASS_LAST")
-        replacement.append(r"R_MPIR_T_PVAR_CLASS_LAST")
-        pattern.append(r"MPIR_T_PVAR_CLASS_NUMBER")
-        replacement.append(r"R_MPIR_T_PVAR_CLASS_NUMBER")
-        pattern.append(r"MPIX_Grequest_poll_function")
-        replacement.append(r"R_MPIX_Grequest_poll_function")
-        pattern.append(r"MPIX_Grequest_wait_function")
-        replacement.append(r"R_MPIX_Grequest_wait_function")
-        pattern.append(r" MPIX_Grequest_class_create")
-        # L'espace est nécessaire pour ne pas modifier PMPIX_Grequest_.*
-        replacement.append(r" R_MPIX_Grequest_class_create")
-        pattern.append(r" MPIX_Grequest_class_allocate")
-        replacement.append(r" R_MPIX_Grequest_class_allocate")
-        pattern.append(r" MPIX_Grequest_start")
-        replacement.append(r" R_MPIX_Grequest_start")
-        #
-        pattern.append(r"PMPIX_Grequest_class_create")
-        replacement.append(r"R_PMPIX_Grequest_class_create")
-        pattern.append(r"PMPIX_Grequest_class_allocate")
-        replacement.append(r"R_PMPIX_Grequest_class_allocate")
-        pattern.append(r"PMPIX_Grequest_start")
-        replacement.append(r"R_PMPIX_Grequest_start")
-        pattern.append(r"PMPIX_Mutex_create")
-        replacement.append(r"R_PMPIX_Mutex_create")
-        pattern.append(r"PMPIX_Mutex_free")
-        replacement.append(r"R_PMPIX_Mutex_free")
-        pattern.append(r"PMPIX_Mutex_lock")
-        replacement.append(r"R_PMPIX_Mutex_lock")
-        pattern.append(r"PMPIX_Mutex_unlock")
-        replacement.append(r"R_PMPIX_Mutex_unlock")
-        # Ligne modifiée durant la génération des header de l'interface
-        pattern.append(r"//(#define R_MPI_DUP_FN.*)")
-        replacement.append(r"\1")
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        _conf_file = os.path.join(
+            self.wi4mpi_root,
+            "lib/etc/intelintelheader._preload_exception_header_run_mpih.replace",
+        )
+        text = replacement_from_conf_file(_conf_file, text)
         # Lignes modifiées durant la génération des header de l'interface
         _pattern_block = """
 /* See 4.12.5 for R_MPI_F_STATUS(ES)_IGNORE */
@@ -125,37 +75,24 @@ int R_MPI_Pcontrol(int level, ...);
     def _generate_run_mpih(self, gen_file):
         log.debug("Running _generate_run_mpih (IntelIntelHeaderGenerator).")
         super()._generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._preload_exception_header_run_mpih(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _common_generate_app_mpih(self, text):
         log.debug("Running _common_generate_app_mpih (IntelIntelHeaderGenerator).")
-        pattern = []
-        replacement = []
-        decalage = 0
-
-        pattern.append(r"([ ()*_$\t])R_")
-        replacement.append(r"\1A_")
-        pattern.append(r"MPIX_T_BIND_INVALID")
-        replacement.append(r"A_MPIX_T_BIND_INVALID")
-        pattern.append(r"A_MPIX_Grequest_")
-        replacement.append(r"MPIX_Grequest_")
-        pattern.append(r"mpich_")
-        replacement.append(r"a_mpich_")
-        pattern.append(r"\( void")
-        replacement.append(r"(void")
-        pattern.append(r"A_PMPIX_")
-        replacement.append(r"PMPIX_")
-        pattern.append(r'#include "run_mpio.h"')
-        replacement.append(r'#include "app_mpio.h"')
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        text = replacement_from_conf_file(
+            os.path.join(
+                self.wi4mpi_root,
+                "lib",
+                "etc",
+                "intelintelheader._common_generate_app_mpih.replace",
+            ),
+            text,
+        )
         _pattern_block = """
 /* Note that we may need to define a @PCONTROL_LIST@ depending on whether
    stdargs are supported */
@@ -174,34 +111,27 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
 
     def _generate_app_mpih(self, gen_file):
         log.debug(
-            "Running _generate_app_mpih (IntelIntelHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running _generate_app_mpih (IntelIntelHeaderGenerator). File: {gen_file}."
         )
         self._generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._common_generate_app_mpih(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _common_generate_app_mpioh(self, text):
         log.debug("Running _common_generate_app_mpioh (IntelIntelHeaderGenerator).")
-        pattern = []
-        replacement = []
-        decalage = 0
-
-        pattern.append(r"([ ()*_$\t])R_")
-        replacement.append(r"\1A_")
-        pattern.append(r"MPIO_INCLUDE")
-        replacement.append(r"A_MPIO_INCLUDE")
-        pattern.append(r"^R_")
-        replacement.append(r"A_")
-        pattern.append(r'#include "run_mpi.h"')
-        replacement.append(r'#include "app_mpi.h"')
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        text = replacement_from_conf_file(
+            os.path.join(
+                self.wi4mpi_root,
+                "lib",
+                "etc",
+                "intelintelheader._common_generate_app_mpioh.replace",
+            ),
+            text,
+        )
 
         # Commented lines to remove
         text = delete_lines(
@@ -219,22 +149,18 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
 
     def _generate_app_mpioh(self, gen_file):
         log.debug(
-            "Running _generate_app_mpioh (IntelIntelHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running _generate_app_mpioh (IntelIntelHeaderGenerator). File: {gen_file}."
         )
         self._generate_run_mpioh(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._common_generate_app_mpioh(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def __aux_generate_run_mpioh(self, text):
         log.debug("Running __aux_generate_run_mpioh (IntelIntelHeaderGenerator).")
-        pattern = []
-        replacement = []
-        decalage = 0
-        # Commented lines to remove
         text = delete_line_from_pattern(
             "/* Also rename the MPIO routines to get the MPI versions */", text
         )
@@ -242,26 +168,28 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
         text = delete_line_from_pattern("#define MPIO_Test R_MPI_Test", text)
         text = delete_line_from_pattern("#define PMPIO_Wait R_PMPI_Wait", text)
         text = delete_line_from_pattern("#define PMPIO_Test R_PMPI_Test", text)
-
-        pattern.append(r" MPIO_")
-        replacement.append(r" R_MPIO_")
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        text = replacement_from_conf_file(
+            os.path.join(
+                self.wi4mpi_root,
+                "lib",
+                "etc",
+                "intelintelheader.__aux_generate_run_mpioh.replace",
+            ),
+            text,
+        )
 
         return text
 
     def __generate_run_mpioh(self, gen_file):
         log.debug(
-            "Running __generate_run_mpioh (IntelIntelHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running __generate_run_mpioh (IntelIntelHeaderGenerator). File: {gen_file}."
         )
         super()._generate_run_mpioh(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self.__aux_generate_run_mpioh(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def generate(self):
