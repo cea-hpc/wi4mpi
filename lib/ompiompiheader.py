@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+OmpiOmpiHeader module for generating Ompi-Ompi preload header files.
+"""
 
 import os
 import shutil
@@ -12,15 +15,17 @@ log = getLogger("header_logger")
 
 
 class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
+    """
+    OmpiOmpiHeader class for generating Ompi-Ompi preload header files.
+    """
+
     def __init__(
         self,
         dir_input="src/preload/header/scripts/ompi_ompi_headers",
         dir_output="src/preload/header/_OMPI_OMPI_gen",
     ):
         log.info("Generation of OMPI_OMPI headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _ompi_ompi_run_exception(self, text):
         pattern = []
@@ -58,11 +63,11 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
 
     def _generate_run_mpih(self, gen_file: str) -> None:
         super()._generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._ompi_ompi_run_exception(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _run_to_app(self, text: str) -> str:
@@ -86,11 +91,11 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
 
     def _generate_app_mpih(self, gen_file: str) -> None:
         self._generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._run_to_app(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def generate(self):
