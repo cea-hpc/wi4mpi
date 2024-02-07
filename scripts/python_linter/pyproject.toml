@@ -2,6 +2,7 @@
 
 line-length = 100
 preview = true
+required-version = "23"
 
 [tool.pylint.main]
 # Analyse import fallback blocks. This can be used to support both Python 2 and 3
@@ -266,7 +267,7 @@ min-public-methods = 2
 
 [tool.pylint.exceptions]
 # Exceptions that will emit a warning when caught.
-overgeneral-exceptions = ["BaseException", "Exception"]
+overgeneral-exceptions = ["builtin.BaseException", "builtin.Exception"]
 
 [tool.pylint.format]
 # Expected format of line ending, e.g. empty (any line ending), LF or CRLF.
