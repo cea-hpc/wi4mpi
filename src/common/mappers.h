@@ -944,7 +944,17 @@ static inline void request_pers_array_delete(A_MPI_Request *request, R_MPI_Reque
 #include <sys/mman.h>
 #if !defined (_WI4MPI_GCC_JIT)
 extern int user_func_resolved(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
-extern void user_fn_wrapper_template(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
+// Workaround for NVHPC
+// C Standard do not allow conversion between pointer to function and void*
+// POSIX do require it
+// NVHPC only adhere to C Standard and not to POSIX, therefore we "lie" to get the address of the function.
+//    Instead of declaring the function itself, we declare an object with the name and takes its address.
+//    Otherwise, recent version of NVHPC would crash on the memcpy call.
+//    We keep the function declaration in comment for reference.
+// The same trick is use for every similar mapper (3 more in this file and one in manual_wrapper.h)
+//
+//extern void user_fn_wrapper_template(void *a,void *b,int *c,R_MPI_Datatype *d,void (*pf)(void *in,void *out,int *len,A_MPI_Datatype *data_type));
+extern void *user_fn_wrapper_template;
 #endif
 static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_function **fr)
 {
@@ -982,49 +992,52 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),user_fn_wrapper_template,0x100);
+    memcpy(((char *)ptr+0x10),&user_fn_wrapper_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
     ((void **)ptr)[1]=user_func_resolved;
-    *fr=ptr+0x10;
+    *fr=((char*)ptr)+0x10;
 #endif
 }
 
 #if !defined(_WI4MPI_GCC_JIT)
 extern int datarep_extent_func_resolved(R_MPI_Datatype a, R_MPI_Aint *b, void *c, int (*pf)(A_MPI_Datatype data_type, A_MPI_Aint *file_extent, void *extra_state));
-extern void user_datarep_extent_function_template(R_MPI_Datatype a, R_MPI_Aint *b, void *c, int (*pf)(A_MPI_Datatype data_type, A_MPI_Aint *file_extent, void *extra_state));
+//extern void user_datarep_extent_function_template(R_MPI_Datatype a, R_MPI_Aint *b, void *c, int (*pf)(A_MPI_Datatype data_type, A_MPI_Aint *file_extent, void *extra_state));
+extern void *user_datarep_extent_function_template;
 
 static inline void datarep_extent_function_converter_a2r(A_MPI_Datarep_extent_function **fa, R_MPI_Datarep_extent_function **fr)
 {
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),user_datarep_extent_function_template,0x100);
+    memcpy(((char *)ptr+0x10),&user_datarep_extent_function_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
     ((void **)ptr)[1]=datarep_extent_func_resolved;
-    *fr=ptr+0x10;
+    *fr=(char*)ptr+0x10;
 }
 
 extern int datarep_conversion_func_resolved(void *a, R_MPI_Datatype b, int c, void *d, R_MPI_Offset e, void *f, int (*pf)(void *userbuf, A_MPI_Datatype datatype, int count, void *filebuf, A_MPI_Offset posistion, void *extra_state));
-extern void user_datarep_conversion_function_template(void *a, R_MPI_Datatype b, int c, void *d, R_MPI_Offset e, void *f, int (*pf)(void *userbuf, A_MPI_Datatype datatype, int count, void *filebuf, A_MPI_Offset posistion, void *extra_state));
+//extern void user_datarep_conversion_function_template(void *a, R_MPI_Datatype b, int c, void *d, R_MPI_Offset e, void *f, int (*pf)(void *userbuf, A_MPI_Datatype datatype, int count, void *filebuf, A_MPI_Offset posistion, void *extra_state));
+extern void *user_datarep_conversion_function_template;
 
 static inline void datarep_conversion_function_a2r(A_MPI_Datarep_conversion_function **fa,R_MPI_Datarep_conversion_function **fr)
 {
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),user_datarep_conversion_function_template,0x100);
+    memcpy(((char *)ptr+0x10),&user_datarep_conversion_function_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
     ((void **)ptr)[1]=datarep_conversion_func_resolved;
-    *fr=ptr+0x10;
+    *fr=(char*)ptr+0x10;
 }
 
-extern int user_qrequest_query_function_template(void *a, R_MPI_Status *b, int (*pf)(void *extra_state, A_MPI_Status *status));
+//extern int user_qrequest_query_function_template(void *a, R_MPI_Status *b, int (*pf)(void *extra_state, A_MPI_Status *status));
+extern void* user_qrequest_query_function_template;
 extern int qrequest_query_func_resolved(void *a, R_MPI_Status *b, int (*pf)(void *extra_state, A_MPI_Status *status));
 
 static inline void grequest_query_fn_a2r(A_MPI_Grequest_query_function **fa, R_MPI_Grequest_query_function **fr)
@@ -1032,12 +1045,12 @@ static inline void grequest_query_fn_a2r(A_MPI_Grequest_query_function **fa, R_M
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),user_qrequest_query_function_template,0x100);
+    memcpy(((char *)ptr+0x10),&user_qrequest_query_function_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
     ((void **)ptr)[1]=qrequest_query_func_resolved;
-    *fr=ptr+0x10;
+    *fr=(char*)ptr+0x10;
 }
 
 #endif
