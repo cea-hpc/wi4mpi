@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+MpichHeader module for generating Mpich interface header files.
+"""
 
 import os
 from logging import getLogger
@@ -10,6 +13,10 @@ log = getLogger("header_logger")
 
 
 class MpichHeaderGenerator(IntelHeaderGenerator):
+    """
+    MpichHeaderGenerator class for generating Mpich interface header files.
+    """
+
     def __init__(
         self,
         dir_input="src/interface/header/scripts/mpich_headers",

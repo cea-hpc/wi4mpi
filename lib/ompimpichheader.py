@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+OmpiMpichHeader module for generating Ompi-Mpich preload header files.
+"""
 
 import os
 from logging import getLogger
@@ -10,12 +13,14 @@ log = getLogger("header_logger")
 
 
 class OmpiMpichHeaderGenerator(OmpiIntelHeaderGenerator):
+    """
+    OmpiMpichHeaderGenerator class for generating Ompi-Mpich preload header files.
+    """
+
     def __init__(
         self,
         dir_input="src/preload/header/scripts/ompi_mpich_headers",
         dir_output="src/preload/header/_OMPI_MPICH_gen",
     ):
         log.info("Generation of OMPI_MPICH headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)

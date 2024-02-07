@@ -16,8 +16,7 @@ from textoperator import (
     replacement_from_conf_file,
 )
 
-fileConfig(os.path.join(os.path.dirname(
-    os.path.abspath(__file__)), "logging.conf"))
+fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
@@ -25,6 +24,7 @@ class OmpiHeaderGenerator(HeaderGenerator):
     """
     OmpiHeaderGenerator class for generating Ompi-specific header files.
     """
+
     def __init__(
         self,
         dir_input="src/interface/header/scripts/ompi_headers",
@@ -36,22 +36,22 @@ class OmpiHeaderGenerator(HeaderGenerator):
     def _generate_wrapper_fh(self, gen_file):
         super()._generate_wrapper_fh(gen_file)
         if not os.path.exists(os.path.join(self.dir_output, "wrapper_f.h")):
-            log.warning(
-                lambda: f'Using {os.path.join(self.dir_input, "wrapper_f.h")}')
-            shutil.copy2(os.path.join(self.dir_input,
-                         "wrapper_f.h"), self.dir_output)
+            log.warning(lambda: f'Using {os.path.join(self.dir_input, "wrapper_f.h")}')
+            shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), self.dir_output)
 
     def _replace_mpi_with_rmpi(self, text: str) -> str:
 
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
-            text, decalage = replacement_from_conf_file(os.path.join(
-                self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.replace"),
+            text, decalage = replacement_from_conf_file(
+                os.path.join(self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.replace"),
                 text,
                 shift=True,
             )
         else:
-            text, decalage = replacement_from_conf_file(os.path.join(
-                self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.ompiompi.replace"),
+            text, decalage = replacement_from_conf_file(
+                os.path.join(
+                    self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.ompiompi.replace"
+                ),
                 text,
                 shift=True,
             )
@@ -121,8 +121,7 @@ class OmpiHeaderGenerator(HeaderGenerator):
 #define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 """
-        text = re.sub(re.escape(_pattern_block),
-                      _replacement_block, text, flags=re.DOTALL)
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
             text = delete_lines(

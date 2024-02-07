@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+IntelMpichHeader module for generating Intel-Mpich preload header files.
+"""
 
 import os
 from logging import getLogger
@@ -10,6 +13,10 @@ log = getLogger("header_logger")
 
 
 class IntelMpichHeaderGenerator(IntelIntelHeaderGenerator):
+    """
+    IntelMpichHeaderGenerator class for generating Intel-Mpich preload header files.
+    """
+
     def __init__(
         self,
         dir_input="src/preload/header/scripts/intel_intel_headers",
