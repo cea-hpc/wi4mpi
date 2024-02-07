@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+IntelOmpiHeader module for generating Intel-Ompi preload header files.
+"""
 
 import os
 import shutil
@@ -6,13 +9,20 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from intelheader import IntelHeaderGenerator
-from textoperator import delete_lines
+from textoperator import (
+    delete_lines,
+    replacement_from_conf_file,
+)
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
 class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
+    """
+    IntelOmpiHeader class for generating Intel-Ompi preload header files.
+    """
+
     def __init__(
         self,
         dir_input="src/preload/header/scripts/intel_ompi_headers",
@@ -96,66 +106,30 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
 
     def __generate_app_mpih(self, gen_file):
         log.debug(
-            "Running __generate_app_mpih (IntelOmpiHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running __generate_app_mpih (IntelOmpiHeaderGenerator). File: {gen_file}."
         )
         self._intel_generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._common_generate_app_mpih(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def ompi_replace_mpi_with_rmpi(self, text: str) -> str:
-        pattern = []
-        replacement = []
-        decalage = 0
+        """
+        Replace occurrences of MPI with RMPI in the given text.
 
-        pattern.append(r"MPI_")
-        replacement.append(r"R_MPI_")
-        pattern.append(r"OR_MPI_")
-        replacement.append(r"OMPI_")
-        pattern.append(r"PR_MPI_")
-        replacement.append(r"R_PMPI_")
-        pattern.append(r'#    include "mpi_portable_platform.h"')
-        replacement.append(r'//#    include "mpi_portable_platform.h"')
-        pattern.append(r"MPIO")
-        replacement.append(r"R_MPIO")
-        pattern.append(r"#define R_MPI_NULL_DELETE_FN OMPI_C_R_MPI_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_NULL_DELETE_FN OMPI_C_MPI_NULL_DELETE_FN")
-        pattern.append(r"#define R_MPI_NULL_COPY_FN OMPI_C_R_MPI_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_NULL_COPY_FN OMPI_C_MPI_NULL_COPY_FN")
-        pattern.append(r"const ")
-        replacement.append(r"")
-        pattern.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_FAMILYID .*")
-        replacement.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_FAMILYID 2")
-        pattern.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_VERSION .*")
-        replacement.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_VERSION 1474738278")
-        pattern.append(r"#define OPAL_HAVE_ATTRIBUTE_DEPRECATED_ARGUMENT .*")
-        replacement.append(r"#define OPAL_HAVE_ATTRIBUTE_DEPRECATED_ARGUMENT 0")
-        pattern.append(r"#define R_MPI_TYPE_NULL_DELETE_FN OMPI_C_R_MPI_TYPE_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_TYPE_NULL_DELETE_FN OMPI_C_MPI_TYPE_NULL_DELETE_FN")
-        pattern.append(r"#define R_MPI_TYPE_NULL_COPY_FN OMPI_C_R_MPI_TYPE_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_TYPE_NULL_COPY_FN OMPI_C_MPI_TYPE_NULL_COPY_FN")
-        pattern.append(r"#define R_MPI_TYPE_DUP_FN OMPI_C_R_MPI_TYPE_DUP_FN")
-        replacement.append(r"#define R_MPI_TYPE_DUP_FN OMPI_C_MPI_TYPE_DUP_FN")
-        pattern.append(r"#define R_MPI_COMM_NULL_DELETE_FN OMPI_C_R_MPI_COMM_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_COMM_NULL_DELETE_FN OMPI_C_MPI_COMM_NULL_DELETE_FN")
-        pattern.append(r"#define R_MPI_COMM_NULL_COPY_FN OMPI_C_R_MPI_COMM_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_COMM_NULL_COPY_FN OMPI_C_MPI_COMM_NULL_COPY_FN")
-        pattern.append(r"#define R_MPI_WIN_NULL_DELETE_FN OMPI_C_R_MPI_WIN_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_WIN_NULL_DELETE_FN OMPI_C_MPI_WIN_NULL_DELETE_FN")
-        pattern.append(r"#define R_MPI_WIN_NULL_COPY_FN OMPI_C_R_MPI_WIN_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_WIN_NULL_COPY_FN OMPI_C_MPI_WIN_NULL_COPY_FN")
-        pattern.append(r"#define R_MPI_WIN_DUP_FN OMPI_C_R_MPI_WIN_DUP_FN")
-        replacement.append(r"#define R_MPI_WIN_DUP_FN OMPI_C_MPI_WIN_DUP_FN")
-        pattern.append(r"OMPI_C_R_MPI")
-        replacement.append("OMPI_C_MPI")
+        Args:
+            text (str): The input text where MPI occurrences will be replaced.
 
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            log.debug(_pattern + " => " + _replacement)
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        Returns:
+            str: The modified text with MPI replaced by RMPI.
+        """
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/intelompiheader.ompi_replace_mpi_with_rmpi.replace"
+        )
+        text = replacement_from_conf_file(_conf_file, text)
 
         _pattern = """
 OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
@@ -166,7 +140,6 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
 #define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */"""
         text = re.sub(re.escape(_pattern), _replacement, text, flags=re.DOTALL)
-        decalage = len(_replacement.split("\n")) - len(_pattern.split("\n"))
 
         return text
 
@@ -184,15 +157,15 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
         """  # noqa: E501
         log.debug("Running _generate_run_mpih (HeaderGenerator).")
         try:
-            with open(gen_file, "r") as _file:
+            with open(gen_file, "r", encoding="utf-8") as _file:
                 _content = _file.read()
                 _new_content = self.ompi_replace_mpi_with_rmpi(_content)
-            with open(gen_file, "w") as _file:
+            with open(gen_file, "w", encoding="utf-8") as _file:
                 _file.write(_new_content)
         except FileNotFoundError:
-            log.error(f"The file '{gen_file}' does not exist.")
-        except Exception as e:
-            log.error(f"An error occurred: {str(e)}")
+            log.error(lambda: f"The file '{gen_file}' does not exist.")
+        except Exception:
+            log.error("An error occurred in _generate_run_mpih.")
 
     def _common_generate_app_mpioh(self, text):
         log.debug("Running _common_generate_app_mpioh (IntelIntelHeaderGenerator).")
@@ -213,14 +186,14 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
 
     def _generate_app_mpioh(self, gen_file):
         log.debug(
-            "Running _generate_app_mpioh (IntelOmpiHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running _generate_app_mpioh (IntelOmpiHeaderGenerator). File: {gen_file}."
         )
         self._generate_run_mpioh(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._common_generate_app_mpioh(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def generate(self):
