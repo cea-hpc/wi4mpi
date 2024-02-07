@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+OmpiHeader module for generating Ompi-specific header files.
+"""
 
 import os
 import shutil
@@ -6,98 +9,52 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from header import HeaderGenerator
-from textoperator import delete_lines, insert_lines, function_to_delete
+from textoperator import (
+    delete_lines,
+    insert_lines,
+    function_to_delete,
+    replacement_from_conf_file,
+)
 
-fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
+fileConfig(os.path.join(os.path.dirname(
+    os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
 class OmpiHeaderGenerator(HeaderGenerator):
+    """
+    OmpiHeaderGenerator class for generating Ompi-specific header files.
+    """
     def __init__(
         self,
         dir_input="src/interface/header/scripts/ompi_headers",
         dir_output="src/interface/header/_OMPI_test",
     ):
         log.info("Generation of OMPI headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _generate_wrapper_fh(self, gen_file):
         super()._generate_wrapper_fh(gen_file)
         if not os.path.exists(os.path.join(self.dir_output, "wrapper_f.h")):
-            log.warning("Using {}".format(os.path.join(self.dir_input, "wrapper_f.h")))
-            shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), self.dir_output)
+            log.warning(
+                lambda: f'Using {os.path.join(self.dir_input, "wrapper_f.h")}')
+            shutil.copy2(os.path.join(self.dir_input,
+                         "wrapper_f.h"), self.dir_output)
 
     def _replace_mpi_with_rmpi(self, text: str) -> str:
-        pattern = []
-        replacement = []
-        decalage = 0
 
-        pattern.append(r"MPI_")
-        replacement.append(r"R_MPI_")
-        pattern.append(r"OR_MPI_")
-        replacement.append(r"OMPI_")
-        pattern.append(r"PR_MPI_")
-        replacement.append(r"R_PMPI_")
-        pattern.append(r"#define OMPI_OFFSET_DATATYPE R_MPI_LONG_LONG")
-        replacement.append(r"#define R_OMPI_OFFSET_DATATYPE R_MPI_LONG_LONG")
-        pattern.append(r'#    include "mpi_portable_platform.h"')
-        replacement.append(r'//#    include "mpi_portable_platform.h"')
-        pattern.append(r"MPIO")
-        replacement.append(r"R_MPIO")
-        pattern.append(r"ompi_status_public_t")
-        replacement.append(r"r_ompi_status_public_t")
-        pattern.append(r"#define R_MPI_NULL_DELETE_FN OMPI_C_R_MPI_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_NULL_DELETE_FN (*ccc_OMPI_C_MPI_NULL_DELETE_FN)")
-        pattern.append(r"#define R_MPI_NULL_COPY_FN OMPI_C_R_MPI_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_NULL_COPY_FN (*ccc_OMPI_C_MPI_NULL_COPY_FN)")
-        pattern.append(r"#define R_MPI_DUP_FN OMPI_C_R_MPI_DUP_FN")
-        replacement.append(r"#define R_MPI_DUP_FN (*ccc_OMPI_C_MPI_DUP_FN)")
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
-            pattern.append(r"^OMPI_DECLSPEC extern struct ompi_predefined_.*ompi")
-            replacement.append(r"ccc_linkage void *ccc_ompi")
-            pattern.append(r'__mpi_interface_deprecated__\("R_MPI_LB is deprecated in MPI-2.0"\);')
-            replacement.append(r";")
-            pattern.append(r'__mpi_interface_deprecated__\("R_MPI_UB is deprecated in MPI-2.0"\);')
-            replacement.append(r";")
-        pattern.append(r"const ")
-        replacement.append(r"")
-        pattern.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_FAMILYID .*")
-        replacement.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_FAMILYID 2")
-        pattern.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_VERSION .*")
-        replacement.append(r"#define OPAL_BUILD_PLATFORM_COMPILER_VERSION 1474738278")
-        pattern.append(r"#define OPAL_HAVE_ATTRIBUTE_DEPRECATED_ARGUMENT .*")
-        replacement.append(r"#define OPAL_HAVE_ATTRIBUTE_DEPRECATED_ARGUMENT 0")
-        pattern.append(r"#define OPAL_MAX_OBJECT_NAME 64")
-        replacement.append(r"//#define OPAL_MAX_OBJECT_NAME 64")
-        pattern.append(r"#define OPAL_MAX_PROCESSOR_NAME 256")
-        replacement.append(r"//#define OPAL_MAX_PROCESSOR_NAME 256")
-        pattern.append(r"#define R_MPI_COMM_DUP_FN OMPI_C_MPI_COMM_DUP_FN")
-        replacement.append(r"#define R_MPI_COMM_DUP_FN (*ccc_OMPI_C_MPI_COMM_DUP_FN)")
-        pattern.append(r"#define R_MPI_TYPE_NULL_DELETE_FN OMPI_C_R_MPI_TYPE_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_TYPE_NULL_DELETE_FN OMPI_C_MPI_TYPE_NULL_DELETE_FN")
-        pattern.append(r"#define R_MPI_TYPE_NULL_COPY_FN OMPI_C_R_MPI_TYPE_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_TYPE_NULL_COPY_FN OMPI_C_MPI_TYPE_NULL_COPY_FN")
-        pattern.append(r"#define R_MPI_TYPE_DUP_FN OMPI_C_R_MPI_TYPE_DUP_FN")
-        replacement.append(r"#define R_MPI_TYPE_DUP_FN OMPI_C_MPI_TYPE_DUP_FN")
-        pattern.append(r"#define R_MPI_COMM_NULL_DELETE_FN OMPI_C_R_MPI_COMM_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_COMM_NULL_DELETE_FN OMPI_C_MPI_COMM_NULL_DELETE_FN")
-        pattern.append(r"#define R_MPI_COMM_NULL_COPY_FN OMPI_C_R_MPI_COMM_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_COMM_NULL_COPY_FN OMPI_C_MPI_COMM_NULL_COPY_FN")
-        pattern.append(r"#define R_MPI_COMM_DUP_FN OMPI_C_R_MPI_COMM_DUP_FN")
-        replacement.append(r"#define R_MPI_COMM_DUP_FN (*ccc_OMPI_C_MPI_COMM_DUP_FN)")
-        pattern.append(r"#define R_MPI_WIN_NULL_DELETE_FN OMPI_C_R_MPI_WIN_NULL_DELETE_FN")
-        replacement.append(r"#define R_MPI_WIN_NULL_DELETE_FN OMPI_C_MPI_WIN_NULL_DELETE_FN")
-        pattern.append(r"#define R_MPI_WIN_NULL_COPY_FN OMPI_C_R_MPI_WIN_NULL_COPY_FN")
-        replacement.append(r"#define R_MPI_WIN_NULL_COPY_FN OMPI_C_MPI_WIN_NULL_COPY_FN")
-        pattern.append(r"#define R_MPI_WIN_DUP_FN OMPI_C_R_MPI_WIN_DUP_FN")
-        replacement.append(r"#define R_MPI_WIN_DUP_FN OMPI_C_MPI_WIN_DUP_FN")
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            log.debug(_pattern + " => " + _replacement)
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+            text, decalage = replacement_from_conf_file(os.path.join(
+                self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.replace"),
+                text,
+                shift=True,
+            )
+        else:
+            text, decalage = replacement_from_conf_file(os.path.join(
+                self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.ompiompi.replace"),
+                text,
+                shift=True,
+            )
 
         _pattern = """
 #if !OMPI_BUILDING
@@ -164,7 +121,8 @@ class OmpiHeaderGenerator(HeaderGenerator):
 #define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 """
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        text = re.sub(re.escape(_pattern_block),
+                      _replacement_block, text, flags=re.DOTALL)
 
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
             text = delete_lines(
@@ -174,18 +132,22 @@ class OmpiHeaderGenerator(HeaderGenerator):
                 ],
                 text,
             )
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_NULL_DELETE_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_NULL_COPY_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_DUP_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_NULL_DELETE_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_NULL_COPY_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_DUP_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_NULL_DELETE_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_NULL_COPY_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_DUP_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_NULL_DELETE_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_NULL_COPY_FN")
-            text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_DUP_FN")
+            list_of_functions_to_delete = [
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_NULL_DELETE_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_NULL_COPY_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_DUP_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_NULL_DELETE_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_NULL_COPY_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_DUP_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_NULL_DELETE_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_NULL_COPY_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_DUP_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_NULL_DELETE_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_NULL_COPY_FN",
+                "OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_DUP_FN",
+            ]
+            for _function in list_of_functions_to_delete:
+                text = function_to_delete(text, _function)
 
         return text
 
