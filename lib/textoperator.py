@@ -9,8 +9,18 @@ Functions:
 iven text.
 - insert_lines(lines_to_insert, line_number, text): Inserts the specified lines at the given positi
 on in the text.
-- function_to_delete(text, pattern): Removes function prototypes containing the specified function 
+- function_to_delete(text, pattern): Removes function prototypes containing the specified function
 name from the given text.
+- list_pattern_replacement(pattern, replacement, text, shift=False): Replace patterns with correspo
+nding replacements in a given text.
+- bloc_pattern_replacement(pattern_block, replacement_block, text): Replace a block pattern with a
+replacement block in the given text.
+- replacement_from_conf_file(path_file, text, shift=False, replacement_file=None): Replace patterns
+based on configurations from a file.
+- write_conf_file(pattern, replacement, path_file): Write pattern-replacement configurations to a f
+ile.
+- delete_bloc_from_conf_file(path_file, text): Delete a block from the text based on configurations
+from a file.
 
 Examples:
     original_text = "Line 1\nLine 2\nLine 3\nLine 4\n"
@@ -29,6 +39,7 @@ Examples:
     function_to_delete(original_text, "function1")
     # Returns: 'int main();\nvoid function2();\n'
 """
+import re
 
 
 def delete_lines(lines_to_delete, text):
@@ -143,3 +154,112 @@ def function_to_delete(text, pattern):
             function_ended = False
 
     return "\n".join(new_lines)
+
+
+def list_pattern_replacement(pattern, replacement, text, shift=False):
+    """
+    Replace patterns with corresponding replacements in a given text.
+
+    Args:
+        pattern (list): List of patterns to search for in the text.
+        replacement (list): List of replacement strings corresponding to the patterns.
+        text (str): The text in which to perform the replacements.
+        shift (bool, optional): Indicates whether line shift should be returned. Defaults to False.
+
+    Returns:
+        str or tuple: The text with replacements applied, or a tuple with the modified text and the
+        line shift if shift=True.
+    """
+    line_shift = 0  # Initialize line shift
+    for _pattern, _replacement in zip(pattern, replacement):
+        # Calculate line shift for each replacement
+        line_shift += len(_replacement.split("\n")) - len(_pattern.split("\n"))
+        # Perform replacement in the text
+        text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+
+    # Return modified text with or without line shift
+    if shift:
+        return text, line_shift  # Return text and line shift
+    return text  # Return only the modified text
+
+
+def bloc_pattern_replacement(pattern_block, replacement_block, text):
+    """
+    Replace a block pattern with a replacement block in the given text.
+
+    Args:
+        pattern_block (str): The block pattern to search for in the text.
+        replacement_block (str): The replacement block.
+        text (str): The text in which to perform the replacement.
+
+    Returns:
+        str: The modified text after replacing the block pattern with the replacement block.
+    """
+    text = re.sub(re.escape(pattern_block), replacement_block, text, flags=re.DOTALL)
+    return text
+
+
+def replacement_from_conf_file(path_file, text, shift=False, replacement_file=None):
+    """
+    Replace patterns based on configurations from a file.
+
+    Args:
+        path_file (str): The path to the configuration file containing patterns and replacements.
+        text (str): The text in which to perform the replacements.
+        shift (bool, optional): Indicates whether line shift should be returned. Defaults to False.
+        replacement_file (str, optional): Path to a separate file containing the replacement. Defau
+        lts to None.
+
+    Returns:
+        str or tuple: The modified text with replacements applied, or a tuple with the modified tex
+        t and the
+        line shift if shift=True.
+    """
+    line_shift = 0  # Initialize line shift
+    if replacement_file:
+        with open(path_file, "r", encoding="utf-8") as file_descriptor:
+            _pattern = file_descriptor.read()
+        with open(replacement_file, "r", encoding="utf-8") as file_descriptor:
+            _replacement = file_descriptor.read()
+        line_shift += len(_replacement) - len(_pattern)
+        text = re.sub(re.escape(_pattern), _replacement, text, flags=re.DOTALL)
+    else:
+        with open(path_file, "r", encoding="utf-8") as file_descriptor:
+            for line in file_descriptor.readlines():
+                _pattern = line.split("@")[0]  # pattern and replacement are separated by "@"
+                _replacement = line.split("@")[1][:-1]  # Do not take the last new line char
+                line_shift += len(_replacement.split("\n")) - len(_pattern.split("\n"))
+                text = re.sub(rf"{_pattern}", rf"{_replacement}", text, flags=re.MULTILINE)
+    if shift:
+        return text, line_shift  # Return text and line shift
+    return text  # Return only the modified text
+
+
+def write_conf_file(pattern, replacement, path_file):
+    """
+    Write pattern-replacement configurations to a file.
+
+    Args:
+        pattern (list): List of patterns to write to the file.
+        replacement (list): List of corresponding replacements.
+        path_file (str): The path to the file to write the configurations.
+    """
+    with open(path_file, "w", encoding="utf-8") as file_descriptor:
+        for _pattern, _replacement in zip(pattern, replacement):
+            file_descriptor.write(rf"{_pattern}" + "@" + rf"{_replacement}" + "\n")
+
+
+def delete_bloc_from_conf_file(path_file, text):
+    """
+    Delete a block from the text based on configurations from a file.
+
+    Args:
+        path_file (str): The path to the configuration file containing the block to delete.
+        text (str): The text from which to delete the block.
+
+    Returns:
+        str: The modified text after deleting the block.
+    """
+    with open(path_file, "r", encoding="utf-8") as file_descriptor:
+        text = re.sub(re.escape(file_descriptor.read()), """""", text, flags=re.DOTALL)
+    return text
