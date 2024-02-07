@@ -1,110 +1,85 @@
 #!/usr/bin/env python3
+"""
+OmpiIntelHeader module for generating Ompi-Intel preload header files.
+"""
 
 import os
 import shutil
-import re
 from logging import getLogger
 from logging.config import fileConfig
 from intelompiheader import IntelOmpiHeaderGenerator
-from textoperator import delete_lines, delete_line_from_pattern, function_to_delete
+from textoperator import (
+    delete_lines,
+    delete_line_from_pattern,
+    function_to_delete,
+    replacement_from_conf_file,
+)
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
 class OmpiIntelHeaderGenerator(IntelOmpiHeaderGenerator):
+    """
+    OmpiIntelHeader class for generating Ompi-Intel preload header files.
+    """
+
     def __init__(
         self,
         dir_input="src/preload/header/scripts/ompi_intel_headers",
         dir_output="src/preload/header/_OMPI_INTEL_gen",
     ):
         log.info("Generation of OMPI_INTEL headers in progress.")
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
+        super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _run_to_app(self, text: str) -> str:
         text = delete_line_from_pattern("OMPI_DECLSPEC extern", text)
-        pattern = []
-        replacement = []
-        decalage = 0
+        _conf_file = os.path.join(self.wi4mpi_root, "lib/etc/ompiintelheader._run_to_app.replace")
+        text = replacement_from_conf_file(_conf_file, text)
+        list_of_functions_to_delete = [
+            "OMPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_DELETE_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_COPY_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_TYPE_DUP_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_DELETE_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_COPY_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_COMM_DUP_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_NULL_DELETE_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_NULL_COPY_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_DUP_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_DELETE_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_COPY_FN",
+            "OMPI_DECLSPEC int OMPI_C_MPI_WIN_DUP_FN",
+        ]
+        for _function in list_of_functions_to_delete:
+            text = function_to_delete(text, _function)
 
-        pattern.append(r'([ \t(*,)_"])R_')
-        replacement.append(r"\1A_")
-        pattern.append(r"#define OMPI_OFFSET_DATATYPE A_MPI_LONG_LONG")
-        replacement.append("#define A_OMPI_OFFSET_DATATYPE A_MPI_LONG_LONG")
-        pattern.append(r"A_MPIO")
-        replacement.append(r"MPIO")
-        pattern.append(r"IR_MPI")
-        replacement.append("IA_MPI")
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            log.debug(_pattern + " => " + _replacement)
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
-
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_DELETE_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_COPY_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_TYPE_DUP_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_DELETE_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_COPY_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_COMM_DUP_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_NULL_DELETE_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_NULL_COPY_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_DUP_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_DELETE_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_COPY_FN")
-        text = function_to_delete(text, "OMPI_DECLSPEC int OMPI_C_MPI_WIN_DUP_FN")
-
-        _pattern_block = """#define A_MPI_CONVERSION_FN_NULL ((A_MPI_Datarep_conversion_function*) 0)
-#endif"""
-        _replacement_block = """#define A_MPI_CONVERSION_FN_NULL ((A_MPI_Datarep_conversion_function*) 0)
-#endif
-
-void * OMPI_C_MPI_TYPE_NULL_DELETE_FN;
-void * OMPI_C_MPI_TYPE_NULL_COPY_FN;
-void * OMPI_C_MPI_TYPE_DUP_FN;
-void * OMPI_C_MPI_COMM_NULL_DELETE_FN;
-void * OMPI_C_MPI_COMM_NULL_COPY_FN;
-void * OMPI_C_MPI_COMM_DUP_FN;
-void * OMPI_C_MPI_NULL_DELETE_FN;
-void * OMPI_C_MPI_NULL_COPY_FN;
-void * OMPI_C_MPI_DUP_FN;
-void * OMPI_C_MPI_WIN_NULL_DELETE_FN;
-void * OMPI_C_MPI_WIN_NULL_COPY_FN;
-void * OMPI_C_MPI_WIN_DUP_FN;
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        _pattern_conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/ompiintelheader._run_to_app.bloc_p0.replace"
+        )
+        _replacement_conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/ompiintelheader._run_to_app.bloc_r0.replace"
+        )
+        text = replacement_from_conf_file(
+            _pattern_conf_file, text, replacement_file=_replacement_conf_file
+        )
         return text
 
     def _generate_app_mpih(self, gen_file):
         log.debug(
-            "Running _generate_app_mpih (OmpiIntelHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running _generate_app_mpih (OmpiIntelHeaderGenerator). File: {gen_file}."
         )
         self._generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._run_to_app(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _app_to_run(self, text):
         log.debug("Running _app_to_run (OmpiIntelHeaderGenerator).")
-        pattern = []
-        replacement = []
-        decalage = 0
-        pattern.append(r"([ *(),_])A_")
-        replacement.append(r"\1R_")
-        pattern.append(r"^A_")
-        replacement.append(r"R_")
-        pattern.append(r" MPIO")
-        replacement.append(r" R_MPIO")
-        pattern.append(r"//#define R_MPI_DUP_FN         MPIR_Dup_fn")
-        replacement.append("#define R_MPI_DUP_FN         MPIR_Dup_fn")
-        for _pattern, _replacement in zip(pattern, replacement):
-            decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        _conf_file = os.path.join(self.wi4mpi_root, "lib/etc/ompiintelheader._app_to_run.replace")
+        text = replacement_from_conf_file(_conf_file, text)
 
         # lignes à supprimer car absente du header de référence
         text = delete_lines(
@@ -119,28 +94,28 @@ void * OMPI_C_MPI_WIN_DUP_FN;
 
     def __generate_run_mpih(self, gen_file):
         log.debug(
-            "Running _generate_run_mpih (OmpiIntelHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running _generate_run_mpih (OmpiIntelHeaderGenerator). File: {gen_file}."
         )
         self._intel_generate_run_mpih(gen_file)
 
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._app_to_run(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def __generate_run_mpioh(self, gen_file):
         log.debug(
-            "Running _generate_run_mpih (OmpiIntelHeaderGenerator). File: {}.".format(gen_file)
+            lambda: f"Running _generate_run_mpih (OmpiIntelHeaderGenerator). File: {gen_file}."
         )
         self._generate_app_mpioh(gen_file)
 
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._app_to_run(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def generate(self):
