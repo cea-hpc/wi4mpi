@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+MpcHeader module for generating Mpc-specific header files.
+"""
 
 import os
 import shutil
@@ -6,12 +9,20 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from header import HeaderGenerator
+from textoperator import (
+    replacement_from_conf_file,
+    delete_bloc_from_conf_file,
+)
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
 class MpcHeaderGenerator(HeaderGenerator):
+    """
+    MpcHeaderGenerator class for generating Mpc-specific header files.
+    """
+
     dir_output = ""
     dir_input = ""
 
@@ -26,8 +37,8 @@ class MpcHeaderGenerator(HeaderGenerator):
     def _generate_wrapper_fh(self, gen_file):
         super()._generate_wrapper_fh(gen_file)
         if not os.path.exists(os.path.join(self.dir_output, "wrapper_f.h")):
-            log.warning("Using {}".format(os.path.join(self.dir_input, "wrapper_f.h")))
-            shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), self.dir_output)
+            log.warning(lambda: 'Using {os.path.join(self.dir_input, "wrapper_f.h")}')
+            shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), gen_file)
 
     def _mpc_exceptions_run_mpih(self, text):
         log.debug("Running _mpc_exceptions_run_mpih")
@@ -50,8 +61,10 @@ class MpcHeaderGenerator(HeaderGenerator):
         # Ajout supplémentaires
         lines_to_insert = [
             "#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */",
-            "#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in"
-            " MPI-3.1 */",
+            (
+                "#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in"
+                " MPI-3.1 */"
+            ),
         ]
         # Utiliser une expression régulière pour insérer les lignes
         # après "/** Initialization and Finalization */"
@@ -77,122 +90,34 @@ class MpcHeaderGenerator(HeaderGenerator):
             "typedef struct ADIOI_FileD *R_MPI_File;",
             "#endif",
             "/* Error handling */",
-            "int R_MPI_File_create_errhandler(R_MPI_File_errhandler_function *,"
-            " R_MPI_Errhandler *);",
-            "int R_PMPI_File_create_errhandler(R_MPI_File_errhandler_function *file_errhandler_fn,"
-            " R_MPI_Errhandler *errhandler);",
+            (
+                "int R_MPI_File_create_errhandler(R_MPI_File_errhandler_function *,"
+                " R_MPI_Errhandler *);"
+            ),
+            (
+                "int R_PMPI_File_create_errhandler(R_MPI_File_errhandler_function"
+                " *file_errhandler_fn, R_MPI_Errhandler *errhandler);"
+            ),
             "int R_MPI_File_call_errhandler(R_MPI_File fh , int );",
         ]
         replacement = r"\1\n" + "\n".join(lines_to_insert)
         text = re.sub(r"(\n+$)", replacement, text)
 
-        # Remove const
-        pattern = []
-        replacement = []
-        pattern.append(r"typedef void \(R_MPI_File_errhandler_function\)\(void \*, int \*, ...\);")
-        replacement.append(r"typedef void (R_MPI_File_errhandler_function)(void*, int *, ...);")
-        pattern.append(r"int R_MPI_Info_set\( R_MPI_Info, const char \*, const char \* \);")
-        replacement.append(r"int R_MPI_Info_set( R_MPI_Info, char *, char * );")
-        pattern.append(r"int R_MPI_Info_delete\( R_MPI_Info , const char \* \);")
-        pattern.append(r"int R_MPI_Info_get\(R_MPI_Info , const char \*, int , char \*, int \*\);")
-        replacement.append(r"int R_MPI_Info_delete( R_MPI_Info , char * );")
-        replacement.append(r"int R_MPI_Info_get(R_MPI_Info , char *, int , char *, int *);")
-        pattern.append(r"int R_MPI_Win_set_name\(R_MPI_Win, const char \*\);")
-        replacement.append(r"int R_MPI_Win_set_name(R_MPI_Win, char *);")
-        pattern.append(r"int R_MPI_Win_detach\(R_MPI_Win, const void \*\);")
-        replacement.append(r"int R_MPI_Win_detach(R_MPI_Win, void *);")
-        pattern.append(
-            r"int R_MPI_Get_accumulate\(const void \*, int, R_MPI_Datatype, void \*, int,"
+        _conf_file = os.path.join(
+            self.wi4mpi_root, "lib/etc/mpcheader._mpc_exceptions_run_mpih.replace"
         )
-        replacement.append(r"int R_MPI_Get_accumulate(void *, int, R_MPI_Datatype, void *, int,")
-        pattern.append(
-            r"int R_MPI_Fetch_and_op\(const void \*, void \*, R_MPI_Datatype, int, R_MPI_Aint,"
-            r" R_MPI_Op,"
-        )
-        replacement.append(
-            r"int R_MPI_Fetch_and_op(void *, void *, R_MPI_Datatype, int, R_MPI_Aint, R_MPI_Op,"
-        )
-        pattern.append(
-            r"int R_MPI_Compare_and_swap\(const void \*, const void \*, void \*, R_MPI_Datatype,"
-            r" int,"
-        )
-        replacement.append(
-            r"int R_MPI_Compare_and_swap(void *, void *, void *, R_MPI_Datatype, int,"
-        )
-        pattern.append(
-            r"int R_MPI_Rput\(const void \*, int, R_MPI_Datatype, int, R_MPI_Aint, int,"
-            r" R_MPI_Datatype,"
-        )
-        replacement.append(
-            r"int R_MPI_Rput(void *, int, R_MPI_Datatype, int, R_MPI_Aint, int, R_MPI_Datatype,"
-        )
-        pattern.append(
-            r"int R_MPI_Raccumulate\(const void \*, int, R_MPI_Datatype, int, R_MPI_Aint, int,"
-        )
-        replacement.append(
-            r"int R_MPI_Raccumulate(void *, int, R_MPI_Datatype, int, R_MPI_Aint, int,"
-        )
-        pattern.append(
-            r"int R_MPI_Rget_accumulate\(const void \*, int, R_MPI_Datatype, void \*, int,"
-        )
-        replacement.append(r"int R_MPI_Rget_accumulate(void *, int, R_MPI_Datatype, void *, int,")
-        pattern.append(r"int R_MPI_T_cvar_get_index\(const char \*name, int \*cvar_index\);")
-        replacement.append(r"int R_MPI_T_cvar_get_index(char *name, int *cvar_index);")
-        pattern.append(r"int R_MPI_T_cvar_write\(R_MPI_T_cvar_handle handle, const void \*buff\);")
-        replacement.append(r"int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle, void *buff);")
-        pattern.append(
-            r"int R_MPI_T_pvar_get_index\(char \*name, int \*pvar_class, int \*pvar_index\);"
-        )
-        replacement.append(
-            r"int R_MPI_T_pvar_get_index(char *name, int var_class, int *pvar_index);"
-        )
-        pattern.append(
-            r"int R_MPI_Comm_connect\(const char \*, R_MPI_Info , int , R_MPI_Comm , R_MPI_Comm"
-            r" \*\);"
-        )
-        replacement.append(
-            r"int R_MPI_Comm_connect(char *, R_MPI_Info , int , R_MPI_Comm , R_MPI_Comm *);"
-        )
-        pattern.append(r"int R_MPI_Lookup_name\(const char \*, R_MPI_Info , char \*\);")
-        replacement.append(r"int R_MPI_Lookup_name(char *, R_MPI_Info , char *);")
-        pattern.append(
-            r"int R_MPI_Reduce_local\(const void \*, void \*, int, R_MPI_Datatype, R_MPI_Op\);"
-        )
-        replacement.append(
-            r"int R_MPI_Reduce_local(void *, void *, int, R_MPI_Datatype, R_MPI_Op);"
-        )
-        pattern.append(
-            r"int R_MPI_Dist_graph_create\(R_MPI_Comm , int , const int \[\],const int \[\], const"
-            r" int \[\],const int \[\],R_MPI_Info , int , R_MPI_Comm \*\);"
-        )
-        pattern.append(
-            r"int R_MPI_Dist_graph_create_adjacent\(R_MPI_Comm ,int , const int \[\],const int"
-            r" \[\],int , const int \[\],const int \[\],R_MPI_Info , int , R_MPI_Comm \*\);"
-        )
-        replacement.append(
-            r"int R_MPI_Dist_graph_create(R_MPI_Comm , int , int [], int [], int [],int"
-            r" [],R_MPI_Info , int , R_MPI_Comm *);"
-        )
-        replacement.append(
-            r"int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm ,int , int [], int [],int , int [],"
-            r" int [],R_MPI_Info , int , R_MPI_Comm *);"
-        )
-        pattern.append(r"^[^\S]{21}const void \*buff\);")
-        replacement.append(r"                     void *buff);")
-
-        for _pattern, _replacement in zip(pattern, replacement):
-            log.debug(_pattern + " => " + _replacement)
-            text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        text = replacement_from_conf_file(_conf_file, text)
+        text = delete_bloc_from_conf_file(_conf_file, text)
 
         return text
 
     def _generate_run_mpih(self, gen_file):
         super()._generate_run_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._mpc_exceptions_run_mpih(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _mpc_exceptions_app_mpih(self, text):
@@ -209,11 +134,11 @@ class MpcHeaderGenerator(HeaderGenerator):
 
     def _generate_app_mpih(self, gen_file):
         super()._generate_app_mpih(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._mpc_exceptions_app_mpih(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def _mpc_exceptions_run_mpioh(self, text):
@@ -377,11 +302,11 @@ class MpcHeaderGenerator(HeaderGenerator):
 
     def _generate_run_mpioh(self, gen_file):
         super()._generate_run_mpioh(gen_file)
-        with open(gen_file, "r") as _file:
+        with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._mpc_exceptions_run_mpioh(_content)
-        with open(gen_file, "w") as _file:
+        with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
     def generate(self):
