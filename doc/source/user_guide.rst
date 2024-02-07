@@ -157,51 +157,6 @@ Example
 
 In this example wi4mpi understand that mpi_hello.exe is a binary file compiled with OpenMPI, which is run under IntelMPI.
 
-TGCC integration
-----------------
-
-WI4MPI is available on the TGCC via its module environment. All the
-environment settings detailed in the next section is hide by a system of
-flavor and features specific to the center. The flavor indicates the
-kind of the installation chosen by the users, on the other hand, the
-features are used to set one of the chosen conversion we highlight in
-the previous section.
-
-(Flavors et features are modulefiles) Concerning the flavors:
-
-::
-
-    - flavor/wi4mpi/{installation_type} : {installation_type} can be debug or standard
-
-Concerning the features:
-
-::
-
-    - feature/wi4mpi/to/{MPI}/{version} : indicates the desired MPI version for the runtime ({MPI} can take two value OpenMPI or IntelMPI).
-    - feature/wi4mpi/from/{MPI}/{version} : indicates the MPI version used to compiled the binary ELF file ({MPI} can take two value OpenMPI or IntelMPI). This features is not prerequisites, if not loaded (which is the default behaviour), the user is using WI4MPI in the interface.
-
-Default behavior example:
-
-::
-
-    $ module load mpi/wi4mpi/%version
-    load module flavor/wi4mpi/standard (wi4mpi flavor)                                                  #Default installation is standard
-    load module feature/wi4mpi/to/openmpi/1.8.8 (WI4MPI feature to openmpi 1.8.8)                       #Default conversion is Interface -> OpenMPI/1.8.8 (since no module feature/wi4mpi/from is loaded, the wi4mpi mode is interface)
-    load module feature/wi4mpi/mpi_compiler/intel (Wi4MPI compiler feature)                             #Default compiler use by mpi wrapper (mpicc,mpicxx,mpif90,...) within WI4MPI are Intel compilers
-    load module wi4mpi/3.3.0 (Wi4MPI with openmpi/1.8.8)
-
-    In this example, WI4MPI assume that the application is compiled with its own library libmpi.so
-
-    To simply change the conversion "module switch feature/wi4mpi/to/intelmpi/2017"
-
-To activate the preload mode example:
-
-::
-
-    $ module load mpi/wi4mpi/%version
-    $ module load feature/wi4mpi/from/intelmpi/2017
-    load module feature/wi4mpi/from/intelmpi/2017 (WI4MPI feature from intelmpi 2017)
-
 Environment settings
 --------------------
 
