@@ -17,7 +17,6 @@ Exceptions:
 Exeptions:
 
 - **"line-too-long"**: Cannot ignore only docstrings, so defer to `flake8` for line lengths.
-- **"too-few-public-methods"**: Not applicable to abstract classes/metaclasses.
 
 ## black : PEP8 formatter and coding style
 
