@@ -91,7 +91,6 @@ class CPreloadGenerator(CodeGenerator):
             >>> obj._generate_static_side()
         """
         log.debug("Run _generate_static_side")
-        print(self.jinja_dir)
         jinja_env = jinja2.Environment(
             loader=jinja2.FileSystemLoader([self.jinja_dir,self.static_sources_dir]), trim_blocks=True
         )
