@@ -40,6 +40,7 @@ Examples:
     # Returns: 'int main();\nvoid function2();\n'
 """
 import re
+import json
 
 
 def delete_lines(lines_to_delete, text):
@@ -263,3 +264,21 @@ def delete_bloc_from_conf_file(path_file, text):
     with open(path_file, "r", encoding="utf-8") as file_descriptor:
         text = re.sub(re.escape(file_descriptor.read()), """""", text, flags=re.DOTALL)
     return text
+
+
+def load_json_file(file_path):
+    """
+    Load a JSON file from the specified path.
+
+    Args:
+        file_path (str): The path to the JSON file.
+
+    Returns:
+        dict: The JSON data loaded from the file.
+
+    Raises:
+        FileNotFoundError: If the specified file is not found.
+        JSONDecodeError: If an error occurs during JSON decoding.
+    """
+    with open(file_path, "r", encoding="utf-8") as file_descriptor:
+        return json.load(file_descriptor)
