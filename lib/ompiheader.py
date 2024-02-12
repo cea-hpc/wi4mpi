@@ -46,14 +46,14 @@ class OmpiHeaderGenerator(HeaderGenerator):
 
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
             text, decalage = replacement_from_conf_file(
-                os.path.join(self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.replace"),
+                os.path.join(self.etc_dir, "ompiheader._replace_mpi_with_rmpi.replace"),
                 text,
                 shift=True,
             )
         else:
             text, decalage = replacement_from_conf_file(
                 os.path.join(
-                    self.wi4mpi_root, "lib/etc/ompiheader._replace_mpi_with_rmpi.ompiompi.replace"
+                    self.etc_dir, "ompiheader._replace_mpi_with_rmpi.ompiompi.replace"
                 ),
                 text,
                 shift=True,

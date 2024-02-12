@@ -34,7 +34,7 @@ class OmpiIntelHeaderGenerator(IntelOmpiHeaderGenerator):
 
     def _run_to_app(self, text: str) -> str:
         text = delete_line_from_pattern("OMPI_DECLSPEC extern", text)
-        _conf_file = os.path.join(self.wi4mpi_root, "lib/etc/ompiintelheader._run_to_app.replace")
+        _conf_file = os.path.join(self.etc_dir, "ompiintelheader._run_to_app.replace")
         text = replacement_from_conf_file(_conf_file, text)
         list_of_functions_to_delete = [
             "OMPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_DELETE_FN",
@@ -54,10 +54,10 @@ class OmpiIntelHeaderGenerator(IntelOmpiHeaderGenerator):
             text = function_to_delete(text, _function)
 
         _pattern_conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/ompiintelheader._run_to_app.bloc_p0.replace"
+            self.etc_dir, "ompiintelheader._run_to_app.bloc_p0.replace"
         )
         _replacement_conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/ompiintelheader._run_to_app.bloc_r0.replace"
+            self.etc_dir, "ompiintelheader._run_to_app.bloc_r0.replace"
         )
         text = replacement_from_conf_file(
             _pattern_conf_file, text, replacement_file=_replacement_conf_file
@@ -78,7 +78,7 @@ class OmpiIntelHeaderGenerator(IntelOmpiHeaderGenerator):
 
     def _app_to_run(self, text):
         log.debug("Running _app_to_run (OmpiIntelHeaderGenerator).")
-        _conf_file = os.path.join(self.wi4mpi_root, "lib/etc/ompiintelheader._app_to_run.replace")
+        _conf_file = os.path.join(self.etc_dir, "ompiintelheader._app_to_run.replace")
         text = replacement_from_conf_file(_conf_file, text)
 
         # lignes à supprimer car absente du header de référence

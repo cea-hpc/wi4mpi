@@ -127,7 +127,7 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
             str: The modified text with MPI replaced by RMPI.
         """
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/intelompiheader.ompi_replace_mpi_with_rmpi.replace"
+            self.etc_dir, "intelompiheader.ompi_replace_mpi_with_rmpi.replace"
         )
         text = replacement_from_conf_file(_conf_file, text)
 

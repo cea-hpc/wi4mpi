@@ -35,8 +35,8 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
     def _preload_exception_header_run_mpih(self, text):
         log.debug("Running _preload_exception_header_run_mpih (IntelIntelHeaderGenerator).")
         _conf_file = os.path.join(
-            self.wi4mpi_root,
-            "lib/etc/intelintelheader._preload_exception_header_run_mpih.replace",
+            self.etc_dir,
+            "intelintelheader._preload_exception_header_run_mpih.replace",
         )
         text = replacement_from_conf_file(_conf_file, text)
         # Lignes modifiées durant la génération des header de l'interface
@@ -86,9 +86,7 @@ int R_MPI_Pcontrol(int level, ...);
         log.debug("Running _common_generate_app_mpih (IntelIntelHeaderGenerator).")
         text = replacement_from_conf_file(
             os.path.join(
-                self.wi4mpi_root,
-                "lib",
-                "etc",
+                self.etc_dir,
                 "intelintelheader._common_generate_app_mpih.replace",
             ),
             text,
@@ -133,9 +131,7 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
         log.debug("Running _common_generate_app_mpioh (IntelIntelHeaderGenerator).")
         text = replacement_from_conf_file(
             os.path.join(
-                self.wi4mpi_root,
-                "lib",
-                "etc",
+                self.etc_dir,
                 "intelintelheader._common_generate_app_mpioh.replace",
             ),
             text,
@@ -178,9 +174,7 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
         text = delete_line_from_pattern("#define PMPIO_Test R_PMPI_Test", text)
         text = replacement_from_conf_file(
             os.path.join(
-                self.wi4mpi_root,
-                "lib",
-                "etc",
+                self.etc_dir,
                 "intelintelheader.__aux_generate_run_mpioh.replace",
             ),
             text,

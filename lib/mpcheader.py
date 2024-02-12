@@ -112,9 +112,10 @@ class MpcHeaderGenerator(HeaderGenerator):
         ]
         replacement = r"\1\n" + "\n".join(lines_to_insert)
         text = re.sub(r"(\n+$)", replacement, text)
+        print( self.etc_dir)
 
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/mpcheader._mpc_exceptions_run_mpih.replace"
+            self.etc_dir, "mpcheader._mpc_exceptions_run_mpih.replace"
         )
         text = replacement_from_conf_file(_conf_file, text)
         text = delete_bloc_from_conf_file(_conf_file, text)

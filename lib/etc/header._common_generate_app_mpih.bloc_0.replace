@@ -1,9 +1,0 @@
-
-/*
- * External variables
- *
- * The below externs use the ompi_predefined_xxx_t structures to maintain
- * back compatibility between MPI library versions.
- * See ompi/communicator/communicator.h comments with struct ompi_communicator_t
- * for full explanation why we chose to use the ompi_predefined_xxx_t structure.
- */

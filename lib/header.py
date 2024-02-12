@@ -65,6 +65,7 @@ class HeaderGenerator(ABC):
     _wrapper_f_header_file = "wrapper_f.h"
     dir_output = ""
     dir_input = ""
+    etc_dir = "" 
 
     def set_directories(self, dir_input="", dir_output=""):
         """
@@ -80,6 +81,9 @@ class HeaderGenerator(ABC):
         self.dir_input = dir_input
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
+        print(self.wi4mpi_root)
+        self.etc_dir=os.path.join(self.wi4mpi_root,"lib/etc/headers")
+
 
     def __init__(self, dir_input="", dir_output=""):
         # Prevent instantiation of this class directly
@@ -179,7 +183,7 @@ class HeaderGenerator(ABC):
         text = delete_lines(lines_to_delete, text)
         text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.replace"
+            self.etc_dir, "header._common_generate_app_mpih.replace"
         )
         text = replacement_from_conf_file(_conf_file, text)
         _pattern_block = """
@@ -240,15 +244,15 @@ class HeaderGenerator(ABC):
         for _function in list_of_functions_to_delete:
             text = function_to_delete(text, _function)
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_0.replace"
+            self.etc_dir, "header._common_generate_app_mpih.bloc_0.replace"
         )
         text = delete_bloc_from_conf_file(_conf_file, text)
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_1.replace"
+            self.etc_dir, "header._common_generate_app_mpih.bloc_1.replace"
         )
         text = delete_bloc_from_conf_file(_conf_file, text)
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_2.replace"
+            self.etc_dir, "header._common_generate_app_mpih.bloc_2.replace"
         )
         text = delete_bloc_from_conf_file(_conf_file, text)
         text = delete_line_from_pattern(r"extern struct ompi_predefined_", text)
@@ -261,11 +265,11 @@ class HeaderGenerator(ABC):
             text,
         )
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_3.replace"
+            self.etc_dir, "header._common_generate_app_mpih.bloc_3.replace"
         )
         text = delete_bloc_from_conf_file(_conf_file, text)
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_4.replace"
+            self.etc_dir, "header._common_generate_app_mpih.bloc_4.replace"
         )
         text = delete_bloc_from_conf_file(_conf_file, text)
 
@@ -309,7 +313,7 @@ class HeaderGenerator(ABC):
         ]
         text = delete_lines(lines_to_delete, text)
         _conf_file = os.path.join(
-            self.wi4mpi_root, "lib/etc/header._common_generate_app_mpih.bloc_5.replace"
+            self.etc_dir, "header._common_generate_app_mpih.bloc_5.replace"
         )
         text = delete_bloc_from_conf_file(_conf_file, text)
         text = insert_lines(

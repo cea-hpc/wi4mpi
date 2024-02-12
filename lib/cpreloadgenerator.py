@@ -1,141 +1,26 @@
 #!/usr/bin/env python3
 """
-This module provides classes and methods for generating MPI translation code files.
+This module provides the abstract classe and methods for generating MPI translation code files.
 
 """
 
 import os
 import re
 from abc import abstractmethod
-from subprocess import call
 from logging import getLogger
 from logging.config import fileConfig
 import jinja2
 from textoperator import load_json_file
-
+from codegenerator import CodeGenerator
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("code_logger")
-
-
-class CodeGenerator:
-    """
-    Class for generating MPI translation code files.
-
-    This class contains methods for generating MPI translation code files.
-
-    Attributes:
-        json_files (dict): json file path.
-        jinja_files (dict): Template file path.
-        data (dict): Load of json file.
-        output_file (str): Output file path.
-        dir_input (str): Input directory path.
-
-    Methods:
-        set_directories: Set input and output directories for code generation.
-        __init__: Initialize the CodeGenerator object.
-        clang_format: Format code.
-        write_file_append: Add lines at the end of the input file.
-        typevar:
-
-    """  # noqa: E501
-
-    json_files = {}
-    jinja_files = {}
-    data = {}
-    output_file = ""
-    dir_input = ""
-    dir_output = ""
-
-    def clang_format(self, file_to_format):
-        """
-        Format code with LLVM style.
-
-        Args:
-            file_to_format (str): Path of the file to format.
-
-        Returns:
-            None
-        """
-        call(["clang-format", "-style=LLVM", "-i", file_to_format])
-
-    def write_file_append(self, file_to_edit, content):
-        """
-        Write lines at the end of the file.
-
-        Args:
-            file_to_edit (str): Path of the file to edit.
-            content (str): Strings to append to the file.
-
-        Returns:
-            None
-        """
-        with open(file_to_edit, "a", encoding="utf-8") as file_descriptor:
-            file_descriptor.write(content)
-
-    def set_directories(self, dir_input, dir_output):
-        """
-        Set input and output directories for header generation.
-
-        Args:
-            dir_input (str, optional): The input directory path. Defaults to "".
-            dir_output (str, optional): The output directory path. Defaults to "".
-
-        Returns:
-            None
-        """
-        self.dir_input = dir_input
-        self.dir_output = dir_output
-        os.makedirs(self.dir_output, exist_ok=True)
-        self.output_file = os.path.join(dir_output, self.output_file)
-
-    @abstractmethod
-    def _generate_static_side(self):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the static side of the output file using Jinja templates.
-        """
-
-    @abstractmethod
-    def _generate_declarations_side(self):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the declarations side of the output file using Jinja templates.
-        """
-
-    @abstractmethod
-    def _generate_function(self, function, template_file):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the function using Jinja templates.
-        """
-
-    @abstractmethod
-    def _generate_dlsym_side(self):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the dlsym side of the output file using Jinja templates.
-        """
-
-    @abstractmethod
-    def generate(self):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate output_file.
-        """
-
-    @abstractmethod
-    def __init__(self):
-        """
-        Initialization
-        """
-
 
 class CPreloadGenerator(CodeGenerator):
     """
     CPreloadGenerator class for generating MPI translation C file.
     """
 
-    def __init__(self, dir_input="lib/code_generation_input/C", dir_output="src/preload/new_gen"):
+    def __init__(self, dir_input="lib/etc/code", dir_output="src/preload/new_gen"):
         """
         json_files:
             functions_definitions (str): Name of the json file which describes all MPI functions as
@@ -151,10 +36,10 @@ class CPreloadGenerator(CodeGenerator):
         self.output_file = "test_c_gen_preload.c"
         self.set_directories(dir_input, dir_output)
         self.json_files = {
-            "functions_definitions": os.path.join(dir_input, "functions.json"),
-            "functions_mappers": os.path.join(dir_input, "mappers.json"),
-            "types": os.path.join(dir_input, "types.json"),
-            "exceptions": os.path.join(dir_input, "exceptions.json"),
+            "functions_definitions": os.path.join(dir_input, "common/jsons/functions.json"),
+            "functions_mappers": os.path.join(dir_input, "C/jsons/mappers.json"),
+            "types": os.path.join(dir_input, "common/jsons/types.json"),
+            "exceptions": os.path.join(dir_input, "C/jsons/exceptions.json"),
         }
         self.jinja_files = {
             "declarations": "template_declarations.jinja",
@@ -170,6 +55,8 @@ class CPreloadGenerator(CodeGenerator):
             "types": load_json_file(self.json_files["types"]),
             "exceptions": load_json_file(self.json_files["exceptions"]),
         }
+        self.jinja_dir=os.path.join(dir_input,"C/templates/")
+        self.static_sources_dir=os.path.join(dir_input,"C/static_sources/")
 
     def typevar(self, var, typename):
         """
@@ -204,11 +91,12 @@ class CPreloadGenerator(CodeGenerator):
             >>> obj._generate_static_side()
         """
         log.debug("Run _generate_static_side")
+        print(self.jinja_dir)
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(self.dir_input), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir,self.static_sources_dir]), trim_blocks=True
         )
         jinja_template = jinja_env.get_template(self.jinja_files["static"])
-        rendered_template = jinja_template.render({})
+        rendered_template = jinja_template.render()
         self.write_file_append(self.output_file, rendered_template + "\n")
 
     def _generate_declarations_side(self):
@@ -224,7 +112,7 @@ class CPreloadGenerator(CodeGenerator):
         """
         log.debug("Run _generate_declaration_side")
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(self.dir_input), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]), trim_blocks=True
         )
         jinja_env.filters["typevar"] = self.typevar
         jinja_template = jinja_env.get_template(self.jinja_files["declarations"])
@@ -251,7 +139,7 @@ class CPreloadGenerator(CodeGenerator):
         log.debug(_msg(function, template_file))
         rendered_template = ""
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(self.dir_input), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]), trim_blocks=True
         )
         jinja_env.filters["typevar"] = self.typevar
         jinja_template = jinja_env.get_template(template_file)
@@ -273,7 +161,7 @@ class CPreloadGenerator(CodeGenerator):
         """
         log.debug("Run _generate_dlsym_side")
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(self.dir_input), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir,self.static_sources_dir]), trim_blocks=True
         )
         jinja_template = jinja_env.get_template(self.jinja_files["dlsym"])
         rendered_template = jinja_template.render({

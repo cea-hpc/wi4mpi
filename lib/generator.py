@@ -66,7 +66,7 @@ from mpichompiheader import MpichOmpiHeaderGenerator
 from ompiintelheader import OmpiIntelHeaderGenerator
 from ompimpichheader import OmpiMpichHeaderGenerator
 from ompiompiheader import OmpiOmpiHeaderGenerator
-from codegen import CPreloadGenerator
+from cpreloadgenerator import CPreloadGenerator
 from docopt import docopt
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
@@ -209,7 +209,7 @@ class Generator:
         Launches the generation process for various code files.
         """
         gencpreload = CPreloadGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/code_generation_input/C"),
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code"),
             dir_output=self.c_preload_gen_dir,
         )
         gencpreload.generate()

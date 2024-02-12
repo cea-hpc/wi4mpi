@@ -1,7 +1,0 @@
-([ ()*_$\t])R_@\1A_
-MPIX_T_BIND_INVALID@A_MPIX_T_BIND_INVALID
-A_MPIX_Grequest_@MPIX_Grequest_
-mpich_@a_mpich_
-\( void@(void
-A_PMPIX_@PMPIX_
-#include "run_mpio.h"@#include "app_mpio.h"

@@ -1,2 +1,0 @@
-#define A_MPI_CONVERSION_FN_NULL ((A_MPI_Datarep_conversion_function*) 0)
-#endif
