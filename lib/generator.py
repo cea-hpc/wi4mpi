@@ -114,6 +114,12 @@ class Generator:
         self.interface_header_dir = kwargs.get("interface_header_dir", self.interface_header_dir)
         self.preload_header_dir = kwargs.get("preload_header_dir", self.preload_header_dir)
         self.c_preload_gen_dir = kwargs.get("c_preload_gen_dir", self.c_preload_gen_dir)
+        if self.interface_header_dir is None:
+            self.interface_header_dir = "src/interface/header"
+        if self.preload_header_dir is None:
+            self.preload_header_dir = "src/preload/header"
+        if self.c_preload_gen_dir is None:
+            self.c_preload_gen_dir = "src/preload/gen"
 
     def generate_header(self):
         """

@@ -9,7 +9,7 @@ This module provides classes and methods for generating MPI header files.
 
 import os
 import re
-from abc import abstractmethod
+from abc import abstractmethod,ABC
 from logging import getLogger
 from logging.config import fileConfig
 from textoperator import (
@@ -28,7 +28,7 @@ log = getLogger("header_logger")
 wi4mpi_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-class HeaderGenerator:
+class HeaderGenerator(ABC):
     """
     Class for generating MPI header files.
 
