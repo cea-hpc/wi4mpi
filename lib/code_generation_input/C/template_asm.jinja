@@ -1,0 +1,104 @@
+{#this template use the func dictionary (extrated from functions.json) and the mappers_X.json dict as input #}
+{%- if  conf[func['name']] is defined and  conf[func['name']]['ASM'] is defined and conf[func['name']]['ASM']['C'] is defined and conf[func['name']]['ASM']['C']['generated'] == "False" -%} 
+    {% if conf[func['name']]['ASM']['C']['path'] is defined %}
+        {%-  include conf[func['name']]['ASM']['C']['path']-%} 
+    {% endif %}
+{%-  else-%} 
+    {%- from 'in_functions.jinja' import type_prefix-%} 
+    {%-  set ret_type = type_prefix('A_',mappers[func['ret']['name']]['type'])-%} 
+    {%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
+__asm__(
+        ".global P{{func['name']}}\n"
+        ".weak {{func['name']}}\n"
+        ".set {{func['name']}},P{{func['name']}}\n"
+        ".extern in_w\n"
+        ".extern A_{{func['name']}}\n"
+        ".extern R_{{func['name']}}\n"
+        ".type P{{func['name']}},@function\n"
+        ".text\n"
+        "P{{func['name']}}:\n"
+        {# generate AARCH64 code #}
+        #ifdef __aarch64__
+        "adrp x8, :gottprel:in_w\n"
+        "ldr x8, [x8, :gottprel_lo12:in_w]\n"
+        "mrs x9, TPIDR_EL0\n"
+        "ldr w8, [x9, x8]\n"
+        "cbnz w8, inwrap_{{func['name']}}\n"
+        "b A_{{func['name']}}\n"
+        "inwrap_{{func['name']}}:\n"
+        "b R_{{func['name']}}\n"
+        #else
+        {# generate x86_64 #}
+        {%- set nb_args=func['args']|map(attribute='var')|join(' ')|wordcount -%} 
+            {%- if nb_args < 6-%} 
+               {%- set tmpcount_hexa=nb_args*8%}
+               {%set halfcount_hexa=tmpcount_hexa/16-%} 
+               {%set rcount_hexa=halfcount_hexa|round(0,'ceil')|int-%} 
+               {%set count_hexa=rcount_hexa*16|int-%} 
+            {%- else-%} 
+               {%- set count_hexa=48%}
+        {%- endif-%} 
+        "push %rbp\n"
+        "mov %rsp, %rbp\n"
+        {%- if nb_args > 0 and func['args'][0]['var'] != ""-%} 
+        "sub $0x{{ "%0x" %count_hexa }}, %rsp\n"
+        {%-  for arg in func['args']-%} 
+            {%-  if loop.index == 1-%} 
+               "mov %rdi, -0x8(%rbp)\n"
+            {%- endif-%} 
+            {%-  if loop.index == 2-%} 
+                "mov %rsi, -0x10(%rbp)\n"
+            {%- endif-%} 
+            {%-  if loop.index == 3-%} 
+                "mov %rdx, -0x18(%rbp)\n"
+            {%- endif-%} 
+            {%-  if loop.index == 4-%} 
+                "mov %rcx, -0x20(%rbp)\n"
+            {%- endif-%} 
+            {%-  if loop.index == 5-%} 
+                "mov %r8, -0x28(%rbp)\n"
+            {%- endif-%} 
+            {%-  if loop.index == 6-%} 
+                "mov %r9, -0x30(%rbp)\n"
+            {%- endif-%} 
+        {%- endfor-%}  
+        {%- endif-%} 
+        ".byte 0x66\n"
+        "leaq in_w@tlsgd(%rip), %rdi\n"
+        ".value 0x6666\n"
+        "rex64\n"
+        "call __tls_get_addr@PLT\n"
+        {%- if nb_args > 0 and func['args'][0]['var'] != ""-%} 
+        {%-  for arg in func['args']-%} 
+            {%-  if loop.index == 1-%}  
+                "mov -0x8(%rbp), %rdi\n"
+            {%- endif-%} 
+            {%-  if loop.index == 2-%} 
+                "mov -0x10(%rbp), %rsi\n"
+            {%- endif-%} 
+            {%-  if loop.index == 3-%} 
+                "mov -0x18(%rbp), %rdx\n"
+            {%- endif-%} 
+            {%-  if loop.index == 4-%} 
+                "mov -0x20(%rbp), %rcx\n"
+            {%- endif-%} 
+            {%-  if loop.index == 5-%} 
+                "mov -0x28(%rbp), %r8\n"
+            {%- endif-%} 
+            {%-  if loop.index == 6-%} 
+                "mov -0x30(%rbp), %r9\n"
+            {%- endif-%} 
+        {%- endfor-%}  
+        {%- endif-%} 
+        "leave\n"
+        "cmpl $0x0, 0x0(%rax)\n"
+        "jne inwrap_{{func['name']}}\n"
+        "jmp *A_{{func['name']}}@GOTPCREL(%rip)\n"
+        "inwrap_{{func['name']}}:\n"
+        "jmp *R_{{func['name']}}@GOTPCREL(%rip)\n"
+        #endif
+        ".size P{{func['name']}},.-P{{func['name']}}\n"
+
+
+        );
+{%- endif-%} 

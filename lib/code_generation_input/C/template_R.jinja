@@ -1,0 +1,23 @@
+{#this template use the func dictionary (extrated from functions.json) and the mappers_X.json dict as input #}
+{%- if  conf[func['name']] is defined and  conf[func['name']]['Runtime'] is defined and conf[func['name']]['Runtime']['C'] is defined and conf[func['name']]['Runtime']['C']['generated'] == "False" -%} 
+    {% if  conf[func['name']]['Runtime']['C']['path'] is defined %}
+    {%-  include conf[func['name']]['Runtime']['C']['path']-%} 
+    {% endif %}
+{%-  else-%} 
+# ifndef R_{{func['name']}}
+    {% from 'in_functions.jinja' import type_prefix %}
+    {%-  set ret_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
+    {{ ret_type }} R_{{func['name']}}( {%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%}{{type_prefix('R_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%-  endfor-%} ) 
+    {
+#ifdef TIMEOUT_SUPPORT
+#endif
+    {{ret_type}} ret_tmp=LOCAL_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%}     {%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }} {% else %}  {{ arg['var']|replace([],'') }} {% endif %} {%-  endfor-%} );
+{{ret_type}} ret=ret_tmp;
+#ifdef DEBUG
+#endif
+#ifdef TIMEOUT_SUPPORT
+#endif
+    return ret;
+    } 
+#endif
+{%-  endif-%} 

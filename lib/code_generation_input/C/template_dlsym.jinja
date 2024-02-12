@@ -1,0 +1,45 @@
+__attribute__((constructor)) void wrapper_init(void) {
+void *lib_handle = dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"), RTLD_NOW | RTLD_GLOBAL);
+void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_GLOBAL);
+    {% for func in funcs-%} 
+#ifdef __{{func['name']}}__GEN__
+        LOCAL_{{func['name']}}=dlsym(lib_handle,"{{func['name']}}");
+        if ( ! LOCAL_{{func['name']}} && lib_handle_io)
+        LOCAL_{{func['name']}}=dlsym(lib_handle_io,"{{func['name']}}");
+#endif
+    {% endfor-%} 
+    {%- for type in types-%} 
+        {{type['name']}}_translation_init();
+        {%- for const in type["values"]-%} 
+             {{type['name']}}_translation_add_const(A_{{const}},R_{{const}});
+        {%- endfor -%}
+    {%- endfor -%} 
+  wrapper_init_f();
+  init_f2c(lib_handle);
+  WI4MPI_errhandler_key = R_MPI_KEYVAL_INVALID;
+}
+            
+__attribute__((constructor)) void wi4mpi_timeout_config(void) {
+  char *current_str;
+  size_t current_val;
+  int current_deb;
+  timeout_config_file();
+  int default_debug;
+  if (current_str = getenv("WI4MPI_DEFAULT_PRINT")) {
+    default_debug = strtol(current_str, NULL, 10);
+  } else
+    default_debug = 0;
+    {%- for func in funcs -%} 
+  if (current_str = getenv("WI4{{func['name']}}_timeout")) {
+    current_val = strtoll(current_str, NULL, 10);
+    if (current_val > 0)
+      WI4{{func['name']}}_timeout = current_val;
+  }
+  if (current_str = getenv("WI4{{func['name']}}_debug")) {
+    current_deb = strtol(current_str, NULL, 10);
+    if (current_deb > 0)
+      WI4{{func['name']}}_print = current_deb;
+  } else
+    WI4{{func['name']}}_print = default_debug;
+    {%- endfor -%} 
+}

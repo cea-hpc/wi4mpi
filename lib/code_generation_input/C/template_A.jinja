@@ -1,0 +1,98 @@
+{#this template use the func dictionary (extrated from functions.json) and the mappers_X.json dict as input #}
+{%- from 'out_function.jinja' import convert_out -%} 
+{%- from 'in_functions.jinja' import type_prefix,convert_in,tmp_decl,handle_local_var -%} 
+{%-  set ret_type = type_prefix('A_',mappers[func['ret']['name']]['type'])-%} 
+{%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
+
+{% if  conf[func['name']] is defined and  conf[func['name']]['Application'] is defined and conf[func['name']]['Application']['C'] is defined and conf[func['name']]['Application']['C']['generated'] == "False" -%}
+ {%-  if conf[func['name']]['Application']['C']['path'] is defined -%}
+    {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} );
+    {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{arg["var"]|typevar(type_prefix('R_',mappers[arg['name']]['type'])) }} {%endif%}{%-  endfor-%} );
+
+#define __{{func['name']}}__GEN__
+
+    {%  include conf[func['name']]['Application']['C']['path']-%} 
+ {% endif %}
+{%  else-%} 
+    {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif %}{%-  endfor-%} );
+    {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %} {{ arg["var"]|typevar(type_prefix('R_',mappers[arg['name']]['type'])) }} {%endif%} {%-  endfor-%} );
+#define __{{func['name']}}__GEN__
+#ifndef A_{{func['name']}}
+#ifndef {{func['name']|upper}}_OVERRIDE
+
+    {{ ret_type }} A_{{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %} {{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif%} {%-  endfor-%} ) 
+    {
+    #ifdef TIMEOUT_SUPPORT
+    wi4mpi_set_timeout(WI4{{func['name']}}_timeout);
+    #endif
+    in_w=1;
+    {% if func['heading']|default("") != "" %}
+        {{func['heading']}}
+    {% endif %}
+    {% set count = namespace(value=0)-%}  
+
+    {% if func["local_vars"] is defined  %}
+    {% set larg= func["local_vars"]["function"]["arguments"]|replace('_tmp','') %}
+    {% for arg in func["args"] %}
+    {% if arg['var'] in larg %}
+            {{ tmp_decl(mappers[arg['name']],arg) }}
+                {%- if arg['In'] == 1 and arg['arg_dep'] != ''-%} 
+                    {%- set count.value = count.value + 1-%} 
+                {%- endif -%}  
+            {{ convert_in(arg,mappers[arg['name']],count.value) }}
+        {% endif %}
+    {% endfor %}
+    {{ handle_local_var(func["local_vars"]) }}
+    {% endif %}
+    {%-  for arg in func['args'] -%}  
+        {% if func["local_vars"] is not defined  or arg['var'] not in larg %}
+            {{ tmp_decl(mappers[arg['name']],arg) }}
+            {%- if arg['In'] == 1 and arg['arg_dep'] != ''-%} 
+                 {%- set count.value = count.value + 1-%} 
+            {%- endif -%}  
+            {{ convert_in(arg,mappers[arg['name']],count.value) }}
+        {% endif %}
+    {%-  endfor %} 
+
+    {{ret_run_type}} ret_tmp=LOCAL_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%}     {%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%} );
+
+    {%  for arg in func['args'] -%} 
+        {%- if arg['Out'] == 1 and arg['arg_dep'] != ''-%} 
+             {%- set count.value = count.value + 1-%} 
+        {%- endif-%} 
+        {%- if 'Test' in func['name'] -%} 
+            {{ convert_out(arg,mappers[arg['name']],count.value,True,func['name']) }} 
+        {%- else -%} 
+            {{ convert_out(arg,mappers[arg['name']],count.value,false,func['name']) }} 
+        {%- endif -%} 
+    {%-  endfor -%}  
+    {%- for arg in func['args'] -%} 
+        {%- if arg['arg_dep'] != '' and mappers[arg['name']]['no_map'] is not defined and mappers[arg['name']]['max_mpi'] is defined%}
+                     {%- if arg['if_status_ignore'] is defined-%} 
+                     if ( {{arg['var']|replace('[]','')}}!=A_MPI_STATUSES_IGNORE)
+                    {%- endif -%} 
+                    wi4mpi_free({{arg['var']|replace('[]','')}}_tmp);
+        {%- endif -%} 
+    {%- endfor -%} 
+    {% if ret_type == "double" %}
+          {{ret_type}} ret={{func['ret']['var']}}_tmp;
+    {% else %}
+    {{ret_type}} ret={{mappers[func['ret']['name']]['r2a']}}({{func['ret']['var']}}_tmp);
+    {% endif %}
+    in_w=0;
+    {# le code de construction des parametre dans debug_printer est faux mais laissé tel quel tant que la refonte du générateur est pas finie pour ne pas modifier le code généré: on tient compte d'arg_dep dans les argments à afficher mais pas dans le code de construction de la string de contrôle #}
+    #ifdef DEBUG
+        if (WI4{{func['name']}}_print)
+            debug_printer(
+                "{{func['name']}} :\n{\n{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var']|replace('[]','') }} : {{mappers[arg['name']]['debug_type']}},\n{%- endif-%} {%- endfor%}error/return : {{mappers[func['ret']['name']]['debug_type']}}\n}\n",{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var']|replace('[]','') }},{%- endif -%}  {%- endfor -%}ret);
+    #endif
+    #ifdef TIMEOUT_SUPPORT
+        wi4mpi_unset_timeout();
+    #endif
+    return ret;
+    } 
+#endif
+#endif
+{%-  endif %}
+
+ 

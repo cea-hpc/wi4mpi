@@ -7,12 +7,14 @@ This script generates Wi4MPI's headers from OpenMPI 1.8.8 and MPICH 3.1.2 header
 Usage:
   generator.py [--interface_header_dir=<interface_header_dir>]
                [--preload_header_dir=<preload_header_dir>]
+               [--c_preload_gen_dir=<c_preload_gen_dir>]
   generator.py (-h | --help)
 
 Options:
   -h --help                             Show this help message.
   --interface_header_dir=<interface_header_dir>   Path to header interface generation folder.
   --preload_header_dir=<preload_header_dir>       Path to header preload generation folder.
+  --c_preload_gen_dir=<c_preload_gen_dir>         Path to preload C code folder.
 
 Examples:
   1. Generate headers using default directories:
@@ -22,7 +24,8 @@ Examples:
   2. Specify custom directories for generated files:
       ```
       ./generator.py --interface_header_dir=interface_header_gen \
-                     --preload_header_dir=preload_header_gen
+                     --preload_header_dir=preload_header_gen \
+                     --c_preload_gen_dir=c_preload_gen_dir
       ```
 
 Description:
@@ -32,6 +35,7 @@ Description:
   Default directories for generated files:
   - interface_header_dir: "src/interface/header"
   - preload_header_dir: "src/preload/header"
+  - c_preload_gen_dir: "src/preload/gen"
 
   The generated headers are placed in subdirectories starting with underscores, such as "_MPC",
   "_INTEL", etc.
@@ -49,7 +53,6 @@ Authors:
 import os
 from logging import getLogger
 from logging.config import fileConfig
-from docopt import docopt
 from mpcheader import MpcHeaderGenerator
 from intelheader import IntelHeaderGenerator
 from mpichheader import MpichHeaderGenerator
@@ -63,6 +66,8 @@ from mpichompiheader import MpichOmpiHeaderGenerator
 from ompiintelheader import OmpiIntelHeaderGenerator
 from ompimpichheader import OmpiMpichHeaderGenerator
 from ompiompiheader import OmpiOmpiHeaderGenerator
+from codegen import CPreloadGenerator
+from docopt import docopt
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("generator_logger")
@@ -78,10 +83,12 @@ class Generator:
     Args:
         interface_header_dir (str, optional): Directory for interface headers.
         preload_header_dir (str, optional): Directory for preload headers.
+        c_preload_gen_dir (str, optional): Directory for preload C code.
     """
 
     interface_header_dir = "src/interface/header"
     preload_header_dir = "src/preload/header"
+    c_preload_gen_dir = "src/preload/gen"
 
     def __init__(self, **kwargs):
         self.set_directories(**kwargs)
@@ -94,6 +101,7 @@ class Generator:
             **kwargs (dict): A dictionary containing optional parameters.
                 - "interface_header_dir" (str, optional): Directory for interface headers.
                 - "preload_header_dir" (str, optional): Directory for preload headers.
+                - "c_preload_gen_dir" (str, optional): Directory for preload C code.
 
         Returns:
             None
@@ -105,8 +113,9 @@ class Generator:
         """
         self.interface_header_dir = kwargs.get("interface_header_dir", self.interface_header_dir)
         self.preload_header_dir = kwargs.get("preload_header_dir", self.preload_header_dir)
+        self.c_preload_gen_dir = kwargs.get("c_preload_gen_dir", self.c_preload_gen_dir)
 
-    def generate(self):
+    def generate_header(self):
         """
         Launches the generation process for various header files.
         """
@@ -189,6 +198,23 @@ class Generator:
         )
         genompiompi.generate()
 
+    def generate_code(self):
+        """
+        Launches the generation process for various code files.
+        """
+        gencpreload = CPreloadGenerator(
+            dir_input=os.path.join(wi4mpi_root, "lib/code_generation_input/C"),
+            dir_output=self.c_preload_gen_dir,
+        )
+        gencpreload.generate()
+
+    def generate(self):
+        """
+        Launches the generation process for header and code files.
+        """
+        self.generate_header()
+        self.generate_code()
+
 
 if "__main__" == __name__:
     USAGE = """
@@ -201,7 +227,9 @@ if "__main__" == __name__:
     Here is an example of use if you do not want to overwrite the files already present:
 
       ```
-      ./generator.py --interface_header_dir=interface_header_gen --preload_header_dir=preload_header_gen
+      ./generator.py --interface_header_dir=interface_header_gen \
+                     --preload_header_dir=preload_header_gen \
+                     --c_preload_gen_dir=c_preload_gen_dir
       ```
 
     This will create two folders inplace, interface_header_gen and preload_header_gen, with generated headers inside.
@@ -209,18 +237,21 @@ if "__main__" == __name__:
     Usage:
       generator.py [--interface_header_dir=<interface_header_dir>]
                    [--preload_header_dir=<preload_header_dir>]
+                   [--c_preload_gen_dir=<c_preload_gen_dir>]
       generator.py (-h | --help)
 
     Options:
       -h --help                                                          Show this helper.
       --interface_header_dir=<interface_header_dir>                      Path to header interface generation folder.
       --preload_header_dir=<preload_header_dir>                          Path to header preload generation folder.
+      --c_preload_gen_dir=<c_preload_gen_dir>                            Path to C preload generation folder
     """  # noqa: E501
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
     args = {
         "interface_header_dir": arguments["--interface_header_dir"],
         "preload_header_dir": arguments["--preload_header_dir"],
+        "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
     }
     run = Generator(**args)
     run.generate()
