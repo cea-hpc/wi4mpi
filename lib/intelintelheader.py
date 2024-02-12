@@ -106,6 +106,14 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
                void *attribute_val_out, int *flag);
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        _pattern_block = """
+#define A_MPI_MAX_OBJECT_NAME    128
+"""
+        _replacement_block = """
+#define A_MPI_MAX_OBJECT_NAME    128
+#define A_MPI_MAX_DATAREP_STRING 128
+"""
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
         return text
 

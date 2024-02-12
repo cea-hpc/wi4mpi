@@ -124,6 +124,14 @@ class HeaderGenerator:
 
         text = re.sub(r'#include "mpi.h"', r'#include "run_mpi.h"', text)
         text = re.sub(r'#include "mpio.h"', r'#include "run_mpio.h"', text)
+        _pattern_block = """
+#define R_MPI_MAX_OBJECT_NAME    128
+"""
+        _replacement_block = """
+#define R_MPI_MAX_OBJECT_NAME    128
+#define R_MPI_MAX_DATAREP_STRING 128
+"""
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
         return text
 
@@ -313,6 +321,15 @@ class HeaderGenerator:
             1,
             text,
         )
+        _pattern_block = """
+#define A_MPI_MAX_OBJECT_NAME   1024    /* max object name length */
+"""
+        _replacement_block = """
+#define A_MPI_MAX_OBJECT_NAME    128
+#define A_MPI_MAX_DATAREP_STRING 128
+"""
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+
         return text
 
     def _generate_app_mpih(self, gen_file):
