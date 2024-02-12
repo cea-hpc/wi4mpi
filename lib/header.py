@@ -9,6 +9,7 @@ This module provides classes and methods for generating MPI header files.
 
 import os
 import re
+from abc import abstractmethod
 from logging import getLogger
 from logging.config import fileConfig
 from textoperator import (
@@ -81,15 +82,19 @@ class HeaderGenerator:
         os.makedirs(self.dir_output, exist_ok=True)
 
     def __init__(self, dir_input="", dir_output=""):
+        # Prevent instantiation of this class directly
+        if type(self) is HeaderGenerator:
+            raise Exception("HeaderGenerator is an abstract class and cannot be instantiated directly.")
         self.set_directories(dir_input=dir_input, dir_output=dir_output)
 
+    @abstractmethod
     def _generate_wrapper_fh(self, gen_file):
-        wrapper_warning = (
-            f"The generation of '{gen_file}' have to be done locally.\n\tA MPC program has to be e"
-            "xecuted in order to catch MPI_MODE_XXX values.\n\tHave a look to generator/FORTRAN/MP"
-            "I_XXX_generator/MPC/gen_MPC_vars.sh"
-        )
-        log.warning(wrapper_warning)
+        """
+        Abstract method, must be implemented by a subclass.
+        
+        Generate the wrapper_f.h header file.
+        """
+        pass
 
     def _replace_mpi_with_rmpi(self, text: str) -> str:
         """
