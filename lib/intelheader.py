@@ -157,9 +157,13 @@ class IntelHeaderGenerator(HeaderGenerator):
         """
         log.debug("Running _generate_wrapper_fh (IntelHeaderGenerator).")
         super()._generate_wrapper_fh(gen_file)
+
+        def _msg(wrapper_f):
+            return f"Using {wrapper_f}"
+
         if not os.path.exists(gen_file):
             wrapper_f = os.path.join(self.dir_input, "wrapper_f.h")
-            log.warning(lambda: f"Using {wrapper_f}")
+            log.warning(_msg(wrapper_f))
             shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), gen_file)
 
     def _mpich_exceptions_run_mpih(self, text):

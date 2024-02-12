@@ -36,8 +36,13 @@ class MpcHeaderGenerator(HeaderGenerator):
 
     def _generate_wrapper_fh(self, gen_file):
         super()._generate_wrapper_fh(gen_file)
+
+        def _msg(wrapper_f):
+            return f"Using {wrapper_f} (MpcHeaderGenerator)"
+
         if not os.path.exists(os.path.join(self.dir_output, "wrapper_f.h")):
-            log.warning(lambda: 'Using {os.path.join(self.dir_input, "wrapper_f.h")}')
+            wrapper_f = os.path.join(self.dir_input, "wrapper_f.h")
+            log.warning(_msg(wrapper_f))
             shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), gen_file)
 
     def _mpc_exceptions_run_mpih(self, text):
