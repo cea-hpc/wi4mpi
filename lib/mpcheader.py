@@ -35,7 +35,12 @@ class MpcHeaderGenerator(HeaderGenerator):
         super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _generate_wrapper_fh(self, gen_file):
-        super()._generate_wrapper_fh(gen_file)
+        wrapper_warning = (
+            f"The generation of '{gen_file}' have to be done locally.\n\tA MPC program has to be e"
+            "xecuted in order to catch MPI_MODE_XXX values.\n\tHave a look to generator/FORTRAN/MP"
+            "I_XXX_generator/MPC/gen_MPC_vars.sh"
+        )
+        log.warning(wrapper_warning)
 
         def _msg(wrapper_f):
             return f"Using {wrapper_f} (MpcHeaderGenerator)"

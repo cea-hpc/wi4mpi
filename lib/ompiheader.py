@@ -34,8 +34,6 @@ class OmpiHeaderGenerator(HeaderGenerator):
         super().__init__(dir_input=dir_input, dir_output=dir_output)
 
     def _generate_wrapper_fh(self, gen_file):
-        super()._generate_wrapper_fh(gen_file)
-
         def _msg(wrapper_f):
             return f"Using {wrapper_f} (OmpiHeaderGenerator)"
 

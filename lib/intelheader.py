@@ -156,7 +156,6 @@ class IntelHeaderGenerator(HeaderGenerator):
             gen_file (str): The path to the generated file.
         """
         log.debug("Running _generate_wrapper_fh (IntelHeaderGenerator).")
-        super()._generate_wrapper_fh(gen_file)
 
         def _msg(wrapper_f):
             return f"Using {wrapper_f}"
