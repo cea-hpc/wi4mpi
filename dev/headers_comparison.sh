@@ -1,6 +1,11 @@
 #!/bin/bash
 
-_dir=$(realpath $(dirname $0))
+GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1}
+GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-1}
+GENERATOR_RUN=${GENERATOR_RUN-1}
+
+_dir="${1-$(realpath "$(dirname "$0")")}"
+
 
 function diff_gen_ref() {
 file_gen=$1
@@ -21,12 +26,12 @@ fi
 }
 
 
-
+dir_gen_c_preload=$(mktemp -d)
+wi4mpi_dir="$_dir/.."
 dir_ref_interface="$_dir/../src/interface/header"
 dir_gen_interface=$(mktemp -d)
 dir_ref_preload="$_dir/../src/preload/header"
 dir_gen_preload=$(mktemp -d)
-wi4mpi_dir="$_dir/.."
 
 file_ref_ompi_run_mpi=$dir_ref_interface/_OMPI/run_mpi.h
 file_ref_intel_run_mpi=$dir_ref_interface/_INTEL/run_mpi.h
@@ -305,10 +310,13 @@ $dir_gen_preload/MPICH_OMPI \
 $dir_gen_preload/OMPI_INTEL \
 $dir_gen_preload/OMPI_MPICH
 
+if [[ $GENERATOR_RUN == 1 ]]; then
 export PYTHONPATH=$PYTHONPATH:$wi4mpi_dir/lib
 cd $wi4mpi_dir
-./lib/generator.py --interface_header_dir=$dir_gen_interface --preload_header_dir=$dir_gen_preload
+./lib/generator.py --interface_header_dir=$dir_gen_interface --preload_header_dir=$dir_gen_preload --c_preload_gen_dir=$dir_gen_c_preload
+fi
 
+if [[ $GENERATOR_TEST_HEADER == 1 && $GENERATOR_RUN == 1 ]]; then
 echo "-------------------------------------------------------------------------------------"
 for step in "${sorted_step[@]}"; do
   _files=(${compare_match[$step]})
@@ -358,8 +366,12 @@ else
   echo -e "\033[31m[========]\n| FAILED |\n[========]\n\033[0m"
   exit 1
 fi
+fi
 
-
+if [[ $GENERATOR_TEST_BUILD == 1 ]]; then
+    if [[ $GENERATOR_RUN == 1 ]]; then
+        cp $dir_gen_c_preload/test_c_gen_preload.c $wi4mpi_dir/src/preload/gen/mpi_translation_c.c
+    fi
 wi4mpi_build_prefix=$(mktemp -d)
 wi4mpi_install_prefix=$(mktemp -d)
 echo -e "\033[35m[=====================================]\n| Build   prefix: $wi4mpi_build_prefix |\n| Install prefix: $wi4mpi_install_prefix |\n[=====================================]\n\033[0m"
@@ -374,4 +386,12 @@ echo -e "\033[35m
   * Install prefix: $wi4mpi_install_prefix
   * Interface header directory: $dir_gen_interface
   * Preload header directory: $dir_gen_preload
+  * Preload C code directory: $dir_gen_c_preload
 \033[0m"
+else
+echo -e "\033[35m
+  * Interface header directory: $dir_gen_interface
+  * Preload header directory: $dir_gen_preload
+  * Preload C code directory: $dir_gen_c_preload
+\033[0m"
+fi
