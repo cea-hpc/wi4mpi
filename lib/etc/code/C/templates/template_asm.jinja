@@ -1,6 +1,6 @@
 {#this template use the func dictionary (extrated from functions.json) and the mappers_X.json dict as input #}
 {%- if  conf[func['name']] is defined and  conf[func['name']]['ASM'] is defined and conf[func['name']]['ASM']['C'] is defined and conf[func['name']]['ASM']['C']['generated'] == "False" -%} 
-    {% if conf[func['name']]['ASM']['C']['path'] is defined %}
+    {% if conf[func['name']]['ASM']['C']['file'] is defined %}
         {%-  include conf[func['name']]['ASM']['C']['file']-%} 
     {% endif %}
 {%-  else-%} 
