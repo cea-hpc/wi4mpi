@@ -1,0 +1,7 @@
+{%- from 'in_functions.jinja' import type_prefix-%} 
+{% for func in funcs %}
+    {%-  set ret_type = type_prefix('A_',mappers[func['ret']['name']]['type'])-%} 
+    {%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
+    unsigned long long WI4{{func['name']}}_timeout = WI4MPI_MAX_TIME;
+    unsigned int WI4{{func['name']}}_print = 0;
+{% endfor %}
