@@ -9,7 +9,7 @@ This module provides classes and methods for generating MPI header files.
 
 import os
 import re
-from abc import abstractmethod,ABC
+from abc import abstractmethod, ABC
 from logging import getLogger
 from logging.config import fileConfig
 from textoperator import (
@@ -65,7 +65,7 @@ class HeaderGenerator(ABC):
     _wrapper_f_header_file = "wrapper_f.h"
     dir_output = ""
     dir_input = ""
-    etc_dir = "" 
+    etc_dir = ""
 
     def set_directories(self, dir_input="", dir_output=""):
         """
@@ -82,23 +82,18 @@ class HeaderGenerator(ABC):
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
         print(self.wi4mpi_root)
-        self.etc_dir=os.path.join(self.wi4mpi_root,"lib/etc/headers")
-
+        self.etc_dir = os.path.join(self.wi4mpi_root, "lib/etc/headers")
 
     def __init__(self, dir_input="", dir_output=""):
-        # Prevent instantiation of this class directly
-        if type(self) is HeaderGenerator:
-            raise Exception("HeaderGenerator is an abstract class and cannot be instantiated directly.")
         self.set_directories(dir_input=dir_input, dir_output=dir_output)
 
     @abstractmethod
     def _generate_wrapper_fh(self, gen_file):
         """
         Abstract method, must be implemented by a subclass.
-        
+
         Generate the wrapper_f.h header file.
         """
-        pass
 
     def _replace_mpi_with_rmpi(self, text: str) -> str:
         """
@@ -182,9 +177,7 @@ class HeaderGenerator(ABC):
                 lines_to_delete.append(line)
         text = delete_lines(lines_to_delete, text)
         text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
-        _conf_file = os.path.join(
-            self.etc_dir, "header._common_generate_app_mpih.replace"
-        )
+        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.replace")
         text = replacement_from_conf_file(_conf_file, text)
         _pattern_block = """
 #define A_MPI_T_ERR_INVALID             72
@@ -243,17 +236,11 @@ class HeaderGenerator(ABC):
         ]
         for _function in list_of_functions_to_delete:
             text = function_to_delete(text, _function)
-        _conf_file = os.path.join(
-            self.etc_dir, "header._common_generate_app_mpih.bloc_0.replace"
-        )
+        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_0.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
-        _conf_file = os.path.join(
-            self.etc_dir, "header._common_generate_app_mpih.bloc_1.replace"
-        )
+        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_1.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
-        _conf_file = os.path.join(
-            self.etc_dir, "header._common_generate_app_mpih.bloc_2.replace"
-        )
+        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_2.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
         text = delete_line_from_pattern(r"extern struct ompi_predefined_", text)
         text = delete_line_from_pattern(r"extern A_MPI_Fint *A_MPI_F_STATUS_IGNORE;", text)
@@ -264,13 +251,9 @@ class HeaderGenerator(ABC):
             r" A_MPI_LOGICAL1 */",
             text,
         )
-        _conf_file = os.path.join(
-            self.etc_dir, "header._common_generate_app_mpih.bloc_3.replace"
-        )
+        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_3.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
-        _conf_file = os.path.join(
-            self.etc_dir, "header._common_generate_app_mpih.bloc_4.replace"
-        )
+        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_4.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
 
         _pattern_block = """
@@ -312,9 +295,7 @@ class HeaderGenerator(ABC):
             "typedef void (A_MPI_File_errhandler_fn)(struct ompi_file_t**, int *, ...);",
         ]
         text = delete_lines(lines_to_delete, text)
-        _conf_file = os.path.join(
-            self.etc_dir, "header._common_generate_app_mpih.bloc_5.replace"
-        )
+        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_5.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
         text = insert_lines(
             [

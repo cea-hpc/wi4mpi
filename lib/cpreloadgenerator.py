@@ -6,14 +6,19 @@ This module provides the abstract classe and methods for generating MPI translat
 
 import os
 import re
-from abc import abstractmethod
 from logging import getLogger
 from logging.config import fileConfig
 import jinja2
-from textoperator import load_json_file
+from textoperator import (
+    load_json_file,
+    clang_format,
+    write_file_append,
+)
 from codegenerator import CodeGenerator
+
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("code_logger")
+
 
 class CPreloadGenerator(CodeGenerator):
     """
@@ -55,8 +60,8 @@ class CPreloadGenerator(CodeGenerator):
             "types": load_json_file(self.json_files["types"]),
             "exceptions": load_json_file(self.json_files["exceptions"]),
         }
-        self.jinja_dir=os.path.join(dir_input,"C/templates/")
-        self.static_sources_dir=os.path.join(dir_input,"C/static_sources/")
+        self.jinja_dir = os.path.join(dir_input, "C/templates/")
+        self.static_sources_dir = os.path.join(dir_input, "C/static_sources/")
 
     def typevar(self, var, typename):
         """
@@ -92,11 +97,12 @@ class CPreloadGenerator(CodeGenerator):
         """
         log.debug("Run _generate_static_side")
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader([self.jinja_dir,self.static_sources_dir]), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
+            trim_blocks=True,
         )
         jinja_template = jinja_env.get_template(self.jinja_files["static"])
         rendered_template = jinja_template.render()
-        self.write_file_append(self.output_file, rendered_template + "\n")
+        return rendered_template + "\n"
 
     def _generate_declarations_side(self):
         """
@@ -111,14 +117,15 @@ class CPreloadGenerator(CodeGenerator):
         """
         log.debug("Run _generate_declaration_side")
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
+            trim_blocks=True,
         )
         jinja_env.filters["typevar"] = self.typevar
         jinja_template = jinja_env.get_template(self.jinja_files["declarations"])
         rendered_template = jinja_template.render({
             "funcs": self.data["functions"], "mappers": self.data["mappers"]
         })
-        self.write_file_append(self.output_file, rendered_template + "\n")
+        return rendered_template + "\n"
 
     def _generate_function(self, function, template_file):
         """
@@ -138,14 +145,15 @@ class CPreloadGenerator(CodeGenerator):
         log.debug(_msg(function, template_file))
         rendered_template = ""
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
+            trim_blocks=True,
         )
         jinja_env.filters["typevar"] = self.typevar
         jinja_template = jinja_env.get_template(template_file)
         rendered_template += jinja_template.render({
             "func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"]
         })
-        self.write_file_append(self.output_file, rendered_template + "\n")
+        return rendered_template + "\n"
 
     def _generate_dlsym_side(self):
         """
@@ -160,20 +168,23 @@ class CPreloadGenerator(CodeGenerator):
         """
         log.debug("Run _generate_dlsym_side")
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader([self.jinja_dir,self.static_sources_dir]), trim_blocks=True
+            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
+            trim_blocks=True,
         )
         jinja_template = jinja_env.get_template(self.jinja_files["dlsym"])
         rendered_template = jinja_template.render({
             "funcs": self.data["functions"], "types": self.data["types"]
         })
-        self.write_file_append(self.output_file, rendered_template + "\n")
+        return rendered_template + "\n"
 
     def generate(self):
-        self._generate_static_side()
-        self._generate_declarations_side()
+        content = ""
+        content += self._generate_static_side()
+        content += self._generate_declarations_side()
         for function in self.data["functions"]:
-            self._generate_function(function, self.jinja_files["asm"])
-            self._generate_function(function, self.jinja_files["app"])
-            self._generate_function(function, self.jinja_files["run"])
-        self._generate_dlsym_side()
-        self.clang_format(self.output_file)
+            content += self._generate_function(function, self.jinja_files["asm"])
+            content += self._generate_function(function, self.jinja_files["app"])
+            content += self._generate_function(function, self.jinja_files["run"])
+        content += self._generate_dlsym_side()
+        write_file_append(self.output_file, content)
+        clang_format(self.output_file)

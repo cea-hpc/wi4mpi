@@ -52,9 +52,7 @@ class OmpiHeaderGenerator(HeaderGenerator):
             )
         else:
             text, decalage = replacement_from_conf_file(
-                os.path.join(
-                    self.etc_dir, "ompiheader._replace_mpi_with_rmpi.ompiompi.replace"
-                ),
+                os.path.join(self.etc_dir, "ompiheader._replace_mpi_with_rmpi.ompiompi.replace"),
                 text,
                 shift=True,
             )

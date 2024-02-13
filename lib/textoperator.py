@@ -21,6 +21,8 @@ based on configurations from a file.
 ile.
 - delete_bloc_from_conf_file(path_file, text): Delete a block from the text based on configurations
 from a file.
+- clang_format: Format code.
+- write_file_append: Add lines at the end of the input file.
 
 Examples:
     original_text = "Line 1\nLine 2\nLine 3\nLine 4\n"
@@ -41,6 +43,7 @@ Examples:
 """
 import re
 import json
+from subprocess import call
 
 
 def delete_lines(lines_to_delete, text):
@@ -282,3 +285,31 @@ def load_json_file(file_path):
     """
     with open(file_path, "r", encoding="utf-8") as file_descriptor:
         return json.load(file_descriptor)
+
+
+def clang_format(file_to_format):
+    """
+    Format code with LLVM style.
+
+    Args:
+        file_to_format (str): Path of the file to format.
+
+    Returns:
+        None
+    """
+    call(["clang-format", "-style=LLVM", "-i", file_to_format])
+
+
+def write_file_append(file_to_edit, content):
+    """
+    Write lines at the end of the file.
+
+    Args:
+        file_to_edit (str): Path of the file to edit.
+        content (str): Strings to append to the file.
+
+    Returns:
+        None
+    """
+    with open(file_to_edit, "a", encoding="utf-8") as file_descriptor:
+        file_descriptor.write(content)
