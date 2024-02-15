@@ -16,6 +16,7 @@
 #include <sched.h>
 #include <stdio.h>
 #include <sys/syscall.h>
+#include <errno.h>
 int gettid(void) { return syscall(SYS_gettid); }
 /* data structure to keep information on timeout for each thread, the linked
  * list property is use only by controler thread*/
@@ -29,7 +30,6 @@ int timeout_thread_end;
 
 void* wi4mpi_timeout_main_loop(void *);
 void wi4mpi_timeout_thread_register(int th);
-void wi4mpi_timeout_thread_unregister();
 unsigned long long gettimestamp(void) {
 #ifdef __aarch64__
   int64_t t;
@@ -41,51 +41,6 @@ unsigned long long gettimestamp(void) {
   return ((unsigned long long)a) | (((long long)d) << 32);
 #endif
 }
-/*libc clone is a weak symbol of __clone, we use a wrapper function to clone in
- * order to do the registration/unregistration of the threads*/
-struct clone_arg {
-  int (*fn)(void *arg);
-  void *arg;
-};
-/*registation wrapper*/
-int clone_wrap_fn(void *arg) {
-  int ret;
-  struct clone_arg *casted_arg = (struct clone_arg *)arg;
-  int (*fn)(void *arg) = casted_arg->fn;
-  void *rarg = casted_arg->arg;
-  /* can be freed here */
-  free(arg);
-  /* to avoid registation of timout control thread*/
-  if (fn != (int (*)(void *arg))wi4mpi_timeout_main_loop)
-    wi4mpi_timeout_thread_register(gettid());
-  ret = fn(rarg);
-  /* to avoid unregistation of timout control thread*/
-  if (fn != (int (*)(void *arg))wi4mpi_timeout_main_loop)
-    wi4mpi_timeout_thread_unregister();
-  return ret;
-}
-int __clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg, ...);
-int clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg, ...) {
-  int ret;
-  pid_t *ptid;
-  void *tls;
-  pid_t *ctid;
-  va_list va;
-  va_start(va, arg);
-  ptid = va_arg(va, pid_t *);
-  tls = va_arg(va, void *);
-  ctid = va_arg(va, pid_t *);
-  /* will be freed in the created thread */
-  struct clone_arg *warg = malloc(sizeof(struct clone_arg));
-  warg->fn = fn;
-  warg->arg = arg;
-  ret = __clone(clone_wrap_fn, child_stack, flags, warg, ptid, tls, ctid);
-  if (ret == -1) {
-    /* clone didn't work so wrag hasn't be freed */
-    free(warg);
-  }
-  return ret;
-}
 th_reg_list *last_elt;
 /* each thread has a pointer on is own control structure*/
 __thread th_reg_list *my_elt;
@@ -96,10 +51,16 @@ void* wi4mpi_timeout_main_loop(void *felement) {
   pthread_mutex_lock(&mutex_list_lock);
   my_elt = (th_reg_list *)felement;
   pthread_mutex_unlock(&mutex_list_lock);
+  unsigned long long next_check = gettimestamp() + 0xfffffu;
   while (!timeout_thread_end) {
     unsigned long long ts = gettimestamp();
     th_reg_list *otmp;
     for (th_reg_list *tmp = my_elt; tmp != NULL; tmp = tmp->next) {
+      // check if the thread still exist, for unregistration
+      int kret = kill(tmp->tid, 0);
+      if (kret == -1 && errno == ESRCH) {
+          tmp->active = 0;
+      }
       if (tmp->active) {
         if (ts >= tmp->timeout) {
           /* effective timeout kill the responsible thread*/
@@ -132,6 +93,10 @@ void* wi4mpi_timeout_main_loop(void *felement) {
 }
 
 void wi4mpi_set_timeout(unsigned long long timeout_val) {
+  // First time the thread does a call to MPI, register it
+  if (!my_elt) {
+    wi4mpi_timeout_thread_register(gettid());
+  }
   /* may need a memfence to ensure that compiler doen't do timeout =
    ts;timeout+=timeout_val; or in the reverse order*/
   unsigned long long ts = gettimestamp();
@@ -155,10 +120,6 @@ void wi4mpi_timeout_thread_register(int th) {
   last_elt = my_elt;
   pthread_mutex_unlock(&mutex_list_lock);
   tmp->next = my_elt;
-}
-void wi4mpi_timeout_thread_unregister() {
-  /*effective destruction is done in helper thread to avoid list corruption*/
-  my_elt->active = 0;
 }
 __attribute__((constructor)) void timeout_init(void) {
   pthread_t timeout_thread;
