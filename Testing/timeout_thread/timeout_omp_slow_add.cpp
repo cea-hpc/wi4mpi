@@ -1,5 +1,11 @@
 #include <mpi.h>
 #include <unistd.h>
+#include <thread>
+
+void caller_mpi(int rank, MPI_Op slow_op) {
+    int srank;
+    MPI_Reduce(&rank, &srank, 1, MPI_INT, slow_op, 0, MPI_COMM_WORLD);
+}
 void slow_add(void *in, void *out, int *len, MPI_Datatype *dat) {
   int i;
   int *iin = (int *)in;
@@ -12,11 +18,12 @@ void slow_add(void *in, void *out, int *len, MPI_Datatype *dat) {
   }
 }
 int main(int argc, char **argv) {
-  int rank, srank;
+  int rank;
   MPI_Op slow_op;
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Op_create(&slow_add, 1, &slow_op);
-  MPI_Reduce(&rank, &srank, 1, MPI_INT, slow_op, 0, MPI_COMM_WORLD);
+  std::thread t1{caller_mpi, rank, slow_op};
+  t1.join();
   MPI_Finalize();
 }
