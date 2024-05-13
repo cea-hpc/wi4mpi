@@ -62,6 +62,7 @@ set(CMAKE_MODULE_PATH
 
 option(WI4MPI_DEBUG "Add debug printing in the wrapped calls")
 option(WI4MPI_JIT "Use JIT compilation for user-provided stuff (required gcc in the PATH at run time")
+option(WI4MPI_TIMEOUT "Activate timeout")
 
 #The Rpath Strikes Back
 set(CMAKE_SKIP_RPATH TRUE)
@@ -82,11 +83,13 @@ set(CMAKE_INSTALL_RPATH "")                                                   #
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)                                  #
 ###############################################################################
 
-if(CMAKE_SYSTEM_NAME MATCHES Linux)
+if(WI4MPI_TIMEOUT MATCHES ON)
+  if(CMAKE_SYSTEM_NAME MATCHES Linux)
     set(WI4MPI_TIMEOUT ON)
     add_definitions(-DTIMEOUT_SUPPORT)
-else()
+  else()
     set(WI4MPI_TIMEOUT OFF)
+  endif()
 endif()
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
