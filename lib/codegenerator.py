@@ -52,34 +52,34 @@ class CodeGenerator(ABC):
         os.makedirs(self.dir_output, exist_ok=True)
         self.output_file = os.path.join(dir_output, self.output_file)
 
-    @abstractmethod
-    def _generate_static_side(self):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the static side of the output file using Jinja templates.
-        """
-
-    @abstractmethod
-    def _generate_declarations_side(self):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the declarations side of the output file using Jinja templates.
-        """
-
-    @abstractmethod
-    def _generate_function(self, function, template_file):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the function using Jinja templates.
-        """
-
-    @abstractmethod
-    def _generate_dlsym_side(self):
-        """
-        Abstract method, must be implemented by a subclass.
-        Generate the dlsym side of the output file using Jinja templates.
-        """
-
+#    @abstractmethod
+#    def _generate_static_side(self):
+#        """
+#        Abstract method, must be implemented by a subclass.
+#        Generate the static side of the output file using Jinja templates.
+#        """
+#
+#    @abstractmethod
+#    def _generate_declarations_side(self):
+#        """
+#        Abstract method, must be implemented by a subclass.
+#        Generate the declarations side of the output file using Jinja templates.
+#        """
+#
+#    @abstractmethod
+#    def _generate_function(self, function, template_file):
+#        """
+#        Abstract method, must be implemented by a subclass.
+#        Generate the function using Jinja templates.
+#        """
+#
+#    @abstractmethod
+#    def _generate_dlsym_side(self):
+#        """
+#        Abstract method, must be implemented by a subclass.
+#        Generate the dlsym side of the output file using Jinja templates.
+#        """
+#
     @abstractmethod
     def generate(self):
         """
