@@ -1,0 +1,14 @@
+#include <stdlib.h>
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <dlfcn.h>
+#include "mpi.h"
+
+char wi4mpi_mode[]="";
+
+__thread int in_w;
+
+{% for func in funcs %}
+    unsigned long long WI4{{func['name']}}_timeout = WI4MPI_MAX_TIME;
+    unsigned int WI4{{func['name']}}_print = 0;
+{% endfor %}
