@@ -8,15 +8,15 @@
     {%-  set ret_type = type_prefix('A_',mappers[func['ret']['name']]['type'])-%} 
     {%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
 __asm__(
-        ".global P{{func['name']}}\n"
+        ".global {{caller_prefix}}{{func['name']}}\n"
         ".weak {{func['name']}}\n"
-        ".set {{func['name']}},P{{func['name']}}\n"
+        ".set {{func['name']}},{{conf['upper_mpi_prefix']}}{{func['name']}}\n"
         ".extern in_w\n"
         ".extern A_{{func['name']}}\n"
         ".extern R_{{func['name']}}\n"
-        ".type P{{func['name']}},@function\n"
+        ".type {{caller_prefix}}{{func['name']}},@function\n"
         ".text\n"
-        "P{{func['name']}}:\n"
+        "{{caller_prefix}}{{func['name']}}:\n"
         {# generate AARCH64 code #}
         #ifdef __aarch64__
         "adrp x8, :gottprel:in_w\n"
@@ -97,7 +97,7 @@ __asm__(
         "inwrap_{{func['name']}}:\n"
         "jmp *R_{{func['name']}}@GOTPCREL(%rip)\n"
         #endif
-        ".size P{{func['name']}},.-P{{func['name']}}\n"
+        ".size {{caller_prefix}}{{func['name']}},.-{{caller_prefix}}{{func['name']}}\n"
 
 
         );

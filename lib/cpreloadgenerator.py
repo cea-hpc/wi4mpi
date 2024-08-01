@@ -151,8 +151,7 @@ class CPreloadGenerator(CodeGenerator):
         jinja_env.filters["typevar"] = self.typevar
         jinja_template = jinja_env.get_template(template_file)
         rendered_template += jinja_template.render({
-            "func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"]
-        })
+            "func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"],"caller_prefix":"P"})
         return rendered_template + "\n"
 
     def _generate_dlsym_side(self):
