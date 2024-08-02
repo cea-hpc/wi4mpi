@@ -9,8 +9,10 @@
     {%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
 __asm__(
         ".global {{caller_prefix}}{{func['name']}}\n"
+        {% if caller_prefix == 'P' %}
         ".weak {{func['name']}}\n"
         ".set {{func['name']}},{{conf['upper_mpi_prefix']}}{{func['name']}}\n"
+        {% endif %} 
         ".extern in_w\n"
         ".extern A_{{func['name']}}\n"
         ".extern R_{{func['name']}}\n"
