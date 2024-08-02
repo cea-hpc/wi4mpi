@@ -109,7 +109,7 @@ class CInterfaceGenerator(CodeGenerator):
         content += self._apply_jinja("declarations",{"funcs":self.data["functions"], "mappers": self.data["mappers"]})
         for function in self.data["functions"]:
             content += self._apply_jinja("asm",{"func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"],"caller_prefix":"INTERF"})
-            content += self._apply_jinja("app",{"func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"]})
+            content += self._apply_jinja("app",{"func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"],"decl_ext":"extern"})
             content += self._apply_jinja("run",{"func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"]})
         content += self._apply_jinja("dlsym",{"funcs": self.data["functions"], "types": self.data["types"],"mpi_libraries":["OMPI","INTEL"]})
         write_file_append(self.output_file, content)
