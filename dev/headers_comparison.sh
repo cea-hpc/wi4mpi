@@ -1,5 +1,8 @@
 #!/bin/bash
 
+module purge
+module load gnu mpi/openmpi python3/3.11 llvm
+
 GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1}
 GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-1}
 GENERATOR_RUN=${GENERATOR_RUN-1}
@@ -27,6 +30,7 @@ fi
 
 
 dir_gen_c_preload=$(mktemp -d)
+dir_gen_c_interface=$(mktemp -d)
 wi4mpi_dir="$_dir/.."
 dir_ref_interface="$_dir/../src/interface/header"
 dir_gen_interface=$(mktemp -d)
@@ -313,7 +317,7 @@ $dir_gen_preload/OMPI_MPICH
 if [[ $GENERATOR_RUN == 1 ]]; then
 export PYTHONPATH=$PYTHONPATH:$wi4mpi_dir/lib
 cd $wi4mpi_dir
-./lib/generator.py --interface_header_dir=$dir_gen_interface --preload_header_dir=$dir_gen_preload --c_preload_gen_dir=$dir_gen_c_preload
+./lib/generator.py --interface_header_dir=$dir_gen_interface --preload_header_dir=$dir_gen_preload --c_preload_gen_dir=$dir_gen_c_preload --c_interface_gen_dir=$dir_gen_c_interface
 fi
 
 if [[ $GENERATOR_TEST_HEADER == 1 && $GENERATOR_RUN == 1 ]]; then
@@ -371,6 +375,8 @@ fi
 if [[ $GENERATOR_TEST_BUILD == 1 ]]; then
     if [[ $GENERATOR_RUN == 1 ]]; then
         cp $dir_gen_c_preload/test_c_gen_preload.c $wi4mpi_dir/src/preload/gen/mpi_translation_c.c
+        cp $dir_gen_c_interface/test_c_gen_interface.c $wi4mpi_dir/src/interface/gen/mpi_translation_c.c
+        cp $dir_gen_c_interface/interface_c.c $wi4mpi_dir/src/interface/gen/.
     fi
 wi4mpi_build_prefix=$(mktemp -d)
 wi4mpi_install_prefix=$(mktemp -d)
@@ -387,11 +393,13 @@ echo -e "\033[35m
   * Interface header directory: $dir_gen_interface
   * Preload header directory: $dir_gen_preload
   * Preload C code directory: $dir_gen_c_preload
+  * Interface C code directory: $dir_gen_c_interface
 \033[0m"
 else
 echo -e "\033[35m
   * Interface header directory: $dir_gen_interface
   * Preload header directory: $dir_gen_preload
   * Preload C code directory: $dir_gen_c_preload
+  * Interface C code directory: $dir_gen_c_interface
 \033[0m"
 fi

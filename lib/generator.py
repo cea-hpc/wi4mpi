@@ -257,6 +257,7 @@ if "__main__" == __name__:
       generator.py [--interface_header_dir=<interface_header_dir>]
                    [--preload_header_dir=<preload_header_dir>]
                    [--c_preload_gen_dir=<c_preload_gen_dir>]
+                   [--c_interface_gen_dir=<c_interface_gen_dir>]
       generator.py (-h | --help)
 
     Options:
@@ -264,7 +265,7 @@ if "__main__" == __name__:
       --interface_header_dir=<interface_header_dir>                      Path to header interface generation folder.
       --preload_header_dir=<preload_header_dir>                          Path to header preload generation folder.
       --c_preload_gen_dir=<c_preload_gen_dir>                            Path to C preload generation folder
-      --c_interface_gen_dir=<c_interface_gen_dir>                            Path to C interface generation folder
+      --c_interface_gen_dir=<c_interface_gen_dir>                        Path to C interface generation folder
     """  # noqa: E501
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
@@ -272,7 +273,7 @@ if "__main__" == __name__:
         "interface_header_dir": arguments["--interface_header_dir"],
         "preload_header_dir": arguments["--preload_header_dir"],
         "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
-     #   "c_interface_gen_dir": arguments["--c_interface_gen_dir"]
+        "c_interface_gen_dir": arguments["--c_interface_gen_dir"]
     }
     run = Generator(**args)
     run.generate()
