@@ -273,7 +273,7 @@ if "__main__" == __name__:
         "interface_header_dir": arguments["--interface_header_dir"],
         "preload_header_dir": arguments["--preload_header_dir"],
         "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
-        "c_interface_gen_dir": arguments["--c_interface_gen_dir"]
+        "c_interface_gen_dir": arguments["--c_interface_gen_dir"],
     }
     run = Generator(**args)
     run.generate()

@@ -9,7 +9,6 @@ from logging import getLogger
 from logging.config import fileConfig
 import jinja2
 from textoperator import (
-    load_json_file,
     clang_format,
     write_file_append,
 )
@@ -39,28 +38,6 @@ class CPreloadGenerator(CodeGenerator):
         log.info("Generation of preload C file.")
         self.output_file = "test_c_gen_preload.c"
         self.set_directories(dir_input, dir_output)
-        self.json_files = {
-            "functions_definitions": os.path.join(dir_input, "common/jsons/functions.json"),
-            "functions_mappers": os.path.join(dir_input, "C/jsons/mappers.json"),
-            "types": os.path.join(dir_input, "common/jsons/types.json"),
-            "exceptions": os.path.join(dir_input, "C/jsons/exceptions.json"),
-        }
-        self.jinja_files = {
-            "declarations": "template_declarations.jinja",
-            "static": "template_static.jinja",
-            "asm": "template_asm.jinja",
-            "app": "template_A.jinja",
-            "run": "template_R.jinja",
-            "dlsym": "template_dlsym.jinja",
-        }
-        self.data = {
-            "functions": load_json_file(self.json_files["functions_definitions"]),
-            "mappers": load_json_file(self.json_files["functions_mappers"]),
-            "types": load_json_file(self.json_files["types"]),
-            "exceptions": load_json_file(self.json_files["exceptions"]),
-        }
-        self.jinja_dir = os.path.join(dir_input, "C/templates/")
-        self.static_sources_dir = os.path.join(dir_input, "C/static_sources/")
 
     def _generate_static_side(self):
         """

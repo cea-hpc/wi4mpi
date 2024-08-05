@@ -7,9 +7,11 @@ This module provides the abstract classe and methods for generating MPI translat
 import os
 from abc import abstractmethod, ABC
 import re
-import jinja2
 from logging import getLogger
 from logging.config import fileConfig
+import jinja2
+from textoperator import load_json_file
+
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("code_logger")
 
@@ -34,7 +36,14 @@ class CodeGenerator(ABC):
     """  # noqa: E501
 
     json_files = {}
-    jinja_files = {}
+    jinja_files = {
+        "declarations": "template_declarations.jinja",
+        "static": "template_static.jinja",
+        "asm": "template_asm.jinja",
+        "app": "template_A.jinja",
+        "run": "template_R.jinja",
+        "dlsym": "template_dlsym.jinja",
+    }
     data = {}
     output_file = ""
     dir_input = ""
@@ -57,35 +66,49 @@ class CodeGenerator(ABC):
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
         self.output_file = os.path.join(dir_output, self.output_file)
+        self.json_files = {
+            "functions_definitions": os.path.join(dir_input, "common/jsons/functions.json"),
+            "functions_mappers": os.path.join(dir_input, "C/jsons/mappers.json"),
+            "types": os.path.join(dir_input, "common/jsons/types.json"),
+            "exceptions": os.path.join(dir_input, "C/jsons/exceptions.json"),
+        }
+        self.data = {
+            "functions": load_json_file(self.json_files["functions_definitions"]),
+            "mappers": load_json_file(self.json_files["functions_mappers"]),
+            "types": load_json_file(self.json_files["types"]),
+            "exceptions": load_json_file(self.json_files["exceptions"]),
+        }
+        self.jinja_dir = os.path.join(dir_input, "C/templates/")
+        self.static_sources_dir = os.path.join(dir_input, "C/static_sources/")
 
-#    @abstractmethod
-#    def _generate_static_side(self):
-#        """
-#        Abstract method, must be implemented by a subclass.
-#        Generate the static side of the output file using Jinja templates.
-#        """
-#
-#    @abstractmethod
-#    def _generate_declarations_side(self):
-#        """
-#        Abstract method, must be implemented by a subclass.
-#        Generate the declarations side of the output file using Jinja templates.
-#        """
-#
-#    @abstractmethod
-#    def _generate_function(self, function, template_file):
-#        """
-#        Abstract method, must be implemented by a subclass.
-#        Generate the function using Jinja templates.
-#        """
-#
-#    @abstractmethod
-#    def _generate_dlsym_side(self):
-#        """
-#        Abstract method, must be implemented by a subclass.
-#        Generate the dlsym side of the output file using Jinja templates.
-#        """
-#
+    #    @abstractmethod
+    #    def _generate_static_side(self):
+    #        """
+    #        Abstract method, must be implemented by a subclass.
+    #        Generate the static side of the output file using Jinja templates.
+    #        """
+    #
+    #    @abstractmethod
+    #    def _generate_declarations_side(self):
+    #        """
+    #        Abstract method, must be implemented by a subclass.
+    #        Generate the declarations side of the output file using Jinja templates.
+    #        """
+    #
+    #    @abstractmethod
+    #    def _generate_function(self, function, template_file):
+    #        """
+    #        Abstract method, must be implemented by a subclass.
+    #        Generate the function using Jinja templates.
+    #        """
+    #
+    #    @abstractmethod
+    #    def _generate_dlsym_side(self):
+    #        """
+    #        Abstract method, must be implemented by a subclass.
+    #        Generate the dlsym side of the output file using Jinja templates.
+    #        """
+    #
     def typevar(self, var, typename):
         """
         Generate a type declaration string based on the variable name and type.

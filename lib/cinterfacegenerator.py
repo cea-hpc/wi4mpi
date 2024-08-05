@@ -5,12 +5,9 @@ This module provides the abstract classe and methods for generating MPI translat
 """
 
 import os
-import re
 from logging import getLogger
 from logging.config import fileConfig
-import jinja2
 from textoperator import (
-    load_json_file,
     clang_format,
     write_file_append,
 )
@@ -42,31 +39,9 @@ class CInterfaceGenerator(CodeGenerator):
         self.interface_file = "interface_c.c"
         self.set_directories(dir_input, dir_output)
         self.interface_file = os.path.join(dir_output, self.interface_file)
-        self.json_files = {
-            "functions_definitions": os.path.join(dir_input, "common/jsons/functions.json"),
-            "functions_mappers": os.path.join(dir_input, "C/jsons/mappers.json"),
-            "types": os.path.join(dir_input, "common/jsons/types.json"),
-            "exceptions": os.path.join(dir_input, "C/jsons/exceptions.json"),
-        }
-        self.jinja_files = {
-            "declarations": "template_declarations.jinja",
-            "static": "template_static.jinja",
-            "asm": "template_asm.jinja",
-            "app": "template_A.jinja",
-            "run": "template_R.jinja",
-            "dlsym": "template_dlsym.jinja",
-            "dlsym_interface": "template_dlsym_interface.jinja",
-            "interface": "template_interface.jinja",
-            "interface_entry": "template_interface_entry.jinja",
-        }
-        self.data = {
-            "functions": load_json_file(self.json_files["functions_definitions"]),
-            "mappers": load_json_file(self.json_files["functions_mappers"]),
-            "types": load_json_file(self.json_files["types"]),
-            "exceptions": load_json_file(self.json_files["exceptions"]),
-        }
-        self.jinja_dir = os.path.join(dir_input, "C/templates/")
-        self.static_sources_dir = os.path.join(dir_input, "C/static_sources/")
+        self.jinja_files["dlsym_interface"] = "template_dlsym_interface.jinja"
+        self.jinja_files["interface"] = "template_interface.jinja"
+        self.jinja_files["interface_entry"] = "template_interface_entry.jinja"
 
     def generate(self):
         content = ""
@@ -75,10 +50,40 @@ class CInterfaceGenerator(CodeGenerator):
             "declarations", {"funcs": self.data["functions"], "mappers": self.data["mappers"]}
         )
         for function in self.data["functions"]:
-            content += self.apply_jinja("asm",{"func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"],"caller_prefix":"INTERF"})
-            content += self.apply_jinja("app",{"func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"],"decl_ext":"extern"})
-            content += self.apply_jinja("run",{"func": function, "mappers": self.data["mappers"], "conf": self.data["exceptions"]})
-        content += self.apply_jinja("dlsym",{"funcs": self.data["functions"], "types": self.data["types"],"mpi_libraries":["OMPI","INTEL"]})
+            content += self.apply_jinja(
+                "asm",
+                {
+                    "func": function,
+                    "mappers": self.data["mappers"],
+                    "conf": self.data["exceptions"],
+                    "caller_prefix": "INTERF",
+                },
+            )
+            content += self.apply_jinja(
+                "app",
+                {
+                    "func": function,
+                    "mappers": self.data["mappers"],
+                    "conf": self.data["exceptions"],
+                    "decl_ext": "extern",
+                },
+            )
+            content += self.apply_jinja(
+                "run",
+                {
+                    "func": function,
+                    "mappers": self.data["mappers"],
+                    "conf": self.data["exceptions"],
+                },
+            )
+        content += self.apply_jinja(
+            "dlsym",
+            {
+                "funcs": self.data["functions"],
+                "types": self.data["types"],
+                "mpi_libraries": ["OMPI", "INTEL"],
+            },
+        )
         write_file_append(self.output_file, content)
         clang_format(self.output_file)
         content = ""
