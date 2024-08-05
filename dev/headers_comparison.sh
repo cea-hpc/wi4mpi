@@ -1,14 +1,12 @@
 #!/bin/bash
 
-module purge
-module load gnu mpi/openmpi python3/3.11 llvm
+_dir="${1-$(realpath "$(dirname "$0")")}"
+wi4mpi_dir="$_dir/.."
+module restore $wi4mpi_dir/dev/wi4mpi_dev.inti.Rhel_8__x86_64
 
 GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1}
 GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-1}
 GENERATOR_RUN=${GENERATOR_RUN-1}
-
-_dir="${1-$(realpath "$(dirname "$0")")}"
-
 
 function diff_gen_ref() {
 file_gen=$1
@@ -28,10 +26,8 @@ else
 fi
 }
 
-
 dir_gen_c_preload=$(mktemp -d)
 dir_gen_c_interface=$(mktemp -d)
-wi4mpi_dir="$_dir/.."
 dir_ref_interface="$_dir/../src/interface/header"
 dir_gen_interface=$(mktemp -d)
 dir_ref_preload="$_dir/../src/preload/header"
