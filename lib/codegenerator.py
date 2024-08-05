@@ -6,6 +6,12 @@ This module provides the abstract classe and methods for generating MPI translat
 
 import os
 from abc import abstractmethod, ABC
+import re
+import jinja2
+from logging import getLogger
+from logging.config import fileConfig
+fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
+log = getLogger("code_logger")
 
 
 class CodeGenerator(ABC):
@@ -80,6 +86,43 @@ class CodeGenerator(ABC):
 #        Generate the dlsym side of the output file using Jinja templates.
 #        """
 #
+    def typevar(self, var, typename):
+        """
+        Generate a type declaration string based on the variable name and type.
+
+        Args:
+            var (str): The variable name with potential array brackets.
+            typename (str): The type name.
+
+        Returns:
+            str: The type declaration string.
+
+        Example:
+            >>> obj = YourClassName()
+            >>> obj.typevar("arr[10]", "int")
+            'int **********arr'
+        """
+        pattern = r"\[[0-9]*\]"
+        sub = re.split(pattern, var)
+        ret = typename + " " + "*" * len(sub[1:]) + sub[0]
+        return ret
+
+    def apply_jinja(self, jinja_name, param_dict):
+        """
+        generate the code correponding to the application of the dictionnary
+        on a jinja template
+        """
+        _msg = f"Run generate {jinja_name}"
+        log.debug(_msg)
+        jinja_env = jinja2.Environment(
+            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
+            trim_blocks=True,
+        )
+        jinja_env.filters["typevar"] = self.typevar
+        jinja_template = jinja_env.get_template(self.jinja_files[jinja_name])
+        rendered_template = jinja_template.render(param_dict)
+        return rendered_template + "\n"
+
     @abstractmethod
     def generate(self):
         """

@@ -5,7 +5,6 @@ This module provides the abstract classe and methods for generating MPI translat
 """
 
 import os
-import re
 from logging import getLogger
 from logging.config import fileConfig
 import jinja2
@@ -63,27 +62,6 @@ class CPreloadGenerator(CodeGenerator):
         self.jinja_dir = os.path.join(dir_input, "C/templates/")
         self.static_sources_dir = os.path.join(dir_input, "C/static_sources/")
 
-    def typevar(self, var, typename):
-        """
-        Generate a type declaration string based on the variable name and type.
-
-        Args:
-            var (str): The variable name with potential array brackets.
-            typename (str): The type name.
-
-        Returns:
-            str: The type declaration string.
-
-        Example:
-            >>> obj = YourClassName()
-            >>> obj.typevar("arr[10]", "int")
-            'int **********arr'
-        """
-        pattern = r"\[[0-9]*\]"
-        sub = re.split(pattern, var)
-        ret = typename + " " + "*" * len(sub[1:]) + sub[0]
-        return ret
-
     def _generate_static_side(self):
         """
         Generate the static side of the output file using Jinja templates.
@@ -120,7 +98,7 @@ class CPreloadGenerator(CodeGenerator):
             loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
             trim_blocks=True,
         )
-        jinja_env.filters["typevar"] = self.typevar
+        jinja_env.filters["typevar"] = super().typevar
         jinja_template = jinja_env.get_template(self.jinja_files["declarations"])
         rendered_template = jinja_template.render({
             "funcs": self.data["functions"], "mappers": self.data["mappers"]
@@ -148,7 +126,7 @@ class CPreloadGenerator(CodeGenerator):
             loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
             trim_blocks=True,
         )
-        jinja_env.filters["typevar"] = self.typevar
+        jinja_env.filters["typevar"] = super().typevar
         jinja_template = jinja_env.get_template(template_file)
         rendered_template += jinja_template.render({
             "func": function,
