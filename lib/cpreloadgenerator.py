@@ -140,7 +140,15 @@ class CPreloadGenerator(CodeGenerator):
         content += self._generate_static_side()
         content += self._generate_declarations_side()
         for function in self.data["functions"]:
-            content += self._generate_function(function, self.jinja_files["asm"])
+            content += self.apply_jinja(
+                "asm",
+                {
+                    "func": function,
+                    "mappers": self.data["mappers"],
+                    "conf": self.data["exceptions"],
+                    "caller_prefix": "INTERF",
+                },
+            )
             content += self._generate_function(function, self.jinja_files["app"])
             content += self._generate_function(function, self.jinja_files["run"])
         content += self._generate_dlsym_side()
