@@ -35,7 +35,7 @@ class CInterfaceGenerator(CodeGenerator):
             exceptions (str): Name of the json which describes non-generated functions in Wi4MPI.
         """
         log.info("Generation of interface C file.")
-        self.output_file = "test_c_gen_interface.c"
+        self.output_file = "mpi_translation_c.c"
         self.interface_file = "interface_c.c"
         self.set_directories(dir_input, dir_output)
         self.interface_file = os.path.join(dir_output, self.interface_file)

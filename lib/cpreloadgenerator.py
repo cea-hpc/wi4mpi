@@ -36,7 +36,7 @@ class CPreloadGenerator(CodeGenerator):
             exceptions (str): Name of the json which describes non-generated functions in Wi4MPI.
         """
         log.info("Generation of preload C file.")
-        self.output_file = "test_c_gen_preload.c"
+        self.output_file = "mpi_translation_c.c"
         self.set_directories(dir_input, dir_output)
 
     def _generate_static_side(self):

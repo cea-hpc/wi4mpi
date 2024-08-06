@@ -1,13 +1,5 @@
 #!/bin/bash
 
-_dir="${1-$(realpath "$(dirname "$0")")}"
-wi4mpi_dir="$_dir/.."
-module restore $wi4mpi_dir/dev/wi4mpi_dev.inti.Rhel_8__x86_64
-
-GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1}
-GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-1}
-GENERATOR_RUN=${GENERATOR_RUN-1}
-
 function diff_gen_ref() {
 file_gen=$1
 file_ref=$2
@@ -26,12 +18,8 @@ else
 fi
 }
 
-dir_gen_c_preload=$(mktemp -d)
-dir_gen_c_interface=$(mktemp -d)
-dir_ref_interface="$_dir/../src/interface/header"
-dir_gen_interface=$(mktemp -d)
 dir_ref_preload="$_dir/../src/preload/header"
-dir_gen_preload=$(mktemp -d)
+dir_ref_interface="$_dir/../src/interface/header"
 
 file_ref_ompi_run_mpi=$dir_ref_interface/_OMPI/run_mpi.h
 file_ref_intel_run_mpi=$dir_ref_interface/_INTEL/run_mpi.h
@@ -296,27 +284,6 @@ sorted_step=(
 "OMPI_OMPI_wrapper_f"
 )
 
-rm -rf \
-$dir_gen_interface/_MPC \
-$dir_gen_interface/_OMPI \
-$dir_gen_interface/_INTEL \
-$dir_gen_interface/_MPICH \
-$dir_gen_preload/INTEL_INTEL \
-$dir_gen_preload/INTEL_MPICH \
-$dir_gen_preload/MPICH_MPICH \
-$dir_gen_preload/MPICH_INTEL \
-$dir_gen_preload/INTEL_OMPI \
-$dir_gen_preload/MPICH_OMPI \
-$dir_gen_preload/OMPI_INTEL \
-$dir_gen_preload/OMPI_MPICH
-
-if [[ $GENERATOR_RUN == 1 ]]; then
-export PYTHONPATH=$PYTHONPATH:$wi4mpi_dir/lib
-cd $wi4mpi_dir
-./lib/generator.py --interface_header_dir=$dir_gen_interface --preload_header_dir=$dir_gen_preload --c_preload_gen_dir=$dir_gen_c_preload --c_interface_gen_dir=$dir_gen_c_interface
-fi
-
-if [[ $GENERATOR_TEST_HEADER == 1 && $GENERATOR_RUN == 1 ]]; then
 echo "-------------------------------------------------------------------------------------"
 for step in "${sorted_step[@]}"; do
   _files=(${compare_match[$step]})
@@ -365,37 +332,4 @@ if [[ $validation == 0 ]]; then
 else
   echo -e "\033[31m[========]\n| FAILED |\n[========]\n\033[0m"
   exit 1
-fi
-fi
-
-if [[ $GENERATOR_TEST_BUILD == 1 ]]; then
-    if [[ $GENERATOR_RUN == 1 ]]; then
-        cp $dir_gen_c_preload/test_c_gen_preload.c $wi4mpi_dir/src/preload/gen/mpi_translation_c.c
-        cp $dir_gen_c_interface/test_c_gen_interface.c $wi4mpi_dir/src/interface/gen/mpi_translation_c.c
-        cp $dir_gen_c_interface/interface_c.c $wi4mpi_dir/src/interface/gen/.
-    fi
-wi4mpi_build_prefix=$(mktemp -d)
-wi4mpi_install_prefix=$(mktemp -d)
-echo -e "\033[35m[=====================================]\n| Build   prefix: $wi4mpi_build_prefix |\n| Install prefix: $wi4mpi_install_prefix |\n[=====================================]\n\033[0m"
-cd $wi4mpi_build_prefix
-cmake \
- -DCMAKE_INSTALL_PREFIX=$wi4mpi_install_prefix\
- -DWI4MPI_COMPILER=GNU \
- $wi4mpi_dir
-make -j 4 && make install
-echo -e "\033[35m
-  * Build prefix: $wi4mpi_build_prefix
-  * Install prefix: $wi4mpi_install_prefix
-  * Interface header directory: $dir_gen_interface
-  * Preload header directory: $dir_gen_preload
-  * Preload C code directory: $dir_gen_c_preload
-  * Interface C code directory: $dir_gen_c_interface
-\033[0m"
-else
-echo -e "\033[35m
-  * Interface header directory: $dir_gen_interface
-  * Preload header directory: $dir_gen_preload
-  * Preload C code directory: $dir_gen_c_preload
-  * Interface C code directory: $dir_gen_c_interface
-\033[0m"
 fi
