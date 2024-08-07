@@ -120,14 +120,6 @@ class Generator:
         self.preload_header_dir = kwargs.get("preload_header_dir", self.preload_header_dir)
         self.c_preload_gen_dir = kwargs.get("c_preload_gen_dir", self.c_preload_gen_dir)
         self.c_interface_gen_dir = kwargs.get("c_interface_gen_dir", self.c_interface_gen_dir)
-        if self.interface_header_dir is None:
-            self.interface_header_dir = "src/interface/header"
-        if self.preload_header_dir is None:
-            self.preload_header_dir = "src/preload/header"
-        if self.c_preload_gen_dir is None:
-            self.c_preload_gen_dir = "src/preload/gen"
-        if self.c_interface_gen_dir is None:
-            self.c_interface_gen_dir = "src/interface/gen"
 
     def generate_header(self):
         """
@@ -275,6 +267,14 @@ if "__main__" == __name__:
         "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
         "c_interface_gen_dir": arguments["--c_interface_gen_dir"],
     }
+    # Delete keys that have a value of None
+    none_list = []
+    for key, value in args.items():
+        if value == None:
+            none_list.append(key)
+    for key in none_list:
+        args.pop(key)
+
     run = Generator(**args)
     run.generate()
     log.info("End")
