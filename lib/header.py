@@ -66,6 +66,7 @@ class HeaderGenerator(ABC):
     dir_output = ""
     dir_input = ""
     etc_dir = ""
+    mpi_target_version={}
 
     def set_directories(self, dir_input="", dir_output=""):
         """
@@ -84,8 +85,9 @@ class HeaderGenerator(ABC):
         print(self.wi4mpi_root)
         self.etc_dir = os.path.join(self.wi4mpi_root, "lib/etc/headers")
 
-    def __init__(self, dir_input="", dir_output=""):
+    def __init__(self, dir_input="", dir_output="", mpi_target_version={}):
         self.set_directories(dir_input=dir_input, dir_output=dir_output)
+        self.mpi_target_version = mpi_target_version
 
     @abstractmethod
     def _generate_wrapper_fh(self, gen_file):

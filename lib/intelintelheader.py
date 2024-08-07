@@ -28,9 +28,14 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/intel_intel_headers",
         dir_output="src/preload/header/_INTEL_INTEL_gen",
+        mpi_target_version={},
     ):
         log.info("Generation of INTEL_INTEL headers in progress.")
-        super().__init__(dir_input=dir_input, dir_output=dir_output)
+        super().__init__(
+                dir_input=dir_input,
+                dir_output=dir_output,
+                mpi_target_version=mpi_target_version
+        )
 
     def _preload_exception_header_run_mpih(self, text):
         log.debug("Running _preload_exception_header_run_mpih (IntelIntelHeaderGenerator).")
@@ -197,19 +202,19 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
     def generate(self):
         log.debug("Running generate (IntelIntelHeaderGenerator).")
         shutil.copy2(
-            os.path.join(self.dir_input, "mpich-3.1.2_mpi.h"),
+            os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi.h"),
             os.path.join(self.dir_output, self._run_mpi_header_file),
         )
         shutil.copy2(
-            os.path.join(self.dir_input, "mpich-3.1.2_mpi.h"),
+            os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi.h"),
             os.path.join(self.dir_output, self._app_mpi_header_file),
         )
         shutil.copy2(
-            os.path.join(self.dir_input, "mpich-3.1.2_mpio.h"),
+            os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpio.h"),
             os.path.join(self.dir_output, self._run_mpio_header_file),
         )
         shutil.copy2(
-            os.path.join(self.dir_input, "mpich-3.1.2_mpio.h"),
+            os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpio.h"),
             os.path.join(self.dir_output, self._app_mpio_header_file),
         )
         self._generate_run_mpih(os.path.join(self.dir_output, self._run_mpi_header_file))

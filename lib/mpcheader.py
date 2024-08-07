@@ -23,16 +23,18 @@ class MpcHeaderGenerator(HeaderGenerator):
     MpcHeaderGenerator class for generating Mpc-specific header files.
     """
 
-    dir_output = ""
-    dir_input = ""
-
     def __init__(
         self,
         dir_input="src/interface/header/scripts/mpc_headers",
         dir_output="src/interface/header/_MPC",
+        mpi_target_version={},
     ):
         log.info("Generation of MPC headers in progress.")
-        super().__init__(dir_input=dir_input, dir_output=dir_output)
+        super().__init__(
+                dir_input=dir_input,
+                dir_output=dir_output,
+                mpi_target_version=mpi_target_version
+        )
 
     def _generate_wrapper_fh(self, gen_file):
         wrapper_warning = (
@@ -320,7 +322,7 @@ class MpcHeaderGenerator(HeaderGenerator):
 
     def generate(self):
         shutil.copy2(
-            os.path.join(self.dir_input, "ompi-1.8.8_mpi.h"),
+            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
             os.path.join(self.dir_output, self._app_mpi_header_file),
         )
         shutil.copy2(

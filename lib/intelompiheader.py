@@ -27,9 +27,14 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/intel_ompi_headers",
         dir_output="src/preload/header/_INTEL_OMPI_gen",
+        mpi_target_version={},
     ):
         log.info("Generation of INTEL_OMPI headers in progress.")
-        super().__init__(dir_input=dir_input, dir_output=dir_output)
+        super().__init__(
+                dir_input=dir_input,
+                dir_output=dir_output,
+                mpi_target_version=mpi_target_version
+        )
 
     def _common_generate_app_mpih(self, text):
         log.debug("Running _common_generate_app_mpih (IntelOmpiHeaderGenerator).")
@@ -198,15 +203,15 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
 
     def generate(self):
         shutil.copy2(
-            os.path.join(self.dir_input, "mpich-3.1.2_mpi.h"),
+            os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi.h"),
             os.path.join(self.dir_output, self._app_mpi_header_file),
         )
         shutil.copy2(
-            os.path.join(self.dir_input, "mpich-3.1.2_mpio.h"),
+            os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpio.h"),
             os.path.join(self.dir_output, self._app_mpio_header_file),
         )
         shutil.copy2(
-            os.path.join(self.dir_input, "ompi-1.8.8_mpi.h"),
+            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
             os.path.join(self.dir_output, self._run_mpi_header_file),
         )
         self._generate_run_mpih(os.path.join(self.dir_output, self._run_mpi_header_file))

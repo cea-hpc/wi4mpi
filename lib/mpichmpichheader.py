@@ -21,6 +21,11 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/intel_intel_headers",
         dir_output="src/preload/header/_MPICH_MPICH_gen",
+        mpi_target_version={},
     ):
         log.info("Generation of MPICH_MPICH headers in progress.")
-        super().__init__(dir_input=dir_input, dir_output=dir_output)
+        super().__init__(
+                dir_input=dir_input,
+                dir_output=dir_output,
+                mpi_target_version=mpi_target_version
+        )

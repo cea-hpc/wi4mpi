@@ -23,9 +23,14 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/ompi_ompi_headers",
         dir_output="src/preload/header/_OMPI_OMPI_gen",
+        mpi_target_version={},
     ):
         log.info("Generation of OMPI_OMPI headers in progress.")
-        super().__init__(dir_input=dir_input, dir_output=dir_output)
+        super().__init__(
+                dir_input=dir_input,
+                dir_output=dir_output,
+                mpi_target_version=mpi_target_version
+        )
 
     def _ompi_ompi_run_exception(self, text):
         pattern = []
@@ -100,11 +105,11 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
 
     def generate(self):
         shutil.copy2(
-            os.path.join(self.dir_input, "ompi-1.8.8_mpi.h"),
+            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
             os.path.join(self.dir_output, self._run_mpi_header_file),
         )
         shutil.copy2(
-            os.path.join(self.dir_input, "ompi-1.8.8_mpi.h"),
+            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
             os.path.join(self.dir_output, self._app_mpi_header_file),
         )
         super().generate()

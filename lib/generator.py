@@ -94,9 +94,17 @@ class Generator:
     preload_header_dir = "src/preload/header"
     c_preload_gen_dir = "src/preload/gen"
     c_interface_gen_dir = "src/interface/gen"
+    mpi_target_version = {
+            "openmpi": "1.8.8",
+            "mpich": "3.1.2",
+            "intelmpi": "20.0.0"
+            }
 
     def __init__(self, **kwargs):
         self.set_directories(**kwargs)
+        self.mpi_target_version["openmpi"] = kwargs.get("openmpi_version", self.mpi_target_version["openmpi"])
+        self.mpi_target_version["mpich"] = kwargs.get("mpich_version", self.mpi_target_version["mpich"])
+        self.mpi_target_version["intelmpi"] = kwargs.get("intelmpi_version", self.mpi_target_version["intelmpi"])
 
     def set_directories(self, **kwargs):
         """
@@ -129,78 +137,91 @@ class Generator:
         genmpc = MpcHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/mpc_headers"),
             dir_output=os.path.join(self.interface_header_dir, "_MPC"),
+            mpi_target_version=self.mpi_target_version,
         )
         genmpc.generate()
 
         genintel = IntelHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/intel_headers"),
             dir_output=os.path.join(self.interface_header_dir, "_INTEL"),
+            mpi_target_version=self.mpi_target_version,
         )
         genintel.generate()
 
         genmpich = MpichHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/mpich_headers"),
             dir_output=os.path.join(self.interface_header_dir, "_MPICH"),
+            mpi_target_version=self.mpi_target_version,
         )
         genmpich.generate()
 
         genompi = OmpiHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/ompi_headers"),
             dir_output=os.path.join(self.interface_header_dir, "_OMPI"),
+            mpi_target_version=self.mpi_target_version,
         )
         genompi.generate()
 
         genintelintel = IntelIntelHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
             dir_output=os.path.join(self.preload_header_dir, "INTEL_INTEL"),
+            mpi_target_version=self.mpi_target_version,
         )
         genintelintel.generate()
 
         genintelmpich = IntelMpichHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
             dir_output=os.path.join(self.preload_header_dir, "INTEL_MPICH"),
+            mpi_target_version=self.mpi_target_version,
         )
         genintelmpich.generate()
 
         genmpichintel = MpichIntelHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_INTEL"),
+            mpi_target_version=self.mpi_target_version,
         )
         genmpichintel.generate()
 
         genmpichmpich = MpichMpichHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_MPICH"),
+            mpi_target_version=self.mpi_target_version,
         )
         genmpichmpich.generate()
 
         genintelompi = IntelOmpiHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_ompi_headers"),
             dir_output=os.path.join(self.preload_header_dir, "INTEL_OMPI"),
+            mpi_target_version=self.mpi_target_version,
         )
         genintelompi.generate()
 
         genmpichompi = MpichOmpiHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_ompi_headers"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_OMPI"),
+            mpi_target_version=self.mpi_target_version,
         )
         genmpichompi.generate()
 
         genompiintel = OmpiIntelHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_intel_headers"),
             dir_output=os.path.join(self.preload_header_dir, "OMPI_INTEL"),
+            mpi_target_version=self.mpi_target_version,
         )
         genompiintel.generate()
 
         genompimpich = OmpiMpichHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_intel_headers"),
             dir_output=os.path.join(self.preload_header_dir, "OMPI_MPICH"),
+            mpi_target_version=self.mpi_target_version,
         )
         genompimpich.generate()
 
         genompiompi = OmpiOmpiHeaderGenerator(
             dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_ompi_headers"),
             dir_output=os.path.join(self.preload_header_dir, "OMPI_OMPI"),
+            mpi_target_version=self.mpi_target_version,
         )
         genompiompi.generate()
 
@@ -250,14 +271,20 @@ if "__main__" == __name__:
                    [--preload_header_dir=<preload_header_dir>]
                    [--c_preload_gen_dir=<c_preload_gen_dir>]
                    [--c_interface_gen_dir=<c_interface_gen_dir>]
+                   [--openmpi_version=<openmpi_version>]
+                   [--mpich_version=<mpich_version>]
+                   [--intelmpi_version=<intelmpi_version>]
       generator.py (-h | --help)
 
     Options:
       -h --help                                                          Show this helper.
       --interface_header_dir=<interface_header_dir>                      Path to header interface generation folder.
       --preload_header_dir=<preload_header_dir>                          Path to header preload generation folder.
-      --c_preload_gen_dir=<c_preload_gen_dir>                            Path to C preload generation folder
-      --c_interface_gen_dir=<c_interface_gen_dir>                        Path to C interface generation folder
+      --c_preload_gen_dir=<c_preload_gen_dir>                            Path to C preload generation folder.
+      --c_interface_gen_dir=<c_interface_gen_dir>                        Path to C interface generation folder.
+      --openmpi_version=<openmpi_version>                                Version of the target OpenMPI
+      --mpich_version=<mpich_version>                                    Version of the target MPICH
+      --intelmpi_version=<intelmpi_version>                              Version of the target IntelMPI
     """  # noqa: E501
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
@@ -266,6 +293,9 @@ if "__main__" == __name__:
         "preload_header_dir": arguments["--preload_header_dir"],
         "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
         "c_interface_gen_dir": arguments["--c_interface_gen_dir"],
+        "openmpi_version": arguments["--openmpi_version"],
+        "mpich_version": arguments["--mpich_version"],
+        "intelmpi_version": arguments["--intelmpi_version"],
     }
     # Delete keys that have a value of None
     none_list = []
