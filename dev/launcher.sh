@@ -15,7 +15,7 @@ EOF
 }
 
 
-while getopts ":g:b:c:h" opt; do
+while getopts ":g:b:d:h" opt; do
 	case ${opt} in
 		g )
 			GENERATOR_RUN="$OPTARG"
