@@ -44,23 +44,16 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
             "intelintelheader._preload_exception_header_run_mpih.replace",
         )
         text = replacement_from_conf_file(_conf_file, text)
-        # Lignes modifiées durant la génération des header de l'interface
-        _pattern_block = """
-/* See 4.12.5 for R_MPI_F_STATUS(ES)_IGNORE */
-#define MPIU_DLL_SPEC
-extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE;
-extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE;
-"""
-        _replacement_block = """
-/* See 4.12.5 for R_MPI_F_STATUS(ES)_IGNORE */
-#define MPIU_DLL_SPEC
-extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE;
-extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE;
-int * R_MPI_UNWEIGHTED;
-int * R_MPI_WEIGHTS_EMPTY;
 
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        text = delete_lines(
+            [
+                "//extern MPIU_DLL_SPEC int * R_MPI_UNWEIGHTED;",
+                "//extern MPIU_DLL_SPEC int * R_MPI_WEIGHTS_EMPTY;",
+
+            ],
+            text,
+        )
+        # Lignes modifiées durant la génération des header de l'interface
         _pattern_block = """
 /* Note that we may need to define a @PCONTROL_LIST@ depending on whether
    stdargs are supported */

@@ -473,14 +473,14 @@ typedef R_MPI_Win_errhandler_function R_MPI_Win_errhandler_fn;
 #define R_MPI_ERRORS_ARE_FATAL ((R_MPI_Errhandler)0x54000000)
 #define R_MPI_ERRORS_RETURN    ((R_MPI_Errhandler)0x54000001)
 /* R_MPIR_ERRORS_THROW_EXCEPTIONS is not part of the MPI standard, it is here to
-   facilitate the c++ binding which has MPI::ERRORS_THROW_EXCEPTIONS.
+   facilitate the c++ binding which has MPI::ERRORS_THROW_EXCEPTIONS. 
    Using the MPIR prefix preserved the R_MPI_ names for objects defined by
    the standard. */
 #define R_MPIR_ERRORS_THROW_EXCEPTIONS ((R_MPI_Errhandler)0x54000002)
 typedef int R_MPI_Errhandler;
 
 /* Make the C names for the dup function mixed case.
-   This is required for systems that use all uppercase names for Fortran
+   This is required for systems that use all uppercase names for Fortran 
    externals.  */
 /* MPI 1 names */
 #define R_MPI_NULL_COPY_FN   ((R_MPI_Copy_function *)0)
@@ -555,7 +555,7 @@ typedef int (R_MPI_Delete_function) ( R_MPI_Comm, int, void *, void * );
 enum R_MPIR_Combiner_enum {
     R_MPI_COMBINER_NAMED            = 1,
     R_MPI_COMBINER_DUP              = 2,
-    R_MPI_COMBINER_CONTIGUOUS       = 3,
+    R_MPI_COMBINER_CONTIGUOUS       = 3, 
     R_MPI_COMBINER_VECTOR           = 4,
     R_MPI_COMBINER_HVECTOR_INTEGER  = 5,
     R_MPI_COMBINER_HVECTOR          = 6,
@@ -611,14 +611,14 @@ static R_MPI_Datatype mpich_mpi_aint   MPICH_ATTR_TYPE_TAG(R_MPI_Aint)   = R_MPI
 #endif
 
 /* FIXME: The following two definition are not defined by MPI and must not be
-   included in the mpi.h file, as the MPI namespace is reserved to the MPI
+   included in the mpi.h file, as the MPI namespace is reserved to the MPI 
    standard */
 #define R_MPI_AINT_FMT_DEC_SPEC "%ld"
 #define R_MPI_AINT_FMT_HEX_SPEC "%lx"
 
 /* Let ROMIO know that R_MPI_Offset is already defined */
 #define HAVE_R_MPI_OFFSET
-/* R_MPI_OFFSET_TYPEDEF is set in configure and is
+/* R_MPI_OFFSET_TYPEDEF is set in configure and is 
       typedef $R_MPI_OFFSET R_MPI_Offset;
    where $R_MPI_OFFSET is the correct C type */
 typedef long long R_MPI_Offset;
@@ -784,8 +784,10 @@ extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE;
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE;
 int * R_MPI_UNWEIGHTED;
 int * R_MPI_WEIGHTS_EMPTY;
+int * MPI_UNWEIGHTED;
+int * MPI_WEIGHTS_EMPTY;
 
-/* The annotation MPIU_DLL_SPEC to the extern statements is used
+/* The annotation MPIU_DLL_SPEC to the extern statements is used 
    as a hook for systems that require C extensions to correctly construct
    DLLs, and is defined as an empty string otherwise
  */
@@ -822,9 +824,9 @@ extern R_MPI_F08_Status *R_MPI_F08_STATUSES_IGNORE;
 #define R_MPI_THREAD_MULTIPLE 3
 
 /* Typedefs for generalized requests */
-typedef int (R_MPI_Grequest_cancel_function)(void *, int);
-typedef int (R_MPI_Grequest_free_function)(void *);
-typedef int (R_MPI_Grequest_query_function)(void *, R_MPI_Status *);
+typedef int (R_MPI_Grequest_cancel_function)(void *, int); 
+typedef int (R_MPI_Grequest_free_function)(void *); 
+typedef int (R_MPI_Grequest_query_function)(void *, R_MPI_Status *); 
 typedef int (R_MPIX_Grequest_poll_function)(void *, R_MPI_Status *);
 typedef int (R_MPIX_Grequest_wait_function)(int, void **, double, R_MPI_Status *);
 
@@ -931,7 +933,7 @@ typedef int (R_MPIX_Grequest_wait_function)(int, void **, double, R_MPI_Status *
 #define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 
-#define R_MPI_ERR_LASTCODE    0x3fffffff  /* Last valid error code for a
+#define R_MPI_ERR_LASTCODE    0x3fffffff  /* Last valid error code for a 
 					   predefined error class */
 /* WARNING: this is also defined in mpishared.h.  Update both locations */
 #define MPICH_ERR_LAST_CLASS 74     /* It is also helpful to know the
@@ -1268,7 +1270,7 @@ int R_MPI_Win_flush_all(R_MPI_Win win);
 int R_MPI_Win_flush_local(int rank, R_MPI_Win win);
 int R_MPI_Win_flush_local_all(R_MPI_Win win);
 int R_MPI_Win_sync(R_MPI_Win win);
-
+ 
 /* External Interfaces */
 int R_MPI_Add_error_class(int *errorclass);
 int R_MPI_Add_error_code(int errorclass, int *errorcode);
@@ -1382,7 +1384,7 @@ int R_MPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
 int R_MPI_Win_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
 
 /* Fortran 90-related functions.  These routines are available only if
-   Fortran 90 support is enabled
+   Fortran 90 support is enabled 
 */
 int R_MPI_Type_create_f90_integer(int range, R_MPI_Datatype *newtype);
 int R_MPI_Type_create_f90_real(int precision, int range, R_MPI_Datatype *newtype);
@@ -1902,7 +1904,7 @@ int R_PMPI_Win_flush_all(R_MPI_Win win);
 int R_PMPI_Win_flush_local(int rank, R_MPI_Win win);
 int R_PMPI_Win_flush_local_all(R_MPI_Win win);
 int R_PMPI_Win_sync(R_MPI_Win win);
-
+ 
 /* External Interfaces */
 int R_PMPI_Add_error_class(int *errorclass);
 int R_PMPI_Add_error_code(int errorclass, int *errorcode);
@@ -2016,7 +2018,7 @@ int R_PMPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
 int R_PMPI_Win_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
 
 /* Fortran 90-related functions.  These routines are available only if
-   Fortran 90 support is enabled
+   Fortran 90 support is enabled 
 */
 int R_PMPI_Type_create_f90_integer(int r, R_MPI_Datatype *newtype);
 int R_PMPI_Type_create_f90_real(int p, int r, R_MPI_Datatype *newtype);
@@ -2253,7 +2255,7 @@ int R_PMPI_T_category_changed(int *stamp);
    include is in an autoconf variable in case the compiler is a C++ 
    compiler but MPI was built without the C++ bindings */
 #include "mpicxx.h"
-#endif
+#endif 
 #endif
 
 
