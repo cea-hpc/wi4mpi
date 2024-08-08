@@ -15,7 +15,7 @@ EOF
 }
 
 
-while getopts ":g:b:d:h" opt; do
+while getopts ":g:b:d:o:t:h" opt; do
 	case ${opt} in
 		g )
 			GENERATOR_RUN="$OPTARG"
@@ -25,6 +25,12 @@ while getopts ":g:b:d:h" opt; do
 			;;
                 d)
                         GENERATOR_TEST_HEADER="$OPTARG"
+                        ;;
+                o)
+                        GENERATOR_OPENMPI_VERSION="$OPTARG"
+                        ;;
+                t)
+                        GENERATOR_BUILD_WITH_GENERATED_HEADERS="$OPTARG"
                         ;;
 		h )
 			usage
@@ -44,6 +50,8 @@ shift $((OPTIND -1))
 export GENERATOR_RUN=${GENERATOR_RUN-1} # Execute ./lib/generator.py; copie les fichiers générés
 export GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1} # Compile Wi4mpi
 export GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-1} # Compare les headers interface, preload aux références
+export GENERATOR_OPENMPI_VERSION=${GENERATOR_OPENMPI_VERSION-1.8.8}
+export GENERATOR_BUILD_WITH_GENERATED_HEADERS=${GENERATOR_BUILD_WITH_GENERATED_HEADERS-0}
 
 ## Variables
 

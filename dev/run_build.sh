@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ $GENERATOR_BUILD_WITH_GENERATED_HEADERS == 1 ]]; then
+    cp -r $dir_gen_preload/* $wi4mpi_dir/src/preload/header/.
+    cp -r $dir_gen_interface/* $wi4mpi_dir/src/interface/header/.
+fi
 if [[ $GENERATOR_RUN == 0 ]]; then
     echo "The generator did not run. Define the following directories:"
     read -p "Define dir_gen_c_preload: " dir_gen_c_preload
