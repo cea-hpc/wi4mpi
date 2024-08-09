@@ -64,7 +64,9 @@ export dir_gen_preload=$(mktemp -d)
 
 ## Environment
 
-module restore $wi4mpi_dir/dev/wi4mpi_dev.inti.Rhel_8__x86_64
+if [[ $MODULES_COLLECTION_TARGET == "inti.Rhel_8__x86_64" ]]; then
+    module restore $wi4mpi_dir/dev/wi4mpi_dev.inti.Rhel_8__x86_64
+fi
 
 ## Generator
 
