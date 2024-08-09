@@ -9,6 +9,9 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 from ompiheader import OmpiHeaderGenerator
+from textoperator import (
+    delete_line_from_pattern,
+)
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
@@ -47,6 +50,7 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
         for _pattern, _replacement in zip(pattern, replacement):
             decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
             text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
+        text = delete_line_from_pattern(r"  OMPI_COMM_TYPE_", text)
 
         # lignes à supprimer car absente du header de référence
         _pattern_block = """
