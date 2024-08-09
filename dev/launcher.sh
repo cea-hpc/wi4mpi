@@ -1,46 +1,48 @@
 #!/bin/bash
 
 function usage() {
-	cat << EOF
+    cat << EOF
 
-Usage: $0 [-g <GENERATOR_RUN>] [-b <GENERATOR_TEST_BUILD>] [-d <GENERATOR_TEST_HEADER>]
+Usage: $0 [-g <GENERATOR_RUN>] [-b <GENERATOR_TEST_BUILD>] [-d <GENERATOR_TEST_HEADER>] [-o <GENERATOR_OPENMPI_VERSION>] [-t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>]
 
 
 Options:
-  -g <GENERATOR_RUN>: Boolean 1/0. Execute ./lib/generator.py; copie les fichiers générés
-  -b <GENERATOR_TEST_BUILD>: Boolean 1/0. Compile Wi4mpi
-  -d <GENERATOR_TEST_HEADER>: Boolean 1/0. Compare les headers interface, preload aux références
+  -g <GENERATOR_RUN>: Boolean (1)/0. Execute ./lib/generator.py; copie les fichiers générés
+  -b <GENERATOR_TEST_BUILD>: Boolean (1)/0. Compile Wi4mpi
+  -d <GENERATOR_TEST_HEADER>: Boolean (1)/0. Compare les headers interface, preload aux références
+  -o <GENERATOR_OPENMPI_VERSION>: String number version of the OpenMPI base header to use in the generator. Default: 1.8.8. Available: 1.8.8, 2.1.6
+  -t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>: Boolean 1/(0). Copy generated headers in wi4mpi sources before the compilation. They replace reference headers.
 
 EOF
 }
 
 
 while getopts ":g:b:d:o:t:h" opt; do
-	case ${opt} in
-		g )
-			GENERATOR_RUN="$OPTARG"
-			;;
-		b )
-			GENERATOR_TEST_BUILD="$OPTARG"
-			;;
-                d)
-                        GENERATOR_TEST_HEADER="$OPTARG"
-                        ;;
-                o)
-                        GENERATOR_OPENMPI_VERSION="$OPTARG"
-                        ;;
-                t)
-                        GENERATOR_BUILD_WITH_GENERATED_HEADERS="$OPTARG"
-                        ;;
-		h )
-			usage
-			exit 0
-			;;
-		\? )
-			echo "Option invalide: -$OPTARG" >&2
-			exit 1
-			;;
-	esac
+    case ${opt} in
+        g )
+            GENERATOR_RUN="$OPTARG"
+            ;;
+        b )
+            GENERATOR_TEST_BUILD="$OPTARG"
+            ;;
+        d)
+            GENERATOR_TEST_HEADER="$OPTARG"
+            ;;
+        o)
+            GENERATOR_OPENMPI_VERSION="$OPTARG"
+            ;;
+        t)
+            GENERATOR_BUILD_WITH_GENERATED_HEADERS="$OPTARG"
+            ;;
+        h )
+            usage
+            exit 0
+            ;;
+        \? )
+            echo "Option invalide: -$OPTARG" >&2
+            exit 1
+            ;;
+    esac
 done
 
 shift $((OPTIND -1))
