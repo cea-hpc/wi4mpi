@@ -86,38 +86,59 @@ class OmpiHeaderGenerator(HeaderGenerator):
         decalage = len(_replacement.split("\n")) - len(_pattern.split("\n"))
 
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
-            lines_to_insert = [
-                r"int (*ccc_OMPI_C_MPI_NULL_DELETE_FN)( R_MPI_Comm comm, int comm_keyval,",
-                r"                                           void* attribute_val_out,",
-                r"                                           void* extra_state );",
-                r"int (*ccc_OMPI_C_MPI_DUP_FN)( R_MPI_Comm comm, int comm_keyval,",
-                r"                                   void* extra_state,",
-                r"                                   void* attribute_val_in,",
-                r"                                   void* attribute_val_out,",
-                r"                                   int* flag );",
-                r"int (*ccc_OMPI_C_MPI_NULL_COPY_FN)( R_MPI_Comm comm, int comm_keyval,",
-                r"                                         void* extra_state,",
-                r"                                         void* attribute_val_in,",
-                r"                                         void* attribute_val_out,",
-                r"                                         int* flag );",
-                r"int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,",
-                r"                                        void* extra_state,",
-                r"                                        void* attribute_val_in,",
-                r"                                        void* attribute_val_out,",
-                r"                                        int* flag );",
-                r"",
-            ]
-            text = insert_lines(lines_to_insert, 875 + decalage, text)
-            decalage += len(lines_to_insert)
-            lines_to_insert = [
-                r"#if !allocate_global",
-                r"#define ccc_linkage extern",
-                r"#else",
-                r"#define ccc_linkage",
-                r"#endif",
-            ]
-            text = insert_lines(lines_to_insert, 883 + decalage, text)
-            decalage += len(lines_to_insert)
+            _pattern_block = """
+#define R_MPI_CONVERSION_FN_NULL ((R_MPI_Datarep_conversion_function*) 0)
+#endif
+"""
+            _replacement_block = """
+#define R_MPI_CONVERSION_FN_NULL ((R_MPI_Datarep_conversion_function*) 0)
+#endif
+int (*ccc_OMPI_C_MPI_NULL_DELETE_FN)( R_MPI_Comm comm, int comm_keyval,
+                                           void* attribute_val_out,
+                                           void* extra_state );
+int (*ccc_OMPI_C_MPI_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
+                                   void* extra_state,
+                                   void* attribute_val_in,
+                                   void* attribute_val_out,
+                                   int* flag );
+int (*ccc_OMPI_C_MPI_NULL_COPY_FN)( R_MPI_Comm comm, int comm_keyval,
+                                         void* extra_state,
+                                         void* attribute_val_in,
+                                         void* attribute_val_out,
+                                         int* flag );
+int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
+                                        void* extra_state,
+                                        void* attribute_val_in,
+                                        void* attribute_val_out,
+                                        int* flag );
+"""
+            text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+            _pattern_block = """
+/*
+ * External variables
+ *
+ * The below externs use the ompi_predefined_xxx_t structures to maintain
+ * back compatibility between MPI library versions.
+ * See ompi/communicator/communicator.h comments with struct ompi_communicator_t
+ * for full explanation why we chose to use the ompi_predefined_xxx_t structure.
+ */
+"""
+            _replacement_block = """
+/*
+ * External variables
+ *
+ * The below externs use the ompi_predefined_xxx_t structures to maintain
+ * back compatibility between MPI library versions.
+ * See ompi/communicator/communicator.h comments with struct ompi_communicator_t
+ * for full explanation why we chose to use the ompi_predefined_xxx_t structure.
+ */
+#if !allocate_global
+#define ccc_linkage extern
+#else
+#define ccc_linkage
+#endif
+"""
+            text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
         _pattern_block = """
 #define R_MPI_T_ERR_INVALID_NAME        71
