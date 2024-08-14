@@ -62,7 +62,20 @@ class OmpiHeaderGenerator(HeaderGenerator):
                 shift=True,
             )
 
-        _pattern = """
+        if "4.1.6" == self.mpi_target_version["openmpi"]:
+            _pattern = """
+#if !OMPI_BUILDING
+#if defined(c_plusplus) || defined(__cplusplus)
+#define OMPI_PREDEFINED_GLOBAL(type, global) (static_cast<type> (static_cast<void *> (&(global))))
+#else
+#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) &(global)))
+#endif
+#else
+#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) &(global))
+#endif
+"""
+        else:
+            _pattern = """
 #if !OMPI_BUILDING
 #define OMPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) &(global)))
 #else

@@ -141,7 +141,8 @@ OA_MPI_C_A_MPI_DUP_FN\n@ 0x1\n
 OA_MPI_C_A_MPI_TYPE_DUP_FN\n@ 0x1\n
 OA_MPI_C_A_MPI_COMM_DUP_FN\n@ 0x1\n
 OA_MPI_C_A_MPI_WIN_DUP_FN\n@ 0x1\n
-typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn\n@typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn;
+typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn\n@typedef A_MPI_Comm_errhandler_function A_MPI_Comm_errhandler_fn;\n
+typedef A_MPI_File_errhandler_fn A_MPI_File_errhandler_fn\n@typedef A_MPI_File_errhandler_fn A_MPI_File_errhandler_fn;\n
 ompi_file_errhandler_fn@A_MPI_File_errhandler_fn
 ^typedef A_MPI_Win_errhandler_function A_MPI_Win_errhandler_fn@typedef A_MPI_Win_errhandler_function A_MPI_Win_errhandler_fn;
 ^  int A_MPI_Address\(void \*location, A_MPI_Aint \*address\)@  int A_MPI_Address(void *location, A_MPI_Aint *address);
@@ -168,3 +169,4 @@ A_MPI_Errhandler errhandler\)$@A_MPI_Errhandler errhandler);
 ^  int A_PMPI_Type_ub\(A_MPI_Datatype mtype, A_MPI_Aint \*ub\)@  int A_PMPI_Type_ub(A_MPI_Datatype mtype, A_MPI_Aint *ub);
 int A_PMPI_Type_extent\(A_MPI_Datatype type, A_MPI_Aint \*extent\)$@int A_PMPI_Type_extent(A_MPI_Datatype type, A_MPI_Aint *extent);
 A_MPI_Datatype oldtype, A_MPI_Datatype \*newtype\)$@A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
+OA_MPI_@A_OMPI_

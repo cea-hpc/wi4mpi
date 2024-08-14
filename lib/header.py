@@ -178,7 +178,6 @@ class HeaderGenerator(ABC):
             if "#if" in line or "#endif" in line or "#else" in line:
                 lines_to_delete.append(line)
         text = delete_lines(lines_to_delete, text)
-        text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
         _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.replace")
         text = replacement_from_conf_file(_conf_file, text)
         _pattern_block = """
@@ -223,21 +222,22 @@ class HeaderGenerator(ABC):
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
         list_of_functions_to_delete = [
-            "int OA_MPI_C_A_MPI_TYPE_NULL_DELETE_FN",
-            "int OA_MPI_C_A_MPI_TYPE_NULL_COPY_FN",
-            "int OA_MPI_C_A_MPI_TYPE_DUP_FN",
-            "int OA_MPI_C_A_MPI_COMM_NULL_DELETE_FN",
-            "int OA_MPI_C_A_MPI_COMM_NULL_COPY_F",
-            "int OA_MPI_C_A_MPI_COMM_DUP_FN",
-            "int OA_MPI_C_A_MPI_NULL_DELETE_FN",
-            "int OA_MPI_C_A_MPI_NULL_COPY_FN",
-            "int OA_MPI_C_A_MPI_DUP_FN",
-            "int OA_MPI_C_A_MPI_WIN_NULL_DELETE_FN",
-            "int OA_MPI_C_A_MPI_WIN_NULL_COPY_FN",
-            "int OA_MPI_C_A_MPI_WIN_DUP_FN",
+            "int A_OMPI_C_A_MPI_TYPE_NULL_DELETE_FN",
+            "int A_OMPI_C_A_MPI_TYPE_NULL_COPY_FN",
+            "int A_OMPI_C_A_MPI_TYPE_DUP_FN",
+            "int A_OMPI_C_A_MPI_COMM_NULL_DELETE_FN",
+            "int A_OMPI_C_A_MPI_COMM_NULL_COPY_F",
+            "int A_OMPI_C_A_MPI_COMM_DUP_FN",
+            "int A_OMPI_C_A_MPI_NULL_DELETE_FN",
+            "int A_OMPI_C_A_MPI_NULL_COPY_FN",
+            "int A_OMPI_C_A_MPI_DUP_FN",
+            "int A_OMPI_C_A_MPI_WIN_NULL_DELETE_FN",
+            "int A_OMPI_C_A_MPI_WIN_NULL_COPY_FN",
+            "int A_OMPI_C_A_MPI_WIN_DUP_FN",
         ]
         for _function in list_of_functions_to_delete:
             text = function_to_delete(text, _function)
+        text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
         _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_0.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
         _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_1.replace")
@@ -258,7 +258,22 @@ class HeaderGenerator(ABC):
         _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_4.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
 
-        _pattern_block = """
+        if "4.1.6" == self.mpi_target_version["openmpi"]:
+            _pattern_block = """
+}
+
+/*
+ * Conditional MPI 2 C++ bindings support.  Include if:
+ *   - The user does not explicitly request us to skip it (when a C++ compiler
+ *       is used to compile C code).
+ *   - We want C++ bindings support
+ *   - We are not building OMPI itself
+ *   - We are using a C++ compiler
+ */
+#include "openmpi/ompi/mpi/cxx/mpicxx.h"
+"""
+        else:
+            _pattern_block = """
 }
 
 /*
