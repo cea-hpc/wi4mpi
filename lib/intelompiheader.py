@@ -106,6 +106,7 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
             ],
             text,
         )
+        text = re.sub(r'R_MPI', r'A_MPI', text)
 
         return text
 

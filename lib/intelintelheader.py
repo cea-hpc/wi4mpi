@@ -110,6 +110,7 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
 #define A_MPI_MAX_DATAREP_STRING 128
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        text = re.sub(r'R_MPI', r'A_MPI', text)
 
         return text
 
