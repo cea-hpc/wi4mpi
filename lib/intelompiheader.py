@@ -107,6 +107,9 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
             text,
         )
         text = re.sub(r'R_MPI', r'A_MPI', text)
+        if "4.2.0" == self.mpi_target_version["mpich"]:
+            text = re.sub(r'#include <run_mpi_proto.h>', r'#include <app_mpi_proto.h>', text)
+            text = re.sub(r'([ \t(*,)])MPIX_', r'\1A_MPIX_', text)
 
         return text
 
@@ -202,6 +205,27 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
         with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
+    def _preload_exception_header_app_mpi_protoh(self, text):
+        text = re.sub(r'R_MPI', r'A_MPI', text)
+        text = re.sub(r'R_QMPI', r'A_QMPI', text)
+        text = re.sub(r'R_PMPIX', r'A_PMPIX', text)
+        text = re.sub(r'R_PMPI', r'A_PMPI', text)
+        text = re.sub(r'([^_])MPIX_', r'\1A_MPIX_', text)
+        return text
+
+    def _generate_app_mpi_protoh(self, gen_file):
+        super()._generate_run_mpi_protoh(gen_file)
+        if "4.2.0" == self.mpi_target_version["mpich"]:
+            log.debug("Running _generate_app_mpi_protoh (IntelIntelGenerator)")
+            with open(gen_file, "r", encoding="utf-8") as _file:
+                _content = _file.read()
+
+            _new_content = self._preload_exception_header_app_mpi_protoh(_content)
+            with open(gen_file, "w", encoding="utf-8") as _file:
+                _file.write(_new_content)
+        else:
+            pass
+
     def generate(self):
         shutil.copy2(
             os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi.h"),
@@ -219,4 +243,10 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
         self.__generate_app_mpih(os.path.join(self.dir_output, self._app_mpi_header_file))
         self._generate_app_mpioh(os.path.join(self.dir_output, self._app_mpio_header_file))
         self._generate_wrapper_fh(os.path.join(self.dir_output, self._wrapper_f_header_file))
+        if "4.2.0" == self.mpi_target_version['mpich']:
+            shutil.copy2(
+                os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"),
+                os.path.join(self.dir_output, self._app_mpi_proto_header_file),
+            )
+        self._generate_app_mpi_protoh(os.path.join(self.dir_output, self._app_mpi_proto_header_file))
         log.debug("INTEL_OMPI header has been generated.")

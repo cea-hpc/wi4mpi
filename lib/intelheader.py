@@ -294,6 +294,7 @@ int * MPI_WEIGHTS_EMPTY;
         text = re.sub(r"R_MPIX_Mutex", "MPIX_Mutex", text)
         text = re.sub(r"R_PMPIX_Grequest", "PMPIX_Grequest", text)
         text = re.sub(r"R_PMPIX_Mutex", "PMPIX_Mutex", text)
+        text = re.sub(r"R_MPIX_Iov", "MPIX_Iov", text)
 
         return text
 
@@ -365,6 +366,37 @@ int * MPI_WEIGHTS_EMPTY;
         with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
+    def _mpich_exception_run_mpi_protoh(self, text):
+        log.debug("Running _mpich_exception_run_mpi_protoh (IntelHeaderGenerator).")
+        text = re.sub(r"const ", "", text)
+        text = re.sub(r"R_MPIX_Iov", "MPIX_Iov", text)
+        text = re.sub(r"R_MPIX_Stream", "MPIX_Stream", text)
+        text = re.sub(r"R_MPIX_Grequest_poll_function", "MPIX_Grequest_poll_function", text)
+        text = re.sub(r"R_MPIX_Grequest_class", "MPIX_Grequest_class", text)
+        text = re.sub(r"R_MPIX_Grequest_wait_function", "MPIX_Grequest_wait_function", text)
+        text = re.sub(r"R_MPIX_Grequest_class", "MPIX_Grequest_class", text)
+        text = re.sub(r"R_MPIX_Grequest_poll_function", "MPIX_Grequest_poll_function", text)
+        text = re.sub(r"R_MPIX_Grequest_wait_function", "MPIX_Grequest_wait_function", text)
+        text = re.sub(r"R_MPIX_Grequest_class", "MPIX_Grequest_class", text)
+        text = re.sub(r"QMPIX_", "R_QMPIX_", text)
+        return text
+
+    def _generate_run_mpi_protoh(self, gen_file):
+        super()._generate_run_mpi_protoh(gen_file)
+        if "4.2.0" == self.mpi_target_version["mpich"]:
+            log.debug("Running _generate_run_mpi_protoh (IntelGenerator)")
+            with open(gen_file, "r", encoding="utf-8") as _file:
+                _content = _file.read()
+
+            _new_content = self._mpich_exception_run_mpi_protoh(_content)
+            with open(gen_file, "w", encoding="utf-8") as _file:
+                _file.write(_new_content)
+        else:
+            pass
+
+    def _generate_app_mpi_protoh(self, gen_file):
+        pass
+
     def generate(self):
         """
         Generates Intel-specific header files.
@@ -381,5 +413,10 @@ int * MPI_WEIGHTS_EMPTY;
             os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpio.h"),
             os.path.join(self.dir_output, self._run_mpio_header_file),
         )
+        if "4.2.0" == self.mpi_target_version['mpich']:
+            shutil.copy2(
+                os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"),
+                os.path.join(self.dir_output, self._run_mpi_proto_header_file),
+            )
         super().generate()
         log.debug("INTEL header has been generated.")

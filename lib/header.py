@@ -63,6 +63,8 @@ class HeaderGenerator(ABC):
     _app_mpi_header_file = "app_mpi.h"
     _app_mpio_header_file = "app_mpio.h"
     _wrapper_f_header_file = "wrapper_f.h"
+    _run_mpi_proto_header_file = "run_mpi_proto.h"
+    _app_mpi_proto_header_file = "app_mpi_proto.h"
     dir_output = ""
     dir_input = ""
     etc_dir = ""
@@ -128,8 +130,13 @@ class HeaderGenerator(ABC):
         text = re.sub(r"([ \t(*,)])PMPIX_", r"\1R_PMPIX_", text, flags=re.MULTILINE)
         text = re.sub(r"^PMPIX_", r"R_PMPIX_", text, flags=re.MULTILINE)
 
+        # Replace QMPI with R_QMPI
+        text = re.sub(r"([ \t(*,)])QMPI_", r"\1R_QMPI_", text, flags=re.MULTILINE)
+        text = re.sub(r"^QMPI_", r"R_QMPI_", text, flags=re.MULTILINE)
+
         text = re.sub(r'#include "mpi.h"', r'#include "run_mpi.h"', text)
         text = re.sub(r'#include "mpio.h"', r'#include "run_mpio.h"', text)
+        text = re.sub(r'#include <mpi_proto.h>', r'#include <run_mpi_proto.h>', text)
         _pattern_block = """
 #define R_MPI_MAX_OBJECT_NAME    128
 """
@@ -357,6 +364,20 @@ class HeaderGenerator(ABC):
         with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
+    def _generate_run_mpi_protoh(self, gen_file):
+        if "4.2.0" == self.mpi_target_version["mpich"]:
+            log.debug("Running _generate_run_mpi_protoh (HeaderGenerator)")
+            with open(gen_file, "r", encoding="utf-8") as _file:
+                _content = _file.read()
+            _new_content = self._replace_mpi_with_rmpi(_content)
+            with open(gen_file, "w", encoding="utf-8") as _file:
+                _file.write(_new_content)
+        else:
+            pass
+
+    def _generate_app_mpi_protoh(self, gen_file):
+        pass
+
     def generate(self):
         """
         Generate MPI header files.
@@ -372,3 +393,5 @@ class HeaderGenerator(ABC):
         self._generate_run_mpioh(os.path.join(self.dir_output, self._run_mpio_header_file))
         self._generate_app_mpih(os.path.join(self.dir_output, self._app_mpi_header_file))
         self._generate_wrapper_fh(os.path.join(self.dir_output, self._wrapper_f_header_file))
+        self._generate_run_mpi_protoh(os.path.join(self.dir_output, self._run_mpi_proto_header_file))
+        self._generate_app_mpi_protoh(os.path.join(self.dir_output, self._app_mpi_proto_header_file))

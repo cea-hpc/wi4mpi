@@ -193,6 +193,12 @@ int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
     def _generate_run_mpioh(self, gen_file):
         pass
 
+    def _generate_run_mpi_protoh(self, gen_file):
+        pass
+
+    def _generate_app_mpi_protoh(self, gen_file):
+        pass
+
     def generate(self):
         shutil.copy2(
             os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),

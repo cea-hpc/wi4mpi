@@ -320,6 +320,13 @@ class MpcHeaderGenerator(HeaderGenerator):
         with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
+    def _generate_run_mpi_protoh(self, gen_file):
+        pass
+
+    def _generate_app_mpi_protoh(self, gen_file):
+        pass
+
+
     def generate(self):
         shutil.copy2(
             os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
