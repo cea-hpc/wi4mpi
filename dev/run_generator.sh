@@ -7,4 +7,5 @@ cd $wi4mpi_dir
     --preload_header_dir=$dir_gen_preload \
     --c_preload_gen_dir=$dir_gen_c_preload \
     --c_interface_gen_dir=$dir_gen_c_interface \
-    --openmpi_version=$GENERATOR_OPENMPI_VERSION
+    --openmpi_version=$GENERATOR_OPENMPI_VERSION \
+    --mpich_version=$GENERATOR_MPICH_VERSION
