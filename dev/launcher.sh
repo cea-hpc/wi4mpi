@@ -69,10 +69,10 @@ export GENERATOR_BUILD_WITH_GENERATED_HEADERS=${GENERATOR_BUILD_WITH_GENERATED_H
 
 export _dir="${1-$(realpath "$(dirname "$0")")}"
 export wi4mpi_dir="$_dir/.."
-export dir_gen_c_preload=$(mktemp -d)
-export dir_gen_c_interface=$(mktemp -d)
-export dir_gen_interface=$(mktemp -d)
-export dir_gen_preload=$(mktemp -d)
+export dir_gen_c_preload=${GENERATOR_DIR_GEN_C_PRELOAD-$(mktemp -d)}
+export dir_gen_c_interface=${GENERATOR_DIR_GEN_C_INTERFACE-$(mktemp -d)}
+export dir_gen_interface=${GENERATOR_DIR_GEN_INTERFACE-$(mktemp -d)}
+export dir_gen_preload=${GENERATOR_DIR_GEN_PRELOAD-$(mktemp -d)}
 
 ## Environment
 
