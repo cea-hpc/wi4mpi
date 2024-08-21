@@ -1,1 +1,1 @@
-../mpich/3.1.2/mpi.h
+../../../../../src/common/mpich/3.1.2/mpi.h
