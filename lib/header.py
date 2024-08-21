@@ -343,6 +343,18 @@ class HeaderGenerator(ABC):
 #define A_MPI_MAX_DATAREP_STRING 128
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        if "4.1.6" == self.mpi_target_version["openmpi"]:
+            text = delete_line_from_pattern("  define A_MPI_UB", text)
+            text = delete_line_from_pattern("  define A_MPI_LB", text)
+            idx = text.index("\n#define A_MPI_2INT 20")
+            line_idx = len(text[:idx].split("\n"))
+            lines_to_insert = [
+                "#define A_MPI_UB 21 ",
+                "#define A_MPI_LB 22 ",
+            ]
+            text = insert_lines(lines_to_insert, line_idx, text)
+            text = delete_line_from_pattern("#define A_MPI_Errhandler_set(...)", text)
+            text = delete_line_from_pattern("#define A_MPI_Errhandler_get(...)", text)
 
         return text
 

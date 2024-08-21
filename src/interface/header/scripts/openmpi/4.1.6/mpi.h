@@ -143,7 +143,7 @@
 #define OMPI_HAVE_FORTRAN_REAL8 1
 
 /* Whether in include MPI-1 compatibility */
-#define OMPI_ENABLE_MPI1_COMPAT 0
+#define OMPI_ENABLE_MPI1_COMPAT 1
 
 /* Whether we have float _Complex  or not */
 #define HAVE_FLOAT__COMPLEX 1
