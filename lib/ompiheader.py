@@ -62,7 +62,7 @@ class OmpiHeaderGenerator(HeaderGenerator):
                 shift=True,
             )
 
-        if "4.1.6" == self.mpi_target_version["openmpi"]:
+        if "4.1.6" == self.mpi_target_version["openmpi"] or "5.0.3" == self.mpi_target_version["openmpi"]:
             _pattern = """
 #if !OMPI_BUILDING
 #if defined(c_plusplus) || defined(__cplusplus)

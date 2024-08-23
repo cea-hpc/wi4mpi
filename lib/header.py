@@ -179,6 +179,17 @@ class HeaderGenerator(ABC):
         line_idx = len(text[:idx].split("\n"))
         text = delete_lines(range(0, line_idx + 1), text)
 
+        # Fin de fichier pour openmpi 5.0.3
+        if "5.0.3" == self.mpi_target_version["openmpi"]:
+            _pattern_block = """
+#if defined(c_plusplus) || defined(__cplusplus)
+}
+#endif
+"""
+            _replacement_block = """
+# endif /*CCC_MPI*/
+"""
+            text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
         # Suppression des lignes contenant #if et #endif
         lines_to_delete = []
         for line in text.split("\n"):
@@ -244,7 +255,8 @@ class HeaderGenerator(ABC):
         ]
         for _function in list_of_functions_to_delete:
             text = function_to_delete(text, _function)
-        text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
+#       text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
+        text = re.sub(r"^.*__mpi_interface_deprecated__.*;$", ';', text, flags=re.MULTILINE)
         _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_0.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
         _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_1.replace")
@@ -321,20 +333,22 @@ class HeaderGenerator(ABC):
         text = delete_lines(lines_to_delete, text)
         _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_5.replace")
         text = delete_bloc_from_conf_file(_conf_file, text)
-        text = insert_lines(
-            [
-                r"#ifndef CCC_MPI",
-                r"#define CCC_MPI",
-                r"",
-                r"#ifndef __MPI__COMPILE__",
-                r"#define A_MPI_ MPI_",
-                r"#define A_PMPI_ PMPI_",
-                r"#endif",
-                r"typedef unsigned long size_t;",
-            ],
-            1,
-            text,
-        )
+        # Insert lines at the top of app_mpi.h file
+        lines_to_insert = [
+            "#ifndef CCC_MPI",
+            "#define CCC_MPI",
+            "",
+            "#ifndef __MPI__COMPILE__",
+            "#define A_MPI_ MPI_",
+            "#define A_PMPI_ PMPI_",
+            "#endif",
+            "typedef unsigned long size_t;",
+        ]
+        if "5.0.3" == self.mpi_target_version["openmpi"]:
+            lines_to_insert.append("/* The number or Fortran INTEGER in MPI Status */")
+            lines_to_insert.append("#define A_OMPI_FORTRAN_STATUS_SIZE 6")
+        text = insert_lines(lines_to_insert, 1, text)
+        #
         _pattern_block = """
 #define A_MPI_MAX_OBJECT_NAME   1024    /* max object name length */
 """
@@ -343,7 +357,7 @@ class HeaderGenerator(ABC):
 #define A_MPI_MAX_DATAREP_STRING 128
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        if "4.1.6" == self.mpi_target_version["openmpi"]:
+        if "4.1.6" == self.mpi_target_version["openmpi"] or "5.0.3" == self.mpi_target_version["openmpi"]:
             text = delete_line_from_pattern("  define A_MPI_UB", text)
             text = delete_line_from_pattern("  define A_MPI_LB", text)
             idx = text.index("\n#define A_MPI_2INT 20")

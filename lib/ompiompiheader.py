@@ -67,6 +67,11 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
 #endif
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        if "5.0.3" == self.mpi_target_version["openmpi"]:
+            text = re.sub(r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text)
+            text = re.sub(r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;", "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;", text)
+            text = re.sub(r"typedef struct r_ompi_status_public_t r_ompi_status_public_t;", "typedef struct r_ompi_status_public_t R_MPI_Status;", text)
+
 
         return text
 
@@ -83,13 +88,18 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
         pattern = []
         replacement = []
         decalage = 0
-
+        if "5.0.3" == self.mpi_target_version["openmpi"]:
+            text = re.sub(r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text)
+            text = re.sub(r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;", "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;", text)
+            text = re.sub(r"typedef struct ompi_status_public_t ompi_status_public_t;", "typedef struct r_ompi_status_public_t R_MPI_Status;", text)
         pattern.append(r'([ \t(*,)_"])R_')
         replacement.append(r"\1A_")
         pattern.append(r"A_MPIO")
         replacement.append("MPIO")
         pattern.append(r"r_ompi_status")
         replacement.append("a_ompi_status")
+        pattern.append(r"r_ompi_f08_status")
+        replacement.append("a_ompi_f08_status")
         pattern.append(r"IR_MPI_")
         replacement.append("IA_MPI_")
         for _pattern, _replacement in zip(pattern, replacement):

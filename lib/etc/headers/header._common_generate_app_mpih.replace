@@ -170,3 +170,7 @@ A_MPI_Errhandler errhandler\)$@A_MPI_Errhandler errhandler);
 int A_PMPI_Type_extent\(A_MPI_Datatype type, A_MPI_Aint \*extent\)$@int A_PMPI_Type_extent(A_MPI_Datatype type, A_MPI_Aint *extent);
 A_MPI_Datatype oldtype, A_MPI_Datatype \*newtype\)$@A_MPI_Datatype oldtype, A_MPI_Datatype *newtype);
 OA_MPI_@A_OMPI_
+struct ompi_f08_status_public_t {@struct CCC_mpi_f08_status_struct {
+typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;@typedef struct CCC_mpi_f08_status_struct A_MPI_F08_status;
+typedef size_t A_MPI_F08_status;@//typedef size_t A_MPI_F08_status;
+ompi_file_errhandler_function@A_MPI_File_errhandler_function
