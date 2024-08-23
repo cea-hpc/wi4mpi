@@ -1,5 +1,3 @@
-typedef struct ompi_f08_status_public_t MPI_F08_status;@
-typedef struct ompi_status_public_t MPI_Status;@
 MPI_@R_MPI_
 OR_MPI_@OMPI_
 PR_MPI_@R_PMPI_

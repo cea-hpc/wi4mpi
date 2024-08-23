@@ -11,6 +11,7 @@ from logging.config import fileConfig
 from intelheader import IntelHeaderGenerator
 from textoperator import (
     delete_lines,
+    delete_line_from_pattern,
     replacement_from_conf_file,
 )
 
@@ -149,6 +150,9 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
 #define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */"""
         text = re.sub(re.escape(_pattern), _replacement, text, flags=re.DOTALL)
+        text = delete_line_from_pattern("#define R_MPI_Errhandler_get(...)", text)
+        text = delete_line_from_pattern("#define R_MPI_Errhandler_set(...)", text)
+        text = re.sub(r"#define OMPI_BUILDING 0", "#define OMPI_BUILDING 1", text)
 
         return text
 

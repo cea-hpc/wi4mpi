@@ -71,7 +71,8 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
             text = re.sub(r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text)
             text = re.sub(r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;", "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;", text)
             text = re.sub(r"typedef struct r_ompi_status_public_t r_ompi_status_public_t;", "typedef struct r_ompi_status_public_t R_MPI_Status;", text)
-
+        text = delete_line_from_pattern("#define R_MPI_Errhandler_get(...)", text)
+        text = delete_line_from_pattern("#define R_MPI_Errhandler_set(...)", text)
 
         return text
 

@@ -369,6 +369,7 @@ class HeaderGenerator(ABC):
             text = insert_lines(lines_to_insert, line_idx, text)
             text = delete_line_from_pattern("#define A_MPI_Errhandler_set(...)", text)
             text = delete_line_from_pattern("#define A_MPI_Errhandler_get(...)", text)
+            text = delete_line_from_pattern("THIS_FUNCTION_WAS_REMOVED_IN_MPI30", text)
 
         return text
 

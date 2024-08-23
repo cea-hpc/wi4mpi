@@ -48,6 +48,13 @@ class OmpiHeaderGenerator(HeaderGenerator):
             shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), self.dir_output)
 
     def _replace_mpi_with_rmpi(self, text: str) -> str:
+        if "5.0.3" == self.mpi_target_version["openmpi"]:
+            lines_to_delete = [
+                "typedef struct ompi_f08_status_public_t MPI_F08_status;",
+                "typedef struct ompi_status_public_t MPI_Status;",
+            ]
+            text = delete_lines(lines_to_delete, text)
+
 
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
             text, decalage = replacement_from_conf_file(
@@ -152,6 +159,10 @@ int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
 #endif
 """
             text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+            if "5.0.3" == self.mpi_target_version["openmpi"]:
+                text = re.sub(r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text)
+                text = re.sub(r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;", "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;", text)
+                text = re.sub(r"typedef struct r_ompi_status_public_t r_ompi_status_public_t;", "typedef struct r_ompi_status_public_t R_MPI_Status;", text)
 
         _pattern_block = """
 #define R_MPI_T_ERR_INVALID_NAME        71
