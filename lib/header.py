@@ -18,6 +18,7 @@ from textoperator import (
     insert_lines,
     function_to_delete,
     replacement_from_conf_file,
+    replace_bloc_from_conf_file,
     delete_bloc_from_conf_file,
 )
 
@@ -68,7 +69,7 @@ class HeaderGenerator(ABC):
     dir_output = ""
     dir_input = ""
     etc_dir = ""
-    mpi_target_version={}
+    mpi_target_version = None
 
     def set_directories(self, dir_input="", dir_output=""):
         """
@@ -87,7 +88,7 @@ class HeaderGenerator(ABC):
         print(self.wi4mpi_root)
         self.etc_dir = os.path.join(self.wi4mpi_root, "lib/etc/headers")
 
-    def __init__(self, dir_input="", dir_output="", mpi_target_version={}):
+    def __init__(self, dir_input="", dir_output="", mpi_target_version=None):
         self.set_directories(dir_input=dir_input, dir_output=dir_output)
         self.mpi_target_version = mpi_target_version
 
@@ -136,7 +137,7 @@ class HeaderGenerator(ABC):
 
         text = re.sub(r'#include "mpi.h"', r'#include "run_mpi.h"', text)
         text = re.sub(r'#include "mpio.h"', r'#include "run_mpio.h"', text)
-        text = re.sub(r'#include <mpi_proto.h>', r'#include <run_mpi_proto.h>', text)
+        text = re.sub(r"#include <mpi_proto.h>", r"#include <run_mpi_proto.h>", text)
         _pattern_block = """
 #define R_MPI_MAX_OBJECT_NAME    128
 """
@@ -175,70 +176,53 @@ class HeaderGenerator(ABC):
     def _common_generate_app_mpih(self, text):
         log.debug("Running _common_generate_app_mpih (HeaderGenerator)")
         # Suppression des lignes du début du fichiers
-        idx = text.index("\ntypedef ")
-        line_idx = len(text[:idx].split("\n"))
+        line_idx = len(text[: text.index("\ntypedef ")].split("\n"))
         text = delete_lines(range(0, line_idx + 1), text)
-
         # Fin de fichier pour openmpi 5.0.3
         if "5.0.3" == self.mpi_target_version["openmpi"]:
-            _pattern_block = """
-#if defined(c_plusplus) || defined(__cplusplus)
-}
-#endif
-"""
-            _replacement_block = """
-# endif /*CCC_MPI*/
-"""
-            text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+            text = replace_bloc_from_conf_file(
+                os.path.join(
+                    self.etc_dir,
+                    "header._common_generate_app_mpih.bloc_00.pattern",
+                ),
+                os.path.join(
+                    self.etc_dir,
+                    "header._common_generate_app_mpih.bloc_00.replace",
+                ),
+                text,
+            )
         # Suppression des lignes contenant #if et #endif
         lines_to_delete = []
         for line in text.split("\n"):
             if "#if" in line or "#endif" in line or "#else" in line:
                 lines_to_delete.append(line)
         text = delete_lines(lines_to_delete, text)
-        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.replace")
-        text = replacement_from_conf_file(_conf_file, text)
-        _pattern_block = """
-#define A_MPI_T_ERR_INVALID             72
-#define A_MPI_T_ERR_INVALID_NAME        73
-
-/* Per MPI-3 p349 47, A_MPI_ERR_LASTCODE must be >= the last predefined
-   A_MPI_ERR_<foo> code. Set the last code to allow some room for adding
-   error codes without breaking ABI. */
-#define A_MPI_ERR_LASTCODE              92
-"""
-        _replacement_block = """
-
-/* for 1.8 these intentially overlap other error codes because A_MPI_ERR_LASTCODE
-   can not be changed in a release series*/
-#define A_MPI_T_ERR_INVALID             70
-#define A_MPI_T_ERR_INVALID_NAME        71
-
-/* Per MPI-3 p349 47, A_MPI_ERR_LASTCODE must be >= the last predefined
-   A_MPI_ERR_<foo> code.  So just set it equal to the last code --
-   A_MPI_ERR_RMA_SHARED, in this case. */
-#define A_MPI_ERR_LASTCODE              A_MPI_ERR_RMA_SHARED
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        _pattern_block = """
-/* MPI-2 specifies that the name "A_MPI_TYPE_NULL_DELETE_FN" (and all
-   related friends) must be accessible in C, C++, and Fortran. This is
-   unworkable if the back-end Fortran compiler uses all caps for its
-   linker symbol convention -- it results in two functions with
-   different signatures that have the same name (i.e., both C and
-   Fortran use the symbol A_MPI_TYPE_NULL_DELETE_FN).  So we have to
-   #define the C names to be something else, so that they names are
-   *accessed* through A_MPI_TYPE_NULL_DELETE_FN, but their actual symbol
-   name is different.
-
-   However, this file is included when the fortran wrapper functions
-   are compiled in Open MPI, so we do *not* want these #defines in
-   this case (i.e., we need the Fortran wrapper function to be
-   protection for this case. */
-"""
-        _replacement_block = """
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+        text = replacement_from_conf_file(
+            os.path.join(self.etc_dir, "header._common_generate_app_mpih.replace"),
+            text,
+        )
+        text = replace_bloc_from_conf_file(
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_01.pattern",
+            ),
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_01.replace",
+            ),
+            text,
+        )
+        text = replace_bloc_from_conf_file(
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_02.pattern",
+            ),
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_02.replace",
+            ),
+            text,
+        )
         list_of_functions_to_delete = [
             "int A_OMPI_C_A_MPI_TYPE_NULL_DELETE_FN",
             "int A_OMPI_C_A_MPI_TYPE_NULL_COPY_FN",
@@ -255,14 +239,19 @@ class HeaderGenerator(ABC):
         ]
         for _function in list_of_functions_to_delete:
             text = function_to_delete(text, _function)
-#       text = delete_line_from_pattern(r"__mpi_interface_deprecated__(", text)
-        text = re.sub(r"^.*__mpi_interface_deprecated__.*;$", ';', text, flags=re.MULTILINE)
-        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_0.replace")
-        text = delete_bloc_from_conf_file(_conf_file, text)
-        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_1.replace")
-        text = delete_bloc_from_conf_file(_conf_file, text)
-        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_2.replace")
-        text = delete_bloc_from_conf_file(_conf_file, text)
+        text = re.sub(r"^.*__mpi_interface_deprecated__.*;$", ";", text, flags=re.MULTILINE)
+        text = delete_bloc_from_conf_file(
+            os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_03.delete"),
+            text,
+        )
+        text = delete_bloc_from_conf_file(
+            os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_04.delete"),
+            text,
+        )
+        text = delete_bloc_from_conf_file(
+            os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_05.delete"),
+            text,
+        )
         text = delete_line_from_pattern(r"extern struct ompi_predefined_", text)
         text = delete_line_from_pattern(r"extern A_MPI_Fint *A_MPI_F_STATUS_IGNORE;", text)
         text = delete_line_from_pattern(r"extern A_MPI_Fint *A_MPI_F_STATUSES_IGNORE;", text)
@@ -272,67 +261,60 @@ class HeaderGenerator(ABC):
             r" A_MPI_LOGICAL1 */",
             text,
         )
-        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_3.replace")
-        text = delete_bloc_from_conf_file(_conf_file, text)
-        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_4.replace")
-        text = delete_bloc_from_conf_file(_conf_file, text)
+        text = delete_bloc_from_conf_file(
+            os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_06.delete"),
+            text,
+        )
+        text = delete_bloc_from_conf_file(
+            os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_07.delete"),
+            text,
+        )
 
         if "4.1.6" == self.mpi_target_version["openmpi"]:
-            _pattern_block = """
-}
-
-/*
- * Conditional MPI 2 C++ bindings support.  Include if:
- *   - The user does not explicitly request us to skip it (when a C++ compiler
- *       is used to compile C code).
- *   - We want C++ bindings support
- *   - We are not building OMPI itself
- *   - We are using a C++ compiler
- */
-#include "openmpi/ompi/mpi/cxx/mpicxx.h"
-"""
+            text = replace_bloc_from_conf_file(
+                os.path.join(
+                    self.etc_dir,
+                    "header._common_generate_app_mpih.bloc_08a.pattern",
+                ),
+                os.path.join(
+                    self.etc_dir,
+                    "header._common_generate_app_mpih.bloc_08.replace",
+                ),
+                text,
+            )
         else:
-            _pattern_block = """
-}
-
-/*
- * Conditional MPI 2 C++ bindings support.  Include if:
- *   - The user does not explicitly request us to skip it (when a C++ compiler
- *       is used to compile C code).
- *   - We want C++ bindings support
- *   - We are not building OMPI itself
- *   - We are using a C++ compiler
- */
-#include "openmpi/ompi/mpi/cxx/mpicxx.h"
-
-/* ROMIO requires MPI implementations to set this to 1 if they provide
-   A_MPI_OFFSET.  We need to provide it because its used throughout the
-   DDT engine */
-#define HAVE_A_MPI_OFFSET 1
-"""
-        _replacement_block = """
-#endif /*CCC_MPI*/"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-
-        _pattern_block = """
-  int A_MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
-                             int tag, A_MPI_Comm comm, A_MPI_Request *request);
-"""
-        _replacement_block = """
-  int A_MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
-                             int tag, A_MPI_Comm comm, A_MPI_Request *request);
-#define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
-#define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+            text = replace_bloc_from_conf_file(
+                os.path.join(
+                    self.etc_dir,
+                    "header._common_generate_app_mpih.bloc_08.pattern",
+                ),
+                os.path.join(
+                    self.etc_dir,
+                    "header._common_generate_app_mpih.bloc_08.replace",
+                ),
+                text,
+            )
+        text = replace_bloc_from_conf_file(
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_09.pattern",
+            ),
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_09.replace",
+            ),
+            text,
+        )
         lines_to_delete = [
             "typedef A_MPI_File_errhandler_fn A_MPI_File_errhandler_fn",
             "struct ompi_file_t;",
             "typedef void (A_MPI_File_errhandler_fn)(struct ompi_file_t**, int *, ...);",
         ]
         text = delete_lines(lines_to_delete, text)
-        _conf_file = os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_5.replace")
-        text = delete_bloc_from_conf_file(_conf_file, text)
+        text = delete_bloc_from_conf_file(
+            os.path.join(self.etc_dir, "header._common_generate_app_mpih.bloc_10.delete"),
+            text,
+        )
         # Insert lines at the top of app_mpi.h file
         lines_to_insert = [
             "#ifndef CCC_MPI",
@@ -349,19 +331,24 @@ class HeaderGenerator(ABC):
             lines_to_insert.append("#define A_OMPI_FORTRAN_STATUS_SIZE 6")
         text = insert_lines(lines_to_insert, 1, text)
         #
-        _pattern_block = """
-#define A_MPI_MAX_OBJECT_NAME   1024    /* max object name length */
-"""
-        _replacement_block = """
-#define A_MPI_MAX_OBJECT_NAME    128
-#define A_MPI_MAX_DATAREP_STRING 128
-"""
-        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        if "4.1.6" == self.mpi_target_version["openmpi"] or "5.0.3" == self.mpi_target_version["openmpi"]:
+        text = replace_bloc_from_conf_file(
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_06.pattern",
+            ),
+            os.path.join(
+                self.etc_dir,
+                "header._common_generate_app_mpih.bloc_06.replace",
+            ),
+            text,
+        )
+        if (
+            "4.1.6" == self.mpi_target_version["openmpi"]
+            or "5.0.3" == self.mpi_target_version["openmpi"]
+        ):
             text = delete_line_from_pattern("  define A_MPI_UB", text)
             text = delete_line_from_pattern("  define A_MPI_LB", text)
-            idx = text.index("\n#define A_MPI_2INT 20")
-            line_idx = len(text[:idx].split("\n"))
+            line_idx = len(text[: text.index("\n#define A_MPI_2INT 20")].split("\n"))
             lines_to_insert = [
                 "#define A_MPI_UB 21 ",
                 "#define A_MPI_LB 22 ",
@@ -420,5 +407,9 @@ class HeaderGenerator(ABC):
         self._generate_run_mpioh(os.path.join(self.dir_output, self._run_mpio_header_file))
         self._generate_app_mpih(os.path.join(self.dir_output, self._app_mpi_header_file))
         self._generate_wrapper_fh(os.path.join(self.dir_output, self._wrapper_f_header_file))
-        self._generate_run_mpi_protoh(os.path.join(self.dir_output, self._run_mpi_proto_header_file))
-        self._generate_app_mpi_protoh(os.path.join(self.dir_output, self._app_mpi_proto_header_file))
+        self._generate_run_mpi_protoh(
+            os.path.join(self.dir_output, self._run_mpi_proto_header_file),
+        )
+        self._generate_app_mpi_protoh(
+            os.path.join(self.dir_output, self._app_mpi_proto_header_file),
+        )

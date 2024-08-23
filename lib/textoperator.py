@@ -15,6 +15,8 @@ name from the given text.
 nding replacements in a given text.
 - bloc_pattern_replacement(pattern_block, replacement_block, text): Replace a block pattern with a
 replacement block in the given text.
+- replace_bloc_from_conf_file(pattern_path, replace_path, text): Replace a block from the text base
+d on configurations from files.
 - replacement_from_conf_file(path_file, text, shift=False, replacement_file=None): Replace patterns
 based on configurations from a file.
 - write_conf_file(pattern, replacement, path_file): Write pattern-replacement configurations to a f
@@ -266,6 +268,29 @@ def delete_bloc_from_conf_file(path_file, text):
     """
     with open(path_file, "r", encoding="utf-8") as file_descriptor:
         text = re.sub(re.escape(file_descriptor.read()), """""", text, flags=re.DOTALL)
+    return text
+
+
+def replace_bloc_from_conf_file(pattern_path, replace_path, text):
+    """
+    Replace a block from the text based on configurations from files.
+
+    Args:
+        pattern_path (str): The path to the configuration file containing the pattern.
+        replace_path (str): The path to the configuration file containing the replacement.
+        text (str): The text from which to replace the block.
+
+    Returns:
+        str: The modified text.
+    """
+    with open(pattern_path, "r", encoding="utf-8") as pattern_file:
+        with open(replace_path, "r", encoding="utf-8") as replace_file:
+            text = re.sub(
+                re.escape(pattern_file.read()),
+                replace_file.read(),
+                text,
+                flags=re.DOTALL,
+            )
     return text
 
 

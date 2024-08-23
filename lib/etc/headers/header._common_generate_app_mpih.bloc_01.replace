@@ -1,0 +1,12 @@
+
+
+/* for 1.8 these intentially overlap other error codes because A_MPI_ERR_LASTCODE
+   can not be changed in a release series*/
+#define A_MPI_T_ERR_INVALID             70
+#define A_MPI_T_ERR_INVALID_NAME        71
+
+/* Per MPI-3 p349 47, A_MPI_ERR_LASTCODE must be >= the last predefined
+   A_MPI_ERR_<foo> code.  So just set it equal to the last code --
+   A_MPI_ERR_RMA_SHARED, in this case. */
+#define A_MPI_ERR_LASTCODE              A_MPI_ERR_RMA_SHARED
+
