@@ -95,16 +95,25 @@ class Generator:
     c_preload_gen_dir = "src/preload/gen"
     c_interface_gen_dir = "src/interface/gen"
     mpi_target_version = {
-            "openmpi": "1.8.8",
-            "mpich": "3.1.2",
-            "intelmpi": "20.0.0"
-            }
+        "openmpi": "1.8.8",
+        "mpich": "3.1.2",
+        "intelmpi": "20.0.0",
+    }
 
     def __init__(self, **kwargs):
         self.set_directories(**kwargs)
-        self.mpi_target_version["openmpi"] = kwargs.get("openmpi_version", self.mpi_target_version["openmpi"])
-        self.mpi_target_version["mpich"] = kwargs.get("mpich_version", self.mpi_target_version["mpich"])
-        self.mpi_target_version["intelmpi"] = kwargs.get("intelmpi_version", self.mpi_target_version["intelmpi"])
+        self.mpi_target_version["openmpi"] = kwargs.get(
+            "openmpi_version",
+            self.mpi_target_version["openmpi"],
+        )
+        self.mpi_target_version["mpich"] = kwargs.get(
+            "mpich_version",
+            self.mpi_target_version["mpich"],
+        )
+        self.mpi_target_version["intelmpi"] = kwargs.get(
+            "intelmpi_version",
+            self.mpi_target_version["intelmpi"],
+        )
 
     def set_directories(self, **kwargs):
         """
@@ -300,7 +309,7 @@ if "__main__" == __name__:
     # Delete keys that have a value of None
     none_list = []
     for key, value in args.items():
-        if value == None:
+        if value is None:
             none_list.append(key)
     for key in none_list:
         args.pop(key)
