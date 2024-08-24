@@ -137,7 +137,7 @@ class IntelHeaderGenerator(HeaderGenerator):
         self,
         dir_input="src/interface/header/scripts/mpc_headers",
         dir_output="src/interface/header/_INTEL_gen",
-        mpi_target_version={},
+        mpi_target_version=None,
     ):
         """
         Initializes the IntelHeaderGenerator.
@@ -148,9 +148,7 @@ class IntelHeaderGenerator(HeaderGenerator):
         """
         log.info("Generation of INTEL headers in progress.")
         super().__init__(
-                dir_input=dir_input,
-                dir_output=dir_output,
-                mpi_target_version=mpi_target_version
+            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
         )
 
     def _generate_wrapper_fh(self, gen_file):
@@ -413,9 +411,11 @@ int * MPI_WEIGHTS_EMPTY;
             os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpio.h"),
             os.path.join(self.dir_output, self._run_mpio_header_file),
         )
-        if "4.2.0" == self.mpi_target_version['mpich']:
+        if "4.2.0" == self.mpi_target_version["mpich"]:
             shutil.copy2(
-                os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"),
+                os.path.join(
+                    self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"
+                ),
                 os.path.join(self.dir_output, self._run_mpi_proto_header_file),
             )
         super().generate()
