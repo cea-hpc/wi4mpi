@@ -27,13 +27,11 @@ class MpcHeaderGenerator(HeaderGenerator):
         self,
         dir_input="src/interface/header/scripts/mpc_headers",
         dir_output="src/interface/header/_MPC",
-        mpi_target_version={},
+        mpi_target_version=None,
     ):
         log.info("Generation of MPC headers in progress.")
         super().__init__(
-                dir_input=dir_input,
-                dir_output=dir_output,
-                mpi_target_version=mpi_target_version
+            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
         )
 
     def _generate_wrapper_fh(self, gen_file):
@@ -325,7 +323,6 @@ class MpcHeaderGenerator(HeaderGenerator):
 
     def _generate_app_mpi_protoh(self, gen_file):
         pass
-
 
     def generate(self):
         shutil.copy2(
