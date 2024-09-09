@@ -21,11 +21,9 @@ class MpichOmpiHeaderGenerator(IntelOmpiHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/intel_ompi_headers",
         dir_output="src/preload/header/_MPICH_OMPI_gen",
-        mpi_target_version={},
+        mpi_target_version=None,
     ):
         log.info("Generation of MPICH_OMPI headers in progress.")
         super().__init__(
-                dir_input=dir_input,
-                dir_output=dir_output,
-                mpi_target_version=mpi_target_version
+            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
         )
