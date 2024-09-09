@@ -11,7 +11,6 @@ from logging.config import fileConfig
 from header import HeaderGenerator
 from textoperator import (
     delete_lines,
-    insert_lines,
     function_to_delete,
     replacement_from_conf_file,
 )
@@ -29,13 +28,11 @@ class OmpiHeaderGenerator(HeaderGenerator):
         self,
         dir_input="src/interface/header/scripts/ompi_headers",
         dir_output="src/interface/header/_OMPI_test",
-        mpi_target_version={},
+        mpi_target_version=None,
     ):
         log.info("Generation of OMPI headers in progress.")
         super().__init__(
-                dir_input=dir_input,
-                dir_output=dir_output,
-                mpi_target_version=mpi_target_version
+            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
         )
 
     def _generate_wrapper_fh(self, gen_file):
@@ -54,22 +51,23 @@ class OmpiHeaderGenerator(HeaderGenerator):
                 "typedef struct ompi_status_public_t MPI_Status;",
             ]
             text = delete_lines(lines_to_delete, text)
-
-
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
-            text, decalage = replacement_from_conf_file(
+            text, _ = replacement_from_conf_file(
                 os.path.join(self.etc_dir, "ompiheader._replace_mpi_with_rmpi.replace"),
                 text,
                 shift=True,
             )
         else:
-            text, decalage = replacement_from_conf_file(
+            text, _ = replacement_from_conf_file(
                 os.path.join(self.etc_dir, "ompiheader._replace_mpi_with_rmpi.ompiompi.replace"),
                 text,
                 shift=True,
             )
 
-        if "4.1.6" == self.mpi_target_version["openmpi"] or "5.0.3" == self.mpi_target_version["openmpi"]:
+        if (
+            "4.1.6" == self.mpi_target_version["openmpi"]
+            or "5.0.3" == self.mpi_target_version["openmpi"]
+        ):
             _pattern = """
 #if !OMPI_BUILDING
 #if defined(c_plusplus) || defined(__cplusplus)
@@ -103,7 +101,6 @@ class OmpiHeaderGenerator(HeaderGenerator):
 #endif
 """
         text = re.sub(re.escape(_pattern), _replacement, text, flags=re.DOTALL)
-        decalage = len(_replacement.split("\n")) - len(_pattern.split("\n"))
 
         if self.__class__.__name__ != "OmpiOmpiHeaderGenerator":
             _pattern_block = """
@@ -160,9 +157,21 @@ int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
 """
             text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
             if "5.0.3" == self.mpi_target_version["openmpi"]:
-                text = re.sub(r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text)
-                text = re.sub(r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;", "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;", text)
-                text = re.sub(r"typedef struct r_ompi_status_public_t r_ompi_status_public_t;", "typedef struct r_ompi_status_public_t R_MPI_Status;", text)
+                text = re.sub(
+                    r"struct ompi_f08_status_public_t {",
+                    "struct r_ompi_f08_status_public_t {",
+                    text,
+                )
+                text = re.sub(
+                    r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;",
+                    "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;",
+                    text,
+                )
+                text = re.sub(
+                    r"typedef struct r_ompi_status_public_t r_ompi_status_public_t;",
+                    "typedef struct r_ompi_status_public_t R_MPI_Status;",
+                    text,
+                )
 
         _pattern_block = """
 #define R_MPI_T_ERR_INVALID_NAME        71
