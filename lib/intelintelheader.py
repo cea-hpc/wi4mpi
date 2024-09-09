@@ -29,13 +29,11 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/intel_intel_headers",
         dir_output="src/preload/header/_INTEL_INTEL_gen",
-        mpi_target_version={},
+        mpi_target_version=None,
     ):
         log.info("Generation of INTEL_INTEL headers in progress.")
         super().__init__(
-                dir_input=dir_input,
-                dir_output=dir_output,
-                mpi_target_version=mpi_target_version
+            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
         )
 
     def _preload_exception_header_run_mpih(self, text):
@@ -50,7 +48,6 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
             [
                 "//extern MPIU_DLL_SPEC int * R_MPI_UNWEIGHTED;",
                 "//extern MPIU_DLL_SPEC int * R_MPI_WEIGHTS_EMPTY;",
-
             ],
             text,
         )
@@ -69,7 +66,7 @@ int R_MPI_Pcontrol(int level, ...);
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
         text = re.sub(r"MPIX_Iov", "R_MPIX_Iov", text)
-        text = re.sub(r'([^_])MPIX_', r'\1R_MPIX_', text)
+        text = re.sub(r"([^_])MPIX_", r"\1R_MPIX_", text)
 
         return text
 
@@ -113,11 +110,11 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
 #define A_MPI_MAX_DATAREP_STRING 128
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
-        text = re.sub(r'R_MPI', r'A_MPI', text)
+        text = re.sub(r"R_MPI", r"A_MPI", text)
         # MPICH 4.2.0
         if "4.2.0" == self.mpi_target_version["mpich"]:
-            text = re.sub(r'#include <run_mpi_proto.h>', r'#include <app_mpi_proto.h>', text)
-            text = re.sub(r'([ \t(*,)])MPIX_', r'\1A_MPIX_', text)
+            text = re.sub(r"#include <run_mpi_proto.h>", r"#include <app_mpi_proto.h>", text)
+            text = re.sub(r"([ \t(*,)])MPIX_", r"\1A_MPIX_", text)
 
         return text
 
@@ -201,11 +198,11 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
             _file.write(_new_content)
 
     def _preload_exception_header_app_mpi_protoh(self, text):
-        text = re.sub(r'R_MPI', r'A_MPI', text)
-        text = re.sub(r'R_QMPI', r'A_QMPI', text)
-        text = re.sub(r'R_PMPIX', r'A_PMPIX', text)
-        text = re.sub(r'R_PMPI', r'A_PMPI', text)
-        text = re.sub(r'([^_])MPIX_', r'\1A_MPIX_', text)
+        text = re.sub(r"R_MPI", r"A_MPI", text)
+        text = re.sub(r"R_QMPI", r"A_QMPI", text)
+        text = re.sub(r"R_PMPIX", r"A_PMPIX", text)
+        text = re.sub(r"R_PMPI", r"A_PMPI", text)
+        text = re.sub(r"([^_])MPIX_", r"\1A_MPIX_", text)
         text = function_to_delete(text, "int A_MPI_DUP_FN")
         return text
 
@@ -222,9 +219,9 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
             pass
 
     def _preload_exception_header_run_mpi_protoh(self, text):
-        text = re.sub(r'A_MPI', r'R_MPI', text)
-        text = re.sub(r'A_QMPI', r'R_QMPI', text)
-        text = re.sub(r'A_PMPI', r'R_PMPI', text)
+        text = re.sub(r"A_MPI", r"R_MPI", text)
+        text = re.sub(r"A_QMPI", r"R_QMPI", text)
+        text = re.sub(r"A_PMPI", r"R_PMPI", text)
         text = function_to_delete(text, "int R_MPI_DUP_FN")
         return text
 
@@ -259,13 +256,17 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
             os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpio.h"),
             os.path.join(self.dir_output, self._app_mpio_header_file),
         )
-        if "4.2.0" == self.mpi_target_version['mpich']:
+        if "4.2.0" == self.mpi_target_version["mpich"]:
             shutil.copy2(
-                os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"),
+                os.path.join(
+                    self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"
+                ),
                 os.path.join(self.dir_output, self._run_mpi_proto_header_file),
             )
             shutil.copy2(
-                os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"),
+                os.path.join(
+                    self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"
+                ),
                 os.path.join(self.dir_output, self._app_mpi_proto_header_file),
             )
         self._generate_run_mpih(os.path.join(self.dir_output, self._run_mpi_header_file))
@@ -273,6 +274,10 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
         self._generate_app_mpih(os.path.join(self.dir_output, self._app_mpi_header_file))
         self._generate_app_mpioh(os.path.join(self.dir_output, self._app_mpio_header_file))
         self._generate_wrapper_fh(os.path.join(self.dir_output, self._wrapper_f_header_file))
-        self._generate_run_mpi_protoh(os.path.join(self.dir_output, self._run_mpi_proto_header_file))
-        self._generate_app_mpi_protoh(os.path.join(self.dir_output, self._app_mpi_proto_header_file))
+        self._generate_run_mpi_protoh(
+            os.path.join(self.dir_output, self._run_mpi_proto_header_file)
+        )
+        self._generate_app_mpi_protoh(
+            os.path.join(self.dir_output, self._app_mpi_proto_header_file)
+        )
         log.debug("INTEL_INTEL header has been generated.")
