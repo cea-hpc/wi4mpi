@@ -29,13 +29,11 @@ class OmpiIntelHeaderGenerator(IntelOmpiHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/ompi_intel_headers",
         dir_output="src/preload/header/_OMPI_INTEL_gen",
-        mpi_target_version={},
+        mpi_target_version=None,
     ):
         log.info("Generation of OMPI_INTEL headers in progress.")
         super().__init__(
-                dir_input=dir_input,
-                dir_output=dir_output,
-                mpi_target_version=mpi_target_version
+            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
         )
 
     def _run_to_app(self, text: str) -> str:
@@ -125,7 +123,7 @@ class OmpiIntelHeaderGenerator(IntelOmpiHeaderGenerator):
             _file.write(_new_content)
 
     def _preload_exception_header_run_mpi_protoh(self, text):
-        text = re.sub(r'([^_])MPIX_', r'\1R_MPIX_', text)
+        text = re.sub(r"([^_])MPIX_", r"\1R_MPIX_", text)
         text = function_to_delete(text, "int R_MPI_DUP_FN")
         text = re.sub(r"const ", "", text)
         text = re.sub(r"R_MPIX_Iov", "MPIX_Iov", text)
@@ -171,10 +169,14 @@ class OmpiIntelHeaderGenerator(IntelOmpiHeaderGenerator):
         self._generate_app_mpih(os.path.join(self.dir_output, self._app_mpi_header_file))
         self.__generate_run_mpioh(os.path.join(self.dir_output, self._run_mpio_header_file))
         self._generate_wrapper_fh(os.path.join(self.dir_output, self._wrapper_f_header_file))
-        if "4.2.0" == self.mpi_target_version['mpich']:
+        if "4.2.0" == self.mpi_target_version["mpich"]:
             shutil.copy2(
-                os.path.join(self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"),
+                os.path.join(
+                    self.dir_input, f"mpich-{self.mpi_target_version['mpich']}_mpi_proto.h"
+                ),
                 os.path.join(self.dir_output, self._run_mpi_proto_header_file),
             )
-        self._generate_run_mpi_protoh(os.path.join(self.dir_output, self._run_mpi_proto_header_file))
+        self._generate_run_mpi_protoh(
+            os.path.join(self.dir_output, self._run_mpi_proto_header_file)
+        )
         log.debug("OMPI_INTEL header has been generated.")
