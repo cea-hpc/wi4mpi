@@ -26,13 +26,11 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
         self,
         dir_input="src/preload/header/scripts/ompi_ompi_headers",
         dir_output="src/preload/header/_OMPI_OMPI_gen",
-        mpi_target_version={},
+        mpi_target_version=None,
     ):
         log.info("Generation of OMPI_OMPI headers in progress.")
         super().__init__(
-                dir_input=dir_input,
-                dir_output=dir_output,
-                mpi_target_version=mpi_target_version
+            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
         )
 
     def _ompi_ompi_run_exception(self, text):
@@ -68,9 +66,21 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
         if "5.0.3" == self.mpi_target_version["openmpi"]:
-            text = re.sub(r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text)
-            text = re.sub(r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;", "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;", text)
-            text = re.sub(r"typedef struct r_ompi_status_public_t r_ompi_status_public_t;", "typedef struct r_ompi_status_public_t R_MPI_Status;", text)
+            text = re.sub(
+                r"struct ompi_f08_status_public_t {",
+                "struct r_ompi_f08_status_public_t {",
+                text,
+            )
+            text = re.sub(
+                r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;",
+                "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;",
+                text,
+            )
+            text = re.sub(
+                r"typedef struct r_ompi_status_public_t r_ompi_status_public_t;",
+                "typedef struct r_ompi_status_public_t R_MPI_Status;",
+                text,
+            )
         text = delete_line_from_pattern("#define R_MPI_Errhandler_get(...)", text)
         text = delete_line_from_pattern("#define R_MPI_Errhandler_set(...)", text)
 
@@ -90,9 +100,19 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
         replacement = []
         decalage = 0
         if "5.0.3" == self.mpi_target_version["openmpi"]:
-            text = re.sub(r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text)
-            text = re.sub(r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;", "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;", text)
-            text = re.sub(r"typedef struct ompi_status_public_t ompi_status_public_t;", "typedef struct r_ompi_status_public_t R_MPI_Status;", text)
+            text = re.sub(
+                r"struct ompi_f08_status_public_t {", "struct r_ompi_f08_status_public_t {", text
+            )
+            text = re.sub(
+                r"typedef struct ompi_f08_status_public_t ompi_f08_status_public_t;",
+                "typedef struct r_ompi_f08_status_public_t R_MPI_F08_status;",
+                text,
+            )
+            text = re.sub(
+                r"typedef struct ompi_status_public_t ompi_status_public_t;",
+                "typedef struct r_ompi_status_public_t R_MPI_Status;",
+                text,
+            )
         pattern.append(r'([ \t(*,)_"])R_')
         replacement.append(r"\1A_")
         pattern.append(r"A_MPIO")
