@@ -10,7 +10,11 @@ import re
 from logging import getLogger
 from logging.config import fileConfig
 import jinja2
-from textoperator import load_json_file
+from textoperator import (
+    clang_format,
+    load_json_file,
+    write_file_append,
+)
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("code_logger")
@@ -35,21 +39,18 @@ class CodeGenerator(ABC):
 
     """  # noqa: E501
 
-    json_files = {}
-    jinja_files = {
-        "declarations": "template_declarations.jinja",
-        "static": "template_static.jinja",
-        "asm": "template_asm.jinja",
-        "app": "template_A.jinja",
-        "run": "template_R.jinja",
-        "dlsym": "template_dlsym.jinja",
-    }
-    data = {}
+    json_files = None
+    data = None
     output_file = ""
     dir_input = ""
-    jinja_dir = ""
     static_sources_dir = ""
     dir_output = ""
+    apply_jinja_dict = {
+        "asm_dict": {},
+        "app_dict": {},
+        "run_dict": {},
+        "dlsym_dict": {},
+    }
 
     def set_directories(self, dir_input, dir_output):
         """
@@ -78,37 +79,7 @@ class CodeGenerator(ABC):
             "types": load_json_file(self.json_files["types"]),
             "exceptions": load_json_file(self.json_files["exceptions"]),
         }
-        self.jinja_dir = os.path.join(dir_input, "C/templates/")
-        self.static_sources_dir = os.path.join(dir_input, "C/static_sources/")
 
-    #    @abstractmethod
-    #    def _generate_static_side(self):
-    #        """
-    #        Abstract method, must be implemented by a subclass.
-    #        Generate the static side of the output file using Jinja templates.
-    #        """
-    #
-    #    @abstractmethod
-    #    def _generate_declarations_side(self):
-    #        """
-    #        Abstract method, must be implemented by a subclass.
-    #        Generate the declarations side of the output file using Jinja templates.
-    #        """
-    #
-    #    @abstractmethod
-    #    def _generate_function(self, function, template_file):
-    #        """
-    #        Abstract method, must be implemented by a subclass.
-    #        Generate the function using Jinja templates.
-    #        """
-    #
-    #    @abstractmethod
-    #    def _generate_dlsym_side(self):
-    #        """
-    #        Abstract method, must be implemented by a subclass.
-    #        Generate the dlsym side of the output file using Jinja templates.
-    #        """
-    #
     def typevar(self, var, typename):
         """
         Generate a type declaration string based on the variable name and type.
@@ -137,21 +108,67 @@ class CodeGenerator(ABC):
         """
         _msg = f"Run generate {jinja_name}"
         log.debug(_msg)
+        jinja_files = {
+            "declarations": "template_declarations.jinja",
+            "static": "template_static.jinja",
+            "asm": "template_asm.jinja",
+            "app": "template_A.jinja",
+            "run": "template_R.jinja",
+            "dlsym": "template_dlsym.jinja",
+            "dlsym_interface": "template_dlsym_interface.jinja",
+            "interface": "template_interface.jinja",
+            "interface_entry": "template_interface_entry.jinja",
+        }
+        static_sources_dir = os.path.join(self.dir_input, "C/static_sources/")
+        jinja_dir = os.path.join(self.dir_input, "C/templates/")
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader([self.jinja_dir, self.static_sources_dir]),
+            loader=jinja2.FileSystemLoader([jinja_dir, static_sources_dir]),
             trim_blocks=True,
         )
         jinja_env.filters["typevar"] = self.typevar
-        jinja_template = jinja_env.get_template(self.jinja_files[jinja_name])
+        jinja_template = jinja_env.get_template(jinja_files[jinja_name])
         rendered_template = jinja_template.render(param_dict)
         return rendered_template + "\n"
 
-    @abstractmethod
     def generate(self):
         """
-        Abstract method, must be implemented by a subclass.
-        Generate output_file.
+        Common code between classes CPreloadGenerator and CInterfaceGenerator
         """
+        content = ""
+        content += self.apply_jinja("static", {})
+        content += self.apply_jinja(
+            "declarations",
+            {
+                "funcs": self.data["functions"],
+                "mappers": self.data["mappers"],
+            },
+        )
+        self.apply_jinja_dict["asm_dict"] = {
+            "mappers": self.data["mappers"],
+            "conf": self.data["exceptions"],
+        }
+        self.apply_jinja_dict["app_dict"] = {
+            "mappers": self.data["mappers"],
+            "conf": self.data["exceptions"],
+        }
+        self.apply_jinja_dict["run_dict"] = {
+            "mappers": self.data["mappers"],
+            "conf": self.data["exceptions"],
+        }
+        self.apply_jinja_dict["dlsym_dict"] = {
+            "funcs": self.data["functions"],
+            "types": self.data["types"],
+        }
+        for function in self.data["functions"]:
+            self.apply_jinja_dict["asm_dict"]["func"] = function
+            self.apply_jinja_dict["app_dict"]["func"] = function
+            self.apply_jinja_dict["run_dict"]["func"] = function
+            content += self.apply_jinja("asm", self.apply_jinja_dict["asm_dict"])
+            content += self.apply_jinja("app", self.apply_jinja_dict["app_dict"])
+            content += self.apply_jinja("run", self.apply_jinja_dict["run_dict"])
+        content += self.apply_jinja("dlsym", self.apply_jinja_dict["dlsym_dict"])
+        write_file_append(self.output_file, content)
+        clang_format(self.output_file)
 
     @abstractmethod
     def __init__(self):

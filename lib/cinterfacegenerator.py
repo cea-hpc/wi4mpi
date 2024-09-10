@@ -39,53 +39,12 @@ class CInterfaceGenerator(CodeGenerator):
         self.interface_file = "interface_c.c"
         self.set_directories(dir_input, dir_output)
         self.interface_file = os.path.join(dir_output, self.interface_file)
-        self.jinja_files["dlsym_interface"] = "template_dlsym_interface.jinja"
-        self.jinja_files["interface"] = "template_interface.jinja"
-        self.jinja_files["interface_entry"] = "template_interface_entry.jinja"
 
     def generate(self):
-        content = ""
-        content += self.apply_jinja("static", {})
-        content += self.apply_jinja(
-            "declarations", {"funcs": self.data["functions"], "mappers": self.data["mappers"]}
-        )
-        for function in self.data["functions"]:
-            content += self.apply_jinja(
-                "asm",
-                {
-                    "func": function,
-                    "mappers": self.data["mappers"],
-                    "conf": self.data["exceptions"],
-                    "caller_prefix": "INTERF",
-                },
-            )
-            content += self.apply_jinja(
-                "app",
-                {
-                    "func": function,
-                    "mappers": self.data["mappers"],
-                    "conf": self.data["exceptions"],
-                    "decl_ext": "extern",
-                },
-            )
-            content += self.apply_jinja(
-                "run",
-                {
-                    "func": function,
-                    "mappers": self.data["mappers"],
-                    "conf": self.data["exceptions"],
-                },
-            )
-        content += self.apply_jinja(
-            "dlsym",
-            {
-                "funcs": self.data["functions"],
-                "types": self.data["types"],
-                "mpi_libraries": ["OMPI", "INTEL"],
-            },
-        )
-        write_file_append(self.output_file, content)
-        clang_format(self.output_file)
+        self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "INTERF"
+        self.apply_jinja_dict["app_dict"]["decl_ext"] = "extern"
+        self.apply_jinja_dict["dlsym_dict"]["mpi_libraries"] = ["OMPI", "INTEL"]
+        super().generate()
         content = ""
         content += self.apply_jinja("interface_entry", {"funcs": self.data["functions"]})
         for function in self.data["functions"]:
