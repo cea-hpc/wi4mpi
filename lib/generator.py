@@ -54,6 +54,7 @@ Authors:
 """
 
 import os
+import sys
 from logging import getLogger
 from logging.config import fileConfig
 from mpcheader import MpcHeaderGenerator
@@ -99,21 +100,47 @@ class Generator:
         "mpich": "3.1.2",
         "intelmpi": "20.0.0",
     }
+    mpi_availabe_target_version = {
+        "openmpi": ["1.8.8", "2.1.6", "4.1.6", "5.0.3"],
+        "mpich": ["3.1.2", "3.4.3", "4.2.0"],
+        "intelmpi": ["20.0.0", "24.0.0"],
+    }
 
     def __init__(self, **kwargs):
         self.set_directories(**kwargs)
+        bool_openmpi_version = False
+        bool_mpich_version = False
+        bool_intelmpi_version = False
         self.mpi_target_version["openmpi"] = kwargs.get(
             "openmpi_version",
             self.mpi_target_version["openmpi"],
         )
+        if self.mpi_target_version["openmpi"] in self.mpi_availabe_target_version["openmpi"]:
+            bool_openmpi_version = True
+        else:
+            _msg = f"OpenMPI {self.mpi_target_version['openmpi']} is not available."
+            log.error(_msg)
         self.mpi_target_version["mpich"] = kwargs.get(
             "mpich_version",
             self.mpi_target_version["mpich"],
         )
+        if self.mpi_target_version["mpich"] in self.mpi_availabe_target_version["mpich"]:
+            bool_mpich_version = True
+        else:
+            _msg = f"MPICH {self.mpi_target_version['mpich']} is not available."
+            log.error(_msg)
         self.mpi_target_version["intelmpi"] = kwargs.get(
             "intelmpi_version",
             self.mpi_target_version["intelmpi"],
         )
+        if self.mpi_target_version["intelmpi"] in self.mpi_availabe_target_version["intelmpi"]:
+            bool_intelmpi_version = True
+        else:
+            _msg = f"IntalMPI {self.mpi_target_version['intelmpi']} is not available."
+            log.error(_msg)
+        if not (bool_openmpi_version and bool_mpich_version and bool_intelmpi_version):
+            log.error("MPI configuration not available.")
+            sys.exit()
 
     def set_directories(self, **kwargs):
         """
