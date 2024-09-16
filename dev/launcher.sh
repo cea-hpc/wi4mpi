@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 function usage() {
     cat << EOF
@@ -8,6 +9,7 @@ Usage: $0 [-g <GENERATOR_RUN>]
           [-d <GENERATOR_TEST_HEADER>]
           [-o <GENERATOR_OPENMPI_VERSION>]
           [-m <GENERATOR_MPICH_VERSION>]
+          [-i <GENERATOR_INTELMPI_VERSION>]
           [-t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>]
 
 
@@ -17,13 +19,14 @@ Options:
   -d <GENERATOR_TEST_HEADER>: Boolean (1)/0. Compare les headers interface, preload aux références
   -o <GENERATOR_OPENMPI_VERSION>: String number version of the OpenMPI base header to use in the generator. Default: 1.8.8. Available: 1.8.8, 2.1.6, 4.1.6, 5.0.3
   -m <GENERATOR_MPICH_VERSION>: String number version of the MPICH base header to use in the generator. Default: 3.1.2. Available: 3.1.2, 3.4.3, 4.2.0
+  -i <GENERATOR_INTELMPI_VERSION>: String number version of the IntelMPI base header to use in the generator. Default: 20.0.0 Available: 20.0.0, 24.0.0
   -t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>: Boolean 1/(0). Copy generated headers in wi4mpi sources before the compilation. They replace reference headers.
 
 EOF
 }
 
 
-while getopts ":g:b:d:o:t:m:h" opt; do
+while getopts ":g:b:d:o:t:m:i:h" opt; do
     case ${opt} in
         g )
             GENERATOR_RUN="$OPTARG"
@@ -39,6 +42,9 @@ while getopts ":g:b:d:o:t:m:h" opt; do
             ;;
         m)
             GENERATOR_MPICH_VERSION="$OPTARG"
+            ;;
+        i)
+            GENERATOR_INTELMPI_VERSION="$OPTARG"
             ;;
         t)
             GENERATOR_BUILD_WITH_GENERATED_HEADERS="$OPTARG"
@@ -63,6 +69,7 @@ export GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1} # Compile Wi4mpi
 export GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-1} # Compare les headers interface, preload aux références
 export GENERATOR_OPENMPI_VERSION=${GENERATOR_OPENMPI_VERSION-1.8.8}
 export GENERATOR_MPICH_VERSION=${GENERATOR_MPICH_VERSION-3.1.2}
+export GENERATOR_INTELMPI_VERSION=${GENERATOR_INTELMPI_VERSION-20.0.0}
 export GENERATOR_BUILD_WITH_GENERATED_HEADERS=${GENERATOR_BUILD_WITH_GENERATED_HEADERS-0}
 
 ## Variables
