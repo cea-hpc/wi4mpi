@@ -6,24 +6,19 @@ MpichIntelHeaderGenerator class for generating Mpich-Intel preload header files.
 import os
 from logging import getLogger
 from logging.config import fileConfig
-from intelintelheader import IntelIntelHeaderGenerator
+from mpichmpichheader import MpichMpichHeaderGenerator
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
 log = getLogger("header_logger")
 
 
-class MpichIntelHeaderGenerator(IntelIntelHeaderGenerator):
+class MpichIntelHeaderGenerator(MpichMpichHeaderGenerator):
     """
     MpichIntelHeaderGenerator class for generating Mpich-Intel preload header files.
     """
 
-    def __init__(
-        self,
-        dir_input="src/preload/header/scripts/intel_intel_headers",
-        dir_output="src/preload/header/_MPICH_INTEL_gen",
-        mpi_target_version=None,
-    ):
-        log.info("Generation of MPICH_INTEL headers in progress.")
-        super().__init__(
-            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
-        )
+    app = "mpich"
+    run = "intelmpi"
+
+    def _generate_run_mpi_protoh(self, gen_file):
+        pass

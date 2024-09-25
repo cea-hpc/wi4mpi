@@ -206,21 +206,21 @@ class Generator:
         genintelintel.generate()
 
         genintelmpich = IntelMpichHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_mpich_headers"),
             dir_output=os.path.join(self.preload_header_dir, "INTEL_MPICH"),
             mpi_target_version=self.mpi_target_version,
         )
         genintelmpich.generate()
 
         genmpichintel = MpichIntelHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/mpich_intel_headers"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_INTEL"),
             mpi_target_version=self.mpi_target_version,
         )
         genmpichintel.generate()
 
         genmpichmpich = MpichMpichHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/mpich_mpich_headers"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_MPICH"),
             mpi_target_version=self.mpi_target_version,
         )
@@ -234,7 +234,7 @@ class Generator:
         genintelompi.generate()
 
         genmpichompi = MpichOmpiHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_ompi_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/mpich_ompi_headers"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_OMPI"),
             mpi_target_version=self.mpi_target_version,
         )
@@ -248,7 +248,7 @@ class Generator:
         genompiintel.generate()
 
         genompimpich = OmpiMpichHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_mpich_headers"),
             dir_output=os.path.join(self.preload_header_dir, "OMPI_MPICH"),
             mpi_target_version=self.mpi_target_version,
         )

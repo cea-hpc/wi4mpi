@@ -4,7 +4,6 @@ OmpiOmpiHeader module for generating Ompi-Ompi preload header files.
 """
 
 import os
-import shutil
 import re
 from logging import getLogger
 from logging.config import fileConfig
@@ -22,16 +21,8 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
     OmpiOmpiHeader class for generating Ompi-Ompi preload header files.
     """
 
-    def __init__(
-        self,
-        dir_input="src/preload/header/scripts/ompi_ompi_headers",
-        dir_output="src/preload/header/_OMPI_OMPI_gen",
-        mpi_target_version=None,
-    ):
-        log.info("Generation of OMPI_OMPI headers in progress.")
-        super().__init__(
-            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
-        )
+    app = "openmpi"
+    run = "openmpi"
 
     def _ompi_ompi_run_exception(self, text):
         pattern = []
@@ -129,7 +120,10 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
             text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
         return text
 
-    def _generate_app_mpih(self, gen_file: str) -> None:
+    def ompi_generate_app_mpih(self, gen_file: str) -> None:
+        """
+        Generate ompi app_mpi.h
+        """
         self._generate_run_mpih(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
@@ -138,14 +132,5 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
         with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
-    def generate(self):
-        shutil.copy2(
-            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
-            os.path.join(self.dir_output, self._run_mpi_header_file),
-        )
-        shutil.copy2(
-            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
-            os.path.join(self.dir_output, self._app_mpi_header_file),
-        )
-        super().generate()
-        log.debug("OMPI header has been generated.")
+    def _generate_app_mpih(self, gen_file: str) -> None:
+        self.ompi_generate_app_mpih(gen_file)

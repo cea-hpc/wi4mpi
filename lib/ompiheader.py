@@ -24,16 +24,8 @@ class OmpiHeaderGenerator(HeaderGenerator):
     OmpiHeaderGenerator class for generating Ompi-specific header files.
     """
 
-    def __init__(
-        self,
-        dir_input="src/interface/header/scripts/ompi_headers",
-        dir_output="src/interface/header/_OMPI_test",
-        mpi_target_version=None,
-    ):
-        log.info("Generation of OMPI headers in progress.")
-        super().__init__(
-            dir_input=dir_input, dir_output=dir_output, mpi_target_version=mpi_target_version
-        )
+    app = None
+    run = "openmpi"
 
     def _generate_wrapper_fh(self, gen_file):
         def _msg(wrapper_f):
@@ -44,7 +36,11 @@ class OmpiHeaderGenerator(HeaderGenerator):
             log.warning(_msg(wrapper_f))
             shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), self.dir_output)
 
-    def _replace_mpi_with_rmpi(self, text: str) -> str:
+    def ompi_replace_mpi_with_rmpi(self, text: str) -> str:
+        """
+        Manage execptions for openmpi header.
+        """
+        log.debug("Running ompi_replace_mpi_with_rmpi (OmpiHeaderGenerator).")
         if "5.0.3" == self.mpi_target_version["openmpi"]:
             lines_to_delete = [
                 "typedef struct ompi_f08_status_public_t MPI_F08_status;",
@@ -210,23 +206,31 @@ int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
 
         return text
 
+    def _generate_run_mpih(self, gen_file: str) -> None:
+        """
+        :param gen_file: A string representing the path to the input file.
+        :type gen_file: str
+        :return: None
+        """  # noqa: E501
+        log.debug("Running _generate_run_mpih (OmpiHeaderGenerator).")
+        try:
+            with open(gen_file, "r", encoding="utf-8") as _file:
+                _content = _file.read()
+                _new_content = self.ompi_replace_mpi_with_rmpi(_content)
+            with open(gen_file, "w", encoding="utf-8") as _file:
+                _file.write(_new_content)
+        except FileNotFoundError:
+            log.error(lambda: f"The file '{gen_file}' does not exist.")
+        except ValueError:
+            log.error("An error occurred during _generate_run_mpih.")
+
     def _generate_run_mpioh(self, gen_file):
-        pass
+        log.debug("Running _generate_run_mpioh (OmpiHeaderGenerator).")
+        if self.__class__.__name__ in ("OmpiIntelHeaderGenerator", "OmpiMpichHeaderGenerator"):
+            super()._generate_run_mpioh(gen_file)
 
-    def _generate_run_mpi_protoh(self, gen_file):
-        pass
+    def _generate_run_mpi_protoh(self, _):
+        log.debug("Running _generate_run_mpi_protoh (OmpiHeaderGenerator).")
 
-    def _generate_app_mpi_protoh(self, gen_file):
-        pass
-
-    def generate(self):
-        shutil.copy2(
-            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
-            os.path.join(self.dir_output, self._run_mpi_header_file),
-        )
-        shutil.copy2(
-            os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
-            os.path.join(self.dir_output, self._app_mpi_header_file),
-        )
-        super().generate()
-        log.debug("OMPI header has been generated.")
+    def _generate_app_mpi_protoh(self, _):
+        log.debug("Running _generate_app_mpi_protoh (OmpiHeaderGenerator).")

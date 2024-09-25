@@ -9,6 +9,7 @@ This module provides classes and methods for generating MPI header files.
 
 import os
 import re
+import shutil
 from abc import abstractmethod, ABC
 from logging import getLogger
 from logging.config import fileConfig
@@ -70,6 +71,8 @@ class HeaderGenerator(ABC):
     dir_input = ""
     etc_dir = ""
     mpi_target_version = None
+    app = None
+    run = None
 
     def set_directories(self, dir_input="", dir_output=""):
         """
@@ -89,6 +92,8 @@ class HeaderGenerator(ABC):
         self.etc_dir = os.path.join(self.wi4mpi_root, "lib/etc/headers")
 
     def __init__(self, dir_input="", dir_output="", mpi_target_version=None):
+        _msg = f"{self.__class__.__name__} in progress."
+        log.info(_msg)
         self.set_directories(dir_input=dir_input, dir_output=dir_output)
         self.mpi_target_version = mpi_target_version
 
@@ -149,29 +154,8 @@ class HeaderGenerator(ABC):
 
         return text
 
-    def _generate_run_mpih(self, gen_file: str) -> None:
-        """
-        Generate a the header file run_mpi.h by replacing MPI_ with R_MPI_ in the input file content and save it in place.
-
-        This method reads the content of the input file, replaces all occurrences of MPI_ with R_MPI_,
-        and then saves the modified content to the same file. If the input file does not exist or if there
-        is an error during the file I/O operations, appropriate error messages are displayed.
-
-        :param gen_file: A string representing the path to the input file.
-        :type gen_file: str
-        :return: None
-        """  # noqa: E501
-        log.debug("Running _generate_run_mpih (HeaderGenerator).")
-        try:
-            with open(gen_file, "r", encoding="utf-8") as _file:
-                _content = _file.read()
-                _new_content = self._replace_mpi_with_rmpi(_content)
-            with open(gen_file, "w", encoding="utf-8") as _file:
-                _file.write(_new_content)
-        except FileNotFoundError:
-            log.error(lambda: f"The file '{gen_file}' does not exist.")
-        except ValueError:
-            log.error("An error occurred during _generate_run_mpih.")
+    def _generate_run_mpih(self, gen_file):
+        pass
 
     def _common_generate_app_mpih(self, text):
         log.debug("Running _common_generate_app_mpih (HeaderGenerator)")
@@ -369,28 +353,78 @@ class HeaderGenerator(ABC):
         with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
+    def intel_exceptions_run_mpioh(self, text):
+        """
+        Manage execptions for intel run_mpio.h.
+        This function is overloaded inside subclasses.
+        """
+        return text
+
     def _generate_run_mpioh(self, gen_file):
         log.debug("Running _generate_run_mpioh (HeaderGenerator)")
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
         _new_content = self._replace_mpi_with_rmpi(_content)
+        _new_content = self.intel_exceptions_run_mpioh(_new_content)
         with open(gen_file, "w", encoding="utf-8") as _file:
             _file.write(_new_content)
 
-    def _generate_run_mpi_protoh(self, gen_file):
-        if "4.2.0" == self.mpi_target_version["mpich"]:
-            log.debug("Running _generate_run_mpi_protoh (HeaderGenerator)")
-            with open(gen_file, "r", encoding="utf-8") as _file:
-                _content = _file.read()
-            _new_content = self._replace_mpi_with_rmpi(_content)
-            with open(gen_file, "w", encoding="utf-8") as _file:
-                _file.write(_new_content)
-        else:
-            pass
+    def copy_file(self, input_file_name, output_file_name):
+        """
+        Performs the copy from dir_input to dir_output.
+        """
+        shutil.copy2(
+            os.path.join(self.dir_input, input_file_name),
+            os.path.join(self.dir_output, output_file_name),
+        )
 
-    def _generate_app_mpi_protoh(self, gen_file):
-        pass
+    def copy_files(self):
+        """
+        Copy target headers
+        """
+        log.debug("Running copy_files (HeaderGenerator)")
+        if self.app in (None, "openmpi"):
+            input_file_name = f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"
+            self.copy_file(input_file_name, "app_mpi.h")
+
+        if self.app in ("intelmpi", "mpich"):
+            input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpio.h"
+            self.copy_file(input_file_name, "app_mpio.h")
+            input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpi.h"
+            self.copy_file(input_file_name, "app_mpi.h")
+
+        if self.app == "mpich" and "4.2.0" == self.mpi_target_version["mpich"]:
+            input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpi_proto.h"
+            self.copy_file(input_file_name, "app_mpi_proto.h")
+
+        if self.run == "openmpi":
+            input_file_name = f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"
+        else:
+            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpi.h"
+        self.copy_file(input_file_name, "run_mpi.h")
+
+        if self.run in ("intelmpi", "mpich"):
+            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpio.h"
+            self.copy_file(input_file_name, "run_mpio.h")
+            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpi.h"
+            self.copy_file(input_file_name, "run_mpi.h")
+
+        if self.run == "mpich" and "4.2.0" == self.mpi_target_version["mpich"]:
+            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpi_proto.h"
+            self.copy_file(input_file_name, "run_mpi_proto.h")
+
+    def _generate_app_mpioh(self, _):
+        """
+        Method to be defined in subclasse.
+        """
+        log.debug("Running copy_files (HeaderGenerator)")
+
+    def _generate_run_mpi_protoh(self, _):
+        log.debug("Running _generate_run_mpi_protoh (HeaderGenerator)")
+
+    def _generate_app_mpi_protoh(self, _):
+        log.debug("Running _generate_app_mpi_protoh (HeaderGenerator)")
 
     def generate(self):
         """
@@ -403,13 +437,15 @@ class HeaderGenerator(ABC):
 
         """
         log.debug("Running generate (HeaderGenerator)")
+        self.copy_files()
         self._generate_run_mpih(os.path.join(self.dir_output, self._run_mpi_header_file))
         self._generate_run_mpioh(os.path.join(self.dir_output, self._run_mpio_header_file))
         self._generate_app_mpih(os.path.join(self.dir_output, self._app_mpi_header_file))
-        self._generate_wrapper_fh(os.path.join(self.dir_output, self._wrapper_f_header_file))
+        self._generate_app_mpioh(os.path.join(self.dir_output, self._app_mpio_header_file))
         self._generate_run_mpi_protoh(
-            os.path.join(self.dir_output, self._run_mpi_proto_header_file),
+            os.path.join(self.dir_output, self._run_mpi_proto_header_file)
         )
         self._generate_app_mpi_protoh(
-            os.path.join(self.dir_output, self._app_mpi_proto_header_file),
+            os.path.join(self.dir_output, self._app_mpi_proto_header_file)
         )
+        self._generate_wrapper_fh(os.path.join(self.dir_output, self._wrapper_f_header_file))
