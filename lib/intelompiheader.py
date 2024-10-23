@@ -42,7 +42,7 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
             decalage += len(_replacement.split("\n")) - len(_pattern.split("\n"))
             text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
 
-        # lignes à supprimer car commentées dans le header de référence
+        # Lines to be deleted because commented in the reference header
         text = delete_lines(
             [
                 "/* Programs that need to convert types used in MPICH should use these */",
@@ -70,7 +70,7 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
             text,
         )
 
-        # lignes à supprimer car absente du header de référence
+        # Lines to delete because they are missing from the reference header
         text = delete_lines(
             [
                 "int * MPI_UNWEIGHTED;",

@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#
+# This script executes the generator with the arguments defined in launcher.sh
+#
 export PYTHONPATH=$PYTHONPATH:$wi4mpi_dir/lib
 cd $wi4mpi_dir
 ./lib/generator.py \

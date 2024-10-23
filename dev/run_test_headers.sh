@@ -1,19 +1,23 @@
 #!/bin/bash
-
+#
+# This script performs multiple file comparisons with the diff command.
+# The reference files are in src/{preload,interface}/header/*_*
+# Remark: the file mpi_proto.h from MPICH 4.2.0 is actually not supported
+#
 function diff_gen_ref() {
 file_gen=$1
 file_ref=$2
 diff -q $file_gen $file_ref &> /dev/null
 if [[ $? == 0 ]]; then
-  echo -e "\033[32;1mLes fichiers sont identiques: $file_gen $file_ref\033[0m"
+  echo -e "\033[32;1mFiles are identical: $file_gen $file_ref\033[0m"
   return 0
 else
-  echo -e "\033[31;1mLes fichiers sont différents: $file_gen $file_ref\033[0m"
+  echo -e "\033[31;1mFiles are different: $file_gen $file_ref\033[0m"
   nbr_of_lines_only_gen=$(diff $file_gen $file_ref | grep "^<" | wc -l)
   nbr_of_lines_only_ref=$(diff $file_gen $file_ref | grep "^>" | wc -l)
-  echo -e "\033[31mNombre de lignes uniquement dans $file_gen: $nbr_of_lines_only_gen"
-  echo -e "Nombre de lignes uniquement dans $file_ref: $nbr_of_lines_only_ref"
-  echo -e "Nombre total de lignes différentes: $((nbr_of_lines_only_gen + nbr_of_lines_only_ref))\033[0m"
+  echo -e "\033[31mNumber of lines only in $file_gen: $nbr_of_lines_only_gen"
+  echo -e "Number of lines only in $file_ref: $nbr_of_lines_only_ref"
+  echo -e "Total number of different lines: $((nbr_of_lines_only_gen + nbr_of_lines_only_ref))\033[0m"
   return 1
 fi
 }

@@ -65,7 +65,7 @@ class OmpiIntelHeaderGenerator(IntelIntelHeaderGenerator, OmpiHeaderGenerator):
         _conf_file = os.path.join(self.etc_dir, "ompiintelheader._app_to_run.replace")
         text = replacement_from_conf_file(_conf_file, text)
 
-        # lignes à supprimer car absente du header de référence
+        # Lines to delete because they are missing from the reference header
         text = delete_lines(
             [
                 "int * MPI_UNWEIGHTED;",

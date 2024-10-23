@@ -1,4 +1,18 @@
 #!/bin/bash
+#
+# This script is intended to centralize the execution of wi4mpi development tests.
+# It is initially designed to configure the environment to run the header generator
+# and compare the generation to the files already present in the sources.
+# Here are the currently available features:
+# -g <GENERATOR_RUN>: enables (1) or disables (0) the execution of the generator
+# -b <GENERATOR_TEST_BUILD>: enables (1) or disables (0) the cmake and make phases of the wi4mpi build
+# -d <GENERATOR_TEST_HEADER>: enables (1) or disables (0) the comparison between the generated headers and those already present in the sources
+# -o <GENERATOR_OPENMPI_VERSION>: version of the OpenMPI used by the generator
+# -m <GENERATOR_MPICH_VERSION>: version of the MPICH used by the generator
+# -i <GENERATOR_INTELMPI_VERSION>: version of the IntelMPI used by the generator
+# -t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>: enables (1) or disables (0) the copy of generated headers into the src
+# -c <GENERATOR_BUILD_WITH_GENERATED_CODE>: enables (1) or disables (0) the copy of the generated code into the src
+#
 set -e
 
 function usage() {
@@ -11,22 +25,25 @@ Usage: $0 [-g <GENERATOR_RUN>]
           [-m <GENERATOR_MPICH_VERSION>]
           [-i <GENERATOR_INTELMPI_VERSION>]
           [-t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>]
-
+          [-c <GENERATOR_BUILD_WITH_GENERATED_CODE>]
 
 Options:
-  -g <GENERATOR_RUN>: Boolean (1)/0. Execute ./lib/generator.py; copie les fichiers générés
+  -g <GENERATOR_RUN>: Boolean (1)/0. Execute ./lib/generator.py; copies the generated files
   -b <GENERATOR_TEST_BUILD>: Boolean (1)/0. Compile Wi4mpi
-  -d <GENERATOR_TEST_HEADER>: Boolean (1)/0. Compare les headers interface, preload aux références
+  -d <GENERATOR_TEST_HEADER>: Boolean 1/(0). Compare the interface headers, preload to the references
   -o <GENERATOR_OPENMPI_VERSION>: String number version of the OpenMPI base header to use in the generator. Default: 1.8.8. Available: 1.8.8, 2.1.6, 4.1.6, 5.0.3
   -m <GENERATOR_MPICH_VERSION>: String number version of the MPICH base header to use in the generator. Default: 3.1.2. Available: 3.1.2, 3.4.3, 4.2.0
-  -i <GENERATOR_INTELMPI_VERSION>: String number version of the IntelMPI base header to use in the generator. Default: 20.0.0 Available: 20.0.0, 24.0.0
-  -t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>: Boolean 1/(0). Copy generated headers in wi4mpi sources before the compilation. They replace reference headers.
+  -i <GENERATOR_INTELMPI_VERSION>: String number version of the IntelMPI base header to use in the generator. Default: 20.0.0. Available: 20.0.0, 24.0.0
+  -t <GENERATOR_BUILD_WITH_GENERATED_HEADERS>: Boolean 1/(0). Copy generated headers into Wi4mpi sources before the compilation. They will replace reference headers.
+  -c <GENERATOR_BUILD_WITH_GENERATED_CODE>: Boolean 1/(0). Copy generated code in wi4mpi sources before the compilation.
+
+
 
 EOF
 }
 
 
-while getopts ":g:b:d:o:t:m:i:h" opt; do
+while getopts ":g:b:d:o:t:m:i:c:h" opt; do
     case ${opt} in
         g )
             GENERATOR_RUN="$OPTARG"
@@ -49,6 +66,9 @@ while getopts ":g:b:d:o:t:m:i:h" opt; do
         t)
             GENERATOR_BUILD_WITH_GENERATED_HEADERS="$OPTARG"
             ;;
+        c)
+            GENERATOR_BUILD_WITH_GENERATED_CODE="$OPTARG"
+            ;;
         h )
             usage
             exit 0
@@ -62,11 +82,11 @@ done
 
 shift $((OPTIND -1))
 
-## Script parameters
+## Script settings
 
-export GENERATOR_RUN=${GENERATOR_RUN-1} # Execute ./lib/generator.py; copie les fichiers générés
+export GENERATOR_RUN=${GENERATOR_RUN-1} # Execute ./lib/generator.py
 export GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1} # Compile Wi4mpi
-export GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-1} # Compare les headers interface, preload aux références
+export GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-0} # Compare the interface headers, preload to the references
 export GENERATOR_OPENMPI_VERSION=${GENERATOR_OPENMPI_VERSION-1.8.8}
 export GENERATOR_MPICH_VERSION=${GENERATOR_MPICH_VERSION-3.1.2}
 export GENERATOR_INTELMPI_VERSION=${GENERATOR_INTELMPI_VERSION-20.0.0}
@@ -98,8 +118,8 @@ fi
 if [[ $GENERATOR_TEST_HEADER == 1 ]]; then
     if [[ $GENERATOR_RUN == 0 ]]; then
         echo "The generator will not run. Only comparison will be performed."
-        read -p "Define dir_gen_interface: " dir_gen_interface
-        read -p "Define dir_gen_preload: " dir_gen_preload
+        read -p "Directory where the code generated for the interface mode is located: " dir_gen_interface
+        read -p "Directory where the code generated for the preload mode is located: " dir_gen_preload
         export dir_gen_interface dir_gen_preload
     fi
     $_dir/run_test_headers.sh

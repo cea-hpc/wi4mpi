@@ -159,10 +159,10 @@ class HeaderGenerator(ABC):
 
     def _common_generate_app_mpih(self, text):
         log.debug("Running _common_generate_app_mpih (HeaderGenerator)")
-        # Suppression des lignes du début du fichiers
+        # Delete lines from the beginning of the file
         line_idx = len(text[: text.index("\ntypedef ")].split("\n"))
         text = delete_lines(range(0, line_idx + 1), text)
-        # Fin de fichier pour openmpi 5.0.3
+        # End of file for openmpi 5.0.3
         if "5.0.3" == self.mpi_target_version["openmpi"]:
             text = replace_bloc_from_conf_file(
                 os.path.join(
@@ -175,7 +175,7 @@ class HeaderGenerator(ABC):
                 ),
                 text,
             )
-        # Suppression des lignes contenant #if et #endif
+        # Delete lines whichcontains #if et #endif
         lines_to_delete = []
         for line in text.split("\n"):
             if "#if" in line or "#endif" in line or "#else" in line:

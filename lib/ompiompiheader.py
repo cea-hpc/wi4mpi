@@ -41,7 +41,7 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
             text = re.sub(_pattern, _replacement, text, flags=re.MULTILINE)
         text = delete_line_from_pattern(r"  OMPI_COMM_TYPE_", text)
 
-        # lignes à supprimer car absente du header de référence
+        # Lines to delete because they are missing from the reference header
         _pattern_block = """
 #ifdef OMPI_PREDEFINED_GLOBAL
 #undef OMPI_PREDEFINED_GLOBAL

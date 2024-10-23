@@ -42,14 +42,13 @@ class MpcHeaderGenerator(HeaderGenerator):
     def _mpc_exceptions_run_mpih(self, text):
         log.debug("Running _mpc_exceptions_run_mpih")
 
-        # Définir les lignes à insérer
+        # Define the lines to insert
         lines_to_insert = [
             "#define R_MPI_ERR_RMA_RANGE 74",
             "#define R_MPI_ERR_RMA_ATTACH 75",
             "#define R_MPI_ERR_RMA_SHARED 76",
         ]
-        # Utiliser une expression régulière pour insérer les lignes
-        # avant "#define R_MPI_ERR_RMA_CONFLICT"
+        # Use a regular expression to insert the lines before #define R_MPI_ERR_RMA_CONFLICT
         pattern = r"(#define R_MPI_ERR_RMA_CONFLICT)"
         replacement = "\n".join(lines_to_insert) + r"\n\1"
         text = re.sub(pattern, replacement, text)
@@ -57,7 +56,9 @@ class MpcHeaderGenerator(HeaderGenerator):
         # Add line at the end of the file
         text = re.sub(r"(\n+$)", r'\n#include "run_mpio.h"\n', text)
 
-        # Ajout supplémentaires
+        # Use a regular expression to insert the lines after /** Initialization and Finalization */
+        # and perform the substitution using re.sub()
+        pattern = r"(/\*\* Initialization and Finalization \*/)"
         lines_to_insert = [
             "#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */",
             (
@@ -65,14 +66,10 @@ class MpcHeaderGenerator(HeaderGenerator):
                 " MPI-3.1 */"
             ),
         ]
-        # Utiliser une expression régulière pour insérer les lignes
-        # après "/** Initialization and Finalization */"
-        pattern = r"(/\*\* Initialization and Finalization \*/)"
-        # Effectuer la substitution en utilisant re.sub()
         replacement = r"\1\n" + "\n".join(lines_to_insert)
         text = re.sub(pattern, replacement, text)
 
-        # Expression régulière pour correspondre aux lignes à supprimer
+        # Regular expression to match the lines to delete
         pattern = (
             r"/\* Error handling \*/\nint"
             r" R_MPI_File_create_errhandler\(R_MPI_File_errhandler_function \*, R_MPI_Errhandler"
@@ -80,7 +77,6 @@ class MpcHeaderGenerator(HeaderGenerator):
             r" \*file_errhandler_fn, R_MPI_Errhandler \*errhandler\);\nint"
             r" R_MPI_File_call_errhandler\(void \* , int \);"
         )
-        # Effectuer la substitution pour supprimer les lignes
         text = re.sub(pattern, "", text)
 
         # Add lines at the end of the file
@@ -120,7 +116,7 @@ class MpcHeaderGenerator(HeaderGenerator):
 
     def _mpc_exceptions_app_mpih(self, text):
         log.debug("Running _mpc_exceptions_app_mpih")
-        # Remplacer les valeurs manquantes par A_MPI_ERR_UNKNOWN
+        # Replace missing values with A_MPI_ERR_UNKNOWN
         pattern = r"(#define.*A_MPI_ERR_RMA_RANGE).*"
         text = re.sub(pattern, r"\1             74", text)
         pattern = r"(#define.*A_MPI_ERR_RMA_ATTACH).*"
