@@ -54,6 +54,7 @@ Authors:
 """
 
 import os
+import re
 import sys
 from logging import getLogger
 from logging.config import fileConfig
@@ -136,11 +137,11 @@ class Generator:
         if self.mpi_target_version["intelmpi"] in self.mpi_availabe_target_version["intelmpi"]:
             bool_intelmpi_version = True
         else:
-            _msg = f"IntalMPI {self.mpi_target_version['intelmpi']} is not available."
+            _msg = f"IntelMPI {self.mpi_target_version['intelmpi']} is not available."
             log.error(_msg)
         if not (bool_openmpi_version and bool_mpich_version and bool_intelmpi_version):
             log.error("MPI configuration not available.")
-            sys.exit()
+            sys.exit(1)
 
     def set_directories(self, **kwargs):
         """
@@ -329,9 +330,9 @@ if "__main__" == __name__:
         "preload_header_dir": arguments["--preload_header_dir"],
         "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
         "c_interface_gen_dir": arguments["--c_interface_gen_dir"],
-        "openmpi_version": arguments["--openmpi_version"],
-        "mpich_version": arguments["--mpich_version"],
-        "intelmpi_version": arguments["--intelmpi_version"],
+        "openmpi_version": re.sub(r"['\"]", "", arguments["--openmpi_version"]),
+        "mpich_version": re.sub(r"['\"]", "", arguments["--mpich_version"]),
+        "intelmpi_version": re.sub(r"['\"]", "", arguments["--intelmpi_version"]),
     }
     # Delete keys that have a value of None
     none_list = []
@@ -344,3 +345,4 @@ if "__main__" == __name__:
     run = Generator(**args)
     run.generate()
     log.info("End")
+    sys.exit(0)

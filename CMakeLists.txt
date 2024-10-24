@@ -63,6 +63,10 @@ set(CMAKE_MODULE_PATH
 option(WI4MPI_DEBUG "Add debug printing in the wrapped calls")
 option(WI4MPI_JIT "Use JIT compilation for user-provided stuff (required gcc in the PATH at run time")
 option(WI4MPI_TIMEOUT "Activate timeout")
+option(WI4MPI_GENERATOR "Enable generation of sources (headers and code)" OFF)
+set(WI4MPI_GENERATOR_OPENMPI_VERSION "1.8.8" CACHE STRING "Version number of OpenMPI")
+set(WI4MPI_GENERATOR_INTELMPI_VERSION "20.0.0" CACHE STRING "Version number of IntelMPI")
+set(WI4MPI_GENERATOR_MPICH_VERSION "3.1.2" CACHE STRING "Version number of MPICH")
 
 #The Rpath Strikes Back
 set(CMAKE_SKIP_RPATH TRUE)
@@ -155,6 +159,47 @@ else()
     if(NOT Threads_FOUND)
         message(FATAL_ERROR "Be sure to have Pthread available on your system")
     endif()
+endif()
+
+if(WI4MPI_GENERATOR)
+  message(STATUS "Header and code generator is enabled.")
+  find_package(Python3 COMPONENTS Interpreter REQUIRED)
+  set(PYTHONPATH "${CMAKE_SOURCE_DIR}/lib:$ENV{PYTHONPATH}")
+  message(STATUS "Updated PYTHONPATH: ${PYTHONPATH}")
+  set(dir_gen_c_interface "${CMAKE_SOURCE_DIR}/interface/gen")
+  set(dir_gen_c_preload "${CMAKE_SOURCE_DIR}/preload/gen")
+  set(dir_gen_interface "${CMAKE_SOURCE_DIR}/interface/header")
+  set(dir_gen_preload "${CMAKE_SOURCE_DIR}/preload/header")
+  message(STATUS "Running header and code generator with arguments")
+  message(STATUS "--interface_header_dir=${dir_gen_interface}")
+  message(STATUS "--preload_header_dir=${dir_gen_preload}")
+  message(STATUS "--c_preload_gen_dir=${dir_gen_c_preload}")
+  message(STATUS "--c_interface_gen_dir=${dir_gen_c_interface}")
+  message(STATUS "--openmpi_version=${WI4MPI_GENERATOR_OPENMPI_VERSION}")
+  message(STATUS "--intelmpi_version=${WI4MPI_GENERATOR_INTELMPI_VERSION}")
+  message(STATUS "--mpich_version=${WI4MPI_GENERATOR_MPICH_VERSION}")
+  message(STATUS "Option: set WI4MPI_GENERATOR_OPENMPI_VERSION to an OpenMPI available version: 1.8.8 2.1.6 4.1.6 5.0.3")
+  message(STATUS "Option: set WI4MPI_GENERATOR_INTELMPI_VERSION to an IntelMPI available version: 20.0.0 24.0.0")
+  message(STATUS "Option: set WI4MPI_GENERATOR_MPICH_VERSION to an MPICH available version: 3.1.2 3.4.3 4.2.0")
+  execute_process(
+      COMMAND python3 ${CMAKE_SOURCE_DIR}/lib/generator.py
+                --interface_header_dir="${dir_gen_interface}"
+                --preload_header_dir="${dir_gen_preload}"
+                --c_preload_gen_dir="${dir_gen_c_preload}"
+                --c_interface_gen_dir="${dir_gen_c_interface}"
+                --openmpi_version="${WI4MPI_GENERATOR_OPENMPI_VERSION}"
+                --intelmpi_version="${WI4MPI_GENERATOR_INTELMPI_VERSION}"
+                --mpich_version="${WI4MPI_GENERATOR_MPICH_VERSION}"
+      RESULT_VARIABLE is_generator_ok
+  )
+  if(NOT "${is_generator_ok}" STREQUAL "0")
+    message(
+      FATAL_ERROR
+        "Generator failed."
+    )
+  endif()
+else()
+    message(STATUS "Header and code generator is disabled. Set WI4MPI_GENERATOR to ON to activate it.")
 endif()
 
 #Setting wi4mpi.cfg
