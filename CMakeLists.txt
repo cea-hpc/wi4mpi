@@ -1,4 +1,28 @@
 cmake_minimum_required(VERSION 3.1.0)
+
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.17")
+# Specifies the logging level used by the message() command.
+# The valid log levels are ERROR, WARNING, NOTICE, STATUS (default), VERBOSE, DEBUG, or TRACE.
+set(CMAKE_MESSAGE_LOG_LEVEL WARNING CACHE STRING "Specifies the logging level used by the message() command.")
+endif()
+
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.13")
+# Remove all progress messages regarding rules: example "[ x%] Built C object ..."
+set(CMAKE_RULE_MESSAGES OFF CACHE STRING "Remove all progress messages regarding rules.")
+else()
+set(RULE_MESSAGES OFF)
+endif()
+
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.4")
+# Remove all progress messages regarding targets: example "[ x%] Built target ..."
+set(CMAKE_TARGET_MESSAGES OFF CACHE STRING "Remove all progress messages regarding targets.")
+endif()
+
+# NEVER: Removes all progress messages regarding installed files
+# LAZY: Removes all progress messages regarding updated installed files
+# ALWAYS: Displays all progress messages regarding installed files
+set(CMAKE_INSTALL_MESSAGE NEVER CACHE STRING "Manage progres messages regarding installed files. Values are: NEVER, LAZY, ALWAYS")
+
 #Default compiler for wi4mpi
 if(WI4MPI_COMPILER)
     message(DEPRECATION "WI4MPI_COMPILER is deprecated. Set environment variables CC, CXX and FC, or use CMAKE_<lang>_COMPILER cmake's option instead.")
@@ -137,7 +161,8 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_C_FLAGS_RELWITHDEBINFO  "-g -O3")
-set(CMAKE_C_FLAGS_RELEASE "-O3")
+set(CMAKE_C_FLAGS_RELEASE "-w -O3")
+
 if(WI4MPI_DEBUG)
     add_definitions(-DDEBUG)
 endif()
