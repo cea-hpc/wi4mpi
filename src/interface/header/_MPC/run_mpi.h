@@ -1871,6 +1871,8 @@ int R_MPI_Dist_graph_neighbors(R_MPI_Comm , int , int [], int [], int , int [], 
 int R_MPI_Dist_graph_create(R_MPI_Comm , int , int [], int [], int [],int [],R_MPI_Info , int , R_MPI_Comm *);
 int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm ,int , int [], int [],int , int [], int [],R_MPI_Info , int , R_MPI_Comm *);
 
+
+
 /* MPIX methods */
 int R_MPIX_Comm_failure_ack( R_MPI_Comm  );
 int R_MPIX_Comm_failure_get_acked( R_MPI_Comm , R_MPI_Group * );

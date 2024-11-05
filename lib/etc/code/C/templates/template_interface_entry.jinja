@@ -1,0 +1,10 @@
+#include <stdlib.h>
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <dlfcn.h>
+#include "mpi.h"
+
+char wi4mpi_mode[]="";
+
+__thread int in_w;
+

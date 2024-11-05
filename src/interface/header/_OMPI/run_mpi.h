@@ -613,6 +613,8 @@ enum {
    can not be changed in a release series*/
 #define R_MPI_T_ERR_INVALID             70
 #define R_MPI_T_ERR_INVALID_NAME        71
+#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 
 /* Per MPI-3 p349 47, R_MPI_ERR_LASTCODE must be >= the last predefined
    R_MPI_ERR_<foo> code.  So just set it equal to the last code --
@@ -816,69 +818,6 @@ enum {
 #define R_MPI_CONVERSION_FN_NULL ((R_MPI_Datarep_conversion_function*) 0)
 #endif
 
-/*
-OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_NULL_DELETE_FN( R_MPI_Datatype datatype,
-                                                  int type_keyval,
-                                                  void* attribute_val_out,
-                                                  void* extra_state );
-OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_NULL_COPY_FN( R_MPI_Datatype datatype,
-                                                int type_keyval,
-                                                void* extra_state,
-                                                void* attribute_val_in,
-                                                void* attribute_val_out,
-                                                int* flag );
-OMPI_DECLSPEC int OMPI_C_R_MPI_TYPE_DUP_FN( R_MPI_Datatype datatype,
-                                          int type_keyval,
-                                          void* extra_state,
-                                          void* attribute_val_in,
-                                          void* attribute_val_out,
-                                          int* flag );
-OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_NULL_DELETE_FN( R_MPI_Comm comm,
-                                                  int comm_keyval,
-                                                  void* attribute_val_out,
-                                                  void* extra_state );
-OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_NULL_COPY_FN( R_MPI_Comm comm,
-                                                int comm_keyval,
-                                                void* extra_state,
-                                                void* attribute_val_in,
-                                                void* attribute_val_out,
-                                                int* flag );
-OMPI_DECLSPEC int OMPI_C_R_MPI_COMM_DUP_FN( R_MPI_Comm comm, int comm_keyval,
-                                          void* extra_state,
-                                          void* attribute_val_in,
-                                          void* attribute_val_out,
-                                          int* flag );
-OMPI_DECLSPEC int OMPI_C_R_MPI_NULL_DELETE_FN( R_MPI_Comm comm, int comm_keyval,
-                                             void* attribute_val_out,
-                                             void* extra_state )
-                                             __mpi_interface_deprecated__("R_MPI_NULL_DELETE_FN is deprecated in MPI-2.0");
-OMPI_DECLSPEC int OMPI_C_R_MPI_NULL_COPY_FN( R_MPI_Comm comm, int comm_keyval,
-                                           void* extra_state,
-                                           void* attribute_val_in,
-                                           void* attribute_val_out,
-                                           int* flag )
-                                           __mpi_interface_deprecated__("R_MPI_NULL_COPY_FN is deprecated in MPI-2.0");
-OMPI_DECLSPEC int OMPI_C_R_MPI_DUP_FN( R_MPI_Comm comm, int comm_keyval,
-                                     void* extra_state,
-                                     void* attribute_val_in,
-                                     void* attribute_val_out,
-                                     int* flag )
-                                     __mpi_interface_deprecated__("R_MPI_DUP_FN is deprecated in MPI-2.0");
-OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_NULL_DELETE_FN( R_MPI_Win window,
-                                                 int win_keyval,
-                                                 void* attribute_val_out,
-                                                 void* extra_state );
-OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_NULL_COPY_FN( R_MPI_Win window, int win_keyval,
-                                               void* extra_state,
-                                               void* attribute_val_in,
-                                               void* attribute_val_out,
-                                               int* flag );
-OMPI_DECLSPEC int OMPI_C_R_MPI_WIN_DUP_FN( R_MPI_Win window, int win_keyval,
-                                         void* extra_state,
-                                         void* attribute_val_in,
-                                         void* attribute_val_out,
-                                         int* flag );
-*/
 
 int (*ccc_OMPI_C_MPI_NULL_DELETE_FN)( R_MPI_Comm comm, int comm_keyval,
                                            void* attribute_val_out,
@@ -931,8 +870,6 @@ ccc_linkage void *ccc_ompi_mpi_op_sum;
 ccc_linkage void *ccc_ompi_mpi_op_prod;
 ccc_linkage void *ccc_ompi_mpi_op_land;
 ccc_linkage void *ccc_ompi_mpi_op_band;
-#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
-#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 ccc_linkage void *ccc_ompi_mpi_op_lor;
 ccc_linkage void *ccc_ompi_mpi_op_bor;
 ccc_linkage void *ccc_ompi_mpi_op_lxor;

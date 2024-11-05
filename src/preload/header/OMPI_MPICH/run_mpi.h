@@ -8,40 +8,40 @@
 //# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
 //#                                                                      #
 //########################################################################
-/*  
+/*
  *  (C) 2001 by Argonne National Laboratory.
-    
-    				  MPICH2 COPYRIGHT
-    
+
+              MPICH2 COPYRIGHT
+
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
     of the code.
-    
+
     Copyright Notice
      + 2002 University of Chicago
-    
+
     Permission is hereby granted to use, reproduce, prepare derivative works, and
     to redistribute to others.  This software was authored by:
-    
+
     Mathematics and Computer Science Division
     Argonne National Laboratory, Argonne IL 60439
-    
+
     (and)
-    
+
     Department of Computer Science
     University of Illinois at Urbana-Champaign
-    
-    
-    			      GOVERNMENT LICENSE
-    
+
+
+             GOVERNMENT LICENSE
+
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
     is granted for itself and others acting on its behalf a paid-up, nonexclusive,
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
-    
-    				  DISCLAIMER
-    
+
+             DISCLAIMER
+
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
     States, nor the University of Chicago, nor any of their employees, makes any
@@ -49,8 +49,8 @@
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
- *      
+
+ *
  */
 /* src/include/mpi.h.  Generated from mpi.h.in by configure. */
 #ifndef R_MPI_INCLUDED
@@ -58,11 +58,11 @@
 
 /* user include file for MPI programs */
 #if !defined(_WIN32) && !defined(_WIN64)  /* Linux only */
-#	include <stdint.h> /* for __WORDSIZE definition */
+#    include <stdint.h> /* for __WORDSIZE definition */
 #   ifdef __WORDSIZE
-#	    if __WORDSIZE != 8*8 /* 32 or 64 */
-#		    error A wrong version of mpi.h file was included. Check include path.
-#	    endif
+#        if __WORDSIZE != 8*8 /* 32 or 64 */
+#            error A wrong version of mpi.h file was included. Check include path.
+#        endif
 #    endif
 #endif
 
@@ -930,11 +930,11 @@ typedef int (MPIX_Grequest_wait_function)(int, void **, double, R_MPI_Status *);
 #define R_MPI_T_ERR_PVAR_NO_STARTSTOP 70  /* Pvar can't be started or stopped */
 #define R_MPI_T_ERR_PVAR_NO_WRITE     71  /* Pvar can't be written or reset */
 #define R_MPI_T_ERR_PVAR_NO_ATOMIC    72  /* Pvar can't be R/W atomically */
+#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 
 #define R_MPI_ERR_LASTCODE    0x3fffffff  /* Last valid error code for a 
 					   predefined error class */
-#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
-#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 /* WARNING: this is also defined in mpishared.h.  Update both locations */
 #define MPICH_ERR_LAST_CLASS 74     /* It is also helpful to know the
 				       last valid class */

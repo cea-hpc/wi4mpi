@@ -1,0 +1,9 @@
+
+#define A_MPI_T_ERR_INVALID             72
+#define A_MPI_T_ERR_INVALID_NAME        73
+
+/* Per MPI-3 p349 47, A_MPI_ERR_LASTCODE must be >= the last predefined
+   A_MPI_ERR_<foo> code. Set the last code to allow some room for adding
+   error codes without breaking ABI. */
+#define A_MPI_ERR_LASTCODE              92
+

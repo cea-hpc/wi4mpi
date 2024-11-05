@@ -8,41 +8,41 @@
 //# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
 //#                                                                      #
 //########################################################################
-/* 
+/*
  *
- *   Copyright (C) 1997 University of Chicago. 
-    
-    				  MPICH2 COPYRIGHT
-    
+ *   Copyright (C) 1997 University of Chicago.
+
+             MPICH2 COPYRIGHT
+
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
     of the code.
-    
+
     Copyright Notice
      + 2002 University of Chicago
-    
+
     Permission is hereby granted to use, reproduce, prepare derivative works, and
     to redistribute to others.  This software was authored by:
-    
+
     Mathematics and Computer Science Division
     Argonne National Laboratory, Argonne IL 60439
-    
+
     (and)
-    
+
     Department of Computer Science
     University of Illinois at Urbana-Champaign
-    
-    
-    			      GOVERNMENT LICENSE
-    
+
+
+             GOVERNMENT LICENSE
+
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
     is granted for itself and others acting on its behalf a paid-up, nonexclusive,
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
-    
-    				  DISCLAIMER
-    
+
+             DISCLAIMER
+
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
     States, nor the University of Chicago, nor any of their employees, makes any
@@ -50,8 +50,8 @@
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
- *   
+
+ *
  */
 
 /* user include file for MPI-IO programs */
@@ -77,15 +77,10 @@ typedef struct ADIOI_FileD *R_MPI_File;
 #ifndef HAVE_R_MPI_GREQUEST
 typedef struct ADIOI_RequestD *MPIO_Request;  
 #else
-#define R_MPIORequest R_MPI_Request
-#define R_MPIOUSES_R_MPI_REQUEST
-/* Also rename the MPIO routines to get the MPI versions */
-/*#define R_MPIO_Wait R_MPI_Wait
-#define R_MPIO_Test R_MPI_Test
-#define R_PMPIO_Wait R_PMPI_Wait
-#define R_PMPIO_Test R_PMPI_Test*/
+#define R_MPIO_Request R_MPI_Request
+#define R_MPIO_USES_R_MPI_REQUEST
 #endif
-#define R_MPIOREQUEST_DEFINED
+#define R_MPIO_REQUEST_DEFINED
 
 #ifndef HAVE_R_MPI_OFFSET
 typedef long long R_MPI_Offset;
@@ -135,7 +130,7 @@ typedef int R_MPI_Fint;
 /* MPICH defines null object handles differently */
 #define R_MPI_FILE_NULL           ((R_MPI_File) 0)
 #endif
-#define R_MPIOREQUEST_NULL       ((MPIO_Request) 0)
+#define R_MPIO_REQUEST_NULL       ((MPIO_Request) 0)
 
 #define R_MPI_SEEK_SET            600
 #define R_MPI_SEEK_CUR            602
@@ -199,13 +194,13 @@ int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset,  void *buf, int 
                           R_MPI_Datatype datatype, R_MPI_Status *status)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 
-/* nonblocking calls currently use R_MPIORequest, because generalized
-   requests not yet implemented. For the same reason, R_MPIOTest and 
-   R_MPIOWait are used to test and wait on nonblocking I/O requests */ 
+/* nonblocking calls currently use R_MPIO_Request, because generalized
+   requests not yet implemented. For the same reason, R_MPIO_Test and 
+   R_MPIO_Wait are used to test and wait on nonblocking I/O requests */ 
 int R_MPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf, int count, R_MPI_Datatype datatype,
-                      R_MPIORequest *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
+                      R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 int R_MPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset,  void *buf, int count,
-                       R_MPI_Datatype datatype, R_MPIORequest *request)
+                       R_MPI_Datatype datatype, R_MPIO_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 
 /* Section 9.4.3 */
@@ -218,14 +213,14 @@ int R_MPI_File_write(R_MPI_File fh,  void *buf, int count, R_MPI_Datatype dataty
 int R_MPI_File_write_all(R_MPI_File fh,  void *buf, int count, R_MPI_Datatype datatype,
                        R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
-/* nonblocking calls currently use R_MPIORequest, because generalized
-   requests not yet implemented. For the same reason, R_MPIOTest and 
-   R_MPIOWait are used to test and wait on nonblocking I/O requests */ 
+/* nonblocking calls currently use R_MPIO_Request, because generalized
+   requests not yet implemented. For the same reason, R_MPIO_Test and 
+   R_MPIO_Wait are used to test and wait on nonblocking I/O requests */ 
 
-int R_MPI_File_iread(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype, R_MPIORequest *request)
+int R_MPI_File_iread(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype, R_MPIO_Request *request)
     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_iwrite(R_MPI_File fh,  void *buf, int count, R_MPI_Datatype datatype,
-                    R_MPIORequest *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
+                    R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
 int R_MPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence);
 int R_MPI_File_get_position(R_MPI_File fh, R_MPI_Offset *offset);
@@ -237,9 +232,9 @@ int R_MPI_File_read_shared(R_MPI_File fh, void *buf, int count, R_MPI_Datatype d
 int R_MPI_File_write_shared(R_MPI_File fh,  void *buf, int count, R_MPI_Datatype datatype,
                           R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_iread_shared(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
-                          R_MPIORequest *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
+                          R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_iwrite_shared(R_MPI_File fh,  void *buf, int count, R_MPI_Datatype datatype,
-                           R_MPIORequest *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
+                           R_MPIO_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_read_ordered(R_MPI_File fh, void *buf, int count, R_MPI_Datatype datatype,
                           R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_File_write_ordered(R_MPI_File fh,  void *buf, int count, R_MPI_Datatype datatype,
@@ -320,23 +315,23 @@ R_MPI_Fint R_MPI_File_c2f(R_MPI_File file);
 
 #ifndef HAVE_R_MPI_GREQUEST
 /* The following functions are required if generalized requests are not
-   available, because in that case, an R_MPIORequest object
+   available, because in that case, an R_MPIO_Request object
    is currently used for nonblocking I/O. */
 int R_MPIO_Test(MPIO_Request *request, int *flag, R_MPI_Status *status);
 int R_MPIO_Wait(MPIO_Request *request, R_MPI_Status *status);
-int R_MPIO_Testall(int count, R_MPIORequest array_of_requests[], int *flag,
+int R_MPIO_Testall(int count, R_MPIO_Request array_of_requests[], int *flag,
                  R_MPI_Status array_of_statuses[]);
-int R_MPIO_Waitall(int count, R_MPIORequest array_of_requests[], R_MPI_Status array_of_statuses[]);
-int R_MPIO_Testany(int count, R_MPIORequest array_of_requests[], int *indx, int *flag,
+int R_MPIO_Waitall(int count, R_MPIO_Request array_of_requests[], R_MPI_Status array_of_statuses[]);
+int R_MPIO_Testany(int count, R_MPIO_Request array_of_requests[], int *indx, int *flag,
                  R_MPI_Status *status);
-int R_MPIO_Waitany(int count, R_MPIORequest array_of_requests[], int *indx, R_MPI_Status *status);
-int R_MPIO_Waitsome(int incount, R_MPIORequest array_of_requests[], int *outcount,
+int R_MPIO_Waitany(int count, R_MPIO_Request array_of_requests[], int *indx, R_MPI_Status *status);
+int R_MPIO_Waitsome(int incount, R_MPIO_Request array_of_requests[], int *outcount,
                   int array_of_indices[], R_MPI_Status array_of_statuses[]);
-int R_MPIO_Testsome(int incount, R_MPIORequest array_of_requests[], int *outcount,
+int R_MPIO_Testsome(int incount, R_MPIO_Request array_of_requests[], int *outcount,
                   int array_of_indices[], R_MPI_Status array_of_statuses[]);
 
-R_MPI_Fint R_MPIORequest_c2f(MPIO_Request request);
-MPIO_Request R_MPIORequest_f2c(R_MPI_Fint request);
+R_MPI_Fint R_MPIO_Request_c2f(MPIO_Request request);
+MPIO_Request R_MPIO_Request_f2c(R_MPI_Fint request);
 #endif /* HAVE_R_MPI_GREQUEST */
 
 /* info functions if not defined in the MPI implementation */
@@ -406,15 +401,15 @@ int R_PMPI_File_write_at_all(R_MPI_File, R_MPI_Offset,  void *,
 	      int, R_MPI_Datatype, R_MPI_Status *)
               MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 
-/* nonblocking calls currently use R_MPIORequest, because generalized
-   requests not yet implemented. For the same reason, R_MPIOTest and 
-   R_MPIOWait are used to test and wait on nonblocking I/O requests */ 
+/* nonblocking calls currently use R_MPIO_Request, because generalized
+   requests not yet implemented. For the same reason, R_MPIO_Test and 
+   R_MPIO_Wait are used to test and wait on nonblocking I/O requests */ 
 
 int R_PMPI_File_iread_at(R_MPI_File, R_MPI_Offset, void *,
-	      int, R_MPI_Datatype, R_MPIORequest *)
+	      int, R_MPI_Datatype, R_MPIO_Request *)
               MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 int R_PMPI_File_iwrite_at(R_MPI_File, R_MPI_Offset,  void *,
-	      int, R_MPI_Datatype, R_MPIORequest *)
+	      int, R_MPI_Datatype, R_MPIO_Request *)
               MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,5);
 
 /* Section 9.4.3 */
@@ -427,13 +422,13 @@ int R_PMPI_File_write(R_MPI_File,  void *, int, R_MPI_Datatype, R_MPI_Status *)
 int R_PMPI_File_write_all(R_MPI_File,  void *, int, R_MPI_Datatype, R_MPI_Status *)
                         MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
-/* nonblocking calls currently use R_MPIORequest, because generalized
-   requests not yet implemented. For the same reason, R_MPIOTest and 
-   R_MPIOWait are used to test and wait on nonblocking I/O requests */ 
+/* nonblocking calls currently use R_MPIO_Request, because generalized
+   requests not yet implemented. For the same reason, R_MPIO_Test and 
+   R_MPIO_Wait are used to test and wait on nonblocking I/O requests */ 
 
-int R_PMPI_File_iread(R_MPI_File, void *, int, R_MPI_Datatype, R_MPIORequest *)
+int R_PMPI_File_iread(R_MPI_File, void *, int, R_MPI_Datatype, R_MPIO_Request *)
                     MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPI_File_iwrite(R_MPI_File,  void *, int, R_MPI_Datatype, R_MPIORequest *)
+int R_PMPI_File_iwrite(R_MPI_File,  void *, int, R_MPI_Datatype, R_MPIO_Request *)
                      MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
 int R_PMPI_File_seek(R_MPI_File, R_MPI_Offset, int);
@@ -446,10 +441,10 @@ int R_PMPI_File_read_shared(R_MPI_File, void *, int, R_MPI_Datatype, R_MPI_Statu
 int R_PMPI_File_write_shared(R_MPI_File,  void *, int, R_MPI_Datatype, R_MPI_Status *)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_PMPI_File_iread_shared(R_MPI_File, void *, int, 
-			   R_MPI_Datatype, R_MPIORequest *)
+			   R_MPI_Datatype, R_MPIO_Request *)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_PMPI_File_iwrite_shared(R_MPI_File,  void *, int,
-			    R_MPI_Datatype, R_MPIORequest *)
+			    R_MPI_Datatype, R_MPIO_Request *)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_PMPI_File_read_ordered(R_MPI_File, void *, int, R_MPI_Datatype, R_MPI_Status *)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
@@ -518,16 +513,16 @@ R_MPI_Fint R_PMPI_File_c2f(R_MPI_File);
 
 #ifndef HAVE_R_MPI_GREQUEST
 /* The following functions are required if generalized requests are not
-   available, because in that case, an R_MPIORequest object
+   available, because in that case, an R_MPIO_Request object
    is currently used for nonblocking I/O. */
 int PMPIO_Test(MPIO_Request *, int *, R_MPI_Status *);
 int PMPIO_Wait(MPIO_Request *, R_MPI_Status *);
-int PMPIO_Testall(int, R_MPIORequest *, int *, R_MPI_Status *);
-int PMPIO_Waitall(int, R_MPIORequest *, R_MPI_Status *);
-int PMPIO_Testany(int, R_MPIORequest *, int *, int *, R_MPI_Status *);
-int PMPIO_Waitany(int, R_MPIORequest *, int *, R_MPI_Status *);
-int PMPIO_Waitsome(int, R_MPIORequest *, int *, int *, R_MPI_Status *);
-int PMPIO_Testsome(int, R_MPIORequest *, int *, int *, R_MPI_Status *);
+int PMPIO_Testall(int, R_MPIO_Request *, int *, R_MPI_Status *);
+int PMPIO_Waitall(int, R_MPIO_Request *, R_MPI_Status *);
+int PMPIO_Testany(int, R_MPIO_Request *, int *, int *, R_MPI_Status *);
+int PMPIO_Waitany(int, R_MPIO_Request *, int *, R_MPI_Status *);
+int PMPIO_Waitsome(int, R_MPIO_Request *, int *, int *, R_MPI_Status *);
+int PMPIO_Testsome(int, R_MPIO_Request *, int *, int *, R_MPI_Status *);
 R_MPI_Fint PMPIO_Request_c2f(MPIO_Request);
 MPIO_Request PMPIO_Request_f2c(R_MPI_Fint);
 #endif /* HAVE_R_MPI_GREQUEST */

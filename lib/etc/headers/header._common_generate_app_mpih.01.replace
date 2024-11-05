@@ -1,0 +1,143 @@
+MPI_@A_MPI_
+PA_MPI_@A_PMPI_
+typedef OPAL.*A_@typedef size_t A_
+typedef OA_MPI.*A_@typedef size_t A_
+typedef struct.*A_@typedef size_t A_
+typedef size_t A_MPI_Count;@//typedef size_t A_MPI_Count;\ntypedef long long A_MPI_Count;
+typedef size_t A_MPI_Status;@//typedef size_t A_MPI_Status;
+typedef size_t A_MPI_T_pvar_session;\n@typedef size_t A_MPI_T_pvar_session;\n\ntypedef int A_MPI_Fint;
+struct ompi_status_public_t {@struct CCC_mpi_status_struct {
+struct ompi_status_public_t {@struct CCC_mpi_status_struct {
+typedef struct ompi_status_public_t ompi_status_public_t;@typedef struct CCC_mpi_status_struct A_MPI_Status;
+OA_MPI_DECLSPEC@
+const @
+A_MPI_MAX_PROCESSOR_NAME OPAL_MAX_PROCESSOR_NAME@OPAL_MAX_PROCESSOR_NAME 512
+A_MPI_MAX_ERROR_STRING   OPAL_MAX_ERROR_STRING@OPAL_MAX_ERROR_STRING  2048
+A_MPI_MAX_OBJECT_NAME    OPAL_MAX_OBJECT_NAME@OPAL_MAX_OBJECT_NAME   1024
+A_MPI_MAX_INFO_KEY         OPAL_MAX_INFO_KEY@A_MPI_MAX_INFO_KEY 256
+A_MPI_MAX_INFO_VAL         OPAL_MAX_INFO_VAL@A_MPI_MAX_INFO_VAL 512
+A_MPI_MAX_PORT_NAME        OPAL_MAX_PORT_NAME@A_MPI_MAX_PORT_NAME 512
+A_MPI_MAX_DATAREP_STRING OPAL_MAX_DATAREP_STRING\n@A_MPI_MAX_DATAREP_STRING 512
+#define A_MPI_GROUP_NULL .*@#define A_MPI_GROUP_NULL 0x0
+#define A_MPI_COMM_NULL .*@#define A_MPI_COMM_NULL 0x0
+#define A_MPI_REQUEST_NULL .*@#define A_MPI_REQUEST_NULL 0x0
+#define A_MPI_MESSAGE_NULL .*@#define A_MPI_MESSAGE_NULL 0x0
+#define A_MPI_OP_NULL .*@#define A_MPI_OP_NULL 0x0
+#define A_MPI_ERRHANDLER_NULL .*@#define A_MPI_ERRHANDLER_NULL 0x0
+#define A_MPI_INFO_NULL .*@#define A_MPI_INFO_NULL 0x0
+#define A_MPI_WIN_NULL .*@#define A_MPI_WIN_NULL 0x0
+#define A_MPI_FILE_NULL .*@#define A_MPI_FILE_NULL 0x0
+#define A_MPI_T_ENUM_NULL .*@#define A_MPI_T_ENUM_NULL 0x0
+#define A_MPI_INFO_ENV .*@#define A_MPI_INFO_ENV 0x0 
+#define A_MPI_STATUS_IGNORE .*@#define A_MPI_STATUS_IGNORE 0x0
+#define A_MPI_STATUSES_IGNORE .*@#define A_MPI_STATUSES_IGNORE 0x0
+#define A_MPI_NULL_DELETE_FN .*@#define A_MPI_NULL_DELETE_FN  0x0
+#define A_MPI_NULL_COPY_FN .*@#define A_MPI_NULL_COPY_FN  0x0
+#define A_MPI_TYPE_NULL_DELETE_FN .*@#define A_MPI_TYPE_NULL_DELETE_FN  0x0
+#define A_MPI_TYPE_NULL_COPY_FN .*@#define A_MPI_TYPE_NULL_COPY_FN  0x0
+#define A_MPI_COMM_NULL_DELETE_FN .*@#define A_MPI_COMM_NULL_DELETE_FN  0x0
+#define A_MPI_COMM_NULL_COPY_FN .*@#define A_MPI_COMM_NULL_COPY_FN  0x0
+#define A_MPI_WIN_NULL_DELETE_FN .*@#define A_MPI_WIN_NULL_DELETE_FN  0x0
+#define A_MPI_WIN_NULL_COPY_FN .*@#define A_MPI_WIN_NULL_COPY_FN  0x0
+A_MPI_COMM_WORLD OA_MPI_PREDEFINED_GLOBAL\( A_MPI_Comm, ompi_mpi_comm_world\)@A_MPI_COMM_WORLD 0x1
+A_MPI_COMM_SELF OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Comm, ompi_mpi_comm_self\)@A_MPI_COMM_SELF 0x2
+#define A_MPI_GROUP_EMPTY OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Group, ompi_mpi_group_empty\)@#define A_MPI_GROUP_EMPTY 0x1
+A_MPI_MESSAGE_NO_PROC OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Message, ompi_message_no_proc\)@A_MPI_MESSAGE_NO_PROC 0x1
+OPAL_MAX_PROCESSOR_NAME@A_MPI_MAX_PROCESSOR_NAME
+OPAL_MAX_ERROR_STRING@A_MPI_MAX_ERROR_STRING
+OPAL_MAX_OBJECT_NAME@A_MPI_MAX_OBJECT_NAME
+(^#define A_MPI_MAX) .*@\1 1
+(^#define A_MPI_MIN) .*@\1 2
+(^#define A_MPI_SUM) .*@\1 3
+(^#define A_MPI_PROD) .*@\1 4
+(^#define A_MPI_LAND) .*@\1 5
+(^#define A_MPI_BAND) .*@\1 6
+(^#define A_MPI_LOR) .*@\1 7
+(^#define A_MPI_BOR) .*@\1 8
+(^#define A_MPI_LXOR) .*@\1 9
+(^#define A_MPI_BXOR) .*@\1 10
+(^#define A_MPI_MAXLOC) .*@\1 11
+(^#define A_MPI_MINLOC) .*@\1 12
+(^#define A_MPI_REPLACE) .*@\1 13
+(^#define A_MPI_NO_OP) .*@\1 14
+(^#define A_MPI_DATATYPE_NULL) .*@\1 0
+(^#define A_MPI_BYTE) .*@\1 1
+(^#define A_MPI_PACKED) .*@\1 2
+(^#define A_MPI_CHAR) .*@\1 3
+(^#define A_MPI_SHORT) .*@\1 4
+(^#define A_MPI_INT) .*@\1 5
+(^#define A_MPI_LONG) .*@\1 6
+(^#define A_MPI_FLOAT) .*@\1 7
+(^#define A_MPI_DOUBLE) .*@\1 8
+(^#define A_MPI_LONG_DOUBLE) .*@\1 9
+(^#define A_MPI_UNSIGNED_CHAR) .*@\1 10
+(^#define A_MPI_SIGNED_CHAR) .*@\1 11
+(^#define A_MPI_UNSIGNED_SHORT) .*@\1 12
+(^#define A_MPI_UNSIGNED_LONG) .*@\1 13
+(^#define A_MPI_UNSIGNED) .*@\1 14
+(^#define A_MPI_FLOAT_INT) .*@\1 15
+(^#define A_MPI_DOUBLE_INT) .*@\1 16
+(^#define A_MPI_LONG_DOUBLE_INT) .*@\1 17
+(^#define A_MPI_LONG_INT) .*@\1 18
+(^#define A_MPI_SHORT_INT) .*@\1 19
+(^#define A_MPI_2INT) .*@\1 20
+(^#define A_MPI_UB) .*@\1 21
+(^#define A_MPI_LB) .*@\1 22
+(^#define A_MPI_WCHAR) .*@\1 23
+(^#define A_MPI_LONG_LONG_INT) .*@\1 24
+(^#define A_MPI_LONG_LONG) .*@\1 25
+(^#define A_MPI_UNSIGNED_LONG_LONG) .*@\1 26
+(^#define A_MPI_2COMPLEX) .*@\1 27
+(^#define A_MPI_2DOUBLE_COMPLEX) .*@\1 28
+(^#define A_MPI_CHARACTER) .*@\1 29
+(^#define A_MPI_LOGICAL) .*@\1 30
+(^#define A_MPI_LOGICAL1) .*@\1 31
+(^#define A_MPI_LOGICAL2) .*@\1 32
+(^#define A_MPI_LOGICAL4) .*@\1 33
+(^#define A_MPI_LOGICAL8) .*@\1 34
+(^#define A_MPI_INTEGER) .*@\1 35
+(^#define A_MPI_INTEGER1) .*@\1 36
+(^#define A_MPI_INTEGER2) .*@\1 37
+(^#define A_MPI_INTEGER4) .*@\1 38
+(^#define A_MPI_INTEGER8) .*@\1 39
+(^#define A_MPI_INTEGER16) .*@\1 40
+(^#define A_MPI_REAL) .*@\1 41
+(^#define A_MPI_REAL4) .*@\1 42
+(^#define A_MPI_REAL8) .*@\1 43
+(^#define A_MPI_REAL16) .*@\1 44
+(^#define A_MPI_DOUBLE_PRECISION) .*@\1 45
+(^#define A_MPI_COMPLEX) .*@\1 46
+(^#define A_MPI_COMPLEX8) .*@\1 47
+(^#define A_MPI_COMPLEX16) .*@\1 48
+(^#define A_MPI_COMPLEX32) .*@\1 49
+(^#define A_MPI_DOUBLE_COMPLEX) .*@\1 50
+(^#define A_MPI_2REAL) .*@\1 51
+(^#define A_MPI_2DOUBLE_PRECISION) .*@\1 52
+(^#define A_MPI_2INTEGER) .*@\1 53
+^#define A_MPI_INT8_T .*@#define A_MPI_INT8_T                54
+^#define A_MPI_UINT8_T .*@#define A_MPI_UINT8_T               55
+^#define A_MPI_INT16_T .*@#define A_MPI_INT16_T               56
+^#define A_MPI_UINT16_T .*@#define A_MPI_UINT16_T              57
+^#define A_MPI_INT32_T .*@#define A_MPI_INT32_T               58
+^#define A_MPI_UINT32_T .*@#define A_MPI_UINT32_T              59
+^#define A_MPI_INT64_T .*@#define A_MPI_INT64_T               60
+^#define A_MPI_UINT64_T .*@#define A_MPI_UINT64_T              61
+^#define A_MPI_AINT .*@#define A_MPI_AINT                  62
+^#define A_MPI_OFFSET .*@#define A_MPI_OFFSET                63
+^#define A_MPI_C_BOOL .*@#define A_MPI_C_BOOL                64
+^#define A_MPI_C_COMPLEX .*@#define A_MPI_C_COMPLEX             65
+^#define A_MPI_C_FLOAT_COMPLEX .*@#define A_MPI_C_FLOAT_COMPLEX       66
+^#define A_MPI_C_DOUBLE_COMPLEX .*@#define A_MPI_C_DOUBLE_COMPLEX      67
+^#define A_MPI_C_LONG_DOUBLE_COMPLEX .*@#define A_MPI_C_LONG_DOUBLE_COMPLEX 68
+^#define A_MPI_CXX_BOOL .*@#define A_MPI_CXX_BOOL              69
+^#define A_MPI_CXX_FLOAT_COMPLEX .*@#define A_MPI_CXX_FLOAT_COMPLEX     70
+^#define A_MPI_CXX_DOUBLE_COMPLEX .*@#define A_MPI_CXX_DOUBLE_COMPLEX    71
+^#define A_MPI_CXX_LONG_DOUBLE_COMPLEX .*@#define A_MPI_CXX_LONG_DOUBLE_COMPLEX 72
+^#define A_MPI_COUNT .*@#define A_MPI_COUNT 73 
+(^#define A_MPI_ERRORS_ARE_FATAL) .*@\1 1
+(^#define A_MPI_ERRORS_RETURN) .*@\1 2 
+struct mca_base_pvar_session_t \*@
+OA_MPI_C_A_MPI_DUP_FN\n@ 0x1\n
+OA_MPI_C_A_MPI_TYPE_DUP_FN\n@ 0x1\n
+OA_MPI_C_A_MPI_COMM_DUP_FN\n@ 0x1\n
+OA_MPI_C_A_MPI_WIN_DUP_FN\n@ 0x1\n
