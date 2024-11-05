@@ -39,17 +39,17 @@ To use it you need:
 ### Non-regression test
 
 A non regression test is inside `<wi4mpi_root>/dev` it will check that all generated header files are the same as reference files in `<wi4mpi_root>/src/preload/header` and `<wi4mpi_root>/src/interface/header`.
-This test will also copy the generated  file `translation_mpi_c.c` inside `<wi4mpi_root>/src/preload/gen` and run a build.
+This test will also copy the generated file `translation_mpi_c.c` in `<wi4mpi_root>/src/preload/gen` and run a build.
 
 ### Logger
 
 The configuration of the logger is in `<wi4mpi_root>/lib/logging.conf`.
-During the run of the generator, info and warning will be printed in the standard output. Additionnal messages will be printed inside `<wi4mpi_root>/generator.log`.
+During the run of the generator, info and warning will be printed in the standard output. Additional messages will be printed inside `<wi4mpi_root>/generator.log`.
 
 # Generator Structure
 
 The generator files are in directory `lib`.
-The input of code generator are inside `<wi4mpi_root>lib/code_generation_input/C`
+The inputs for the code generator are in `<wi4mpi_root>lib/code_generation_input/C`
 
 ## Generator organization
 
@@ -108,10 +108,10 @@ They are used by the following methods of `textoperator.py`:
 `codegen.py` contains the meta-class CodeGenerator and the sub-class CPreloadGenerator.
 The following methods have to be overridden:
 
-  * `_generate_static_side`: Generate the static side of the output file using Jinja templates.
+  * `_generate_static_side`: Generate the static side of the output file using Jinja templates
   * `_generate_declarations_side`: Generate the declarations side of the output file using Jinja template
-  * `_generate_function`: Generate the function part (asm/app/run) using Jinja templates.
-  * `_generate_dlsym_side`: Generate the dlsym side of the output file using Jinja templates.
+  * `_generate_function`: Generate the function part (asm/app/run) using Jinja templates
+  * `_generate_dlsym_side`: Generate the dlsym side of the output file using Jinja templates
   * `generate`: Generate the output file
 
 The output file is processed by `clang-format`, so you need it in your PATH.
@@ -163,7 +163,7 @@ Describes all MPI functions as defined in the MPI norm, including function name,
 
 ## Non-generated Code
 
-Functions or parts of Wi4MPI code that do not fit the generator template are provided in static files under the `not_generated` directory. These files are organized by language, type (A, R, asm), and MPI function name.
+Functions or parts of Wi4MPI code that do not fit the generator template are provided in static files under the `not_generated` directory. These files are organized by languages, types (A, R, asm), and MPI function names.
 
 # Extending the Generated Code
 

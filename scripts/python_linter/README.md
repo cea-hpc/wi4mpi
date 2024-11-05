@@ -27,7 +27,7 @@ This setup balances strict PEP8 adherence with practicality in code generation f
 
 ## Using the Wrapper Script (python\_linter/linter.sh)
 
-To lint your Python code using our prescribed rules, you can utilize the provided wrapper script `linter.sh`. Here's how to use it:
+To lint your Python code using our prescribed rules, you can use the provided wrapper script `linter.sh`. Here's how to use it:
 
 ```bash
 $ scripts/python_linter/linter.sh ./lib

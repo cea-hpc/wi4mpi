@@ -2,21 +2,48 @@
 """
 Wi4MPI Header Generator
 
-This script generates Wi4MPI's headers from OpenMPI 1.8.8 and MPICH 3.1.2 headers.
+This script generates Wi4MPI's headers from OpenMPI, MPICH, IntelMPI and MPC headers.
 
 Usage:
   generator.py [--interface_header_dir=<interface_header_dir>]
                [--preload_header_dir=<preload_header_dir>]
                [--c_preload_gen_dir=<c_preload_gen_dir>]
                [--c_interface_gen_dir=<c_interface_gen_dir>]
+               [--openmpi_version=<openmpi_version>]
+               [--mpich_version=<mpich_version>]
+               [--intelmpi_version=<intelmpi_version>]
   generator.py (-h | --help)
 
+Arguments:
+  interface_header_dir  Path to header interface generation folder.
+  preload_header_dir    Path to header preload generation folder.
+  c_preload_gen_dir     Path to C preload generation folder.
+  c_interface_gen_dir   Path to C interface generation folder.
+  openmpi_version       Version of the target Open MPI
+                        Supported versions:
+                            * 1.8.8 (alias: 1)
+                            * 2.1.6 (alias: 2)
+                            * 4.1.6 (alias: 4)
+                            * 5.0.3 (alias: 5)
+  mpich_version         Version of the target MPICH
+                        Supported versions:
+                            * 3.1.2
+                            * 3.4.3 (alias: 3)
+                            * 4.2.0 (alias: 4)
+  intelmpi_version      Version of the target Intel MPI
+                        Supported versions:
+                            * 20.0.0 (alias: 20)
+                            * 24.0.0 (alias: 24)
+
 Options:
-  -h --help                             Show this help message.
-  --interface_header_dir=<interface_header_dir>   Path to header interface generation folder.
-  --preload_header_dir=<preload_header_dir>       Path to header preload generation folder.
-  --c_preload_gen_dir=<c_preload_gen_dir>         Path to preload C code folder.
-  --c_interface_gen_dir=<c_interface_gen_dir>         Path to interface C code folder.
+  -h --help                                                          Show this helper.
+  --interface_header_dir=<interface_header_dir>                      Set interface_header_dir
+  --preload_header_dir=<preload_header_dir>                          Set preload_header_dir
+  --c_preload_gen_dir=<c_preload_gen_dir>                            Set c_preload_gen_dir
+  --c_interface_gen_dir=<c_interface_gen_dir>                        Set c_interface_gen_dir
+  --openmpi_version=<openmpi_version>                                Set openmpi_version
+  --mpich_version=<mpich_version>                                    Set mpich_version
+  --intelmpi_version=<intelmpi_version>                              Set intelmpi_version
 
 Examples:
   1. Generate headers using default directories:
@@ -28,6 +55,12 @@ Examples:
       ./generator.py --interface_header_dir=interface_header_gen \
                      --preload_header_dir=preload_header_gen \
                      --c_preload_gen_dir=c_preload_gen_dir
+      ```
+  3. Sprecifiy custom versions for base headers:
+      ```
+      ./generator.py --openmpi_version=2 \
+                     --mpich_version=3.1.2 \
+                     --intelmpi_version=24
       ```
 
 Description:
@@ -43,8 +76,8 @@ Description:
   The generated headers are placed in subdirectories starting with underscores, such as "_MPC",
   "_INTEL", etc.
 
-  The script can be run from the command line, and options can be provided to specify custom genera
-  tion directories.
+  The script can be run from the command line, and options can be provided to specify custom 
+  generation directories.
 
 Authors:
   Cotte Adrien - Alliance Service Plus - adrien.cotte.tgcc@cea.fr
@@ -54,7 +87,6 @@ Authors:
 """
 
 import os
-import re
 import sys
 from logging import getLogger
 from logging.config import fileConfig
@@ -97,14 +129,28 @@ class Generator:
     c_preload_gen_dir = "src/preload/gen"
     c_interface_gen_dir = "src/interface/gen"
     mpi_target_version = {
-        "openmpi": "1.8.8",
-        "mpich": "3.1.2",
-        "intelmpi": "20.0.0",
+        "openmpi": "5.0.3",
+        "mpich": "4.2.0",
+        "intelmpi": "24.0.0",
     }
     mpi_availabe_target_version = {
         "openmpi": ["1.8.8", "2.1.6", "4.1.6", "5.0.3"],
         "mpich": ["3.1.2", "3.4.3", "4.2.0"],
         "intelmpi": ["20.0.0", "24.0.0"],
+    }
+    alias_openmpi = {
+        "1": "1.8.8",
+        "2": "2.1.6",
+        "4": "4.1.6",
+        "5": "5.0.3",
+    }
+    alias_mpich = {
+        "3": "3.4.3",
+        "4": "4.2.0",
+    }
+    alias_intelmpi = {
+        "20": "20.0.0",
+        "24": "24.0.0",
     }
 
     def __init__(self, **kwargs):
@@ -116,17 +162,21 @@ class Generator:
             "openmpi_version",
             self.mpi_target_version["openmpi"],
         )
-        if self.mpi_target_version["openmpi"] in self.mpi_availabe_target_version["openmpi"]:
-            bool_openmpi_version = True
+        if self.mpi_target_version["openmpi"] in (list(self.alias_openmpi.keys()) + self.mpi_availabe_target_version["openmpi"]):
+           if self.mpi_target_version["openmpi"] in self.alias_openmpi.keys():
+              self.mpi_target_version["openmpi"] = self.alias_openmpi[self.mpi_target_version["openmpi"]]
+           bool_openmpi_version = True
         else:
-            _msg = f"OpenMPI {self.mpi_target_version['openmpi']} is not available."
+            _msg = f"Open MPI {self.mpi_target_version['openmpi']} is not available."
             log.error(_msg)
         self.mpi_target_version["mpich"] = kwargs.get(
             "mpich_version",
             self.mpi_target_version["mpich"],
         )
-        if self.mpi_target_version["mpich"] in self.mpi_availabe_target_version["mpich"]:
-            bool_mpich_version = True
+        if self.mpi_target_version["mpich"] in (list(self.alias_mpich.keys()) + self.mpi_availabe_target_version["mpich"]):
+           if self.mpi_target_version["mpich"] in self.alias_mpich.keys():
+              self.mpi_target_version["mpich"] = self.alias_mpich[self.mpi_target_version["mpich"]]
+           bool_mpich_version = True
         else:
             _msg = f"MPICH {self.mpi_target_version['mpich']} is not available."
             log.error(_msg)
@@ -134,14 +184,16 @@ class Generator:
             "intelmpi_version",
             self.mpi_target_version["intelmpi"],
         )
-        if self.mpi_target_version["intelmpi"] in self.mpi_availabe_target_version["intelmpi"]:
-            bool_intelmpi_version = True
+        if self.mpi_target_version["intelmpi"] in (list(self.alias_intelmpi.keys()) + self.mpi_availabe_target_version["intelmpi"]):
+           if self.mpi_target_version["intelmpi"] in self.alias_intelmpi.keys():
+              self.mpi_target_version["intelmpi"] = self.alias_intelmpi[self.mpi_target_version["intelmpi"]]
+           bool_intelmpi_version = True
         else:
-            _msg = f"IntelMPI {self.mpi_target_version['intelmpi']} is not available."
+            _msg = f"Intel MPI {self.mpi_target_version['intelmpi']} is not available."
             log.error(_msg)
         if not (bool_openmpi_version and bool_mpich_version and bool_intelmpi_version):
             log.error("MPI configuration not available.")
-            sys.exit(1)
+            sys.exit()
 
     def set_directories(self, **kwargs):
         """
@@ -286,22 +338,19 @@ class Generator:
 
 
 if "__main__" == __name__:
+    # Remark: Docopt scans for lines that start with '-' when searching for description of options.
+    #         That is why if one of the lines in usage starts with dash it is misinterpreted as
+    #         being a separate description of an option.
+    #         cf. https://github.com/docopt/docopt/issues/130
+    #         This is the reason why there are '$' in 'Examples' section. This behaviour could
+    #         change in recent version.
+    #
     USAGE = """
-    Generate Wi4MPI's headers frome OpenMPI 1.8.8 and MPICH 3.1.2 headers.
+    Generate Wi4MPI's headers from user defined headers.
     The default directories of generated files are:
 
       * interface_header_dir = "src/interface/header"
       * preload_header_dir = "src/preload/header"
-
-    Here is an example of use if you do not want to overwrite the files already present:
-
-      ```
-      ./generator.py --interface_header_dir=interface_header_gen \
-                     --preload_header_dir=preload_header_gen \
-                     --c_preload_gen_dir=c_preload_gen_dir
-      ```
-
-    This will create two folders inplace, interface_header_gen and preload_header_gen, with generated headers inside.
 
     Usage:
       generator.py [--interface_header_dir=<interface_header_dir>]
@@ -313,15 +362,45 @@ if "__main__" == __name__:
                    [--intelmpi_version=<intelmpi_version>]
       generator.py (-h | --help)
 
+    Examples:
+        Here is an example of use if you do not want to overwrite the files already present:
+        $ ./lib/generator.py --interface_header_dir=interface_header_gen
+        $                    --preload_header_dir=preload_header_gen
+        $                    --c_preload_gen_dir=c_preload_gen_dir
+
+        This will create two folders inplace, interface_header_gen and preload_header_gen, with 
+        generated headers inside.
+
+    Arguments:
+      interface_header_dir  Path to header interface generation folder.
+      preload_header_dir    Path to header preload generation folder.
+      c_preload_gen_dir     Path to C preload generation folder.
+      c_interface_gen_dir   Path to C interface generation folder.
+      openmpi_version       Version of the target Open MPI
+                            Supported versions:
+                                * 1.8.8 (alias: 1)
+                                * 2.1.6 (alias: 2)
+                                * 4.1.6 (alias: 4)
+                                * 5.0.3 (alias: 5)
+      mpich_version         Version of the target MPICH
+                            Supported versions:
+                                * 3.1.2
+                                * 3.4.3 (alias: 3)
+                                * 4.2.0 (alias: 4)
+      intelmpi_version      Version of the target Intel MPI
+                            Supported versions:
+                                * 20.0.0 (alias: 20)
+                                * 24.0.0 (alias: 24)
+
     Options:
       -h --help                                                          Show this helper.
-      --interface_header_dir=<interface_header_dir>                      Path to header interface generation folder.
-      --preload_header_dir=<preload_header_dir>                          Path to header preload generation folder.
-      --c_preload_gen_dir=<c_preload_gen_dir>                            Path to C preload generation folder.
-      --c_interface_gen_dir=<c_interface_gen_dir>                        Path to C interface generation folder.
-      --openmpi_version=<openmpi_version>                                Version of the target OpenMPI
-      --mpich_version=<mpich_version>                                    Version of the target MPICH
-      --intelmpi_version=<intelmpi_version>                              Version of the target IntelMPI
+      --interface_header_dir=<interface_header_dir>                      Set interface_header_dir
+      --preload_header_dir=<preload_header_dir>                          Set preload_header_dir
+      --c_preload_gen_dir=<c_preload_gen_dir>                            Set c_preload_gen_dir
+      --c_interface_gen_dir=<c_interface_gen_dir>                        Set c_interface_gen_dir
+      --openmpi_version=<openmpi_version>                                Set openmpi_version
+      --mpich_version=<mpich_version>                                    Set mpich_version
+      --intelmpi_version=<intelmpi_version>                              Set intelmpi_version
     """  # noqa: E501
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
@@ -330,9 +409,9 @@ if "__main__" == __name__:
         "preload_header_dir": arguments["--preload_header_dir"],
         "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
         "c_interface_gen_dir": arguments["--c_interface_gen_dir"],
-        "openmpi_version": re.sub(r"['\"]", "", arguments["--openmpi_version"]),
-        "mpich_version": re.sub(r"['\"]", "", arguments["--mpich_version"]),
-        "intelmpi_version": re.sub(r"['\"]", "", arguments["--intelmpi_version"]),
+        "openmpi_version": arguments["--openmpi_version"],
+        "mpich_version": arguments["--mpich_version"],
+        "intelmpi_version": arguments["--intelmpi_version"],
     }
     # Delete keys that have a value of None
     none_list = []
@@ -345,4 +424,3 @@ if "__main__" == __name__:
     run = Generator(**args)
     run.generate()
     log.info("End")
-    sys.exit(0)

@@ -103,7 +103,7 @@ class CodeGenerator(ABC):
 
     def apply_jinja(self, jinja_name, param_dict):
         """
-        generate the code correponding to the application of the dictionnary
+        generate the code correponding to the application of the dictionary
         on a jinja template
         """
         _msg = f"Run generate {jinja_name}"

@@ -23,7 +23,7 @@ Files are written in temporary directories.
 
 The script `run_test_headers.sh` compares generated headers to references.
 
-If the generator is not activate (`launcher.sh -g 0`) you have to define interactively directories which contains preload and interface headers.
+If the generator is not activate (`launcher.sh -g 0`) you have to define interactively directories that contain preload and interface headers.
 For example:
 
 Interface headers:
@@ -111,18 +111,18 @@ $ tree /tmp/tmp.RhYegT1HGr
 
 `launcher.sh -b 1`
 
-The script `run_build.sh` build Wi4mpi in temporary directory.
-If preload and interface code is not generated (`launcher.sh -g 0`) you have to define interactively directories which contains preload and interface code.
+The script `run_build.sh` build Wi4MPI in a temporary directory.
+If preload and interface code is not generated (`launcher.sh -g 0`) you have to define interactively directories that contain the preload and interface code.
 For example:
 
-C code preload:
+C code for preload:
 ```
 $ tree /tmp/tmp.gMsxpPUgsr
 /tmp/tmp.gMsxpPUgsr
 └── mpi_translation_c.c
 ```
 
-C code interface:
+C code for interface:
 ```
 $ tree /tmp/tmp.HVdYvafPuH
 /tmp/tmp.HVdYvafPuH

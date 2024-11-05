@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This module provides the abstract classe and methods for generating MPI translation code files.
+This module provides the abstract class and methods for generating MPI translation code files.
 
 """
 
@@ -26,12 +26,12 @@ class CInterfaceGenerator(CodeGenerator):
         """
         json_files:
             functions_definitions (str): Name of the json file which describes all MPI functions as
-            defined in the MPI norm, including function name, arguments, local variables, and retur
-            n values.
-            functions_mappers_json (str): Name of the json file which describes each translation ma
-            pper, controlling code generation and translation of MPI function parameters.
-            types (str): Name of the json which describes translated types and their constant value
-            s as defined in the MPI norm.
+            defined in the MPI norm, including function name, arguments, local variables, and 
+            return values.
+            functions_mappers_json (str): Name of the json file which describes each translation 
+            mapper, controlling code generation and translation of MPI function parameters.
+            types (str): Name of the json which describes translated types and their constant 
+            values as defined in the MPI norm.
             exceptions (str): Name of the json which describes non-generated functions in Wi4MPI.
         """
         log.info("Generation of interface C file.")
