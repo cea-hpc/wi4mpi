@@ -20,3 +20,4 @@ in `src/interface/header` and `src/preload/header`.
 Example:
 ```
 <wi4mpi_root>/lib/generator.py --interface_header_dir=src/interface/header_gen --preload_header_dir=src/preload/header_gen
+```
