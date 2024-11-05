@@ -1,0 +1,4 @@
+([ ()*_$\t])R_@\1A_
+MPIO_INCLUDE@A_MPIO_INCLUDE
+^R_@A_
+#include "run_mpi.h"@#include "app_mpi.h"

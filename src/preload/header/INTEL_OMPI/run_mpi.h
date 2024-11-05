@@ -23,17 +23,17 @@
  * $HEADER$
  */
 
-#ifndef OR_MPI_R_MPI_H
-#define OR_MPI_R_MPI_H
+#ifndef OMPI_R_MPI_H
+#define OMPI_R_MPI_H
 
 /* The comment below (and the ending partner) are for building fat
    distributions on platforms that support it.  Please do not remove */
 
-/* @OR_MPI_BEGIN_CONFIGURE_SECTION@ */
+/* @OMPI_BEGIN_CONFIGURE_SECTION@ */
 
-#ifndef OR_MPI_CONFIG_H
+#ifndef OMPI_CONFIG_H
 
-/* Only include these if OR_MPI_CONFIG_H isn't defined (meaning if
+/* Only include these if OMPI_CONFIG_H isn't defined (meaning if
    ompi_config.h hasn't already been included).  Otherwise, we'll
    duplicate all those symbols.  OMPI coding standards say that
    ompi_config.h must be included before all other files, so this
@@ -91,43 +91,43 @@
 #define OPAL_MAX_PROCESSOR_NAME 256
 
 /* Whether we have FORTRAN LOGICAL*1 or not */
-#define OR_MPI_HAVE_FORTRAN_LOGICAL1 1
+#define OMPI_HAVE_FORTRAN_LOGICAL1 1
 
 /* Whether we have FORTRAN LOGICAL*2 or not */
-#define OR_MPI_HAVE_FORTRAN_LOGICAL2 1
+#define OMPI_HAVE_FORTRAN_LOGICAL2 1
 
 /* Whether we have FORTRAN LOGICAL*4 or not */
-#define OR_MPI_HAVE_FORTRAN_LOGICAL4 1
+#define OMPI_HAVE_FORTRAN_LOGICAL4 1
 
 /* Whether we have FORTRAN LOGICAL*8 or not */
-#define OR_MPI_HAVE_FORTRAN_LOGICAL8 1
+#define OMPI_HAVE_FORTRAN_LOGICAL8 1
 
 /* Whether we have FORTRAN INTEGER*1 or not */
-#define OR_MPI_HAVE_FORTRAN_INTEGER1 1
+#define OMPI_HAVE_FORTRAN_INTEGER1 1
 
 /* Whether we have FORTRAN INTEGER*16 or not */
-#define OR_MPI_HAVE_FORTRAN_INTEGER16 0
+#define OMPI_HAVE_FORTRAN_INTEGER16 0
 
 /* Whether we have FORTRAN INTEGER*2 or not */
-#define OR_MPI_HAVE_FORTRAN_INTEGER2 1
+#define OMPI_HAVE_FORTRAN_INTEGER2 1
 
 /* Whether we have FORTRAN INTEGER*4 or not */
-#define OR_MPI_HAVE_FORTRAN_INTEGER4 1
+#define OMPI_HAVE_FORTRAN_INTEGER4 1
 
 /* Whether we have FORTRAN INTEGER*8 or not */
-#define OR_MPI_HAVE_FORTRAN_INTEGER8 1
+#define OMPI_HAVE_FORTRAN_INTEGER8 1
 
 /* Whether we have FORTRAN REAL*16 or not */
-#define OR_MPI_HAVE_FORTRAN_REAL16 1
+#define OMPI_HAVE_FORTRAN_REAL16 1
 
 /* Whether we have FORTRAN REAL*2 or not */
-#define OR_MPI_HAVE_FORTRAN_REAL2 0
+#define OMPI_HAVE_FORTRAN_REAL2 0
 
 /* Whether we have FORTRAN REAL*4 or not */
-#define OR_MPI_HAVE_FORTRAN_REAL4 1
+#define OMPI_HAVE_FORTRAN_REAL4 1
 
 /* Whether we have FORTRAN REAL*8 or not */
-#define OR_MPI_HAVE_FORTRAN_REAL8 1
+#define OMPI_HAVE_FORTRAN_REAL8 1
 
 /* Whether we have float _Complex  or not */
 #define HAVE_FLOAT__COMPLEX 1
@@ -139,46 +139,46 @@
 #define HAVE_LONG_DOUBLE__COMPLEX 1
 
 /* Type of R_MPI_Offset -- has to be defined here and typedef'ed later because mpi.h does not get AC SUBST's */
-#define OR_MPI_R_MPI_OFFSET_TYPE long long
+#define OMPI_R_MPI_OFFSET_TYPE long long
 
 /* MPI datatype corresponding to R_MPI_Offset */
-#define OR_MPI_OFFSET_DATATYPE R_MPI_LONG_LONG
+#define OMPI_OFFSET_DATATYPE R_MPI_LONG_LONG
 
 /* Size of the R_MPI_Offset corresponding type */
-#define OR_MPI_R_MPI_OFFSET_SIZE 8
+#define OMPI_R_MPI_OFFSET_SIZE 8
 
 /* Type of R_MPI_Count */
-#define OR_MPI_R_MPI_COUNT_TYPE long long
+#define OMPI_R_MPI_COUNT_TYPE long long
 
 /* type to use for ptrdiff_t, if it does not exist, set to ptrdiff_t if it does exist */
 #define OPAL_PTRDIFF_TYPE ptrdiff_t
 
 /* Whether we want MPI cxx support or not */
-#define OR_MPI_BUILD_CXX_BINDINGS 1
+#define OMPI_BUILD_CXX_BINDINGS 1
 
 /* do we want to try to work around C++ bindings SEEK_* issue? */
-#define OR_MPI_WANT_R_MPI_CXX_SEEK 1
+#define OMPI_WANT_R_MPI_CXX_SEEK 1
 
 /* Whether a const_cast on a 2-d array will work with the C++ compiler */
-#define OR_MPI_CXX_SUPPORTS_2D_CONST_CAST 1
+#define OMPI_CXX_SUPPORTS_2D_CONST_CAST 1
 
 /* Whether OMPI was built with parameter checking or not */
-#define OR_MPI_PARAM_CHECK 1
+#define OMPI_PARAM_CHECK 1
 
 /* Enable warnings in wrong usage (e.g. deprecated) in user-level code */
 /* XXX This __disabled__ by default for Open MPI-1.5, but will be __enabled__ for Open MPI-1.7 by default */
 /* Users should be notified about this proposed change. */
-#ifndef OR_MPI_WANT_R_MPI_INTERFACE_WARNING
-#define OR_MPI_WANT_R_MPI_INTERFACE_WARNING 1
+#ifndef OMPI_WANT_R_MPI_INTERFACE_WARNING
+#define OMPI_WANT_R_MPI_INTERFACE_WARNING 1
 #endif
 
 /* Whether or not we have compiled with C++ exceptions support */
-#define OR_MPI_HAVE_CXX_EXCEPTION_SUPPORT 0
+#define OMPI_HAVE_CXX_EXCEPTION_SUPPORT 0
 
 /* Major, minor, and release version of Open MPI */
-#define OR_MPI_MAJOR_VERSION 1
-#define OR_MPI_MINOR_VERSION 8
-#define OR_MPI_RELEASE_VERSION 8
+#define OMPI_MAJOR_VERSION 1
+#define OMPI_MINOR_VERSION 8
+#define OMPI_RELEASE_VERSION 8
 
 /* A  type that allows us to have sentinel type values that are still
    valid */
@@ -191,20 +191,20 @@
 #define OPAL_C_HAVE_VISIBILITY 1
 
 /* Whether OMPI should provide MPI File interface */
-#define OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE 1
+#define OMPI_PROVIDE_R_MPI_FILE_INTERFACE 1
 
-#ifndef OR_MPI_DECLSPEC
+#ifndef OMPI_DECLSPEC
 #  if defined(WIN32) || defined(_WIN32)
-#    if defined(OR_MPI_IMPORTS)
-#      define OR_MPI_DECLSPEC        __declspec(dllimport)
+#    if defined(OMPI_IMPORTS)
+#      define OMPI_DECLSPEC        __declspec(dllimport)
 #    else
-#      define OR_MPI_DECLSPEC
-#    endif  /* defined(OR_MPI_IMPORTS) */
+#      define OMPI_DECLSPEC
+#    endif  /* defined(OMPI_IMPORTS) */
 #  else
 #    if OPAL_C_HAVE_VISIBILITY == 1
-#       define OR_MPI_DECLSPEC __attribute__((visibility("default")))
+#       define OMPI_DECLSPEC __attribute__((visibility("default")))
 #    else
-#       define OR_MPI_DECLSPEC
+#       define OMPI_DECLSPEC
 #    endif
 #  endif
 #endif
@@ -214,17 +214,17 @@
 #define R_MPI_Fint ompi_fortran_integer_t
 #endif
 
-#endif /* #ifndef OR_MPI_CONFIG_H */
+#endif /* #ifndef OMPI_CONFIG_H */
 
-/* @OR_MPI_END_CONFIGURE_SECTION@ */
+/* @OMPI_END_CONFIGURE_SECTION@ */
 
 /* include for ptrdiff_t */
 #ifdef OPAL_STDC_HEADERS
 #include <stddef.h>
 #endif
 
-#ifndef OR_MPI_BUILDING
-#define OR_MPI_BUILDING 0
+#ifndef OMPI_BUILDING
+#define OMPI_BUILDING 0
 #endif
 
 
@@ -245,9 +245,9 @@
  * only relevant if we're not building Open MPI (i.e., we're compiling an
  * MPI application).
  */
-#if !(OR_MPI_BUILDING || \
-      (defined(OR_MPI_BUILDING_CXX_BINDINGS_LIBRARY) && \
-       OR_MPI_BUILDING_CXX_BINDINGS_LIBRARY))
+#if !(OMPI_BUILDING || \
+      (defined(OMPI_BUILDING_CXX_BINDINGS_LIBRARY) && \
+       OMPI_BUILDING_CXX_BINDINGS_LIBRARY))
 
      /*
       * Figure out which compiler is being invoked (in order to compare if
@@ -263,7 +263,7 @@
 #    if (OPAL_BUILD_PLATFORM_COMPILER_FAMILYID == PLATFORM_COMPILER_FAMILYID) && \
         (OPAL_BUILD_PLATFORM_COMPILER_VERSION == PLATFORM_COMPILER_VERSION)
 
-#        if OR_MPI_WANT_R_MPI_INTERFACE_WARNING
+#        if OMPI_WANT_R_MPI_INTERFACE_WARNING
 #            if OPAL_HAVE_ATTRIBUTE_DEPRECATED
 #                if OPAL_HAVE_ATTRIBUTE_DEPRECATED_ARGUMENT
 #                    define __mpi_interface_deprecated__(msg) __attribute__((__deprecated__(msg)))
@@ -288,7 +288,7 @@
  * To accomodate programs written for MPI implementations that use a
  * straight ROMIO import
  */
-#if !OR_MPI_BUILDING && OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE
+#if !OMPI_BUILDING && OMPI_PROVIDE_R_MPI_FILE_INTERFACE
 #define R_MPIO_Request R_MPI_Request
 #define R_MPIO_Test R_MPI_Test
 #define R_MPIO_Wait R_MPI_Wait
@@ -304,10 +304,10 @@
  * checking (because we *do* have the full type definitions available
  * when building OMPI).
  */
-#if !OR_MPI_BUILDING
-#define OR_MPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) &(global)))
+#if !OMPI_BUILDING
+#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) &(global)))
 #else
-#define OR_MPI_PREDEFINED_GLOBAL(type, global) ((type) &(global))
+#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) &(global))
 #endif
 
 #if defined(c_plusplus) || defined(__cplusplus)
@@ -319,12 +319,12 @@ extern "C" {
  */
 
 typedef OPAL_PTRDIFF_TYPE R_MPI_Aint;
-typedef OR_MPI_R_MPI_OFFSET_TYPE R_MPI_Offset;
-typedef OR_MPI_R_MPI_COUNT_TYPE R_MPI_Count;
+typedef OMPI_R_MPI_OFFSET_TYPE R_MPI_Offset;
+typedef OMPI_R_MPI_COUNT_TYPE R_MPI_Count;
 typedef struct ompi_communicator_t *R_MPI_Comm;
 typedef struct ompi_datatype_t *R_MPI_Datatype;
 typedef struct ompi_errhandler_t *R_MPI_Errhandler;
-#if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE
+#if OMPI_PROVIDE_R_MPI_FILE_INTERFACE
 typedef struct ompi_file_t *R_MPI_File;
 #endif
 typedef struct ompi_group_t *R_MPI_Group;
@@ -375,7 +375,7 @@ typedef void (R_MPI_Comm_errhandler_function)(R_MPI_Comm *, int *, ...);
 typedef R_MPI_Comm_errhandler_function R_MPI_Comm_errhandler_fn
         __mpi_interface_deprecated__("R_MPI_Comm_errhandler_fn was deprecated in MPI-2.2; use R_MPI_Comm_errhandler_function instead");
 
-#if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE
+#if OMPI_PROVIDE_R_MPI_FILE_INTERFACE
     /* This is a little hackish, but errhandler.h needs space for a
        R_MPI_File_errhandler_fn.  While it could just be removed, this
        allows us to maintain a stable ABI within OMPI, at least for
@@ -448,7 +448,7 @@ typedef int (R_MPI_Grequest_cancel_function)(void *, int);
 #define R_MPI_DISTRIBUTE_NONE      2                     /* not distributed */
 #define R_MPI_DISTRIBUTE_DFLT_DARG (-1)                  /* default distribution arg */
 
-#if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE
+#if OMPI_PROVIDE_R_MPI_FILE_INTERFACE
 /*
  * Since these values are arbitrary to Open MPI, we might as well make
  * them the same as ROMIO for ease of mapping.  These values taken
@@ -473,7 +473,7 @@ typedef int (R_MPI_Grequest_cancel_function)(void *, int);
 /* Max data representation length */
 #define R_MPI_MAX_DATAREP_STRING OPAL_MAX_DATAREP_STRING
 
-#endif /* #if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE */
+#endif /* #if OMPI_PROVIDE_R_MPI_FILE_INTERFACE */
 
 /*
  * MPI-2 One-Sided Communications asserts
@@ -739,23 +739,23 @@ enum {
 /*
  * NULL handles
  */
-#define R_MPI_GROUP_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Group, ompi_mpi_group_null)
-#define R_MPI_COMM_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Comm, ompi_mpi_comm_null)
-#define R_MPI_REQUEST_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Request, ompi_request_null)
-#define R_MPI_MESSAGE_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Message, ompi_message_null)
-#define R_MPI_OP_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_null)
-#define R_MPI_ERRHANDLER_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Errhandler, ompi_mpi_errhandler_null)
-#define R_MPI_INFO_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Info, ompi_mpi_info_null)
-#define R_MPI_WIN_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Win, ompi_mpi_win_null)
-#if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE
-#define R_MPI_FILE_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_File, ompi_mpi_file_null)
+#define R_MPI_GROUP_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Group, ompi_mpi_group_null)
+#define R_MPI_COMM_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Comm, ompi_mpi_comm_null)
+#define R_MPI_REQUEST_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Request, ompi_request_null)
+#define R_MPI_MESSAGE_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Message, ompi_message_null)
+#define R_MPI_OP_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_null)
+#define R_MPI_ERRHANDLER_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Errhandler, ompi_mpi_errhandler_null)
+#define R_MPI_INFO_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Info, ompi_mpi_info_null)
+#define R_MPI_WIN_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Win, ompi_mpi_win_null)
+#if OMPI_PROVIDE_R_MPI_FILE_INTERFACE
+#define R_MPI_FILE_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_File, ompi_mpi_file_null)
 #endif
 #define R_MPI_T_ENUM_NULL ((R_MPI_T_enum) NULL)
 
 /*
  * R_MPI_INFO_ENV handle
  */
-#define R_MPI_INFO_ENV OR_MPI_PREDEFINED_GLOBAL(R_MPI_Info, ompi_mpi_info_env)
+#define R_MPI_INFO_ENV OMPI_PREDEFINED_GLOBAL(R_MPI_Info, ompi_mpi_info_env)
 
 #define R_MPI_STATUS_IGNORE ((R_MPI_Status *) 0)
 #define R_MPI_STATUSES_IGNORE ((R_MPI_Status *) 0)
@@ -783,7 +783,7 @@ enum {
    compiled as R_MPI_TYPE_NULL_DELETE_FN).  So add some #if kinds of
    protection for this case. */
 
-#if !defined(OR_MPI_COMPILING_FORTRAN_WRAPPERS)
+#if !defined(OMPI_COMPILING_FORTRAN_WRAPPERS)
 #define R_MPI_NULL_DELETE_FN OMPI_C_MPI_NULL_DELETE_FN
 #define R_MPI_NULL_COPY_FN OMPI_C_MPI_NULL_COPY_FN
 #define R_MPI_DUP_FN OMPI_C_MPI_DUP_FN
@@ -810,63 +810,63 @@ enum {
 #define R_MPI_CONVERSION_FN_NULL ((R_MPI_Datarep_conversion_function*) 0)
 #endif
 
-OR_MPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_DELETE_FN( R_MPI_Datatype datatype,
+OMPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_DELETE_FN( R_MPI_Datatype datatype,
                                                   int type_keyval,
                                                   void* attribute_val_out,
                                                   void* extra_state );
-OR_MPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_COPY_FN( R_MPI_Datatype datatype,
+OMPI_DECLSPEC int OMPI_C_MPI_TYPE_NULL_COPY_FN( R_MPI_Datatype datatype,
                                                 int type_keyval,
                                                 void* extra_state,
                                                 void* attribute_val_in,
                                                 void* attribute_val_out,
                                                 int* flag );
-OR_MPI_DECLSPEC int OMPI_C_MPI_TYPE_DUP_FN( R_MPI_Datatype datatype,
+OMPI_DECLSPEC int OMPI_C_MPI_TYPE_DUP_FN( R_MPI_Datatype datatype,
                                           int type_keyval,
                                           void* extra_state,
                                           void* attribute_val_in,
                                           void* attribute_val_out,
                                           int* flag );
-OR_MPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_DELETE_FN( R_MPI_Comm comm,
+OMPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_DELETE_FN( R_MPI_Comm comm,
                                                   int comm_keyval,
                                                   void* attribute_val_out,
                                                   void* extra_state );
-OR_MPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_COPY_FN( R_MPI_Comm comm,
+OMPI_DECLSPEC int OMPI_C_MPI_COMM_NULL_COPY_FN( R_MPI_Comm comm,
                                                 int comm_keyval,
                                                 void* extra_state,
                                                 void* attribute_val_in,
                                                 void* attribute_val_out,
                                                 int* flag );
-OR_MPI_DECLSPEC int OMPI_C_MPI_COMM_DUP_FN( R_MPI_Comm comm, int comm_keyval,
+OMPI_DECLSPEC int OMPI_C_MPI_COMM_DUP_FN( R_MPI_Comm comm, int comm_keyval,
                                           void* extra_state,
                                           void* attribute_val_in,
                                           void* attribute_val_out,
                                           int* flag );
-OR_MPI_DECLSPEC int OMPI_C_MPI_NULL_DELETE_FN( R_MPI_Comm comm, int comm_keyval,
+OMPI_DECLSPEC int OMPI_C_MPI_NULL_DELETE_FN( R_MPI_Comm comm, int comm_keyval,
                                              void* attribute_val_out,
                                              void* extra_state )
                                              __mpi_interface_deprecated__("R_MPI_NULL_DELETE_FN is deprecated in MPI-2.0");
-OR_MPI_DECLSPEC int OMPI_C_MPI_NULL_COPY_FN( R_MPI_Comm comm, int comm_keyval,
+OMPI_DECLSPEC int OMPI_C_MPI_NULL_COPY_FN( R_MPI_Comm comm, int comm_keyval,
                                            void* extra_state,
                                            void* attribute_val_in,
                                            void* attribute_val_out,
                                            int* flag )
                                            __mpi_interface_deprecated__("R_MPI_NULL_COPY_FN is deprecated in MPI-2.0");
-OR_MPI_DECLSPEC int OMPI_C_MPI_DUP_FN( R_MPI_Comm comm, int comm_keyval,
+OMPI_DECLSPEC int OMPI_C_MPI_DUP_FN( R_MPI_Comm comm, int comm_keyval,
                                      void* extra_state,
                                      void* attribute_val_in,
                                      void* attribute_val_out,
                                      int* flag )
                                      __mpi_interface_deprecated__("R_MPI_DUP_FN is deprecated in MPI-2.0");
-OR_MPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_DELETE_FN( R_MPI_Win window,
+OMPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_DELETE_FN( R_MPI_Win window,
                                                  int win_keyval,
                                                  void* attribute_val_out,
                                                  void* extra_state );
-OR_MPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_COPY_FN( R_MPI_Win window, int win_keyval,
+OMPI_DECLSPEC int OMPI_C_MPI_WIN_NULL_COPY_FN( R_MPI_Win window, int win_keyval,
                                                void* extra_state,
                                                void* attribute_val_in,
                                                void* attribute_val_out,
                                                int* flag );
-OR_MPI_DECLSPEC int OMPI_C_MPI_WIN_DUP_FN( R_MPI_Win window, int win_keyval,
+OMPI_DECLSPEC int OMPI_C_MPI_WIN_DUP_FN( R_MPI_Win window, int win_keyval,
                                          void* extra_state,
                                          void* attribute_val_in,
                                          void* attribute_val_out,
@@ -880,290 +880,290 @@ OR_MPI_DECLSPEC int OMPI_C_MPI_WIN_DUP_FN( R_MPI_Win window, int win_keyval,
  * See ompi/communicator/communicator.h comments with struct ompi_communicator_t
  * for full explanation why we chose to use the ompi_predefined_xxx_t structure.
  */
-OR_MPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_world;
-OR_MPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_self;
-OR_MPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_null;
+OMPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_world;
+OMPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_self;
+OMPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_null;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_group_t ompi_mpi_group_empty;
-OR_MPI_DECLSPEC extern struct ompi_predefined_group_t ompi_mpi_group_null;
+OMPI_DECLSPEC extern struct ompi_predefined_group_t ompi_mpi_group_empty;
+OMPI_DECLSPEC extern struct ompi_predefined_group_t ompi_mpi_group_null;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_request_t ompi_request_null;
+OMPI_DECLSPEC extern struct ompi_predefined_request_t ompi_request_null;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_message_t ompi_message_null;
-OR_MPI_DECLSPEC extern struct ompi_predefined_message_t ompi_message_no_proc;
+OMPI_DECLSPEC extern struct ompi_predefined_message_t ompi_message_null;
+OMPI_DECLSPEC extern struct ompi_predefined_message_t ompi_message_no_proc;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_null;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_min;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_max;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_sum;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_prod;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_land;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_band;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_lor;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_bor;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_lxor;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_bxor;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_maxloc;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_minloc;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_replace;
-OR_MPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_no_op;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_null;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_min;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_max;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_sum;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_prod;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_land;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_band;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_lor;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_bor;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_lxor;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_bxor;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_maxloc;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_minloc;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_replace;
+OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_no_op;
 
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_datatype_null;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_datatype_null;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_lb __mpi_interface_deprecated__("R_MPI_LB is deprecated in MPI-2.0");
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_ub __mpi_interface_deprecated__("R_MPI_UB is deprecated in MPI-2.0");
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_char;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_signed_char;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_char;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_byte;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_short;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_short;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_long;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_long_int;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_long_long;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_float;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_double;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_double;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_wchar;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_lb __mpi_interface_deprecated__("R_MPI_LB is deprecated in MPI-2.0");
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_ub __mpi_interface_deprecated__("R_MPI_UB is deprecated in MPI-2.0");
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_char;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_signed_char;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_char;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_byte;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_short;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_short;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_long;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_long_int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_long_long;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_float;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_double;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_double;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_wchar;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
 
 #define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 /*
  * Following are the C++/C99 datatypes
  */
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_bool;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_cplex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_dblcplex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_ldblcplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_bool;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_cplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_dblcplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_ldblcplex;
 
 /*
  * Following are the Fortran datatypes
  */
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_character;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_dblprec;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cplex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_dblcplex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_ldblcplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_character;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_dblprec;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_dblcplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_ldblcplex;
 
 /* Aggregate struct datatypes are not */
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2int;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2integer;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2real;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2dblprec;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2cplex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2dblcplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2integer;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2real;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2dblprec;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2cplex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2dblcplex;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_float_int;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_double_int;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_longdbl_int;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_short_int;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_float_int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_double_int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_longdbl_int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_short_int;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_int;
 
 /* Optional MPI2 datatypes, always declared and defined, but not "exported" as R_MPI_LOGICAL1 */
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical1;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical2;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical4;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical8;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer1;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer2;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer4;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer8;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer16;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real2;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real4;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real8;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real16;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex8;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex16;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex32;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical1;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical2;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical4;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical8;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer1;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer2;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer4;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer8;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer16;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real2;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real4;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real8;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real16;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex8;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex16;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex32;
 
 /* New datatypes from the MPI 2.2 standard */
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int8_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint8_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int16_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint16_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int32_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint32_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int64_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint64_t;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_aint;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_offset;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_count;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_bool;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_complex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_float_complex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_double_complex;
-OR_MPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_long_double_complex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int8_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint8_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int16_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint16_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int32_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint32_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int64_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint64_t;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_aint;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_offset;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_count;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_bool;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_complex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_float_complex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_double_complex;
+OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_long_double_complex;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errhandler_null;
-OR_MPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errors_are_fatal;
-OR_MPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errors_return;
+OMPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errhandler_null;
+OMPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errors_are_fatal;
+OMPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errors_return;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_win_t ompi_mpi_win_null;
-OR_MPI_DECLSPEC extern struct ompi_predefined_file_t ompi_mpi_file_null;
+OMPI_DECLSPEC extern struct ompi_predefined_win_t ompi_mpi_win_null;
+OMPI_DECLSPEC extern struct ompi_predefined_file_t ompi_mpi_file_null;
 
-OR_MPI_DECLSPEC extern struct ompi_predefined_info_t ompi_mpi_info_null;
-OR_MPI_DECLSPEC extern struct ompi_predefined_info_t ompi_mpi_info_env;
+OMPI_DECLSPEC extern struct ompi_predefined_info_t ompi_mpi_info_null;
+OMPI_DECLSPEC extern struct ompi_predefined_info_t ompi_mpi_info_env;
 
-OR_MPI_DECLSPEC extern R_MPI_Fint *R_MPI_F_STATUS_IGNORE;
-OR_MPI_DECLSPEC extern R_MPI_Fint *R_MPI_F_STATUSES_IGNORE;
+OMPI_DECLSPEC extern R_MPI_Fint *R_MPI_F_STATUS_IGNORE;
+OMPI_DECLSPEC extern R_MPI_Fint *R_MPI_F_STATUSES_IGNORE;
 
 
 /*
  * MPI predefined handles
  */
-#define R_MPI_COMM_WORLD OR_MPI_PREDEFINED_GLOBAL( R_MPI_Comm, ompi_mpi_comm_world)
-#define R_MPI_COMM_SELF OR_MPI_PREDEFINED_GLOBAL(R_MPI_Comm, ompi_mpi_comm_self)
+#define R_MPI_COMM_WORLD OMPI_PREDEFINED_GLOBAL( R_MPI_Comm, ompi_mpi_comm_world)
+#define R_MPI_COMM_SELF OMPI_PREDEFINED_GLOBAL(R_MPI_Comm, ompi_mpi_comm_self)
 
-#define R_MPI_GROUP_EMPTY OR_MPI_PREDEFINED_GLOBAL(R_MPI_Group, ompi_mpi_group_empty)
+#define R_MPI_GROUP_EMPTY OMPI_PREDEFINED_GLOBAL(R_MPI_Group, ompi_mpi_group_empty)
 
-#define R_MPI_MESSAGE_NO_PROC OR_MPI_PREDEFINED_GLOBAL(R_MPI_Message, ompi_message_no_proc)
+#define R_MPI_MESSAGE_NO_PROC OMPI_PREDEFINED_GLOBAL(R_MPI_Message, ompi_message_no_proc)
 
-#define R_MPI_MAX OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_max)
-#define R_MPI_MIN OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_min)
-#define R_MPI_SUM OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_sum)
-#define R_MPI_PROD OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_prod)
-#define R_MPI_LAND OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_land)
-#define R_MPI_BAND OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_band)
-#define R_MPI_LOR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_lor)
-#define R_MPI_BOR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_bor)
-#define R_MPI_LXOR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_lxor)
-#define R_MPI_BXOR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_bxor)
-#define R_MPI_MAXLOC OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_maxloc)
-#define R_MPI_MINLOC OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_minloc)
-#define R_MPI_REPLACE OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_replace)
-#define R_MPI_NO_OP OR_MPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_no_op)
+#define R_MPI_MAX OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_max)
+#define R_MPI_MIN OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_min)
+#define R_MPI_SUM OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_sum)
+#define R_MPI_PROD OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_prod)
+#define R_MPI_LAND OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_land)
+#define R_MPI_BAND OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_band)
+#define R_MPI_LOR OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_lor)
+#define R_MPI_BOR OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_bor)
+#define R_MPI_LXOR OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_lxor)
+#define R_MPI_BXOR OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_bxor)
+#define R_MPI_MAXLOC OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_maxloc)
+#define R_MPI_MINLOC OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_minloc)
+#define R_MPI_REPLACE OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_replace)
+#define R_MPI_NO_OP OMPI_PREDEFINED_GLOBAL(R_MPI_Op, ompi_mpi_op_no_op)
 
 /* C datatypes */
-#define R_MPI_DATATYPE_NULL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_datatype_null)
-#define R_MPI_BYTE OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_byte)
-#define R_MPI_PACKED OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_packed)
-#define R_MPI_CHAR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_char)
-#define R_MPI_SHORT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_short)
-#define R_MPI_INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int)
-#define R_MPI_LONG OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long)
-#define R_MPI_FLOAT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_float)
-#define R_MPI_DOUBLE OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_double)
-#define R_MPI_LONG_DOUBLE OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_double)
-#define R_MPI_UNSIGNED_CHAR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_char)
-#define R_MPI_SIGNED_CHAR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_signed_char)
-#define R_MPI_UNSIGNED_SHORT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_short)
-#define R_MPI_UNSIGNED_LONG OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_long)
-#define R_MPI_UNSIGNED OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned)
-#define R_MPI_FLOAT_INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_float_int)
-#define R_MPI_DOUBLE_INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_double_int)
-#define R_MPI_LONG_DOUBLE_INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_longdbl_int)
-#define R_MPI_LONG_INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_int)
-#define R_MPI_SHORT_INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_short_int)
-#define R_MPI_2INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2int)
-#define R_MPI_UB OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_ub)
-#define R_MPI_LB OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_lb)
-#define R_MPI_WCHAR OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_wchar)
+#define R_MPI_DATATYPE_NULL OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_datatype_null)
+#define R_MPI_BYTE OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_byte)
+#define R_MPI_PACKED OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_packed)
+#define R_MPI_CHAR OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_char)
+#define R_MPI_SHORT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_short)
+#define R_MPI_INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int)
+#define R_MPI_LONG OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long)
+#define R_MPI_FLOAT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_float)
+#define R_MPI_DOUBLE OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_double)
+#define R_MPI_LONG_DOUBLE OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_double)
+#define R_MPI_UNSIGNED_CHAR OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_char)
+#define R_MPI_SIGNED_CHAR OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_signed_char)
+#define R_MPI_UNSIGNED_SHORT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_short)
+#define R_MPI_UNSIGNED_LONG OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_long)
+#define R_MPI_UNSIGNED OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned)
+#define R_MPI_FLOAT_INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_float_int)
+#define R_MPI_DOUBLE_INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_double_int)
+#define R_MPI_LONG_DOUBLE_INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_longdbl_int)
+#define R_MPI_LONG_INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_int)
+#define R_MPI_SHORT_INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_short_int)
+#define R_MPI_2INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2int)
+#define R_MPI_UB OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_ub)
+#define R_MPI_LB OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_lb)
+#define R_MPI_WCHAR OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_wchar)
 #if OPAL_HAVE_LONG_LONG
-#define R_MPI_LONG_LONG_INT OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_long_int)
-#define R_MPI_LONG_LONG OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_long_int)
-#define R_MPI_UNSIGNED_LONG_LONG OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_long_long)
+#define R_MPI_LONG_LONG_INT OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_long_int)
+#define R_MPI_LONG_LONG OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_long_long_int)
+#define R_MPI_UNSIGNED_LONG_LONG OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_unsigned_long_long)
 #endif  /* OPAL_HAVE_LONG_LONG */
-#define R_MPI_2COMPLEX OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2cplex)
-#define R_MPI_2DOUBLE_COMPLEX OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2dblcplex)
+#define R_MPI_2COMPLEX OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2cplex)
+#define R_MPI_2DOUBLE_COMPLEX OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2dblcplex)
 
 /* Fortran datatype bindings */
-#define R_MPI_CHARACTER OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_character)
-#define R_MPI_LOGICAL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical)
-#if OR_MPI_HAVE_FORTRAN_LOGICAL1
-#define R_MPI_LOGICAL1 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical1)
+#define R_MPI_CHARACTER OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_character)
+#define R_MPI_LOGICAL OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical)
+#if OMPI_HAVE_FORTRAN_LOGICAL1
+#define R_MPI_LOGICAL1 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical1)
 #endif
-#if OR_MPI_HAVE_FORTRAN_LOGICAL2
-#define R_MPI_LOGICAL2 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical2)
+#if OMPI_HAVE_FORTRAN_LOGICAL2
+#define R_MPI_LOGICAL2 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical2)
 #endif
-#if OR_MPI_HAVE_FORTRAN_LOGICAL4
-#define R_MPI_LOGICAL4 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical4)
+#if OMPI_HAVE_FORTRAN_LOGICAL4
+#define R_MPI_LOGICAL4 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical4)
 #endif
-#if OR_MPI_HAVE_FORTRAN_LOGICAL8
-#define R_MPI_LOGICAL8 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical8)
+#if OMPI_HAVE_FORTRAN_LOGICAL8
+#define R_MPI_LOGICAL8 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_logical8)
 #endif
-#define R_MPI_INTEGER OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer)
-#if OR_MPI_HAVE_FORTRAN_INTEGER1
-#define R_MPI_INTEGER1 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer1)
+#define R_MPI_INTEGER OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer)
+#if OMPI_HAVE_FORTRAN_INTEGER1
+#define R_MPI_INTEGER1 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer1)
 #endif
-#if OR_MPI_HAVE_FORTRAN_INTEGER2
-#define R_MPI_INTEGER2 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer2)
+#if OMPI_HAVE_FORTRAN_INTEGER2
+#define R_MPI_INTEGER2 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer2)
 #endif
-#if OR_MPI_HAVE_FORTRAN_INTEGER4
-#define R_MPI_INTEGER4 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer4)
+#if OMPI_HAVE_FORTRAN_INTEGER4
+#define R_MPI_INTEGER4 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer4)
 #endif
-#if OR_MPI_HAVE_FORTRAN_INTEGER8
-#define R_MPI_INTEGER8 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer8)
+#if OMPI_HAVE_FORTRAN_INTEGER8
+#define R_MPI_INTEGER8 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer8)
 #endif
-#if OR_MPI_HAVE_FORTRAN_INTEGER16
-#define R_MPI_INTEGER16 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer16)
+#if OMPI_HAVE_FORTRAN_INTEGER16
+#define R_MPI_INTEGER16 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_integer16)
 #endif
-#define R_MPI_REAL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real)
-#if OR_MPI_HAVE_FORTRAN_REAL4
-#define R_MPI_REAL4 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real4)
+#define R_MPI_REAL OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real)
+#if OMPI_HAVE_FORTRAN_REAL4
+#define R_MPI_REAL4 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real4)
 #endif
-#if OR_MPI_HAVE_FORTRAN_REAL8
-#define R_MPI_REAL8 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real8)
+#if OMPI_HAVE_FORTRAN_REAL8
+#define R_MPI_REAL8 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real8)
 #endif
-#if OR_MPI_HAVE_FORTRAN_REAL16
-#define R_MPI_REAL16 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real16)
+#if OMPI_HAVE_FORTRAN_REAL16
+#define R_MPI_REAL16 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_real16)
 #endif
-#define R_MPI_DOUBLE_PRECISION OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_dblprec)
-#define R_MPI_COMPLEX OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cplex)
-#if OR_MPI_HAVE_FORTRAN_REAL4
-#define R_MPI_COMPLEX8 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_complex8)
+#define R_MPI_DOUBLE_PRECISION OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_dblprec)
+#define R_MPI_COMPLEX OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cplex)
+#if OMPI_HAVE_FORTRAN_REAL4
+#define R_MPI_COMPLEX8 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_complex8)
 #endif
-#if OR_MPI_HAVE_FORTRAN_REAL8
-#define R_MPI_COMPLEX16 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_complex16)
+#if OMPI_HAVE_FORTRAN_REAL8
+#define R_MPI_COMPLEX16 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_complex16)
 #endif
-#if OR_MPI_HAVE_FORTRAN_REAL16
-#define R_MPI_COMPLEX32 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_complex32)
+#if OMPI_HAVE_FORTRAN_REAL16
+#define R_MPI_COMPLEX32 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_complex32)
 #endif
-#define R_MPI_DOUBLE_COMPLEX OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_dblcplex)
-#define R_MPI_2REAL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2real)
-#define R_MPI_2DOUBLE_PRECISION OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2dblprec)
-#define R_MPI_2INTEGER OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2integer)
+#define R_MPI_DOUBLE_COMPLEX OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_dblcplex)
+#define R_MPI_2REAL OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2real)
+#define R_MPI_2DOUBLE_PRECISION OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2dblprec)
+#define R_MPI_2INTEGER OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_2integer)
 
 /* New datatypes from the MPI 2.2 standard */
-#define R_MPI_INT8_T                OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int8_t)
-#define R_MPI_UINT8_T               OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint8_t)
-#define R_MPI_INT16_T               OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int16_t)
-#define R_MPI_UINT16_T              OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint16_t)
-#define R_MPI_INT32_T               OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int32_t)
-#define R_MPI_UINT32_T              OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint32_t)
-#define R_MPI_INT64_T               OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int64_t)
-#define R_MPI_UINT64_T              OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint64_t)
-#define R_MPI_AINT                  OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_aint)
-#define R_MPI_OFFSET                OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_offset)
-#define R_MPI_C_BOOL                OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_bool)
+#define R_MPI_INT8_T                OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int8_t)
+#define R_MPI_UINT8_T               OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint8_t)
+#define R_MPI_INT16_T               OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int16_t)
+#define R_MPI_UINT16_T              OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint16_t)
+#define R_MPI_INT32_T               OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int32_t)
+#define R_MPI_UINT32_T              OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint32_t)
+#define R_MPI_INT64_T               OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_int64_t)
+#define R_MPI_UINT64_T              OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_uint64_t)
+#define R_MPI_AINT                  OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_aint)
+#define R_MPI_OFFSET                OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_offset)
+#define R_MPI_C_BOOL                OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_bool)
 #if HAVE_FLOAT__COMPLEX
-#define R_MPI_C_COMPLEX             OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_complex)
-#define R_MPI_C_FLOAT_COMPLEX       OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_float_complex)
+#define R_MPI_C_COMPLEX             OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_complex)
+#define R_MPI_C_FLOAT_COMPLEX       OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_float_complex)
 #endif
 #if HAVE_DOUBLE__COMPLEX
-#define R_MPI_C_DOUBLE_COMPLEX      OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_double_complex)
+#define R_MPI_C_DOUBLE_COMPLEX      OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_double_complex)
 #endif
 #if HAVE_LONG_DOUBLE__COMPLEX
-#define R_MPI_C_LONG_DOUBLE_COMPLEX OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_long_double_complex)
+#define R_MPI_C_LONG_DOUBLE_COMPLEX OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_c_long_double_complex)
 #endif
-#define R_MPI_CXX_BOOL              OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_bool)
-#define R_MPI_CXX_FLOAT_COMPLEX     OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_cplex)
-#define R_MPI_CXX_DOUBLE_COMPLEX    OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_dblcplex)
-#define R_MPI_CXX_LONG_DOUBLE_COMPLEX OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_ldblcplex)
+#define R_MPI_CXX_BOOL              OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_bool)
+#define R_MPI_CXX_FLOAT_COMPLEX     OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_cplex)
+#define R_MPI_CXX_DOUBLE_COMPLEX    OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_dblcplex)
+#define R_MPI_CXX_LONG_DOUBLE_COMPLEX OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_cxx_ldblcplex)
 
 /* New datatypes from the 3.0 standard */
-#define R_MPI_COUNT                 OR_MPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_count)
+#define R_MPI_COUNT                 OMPI_PREDEFINED_GLOBAL(R_MPI_Datatype, ompi_mpi_count)
 
-#define R_MPI_ERRORS_ARE_FATAL OR_MPI_PREDEFINED_GLOBAL(R_MPI_Errhandler, ompi_mpi_errors_are_fatal)
-#define R_MPI_ERRORS_RETURN OR_MPI_PREDEFINED_GLOBAL(R_MPI_Errhandler, ompi_mpi_errors_return)
+#define R_MPI_ERRORS_ARE_FATAL OMPI_PREDEFINED_GLOBAL(R_MPI_Errhandler, ompi_mpi_errors_are_fatal)
+#define R_MPI_ERRORS_RETURN OMPI_PREDEFINED_GLOBAL(R_MPI_Errhandler, ompi_mpi_errors_return)
 
 /* Typeclass definition for R_MPI_Type_match_size */
 #define R_MPI_TYPECLASS_INTEGER    1
@@ -1175,113 +1175,113 @@ OR_MPI_DECLSPEC extern R_MPI_Fint *R_MPI_F_STATUSES_IGNORE;
  * MPI API
  */
 
-OR_MPI_DECLSPEC  int R_MPI_Abort(R_MPI_Comm comm, int errorcode);
-OR_MPI_DECLSPEC  int R_MPI_Accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_MPI_Abort(R_MPI_Comm comm, int errorcode);
+OMPI_DECLSPEC  int R_MPI_Accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                                   int target_rank, R_MPI_Aint target_disp, int target_count,
                                   R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Add_error_class(int *errorclass);
-OR_MPI_DECLSPEC  int R_MPI_Add_error_code(int errorclass, int *errorcode);
-OR_MPI_DECLSPEC  int R_MPI_Add_error_string(int errorcode, char *string);
-OR_MPI_DECLSPEC  int R_MPI_Address(void *location, R_MPI_Aint *address)
+OMPI_DECLSPEC  int R_MPI_Add_error_class(int *errorclass);
+OMPI_DECLSPEC  int R_MPI_Add_error_code(int errorclass, int *errorcode);
+OMPI_DECLSPEC  int R_MPI_Add_error_string(int errorcode, char *string);
+OMPI_DECLSPEC  int R_MPI_Address(void *location, R_MPI_Aint *address)
                                __mpi_interface_deprecated__("R_MPI_Address is superseded by R_MPI_Get_address in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                  void *recvbuf, int recvcount,
                                  R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                  void *recvbuf, int recvcount,
                                  R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                   void *recvbuf, int recvcounts[],
                                   int displs[], R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                   void *recvbuf, int recvcounts[],
                                   int displs[], R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info,
+OMPI_DECLSPEC  int R_MPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info,
                                  void *baseptr);
-OR_MPI_DECLSPEC  int R_MPI_Allreduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Allreduce(void *sendbuf, void *recvbuf, int count,
                                  R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
                                  R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                 void *recvbuf, int recvcount,
                                 R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                 void *recvbuf, int recvcount,
                                 R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+OMPI_DECLSPEC  int R_MPI_Alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                                  R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
                                  int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ialltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+OMPI_DECLSPEC  int R_MPI_Ialltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                                  R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
                                  int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
                                  void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtypes[],
                                  R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
                                  void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtypes[],
                                  R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Attr_delete(R_MPI_Comm comm, int keyval)
+OMPI_DECLSPEC  int R_MPI_Attr_delete(R_MPI_Comm comm, int keyval)
                                    __mpi_interface_deprecated__("R_MPI_Attr_delete is superseded by R_MPI_Comm_delete_attr in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val, int *flag)
+OMPI_DECLSPEC  int R_MPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val, int *flag)
                                 __mpi_interface_deprecated__("R_MPI_Attr_get is superseded by R_MPI_Comm_get_attr in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val)
+OMPI_DECLSPEC  int R_MPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val)
                                 __mpi_interface_deprecated__("R_MPI_Attr_put is superseded by R_MPI_Comm_set_attr in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Barrier(R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Barrier(R_MPI_Comm comm);
+OMPI_DECLSPEC  int R_MPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request);
+OMPI_DECLSPEC  int R_MPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype,
                              int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Bsend(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Bsend(void *buf, int count, R_MPI_Datatype datatype,
                              int dest, int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype,
 				                              int root, R_MPI_Comm comm,
 											  R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype,
                                   int dest, int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Buffer_attach(void *buffer, int size);
-OR_MPI_DECLSPEC  int R_MPI_Buffer_detach(void *buffer, int *size);
-OR_MPI_DECLSPEC  int R_MPI_Cancel(R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]);
-OR_MPI_DECLSPEC  int R_MPI_Cart_create(R_MPI_Comm old_comm, int ndims, int dims[],
+OMPI_DECLSPEC  int R_MPI_Buffer_attach(void *buffer, int size);
+OMPI_DECLSPEC  int R_MPI_Buffer_detach(void *buffer, int *size);
+OMPI_DECLSPEC  int R_MPI_Cancel(R_MPI_Request *request);
+OMPI_DECLSPEC  int R_MPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]);
+OMPI_DECLSPEC  int R_MPI_Cart_create(R_MPI_Comm old_comm, int ndims, int dims[],
                                    int periods[], int reorder, R_MPI_Comm *comm_cart);
-OR_MPI_DECLSPEC  int R_MPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[],
+OMPI_DECLSPEC  int R_MPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[],
                                 int periods[], int coords[]);
-OR_MPI_DECLSPEC  int R_MPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[],
+OMPI_DECLSPEC  int R_MPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[],
                                 int periods[], int *newrank);
-OR_MPI_DECLSPEC  int R_MPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank);
-OR_MPI_DECLSPEC  int R_MPI_Cart_shift(R_MPI_Comm comm, int direction, int disp,
+OMPI_DECLSPEC  int R_MPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank);
+OMPI_DECLSPEC  int R_MPI_Cart_shift(R_MPI_Comm comm, int direction, int disp,
                                   int *rank_source, int *rank_dest);
-OR_MPI_DECLSPEC  int R_MPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *new_comm);
-OR_MPI_DECLSPEC  int R_MPI_Cartdim_get(R_MPI_Comm comm, int *ndims);
-OR_MPI_DECLSPEC  int R_MPI_Close_port(char *port_name);
-OR_MPI_DECLSPEC  int R_MPI_Comm_accept(char *port_name, R_MPI_Info info, int root,
+OMPI_DECLSPEC  int R_MPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *new_comm);
+OMPI_DECLSPEC  int R_MPI_Cartdim_get(R_MPI_Comm comm, int *ndims);
+OMPI_DECLSPEC  int R_MPI_Close_port(char *port_name);
+OMPI_DECLSPEC  int R_MPI_Comm_accept(char *port_name, R_MPI_Info info, int root,
                                    R_MPI_Comm comm, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Comm_c2f(R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode);
-OR_MPI_DECLSPEC  int R_MPI_Comm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result);
-OR_MPI_DECLSPEC  int R_MPI_Comm_connect(char *port_name, R_MPI_Info info, int root,
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Comm_c2f(R_MPI_Comm comm);
+OMPI_DECLSPEC  int R_MPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode);
+OMPI_DECLSPEC  int R_MPI_Comm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result);
+OMPI_DECLSPEC  int R_MPI_Comm_connect(char *port_name, R_MPI_Info info, int root,
                                     R_MPI_Comm comm, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function *function,
+OMPI_DECLSPEC  int R_MPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function *function,
                                               R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Comm_create_keyval(R_MPI_Comm_copy_attr_function *comm_copy_attr_fn,
+OMPI_DECLSPEC  int R_MPI_Comm_create_keyval(R_MPI_Comm_copy_attr_function *comm_copy_attr_fn,
                                           R_MPI_Comm_delete_attr_function *comm_delete_attr_fn,
                                           int *comm_keyval, void *extra_state);
-OR_MPI_DECLSPEC  int R_MPI_Comm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_delete_attr(R_MPI_Comm comm, int comm_keyval);
-OR_MPI_DECLSPEC  int R_MPI_Comm_disconnect(R_MPI_Comm *comm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Comm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  R_MPI_Comm R_MPI_Comm_f2c(R_MPI_Fint comm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_free_keyval(int *comm_keyval);
-OR_MPI_DECLSPEC  int R_MPI_Comm_free(R_MPI_Comm *comm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval,
+OMPI_DECLSPEC  int R_MPI_Comm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_MPI_Comm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_MPI_Comm_delete_attr(R_MPI_Comm comm, int comm_keyval);
+OMPI_DECLSPEC  int R_MPI_Comm_disconnect(R_MPI_Comm *comm);
+OMPI_DECLSPEC  int R_MPI_Comm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_MPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm, R_MPI_Request *request);
+OMPI_DECLSPEC  int R_MPI_Comm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  R_MPI_Comm R_MPI_Comm_f2c(R_MPI_Fint comm);
+OMPI_DECLSPEC  int R_MPI_Comm_free_keyval(int *comm_keyval);
+OMPI_DECLSPEC  int R_MPI_Comm_free(R_MPI_Comm *comm);
+OMPI_DECLSPEC  int R_MPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval,
                                      void *attribute_val, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int nodes[],
+OMPI_DECLSPEC  int R_MPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int nodes[],
                                          int degrees[], int targets[],
                                          int weights[], R_MPI_Info info,
                                          int reorder, R_MPI_Comm * newcomm);
-OR_MPI_DECLSPEC  int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old,
+OMPI_DECLSPEC  int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old,
                                                   int indegree, int sources[],
                                                   int sourceweights[],
                                                   int outdegree,
@@ -1289,638 +1289,638 @@ OR_MPI_DECLSPEC  int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old,
                                                   int destweights[],
                                                   R_MPI_Info info, int reorder,
                                                   R_MPI_Comm *comm_dist_graph);
-OR_MPI_DECLSPEC int R_MPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree,
+OMPI_DECLSPEC int R_MPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree,
                                            int sources[], int sourceweights[],
                                            int maxoutdegree,
                                            int destinations[],
                                            int destweights[]);
-OR_MPI_DECLSPEC  int R_MPI_Dist_graph_neighbors_count(R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_MPI_Dist_graph_neighbors_count(R_MPI_Comm comm,
                                                   int *inneighbors,
                                                   int *outneighbors,
                                                   int *weighted);
-OR_MPI_DECLSPEC  int R_MPI_Comm_get_errhandler(R_MPI_Comm comm, R_MPI_Errhandler *erhandler);
-OR_MPI_DECLSPEC  int R_MPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info_used);
-OR_MPI_DECLSPEC  int R_MPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen);
-OR_MPI_DECLSPEC  int R_MPI_Comm_get_parent(R_MPI_Comm *parent);
-OR_MPI_DECLSPEC  int R_MPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_MPI_Comm_join(int fd, R_MPI_Comm *intercomm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_rank(R_MPI_Comm comm, int *rank);
-OR_MPI_DECLSPEC  int R_MPI_Comm_remote_group(R_MPI_Comm comm, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_MPI_Comm_remote_size(R_MPI_Comm comm, int *size);
-OR_MPI_DECLSPEC  int R_MPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val);
-OR_MPI_DECLSPEC  int R_MPI_Comm_set_errhandler(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_MPI_Comm_set_name(R_MPI_Comm comm, char *comm_name);
-OR_MPI_DECLSPEC  int R_MPI_Comm_size(R_MPI_Comm comm, int *size);
-OR_MPI_DECLSPEC  int R_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info,
+OMPI_DECLSPEC  int R_MPI_Comm_get_errhandler(R_MPI_Comm comm, R_MPI_Errhandler *erhandler);
+OMPI_DECLSPEC  int R_MPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info_used);
+OMPI_DECLSPEC  int R_MPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen);
+OMPI_DECLSPEC  int R_MPI_Comm_get_parent(R_MPI_Comm *parent);
+OMPI_DECLSPEC  int R_MPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_MPI_Comm_join(int fd, R_MPI_Comm *intercomm);
+OMPI_DECLSPEC  int R_MPI_Comm_rank(R_MPI_Comm comm, int *rank);
+OMPI_DECLSPEC  int R_MPI_Comm_remote_group(R_MPI_Comm comm, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_MPI_Comm_remote_size(R_MPI_Comm comm, int *size);
+OMPI_DECLSPEC  int R_MPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val);
+OMPI_DECLSPEC  int R_MPI_Comm_set_errhandler(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_MPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info);
+OMPI_DECLSPEC  int R_MPI_Comm_set_name(R_MPI_Comm comm, char *comm_name);
+OMPI_DECLSPEC  int R_MPI_Comm_size(R_MPI_Comm comm, int *size);
+OMPI_DECLSPEC  int R_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info,
                                   int root, R_MPI_Comm comm, R_MPI_Comm *intercomm,
                                   int array_of_errcodes[]);
-OR_MPI_DECLSPEC  int R_MPI_Comm_spawn_multiple(int count, char *array_of_commands[], char **array_of_argv[],
+OMPI_DECLSPEC  int R_MPI_Comm_spawn_multiple(int count, char *array_of_commands[], char **array_of_argv[],
                                            int array_of_maxprocs[], R_MPI_Info array_of_info[],
                                            int root, R_MPI_Comm comm, R_MPI_Comm *intercomm,
                                            int array_of_errcodes[]);
-OR_MPI_DECLSPEC  int R_MPI_Comm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key, R_MPI_Info info, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_MPI_Comm_test_inter(R_MPI_Comm comm, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
+OMPI_DECLSPEC  int R_MPI_Comm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_MPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key, R_MPI_Info info, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_MPI_Comm_test_inter(R_MPI_Comm comm, int *flag);
+OMPI_DECLSPEC  int R_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
                                         void *result_addr, R_MPI_Datatype datatype, int target_rank,
                                         R_MPI_Aint target_disp, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Dims_create(int nnodes, int ndims, int dims[]);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Errhandler_c2f(R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Errhandler_create(R_MPI_Handler_function *function,
+OMPI_DECLSPEC  int R_MPI_Dims_create(int nnodes, int ndims, int dims[]);
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Errhandler_c2f(R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_MPI_Errhandler_create(R_MPI_Handler_function *function,
                                          R_MPI_Errhandler *errhandler)
                                          __mpi_interface_deprecated__("R_MPI_Errhandler_create is superseded by R_MPI_Comm_create_errhandler in MPI-2.0");
-OR_MPI_DECLSPEC  R_MPI_Errhandler R_MPI_Errhandler_f2c(R_MPI_Fint errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Errhandler_free(R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Errhandler_get(R_MPI_Comm comm, R_MPI_Errhandler *errhandler)
+OMPI_DECLSPEC  R_MPI_Errhandler R_MPI_Errhandler_f2c(R_MPI_Fint errhandler);
+OMPI_DECLSPEC  int R_MPI_Errhandler_free(R_MPI_Errhandler *errhandler);
+OMPI_DECLSPEC  int R_MPI_Errhandler_get(R_MPI_Comm comm, R_MPI_Errhandler *errhandler)
                                       __mpi_interface_deprecated__("R_MPI_Errhandler_get is superseded by R_MPI_Comm_get_errhandler in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Errhandler_set(R_MPI_Comm comm, R_MPI_Errhandler errhandler)
+OMPI_DECLSPEC  int R_MPI_Errhandler_set(R_MPI_Comm comm, R_MPI_Errhandler errhandler)
                                       __mpi_interface_deprecated__("R_MPI_Errhandler_set is superseded by R_MPI_Comm_set_errhandler in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Error_class(int errorcode, int *errorclass);
-OR_MPI_DECLSPEC  int R_MPI_Error_string(int errorcode, char *string, int *resultlen);
-OR_MPI_DECLSPEC  int R_MPI_Exscan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Error_class(int errorcode, int *errorclass);
+OMPI_DECLSPEC  int R_MPI_Error_string(int errorcode, char *string, int *resultlen);
+OMPI_DECLSPEC  int R_MPI_Exscan(void *sendbuf, void *recvbuf, int count,
                               R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Fetch_and_op(void *origin_addr, void *result_addr, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Fetch_and_op(void *origin_addr, void *result_addr, R_MPI_Datatype datatype,
                                     int target_rank, R_MPI_Aint target_disp, R_MPI_Op op, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Iexscan(void *sendbuf, void *recvbuf, int count,
                               R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-#if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_File_c2f(R_MPI_File file);
-OR_MPI_DECLSPEC  R_MPI_File R_MPI_File_f2c(R_MPI_Fint file);
-OR_MPI_DECLSPEC  int R_MPI_File_call_errhandler(R_MPI_File fh, int errorcode);
-OR_MPI_DECLSPEC  int R_MPI_File_create_errhandler(R_MPI_File_errhandler_function *function,
+#if OMPI_PROVIDE_R_MPI_FILE_INTERFACE
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_File_c2f(R_MPI_File file);
+OMPI_DECLSPEC  R_MPI_File R_MPI_File_f2c(R_MPI_Fint file);
+OMPI_DECLSPEC  int R_MPI_File_call_errhandler(R_MPI_File fh, int errorcode);
+OMPI_DECLSPEC  int R_MPI_File_create_errhandler(R_MPI_File_errhandler_function *function,
                                               R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_MPI_File_set_errhandler( R_MPI_File file, R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_MPI_File_get_errhandler( R_MPI_File file, R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_MPI_File_open(R_MPI_Comm comm, char *filename, int amode,
+OMPI_DECLSPEC  int R_MPI_File_set_errhandler( R_MPI_File file, R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_MPI_File_get_errhandler( R_MPI_File file, R_MPI_Errhandler *errhandler);
+OMPI_DECLSPEC  int R_MPI_File_open(R_MPI_Comm comm, char *filename, int amode,
                                  R_MPI_Info info, R_MPI_File *fh);
-OR_MPI_DECLSPEC  int R_MPI_File_close(R_MPI_File *fh);
-OR_MPI_DECLSPEC  int R_MPI_File_delete(char *filename, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_MPI_File_set_size(R_MPI_File fh, R_MPI_Offset size);
-OR_MPI_DECLSPEC  int R_MPI_File_preallocate(R_MPI_File fh, R_MPI_Offset size);
-OR_MPI_DECLSPEC  int R_MPI_File_get_size(R_MPI_File fh, R_MPI_Offset *size);
-OR_MPI_DECLSPEC  int R_MPI_File_get_group(R_MPI_File fh, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_MPI_File_get_amode(R_MPI_File fh, int *amode);
-OR_MPI_DECLSPEC  int R_MPI_File_set_info(R_MPI_File fh, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_MPI_File_get_info(R_MPI_File fh, R_MPI_Info *info_used);
-OR_MPI_DECLSPEC  int R_MPI_File_set_view(R_MPI_File fh, R_MPI_Offset disp, R_MPI_Datatype etype,
+OMPI_DECLSPEC  int R_MPI_File_close(R_MPI_File *fh);
+OMPI_DECLSPEC  int R_MPI_File_delete(char *filename, R_MPI_Info info);
+OMPI_DECLSPEC  int R_MPI_File_set_size(R_MPI_File fh, R_MPI_Offset size);
+OMPI_DECLSPEC  int R_MPI_File_preallocate(R_MPI_File fh, R_MPI_Offset size);
+OMPI_DECLSPEC  int R_MPI_File_get_size(R_MPI_File fh, R_MPI_Offset *size);
+OMPI_DECLSPEC  int R_MPI_File_get_group(R_MPI_File fh, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_MPI_File_get_amode(R_MPI_File fh, int *amode);
+OMPI_DECLSPEC  int R_MPI_File_set_info(R_MPI_File fh, R_MPI_Info info);
+OMPI_DECLSPEC  int R_MPI_File_get_info(R_MPI_File fh, R_MPI_Info *info_used);
+OMPI_DECLSPEC  int R_MPI_File_set_view(R_MPI_File fh, R_MPI_Offset disp, R_MPI_Datatype etype,
                                      R_MPI_Datatype filetype, char *datarep, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_MPI_File_get_view(R_MPI_File fh, R_MPI_Offset *disp,
+OMPI_DECLSPEC  int R_MPI_File_get_view(R_MPI_File fh, R_MPI_Offset *disp,
                                      R_MPI_Datatype *etype,
                                      R_MPI_Datatype *filetype, char *datarep);
-OR_MPI_DECLSPEC  int R_MPI_File_read_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_read_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                     int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_read_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_read_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                         int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                      int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                          int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                      int count, R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                       int count, R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_File_read(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_read(R_MPI_File fh, void *buf, int count,
                                  R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_read_all(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_read_all(R_MPI_File fh, void *buf, int count,
                                      R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_write(R_MPI_File fh, void *buf, int count,
                                   R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_all(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_write_all(R_MPI_File fh, void *buf, int count,
                                       R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_iread(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_iread(R_MPI_File fh, void *buf, int count,
                                   R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_File_iwrite(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_iwrite(R_MPI_File fh, void *buf, int count,
                                    R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence);
-OR_MPI_DECLSPEC  int R_MPI_File_get_position(R_MPI_File fh, R_MPI_Offset *offset);
-OR_MPI_DECLSPEC  int R_MPI_File_get_byte_offset(R_MPI_File fh, R_MPI_Offset offset,
+OMPI_DECLSPEC  int R_MPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence);
+OMPI_DECLSPEC  int R_MPI_File_get_position(R_MPI_File fh, R_MPI_Offset *offset);
+OMPI_DECLSPEC  int R_MPI_File_get_byte_offset(R_MPI_File fh, R_MPI_Offset offset,
                                             R_MPI_Offset *disp);
-OR_MPI_DECLSPEC  int R_MPI_File_read_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_read_shared(R_MPI_File fh, void *buf, int count,
                                         R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_write_shared(R_MPI_File fh, void *buf, int count,
 					 R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_iread_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_iread_shared(R_MPI_File fh, void *buf, int count,
                                          R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_File_iwrite_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_iwrite_shared(R_MPI_File fh, void *buf, int count,
                                           R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_File_read_ordered(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_read_ordered(R_MPI_File fh, void *buf, int count,
                                          R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_ordered(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_write_ordered(R_MPI_File fh, void *buf, int count,
                                           R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_seek_shared(R_MPI_File fh, R_MPI_Offset offset, int whence);
-OR_MPI_DECLSPEC  int R_MPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset);
-OR_MPI_DECLSPEC  int R_MPI_File_read_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_seek_shared(R_MPI_File fh, R_MPI_Offset offset, int whence);
+OMPI_DECLSPEC  int R_MPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset);
+OMPI_DECLSPEC  int R_MPI_File_read_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                               int count, R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_File_read_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_MPI_File_read_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                                int count, R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_File_write_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_read_all_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_write_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_File_read_all_begin(R_MPI_File fh, void *buf, int count,
                                            R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_File_read_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_all_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_read_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_File_write_all_begin(R_MPI_File fh, void *buf, int count,
                                             R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_File_write_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_read_ordered_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_write_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_File_read_ordered_begin(R_MPI_File fh, void *buf, int count,
                                                R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_File_read_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_write_ordered_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_MPI_File_read_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_File_write_ordered_begin(R_MPI_File fh, void *buf, int count,
                                                 R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_File_write_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_File_get_type_extent(R_MPI_File fh, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_File_write_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_File_get_type_extent(R_MPI_File fh, R_MPI_Datatype datatype,
                                             R_MPI_Aint *extent);
-OR_MPI_DECLSPEC  int R_MPI_File_set_atomicity(R_MPI_File fh, int flag);
-OR_MPI_DECLSPEC  int R_MPI_File_get_atomicity(R_MPI_File fh, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_File_sync(R_MPI_File fh);
-#endif /* #if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE */
-OR_MPI_DECLSPEC  int R_MPI_Finalize(void);
-OR_MPI_DECLSPEC  int R_MPI_Finalized(int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Free_mem(void *base);
-OR_MPI_DECLSPEC  int R_MPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_File_set_atomicity(R_MPI_File fh, int flag);
+OMPI_DECLSPEC  int R_MPI_File_get_atomicity(R_MPI_File fh, int *flag);
+OMPI_DECLSPEC  int R_MPI_File_sync(R_MPI_File fh);
+#endif /* #if OMPI_PROVIDE_R_MPI_FILE_INTERFACE */
+OMPI_DECLSPEC  int R_MPI_Finalize(void);
+OMPI_DECLSPEC  int R_MPI_Finalized(int *flag);
+OMPI_DECLSPEC  int R_MPI_Free_mem(void *base);
+OMPI_DECLSPEC  int R_MPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                               void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                               int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                               void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                               int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                void *recvbuf, int recvcounts[], int displs[],
                                R_MPI_Datatype recvtype, int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                void *recvbuf, int recvcounts[], int displs[],
                                R_MPI_Datatype recvtype, int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Get_address(void *location, R_MPI_Aint *address);
-OR_MPI_DECLSPEC  int R_MPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
-OR_MPI_DECLSPEC  int R_MPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
-OR_MPI_DECLSPEC  int R_MPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count *count);
-OR_MPI_DECLSPEC  int R_MPI_Get(void *origin_addr, int origin_count,
+OMPI_DECLSPEC  int R_MPI_Get_address(void *location, R_MPI_Aint *address);
+OMPI_DECLSPEC  int R_MPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
+OMPI_DECLSPEC  int R_MPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
+OMPI_DECLSPEC  int R_MPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count *count);
+OMPI_DECLSPEC  int R_MPI_Get(void *origin_addr, int origin_count,
                            R_MPI_Datatype origin_datatype, int target_rank,
                            R_MPI_Aint target_disp, int target_count,
                            R_MPI_Datatype target_datatype, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Get_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_MPI_Get_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                                       void *result_addr, int result_count, R_MPI_Datatype result_datatype,
                                       int target_rank, R_MPI_Aint target_disp, int target_count,
                                       R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Get_library_version(char *version, int *resultlen);
-OR_MPI_DECLSPEC  int R_MPI_Get_processor_name(char *name, int *resultlen);
-OR_MPI_DECLSPEC  int R_MPI_Get_version(int *version, int *subversion);
-OR_MPI_DECLSPEC  int R_MPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int index[],
+OMPI_DECLSPEC  int R_MPI_Get_library_version(char *version, int *resultlen);
+OMPI_DECLSPEC  int R_MPI_Get_processor_name(char *name, int *resultlen);
+OMPI_DECLSPEC  int R_MPI_Get_version(int *version, int *subversion);
+OMPI_DECLSPEC  int R_MPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int index[],
                                     int edges[], int reorder, R_MPI_Comm *comm_graph);
-OR_MPI_DECLSPEC  int R_MPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges,
+OMPI_DECLSPEC  int R_MPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges,
                                  int index[], int edges[]);
-OR_MPI_DECLSPEC  int R_MPI_Graph_map(R_MPI_Comm comm, int nnodes, int index[], int edges[],
+OMPI_DECLSPEC  int R_MPI_Graph_map(R_MPI_Comm comm, int nnodes, int index[], int edges[],
                                  int *newrank);
-OR_MPI_DECLSPEC  int R_MPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors);
-OR_MPI_DECLSPEC  int R_MPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors,
+OMPI_DECLSPEC  int R_MPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors);
+OMPI_DECLSPEC  int R_MPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors,
                                        int neighbors[]);
-OR_MPI_DECLSPEC  int R_MPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges);
-OR_MPI_DECLSPEC  int R_MPI_Grequest_complete(R_MPI_Request request);
-OR_MPI_DECLSPEC  int R_MPI_Grequest_start(R_MPI_Grequest_query_function *query_fn,
+OMPI_DECLSPEC  int R_MPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges);
+OMPI_DECLSPEC  int R_MPI_Grequest_complete(R_MPI_Request request);
+OMPI_DECLSPEC  int R_MPI_Grequest_start(R_MPI_Grequest_query_function *query_fn,
                                       R_MPI_Grequest_free_function *free_fn,
                                       R_MPI_Grequest_cancel_function *cancel_fn,
                                       void *extra_state, R_MPI_Request *request);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Group_c2f(R_MPI_Group group);
-OR_MPI_DECLSPEC  int R_MPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result);
-OR_MPI_DECLSPEC  int R_MPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2,
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Group_c2f(R_MPI_Group group);
+OMPI_DECLSPEC  int R_MPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result);
+OMPI_DECLSPEC  int R_MPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2,
                                         R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_MPI_Group_excl(R_MPI_Group group, int n, int ranks[],
+OMPI_DECLSPEC  int R_MPI_Group_excl(R_MPI_Group group, int n, int ranks[],
                                   R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  R_MPI_Group R_MPI_Group_f2c(R_MPI_Fint group);
-OR_MPI_DECLSPEC  int R_MPI_Group_free(R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_MPI_Group_incl(R_MPI_Group group, int n, int ranks[],
+OMPI_DECLSPEC  R_MPI_Group R_MPI_Group_f2c(R_MPI_Fint group);
+OMPI_DECLSPEC  int R_MPI_Group_free(R_MPI_Group *group);
+OMPI_DECLSPEC  int R_MPI_Group_incl(R_MPI_Group group, int n, int ranks[],
                                   R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_MPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2,
+OMPI_DECLSPEC  int R_MPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2,
                                           R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_MPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3],
+OMPI_DECLSPEC  int R_MPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3],
                                         R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_MPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3],
+OMPI_DECLSPEC  int R_MPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3],
                                         R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_MPI_Group_rank(R_MPI_Group group, int *rank);
-OR_MPI_DECLSPEC  int R_MPI_Group_size(R_MPI_Group group, int *size);
-OR_MPI_DECLSPEC  int R_MPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[],
+OMPI_DECLSPEC  int R_MPI_Group_rank(R_MPI_Group group, int *rank);
+OMPI_DECLSPEC  int R_MPI_Group_size(R_MPI_Group group, int *size);
+OMPI_DECLSPEC  int R_MPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[],
                                              R_MPI_Group group2, int ranks2[]);
-OR_MPI_DECLSPEC  int R_MPI_Group_union(R_MPI_Group group1, R_MPI_Group group2,
+OMPI_DECLSPEC  int R_MPI_Group_union(R_MPI_Group group1, R_MPI_Group group2,
                                    R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_MPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_MPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                               int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Improbe(int source, int tag, R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_MPI_Improbe(int source, int tag, R_MPI_Comm comm,
                                int *flag, R_MPI_Message *message,
                                R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Imrecv(void *buf, int count, R_MPI_Datatype type,
+OMPI_DECLSPEC  int R_MPI_Imrecv(void *buf, int count, R_MPI_Datatype type,
                               R_MPI_Message *message, R_MPI_Request *request);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Info_c2f(R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_MPI_Info_create(R_MPI_Info *info);
-OR_MPI_DECLSPEC  int R_MPI_Info_delete(R_MPI_Info info, char *key);
-OR_MPI_DECLSPEC  int R_MPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo);
-OR_MPI_DECLSPEC  R_MPI_Info R_MPI_Info_f2c(R_MPI_Fint info);
-OR_MPI_DECLSPEC  int R_MPI_Info_free(R_MPI_Info *info);
-OR_MPI_DECLSPEC  int R_MPI_Info_get(R_MPI_Info info, char *key, int valuelen,
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Info_c2f(R_MPI_Info info);
+OMPI_DECLSPEC  int R_MPI_Info_create(R_MPI_Info *info);
+OMPI_DECLSPEC  int R_MPI_Info_delete(R_MPI_Info info, char *key);
+OMPI_DECLSPEC  int R_MPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo);
+OMPI_DECLSPEC  R_MPI_Info R_MPI_Info_f2c(R_MPI_Fint info);
+OMPI_DECLSPEC  int R_MPI_Info_free(R_MPI_Info *info);
+OMPI_DECLSPEC  int R_MPI_Info_get(R_MPI_Info info, char *key, int valuelen,
                                 char *value, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Info_get_nkeys(R_MPI_Info info, int *nkeys);
-OR_MPI_DECLSPEC  int R_MPI_Info_get_nthkey(R_MPI_Info info, int n, char *key);
-OR_MPI_DECLSPEC  int R_MPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen,
+OMPI_DECLSPEC  int R_MPI_Info_get_nkeys(R_MPI_Info info, int *nkeys);
+OMPI_DECLSPEC  int R_MPI_Info_get_nthkey(R_MPI_Info info, int n, char *key);
+OMPI_DECLSPEC  int R_MPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen,
                                          int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Info_set(R_MPI_Info info, char *key, char *value);
-OR_MPI_DECLSPEC  int R_MPI_Init(int *argc, char ***argv);
-OR_MPI_DECLSPEC  int R_MPI_Initialized(int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Init_thread(int *argc, char ***argv, int required,
+OMPI_DECLSPEC  int R_MPI_Info_set(R_MPI_Info info, char *key, char *value);
+OMPI_DECLSPEC  int R_MPI_Init(int *argc, char ***argv);
+OMPI_DECLSPEC  int R_MPI_Initialized(int *flag);
+OMPI_DECLSPEC  int R_MPI_Init_thread(int *argc, char ***argv, int required,
                                    int *provided);
-OR_MPI_DECLSPEC  int R_MPI_Intercomm_create(R_MPI_Comm local_comm, int local_leader,
+OMPI_DECLSPEC  int R_MPI_Intercomm_create(R_MPI_Comm local_comm, int local_leader,
                                         R_MPI_Comm bridge_comm, int remote_leader,
                                         int tag, R_MPI_Comm *newintercomm);
-OR_MPI_DECLSPEC  int R_MPI_Intercomm_merge(R_MPI_Comm intercomm, int high,
+OMPI_DECLSPEC  int R_MPI_Intercomm_merge(R_MPI_Comm intercomm, int high,
                                        R_MPI_Comm *newintercomm);
-OR_MPI_DECLSPEC  int R_MPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag,
+OMPI_DECLSPEC  int R_MPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag,
                               R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source,
+OMPI_DECLSPEC  int R_MPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source,
                              int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_MPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                               int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_MPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                              int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_MPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                               int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Is_thread_main(int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Keyval_create(R_MPI_Copy_function *copy_fn,
+OMPI_DECLSPEC  int R_MPI_Is_thread_main(int *flag);
+OMPI_DECLSPEC  int R_MPI_Keyval_create(R_MPI_Copy_function *copy_fn,
                                      R_MPI_Delete_function *delete_fn,
                                      int *keyval, void *extra_state)
                                      __mpi_interface_deprecated__("R_MPI_Keyval_create is superseded by R_MPI_Comm_create_keyval in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Keyval_free(int *keyval)
+OMPI_DECLSPEC  int R_MPI_Keyval_free(int *keyval)
                                    __mpi_interface_deprecated__("R_MPI_Keyval_free is superseded by R_MPI_Comm_free_keyval in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Message_c2f(R_MPI_Message message);
-OR_MPI_DECLSPEC  R_MPI_Message R_MPI_Message_f2c(R_MPI_Fint message);
-OR_MPI_DECLSPEC  int R_MPI_Mprobe(int source, int tag, R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_MPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name);
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Message_c2f(R_MPI_Message message);
+OMPI_DECLSPEC  R_MPI_Message R_MPI_Message_f2c(R_MPI_Fint message);
+OMPI_DECLSPEC  int R_MPI_Mprobe(int source, int tag, R_MPI_Comm comm,
                                R_MPI_Message *message,
                                R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Mrecv(void *buf, int count, R_MPI_Datatype type,
+OMPI_DECLSPEC  int R_MPI_Mrecv(void *buf, int count, R_MPI_Datatype type,
                              R_MPI_Message *message, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Neighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Neighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                           void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                           R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ineighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Ineighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                            void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                            R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                            void *recvbuf, int recvcounts[], int displs[],
                                            R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                             void *recvbuf, int recvcounts[], int displs[],
                                             R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Neighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Neighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                          void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                          R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                           void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                           R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],  R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],  R_MPI_Datatype sendtype,
                                           void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtype,
                                           R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtype,
                                            void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtype,
                                            R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
                                           void *recvbuf, int recvcounts[], R_MPI_Aint rdispls[], R_MPI_Datatype recvtypes[],
                                           R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
                                            void *recvbuf, int recvcounts[], R_MPI_Aint rdispls[], R_MPI_Datatype recvtypes[],
                                            R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Op_c2f(R_MPI_Op op);
-OR_MPI_DECLSPEC  int R_MPI_Op_commutative(R_MPI_Op op, int *commute);
-OR_MPI_DECLSPEC  int R_MPI_Op_create(R_MPI_User_function *function, int commute, R_MPI_Op *op);
-OR_MPI_DECLSPEC  int R_MPI_Open_port(R_MPI_Info info, char *port_name);
-OR_MPI_DECLSPEC  R_MPI_Op R_MPI_Op_f2c(R_MPI_Fint op);
-OR_MPI_DECLSPEC  int R_MPI_Op_free(R_MPI_Op *op);
-OR_MPI_DECLSPEC  int R_MPI_Pack_external(char datarep[], void *inbuf, int incount,
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Op_c2f(R_MPI_Op op);
+OMPI_DECLSPEC  int R_MPI_Op_commutative(R_MPI_Op op, int *commute);
+OMPI_DECLSPEC  int R_MPI_Op_create(R_MPI_User_function *function, int commute, R_MPI_Op *op);
+OMPI_DECLSPEC  int R_MPI_Open_port(R_MPI_Info info, char *port_name);
+OMPI_DECLSPEC  R_MPI_Op R_MPI_Op_f2c(R_MPI_Fint op);
+OMPI_DECLSPEC  int R_MPI_Op_free(R_MPI_Op *op);
+OMPI_DECLSPEC  int R_MPI_Pack_external(char datarep[], void *inbuf, int incount,
                                      R_MPI_Datatype datatype, void *outbuf,
                                      R_MPI_Aint outsize, R_MPI_Aint *position);
-OR_MPI_DECLSPEC  int R_MPI_Pack_external_size(char datarep[], int incount,
+OMPI_DECLSPEC  int R_MPI_Pack_external_size(char datarep[], int incount,
                                           R_MPI_Datatype datatype, R_MPI_Aint *size);
-OR_MPI_DECLSPEC  int R_MPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype,
                             void *outbuf, int outsize, int *position, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_MPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm,
                                  int *size);
-OR_MPI_DECLSPEC  int R_MPI_Pcontrol(int level, ...);
-OR_MPI_DECLSPEC  int R_MPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Publish_name(char *service_name, R_MPI_Info info,
+OMPI_DECLSPEC  int R_MPI_Pcontrol(int level, ...);
+OMPI_DECLSPEC  int R_MPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_Publish_name(char *service_name, R_MPI_Info info,
                                     char *port_name);
-OR_MPI_DECLSPEC  int R_MPI_Put(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_MPI_Put(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                            int target_rank, R_MPI_Aint target_disp, int target_count,
                            R_MPI_Datatype target_datatype, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Query_thread(int *provided);
-OR_MPI_DECLSPEC  int R_MPI_Raccumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
+OMPI_DECLSPEC  int R_MPI_Query_thread(int *provided);
+OMPI_DECLSPEC  int R_MPI_Raccumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
                                    int target_rank, R_MPI_Aint target_disp, int target_count, 
                                    R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source,
+OMPI_DECLSPEC  int R_MPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source,
                                  int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source,
+OMPI_DECLSPEC  int R_MPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source,
                             int tag, R_MPI_Comm comm, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Reduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Reduce(void *sendbuf, void *recvbuf, int count,
                               R_MPI_Datatype datatype, R_MPI_Op op, int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Ireduce(void *sendbuf, void *recvbuf, int count,
                               R_MPI_Datatype datatype, R_MPI_Op op, int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
                                     R_MPI_Datatype datatype, R_MPI_Op op);
-OR_MPI_DECLSPEC  int R_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
+OMPI_DECLSPEC  int R_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                                       R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
+OMPI_DECLSPEC  int R_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                                       R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
+OMPI_DECLSPEC  int R_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                                       R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
+OMPI_DECLSPEC  int R_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                                       R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Register_datarep(char *datarep,
+OMPI_DECLSPEC  int R_MPI_Register_datarep(char *datarep,
                                         R_MPI_Datarep_conversion_function *read_conversion_fn,
                                         R_MPI_Datarep_conversion_function *write_conversion_fn,
                                         R_MPI_Datarep_extent_function *dtype_file_extent_fn,
                                         void *extra_state);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Request_c2f(R_MPI_Request request);
-OR_MPI_DECLSPEC  R_MPI_Request R_MPI_Request_f2c(R_MPI_Fint request);
-OR_MPI_DECLSPEC  int R_MPI_Request_free(R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Request_get_status(R_MPI_Request request, int *flag,
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Request_c2f(R_MPI_Request request);
+OMPI_DECLSPEC  R_MPI_Request R_MPI_Request_f2c(R_MPI_Fint request);
+OMPI_DECLSPEC  int R_MPI_Request_free(R_MPI_Request *request);
+OMPI_DECLSPEC  int R_MPI_Request_get_status(R_MPI_Request request, int *flag,
                                           R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Rget(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
+OMPI_DECLSPEC  int R_MPI_Rget(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
                             int target_rank, R_MPI_Aint target_disp, int target_count, R_MPI_Datatype target_datatype,
                             R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Rget_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_MPI_Rget_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                                        void *result_addr, int result_count, R_MPI_Datatype result_datatype,
                                        int target_rank, R_MPI_Aint target_disp, int target_count, 
                                        R_MPI_Datatype target_datatype, R_MPI_Op op,
                                        R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Rput(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_MPI_Rput(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                             int target_rank, R_MPI_Aint target_disp, int target_cout, 
                             R_MPI_Datatype target_datatype, R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Rsend(void *ibuf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_MPI_Rsend(void *ibuf, int count, R_MPI_Datatype datatype, int dest,
                              int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype,
                                   int dest, int tag, R_MPI_Comm comm,
                                   R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Scan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Scan(void *sendbuf, void *recvbuf, int count,
                             R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Iscan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_MPI_Iscan(void *sendbuf, void *recvbuf, int count,
                             R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Scatterv(void *sendbuf, int sendcounts[], int displs[],
+OMPI_DECLSPEC  int R_MPI_Scatterv(void *sendbuf, int sendcounts[], int displs[],
                                 R_MPI_Datatype sendtype, void *recvbuf, int recvcount,
                                 R_MPI_Datatype recvtype, int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Iscatterv(void *sendbuf, int sendcounts[], int displs[],
+OMPI_DECLSPEC  int R_MPI_Iscatterv(void *sendbuf, int sendcounts[], int displs[],
                                 R_MPI_Datatype sendtype, void *recvbuf, int recvcount,
                                 R_MPI_Datatype recvtype, int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Send_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Send_init(void *buf, int count, R_MPI_Datatype datatype,
                                  int dest, int tag, R_MPI_Comm comm,
                                  R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_MPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest,
                             int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_MPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                 int dest, int sendtag, void *recvbuf, int recvcount,
                                 R_MPI_Datatype recvtype, int source, int recvtag,
                                 R_MPI_Comm comm,  R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Sendrecv_replace(void * buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Sendrecv_replace(void * buf, int count, R_MPI_Datatype datatype,
                                         int dest, int sendtag, int source, int recvtag,
                                         R_MPI_Comm comm, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype,
                                   int dest, int tag, R_MPI_Comm comm,
                                   R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_MPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                              int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Start(R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_MPI_Startall(int count, R_MPI_Request array_of_requests[]);
-OR_MPI_DECLSPEC  int R_MPI_Status_c2f(R_MPI_Status *c_status, R_MPI_Fint *f_status);
-OR_MPI_DECLSPEC  int R_MPI_Status_f2c(R_MPI_Fint *f_status, R_MPI_Status *c_status);
-OR_MPI_DECLSPEC  int R_MPI_Status_set_cancelled(R_MPI_Status *status, int flag);
-OR_MPI_DECLSPEC  int R_MPI_Status_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Start(R_MPI_Request *request);
+OMPI_DECLSPEC  int R_MPI_Startall(int count, R_MPI_Request array_of_requests[]);
+OMPI_DECLSPEC  int R_MPI_Status_c2f(R_MPI_Status *c_status, R_MPI_Fint *f_status);
+OMPI_DECLSPEC  int R_MPI_Status_f2c(R_MPI_Fint *f_status, R_MPI_Status *c_status);
+OMPI_DECLSPEC  int R_MPI_Status_set_cancelled(R_MPI_Status *status, int flag);
+OMPI_DECLSPEC  int R_MPI_Status_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
                                            int count);
-OR_MPI_DECLSPEC  int R_MPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_MPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
                                              R_MPI_Count count);
-OR_MPI_DECLSPEC  int R_MPI_Testall(int count, R_MPI_Request array_of_requests[], int *flag,
+OMPI_DECLSPEC  int R_MPI_Testall(int count, R_MPI_Request array_of_requests[], int *flag,
                                R_MPI_Status array_of_statuses[]);
-OR_MPI_DECLSPEC  int R_MPI_Testany(int count, R_MPI_Request array_of_requests[], int *index,
+OMPI_DECLSPEC  int R_MPI_Testany(int count, R_MPI_Request array_of_requests[], int *index,
                                int *flag, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Test(R_MPI_Request *request, int *flag, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Test_cancelled(R_MPI_Status *status, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Testsome(int incount, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_MPI_Test(R_MPI_Request *request, int *flag, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_Test_cancelled(R_MPI_Status *status, int *flag);
+OMPI_DECLSPEC  int R_MPI_Testsome(int incount, R_MPI_Request array_of_requests[],
                                 int *outcount, int array_of_indices[],
                                 R_MPI_Status array_of_statuses[]);
-OR_MPI_DECLSPEC  int R_MPI_Topo_test(R_MPI_Comm comm, int *status);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Type_c2f(R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_Type_commit(R_MPI_Datatype *type);
-OR_MPI_DECLSPEC  int R_MPI_Type_contiguous(int count, R_MPI_Datatype oldtype,
+OMPI_DECLSPEC  int R_MPI_Topo_test(R_MPI_Comm comm, int *status);
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Type_c2f(R_MPI_Datatype datatype);
+OMPI_DECLSPEC  int R_MPI_Type_commit(R_MPI_Datatype *type);
+OMPI_DECLSPEC  int R_MPI_Type_contiguous(int count, R_MPI_Datatype oldtype,
                                        R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_darray(int size, int rank, int ndims,
+OMPI_DECLSPEC  int R_MPI_Type_create_darray(int size, int rank, int ndims,
                                           int gsize_array[], int distrib_array[],
                                           int darg_array[], int psize_array[],
                                           int order, R_MPI_Datatype oldtype,
                                           R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_f90_complex(int p, int r, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_f90_integer(int r, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_f90_real(int p, int r, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_hindexed_block(int count, int blocklength,
+OMPI_DECLSPEC  int R_MPI_Type_create_f90_complex(int p, int r, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_MPI_Type_create_f90_integer(int r, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_MPI_Type_create_f90_real(int p, int r, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_MPI_Type_create_hindexed_block(int count, int blocklength,
                                                   R_MPI_Aint array_of_displacements[],
                                                   R_MPI_Datatype oldtype,
                                                   R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
                                             R_MPI_Aint array_of_displacements[],
                                             R_MPI_Datatype oldtype,
                                             R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride,
+OMPI_DECLSPEC  int R_MPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride,
                                            R_MPI_Datatype oldtype,
                                            R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_keyval(R_MPI_Type_copy_attr_function *type_copy_attr_fn,
+OMPI_DECLSPEC  int R_MPI_Type_create_keyval(R_MPI_Type_copy_attr_function *type_copy_attr_fn,
                                           R_MPI_Type_delete_attr_function *type_delete_attr_fn,
                                           int *type_keyval, void *extra_state);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_indexed_block(int count, int blocklength,
+OMPI_DECLSPEC  int R_MPI_Type_create_indexed_block(int count, int blocklength,
                                                  int array_of_displacements[],
                                                  R_MPI_Datatype oldtype,
                                                  R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_struct(int count, int array_of_block_lengths[],
+OMPI_DECLSPEC  int R_MPI_Type_create_struct(int count, int array_of_block_lengths[],
                                           R_MPI_Aint array_of_displacements[],
                                           R_MPI_Datatype array_of_types[],
                                           R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_subarray(int ndims, int size_array[], int subsize_array[],
+OMPI_DECLSPEC  int R_MPI_Type_create_subarray(int ndims, int size_array[], int subsize_array[],
                                             int start_array[], int order,
                                             R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb,
+OMPI_DECLSPEC  int R_MPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb,
                                            R_MPI_Aint extent, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_delete_attr(R_MPI_Datatype type, int type_keyval);
-OR_MPI_DECLSPEC  int R_MPI_Type_dup(R_MPI_Datatype type, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_extent(R_MPI_Datatype type, R_MPI_Aint *extent)
+OMPI_DECLSPEC  int R_MPI_Type_delete_attr(R_MPI_Datatype type, int type_keyval);
+OMPI_DECLSPEC  int R_MPI_Type_dup(R_MPI_Datatype type, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_MPI_Type_extent(R_MPI_Datatype type, R_MPI_Aint *extent)
                                    __mpi_interface_deprecated__("R_MPI_Type_extent is superseded by R_MPI_Type_get_extent in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Type_free(R_MPI_Datatype *type);
-OR_MPI_DECLSPEC  int R_MPI_Type_free_keyval(int *type_keyval);
-OR_MPI_DECLSPEC  R_MPI_Datatype R_MPI_Type_f2c(R_MPI_Fint datatype);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_attr(R_MPI_Datatype type, int type_keyval,
+OMPI_DECLSPEC  int R_MPI_Type_free(R_MPI_Datatype *type);
+OMPI_DECLSPEC  int R_MPI_Type_free_keyval(int *type_keyval);
+OMPI_DECLSPEC  R_MPI_Datatype R_MPI_Type_f2c(R_MPI_Fint datatype);
+OMPI_DECLSPEC  int R_MPI_Type_get_attr(R_MPI_Datatype type, int type_keyval,
                                      void *attribute_val, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_contents(R_MPI_Datatype mtype, int max_integers,
+OMPI_DECLSPEC  int R_MPI_Type_get_contents(R_MPI_Datatype mtype, int max_integers,
                                          int max_addresses, int max_datatypes,
                                          int array_of_integers[],
                                          R_MPI_Aint array_of_addresses[],
                                          R_MPI_Datatype array_of_datatypes[]);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_envelope(R_MPI_Datatype type, int *num_integers,
+OMPI_DECLSPEC  int R_MPI_Type_get_envelope(R_MPI_Datatype type, int *num_integers,
                                          int *num_addresses, int *num_datatypes,
                                          int *combiner);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_extent(R_MPI_Datatype type, R_MPI_Aint *lb,
+OMPI_DECLSPEC  int R_MPI_Type_get_extent(R_MPI_Datatype type, R_MPI_Aint *lb,
                                        R_MPI_Aint *extent);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_extent_x(R_MPI_Datatype type, R_MPI_Count *lb,
+OMPI_DECLSPEC  int R_MPI_Type_get_extent_x(R_MPI_Datatype type, R_MPI_Count *lb,
                                          R_MPI_Count *extent);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_name(R_MPI_Datatype type, char *type_name,
+OMPI_DECLSPEC  int R_MPI_Type_get_name(R_MPI_Datatype type, char *type_name,
                                      int *resultlen);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb,
+OMPI_DECLSPEC  int R_MPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb,
                                             R_MPI_Aint *true_extent);
-OR_MPI_DECLSPEC  int R_MPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *true_lb,
+OMPI_DECLSPEC  int R_MPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *true_lb,
                                               R_MPI_Count *true_extent);
-OR_MPI_DECLSPEC  int R_MPI_Type_hindexed(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_MPI_Type_hindexed(int count, int array_of_blocklengths[],
                                      R_MPI_Aint array_of_displacements[],
                                      R_MPI_Datatype oldtype, R_MPI_Datatype *newtype)
                                      __mpi_interface_deprecated__("R_MPI_Type_hindexed is superseded by R_MPI_Type_create_hindexed in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride,
+OMPI_DECLSPEC  int R_MPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride,
                                     R_MPI_Datatype oldtype, R_MPI_Datatype *newtype)
                                     __mpi_interface_deprecated__("R_MPI_Type_hvector is superseded by R_MPI_Type_create_hvector in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Type_indexed(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_MPI_Type_indexed(int count, int array_of_blocklengths[],
                                     int array_of_displacements[],
                                     R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Type_lb(R_MPI_Datatype type, R_MPI_Aint *lb)
+OMPI_DECLSPEC  int R_MPI_Type_lb(R_MPI_Datatype type, R_MPI_Aint *lb)
                                __mpi_interface_deprecated__("R_MPI_Type_lb is deprecated, use R_MPI_Type_get_extent in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *type);
-OR_MPI_DECLSPEC  int R_MPI_Type_set_attr(R_MPI_Datatype type, int type_keyval,
+OMPI_DECLSPEC  int R_MPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *type);
+OMPI_DECLSPEC  int R_MPI_Type_set_attr(R_MPI_Datatype type, int type_keyval,
                                      void *attr_val);
-OR_MPI_DECLSPEC  int R_MPI_Type_set_name(R_MPI_Datatype type, char *type_name);
-OR_MPI_DECLSPEC  int R_MPI_Type_size(R_MPI_Datatype type, int *size);
-OR_MPI_DECLSPEC  int R_MPI_Type_size_x(R_MPI_Datatype type, R_MPI_Count *size);
-OR_MPI_DECLSPEC  int R_MPI_Type_struct(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_MPI_Type_set_name(R_MPI_Datatype type, char *type_name);
+OMPI_DECLSPEC  int R_MPI_Type_size(R_MPI_Datatype type, int *size);
+OMPI_DECLSPEC  int R_MPI_Type_size_x(R_MPI_Datatype type, R_MPI_Count *size);
+OMPI_DECLSPEC  int R_MPI_Type_struct(int count, int array_of_blocklengths[],
                                    R_MPI_Aint array_of_displacements[],
                                    R_MPI_Datatype array_of_types[],
                                    R_MPI_Datatype *newtype)
                                    __mpi_interface_deprecated__("R_MPI_Type_struct is superseded by R_MPI_Type_create_struct in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Type_ub(R_MPI_Datatype mtype, R_MPI_Aint *ub)
+OMPI_DECLSPEC  int R_MPI_Type_ub(R_MPI_Datatype mtype, R_MPI_Aint *ub)
                                __mpi_interface_deprecated__("R_MPI_Type_ub is deprecated, use R_MPI_Type_get_extent in MPI-2.0");
-OR_MPI_DECLSPEC  int R_MPI_Type_vector(int count, int blocklength, int stride,
+OMPI_DECLSPEC  int R_MPI_Type_vector(int count, int blocklength, int stride,
                                    R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_MPI_Unpack(void *inbuf, int insize, int *position,
+OMPI_DECLSPEC  int R_MPI_Unpack(void *inbuf, int insize, int *position,
                               void *outbuf, int outcount, R_MPI_Datatype datatype,
                               R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_MPI_Unpublish_name(char *service_name, R_MPI_Info info, char *port_name);
-OR_MPI_DECLSPEC  int R_MPI_Unpack_external (char datarep[], void *inbuf, R_MPI_Aint insize,
+OMPI_DECLSPEC  int R_MPI_Unpublish_name(char *service_name, R_MPI_Info info, char *port_name);
+OMPI_DECLSPEC  int R_MPI_Unpack_external (char datarep[], void *inbuf, R_MPI_Aint insize,
                                         R_MPI_Aint *position, void *outbuf, int outcount,
                                         R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_MPI_Waitall(int count, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_MPI_Waitall(int count, R_MPI_Request array_of_requests[],
                                R_MPI_Status *array_of_statuses);
-OR_MPI_DECLSPEC  int R_MPI_Waitany(int count, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_MPI_Waitany(int count, R_MPI_Request array_of_requests[],
                                int *index, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Wait(R_MPI_Request *request, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_MPI_Waitsome(int incount, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_MPI_Wait(R_MPI_Request *request, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_MPI_Waitsome(int incount, R_MPI_Request array_of_requests[],
                                 int *outcount, int array_of_indices[],
                                 R_MPI_Status array_of_statuses[]);
-OR_MPI_DECLSPEC  int R_MPI_Win_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
+OMPI_DECLSPEC  int R_MPI_Win_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
                                     R_MPI_Comm comm, void *baseptr, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_MPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
+OMPI_DECLSPEC  int R_MPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
                                            R_MPI_Comm comm, void *baseptr, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_MPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size);
-OR_MPI_DECLSPEC  R_MPI_Fint R_MPI_Win_c2f(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_call_errhandler(R_MPI_Win win, int errorcode);
-OR_MPI_DECLSPEC  int R_MPI_Win_complete(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_create(void *base, R_MPI_Aint size, int disp_unit,
+OMPI_DECLSPEC  int R_MPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size);
+OMPI_DECLSPEC  R_MPI_Fint R_MPI_Win_c2f(R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_call_errhandler(R_MPI_Win win, int errorcode);
+OMPI_DECLSPEC  int R_MPI_Win_complete(R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_create(void *base, R_MPI_Aint size, int disp_unit,
                                   R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_MPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_MPI_Win_create_errhandler(R_MPI_Win_errhandler_function *function,
+OMPI_DECLSPEC  int R_MPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
+OMPI_DECLSPEC  int R_MPI_Win_create_errhandler(R_MPI_Win_errhandler_function *function,
                                              R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
+OMPI_DECLSPEC  int R_MPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
                                          R_MPI_Win_delete_attr_function *win_delete_attr_fn,
                                          int *win_keyval, void *extra_state);
-OR_MPI_DECLSPEC  int R_MPI_Win_delete_attr(R_MPI_Win win, int win_keyval);
-OR_MPI_DECLSPEC  int R_MPI_Win_detach(R_MPI_Win win, void *base);
-OR_MPI_DECLSPEC  R_MPI_Win R_MPI_Win_f2c(R_MPI_Fint win);
-OR_MPI_DECLSPEC  int R_MPI_Win_fence(int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_flush(int rank, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_flush_all(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_flush_local(int rank, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_flush_local_all(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_free(R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_MPI_Win_free_keyval(int *win_keyval);
-OR_MPI_DECLSPEC  int R_MPI_Win_get_attr(R_MPI_Win win, int win_keyval,
+OMPI_DECLSPEC  int R_MPI_Win_delete_attr(R_MPI_Win win, int win_keyval);
+OMPI_DECLSPEC  int R_MPI_Win_detach(R_MPI_Win win, void *base);
+OMPI_DECLSPEC  R_MPI_Win R_MPI_Win_f2c(R_MPI_Fint win);
+OMPI_DECLSPEC  int R_MPI_Win_fence(int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_flush(int rank, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_flush_all(R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_flush_local(int rank, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_flush_local_all(R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_free(R_MPI_Win *win);
+OMPI_DECLSPEC  int R_MPI_Win_free_keyval(int *win_keyval);
+OMPI_DECLSPEC  int R_MPI_Win_get_attr(R_MPI_Win win, int win_keyval,
                                     void *attribute_val, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Win_get_group(R_MPI_Win win, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_MPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used);
-OR_MPI_DECLSPEC  int R_MPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen);
-OR_MPI_DECLSPEC  int R_MPI_Win_lock(int lock_type, int rank, int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_lock_all(int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_post(R_MPI_Group group, int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val);
-OR_MPI_DECLSPEC  int R_MPI_Win_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_MPI_Win_set_info(R_MPI_Win win, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_MPI_Win_set_name(R_MPI_Win win, char *win_name);
-OR_MPI_DECLSPEC  int R_MPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size, int *disp_unit, void *baseptr);
-OR_MPI_DECLSPEC  int R_MPI_Win_start(R_MPI_Group group, int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_sync(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_test(R_MPI_Win win, int *flag);
-OR_MPI_DECLSPEC  int R_MPI_Win_unlock(int rank, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_unlock_all(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_MPI_Win_wait(R_MPI_Win win);
-OR_MPI_DECLSPEC  double R_MPI_Wtick(void);
-OR_MPI_DECLSPEC  double R_MPI_Wtime(void);
+OMPI_DECLSPEC  int R_MPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
+OMPI_DECLSPEC  int R_MPI_Win_get_group(R_MPI_Win win, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_MPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used);
+OMPI_DECLSPEC  int R_MPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen);
+OMPI_DECLSPEC  int R_MPI_Win_lock(int lock_type, int rank, int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_lock_all(int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_post(R_MPI_Group group, int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val);
+OMPI_DECLSPEC  int R_MPI_Win_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_MPI_Win_set_info(R_MPI_Win win, R_MPI_Info info);
+OMPI_DECLSPEC  int R_MPI_Win_set_name(R_MPI_Win win, char *win_name);
+OMPI_DECLSPEC  int R_MPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size, int *disp_unit, void *baseptr);
+OMPI_DECLSPEC  int R_MPI_Win_start(R_MPI_Group group, int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_sync(R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_test(R_MPI_Win win, int *flag);
+OMPI_DECLSPEC  int R_MPI_Win_unlock(int rank, R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_unlock_all(R_MPI_Win win);
+OMPI_DECLSPEC  int R_MPI_Win_wait(R_MPI_Win win);
+OMPI_DECLSPEC  double R_MPI_Wtick(void);
+OMPI_DECLSPEC  double R_MPI_Wtime(void);
 
   /*
    * Profiling MPI API
    */
-OR_MPI_DECLSPEC  int R_PMPI_Abort(R_MPI_Comm comm, int errorcode);
-OR_MPI_DECLSPEC  int R_PMPI_Accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_PMPI_Abort(R_MPI_Comm comm, int errorcode);
+OMPI_DECLSPEC  int R_PMPI_Accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                                    int target_rank, R_MPI_Aint target_disp, int target_count,
                                    R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Add_error_class(int *errorclass);
-OR_MPI_DECLSPEC  int R_PMPI_Add_error_code(int errorclass, int *errorcode);
-OR_MPI_DECLSPEC  int R_PMPI_Add_error_string(int errorcode, char *string);
-OR_MPI_DECLSPEC  int R_PMPI_Address(void *location, R_MPI_Aint *address)
+OMPI_DECLSPEC  int R_PMPI_Add_error_class(int *errorclass);
+OMPI_DECLSPEC  int R_PMPI_Add_error_code(int errorclass, int *errorcode);
+OMPI_DECLSPEC  int R_PMPI_Add_error_string(int errorcode, char *string);
+OMPI_DECLSPEC  int R_PMPI_Address(void *location, R_MPI_Aint *address)
                                 __mpi_interface_deprecated__("R_MPI_Address is superseded by R_MPI_Get_address in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                   void *recvbuf, int recvcount,
                                   R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                   void *recvbuf, int recvcount,
                                   R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                    void *recvbuf, int recvcounts[],
                                    int displs[], R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                    void *recvbuf, int recvcounts[],
                                    int displs[], R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info,
+OMPI_DECLSPEC  int R_PMPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info,
                                   void *baseptr);
-OR_MPI_DECLSPEC  int R_PMPI_Allreduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Allreduce(void *sendbuf, void *recvbuf, int count,
                                   R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Iallreduce(void *sendbuf, void *recvbuf, int count,
                                   R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                  void *recvbuf, int recvcount,
                                  R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                  void *recvbuf, int recvcount,
                                  R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+OMPI_DECLSPEC  int R_PMPI_Alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                                   R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
                                   int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ialltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+OMPI_DECLSPEC  int R_PMPI_Ialltoallv(void *sendbuf, int sendcounts[], int sdispls[],
                                   R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
                                   int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_PMPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
                                   void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtypes[],
                                   R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_PMPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtypes[],
                                   void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtypes[],
                                   R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Attr_delete(R_MPI_Comm comm, int keyval)
+OMPI_DECLSPEC  int R_PMPI_Attr_delete(R_MPI_Comm comm, int keyval)
                                     __mpi_interface_deprecated__("R_MPI_Attr_delete is superseded by R_MPI_Comm_delete_attr in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val, int *flag)
+OMPI_DECLSPEC  int R_PMPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val, int *flag)
                                  __mpi_interface_deprecated__("R_MPI_Attr_get is superseded by R_MPI_Comm_get_attr in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int nodes[],
+OMPI_DECLSPEC  int R_PMPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int nodes[],
                                           int degrees[], int targets[],
                                           int weights[], R_MPI_Info info,
                                           int reorder, R_MPI_Comm * newcomm);
-OR_MPI_DECLSPEC  int R_PMPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old,
+OMPI_DECLSPEC  int R_PMPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old,
                                                    int indegree, int sources[],
                                                    int sourceweights[],
                                                    int outdegree,
@@ -1928,730 +1928,730 @@ OR_MPI_DECLSPEC  int R_PMPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old,
                                                    int destweights[],
                                                    R_MPI_Info info, int reorder,
                                                    R_MPI_Comm *comm_dist_graph);
-OR_MPI_DECLSPEC int R_PMPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree,
+OMPI_DECLSPEC int R_PMPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree,
                                             int sources[], int sourceweights[],
                                             int maxoutdegree,
                                              int destinations[],
                                             int destweights[]);
-OR_MPI_DECLSPEC  int R_PMPI_Dist_graph_neighbors_count(R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_PMPI_Dist_graph_neighbors_count(R_MPI_Comm comm,
                                                    int *inneighbors,
                                                    int *outneighbors,
                                                    int *weighted);
-OR_MPI_DECLSPEC  int R_PMPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val)
+OMPI_DECLSPEC  int R_PMPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val)
                                  __mpi_interface_deprecated__("R_MPI_Attr_put is superseded by R_MPI_Comm_set_attr in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Barrier(R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Barrier(R_MPI_Comm comm);
+OMPI_DECLSPEC  int R_PMPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request);
+OMPI_DECLSPEC  int R_PMPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype,
                               int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype,
 				                              int root, R_MPI_Comm comm,
 											  R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Bsend(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Bsend(void *buf, int count, R_MPI_Datatype datatype,
                               int dest, int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype,
                                    int dest, int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Buffer_attach(void *buffer, int size);
-OR_MPI_DECLSPEC  int R_PMPI_Buffer_detach(void *buffer, int *size);
-OR_MPI_DECLSPEC  int R_PMPI_Cancel(R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]);
-OR_MPI_DECLSPEC  int R_PMPI_Cart_create(R_MPI_Comm old_comm, int ndims, int dims[],
+OMPI_DECLSPEC  int R_PMPI_Buffer_attach(void *buffer, int size);
+OMPI_DECLSPEC  int R_PMPI_Buffer_detach(void *buffer, int *size);
+OMPI_DECLSPEC  int R_PMPI_Cancel(R_MPI_Request *request);
+OMPI_DECLSPEC  int R_PMPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]);
+OMPI_DECLSPEC  int R_PMPI_Cart_create(R_MPI_Comm old_comm, int ndims, int dims[],
                                     int periods[], int reorder, R_MPI_Comm *comm_cart);
-OR_MPI_DECLSPEC  int R_PMPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[],
+OMPI_DECLSPEC  int R_PMPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[],
                                  int periods[], int coords[]);
-OR_MPI_DECLSPEC  int R_PMPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[],
+OMPI_DECLSPEC  int R_PMPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[],
                                  int periods[], int *newrank);
-OR_MPI_DECLSPEC  int R_PMPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank);
-OR_MPI_DECLSPEC  int R_PMPI_Cart_shift(R_MPI_Comm comm, int direction, int disp,
+OMPI_DECLSPEC  int R_PMPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank);
+OMPI_DECLSPEC  int R_PMPI_Cart_shift(R_MPI_Comm comm, int direction, int disp,
                                    int *rank_source, int *rank_dest);
-OR_MPI_DECLSPEC  int R_PMPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *new_comm);
-OR_MPI_DECLSPEC  int R_PMPI_Cartdim_get(R_MPI_Comm comm, int *ndims);
-OR_MPI_DECLSPEC  int R_PMPI_Close_port(char *port_name);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_accept(char *port_name, R_MPI_Info info, int root,
+OMPI_DECLSPEC  int R_PMPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *new_comm);
+OMPI_DECLSPEC  int R_PMPI_Cartdim_get(R_MPI_Comm comm, int *ndims);
+OMPI_DECLSPEC  int R_PMPI_Close_port(char *port_name);
+OMPI_DECLSPEC  int R_PMPI_Comm_accept(char *port_name, R_MPI_Info info, int root,
                                     R_MPI_Comm comm, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Comm_c2f(R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_connect(char *port_name, R_MPI_Info info, int root,
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Comm_c2f(R_MPI_Comm comm);
+OMPI_DECLSPEC  int R_PMPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode);
+OMPI_DECLSPEC  int R_PMPI_Comm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result);
+OMPI_DECLSPEC  int R_PMPI_Comm_connect(char *port_name, R_MPI_Info info, int root,
                                      R_MPI_Comm comm, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function *function,
+OMPI_DECLSPEC  int R_PMPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function *function,
                                                R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_create_keyval(R_MPI_Comm_copy_attr_function *comm_copy_attr_fn,
+OMPI_DECLSPEC  int R_PMPI_Comm_create_keyval(R_MPI_Comm_copy_attr_function *comm_copy_attr_fn,
                                            R_MPI_Comm_delete_attr_function *comm_delete_attr_fn,
                                            int *comm_keyval, void *extra_state);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_delete_attr(R_MPI_Comm comm, int comm_keyval);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_disconnect(R_MPI_Comm *comm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  R_MPI_Comm R_PMPI_Comm_f2c(R_MPI_Fint comm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_free_keyval(int *comm_keyval);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_free(R_MPI_Comm *comm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval,
+OMPI_DECLSPEC  int R_PMPI_Comm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_PMPI_Comm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_PMPI_Comm_delete_attr(R_MPI_Comm comm, int comm_keyval);
+OMPI_DECLSPEC  int R_PMPI_Comm_disconnect(R_MPI_Comm *comm);
+OMPI_DECLSPEC  int R_PMPI_Comm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_PMPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm, R_MPI_Request *request);
+OMPI_DECLSPEC  int R_PMPI_Comm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  R_MPI_Comm R_PMPI_Comm_f2c(R_MPI_Fint comm);
+OMPI_DECLSPEC  int R_PMPI_Comm_free_keyval(int *comm_keyval);
+OMPI_DECLSPEC  int R_PMPI_Comm_free(R_MPI_Comm *comm);
+OMPI_DECLSPEC  int R_PMPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval,
                                       void *attribute_val, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_get_errhandler(R_MPI_Comm comm, R_MPI_Errhandler *erhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info_used);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_get_parent(R_MPI_Comm *parent);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_join(int fd, R_MPI_Comm *intercomm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_rank(R_MPI_Comm comm, int *rank);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_remote_group(R_MPI_Comm comm, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_remote_size(R_MPI_Comm comm, int *size);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_set_errhandler(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_set_name(R_MPI_Comm comm, char *comm_name);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_size(R_MPI_Comm comm, int *size);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info,
+OMPI_DECLSPEC  int R_PMPI_Comm_get_errhandler(R_MPI_Comm comm, R_MPI_Errhandler *erhandler);
+OMPI_DECLSPEC  int R_PMPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info_used);
+OMPI_DECLSPEC  int R_PMPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen);
+OMPI_DECLSPEC  int R_PMPI_Comm_get_parent(R_MPI_Comm *parent);
+OMPI_DECLSPEC  int R_PMPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_PMPI_Comm_join(int fd, R_MPI_Comm *intercomm);
+OMPI_DECLSPEC  int R_PMPI_Comm_rank(R_MPI_Comm comm, int *rank);
+OMPI_DECLSPEC  int R_PMPI_Comm_remote_group(R_MPI_Comm comm, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_PMPI_Comm_remote_size(R_MPI_Comm comm, int *size);
+OMPI_DECLSPEC  int R_PMPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val);
+OMPI_DECLSPEC  int R_PMPI_Comm_set_errhandler(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_PMPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info);
+OMPI_DECLSPEC  int R_PMPI_Comm_set_name(R_MPI_Comm comm, char *comm_name);
+OMPI_DECLSPEC  int R_PMPI_Comm_size(R_MPI_Comm comm, int *size);
+OMPI_DECLSPEC  int R_PMPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info,
                                    int root, R_MPI_Comm comm, R_MPI_Comm *intercomm,
                                    int array_of_errcodes[]);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_spawn_multiple(int count, char *array_of_commands[], char **array_of_argv[],
+OMPI_DECLSPEC  int R_PMPI_Comm_spawn_multiple(int count, char *array_of_commands[], char **array_of_argv[],
                                             int array_of_maxprocs[], R_MPI_Info array_of_info[],
                                             int root, R_MPI_Comm comm, R_MPI_Comm *intercomm,
                                             int array_of_errcodes[]);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key, R_MPI_Info info, R_MPI_Comm *newcomm);
-OR_MPI_DECLSPEC  int R_PMPI_Comm_test_inter(R_MPI_Comm comm, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Compare_and_swap(void *origin_addr, void *compare_addr,
+OMPI_DECLSPEC  int R_PMPI_Comm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_PMPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key, R_MPI_Info info, R_MPI_Comm *newcomm);
+OMPI_DECLSPEC  int R_PMPI_Comm_test_inter(R_MPI_Comm comm, int *flag);
+OMPI_DECLSPEC  int R_PMPI_Compare_and_swap(void *origin_addr, void *compare_addr,
                                          void *result_addr, R_MPI_Datatype datatype, int target_rank,
                                          R_MPI_Aint target_disp, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Dims_create(int nnodes, int ndims, int dims[]);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Errhandler_c2f(R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Errhandler_create(R_MPI_Handler_function *function,
+OMPI_DECLSPEC  int R_PMPI_Dims_create(int nnodes, int ndims, int dims[]);
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Errhandler_c2f(R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_PMPI_Errhandler_create(R_MPI_Handler_function *function,
                                           R_MPI_Errhandler *errhandler)
                                           __mpi_interface_deprecated__("R_MPI_Errhandler_create is superseded by R_MPI_Comm_create_errhandler in MPI-2.0");
-OR_MPI_DECLSPEC  R_MPI_Errhandler R_PMPI_Errhandler_f2c(R_MPI_Fint errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Errhandler_free(R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Errhandler_get(R_MPI_Comm comm, R_MPI_Errhandler *errhandler)
+OMPI_DECLSPEC  R_MPI_Errhandler R_PMPI_Errhandler_f2c(R_MPI_Fint errhandler);
+OMPI_DECLSPEC  int R_PMPI_Errhandler_free(R_MPI_Errhandler *errhandler);
+OMPI_DECLSPEC  int R_PMPI_Errhandler_get(R_MPI_Comm comm, R_MPI_Errhandler *errhandler)
                                        __mpi_interface_deprecated__("R_MPI_Errhandler_get is superseded by R_MPI_Comm_get_errhandler in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Errhandler_set(R_MPI_Comm comm, R_MPI_Errhandler errhandler)
+OMPI_DECLSPEC  int R_PMPI_Errhandler_set(R_MPI_Comm comm, R_MPI_Errhandler errhandler)
                                        __mpi_interface_deprecated__("R_MPI_Errhandler_set is superseded by R_MPI_Comm_set_errhandler in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Error_class(int errorcode, int *errorclass);
-OR_MPI_DECLSPEC  int R_PMPI_Error_string(int errorcode, char *string, int *resultlen);
-OR_MPI_DECLSPEC  int R_PMPI_Exscan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Error_class(int errorcode, int *errorclass);
+OMPI_DECLSPEC  int R_PMPI_Error_string(int errorcode, char *string, int *resultlen);
+OMPI_DECLSPEC  int R_PMPI_Exscan(void *sendbuf, void *recvbuf, int count,
                                R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Fetch_and_op(void *origin_addr, void *result_addr, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Fetch_and_op(void *origin_addr, void *result_addr, R_MPI_Datatype datatype,
                                      int target_rank, R_MPI_Aint target_disp, R_MPI_Op op, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Iexscan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Iexscan(void *sendbuf, void *recvbuf, int count,
                                R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-#if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_File_c2f(R_MPI_File file);
-OR_MPI_DECLSPEC  R_MPI_File R_PMPI_File_f2c(R_MPI_Fint file);
-OR_MPI_DECLSPEC  int R_PMPI_File_call_errhandler(R_MPI_File fh, int errorcode);
-OR_MPI_DECLSPEC  int R_PMPI_File_create_errhandler(R_MPI_File_errhandler_function *function,
+#if OMPI_PROVIDE_R_MPI_FILE_INTERFACE
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_File_c2f(R_MPI_File file);
+OMPI_DECLSPEC  R_MPI_File R_PMPI_File_f2c(R_MPI_Fint file);
+OMPI_DECLSPEC  int R_PMPI_File_call_errhandler(R_MPI_File fh, int errorcode);
+OMPI_DECLSPEC  int R_PMPI_File_create_errhandler(R_MPI_File_errhandler_function *function,
                                                R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_File_set_errhandler( R_MPI_File file, R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_errhandler( R_MPI_File file, R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_File_open(R_MPI_Comm comm, char *filename, int amode,
+OMPI_DECLSPEC  int R_PMPI_File_set_errhandler( R_MPI_File file, R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_PMPI_File_get_errhandler( R_MPI_File file, R_MPI_Errhandler *errhandler);
+OMPI_DECLSPEC  int R_PMPI_File_open(R_MPI_Comm comm, char *filename, int amode,
                                   R_MPI_Info info, R_MPI_File *fh);
-OR_MPI_DECLSPEC  int R_PMPI_File_close(R_MPI_File *fh);
-OR_MPI_DECLSPEC  int R_PMPI_File_delete(char *filename, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_PMPI_File_set_size(R_MPI_File fh, R_MPI_Offset size);
-OR_MPI_DECLSPEC  int R_PMPI_File_preallocate(R_MPI_File fh, R_MPI_Offset size);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_size(R_MPI_File fh, R_MPI_Offset *size);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_group(R_MPI_File fh, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_amode(R_MPI_File fh, int *amode);
-OR_MPI_DECLSPEC  int R_PMPI_File_set_info(R_MPI_File fh, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_info(R_MPI_File fh, R_MPI_Info *info_used);
-OR_MPI_DECLSPEC  int R_PMPI_File_set_view(R_MPI_File fh, R_MPI_Offset disp, R_MPI_Datatype etype,
+OMPI_DECLSPEC  int R_PMPI_File_close(R_MPI_File *fh);
+OMPI_DECLSPEC  int R_PMPI_File_delete(char *filename, R_MPI_Info info);
+OMPI_DECLSPEC  int R_PMPI_File_set_size(R_MPI_File fh, R_MPI_Offset size);
+OMPI_DECLSPEC  int R_PMPI_File_preallocate(R_MPI_File fh, R_MPI_Offset size);
+OMPI_DECLSPEC  int R_PMPI_File_get_size(R_MPI_File fh, R_MPI_Offset *size);
+OMPI_DECLSPEC  int R_PMPI_File_get_group(R_MPI_File fh, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_PMPI_File_get_amode(R_MPI_File fh, int *amode);
+OMPI_DECLSPEC  int R_PMPI_File_set_info(R_MPI_File fh, R_MPI_Info info);
+OMPI_DECLSPEC  int R_PMPI_File_get_info(R_MPI_File fh, R_MPI_Info *info_used);
+OMPI_DECLSPEC  int R_PMPI_File_set_view(R_MPI_File fh, R_MPI_Offset disp, R_MPI_Datatype etype,
                                       R_MPI_Datatype filetype, char *datarep, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_view(R_MPI_File fh, R_MPI_Offset *disp,
+OMPI_DECLSPEC  int R_PMPI_File_get_view(R_MPI_File fh, R_MPI_Offset *disp,
                                       R_MPI_Datatype *etype,
                                       R_MPI_Datatype *filetype, char *datarep);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_read_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                      int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_read_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                          int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_write_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                       int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_write_at_all(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                           int count, R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_iread_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                       int count, R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_iwrite_at(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                        int count, R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_File_read(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_read(R_MPI_File fh, void *buf, int count,
                                   R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_all(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_read_all(R_MPI_File fh, void *buf, int count,
                                       R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_write(R_MPI_File fh, void *buf, int count,
                                    R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_all(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_write_all(R_MPI_File fh, void *buf, int count,
                                        R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_iread(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_iread(R_MPI_File fh, void *buf, int count,
                                    R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_File_iwrite(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_iwrite(R_MPI_File fh, void *buf, int count,
                                     R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_position(R_MPI_File fh, R_MPI_Offset *offset);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_byte_offset(R_MPI_File fh, R_MPI_Offset offset,
+OMPI_DECLSPEC  int R_PMPI_File_seek(R_MPI_File fh, R_MPI_Offset offset, int whence);
+OMPI_DECLSPEC  int R_PMPI_File_get_position(R_MPI_File fh, R_MPI_Offset *offset);
+OMPI_DECLSPEC  int R_PMPI_File_get_byte_offset(R_MPI_File fh, R_MPI_Offset offset,
                                              R_MPI_Offset *disp);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_read_shared(R_MPI_File fh, void *buf, int count,
                                          R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_write_shared(R_MPI_File fh, void *buf, int count,
                                           R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_iread_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_iread_shared(R_MPI_File fh, void *buf, int count,
                                           R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_File_iwrite_shared(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_iwrite_shared(R_MPI_File fh, void *buf, int count,
                                            R_MPI_Datatype datatype, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_ordered(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_read_ordered(R_MPI_File fh, void *buf, int count,
                                           R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_ordered(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_write_ordered(R_MPI_File fh, void *buf, int count,
                                            R_MPI_Datatype datatype, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_seek_shared(R_MPI_File fh, R_MPI_Offset offset, int whence);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_seek_shared(R_MPI_File fh, R_MPI_Offset offset, int whence);
+OMPI_DECLSPEC  int R_PMPI_File_get_position_shared(R_MPI_File fh, R_MPI_Offset *offset);
+OMPI_DECLSPEC  int R_PMPI_File_read_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                                int count, R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
+OMPI_DECLSPEC  int R_PMPI_File_read_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_File_write_at_all_begin(R_MPI_File fh, R_MPI_Offset offset, void *buf,
                                                 int count, R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_all_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_write_at_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_File_read_all_begin(R_MPI_File fh, void *buf, int count,
                                             R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_all_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_read_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_File_write_all_begin(R_MPI_File fh, void *buf, int count,
                                              R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_ordered_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_write_all_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_File_read_ordered_begin(R_MPI_File fh, void *buf, int count,
                                                 R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_File_read_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_ordered_begin(R_MPI_File fh, void *buf, int count,
+OMPI_DECLSPEC  int R_PMPI_File_read_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_File_write_ordered_begin(R_MPI_File fh, void *buf, int count,
                                                  R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_File_write_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_type_extent(R_MPI_File fh, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_File_write_ordered_end(R_MPI_File fh, void *buf, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_File_get_type_extent(R_MPI_File fh, R_MPI_Datatype datatype,
                                              R_MPI_Aint *extent);
-OR_MPI_DECLSPEC  int R_PMPI_File_set_atomicity(R_MPI_File fh, int flag);
-OR_MPI_DECLSPEC  int R_PMPI_File_get_atomicity(R_MPI_File fh, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_File_sync(R_MPI_File fh);
-#endif /* #if OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE */
-OR_MPI_DECLSPEC  int R_PMPI_Finalize(void);
-OR_MPI_DECLSPEC  int R_PMPI_Finalized(int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Free_mem(void *base);
-OR_MPI_DECLSPEC  int R_PMPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_File_set_atomicity(R_MPI_File fh, int flag);
+OMPI_DECLSPEC  int R_PMPI_File_get_atomicity(R_MPI_File fh, int *flag);
+OMPI_DECLSPEC  int R_PMPI_File_sync(R_MPI_File fh);
+#endif /* #if OMPI_PROVIDE_R_MPI_FILE_INTERFACE */
+OMPI_DECLSPEC  int R_PMPI_Finalize(void);
+OMPI_DECLSPEC  int R_PMPI_Finalized(int *flag);
+OMPI_DECLSPEC  int R_PMPI_Free_mem(void *base);
+OMPI_DECLSPEC  int R_PMPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                 void *recvbuf, int recvcounts[], int displs[],
                                 R_MPI_Datatype recvtype, int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                 void *recvbuf, int recvcounts[], int displs[],
                                 R_MPI_Datatype recvtype, int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Get_address(void *location, R_MPI_Aint *address);
-OR_MPI_DECLSPEC  int R_PMPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
-OR_MPI_DECLSPEC  int R_PMPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Get_address(void *location, R_MPI_Aint *address);
+OMPI_DECLSPEC  int R_PMPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
+OMPI_DECLSPEC  int R_PMPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
                                      int *count);
-OR_MPI_DECLSPEC  int R_PMPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
                                        R_MPI_Count *count);
-OR_MPI_DECLSPEC  int R_PMPI_Get(void *origin_addr, int origin_count,
+OMPI_DECLSPEC  int R_PMPI_Get(void *origin_addr, int origin_count,
                             R_MPI_Datatype origin_datatype, int target_rank,
                             R_MPI_Aint target_disp, int target_count,
                             R_MPI_Datatype target_datatype, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Get_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_PMPI_Get_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                                        void *result_addr, int result_count, R_MPI_Datatype result_datatype,
                                        int target_rank, R_MPI_Aint target_disp, int target_count,
                                        R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Get_library_version(char *version, int *resultlen);
-OR_MPI_DECLSPEC  int R_PMPI_Get_processor_name(char *name, int *resultlen);
-OR_MPI_DECLSPEC  int R_PMPI_Get_version(int *version, int *subversion);
-OR_MPI_DECLSPEC  int R_PMPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int index[],
+OMPI_DECLSPEC  int R_PMPI_Get_library_version(char *version, int *resultlen);
+OMPI_DECLSPEC  int R_PMPI_Get_processor_name(char *name, int *resultlen);
+OMPI_DECLSPEC  int R_PMPI_Get_version(int *version, int *subversion);
+OMPI_DECLSPEC  int R_PMPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int index[],
                                      int edges[], int reorder, R_MPI_Comm *comm_graph);
-OR_MPI_DECLSPEC  int R_PMPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges,
+OMPI_DECLSPEC  int R_PMPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges,
                                   int index[], int edges[]);
-OR_MPI_DECLSPEC  int R_PMPI_Graph_map(R_MPI_Comm comm, int nnodes, int index[], int edges[],
+OMPI_DECLSPEC  int R_PMPI_Graph_map(R_MPI_Comm comm, int nnodes, int index[], int edges[],
                                   int *newrank);
-OR_MPI_DECLSPEC  int R_PMPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors);
-OR_MPI_DECLSPEC  int R_PMPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors,
+OMPI_DECLSPEC  int R_PMPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors);
+OMPI_DECLSPEC  int R_PMPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors,
                                         int neighbors[]);
-OR_MPI_DECLSPEC  int R_PMPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges);
-OR_MPI_DECLSPEC  int R_PMPI_Grequest_complete(R_MPI_Request request);
-OR_MPI_DECLSPEC  int R_PMPI_Grequest_start(R_MPI_Grequest_query_function *query_fn,
+OMPI_DECLSPEC  int R_PMPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges);
+OMPI_DECLSPEC  int R_PMPI_Grequest_complete(R_MPI_Request request);
+OMPI_DECLSPEC  int R_PMPI_Grequest_start(R_MPI_Grequest_query_function *query_fn,
                                        R_MPI_Grequest_free_function *free_fn,
                                        R_MPI_Grequest_cancel_function *cancel_fn,
                                        void *extra_state, R_MPI_Request *request);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Group_c2f(R_MPI_Group group);
-OR_MPI_DECLSPEC  int R_PMPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result);
-OR_MPI_DECLSPEC  int R_PMPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2,
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Group_c2f(R_MPI_Group group);
+OMPI_DECLSPEC  int R_PMPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result);
+OMPI_DECLSPEC  int R_PMPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2,
                                          R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_PMPI_Group_excl(R_MPI_Group group, int n, int ranks[],
+OMPI_DECLSPEC  int R_PMPI_Group_excl(R_MPI_Group group, int n, int ranks[],
                                    R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  R_MPI_Group R_PMPI_Group_f2c(R_MPI_Fint group);
-OR_MPI_DECLSPEC  int R_PMPI_Group_free(R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_PMPI_Group_incl(R_MPI_Group group, int n, int ranks[],
+OMPI_DECLSPEC  R_MPI_Group R_PMPI_Group_f2c(R_MPI_Fint group);
+OMPI_DECLSPEC  int R_PMPI_Group_free(R_MPI_Group *group);
+OMPI_DECLSPEC  int R_PMPI_Group_incl(R_MPI_Group group, int n, int ranks[],
                                    R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_PMPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2,
+OMPI_DECLSPEC  int R_PMPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2,
                                            R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_PMPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3],
+OMPI_DECLSPEC  int R_PMPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3],
                                          R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_PMPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3],
+OMPI_DECLSPEC  int R_PMPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3],
                                          R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_PMPI_Group_rank(R_MPI_Group group, int *rank);
-OR_MPI_DECLSPEC  int R_PMPI_Group_size(R_MPI_Group group, int *size);
-OR_MPI_DECLSPEC  int R_PMPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[],
+OMPI_DECLSPEC  int R_PMPI_Group_rank(R_MPI_Group group, int *rank);
+OMPI_DECLSPEC  int R_PMPI_Group_size(R_MPI_Group group, int *size);
+OMPI_DECLSPEC  int R_PMPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[],
                                               R_MPI_Group group2, int ranks2[]);
-OR_MPI_DECLSPEC  int R_PMPI_Group_union(R_MPI_Group group1, R_MPI_Group group2,
+OMPI_DECLSPEC  int R_PMPI_Group_union(R_MPI_Group group1, R_MPI_Group group2,
                                     R_MPI_Group *newgroup);
-OR_MPI_DECLSPEC  int R_PMPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_PMPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                                int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Improbe(int source, int tag, R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_PMPI_Improbe(int source, int tag, R_MPI_Comm comm,
                                 int *flag, R_MPI_Message *message,
                                 R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Imrecv(void *buf, int count, R_MPI_Datatype type,
+OMPI_DECLSPEC  int R_PMPI_Imrecv(void *buf, int count, R_MPI_Datatype type,
                                R_MPI_Message *message, R_MPI_Request *request);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Info_c2f(R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_PMPI_Info_create(R_MPI_Info *info);
-OR_MPI_DECLSPEC  int R_PMPI_Info_delete(R_MPI_Info info, char *key);
-OR_MPI_DECLSPEC  int R_PMPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo);
-OR_MPI_DECLSPEC  R_MPI_Info R_PMPI_Info_f2c(R_MPI_Fint info);
-OR_MPI_DECLSPEC  int R_PMPI_Info_free(R_MPI_Info *info);
-OR_MPI_DECLSPEC  int R_PMPI_Info_get(R_MPI_Info info, char *key, int valuelen,
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Info_c2f(R_MPI_Info info);
+OMPI_DECLSPEC  int R_PMPI_Info_create(R_MPI_Info *info);
+OMPI_DECLSPEC  int R_PMPI_Info_delete(R_MPI_Info info, char *key);
+OMPI_DECLSPEC  int R_PMPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo);
+OMPI_DECLSPEC  R_MPI_Info R_PMPI_Info_f2c(R_MPI_Fint info);
+OMPI_DECLSPEC  int R_PMPI_Info_free(R_MPI_Info *info);
+OMPI_DECLSPEC  int R_PMPI_Info_get(R_MPI_Info info, char *key, int valuelen,
                                  char *value, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Info_get_nkeys(R_MPI_Info info, int *nkeys);
-OR_MPI_DECLSPEC  int R_PMPI_Info_get_nthkey(R_MPI_Info info, int n, char *key);
-OR_MPI_DECLSPEC  int R_PMPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen,
+OMPI_DECLSPEC  int R_PMPI_Info_get_nkeys(R_MPI_Info info, int *nkeys);
+OMPI_DECLSPEC  int R_PMPI_Info_get_nthkey(R_MPI_Info info, int n, char *key);
+OMPI_DECLSPEC  int R_PMPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen,
                                           int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Info_set(R_MPI_Info info, char *key, char *value);
-OR_MPI_DECLSPEC  int R_PMPI_Init(int *argc, char ***argv);
-OR_MPI_DECLSPEC  int R_PMPI_Initialized(int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Init_thread(int *argc, char ***argv, int required,
+OMPI_DECLSPEC  int R_PMPI_Info_set(R_MPI_Info info, char *key, char *value);
+OMPI_DECLSPEC  int R_PMPI_Init(int *argc, char ***argv);
+OMPI_DECLSPEC  int R_PMPI_Initialized(int *flag);
+OMPI_DECLSPEC  int R_PMPI_Init_thread(int *argc, char ***argv, int required,
                                     int *provided);
-OR_MPI_DECLSPEC  int R_PMPI_Intercomm_create(R_MPI_Comm local_comm, int local_leader,
+OMPI_DECLSPEC  int R_PMPI_Intercomm_create(R_MPI_Comm local_comm, int local_leader,
                                          R_MPI_Comm bridge_comm, int remote_leader,
                                          int tag, R_MPI_Comm *newintercomm);
-OR_MPI_DECLSPEC  int R_PMPI_Intercomm_merge(R_MPI_Comm intercomm, int high,
+OMPI_DECLSPEC  int R_PMPI_Intercomm_merge(R_MPI_Comm intercomm, int high,
                                         R_MPI_Comm *newintercomm);
-OR_MPI_DECLSPEC  int R_PMPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag,
+OMPI_DECLSPEC  int R_PMPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag,
                                R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source,
+OMPI_DECLSPEC  int R_PMPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source,
                               int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_PMPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                                int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_PMPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                               int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_PMPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                                int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Is_thread_main(int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Keyval_create(R_MPI_Copy_function *copy_fn,
+OMPI_DECLSPEC  int R_PMPI_Is_thread_main(int *flag);
+OMPI_DECLSPEC  int R_PMPI_Keyval_create(R_MPI_Copy_function *copy_fn,
                                       R_MPI_Delete_function *delete_fn,
                                       int *keyval, void *extra_state)
                                       __mpi_interface_deprecated__("R_MPI_Keyval_create is superseded by R_MPI_Comm_create_keyval in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Keyval_free(int *keyval)
+OMPI_DECLSPEC  int R_PMPI_Keyval_free(int *keyval)
                                     __mpi_interface_deprecated__("R_MPI_Keyval_free is superseded by R_MPI_Comm_free_keyval in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Message_c2f(R_MPI_Message message);
-OR_MPI_DECLSPEC  R_MPI_Message R_PMPI_Message_f2c(R_MPI_Fint message);
-OR_MPI_DECLSPEC  int R_PMPI_Mprobe(int source, int tag, R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_PMPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name);
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Message_c2f(R_MPI_Message message);
+OMPI_DECLSPEC  R_MPI_Message R_PMPI_Message_f2c(R_MPI_Fint message);
+OMPI_DECLSPEC  int R_PMPI_Mprobe(int source, int tag, R_MPI_Comm comm,
                                R_MPI_Message *message,
                                R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Mrecv(void *buf, int count, R_MPI_Datatype type,
+OMPI_DECLSPEC  int R_PMPI_Mrecv(void *buf, int count, R_MPI_Datatype type,
                               R_MPI_Message *message, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Neighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Neighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                            void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                            R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ineighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Ineighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                             void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                             R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Neighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Neighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                             void *recvbuf, int recvcounts[], int displs[],
                                             R_MPI_Datatype recvtype, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ineighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Ineighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                              void *recvbuf, int recvcounts[], int displs[],
                                              R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Neighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Neighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                           void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                           R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ineighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Ineighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                            void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                            R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],  R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],  R_MPI_Datatype sendtype,
                                            void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtype,
                                            R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[], R_MPI_Datatype sendtype,
                                             void *recvbuf, int recvcounts[], int rdispls[], R_MPI_Datatype recvtype,
                                             R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_PMPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
                                            void *recvbuf, int recvcounts[], R_MPI_Aint rdispls[], R_MPI_Datatype recvtypes[],
                                            R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
+OMPI_DECLSPEC  int R_PMPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
                                             void *recvbuf, int recvcounts[], R_MPI_Aint rdispls[], R_MPI_Datatype recvtypes[],
                                             R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Op_c2f(R_MPI_Op op);
-OR_MPI_DECLSPEC  int R_PMPI_Op_commutative(R_MPI_Op op, int *commute);
-OR_MPI_DECLSPEC  int R_PMPI_Op_create(R_MPI_User_function *function, int commute, R_MPI_Op *op);
-OR_MPI_DECLSPEC  int R_PMPI_Open_port(R_MPI_Info info, char *port_name);
-OR_MPI_DECLSPEC  R_MPI_Op R_PMPI_Op_f2c(R_MPI_Fint op);
-OR_MPI_DECLSPEC  int R_PMPI_Op_free(R_MPI_Op *op);
-OR_MPI_DECLSPEC  int R_PMPI_Pack_external(char datarep[], void *inbuf, int incount,
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Op_c2f(R_MPI_Op op);
+OMPI_DECLSPEC  int R_PMPI_Op_commutative(R_MPI_Op op, int *commute);
+OMPI_DECLSPEC  int R_PMPI_Op_create(R_MPI_User_function *function, int commute, R_MPI_Op *op);
+OMPI_DECLSPEC  int R_PMPI_Open_port(R_MPI_Info info, char *port_name);
+OMPI_DECLSPEC  R_MPI_Op R_PMPI_Op_f2c(R_MPI_Fint op);
+OMPI_DECLSPEC  int R_PMPI_Op_free(R_MPI_Op *op);
+OMPI_DECLSPEC  int R_PMPI_Pack_external(char datarep[], void *inbuf, int incount,
                                       R_MPI_Datatype datatype, void *outbuf,
                                       R_MPI_Aint outsize, R_MPI_Aint *position);
-OR_MPI_DECLSPEC  int R_PMPI_Pack_external_size(char datarep[], int incount,
+OMPI_DECLSPEC  int R_PMPI_Pack_external_size(char datarep[], int incount,
                                            R_MPI_Datatype datatype, R_MPI_Aint *size);
-OR_MPI_DECLSPEC  int R_PMPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype,
                              void *outbuf, int outsize, int *position, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm,
+OMPI_DECLSPEC  int R_PMPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm,
                                   int *size);
-OR_MPI_DECLSPEC  int R_PMPI_Pcontrol(int level, ...);
-OR_MPI_DECLSPEC  int R_PMPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Publish_name(char *service_name, R_MPI_Info info,
+OMPI_DECLSPEC  int R_PMPI_Pcontrol(int level, ...);
+OMPI_DECLSPEC  int R_PMPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_Publish_name(char *service_name, R_MPI_Info info,
                                      char *port_name);
-OR_MPI_DECLSPEC  int R_PMPI_Put(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_PMPI_Put(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                             int target_rank, R_MPI_Aint target_disp, int target_count,
                             R_MPI_Datatype target_datatype, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Query_thread(int *provided);
-OR_MPI_DECLSPEC  int R_PMPI_Raccumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
+OMPI_DECLSPEC  int R_PMPI_Query_thread(int *provided);
+OMPI_DECLSPEC  int R_PMPI_Raccumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
                                     int target_rank, R_MPI_Aint target_disp, int target_count, 
                                     R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source,
+OMPI_DECLSPEC  int R_PMPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source,
                                   int tag, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source,
+OMPI_DECLSPEC  int R_PMPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source,
                              int tag, R_MPI_Comm comm, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Reduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Reduce(void *sendbuf, void *recvbuf, int count,
                                R_MPI_Datatype datatype, R_MPI_Op op, int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ireduce(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Ireduce(void *sendbuf, void *recvbuf, int count,
                                R_MPI_Datatype datatype, R_MPI_Op op, int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
                                      R_MPI_Datatype datatype, R_MPI_Op);
-OR_MPI_DECLSPEC  int R_PMPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
+OMPI_DECLSPEC  int R_PMPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                                        R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
+OMPI_DECLSPEC  int R_PMPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                                         R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
+OMPI_DECLSPEC  int R_PMPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                                              R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
+OMPI_DECLSPEC  int R_PMPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                                               R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Register_datarep(char *datarep,
+OMPI_DECLSPEC  int R_PMPI_Register_datarep(char *datarep,
                                          R_MPI_Datarep_conversion_function *read_conversion_fn,
                                          R_MPI_Datarep_conversion_function *write_conversion_fn,
                                          R_MPI_Datarep_extent_function *dtype_file_extent_fn,
                                          void *extra_state);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Request_c2f(R_MPI_Request request);
-OR_MPI_DECLSPEC  R_MPI_Request R_PMPI_Request_f2c(R_MPI_Fint request);
-OR_MPI_DECLSPEC  int R_PMPI_Request_free(R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Request_get_status(R_MPI_Request request, int *flag,
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Request_c2f(R_MPI_Request request);
+OMPI_DECLSPEC  R_MPI_Request R_PMPI_Request_f2c(R_MPI_Fint request);
+OMPI_DECLSPEC  int R_PMPI_Request_free(R_MPI_Request *request);
+OMPI_DECLSPEC  int R_PMPI_Request_get_status(R_MPI_Request request, int *flag,
                                            R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Rget(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
+OMPI_DECLSPEC  int R_PMPI_Rget(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype, 
                              int target_rank, R_MPI_Aint target_disp, int target_count, R_MPI_Datatype target_datatype,
                              R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Rget_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_PMPI_Rget_accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                                         void *result_addr, int result_count, R_MPI_Datatype result_datatype,
                                         int target_rank, R_MPI_Aint target_disp, int target_count, 
                                         R_MPI_Datatype target_datatype, R_MPI_Op op,
                                         R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Rput(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+OMPI_DECLSPEC  int R_PMPI_Rput(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                              int target_rank, R_MPI_Aint target_disp, int target_cout, 
                              R_MPI_Datatype target_datatype, R_MPI_Win win, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Rsend(void *ibuf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_PMPI_Rsend(void *ibuf, int count, R_MPI_Datatype datatype, int dest,
                               int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype,
                                    int dest, int tag, R_MPI_Comm comm,
                                    R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Scan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Scan(void *sendbuf, void *recvbuf, int count,
                              R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Iscan(void *sendbuf, void *recvbuf, int count,
+OMPI_DECLSPEC  int R_PMPI_Iscan(void *sendbuf, void *recvbuf, int count,
                              R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                 void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                 int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                 void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                                 int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Scatterv(void *sendbuf, int sendcounts[], int displs[],
+OMPI_DECLSPEC  int R_PMPI_Scatterv(void *sendbuf, int sendcounts[], int displs[],
                                  R_MPI_Datatype sendtype, void *recvbuf, int recvcount,
                                  R_MPI_Datatype recvtype, int root, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Iscatterv(void *sendbuf, int sendcounts[], int displs[],
+OMPI_DECLSPEC  int R_PMPI_Iscatterv(void *sendbuf, int sendcounts[], int displs[],
                                  R_MPI_Datatype sendtype, void *recvbuf, int recvcount,
                                  R_MPI_Datatype recvtype, int root, R_MPI_Comm comm, R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Send_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Send_init(void *buf, int count, R_MPI_Datatype datatype,
                                   int dest, int tag, R_MPI_Comm comm,
                                   R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_PMPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest,
                              int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+OMPI_DECLSPEC  int R_PMPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                                  int dest, int sendtag, void *recvbuf, int recvcount,
                                  R_MPI_Datatype recvtype, int source, int recvtag,
                                  R_MPI_Comm comm,  R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Sendrecv_replace(void * buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Sendrecv_replace(void * buf, int count, R_MPI_Datatype datatype,
                                          int dest, int sendtag, int source, int recvtag,
                                          R_MPI_Comm comm, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype,
                                    int dest, int tag, R_MPI_Comm comm,
                                    R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest,
+OMPI_DECLSPEC  int R_PMPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest,
                               int tag, R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Start(R_MPI_Request *request);
-OR_MPI_DECLSPEC  int R_PMPI_Startall(int count, R_MPI_Request array_of_requests[]);
-OR_MPI_DECLSPEC  int R_PMPI_Status_c2f(R_MPI_Status *c_status, R_MPI_Fint *f_status);
-OR_MPI_DECLSPEC  int R_PMPI_Status_f2c(R_MPI_Fint *f_status, R_MPI_Status *c_status);
-OR_MPI_DECLSPEC  int R_PMPI_Status_set_cancelled(R_MPI_Status *status, int flag);
-OR_MPI_DECLSPEC  int R_PMPI_Status_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Start(R_MPI_Request *request);
+OMPI_DECLSPEC  int R_PMPI_Startall(int count, R_MPI_Request array_of_requests[]);
+OMPI_DECLSPEC  int R_PMPI_Status_c2f(R_MPI_Status *c_status, R_MPI_Fint *f_status);
+OMPI_DECLSPEC  int R_PMPI_Status_f2c(R_MPI_Fint *f_status, R_MPI_Status *c_status);
+OMPI_DECLSPEC  int R_PMPI_Status_set_cancelled(R_MPI_Status *status, int flag);
+OMPI_DECLSPEC  int R_PMPI_Status_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype,
                                             int count);
-OR_MPI_DECLSPEC  int R_PMPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
+OMPI_DECLSPEC  int R_PMPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype,
                                               R_MPI_Count count);
-OR_MPI_DECLSPEC  int R_PMPI_Testall(int count, R_MPI_Request array_of_requests[], int *flag,
+OMPI_DECLSPEC  int R_PMPI_Testall(int count, R_MPI_Request array_of_requests[], int *flag,
                                 R_MPI_Status array_of_statuses[]);
-OR_MPI_DECLSPEC  int R_PMPI_Testany(int count, R_MPI_Request array_of_requests[], int *index, int *flag, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Test(R_MPI_Request *request, int *flag, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Test_cancelled(R_MPI_Status *status, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Testsome(int incount, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_PMPI_Testany(int count, R_MPI_Request array_of_requests[], int *index, int *flag, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_Test(R_MPI_Request *request, int *flag, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_Test_cancelled(R_MPI_Status *status, int *flag);
+OMPI_DECLSPEC  int R_PMPI_Testsome(int incount, R_MPI_Request array_of_requests[],
                                  int *outcount, int array_of_indices[],
                                  R_MPI_Status array_of_statuses[]);
-OR_MPI_DECLSPEC  int R_PMPI_Topo_test(R_MPI_Comm comm, int *status);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Type_c2f(R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_commit(R_MPI_Datatype *type);
-OR_MPI_DECLSPEC  int R_PMPI_Type_contiguous(int count, R_MPI_Datatype oldtype,
+OMPI_DECLSPEC  int R_PMPI_Topo_test(R_MPI_Comm comm, int *status);
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Type_c2f(R_MPI_Datatype datatype);
+OMPI_DECLSPEC  int R_PMPI_Type_commit(R_MPI_Datatype *type);
+OMPI_DECLSPEC  int R_PMPI_Type_contiguous(int count, R_MPI_Datatype oldtype,
                                         R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_darray(int size, int rank, int ndims,
+OMPI_DECLSPEC  int R_PMPI_Type_create_darray(int size, int rank, int ndims,
                                            int gsize_array[], int distrib_array[],
                                            int darg_array[], int psize_array[],
                                            int order, R_MPI_Datatype oldtype,
                                            R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_f90_complex(int p, int r, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_f90_integer(int r, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_f90_real(int p, int r, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_hindexed(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_PMPI_Type_create_f90_complex(int p, int r, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_PMPI_Type_create_f90_integer(int r, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_PMPI_Type_create_f90_real(int p, int r, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_PMPI_Type_create_hindexed(int count, int array_of_blocklengths[],
                                              R_MPI_Aint array_of_displacements[],
                                              R_MPI_Datatype oldtype,
                                              R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride,
+OMPI_DECLSPEC  int R_PMPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride,
                                             R_MPI_Datatype oldtype,
                                             R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_keyval(R_MPI_Type_copy_attr_function *type_copy_attr_fn,
+OMPI_DECLSPEC  int R_PMPI_Type_create_keyval(R_MPI_Type_copy_attr_function *type_copy_attr_fn,
                                            R_MPI_Type_delete_attr_function *type_delete_attr_fn,
                                            int *type_keyval, void *extra_state);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_hindexed_block(int count, int blocklength,
+OMPI_DECLSPEC  int R_PMPI_Type_create_hindexed_block(int count, int blocklength,
                                                    R_MPI_Aint array_of_displacements[],
                                                    R_MPI_Datatype oldtype,
                                                    R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_indexed_block(int count, int blocklength,
+OMPI_DECLSPEC  int R_PMPI_Type_create_indexed_block(int count, int blocklength,
                                                   int array_of_displacements[],
                                                   R_MPI_Datatype oldtype,
                                                   R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_struct(int count, int array_of_block_lengths[],
+OMPI_DECLSPEC  int R_PMPI_Type_create_struct(int count, int array_of_block_lengths[],
                                            R_MPI_Aint array_of_displacements[],
                                            R_MPI_Datatype array_of_types[],
                                            R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_subarray(int ndims, int size_array[], int subsize_array[],
+OMPI_DECLSPEC  int R_PMPI_Type_create_subarray(int ndims, int size_array[], int subsize_array[],
                                              int start_array[], int order,
                                              R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb,
+OMPI_DECLSPEC  int R_PMPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb,
                                             R_MPI_Aint extent, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_delete_attr(R_MPI_Datatype type, int type_keyval);
-OR_MPI_DECLSPEC  int R_PMPI_Type_dup(R_MPI_Datatype type, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_extent(R_MPI_Datatype type, R_MPI_Aint *extent)
+OMPI_DECLSPEC  int R_PMPI_Type_delete_attr(R_MPI_Datatype type, int type_keyval);
+OMPI_DECLSPEC  int R_PMPI_Type_dup(R_MPI_Datatype type, R_MPI_Datatype *newtype);
+OMPI_DECLSPEC  int R_PMPI_Type_extent(R_MPI_Datatype type, R_MPI_Aint *extent)
                                     __mpi_interface_deprecated__("R_MPI_Type_extent is superseded by R_MPI_Type_get_extent in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Type_free(R_MPI_Datatype *type);
-OR_MPI_DECLSPEC  int R_PMPI_Type_free_keyval(int *type_keyval);
-OR_MPI_DECLSPEC  R_MPI_Datatype R_PMPI_Type_f2c(R_MPI_Fint datatype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_attr(R_MPI_Datatype type, int type_keyval,
+OMPI_DECLSPEC  int R_PMPI_Type_free(R_MPI_Datatype *type);
+OMPI_DECLSPEC  int R_PMPI_Type_free_keyval(int *type_keyval);
+OMPI_DECLSPEC  R_MPI_Datatype R_PMPI_Type_f2c(R_MPI_Fint datatype);
+OMPI_DECLSPEC  int R_PMPI_Type_get_attr(R_MPI_Datatype type, int type_keyval,
                                       void *attribute_val, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_contents(R_MPI_Datatype mtype, int max_integers,
+OMPI_DECLSPEC  int R_PMPI_Type_get_contents(R_MPI_Datatype mtype, int max_integers,
                                           int max_addresses, int max_datatypes,
                                           int array_of_integers[],
                                           R_MPI_Aint array_of_addresses[],
                                           R_MPI_Datatype array_of_datatypes[]);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_envelope(R_MPI_Datatype type, int *num_integers,
+OMPI_DECLSPEC  int R_PMPI_Type_get_envelope(R_MPI_Datatype type, int *num_integers,
                                           int *num_addresses, int *num_datatypes,
                                           int *combiner);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_extent(R_MPI_Datatype type, R_MPI_Aint *lb,
+OMPI_DECLSPEC  int R_PMPI_Type_get_extent(R_MPI_Datatype type, R_MPI_Aint *lb,
                                         R_MPI_Aint *extent);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_extent_x(R_MPI_Datatype type, R_MPI_Count *lb,
+OMPI_DECLSPEC  int R_PMPI_Type_get_extent_x(R_MPI_Datatype type, R_MPI_Count *lb,
                                           R_MPI_Count *extent);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_name(R_MPI_Datatype type, char *type_name,
+OMPI_DECLSPEC  int R_PMPI_Type_get_name(R_MPI_Datatype type, char *type_name,
                                       int *resultlen);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb,
+OMPI_DECLSPEC  int R_PMPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb,
                                              R_MPI_Aint *true_extent);
-OR_MPI_DECLSPEC  int R_PMPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *true_lb,
+OMPI_DECLSPEC  int R_PMPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *true_lb,
                                                R_MPI_Count *true_extent);
-OR_MPI_DECLSPEC  int R_PMPI_Type_hindexed(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_PMPI_Type_hindexed(int count, int array_of_blocklengths[],
                                       R_MPI_Aint array_of_displacements[],
                                       R_MPI_Datatype oldtype, R_MPI_Datatype *newtype)
                                       __mpi_interface_deprecated__("R_MPI_Type_hindexed is superseded by R_MPI_Type_create_hindexed in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride,
+OMPI_DECLSPEC  int R_PMPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride,
                                      R_MPI_Datatype oldtype, R_MPI_Datatype *newtype)
                                      __mpi_interface_deprecated__("R_MPI_Type_hvector is superseded by R_MPI_Type_create_hvector in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Type_indexed(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_PMPI_Type_indexed(int count, int array_of_blocklengths[],
                                      int array_of_displacements[],
                                      R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Type_lb(R_MPI_Datatype type, R_MPI_Aint *lb)
+OMPI_DECLSPEC  int R_PMPI_Type_lb(R_MPI_Datatype type, R_MPI_Aint *lb)
                                 __mpi_interface_deprecated__("R_MPI_Type_lb is deprecated, use R_MPI_Type_get_extent in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *type);
-OR_MPI_DECLSPEC  int R_PMPI_Type_set_attr(R_MPI_Datatype type, int type_keyval,
+OMPI_DECLSPEC  int R_PMPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *type);
+OMPI_DECLSPEC  int R_PMPI_Type_set_attr(R_MPI_Datatype type, int type_keyval,
                                       void *attr_val);
-OR_MPI_DECLSPEC  int R_PMPI_Type_set_name(R_MPI_Datatype type, char *type_name);
-OR_MPI_DECLSPEC  int R_PMPI_Type_size(R_MPI_Datatype type, int *size);
-OR_MPI_DECLSPEC  int R_PMPI_Type_size_x(R_MPI_Datatype type, R_MPI_Count *size);
-OR_MPI_DECLSPEC  int R_PMPI_Type_struct(int count, int array_of_blocklengths[],
+OMPI_DECLSPEC  int R_PMPI_Type_set_name(R_MPI_Datatype type, char *type_name);
+OMPI_DECLSPEC  int R_PMPI_Type_size(R_MPI_Datatype type, int *size);
+OMPI_DECLSPEC  int R_PMPI_Type_size_x(R_MPI_Datatype type, R_MPI_Count *size);
+OMPI_DECLSPEC  int R_PMPI_Type_struct(int count, int array_of_blocklengths[],
                                     R_MPI_Aint array_of_displacements[],
                                     R_MPI_Datatype array_of_types[],
                                     R_MPI_Datatype *newtype)
                                     __mpi_interface_deprecated__("R_MPI_Type_struct is superseded by R_MPI_Type_create_struct in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Type_ub(R_MPI_Datatype mtype, R_MPI_Aint *ub)
+OMPI_DECLSPEC  int R_PMPI_Type_ub(R_MPI_Datatype mtype, R_MPI_Aint *ub)
                                 __mpi_interface_deprecated__("R_MPI_Type_ub is deprecated, use R_MPI_Type_get_extent in MPI-2.0");
-OR_MPI_DECLSPEC  int R_PMPI_Type_vector(int count, int blocklength, int stride,
+OMPI_DECLSPEC  int R_PMPI_Type_vector(int count, int blocklength, int stride,
                                     R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-OR_MPI_DECLSPEC  int R_PMPI_Unpack(void *inbuf, int insize, int *position,
+OMPI_DECLSPEC  int R_PMPI_Unpack(void *inbuf, int insize, int *position,
                                void *outbuf, int outcount, R_MPI_Datatype datatype,
                                R_MPI_Comm comm);
-OR_MPI_DECLSPEC  int R_PMPI_Unpublish_name(char *service_name, R_MPI_Info info,
+OMPI_DECLSPEC  int R_PMPI_Unpublish_name(char *service_name, R_MPI_Info info,
                                        char *port_name);
-OR_MPI_DECLSPEC  int R_PMPI_Unpack_external (char datarep[], void *inbuf, R_MPI_Aint insize,
+OMPI_DECLSPEC  int R_PMPI_Unpack_external (char datarep[], void *inbuf, R_MPI_Aint insize,
                                          R_MPI_Aint *position, void *outbuf, int outcount,
                                          R_MPI_Datatype datatype);
-OR_MPI_DECLSPEC  int R_PMPI_Waitall(int count, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_PMPI_Waitall(int count, R_MPI_Request array_of_requests[],
                                 R_MPI_Status array_of_statuses[]);
-OR_MPI_DECLSPEC  int R_PMPI_Waitany(int count, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_PMPI_Waitany(int count, R_MPI_Request array_of_requests[],
                                 int *index, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Wait(R_MPI_Request *request, R_MPI_Status *status);
-OR_MPI_DECLSPEC  int R_PMPI_Waitsome(int incount, R_MPI_Request array_of_requests[],
+OMPI_DECLSPEC  int R_PMPI_Wait(R_MPI_Request *request, R_MPI_Status *status);
+OMPI_DECLSPEC  int R_PMPI_Waitsome(int incount, R_MPI_Request array_of_requests[],
                                  int *outcount, int array_of_indices[],
                                  R_MPI_Status array_of_statuses[]);
-OR_MPI_DECLSPEC  int R_PMPI_Win_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
+OMPI_DECLSPEC  int R_PMPI_Win_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
                                      R_MPI_Comm comm, void *baseptr, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
+OMPI_DECLSPEC  int R_PMPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info,
                                             R_MPI_Comm comm, void *baseptr, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size);
-OR_MPI_DECLSPEC  R_MPI_Fint R_PMPI_Win_c2f(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_call_errhandler(R_MPI_Win win, int errorcode);
-OR_MPI_DECLSPEC  int R_PMPI_Win_complete(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_create(void *base, R_MPI_Aint size, int disp_unit,
+OMPI_DECLSPEC  int R_PMPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size);
+OMPI_DECLSPEC  R_MPI_Fint R_PMPI_Win_c2f(R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_call_errhandler(R_MPI_Win win, int errorcode);
+OMPI_DECLSPEC  int R_PMPI_Win_complete(R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_create(void *base, R_MPI_Aint size, int disp_unit,
                                    R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_create_errhandler(R_MPI_Win_errhandler_function *function,
+OMPI_DECLSPEC  int R_PMPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
+OMPI_DECLSPEC  int R_PMPI_Win_create_errhandler(R_MPI_Win_errhandler_function *function,
                                               R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
+OMPI_DECLSPEC  int R_PMPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
                                           R_MPI_Win_delete_attr_function *win_delete_attr_fn,
                                           int *win_keyval, void *extra_state);
-OR_MPI_DECLSPEC  int R_PMPI_Win_delete_attr(R_MPI_Win win, int win_keyval);
-OR_MPI_DECLSPEC  int R_PMPI_Win_detach(R_MPI_Win win, void *base);
-OR_MPI_DECLSPEC  R_MPI_Win R_PMPI_Win_f2c(R_MPI_Fint win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_fence(int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_flush(int rank, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_flush_all(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_flush_local(int rank, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_flush_local_all(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_free(R_MPI_Win *win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_free_keyval(int *win_keyval);
-OR_MPI_DECLSPEC  int R_PMPI_Win_get_attr(R_MPI_Win win, int win_keyval,
+OMPI_DECLSPEC  int R_PMPI_Win_delete_attr(R_MPI_Win win, int win_keyval);
+OMPI_DECLSPEC  int R_PMPI_Win_detach(R_MPI_Win win, void *base);
+OMPI_DECLSPEC  R_MPI_Win R_PMPI_Win_f2c(R_MPI_Fint win);
+OMPI_DECLSPEC  int R_PMPI_Win_fence(int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_flush(int rank, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_flush_all(R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_flush_local(int rank, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_flush_local_all(R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_free(R_MPI_Win *win);
+OMPI_DECLSPEC  int R_PMPI_Win_free_keyval(int *win_keyval);
+OMPI_DECLSPEC  int R_PMPI_Win_get_attr(R_MPI_Win win, int win_keyval,
                                      void *attribute_val, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Win_get_group(R_MPI_Win win, R_MPI_Group *group);
-OR_MPI_DECLSPEC  int R_PMPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used);
-OR_MPI_DECLSPEC  int R_PMPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen);
-OR_MPI_DECLSPEC  int R_PMPI_Win_lock(int lock_type, int rank, int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_lock_all(int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_post(R_MPI_Group group, int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val);
-OR_MPI_DECLSPEC  int R_PMPI_Win_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
-OR_MPI_DECLSPEC  int R_PMPI_Win_set_info(R_MPI_Win win, R_MPI_Info info);
-OR_MPI_DECLSPEC  int R_PMPI_Win_set_name(R_MPI_Win win, char *win_name);
-OR_MPI_DECLSPEC  int R_PMPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size, int *disp_unit, void *baseptr);
-OR_MPI_DECLSPEC  int R_PMPI_Win_start(R_MPI_Group group, int assert, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_sync(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_test(R_MPI_Win win, int *flag);
-OR_MPI_DECLSPEC  int R_PMPI_Win_unlock(int rank, R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_unlock_all(R_MPI_Win win);
-OR_MPI_DECLSPEC  int R_PMPI_Win_wait(R_MPI_Win win);
-OR_MPI_DECLSPEC  double R_PMPI_Wtick(void);
-OR_MPI_DECLSPEC  double R_PMPI_Wtime(void);
-OR_MPI_DECLSPEC  int R_PMPI_T_init_thread (int required, int *provided);
-OR_MPI_DECLSPEC  int R_PMPI_T_finalize (void);
-OR_MPI_DECLSPEC  int R_PMPI_T_cvar_get_num (int *num_cvar);
-OR_MPI_DECLSPEC  int R_PMPI_T_cvar_get_info (int cvar_index, char *name, int *name_len,
+OMPI_DECLSPEC  int R_PMPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
+OMPI_DECLSPEC  int R_PMPI_Win_get_group(R_MPI_Win win, R_MPI_Group *group);
+OMPI_DECLSPEC  int R_PMPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used);
+OMPI_DECLSPEC  int R_PMPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen);
+OMPI_DECLSPEC  int R_PMPI_Win_lock(int lock_type, int rank, int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_lock_all(int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_post(R_MPI_Group group, int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val);
+OMPI_DECLSPEC  int R_PMPI_Win_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
+OMPI_DECLSPEC  int R_PMPI_Win_set_info(R_MPI_Win win, R_MPI_Info info);
+OMPI_DECLSPEC  int R_PMPI_Win_set_name(R_MPI_Win win, char *win_name);
+OMPI_DECLSPEC  int R_PMPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size, int *disp_unit, void *baseptr);
+OMPI_DECLSPEC  int R_PMPI_Win_start(R_MPI_Group group, int assert, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_sync(R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_test(R_MPI_Win win, int *flag);
+OMPI_DECLSPEC  int R_PMPI_Win_unlock(int rank, R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_unlock_all(R_MPI_Win win);
+OMPI_DECLSPEC  int R_PMPI_Win_wait(R_MPI_Win win);
+OMPI_DECLSPEC  double R_PMPI_Wtick(void);
+OMPI_DECLSPEC  double R_PMPI_Wtime(void);
+OMPI_DECLSPEC  int R_PMPI_T_init_thread (int required, int *provided);
+OMPI_DECLSPEC  int R_PMPI_T_finalize (void);
+OMPI_DECLSPEC  int R_PMPI_T_cvar_get_num (int *num_cvar);
+OMPI_DECLSPEC  int R_PMPI_T_cvar_get_info (int cvar_index, char *name, int *name_len,
                                          int *verbosity, R_MPI_Datatype *datatype,
                                          R_MPI_T_enum *enumtype, char *desc,
                                          int *desc_len, int *bind, int *scope);
-OR_MPI_DECLSPEC  int R_PMPI_T_cvar_get_index (char *name, int *cvar_index);
-OR_MPI_DECLSPEC  int R_PMPI_T_cvar_handle_alloc (int cvar_index, void *obj_handle,
+OMPI_DECLSPEC  int R_PMPI_T_cvar_get_index (char *name, int *cvar_index);
+OMPI_DECLSPEC  int R_PMPI_T_cvar_handle_alloc (int cvar_index, void *obj_handle,
                                             R_MPI_T_cvar_handle *handle, int *count);
-OR_MPI_DECLSPEC  int R_PMPI_T_cvar_handle_free (R_MPI_T_cvar_handle *handle);
-OR_MPI_DECLSPEC  int R_PMPI_T_cvar_read (R_MPI_T_cvar_handle handle, void *buf);
-OR_MPI_DECLSPEC  int R_PMPI_T_cvar_write (R_MPI_T_cvar_handle handle, void *buf);
-OR_MPI_DECLSPEC  int R_PMPI_T_category_get_num(int *num_cat);
-OR_MPI_DECLSPEC  int R_PMPI_T_category_get_info(int cat_index, char *name, int *name_len,
+OMPI_DECLSPEC  int R_PMPI_T_cvar_handle_free (R_MPI_T_cvar_handle *handle);
+OMPI_DECLSPEC  int R_PMPI_T_cvar_read (R_MPI_T_cvar_handle handle, void *buf);
+OMPI_DECLSPEC  int R_PMPI_T_cvar_write (R_MPI_T_cvar_handle handle, void *buf);
+OMPI_DECLSPEC  int R_PMPI_T_category_get_num(int *num_cat);
+OMPI_DECLSPEC  int R_PMPI_T_category_get_info(int cat_index, char *name, int *name_len,
                                             char *desc, int *desc_len, int *num_cvars,
                                             int *num_pvars, int *num_categories);
-OR_MPI_DECLSPEC  int R_PMPI_T_category_get_index (char *name, int *category_index);
-OR_MPI_DECLSPEC  int R_PMPI_T_category_get_cvars(int cat_index, int len, int indices[]);
-OR_MPI_DECLSPEC  int R_PMPI_T_category_get_pvars(int cat_index, int len, int indices[]);
-OR_MPI_DECLSPEC  int R_PMPI_T_category_get_categories(int cat_index, int len, int indices[]);
-OR_MPI_DECLSPEC  int R_PMPI_T_category_changed(int *stamp);
+OMPI_DECLSPEC  int R_PMPI_T_category_get_index (char *name, int *category_index);
+OMPI_DECLSPEC  int R_PMPI_T_category_get_cvars(int cat_index, int len, int indices[]);
+OMPI_DECLSPEC  int R_PMPI_T_category_get_pvars(int cat_index, int len, int indices[]);
+OMPI_DECLSPEC  int R_PMPI_T_category_get_categories(int cat_index, int len, int indices[]);
+OMPI_DECLSPEC  int R_PMPI_T_category_changed(int *stamp);
 
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_get_num(int *num_pvar);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
+OMPI_DECLSPEC  int R_PMPI_T_pvar_get_num(int *num_pvar);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
                                         int *verbosity, int *var_class, R_MPI_Datatype *datatype,
                                         R_MPI_T_enum *enumtype, char *desc, int *desc_len, int *bind,
                                         int *readonly, int *continuous, int *atomic);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_get_index (char *name, int var_class, int *pvar_index);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_session_create(R_MPI_T_pvar_session *session);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_session_free(R_MPI_T_pvar_session *session);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_handle_alloc(R_MPI_T_pvar_session session, int pvar_index,
+OMPI_DECLSPEC  int R_PMPI_T_pvar_get_index (char *name, int var_class, int *pvar_index);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_session_create(R_MPI_T_pvar_session *session);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_session_free(R_MPI_T_pvar_session *session);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_handle_alloc(R_MPI_T_pvar_session session, int pvar_index,
                                             void *obj_handle, R_MPI_T_pvar_handle *handle, int *count);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_handle_free(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle *handle);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_start(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_stop(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_read(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
+OMPI_DECLSPEC  int R_PMPI_T_pvar_handle_free(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle *handle);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_start(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_stop(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_read(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
                                     void *buf);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
+OMPI_DECLSPEC  int R_PMPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
                                      void *buf);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_reset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-OR_MPI_DECLSPEC  int R_PMPI_T_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
+OMPI_DECLSPEC  int R_PMPI_T_pvar_reset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+OMPI_DECLSPEC  int R_PMPI_T_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
                                          void *buf);
-OR_MPI_DECLSPEC  int R_PMPI_T_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name, int *name_len);
-OR_MPI_DECLSPEC  int R_PMPI_T_enum_get_item(R_MPI_T_enum enumtype, int index, int *value, char *name,
+OMPI_DECLSPEC  int R_PMPI_T_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name, int *name_len);
+OMPI_DECLSPEC  int R_PMPI_T_enum_get_item(R_MPI_T_enum enumtype, int index, int *value, char *name,
                                         int *name_len);
 
   /*
    * Tool MPI API
    */
-OR_MPI_DECLSPEC  int R_MPI_T_init_thread (int required, int *provided);
-OR_MPI_DECLSPEC  int R_MPI_T_finalize (void);
-OR_MPI_DECLSPEC  int R_MPI_T_cvar_get_num (int *num_cvar);
-OR_MPI_DECLSPEC  int R_MPI_T_cvar_get_info (int cvar_index, char *name, int *name_len,
+OMPI_DECLSPEC  int R_MPI_T_init_thread (int required, int *provided);
+OMPI_DECLSPEC  int R_MPI_T_finalize (void);
+OMPI_DECLSPEC  int R_MPI_T_cvar_get_num (int *num_cvar);
+OMPI_DECLSPEC  int R_MPI_T_cvar_get_info (int cvar_index, char *name, int *name_len,
                                         int *verbosity, R_MPI_Datatype *datatype,
                                         R_MPI_T_enum *enumtype, char *desc,
                                         int *desc_len, int *bind, int *scope);
-OR_MPI_DECLSPEC  int R_MPI_T_cvar_get_index (char *name, int *cvar_index);
-OR_MPI_DECLSPEC  int R_MPI_T_cvar_handle_alloc (int cvar_index, void *obj_handle,
+OMPI_DECLSPEC  int R_MPI_T_cvar_get_index (char *name, int *cvar_index);
+OMPI_DECLSPEC  int R_MPI_T_cvar_handle_alloc (int cvar_index, void *obj_handle,
                                             R_MPI_T_cvar_handle *handle, int *count);
-OR_MPI_DECLSPEC  int R_MPI_T_cvar_handle_free (R_MPI_T_cvar_handle *handle);
-OR_MPI_DECLSPEC  int R_MPI_T_cvar_read (R_MPI_T_cvar_handle handle, void *buf);
-OR_MPI_DECLSPEC  int R_MPI_T_cvar_write (R_MPI_T_cvar_handle handle, void *buf);
-OR_MPI_DECLSPEC  int R_MPI_T_category_get_num(int *num_cat);
-OR_MPI_DECLSPEC  int R_MPI_T_category_get_info(int cat_index, char *name, int *name_len,
+OMPI_DECLSPEC  int R_MPI_T_cvar_handle_free (R_MPI_T_cvar_handle *handle);
+OMPI_DECLSPEC  int R_MPI_T_cvar_read (R_MPI_T_cvar_handle handle, void *buf);
+OMPI_DECLSPEC  int R_MPI_T_cvar_write (R_MPI_T_cvar_handle handle, void *buf);
+OMPI_DECLSPEC  int R_MPI_T_category_get_num(int *num_cat);
+OMPI_DECLSPEC  int R_MPI_T_category_get_info(int cat_index, char *name, int *name_len,
                                            char *desc, int *desc_len, int *num_cvars,
                                            int *num_pvars, int *num_categories);
-OR_MPI_DECLSPEC  int R_MPI_T_category_get_index (char *name, int *category_index);
-OR_MPI_DECLSPEC  int R_MPI_T_category_get_cvars(int cat_index, int len, int indices[]);
-OR_MPI_DECLSPEC  int R_MPI_T_category_get_pvars(int cat_index, int len, int indices[]);
-OR_MPI_DECLSPEC  int R_MPI_T_category_get_categories(int cat_index, int len, int indices[]);
-OR_MPI_DECLSPEC  int R_MPI_T_category_changed(int *stamp);
+OMPI_DECLSPEC  int R_MPI_T_category_get_index (char *name, int *category_index);
+OMPI_DECLSPEC  int R_MPI_T_category_get_cvars(int cat_index, int len, int indices[]);
+OMPI_DECLSPEC  int R_MPI_T_category_get_pvars(int cat_index, int len, int indices[]);
+OMPI_DECLSPEC  int R_MPI_T_category_get_categories(int cat_index, int len, int indices[]);
+OMPI_DECLSPEC  int R_MPI_T_category_changed(int *stamp);
 
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_get_num(int *num_pvar);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
+OMPI_DECLSPEC  int R_MPI_T_pvar_get_num(int *num_pvar);
+OMPI_DECLSPEC  int R_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len,
                                        int *verbosity, int *var_class, R_MPI_Datatype *datatype,
                                        R_MPI_T_enum *enumtype, char *desc, int *desc_len, int *bind,
                                        int *readonly, int *continuous, int *atomic);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_get_index (char *name, int var_class, int *pvar_index);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_session_create(R_MPI_T_pvar_session *session);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_session_free(R_MPI_T_pvar_session *session);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_handle_alloc(R_MPI_T_pvar_session session, int pvar_index,
+OMPI_DECLSPEC  int R_MPI_T_pvar_get_index (char *name, int var_class, int *pvar_index);
+OMPI_DECLSPEC  int R_MPI_T_pvar_session_create(R_MPI_T_pvar_session *session);
+OMPI_DECLSPEC  int R_MPI_T_pvar_session_free(R_MPI_T_pvar_session *session);
+OMPI_DECLSPEC  int R_MPI_T_pvar_handle_alloc(R_MPI_T_pvar_session session, int pvar_index,
                                            void *obj_handle, R_MPI_T_pvar_handle *handle, int *count);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_handle_free(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle *handle);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_start(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_stop(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_read(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
+OMPI_DECLSPEC  int R_MPI_T_pvar_handle_free(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle *handle);
+OMPI_DECLSPEC  int R_MPI_T_pvar_start(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+OMPI_DECLSPEC  int R_MPI_T_pvar_stop(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+OMPI_DECLSPEC  int R_MPI_T_pvar_read(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
                                    void *buf);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
+OMPI_DECLSPEC  int R_MPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
                                     void *buf);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_reset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-OR_MPI_DECLSPEC  int R_MPI_T_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
+OMPI_DECLSPEC  int R_MPI_T_pvar_reset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+OMPI_DECLSPEC  int R_MPI_T_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,
                                         void *buf);
-OR_MPI_DECLSPEC  int R_MPI_T_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name, int *name_len);
-OR_MPI_DECLSPEC  int R_MPI_T_enum_get_item(R_MPI_T_enum enumtype, int index, int *value, char *name,
+OMPI_DECLSPEC  int R_MPI_T_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name, int *name_len);
+OMPI_DECLSPEC  int R_MPI_T_enum_get_item(R_MPI_T_enum enumtype, int index, int *value, char *name,
                                        int *name_len);
 
 #if defined(c_plusplus) || defined(__cplusplus)
@@ -2666,17 +2666,17 @@ OR_MPI_DECLSPEC  int R_MPI_T_enum_get_item(R_MPI_T_enum enumtype, int index, int
  *   - We are not building OMPI itself
  *   - We are using a C++ compiler
  */
-#if !defined(OR_MPI_SKIP_MPICXX) && OR_MPI_BUILD_CXX_BINDINGS && !OR_MPI_BUILDING
+#if !defined(OMPI_SKIP_MPICXX) && OMPI_BUILD_CXX_BINDINGS && !OMPI_BUILDING
 #if defined(c_plusplus) || defined(__cplusplus)
 #include "openmpi/ompi/mpi/cxx/mpicxx.h"
 #endif
 #endif
 
-#if !OR_MPI_PROVIDE_R_MPI_FILE_INTERFACE && !OR_MPI_BUILDING
+#if !OMPI_PROVIDE_R_MPI_FILE_INTERFACE && !OMPI_BUILDING
 /* ROMIO requires MPI implementations to set this to 1 if they provide
    R_MPI_OFFSET.  We need to provide it because its used throughout the
    DDT engine */
 #define HAVE_R_MPI_OFFSET 1
 #endif
 
-#endif /* OR_MPI_R_MPI_H */
+#endif /* OMPI_R_MPI_H */

@@ -607,6 +607,8 @@ enum {
    can not be changed in a release series*/
 #define A_MPI_T_ERR_INVALID             70
 #define A_MPI_T_ERR_INVALID_NAME        71
+#define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 
 /* Per MPI-3 p349 47, A_MPI_ERR_LASTCODE must be >= the last predefined
    A_MPI_ERR_<foo> code.  So just set it equal to the last code --
@@ -931,8 +933,6 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_double;
 OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_wchar;
 OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
 
-#define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
-#define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 /*
  * Following are the C++/C99 datatypes
  */

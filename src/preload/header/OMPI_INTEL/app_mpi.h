@@ -810,67 +810,20 @@ enum {
 #define A_MPI_CONVERSION_FN_NULL ((A_MPI_Datarep_conversion_function*) 0)
 #endif
 
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_TYPE_NULL_DELETE_FN;/*( A_MPI_Datatype datatype,
-                                                  int type_keyval,
-                                                  void* attribute_val_out,
-                                                  void* extra_state );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_TYPE_NULL_COPY_FN;/*( A_MPI_Datatype datatype,
-                                                int type_keyval,
-                                                void* extra_state,
-                                                void* attribute_val_in,
-                                                void* attribute_val_out,
-                                                int* flag );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_TYPE_DUP_FN;/*( A_MPI_Datatype datatype,
-                                          int type_keyval,
-                                          void* extra_state,
-                                          void* attribute_val_in,
-                                          void* attribute_val_out,
-                                          int* flag );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_COMM_NULL_DELETE_FN;/*( A_MPI_Comm comm,
-                                                  int comm_keyval,
-                                                  void* attribute_val_out,
-                                                  void* extra_state );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_COMM_NULL_COPY_FN;/*( A_MPI_Comm comm,
-                                                int comm_keyval,
-                                                void* extra_state,
-                                                void* attribute_val_in,
-                                                void* attribute_val_out,
-                                                int* flag );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_COMM_DUP_FN;/*( A_MPI_Comm comm, int comm_keyval,
-                                          void* extra_state,
-                                          void* attribute_val_in,
-                                          void* attribute_val_out,
-                                          int* flag );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_NULL_DELETE_FN;/*( A_MPI_Comm comm, int comm_keyval,
-                                             void* attribute_val_out,
-                                             void* extra_state )
-                                             __mpi_interface_deprecated__;/*("A_MPI_NULL_DELETE_FN is deprecated in MPI-2.0");*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_NULL_COPY_FN;/*( A_MPI_Comm comm, int comm_keyval,
-                                           void* extra_state,
-                                           void* attribute_val_in,
-                                           void* attribute_val_out,
-                                           int* flag )
-                                           __mpi_interface_deprecated__;/*("A_MPI_NULL_COPY_FN is deprecated in MPI-2.0");*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_DUP_FN;/*( A_MPI_Comm comm, int comm_keyval,
-                                     void* extra_state,
-                                     void* attribute_val_in,
-                                     void* attribute_val_out,
-                                     int* flag )
-                                     __mpi_interface_deprecated__;/*("A_MPI_DUP_FN is deprecated in MPI-2.0");*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_WIN_NULL_DELETE_FN;/*( A_MPI_Win window,
-                                                 int win_keyval,
-                                                 void* attribute_val_out,
-                                                 void* extra_state );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_WIN_NULL_COPY_FN;/*( A_MPI_Win window, int win_keyval,
-                                               void* extra_state,
-                                               void* attribute_val_in,
-                                               void* attribute_val_out,
-                                               int* flag );*/
-/*OMPI_DECLSPEC int*/ void * OMPI_C_MPI_WIN_DUP_FN;/*( A_MPI_Win window, int win_keyval,
-                                         void* extra_state,
-                                         void* attribute_val_in,
-                                         void* attribute_val_out,
-                                         int* flag );*/
+void * OMPI_C_MPI_TYPE_NULL_DELETE_FN;
+void * OMPI_C_MPI_TYPE_NULL_COPY_FN;
+void * OMPI_C_MPI_TYPE_DUP_FN;
+void * OMPI_C_MPI_COMM_NULL_DELETE_FN;
+void * OMPI_C_MPI_COMM_NULL_COPY_FN;
+void * OMPI_C_MPI_COMM_DUP_FN;
+void * OMPI_C_MPI_NULL_DELETE_FN;
+void * OMPI_C_MPI_NULL_COPY_FN;
+void * OMPI_C_MPI_DUP_FN;
+void * OMPI_C_MPI_WIN_NULL_DELETE_FN;
+void * OMPI_C_MPI_WIN_NULL_COPY_FN;
+void * OMPI_C_MPI_WIN_DUP_FN;
+
+
 
 /*
  * External variables
@@ -880,141 +833,34 @@ enum {
  * See ompi/communicator/communicator.h comments with struct ompi_communicator_t
  * for full explanation why we chose to use the ompi_predefined_xxx_t structure.
  */
-//OMPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_world;
-//OMPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_self;
-//OMPI_DECLSPEC extern struct ompi_predefined_communicator_t ompi_mpi_comm_null;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_group_t ompi_mpi_group_empty;
-//OMPI_DECLSPEC extern struct ompi_predefined_group_t ompi_mpi_group_null;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_request_t ompi_request_null;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_message_t ompi_message_null;
-//OMPI_DECLSPEC extern struct ompi_predefined_message_t ompi_message_no_proc;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_null;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_min;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_max;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_sum;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_prod;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_land;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_band;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_lor;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_bor;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_lxor;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_bxor;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_maxloc;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_minloc;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_replace;
-//OMPI_DECLSPEC extern struct ompi_predefined_op_t ompi_mpi_op_no_op;
-//
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_datatype_null;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_lb __mpi_interface_deprecated__("A_MPI_LB is deprecated in MPI-2.0");
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_ub __mpi_interface_deprecated__("A_MPI_UB is deprecated in MPI-2.0");
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_char;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_signed_char;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_char;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_byte;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_short;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_short;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_long;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_long_int;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_unsigned_long_long;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_float;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_double;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_double;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_wchar;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
-//
+
+
+
+
+
+
+
+
 #define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
 #define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
-///*
-// * Following are the C++/C99 datatypes
-// */
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_bool;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_cplex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_dblcplex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cxx_ldblcplex;
-//
-///*
-// * Following are the Fortran datatypes
-// */
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_character;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_dblprec;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_cplex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_dblcplex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_ldblcplex;
-//
-///* Aggregate struct datatypes are not */
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2int;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2integer;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2real;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2dblprec;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2cplex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_2dblcplex;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_float_int;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_double_int;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_longdbl_int;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_short_int;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_long_int;
-//
-///* Optional MPI2 datatypes, always declared and defined, but not "exported" as A_MPI_LOGICAL1 */
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical1;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical2;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical4;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_logical8;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer1;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer2;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer4;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer8;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_integer16;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real2;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real4;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real8;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_real16;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex8;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex16;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_complex32;
-//
-///* New datatypes from the MPI 2.2 standard */
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int8_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint8_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int16_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint16_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int32_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint32_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_int64_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_uint64_t;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_aint;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_offset;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_count;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_bool;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_complex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_float_complex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_double_complex;
-//OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_c_long_double_complex;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errhandler_null;
-//OMPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errors_are_fatal;
-//OMPI_DECLSPEC extern struct ompi_predefined_errhandler_t ompi_mpi_errors_return;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_win_t ompi_mpi_win_null;
-//OMPI_DECLSPEC extern struct ompi_predefined_file_t ompi_mpi_file_null;
-//
-//OMPI_DECLSPEC extern struct ompi_predefined_info_t ompi_mpi_info_null;
-//OMPI_DECLSPEC extern struct ompi_predefined_info_t ompi_mpi_info_env;
-//
-//OMPI_DECLSPEC extern A_MPI_Fint *A_MPI_F_STATUS_IGNORE;
-//OMPI_DECLSPEC extern A_MPI_Fint *A_MPI_F_STATUSES_IGNORE;
+/*
+ * Following are the C++/C99 datatypes
+ */
+
+/*
+ * Following are the Fortran datatypes
+ */
+
+/* Aggregate struct datatypes are not */
+
+
+/* Optional MPI2 datatypes, always declared and defined, but not "exported" as A_MPI_LOGICAL1 */
+
+/* New datatypes from the MPI 2.2 standard */
+
+
+
+
 
 
 /*
