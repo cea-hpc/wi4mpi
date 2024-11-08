@@ -43,6 +43,7 @@ Examples:
     function_to_delete(original_text, "function1")
     # Returns: 'int main();\nvoid function2();\n'
 """
+import os
 import re
 import json
 from subprocess import call
@@ -338,3 +339,17 @@ def write_file_append(file_to_edit, content):
     """
     with open(file_to_edit, "a", encoding="utf-8") as file_descriptor:
         file_descriptor.write(content)
+
+
+def remove_file(file_path):
+    """
+    Remove file if it exists.
+
+    Args:
+        file_path (str): Path of the file to remove
+
+    Returns:
+        None
+    """
+    if os.path.exists(file_path):
+        os.remove(file_path)

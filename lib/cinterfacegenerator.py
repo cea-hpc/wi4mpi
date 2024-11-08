@@ -9,6 +9,7 @@ from logging import getLogger
 from logging.config import fileConfig
 from textoperator import (
     clang_format,
+    remove_file,
     write_file_append,
 )
 from codegenerator import CodeGenerator
@@ -45,6 +46,7 @@ class CInterfaceGenerator(CodeGenerator):
         self.apply_jinja_dict["app_dict"]["decl_ext"] = "extern"
         self.apply_jinja_dict["dlsym_dict"]["mpi_libraries"] = ["OMPI", "INTEL"]
         super().generate()
+        remove_file(self.interface_file)
         content = ""
         content += self.apply_jinja("interface_entry", {"funcs": self.data["functions"]})
         for function in self.data["functions"]:
