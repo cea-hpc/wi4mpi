@@ -13,6 +13,7 @@ import jinja2
 from textoperator import (
     clang_format,
     load_json_file,
+    remove_file,
     write_file_append,
 )
 
@@ -134,6 +135,7 @@ class CodeGenerator(ABC):
         """
         Common code between classes CPreloadGenerator and CInterfaceGenerator
         """
+        remove_file(self.output_file)
         content = ""
         content += self.apply_jinja("static", {})
         content += self.apply_jinja(

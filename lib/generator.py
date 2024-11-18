@@ -87,6 +87,7 @@ Authors:
 """
 
 import os
+import re
 import sys
 from logging import getLogger
 from logging.config import fileConfig
@@ -405,13 +406,13 @@ if "__main__" == __name__:
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
     args = {
-        "interface_header_dir": arguments["--interface_header_dir"],
-        "preload_header_dir": arguments["--preload_header_dir"],
-        "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
-        "c_interface_gen_dir": arguments["--c_interface_gen_dir"],
-        "openmpi_version": arguments["--openmpi_version"],
-        "mpich_version": arguments["--mpich_version"],
-        "intelmpi_version": arguments["--intelmpi_version"],
+        "interface_header_dir": re.sub(r"['\"]", "",arguments["--interface_header_dir"]),
+        "preload_header_dir": re.sub(r"['\"]", "",arguments["--preload_header_dir"]),
+        "c_preload_gen_dir": re.sub(r"['\"]", "",arguments["--c_preload_gen_dir"]),
+        "c_interface_gen_dir": re.sub(r"['\"]", "",arguments["--c_interface_gen_dir"]),
+        "openmpi_version": re.sub(r"['\"]", "", arguments["--openmpi_version"]),
+        "mpich_version": re.sub(r"['\"]", "", arguments["--mpich_version"]),
+        "intelmpi_version": re.sub(r"['\"]", "", arguments["--intelmpi_version"]),
     }
     # Delete keys that have a value of None
     none_list = []
@@ -424,3 +425,4 @@ if "__main__" == __name__:
     run = Generator(**args)
     run.generate()
     log.info("End")
+    sys.exit(0)
