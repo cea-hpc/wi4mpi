@@ -88,12 +88,10 @@ typedef int (A_MPI_Grequest_cancel_function)(void *, int);
 #define A_MPI_PROC_NULL          -2                      /* rank of null process */
 #define A_MPI_ROOT               -4                      /* special value for intercomms */
 #define A_MPI_ANY_TAG            -1                      /* match any message tag */
-//#define OPAL_MAX_PROCESSOR_NAME 512 /* max proc. name length */
-//#define OPAL_MAX_ERROR_STRING  2048   /* max error message length */
-//#define OPAL_MAX_OBJECT_NAME   1024    /* max object name length */
 #define A_MPI_MAX_PROCESSOR_NAME 512 /* max proc. name length */
 #define A_MPI_MAX_ERROR_STRING  2048   /* max error message length */
-#define A_MPI_MAX_OBJECT_NAME   1024    /* max object name length */
+#define A_MPI_MAX_OBJECT_NAME    128
+#define A_MPI_MAX_DATAREP_STRING 128
 #define A_MPI_MAX_LIBRARY_VERSION_STRING 256             /* max length of library version string */
 #define A_MPI_UNDEFINED          -32766                  /* undefined stuff */
 #define A_MPI_DIST_GRAPH         3                       /* dist graph topology */
@@ -461,8 +459,6 @@ enum {
    must be able to be present, and therefore has to be in this
    conditional block in mpi.h. */
 #define A_MPI_CONVERSION_FN_NULL ((A_MPI_Datarep_conversion_function*) 0)
- //extern struct ompi_predefined_datatype_t ompi_mpi_cxx_cplex;
-
 
 /*
  * MPI predefined handles
@@ -931,11 +927,11 @@ enum {
   int A_MPI_Intercomm_merge(A_MPI_Comm intercomm, int high,
                                        A_MPI_Comm *newintercomm);
   int A_MPI_Iprobe(int source, int tag, A_MPI_Comm comm, int *flag,
-#define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
-#define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
                               A_MPI_Status *status);
   int A_MPI_Irecv(void *buf, int count, A_MPI_Datatype datatype, int source,
                              int tag, A_MPI_Comm comm, A_MPI_Request *request);
+#define A_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define A_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
   int A_MPI_Irsend(void *buf, int count, A_MPI_Datatype datatype, int dest,
                               int tag, A_MPI_Comm comm, A_MPI_Request *request);
   int A_MPI_Isend(void *buf, int count, A_MPI_Datatype datatype, int dest,

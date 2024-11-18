@@ -8,40 +8,40 @@
 //# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
 //#                                                                      #
 //########################################################################
-/*  
+/*
  *  (C) 2001 by Argonne National Laboratory.
-    
-    				  MPICH2 COPYRIGHT
-    
+
+              MPICH2 COPYRIGHT
+
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
     of the code.
-    
+
     Copyright Notice
      + 2002 University of Chicago
-    
+
     Permission is hereby granted to use, reproduce, prepare derivative works, and
     to redistribute to others.  This software was authored by:
-    
+
     Mathematics and Computer Science Division
     Argonne National Laboratory, Argonne IL 60439
-    
+
     (and)
-    
+
     Department of Computer Science
     University of Illinois at Urbana-Champaign
-    
-    
-    			      GOVERNMENT LICENSE
-    
+
+
+             GOVERNMENT LICENSE
+
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
     is granted for itself and others acting on its behalf a paid-up, nonexclusive,
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
-    
-    				  DISCLAIMER
-    
+
+             DISCLAIMER
+
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
     States, nor the University of Chicago, nor any of their employees, makes any
@@ -49,8 +49,8 @@
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
- *      
+
+ *
  */
 /* src/include/mpi.h.  Generated from mpi.h.in by configure. */
 #ifndef R_MPI_INCLUDED
@@ -58,11 +58,11 @@
 
 /* user include file for MPI programs */
 #if !defined(_WIN32) && !defined(_WIN64)  /* Linux only */
-#	include <stdint.h> /* for __WORDSIZE definition */
+#    include <stdint.h> /* for __WORDSIZE definition */
 #   ifdef __WORDSIZE
-#	    if __WORDSIZE != 8*8 /* 32 or 64 */
-#		    error A wrong version of mpi.h file was included. Check include path.
-#	    endif
+#        if __WORDSIZE != 8*8 /* 32 or 64 */
+#            error A wrong version of mpi.h file was included. Check include path.
+#        endif
 #    endif
 #endif
 
@@ -170,24 +170,24 @@ typedef int R_MPI_Datatype;
 #define R_MPI_LONG_LONG      R_MPI_LONG_LONG_INT
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  R_MPI_Datatype mpich_mpi_char               MPICH_ATTR_TYPE_TAG(char)               = R_MPI_CHAR;
-static  R_MPI_Datatype mpich_mpi_signed_char        MPICH_ATTR_TYPE_TAG(signed char)        = R_MPI_SIGNED_CHAR;
-static  R_MPI_Datatype mpich_mpi_unsigned_char      MPICH_ATTR_TYPE_TAG(unsigned char)      = R_MPI_UNSIGNED_CHAR;
-/*static  R_MPI_Datatype mpich_mpi_byte               MPICH_ATTR_TYPE_TAG(char)               = R_MPI_BYTE;*/
-static  R_MPI_Datatype mpich_mpi_wchar              MPICH_ATTR_TYPE_TAG(wchar_t)            = R_MPI_WCHAR;
-static  R_MPI_Datatype mpich_mpi_short              MPICH_ATTR_TYPE_TAG(short)              = R_MPI_SHORT;
-static  R_MPI_Datatype mpich_mpi_unsigned_short     MPICH_ATTR_TYPE_TAG(unsigned short)     = R_MPI_UNSIGNED_SHORT;
-static  R_MPI_Datatype mpich_mpi_int                MPICH_ATTR_TYPE_TAG(int)                = R_MPI_INT;
-static  R_MPI_Datatype mpich_mpi_unsigned           MPICH_ATTR_TYPE_TAG(unsigned)           = R_MPI_UNSIGNED;
-static  R_MPI_Datatype mpich_mpi_long               MPICH_ATTR_TYPE_TAG(long)               = R_MPI_LONG;
-static  R_MPI_Datatype mpich_mpi_unsigned_long      MPICH_ATTR_TYPE_TAG(unsigned long)      = R_MPI_UNSIGNED_LONG;
-static  R_MPI_Datatype mpich_mpi_float              MPICH_ATTR_TYPE_TAG(float)              = R_MPI_FLOAT;
-static  R_MPI_Datatype mpich_mpi_double             MPICH_ATTR_TYPE_TAG(double)             = R_MPI_DOUBLE;
+static R_MPI_Datatype mpich_mpi_char               MPICH_ATTR_TYPE_TAG(char)               = R_MPI_CHAR;
+static R_MPI_Datatype mpich_mpi_signed_char        MPICH_ATTR_TYPE_TAG(signed char)        = R_MPI_SIGNED_CHAR;
+static R_MPI_Datatype mpich_mpi_unsigned_char      MPICH_ATTR_TYPE_TAG(unsigned char)      = R_MPI_UNSIGNED_CHAR;
+/*static R_MPI_Datatype mpich_mpi_byte               MPICH_ATTR_TYPE_TAG(char)               = R_MPI_BYTE;*/
+static R_MPI_Datatype mpich_mpi_wchar              MPICH_ATTR_TYPE_TAG(wchar_t)            = R_MPI_WCHAR;
+static R_MPI_Datatype mpich_mpi_short              MPICH_ATTR_TYPE_TAG(short)              = R_MPI_SHORT;
+static R_MPI_Datatype mpich_mpi_unsigned_short     MPICH_ATTR_TYPE_TAG(unsigned short)     = R_MPI_UNSIGNED_SHORT;
+static R_MPI_Datatype mpich_mpi_int                MPICH_ATTR_TYPE_TAG(int)                = R_MPI_INT;
+static R_MPI_Datatype mpich_mpi_unsigned           MPICH_ATTR_TYPE_TAG(unsigned)           = R_MPI_UNSIGNED;
+static R_MPI_Datatype mpich_mpi_long               MPICH_ATTR_TYPE_TAG(long)               = R_MPI_LONG;
+static R_MPI_Datatype mpich_mpi_unsigned_long      MPICH_ATTR_TYPE_TAG(unsigned long)      = R_MPI_UNSIGNED_LONG;
+static R_MPI_Datatype mpich_mpi_float              MPICH_ATTR_TYPE_TAG(float)              = R_MPI_FLOAT;
+static R_MPI_Datatype mpich_mpi_double             MPICH_ATTR_TYPE_TAG(double)             = R_MPI_DOUBLE;
 #if 0x4c00100c != 0x0c000000
-static  R_MPI_Datatype mpich_mpi_long_double        MPICH_ATTR_TYPE_TAG(long double)        = R_MPI_LONG_DOUBLE;
+static R_MPI_Datatype mpich_mpi_long_double        MPICH_ATTR_TYPE_TAG(long double)        = R_MPI_LONG_DOUBLE;
 #endif
-static  R_MPI_Datatype mpich_mpi_long_long_int      MPICH_ATTR_TYPE_TAG(long long int)      = R_MPI_LONG_LONG_INT;
-static  R_MPI_Datatype mpich_mpi_unsigned_long_long MPICH_ATTR_TYPE_TAG(unsigned long long) = R_MPI_UNSIGNED_LONG_LONG;
+static R_MPI_Datatype mpich_mpi_long_long_int      MPICH_ATTR_TYPE_TAG(long long int)      = R_MPI_LONG_LONG_INT;
+static R_MPI_Datatype mpich_mpi_unsigned_long_long MPICH_ATTR_TYPE_TAG(unsigned long long) = R_MPI_UNSIGNED_LONG_LONG;
 #endif
 
 #define R_MPI_PACKED         ((R_MPI_Datatype)0x4c00010f)
@@ -219,10 +219,10 @@ struct mpich_struct_mpi_2int            { int i1; int i2; };
 struct mpich_struct_mpi_long_double_int { long double ld; int i; };
 #endif
 
-static  R_MPI_Datatype mpich_mpi_float_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_float_int)       = R_MPI_FLOAT_INT;
-static  R_MPI_Datatype mpich_mpi_double_int      MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_double_int)      = R_MPI_DOUBLE_INT;
-static  R_MPI_Datatype mpich_mpi_long_int        MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_long_int)        = R_MPI_LONG_INT;
-static  R_MPI_Datatype mpich_mpi_short_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_short_int)       = R_MPI_SHORT_INT;
+static R_MPI_Datatype mpich_mpi_float_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_float_int)       = R_MPI_FLOAT_INT;
+static R_MPI_Datatype mpich_mpi_double_int      MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_double_int)      = R_MPI_DOUBLE_INT;
+static R_MPI_Datatype mpich_mpi_long_int        MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_long_int)        = R_MPI_LONG_INT;
+static R_MPI_Datatype mpich_mpi_short_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_short_int)       = R_MPI_SHORT_INT;
 
 /*
  * The R_MPI_2INT line is commented out because currently Clang 3.3 flags
@@ -235,11 +235,11 @@ static  R_MPI_Datatype mpich_mpi_short_int       MPICH_ATTR_TYPE_TAG_LAYOUT_COMP
  * So, we disable type checking for R_MPI_2INT until Clang fixes this bug.
  */
 
-/* static  R_MPI_Datatype mpich_mpi_2int            MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_2int)            = R_MPI_2INT
+/* static R_MPI_Datatype mpich_mpi_2int            MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_2int)            = R_MPI_2INT
  */
 
 #if 0x8c000004 != 0x0c000000
-static  R_MPI_Datatype mpich_mpi_long_double_int MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_long_double_int) = R_MPI_LONG_DOUBLE_INT;
+static R_MPI_Datatype mpich_mpi_long_double_int MPICH_ATTR_TYPE_TAG_LAYOUT_COMPATIBLE(struct mpich_struct_mpi_long_double_int) = R_MPI_LONG_DOUBLE_INT;
 #endif
 #endif
 
@@ -291,14 +291,14 @@ static  R_MPI_Datatype mpich_mpi_long_double_int MPICH_ATTR_TYPE_TAG_LAYOUT_COMP
 #define R_MPI_UINT64_T          ((R_MPI_Datatype)0x4c00083e)
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  R_MPI_Datatype mpich_mpi_int8_t   MPICH_ATTR_TYPE_TAG_STDINT(int8_t)   = R_MPI_INT8_T;
-static  R_MPI_Datatype mpich_mpi_int16_t  MPICH_ATTR_TYPE_TAG_STDINT(int16_t)  = R_MPI_INT16_T;
-static  R_MPI_Datatype mpich_mpi_int32_t  MPICH_ATTR_TYPE_TAG_STDINT(int32_t)  = R_MPI_INT32_T;
-static  R_MPI_Datatype mpich_mpi_int64_t  MPICH_ATTR_TYPE_TAG_STDINT(int64_t)  = R_MPI_INT64_T;
-static  R_MPI_Datatype mpich_mpi_uint8_t  MPICH_ATTR_TYPE_TAG_STDINT(uint8_t)  = R_MPI_UINT8_T;
-static  R_MPI_Datatype mpich_mpi_uint16_t MPICH_ATTR_TYPE_TAG_STDINT(uint16_t) = R_MPI_UINT16_T;
-static  R_MPI_Datatype mpich_mpi_uint32_t MPICH_ATTR_TYPE_TAG_STDINT(uint32_t) = R_MPI_UINT32_T;
-static  R_MPI_Datatype mpich_mpi_uint64_t MPICH_ATTR_TYPE_TAG_STDINT(uint64_t) = R_MPI_UINT64_T;
+static R_MPI_Datatype mpich_mpi_int8_t   MPICH_ATTR_TYPE_TAG_STDINT(int8_t)   = R_MPI_INT8_T;
+static R_MPI_Datatype mpich_mpi_int16_t  MPICH_ATTR_TYPE_TAG_STDINT(int16_t)  = R_MPI_INT16_T;
+static R_MPI_Datatype mpich_mpi_int32_t  MPICH_ATTR_TYPE_TAG_STDINT(int32_t)  = R_MPI_INT32_T;
+static R_MPI_Datatype mpich_mpi_int64_t  MPICH_ATTR_TYPE_TAG_STDINT(int64_t)  = R_MPI_INT64_T;
+static R_MPI_Datatype mpich_mpi_uint8_t  MPICH_ATTR_TYPE_TAG_STDINT(uint8_t)  = R_MPI_UINT8_T;
+static R_MPI_Datatype mpich_mpi_uint16_t MPICH_ATTR_TYPE_TAG_STDINT(uint16_t) = R_MPI_UINT16_T;
+static R_MPI_Datatype mpich_mpi_uint32_t MPICH_ATTR_TYPE_TAG_STDINT(uint32_t) = R_MPI_UINT32_T;
+static R_MPI_Datatype mpich_mpi_uint64_t MPICH_ATTR_TYPE_TAG_STDINT(uint64_t) = R_MPI_UINT64_T;
 #endif
 
 /* other C99 types */
@@ -309,11 +309,11 @@ static  R_MPI_Datatype mpich_mpi_uint64_t MPICH_ATTR_TYPE_TAG_STDINT(uint64_t) =
 #define R_MPI_C_LONG_DOUBLE_COMPLEX  ((R_MPI_Datatype)0x4c002042)
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  R_MPI_Datatype mpich_mpi_c_bool                MPICH_ATTR_TYPE_TAG_C99(_Bool)           = R_MPI_C_BOOL;
-static  R_MPI_Datatype mpich_mpi_c_float_complex       MPICH_ATTR_TYPE_TAG_C99(float _Complex)  = R_MPI_C_FLOAT_COMPLEX;
-static  R_MPI_Datatype mpich_mpi_c_double_complex      MPICH_ATTR_TYPE_TAG_C99(double _Complex) = R_MPI_C_DOUBLE_COMPLEX;
+static R_MPI_Datatype mpich_mpi_c_bool                MPICH_ATTR_TYPE_TAG_C99(_Bool)           = R_MPI_C_BOOL;
+static R_MPI_Datatype mpich_mpi_c_float_complex       MPICH_ATTR_TYPE_TAG_C99(float _Complex)  = R_MPI_C_FLOAT_COMPLEX;
+static R_MPI_Datatype mpich_mpi_c_double_complex      MPICH_ATTR_TYPE_TAG_C99(double _Complex) = R_MPI_C_DOUBLE_COMPLEX;
 #if 0x4c002042 != 0x0c000000
-static  R_MPI_Datatype mpich_mpi_c_long_double_complex MPICH_ATTR_TYPE_TAG_C99(long double _Complex) = R_MPI_C_LONG_DOUBLE_COMPLEX;
+static R_MPI_Datatype mpich_mpi_c_long_double_complex MPICH_ATTR_TYPE_TAG_C99(long double _Complex) = R_MPI_C_LONG_DOUBLE_COMPLEX;
 #endif
 #endif
 
@@ -402,7 +402,7 @@ typedef int R_MPI_Op;
 #define R_MPI_WIN_MODEL         0x66000009
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  R_MPI_Datatype mpich_mpi_datatype_null MPICH_ATTR_TYPE_TAG_MUST_BE_NULL() = R_MPI_DATATYPE_NULL;
+static R_MPI_Datatype mpich_mpi_datatype_null MPICH_ATTR_TYPE_TAG_MUST_BE_NULL() = R_MPI_DATATYPE_NULL;
 #endif
 
 /* These are only guesses; make sure you change them in mpif.h as well */
@@ -413,7 +413,7 @@ static  R_MPI_Datatype mpich_mpi_datatype_null MPICH_ATTR_TYPE_TAG_MUST_BE_NULL(
 #define R_MPI_MAX_OBJECT_NAME    128
 #define R_MPI_MAX_DATAREP_STRING 128
 
-/* Pre-defined ants */
+/* Pre-defined constants */
 #define R_MPI_UNDEFINED      (-32766)
 #define R_MPI_UNDEFINED_RANK R_MPI_UNDEFINED
 #define R_MPI_KEYVAL_INVALID 0x24000000
@@ -427,10 +427,10 @@ typedef enum R_MPIR_Win_flavor {
 } R_MPIR_Win_flavor_t;
 
 /* MPI-3 window consistency models */
-typedef enum A_MPIR_Win_model {
+typedef enum R_MPIR_Win_model {
     R_MPI_WIN_SEPARATE   = 1,
     R_MPI_WIN_UNIFIED    = 2
-} A_MPIR_Win_model_t;
+} R_MPIR_Win_model_t;
 
 /* Upper bound on the overhead in bsend for each message buffer */
 #define R_MPI_BSEND_OVERHEAD 95
@@ -472,7 +472,7 @@ typedef R_MPI_Win_errhandler_function R_MPI_Win_errhandler_fn;
    in 22-25), index in the low bits */
 #define R_MPI_ERRORS_ARE_FATAL ((R_MPI_Errhandler)0x54000000)
 #define R_MPI_ERRORS_RETURN    ((R_MPI_Errhandler)0x54000001)
-/* MPIR_ERRORS_THROW_EXCEPTIONS is not part of the MPI standard, it is here to
+/* R_MPIR_ERRORS_THROW_EXCEPTIONS is not part of the MPI standard, it is here to
    facilitate the c++ binding which has MPI::ERRORS_THROW_EXCEPTIONS. 
    Using the MPIR prefix preserved the R_MPI_ names for objects defined by
    the standard. */
@@ -581,7 +581,7 @@ typedef int R_MPI_Info;
 #define R_MPI_MAX_INFO_KEY       255
 #define R_MPI_MAX_INFO_VAL      1024
 
-/* for subarray and darray ructors */
+/* for subarray and darray constructors */
 #define R_MPI_ORDER_C              56
 #define R_MPI_ORDER_FORTRAN        57
 #define R_MPI_DISTRIBUTE_BLOCK    121
@@ -607,7 +607,7 @@ typedef int R_MPI_Fint;
 typedef long long R_MPI_Count;
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  R_MPI_Datatype mpich_mpi_aint   MPICH_ATTR_TYPE_TAG(R_MPI_Aint)   = R_MPI_AINT;
+static R_MPI_Datatype mpich_mpi_aint   MPICH_ATTR_TYPE_TAG(R_MPI_Aint)   = R_MPI_AINT;
 #endif
 
 /* FIXME: The following two definition are not defined by MPI and must not be
@@ -624,7 +624,7 @@ static  R_MPI_Datatype mpich_mpi_aint   MPICH_ATTR_TYPE_TAG(R_MPI_Aint)   = R_MP
 typedef long long R_MPI_Offset;
 
 #ifdef MPICH_DEFINE_ATTR_TYPE_TYPES
-static  R_MPI_Datatype mpich_mpi_offset MPICH_ATTR_TYPE_TAG(R_MPI_Offset) = R_MPI_OFFSET;
+static R_MPI_Datatype mpich_mpi_offset MPICH_ATTR_TYPE_TAG(R_MPI_Offset) = R_MPI_OFFSET;
 #endif
 
 /* The order of these elements must match that in mpif.h, mpi_f08_types.f90,
@@ -648,15 +648,15 @@ typedef struct MPIR_T_cvar_handle_s * R_MPI_T_cvar_handle;
 typedef struct MPIR_T_pvar_handle_s * R_MPI_T_pvar_handle;
 typedef struct MPIR_T_pvar_session_s * R_MPI_T_pvar_session;
 
-/* extra  at front would be safer, but is incompatible with R_MPI_T_ prototypes */
-extern struct MPIR_T_pvar_handle_s *  R_MPI_T_PVAR_ALL_HANDLES;
+/* extra at front would be safer, but is incompatible with R_MPI_T_ prototypes */
+extern struct MPIR_T_pvar_handle_s * R_MPI_T_PVAR_ALL_HANDLES;
 
 #define R_MPI_T_ENUM_NULL         ((R_MPI_T_enum)NULL)
 #define R_MPI_T_CVAR_HANDLE_NULL  ((R_MPI_T_cvar_handle)NULL)
 #define R_MPI_T_PVAR_HANDLE_NULL  ((R_MPI_T_pvar_handle)NULL)
 #define R_MPI_T_PVAR_SESSION_NULL ((R_MPI_T_pvar_session)NULL)
 
-/* the R_MPI_T_ interface requires that these VERBOSITY ants occur in this
+/* the R_MPI_T_ interface requires that these VERBOSITY constants occur in this
  * relative order with increasing values */
 typedef enum R_MPIR_T_verbosity_t {
     /* don't name-shift this if/when R_MPI_T_ is accepted, this is an MPICH-only
@@ -755,24 +755,24 @@ typedef enum R_MPIR_T_pvar_class_t {
 #define R_MPI_Message_f2c(msg) ((R_MPI_Message)(msg))
 
 /* PMPI versions of the handle transfer functions.  See section 4.17 */
-#define R_PMPIComm_c2f(comm) (R_MPI_Fint)(comm)
-#define R_PMPIComm_f2c(comm) (R_MPI_Comm)(comm)
-#define R_PMPIType_c2f(datatype) (R_MPI_Fint)(datatype)
-#define R_PMPIType_f2c(datatype) (R_MPI_Datatype)(datatype)
-#define R_PMPIGroup_c2f(group) (R_MPI_Fint)(group)
-#define R_PMPIGroup_f2c(group) (R_MPI_Group)(group)
-#define R_PMPIInfo_c2f(info) (R_MPI_Fint)(info)
-#define R_PMPIInfo_f2c(info) (R_MPI_Info)(info)
-#define R_PMPIRequest_f2c(request) (R_MPI_Request)(request)
-#define R_PMPIRequest_c2f(request) (R_MPI_Fint)(request)
-#define R_PMPIOp_c2f(op) (R_MPI_Fint)(op)
-#define R_PMPIOp_f2c(op) (R_MPI_Op)(op)
-#define R_PMPIErrhandler_c2f(errhandler) (R_MPI_Fint)(errhandler)
-#define R_PMPIErrhandler_f2c(errhandler) (R_MPI_Errhandler)(errhandler)
-#define R_PMPIWin_c2f(win)   (R_MPI_Fint)(win)
-#define R_PMPIWin_f2c(win)   (R_MPI_Win)(win)
-#define R_PMPIMessage_c2f(msg) ((R_MPI_Fint)(msg))
-#define R_PMPIMessage_f2c(msg) ((R_MPI_Message)(msg))
+#define R_PMPI_Comm_c2f(comm) (R_MPI_Fint)(comm)
+#define R_PMPI_Comm_f2c(comm) (R_MPI_Comm)(comm)
+#define R_PMPI_Type_c2f(datatype) (R_MPI_Fint)(datatype)
+#define R_PMPI_Type_f2c(datatype) (R_MPI_Datatype)(datatype)
+#define R_PMPI_Group_c2f(group) (R_MPI_Fint)(group)
+#define R_PMPI_Group_f2c(group) (R_MPI_Group)(group)
+#define R_PMPI_Info_c2f(info) (R_MPI_Fint)(info)
+#define R_PMPI_Info_f2c(info) (R_MPI_Info)(info)
+#define R_PMPI_Request_f2c(request) (R_MPI_Request)(request)
+#define R_PMPI_Request_c2f(request) (R_MPI_Fint)(request)
+#define R_PMPI_Op_c2f(op) (R_MPI_Fint)(op)
+#define R_PMPI_Op_f2c(op) (R_MPI_Op)(op)
+#define R_PMPI_Errhandler_c2f(errhandler) (R_MPI_Fint)(errhandler)
+#define R_PMPI_Errhandler_f2c(errhandler) (R_MPI_Errhandler)(errhandler)
+#define R_PMPI_Win_c2f(win)   (R_MPI_Fint)(win)
+#define R_PMPI_Win_f2c(win)   (R_MPI_Win)(win)
+#define R_PMPI_Message_c2f(msg) ((R_MPI_Fint)(msg))
+#define R_PMPI_Message_f2c(msg) ((R_MPI_Message)(msg))
 
 #define R_MPI_STATUS_IGNORE (R_MPI_Status *)1
 #define R_MPI_STATUSES_IGNORE (R_MPI_Status *)1
@@ -782,13 +782,13 @@ typedef enum R_MPIR_T_pvar_class_t {
 #define MPIU_DLL_SPEC
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE;
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE;
-//extern MPIU_DLL_SPEC int *  R_MPI_UNWEIGHTED;
-//extern MPIU_DLL_SPEC int *  R_MPI_WEIGHTS_EMPTY;
-int *  R_MPI_UNWEIGHTED;
-int *  R_MPI_WEIGHTS_EMPTY;
+int * R_MPI_UNWEIGHTED;
+int * R_MPI_WEIGHTS_EMPTY;
+int * MPI_UNWEIGHTED;
+int * MPI_WEIGHTS_EMPTY;
 
 /* The annotation MPIU_DLL_SPEC to the extern statements is used 
-   as a hook for systems that require C extensions to correctly ruct
+   as a hook for systems that require C extensions to correctly construct
    DLLs, and is defined as an empty string otherwise
  */
 
@@ -930,11 +930,11 @@ typedef int (R_MPIX_Grequest_wait_function)(int, void **, double, R_MPI_Status *
 #define R_MPI_T_ERR_PVAR_NO_STARTSTOP 70  /* Pvar can't be started or stopped */
 #define R_MPI_T_ERR_PVAR_NO_WRITE     71  /* Pvar can't be written or reset */
 #define R_MPI_T_ERR_PVAR_NO_ATOMIC    72  /* Pvar can't be R/W atomically */
+#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
+#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 
 #define R_MPI_ERR_LASTCODE    0x3fffffff  /* Last valid error code for a 
 					   predefined error class */
-#define R_MPI_T_ERR_INVALID_NAME      73  /* Name doesn't match */
-#define R_MPI_T_ERR_INVALID           74  /* Generic error code for MPI_T added in MPI-3.1 */
 /* WARNING: this is also defined in mpishared.h.  Update both locations */
 #define MPICH_ERR_LAST_CLASS 74     /* It is also helpful to know the
 				       last valid class */
@@ -961,26 +961,26 @@ typedef int (R_MPI_Datarep_extent_function)(R_MPI_Datatype datatype, R_MPI_Aint 
 #ifndef MPICH_SUPPRESS_PROTOTYPES
 /* We require that the C compiler support prototypes */
 /* Begin Prototypes */
-int R_MPI_Send( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
              R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 int R_MPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
              R_MPI_Comm comm, R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Get_count( R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
-int R_MPI_Bsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
+int R_MPI_Bsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
               R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Ssend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
               R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Rsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Rsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
               R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 int R_MPI_Buffer_attach(void *buffer, int size);
 int R_MPI_Buffer_detach(void *buffer_addr, int *size);
-int R_MPI_Isend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
               R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Ibsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Issend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Irsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 int R_MPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
               R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
@@ -1000,20 +1000,20 @@ int R_MPI_Testsome(int incount, R_MPI_Request array_of_requests[], int *outcount
 int R_MPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag, R_MPI_Status *status);
 int R_MPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status);
 int R_MPI_Cancel(R_MPI_Request *request);
-int R_MPI_Test_cancelled( R_MPI_Status *status, int *flag);
-int R_MPI_Send_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Test_cancelled(R_MPI_Status *status, int *flag);
+int R_MPI_Send_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                   R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Bsend_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                    R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Ssend_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                    R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Rsend_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_MPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                    R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 int R_MPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
                   R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 int R_MPI_Start(R_MPI_Request *request);
 int R_MPI_Startall(int count, R_MPI_Request array_of_requests[]);
-int R_MPI_Sendrecv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, int dest,
+int R_MPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, int dest,
                  int sendtag, void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                  int source, int recvtag, R_MPI_Comm comm, R_MPI_Status *status)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(6,8);
@@ -1025,65 +1025,65 @@ int R_MPI_Type_vector(int count, int blocklength, int stride, R_MPI_Datatype old
                     R_MPI_Datatype *newtype);
 int R_MPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride, R_MPI_Datatype oldtype,
                      R_MPI_Datatype *newtype);
-int R_MPI_Type_indexed(int count,  int *array_of_blocklengths,
-                      int *array_of_displacements, R_MPI_Datatype oldtype,
+int R_MPI_Type_indexed(int count, int *array_of_blocklengths,
+                     int *array_of_displacements, R_MPI_Datatype oldtype,
                      R_MPI_Datatype *newtype);
-int R_MPI_Type_hindexed(int count,  int *array_of_blocklengths,
-                       R_MPI_Aint *array_of_displacements, R_MPI_Datatype oldtype,
+int R_MPI_Type_hindexed(int count, int *array_of_blocklengths,
+                      R_MPI_Aint *array_of_displacements, R_MPI_Datatype oldtype,
                       R_MPI_Datatype *newtype);
-int R_MPI_Type_struct(int count,  int *array_of_blocklengths,
-                     R_MPI_Aint *array_of_displacements,
-                     R_MPI_Datatype *array_of_types, R_MPI_Datatype *newtype);
-int R_MPI_Address( void *location, R_MPI_Aint *address);
+int R_MPI_Type_struct(int count, int *array_of_blocklengths,
+                    R_MPI_Aint *array_of_displacements,
+                    R_MPI_Datatype *array_of_types, R_MPI_Datatype *newtype);
+int R_MPI_Address(void *location, R_MPI_Aint *address);
 int R_MPI_Type_extent(R_MPI_Datatype datatype, R_MPI_Aint *extent);
 int R_MPI_Type_size(R_MPI_Datatype datatype, int *size);
 int R_MPI_Type_lb(R_MPI_Datatype datatype, R_MPI_Aint *displacement);
 int R_MPI_Type_ub(R_MPI_Datatype datatype, R_MPI_Aint *displacement);
 int R_MPI_Type_commit(R_MPI_Datatype *datatype);
 int R_MPI_Type_free(R_MPI_Datatype *datatype);
-int R_MPI_Get_elements( R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
-int R_MPI_Pack( void *inbuf, int incount, R_MPI_Datatype datatype, void *outbuf,
+int R_MPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
+int R_MPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype, void *outbuf,
              int outsize, int *position, R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Unpack( void *inbuf, int insize, int *position, void *outbuf, int outcount,
+int R_MPI_Unpack(void *inbuf, int insize, int *position, void *outbuf, int outcount,
                R_MPI_Datatype datatype, R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
 int R_MPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm, int *size);
 int R_MPI_Barrier(R_MPI_Comm comm);
 int R_MPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype, int root, R_MPI_Comm comm)
               MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Gather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm)
                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Gatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                 int *recvcounts,  int *displs, R_MPI_Datatype recvtype, int root,
+int R_MPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                int *recvcounts, int *displs, R_MPI_Datatype recvtype, int root,
                 R_MPI_Comm comm)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_MPI_Scatter( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                 int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Scatterv( void *sendbuf,  int *sendcounts,  int *displs,
+int R_MPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
                  R_MPI_Datatype sendtype, void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                  int root, R_MPI_Comm comm)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,7);
-int R_MPI_Allgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                   int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Allgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                    int *recvcounts,  int *displs, R_MPI_Datatype recvtype, R_MPI_Comm comm)
+int R_MPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                   int *recvcounts, int *displs, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_MPI_Alltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                  int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Alltoallv( void *sendbuf,  int *sendcounts,  int *sdispls,
-                  R_MPI_Datatype sendtype, void *recvbuf,  int *recvcounts,
-                   int *rdispls, R_MPI_Datatype recvtype, R_MPI_Comm comm)
+int R_MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
+                  R_MPI_Datatype sendtype, void *recvbuf, int *recvcounts,
+                  int *rdispls, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_MPI_Alltoallw( void *sendbuf,  int sendcounts[],  int sdispls[],
-                   R_MPI_Datatype sendtypes[], void *recvbuf,  int recvcounts[],
-                   int rdispls[],  R_MPI_Datatype recvtypes[], R_MPI_Comm comm);
-int R_MPI_Exscan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_MPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
+                  R_MPI_Datatype sendtypes[], void *recvbuf, int recvcounts[],
+                  int rdispls[], R_MPI_Datatype recvtypes[], R_MPI_Comm comm);
+int R_MPI_Exscan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                R_MPI_Op op, R_MPI_Comm comm)
                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Reduce( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_MPI_Reduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                R_MPI_Op op, int root, R_MPI_Comm comm)
                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_Op_create(R_MPI_User_function *user_fn, int commute, R_MPI_Op *op);
@@ -1091,23 +1091,23 @@ int R_MPI_Op_free(R_MPI_Op *op);
 int R_MPI_Allreduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                   R_MPI_Op op, R_MPI_Comm comm)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Reduce_scatter( void *sendbuf, void *recvbuf,  int recvcounts[],
+int R_MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                        R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm)
                        MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Scan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
+int R_MPI_Scan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
              R_MPI_Comm comm)
              MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_Group_size(R_MPI_Group group, int *size);
 int R_MPI_Group_rank(R_MPI_Group group, int *rank);
-int R_MPI_Group_translate_ranks(R_MPI_Group group1, int n,  int ranks1[], R_MPI_Group group2,
+int R_MPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[], R_MPI_Group group2,
                               int ranks2[]);
 int R_MPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result);
 int R_MPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group);
 int R_MPI_Group_union(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
 int R_MPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
 int R_MPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
-int R_MPI_Group_incl(R_MPI_Group group, int n,  int ranks[], R_MPI_Group *newgroup);
-int R_MPI_Group_excl(R_MPI_Group group, int n,  int ranks[], R_MPI_Group *newgroup);
+int R_MPI_Group_incl(R_MPI_Group group, int n, int ranks[], R_MPI_Group *newgroup);
+int R_MPI_Group_excl(R_MPI_Group group, int n, int ranks[], R_MPI_Group *newgroup);
 int R_MPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3], R_MPI_Group *newgroup);
 int R_MPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3], R_MPI_Group *newgroup);
 int R_MPI_Group_free(R_MPI_Group *group);
@@ -1132,23 +1132,23 @@ int R_MPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val);
 int R_MPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val, int *flag);
 int R_MPI_Attr_delete(R_MPI_Comm comm, int keyval);
 int R_MPI_Topo_test(R_MPI_Comm comm, int *status);
-int R_MPI_Cart_create(R_MPI_Comm comm_old, int ndims,  int dims[],  int periods[],
+int R_MPI_Cart_create(R_MPI_Comm comm_old, int ndims, int dims[], int periods[],
                     int reorder, R_MPI_Comm *comm_cart);
 int R_MPI_Dims_create(int nnodes, int ndims, int dims[]);
-int R_MPI_Graph_create(R_MPI_Comm comm_old, int nnodes,  int indx[],  int edges[],
+int R_MPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
                      int reorder, R_MPI_Comm *comm_graph);
 int R_MPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges);
 int R_MPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges, int indx[], int edges[]);
 int R_MPI_Cartdim_get(R_MPI_Comm comm, int *ndims);
 int R_MPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[], int periods[], int coords[]);
-int R_MPI_Cart_rank(R_MPI_Comm comm,  int coords[], int *rank);
+int R_MPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank);
 int R_MPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]);
 int R_MPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors);
 int R_MPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors, int neighbors[]);
 int R_MPI_Cart_shift(R_MPI_Comm comm, int direction, int disp, int *rank_source, int *rank_dest);
-int R_MPI_Cart_sub(R_MPI_Comm comm,  int remain_dims[], R_MPI_Comm *newcomm);
-int R_MPI_Cart_map(R_MPI_Comm comm, int ndims,  int dims[],  int periods[], int *newrank);
-int R_MPI_Graph_map(R_MPI_Comm comm, int nnodes,  int indx[],  int edges[], int *newrank);
+int R_MPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *newcomm);
+int R_MPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[], int periods[], int *newrank);
+int R_MPI_Graph_map(R_MPI_Comm comm, int nnodes, int indx[], int edges[], int *newrank);
 int R_MPI_Get_processor_name(char *name, int *resultlen);
 int R_MPI_Get_version(int *version, int *subversion);
 int R_MPI_Get_library_version(char *version, int *resultlen);
@@ -1167,38 +1167,38 @@ int R_MPI_Abort(R_MPI_Comm comm, int errorcode);
 
 /* Note that we may need to define a @PCONTROL_LIST@ depending on whether
    stdargs are supported */
-int R_MPI_Pcontrol( int level, ...);
+int R_MPI_Pcontrol(int level, ...);
 
 /* Process Creation and Management */
-int R_MPI_Close_port( char *port_name);
-int R_MPI_Comm_accept( char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
+int R_MPI_Close_port(char *port_name);
+int R_MPI_Comm_accept(char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
                     R_MPI_Comm *newcomm);
-int R_MPI_Comm_connect( char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
+int R_MPI_Comm_connect(char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
                      R_MPI_Comm *newcomm);
 int R_MPI_Comm_disconnect(R_MPI_Comm *comm);
 int R_MPI_Comm_get_parent(R_MPI_Comm *parent);
 int R_MPI_Comm_join(int fd, R_MPI_Comm *intercomm);
-int R_MPI_Comm_spawn( char *command, char *argv[], int maxprocs, R_MPI_Info info, int root,
+int R_MPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info, int root,
                    R_MPI_Comm comm, R_MPI_Comm *intercomm, int array_of_errcodes[]);
 int R_MPI_Comm_spawn_multiple(int count, char *array_of_commands[], char **array_of_argv[],
-                             int array_of_maxprocs[],  R_MPI_Info array_of_info[],
+                            int array_of_maxprocs[], R_MPI_Info array_of_info[],
                             int root, R_MPI_Comm comm, R_MPI_Comm *intercomm, int array_of_errcodes[]);
-int R_MPI_Lookup_name( char *service_name, R_MPI_Info info, char *port_name);
+int R_MPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name);
 int R_MPI_Open_port(R_MPI_Info info, char *port_name);
-int R_MPI_Publish_name( char *service_name, R_MPI_Info info,  char *port_name);
-int R_MPI_Unpublish_name( char *service_name, R_MPI_Info info,  char *port_name);
+int R_MPI_Publish_name(char *service_name, R_MPI_Info info, char *port_name);
+int R_MPI_Unpublish_name(char *service_name, R_MPI_Info info, char *port_name);
 int R_MPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info);
 int R_MPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info);
 
 /* One-Sided Communications */
-int R_MPI_Accumulate( void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+int R_MPI_Accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                    int target_rank, R_MPI_Aint target_disp, int target_count,
                    R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 int R_MPI_Get(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
             int target_rank, R_MPI_Aint target_disp, int target_count,
             R_MPI_Datatype target_datatype, R_MPI_Win win) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Put( void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+int R_MPI_Put(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
             int target_rank, R_MPI_Aint target_disp, int target_count,
             R_MPI_Datatype target_datatype, R_MPI_Win win) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 int R_MPI_Win_complete(R_MPI_Win win);
@@ -1222,26 +1222,26 @@ int R_MPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info, R
 int R_MPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size, int *disp_unit, void *baseptr);
 int R_MPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
 int R_MPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size);
-int R_MPI_Win_detach(R_MPI_Win win,  void *base);
+int R_MPI_Win_detach(R_MPI_Win win, void *base);
 int R_MPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used);
 int R_MPI_Win_set_info(R_MPI_Win win, R_MPI_Info info);
-int R_MPI_Get_accumulate( void *origin_addr, int origin_count,
+int R_MPI_Get_accumulate(void *origin_addr, int origin_count,
                         R_MPI_Datatype origin_datatype, void *result_addr, int result_count,
                         R_MPI_Datatype result_datatype, int target_rank, R_MPI_Aint target_disp,
                         int target_count, R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win)
                         MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                         MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Fetch_and_op( void *origin_addr, void *result_addr,
+int R_MPI_Fetch_and_op(void *origin_addr, void *result_addr,
                       R_MPI_Datatype datatype, int target_rank, R_MPI_Aint target_disp,
                       R_MPI_Op op, R_MPI_Win win)
                       MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Compare_and_swap( void *origin_addr,  void *compare_addr,
+int R_MPI_Compare_and_swap(void *origin_addr, void *compare_addr,
                           void *result_addr, R_MPI_Datatype datatype, int target_rank,
                           R_MPI_Aint target_disp, R_MPI_Win win)
                           MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                           MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4)
                           MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,4);
-int R_MPI_Rput( void *origin_addr, int origin_count,
+int R_MPI_Rput(void *origin_addr, int origin_count,
               R_MPI_Datatype origin_datatype, int target_rank, R_MPI_Aint target_disp,
               int target_count, R_MPI_Datatype target_datatype, R_MPI_Win win,
               R_MPI_Request *request)
@@ -1251,12 +1251,12 @@ int R_MPI_Rget(void *origin_addr, int origin_count,
               int target_count, R_MPI_Datatype target_datatype, R_MPI_Win win,
               R_MPI_Request *request)
               MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Raccumulate( void *origin_addr, int origin_count,
+int R_MPI_Raccumulate(void *origin_addr, int origin_count,
                      R_MPI_Datatype origin_datatype, int target_rank, R_MPI_Aint target_disp,
                      int target_count, R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win,
                      R_MPI_Request *request)
                      MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Rget_accumulate( void *origin_addr, int origin_count,
+int R_MPI_Rget_accumulate(void *origin_addr, int origin_count,
                          R_MPI_Datatype origin_datatype, void *result_addr, int result_count,
                          R_MPI_Datatype result_datatype, int target_rank, R_MPI_Aint target_disp,
                          int target_count, R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win,
@@ -1274,7 +1274,7 @@ int R_MPI_Win_sync(R_MPI_Win win);
 /* External Interfaces */
 int R_MPI_Add_error_class(int *errorclass);
 int R_MPI_Add_error_code(int errorclass, int *errorcode);
-int R_MPI_Add_error_string(int errorcode,  char *string);
+int R_MPI_Add_error_string(int errorcode, char *string);
 int R_MPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode);
 int R_MPI_Comm_create_keyval(R_MPI_Comm_copy_attr_function *comm_copy_attr_fn,
                            R_MPI_Comm_delete_attr_function *comm_delete_attr_fn, int *comm_keyval,
@@ -1284,7 +1284,7 @@ int R_MPI_Comm_free_keyval(int *comm_keyval);
 int R_MPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val, int *flag);
 int R_MPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen);
 int R_MPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val);
-int R_MPI_Comm_set_name(R_MPI_Comm comm,  char *comm_name);
+int R_MPI_Comm_set_name(R_MPI_Comm comm, char *comm_name);
 int R_MPI_File_call_errhandler(R_MPI_File fh, int errorcode);
 int R_MPI_Grequest_complete(R_MPI_Request request);
 int R_MPI_Grequest_start(R_MPI_Grequest_query_function *query_fn, R_MPI_Grequest_free_function *free_fn,
@@ -1309,7 +1309,7 @@ int R_MPI_Type_get_envelope(R_MPI_Datatype datatype, int *num_integers, int *num
                           int *num_datatypes, int *combiner);
 int R_MPI_Type_get_name(R_MPI_Datatype datatype, char *type_name, int *resultlen);
 int R_MPI_Type_set_attr(R_MPI_Datatype datatype, int type_keyval, void *attribute_val);
-int R_MPI_Type_set_name(R_MPI_Datatype datatype,  char *type_name);
+int R_MPI_Type_set_name(R_MPI_Datatype datatype, char *type_name);
 int R_MPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *datatype);
 int R_MPI_Win_call_errhandler(R_MPI_Win win, int errorcode);
 int R_MPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
@@ -1320,7 +1320,7 @@ int R_MPI_Win_free_keyval(int *win_keyval);
 int R_MPI_Win_get_attr(R_MPI_Win win, int win_keyval, void *attribute_val, int *flag);
 int R_MPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen);
 int R_MPI_Win_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val);
-int R_MPI_Win_set_name(R_MPI_Win win,  char *win_name);
+int R_MPI_Win_set_name(R_MPI_Win win, char *win_name);
 
 int R_MPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info, void *baseptr);
 int R_MPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function *comm_errhandler_fn,
@@ -1333,49 +1333,49 @@ int R_MPI_File_get_errhandler(R_MPI_File file, R_MPI_Errhandler *errhandler);
 int R_MPI_File_set_errhandler(R_MPI_File file, R_MPI_Errhandler errhandler);
 int R_MPI_Finalized(int *flag);
 int R_MPI_Free_mem(void *base);
-int R_MPI_Get_address( void *location, R_MPI_Aint *address);
+int R_MPI_Get_address(void *location, R_MPI_Aint *address);
 int R_MPI_Info_create(R_MPI_Info *info);
-int R_MPI_Info_delete(R_MPI_Info info,  char *key);
+int R_MPI_Info_delete(R_MPI_Info info, char *key);
 int R_MPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo);
 int R_MPI_Info_free(R_MPI_Info *info);
-int R_MPI_Info_get(R_MPI_Info info,  char *key, int valuelen, char *value, int *flag);
+int R_MPI_Info_get(R_MPI_Info info, char *key, int valuelen, char *value, int *flag);
 int R_MPI_Info_get_nkeys(R_MPI_Info info, int *nkeys);
 int R_MPI_Info_get_nthkey(R_MPI_Info info, int n, char *key);
-int R_MPI_Info_get_valuelen(R_MPI_Info info,  char *key, int *valuelen, int *flag);
-int R_MPI_Info_set(R_MPI_Info info,  char *key,  char *value);
-int R_MPI_Pack_external( char datarep[],  void *inbuf, int incount,
+int R_MPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen, int *flag);
+int R_MPI_Info_set(R_MPI_Info info, char *key, char *value);
+int R_MPI_Pack_external(char datarep[], void *inbuf, int incount,
                       R_MPI_Datatype datatype, void *outbuf, R_MPI_Aint outsize, R_MPI_Aint *position)
                       MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Pack_external_size( char datarep[], int incount, R_MPI_Datatype datatype,
+int R_MPI_Pack_external_size(char datarep[], int incount, R_MPI_Datatype datatype,
                            R_MPI_Aint *size);
 int R_MPI_Request_get_status(R_MPI_Request request, int *flag, R_MPI_Status *status);
-int R_MPI_Status_c2f( R_MPI_Status *c_status, R_MPI_Fint *f_status);
-int R_MPI_Status_f2c( R_MPI_Fint *f_status, R_MPI_Status *c_status);
-int R_MPI_Type_create_darray(int size, int rank, int ndims,  int array_of_gsizes[],
-                            int array_of_distribs[],  int array_of_dargs[],
-                            int array_of_psizes[], int order, R_MPI_Datatype oldtype,
+int R_MPI_Status_c2f(R_MPI_Status *c_status, R_MPI_Fint *f_status);
+int R_MPI_Status_f2c(R_MPI_Fint *f_status, R_MPI_Status *c_status);
+int R_MPI_Type_create_darray(int size, int rank, int ndims, int array_of_gsizes[],
+                           int array_of_distribs[], int array_of_dargs[],
+                           int array_of_psizes[], int order, R_MPI_Datatype oldtype,
                            R_MPI_Datatype *newtype);
-int R_MPI_Type_create_hindexed(int count,  int array_of_blocklengths[],
-                              R_MPI_Aint array_of_displacements[], R_MPI_Datatype oldtype,
+int R_MPI_Type_create_hindexed(int count, int array_of_blocklengths[],
+                             R_MPI_Aint array_of_displacements[], R_MPI_Datatype oldtype,
                              R_MPI_Datatype *newtype);
 int R_MPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride, R_MPI_Datatype oldtype,
                             R_MPI_Datatype *newtype);
-int R_MPI_Type_create_indexed_block(int count, int blocklength,  int array_of_displacements[],
+int R_MPI_Type_create_indexed_block(int count, int blocklength, int array_of_displacements[],
                                   R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
 int R_MPI_Type_create_hindexed_block(int count, int blocklength,
-                                    R_MPI_Aint array_of_displacements[],
+                                   R_MPI_Aint array_of_displacements[],
                                    R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
 int R_MPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb, R_MPI_Aint extent,
                             R_MPI_Datatype *newtype);
-int R_MPI_Type_create_struct(int count,  int array_of_blocklengths[],
-                            R_MPI_Aint array_of_displacements[],
-                            R_MPI_Datatype array_of_types[], R_MPI_Datatype *newtype);
-int R_MPI_Type_create_subarray(int ndims,  int array_of_sizes[],
-                              int array_of_subsizes[],  int array_of_starts[],
+int R_MPI_Type_create_struct(int count, int array_of_blocklengths[],
+                           R_MPI_Aint array_of_displacements[],
+                           R_MPI_Datatype array_of_types[], R_MPI_Datatype *newtype);
+int R_MPI_Type_create_subarray(int ndims, int array_of_sizes[],
+                             int array_of_subsizes[], int array_of_starts[],
                              int order, R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
 int R_MPI_Type_get_extent(R_MPI_Datatype datatype, R_MPI_Aint *lb, R_MPI_Aint *extent);
 int R_MPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb, R_MPI_Aint *true_extent);
-int R_MPI_Unpack_external( char datarep[],  void *inbuf, R_MPI_Aint insize,
+int R_MPI_Unpack_external(char datarep[], void *inbuf, R_MPI_Aint insize,
                         R_MPI_Aint *position, void *outbuf, int outcount, R_MPI_Datatype datatype)
                         MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,7);
 int R_MPI_Win_create_errhandler(R_MPI_Win_errhandler_function *win_errhandler_fn,
@@ -1390,20 +1390,20 @@ int R_MPI_Type_create_f90_integer(int range, R_MPI_Datatype *newtype);
 int R_MPI_Type_create_f90_real(int precision, int range, R_MPI_Datatype *newtype);
 int R_MPI_Type_create_f90_complex(int precision, int range, R_MPI_Datatype *newtype);
 
-int R_MPI_Reduce_local( void *inbuf, void *inoutbuf, int count, R_MPI_Datatype datatype,
+int R_MPI_Reduce_local(void *inbuf, void *inoutbuf, int count, R_MPI_Datatype datatype,
                      R_MPI_Op op)
                      MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 int R_MPI_Op_commutative(R_MPI_Op op, int *commute);
-int R_MPI_Reduce_scatter_block( void *sendbuf, void *recvbuf, int recvcount,
+int R_MPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                              R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old, int indegree,  int sources[],
-                                    int sourceweights[], int outdegree,
-                                    int destinations[],  int destweights[],
+int R_MPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old, int indegree, int sources[],
+                                   int sourceweights[], int outdegree,
+                                   int destinations[], int destweights[],
                                    R_MPI_Info info, int reorder, R_MPI_Comm *comm_dist_graph);
-int R_MPI_Dist_graph_create(R_MPI_Comm comm_old, int n,  int sources[],  int degrees[],
-                           int destinations[],  int weights[], R_MPI_Info info,
+int R_MPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int sources[], int degrees[],
+                          int destinations[], int weights[], R_MPI_Info info,
                           int reorder, R_MPI_Comm *comm_dist_graph);
 int R_MPI_Dist_graph_neighbors_count(R_MPI_Comm comm, int *indegree, int *outdegree, int *weighted);
 int R_MPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree, int sources[], int sourceweights[],
@@ -1423,115 +1423,115 @@ int R_MPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm, R_MPI_Request *request
 int R_MPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request);
 int R_MPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype, int root, R_MPI_Comm comm,
                R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_MPI_Igather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                 int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm,
                 R_MPI_Request *request)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Igatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                  int recvcounts[],  int displs[], R_MPI_Datatype recvtype, int root,
+int R_MPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                 int recvcounts[], int displs[], R_MPI_Datatype recvtype, int root,
                  R_MPI_Comm comm, R_MPI_Request *request)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_MPI_Iscatter( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                  int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm,
                  R_MPI_Request *request)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Iscatterv( void *sendbuf,  int sendcounts[],  int displs[],
+int R_MPI_Iscatterv(void *sendbuf, int sendcounts[], int displs[],
                   R_MPI_Datatype sendtype, void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                   int root, R_MPI_Comm comm, R_MPI_Request *request)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,7);
-int R_MPI_Iallgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                    int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Iallgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                     int recvcounts[],  int displs[], R_MPI_Datatype recvtype,
+int R_MPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                    int recvcounts[], int displs[], R_MPI_Datatype recvtype,
                     R_MPI_Comm comm, R_MPI_Request *request)
                     MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_MPI_Ialltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_MPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                   int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Ialltoallv( void *sendbuf,  int sendcounts[],  int sdispls[],
-                   R_MPI_Datatype sendtype, void *recvbuf,  int recvcounts[],
-                    int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
+int R_MPI_Ialltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+                   R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
+                   int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
                    R_MPI_Request *request)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_MPI_Ialltoallw( void *sendbuf,  int sendcounts[],  int sdispls[],
-                    R_MPI_Datatype sendtypes[], void *recvbuf,  int recvcounts[],
-                    int rdispls[],  R_MPI_Datatype recvtypes[], R_MPI_Comm comm,
+int R_MPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
+                   R_MPI_Datatype sendtypes[], void *recvbuf, int recvcounts[],
+                   int rdispls[], R_MPI_Datatype recvtypes[], R_MPI_Comm comm,
                    R_MPI_Request *request);
-int R_MPI_Ireduce( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_MPI_Ireduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                 R_MPI_Op op, int root, R_MPI_Comm comm, R_MPI_Request *request)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Iallreduce( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_MPI_Iallreduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                    R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Ireduce_scatter( void *sendbuf, void *recvbuf,  int recvcounts[],
+int R_MPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                         R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request)
                         MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Ireduce_scatter_block( void *sendbuf, void *recvbuf, int recvcount,
+int R_MPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                               R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm,
                               R_MPI_Request *request)
                               MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                               MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Iscan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
+int R_MPI_Iscan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
               R_MPI_Comm comm, R_MPI_Request *request)
               MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_MPI_Iexscan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_MPI_Iexscan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                 R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
 /* Neighborhood collectives */
-int R_MPI_Ineighbor_allgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_MPI_Ineighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                             void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                             R_MPI_Comm comm, R_MPI_Request *request)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Ineighbor_allgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
-                             void *recvbuf,  int recvcounts[],  int displs[],
+int R_MPI_Ineighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+                             void *recvbuf, int recvcounts[], int displs[],
                              R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_MPI_Ineighbor_alltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_MPI_Ineighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                            void *recvbuf, int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm,
                            R_MPI_Request *request)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Ineighbor_alltoallv( void *sendbuf,  int sendcounts[],  int sdispls[],
-                            R_MPI_Datatype sendtype, void *recvbuf,  int recvcounts[],
-                             int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
+int R_MPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+                            R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
+                            int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
                             R_MPI_Request *request)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_MPI_Ineighbor_alltoallw( void *sendbuf,  int sendcounts[],
-                             R_MPI_Aint sdispls[],  R_MPI_Datatype sendtypes[],
-                            void *recvbuf,  int recvcounts[],  R_MPI_Aint rdispls[],
-                             R_MPI_Datatype recvtypes[], R_MPI_Comm comm, R_MPI_Request *request);
-int R_MPI_Neighbor_allgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_MPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
+                            R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
+                            void *recvbuf, int recvcounts[], R_MPI_Aint rdispls[],
+                            R_MPI_Datatype recvtypes[], R_MPI_Comm comm, R_MPI_Request *request);
+int R_MPI_Neighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                            void *recvbuf, int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Neighbor_allgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
-                            void *recvbuf,  int recvcounts[],  int displs[],
+int R_MPI_Neighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+                            void *recvbuf, int recvcounts[], int displs[],
                             R_MPI_Datatype recvtype, R_MPI_Comm comm)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_MPI_Neighbor_alltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_MPI_Neighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                           void *recvbuf, int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                           MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                           MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_MPI_Neighbor_alltoallv( void *sendbuf,  int sendcounts[],  int sdispls[],
-                           R_MPI_Datatype sendtype, void *recvbuf,  int recvcounts[],
-                            int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm)
+int R_MPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+                           R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
+                           int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_MPI_Neighbor_alltoallw( void *sendbuf,  int sendcounts[],  R_MPI_Aint sdispls[],
-                            R_MPI_Datatype sendtypes[], void *recvbuf,  int recvcounts[],
-                            R_MPI_Aint rdispls[],  R_MPI_Datatype recvtypes[], R_MPI_Comm comm);
+int R_MPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[],
+                           R_MPI_Datatype sendtypes[], void *recvbuf, int recvcounts[],
+                           R_MPI_Aint rdispls[], R_MPI_Datatype recvtypes[], R_MPI_Comm comm);
 
 /* Shared memory */
 int R_MPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key, R_MPI_Info info, R_MPI_Comm *newcomm);
 
 /* MPI-3 "large count" routines */
-int R_MPI_Get_elements_x( R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count *count);
+int R_MPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count *count);
 int R_MPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count count);
 int R_MPI_Type_get_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb, R_MPI_Count *extent);
 int R_MPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb, R_MPI_Count *extent);
@@ -1564,7 +1564,7 @@ int R_MPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle, R_MPI_T_cvar_han
                             int *count);
 int R_MPI_T_cvar_handle_free(R_MPI_T_cvar_handle *handle);
 int R_MPI_T_cvar_read(R_MPI_T_cvar_handle handle, void *buf);
-int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle,  void *buf);
+int R_MPI_T_cvar_write(R_MPI_T_cvar_handle handle, void *buf);
 int R_MPI_T_pvar_get_num(int *num_pvar);
 int R_MPI_T_pvar_get_info(int pvar_index, char *name, int *name_len, int *verbosity, int *var_class,
                         R_MPI_Datatype *datatype, R_MPI_T_enum *enumtype, char *desc, int *desc_len,
@@ -1577,7 +1577,7 @@ int R_MPI_T_pvar_handle_free(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle *
 int R_MPI_T_pvar_start(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
 int R_MPI_T_pvar_stop(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
 int R_MPI_T_pvar_read(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
-int R_MPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,  void *buf);
+int R_MPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
 int R_MPI_T_pvar_reset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
 int R_MPI_T_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
 int R_MPI_T_category_get_num(int *num_cat);
@@ -1594,587 +1594,587 @@ int R_MPI_T_category_changed(int *stamp);
 
 /* Here are the bindings of the profiling routines */
 #if !defined(R_MPI_BUILD_PROFILING)
-int R_PMPISend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Send(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
               R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIRecv(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
+int R_PMPI_Recv(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
               R_MPI_Comm comm, R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIGet_count( R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
-int R_PMPIBsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Get_count(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
+int R_PMPI_Bsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPISsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Ssend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIRsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Rsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIBuffer_attach(void *buffer, int size);
-int R_PMPIBuffer_detach(void *buffer_addr, int *size);
-int R_PMPIIsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Buffer_attach(void *buffer, int size);
+int R_PMPI_Buffer_detach(void *buffer_addr, int *size);
+int R_PMPI_Isend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIIbsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Ibsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                 R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIIssend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Issend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                 R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIIrsend( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Irsend(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                 R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIIrecv(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
+int R_PMPI_Irecv(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
                R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIWait(R_MPI_Request *request, R_MPI_Status *status);
-int R_PMPITest(R_MPI_Request *request, int *flag, R_MPI_Status *status);
-int R_PMPIRequest_free(R_MPI_Request *request);
-int R_PMPIWaitany(int count, R_MPI_Request array_of_requests[], int *indx, R_MPI_Status *status);
-int R_PMPITestany(int count, R_MPI_Request array_of_requests[], int *indx, int *flag,
+int R_PMPI_Wait(R_MPI_Request *request, R_MPI_Status *status);
+int R_PMPI_Test(R_MPI_Request *request, int *flag, R_MPI_Status *status);
+int R_PMPI_Request_free(R_MPI_Request *request);
+int R_PMPI_Waitany(int count, R_MPI_Request array_of_requests[], int *indx, R_MPI_Status *status);
+int R_PMPI_Testany(int count, R_MPI_Request array_of_requests[], int *indx, int *flag,
                  R_MPI_Status *status);
-int R_PMPIWaitall(int count, R_MPI_Request array_of_requests[], R_MPI_Status array_of_statuses[]);
-int R_PMPITestall(int count, R_MPI_Request array_of_requests[], int *flag,
+int R_PMPI_Waitall(int count, R_MPI_Request array_of_requests[], R_MPI_Status array_of_statuses[]);
+int R_PMPI_Testall(int count, R_MPI_Request array_of_requests[], int *flag,
                  R_MPI_Status array_of_statuses[]);
-int R_PMPIWaitsome(int incount, R_MPI_Request array_of_requests[], int *outcount,
+int R_PMPI_Waitsome(int incount, R_MPI_Request array_of_requests[], int *outcount,
                   int array_of_indices[], R_MPI_Status array_of_statuses[]);
-int R_PMPITestsome(int incount, R_MPI_Request array_of_requests[], int *outcount,
+int R_PMPI_Testsome(int incount, R_MPI_Request array_of_requests[], int *outcount,
                   int array_of_indices[], R_MPI_Status array_of_statuses[]);
-int R_PMPIIprobe(int source, int tag, R_MPI_Comm comm, int *flag, R_MPI_Status *status);
-int R_PMPIProbe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status);
-int R_PMPICancel(R_MPI_Request *request);
-int R_PMPITest_cancelled( R_MPI_Status *status, int *flag);
-int R_PMPISend_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Iprobe(int source, int tag, R_MPI_Comm comm, int *flag, R_MPI_Status *status);
+int R_PMPI_Probe(int source, int tag, R_MPI_Comm comm, R_MPI_Status *status);
+int R_PMPI_Cancel(R_MPI_Request *request);
+int R_PMPI_Test_cancelled(R_MPI_Status *status, int *flag);
+int R_PMPI_Send_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                    R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIBsend_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Bsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                     R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPISsend_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Ssend_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                     R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIRsend_init( void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
+int R_PMPI_Rsend_init(void *buf, int count, R_MPI_Datatype datatype, int dest, int tag,
                     R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIRecv_init(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
+int R_PMPI_Recv_init(void *buf, int count, R_MPI_Datatype datatype, int source, int tag,
                    R_MPI_Comm comm, R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIStart(R_MPI_Request *request);
-int R_PMPIStartall(int count, R_MPI_Request array_of_requests[]);
-int R_PMPISendrecv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, int dest,
+int R_PMPI_Start(R_MPI_Request *request);
+int R_PMPI_Startall(int count, R_MPI_Request array_of_requests[]);
+int R_PMPI_Sendrecv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, int dest,
                   int sendtag, void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                   int source, int recvtag, R_MPI_Comm comm, R_MPI_Status *status)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(6,8);
-int R_PMPISendrecv_replace(void *buf, int count, R_MPI_Datatype datatype, int dest,
+int R_PMPI_Sendrecv_replace(void *buf, int count, R_MPI_Datatype datatype, int dest,
                           int sendtag, int source, int recvtag, R_MPI_Comm comm,
                           R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIType_contiguous(int count, R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-int R_PMPIType_vector(int count, int blocklength, int stride, R_MPI_Datatype oldtype,
+int R_PMPI_Type_contiguous(int count, R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
+int R_PMPI_Type_vector(int count, int blocklength, int stride, R_MPI_Datatype oldtype,
                      R_MPI_Datatype *newtype);
-int R_PMPIType_hvector(int count, int blocklength, R_MPI_Aint stride, R_MPI_Datatype oldtype,
+int R_PMPI_Type_hvector(int count, int blocklength, R_MPI_Aint stride, R_MPI_Datatype oldtype,
                       R_MPI_Datatype *newtype);
-int R_PMPIType_indexed(int count,  int *array_of_blocklengths,
-                       int *array_of_displacements, R_MPI_Datatype oldtype,
+int R_PMPI_Type_indexed(int count, int *array_of_blocklengths,
+                      int *array_of_displacements, R_MPI_Datatype oldtype,
                       R_MPI_Datatype *newtype);
-int R_PMPIType_hindexed(int count,  int *array_of_blocklengths,
-                        R_MPI_Aint *array_of_displacements, R_MPI_Datatype oldtype,
+int R_PMPI_Type_hindexed(int count, int *array_of_blocklengths,
+                       R_MPI_Aint *array_of_displacements, R_MPI_Datatype oldtype,
                        R_MPI_Datatype *newtype);
-int R_PMPIType_struct(int count,  int *array_of_blocklengths,
-                      R_MPI_Aint *array_of_displacements,
-                      R_MPI_Datatype *array_of_types, R_MPI_Datatype *newtype);
-int R_PMPIAddress( void *location, R_MPI_Aint *address);
-int R_PMPIType_extent(R_MPI_Datatype datatype, R_MPI_Aint *extent);
-int R_PMPIType_size(R_MPI_Datatype datatype, int *size);
-int R_PMPIType_lb(R_MPI_Datatype datatype, R_MPI_Aint *displacement);
-int R_PMPIType_ub(R_MPI_Datatype datatype, R_MPI_Aint *displacement);
-int R_PMPIType_commit(R_MPI_Datatype *datatype);
-int R_PMPIType_free(R_MPI_Datatype *datatype);
-int R_PMPIGet_elements( R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
-int R_PMPIPack( void *inbuf, int incount, R_MPI_Datatype datatype, void *outbuf,
+int R_PMPI_Type_struct(int count, int *array_of_blocklengths,
+                     R_MPI_Aint *array_of_displacements,
+                     R_MPI_Datatype *array_of_types, R_MPI_Datatype *newtype);
+int R_PMPI_Address(void *location, R_MPI_Aint *address);
+int R_PMPI_Type_extent(R_MPI_Datatype datatype, R_MPI_Aint *extent);
+int R_PMPI_Type_size(R_MPI_Datatype datatype, int *size);
+int R_PMPI_Type_lb(R_MPI_Datatype datatype, R_MPI_Aint *displacement);
+int R_PMPI_Type_ub(R_MPI_Datatype datatype, R_MPI_Aint *displacement);
+int R_PMPI_Type_commit(R_MPI_Datatype *datatype);
+int R_PMPI_Type_free(R_MPI_Datatype *datatype);
+int R_PMPI_Get_elements(R_MPI_Status *status, R_MPI_Datatype datatype, int *count);
+int R_PMPI_Pack(void *inbuf, int incount, R_MPI_Datatype datatype, void *outbuf,
               int outsize, int *position, R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIUnpack( void *inbuf, int insize, int *position, void *outbuf, int outcount,
+int R_PMPI_Unpack(void *inbuf, int insize, int *position, void *outbuf, int outcount,
                 R_MPI_Datatype datatype, R_MPI_Comm comm) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIPack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm, int *size);
-int R_PMPIBarrier(R_MPI_Comm comm);
-int R_PMPIBcast(void *buffer, int count, R_MPI_Datatype datatype, int root, R_MPI_Comm comm)
+int R_PMPI_Pack_size(int incount, R_MPI_Datatype datatype, R_MPI_Comm comm, int *size);
+int R_PMPI_Barrier(R_MPI_Comm comm);
+int R_PMPI_Bcast(void *buffer, int count, R_MPI_Datatype datatype, int root, R_MPI_Comm comm)
                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIGather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Gather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                 int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIGatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                  int *recvcounts,  int *displs, R_MPI_Datatype recvtype, int root,
+int R_PMPI_Gatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                 int *recvcounts, int *displs, R_MPI_Datatype recvtype, int root,
                  R_MPI_Comm comm)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_PMPIScatter( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Scatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                  int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIScatterv( void *sendbuf,  int *sendcounts,  int *displs,
+int R_PMPI_Scatterv(void *sendbuf, int *sendcounts, int *displs,
                   R_MPI_Datatype sendtype, void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                   int root, R_MPI_Comm comm)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,7);
-int R_PMPIAllgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                    int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIAllgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                     int *recvcounts,  int *displs, R_MPI_Datatype recvtype, R_MPI_Comm comm)
+int R_PMPI_Allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                    int *recvcounts, int *displs, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                     MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_PMPIAlltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                   int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIAlltoallv( void *sendbuf,  int *sendcounts,  int *sdispls,
-                   R_MPI_Datatype sendtype, void *recvbuf,  int *recvcounts,
-                    int *rdispls, R_MPI_Datatype recvtype, R_MPI_Comm comm)
+int R_PMPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
+                   R_MPI_Datatype sendtype, void *recvbuf, int *recvcounts,
+                   int *rdispls, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_PMPIAlltoallw( void *sendbuf,  int sendcounts[],  int sdispls[],
-                    R_MPI_Datatype sendtypes[], void *recvbuf,  int recvcounts[],
-                    int rdispls[],  R_MPI_Datatype recvtypes[], R_MPI_Comm comm);
-int R_PMPIExscan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_PMPI_Alltoallw(void *sendbuf, int sendcounts[], int sdispls[],
+                   R_MPI_Datatype sendtypes[], void *recvbuf, int recvcounts[],
+                   int rdispls[], R_MPI_Datatype recvtypes[], R_MPI_Comm comm);
+int R_PMPI_Exscan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                 R_MPI_Op op, R_MPI_Comm comm)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIReduce( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_PMPI_Reduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                 R_MPI_Op op, int root, R_MPI_Comm comm)
                 MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIOp_create(R_MPI_User_function *user_fn, int commute, R_MPI_Op *op);
-int R_PMPIOp_free(R_MPI_Op *op);
-int R_PMPIAllreduce( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_PMPI_Op_create(R_MPI_User_function *user_fn, int commute, R_MPI_Op *op);
+int R_PMPI_Op_free(R_MPI_Op *op);
+int R_PMPI_Allreduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                    R_MPI_Op op, R_MPI_Comm comm)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIReduce_scatter( void *sendbuf, void *recvbuf,  int recvcounts[],
+int R_PMPI_Reduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                         R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm)
                         MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIScan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
+int R_PMPI_Scan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
               R_MPI_Comm comm)
               MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIGroup_size(R_MPI_Group group, int *size);
-int R_PMPIGroup_rank(R_MPI_Group group, int *rank);
-int R_PMPIGroup_translate_ranks(R_MPI_Group group1, int n,  int ranks1[], R_MPI_Group group2,
+int R_PMPI_Group_size(R_MPI_Group group, int *size);
+int R_PMPI_Group_rank(R_MPI_Group group, int *rank);
+int R_PMPI_Group_translate_ranks(R_MPI_Group group1, int n, int ranks1[], R_MPI_Group group2,
                                int ranks2[]);
-int R_PMPIGroup_compare(R_MPI_Group group1, R_MPI_Group group2, int *result);
-int R_PMPIComm_group(R_MPI_Comm comm, R_MPI_Group *group);
-int R_PMPIGroup_union(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
-int R_PMPIGroup_intersection(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
-int R_PMPIGroup_difference(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
-int R_PMPIGroup_incl(R_MPI_Group group, int n,  int ranks[], R_MPI_Group *newgroup);
-int R_PMPIGroup_excl(R_MPI_Group group, int n,  int ranks[], R_MPI_Group *newgroup);
-int R_PMPIGroup_range_incl(R_MPI_Group group, int n, int ranges[][3], R_MPI_Group *newgroup);
-int R_PMPIGroup_range_excl(R_MPI_Group group, int n, int ranges[][3], R_MPI_Group *newgroup);
-int R_PMPIGroup_free(R_MPI_Group *group);
-int R_PMPIComm_size(R_MPI_Comm comm, int *size);
-int R_PMPIComm_rank(R_MPI_Comm comm, int *rank);
-int R_PMPIComm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result);
-int R_PMPIComm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm);
-int R_PMPIComm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info, R_MPI_Comm *newcomm);
-int R_PMPIComm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm);
-int R_PMPIComm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm);
-int R_PMPIComm_free(R_MPI_Comm *comm);
-int R_PMPIComm_test_inter(R_MPI_Comm comm, int *flag);
-int R_PMPIComm_remote_size(R_MPI_Comm comm, int *size);
-int R_PMPIComm_remote_group(R_MPI_Comm comm, R_MPI_Group *group);
-int R_PMPIIntercomm_create(R_MPI_Comm local_comm, int local_leader, R_MPI_Comm peer_comm,
+int R_PMPI_Group_compare(R_MPI_Group group1, R_MPI_Group group2, int *result);
+int R_PMPI_Comm_group(R_MPI_Comm comm, R_MPI_Group *group);
+int R_PMPI_Group_union(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
+int R_PMPI_Group_intersection(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
+int R_PMPI_Group_difference(R_MPI_Group group1, R_MPI_Group group2, R_MPI_Group *newgroup);
+int R_PMPI_Group_incl(R_MPI_Group group, int n, int ranks[], R_MPI_Group *newgroup);
+int R_PMPI_Group_excl(R_MPI_Group group, int n, int ranks[], R_MPI_Group *newgroup);
+int R_PMPI_Group_range_incl(R_MPI_Group group, int n, int ranges[][3], R_MPI_Group *newgroup);
+int R_PMPI_Group_range_excl(R_MPI_Group group, int n, int ranges[][3], R_MPI_Group *newgroup);
+int R_PMPI_Group_free(R_MPI_Group *group);
+int R_PMPI_Comm_size(R_MPI_Comm comm, int *size);
+int R_PMPI_Comm_rank(R_MPI_Comm comm, int *rank);
+int R_PMPI_Comm_compare(R_MPI_Comm comm1, R_MPI_Comm comm2, int *result);
+int R_PMPI_Comm_dup(R_MPI_Comm comm, R_MPI_Comm *newcomm);
+int R_PMPI_Comm_dup_with_info(R_MPI_Comm comm, R_MPI_Info info, R_MPI_Comm *newcomm);
+int R_PMPI_Comm_create(R_MPI_Comm comm, R_MPI_Group group, R_MPI_Comm *newcomm);
+int R_PMPI_Comm_split(R_MPI_Comm comm, int color, int key, R_MPI_Comm *newcomm);
+int R_PMPI_Comm_free(R_MPI_Comm *comm);
+int R_PMPI_Comm_test_inter(R_MPI_Comm comm, int *flag);
+int R_PMPI_Comm_remote_size(R_MPI_Comm comm, int *size);
+int R_PMPI_Comm_remote_group(R_MPI_Comm comm, R_MPI_Group *group);
+int R_PMPI_Intercomm_create(R_MPI_Comm local_comm, int local_leader, R_MPI_Comm peer_comm,
                           int remote_leader, int tag, R_MPI_Comm *newintercomm);
-int R_PMPIIntercomm_merge(R_MPI_Comm intercomm, int high, R_MPI_Comm *newintracomm);
-int R_PMPIKeyval_create(R_MPI_Copy_function *copy_fn, R_MPI_Delete_function *delete_fn,
+int R_PMPI_Intercomm_merge(R_MPI_Comm intercomm, int high, R_MPI_Comm *newintracomm);
+int R_PMPI_Keyval_create(R_MPI_Copy_function *copy_fn, R_MPI_Delete_function *delete_fn,
                        int *keyval, void *extra_state);
-int R_PMPIKeyval_free(int *keyval);
-int R_PMPIAttr_put(R_MPI_Comm comm, int keyval, void *attribute_val);
-int R_PMPIAttr_get(R_MPI_Comm comm, int keyval, void *attribute_val, int *flag);
-int R_PMPIAttr_delete(R_MPI_Comm comm, int keyval);
-int R_PMPITopo_test(R_MPI_Comm comm, int *status);
-int R_PMPICart_create(R_MPI_Comm comm_old, int ndims,  int dims[],  int periods[],
+int R_PMPI_Keyval_free(int *keyval);
+int R_PMPI_Attr_put(R_MPI_Comm comm, int keyval, void *attribute_val);
+int R_PMPI_Attr_get(R_MPI_Comm comm, int keyval, void *attribute_val, int *flag);
+int R_PMPI_Attr_delete(R_MPI_Comm comm, int keyval);
+int R_PMPI_Topo_test(R_MPI_Comm comm, int *status);
+int R_PMPI_Cart_create(R_MPI_Comm comm_old, int ndims, int dims[], int periods[],
                      int reorder, R_MPI_Comm *comm_cart);
-int R_PMPIDims_create(int nnodes, int ndims, int dims[]);
-int R_PMPIGraph_create(R_MPI_Comm comm_old, int nnodes,  int indx[],  int edges[],
+int R_PMPI_Dims_create(int nnodes, int ndims, int dims[]);
+int R_PMPI_Graph_create(R_MPI_Comm comm_old, int nnodes, int indx[], int edges[],
                       int reorder, R_MPI_Comm *comm_graph);
-int R_PMPIGraphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges);
-int R_PMPIGraph_get(R_MPI_Comm comm, int maxindex, int maxedges, int indx[], int edges[]);
-int R_PMPICartdim_get(R_MPI_Comm comm, int *ndims);
-int R_PMPICart_get(R_MPI_Comm comm, int maxdims, int dims[], int periods[], int coords[]);
-int R_PMPICart_rank(R_MPI_Comm comm,  int coords[], int *rank);
-int R_PMPICart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]);
-int R_PMPIGraph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors);
-int R_PMPIGraph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors, int neighbors[]);
-int R_PMPICart_shift(R_MPI_Comm comm, int direction, int disp, int *rank_source, int *rank_dest);
-int R_PMPICart_sub(R_MPI_Comm comm,  int remain_dims[], R_MPI_Comm *newcomm);
-int R_PMPICart_map(R_MPI_Comm comm, int ndims,  int dims[],  int periods[], int *newrank);
-int R_PMPIGraph_map(R_MPI_Comm comm, int nnodes,  int indx[],  int edges[], int *newrank);
-int R_PMPIGet_processor_name(char *name, int *resultlen);
-int R_PMPIGet_version(int *version, int *subversion);
-int R_PMPIGet_library_version(char *version, int *resultlen);
-int R_PMPIErrhandler_create(R_MPI_Handler_function *function, R_MPI_Errhandler *errhandler);
-int R_PMPIErrhandler_set(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
-int R_PMPIErrhandler_get(R_MPI_Comm comm, R_MPI_Errhandler *errhandler);
-int R_PMPIErrhandler_free(R_MPI_Errhandler *errhandler);
-int R_PMPIError_string(int errorcode, char *string, int *resultlen);
-int R_PMPIError_class(int errorcode, int *errorclass);
-double R_PMPIWtime(void);
-double R_PMPIWtick(void);
-int R_PMPIInit(int *argc, char ***argv);
-int R_PMPIFinalize(void);
-int R_PMPIInitialized(int *flag);
-int R_PMPIAbort(R_MPI_Comm comm, int errorcode);
+int R_PMPI_Graphdims_get(R_MPI_Comm comm, int *nnodes, int *nedges);
+int R_PMPI_Graph_get(R_MPI_Comm comm, int maxindex, int maxedges, int indx[], int edges[]);
+int R_PMPI_Cartdim_get(R_MPI_Comm comm, int *ndims);
+int R_PMPI_Cart_get(R_MPI_Comm comm, int maxdims, int dims[], int periods[], int coords[]);
+int R_PMPI_Cart_rank(R_MPI_Comm comm, int coords[], int *rank);
+int R_PMPI_Cart_coords(R_MPI_Comm comm, int rank, int maxdims, int coords[]);
+int R_PMPI_Graph_neighbors_count(R_MPI_Comm comm, int rank, int *nneighbors);
+int R_PMPI_Graph_neighbors(R_MPI_Comm comm, int rank, int maxneighbors, int neighbors[]);
+int R_PMPI_Cart_shift(R_MPI_Comm comm, int direction, int disp, int *rank_source, int *rank_dest);
+int R_PMPI_Cart_sub(R_MPI_Comm comm, int remain_dims[], R_MPI_Comm *newcomm);
+int R_PMPI_Cart_map(R_MPI_Comm comm, int ndims, int dims[], int periods[], int *newrank);
+int R_PMPI_Graph_map(R_MPI_Comm comm, int nnodes, int indx[], int edges[], int *newrank);
+int R_PMPI_Get_processor_name(char *name, int *resultlen);
+int R_PMPI_Get_version(int *version, int *subversion);
+int R_PMPI_Get_library_version(char *version, int *resultlen);
+int R_PMPI_Errhandler_create(R_MPI_Handler_function *function, R_MPI_Errhandler *errhandler);
+int R_PMPI_Errhandler_set(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
+int R_PMPI_Errhandler_get(R_MPI_Comm comm, R_MPI_Errhandler *errhandler);
+int R_PMPI_Errhandler_free(R_MPI_Errhandler *errhandler);
+int R_PMPI_Error_string(int errorcode, char *string, int *resultlen);
+int R_PMPI_Error_class(int errorcode, int *errorclass);
+double R_PMPI_Wtime(void);
+double R_PMPI_Wtick(void);
+int R_PMPI_Init(int *argc, char ***argv);
+int R_PMPI_Finalize(void);
+int R_PMPI_Initialized(int *flag);
+int R_PMPI_Abort(R_MPI_Comm comm, int errorcode);
 
 /* Note that we may need to define a @PCONTROL_LIST@ depending on whether
    stdargs are supported */
-int R_PMPIPcontrol( int level, ...);
+int R_PMPI_Pcontrol(int level, ...);
 
 /* Process Creation and Management */
-int R_PMPIClose_port( char *port_name);
-int R_PMPIComm_accept( char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
+int R_PMPI_Close_port(char *port_name);
+int R_PMPI_Comm_accept(char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
                      R_MPI_Comm *newcomm);
-int R_PMPIComm_connect( char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
+int R_PMPI_Comm_connect(char *port_name, R_MPI_Info info, int root, R_MPI_Comm comm,
                       R_MPI_Comm *newcomm);
-int R_PMPIComm_disconnect(R_MPI_Comm *comm);
-int R_PMPIComm_get_parent(R_MPI_Comm *parent);
-int R_PMPIComm_join(int fd, R_MPI_Comm *intercomm);
-int R_PMPIComm_spawn( char *command, char *argv[], int maxprocs, R_MPI_Info info, int root,
+int R_PMPI_Comm_disconnect(R_MPI_Comm *comm);
+int R_PMPI_Comm_get_parent(R_MPI_Comm *parent);
+int R_PMPI_Comm_join(int fd, R_MPI_Comm *intercomm);
+int R_PMPI_Comm_spawn(char *command, char *argv[], int maxprocs, R_MPI_Info info, int root,
                     R_MPI_Comm comm, R_MPI_Comm *intercomm, int array_of_errcodes[]);
-int R_PMPIComm_spawn_multiple(int count, char *array_of_commands[], char **array_of_argv[],
-                              int array_of_maxprocs[],  R_MPI_Info array_of_info[],
+int R_PMPI_Comm_spawn_multiple(int count, char *array_of_commands[], char **array_of_argv[],
+                             int array_of_maxprocs[], R_MPI_Info array_of_info[],
                              int root, R_MPI_Comm comm, R_MPI_Comm *intercomm, int array_of_errcodes[]);
-int R_PMPILookup_name( char *service_name, R_MPI_Info info, char *port_name);
-int R_PMPIOpen_port(R_MPI_Info info, char *port_name);
-int R_PMPIPublish_name( char *service_name, R_MPI_Info info,  char *port_name);
-int R_PMPIUnpublish_name( char *service_name, R_MPI_Info info,  char *port_name);
-int R_PMPIComm_set_info(R_MPI_Comm comm, R_MPI_Info info);
-int R_PMPIComm_get_info(R_MPI_Comm comm, R_MPI_Info *info);
+int R_PMPI_Lookup_name(char *service_name, R_MPI_Info info, char *port_name);
+int R_PMPI_Open_port(R_MPI_Info info, char *port_name);
+int R_PMPI_Publish_name(char *service_name, R_MPI_Info info, char *port_name);
+int R_PMPI_Unpublish_name(char *service_name, R_MPI_Info info, char *port_name);
+int R_PMPI_Comm_set_info(R_MPI_Comm comm, R_MPI_Info info);
+int R_PMPI_Comm_get_info(R_MPI_Comm comm, R_MPI_Info *info);
 
 /* One-Sided Communications */
-int R_PMPIAccumulate( void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+int R_PMPI_Accumulate(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
                     int target_rank, R_MPI_Aint target_disp, int target_count,
                     R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win)
                     MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIGet(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+int R_PMPI_Get(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
              int target_rank, R_MPI_Aint target_disp, int target_count,
              R_MPI_Datatype target_datatype, R_MPI_Win win) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIPut( void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
+int R_PMPI_Put(void *origin_addr, int origin_count, R_MPI_Datatype origin_datatype,
              int target_rank, R_MPI_Aint target_disp, int target_count,
              R_MPI_Datatype target_datatype, R_MPI_Win win) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIWin_complete(R_MPI_Win win);
-int R_PMPIWin_create(void *base, R_MPI_Aint size, int disp_unit, R_MPI_Info info, R_MPI_Comm comm,
+int R_PMPI_Win_complete(R_MPI_Win win);
+int R_PMPI_Win_create(void *base, R_MPI_Aint size, int disp_unit, R_MPI_Info info, R_MPI_Comm comm,
                     R_MPI_Win *win);
-int R_PMPIWin_fence(int assert, R_MPI_Win win);
-int R_PMPIWin_free(R_MPI_Win *win);
-int R_PMPIWin_get_group(R_MPI_Win win, R_MPI_Group *group);
-int R_PMPIWin_lock(int lock_type, int rank, int assert, R_MPI_Win win);
-int R_PMPIWin_post(R_MPI_Group group, int assert, R_MPI_Win win);
-int R_PMPIWin_start(R_MPI_Group group, int assert, R_MPI_Win win);
-int R_PMPIWin_test(R_MPI_Win win, int *flag);
-int R_PMPIWin_unlock(int rank, R_MPI_Win win);
-int R_PMPIWin_wait(R_MPI_Win win);
+int R_PMPI_Win_fence(int assert, R_MPI_Win win);
+int R_PMPI_Win_free(R_MPI_Win *win);
+int R_PMPI_Win_get_group(R_MPI_Win win, R_MPI_Group *group);
+int R_PMPI_Win_lock(int lock_type, int rank, int assert, R_MPI_Win win);
+int R_PMPI_Win_post(R_MPI_Group group, int assert, R_MPI_Win win);
+int R_PMPI_Win_start(R_MPI_Group group, int assert, R_MPI_Win win);
+int R_PMPI_Win_test(R_MPI_Win win, int *flag);
+int R_PMPI_Win_unlock(int rank, R_MPI_Win win);
+int R_PMPI_Win_wait(R_MPI_Win win);
 
 /* MPI-3 One-Sided Communication Routines */
-int R_PMPIWin_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info, R_MPI_Comm comm, void *baseptr,
+int R_PMPI_Win_allocate(R_MPI_Aint size, int disp_unit, R_MPI_Info info, R_MPI_Comm comm, void *baseptr,
                       R_MPI_Win *win);
-int R_PMPIWin_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info, R_MPI_Comm comm,
+int R_PMPI_Win_allocate_shared(R_MPI_Aint size, int disp_unit, R_MPI_Info info, R_MPI_Comm comm,
                              void *baseptr, R_MPI_Win *win);
-int R_PMPIWin_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size, int *disp_unit, void *baseptr);
-int R_PMPIWin_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
-int R_PMPIWin_attach(R_MPI_Win win, void *base, R_MPI_Aint size);
-int R_PMPIWin_detach(R_MPI_Win win,  void *base);
-int R_PMPIWin_get_info(R_MPI_Win win, R_MPI_Info *info_used);
-int R_PMPIWin_set_info(R_MPI_Win win, R_MPI_Info info);
-int R_PMPIGet_accumulate( void *origin_addr, int origin_count,
+int R_PMPI_Win_shared_query(R_MPI_Win win, int rank, R_MPI_Aint *size, int *disp_unit, void *baseptr);
+int R_PMPI_Win_create_dynamic(R_MPI_Info info, R_MPI_Comm comm, R_MPI_Win *win);
+int R_PMPI_Win_attach(R_MPI_Win win, void *base, R_MPI_Aint size);
+int R_PMPI_Win_detach(R_MPI_Win win, void *base);
+int R_PMPI_Win_get_info(R_MPI_Win win, R_MPI_Info *info_used);
+int R_PMPI_Win_set_info(R_MPI_Win win, R_MPI_Info info);
+int R_PMPI_Get_accumulate(void *origin_addr, int origin_count,
                          R_MPI_Datatype origin_datatype, void *result_addr, int result_count,
                          R_MPI_Datatype result_datatype, int target_rank, R_MPI_Aint target_disp,
                          int target_count, R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win)
                          MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                          MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIFetch_and_op( void *origin_addr, void *result_addr,
+int R_PMPI_Fetch_and_op(void *origin_addr, void *result_addr,
                        R_MPI_Datatype datatype, int target_rank, R_MPI_Aint target_disp,
                        R_MPI_Op op, R_MPI_Win win)
                        MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPICompare_and_swap( void *origin_addr,  void *compare_addr,
+int R_PMPI_Compare_and_swap(void *origin_addr, void *compare_addr,
                            void *result_addr, R_MPI_Datatype datatype, int target_rank,
                            R_MPI_Aint target_disp, R_MPI_Win win)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(3,4);
-int R_PMPIRput( void *origin_addr, int origin_count,
+int R_PMPI_Rput(void *origin_addr, int origin_count,
                R_MPI_Datatype origin_datatype, int target_rank, R_MPI_Aint target_disp,
                int target_count, R_MPI_Datatype target_datatype, R_MPI_Win win,
                R_MPI_Request *request)
                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIRget(void *origin_addr, int origin_count,
+int R_PMPI_Rget(void *origin_addr, int origin_count,
                R_MPI_Datatype origin_datatype, int target_rank, R_MPI_Aint target_disp,
                int target_count, R_MPI_Datatype target_datatype, R_MPI_Win win,
                R_MPI_Request *request)
                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIRaccumulate( void *origin_addr, int origin_count,
+int R_PMPI_Raccumulate(void *origin_addr, int origin_count,
                       R_MPI_Datatype origin_datatype, int target_rank, R_MPI_Aint target_disp,
                       int target_count, R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win,
                       R_MPI_Request *request)
                       MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIRget_accumulate( void *origin_addr, int origin_count,
+int R_PMPI_Rget_accumulate(void *origin_addr, int origin_count,
                           R_MPI_Datatype origin_datatype, void *result_addr, int result_count,
                           R_MPI_Datatype result_datatype, int target_rank, R_MPI_Aint target_disp,
                           int target_count, R_MPI_Datatype target_datatype, R_MPI_Op op, R_MPI_Win win,
                           R_MPI_Request *request)
                           MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                           MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIWin_lock_all(int assert, R_MPI_Win win);
-int R_PMPIWin_unlock_all(R_MPI_Win win);
-int R_PMPIWin_flush(int rank, R_MPI_Win win);
-int R_PMPIWin_flush_all(R_MPI_Win win);
-int R_PMPIWin_flush_local(int rank, R_MPI_Win win);
-int R_PMPIWin_flush_local_all(R_MPI_Win win);
-int R_PMPIWin_sync(R_MPI_Win win);
+int R_PMPI_Win_lock_all(int assert, R_MPI_Win win);
+int R_PMPI_Win_unlock_all(R_MPI_Win win);
+int R_PMPI_Win_flush(int rank, R_MPI_Win win);
+int R_PMPI_Win_flush_all(R_MPI_Win win);
+int R_PMPI_Win_flush_local(int rank, R_MPI_Win win);
+int R_PMPI_Win_flush_local_all(R_MPI_Win win);
+int R_PMPI_Win_sync(R_MPI_Win win);
  
 /* External Interfaces */
-int R_PMPIAdd_error_class(int *errorclass);
-int R_PMPIAdd_error_code(int errorclass, int *errorcode);
-int R_PMPIAdd_error_string(int errorcode,  char *string);
-int R_PMPIComm_call_errhandler(R_MPI_Comm comm, int errorcode);
-int R_PMPIComm_create_keyval(R_MPI_Comm_copy_attr_function *comm_copy_attr_fn,
+int R_PMPI_Add_error_class(int *errorclass);
+int R_PMPI_Add_error_code(int errorclass, int *errorcode);
+int R_PMPI_Add_error_string(int errorcode, char *string);
+int R_PMPI_Comm_call_errhandler(R_MPI_Comm comm, int errorcode);
+int R_PMPI_Comm_create_keyval(R_MPI_Comm_copy_attr_function *comm_copy_attr_fn,
                             R_MPI_Comm_delete_attr_function *comm_delete_attr_fn, int *comm_keyval,
                             void *extra_state);
-int R_PMPIComm_delete_attr(R_MPI_Comm comm, int comm_keyval);
-int R_PMPIComm_free_keyval(int *comm_keyval);
-int R_PMPIComm_get_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val, int *flag);
-int R_PMPIComm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen);
-int R_PMPIComm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val);
-int R_PMPIComm_set_name(R_MPI_Comm comm,  char *comm_name);
-int R_PMPIFile_call_errhandler(R_MPI_File fh, int errorcode);
-int R_PMPIGrequest_complete(R_MPI_Request request);
-int R_PMPIGrequest_start(R_MPI_Grequest_query_function *query_fn, R_MPI_Grequest_free_function *free_fn,
+int R_PMPI_Comm_delete_attr(R_MPI_Comm comm, int comm_keyval);
+int R_PMPI_Comm_free_keyval(int *comm_keyval);
+int R_PMPI_Comm_get_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val, int *flag);
+int R_PMPI_Comm_get_name(R_MPI_Comm comm, char *comm_name, int *resultlen);
+int R_PMPI_Comm_set_attr(R_MPI_Comm comm, int comm_keyval, void *attribute_val);
+int R_PMPI_Comm_set_name(R_MPI_Comm comm, char *comm_name);
+int R_PMPI_File_call_errhandler(R_MPI_File fh, int errorcode);
+int R_PMPI_Grequest_complete(R_MPI_Request request);
+int R_PMPI_Grequest_start(R_MPI_Grequest_query_function *query_fn, R_MPI_Grequest_free_function *free_fn,
                         R_MPI_Grequest_cancel_function *cancel_fn, void *extra_state,
                         R_MPI_Request *request);
-int R_PMPIInit_thread(int *argc, char ***argv, int required, int *provided);
-int R_PMPIIs_thread_main(int *flag);
-int R_PMPIQuery_thread(int *provided);
-int R_PMPIStatus_set_cancelled(R_MPI_Status *status, int flag);
-int R_PMPIStatus_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype, int count);
-int R_PMPIType_create_keyval(R_MPI_Type_copy_attr_function *type_copy_attr_fn,
+int R_PMPI_Init_thread(int *argc, char ***argv, int required, int *provided);
+int R_PMPI_Is_thread_main(int *flag);
+int R_PMPI_Query_thread(int *provided);
+int R_PMPI_Status_set_cancelled(R_MPI_Status *status, int flag);
+int R_PMPI_Status_set_elements(R_MPI_Status *status, R_MPI_Datatype datatype, int count);
+int R_PMPI_Type_create_keyval(R_MPI_Type_copy_attr_function *type_copy_attr_fn,
                             R_MPI_Type_delete_attr_function *type_delete_attr_fn,
                             int *type_keyval, void *extra_state);
-int R_PMPIType_delete_attr(R_MPI_Datatype datatype, int type_keyval);
-int R_PMPIType_dup(R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-int R_PMPIType_free_keyval(int *type_keyval);
-int R_PMPIType_get_attr(R_MPI_Datatype datatype, int type_keyval, void *attribute_val, int *flag);
-int R_PMPIType_get_contents(R_MPI_Datatype datatype, int max_integers, int max_addresses,
+int R_PMPI_Type_delete_attr(R_MPI_Datatype datatype, int type_keyval);
+int R_PMPI_Type_dup(R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
+int R_PMPI_Type_free_keyval(int *type_keyval);
+int R_PMPI_Type_get_attr(R_MPI_Datatype datatype, int type_keyval, void *attribute_val, int *flag);
+int R_PMPI_Type_get_contents(R_MPI_Datatype datatype, int max_integers, int max_addresses,
                            int max_datatypes, int array_of_integers[],
                            R_MPI_Aint array_of_addresses[], R_MPI_Datatype array_of_datatypes[]);
-int R_PMPIType_get_envelope(R_MPI_Datatype datatype, int *num_integers, int *num_addresses,
+int R_PMPI_Type_get_envelope(R_MPI_Datatype datatype, int *num_integers, int *num_addresses,
                            int *num_datatypes, int *combiner);
-int R_PMPIType_get_name(R_MPI_Datatype datatype, char *type_name, int *resultlen);
-int R_PMPIType_set_attr(R_MPI_Datatype datatype, int type_keyval, void *attribute_val);
-int R_PMPIType_set_name(R_MPI_Datatype datatype,  char *type_name);
-int R_PMPIType_match_size(int typeclass, int size, R_MPI_Datatype *datatype);
-int R_PMPIWin_call_errhandler(R_MPI_Win win, int errorcode);
-int R_PMPIWin_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
+int R_PMPI_Type_get_name(R_MPI_Datatype datatype, char *type_name, int *resultlen);
+int R_PMPI_Type_set_attr(R_MPI_Datatype datatype, int type_keyval, void *attribute_val);
+int R_PMPI_Type_set_name(R_MPI_Datatype datatype, char *type_name);
+int R_PMPI_Type_match_size(int typeclass, int size, R_MPI_Datatype *datatype);
+int R_PMPI_Win_call_errhandler(R_MPI_Win win, int errorcode);
+int R_PMPI_Win_create_keyval(R_MPI_Win_copy_attr_function *win_copy_attr_fn,
                            R_MPI_Win_delete_attr_function *win_delete_attr_fn, int *win_keyval,
                            void *extra_state);
-int R_PMPIWin_delete_attr(R_MPI_Win win, int win_keyval);
-int R_PMPIWin_free_keyval(int *win_keyval);
-int R_PMPIWin_get_attr(R_MPI_Win win, int win_keyval, void *attribute_val, int *flag);
-int R_PMPIWin_get_name(R_MPI_Win win, char *win_name, int *resultlen);
-int R_PMPIWin_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val);
-int R_PMPIWin_set_name(R_MPI_Win win,  char *win_name);
+int R_PMPI_Win_delete_attr(R_MPI_Win win, int win_keyval);
+int R_PMPI_Win_free_keyval(int *win_keyval);
+int R_PMPI_Win_get_attr(R_MPI_Win win, int win_keyval, void *attribute_val, int *flag);
+int R_PMPI_Win_get_name(R_MPI_Win win, char *win_name, int *resultlen);
+int R_PMPI_Win_set_attr(R_MPI_Win win, int win_keyval, void *attribute_val);
+int R_PMPI_Win_set_name(R_MPI_Win win, char *win_name);
 
-int R_PMPIAlloc_mem(R_MPI_Aint size, R_MPI_Info info, void *baseptr);
-int R_PMPIComm_create_errhandler(R_MPI_Comm_errhandler_function *comm_errhandler_fn,
+int R_PMPI_Alloc_mem(R_MPI_Aint size, R_MPI_Info info, void *baseptr);
+int R_PMPI_Comm_create_errhandler(R_MPI_Comm_errhandler_function *comm_errhandler_fn,
                                 R_MPI_Errhandler *errhandler);
-int R_PMPIComm_get_errhandler(R_MPI_Comm comm, R_MPI_Errhandler *errhandler);
-int R_PMPIComm_set_errhandler(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
-int R_PMPIFile_create_errhandler(R_MPI_File_errhandler_function *file_errhandler_fn,
+int R_PMPI_Comm_get_errhandler(R_MPI_Comm comm, R_MPI_Errhandler *errhandler);
+int R_PMPI_Comm_set_errhandler(R_MPI_Comm comm, R_MPI_Errhandler errhandler);
+int R_PMPI_File_create_errhandler(R_MPI_File_errhandler_function *file_errhandler_fn,
                                 R_MPI_Errhandler *errhandler);
-int R_PMPIFile_get_errhandler(R_MPI_File file, R_MPI_Errhandler *errhandler);
-int R_PMPIFile_set_errhandler(R_MPI_File file, R_MPI_Errhandler errhandler);
-int R_PMPIFinalized(int *flag);
-int R_PMPIFree_mem(void *base);
-int R_PMPIGet_address( void *location, R_MPI_Aint *address);
-int R_PMPIInfo_create(R_MPI_Info *info);
-int R_PMPIInfo_delete(R_MPI_Info info,  char *key);
-int R_PMPIInfo_dup(R_MPI_Info info, R_MPI_Info *newinfo);
-int R_PMPIInfo_free(R_MPI_Info *info);
-int R_PMPIInfo_get(R_MPI_Info info,  char *key, int valuelen, char *value, int *flag);
-int R_PMPIInfo_get_nkeys(R_MPI_Info info, int *nkeys);
-int R_PMPIInfo_get_nthkey(R_MPI_Info info, int n, char *key);
-int R_PMPIInfo_get_valuelen(R_MPI_Info info,  char *key, int *valuelen, int *flag);
-int R_PMPIInfo_set(R_MPI_Info info,  char *key,  char *value);
-int R_PMPIPack_external( char datarep[],  void *inbuf, int incount,
+int R_PMPI_File_get_errhandler(R_MPI_File file, R_MPI_Errhandler *errhandler);
+int R_PMPI_File_set_errhandler(R_MPI_File file, R_MPI_Errhandler errhandler);
+int R_PMPI_Finalized(int *flag);
+int R_PMPI_Free_mem(void *base);
+int R_PMPI_Get_address(void *location, R_MPI_Aint *address);
+int R_PMPI_Info_create(R_MPI_Info *info);
+int R_PMPI_Info_delete(R_MPI_Info info, char *key);
+int R_PMPI_Info_dup(R_MPI_Info info, R_MPI_Info *newinfo);
+int R_PMPI_Info_free(R_MPI_Info *info);
+int R_PMPI_Info_get(R_MPI_Info info, char *key, int valuelen, char *value, int *flag);
+int R_PMPI_Info_get_nkeys(R_MPI_Info info, int *nkeys);
+int R_PMPI_Info_get_nthkey(R_MPI_Info info, int n, char *key);
+int R_PMPI_Info_get_valuelen(R_MPI_Info info, char *key, int *valuelen, int *flag);
+int R_PMPI_Info_set(R_MPI_Info info, char *key, char *value);
+int R_PMPI_Pack_external(char datarep[], void *inbuf, int incount,
                        R_MPI_Datatype datatype, void *outbuf, R_MPI_Aint outsize, R_MPI_Aint *position)
                        MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIPack_external_size( char datarep[], int incount, R_MPI_Datatype datatype,
+int R_PMPI_Pack_external_size(char datarep[], int incount, R_MPI_Datatype datatype,
                             R_MPI_Aint *size);
-int R_PMPIRequest_get_status(R_MPI_Request request, int *flag, R_MPI_Status *status);
-int R_PMPIStatus_c2f( R_MPI_Status *c_status, R_MPI_Fint *f_status);
-int R_PMPIStatus_f2c( R_MPI_Fint *f_status, R_MPI_Status *c_status);
-int R_PMPIType_create_darray(int size, int rank, int ndims,  int array_of_gsizes[],
-                             int array_of_distribs[],  int array_of_dargs[],
-                             int array_of_psizes[], int order, R_MPI_Datatype oldtype,
+int R_PMPI_Request_get_status(R_MPI_Request request, int *flag, R_MPI_Status *status);
+int R_PMPI_Status_c2f(R_MPI_Status *c_status, R_MPI_Fint *f_status);
+int R_PMPI_Status_f2c(R_MPI_Fint *f_status, R_MPI_Status *c_status);
+int R_PMPI_Type_create_darray(int size, int rank, int ndims, int array_of_gsizes[],
+                            int array_of_distribs[], int array_of_dargs[],
+                            int array_of_psizes[], int order, R_MPI_Datatype oldtype,
                             R_MPI_Datatype *newtype);
-int R_PMPIType_create_hindexed(int count,  int array_of_blocklengths[],
-                               R_MPI_Aint array_of_displacements[], R_MPI_Datatype oldtype,
+int R_PMPI_Type_create_hindexed(int count, int array_of_blocklengths[],
+                              R_MPI_Aint array_of_displacements[], R_MPI_Datatype oldtype,
                               R_MPI_Datatype *newtype);
-int R_PMPIType_create_hvector(int count, int blocklength, R_MPI_Aint stride, R_MPI_Datatype oldtype,
+int R_PMPI_Type_create_hvector(int count, int blocklength, R_MPI_Aint stride, R_MPI_Datatype oldtype,
                              R_MPI_Datatype *newtype);
-int R_PMPIType_create_indexed_block(int count, int blocklength,  int array_of_displacements[],
+int R_PMPI_Type_create_indexed_block(int count, int blocklength, int array_of_displacements[],
                                    R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-int R_PMPIType_create_hindexed_block(int count, int blocklength,
-                                     R_MPI_Aint array_of_displacements[],
+int R_PMPI_Type_create_hindexed_block(int count, int blocklength,
+                                    R_MPI_Aint array_of_displacements[],
                                     R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-int R_PMPIType_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb, R_MPI_Aint extent,
+int R_PMPI_Type_create_resized(R_MPI_Datatype oldtype, R_MPI_Aint lb, R_MPI_Aint extent,
                              R_MPI_Datatype *newtype);
-int R_PMPIType_create_struct(int count,  int array_of_blocklengths[],
-                             R_MPI_Aint array_of_displacements[],
-                             R_MPI_Datatype array_of_types[], R_MPI_Datatype *newtype);
-int R_PMPIType_create_subarray(int ndims,  int array_of_sizes[],
-                               int array_of_subsizes[],  int array_of_starts[],
+int R_PMPI_Type_create_struct(int count, int array_of_blocklengths[],
+                            R_MPI_Aint array_of_displacements[],
+                            R_MPI_Datatype array_of_types[], R_MPI_Datatype *newtype);
+int R_PMPI_Type_create_subarray(int ndims, int array_of_sizes[],
+                              int array_of_subsizes[], int array_of_starts[],
                               int order, R_MPI_Datatype oldtype, R_MPI_Datatype *newtype);
-int R_PMPIType_get_extent(R_MPI_Datatype datatype, R_MPI_Aint *lb, R_MPI_Aint *extent);
-int R_PMPIType_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb, R_MPI_Aint *true_extent);
-int R_PMPIUnpack_external( char datarep[],  void *inbuf, R_MPI_Aint insize,
+int R_PMPI_Type_get_extent(R_MPI_Datatype datatype, R_MPI_Aint *lb, R_MPI_Aint *extent);
+int R_PMPI_Type_get_true_extent(R_MPI_Datatype datatype, R_MPI_Aint *true_lb, R_MPI_Aint *true_extent);
+int R_PMPI_Unpack_external(char datarep[], void *inbuf, R_MPI_Aint insize,
                          R_MPI_Aint *position, void *outbuf, int outcount, R_MPI_Datatype datatype)
                          MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,7);
-int R_PMPIWin_create_errhandler(R_MPI_Win_errhandler_function *win_errhandler_fn,
+int R_PMPI_Win_create_errhandler(R_MPI_Win_errhandler_function *win_errhandler_fn,
                                R_MPI_Errhandler *errhandler);
-int R_PMPIWin_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
-int R_PMPIWin_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
+int R_PMPI_Win_get_errhandler(R_MPI_Win win, R_MPI_Errhandler *errhandler);
+int R_PMPI_Win_set_errhandler(R_MPI_Win win, R_MPI_Errhandler errhandler);
 
 /* Fortran 90-related functions.  These routines are available only if
    Fortran 90 support is enabled 
 */
-int R_PMPIType_create_f90_integer(int r, R_MPI_Datatype *newtype);
-int R_PMPIType_create_f90_real(int p, int r, R_MPI_Datatype *newtype);
-int R_PMPIType_create_f90_complex(int p, int r, R_MPI_Datatype *newtype);
+int R_PMPI_Type_create_f90_integer(int r, R_MPI_Datatype *newtype);
+int R_PMPI_Type_create_f90_real(int p, int r, R_MPI_Datatype *newtype);
+int R_PMPI_Type_create_f90_complex(int p, int r, R_MPI_Datatype *newtype);
 
-int R_PMPIReduce_local( void *inbuf, void *inoutbuf, int count, R_MPI_Datatype datatype,
+int R_PMPI_Reduce_local(void *inbuf, void *inoutbuf, int count, R_MPI_Datatype datatype,
                       R_MPI_Op op)
                       MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIOp_commutative(R_MPI_Op op, int *commute);
-int R_PMPIReduce_scatter_block( void *sendbuf, void *recvbuf, int recvcount,
+int R_PMPI_Op_commutative(R_MPI_Op op, int *commute);
+int R_PMPI_Reduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                               R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm)
                               MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                               MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIDist_graph_create_adjacent(R_MPI_Comm comm_old, int indegree,  int sources[],
-                                     int sourceweights[], int outdegree,
-                                     int destinations[],  int destweights[],
+int R_PMPI_Dist_graph_create_adjacent(R_MPI_Comm comm_old, int indegree, int sources[],
+                                    int sourceweights[], int outdegree,
+                                    int destinations[], int destweights[],
                                     R_MPI_Info info, int reorder, R_MPI_Comm *comm_dist_graph);
-int R_PMPIDist_graph_create(R_MPI_Comm comm_old, int n,  int sources[],  int degrees[],
-                            int destinations[],  int weights[], R_MPI_Info info,
+int R_PMPI_Dist_graph_create(R_MPI_Comm comm_old, int n, int sources[], int degrees[],
+                           int destinations[], int weights[], R_MPI_Info info,
                            int reorder, R_MPI_Comm *comm_dist_graph);
-int R_PMPIDist_graph_neighbors_count(R_MPI_Comm comm, int *indegree, int *outdegree, int *weighted);
-int R_PMPIDist_graph_neighbors(R_MPI_Comm comm, int maxindegree, int sources[], int sourceweights[],
+int R_PMPI_Dist_graph_neighbors_count(R_MPI_Comm comm, int *indegree, int *outdegree, int *weighted);
+int R_PMPI_Dist_graph_neighbors(R_MPI_Comm comm, int maxindegree, int sources[], int sourceweights[],
                               int maxoutdegree, int destinations[], int destweights[]);
 
 /* Matched probe functionality */
-int R_PMPIImprobe(int source, int tag, R_MPI_Comm comm, int *flag, R_MPI_Message *message,
+int R_PMPI_Improbe(int source, int tag, R_MPI_Comm comm, int *flag, R_MPI_Message *message,
                  R_MPI_Status *status);
-int R_PMPIImrecv(void *buf, int count, R_MPI_Datatype datatype, R_MPI_Message *message,
+int R_PMPI_Imrecv(void *buf, int count, R_MPI_Datatype datatype, R_MPI_Message *message,
                 R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIMprobe(int source, int tag, R_MPI_Comm comm, R_MPI_Message *message, R_MPI_Status *status);
-int R_PMPIMrecv(void *buf, int count, R_MPI_Datatype datatype, R_MPI_Message *message,
+int R_PMPI_Mprobe(int source, int tag, R_MPI_Comm comm, R_MPI_Message *message, R_MPI_Status *status);
+int R_PMPI_Mrecv(void *buf, int count, R_MPI_Datatype datatype, R_MPI_Message *message,
                R_MPI_Status *status) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
 
 /* Nonblocking collectives */
-int R_PMPIComm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm, R_MPI_Request *request);
-int R_PMPIIbarrier(R_MPI_Comm comm, R_MPI_Request *request);
-int R_PMPIIbcast(void *buffer, int count, R_MPI_Datatype datatype, int root, R_MPI_Comm comm,
+int R_PMPI_Comm_idup(R_MPI_Comm comm, R_MPI_Comm *newcomm, R_MPI_Request *request);
+int R_PMPI_Ibarrier(R_MPI_Comm comm, R_MPI_Request *request);
+int R_PMPI_Ibcast(void *buffer, int count, R_MPI_Datatype datatype, int root, R_MPI_Comm comm,
                 R_MPI_Request *request) MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3);
-int R_PMPIIgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Igather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                  int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm,
                  R_MPI_Request *request)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIIgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                   int recvcounts[],  int displs[], R_MPI_Datatype recvtype, int root,
+int R_PMPI_Igatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                  int recvcounts[], int displs[], R_MPI_Datatype recvtype, int root,
                   R_MPI_Comm comm, R_MPI_Request *request)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_PMPIIscatter( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Iscatter(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                   int recvcount, R_MPI_Datatype recvtype, int root, R_MPI_Comm comm,
                   R_MPI_Request *request)
                   MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIIscatterv( void *sendbuf,  int sendcounts[],  int displs[],
+int R_PMPI_Iscatterv(void *sendbuf, int sendcounts[], int displs[],
                    R_MPI_Datatype sendtype, void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                    int root, R_MPI_Comm comm, R_MPI_Request *request)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,7);
-int R_PMPIIallgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Iallgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                     int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request)
                     MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIIallgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
-                      int recvcounts[],  int displs[], R_MPI_Datatype recvtype,
+int R_PMPI_Iallgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+                     int recvcounts[], int displs[], R_MPI_Datatype recvtype,
                      R_MPI_Comm comm, R_MPI_Request *request)
                      MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_PMPIIalltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
+int R_PMPI_Ialltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype, void *recvbuf,
                    int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request)
                    MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3) MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIIalltoallv( void *sendbuf,  int sendcounts[],  int sdispls[],
-                    R_MPI_Datatype sendtype, void *recvbuf,  int recvcounts[],
-                     int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
+int R_PMPI_Ialltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+                    R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
+                    int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
                     R_MPI_Request *request)
                     MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_PMPIIalltoallw( void *sendbuf,  int sendcounts[],  int sdispls[],
-                     R_MPI_Datatype sendtypes[], void *recvbuf,  int recvcounts[],
-                     int rdispls[],  R_MPI_Datatype recvtypes[], R_MPI_Comm comm,
+int R_PMPI_Ialltoallw(void *sendbuf, int sendcounts[], int sdispls[],
+                    R_MPI_Datatype sendtypes[], void *recvbuf, int recvcounts[],
+                    int rdispls[], R_MPI_Datatype recvtypes[], R_MPI_Comm comm,
                     R_MPI_Request *request);
-int R_PMPIIreduce( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_PMPI_Ireduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                  R_MPI_Op op, int root, R_MPI_Comm comm, R_MPI_Request *request)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIIallreduce( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_PMPI_Iallreduce(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                     R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request)
                     MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIIreduce_scatter( void *sendbuf, void *recvbuf,  int recvcounts[],
+int R_PMPI_Ireduce_scatter(void *sendbuf, void *recvbuf, int recvcounts[],
                          R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request)
                          MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                          MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIIreduce_scatter_block( void *sendbuf, void *recvbuf, int recvcount,
+int R_PMPI_Ireduce_scatter_block(void *sendbuf, void *recvbuf, int recvcount,
                                R_MPI_Datatype datatype, R_MPI_Op op, R_MPI_Comm comm,
                                R_MPI_Request *request)
                                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                                MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIIscan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
+int R_PMPI_Iscan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype, R_MPI_Op op,
                R_MPI_Comm comm, R_MPI_Request *request)
                MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
-int R_PMPIIexscan( void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
+int R_PMPI_Iexscan(void *sendbuf, void *recvbuf, int count, R_MPI_Datatype datatype,
                  R_MPI_Op op, R_MPI_Comm comm, R_MPI_Request *request)
                  MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4) MPICH_ATTR_POINTER_WITH_TYPE_TAG(2,4);
 
 /* Neighborhood collectives */
-int R_PMPIIneighbor_allgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_PMPI_Ineighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                              void *recvbuf, int recvcount, R_MPI_Datatype recvtype,
                              R_MPI_Comm comm, R_MPI_Request *request)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIIneighbor_allgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
-                              void *recvbuf,  int recvcounts[],  int displs[],
+int R_PMPI_Ineighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+                              void *recvbuf, int recvcounts[], int displs[],
                               R_MPI_Datatype recvtype, R_MPI_Comm comm, R_MPI_Request *request)
                               MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                               MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_PMPIIneighbor_alltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_PMPI_Ineighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                             void *recvbuf, int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm,
                             R_MPI_Request *request)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPIIneighbor_alltoallv( void *sendbuf,  int sendcounts[],  int sdispls[],
-                             R_MPI_Datatype sendtype, void *recvbuf,  int recvcounts[],
-                              int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
+int R_PMPI_Ineighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+                             R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
+                             int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm,
                              R_MPI_Request *request)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_PMPIIneighbor_alltoallw( void *sendbuf,  int sendcounts[],
-                              R_MPI_Aint sdispls[],  R_MPI_Datatype sendtypes[],
-                             void *recvbuf,  int recvcounts[],  R_MPI_Aint rdispls[],
-                              R_MPI_Datatype recvtypes[], R_MPI_Comm comm, R_MPI_Request *request);
-int R_PMPINeighbor_allgather( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_PMPI_Ineighbor_alltoallw(void *sendbuf, int sendcounts[],
+                             R_MPI_Aint sdispls[], R_MPI_Datatype sendtypes[],
+                             void *recvbuf, int recvcounts[], R_MPI_Aint rdispls[],
+                             R_MPI_Datatype recvtypes[], R_MPI_Comm comm, R_MPI_Request *request);
+int R_PMPI_Neighbor_allgather(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                             void *recvbuf, int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPINeighbor_allgatherv( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
-                             void *recvbuf,  int recvcounts[],  int displs[],
+int R_PMPI_Neighbor_allgatherv(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+                             void *recvbuf, int recvcounts[], int displs[],
                              R_MPI_Datatype recvtype, R_MPI_Comm comm)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                              MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,7);
-int R_PMPINeighbor_alltoall( void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
+int R_PMPI_Neighbor_alltoall(void *sendbuf, int sendcount, R_MPI_Datatype sendtype,
                            void *recvbuf, int recvcount, R_MPI_Datatype recvtype, R_MPI_Comm comm)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,3)
                            MPICH_ATTR_POINTER_WITH_TYPE_TAG(4,6);
-int R_PMPINeighbor_alltoallv( void *sendbuf,  int sendcounts[],  int sdispls[],
-                            R_MPI_Datatype sendtype, void *recvbuf,  int recvcounts[],
-                             int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm)
+int R_PMPI_Neighbor_alltoallv(void *sendbuf, int sendcounts[], int sdispls[],
+                            R_MPI_Datatype sendtype, void *recvbuf, int recvcounts[],
+                            int rdispls[], R_MPI_Datatype recvtype, R_MPI_Comm comm)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(1,4)
                             MPICH_ATTR_POINTER_WITH_TYPE_TAG(5,8);
-int R_PMPINeighbor_alltoallw( void *sendbuf,  int sendcounts[],  R_MPI_Aint sdispls[],
-                             R_MPI_Datatype sendtypes[], void *recvbuf,  int recvcounts[],
-                             R_MPI_Aint rdispls[],  R_MPI_Datatype recvtypes[],
+int R_PMPI_Neighbor_alltoallw(void *sendbuf, int sendcounts[], R_MPI_Aint sdispls[],
+                            R_MPI_Datatype sendtypes[], void *recvbuf, int recvcounts[],
+                            R_MPI_Aint rdispls[], R_MPI_Datatype recvtypes[],
                             R_MPI_Comm comm);
 
 /* Shared memory */
-int R_PMPIComm_split_type(R_MPI_Comm comm, int split_type, int key, R_MPI_Info info, R_MPI_Comm *newcomm);
+int R_PMPI_Comm_split_type(R_MPI_Comm comm, int split_type, int key, R_MPI_Info info, R_MPI_Comm *newcomm);
 
 /* Noncollective communicator creation */
-int R_PMPIComm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag, R_MPI_Comm *newcomm);
+int R_PMPI_Comm_create_group(R_MPI_Comm comm, R_MPI_Group group, int tag, R_MPI_Comm *newcomm);
 
 /* MPI-3 "large count" routines */
-int R_PMPIGet_elements_x( R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count *count);
-int R_PMPIStatus_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count count);
-int R_PMPIType_get_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb, R_MPI_Count *extent);
-int R_PMPIType_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb, R_MPI_Count *extent);
-int R_PMPIType_size_x(R_MPI_Datatype datatype, R_MPI_Count *size);
+int R_PMPI_Get_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count *count);
+int R_PMPI_Status_set_elements_x(R_MPI_Status *status, R_MPI_Datatype datatype, R_MPI_Count count);
+int R_PMPI_Type_get_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb, R_MPI_Count *extent);
+int R_PMPI_Type_get_true_extent_x(R_MPI_Datatype datatype, R_MPI_Count *lb, R_MPI_Count *extent);
+int R_PMPI_Type_size_x(R_MPI_Datatype datatype, R_MPI_Count *size);
 
 /* Non-standard but public extensions to MPI */
 /* Fault Tolerance Extensions */
@@ -2187,41 +2187,41 @@ int PMPIX_Comm_reenable_anysource(R_MPI_Comm comm, R_MPI_Group *failed_group);
 /* The R_MPI_T routines are available only in C bindings - tell tools that they
    can skip these prototypes */
 /* Begin Skip Prototypes */
-int R_PMPIT_init_thread(int required, int *provided);
-int R_PMPIT_finalize(void);
-int R_PMPIT_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name, int *name_len);
-int R_PMPIT_enum_get_item(R_MPI_T_enum enumtype, int indx, int *value, char *name, int *name_len);
-int R_PMPIT_cvar_get_num(int *num_cvar);
-int R_PMPIT_cvar_get_info(int cvar_index, char *name, int *name_len, int *verbosity,
+int R_PMPI_T_init_thread(int required, int *provided);
+int R_PMPI_T_finalize(void);
+int R_PMPI_T_enum_get_info(R_MPI_T_enum enumtype, int *num, char *name, int *name_len);
+int R_PMPI_T_enum_get_item(R_MPI_T_enum enumtype, int indx, int *value, char *name, int *name_len);
+int R_PMPI_T_cvar_get_num(int *num_cvar);
+int R_PMPI_T_cvar_get_info(int cvar_index, char *name, int *name_len, int *verbosity,
                          R_MPI_Datatype *datatype, R_MPI_T_enum *enumtype, char *desc, int *desc_len,
                          int *binding, int *scope);
-int R_PMPIT_cvar_handle_alloc(int cvar_index, void *obj_handle, R_MPI_T_cvar_handle *handle,
+int R_PMPI_T_cvar_handle_alloc(int cvar_index, void *obj_handle, R_MPI_T_cvar_handle *handle,
                              int *count);
-int R_PMPIT_cvar_handle_free(R_MPI_T_cvar_handle *handle);
-int R_PMPIT_cvar_read(R_MPI_T_cvar_handle handle, void *buf);
-int R_PMPIT_cvar_write(R_MPI_T_cvar_handle handle,  void *buf);
-int R_PMPIT_pvar_get_num(int *num_pvar);
-int R_PMPIT_pvar_get_info(int pvar_index, char *name, int *name_len, int *verbosity, int *var_class,
+int R_PMPI_T_cvar_handle_free(R_MPI_T_cvar_handle *handle);
+int R_PMPI_T_cvar_read(R_MPI_T_cvar_handle handle, void *buf);
+int R_PMPI_T_cvar_write(R_MPI_T_cvar_handle handle, void *buf);
+int R_PMPI_T_pvar_get_num(int *num_pvar);
+int R_PMPI_T_pvar_get_info(int pvar_index, char *name, int *name_len, int *verbosity, int *var_class,
                          R_MPI_Datatype *datatype, R_MPI_T_enum *enumtype, char *desc, int *desc_len,
                          int *binding, int *readonly, int *continuous, int *atomic);
-int R_PMPIT_pvar_session_create(R_MPI_T_pvar_session *session);
-int R_PMPIT_pvar_session_free(R_MPI_T_pvar_session *session);
-int R_PMPIT_pvar_handle_alloc(R_MPI_T_pvar_session session, int pvar_index, void *obj_handle,
+int R_PMPI_T_pvar_session_create(R_MPI_T_pvar_session *session);
+int R_PMPI_T_pvar_session_free(R_MPI_T_pvar_session *session);
+int R_PMPI_T_pvar_handle_alloc(R_MPI_T_pvar_session session, int pvar_index, void *obj_handle,
                              R_MPI_T_pvar_handle *handle, int *count);
-int R_PMPIT_pvar_handle_free(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle *handle);
-int R_PMPIT_pvar_start(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-int R_PMPIT_pvar_stop(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-int R_PMPIT_pvar_read(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
-int R_PMPIT_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle,  void *buf);
-int R_PMPIT_pvar_reset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
-int R_PMPIT_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
-int R_PMPIT_category_get_num(int *num_cat);
-int R_PMPIT_category_get_info(int cat_index, char *name, int *name_len, char *desc, int *desc_len,
+int R_PMPI_T_pvar_handle_free(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle *handle);
+int R_PMPI_T_pvar_start(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+int R_PMPI_T_pvar_stop(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+int R_PMPI_T_pvar_read(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
+int R_PMPI_T_pvar_write(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
+int R_PMPI_T_pvar_reset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle);
+int R_PMPI_T_pvar_readreset(R_MPI_T_pvar_session session, R_MPI_T_pvar_handle handle, void *buf);
+int R_PMPI_T_category_get_num(int *num_cat);
+int R_PMPI_T_category_get_info(int cat_index, char *name, int *name_len, char *desc, int *desc_len,
                              int *num_cvars, int *num_pvars, int *num_categories);
-int R_PMPIT_category_get_cvars(int cat_index, int len, int indices[]);
-int R_PMPIT_category_get_pvars(int cat_index, int len, int indices[]);
-int R_PMPIT_category_get_categories(int cat_index, int len, int indices[]);
-int R_PMPIT_category_changed(int *stamp);
+int R_PMPI_T_category_get_cvars(int cat_index, int len, int indices[]);
+int R_PMPI_T_category_get_pvars(int cat_index, int len, int indices[]);
+int R_PMPI_T_category_get_categories(int cat_index, int len, int indices[]);
+int R_PMPI_T_category_changed(int *stamp);
 /* End Skip Prototypes */
 #endif  /* R_MPI_BUILD_PROFILING */
 /* End of MPI bindings */

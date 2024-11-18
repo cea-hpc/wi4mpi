@@ -1,0 +1,48 @@
+MPI_@A_MPI_
+PA_MPI_@A_PMPI_
+typedef OPAL.*A_@typedef size_t A_
+typedef OA_MPI.*A_@typedef size_t A_
+typedef struct.*A_@typedef size_t A_
+typedef size_t A_MPI_Count;@//typedef size_t A_MPI_Count;\ntypedef long long A_MPI_Count;
+typedef size_t A_MPI_Status;@//typedef size_t A_MPI_Status;
+typedef size_t A_MPI_T_pvar_session;\n@typedef size_t A_MPI_T_pvar_session;\n\ntypedef int A_MPI_Fint;
+struct ompi_status_public_t {@struct CCC_mpi_status_struct {
+struct ompi_status_public_t {@struct CCC_mpi_status_struct {
+typedef struct ompi_status_public_t ompi_status_public_t;@typedef struct CCC_mpi_status_struct A_MPI_Status;
+OA_MPI_DECLSPEC@
+const @
+A_MPI_MAX_PROCESSOR_NAME OPAL_MAX_PROCESSOR_NAME@OPAL_MAX_PROCESSOR_NAME 512
+A_MPI_MAX_ERROR_STRING   OPAL_MAX_ERROR_STRING@OPAL_MAX_ERROR_STRING  2048
+A_MPI_MAX_OBJECT_NAME    OPAL_MAX_OBJECT_NAME@OPAL_MAX_OBJECT_NAME   1024
+A_MPI_MAX_INFO_KEY         OPAL_MAX_INFO_KEY@A_MPI_MAX_INFO_KEY 256
+A_MPI_MAX_INFO_VAL         OPAL_MAX_INFO_VAL@A_MPI_MAX_INFO_VAL 512
+A_MPI_MAX_PORT_NAME        OPAL_MAX_PORT_NAME@A_MPI_MAX_PORT_NAME 512
+A_MPI_MAX_DATAREP_STRING OPAL_MAX_DATAREP_STRING\n@A_MPI_MAX_DATAREP_STRING 512
+#define A_MPI_GROUP_NULL .*@#define A_MPI_GROUP_NULL 0x0
+#define A_MPI_COMM_NULL .*@#define A_MPI_COMM_NULL 0x0
+#define A_MPI_REQUEST_NULL .*@#define A_MPI_REQUEST_NULL 0x0
+#define A_MPI_MESSAGE_NULL .*@#define A_MPI_MESSAGE_NULL 0x0
+#define A_MPI_OP_NULL .*@#define A_MPI_OP_NULL 0x0
+#define A_MPI_ERRHANDLER_NULL .*@#define A_MPI_ERRHANDLER_NULL 0x0
+#define A_MPI_INFO_NULL .*@#define A_MPI_INFO_NULL 0x0
+#define A_MPI_WIN_NULL .*@#define A_MPI_WIN_NULL 0x0
+#define A_MPI_FILE_NULL .*@#define A_MPI_FILE_NULL 0x0
+#define A_MPI_T_ENUM_NULL .*@#define A_MPI_T_ENUM_NULL 0x0
+#define A_MPI_INFO_ENV .*@#define A_MPI_INFO_ENV 0x0 
+#define A_MPI_STATUS_IGNORE .*@#define A_MPI_STATUS_IGNORE 0x0
+#define A_MPI_STATUSES_IGNORE .*@#define A_MPI_STATUSES_IGNORE 0x0
+#define A_MPI_NULL_DELETE_FN .*@#define A_MPI_NULL_DELETE_FN  0x0
+#define A_MPI_NULL_COPY_FN .*@#define A_MPI_NULL_COPY_FN  0x0
+#define A_MPI_TYPE_NULL_DELETE_FN .*@#define A_MPI_TYPE_NULL_DELETE_FN  0x0
+#define A_MPI_TYPE_NULL_COPY_FN .*@#define A_MPI_TYPE_NULL_COPY_FN  0x0
+#define A_MPI_COMM_NULL_DELETE_FN .*@#define A_MPI_COMM_NULL_DELETE_FN  0x0
+#define A_MPI_COMM_NULL_COPY_FN .*@#define A_MPI_COMM_NULL_COPY_FN  0x0
+#define A_MPI_WIN_NULL_DELETE_FN .*@#define A_MPI_WIN_NULL_DELETE_FN  0x0
+#define A_MPI_WIN_NULL_COPY_FN .*@#define A_MPI_WIN_NULL_COPY_FN  0x0
+A_MPI_COMM_WORLD OA_MPI_PREDEFINED_GLOBAL\( A_MPI_Comm, ompi_mpi_comm_world\)@A_MPI_COMM_WORLD 0x1
+A_MPI_COMM_SELF OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Comm, ompi_mpi_comm_self\)@A_MPI_COMM_SELF 0x2
+#define A_MPI_GROUP_EMPTY OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Group, ompi_mpi_group_empty\)@#define A_MPI_GROUP_EMPTY 0x1
+A_MPI_MESSAGE_NO_PROC OA_MPI_PREDEFINED_GLOBAL\(A_MPI_Message, ompi_message_no_proc\)@A_MPI_MESSAGE_NO_PROC 0x1
+OPAL_MAX_PROCESSOR_NAME@A_MPI_MAX_PROCESSOR_NAME
+OPAL_MAX_ERROR_STRING@A_MPI_MAX_ERROR_STRING
+OPAL_MAX_OBJECT_NAME@A_MPI_MAX_OBJECT_NAME

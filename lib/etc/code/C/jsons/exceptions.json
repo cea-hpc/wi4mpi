@@ -1,0 +1,969 @@
+{
+  "MPI_Comm_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_dup_fn": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_null_copy_fn": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_null_delete_fn": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Conversion_fn_null": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Dup_fn": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Errhandler_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Errhandler_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_call_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_create_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Group_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Group_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Info_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Info_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Message_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Message_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Op_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Op_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Request_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Request_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Status_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Status_c2f08": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Status_f082c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Status_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_alloc": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_free": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_read": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_readreset": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_reset": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_create": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_free": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_start": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_stop": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_write": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Type_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Type_dup_fn": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Type_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Type_null_copy_fn": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Type_null_delete_fn": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_c2f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_call_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_create_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_set_attr": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_set_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "PI_T_category_changed": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPIX_Query_cuda_support": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPIX_Query_cuda_support.c"
+      }
+    }
+  },
+  "MPI_Comm_create_keyval": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Comm_create_keyval.c"
+      }
+    }
+  },
+  "MPI_Comm_free_keyval": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Comm_free_keyval.c"
+      }
+    }
+  },
+  "MPI_Keyval_create": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Keyval_create.c"
+      }
+    }
+  },
+  "MPI_Keyval_free": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Keyval_free.c"
+      }
+    }
+  },
+  "MPI_Win_get_attr": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Win_get_attr.c"
+      }
+    }
+  },
+  "MPI_Pcontrol": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Pcontrol.c"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False",
+        "file": "asm_MPI_Pcontrol.c"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False",
+        "file": "R_MPI_Pcontrol.c"
+      }
+    }
+  },
+  "MPI_Type_create_keyval": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Type_create_keyval.c"
+      }
+    }
+  },
+  "MPI_Win_create_keyval": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Win_create_keyval.c"
+      }
+    }
+  },
+  "MPI_Errhandler_create": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Errhandler_create.c"
+      }
+    }
+  },
+  "MPI_Comm_create_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Comm_create_errhandler.c"
+      }
+    }
+  },
+  "MPI_File_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Status_f2f08": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Status_f082f": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_f2c": {
+    "Application": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  }
+}

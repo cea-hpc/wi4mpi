@@ -1,0 +1,4 @@
+
+#define A_MPI_MAX_OBJECT_NAME    128
+#define A_MPI_MAX_DATAREP_STRING 128
+

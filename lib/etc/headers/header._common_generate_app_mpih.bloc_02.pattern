@@ -1,0 +1,16 @@
+
+/* MPI-2 specifies that the name "A_MPI_TYPE_NULL_DELETE_FN" (and all
+   related friends) must be accessible in C, C++, and Fortran. This is
+   unworkable if the back-end Fortran compiler uses all caps for its
+   linker symbol convention -- it results in two functions with
+   different signatures that have the same name (i.e., both C and
+   Fortran use the symbol A_MPI_TYPE_NULL_DELETE_FN).  So we have to
+   #define the C names to be something else, so that they names are
+   *accessed* through A_MPI_TYPE_NULL_DELETE_FN, but their actual symbol
+   name is different.
+
+   However, this file is included when the fortran wrapper functions
+   are compiled in Open MPI, so we do *not* want these #defines in
+   this case (i.e., we need the Fortran wrapper function to be
+   protection for this case. */
+

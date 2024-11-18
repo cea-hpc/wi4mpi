@@ -8,41 +8,41 @@
 //# SPDX-License-Identifier: BSD-3-Clause OR CeCILL-B                    #
 //#                                                                      #
 //########################################################################
-/* 
+/*
  *
- *   Copyright (C) 1997 University of Chicago. 
-    
-    				  MPICH2 COPYRIGHT
-    
+ *   Copyright (C) 1997 University of Chicago.
+
+             MPICH2 COPYRIGHT
+
     The following is a notice of limited availability of the code, and disclaimer
     which must be included in the prologue of the code and in all source listings
     of the code.
-    
+
     Copyright Notice
      + 2002 University of Chicago
-    
+
     Permission is hereby granted to use, reproduce, prepare derivative works, and
     to redistribute to others.  This software was authored by:
-    
+
     Mathematics and Computer Science Division
     Argonne National Laboratory, Argonne IL 60439
-    
+
     (and)
-    
+
     Department of Computer Science
     University of Illinois at Urbana-Champaign
-    
-    
-    			      GOVERNMENT LICENSE
-    
+
+
+             GOVERNMENT LICENSE
+
     Portions of this material resulted from work developed under a U.S.
     Government Contract and are subject to the following license: the Government
     is granted for itself and others acting on its behalf a paid-up, nonexclusive,
     irrevocable worldwide license in this computer software to reproduce, prepare
     derivative works, and perform publicly and display publicly.
-    
-    				  DISCLAIMER
-    
+
+             DISCLAIMER
+
     This computer code material was prepared, in part, as an account of work
     sponsored by an agency of the United States Government.  Neither the United
     States, nor the University of Chicago, nor any of their employees, makes any
@@ -50,8 +50,8 @@
     for the accuracy, completeness, or usefulness of any information, apparatus,
     product, or process disclosed, or represents that its use would not infringe
     privately owned rights.
-    
- *   
+
+ *
  */
 
 /* user include file for MPI-IO programs */
@@ -79,11 +79,6 @@ typedef struct ADIOI_RequestD *MPIO_Request;
 #else
 #define MPIO_Request A_MPI_Request
 #define MPIO_USES_A_MPI_REQUEST
-/* Also rename the MPIO routines to get the MPI versions */
-/*#define A_MPIO_Wait A_MPI_Wait
-#define A_MPIO_Test A_MPI_Test
-#define A_PMPIO_Wait A_PMPI_Wait
-#define A_MPIO_Test A_PMPI_Test*/
 #endif
 #define MPIO_REQUEST_DEFINED
 
@@ -325,13 +320,13 @@ A_MPI_Fint A_MPI_File_c2f(A_MPI_File file);
 int MPIO_Test(MPIO_Request *request, int *flag, A_MPI_Status *status);
 int MPIO_Wait(MPIO_Request *request, A_MPI_Status *status);
 int MPIO_Testall(int count, MPIO_Request array_of_requests[], int *flag,
-               A_MPI_Status array_of_statuses[]);
+                 A_MPI_Status array_of_statuses[]);
 int MPIO_Waitall(int count, MPIO_Request array_of_requests[], A_MPI_Status array_of_statuses[]);
 int MPIO_Testany(int count, MPIO_Request array_of_requests[], int *indx, int *flag,
-               A_MPI_Status *status);
+                 A_MPI_Status *status);
 int MPIO_Waitany(int count, MPIO_Request array_of_requests[], int *indx, A_MPI_Status *status);
 int MPIO_Waitsome(int incount, MPIO_Request array_of_requests[], int *outcount,
-                int array_of_indices[], A_MPI_Status array_of_statuses[]);
+                  int array_of_indices[], A_MPI_Status array_of_statuses[]);
 int MPIO_Testsome(int incount, MPIO_Request array_of_requests[], int *outcount,
                   int array_of_indices[], A_MPI_Status array_of_statuses[]);
 

@@ -1,0 +1,42 @@
+#%Module5.1
+module use --append /etc/scl/modulefiles
+module use --append /usr/share/modulefiles/applications
+module use --append /usr/share/modulefiles/environment
+module use --append /usr/share/modulefiles/configurations
+module use --append /usr/share/modulefiles/tools
+module use --append /usr/share/modulefiles/graphics
+module use --append /usr/share/modulefiles/parallel
+module use --append /usr/share/modulefiles/libraries
+module use --append /usr/share/modulefiles/compilers
+module load ccc
+module load --tag=auto-loaded datadir
+module load --tag=auto-loaded datadir
+module load dfldatadir
+module load --tag=auto-loaded flavor/buildcompiler/gcc
+module load --tag=auto-loaded c++/gnu
+module load --tag=auto-loaded c/gnu
+module load --tag=auto-loaded fortran/gnu
+module load gnu
+module load --tag=auto-loaded flavor/buildmpi/openmpi
+module load --tag=auto-loaded feature/openmpi/mpi_compiler/gcc
+module load --tag=auto-loaded feature/mkl/single_node
+module load --tag=auto-loaded feature/openmpi/io
+module load --tag=auto-loaded feature/openmpi/net
+module load --tag=auto-loaded flavor/ucx/standard
+module load --tag=auto-loaded flavor/cuda/nvhpc-222
+module load --tag=auto-loaded cuda/11.6
+module load --tag=auto-loaded flavor/libccc_user
+module load --tag=auto-loaded hwloc/2.5.0
+module load --tag=auto-loaded pmix
+module load --tag=auto-loaded feature/hcoll
+module load --tag=auto-loaded sharp/2.4.2
+module load --tag=auto-loaded hcoll/4.7.3191
+module load --tag=auto-loaded ucx/1.12.1
+module load --tag=auto-loaded .tuning/openmpi/4.1.4
+module load mpi
+module load python3/3.11.4
+module load --tag=auto-loaded c++/llvm
+module load --tag=auto-loaded c/llvm
+module load --tag=auto-loaded fortran/llvm
+module load llvm
+

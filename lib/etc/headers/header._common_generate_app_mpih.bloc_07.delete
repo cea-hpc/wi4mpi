@@ -1,0 +1,4 @@
+    /* This is a little hackish, but errhandler.h needs space for a
+       A_MPI_File_errhandler_fn.  While it could just be removed, this
+       allows us to maintain a stable ABI within OMPI, at least for
+       apps that don't use MPI I/O. */
