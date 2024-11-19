@@ -18,7 +18,8 @@ void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_G
   init_f2c(lib_handle);
   WI4MPI_errhandler_key = R_MPI_KEYVAL_INVALID;
 }
-            
+
+#ifdef TIMEOUT_SUPPORT
 __attribute__((constructor)) void wi4mpi_timeout_config(void) {
   char *current_str;
   size_t current_val;
@@ -43,3 +44,4 @@ __attribute__((constructor)) void wi4mpi_timeout_config(void) {
     WI4{{func['name']}}_print = default_debug;
     {%- endfor -%} 
 }
+#endif
