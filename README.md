@@ -29,12 +29,16 @@ $ make -j 4 && make install
 ```
 
 You may use the following environment variables to customize the configure and build steps :
-* `WI4MPI_COMPILER` : `<INTEL, GCC, PGI, LLVM, ARMCLANG, FUJITSU>`
-* `WI4MPI_RELEASE`  : `<DEBUG, RELEASE, GCC_JITI>`
-* `OPENMPI_ROOT`    : path to the openmpi installation root
-* `INTELMPI_ROOT`   : path to the intelmpi installation root
-* `MPC_ROOT`        : path to the mpc installation root
-* `MPICH_ROOT`      : path to the mpich installation root
+* `CC` or `CMAKE_C_COMPILER`       : C compiler
+* `CXX` or `CMAKE_CXX_COMPILER`    : C++ compiler
+* `FC` or `CMAKE_Fortran_COMPILER` : Fortran compiler
+* `CMAKE_BUILD_TYPE`               : `<RelWithDebInfo, Release>`
+* `WI4MPI_DEBUG`                   : option to activate debug printing in the wrapped calls
+* `WI4MPI_JIT`                     : option to activate JIT compilation for user-provided stuff
+* `OPENMPI_ROOT`                   : path to the openmpi installation root
+* `INTELMPI_ROOT`                  : path to the intelmpi installation root
+* `MPC_ROOT`                       : path to the mpc installation root
+* `MPICH_ROOT`                     : path to the mpich installation root
 
 ### Documentation
 
