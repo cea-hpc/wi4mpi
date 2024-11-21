@@ -40,12 +40,16 @@
 
     {%-  macro tmp_free(map,arg)-%} 
         {%-  set var=arg['var']-%} 
+        {%-  if map['local_alloc']|default(0) != 1 -%}
         {%-  if map['no_map']|default("") == "" and map['set']|default("") == "" -%} 
             {%-  if arg['arg_dep']|default("") != "" -%} 
+                {%- if map['max_mpi']|default("") == "" or map['type']!='char *' %}
                 {%-  if map['type'] == 'MPI_Status'-%} 
                     wi4mpi_free(array_of_statuses_tmp);
                 {%-  else-%}  
                     wi4mpi_free({{var|replace('[]','')}}_tmp);
+                {%-  endif-%} 
+                {%-  endif-%} 
                 {%-  endif-%} 
             {%- endif %}
         {%-  endif-%} 
