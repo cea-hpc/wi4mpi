@@ -65,7 +65,7 @@
         {%- endif -%} 
     {%-  endfor -%}  
     {%- for arg in func['args'] -%} 
-       {{tmp_free(arg)}}
+        {{ tmp_free(mappers[arg['name']],arg) }}
     {%- endfor -%} 
     {% if ret_type == "double" %}
           {{ret_type}} ret={{func['ret']['var']}}_tmp;
