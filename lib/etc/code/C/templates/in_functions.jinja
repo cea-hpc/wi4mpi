@@ -37,6 +37,19 @@
             {%-  endif-%} 
         {%-  endif-%} 
     {%-  endmacro-%} 
+
+    {%-  macro tmp_free(map,arg)-%} 
+        {%-  set var=arg['var']-%} 
+        {%-  if map['no_map']|default("") == "" and map['set']|default("") == "" -%} 
+            {%-  if arg['arg_dep']|default("") != "" -%} 
+                {%-  if map['type'] == 'MPI_Status'-%} 
+                    wi4mpi_free(array_of_statuses_tmp);
+                {%-  else-%}  
+                    wi4mpi_free({{var|replace('[]','')}}_tmp);
+                {%-  endif-%} 
+            {%- endif %}
+        {%-  endif-%} 
+    {%-  endmacro-%} 
     {%-  macro convert_in(arg, map,idx)-%} 
         {%-  if arg['In'] == 1  -%} 
             {%-  if map['no_map']|default("") == "" and map['set']|default("") == "" -%} 
