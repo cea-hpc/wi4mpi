@@ -1,6 +1,6 @@
 {#this template use the func dictionary (extrated from functions.json) and the mappers_X.json dict as input #}
 {%- from 'out_function.jinja' import convert_out -%} 
-{%- from 'in_functions.jinja' import type_prefix,convert_in,tmp_decl,handle_local_var -%} 
+{%- from 'in_functions.jinja' import type_prefix,convert_in,tmp_decl,handle_local_var,tmp_free -%} 
 {%-  set ret_type = type_prefix('A_',mappers[func['ret']['name']]['type'])-%} 
 {%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
 
@@ -65,12 +65,7 @@
         {%- endif -%} 
     {%-  endfor -%}  
     {%- for arg in func['args'] -%} 
-        {%- if arg['arg_dep'] != '' and mappers[arg['name']]['no_map'] is not defined and mappers[arg['name']]['max_mpi'] is defined%}
-                     {%- if arg['if_status_ignore'] is defined-%} 
-                     if ( {{arg['var']|replace('[]','')}}!=A_MPI_STATUSES_IGNORE)
-                    {%- endif -%} 
-                    wi4mpi_free({{arg['var']|replace('[]','')}}_tmp);
-        {%- endif -%} 
+       {{tmp_free(arg)}}
     {%- endfor -%} 
     {% if ret_type == "double" %}
           {{ret_type}} ret={{func['ret']['var']}}_tmp;
