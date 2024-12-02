@@ -52,6 +52,7 @@ class CodeGenerator(ABC):
         "run_dict": {},
         "dlsym_dict": {},
     }
+    mpi_norm = None
 
     def set_directories(self, dir_input, dir_output):
         """
@@ -75,7 +76,7 @@ class CodeGenerator(ABC):
             "exceptions": os.path.join(dir_input, "C/jsons/exceptions.json"),
         }
         self.data = {
-            "functions": load_json_file(self.json_files["functions_definitions"]),
+            "functions": load_json_file(self.json_files["functions_definitions"], mpi_norm=self.mpi_norm),
             "mappers": load_json_file(self.json_files["functions_mappers"]),
             "types": load_json_file(self.json_files["types"]),
             "exceptions": load_json_file(self.json_files["exceptions"]),

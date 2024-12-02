@@ -295,22 +295,66 @@ def replace_bloc_from_conf_file(pattern_path, replace_path, text):
     return text
 
 
-def load_json_file(file_path):
+
+def load_json_file(file_path, mpi_norm=None):
     """
-    Load a JSON file from the specified path.
+    Load a JSON file from the specified path and optionally filter
+    blocks based on MPI version constraints (`MPImin`, `MPImax`).
 
     Args:
         file_path (str): The path to the JSON file.
+        mpi_norm (float, optional): The MPI version to filter by.
+                                  If None, all data is returned.
 
     Returns:
-        dict: The JSON data loaded from the file.
+        list or dict: The JSON data loaded from the file, filtered
+                      by MPI_norm if specified.
 
     Raises:
         FileNotFoundError: If the specified file is not found.
         JSONDecodeError: If an error occurs during JSON decoding.
+        ValueError: If mpi_norm is specified but not compatible with any block.
     """
+    # Load full file
     with open(file_path, "r", encoding="utf-8") as file_descriptor:
-        return json.load(file_descriptor)
+        data = json.load(file_descriptor)
+
+    # If no filtering is required, return the full data
+    if mpi_norm is None:
+        return data
+
+    # Check if data is an array
+    if isinstance(data, list):
+        filtered_data = [
+            block for block in data
+            if _is_block_valid_for_mpi(block, mpi_norm)
+        ]
+        if not filtered_data:
+            raise ValueError(f"No blocks found compatible with mpi_norm={mpi_norm}")
+        return filtered_data
+    # Handle single JSON objects
+    elif isinstance(data, dict):
+        if _is_block_valid_for_mpi(data, mpi_norm):
+            return data
+        else:
+            raise ValueError(f"No blocks found compatible with mpi_norm={mpi_norm}")
+
+    # Unsupported JSON structure
+    raise ValueError("Unsupported JSON structure for filtering")
+
+
+def _is_block_valid_for_MPI(block, mpi_norm):
+    """Helper function to check if a block is valid for the given MPI version."""
+    mpi_min = block.get("MPImin")
+    mpi_max = block.get("MPImax")
+
+    # Check constraints
+    if mpi_min is not None and mpi_norm < mpi_min:
+        return False
+    if mpi_max is not None and mpi_norm > mpi_max:
+        return False
+
+    return True
 
 
 def clang_format(file_to_format):
