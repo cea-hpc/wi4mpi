@@ -69,10 +69,10 @@ class CodeGenerator(ABC):
         os.makedirs(self.dir_output, exist_ok=True)
         self.output_file = os.path.join(dir_output, self.output_file)
         self.json_files = {
-            "functions_definitions": os.path.join(dir_input, "common/jsons/functions.json"),
-            "functions_mappers": os.path.join(dir_input, "C/jsons/mappers.json"),
-            "types": os.path.join(dir_input, "common/jsons/types.json"),
-            "exceptions": os.path.join(dir_input, "C/jsons/exceptions.json"),
+            "functions_definitions": os.path.join(dir_input, "../common/jsons/functions.json"),
+            "functions_mappers": os.path.join(dir_input, "jsons/mappers.json"),
+            "types": os.path.join(dir_input, "../common/jsons/types.json"),
+            "exceptions": os.path.join(dir_input, "../common/jsons/exceptions.json"),
         }
         self.data = {
             "functions": load_json_file(self.json_files["functions_definitions"]),
@@ -120,8 +120,8 @@ class CodeGenerator(ABC):
             "interface": "template_interface.jinja",
             "interface_entry": "template_interface_entry.jinja",
         }
-        static_sources_dir = os.path.join(self.dir_input, "C/static_sources/")
-        jinja_dir = os.path.join(self.dir_input, "C/templates/")
+        static_sources_dir = os.path.join(self.dir_input, "static_sources/")
+        jinja_dir = os.path.join(self.dir_input, "templates/")
         jinja_env = jinja2.Environment(
             loader=jinja2.FileSystemLoader([jinja_dir, static_sources_dir]),
             trim_blocks=True,

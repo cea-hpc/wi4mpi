@@ -320,15 +320,20 @@ class Generator:
         Launches the generation process for various code files.
         """
         gencpreload = CPreloadGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code"),
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
             dir_output=self.c_preload_gen_dir,
         )
         gencpreload.generate()
         gencinterface = CInterfaceGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code"),
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
             dir_output=self.c_interface_gen_dir,
         )
         gencinterface.generate()
+        genfortpreload = FortranPreloadGenerator(
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/fortran"),
+            dir_output=self.c_preload_gen_dir,
+        )
+        genfortpreload.generate()
 
     def generate(self):
         """
