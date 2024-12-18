@@ -106,6 +106,8 @@ from ompimpichheader import OmpiMpichHeaderGenerator
 from ompiompiheader import OmpiOmpiHeaderGenerator
 from cpreloadgenerator import CPreloadGenerator
 from cinterfacegenerator import CInterfaceGenerator
+from fortranpreloadgenerator import FortranPreloadGenerator
+#from fortraninterfacegenerator import FortranInterfaceGenerator
 from docopt import docopt
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))

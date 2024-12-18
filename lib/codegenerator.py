@@ -162,6 +162,7 @@ class CodeGenerator(ABC):
             "types": self.data["types"],
         }
         for function in self.data["functions"]:
+            print(function)
             self.apply_jinja_dict["asm_dict"]["func"] = function
             self.apply_jinja_dict["app_dict"]["func"] = function
             self.apply_jinja_dict["run_dict"]["func"] = function
