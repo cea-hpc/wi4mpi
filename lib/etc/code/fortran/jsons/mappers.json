@@ -824,5 +824,11 @@
     "r2a": "request_pers_ptr_conv_f_r2a",
     "addr_change": "True",
     "debug_type":"%*p"
+  },
+  "grequest_query_fn": {
+    "local_alloc": 0, 
+    "type": "int ", 
+    "nomap":true,
+    "debug_type":"%p"
   }
 }
