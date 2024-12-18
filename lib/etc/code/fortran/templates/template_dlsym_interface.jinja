@@ -1,0 +1,61 @@
+int wi4mpi__init__C=0;
+extern int wi4mpi__init__F;
+__attribute__((constructor)) void wrapper_interface(void) {
+    void * interface_handle;
+    if(wi4mpi__init__C!=0)
+		return;
+	wi4mpi__init__C=1;
+#ifdef WI4MPI_STATIC
+char *target_inter=getenv("WI4MPI_STATIC_TARGET_TYPE");
+int libfound=0;
+{%- for mpilib in mpi_libraries -%}
+if(target_inter&&!strcmp(target_inter,"{{mpilib}}")){
+libfound=1;
+{% for func in funcs %} 
+{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['C'] is not defined or conf[func['name']]['Application']['C']['generated'] != "False" or conf[func['name']]['Application']['C']['file'] is defined -%}
+    INTERF_2_{{mpilib}}_LOCAL_{{func['name']}}=dlsym(interface_handle,"INTERF_{{func['name']}}");
+{% endif %}
+{%- endfor -%}
+INTERF_2_{{mpilib}}_wrapper_init();
+{% endfor -%}
+
+if (!libfound)
+{
+printf("no target library defined conversion cannot be chosen\n" );
+exit(1);
+}
+
+#else /* WI4MPI_STATIC */
+    if(getenv("WI4MPI_WRAPPER_LIB") != NULL)
+        interface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
+    else
+    {
+	    if(strcmp(wi4mpi_mode,"") != 0)
+	    {
+	    	interface_handle=dlopen(wi4mpi_mode,RTLD_NOW|RTLD_GLOBAL);
+	    }
+	    else
+	    {
+		    fprintf(stderr,"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\n");
+		    exit(1);
+	    }
+    }
+    if(!interface_handle)
+    {
+    	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
+    	exit(1);
+    }
+{% for func in funcs %} 
+{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['C'] is not defined or conf[func['name']]['Application']['C']['generated'] != "False" or conf[func['name']]['Application']['C']['file'] is defined -%}
+    INTERFACE_LOCAL_{{func['name']}}=dlsym(interface_handle,"INTERF_{{func['name']}}");
+{% endif %}
+
+{% endfor %}
+
+
+#endif /* WI4MPI_STATIC */
+if(wi4mpi__init__F==0)
+    wrapper_interface_f();
+}
+    
+
