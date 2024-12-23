@@ -39,4 +39,7 @@ class CPreloadGenerator(CodeGenerator):
         self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "P"
         self.apply_jinja_dict["app_dict"]["caller_prefix"] = "P"
         self.apply_jinja_dict["run_dict"]["caller_prefix"] = "P"
+        # Warning: Do not use 'apply_jinja' before 'super().generate()'.
+        #          dico_jinja_env is a prerequisite that is defined in
+        #          'generate()' by the call to 'init_jinja()'
         super().generate()
