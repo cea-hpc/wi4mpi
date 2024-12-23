@@ -429,20 +429,22 @@ if "__main__" == __name__:
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
     args = {
-        "interface_header_dir": re.sub(r"['\"]", "",arguments["--interface_header_dir"]),
-        "preload_header_dir": re.sub(r"['\"]", "",arguments["--preload_header_dir"]),
-        "c_preload_gen_dir": re.sub(r"['\"]", "",arguments["--c_preload_gen_dir"]),
-        "c_interface_gen_dir": re.sub(r"['\"]", "",arguments["--c_interface_gen_dir"]),
-        "openmpi_version": re.sub(r"['\"]", "", arguments["--openmpi_version"]),
-        "mpich_version": re.sub(r"['\"]", "", arguments["--mpich_version"]),
-        "intelmpi_version": re.sub(r"['\"]", "", arguments["--intelmpi_version"]),
-        "mpi_norm": re.sub(r"['\"]", "", arguments["--mpi_norm"]),
+        "interface_header_dir": arguments["--interface_header_dir"],
+        "preload_header_dir": arguments["--preload_header_dir"],
+        "c_preload_gen_dir": arguments["--c_preload_gen_dir"],
+        "c_interface_gen_dir": arguments["--c_interface_gen_dir"],
+        "openmpi_version": arguments["--openmpi_version"],
+        "mpich_version": arguments["--mpich_version"],
+        "intelmpi_version": arguments["--intelmpi_version"],
+        "mpi_norm": arguments["--mpi_norm"],
     }
     # Delete keys that have a value of None
     none_list = []
     for key, value in args.items():
         if value is None:
             none_list.append(key)
+        elif isinstance(value, str):
+            args[key] = re.sub(r"['\"]", "", value)
     for key in none_list:
         args.pop(key)
 
