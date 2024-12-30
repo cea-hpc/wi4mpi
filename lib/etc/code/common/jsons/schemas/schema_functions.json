@@ -1,0 +1,134 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "args": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "var": {
+                            "type": "string"
+                        },
+                        "arg_dep": {
+                            "type": "string"
+                        },
+                        "In": {
+                            "type": "integer"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "Out": {
+                            "type": "integer"
+                        },
+                        "variadic": {
+                            "type": "string"
+                        },
+                        "if": {
+                            "type": "string"
+                        },
+                        "if_null": {
+                            "type": "string"
+                        },
+                        "del": {
+                            "type": "string"
+                        },
+                        "if_err": {
+                            "type": "string"
+                        },
+                        "if_null_dep": {
+                            "type": "string"
+                        },
+                        "if_dep": {
+                            "type": "string"
+                        },
+                        "if_status_ignore": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "name": {
+                "type": "string"
+            },
+            "MPImin": {
+                "type": "number"
+            },
+            "ret": {
+                "type": "object",
+                "properties": {
+                    "var": {
+                        "type": "string"
+                    },
+                    "arg_dep": {
+                        "type": "string"
+                    },
+                    "In": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "Out": {
+                        "type": "integer"
+                    },
+                    "cast": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "In",
+                    "Out",
+                    "arg_dep",
+                    "name",
+                    "var"
+                ]
+            },
+            "local_vars": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "names": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "function": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "arguments": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "required": [
+                            "arguments",
+                            "name"
+                        ]
+                    }
+                },
+                "required": [
+                    "function",
+                    "names",
+                    "type"
+                ]
+            }
+        },
+        "required": [
+            "args",
+            "name",
+            "ret",
+            "MPImin"
+        ]
+    }
+}

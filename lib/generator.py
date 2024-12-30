@@ -154,7 +154,7 @@ class Generator:
         "24": "24.0.0",
     }
     mpi_norm = "3.1"
-    mpi_availabe_norm = [ "1.1", "1.2", "2.0", "2.1", "2.2", "3.0", "3.1", "4.0"]
+    mpi_availabe_norm = [ "1.0", "1.1", "1.2", "2.0", "2.1", "2.2", "3.0", "3.1", "4.0"]
 
     def __init__(self, **kwargs):
         self.set_directories(**kwargs)
@@ -162,6 +162,7 @@ class Generator:
         bool_mpich_version = False
         bool_intelmpi_version = False
         bool_mpi_norm = False
+        self.mpi_norm = kwargs.get("mpi_norm", self.mpi_norm)
         self.mpi_target_version["openmpi"] = kwargs.get(
             "openmpi_version",
             self.mpi_target_version["openmpi"],
@@ -410,7 +411,7 @@ if "__main__" == __name__:
                                 * 24.0.0 (alias: 24)
       mpi_norm              Version of the MPI norm to use
                             Supported versions:
-                                * 1.1
+                                * 1.0 1.1
                                 * 2.0 2.1 2.2
                                 * 3.0 3.1
                                 * 4.0
