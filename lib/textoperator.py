@@ -47,6 +47,7 @@ import os
 import re
 import json
 from subprocess import call
+from validate_json import validate_json
 
 
 def delete_lines(lines_to_delete, text):
@@ -296,7 +297,7 @@ def replace_bloc_from_conf_file(pattern_path, replace_path, text):
 
 
 
-def load_json_file(file_path, mpi_norm=None):
+def load_json_file(file_path, mpi_norm=None, schema_path=None):
     """
     Load a JSON file from the specified path and optionally filter
     blocks based on MPI version constraints (`MPImin`, `MPImax`).
@@ -305,6 +306,7 @@ def load_json_file(file_path, mpi_norm=None):
         file_path (str): The path to the JSON file.
         mpi_norm (float, optional): The MPI version to filter by.
                                   If None, all data is returned.
+        schema_path (str): Path to the JSON schema file.
 
     Returns:
         list or dict: The JSON data loaded from the file, filtered
@@ -318,6 +320,8 @@ def load_json_file(file_path, mpi_norm=None):
     # Load full file
     with open(file_path, "r", encoding="utf-8") as file_descriptor:
         data = json.load(file_descriptor)
+    if schema_path:
+        validate_json(schema_path, file_path)
 
     # If no filtering is required, return the full data
     if mpi_norm is None:
@@ -343,15 +347,15 @@ def load_json_file(file_path, mpi_norm=None):
     raise ValueError("Unsupported JSON structure for filtering")
 
 
-def _is_block_valid_for_MPI(block, mpi_norm):
+def _is_block_valid_for_mpi(block, mpi_norm):
     """Helper function to check if a block is valid for the given MPI version."""
     mpi_min = block.get("MPImin")
     mpi_max = block.get("MPImax")
 
     # Check constraints
-    if mpi_min is not None and mpi_norm < mpi_min:
+    if mpi_min is not None and float(mpi_norm) < mpi_min:
         return False
-    if mpi_max is not None and mpi_norm > mpi_max:
+    if mpi_max is not None and float(mpi_norm) > mpi_max:
         return False
 
     return True
