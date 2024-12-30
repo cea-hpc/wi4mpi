@@ -1,0 +1,26 @@
+[
+  {
+    "args": [
+      {
+        "var": "level",
+        "arg_dep": "",
+        "In": 0,
+        "name": "int_mapper",
+        "Out": 0
+      },
+      {
+        "variadic": "True"
+      }
+    ],
+    "name": "MPI_Pcontrol",
+    "ret": {
+      "var": "ret",
+      "arg_dep": "",
+      "In": 0,
+      "name": "error_converter",
+      "Out": 1
+    },
+    "MPImin": 1.1,
+    "MPImax": 4.0
+  }
+]
