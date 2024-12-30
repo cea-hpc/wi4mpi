@@ -38,9 +38,9 @@ class CInterfaceGenerator(CodeGenerator):
         log.info("Generation of interface C file.")
         self.output_file = "mpi_translation_c.c"
         self.interface_file = "interface_c.c"
+        self.mpi_norm = mpi_norm
         self.set_directories(dir_input, dir_output)
         self.interface_file = os.path.join(dir_output, self.interface_file)
-        self.mpi_norm = mpi_norm
 
     def generate(self):
         self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "INTERF"

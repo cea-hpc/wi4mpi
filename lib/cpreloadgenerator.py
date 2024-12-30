@@ -32,8 +32,8 @@ class CPreloadGenerator(CodeGenerator):
         """
         log.info("Generation of preload C file.")
         self.output_file = "mpi_translation_c.c"
-        self.set_directories(dir_input, dir_output)
         self.mpi_norm = mpi_norm
+        self.set_directories(dir_input, dir_output)
 
     def generate(self):
         self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "P"
