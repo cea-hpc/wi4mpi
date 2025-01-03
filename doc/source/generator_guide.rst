@@ -116,7 +116,11 @@ Example:
     
             "Out": 1
     
-      }
+      },
+
+      "MPImin": 1.0,
+
+      "MPImax": 4.0
     
     }
 
