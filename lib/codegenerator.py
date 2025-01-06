@@ -52,6 +52,7 @@ class CodeGenerator(ABC):
         "run_dict": {},
         "dlsym_dict": {},
     }
+    dico_jinja_env = dict()
 
     def set_directories(self, dir_input, dir_output):
         """
@@ -102,10 +103,11 @@ class CodeGenerator(ABC):
         ret = typename + " " + "*" * len(sub[1:]) + sub[0]
         return ret
 
-    def apply_jinja(self, jinja_name, param_dict):
+    def init_jinja(self):
         """
-        generate the code correponding to the application of the dictionary
-        on a jinja template
+        Set the name of all jinja templates.
+        Initialize all environment and store it in the dictionnary 'dico_jinja_env'.
+        This dictionnary is a class attribute.
         """
         _msg = f"Run generate {jinja_name}"
         log.debug(_msg)
@@ -120,14 +122,24 @@ class CodeGenerator(ABC):
             "interface": "template_interface.jinja",
             "interface_entry": "template_interface_entry.jinja",
         }
-        static_sources_dir = os.path.join(self.dir_input, "static_sources/")
-        jinja_dir = os.path.join(self.dir_input, "templates/")
-        jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader([jinja_dir, static_sources_dir]),
-            trim_blocks=True,
-        )
-        jinja_env.filters["typevar"] = self.typevar
-        jinja_template = jinja_env.get_template(jinja_files[jinja_name])
+        static_sources_dir = os.path.join(self.dir_input, "C/static_sources/")
+        jinja_dir = os.path.join(self.dir_input, "C/templates/")
+        for jinja_name in jinja_files.keys():
+            jinja_env = jinja2.Environment(
+                loader=jinja2.FileSystemLoader([jinja_dir, static_sources_dir]),
+                trim_blocks=True,
+            )
+            jinja_env.filters["typevar"] = self.typevar
+            self.dico_jinja_env[jinja_name] = jinja_env.get_template(jinja_files[jinja_name])
+
+    def apply_jinja(self, jinja_name, param_dict):
+        """
+        generate the code correponding to the application of the dictionary
+        on a jinja template
+        """
+        _msg = f"Run generate {jinja_name}"
+        log.debug(_msg)
+        jinja_template = self.dico_jinja_env[jinja_name]
         rendered_template = jinja_template.render(param_dict)
         return rendered_template + "\n"
 
@@ -135,6 +147,7 @@ class CodeGenerator(ABC):
         """
         Common code between classes CPreloadGenerator and CInterfaceGenerator
         """
+        self.init_jinja()
         remove_file(self.output_file)
         content = ""
         content += self.apply_jinja("static", {})
