@@ -1,94 +1,90 @@
     
     {%- macro type_prefix(prefix,type) -%}
+            {%- if type == 'int ' or type == 'void ' -%}
+            {{type}} *
+            {%- else -%}
             {{type}}
+            {%-endif-%} 
     {%- endmacro -%}
     {%- macro var_name_tmp(var,map) -%}
         
     {%- endmacro -%}
-    {%-  macro tmp_decl(map,arg)-%} 
-        {%-  set var=arg['var']-%} 
-        {% if map is defined and map|length >0 %}
-        {%-  if map['no_map']|default("") == "" and map['set']|default("") == "" -%} 
-            {%-  if map['local_alloc'] == 1-%} 
-                {{type_prefix('R_',map['type'][:-1])}} {{var}}_ltmp {%-  if map['type'] not in [ 'MPI_Aint *','MPI_Status *','MPI_Offset *','int *' ]-%} = R_{{ map['type'][:-2]|upper }}_NULL {%-  endif-%} ;
-                {{type_prefix('R_',map['type'])}} {{var}}_tmp=&{{var}}_ltmp;
-            {%-  elif arg['init_alloc']|default("") != ""-%} 
-                {{type_prefix('R_',map['type'])}} {{var}}_tmp=arg['init_alloc'];
-            {%-  elif arg['arg_dep']|default("") != "" -%} 
-                {%- if map['max_mpi']|default("") != "" and map['type']=='char *' %}
-                    char {{arg['var']}}_tmp[R_{{arg['arg_dep']}}];
-                {%- else %}
-                {%-  if arg['arg_dep'] == '*outcount'-%} 
-                    {%-  set argout='incount' -%} 
-                {%-  else-%} 
-                    {%-  set argout=arg['arg_dep']-%} 
-                {%-  endif-%} 
-                {%-  if map['type'] == 'MPI_Status'-%} 
-                    R_MPI_Status *array_of_statuses_tmp=(array_of_statuses==A_MPI_STATUSES_IGNORE?R_MPI_STATUSES_IGNORE:(R_MPI_Status *) wi4mpi_alloc(sizeof({{type_prefix('R_',map['type'])}})*{{argout}}));
-                {%-  else-%}  
-                    {{type_prefix('R_',map['type'])|replace('*','')}} *{{var|replace('[]','')}}_tmp = ({{type_prefix('R_',map['type'])|replace('*','')}} *)wi4mpi_alloc(sizeof({{type_prefix('R_',map['type'])|replace('*','')}})*{{argout}});
-                {%-  endif-%} 
-                {%- endif %}
-            {%-  else-%} 
-                {{type_prefix('R_',map['type'])}} {{var}}_tmp;
-            {%-  endif-%} 
-        {%-  endif-%} 
-        {%-  endif-%} 
-    {%-  endmacro-%} 
+    {%-  macro tmp_decl(map,arg,is_local)-%} 
+        {%- set var=arg['var']|replace('[]','')|trim -%}
+        {%- if map['no_map']|default("") == "" -%}
+            {%- if arg['arg_dep']|default("") != "" -%}
+                {%- if 'status_size' in map -%}
+                    {%- if is_local == 1 -%}
+                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc(({{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));'
+                    {%- else -%}
+                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));'
+                    {%-endif -%}
+                {%- else -%}
+                    {{map['type']}} *{{var}}_tmp=({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*sizeof({{map['type']}}));
+                {% endif -%}
+            {%- else -%}
+                {%- if 'status_size' in map -%}
+                    {{map['type']}} {{var}}_tmp1[R_f_MPI_STATUS_SIZE+1];
+                    {{map['type']}} *{{var}}_tmp=({{var}}==A_f_MPI_STATUS_IGNORE?R_f_MPI_STATUS_IGNORE:{{var}}_tmp1);
+                {%- else -%}
+                    {%- if map['type'] != 'void ' -%}
+                        {%- if arg['name'] == 'weight_converter' -%}
+                            int *{{var}}_tmp={{var}};
+                        {%- else -%}
+                            {{map['type']}} {{var}}_tmp;
+                        {%- endif -%}
+                    {%- else -%}
+                        void *{{var}}_tmp={{var}};
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%-  endmacro -%} 
 
     {%-  macro tmp_free(map,arg)-%} 
-        {%-  set var=arg['var']-%} 
-        {%- if map is defined and map|length >0 -%}
-        {%- if map['local_alloc']|default(0) != 1 -%}
-        {%-  if map['no_map']|default("") == "" and map['set']|default("") == "" -%} 
-            {%-  if arg['arg_dep']|default("") != "" -%} 
-                {%- if map['max_mpi']|default("") == "" or map['type']!='char *' %}
-                {%-  if map['type'] == 'MPI_Status'-%} 
-                    wi4mpi_free(array_of_statuses_tmp);
-                {%-  else-%}  
-                    wi4mpi_free({{var|replace('[]','')}}_tmp);
-                {%-  endif-%} 
-                {%-  endif-%} 
-                {%-  endif-%} 
-            {%- endif %}
-        {%-  endif-%} 
-        {%-  endif-%} 
+        {%- set var=arg['var']|replace('[]','')|trim  -%}
+        {%  if map['no_map']|default("") == "" -%}
+        {%- if 'status_size' in map -%}
+            {%- if 'arg_dep' in arg and arg['arg_dep'] != '' -%}
+                wi4mpi_free({{var}}_tmp);
+            {%- endif -%}
+        {%- else -%}
+            {%- if 'arg_dep' in arg and arg['arg_dep']!='' -%}
+                wi4mpi_free({{var}}_tmp);
+            {%- endif -%}
+        {%- endif -%}
+        {%- endif -%}
     {%-  endmacro-%} 
-    {%-  macro convert_in(arg, map,idx)-%} 
+    {%-  macro convert_in(arg, map,idx,is_local)-%} 
         {%-  if arg['In'] == 1  -%} 
-            {%-  if map['no_map']|default("") == "" and map['set']|default("") == "" -%} 
-                {%-  if map['wrap']|default("") != ""-%} 
-                    {{arg['wrap']}}=(A_{{map['type']}}) {{arg['var']}};
-                {%-  elif map['assign']|default("") != ""-%} 
-                    {%-  if  arg['arg_dep']|default("") != "" -%} 
-                        int i{{idx}};
-                        for( i{{idx}}=0; i{{idx}}< {{arg['arg_dep']}};i{{idx}}++ ) {
-                            {{arg['var']|replace('[]','')}}_tmp[i{{idx}}]=(R_{{map['type']|replace('*','')}}){{arg['var']|replace('[]','')}}[i{{idx}}];
-                        }
-                    {%-  else-%} 
-                        {{arg['var']}}_tmp=(R_{{map['type']}}){{arg['var']}};
-                    {%-  endif-%} 
-                {%-  else-%} 
-                    {%- if   arg['arg_dep']|default("") != "" %} 
-                        {%- if map['max_mpi']|default("") == "" -%} 
-                        int i{{idx}};
-                        for( i{{idx}}=0; i{{idx}}< {{arg['arg_dep']}};i{{idx}}++ ) {
-                            {{map['a2r']}}(&{{arg['var']|replace('[]','')}}[i{{idx}}],&{{arg['var']|replace('[]','')}}_tmp[i{{idx}}]);
-                        }
-                        {%- else %}
-                            {{map['r2a']}}({{arg['var']}},{{arg['var']}}_tmp,A_{{arg['arg_dep']}},R_{{arg['arg_dep']}});
-                        
-                        {%-  endif-%} 
-                    {%-  else-%} 
-                        {%-  if map['a2r'] == 'error_code_conv_a2r'-%} 
-                            {{arg['var']}}_tmp=error_code_conv_a2r({{arg['var']}});
-                        {%-  else-%} 
-                            {%-  if not '*' in map['type'][-1:]  or map['addr_change'] == "True"  -%} 
-                                {{map['a2r']}}(&{{arg['var']|replace('[]','')}},&{{arg['var']|replace('[]','')}}_tmp);
-                            {%-  else-%} 
-                                {{map['a2r']}}({{arg['var']|replace('[]','')}},{{arg['var']|replace('[]','')}}_tmp);
-                            {%- endif%}
-                        {%- endif%}
+            {%- set var=arg['var']|replace('[]','')|trim  -%}
+            {%-  if map['no_map']|default("") == "" -%} 
+                {%- if arg['arg_dep'] !='' %}
+                    {%- set mula=1 -%}
+                    {%- set mulr=1 -%}
+                    {%- if 'status_size' in map -%}
+                        {%- set mula=A_f_MPI_STATUS_SIZE -%}
+                        {%- set mulr=R_f_MPI_STATUS_SIZE -%}
+                    {%- endif -%}
+                    {%- if is_local == 1 -%}
+                        for(int i=0;i<{{arg['arg_dep']}};i++)
+                    {%- else -%}
+                        for(int i=0;i<*{{arg['arg_dep']}};i++)
+                    {%- endif -%}
+                            {{map['a2r']}}(&{{var}}[i*{{mula}}],&arg['var']_tmp[i*{{+mulr}}]);
+                {%- else %}
+                    {%- if 'status_size' in map -%}
+                        {{map['a2r']}}({{var}},{{var}}_tmp);
+                    {%- else -%}
+                        {%- if map['type']!= 'void ' -%}
+                            {%- if arg['name'] == 'weight_converter' -%}
+                                {{map['a2r']}}(&{{var}},&{{var}}_tmp);
+                            {%- else -%}
+                                {{map['a2r']}}({{var}},&{{var}}_tmp);
+                            {%- endif -%}
+                        {%- else -%}
+                            {{map['a2r']}}(&{{var}},&{{var}}_tmp);
+                        {%- endif -%}
                     {%-  endif-%} 
                 {%-  endif-%} 
             {%-  endif-%} 
@@ -97,7 +93,7 @@
     {%- macro handle_local_var(local_var,arg) %}
         {% if local_var is defined %}
             {{local_var["type"]}} {{local_var["names"]|join(',')}}; 
-            LOCAL_{{local_var["function"]["name"] }}({{local_var["function"]["arguments"]|join(',')}});
+            LOCAL_f_{{local_var["function"]["name"] }}({{local_var["function"]["arguments"]|join(',')}});
 
         {% endif %}
     {% endmacro %}

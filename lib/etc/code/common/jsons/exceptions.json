@@ -851,6 +851,9 @@
       "C": {
         "generated": "False",
         "file": "A_MPI_Pcontrol.c"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -965,5 +968,23 @@
         "generated": "False"
       }
     }
+  },
+  "MPI_Init":{
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Init.c",
+        "declare": "False"
+      }
+    }   
+  },
+  "MPI_Init_thread":{
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Init_thread.c",
+        "declare": "False"
+      }
+    }   
   }
 }

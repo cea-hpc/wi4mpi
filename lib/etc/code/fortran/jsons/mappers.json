@@ -8,7 +8,7 @@
   },
   "int_mapper": {
     "local_alloc": 0,
-    "nomap": "true",
+    "no_map": "true",
     "a2r": "int_conv_a2r",
     "type": "int ",
     "r2a": "int_conv_r2a",
@@ -58,7 +58,7 @@
   },
   "source_converter": {
     "local_alloc": 0,
-    "nomap": "true",
+    "no_map": "true",
     "a2r": "int_conv_a2r",
     "type": "int ",
     "r2a": "int_conv_r2a",
@@ -77,7 +77,7 @@
     "a2r": "int_ptr_conv_a2r",
     "type": "int ",
     "r2a": "int_ptr_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "Request_ptr_converter": {
@@ -106,7 +106,7 @@
     "a2r": "aint_conv_a2r",
     "type": "size_t ",
     "r2a": "aint_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "cont_int_ptr_mapper": {
@@ -114,7 +114,7 @@
     "a2r": "const_int_conv_a2r",
     "type": "int ",
     "r2a": "const_int_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "Aint_const_ptr_converter": {
@@ -122,7 +122,7 @@
     "a2r": "const_aint_ptr_conv_a2r",
     "type": "size_t ",
     "r2a": "const_aint_ptr_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "Aint_ptr_converter": {
@@ -130,7 +130,7 @@
     "a2r": "aint_converter_a2r",
     "type": "size_t ",
     "r2a": "aint_converter_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "op_converter": {
@@ -237,7 +237,7 @@
     "a2r": "char_ptr_conv_a2r",
     "type": "char ",
     "r2a": "char_ptr_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "length_maxsize_ptr_mapper": {
@@ -245,7 +245,7 @@
     "a2r": "int_ptr_conv_a2r",
     "type": "int ",
     "r2a": "int_ptr_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "handler_fct_ptr_mapper": {
@@ -346,7 +346,7 @@
     "a2r": "file_a2r",
     "type": "int ",
     "r2a": "file_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "Request_tab_converter": {
@@ -407,7 +407,7 @@
   },
   "typeclass_mapper": {
     "local_alloc": 0,
-    "nomap": "true",
+    "no_map": "true",
     "a2r": "int_conv_a2r",
     "type": "int ",
     "r2a": "int_conv_r2a",
@@ -493,7 +493,7 @@
   },
   "split_mapper": {
     "local_alloc": 0,
-    "nomap": "true",
+    "no_map": "true",
     "a2r": "int_conv_a2r",
     "type": "int ",
     "r2a": "int_conv_r2a",
@@ -504,7 +504,7 @@
     "a2r": "count_ptr_conv_a2r",
     "type": "int ",
     "r2a": "count_ptr_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "count_converter": {
@@ -512,7 +512,7 @@
     "a2r": "count_conv_a2r",
     "type": "int ",
     "r2a": "count_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "t_enum_mapper": {
@@ -527,7 +527,7 @@
     "a2r": "char_ptr_conv_a2r",
     "type": "char ",
     "r2a": "char_ptr_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "t_enum_ptr_mapper": {
@@ -581,7 +581,7 @@
   },
   "amode_converter": {
     "local_alloc": 0,
-    "nomap": "true",
+    "no_map": "true",
     "a2r": "int_conv_a2r",
     "type": "int ",
     "r2a": "int_conv_r2a",
@@ -592,7 +592,7 @@
     "a2r": "file_a2r",
     "type": "int ",
     "r2a": "file_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "offset_converter": {
@@ -600,7 +600,7 @@
     "a2r": "offset_conv_a2r",
     "type": "int",
     "r2a": "offset_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "offset_ptr_converter": {
@@ -608,7 +608,7 @@
     "a2r": "offset_conv_a2r",
     "type": "int",
     "r2a": "offset_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "amode_ptr_converter": {
@@ -616,7 +616,7 @@
     "a2r": "int_ptr_conv_a2r",
     "type": "int ",
     "r2a": "int_ptr_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "datarep_conversion_function": {
@@ -638,7 +638,7 @@
     "a2r": "double_conv_a2r",
     "type": "double ",
     "r2a": "double_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "Status_tab_converter": {
@@ -654,7 +654,7 @@
     "a2r": "const_int_conv_a2r",
     "type": "int ",
     "r2a": "const_int_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "char_ptr_ptr_converter": {
@@ -684,7 +684,7 @@
     "a2r": "const_aint_conv_a2r",
     "type": "size_t ",
     "r2a": "const_aint_conv_r2a",
-    "nomap": "true",
+    "no_map": "true",
     "debug_type": "%*d"
   },
   "order_converter": {
