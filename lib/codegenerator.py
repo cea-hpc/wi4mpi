@@ -109,8 +109,6 @@ class CodeGenerator(ABC):
         Initialize all environment and store it in the dictionnary 'dico_jinja_env'.
         This dictionnary is a class attribute.
         """
-        _msg = f"Run generate {jinja_name}"
-        log.debug(_msg)
         jinja_files = {
             "declarations": "template_declarations.jinja",
             "static": "template_static.jinja",
@@ -122,8 +120,8 @@ class CodeGenerator(ABC):
             "interface": "template_interface.jinja",
             "interface_entry": "template_interface_entry.jinja",
         }
-        static_sources_dir = os.path.join(self.dir_input, "C/static_sources/")
-        jinja_dir = os.path.join(self.dir_input, "C/templates/")
+        static_sources_dir = os.path.join(self.dir_input, "static_sources/")
+        jinja_dir = os.path.join(self.dir_input, "templates/")
         for jinja_name in jinja_files.keys():
             jinja_env = jinja2.Environment(
                 loader=jinja2.FileSystemLoader([jinja_dir, static_sources_dir]),

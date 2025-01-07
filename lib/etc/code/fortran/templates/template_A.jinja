@@ -17,8 +17,8 @@
 {%  else-%} 
     {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} _{{func['name']|lower}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %} ,int *ret {%- endif -%});
    {%- if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%}  (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif%}{%-  endfor-%} {%- if ret_type == "int " %} ,int *ret {%- endif -%});
-#define __{{func['name']}}__GEN__
-#ifndef __{{func['name']}}
+#define __F_{{func['name']}}__GEN__
+#ifndef __F_{{func['name']}}
 #ifndef {{func['name']|upper}}_OVERRIDE
 
     {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%}  A_f_{{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %} {{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif%} {%-  endfor-%}{%- if ret_type == "int " %} ,int *ret {%- endif -%} ) 
@@ -61,6 +61,7 @@
     {% if ret_type == "int " %} int ret_tmp; 
         LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%},&ret_tmp );
 {%else %}
+       {{ret_type}} ret_tmp= LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%});
 {%endif%}
 
     {%  for arg in func['args'] -%} 
