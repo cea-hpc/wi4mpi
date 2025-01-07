@@ -33,3 +33,9 @@ html_theme_options = { 'logo_only' : True }
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 html_static_path = ['_static']
+
+# -- Options for Maths----- --------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-numfig
+
+# Figures, tables and code-blocks are automatically numbered if they have a caption.
+numfig = True

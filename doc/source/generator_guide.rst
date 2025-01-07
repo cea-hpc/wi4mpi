@@ -276,39 +276,131 @@ Just copy the contents of ``A`` the file into the ``B`` file:
 Quick generation
 ================
 
-python generate.py will generate the following files:
+Requirements
+------------
+
+- Prepend :file:`{wi4mpi_dir}/lib` in your :envvar:`PYTHONPATH`
+- The generator uses ``clang-format -style=LLVM`` to format C files. So you must have ``clang-format`` in your :envvar:`PATH`
+- The generator needs following python modules: ``docopt jsonschema logging jinja2``
+
+Execution
+---------
+
+:file:`{wi4mpi_dir}/lib/generate.py` will print in the standard output the following lines:
 
 .. code-block:: console
 
-    >>>>> Generating preload/gen/test_generation_wrapper.c
-            Done.
-    >>>>> Generating preload/gen/wrapper.c
-            Done.
-    >>>>> Generating interface/gen/test_generation_wrapper.c
-            Done.
-    >>>>> Generating interface/gen/wrapper.c
-            Done.
-    >>>>> Generating interface/gen/interface_test.c
-            Done.
-    >>>>> Generating interface/gen/interface_fort.c
+    generator_logger - INFO - Starting to generate.
+    header_logger - INFO - MpcHeaderGenerator in progress.
+    header_logger - WARNING - The generation of 'src/interface/header/_MPC/wrapper_f.h' have to be done locally.
+            A MPC program has to be executed in order to catch MPI_MODE_XXX values.
+            Have a look to generator/FORTRAN/MPI_XXX_generator/MPC/gen_MPC_vars.sh
+    header_logger - INFO - IntelHeaderGenerator in progress.
+    header_logger - INFO - MpichHeaderGenerator in progress.
+    header_logger - INFO - OmpiHeaderGenerator in progress.
+    header_logger - INFO - IntelIntelHeaderGenerator in progress.
+    header_logger - INFO - IntelMpichHeaderGenerator in progress.
+    header_logger - INFO - MpichIntelHeaderGenerator in progress.
+    header_logger - INFO - MpichMpichHeaderGenerator in progress.
+    header_logger - INFO - IntelOmpiHeaderGenerator in progress.
+    header_logger - INFO - MpichOmpiHeaderGenerator in progress.
+    header_logger - INFO - OmpiIntelHeaderGenerator in progress.
+    header_logger - INFO - OmpiMpichHeaderGenerator in progress.
+    header_logger - INFO - OmpiOmpiHeaderGenerator in progress.
+    code_logger - INFO - Generation of preload C file.
+    code_logger - INFO - Generation of interface C file.
+    generator_logger - INFO - End
 
-python generate_header_f.py will generate the following files:
-preload/header/INTEL_INTEL:
-wrapper_f.h
+All log messages are written in :file:`generator.log`.
 
-preload/header/INTEL_OMPI:
-wrapper_f.h
+Without any options, the generator will overwrite the header files in directories
 
-preload/header/OMPI_INTEL:
-wrapper_f.h
+- :file:`{wi4mpi_dir}/src/interface/header/_*`
+- :file:`{wi4mpi_dir}/src/preload/header/*_*`
 
-preload/header/OMPI_OMPI:
-wrapper_f.h
+and generated code files in directories
 
-In order to generate the interface version of the Fortran header please use following 'sed' command for generator directory:
+- :file:`{wi4mpi_dir}/src/interface/gen/`
+- :file:`{wi4mpi_dir}/src/preload/gen/`
 
-.. code-block:: console
+Generated files
+---------------
 
-    mkdir -p interface/header/OMPI_OMPI && sed -e '1,18 s/mpi/a_mpi/g' -e '19,36 s/extern int mpi/int \*ccc_mpi/g' -e '19,36 s/&mpi_/ccc_mpi_/g' preload/header/OMPI_OMPI/wrapper_f.h > interface/header/OMPI_OMPI/wrapper_f.h
-    
-    mkdir -p interface/header/OMPI_INTEL && sed -e '19,32d' -e '18 r ./FORTRAN/utils/wrapper_f_h_O_I_add' preload/header/OMPI_INTEL/wrapper_f.h > interface/header/OMPI_INTEL/wrapper_f.h
+The concerned header files are
+
+- :file:`app_mpi.h`
+- :file:`run_mpi.h`
+- :file:`wrapper_f.h`: interface version of the Fortran header
+
+and, if applicable,
+
+- :file:`run_mpio.h`
+- :file:`mpcmp.h`
+- :file:`sctk_types.h`
+- :file:`run_mpi_proto.h`
+- :file:`app_mpio.h`
+- :file:`app_mpi_proto.h`
+- :file:`run_mpio.h`
+- :file:`run_mpi_proto.h`
+
+see  :numref:`interface-header` and :numref:`preload-header` for an overview.
+
+The concerned code files are
+
+- :file:`mpi_translation_c.c`: interface and preload
+- :file:`interface_c.c`: interface
+
+.. tabularcolumns:: |l|c|c|c|c|c|c|c|
+
+.. _interface-header:
+
+.. table:: Files in :file:`{wi4mpi_dir}/src/interface/header/{Folder}`.
+           (*) additional file  :file:`run_mpi_proto.h` from version 4.2.2
+    :align: center
+    :widths: auto
+
+    +-----------+------------------+---------------+-------------+--------------+------------+-----------------+
+    | Folder    | app_mpi.h        | run_mpi.h     | wrapper_f.h | run_mpio.h   |  mpcmp.h   |  sctk_types.h   |
+    +===========+==================+===============+=============+==============+============+=================+
+    | _INTEL    |       `✓`        |    `✓`        |     `✓`     |    `✓`       |            |                 |
+    +-----------+------------------+---------------+-------------+--------------+------------+-----------------+
+    | _MPC      |       `✓`        |    `✓`        |     `✓`     |    `✓`       |    `✓`     |       `✓`       |
+    +-----------+------------------+---------------+-------------+--------------+------------+-----------------+
+    | _MPICH    |       `✓`        |    `✓` `(*)`  |     `✓`     |    `✓`       |            |                 |
+    +-----------+------------------+---------------+-------------+--------------+------------+-----------------+
+    | _OMPI     |       `✓`        |    `✓`        |     `✓`     |              |            |                 |
+    +-----------+------------------+---------------+-------------+--------------+------------+-----------------+
+
+
+.. tabularcolumns:: |l|c|c|c|c|c|c|c|
+
+.. _preload-header:
+
+.. table:: Files in :file:`{wi4mpi_dir}/src/preload/header/{Folder}`.
+           (*) additional file :file:`run_mpi_proto.h` from version 4.2.2
+           (**) aditional file :file:`app_mpi_proto.h` from version 4.2.2
+    :align: center
+    :widths: auto
+
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | Folder      | app_mpi.h        | run_mpi.h       | wrapper_f.h | app_mpio.h | run_mpio.h |
+    +=============+==================+=================+=============+============+============+
+    | INTEL_INTEL |       `✓`        |    `✓`          |     `✓`     |    `✓`     |   `✓`      |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | INTEL_MPICH |       `✓`        |    `✓` `(*)`    |     `✓`     |    `✓`     |   `✓`      |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | INTEL_OMPI  |       `✓`        |    `✓`          |     `✓`     |    `✓`     |            |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | MPICH_INTEL |       `✓` `(**)` |    `✓`          |     `✓`     |    `✓`     |   `✓`      |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | MPICH_MPICH |       `✓` `(**)` |    `✓` `(*)`    |     `✓`     |    `✓`     |   `✓`      |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | MPICH_OMPI  |       `✓` `(**)` |    `✓`          |     `✓`     |    `✓`     |            |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | OMPI_INTEL  |       `✓`        |    `✓`          |     `✓`     |            |   `✓`      |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | OMPI_MPICH  |       `✓`        |    `✓` `(*)`    |     `✓`     |            |   `✓`      |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+    | OMPI_OMPI   |       `✓`        |    `✓`          |     `✓`     |            |            |
+    +-------------+------------------+-----------------+-------------+------------+------------+
+
