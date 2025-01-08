@@ -41681,7 +41681,7 @@ __attribute__((constructor)) void wrapper_init(void) {
   init_f2c(lib_handle);
   WI4MPI_errhandler_key = R_MPI_KEYVAL_INVALID;
 }
-
+#ifdef TIMEOUT_SUPPORT
 __attribute__((constructor)) void wi4mpi_timeout_config(void) {
   char *current_str;
   size_t current_val;
@@ -46434,3 +46434,4 @@ __attribute__((constructor)) void wi4mpi_timeout_config(void) {
   } else
     WI4MPIX_query_cuda_support_print = default_debug;
 }
+#endif
