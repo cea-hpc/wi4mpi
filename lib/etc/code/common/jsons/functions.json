@@ -703,7 +703,7 @@
         "In": 1,
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
-        "del": "request_ptr_delete"
+        "del": "request_ptr_delete","del_f": "request_r2au"
       },
       {
         "var": "status",
@@ -732,7 +732,7 @@
         "In": 1,
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
-        "del": "request_ptr_delete"
+        "del": "request_ptr_delete","del_f": "request_r2au"
       },
       {
         "var": "flag",
@@ -12656,7 +12656,7 @@
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_null_dep": "indx",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "indx",
@@ -12700,7 +12700,7 @@
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_null_dep": "indx",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "indx",
@@ -12751,7 +12751,7 @@
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "count",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "array_of_statuses[]",
@@ -12789,7 +12789,7 @@
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "count",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "flag",
@@ -12835,7 +12835,8 @@
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "*outcount",
         "if_null_dep": "array_of_indices[]",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au","del_f": "request_r2au"
+        
       },
       {
         "var": "outcount",
@@ -12888,7 +12889,7 @@
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "*outcount",
         "if_null_dep": "array_of_indices[]",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "outcount",

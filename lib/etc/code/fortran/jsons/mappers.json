@@ -278,6 +278,7 @@
   },
   "const_char_ptr_converter": {
     "local_alloc": 0,
+    "no_map":"True",
     "a2r": "const_char_ptr_conv_a2r",
     "type": "char *",
     "r2a": "const_char_ptr_conv_r2a",
@@ -638,7 +639,7 @@
     "a2r": "double_conv_a2r",
     "type": "double ",
     "r2a": "double_conv_r2a",
-    "no_map": "true",
+    "no_map": "True",
     "debug_type": "%*d"
   },
   "Status_tab_converter": {

@@ -14,13 +14,17 @@
         {%- if map['no_map']|default("") == "" -%}
             {%- if arg['arg_dep']|default("") != "" -%}
                 {%- if 'status_size' in map -%}
-                    {%- if is_local == 1 -%}
-                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc(({{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));'
+                    {%- if is_local == 1 or arg['arg_dep'] == "*outcount" -%}
+                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc(({{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));
                     {%- else -%}
-                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));'
+                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));
                     {%-endif -%}
                 {%- else -%}
-                    {{map['type']}} *{{var}}_tmp=({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*sizeof({{map['type']}}));
+                    {%- if is_local == 1 or arg['arg_dep'] == "*outcount"  -%}
+                        {{map['type']}} *{{var}}_tmp=({{map['type']}}*) wi4mpi_alloc(({{arg['arg_dep']}})*sizeof({{map['type']}}));
+                    {%- else -%}
+                        {{map['type']}} *{{var}}_tmp=({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*sizeof({{map['type']}}));
+                    {% endif -%}
                 {% endif -%}
             {%- else -%}
                 {%- if 'status_size' in map -%}
@@ -28,10 +32,11 @@
                     {{map['type']}} *{{var}}_tmp=({{var}}==A_f_MPI_STATUS_IGNORE?R_f_MPI_STATUS_IGNORE:{{var}}_tmp1);
                 {%- else -%}
                     {%- if map['type'] != 'void ' -%}
-                        {%- if arg['name'] == 'weight_converter' -%}
+                        {%- if arg['name'] == 'weight_mapper' -%}
                             int *{{var}}_tmp={{var}};
                         {%- else -%}
-                            {{map['type']}} {{var}}_tmp;
+                            {{map['type']}} {{var}}_ltmp;
+                            {{map['type']}} *{{var}}_tmp=&{{var}}_ltmp;
                         {%- endif -%}
                     {%- else -%}
                         void *{{var}}_tmp={{var}};
@@ -71,16 +76,17 @@
                     {%- else -%}
                         for(int i=0;i<*{{arg['arg_dep']}};i++)
                     {%- endif -%}
-                            {{map['a2r']}}(&{{var}}[i*{{mula}}],&arg['var']_tmp[i*{{+mulr}}]);
+                            {{map['a2r']}}(&{{var}}[i*{{mula}}],&{{var}}_tmp[i*{{+mulr}}]);
+
                 {%- else %}
                     {%- if 'status_size' in map -%}
                         {{map['a2r']}}({{var}},{{var}}_tmp);
                     {%- else -%}
                         {%- if map['type']!= 'void ' -%}
-                            {%- if arg['name'] == 'weight_converter' -%}
+                            {%- if arg['name'] == 'weight_mapper' -%}
                                 {{map['a2r']}}(&{{var}},&{{var}}_tmp);
                             {%- else -%}
-                                {{map['a2r']}}({{var}},&{{var}}_tmp);
+                                {{map['a2r']}}({{var}},{{var}}_tmp);
                             {%- endif -%}
                         {%- else -%}
                             {{map['a2r']}}(&{{var}},&{{var}}_tmp);
@@ -93,7 +99,8 @@
     {%- macro handle_local_var(local_var,arg) %}
         {% if local_var is defined %}
             {{local_var["type"]}} {{local_var["names"]|join(',')}}; 
-            LOCAL_f_{{local_var["function"]["name"] }}({{local_var["function"]["arguments"]|join(',')}});
+            int local_var_ret;
+            LOCAL_f_{{local_var["function"]["name"] }}({{local_var["function"]["arguments"]|join(',')}},&local_var_ret);
 
         {% endif %}
     {% endmacro %}

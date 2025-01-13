@@ -69,8 +69,11 @@
     {%- endfor -%} 
     {% if ret_type == "double" %}
           {{ret_type}} ret={{func['ret']['var']}}_tmp;
+    {% elif ret_type[0:4] == 'MPI_' %}
+       {{ret_type}} ret;
+       {{mappers[func['ret']['name']]['r2a']}}(&{{func['ret']['var']}},&{{func['ret']['var']}}_tmp);
     {% else %}
-    {{ret_type}} ret={{mappers[func['ret']['name']]['r2a']}}({{func['ret']['var']}}_tmp);
+        {{ret_type}} ret={{mappers[func['ret']['name']]['r2a']}}({{func['ret']['var']}}_tmp);
     {% endif %}
     in_w=0;
     {# le code de construction des parametre dans debug_printer est faux mais laissé tel quel tant que la refonte du générateur est pas finie pour ne pas modifier le code généré: on tient compte d'arg_dep dans les argments à afficher mais pas dans le code de construction de la string de contrôle #}

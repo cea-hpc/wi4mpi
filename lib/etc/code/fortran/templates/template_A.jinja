@@ -8,20 +8,26 @@
 {% if  conf[func['name']] is defined and  conf[func['name']]['Application'] is defined and conf[func['name']]['Application']['fortran'] is defined and conf[func['name']]['Application']['fortran']['generated'] == "False" -%}
  {%-  if conf[func['name']]['Application']['fortran']['file'] is defined -%}
 {%-if conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] == "True"  -%}
-    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} _{{func['name']|lower}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}, int *ret {%- endif -%});
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif%}{%-  endfor-%} {%- if ret_type == "int " %} ,int *ret {%- endif -%});
+    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} _{{func['name']|lower}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}}{%endif%}{%-  endfor-%} {%- if ret_type == "int " %} {%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
 {%- endif -%}
 #define __{{func['name']}}__GEN__
+#ifndef __F_{{func['name']}}
+#ifndef {{func['name']|upper}}_OVERRIDE
+
     {%  include conf[func['name']]['Application']['fortran']['file']-%} 
+
+#endif
+#endif
  {% endif %}
 {%  else-%} 
-    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} _{{func['name']|lower}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %} ,int *ret {%- endif -%});
-   {%- if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%}  (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif%}{%-  endfor-%} {%- if ret_type == "int " %} ,int *ret {%- endif -%});
+    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} _{{func['name']|lower}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
+    {%- if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}}{%endif%}{%-  endfor-%} {%- if ret_type == "int " %} {%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
 #define __F_{{func['name']}}__GEN__
 #ifndef __F_{{func['name']}}
 #ifndef {{func['name']|upper}}_OVERRIDE
 
-    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%}  A_f_{{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %} {{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif%} {%-  endfor-%}{%- if ret_type == "int " %} ,int *ret {%- endif -%} ) 
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} _{{func['name']|lower}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %} {%- if func['args']|count != 0 -%}, {%- endif -%}  int *ret {%- endif -%})
     {
     #ifdef TIMEOUT_SUPPORT
     wi4mpi_set_timeout(WI4{{func['name']}}_timeout);
@@ -40,6 +46,7 @@
                 {%- if arg['In'] == 1 and arg['arg_dep'] != ''-%} 
                     {%- set count.value = count.value + 1-%} 
                 {%- endif -%}  
+
             {{ convert_in(arg,mappers[arg['name']],count.value,0) }}
         {% endif %}
     {% endfor %}
@@ -47,19 +54,23 @@
     {% endif %}
     {%-  for arg in func['args'] -%}  
         {% if func["local_vars"] is not defined  or not arg['var'] in larg %}
-            {{ tmp_decl(mappers[arg['name']],arg,0) }}
             {%- if arg['In'] == 1 and arg['arg_dep'] != ''-%} 
                  {%- set count.value = count.value + 1-%} 
             {%- endif -%}  
-            {%- if arg['arg_deps']|default("") in larg %}
+            {%- if func["local_vars"] is defined and arg['arg_dep']|default("") in func["local_vars"]["names"] %}
+
+            {{ tmp_decl(mappers[arg['name']],arg,1) }}
             {{ convert_in(arg,mappers[arg['name']],count.value,1) }}
+    
             {%else %}
+            {{ tmp_decl(mappers[arg['name']],arg,0) }}
+
             {{ convert_in(arg,mappers[arg['name']],count.value,0) }}
         {% endif %}
         {% endif %}
     {%-  endfor %} 
     {% if ret_type == "int " %} int ret_tmp; 
-        LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%},&ret_tmp );
+        LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%}{%- if func['args']|count != 0 -%}, {%- endif -%} &ret_tmp );
 {%else %}
        {{ret_type}} ret_tmp= LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%});
 {%endif%}
@@ -77,7 +88,7 @@
     {%- for arg in func['args'] -%} 
         {{ tmp_free(mappers[arg['name']],arg) }}
     {%- endfor -%} 
-    {% if ret_type == "double" %}
+    {% if mappers[func['ret']['name']]['no_map']|default("") != "" -%}
           {{ret_type}} ret={{func['ret']['var']}}_tmp;
     {% else %}
     {{mappers[func['ret']['name']]['r2a']}}(ret,&{{func['ret']['var']}}_tmp);

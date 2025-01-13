@@ -57,7 +57,6 @@
     "Application": {
       "C": {
         "generated": "False"
-      }
     },
     "ASM": {
       "C": {
@@ -68,6 +67,7 @@
       "C": {
         "generated": "False"
       }
+    }
     }
   },
   "MPI_Conversion_fn_null": {
@@ -127,6 +127,9 @@
   "MPI_Errhandler_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -1007,7 +1010,11 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
+
     },
     "Runtime": {
       "C": {
@@ -1095,6 +1102,314 @@
         "generated": "False",
         "file": "A_f_MPI_Init_thread.c",
         "declare": "False"
+      }
+    }
+  },
+  "MPI_T_init_thread": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_enum_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_enum_get_item": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_get_num": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_handle_alloc": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_handle_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_read": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_write": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_get_num": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_create": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_alloc": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_start": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_stop": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_read": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_write": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_reset": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_readreset": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_num": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_finalize": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_cvars": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_pvars": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_categories": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_index": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_get_index": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_get_index": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_changed": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Lookup_name": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Publish_name": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Unpublish_name": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_create_errhandler": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Register_datarep": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_spawn_multiple": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Pack_external": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Unpack_external": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_dup_fn": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_null_delete_fn": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_null_copy_fn": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+ "MPI_Pack_external_size":{
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPIX_query_cuda_support":{
+    "Application": {
+      "fortran": {
+        "generated": "False"
       }
     }
   }
