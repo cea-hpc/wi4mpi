@@ -248,22 +248,15 @@ wi4mpi_check_target_lib
 if [[ -z $FROM ]]; then
 	LD_LIBRARY_PATH=${WI4MPI_INTERFACE}:$LD_LIBRARY_PATH
 else
-	LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB} ${WI4MPI_RUN_MPI_F_LIB} ${WI4MPI_RUN_MPI_C_LIB}"
+	LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD} }${WI4MPI_WRAPPER_LIB}"
 	libfakedir_cxx="${WI4MPI_LIBEXEC}/fakelibCXX/"
 	[[ ! -d $libfakedir_cxx ]] && {
 		echo "Error: could not find the wrapper extra libdircxx." >&2
 		wi4mpi_error=1
 	}
 	LD_LIBRARY_PATH="${libfakedir_cxx}:$LD_LIBRARY_PATH"
-	if [[ ${FROM_FAMILY} != ${TARGET_FAMILY} ]]; then
-		libfakedir="${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/"
-		[[ ! -d $libfakedir ]] && {
-			echo "Error: could not find the wrapper extra libdir." >&2
-			wi4mpi_error=1
-		}
-		LD_LIBRARY_PATH="${libfakedir}:$LD_LIBRARY_PATH"
-	fi
-
+	libfakedir="${WI4MPI_LIBEXEC}/fakelib${FROM_FAMILY}/"
+	LD_LIBRARY_PATH="${libfakedir}:$LD_LIBRARY_PATH"
 fi
 
 if [[ wi4mpi_error -eq 1 ]]; then
