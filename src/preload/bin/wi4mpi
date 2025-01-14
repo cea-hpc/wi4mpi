@@ -68,9 +68,9 @@ wi4mpi_set_target_vars() {
 		TARGET_FAMILY="INTEL"
 		[[ $is_preload -eq 0 ]] && WI4MPI_FAMILY=${WI4MPI_INTEL}
 		TARGET_ROOT="$INTELMPI_ROOT"
-		TARGET_RUN_MPI_C_LIBNAME="libmpi.so"
+		TARGET_RUN_MPI_C_LIBNAME="release/libmpi.so"
 		TARGET_RUN_MPI_F_LIBNAME="libmpifort.so"
-		TARGET_RUN_MPIIO_C_LIBNAME="libmpi.so"
+		TARGET_RUN_MPIIO_C_LIBNAME="release/libmpi.so"
 		TARGET_RUN_MPIIO_F_LIBNAME="libmpifort.so"
 		;;
 	mpich)
