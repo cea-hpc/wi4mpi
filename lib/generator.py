@@ -107,6 +107,7 @@ from ompiompiheader import OmpiOmpiHeaderGenerator
 from cpreloadgenerator import CPreloadGenerator
 from cinterfacegenerator import CInterfaceGenerator
 from fortranpreloadgenerator import FortranPreloadGenerator
+from fortraninterfacegenerator import FortranInterfaceGenerator
 #from fortraninterfacegenerator import FortranInterfaceGenerator
 from docopt import docopt
 
@@ -334,6 +335,11 @@ class Generator:
         genfortpreload = FortranPreloadGenerator(
             dir_input=os.path.join(wi4mpi_root, "lib/etc/code/fortran"),
             dir_output=self.c_preload_gen_dir,
+        )
+        genfortpreload.generate()
+        genfortpreload = FortranInterfaceGenerator(
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/fortran"),
+            dir_output=self.c_interface_gen_dir,
         )
         genfortpreload.generate()
 

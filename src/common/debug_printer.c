@@ -1,3 +1,4 @@
+#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
 #include "app_mpi.h"
 #include "wrapper_f.h"
 #include <stdarg.h>
@@ -5,6 +6,8 @@
 #include <string.h>
 __thread int debug_act;
 unsigned int WI4MPI_debug_max_array_elt;
+void A_f_MPI_Type_get_name(int *,char *,int *,int *);
+void A_f_MPI_Comm_get_name(int *,char *,int *,int *);
 void print_status(A_MPI_Status);
 void print_status_f(int *stat);
 #define min(a, b) ((a) < (b) ? (a) : (b))
@@ -28,7 +31,7 @@ void print_status_f(int *stat);
   name_function(elt, cname, &namelen);                                         \
   eprintf("{ value: " #print_str ",name :%s}", elt, cname);
 #define print_named_f(elt, name_function, print_str)                           \
-  name_function(&elt, cname, &namelen, &err, 2048);                             \
+  name_function(&elt, cname, &namelen, &err);                             \
   cname[namelen] = '\0';                                                       \
   eprintf("{ value: " #print_str ",name :%s}", elt, cname);
 

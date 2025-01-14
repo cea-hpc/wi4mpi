@@ -923,7 +923,7 @@
   }, 
   "errhandler_ptr_mapper": {
     "local_alloc": 1, 
-    "a2r": "errhandler_conv_a2r", 
+    "a2r": "errhandler_ptr_conv_a2r", 
     "type": "MPI_Errhandler *", 
     "r2a": "errhandler_ptr_conv_r2a",
     "addr_change": "True",

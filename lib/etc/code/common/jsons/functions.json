@@ -16605,7 +16605,7 @@
       "var": "ret",
       "arg_dep": "",
       "Out": 1,
-      "name": "int_mapper",
+      "name": "error_converter",
       "In": 0
     }
   },
@@ -16625,100 +16625,6 @@
       "arg_dep": "",
       "Out": 1,
       "name": "Comm_converter",
-      "In": 0
-    }
-  },
-  {
-    "args": [
-      {
-        "var": "oldcomm",
-        "arg_dep": "",
-        "Out": 0,
-        "name": "Comm_converter",
-        "In": 1
-      },
-      {
-        "var": "comm_keyval",
-        "arg_dep": "",
-        "Out": 0,
-        "name": "int_mapper",
-        "In": 1
-      },
-      {
-        "var": "extra_state",
-        "arg_dep": "",
-        "Out": 0,
-        "name": "buffer_mapper",
-        "In": 1
-      },
-      {
-        "var": "attribute_val_in",
-        "arg_dep": "",
-        "Out": 0,
-        "name": "buffer_mapper",
-        "In": 1
-      },
-      {
-        "var": "attribute_val_out",
-        "arg_dep": "",
-        "Out": 0,
-        "name": "buffer_mapper",
-        "In": 1
-      },
-      {
-        "var": "flag",
-        "arg_dep": "",
-        "Out": 1,
-        "name": "int_ptr_mapper",
-        "In": 0
-      }
-    ],
-    "name": "MPI_Comm_null_copy_fn",
-    "ret": {
-      "var": "ret",
-      "arg_dep": "",
-      "Out": 1,
-      "name": "int_mapper",
-      "In": 0
-    }
-  },
-  {
-    "args": [
-      {
-        "var": "comm",
-        "arg_dep": "",
-        "Out": 0,
-        "name": "Comm_converter",
-        "In": 1
-      },
-      {
-        "var": "comm_keyval",
-        "arg_dep": "",
-        "Out": 0,
-        "name": "int_mapper",
-        "In": 1
-      },
-      {
-        "var": "attribute_val",
-        "arg_dep": "",
-        "Out": 1,
-        "name": "buffer_mapper",
-        "In": 0
-      },
-      {
-        "var": "extra_state",
-        "arg_dep": "",
-        "Out": 1,
-        "name": "buffer_mapper",
-        "In": 0
-      }
-    ],
-    "name": "MPI_Comm_null_delete_fn",
-    "ret": {
-      "var": "ret",
-      "arg_dep": "",
-      "Out": 1,
-      "name": "int_mapper",
       "In": 0
     }
   },

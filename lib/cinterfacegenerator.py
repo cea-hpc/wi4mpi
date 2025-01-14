@@ -35,7 +35,7 @@ class CInterfaceGenerator(CodeGenerator):
             values as defined in the MPI norm.
             exceptions (str): Name of the json which describes non-generated functions in Wi4MPI.
         """
-        log.info("Generation of interface C file.")
+        log.info("Generation of interface C files.")
         self.output_file = "mpi_translation_c.c"
         self.interface_file = "interface_c.c"
         self.set_directories(dir_input, dir_output)

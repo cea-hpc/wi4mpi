@@ -2,9 +2,32 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <dlfcn.h>
-#include "mpi.h"
+#include "manual_interface.h"
 
-char wi4mpi_mode[]="";
+void *mpi_comm_null_copy_fn_=NULL;
+void *mpi_comm_null_copy_fn_=NULL;
+void *mpi_win_dup_fn_=NULL;
+void *mpi_null_copy_fn_=NULL;
+void *mpi_comm_null_delete_fn_=NULL;
+void *mpi_comm_dup_fn_=NULL;
+void *mpi_type_null_copy_fn_=NULL;
+void *mpi_null_delete_fn_=NULL;
+void *mpi_dup_fn_=NULL;
+void *mpi_conversion_fn_null_=NULL;
+void *mpi_win_null_delete_fn_=NULL;
+void *mpi_type_null_delete_fn_=NULL;
+void *mpi_type_dup_fn_=NULL;
+void *mpi_win_null_copy_fn_=NULL;
+/*ompi constante*/
+int mpi_fortran_bottom_;
+int mpi_fortran_in_place_;
+int mpi_fortran_argv_null_;
+int mpi_fortran_argvs_null_;
+int mpi_fortran_errcodes_ignore_;
+int mpi_fortran_status_ignore_;
+int mpi_fortran_statuses_ignore_;
+int mpi_fortran_unweighted_;
+int mpi_fortran_weights_empty_;
 
-__thread int in_w;
+char wi4mpi_mode_f[]="";
 

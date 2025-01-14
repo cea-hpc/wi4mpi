@@ -13,7 +13,7 @@
 //#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 //#                                                                      #
 //########################################################################
-
+#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
 #include "override.h"
 #include "app_mpi.h"
 #include "engine.h"

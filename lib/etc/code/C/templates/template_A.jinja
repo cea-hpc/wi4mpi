@@ -67,12 +67,12 @@
     {%- for arg in func['args'] -%} 
         {{ tmp_free(mappers[arg['name']],arg) }}
     {%- endfor -%} 
-    {% if ret_type == "double" %}
+    {% if ret_type == "double" or mappers[func['ret']['name']]["no_map"]|default("") != "" %}
           {{ret_type}} ret={{func['ret']['var']}}_tmp;
     {% elif ret_type[0:4] == 'MPI_' %}
        {{ret_type}} ret;
        {{mappers[func['ret']['name']]['r2a']}}(&{{func['ret']['var']}},&{{func['ret']['var']}}_tmp);
-    {% else %}
+    {%- else -%}
         {{ret_type}} ret={{mappers[func['ret']['name']]['r2a']}}({{func['ret']['var']}}_tmp);
     {% endif %}
     in_w=0;

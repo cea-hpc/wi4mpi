@@ -71,11 +71,13 @@
                             {%- endif-%}  
                         {%- else-%}  
                             {%- if name_func == "MPI_Comm_get_errhandler"-%} 
-                                int* ptr_err_handler_func;
-                                communicator_fn_translation_get(comm, &ptr_err_handler_func);
-                                errhandler_fn_translation_update(*errhandler, ptr_err_handler_func);
+                                void* ptr_err_handler_func;
+                                communicator_f_fn_translation_get(*comm, &ptr_err_handler_func);
+                                errhandler_f_fn_translation_update(*errhandler, ptr_err_handler_func);
+
                             {%- elif name_func == "MPI_Errhandler_get"-%} 
-                                errhandler_translation_get_key_from_value(*errhandler_tmp,errhandler);
+                                errhandler_translation_get_f(*errhandler_tmp,errhandler);
+
                             {%- else-%} 
                                 {{map['r2a']}}({{arg['var']}},{{arg['var']}}_tmp);
                             {%- endif-%} 

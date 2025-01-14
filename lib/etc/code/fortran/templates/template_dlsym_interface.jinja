@@ -1,61 +1,59 @@
-int wi4mpi__init__C=0;
-extern int wi4mpi__init__F;
-__attribute__((constructor)) void wrapper_interface(void) {
-    void * interface_handle;
-    if(wi4mpi__init__C!=0)
+extern int wi4mpi__init__C;
+int wi4mpi__init__F=0;
+__attribute__((constructor)) void wrapper_interface_f(void) {
+    if(wi4mpi__init__F!=0)
 		return;
-	wi4mpi__init__C=1;
-#ifdef WI4MPI_STATIC
-char *target_inter=getenv("WI4MPI_STATIC_TARGET_TYPE");
-int libfound=0;
-{%- for mpilib in mpi_libraries -%}
-if(target_inter&&!strcmp(target_inter,"{{mpilib}}")){
-libfound=1;
-{% for func in funcs %} 
-{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['C'] is not defined or conf[func['name']]['Application']['C']['generated'] != "False" or conf[func['name']]['Application']['C']['file'] is defined -%}
-    INTERF_2_{{mpilib}}_LOCAL_{{func['name']}}=dlsym(interface_handle,"INTERF_{{func['name']}}");
-{% endif %}
-{%- endfor -%}
-INTERF_2_{{mpilib}}_wrapper_init();
-{% endfor -%}
+	wi4mpi__init__F=1;
+if(wi4mpi__init__C==0)
+		wrapper_interface();
+#ifndef WI4MPI_STATIC
+#define to_string(name) #name
+#define handle_loader(name)\
+INTERFACE_F_LOCAL_##name=dlsym(interface_handle,to_string(CC##name))
 
-if (!libfound)
+#else
+#define handle_loader(name,MPI_TARGET)\
+INTERFACE_F_LOCAL_##name=MPI_TARGET##name
+
+#endif /*WI4MPI_STATIC*/
+#ifndef WI4MPI_STATIC
+void *interface_handle_f;
+if(getenv("WI4MPI_WRAPPER_LIB") != NULL)
 {
-printf("no target library defined conversion cannot be chosen\n" );
-exit(1);
+	interface_handle_f=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
+}
+else
+{
+	if(strcmp(wi4mpi_mode_f,"") != 0)
+	{
+		interface_handle_f=dlopen(wi4mpi_mode_f,RTLD_NOW|RTLD_GLOBAL);
+	}
+	else
+	{
+		fprintf(stderr,"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\n");
+		exit(1);
+	}
+}
+if(!interface_handle_f)
+{
+	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
+	exit(1);
 }
 
-#else /* WI4MPI_STATIC */
-    if(getenv("WI4MPI_WRAPPER_LIB") != NULL)
-        interface_handle=dlopen(getenv("WI4MPI_WRAPPER_LIB"),RTLD_NOW|RTLD_GLOBAL);
-    else
-    {
-	    if(strcmp(wi4mpi_mode,"") != 0)
-	    {
-	    	interface_handle=dlopen(wi4mpi_mode,RTLD_NOW|RTLD_GLOBAL);
-	    }
-	    else
-	    {
-		    fprintf(stderr,"Please provide either WI4MPI_WRAPPER_LIB environment or compile with -wi4mpi_default_run_paths\n");
-		    exit(1);
-	    }
-    }
-    if(!interface_handle)
-    {
-    	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
-    	exit(1);
-    }
 {% for func in funcs %} 
 {% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['C'] is not defined or conf[func['name']]['Application']['C']['generated'] != "False" or conf[func['name']]['Application']['C']['file'] is defined -%}
-    INTERFACE_LOCAL_{{func['name']}}=dlsym(interface_handle,"INTERF_{{func['name']}}");
+    INTERF_F_LOCAL_{{func['name']}}=dlsym(interface_handle_f,"A_f_{{func['name']}}");
 {% endif %}
-
-{% endfor %}
-
-
-#endif /* WI4MPI_STATIC */
-if(wi4mpi__init__F==0)
-    wrapper_interface_f();
+{%- endfor -%}
+#else
+char *target=getenv("WI4MPI_STATIC_TARGET_TYPE");
+{%- for mpilib in mpi_libraries -%}
+if(target&&!strcmp(target,"{{mpilib}}")){
+handle_loader({{func['name']}},INTERF_2_{{mpilib}});
+}
+{% endfor -%}
+if(!target{%- for mpilib in mpi_libraries -%}||strcmp(target,"{{mpilib}}")){%- endfor -%})
+    printf("no valid WI4MPI_STATIC_TARGET_TYPE defined\n");exit(1);  
 }
     
 
