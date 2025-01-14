@@ -16,7 +16,7 @@
 #   - Adrien Cotte <adrien.cotte.tgcc@cea.fr>                          #
 #                                                                      #
 ########################################################################
-
+wi4mpi_root_dir=$(realpath $(dirname ${BASH_SOURCE[0]})/..)
 usage() {
 
 	cat <<EOF
@@ -157,13 +157,13 @@ wi4mpi_print_exports() {
 }
 
 VERBOSE=""
-WI4MPI_LIBEXEC=$(readlink -f $(dirname $0)/../libexec/wi4mpi)
-WI4MPI_INTEL=$(readlink -f $(dirname $0)/../lib_INTEL)
-WI4MPI_OMPI=$(readlink -f $(dirname $0)/../lib_OMPI)
-WI4MPI_MPC=$(readlink -f $(dirname $0)/../lib_MPC)
-WI4MPI_MPICH=$(readlink -f $(dirname $0)/../lib_MPICH)
-WI4MPI_INTERFACE=$(readlink -f $(dirname $0)/../lib)
-WI4MPI_GCONFIG=$(readlink -f $(dirname $0)/../etc/wi4mpi.cfg)
+WI4MPI_LIBEXEC=$(readlink -f $wi4mpi_root_dir/libexec/wi4mpi)
+WI4MPI_INTEL=$(readlink -f $wi4mpi_root_dir/lib_INTEL)
+WI4MPI_OMPI=$(readlink -f $wi4mpi_root_dir/lib_OMPI)
+WI4MPI_MPC=$(readlink -f $wi4mpi_root_dir/lib_MPC)
+WI4MPI_MPICH=$(readlink -f $wi4mpi_root_dir/lib_MPICH)
+WI4MPI_INTERFACE=$(readlink -f $wi4mpi_root_dir/lib)
+WI4MPI_GCONFIG=$(readlink -f $wi4mpi_root_dir/etc/wi4mpi.cfg)
 WI4MPI_UCONFIG="$HOME/.wi4mpi.cfg"
 ENVMODE=0
 wi4mpi_error=0
