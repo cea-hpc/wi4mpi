@@ -1573,5 +1573,25 @@
         "generated": "False"
       }
     }
+  },
+  "MPI_T_pvar_write":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
   }
 }
