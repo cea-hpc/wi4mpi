@@ -1,3 +1,5 @@
+void wrapper_init_f(void);
+void init_f2c(void *);
 __attribute__((constructor)) void wrapper_init(void) {
 void *lib_handle = dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"), RTLD_NOW | RTLD_GLOBAL);
 void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_GLOBAL);

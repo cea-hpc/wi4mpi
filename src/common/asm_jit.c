@@ -1,5 +1,4 @@
 
-#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
 #include "mappers.h"
 #include "wrapper_f.h"
 extern __thread int in_w;

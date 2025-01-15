@@ -11,7 +11,7 @@
     {
 #ifdef TIMEOUT_SUPPORT
 #endif
-    {{ret_type}} ret_tmp=LOCAL_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%}     {%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }} {% else %}  {{ arg['var']|replace([],'') }} {% endif %} {%-  endfor-%} );
+    {{ret_type}} ret_tmp=LOCAL_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%}     {%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var'].split('[')|first }} {% else %}  {{ arg['var'].split('[')|first }} {% endif %} {%-  endfor-%} );
 {{ret_type}} ret=ret_tmp;
 #ifdef DEBUG
 #endif

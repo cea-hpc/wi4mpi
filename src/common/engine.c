@@ -18,6 +18,7 @@
 #include <pthread.h>
 
 #include <stdio.h>
+#include "mappers.h"
 #include "wrapper_f.h"
 #include "engine.h"
 /*

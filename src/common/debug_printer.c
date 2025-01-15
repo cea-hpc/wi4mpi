@@ -1,5 +1,4 @@
-#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
-#include "app_mpi.h"
+#include "mappers.h"
 #include "wrapper_f.h"
 #include <stdarg.h>
 #include <stdio.h>

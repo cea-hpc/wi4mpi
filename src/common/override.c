@@ -13,11 +13,10 @@
 //#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 //#                                                                      #
 //########################################################################
-#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
 #include "override.h"
-#include "app_mpi.h"
-#include "engine.h"
 #include "mappers.h"
+#include "engine.h"
+#include "app_mpi.h"
 #include "run_mpi.h"
 
 extern __thread int in_w;

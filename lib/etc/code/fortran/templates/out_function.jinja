@@ -33,22 +33,22 @@
                                 for(i{{idx}} = 0; i{{idx}} < {{arg['if_dep']}}; i{{idx}}++) {
                                 {%- endif -%}
                                     {%- if arg['if_null_dep']|default("") != ""-%}  
-                                        if({{arg['var']|replace('[]','')}}_tmp[{{arg['if_null_dep']|replace('[]','')}}[i{{idx}}]]=={{arg['if_null']}}) {
+                                        if({{arg['var']|replace('[]','')}}_tmp[{{arg['if_null_dep']|replace('[]','')}}[i{{idx}}]]=={{arg['if_null']|replace('R_MPI','R_f_MPI')}} ){
                                             {{arg['del_f']}}(&{{arg['var']|replace('[]','')}}[{{arg['if_null_dep']|replace('[]','')}}[i{{idx}}]],&{{arg['var']|replace('[]','')}}_tmp[{{arg['if_null_dep']|replace('[]','')}}[i{{idx}}]]);
                                         }
                                     {%- else -%} 
-                                        if( {{arg['var']|replace('[]','')}}_tmp[i{{idx}}] == {{arg['if_null']}} ) {
+                                        if( {{arg['var']|replace('[]','')}}_tmp[i{{idx}}] == {{arg['if_null']|replace('R_MPI','R_f_MPI')}} ) {
                                             {{arg['del_f']}}(&{{arg['var']|replace('[]','')}}[i{{idx}}],&{{arg['var']|replace('[]','')}}_tmp[i{{idx}}]);
                                         }
                                     {%- endif -%} 
                                 }
                             {%- else-%} 
                                 {%- if arg['if_null_dep']|default("") != "" -%} 
-                                if({{arg['var']|replace('[]','')}}_tmp[*{{arg['if_null_dep']}}] == {{arg['if_null']}}){
+                                if({{arg['var']|replace('[]','')}}_tmp[*{{arg['if_null_dep']}}] == {{arg['if_null']|replace('R_MPI','R_f_MPI')}}){
                                     {{arg['del_f']}}(&{{arg['var']|replace('[]','')}}[*{{arg['if_null_dep']}}],&{{arg['var']|replace('[]','')}}_tmp[*{{arg['if_null_dep']}}]);
                                 }
                                 {%- else-%} 
-                                    if(*{{arg['var']}}_tmp == {{arg['if_null']}}) {
+                                    if(*{{arg['var']}}_tmp == {{arg['if_null']|replace('R_MPI','R_f_MPI')}}) {
                                         {{arg['del_f']}}({{arg['var']}},{{arg['var']}}_tmp);
                                     }
                                 {%- endif-%} 

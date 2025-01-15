@@ -17,6 +17,9 @@
 
 #ifndef MANUAL_WRAPPER_H
 #define MANUAL_WRAPPER_H
+#ifndef __mpi_interface_removed__
+#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
+#endif
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE

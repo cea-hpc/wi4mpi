@@ -10,10 +10,13 @@ int WI4MPI_errhandler_key;
 void debug_printer(const char *, ...); 
 {% include "ompi_const.c" %}
 #define EXTERN_ALLOCATED 1                                                                               
+#if  defined(_MPC) || defined(_OMPI) || defined(_INTEL) 
+#include "c2f_f2c.h"
+#endif
 #include "helper.h"                                                                                      
 #include "mappers.h"                                                                                     
 __thread int in_w = 0;                                                                                   
-#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) ||      \                         
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || \
     defined(_INTEL) || defined(_MPC)                                                                     
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state,                              
                          void *attribute_val_in, void *attribute_val_out,                                
