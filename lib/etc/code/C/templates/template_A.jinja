@@ -6,13 +6,13 @@
 
 {% if  conf[func['name']] is defined and  conf[func['name']]['Application'] is defined and conf[func['name']]['Application']['C'] is defined and conf[func['name']]['Application']['C']['generated'] == "False" -%}
  {%-  if conf[func['name']]['Application']['C']['file'] is defined -%}
-    {{decl_ext}} {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} );
+    {{decl_ext}}   {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} );
     {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{type_prefix('R_',mappers[arg['name']]['type']) }} {{arg['var']}} {%endif%}{%-  endfor-%} );
 #define __{{func['name']}}__GEN__
     {%  include conf[func['name']]['Application']['C']['file']-%} 
  {% endif %}
 {%  else-%} 
-     {{decl_ext}} {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif %}{%-  endfor-%} );
+     {{decl_ext}}   {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif %}{%-  endfor-%} );
     {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %} {{ type_prefix('R_',mappers[arg['name']]['type']) }} {{arg['var']}} {%endif%} {%-  endfor-%} );
 #define __{{func['name']}}__GEN__
 #ifndef A_{{func['name']}}
