@@ -1,4 +1,4 @@
-__attribute__((constructor)) void wrapper_initi_f(void) {
+__attribute__((constructor)) void wrapper_init_f(void) {
 void *lib_handle = dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"), RTLD_NOW | RTLD_GLOBAL);
 void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_F_LIB"), RTLD_NOW | RTLD_GLOBAL);
     {% for func in funcs-%} 
