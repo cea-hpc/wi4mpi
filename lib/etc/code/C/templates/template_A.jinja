@@ -69,6 +69,8 @@
     {%- endfor -%} 
     {% if ret_type == "double" or mappers[func['ret']['name']]["no_map"]|default("") != "" %}
           {{ret_type}} ret={{func['ret']['var']}}_tmp;
+    {% elif  mappers[func['ret']['name']]["assign"]|default("") != "" %}
+           {{ret_type}} ret=({{ret_type}}){{func['ret']['var']}}_tmp;
     {% elif ret_type[0:4] == 'MPI_' %}
        {{ret_type}} ret;
        {{mappers[func['ret']['name']]['r2a']}}(&{{func['ret']['var']}},&{{func['ret']['var']}}_tmp);
