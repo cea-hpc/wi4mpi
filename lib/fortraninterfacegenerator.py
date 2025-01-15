@@ -41,7 +41,7 @@ class FortranInterfaceGenerator(CodeGenerator):
         self.set_directories(dir_input, dir_output)
 
     def generate(self):
-        self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "INTERF_F"
+        self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "CC"
         self.apply_jinja_dict["app_dict"]["caller_prefix"] = "extern"
         self.apply_jinja_dict["dlsym_dict"]["mpi_libraries"] = ["OMPI","INTEL"]
         super().generate()

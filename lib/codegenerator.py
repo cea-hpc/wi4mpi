@@ -156,25 +156,23 @@ class CodeGenerator(ABC):
                 "mappers": self.data["mappers"],
             },
         )
-        self.apply_jinja_dict["asm_dict"] = {
+        self.apply_jinja_dict["asm_dict"].update({
             "mappers": self.data["mappers"],
             "conf": self.data["exceptions"],
-        }
-        self.apply_jinja_dict["app_dict"] = {
+        })
+        self.apply_jinja_dict["app_dict"].update({
             "mappers": self.data["mappers"],
             "conf": self.data["exceptions"],
-        }
-        self.apply_jinja_dict["run_dict"] = {
+        })
+        self.apply_jinja_dict["run_dict"].update({
             "mappers": self.data["mappers"],
             "conf": self.data["exceptions"],
-        }
-        self.apply_jinja_dict["dlsym_dict"] = {
+        })
+        self.apply_jinja_dict["dlsym_dict"].update({
             "funcs": self.data["functions"],
             "types": self.data["types"],
-        }
+        })
         for function in self.data["functions"]:
-            print(function)
-            print("coucou")
             self.apply_jinja_dict["asm_dict"]["func"] = function
             self.apply_jinja_dict["app_dict"]["func"] = function
             self.apply_jinja_dict["run_dict"]["func"] = function

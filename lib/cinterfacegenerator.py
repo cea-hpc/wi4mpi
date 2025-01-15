@@ -42,7 +42,7 @@ class CInterfaceGenerator(CodeGenerator):
         self.interface_file = os.path.join(dir_output, self.interface_file)
 
     def generate(self):
-        self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "INTERF"
+        self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "CC"
         self.apply_jinja_dict["app_dict"]["decl_ext"] = "extern"
         self.apply_jinja_dict["dlsym_dict"]["mpi_libraries"] = ["OMPI", "INTEL"]
         # Warning: Do not use 'apply_jinja' before 'super().generate()'.
