@@ -20,7 +20,7 @@ void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_G
 
 #if defined(INTEL_INTEL)||defined(INTEL_OMPI)||defined(OMPI_INTEL)||defined(_INTEL)||defined(_MPC)
 
-  local_MPIR_dup_fn = dlsym(lib_handle, "mpir_dup_fn");
+  local_MPIR_Dup_fn = dlsym(lib_handle, "MPIR_Dup_fn");
 
 #endif
 #if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || \
