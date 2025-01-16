@@ -17,7 +17,7 @@ void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_G
   ptr_mpipriv2_ = dlsym(lib_handle, "mpipriv2_");
   ptr_mpiprivc_ = dlsym(lib_handle, "mpiprivc_");
 #endif
-#if defined(OMPI_OMPI) || defined(_OMPI)
+#if defined(_OMPI)
 
   init_global(lib_handle);
 
