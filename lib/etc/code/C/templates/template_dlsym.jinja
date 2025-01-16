@@ -18,13 +18,13 @@ void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_G
     {%- endfor %} 
 
 
-#if defined(intel_intel)||defined(intel_ompi)||defined(ompi_intel)||defined(_intel)||defined(_mpc)
+#if defined(INTEL_INTEL)||defined(INTEL_OMPI)||defined(OMPI_INTEL)||defined(_INTEL)||defined(_MPC)
 
   local_mpir_dup_fn = dlsym(lib_handle, "mpir_dup_fn");
 
 #endif
-#if defined(intel_intel) || defined(intel_ompi) || defined(ompi_intel) || \
-  defined(_intel)
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || \
+  defined(_INTEL)
 
   ptr_mpifcmb5_ = dlsym(lib_handle, "mpifcmb5_");
   ptr_mpifcmb9_ = dlsym(lib_handle, "mpifcmb9_");
@@ -32,16 +32,25 @@ void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_G
   ptr_mpipriv2_ = dlsym(lib_handle, "mpipriv2_");
   ptr_mpiprivc_ = dlsym(lib_handle, "mpiprivc_");
 #endif
-#if defined(ompi_ompi) || defined(_ompi)
+#if defined(OMPI_OMPI) || defined(_OMPI)
 
   init_global(lib_handle);
 
-#elif defined(ompi_intel) || defined(_intel)
+#elif defined(OMPI_INTEL) || defined(_INTEL)
 
   r_mpi_unweighted = dlsym(lib_handle, "mpi_unweighted");
   r_mpi_weights_empty = dlsym(lib_handle, "mpi_weights_empty");
   mpi_unweighted = dlsym(lib_handle, "mpi_unweighted");
   mpi_weights_empty = dlsym(lib_handle, "mpi_weights_empty");
+#endif
+
+#if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)
+  R_MPI_UNWEIGHTED = dlsym(lib_handle, "MPI_UNWEIGHTED");
+  R_MPI_WEIGHTS_EMPTY = dlsym(lib_handle, "MPI_WEIGHTS_EMPTY");
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI)
+  A_MPI_UNWEIGHTED = dlsym(lib_handle, "MPI_UNWEIGHTED");
+  A_MPI_WEIGHTS_EMPTY = dlsym(lib_handle, "MPI_WEIGHTS_EMPTY");
 #endif
 
   wrapper_init_f();
