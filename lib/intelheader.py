@@ -114,9 +114,8 @@ class IntelHeaderGenerator(HeaderGenerator):
 
         _pattern_block = """
 /* See 4.12.5 for R_MPI_F_STATUS(ES)_IGNORE */
-#define MPIU_DLL_SPEC
-extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE;
-extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE;
+extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE MPICH_API_PUBLIC;
+extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE MPICH_API_PUBLIC;
 /* The annotation MPIU_DLL_SPEC to the extern statements is used 
    as a hook for systems that require C extensions to correctly construct
    DLLs, and is defined as an empty string otherwise
