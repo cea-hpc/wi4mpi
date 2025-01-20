@@ -994,7 +994,7 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char **)ptr+0x10),(void*)user_fn_wrapper_template,0x100);
+    memcpy(((void*)ptr+0x10),(void*)&user_fn_wrapper_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
@@ -1013,7 +1013,7 @@ static inline void datarep_extent_function_converter_a2r(A_MPI_Datarep_extent_fu
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char **)ptr+0x10),(void*)user_datarep_extent_function_template,0x100);
+    memcpy(((void*)ptr+0x10),(void*)&user_datarep_extent_function_template,0x100);
 
     ((void **)ptr)[0]=*((void **)fa);
 
@@ -1030,7 +1030,7 @@ static inline void datarep_conversion_function_a2r(A_MPI_Datarep_conversion_func
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy((((void **)ptr)+0x10),(void *)user_datarep_conversion_function_template,0x100);
+    memcpy((((void **)ptr)+0x10),(void *)&user_datarep_conversion_function_template,0x100);
 
     ((void **)ptr)[0]=*((void**)fa);
 
@@ -1047,7 +1047,7 @@ static inline void grequest_query_fn_a2r(A_MPI_Grequest_query_function **fa, R_M
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy((((void **)ptr)+0x10),((void *)user_qrequest_query_function_template),0x100);
+    memcpy((((void **)ptr)+0x10),((void *)&user_qrequest_query_function_template),0x100);
 
     ((void **)ptr)[0]=*((void**)fa);
 
