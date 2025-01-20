@@ -3,9 +3,9 @@ void *lib_handle = dlopen(getenv("WI4MPI_RUN_MPI_F_LIB"), RTLD_NOW | RTLD_GLOBAL
 void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_F_LIB"), RTLD_NOW | RTLD_GLOBAL);
     {% for func in funcs-%} 
 #ifdef __F_{{func['name']}}__GEN__
-        LOCAL_f_{{func['name']}}=dlsym(lib_handle,"{{func['name']}}");
+        LOCAL_f_{{func['name']}}=dlsym(lib_handle,"p{{func['name']|lower}}_");
         if ( ! LOCAL_f_{{func['name']}} && lib_handle_io)
-        LOCAL_f_{{func['name']}}=dlsym(lib_handle_io,"{{func['name']}}");
+        LOCAL_f_{{func['name']}}=dlsym(lib_handle_io,"p{{func['name']|lower}}_");
 #endif
     {% endfor-%} 
 }
