@@ -9,14 +9,14 @@ void pmpi_init_thread_(int *, int *, int *);
 #pragma weak pmpi_init_thread__ = _PMPI_Init_thread
 extern unsigned long long WI4MPI_Init_thread_timeout;
 extern unsigned int WI4MPI_Init_thread_print;
-void (*_LOCAL_MPI_Init_thread)(int *, int *, int *);
+void (*LOCAL_f_MPI_Init_thread)(int *, int *, int *);
 void A_f_MPI_Init_thread(int *required, int *provided, int *ret) {
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_set_timeout(WI4MPI_Init_thread_timeout);
 #endif
   in_w = 1;
   int ret_tmp = 0;
-  _LOCAL_MPI_Init_thread(required, provided, &ret_tmp);
+  LOCAL_f_MPI_Init_thread(required, provided, &ret_tmp);
   error_r2a(ret, &ret_tmp);
   int wi4mpi_rank;
   R_MPI_Comm_rank(R_MPI_COMM_WORLD, &wi4mpi_rank);

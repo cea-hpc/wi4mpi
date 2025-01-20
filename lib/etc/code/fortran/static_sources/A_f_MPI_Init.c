@@ -14,7 +14,7 @@ void pmpi_init_(int *);
 #pragma weak pmpi_init__ = _PMPI_Init
 extern unsigned long long WI4MPI_Init_timeout;
 extern unsigned int WI4MPI_Init_print;
-void (*_LOCAL_MPI_Init)(int *);
+void (*LOCAL_f_MPI_Init)(int *);
 
 void A_f_MPI_Init(int *ret) {
 #ifdef TIMEOUT_SUPPORT
@@ -23,7 +23,7 @@ void A_f_MPI_Init(int *ret) {
   in_w = 1;
   int ret_tmp = 0;
 
-  _LOCAL_MPI_Init(&ret_tmp);
+  LOCAL_f_MPI_Init(&ret_tmp);
   error_r2a(ret, &ret_tmp);
 
   int wi4mpi_rank;
