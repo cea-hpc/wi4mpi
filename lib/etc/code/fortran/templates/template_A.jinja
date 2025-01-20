@@ -11,7 +11,7 @@
     {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} _{{func['name']|lower}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
     {% if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}}{%endif%}{%-  endfor-%} {%- if ret_type == "int " %} {%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
 {%- endif -%}
-#define __{{func['name']}}__GEN__
+#define __F_{{func['name']}}__GEN__
 #ifndef __F_{{func['name']}}
 #ifndef {{func['name']|upper}}_OVERRIDE
 
