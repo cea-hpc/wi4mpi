@@ -1,4 +1,3 @@
-
 #include "mappers.h"
 #include "wrapper_f.h"
 extern __thread int in_w;

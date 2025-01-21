@@ -18,7 +18,6 @@
 #include <pthread.h>
 
 #include <stdio.h>
-#include "mappers.h"
 #include "wrapper_f.h"
 #include "engine.h"
 /*
@@ -217,7 +216,7 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
    if(conv != NULL) { \
         *mpi_##varname=(conv->r_##varname##_value);  \
     } else { \
-        id=((size_t)a_mpi_##varname)-f##varname;\
+        id=((int)a_mpi_##varname)-f##varname;\
         memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
     }  \
 }  \
@@ -377,7 +376,7 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
         /*memcpy(mpi_##varname,&(conv->r_##varname##_value), sizeof(R_##type));*/*mpi_##varname=(conv->r_##varname##_value);  \
     } else { /* Not a constant */  \
         /* In an hashtable */   \
-        id=((size_t)a_mpi_##varname)-f##varname;\
+        id=((int)a_mpi_##varname)-f##varname;\
     /*    if(id<0||id>=varname##_size) *mpi_##varname=R_##mpi_null;\
         else*/ memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
     }  \
@@ -391,7 +390,7 @@ void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
         /*memcpy(mpi_##varname,&(conv->r_##varname##_value), sizeof(R_##type));*mpi_##varname=(conv->r_##varname##_value);  \
  */ /*  } else */{ /* Not a constant */  \
         /* In an hashtable */   \
-        id=((size_t)a_mpi_##varname)-f##varname;\
+        id=((int)a_mpi_##varname)-f##varname;\
      /*   if(id<0||id>= varname##_size) *mpi_##varname=R_##type##_c2f(R_##mpi_null);\
         else*/ memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
         /*printf ("%s gf %d %d\n",#varname,a_mpi_##varname,*mpi_##varname);\
@@ -606,7 +605,7 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
    if(conv != NULL) { \
         *mpi_##varname=(conv->r_##varname##_value);  \
     } else { \
-        id=((size_t)a_mpi_##varname)-f##varname;\
+        id=((int)a_mpi_##varname)-f##varname;\
         memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
     }  \
 }  \
@@ -1085,7 +1084,7 @@ void request_translation_init()
 }
 /*  GET  */
 void request_translation_get_f(int a_mpi_request, int *mpi_request) {
-    int id=(size_t)a_mpi_request;
+    int id=(int)a_mpi_request;
    if(id<fnb)
     return;
     if(a_mpi_request==0)
@@ -1102,7 +1101,7 @@ void request_translation_get_f(int a_mpi_request, int *mpi_request) {
     
 }
 void request_translation_get(A_MPI_Request a_mpi_request, R_MPI_Request *mpi_request, int* non_blocking) {
-    int id=(size_t)a_mpi_request;
+    int id=(int)a_mpi_request;
    if((id<fnb)||(id>(fnb+req_size)))
     {// const request        
          request_translation_t* conv;

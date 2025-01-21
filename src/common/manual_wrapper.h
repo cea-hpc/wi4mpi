@@ -17,9 +17,6 @@
 
 #ifndef MANUAL_WRAPPER_H
 #define MANUAL_WRAPPER_H
-#ifndef __mpi_interface_removed__
-#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
-#endif
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
@@ -204,7 +201,7 @@ static inline void user_fct_ptr_conv_a2r(void **fa,void **fr)
     void* ptr = mmap(0, 1024,
                    PROT_READ | PROT_WRITE | PROT_EXEC,
                    MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),(void*)user_fn_wrapper_template_fort,0x100);
+    memcpy(((char *)ptr+0x10),&user_fn_wrapper_template_fort,0x100);
 
     ((void **)ptr)[0]=*fa;
     
