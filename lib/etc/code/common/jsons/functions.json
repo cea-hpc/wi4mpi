@@ -1816,9 +1816,10 @@
       {
         "var": "datatype",
         "arg_dep": "",
-        "Out": 1,
+        "Out": 0,
         "name": "Datatype_ptr_converter",
-        "In": 1
+        "In": 1,
+        "if_err": "datatype_translation_del(datatype)"
       }
     ],
     "name": "MPI_Type_commit",
@@ -1837,7 +1838,7 @@
         "arg_dep": "",
         "Out": 1,
         "name": "Datatype_ptr_converter",
-        "In": 1
+        "In": 0
       }
     ],
     "name": "MPI_Type_free",

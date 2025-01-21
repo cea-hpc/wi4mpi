@@ -1,0 +1,5 @@
+
+{% for func in funcs %}
+    extern unsigned long long WI4{{func['name']}}_timeout;
+    extern unsigned int WI4{{func['name']}}_print;
+{% endfor %}

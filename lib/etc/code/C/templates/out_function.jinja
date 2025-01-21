@@ -10,7 +10,7 @@
                     }
                 {%- else-%} 
                     {%- if map['type'][-1] == '*'-%}  
-                        *{{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp;
+                        *{{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_ltmp;
                     {%- else-%} 
                         {{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp;
                     {%- endif-%} 
