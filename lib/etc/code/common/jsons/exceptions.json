@@ -999,6 +999,14 @@
       }
     }
   },
+  "MPI_Errhandler_set": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_set.c"
+      }
+    }
+  },
   "MPI_Comm_create_errhandler": {
     "Application": {
       "C": {

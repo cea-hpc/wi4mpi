@@ -1838,7 +1838,7 @@
         "arg_dep": "",
         "Out": 1,
         "name": "Datatype_ptr_converter",
-        "In": 0
+        "In": 1
       }
     ],
     "name": "MPI_Type_free",
