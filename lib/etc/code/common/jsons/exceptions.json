@@ -996,14 +996,94 @@
       "C": {
         "generated": "False",
         "file": "A_MPI_Errhandler_create.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_create.c"
+      }
+    }
+  },
+  "MPI_Errhandler_free": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Errhandler_free.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_free.c"
+      }
+    }
+  },
+  "MPI_Errhandler_get": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Errhandler_get.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_get.c"
       }
     }
   },
   "MPI_Errhandler_set": {
     "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Errhandler_set.c"
+      },
       "fortran": {
         "generated": "False",
         "file": "A_f_MPI_Errhandler_set.c"
+      }
+    }
+  },
+  "MPI_Info_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Info_free.c"
+      }
+    }
+  },
+  "MPI_Keyval_create": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Keyval_create.c"
+      }
+    }
+  },
+  "MPI_Keyval_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Keyval_free.c"
+      }
+    }
+  },
+  "MPI_Attr_delete": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Attr_delete.c"
+      }
+    }
+  },
+  "MPI_Attr_get": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Attr_get.c"
+      }
+    }
+  },
+  "MPI_Attr_put": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Attr_put.c"
       }
     }
   },
@@ -1012,7 +1092,38 @@
       "C": {
         "generated": "False",
         "file": "A_MPI_Comm_create_errhandler.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Comm_create_errhandler.c"
       }
+   
+    }
+  },
+  "MPI_Comm_get_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Comm_get_errhandler.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Comm_get_errhandler.c"
+      }
+   
+    }
+  },
+  "MPI_Comm_set_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Comm_set_errhandler.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Comm_set_errhandler.c"
+      }
+   
     }
   },
   "MPI_File_f2c": {
