@@ -623,14 +623,14 @@
   "datarep_conversion_function": {
     "local_alloc": 0,
     "a2r": "datarep_conversion_ptr_conv_a2r",
-    "type": "MPI_Datarep_conversion_function *",
+    "type": "void *",
     "r2a": "datarep_conversion_ptr_conv_r2a",
     "debug_type": "%*d"
   },
   "datarep_extent_converter": {
     "local_alloc": 0,
     "a2r": "datarep_extent_ptr_conv_a2r",
-    "type": "MPI_Datarep_extent_function *",
+    "type": "void *",
     "r2a": "datarep_extent_ptr_conv_r2a",
     "debug_type": "%*d"
   },

@@ -579,14 +579,14 @@
   "f08_status_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "f08_status_ptr_conv_a2r", 
-    "type": "MPI_F08_status *", 
+    "type": "MPI_F08_Status *", 
     "r2a": "f08_status_ptr_conv_r2a",
     "debug_type":"%p"
   }, 
   "const_f08_status_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "const_f08_status_ptr_conv_a2r", 
-    "type": "const MPI_F08_status *", 
+    "type": "const MPI_F08_Status *", 
     "r2a": "const_f08_status_ptr_conv_r2a"
   }, 
   "error_converter": {

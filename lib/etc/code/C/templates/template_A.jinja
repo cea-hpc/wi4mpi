@@ -3,13 +3,19 @@
 {%- from 'in_functions.jinja' import type_prefix,convert_in,tmp_decl,handle_local_var,tmp_free -%} 
 {%-  set ret_type = type_prefix('A_',mappers[func['ret']['name']]['type'])-%} 
 {%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
-
+{% if func['name'][-3:] != 'f2c' and func['name'][-3:] != 'c2f' and func['name'][-5:] != 'c2f08' and func['name'][-5:] != 'f2f08' and func['name'][-5:] != 'f082c' and func['name'][-5:] != 'f082f' %}
 {% if  conf[func['name']] is defined and  conf[func['name']]['Application'] is defined and conf[func['name']]['Application']['C'] is defined and conf[func['name']]['Application']['C']['generated'] == "False" -%}
- {%-  if conf[func['name']]['Application']['C']['file'] is defined -%}
     {{decl_ext}}   {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} );
     {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{type_prefix('R_',mappers[arg['name']]['type']) }} {{arg['var']}} {%endif%}{%-  endfor-%} );
+ {%  if conf[func['name']]['Application']['C']['file'] is defined -%}
 #define __{{func['name']}}__GEN__
     {%  include conf[func['name']]['Application']['C']['file']-%} 
+{%else %}
+ {{ ret_type }} A_{{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %} {{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif%} {%-  endfor-%} ) {
+   fprintf(stderr,"{{func['name']}} is not implemented yet in C\n");
+   R_MPI_Abort(R_MPI_COMM_WORLD,255); 
+}
+    
  {% endif %}
 {%  else-%} 
      {{decl_ext}}   {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif %}{%-  endfor-%} );
@@ -92,5 +98,5 @@
 #endif
 #endif
 {%-  endif %}
-
+{% endif %}
  
