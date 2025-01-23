@@ -1,9 +1,9 @@
 void (*_LOCAL_MPI_Keyval_create)(void *, void *, int *, void *, int *);
 int (*LOCAL_MPI_Keyval_create)(void *, void *, int *, void *);
 int (*LOCAL_MPI_Comm_create_keyval)(void *, void *, int *, void *);
-extern void *mpi_null_copy_fn_;
-extern void *mpi_dup_fn_;
-extern void *mpi_null_delete_fn_;
+extern A_F_MPI_Copy_function *mpi_null_copy_fn_;
+extern A_F_MPI_Copy_function *mpi_dup_fn_;
+extern A_F_MPI_Copy_function *mpi_null_delete_fn_;
 int wrapper_copy_function_f(R_MPI_Comm comm, int keyval, void *extra_state,
                             void *attribute_val_in, void *attribute_val_out,
                             int *flag) {
