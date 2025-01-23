@@ -1039,22 +1039,6 @@
       }
     }
   },
-  "MPI_Keyval_create": {
-    "Application": {
-      "fortran": {
-        "generated": "False",
-        "file": "A_f_MPI_Keyval_create.c"
-      }
-    }
-  },
-  "MPI_Keyval_free": {
-    "Application": {
-      "fortran": {
-        "generated": "False",
-        "file": "A_f_MPI_Keyval_free.c"
-      }
-    }
-  },
   "MPI_Comm_create_errhandler": {
     "Application": {
       "C": {
