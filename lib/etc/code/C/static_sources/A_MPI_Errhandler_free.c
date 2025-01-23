@@ -20,14 +20,3 @@ printf("sort : A_MPI_Errhandler_free\n");
 return error_code_conv_r2a(ret_tmp);
 }
 
-int R_MPI_Errhandler_free(R_MPI_Errhandler * errhandler)
-{
-#ifdef DEBUG
-printf("entre : R_MPI_Errhandler_free\n");
-#endif
-int ret_tmp= LOCAL_MPI_Errhandler_free( errhandler);
-#ifdef DEBUG
-printf("sort : R_MPI_Errhandler_free\n");
-#endif
-return ret_tmp;
-}

@@ -28,14 +28,3 @@ printf("sort : A_MPI_Errhandler_get\n");
     errhandler_locks_re();
 return error_code_conv_r2a(ret_tmp);
 }
-int R_MPI_Errhandler_get(R_MPI_Comm comm,R_MPI_Errhandler * errhandler)
-{
-#ifdef DEBUG
-printf("entre : R_MPI_Errhandler_get\n");
-#endif
-int ret_tmp= LOCAL_MPI_Errhandler_get( comm, errhandler);
-#ifdef DEBUG
-printf("sort : R_MPI_Errhandler_get\n");
-#endif
-return ret_tmp;
-}

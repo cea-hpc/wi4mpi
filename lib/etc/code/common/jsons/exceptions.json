@@ -936,14 +936,6 @@
       }
     }
   },
-  "MPI_Keyval_free": {
-    "Application": {
-      "C": {
-        "generated": "False",
-        "file": "A_MPI_Keyval_free.c"
-      }
-    }
-  },
   "MPI_Win_get_attr": {
     "Application": {
       "C": {
@@ -1060,30 +1052,6 @@
       "fortran": {
         "generated": "False",
         "file": "A_f_MPI_Keyval_free.c"
-      }
-    }
-  },
-  "MPI_Attr_delete": {
-    "Application": {
-      "fortran": {
-        "generated": "False",
-        "file": "A_f_MPI_Attr_delete.c"
-      }
-    }
-  },
-  "MPI_Attr_get": {
-    "Application": {
-      "fortran": {
-        "generated": "False",
-        "file": "A_f_MPI_Attr_get.c"
-      }
-    }
-  },
-  "MPI_Attr_put": {
-    "Application": {
-      "fortran": {
-        "generated": "False",
-        "file": "A_f_MPI_Attr_put.c"
       }
     }
   },
