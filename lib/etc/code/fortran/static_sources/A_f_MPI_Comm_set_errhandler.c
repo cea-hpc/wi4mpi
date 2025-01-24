@@ -1,26 +1,26 @@
-void  (*_LOCAL_MPI_Comm_set_errhandler)(int *,int *,int *);
-
-void  A_f_MPI_Comm_set_errhandler(int * comm,int * errhandler,int * ret)
-{
-/*#ifdef DEBUG
-printf("entre : A_f_MPI_Comm_set_errhandler\n");
+void A_f_MPI_Comm_set_errhandler(int *comm, int *errhandler, int *ret) {
+#ifdef TIMEOUT_SUPPORT
+  wi4mpi_set_timeout(WI4MPI_Comm_set_errhandler_timeout);
 #endif
-in_w=1;
-int  ret_tmp=0;
+  in_w = 1;
+  int ret_tmp = 0;
 
-int comm_tmp;
-int errhandler_tmp;
-comm_a2r(comm,&comm_tmp);
-errhandler_converter_a2r(errhandler,&errhandler_tmp);
- _LOCAL_MPI_Comm_set_errhandler( &comm_tmp, &errhandler_tmp, &ret_tmp);
-errhandler_set_func(comm_tmp,errhandler_tmp);
-error_r2a(ret,&ret_tmp);
+  int comm_tmp;
+  int errhandler_tmp;
+  comm_a2r(comm, &comm_tmp);
+  errhandler_converter_a2r(errhandler, &errhandler_tmp);
+  LOCAL_f_MPI_Comm_set_errhandler(&comm_tmp, &errhandler_tmp, &ret_tmp);
+  errhandler_set_func(comm_tmp, errhandler_tmp);
+  error_r2a(ret, &ret_tmp);
 
-in_w=0;
+  in_w = 0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Comm_set_errhandler\n");
+  if (WI4MPI_Comm_set_errhandler_print)
+    debug_printer("MPI_Comm_set_errhandler : \n{\ncomm : %*C,\nerrhandler : "
+                  "%*d,\nerror/return : %*d\n}\n",
+                  comm, errhandler, ret);
 #endif
-*/
- return A_f_MPI_Errhandler_set(comm,errhandler,ret);
-
+#ifdef TIMEOUT_SUPPORT
+  wi4mpi_unset_timeout();
+#endif
 }
