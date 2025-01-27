@@ -102,8 +102,8 @@ class IntelHeaderGenerator(HeaderGenerator):
             flags=re.MULTILINE,
         )
 
-        lines_to_delete = ["extern int * R_MPI_UNWEIGHTED;", "extern int * R_MPI_WEIGHTS_EMPTY;"]
-        text = delete_lines(lines_to_delete, text)
+#        lines_to_delete = ["extern int * R_MPI_UNWEIGHTED;", "extern int * R_MPI_WEIGHTS_EMPTY;"]
+#        text = delete_lines(lines_to_delete, text)
         text = re.sub(r"(#define R_MPI_DUP_FN.*)", r"//\1", text, flags=re.MULTILINE)
         text = re.sub(r"([ \t$])MPI_", r"\1R_MPI_", text, flags=re.MULTILINE)
         text = re.sub(r"HAVE_MPI", "HAVE_R_MPI", text, re.MULTILINE)

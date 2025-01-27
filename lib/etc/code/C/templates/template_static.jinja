@@ -7,6 +7,15 @@
 #define __mpi_interface_removed__(a,b) /*__mpi_interface_removed__(a,b)/*
 /*ompi constante*/                     
 int WI4MPI_errhandler_key;             
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) 
+    int *A_MPI_UNWEIGHTED;
+    int *A_MPI_WEIGHTS_EMPTY;
+#endif
+
+#if defined(INTEL_INTEL)
+int *  R_MPI_UNWEIGHTED;
+int *  R_MPI_WEIGHTS_EMPTY;
+#endif 
 void debug_printer(const char *, ...); 
 {% include "ompi_const.c" %}
 #define EXTERN_ALLOCATED 1                                                                               

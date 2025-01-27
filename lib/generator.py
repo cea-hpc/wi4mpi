@@ -346,7 +346,7 @@ class Generator:
         """
         Launches the generation process for header and code files.
         """
-        #self.generate_header()
+        self.generate_header()
         self.generate_code()
 
 
