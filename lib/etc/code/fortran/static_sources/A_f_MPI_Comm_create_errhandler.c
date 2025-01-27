@@ -10,7 +10,7 @@ void A_f_MPI_Comm_create_errhandler(void *comm_errhandler_fn, int *errhandler,
   void *comm_errhandler_fn_tmp = comm_errhandler_fn;
   int errhandler_tmp;
   handler_fct_ptr_conv_a2r(&comm_errhandler_fn, &comm_errhandler_fn_tmp);
-  LOCALi_f_MPI_Comm_create_errhandler(comm_errhandler_fn_tmp, &errhandler_tmp,
+  LOCAL_f_MPI_Comm_create_errhandler(comm_errhandler_fn_tmp, &errhandler_tmp,
                                     &ret_tmp);
   if (ret_tmp == R_f_MPI_SUCCESS)
     errhandler_converter_r2a(errhandler, &errhandler_tmp);

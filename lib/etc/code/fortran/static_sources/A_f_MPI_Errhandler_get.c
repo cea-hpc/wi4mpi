@@ -9,7 +9,7 @@ void A_f_MPI_Errhandler_get(int *comm, int *errhandler, int *ret) {
   int comm_tmp;
   int errhandler_tmp;
   comm_a2r(comm, &comm_tmp);
-  _LOCAL_MPI_Errhandler_get(&comm_tmp, &errhandler_tmp, &ret_tmp);
+  LOCAL_f_MPI_Errhandler_get(&comm_tmp, &errhandler_tmp, &ret_tmp);
   if (ret_tmp == R_f_MPI_SUCCESS)
     errhandler_converter_r2a(errhandler, &errhandler_tmp);
   error_r2a(ret, &ret_tmp);
