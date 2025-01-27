@@ -29,6 +29,20 @@ int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state,
 }                                                                                                        
 #endif
 {% include "impi_const.c" %}
+#if defined(OMPI_INTEL) ||defined (OMPI_MPC) 
+int OMPI_C_MPI_TYPE_NULL_DELETE_FN() {}
+int OMPI_C_MPI_TYPE_NULL_COPY_FN() {}
+int OMPI_C_MPI_TYPE_DUP_FN() {}
+int OMPI_C_MPI_COMM_NULL_DELETE_FN() {}
+int OMPI_C_MPI_COMM_NULL_COPY_FN() {}
+int OMPI_C_MPI_COMM_DUP_FN() {}
+int OMPI_C_MPI_NULL_DELETE_FN() {}
+int OMPI_C_MPI_NULL_COPY_FN() {}
+int OMPI_C_MPI_DUP_FN() {}
+int OMPI_C_MPI_WIN_NULL_DELETE_FN() {}
+int OMPI_C_MPI_WIN_NULL_COPY_FN() {}
+int OMPI_C_MPI_WIN_DUP_FN() {}
+#endif
 void wrapper_win_copy_function(R_MPI_Win oldwin, int win_keyval,
                                void *extra_state, void *attribute_val_in,
                                void *attribute_val_out, int *flag) {
@@ -194,6 +208,8 @@ static int wrapper_copy_function(R_MPI_Comm comm, int keyval, void *extra_state,
   comm_conv_r2a(&comm_tmp, &comm);
   A_MPI_Copy_function *ptr_copy_func =
       myKeyval_translation_get(keyval)->cp_function;
+  if (*ptr_copy_func==A_MPI_NULL_COPY_FN)
+    return A_MPI_SUCCESS;
   int res = (ptr_copy_func)(comm_tmp, keyval, extra_state, attribute_val_in,
                             attribute_val_out, flag);
   ptr_copy_func = NULL;
@@ -206,6 +222,8 @@ static int wrapper_delete_function(R_MPI_Comm comm, int keyval,
   comm_conv_r2a(&comm_tmp, &comm);
   A_MPI_Delete_function *ptr_delete_func =
       myKeyval_translation_get(keyval)->del_function;
+  if (*ptr_delete_func==A_MPI_NULL_DELETE_FN)
+    return A_MPI_SUCCESS;
   int res = (ptr_delete_func)(comm_tmp, keyval, attribute_val, extra_state);
   ptr_delete_func = NULL;
   return error_code_conv_r2a(res);
