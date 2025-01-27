@@ -45,31 +45,29 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
         )
         # Lines modified during generation of interface headers
         _pattern_block = """
-/* Note that we may need to define a @PCONTROL_LIST@ depending on whether
-   stdargs are supported */
 int R_MPI_Pcontrol(int level, ...);
 int R_MPI_DUP_FN(R_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
                void *attribute_val_out, int *flag);
 """
+
         _replacement_block = """
-/* Note that we may need to define a @PCONTROL_LIST@ depending on whether
-   stdargs are supported */
+int R_MPI_Pcontrol(int level, ...);
+"""
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+
+        # Lines modified during generation of interface headers
+        _pattern_block = """
+int R_MPI_Pcontrol(int level, ...) MPICH_API_PUBLIC;
+int R_MPI_DUP_FN(R_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
+               void *attribute_val_out, int *flag) MPICH_API_PUBLIC;
+"""
+
+        _replacement_block = """
 int R_MPI_Pcontrol(int level, ...);
 """
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
         text = re.sub(r"MPIX_Iov", "R_MPIX_Iov", text)
         text = re.sub(r"([^_])MPIX_", r"\1R_MPIX_", text)
-        if self.__class__.__name__ == "OmpiIntelHeaderGenerator" or (
-            self.__class__.__name__ == "OmpiMpichHeaderGenerator"
-            and self.mpi_target_version["mpich"] in ("3.4.3", "4.2.0")
-        ):
-            text = delete_lines(
-                [
-                    "#define R_MPI_DUP_FN         MPIR_Dup_fn",
-                ],
-                text,
-            )
-
         return text
 
     def _generate_run_mpih(self, gen_file):
