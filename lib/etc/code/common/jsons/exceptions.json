@@ -936,6 +936,14 @@
       }
     }
   },
+  "MPI_Keyval_free": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Keyval_free.c"
+      }
+    }
+  },
   "MPI_Win_get_attr": {
     "Application": {
       "C": {
@@ -954,16 +962,13 @@
         "generated": "False"
       }
     },
-    "ASM": {
-      "C": {
-        "generated": "False",
-        "file": "asm_MPI_Pcontrol.c"
-      }
-    },
     "Runtime": {
       "C": {
         "generated": "False",
         "file": "R_MPI_Pcontrol.c"
+      },
+      "fortran": {
+        "generated": "False"
       }
     }
   },
