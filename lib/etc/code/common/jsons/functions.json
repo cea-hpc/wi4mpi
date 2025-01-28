@@ -12654,6 +12654,8 @@
         "In": 1,
         "name": "Request_tab_converter",
         "Out": 1,
+        "if_null_dep":"indx",
+        "if_null":"R_MPI_REQUEST_NULL||*indx != R_MPI_UNDEFINED",
         "if": "R_MPI_SUCCESS && *indx != R_MPI_UNDEFINED",
         "del": "request_array_delete","del_f": "request_r2au"
       },
