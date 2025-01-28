@@ -1,6 +1,6 @@
     
     {%- macro type_prefix(prefix,type) -%}
-            {%- if type == 'int ' or type == 'void ' -%}
+            {%- if type == 'int ' or type == 'void ' or type == 'char ' -%}
             {{type}} *
             {%- else -%}
             {{type}}
