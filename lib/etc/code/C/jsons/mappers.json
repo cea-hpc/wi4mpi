@@ -1,4 +1,11 @@
 {
+  "indx_mapper":{
+    "local_alloc": 1,
+     "a2r":"int_ptr_conv_a2r",
+    "type":"int *",
+    "r2a":"indx_r2a",
+    "debug_type":"%p"
+    },
   "reduce_user_fn_converter": {
     "local_alloc": 0, 
     "a2r": "reduce_user_fn_a2r", 

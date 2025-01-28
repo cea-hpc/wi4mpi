@@ -12654,7 +12654,7 @@
         "In": 1,
         "name": "Request_tab_converter",
         "Out": 1,
-        "if": "R_MPI_SUCCESS",
+        "if": "R_MPI_SUCCESS && *indx != R_MPI_UNDEFINED",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_null_dep": "indx",
         "del": "request_array_delete","del_f": "request_r2au"
@@ -12663,7 +12663,7 @@
         "var": "indx",
         "arg_dep": "",
         "In": 0,
-        "name": "int_ptr_mapper",
+        "name": "indx_mapper",
         "Out": 1
       },
       {

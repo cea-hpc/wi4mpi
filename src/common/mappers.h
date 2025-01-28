@@ -992,7 +992,7 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),&user_fn_wrapper_template,0x100);
+    memcpy(((char *)ptr+0x10),(char*)&user_fn_wrapper_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
@@ -1011,7 +1011,7 @@ static inline void datarep_extent_function_converter_a2r(A_MPI_Datarep_extent_fu
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),&user_datarep_extent_function_template,0x100);
+    memcpy(((char *)ptr+0x10),(char *)&user_datarep_extent_function_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
@@ -1583,5 +1583,10 @@ static inline void length_max_conv_r2a(int *length, int *length_tmp, int app_max
         *length = *length_tmp;
     }
 }
-
+static inline void indx_r2a(int *ia,int *ir){
+    if (*ir==R_MPI_UNDEFINED)
+        *ia=A_MPI_UNDEFINED;
+    else
+        *ia=*ir;
+}
 #endif /*MAPPERS_HEADERS */
