@@ -25,19 +25,19 @@ void mpi_init__(int *);
 void pmpi_init__(int *);
 
 void pmpi_init_(int *);
-#define IF_MPI_MPI_Init pmpi_init_
+#define IF_MPI_Init pmpi_init_
 #pragma weak mpi_init_=pmpi_init_
 #pragma weak mpi_init__=pmpi_init_
 #pragma weak pmpi_init__=pmpi_init_
 void (*INTERFACE_F_LOCAL_MPI_Init)(int *);
-void  IF_MPI_MPI_Init(int *ret)
+void  IF_MPI_Init(int *ret)
 {
 #ifdef DEBUG
-printf("entre : f_MPI_MPI_Init (interface) \n");
+printf("entre : f_MPI_Init (interface) \n");
 #endif
-INTERFACE_F_LOCAL_MPI_MPI_Init(ret);
+INTERFACE_F_LOCAL_MPI_Init(ret);
 #ifdef DEBUG
-printf("sort : f_MPI_MPI_Init (interface) \n");
+printf("sort : f_MPI_Init (interface) \n");
 #endif
 }
 void mpi_init_thread_(int *);
@@ -47,19 +47,19 @@ void mpi_init_thread__(int *);
 void pmpi_init_thread__(int *);
 
 void pmpi_init_thread_(int *);
-#define IF_MPI_MPI_Init_thread pmpi_init_thread_
+#define IF_MPI_Init_thread pmpi_init_thread_
 #pragma weak mpi_init_thread_=pmpi_init_thread_
 #pragma weak mpi_init_thread__=pmpi_init_thread_
 #pragma weak pmpi_init_thread__=pmpi_init_thread_
 void (*INTERFACE_F_LOCAL_MPI_Init_thread)(int *);
-void  IF_MPI_MPI_Init_thread(int *ret)
+void  IF_MPI_Init_thread(int *ret)
 {
 #ifdef DEBUG
-printf("entre : f_MPI_MPI_Init_thread (interface) \n");
+printf("entre : f_MPI_Init_thread (interface) \n");
 #endif
-INTERFACE_F_LOCAL_MPI_MPI_Init_thread(ret);
+INTERFACE_F_LOCAL_MPI_Init_thread(ret);
 #ifdef DEBUG
-printf("sort : f_MPI_MPI_Init_thread (interface) \n");
+printf("sort : f_MPI_Init_thread (interface) \n");
 #endif
 }
 
