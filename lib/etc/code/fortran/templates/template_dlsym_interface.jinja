@@ -41,7 +41,7 @@ if(!interface_handle_f)
 }
 {% for func in funcs %} 
 {% if func['name'][-3:] != 'f2c' and func['name'][-3:] != 'c2f' and func['name'][-5:] != 'c2f08' and func['name'][-5:] != 'f2f08' and func['name'][-5:] != 'f082c' and func['name'][-5:] != 'f082f' and func['name'][:6] != 'MPI_T_' %}
-{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined ) and ( conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] != "False" ) -%}
+{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined )  -%}
     INTERFACE_F_LOCAL_{{func['name']}}=dlsym(interface_handle_f,"_{{func['name']}}");
 {% endif %}
 {% endif %}
@@ -52,7 +52,7 @@ char *target=getenv("WI4MPI_STATIC_TARGET_TYPE");
 if(target&&!strcmp(target,"{{mpilib}}")){
 {% for func in funcs %} 
 {% if func['name'][-3:] != 'f2c' and func['name'][-3:] != 'c2f' and func['name'][-5:] != 'c2f08' and func['name'][-5:] != 'f2f08' and func['name'][-5:] != 'f082c' and func['name'][-5:] != 'f082f' and func['name'][:6] != 'MPI_T_' %}
-{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined ) and ( conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] != "False" ) -%}
+{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined )  -%}
 handle_loader({{func['name']}},INTERF_2_{{mpilib}});
 {% endif %}
 {% endif %}
