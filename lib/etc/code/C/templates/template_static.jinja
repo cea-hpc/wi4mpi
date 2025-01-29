@@ -25,11 +25,11 @@ void debug_printer(const char *, ...);
 #include "helper.h"                                                                                      
 #include "mappers.h"                                                                                     
 __thread int in_w = 0;                                                                                   
-#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || \
-    defined(_INTEL) || defined(_MPC)                                                                     
 int (*local_MPIR_Dup_fn)(A_MPI_Comm oldcomm, int keyval, void *extra_state,                              
                          void *attribute_val_in, void *attribute_val_out,                                
                          int *flag);                                                                     
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || \
+  defined(_MPC)                                                                     
                                                                                                          
 int MPIR_Dup_fn(A_MPI_Comm oldcomm, int keyval, void *extra_state,                                       
                 void *attribute_val_in, void *attribute_val_out, int *flag) {                            

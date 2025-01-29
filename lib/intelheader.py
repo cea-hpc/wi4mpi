@@ -104,13 +104,23 @@ class IntelHeaderGenerator(HeaderGenerator):
 
 #        lines_to_delete = ["extern int * R_MPI_UNWEIGHTED;", "extern int * R_MPI_WEIGHTS_EMPTY;"]
 #        text = delete_lines(lines_to_delete, text)
-        text = re.sub(r"(#define R_MPI_DUP_FN.*)", r"//\1", text, flags=re.MULTILINE)
         text = re.sub(r"([ \t$])MPI_", r"\1R_MPI_", text, flags=re.MULTILINE)
         text = re.sub(r"HAVE_MPI", "HAVE_R_MPI", text, re.MULTILINE)
         text = re.sub(r"BIND_MPI", "BIND_R_MPI", text, re.MULTILINE)
         text = re.sub(r"BIND_MPI", "BIND_R_MPI", text, re.MULTILINE)
         text = re.sub(r"R_MPIX", "MPIX", text, re.MULTILINE)
         text = re.sub(r"F08_MPI", "F08_R_MPI", text, flags=re.MULTILINE)
+        _pattern_block = """
+#define R_MPI_BOTTOM      (void *)0
+extern int * R_MPI_UNWEIGHTED;
+extern int * R_MPI_WEIGHTS_EMPTY;
+"""
+        _replacement_block = """
+#define R_MPI_BOTTOM      (void *)0
+int * R_MPI_UNWEIGHTED;
+int * R_MPI_WEIGHTS_EMPTY;
+"""
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
         _pattern_block = """
 /* See 4.12.5 for R_MPI_F_STATUS(ES)_IGNORE */
