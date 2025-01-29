@@ -39,6 +39,7 @@ class FortranInterfaceGenerator(CodeGenerator):
         self.output_file = "mpi_translation_fort.c"
         self.interface_file = "interface_fort.c"
         self.set_directories(dir_input, dir_output)
+        self.interface_file = os.path.join(dir_output, self.interface_file)
 
     def generate(self):
         self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "CC"

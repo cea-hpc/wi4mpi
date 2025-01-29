@@ -3,8 +3,8 @@
 {% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined ) and ( conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] != "False" ) -%}
 
     {%-  set ret_type = mappers[func['ret']['name']]['type']-%} 
-
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %}  {{ type_prefix('',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
+#ifndef IF_{{func['name']}}
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %}  {{ type_prefix('',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
     #pragma weak {{func['name']|lower}}_=p{{func['name']|lower}}_
 
     #ifdef WI4MPI_STATIC
@@ -17,10 +17,12 @@
 
     #endif /* WI4MPI_STATIC */
 
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} (*INTERFACE_F_LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}}{%endif%}{%-  endfor-%} {%- if ret_type == "int " %} {%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} (*INTERFACE_F_LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}}{%endif%}{%-  endfor-%} {%- if ret_type == "int " %} {%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
 
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%});
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %}{{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%})
     {
-        return INTERFACE_F_LOCAL_{{func['name']}}({%-  for arg in func['args']-%} {%- if 'var' in arg -%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {{ arg["var"].split('[')|first }}{%- endif -%}{%- endfor -%});
+        return INTERFACE_F_LOCAL_{{func['name']}}({%-  for arg in func['args']-%} {%- if 'var' in arg -%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {{ arg["var"].split('[')|first }}{%- endif -%}{%- endfor -%}{%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} ret {%- endif -%});
     }
+
+#endif
 {% endif %}

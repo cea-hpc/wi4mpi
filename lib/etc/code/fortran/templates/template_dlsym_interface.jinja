@@ -39,21 +39,29 @@ if(!interface_handle_f)
 	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
 	exit(1);
 }
-
 {% for func in funcs %} 
-{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['C'] is not defined or conf[func['name']]['Application']['C']['generated'] != "False" or conf[func['name']]['Application']['C']['file'] is defined -%}
-    INTERF_F_LOCAL_{{func['name']}}=dlsym(interface_handle_f,"_{{func['name']}}");
+{% if func['name'][-3:] != 'f2c' and func['name'][-3:] != 'c2f' and func['name'][-5:] != 'c2f08' and func['name'][-5:] != 'f2f08' and func['name'][-5:] != 'f082c' and func['name'][-5:] != 'f082f' and func['name'][:6] != 'MPI_T_' %}
+{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined ) and ( conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] != "False" ) -%}
+    INTERFACE_F_LOCAL_{{func['name']}}=dlsym(interface_handle_f,"_{{func['name']}}");
+{% endif %}
 {% endif %}
 {%- endfor -%}
 #else
 char *target=getenv("WI4MPI_STATIC_TARGET_TYPE");
 {%- for mpilib in mpi_libraries -%}
 if(target&&!strcmp(target,"{{mpilib}}")){
+{% for func in funcs %} 
+{% if func['name'][-3:] != 'f2c' and func['name'][-3:] != 'c2f' and func['name'][-5:] != 'c2f08' and func['name'][-5:] != 'f2f08' and func['name'][-5:] != 'f082c' and func['name'][-5:] != 'f082f' and func['name'][:6] != 'MPI_T_' %}
+{% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined ) and ( conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] != "False" ) -%}
 handle_loader({{func['name']}},INTERF_2_{{mpilib}});
+{% endif %}
+{% endif %}
+{%- endfor -%}
 }
 {% endfor -%}
 if(!target{%- for mpilib in mpi_libraries -%}||strcmp(target,"{{mpilib}}")){%- endfor -%})
     printf("no valid WI4MPI_STATIC_TARGET_TYPE defined\n");exit(1);  
+#endif
 }
     
 
