@@ -353,6 +353,12 @@ switch (*attr_tmp)
          *attr = *attr_tmp;
    }
 }
+static inline void f_indx_r2a(int *ia,int *ir){
+    if (*ir==R_f_MPI_UNDEFINED)
+        *ia=A_f_MPI_UNDEFINED;
+    else
+        *ia=*ir;
+}
 
 
 #endif /*MANUAL_WRAPPER_H*/

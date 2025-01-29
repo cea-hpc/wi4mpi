@@ -3,7 +3,7 @@
     "local_alloc": 1,
      "a2r":"int_ptr_conv_a2r",
     "type":"int ",
-    "r2a":"indx_r2a",
+    "r2a":"f_indx_r2a",
     "debug_type":"%p"
     },
   "const_buffer_mapper": {
