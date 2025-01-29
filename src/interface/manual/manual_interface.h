@@ -29,7 +29,7 @@ void pmpi_init_(int *);
 #pragma weak mpi_init_=pmpi_init_
 #pragma weak mpi_init__=pmpi_init_
 #pragma weak pmpi_init__=pmpi_init_
-void (*INTERFACE_F_LOCAL_MPI_MPI_Init)(int *);
+void (*INTERFACE_F_LOCAL_MPI_Init)(int *);
 void  IF_MPI_MPI_Init(int *ret)
 {
 #ifdef DEBUG
@@ -51,7 +51,7 @@ void pmpi_init_thread_(int *);
 #pragma weak mpi_init_thread_=pmpi_init_thread_
 #pragma weak mpi_init_thread__=pmpi_init_thread_
 #pragma weak pmpi_init_thread__=pmpi_init_thread_
-void (*INTERFACE_F_LOCAL_MPI_MPI_Init_thread)(int *);
+void (*INTERFACE_F_LOCAL_MPI_Init_thread)(int *);
 void  IF_MPI_MPI_Init_thread(int *ret)
 {
 #ifdef DEBUG
