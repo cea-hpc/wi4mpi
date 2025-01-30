@@ -8,10 +8,10 @@ void pmpi_init__(int *);
 
 void pmpi_init_(int *);
 
-#define A_f_MPI_Init _PMPI_Init
-#pragma weak mpi_init_ = _PMPI_Init
-#pragma weak mpi_init__ = _PMPI_Init
-#pragma weak pmpi_init__ = _PMPI_Init
+#define A_f_MPI_Init _MPI_Init
+#pragma weak mpi_init_ = _MPI_Init
+#pragma weak mpi_init__ = _MPI_Init
+#pragma weak pmpi_init__ = _MPI_Init
 extern unsigned long long WI4MPI_Init_timeout;
 extern unsigned int WI4MPI_Init_print;
 void (*LOCAL_f_MPI_Init)(int *);

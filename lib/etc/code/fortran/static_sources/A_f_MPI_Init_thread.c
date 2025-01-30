@@ -3,10 +3,10 @@ void mpi_init_thread__(int *, int *, int *);
 void pmpi_init_thread_(int *, int *, int *);
 void pmpi_init_thread__(int *, int *, int *);
 void pmpi_init_thread_(int *, int *, int *);
-#define A_f_MPI_Init_thread _PMPI_Init_thread
-#pragma weak mpi_init_thread_ = _PMPI_Init_thread
-#pragma weak mpi_init_thread__ = _PMPI_Init_thread
-#pragma weak pmpi_init_thread__ = _PMPI_Init_thread
+#define A_f_MPI_Init_thread _MPI_Init_thread
+#pragma weak mpi_init_thread_ = _MPI_Init_thread
+#pragma weak mpi_init_thread__ = _MPI_Init_thread
+#pragma weak pmpi_init_thread__ = _MPI_Init_thread
 extern unsigned long long WI4MPI_Init_thread_timeout;
 extern unsigned int WI4MPI_Init_thread_print;
 void (*LOCAL_f_MPI_Init_thread)(int *, int *, int *);

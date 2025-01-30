@@ -599,6 +599,14 @@
       }
     }
   },
+  "MPI_Error_string": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Error_string.c",
+        "generated": "False"
+      }
+    }
+  },
   "MPI_T_pvar_session_free": {
     "Application": {
       "C": {
