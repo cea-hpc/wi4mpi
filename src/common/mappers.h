@@ -1589,4 +1589,29 @@ static inline void indx_r2a(int *ia,int *ir){
     else
         *ia=*ir;
 }
+static inline void fstring_max_conv_r2a(char *name, char *name_tmp, fort_string_length app_size, int resultlen) {
+    if (resultlen < app_size) {
+        strncpy(name, name_tmp, resultlen);
+        memset(name+resultlen, ' ', app_size-resultlen);
+    } else {
+        strncpy(name, name_tmp, app_size);
+    }
+}
+
+// spaces in keys and values for MPI_Info are ignored, but not in other strings.
+// remove_leading allow to ignore leading spaces for key/value, in case the actual string fit in the runtime when ignoring leading spaces but not with them.
+static inline void fstring_max_conv_a2r(char *name, char *name_tmp, fort_string_length app_size, fort_string_length run_size, bool remove_leading) {
+    if (remove_leading) {
+        int i=0;
+        while (i < app_size && name[i] == ' ') i++;
+        name+=i;
+        app_size-=i;
+    }
+    if (run_size <= app_size) {
+        strncpy(name_tmp, name, run_size);
+    } else {
+        strncpy(name_tmp, name, app_size);
+        memset(name_tmp+app_size, ' ', run_size-app_size);
+    }
+}
 #endif /*MAPPERS_HEADERS */
