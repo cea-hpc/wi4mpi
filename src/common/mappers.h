@@ -26,6 +26,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "fort_common.h"
+#include <stdbool.h>
 #ifndef EXTERN_ALLOCATED
 #if defined(OMPI_INTEL) || defined(_INTEL)
 extern char ompi_mpi_comm_null[];
