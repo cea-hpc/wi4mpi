@@ -957,10 +957,6 @@
       "C": {
         "generated": "False",
         "file": "A_MPI_Pcontrol.c"
-      },
-      "fortran": {
-        "generated": "False",
-        "file": "A_f_MPI_Pcontrol.c"
       }
     },
     "Runtime": {

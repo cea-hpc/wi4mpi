@@ -4,12 +4,17 @@
       {
         "var": "level",
         "arg_dep": "",
-        "In": 0,
+        "In": 1,
         "name": "int_mapper",
         "Out": 0
       },
       { 
-        "variadic": "True"
+        "var":"none",
+        "variadic": "True",
+        "In": 0,
+        "name":"int_mapper",
+        "Out": 0
+
       }
     ],
     "name": "MPI_Pcontrol",

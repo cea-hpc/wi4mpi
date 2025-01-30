@@ -119,7 +119,7 @@
         {% endif %}
     {%-  endfor %} 
     {% if ret_type == "int " %} int ret_tmp; 
-        LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%}{%- if func['args']|count != 0 -%}, {%- endif -%} &ret_tmp );
+        LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{% if arg['variadic']|default("") != "True" %} {%-  if loop.index > 1  -%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%- endif -%} {%-  endfor-%}{%- if func['args']|count != 0 -%}, {%- endif -%} &ret_tmp );
 {%else %}
        {{ret_type}} ret_tmp= LOCAL_f_{{func['name']}}({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}{%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%});
 {%endif%}
