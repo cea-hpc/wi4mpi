@@ -1,0 +1,14 @@
+digraph G {
+  // Nodes
+  node [shape=box];
+  Application [label="Application: MPI_Init (OpenMPI)"];
+  Runtime [label="Runtime: MPI_Init (IntelMPI)"];
+  node [shape=ellipse, style="filled", fillcolor=orange];
+  Translation;
+  node [shape=box, style="rounded,filled", fillcolor=lightblue];
+  WI4MPI [label="WI4MPI: A_MPI_Init"];
+  // Links
+  Application -> WI4MPI [label="Phase 1"];
+  Translation -> WI4MPI [label="Phase 2", dir=both];
+  WI4MPI -> Runtime [label="Phase 3"];
+}

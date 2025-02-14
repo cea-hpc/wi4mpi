@@ -1,0 +1,16 @@
+digraph G {
+  rankdir=LR;
+  // Nodes
+  node [shape=box];
+  lib_ompi [label="Lib_OMPI"];
+  lib_impi [label="Lib_IMPI"];
+  openmpi [label="OpenMPI"];
+  intelmpi [label="IntelMPI"];
+  node [shape=box, style="rounded,filled", fillcolor=lightblue];
+  Interface [label="INTERFACE\n libmpi.so"];
+  // Links
+  Interface -> lib_ompi [label="dlopen"];
+  lib_ompi -> openmpi [label="dlopen"];
+  Interface -> lib_impi [label="dlopen"];
+  lib_impi -> intelmpi [label="dlopen"];
+}
