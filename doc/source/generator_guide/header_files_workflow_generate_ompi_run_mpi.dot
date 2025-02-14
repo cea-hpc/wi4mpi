@@ -1,0 +1,97 @@
+digraph G {
+    rankdir=TB;  // Orientation from top to bottom
+    // rankdir=LB;  // Orientation from Rleft to right
+
+    //
+    // Classes definition:
+    //
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator_generate [label="generate"];
+            Generator_generate_header [label="generate_header"];
+            // Links
+            Generator_generate -> Generator_generate_header;
+    }
+    subgraph cluster_class_OmpiHeaderGenerator {
+            label=<<B>OmpiHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            OmpiHeaderGenerator_generate [label="generate"];
+            OmpiHeaderGenerator__generate_run_mpih [label="_generate_run_mpih"];
+            OmpiHeaderGenerator_ompi_replace_mpi_with_rmpi [label="ompi_replace_mpi_with_rmpi"];
+            // Links
+            OmpiHeaderGenerator__generate_run_mpih -> OmpiHeaderGenerator_ompi_replace_mpi_with_rmpi;
+    }
+    subgraph cluster_class_HeaderGenerator {
+            label=<<B>HeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            HeaderGenerator_generate [label="generate"];
+            HeaderGenerator__generate_run_mpioh [label="_generate_run_mpih"];
+//            HeaderGenerator__replace_mpi_with_rmpi [label="_replace_mpi_with_rmpi"];
+//            HeaderGenerator_intel_exceptions_run_mpioh [label="intel_exceptions_run_mpioh"];
+            // Links
+//            HeaderGenerator__generate_run_mpioh -> HeaderGenerator__replace_mpi_with_rmpi;
+//            HeaderGenerator__generate_run_mpioh -> HeaderGenerator_intel_exceptions_run_mpioh;
+    }
+
+    // Module definition: rectangle
+    subgraph cluster_module_textoperator {
+            label=<<B>textoperator</B>>;
+            labeljust="l";
+            color=red;
+            style=rounded;
+            bgcolor=lightsalmon;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            textoperator_replacement_from_conf_file [label="replacement_from_conf_file"];
+            textoperator_delete_lines [label="delete_lines"];
+            textoperator_function_to_delete [label="function_to_delete"];
+    }
+
+    node [shape=ellipse, style=filled, fillcolor=orange];
+    resub [label="re.sub"];
+
+
+    //
+    node [shape=folder, style=filled, fillcolor=red];
+    _OMPI [label="<interface_header_dir>/_OMPI"]
+    node [shape=folder, style=filled, fillcolor=green];
+    etc [label="etc/header"];
+    //
+
+    //
+    // Functionnal relationship
+    //
+    Generator_generate_header -> OmpiHeaderGenerator_generate;
+    OmpiHeaderGenerator_generate -> HeaderGenerator_generate;
+    HeaderGenerator_generate -> OmpiHeaderGenerator__generate_run_mpih;
+    OmpiHeaderGenerator_ompi_replace_mpi_with_rmpi -> textoperator_replacement_from_conf_file;
+    OmpiHeaderGenerator_ompi_replace_mpi_with_rmpi -> textoperator_delete_lines;
+    OmpiHeaderGenerator_ompi_replace_mpi_with_rmpi -> textoperator_function_to_delete;
+    OmpiHeaderGenerator_ompi_replace_mpi_with_rmpi -> resub;
+
+    //
+    // Data Flow
+    //
+    OmpiHeaderGenerator__generate_run_mpih -> _OMPI;
+    etc -> OmpiHeaderGenerator_ompi_replace_mpi_with_rmpi;
+}

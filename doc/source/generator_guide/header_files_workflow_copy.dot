@@ -1,0 +1,99 @@
+
+
+digraph G {
+
+    rankdir=TB;  // Orientation from top to bottom
+    // rankdir=LB;  // Orientation from Rleft to right
+
+    //
+    // Classes definition:
+    //
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator_generate [label="generate"];
+            // Generator_generate_code [label="generate_code"];
+            Generator_generate_header [label="generate_header"];
+            // Links
+            Generator_generate -> Generator_generate_header;
+    }
+    subgraph cluster_class_IntelIntelHeaderGenerator {
+            label=<<B>IntelIntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            node [shape=parallelogram, style=filled, fillcolor=green];
+            IntelIntelHeaderGenerator_app [label="app=intelmpi"];
+            IntelIntelHeaderGenerator_run [label="run=intelmpi"];
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelIntelHeaderGenerator_generate [label="generate"];
+    }
+    subgraph cluster_class_IntelHeaderGenerator {
+            label=<<B>IntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelHeaderGenerator_generate [label="generate"];
+    }
+    subgraph cluster_class_HeaderGenerator {
+            label=<<B>HeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            HeaderGenerator_generate [label="generate"];
+            HeaderGenerator_copy_files [label="copy_files"];
+            HeaderGenerator_copy_file [label="copy_file"];
+            // Output: parallelogram
+            node [shape=parallelogram, style=filled, fillcolor=grey];
+            dir_input;
+            dir_output;
+            // Links
+            HeaderGenerator_generate -> HeaderGenerator_copy_files;
+            HeaderGenerator_copy_files -> HeaderGenerator_copy_file [label="<input_file_name>\n<output_file_name>"];
+            dir_input -> HeaderGenerator_copy_files;
+            dir_output -> HeaderGenerator_copy_files;
+    }
+
+
+
+    //
+    node [shape=ellipse, style=filled, fillcolor=orange];
+    copy [label="shutil.copy2"]
+    //
+    node [shape=folder, style=filled, fillcolor=red];
+    INTEL_INTEL [label="<preload_header_dir>/INTEL_INTEL"]
+    //
+
+    //
+    // Functionnal relationship
+    //
+    Generator_generate_header -> IntelIntelHeaderGenerator_generate [label="dir_output=<preload_header_dir>+INTEL_INTEL \n dir_input=src/preload/header/scripts/intel_intel_headers"];
+    IntelIntelHeaderGenerator_generate -> IntelHeaderGenerator_generate;
+    IntelHeaderGenerator_generate -> HeaderGenerator_generate;
+    HeaderGenerator_copy_file -> copy ;
+
+    //
+    // Data Flow
+    //
+    copy -> INTEL_INTEL [label="run_mpi.h app_mpi.h run_mpio.h"];
+    IntelIntelHeaderGenerator_app -> HeaderGenerator_copy_files;
+    IntelIntelHeaderGenerator_run -> HeaderGenerator_copy_files;
+}
+

@@ -10,18 +10,21 @@ digraph mpi_norm_workflow {
             style=rounded;
             bgcolor=lightblue;
 
+            // Test
+            node [shape=parallelogram, style=filled, fillcolor=grey];
+            Generator_mpi_norm [label="mpi_norm"];
             // Method definition: ellipse
             node [shape=ellipse, style=filled, fillcolor=orange];
             Generator__init__ [label="__init__"];
             Generator_generate [label="generate"];
             Generator_generate_code [label="generate_code"];
-            Generator__init__ -> Generator_generate;
+            Generator__init__ -> Generator_mpi_norm [label="If mpi_norm in\n mpi_available_norm"];
+            Generator_mpi_norm -> Generator_generate;
             Generator_generate -> Generator_generate_code;
     }
 
-
     subgraph cluster_class_CodeGenerator {
-            label=<<B>CodeGenerator</B>>; 
+            label=<<B>CodeGenerator</B>>;
             labeljust="l";
             color=blue;
             style=rounded;

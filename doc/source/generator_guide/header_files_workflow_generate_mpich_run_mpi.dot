@@ -1,0 +1,127 @@
+digraph G {
+    rankdir=TB;  // Orientation from top to bottom
+    // rankdir=LB;  // Orientation from Rleft to right
+
+    //
+    // Classes definition:
+    //
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator_generate [label="generate"];
+            Generator_generate_header [label="generate_header"];
+            // Links
+            Generator_generate -> Generator_generate_header;
+    }
+    subgraph cluster_class_MpichHeaderGenerator {
+            label=<<B>MpichHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            MpichHeaderGenerator_mpich_copyright [label="mpich_copyright"];
+            MpichHeaderGenerator_generate [label="generate"];
+            MpichHeaderGenerator__generate_run_mpih [label="_generate_run_mpih"];
+            MpichHeaderGenerator_mpich_generate_run_mpih [label="mpich_generate_run_mpih"];
+            // Links
+            MpichHeaderGenerator__generate_run_mpih -> MpichHeaderGenerator_mpich_generate_run_mpih;
+            MpichHeaderGenerator__generate_run_mpih -> MpichHeaderGenerator_mpich_copyright;
+    }
+    subgraph cluster_class_IntelHeaderGenerator {
+            label=<<B>IntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelHeaderGenerator_intel_generate_run_mpih [label="intel_generate_run_mpih"];
+            IntelHeaderGenerator__generate_run_mpih [label="_generate_run_mpih"];
+            IntelHeaderGenerator_intel_exceptions_run_mpih [label="intel_exceptions_run_mpih"];
+            // Links
+            IntelHeaderGenerator__generate_run_mpih -> IntelHeaderGenerator_intel_generate_run_mpih;
+    }
+    subgraph cluster_class_HeaderGenerator {
+            label=<<B>HeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            HeaderGenerator_generate [label="generate"];
+//            HeaderGenerator__generate_run_mpih [label="_generate_run_mpih"];
+            HeaderGenerator__replace_mpi_with_rmpi [label="_replace_mpi_with_rmpi"];
+            // Links
+    }
+
+    // Module definition: rectangle
+    subgraph cluster_module_textoperator {
+            label=<<B>textoperator</B>>;
+            labeljust="l";
+            color=red;
+            style=rounded;
+            bgcolor=lightsalmon;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+//            textoperator_replacement_from_conf_file [label="replacement_from_conf_file"];
+            textoperator_delete_lines [label="delete_lines"];
+//            textoperator_replace_bloc_from_conf_file [label="replace_bloc_from_conf_file"];
+//            textoperator_function_to_delete [label="function_to_delete"];
+//            textoperato_delete_bloc_from_conf_file [label="delete_bloc_from_conf_file"];
+//            textoperator_delete_line_from_pattern [label="delete_line_from_pattern"];
+    }
+
+    node [shape=ellipse, style=filled, fillcolor=orange];
+    resub [label="re.sub"];
+
+
+    //
+    node [shape=folder, style=filled, fillcolor=red];
+    _MPICH [label="<interface_header_dir>/_MPICH"]
+//    node [shape=folder, style=filled, fillcolor=green];
+//    etc [label="etc/header"];
+    //
+
+    //
+    // Functionnal relationship
+    //
+    Generator_generate_header -> MpichHeaderGenerator_generate;
+    MpichHeaderGenerator_generate -> HeaderGenerator_generate;
+    MpichHeaderGenerator_mpich_generate_run_mpih -> IntelHeaderGenerator__generate_run_mpih [dir=both];
+    HeaderGenerator_generate -> MpichHeaderGenerator__generate_run_mpih;
+    IntelHeaderGenerator_intel_generate_run_mpih -> HeaderGenerator__replace_mpi_with_rmpi
+    IntelHeaderGenerator_intel_generate_run_mpih -> IntelHeaderGenerator_intel_exceptions_run_mpih
+    MpichHeaderGenerator_mpich_copyright -> resub;
+    HeaderGenerator__replace_mpi_with_rmpi -> resub;
+    IntelHeaderGenerator_intel_exceptions_run_mpih -> resub;
+    IntelHeaderGenerator_intel_exceptions_run_mpih -> textoperator_delete_lines;
+//    HeaderGenerator__common_generate_app_mpih -> textoperator_delete_lines;
+//    HeaderGenerator__common_generate_app_mpih -> textoperator_replacement_from_conf_file;
+//    HeaderGenerator__common_generate_app_mpih -> textoperator_replace_bloc_from_conf_file;
+//    HeaderGenerator__common_generate_app_mpih -> textoperator_function_to_delete;
+//    HeaderGenerator__common_generate_app_mpih -> textoperato_delete_bloc_from_conf_file;
+//    HeaderGenerator__common_generate_app_mpih -> textoperator_delete_line_from_pattern;
+//    HeaderGenerator__common_generate_app_mpih -> resub;
+
+    //
+    // Data Flow
+    //
+    MpichHeaderGenerator_mpich_generate_run_mpih -> _MPICH;
+//    etc -> HeaderGenerator__common_generate_app_mpih;
+//    etc -> OmpiOmpiHeaderGenerator;
+//    OmpiOmpiHeaderGenerator -> INTEL_INTEL;
+}
+

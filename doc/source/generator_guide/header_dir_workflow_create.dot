@@ -1,0 +1,93 @@
+digraph G {
+
+    rankdir=TB;  // Orientation from top to bottom
+    // rankdir=LB;  // Orientation from Rleft to right
+
+    //
+    // Classes definition:
+    //
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Output: parallelogram
+            node [shape=parallelogram, style=filled, fillcolor=grey];
+            preload_header_dir;
+            interface_header_dir;
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator_generate [label="generate"];
+            // Generator_generate_code [label="generate_code"];
+            Generator_generate_header [label="generate_header"];
+            // Links
+            Generator_generate -> Generator_generate_header;
+            interface_header_dir -> Generator_generate_header;
+            preload_header_dir -> Generator_generate_header;
+    }
+    subgraph cluster_class_IntelIntelHeaderGenerator {
+            label=<<B>IntelIntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelIntelHeaderGenerator__init__ [label="__init__"];
+    }
+    subgraph cluster_class_IntelHeaderGenerator {
+            label=<<B>IntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelHeaderGenerator__init__ [label="__init__"];
+    }
+    subgraph cluster_class_HeaderGenerator {
+            label=<<B>HeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            HeaderGenerator__init__ [label="__init__"];
+            HeaderGenerator_set_directories [label="set_directories"];
+            // Output: parallelogram
+            node [shape=parallelogram, style=filled, fillcolor=red];
+            HeaderGenerator_dir_input [label="dir_input"];
+            HeaderGenerator_dir_output [label="dir_output"];
+            // Links
+            HeaderGenerator__init__ -> HeaderGenerator_set_directories;
+            HeaderGenerator_set_directories -> HeaderGenerator_dir_input;
+            HeaderGenerator_set_directories -> HeaderGenerator_dir_output;
+    }
+
+    //
+    node [shape=ellipse, style=filled, fillcolor=orange];
+    makedirs [label="os.makedirs"]
+    //
+    node [shape=folder, style=filled, fillcolor=red];
+    INTEL_INTEL [label="<preload_header_dir>/INTEL_INTEL"]
+    //
+
+    //
+    // Functionnal relationship
+    //
+    Generator_generate_header -> IntelIntelHeaderGenerator__init__ [label="dir_output=<preload_header_dir>+INTEL_INTEL \n dir_input=src/preload/header/scripts/intel_intel_headers"];
+    IntelIntelHeaderGenerator__init__ -> IntelHeaderGenerator__init__;
+    IntelHeaderGenerator__init__ -> HeaderGenerator__init__;
+    HeaderGenerator_set_directories -> makedirs [label="dir_output"];
+
+    //
+    // Data Flow
+    //
+    makedirs -> INTEL_INTEL;
+}

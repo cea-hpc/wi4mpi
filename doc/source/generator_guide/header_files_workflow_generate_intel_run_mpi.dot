@@ -1,0 +1,95 @@
+digraph G {
+    rankdir=TB;  // Orientation from top to bottom
+    // rankdir=LB;  // Orientation from Rleft to right
+
+    //
+    // Classes definition:
+    //
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator_generate [label="generate"];
+            Generator_generate_header [label="generate_header"];
+            // Links
+            Generator_generate -> Generator_generate_header;
+    }
+    subgraph cluster_class_IntelHeaderGenerator {
+            label=<<B>IntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelHeaderGenerator_generate [label="generate"];
+            IntelHeaderGenerator__generate_run_mpih [label="_generate_run_mpih"];
+            IntelHeaderGenerator_intel_generate_run_mpih [label="intel_generate_run_mpih"];
+            IntelHeaderGenerator_intel_exceptions_run_mpih [label="intel_exceptions_run_mpih"];
+            // Links
+            IntelHeaderGenerator__generate_run_mpih -> IntelHeaderGenerator_intel_generate_run_mpih;
+            IntelHeaderGenerator__generate_run_mpih -> IntelHeaderGenerator_intel_exceptions_run_mpih;
+    }
+    subgraph cluster_class_HeaderGenerator {
+            label=<<B>HeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            HeaderGenerator_generate [label="generate"];
+            HeaderGenerator__replace_mpi_with_rmpi [label="_replace_mpi_with_rmpi"];
+    }
+
+    // Module definition: rectangle
+    subgraph cluster_module_textoperator {
+            label=<<B>textoperator</B>>;
+            labeljust="l";
+            color=red;
+            style=rounded;
+            bgcolor=lightsalmon;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            // textoperator_replacement_from_conf_file [label="replacement_from_conf_file"];
+            textoperator_delete_lines [label="delete_lines"];
+    }
+
+    node [shape=ellipse, style=filled, fillcolor=orange];
+    resub [label="re.sub"];
+
+
+    //
+    node [shape=folder, style=filled, fillcolor=red];
+    _INTEL [label="<interface_header_dir>/_INTEL"]
+//    node [shape=folder, style=filled, fillcolor=green];
+//    etc [label="etc/header"];
+    //
+
+    //
+    // Functionnal relationship
+    //
+    Generator_generate_header -> IntelHeaderGenerator_generate;
+    IntelHeaderGenerator_generate -> HeaderGenerator_generate;
+    HeaderGenerator_generate -> IntelHeaderGenerator__generate_run_mpih;
+    IntelHeaderGenerator_intel_generate_run_mpih-> HeaderGenerator__replace_mpi_with_rmpi;
+    IntelHeaderGenerator_intel_exceptions_run_mpih -> textoperator_delete_lines;
+    IntelHeaderGenerator_intel_exceptions_run_mpih -> resub;
+    HeaderGenerator__replace_mpi_with_rmpi -> resub;
+
+    //
+    // Data Flow
+    //
+    IntelHeaderGenerator_intel_generate_run_mpih -> _INTEL;
+//    etc -> IntelIntelHeaderGenerator;
+//    IntelIntelHeaderGenerator -> INTEL_INTEL;
+}
+
