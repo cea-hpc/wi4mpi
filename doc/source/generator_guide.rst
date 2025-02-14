@@ -187,31 +187,193 @@ Aliases
 Workflow
 ========
 
-.. code-block::
-    :caption: Input header files
-    :name: graph_workflow_header_input
 
-    src/preload/header/scripts/<APP>_<RUN>_headers/<implementation_name>-<version>_mpi.h
-    src/interface/header/scripts/_<RUN>_headers
+As can be seen in :ref:`the graph below <graph_header_dir_workflow_init>`, the :code:`--interface_header_dir` and :code:`--preload_header_dir` options pass the prefixes of the writing directories of the preload and interface headers to the generator when initializing an object of the :code:`Generator` class.
+Their value is stored in the :code:`interface_header_dir` and :code:`preload_header_dir` class attributes when calling the :code:`set_directories` method.
 
-.. topic:: Reminder from :ref:`header_generator_output_directories`
+.. graphviz:: generator_guide/header_dir_workflow_init.dot
+    :caption: Set header directories prefix
+    :name: graph_header_dir_workflow_init
 
-    - :code:`<interface_dir>` is defined by the option :code:`--interface_header_dir`. Default value is (:file:`src/interface/header`)
-    - :code:`<preload_dir>` is defined by the option :code:`--preload_header_dir`. Default value is (:file:`src/preload/header`)
+.. tip::
 
-.. code-block::
-    :caption: Workflow of header files
-    :name: graph_workflow_header_setup
+    Default values are :file:`src/interface/header` and :file:`src/preload/header`
 
-    <preload_dir> ──┬─▶ dir_output ┬───▶ generate_{header, interface}
-                    │              │                   │
-    <interface_dir> ┘   dir_input ─┘                generate
-                            ¦                          │
-                            ¦                     copy_files
-                            ¦                          │
-                            ¦                      copy_file
-                            ¦                          │
-                        symbolic link ---------▶ shutil.copy2 ──▶ dir_output/<APP_RUN>
+Then, the creation of these folders is done during the initialization of each header generation class during the execution of the :code:`Generator.generate()` method.
+We can see for example the case of the generation of Intel-Intel preload headers on the graph :ref:`graph_header_dir_workflow_create`.
+The value of :code:`preload_header_dir` previously defined during the initialization step of the :code:`Generator` class is transmitted to the :code:`set_directories` method of the main :code:`HeaderGenerator` class which then calls the :code:`os.makedirs` builtin to create the :code:`<preload_header_dir>/INTEL_INTEL` subfolder.
+
+.. graphviz:: generator_guide/header_dir_workflow_create.dot
+    :caption: Create header directories prefix
+    :name: graph_header_dir_workflow_create
+
+Once the folders are created, it is the turn of the header files.
+The actions concerning them, illustrated on the graph :ref:``, are also triggered by the :code:`generate` method of each generation class.
+The basic headers are first copied from :code:`<dir_input>` to :code:`<dir_output>`.
+To do this, the :code:`app` and :code:`run` attributes are used to form the strings of the file names to be copied.
+This excerpt from the code of the :code:`copy_files` method illustrates the Intel-Intel case:
+
+.. code-block:: python
+
+    input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpio.h"
+    self.copy_file(input_file_name, "app_mpio.h")
+    input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpi.h"
+    self.copy_file(input_file_name, "app_mpi.h")
+
+    input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpio.h"
+    self.copy_file(input_file_name, "run_mpio.h")
+    input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpi.h"
+    self.copy_file(input_file_name, "run_mpi.h")
+
+The names and paths of the files to be copied and their destination are passed one by one to the :code:`copy_file` method.
+
+.. tip::
+
+    The names of the final files are defined in the :code:`HeaderGenerator` class.
+
+    .. code-block:: python
+
+            _run_mpi_header_file = "run_mpi.h"
+            _run_mpio_header_file = "run_mpio.h"
+            _app_mpi_header_file = "app_mpi.h"
+            _app_mpio_header_file = "app_mpio.h"
+            _wrapper_f_header_file = "wrapper_f.h"
+            _run_mpi_proto_header_file = "run_mpi_proto.h"
+            _app_mpi_proto_header_file = "app_mpi_proto.h"
+
+
+.. graphviz:: generator_guide/header_files_workflow_copy.dot
+    :caption: Copy header files
+    :name: graph_header_files_workflow_copy
+
+Then the copied files are modified by the following methods:
+
+.. code-block:: python
+
+    _generate_run_mpih
+    _generate_run_mpioh
+    _generate_app_mpih
+    _generate_app_mpioh
+    _generate_run_mpi_protoh
+    _generate_app_mpi_protoh
+    _generate_wrapper_fh
+
+..
+    Toutes ces méthodes sont définies dans la classe principale :code:`HeaderGenerator`.
+    Elles peuvent ensuite être surchargées dans les sous-classes dédiées à chaque combinaisons :code:`<APP>-<RUN>` d'implémentation MPI.
+    Diverses méthodes sont utilisées afin de mutualiser les modifications de fichier.
+    Ainsi, la description complète du workflow de la génération de chaque header peut s'avérer complexe.
+
+All these methods are defined in the main class :code:`HeaderGenerator`.
+They can then be overridden in subclasses dedicated to each combination :code:`<APP>-<RUN>` of MPI implementation.
+Various methods are used to pool file modifications.
+Thus, the complete description of the workflow for generating each header can be complex.
+
+Preload mode: IntelMPI application side -- IntelMPI runtime side
+----------------------------------------------------------------
+
+:file:`run_mpi.h`
+~~~~~~~~~~~~~~~~
+
+..
+    La génération du header :file:`run_mpi.h` dans le cas Intel-Intel est illustré dans le graphique :ref:`graph_header_files_workflow_generate_intel_intel_run_mpi`.
+    Un objet de la classe :code:`IntelIntelHeaderGenerator` est initialisé dans la méthode :code:`generate_header` de la classe :code:`Generator`.
+    La méthode :code:`generate` de :code:`IntelIntelHeaderGenerator` est héritée de la classe :code:`HeaderGenerator` par la classe :code:`IntelHeaderGenerator`.
+    On y trouve l'appel à la méthode dédiée à la génération du fichier :file:`run_mpi.h`: :code:`_generate_run_mpih`.
+    Celle-ci va successivement appeler :code:`intel_generate_run_mpih` (de la classe :code:`IntelHeaderGenerator`) et :code:`intel_preload_exception_header_run_mpih`.
+    La première méthode applique les modifications communes apportées par :code:`_replace_mpi_with_rmpi` de la classe :code:`HeaderGenerator` et celles de :code:`intel_exceptions_run_mpih`.
+    Les modifications sont ensuite enregistrés dans :file:`run_mpi.h`.
+    Enfin, :code:`intel_preload_exception_header_run_mpih` applique les dernières modifications. Pour cela, un fichier de :file:`etc/header` contenant des instructions de substitution est passé à la fonction :code:`replacement_from_conf_file` et des lignes sont supprimées par la fonction :code:`delete_lines`. Ces deux fonctions appartiennent au module :code:`textoperator`.
+
+The generation of the header :file:`run_mpi.h` in the Intel-Intel case is illustrated in the :ref:`graph below <graph_header_files_workflow_generate_intel_intel_run_mpi>`.
+An object of the class :code:`IntelIntelHeaderGenerator` is initialized in the method :code:`generate_header` of the class :code:`Generator`.
+The method :code:`generate` of :code:`IntelIntelHeaderGenerator` is inherited from the class :code:`HeaderGenerator` by the class :code:`IntelHeaderGenerator`.
+We find there the call to the method dedicated to the generation of the file :file:`run_mpi.h`: :code:`_generate_run_mpih`.
+This will successively call :code:`intel_generate_run_mpih` (from the :code:`IntelHeaderGenerator` class) and :code:`intel_preload_exception_header_run_mpih`.
+The first method applies the common modifications made by :code:`_replace_mpi_with_rmpi` from the :code:`HeaderGenerator` class and those of :code:`intel_exceptions_run_mpih`.
+The modifications are then saved in :file:`run_mpi.h`.
+Finally, :code:`intel_preload_exception_header_run_mpih` applies the latest modifications. To do this, a file from :file:`etc/header` containing substitution instructions is passed to the :code:`replacement_from_conf_file` function and lines are deleted by the :code:`delete_lines` function. These two functions belong to the :code:`textoperator` module.
+
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_run_mpi.dot
+    :caption: Generating ``run_mpi.h`` for IntelMPI application side -- IntelMPI runtime side
+    :name: graph_header_files_workflow_generate_intel_intel_run_mpi
+
+:file:`app_mpi.h`
+~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_app_mpi.dot
+    :caption: Generating ``app_mpi.h`` for IntelMPI application side -- IntelMPI runtime side
+    :name: graph_header_files_workflow_generate_intel_intel_app_mpi
+
+:file:`run_mpio.h`
+~~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_run_mpio.dot
+    :caption: Generating ``run_mpio.h`` for IntelMPI application side -- IntelMPI runtime side
+    :name: graph_header_files_workflow_generate_intel_intel_run_mpio
+
+:file:`app_mpio.h`
+~~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_app_mpio__short.dot
+    :caption: Generating ``app_mpio.h`` for IntelMPI application side -- IntelMPI runtime side (short workflow)
+    :name: graph_header_files_workflow_generate_intel_intel_app_mpio__short
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_app_mpio.dot
+    :caption: Generating ``app_mpio.h`` for IntelMPI application side -- IntelMPI runtime side
+    :name: graph_header_files_workflow_generate_intel_intel_app_mpio
+
+IntelMPI interface mode
+-----------------------
+
+:file:`run_mpi.h`
+~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_run_mpi.dot
+    :caption: Generating ``run_mpi.h`` for IntelMPI
+    :name: graph_header_files_workflow_generate_intel_run_mpi
+
+:file:`app_mpi.h`
+~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_app_mpi.dot
+    :caption: Generating ``app_mpi.h`` for IntelMPI
+    :name: graph_header_files_workflow_generate_intel_app_mpi
+
+:file:`run_mpio.h`
+~~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_intel_run_mpio.dot
+    :caption: Generating ``run_mpio.h`` for IntelMPI
+    :name: graph_header_files_workflow_generate_intel_run_mpio
+
+OpenMPI interface mode
+----------------------
+
+:file:`run_mpi.h`
+~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_ompi_run_mpi.dot
+    :caption: Generating ``run_mpi.h`` for OpenMPI
+    :name: graph_header_files_workflow_generate_ompi_run_mpi
+
+:file:`app_mpi.h`
+~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_ompi_app_mpi.dot
+    :caption: Generating ``app_mpi.h`` for OpenMPI
+    :name: graph_header_files_workflow_generate_ompi_app_mpi
+
+MPICH interface mode
+--------------------
+
+:file:`run_mpi.h`
+~~~~~~~~~~~~~~~~
+
+.. graphviz:: generator_guide/header_files_workflow_generate_mpich_run_mpi.dot
+    :caption: Generating ``run_mpi.h`` for MPICH
+    :name: graph_header_files_workflow_generate_mpich_run_mpi
 
 Code generator
 ##############
