@@ -17,11 +17,6 @@ author = 'Adrien Cotte, Vincent Ducrot, Tony Delforge, Kevin Juilly'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = [
-    'sphinx.ext.todo',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.graphviz',
-]
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
@@ -51,12 +46,17 @@ html_static_path = ['_static']
 numfig = True
 
 WI4MPI_DOC_TODOLIST = bool(os.getenv("WI4MPI_DOC_TODOLIST", False))
+extensions = [
+    'sphinx.ext.todo',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.graphviz',
+]
 
 if WI4MPI_DOC_TODOLIST:
     todo_include_todos = True
     todo_link_only = True
 else:
-    exclude_patterns.append("TODO_list.rst")
+    exclude_patterns.append("TODO_list.rst") 
 
 
 def setup(app):
