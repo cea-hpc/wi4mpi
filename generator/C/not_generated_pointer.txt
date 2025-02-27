@@ -1,7 +1,0 @@
-LOCAL_MPI_Keyval_create=dlsym(lib_handle,"PMPI_Keyval_create"); /* replaced by MPI_Comm_create_keyval */
-LOCAL_MPI_Keyval_free=dlsym(lib_handle,"PMPI_Keyval_free"); /* replaced by MPI_Comm_free_keyval */
-LOCAL_MPI_Comm_create_keyval=dlsym(lib_handle,"PMPI_Comm_create_keyval");
-LOCAL_MPI_Comm_free_keyval=dlsym(lib_handle,"PMPI_Comm_free_keyval");
-LOCAL_MPI_Win_get_attr=dlsym(lib_handle,"PMPI_Win_get_attr");
-LOCAL_MPI_Win_set_attr=dlsym(lib_handle,"PMPI_Win_set_attr");
-LOCAL_MPIX_Query_cuda_support=dlsym(lib_handle,"MPIX_Query_cuda_support");
