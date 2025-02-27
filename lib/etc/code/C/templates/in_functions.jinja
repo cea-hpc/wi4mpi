@@ -76,7 +76,7 @@
                             {{map['a2r']}}(&{{arg['var']|replace('[]','')}}[i{{idx}}],&{{arg['var']|replace('[]','')}}_tmp[i{{idx}}]);
                         }
                         {%- else %}
-                            {{map['r2a']}}({{arg['var']}},{{arg['var']}}_tmp,A_{{arg['arg_dep']}},R_{{arg['arg_dep']}});
+                            {{map['a2r']}}({{arg['var']}},{{arg['var']}}_tmp,A_{{arg['arg_dep']}},R_{{arg['arg_dep']}});
                         
                         {%-  endif-%} 
                     {%-  else-%} 
