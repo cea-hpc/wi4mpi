@@ -7,13 +7,13 @@ message(STATUS "Project compiler C/C++ : ${C_COMPILER_NAME}/${CXX_COMPILER_NAME}
 #------------
 #libmpi.so (wi4mpi side)
 file(GLOB SOURCE_WI4MPI_SO
-     interface/gen/interface_c.c
-     interface/gen/interface_fort.c
+     ${WI4MPI_GENDIR}/interface/gen/interface_c.c
+     ${WI4MPI_GENDIR}/interface/gen/interface_fort.c
     )  
 #libwi4mpi_*.so
 file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
-    interface/gen/mpi_translation_c.c
-    interface/gen/mpi_translation_fort.c
+    ${WI4MPI_GENDIR}/interface/gen/mpi_translation_c.c
+    ${WI4MPI_GENDIR}/interface/gen/mpi_translation_fort.c
     interface/gen/c2f_f2c.c
     common/debug_printer.c
     common/override.c
@@ -34,8 +34,8 @@ file(GLOB_RECURSE SOURCE_WI4MPI_MODULE
 
 #libwi4mpi_FROM_TO.so
 file(GLOB SOURCE_WI4MPI_PRELOAD
-    preload/gen/mpi_translation_c.c
-    preload/gen/mpi_translation_fort.c
+    ${WI4MPI_GENDIR}/preload/gen/mpi_translation_c.c
+    ${WI4MPI_GENDIR}/preload/gen/mpi_translation_fort.c
     preload/gen/c2f_f2c.c
     common/override.c
     common/debug_printer.c
@@ -73,17 +73,17 @@ add_library(wi4mpi_profiling_MPC SHARED ${SOURCE_WI4MPI_PROFILING})
 
 target_include_directories(wi4mpi_profiling_OMPI 
                                                      PRIVATE common
-                                                     PRIVATE interface/header/_OMPI)
+                                                     PRIVATE ${WI4MPI_GENDIR}/interface/header/_OMPI)
 target_include_directories(wi4mpi_profiling_INTEL
                                                      PRIVATE common
-                                                     PRIVATE interface/header/_INTEL)
+                                                     PRIVATE ${WI4MPI_GENDIR}/interface/header/_INTEL)
 target_include_directories(wi4mpi_profiling_MPICH
                                                      PRIVATE common
-                                                     PRIVATE interface/header/_MPICH)
+                                                     PRIVATE ${WI4MPI_GENDIR}/interface/header/_MPICH)
 target_include_directories(wi4mpi_profiling_MPC
                                                      PRIVATE common
                                                      PRIVATE
-                                                     interface/header/_MPC)
+                                                     ${WI4MPI_GENDIR}/interface/header/_MPC)
 
 
 
@@ -142,37 +142,45 @@ add_dependencies(mpi_a wi4mpi_MPC_a)
 target_include_directories(mpi PRIVATE interface/manual)
 target_include_directories(wi4mpi_OMPI
                            PRIVATE common
-                           PRIVATE interface/header/_OMPI
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_OMPI
+                           PRIVATE interface/gen
                           )
 target_include_directories(wi4mpi_INTEL
                            PRIVATE common
-                           PRIVATE interface/header/_INTEL
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_INTEL
+                           PRIVATE interface/gen
                           )
 target_include_directories(wi4mpi_MPICH
                            PRIVATE common
-                           PRIVATE interface/header/_MPICH
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_MPICH
+                           PRIVATE interface/gen
                           )
 target_include_directories(wi4mpi_MPC
                            PRIVATE common
-                           PRIVATE interface/header/_MPC
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_MPC
+                           PRIVATE interface/gen
                           )
 
 target_include_directories(mpi_a PRIVATE interface/manual)
 target_include_directories(wi4mpi_OMPI_a
                            PRIVATE common
-                           PRIVATE interface/header/_OMPI
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_OMPI
+                           PRIVATE interface/gen
                           )
 target_include_directories(wi4mpi_INTEL_a
                            PRIVATE common
-                           PRIVATE interface/header/_INTEL
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_INTEL
+                           PRIVATE interface/gen
                           )
 target_include_directories(wi4mpi_MPICH_a
                            PRIVATE common
-                           PRIVATE interface/header/_MPICH
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_MPICH
+                           PRIVATE interface/gen
                           )
 target_include_directories(wi4mpi_MPC_a
                            PRIVATE common
-                           PRIVATE interface/header/_MPC
+                           PRIVATE ${WI4MPI_GENDIR}/interface/header/_MPC
+                           PRIVATE interface/gen
                           )
 
 #Flags
@@ -296,31 +304,31 @@ endforeach(LIB)
 
 target_include_directories(wi4mpi_INTEL_INTEL
                            PRIVATE common
-                           PRIVATE preload/header/INTEL_INTEL)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/INTEL_INTEL)
 target_include_directories(wi4mpi_INTEL_MPICH
                            PRIVATE common
-                           PRIVATE preload/header/INTEL_MPICH)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/INTEL_MPICH)
 target_include_directories(wi4mpi_INTEL_OMPI
                            PRIVATE common
-                           PRIVATE preload/header/INTEL_OMPI)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/INTEL_OMPI)
 target_include_directories(wi4mpi_MPICH_INTEL
                            PRIVATE common
-                           PRIVATE preload/header/MPICH_INTEL)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/MPICH_INTEL)
 target_include_directories(wi4mpi_MPICH_MPICH
                            PRIVATE common
-                           PRIVATE preload/header/MPICH_MPICH)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/MPICH_MPICH)
 target_include_directories(wi4mpi_MPICH_OMPI
                            PRIVATE common
-                           PRIVATE preload/header/MPICH_OMPI)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/MPICH_OMPI)
 target_include_directories(wi4mpi_OMPI_OMPI
                            PRIVATE common
-                           PRIVATE preload/header/OMPI_OMPI)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/OMPI_OMPI)
 target_include_directories(wi4mpi_OMPI_INTEL
                            PRIVATE common
-                           PRIVATE preload/header/OMPI_INTEL)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/OMPI_INTEL)
 target_include_directories(wi4mpi_OMPI_MPICH
                            PRIVATE common
-                           PRIVATE preload/header/OMPI_MPICH)
+                           PRIVATE ${WI4MPI_GENDIR}/preload/header/OMPI_MPICH)
 
 #Flags
 #-----
@@ -378,27 +386,27 @@ list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/util
 install(FILES ${LIST_INTERNAL_COMMON_HEADER} DESTINATION INTERNAL/include)
 #INTERFACE
     #_OMPI
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_OMPI/wrapper_f.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_OMPI/app_mpi.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_OMPI/run_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${WI4MPI_GENDIR}/interface/header/_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${WI4MPI_GENDIR}/interface/header/_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_O "${WI4MPI_GENDIR}/interface/header/_OMPI/run_mpi.h")
     #_INTEL
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_INTEL/wrapper_f.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_INTEL/app_mpi.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_INTEL/run_mpi.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_INTEL/run_mpio.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${WI4MPI_GENDIR}/interface/header/_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${WI4MPI_GENDIR}/interface/header/_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${WI4MPI_GENDIR}/interface/header/_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_I "${WI4MPI_GENDIR}/interface/header/_INTEL/run_mpio.h")
     #_MPICH
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/wrapper_f.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/app_mpi.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/run_mpi.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPICH/run_mpio.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${WI4MPI_GENDIR}/interface/header/_MPICH/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${WI4MPI_GENDIR}/interface/header/_MPICH/app_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${WI4MPI_GENDIR}/interface/header/_MPICH/run_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_II "${WI4MPI_GENDIR}/interface/header/_MPICH/run_mpio.h")
     #_MPC
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/wrapper_f.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/app_mpi.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/run_mpi.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/run_mpio.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/mpcmp.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/sctk_types.h")
-list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${CMAKE_CURRENT_SOURCE_DIR}/interface/header/_MPC/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${WI4MPI_GENDIR}/interface/header/_MPC/wrapper_f.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${WI4MPI_GENDIR}/interface/header/_MPC/app_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${WI4MPI_GENDIR}/interface/header/_MPC/run_mpi.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${WI4MPI_GENDIR}/interface/header/_MPC/run_mpio.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${WI4MPI_GENDIR}/interface/header/_MPC/mpcmp.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${WI4MPI_GENDIR}/interface/header/_MPC/sctk_types.h")
+list(APPEND LIST_INTERNAL_INTERFACE_HEADER_O_M "${WI4MPI_GENDIR}/interface/header/_MPC/wrapper_f.h")
 
 install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_O} DESTINATION INTERNAL/interface/include/_OMPI)
 install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_I} DESTINATION INTERNAL/interface/include/_INTEL)
@@ -406,53 +414,53 @@ install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_II} DESTINATION INTERNAL/interf
 install(FILES ${LIST_INTERNAL_INTERFACE_HEADER_O_M} DESTINATION INTERNAL/interface/include/_MPC)
 #PRELOAD
     #OMPI_OMPI
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_OMPI/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_OMPI/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_OMPI/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${WI4MPI_GENDIR}/preload/header/OMPI_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${WI4MPI_GENDIR}/preload/header/OMPI_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_O "${WI4MPI_GENDIR}/preload/header/OMPI_OMPI/run_mpi.h")
     #OMPI_INTEL
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/run_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_INTEL/run_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${WI4MPI_GENDIR}/preload/header/OMPI_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${WI4MPI_GENDIR}/preload/header/OMPI_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${WI4MPI_GENDIR}/preload/header/OMPI_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_I "${WI4MPI_GENDIR}/preload/header/OMPI_INTEL/run_mpio.h")
     #OMPI_MPICH
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/run_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/OMPI_MPICH/run_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${WI4MPI_GENDIR}/preload/header/OMPI_MPICH/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${WI4MPI_GENDIR}/preload/header/OMPI_MPICH/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${WI4MPI_GENDIR}/preload/header/OMPI_MPICH/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_O_II "${WI4MPI_GENDIR}/preload/header/OMPI_MPICH/run_mpio.h")
     #INTEL_OMPI
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/app_mpio.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_OMPI/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${WI4MPI_GENDIR}/preload/header/INTEL_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${WI4MPI_GENDIR}/preload/header/INTEL_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${WI4MPI_GENDIR}/preload/header/INTEL_OMPI/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_O "${WI4MPI_GENDIR}/preload/header/INTEL_OMPI/run_mpi.h")
     #INTEL_INTEL
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpio.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_I "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/run_mpio.h")
     #INTEL_INTEL
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/app_mpio.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/INTEL_INTEL/run_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_I_II "${WI4MPI_GENDIR}/preload/header/INTEL_INTEL/run_mpio.h")
     #MPICH_INTEL
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpio.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_II "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/run_mpio.h")
     #MPICH_INTEL
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/app_mpio.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_INTEL/run_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_I "${WI4MPI_GENDIR}/preload/header/MPICH_INTEL/run_mpio.h")
     #MPICH_OMPI
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/wrapper_f.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/app_mpi.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/app_mpio.h")
-list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${CMAKE_CURRENT_SOURCE_DIR}/preload/header/MPICH_OMPI/run_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${WI4MPI_GENDIR}/preload/header/MPICH_OMPI/wrapper_f.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${WI4MPI_GENDIR}/preload/header/MPICH_OMPI/app_mpi.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${WI4MPI_GENDIR}/preload/header/MPICH_OMPI/app_mpio.h")
+list(APPEND LIST_INTERNAL_PRELOAD_HEADER_II_O "${WI4MPI_GENDIR}/preload/header/MPICH_OMPI/run_mpi.h")
                 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_O} DESTINATION INTERNAL/preload/include/OMPI_OMPI) 
 install(FILES ${LIST_INTERNAL_PRELOAD_HEADER_O_I} DESTINATION INTERNAL/preload/include/OMPI_INTEL) 
