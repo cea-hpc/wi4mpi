@@ -593,19 +593,19 @@ install(DIRECTORY
 #Bin
 #---
 install(FILES 
-        interface/interface_utils/bin/mpicc
-        interface/interface_utils/bin/mpicxx
-        interface/interface_utils/bin/mpic++
-        interface/interface_utils/bin/mpifort
-        interface/interface_utils/bin/mpif77
-        interface/interface_utils/bin/mpif90
-        interface/interface_utils/bin/mpiexec
-        interface/interface_utils/bin/mpirun DESTINATION bin
+        resources/bin/mpicc
+        resources/bin/mpicxx
+        resources/bin/mpic++
+        resources/bin/mpifort
+        resources/bin/mpif77
+        resources/bin/mpif90
+        resources/bin/mpiexec
+        resources/bin/mpirun DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 
 install(FILES
-        preload/bin/wi4mpi DESTINATION bin
+        resources/bin/wi4mpi DESTINATION bin
         PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
 if(NOT BASHPATH STREQUAL "/bin/bash")
