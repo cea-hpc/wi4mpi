@@ -1,0 +1,107 @@
+    
+    {%- macro type_prefix(prefix,type) -%}
+            {% set stype=type|trim %}
+            {%- if stype == 'int' or stype == 'void' or stype == 'char' -%}
+            {{stype}} *
+            {%- else -%}
+            {{type}}
+            {%-endif-%} 
+    {%- endmacro -%}
+    {%- macro var_name_tmp(var,map) -%}
+        
+    {%- endmacro -%}
+    {%-  macro tmp_decl(map,arg,is_local)-%} 
+        {%- set var=arg['var']|replace('[]','')|trim -%}
+        {%- if map['no_map']|default("") == "" -%}
+            {%- if arg['arg_dep']|default("") != "" -%}
+                {%- if 'status_size' in map -%}
+                    {%- if is_local == 1 or arg['arg_dep'] == "*outcount" -%}
+                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc(({{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));
+                    {%- else -%}
+                    {{map['type']}} *{{var}}_tmp=({{var}} == A_f_MPI_STATUSES_IGNORE?R_f_MPI_STATUSES_IGNORE:({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*(R_f_MPI_STATUS_SIZE+1)*sizeof({{map['type']}})));
+                    {%-endif -%}
+                {%- else -%}
+                    {%- if is_local == 1 or arg['arg_dep'] == "*outcount"  -%}
+                        {{map['type']}} *{{var}}_tmp=({{map['type']}}*) wi4mpi_alloc(({{arg['arg_dep']}})*sizeof({{map['type']}}));
+                    {%- else -%}
+                        {{map['type']}} *{{var}}_tmp=({{map['type']}}*) wi4mpi_alloc((*{{arg['arg_dep']}})*sizeof({{map['type']}}));
+                    {% endif -%}
+                {% endif -%}
+            {%- else -%}
+                {%- if 'status_size' in map -%}
+                    {{map['type']}} {{var}}_tmp1[R_f_MPI_STATUS_SIZE+1];
+                    {{map['type']}} *{{var}}_tmp=({{var}}==A_f_MPI_STATUS_IGNORE?R_f_MPI_STATUS_IGNORE:{{var}}_tmp1);
+                {%- else -%}
+                    {%- if map['type'] != 'void ' -%}
+                        {%- if arg['name'] == 'weight_mapper' -%}
+                            int *{{var}}_tmp={{var}};
+                        {%- else -%}
+                            {{map['type']}} {{var}}_ltmp;
+                            {{map['type']}} *{{var}}_tmp=&{{var}}_ltmp;
+                        {%- endif -%}
+                    {%- else -%}
+                        void *{{var}}_tmp={{var}};
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%-  endmacro -%} 
+
+    {%-  macro tmp_free(map,arg)-%} 
+        {%- set var=arg['var']|replace('[]','')|trim  -%}
+        {%  if map['no_map']|default("") == "" -%}
+        {%- if 'status_size' in map -%}
+            {%- if 'arg_dep' in arg and arg['arg_dep'] != '' -%}
+                wi4mpi_free({{var}}_tmp);
+            {%- endif -%}
+        {%- else -%}
+            {%- if 'arg_dep' in arg and arg['arg_dep']!='' -%}
+                wi4mpi_free({{var}}_tmp);
+            {%- endif -%}
+        {%- endif -%}
+        {%- endif -%}
+    {%-  endmacro-%} 
+    {%-  macro convert_in(arg, map,idx,is_local)-%} 
+        {%-  if arg['In'] == 1  -%} 
+            {%- set var=arg['var']|replace('[]','')|trim  -%}
+            {%-  if map['no_map']|default("") == "" -%} 
+                {%- if arg['arg_dep'] !='' %}
+                    {%- set mula=1 -%}
+                    {%- set mulr=1 -%}
+                    {%- if 'status_size' in map -%}
+                        {%- set mula=A_f_MPI_STATUS_SIZE -%}
+                        {%- set mulr=R_f_MPI_STATUS_SIZE -%}
+                    {%- endif -%}
+                    {%- if is_local == 1 -%}
+                        for(int i=0;i<{{arg['arg_dep']}};i++)
+                    {%- else -%}
+                        for(int i=0;i<*{{arg['arg_dep']}};i++)
+                    {%- endif -%}
+                            {{map['a2r']}}(&{{var}}[i*{{mula}}],&{{var}}_tmp[i*{{+mulr}}]);
+
+                {%- else %}
+                    {%- if 'status_size' in map -%}
+                        {{map['a2r']}}({{var}},{{var}}_tmp);
+                    {%- else -%}
+                        {%- if map['type']!= 'void ' -%}
+                            {%- if arg['name'] == 'weight_mapper' -%}
+                                {{map['a2r']}}(&{{var}},&{{var}}_tmp);
+                            {%- else -%}
+                                {{map['a2r']}}({{var}},{{var}}_tmp);
+                            {%- endif -%}
+                        {%- else -%}
+                            {{map['a2r']}}(&{{var}},&{{var}}_tmp);
+                        {%- endif -%}
+                    {%-  endif-%} 
+                {%-  endif-%} 
+            {%-  endif-%} 
+        {%-  endif-%} 
+    {%-  endmacro-%} 
+    {%- macro handle_local_var(local_var,arg) %}
+        {% if local_var is defined %}
+            {{local_var["type"]}} {{local_var["names"]|join(',')}}; 
+            int local_var_ret;
+            LOCAL_f_{{local_var["function"]["name"] }}({{local_var["function"]["arguments"]|join(',')}},&local_var_ret);
+
+        {% endif %}
+    {% endmacro %}

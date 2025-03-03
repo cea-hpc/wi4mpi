@@ -13,7 +13,7 @@ if(target_inter&&!strcmp(target_inter,"{{mpilib}}")){
 libfound=1;
 {% for func in funcs %} 
 {% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['C'] is not defined or conf[func['name']]['Application']['C']['generated'] != "False" or conf[func['name']]['Application']['C']['file'] is defined -%}
-    INTERF_2_{{mpilib}}_LOCAL_{{func['name']}}=dlsym(interface_handle,"INTERF_{{func['name']}}");
+    INTERFACE_LOCAL_{{func['name']}}=dlsym(interface_handle,"INTERF_2_{{mpilib}}_CC{{func['name']}}");
 {% endif %}
 {%- endfor -%}
 INTERF_2_{{mpilib}}_wrapper_init();
@@ -47,7 +47,7 @@ exit(1);
     }
 {% for func in funcs %} 
 {% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['C'] is not defined or conf[func['name']]['Application']['C']['generated'] != "False" or conf[func['name']]['Application']['C']['file'] is defined -%}
-    INTERFACE_LOCAL_{{func['name']}}=dlsym(interface_handle,"INTERF_{{func['name']}}");
+    INTERFACE_LOCAL_{{func['name']}}=dlsym(interface_handle,"CC{{func['name']}}");
 {% endif %}
 
 {% endfor %}

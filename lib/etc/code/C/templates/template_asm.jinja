@@ -11,7 +11,7 @@ __asm__(
         ".global {{caller_prefix}}{{func['name']}}\n"
         {% if caller_prefix == 'P' %}
         ".weak {{func['name']}}\n"
-        ".set {{func['name']}},{{conf['upper_mpi_prefix']}}{{func['name']}}\n"
+        ".set {{func['name']}},{{caller_prefix}}{{func['name']}}\n"
         {% endif %} 
         ".extern in_w\n"
         ".extern A_{{func['name']}}\n"

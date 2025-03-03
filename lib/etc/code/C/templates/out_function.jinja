@@ -3,14 +3,14 @@
     {%- if arg['Out'] == 1 -%} 
         {%- if map['no_map']|default("") == ""-%}  
             {%- if map['assign']|default("") != "" -%} 
-                {%- if map['arg_dep']|default("") != "" -%} 
+                {%- if arg['arg_dep']|default("") != "" -%} 
                     int i{{idx}};
-                    for (i{{idx}}=0;i{{idx}}<{{map['arg_dep']}};i{{idx}}++) {
+                    for (i{{idx}}=0;i{{idx}}<{{arg['arg_dep']}};i{{idx}}++) {
                         {{ arg['var']|replace('[]','') }}[i{{idx}}]=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp[i{{idx}}];
                     }
                 {%- else-%} 
-                    {%- if map['type'][:-1] == '*'-%}  
-                        *{{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp;
+                    {%- if map['type'][-1] == '*'-%}  
+                        *{{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_ltmp;
                     {%- else-%} 
                         {{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp;
                     {%- endif-%} 

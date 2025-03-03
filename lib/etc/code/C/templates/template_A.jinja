@@ -3,17 +3,23 @@
 {%- from 'in_functions.jinja' import type_prefix,convert_in,tmp_decl,handle_local_var,tmp_free -%} 
 {%-  set ret_type = type_prefix('A_',mappers[func['ret']['name']]['type'])-%} 
 {%-  set ret_run_type = type_prefix('R_',mappers[func['ret']['name']]['type'])-%} 
-
+{% if func['name'][-3:] != 'f2c' and func['name'][-3:] != 'c2f' and func['name'][-5:] != 'c2f08' and func['name'][-5:] != 'f2f08' and func['name'][-5:] != 'f082c' and func['name'][-5:] != 'f082f' %}
 {% if  conf[func['name']] is defined and  conf[func['name']]['Application'] is defined and conf[func['name']]['Application']['C'] is defined and conf[func['name']]['Application']['C']['generated'] == "False" -%}
- {%-  if conf[func['name']]['Application']['C']['file'] is defined -%}
-    {{decl_ext}} {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} );
-    {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{arg["var"]|typevar(type_prefix('R_',mappers[arg['name']]['type'])) }} {%endif%}{%-  endfor-%} );
+    {{decl_ext}}   {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ arg["var"]|typevar(type_prefix('A_',mappers[arg['name']]['type'])) }} {%endif %}{%-  endfor-%} );
+    {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{type_prefix('R_',mappers[arg['name']]['type']) }} {{arg['var']}} {%endif%}{%-  endfor-%} );
+ {%  if conf[func['name']]['Application']['C']['file'] is defined -%}
 #define __{{func['name']}}__GEN__
     {%  include conf[func['name']]['Application']['C']['file']-%} 
+{%else %}
+ {{ ret_type }} A_{{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %} {{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif%} {%-  endfor-%} ) {
+   fprintf(stderr,"{{func['name']}} is not implemented yet in C\n");
+   R_MPI_Abort(R_MPI_COMM_WORLD,255); 
+}
+    
  {% endif %}
 {%  else-%} 
-     {{decl_ext}} {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif %}{%-  endfor-%} );
-    {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %} {{ arg["var"]|typevar(type_prefix('R_',mappers[arg['name']]['type'])) }} {%endif%} {%-  endfor-%} );
+     {{decl_ext}}   {{ ret_type }} {{func['name']}}({%-  for arg in func['args']-%} {%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %}{{ type_prefix('A_',mappers[arg['name']]['type'])}} {{ arg["var"] }} {%endif %}{%-  endfor-%} );
+    {{ ret_run_type }} (*LOCAL_{{func['name']}})({%-  for arg in func['args']-%}{%-  if loop.index > 1-%}  , {%-  endif-%}  {%if arg["variadic"]== "True" %} ... {%else %} {{ type_prefix('R_',mappers[arg['name']]['type']) }} {{arg['var']}} {%endif%} {%-  endfor-%} );
 #define __{{func['name']}}__GEN__
 #ifndef A_{{func['name']}}
 #ifndef {{func['name']|upper}}_OVERRIDE
@@ -52,7 +58,7 @@
         {% endif %}
     {%-  endfor %} 
 
-    {{ret_run_type}} ret_tmp=LOCAL_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%}     {%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var']|replace([],'') }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%} );
+    {{ret_run_type}} ret_tmp=LOCAL_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%}     {%-  if  mappers[arg['name']]['no_map'] is not defined and  mappers[arg['name']]['wrap'] is not defined  and  mappers[arg['name']]['set'] is not defined-%} {{ arg['var'].split('[')|first }}_tmp {%- else -%}   {{ arg['var'].split('[')|first }} {%- endif -%}  {%-  endfor-%} );
 
     {%  for arg in func['args'] -%} 
         {%- if arg['Out'] == 1 and arg['arg_dep'] != ''-%} 
@@ -67,17 +73,30 @@
     {%- for arg in func['args'] -%} 
         {{ tmp_free(mappers[arg['name']],arg) }}
     {%- endfor -%} 
-    {% if ret_type == "double" %}
+    {% if ret_type == "double" or mappers[func['ret']['name']]["no_map"]|default("") != "" %}
           {{ret_type}} ret={{func['ret']['var']}}_tmp;
-    {% else %}
-    {{ret_type}} ret={{mappers[func['ret']['name']]['r2a']}}({{func['ret']['var']}}_tmp);
+    {% elif  mappers[func['ret']['name']]["assign"]|default("") != "" %}
+           {{ret_type}} ret=({{ret_type}}){{func['ret']['var']}}_tmp;
+    {% elif ret_type[0:4] == 'MPI_' %}
+       {{ret_type}} ret;
+       {{mappers[func['ret']['name']]['r2a']}}(&{{func['ret']['var']}},&{{func['ret']['var']}}_tmp);
+    {%- else -%}
+        {{ret_type}} ret={{mappers[func['ret']['name']]['r2a']}}({{func['ret']['var']}}_tmp);
     {% endif %}
+    {%- if func['name'] == 'MPI_Init' or func['name'] == 'MPI_Init_thread' -%}
+  int wi4mpi_rank;
+  R_MPI_Comm_rank(R_MPI_COMM_WORLD, &wi4mpi_rank);
+  if (wi4mpi_rank == 0)
+    fprintf(
+        stdout, "You are using Wi4MPI-%s with the mode preload From %s To %s\n",
+        getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
+    {%- endif -%}
     in_w=0;
     {# le code de construction des parametre dans debug_printer est faux mais laissé tel quel tant que la refonte du générateur est pas finie pour ne pas modifier le code généré: on tient compte d'arg_dep dans les argments à afficher mais pas dans le code de construction de la string de contrôle #}
     #ifdef DEBUG
         if (WI4{{func['name']}}_print)
             debug_printer(
-                "{{func['name']}} :\n{\n{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var']|replace('[]','') }} : {{mappers[arg['name']]['debug_type']}},\n{%- endif-%} {%- endfor%}error/return : {{mappers[func['ret']['name']]['debug_type']}}\n}\n",{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var']|replace('[]','') }},{%- endif -%}  {%- endfor -%}ret);
+                "{{func['name']}} :\n{\n{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var']|replace('[]','') }} : {{mappers[arg['name']]['debug_type']}},\n{%- endif-%} {%- endfor%}error/return : {{mappers[func['ret']['name']]['debug_type']}}\n}\n",{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var'].split('[')|first}},{%- endif -%}  {%- endfor -%}ret);
     #endif
     #ifdef TIMEOUT_SUPPORT
         wi4mpi_unset_timeout();
@@ -87,5 +106,5 @@
 #endif
 #endif
 {%-  endif %}
-
+{% endif %}
  

@@ -4,12 +4,17 @@
       {
         "var": "level",
         "arg_dep": "",
-        "In": 0,
+        "In": 1,
         "name": "int_mapper",
         "Out": 0
       },
-      {
-        "variadic": "True"
+      { 
+        "var":"none",
+        "variadic": "True",
+        "In": 0,
+        "name":"int_mapper",
+        "Out": 0
+
       }
     ],
     "name": "MPI_Pcontrol",
@@ -731,7 +736,7 @@
         "In": 1,
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
-        "del": "request_ptr_delete"
+        "del": "request_ptr_delete","del_f": "request_r2au"
       },
       {
         "var": "status",
@@ -762,7 +767,7 @@
         "In": 1,
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
-        "del": "request_ptr_delete"
+        "del": "request_ptr_delete","del_f": "request_r2au"
       },
       {
         "var": "flag",
@@ -1896,9 +1901,10 @@
       {
         "var": "datatype",
         "arg_dep": "",
-        "Out": 1,
+        "Out": 0,
         "name": "Datatype_ptr_converter",
-        "In": 1
+        "In": 1,
+        "if_err": "datatype_translation_del(datatype)"
       }
     ],
     "name": "MPI_Type_commit",
@@ -13319,16 +13325,16 @@
         "In": 1,
         "name": "Request_tab_converter",
         "Out": 1,
-        "if": "R_MPI_SUCCESS",
-        "if_null": "R_MPI_REQUEST_NULL",
-        "if_null_dep": "indx",
-        "del": "request_array_delete"
+        "if_null_dep":"indx_tmp",
+        "if_null":"R_MPI_REQUEST_NULL||indx_ltmp != R_MPI_UNDEFINED",
+        "if": "R_MPI_SUCCESS && indx_ltmp != R_MPI_UNDEFINED",
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "indx",
         "arg_dep": "",
         "In": 0,
-        "name": "int_ptr_mapper",
+        "name": "indx_mapper",
         "Out": 1
       },
       {
@@ -13368,7 +13374,7 @@
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_null_dep": "indx",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "indx",
@@ -13421,7 +13427,7 @@
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "count",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "array_of_statuses[]",
@@ -13461,7 +13467,7 @@
         "if": "R_MPI_SUCCESS",
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "count",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "flag",
@@ -13509,7 +13515,8 @@
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "*outcount",
         "if_null_dep": "array_of_indices[]",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au","del_f": "request_r2au"
+        
       },
       {
         "var": "outcount",
@@ -13564,7 +13571,7 @@
         "if_null": "R_MPI_REQUEST_NULL",
         "if_dep": "*outcount",
         "if_null_dep": "array_of_indices[]",
-        "del": "request_array_delete"
+        "del": "request_array_delete","del_f": "request_r2au"
       },
       {
         "var": "outcount",
@@ -17466,7 +17473,7 @@
       "var": "ret",
       "arg_dep": "",
       "Out": 1,
-      "name": "int_mapper",
+      "name": "error_converter",
       "In": 0
     },
     "MPImin": 2.0,

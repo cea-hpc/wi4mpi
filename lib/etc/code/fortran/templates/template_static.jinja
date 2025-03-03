@@ -1,0 +1,15 @@
+{% include "copyright.c" %} 
+#ifndef _GNU_SOURCE                    
+#define _GNU_SOURCE                    
+#endif                                 
+#include <dlfcn.h>                     
+#include <stdio.h>                     
+#include <stdlib.h>
+#define debug_printer debug_printer_f
+void debug_printer(const char *, ...); 
+#define __mpi_interface_removed__(a,b) /* __mpi_interface_removed__(a,b) */
+#include "helper.h"                                                                                      
+#include "mappers.h"                                                                                      
+#include "wrapper_f.h"
+extern __thread int in_w;
+#include "fort_common.h"

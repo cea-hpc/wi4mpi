@@ -1,4 +1,11 @@
 {
+  "indx_mapper":{
+    "local_alloc": 1,
+     "a2r":"int_ptr_conv_a2r",
+    "type":"int *",
+    "r2a":"indx_r2a",
+    "debug_type":"%p"
+    },
   "reduce_user_fn_converter": {
     "local_alloc": 0, 
     "a2r": "reduce_user_fn_a2r", 
@@ -579,14 +586,14 @@
   "f08_status_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "f08_status_ptr_conv_a2r", 
-    "type": "MPI_F08_status *", 
+    "type": "MPI_F08_Status *", 
     "r2a": "f08_status_ptr_conv_r2a",
     "debug_type":"%p"
   }, 
   "const_f08_status_ptr_converter": {
     "local_alloc": 0, 
     "a2r": "const_f08_status_ptr_conv_a2r", 
-    "type": "const MPI_F08_status *", 
+    "type": "const MPI_F08_Status *", 
     "r2a": "const_f08_status_ptr_conv_r2a"
   }, 
   "error_converter": {
@@ -923,7 +930,7 @@
   }, 
   "errhandler_ptr_mapper": {
     "local_alloc": 1, 
-    "a2r": "errhandler_conv_a2r", 
+    "a2r": "errhandler_ptr_conv_a2r", 
     "type": "MPI_Errhandler *", 
     "r2a": "errhandler_ptr_conv_r2a",
     "addr_change": "True",

@@ -8,7 +8,7 @@ ompi_status_public_t@r_ompi_status_public_t
 #define R_MPI_NULL_DELETE_FN OMPI_C_R_MPI_NULL_DELETE_FN@#define R_MPI_NULL_DELETE_FN (*ccc_OMPI_C_MPI_NULL_DELETE_FN)
 #define R_MPI_NULL_COPY_FN OMPI_C_R_MPI_NULL_COPY_FN@#define R_MPI_NULL_COPY_FN (*ccc_OMPI_C_MPI_NULL_COPY_FN)
 #define R_MPI_DUP_FN OMPI_C_R_MPI_DUP_FN@#define R_MPI_DUP_FN (*ccc_OMPI_C_MPI_DUP_FN)
-^OMPI_DECLSPEC extern struct ompi_predefined_.*ompi@ccc_linkage void *ccc_ompi
+^OMPI_DECLSPEC extern struct ompi_predefined_.*ompi(.*);@ccc_linkage(void *ccc_ompi\1)
 __mpi_interface_deprecated__\("R_MPI_LB is deprecated in MPI-2.0"\);@;
 __mpi_interface_deprecated__\("R_MPI_UB is deprecated in MPI-2.0"\);@;
 const @

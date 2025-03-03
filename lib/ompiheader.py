@@ -88,7 +88,12 @@ class OmpiHeaderGenerator(HeaderGenerator):
 #undef OMPI_PREDEFINED_GLOBAL
 #endif
 #if !OMPI_BUILDING
+#ifdef _OMPI
 #define OMPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) (ccc_##global)))
+#else
+#define OMPI_PREDEFINED_GLOBAL(type, global) ((type) ((void *) &(global)))
+#endif
+
 #else
 #define OMPI_PREDEFINED_GLOBAL(type, global) ((type) &(global))
 #endif
@@ -145,10 +150,14 @@ int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
  * See ompi/communicator/communicator.h comments with struct ompi_communicator_t
  * for full explanation why we chose to use the ompi_predefined_xxx_t structure.
  */
-#if !allocate_global
-#define ccc_linkage extern
+#ifdef _OMPI
+#if !allocate_global 
+#define ccc_linkage(a) extern a;
 #else
-#define ccc_linkage
+#define ccc_linkage(a) a;
+#endif
+#else
+#define ccc_linkage(a) /*a*/
 #endif
 """
             text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)

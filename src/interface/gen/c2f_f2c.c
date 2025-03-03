@@ -13,6 +13,7 @@
 //#   - Ducrot Vincent <vincent.ducrot.tgcc@cea.fr>                      #
 //#                                                                      #
 //########################################################################
+#include "mappers.h"
 #include "wrapper_f.h"
 #if defined(INTEL_OMPI) || defined (OMPI_OMPI) || defined(_OMPI) || defined(_MPC)
 #ifndef _GNU_SOURCE
@@ -20,7 +21,6 @@
 #endif
 #include <stdio.h>
 #include <dlfcn.h>
-#include "mappers.h"
 extern __thread int in_w;
 
 __asm__(

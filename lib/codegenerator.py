@@ -71,13 +71,13 @@ class CodeGenerator(ABC):
         os.makedirs(self.dir_output, exist_ok=True)
         self.output_file = os.path.join(dir_output, self.output_file)
         self.schema_files = {
-            "functions_definitions": os.path.join(dir_input, "common/jsons/schemas/schema_functions.json"),
+            "functions_definitions": os.path.join(dir_input, "../common/jsons/schemas/schema_functions.json"),
         }
         self.json_files = {
-            "functions_definitions": os.path.join(dir_input, "common/jsons/functions.json"),
-            "functions_mappers": os.path.join(dir_input, "C/jsons/mappers.json"),
-            "types": os.path.join(dir_input, "common/jsons/types.json"),
-            "exceptions": os.path.join(dir_input, "C/jsons/exceptions.json"),
+            "functions_definitions": os.path.join(dir_input, "../common/jsons/functions.json"),
+            "functions_mappers": os.path.join(dir_input, "jsons/mappers.json"),
+            "types": os.path.join(dir_input, "../common/jsons/types.json"),
+            "exceptions": os.path.join(dir_input, "../common/jsons/exceptions.json"),
         }
         self.data = {
             "functions": load_json_file(self.json_files["functions_definitions"], mpi_norm=self.mpi_norm, schema_path=self.schema_files["functions_definitions"]),
@@ -124,8 +124,8 @@ class CodeGenerator(ABC):
             "interface": "template_interface.jinja",
             "interface_entry": "template_interface_entry.jinja",
         }
-        static_sources_dir = os.path.join(self.dir_input, "C/static_sources/")
-        jinja_dir = os.path.join(self.dir_input, "C/templates/")
+        static_sources_dir = os.path.join(self.dir_input, "static_sources/")
+        jinja_dir = os.path.join(self.dir_input, "templates/")
         for jinja_name in jinja_files.keys():
             jinja_env = jinja2.Environment(
                 loader=jinja2.FileSystemLoader([jinja_dir, static_sources_dir]),
@@ -160,22 +160,22 @@ class CodeGenerator(ABC):
                 "mappers": self.data["mappers"],
             },
         )
-        self.apply_jinja_dict["asm_dict"] = {
+        self.apply_jinja_dict["asm_dict"].update({
             "mappers": self.data["mappers"],
             "conf": self.data["exceptions"],
-        }
-        self.apply_jinja_dict["app_dict"] = {
+        })
+        self.apply_jinja_dict["app_dict"].update({
             "mappers": self.data["mappers"],
             "conf": self.data["exceptions"],
-        }
-        self.apply_jinja_dict["run_dict"] = {
+        })
+        self.apply_jinja_dict["run_dict"].update({
             "mappers": self.data["mappers"],
             "conf": self.data["exceptions"],
-        }
-        self.apply_jinja_dict["dlsym_dict"] = {
+        })
+        self.apply_jinja_dict["dlsym_dict"].update({
             "funcs": self.data["functions"],
             "types": self.data["types"],
-        }
+        })
         for function in self.data["functions"]:
             self.apply_jinja_dict["asm_dict"]["func"] = function
             self.apply_jinja_dict["app_dict"]["func"] = function

@@ -1,6 +1,37 @@
+void wrapper_init_f(void);
+void init_f2c(void *);
 __attribute__((constructor)) void wrapper_init(void) {
 void *lib_handle = dlopen(getenv("WI4MPI_RUN_MPI_C_LIB"), RTLD_NOW | RTLD_GLOBAL);
 void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_GLOBAL);
+#if defined(INTEL_INTEL)||defined(INTEL_OMPI)||defined(OMPI_INTEL)||defined(_INTEL)||defined(_MPC)
+
+  local_MPIR_Dup_fn = dlsym(lib_handle, "MPIR_Dup_fn");
+
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI) || defined(OMPI_INTEL) || \
+  defined(_INTEL)
+
+  ptr_mpifcmb5_ = dlsym(lib_handle, "mpifcmb5_");
+  ptr_mpifcmb9_ = dlsym(lib_handle, "mpifcmb9_");
+  ptr_mpipriv1_ = dlsym(lib_handle, "mpipriv1_");
+  ptr_mpipriv2_ = dlsym(lib_handle, "mpipriv2_");
+  ptr_mpiprivc_ = dlsym(lib_handle, "mpiprivc_");
+#endif
+#if defined(_OMPI)
+
+  init_global(lib_handle);
+
+#endif
+
+#if defined(INTEL_INTEL) || defined(OMPI_INTEL) || defined(_INTEL)
+  R_MPI_UNWEIGHTED = dlsym(lib_handle, "MPI_UNWEIGHTED");
+  R_MPI_WEIGHTS_EMPTY = dlsym(lib_handle, "MPI_WEIGHTS_EMPTY");
+#endif
+#if defined(INTEL_INTEL) || defined(INTEL_OMPI)
+  A_MPI_UNWEIGHTED = dlsym(lib_handle, "MPI_UNWEIGHTED");
+  A_MPI_WEIGHTS_EMPTY = dlsym(lib_handle, "MPI_WEIGHTS_EMPTY");
+#endif
+
     {% for func in funcs-%} 
 #ifdef __{{func['name']}}__GEN__
         LOCAL_{{func['name']}}=dlsym(lib_handle,"{{func['name']}}");
@@ -13,7 +44,9 @@ void *lib_handle_io = dlopen(getenv("WI4MPI_RUN_MPIIO_C_LIB"), RTLD_NOW | RTLD_G
         {%- for const in type["values"]-%} 
              {{type['name']}}_translation_add_const(A_{{const}},R_{{const}});
         {%- endfor -%}
-    {%- endfor -%} 
+    {%- endfor %} 
+
+
   wrapper_init_f();
   init_f2c(lib_handle);
   WI4MPI_errhandler_key = R_MPI_KEYVAL_INVALID;

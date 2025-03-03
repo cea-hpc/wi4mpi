@@ -17,6 +17,6 @@
 {{ ret_type }} (*INTERFACE_LOCAL_{{func['name']}})({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %} {{ mappers[arg['name']]['type'] }} {{ arg["var"] }} {%endif %}{%-  endfor-%} );
 {{ ret_type }} P{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {%if arg["variadic"]== "True" %} ... {%else %}{{ mappers[arg['name']]['type'] }} {{ arg["var"] }} {%endif %}{%-  endfor-%} )
 {
-    return INTERFACE_LOCAL_{{func['name']}}({%-  for arg in func['args']-%} {%- if 'var' in arg -%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {{ arg["var"].split('[')|first }}{%- endif -%}{%- endfor -%});
+    return INTERFACE_LOCAL_{{func['name']}}({%-  for arg in func['args']-%} {%- if arg['variadic']|default("") != "True" %} {%- if 'var' in arg -%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {{ arg["var"].split('[')|first }}{%- endif -%}{%- endif -%} {%- endfor -%});
 }
 {% endif %}

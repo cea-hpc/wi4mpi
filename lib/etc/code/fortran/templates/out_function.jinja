@@ -1,0 +1,126 @@
+
+{%-  macro convert_out(arg,map,idx,test_func,name_func)-%} 
+    {%- if arg['Out'] == 1 -%} 
+        {%- if map['no_map']|default("") == ""-%}  
+            {%- if map['assign']|default("") != "" -%} 
+                {%- if map['arg_dep']|default("") != "" -%} 
+                    int i{{idx}};
+                    for (i{{idx}}=0;i{{idx}}<*{{map['arg_dep']}};i{{idx}}++) {
+                        {{ arg['var']|replace('[]','') }}[i{{idx}}]=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp[i{{idx}}];
+                    }
+                {%- else-%} 
+                    {%- if map['type'][:-1] == '*'-%}  
+                        *{{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp;
+                    {%- else-%} 
+                        {{ arg['var']|replace('[]','') }}=(A_{{map['type']|replace('*','')}}){{ arg['var']|replace('[]','') }}_tmp;
+                    {%- endif-%} 
+                {%- endif-%} 
+            {%- elif map['set']|default("") != "" -%} 
+                {{map['r2a']}}
+            {%- elif arg['if']|default("") != "" -%} 
+                if(ret_tmp=={{arg['if']}}) 
+                {
+                    {%- if arg['if_null']|default("") != ""-%} 
+                        {%- if "Test" in name_func and "Testsome" not in name_func -%} 
+                            if(*flag) 
+                        {%- endif-%} 
+                        {
+                            {%- if arg['if_dep']|default("") != "" -%} 
+                                int i{{idx}};
+                                {%- if arg['if_dep'] != "*outcount" -%}
+                                for(i{{idx}} = 0; i{{idx}} < *{{arg['if_dep']}}; i{{idx}}++) {
+                                {%- else -%}
+                                for(i{{idx}} = 0; i{{idx}} < {{arg['if_dep']}}; i{{idx}}++) {
+                                {%- endif -%}
+                                    {%- if arg['if_null_dep']|default("") != ""-%}  
+                                        if({{arg['var']|replace('[]','')}}_tmp[{{arg['if_null_dep']|replace('[]','')}}[i{{idx}}]]=={{arg['if_null']|replace('R_MPI','R_f_MPI')}} ){
+                                            {{arg['del_f']}}(&{{arg['var']|replace('[]','')}}[{{arg['if_null_dep']|replace('[]','')}}[i{{idx}}]],&{{arg['var']|replace('[]','')}}_tmp[{{arg['if_null_dep']|replace('[]','')}}[i{{idx}}]]);
+                                        }
+                                    {%- else -%} 
+                                        if( {{arg['var']|replace('[]','')}}_tmp[i{{idx}}] == {{arg['if_null']|replace('R_MPI','R_f_MPI')}} ) {
+                                            {{arg['del_f']}}(&{{arg['var']|replace('[]','')}}[i{{idx}}],&{{arg['var']|replace('[]','')}}_tmp[i{{idx}}]);
+                                        }
+                                    {%- endif -%} 
+                                }
+                            {%- else-%} 
+                                {%- if arg['if_null_dep']|default("") != "" -%} 
+                                if({{arg['var']|replace('[]','')}}_tmp[*{{arg['if_null_dep']}}] == {{arg['if_null']|replace('R_MPI','R_f_MPI')}}){
+                                    {{arg['del_f']}}(&{{arg['var']|replace('[]','')}}[*{{arg['if_null_dep']}}],&{{arg['var']|replace('[]','')}}_tmp[*{{arg['if_null_dep']}}]);
+                                }
+                                {%- else-%} 
+                                    if(*{{arg['var']}}_tmp == {{arg['if_null']|replace('R_MPI','R_f_MPI')}}) {
+                                        {{arg['del_f']}}({{arg['var']}},{{arg['var']}}_tmp);
+                                    }
+                                {%- endif-%} 
+                            {%- endif-%} 
+                        }       
+                    {%- else-%} 
+                        {%- if arg['del_f']|default("") != ""-%} 
+                            {%- if  arg['del2']|default("") != ""-%} 
+                                {{arg['del_f']}}(&{{arg['var']}},&{{arg['var']}}_tmp);
+                                {{arg['del2']}}(&{{arg['var']}},&{{arg['var']}}_tmp);
+                            {%- else-%}  
+                                {%- if arg['del_f'] == 'errhandler_del'-%} 
+                                    {{arg['del_f']}}({{arg['var']}},{{arg['var']}}_tmp);
+                                {%- elif arg['del_f'] == 'communicator_translation_del(comm)'-%} 
+                                    comm_conv_r2a(comm,comm_tmp);
+                                    {{arg['del_f']}};
+                                {%- else-%} 
+                                    {{arg['del_f']}}(&{{arg['var']}},&{{arg['var']}}_tmp);
+                                {%- endif-%} 
+                            {%- endif-%}  
+                        {%- else-%}  
+                            {%- if name_func == "MPI_Comm_get_errhandler"-%} 
+                                void* ptr_err_handler_func;
+                                communicator_f_fn_translation_get(*comm, &ptr_err_handler_func);
+                                errhandler_f_fn_translation_update(*errhandler, ptr_err_handler_func);
+
+                            {%- elif name_func == "MPI_Errhandler_get"-%} 
+                                errhandler_translation_get_f(*errhandler_tmp,errhandler);
+
+                            {%- else-%} 
+                                {{map['r2a']}}({{arg['var']}},{{arg['var']}}_tmp);
+                            {%- endif-%} 
+                        {%- endif-%}     
+                    {%- endif-%}
+                }
+            {%- elif arg['arg_dep']|default("") != "" -%} 
+                    {%- if map['max_mpi']|default("") != ""-%} 
+                        {{map['r2a']}}({{arg['var']|replace('[]','')}},{{arg['var']|replace('[]','')}}_tmp,A_{{arg['arg_dep']}},R_{{arg['arg_dep']}});
+                    {%else-%} 
+                        int i{{idx}};
+                        {%- if arg['if_status_ignore']|default("") != "" -%} 
+                            if (array_of_statuses!=A_f_MPI_STATUSES_IGNORE) 
+                        {%- endif-%} 
+                            {
+                                /*coucou*/
+                                {%- if arg['arg_dep'] != "*outcount" -%}
+                                for (i{{idx}}=0;i{{idx}}<*{{arg['arg_dep']}};i{{idx}}++) { 
+                                {%- else -%}
+                                for (i{{idx}}=0;i{{idx}}<{{arg['arg_dep']}};i{{idx}}++) { 
+                                {%- endif -%}
+                                    {{map['r2a']}}(&{{arg['var']|replace('[]','')}}[i{{idx}}],&{{arg['var']|replace('[]','')}}_tmp[i{{idx}}]);
+                                }
+                            }
+                    {%- endif-%} 
+            {%- elif arg['if_err_f']|default("") != ""-%} 
+                if({{arg['if_err_f']}}){
+                    {%- if  name_func == 'MPI_Comm_set_errhandler'-%} 
+                        int* ptr_errhandler_func;
+                    {%- elif name_func == 'MPI_Errhandler_set'-%} 
+                        int* ptr_errhandler_func;
+                    {%- endif-%} 
+                    errhandler_fn_translation_get(errhandler, &ptr_errhandler_func);
+                    communicator_fn_translation_update(comm, ptr_errhandler_func);
+                }        
+            {%- else-%} 
+                {%-  if arg['name'] == 'weight_mapper'   -%} 
+                    {{map['r2a']}}(&{{arg['var']|replace('[]','')}},&{{arg['var']|replace('[]','')}}_tmp);
+                {%-  else -%} 
+                    {{map['r2a']}}({{arg['var']|replace('[]','')}},{{arg['var']|replace('[]','')}}_tmp);
+                {%- endif-%} 
+            {%- endif-%} 
+        {%- endif-%}  
+    {%- endif-%} 
+{%-  endmacro-%}   
+

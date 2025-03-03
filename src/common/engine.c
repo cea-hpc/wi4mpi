@@ -377,8 +377,8 @@ void varname##_translation_get(A_##type a_mpi_##varname, R_##type *mpi_##varname
     } else { /* Not a constant */  \
         /* In an hashtable */   \
         id=((int)a_mpi_##varname)-f##varname;\
-    /*    if(id<0||id>=varname##_size) *mpi_##varname=R_##mpi_null;\
-        else*/ memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
+        if(id<0||id>=varname##_size) *mpi_##varname=R_##mpi_null;\
+        else memcpy(mpi_##varname,&(varname##_table[id].C), sizeof(R_##type));\
     }  \
 }  \
 void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
@@ -391,8 +391,8 @@ void varname##_translation_get_f(int a_mpi_##varname, int *mpi_##varname) {  \
  */ /*  } else */{ /* Not a constant */  \
         /* In an hashtable */   \
         id=((int)a_mpi_##varname)-f##varname;\
-     /*   if(id<0||id>= varname##_size) *mpi_##varname=R_##type##_c2f(R_##mpi_null);\
-        else*/ memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
+        if(id<0||id>= varname##_size) *mpi_##varname=R_##type##_c2f(R_##mpi_null);\
+        else memcpy(mpi_##varname,&(varname##_table[id].fort), sizeof(int));\
         /*printf ("%s gf %d %d\n",#varname,a_mpi_##varname,*mpi_##varname);\
     */}  \
 }  \

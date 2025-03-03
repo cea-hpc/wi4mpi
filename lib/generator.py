@@ -106,6 +106,8 @@ from ompimpichheader import OmpiMpichHeaderGenerator
 from ompiompiheader import OmpiOmpiHeaderGenerator
 from cpreloadgenerator import CPreloadGenerator
 from cinterfacegenerator import CInterfaceGenerator
+from fortranpreloadgenerator import FortranPreloadGenerator
+from fortraninterfacegenerator import FortranInterfaceGenerator
 from docopt import docopt
 
 fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
@@ -334,17 +336,27 @@ class Generator:
         Launches the generation process for various code files.
         """
         gencpreload = CPreloadGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code"),
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
             dir_output=self.c_preload_gen_dir,
             mpi_norm=self.mpi_norm,
         )
         gencpreload.generate()
         gencinterface = CInterfaceGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code"),
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
             dir_output=self.c_interface_gen_dir,
             mpi_norm=self.mpi_norm,
         )
         gencinterface.generate()
+        genfortpreload = FortranPreloadGenerator(
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/fortran"),
+            dir_output=self.c_preload_gen_dir,
+        )
+        genfortpreload.generate()
+        genfortinterface = FortranInterfaceGenerator(
+            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/fortran"),
+            dir_output=self.c_interface_gen_dir,
+        )
+        genfortinterface.generate()
 
     def generate(self):
         """

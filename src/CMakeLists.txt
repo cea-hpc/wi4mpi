@@ -201,6 +201,7 @@ endif()
 
 foreach(lib wi4mpi_OMPI wi4mpi_INTEL wi4mpi_MPICH wi4mpi_MPC wi4mpi_OMPI_a wi4mpi_INTEL_a wi4mpi_MPICH_a wi4mpi_MPC_a)
     target_link_libraries(${lib} Threads::Threads)
+    target_link_libraries(${lib} dl)
 endforeach()
 
 #Custom command

@@ -35,7 +35,7 @@ class CInterfaceGenerator(CodeGenerator):
             values as defined in the MPI norm.
             exceptions (str): Name of the json which describes non-generated functions in Wi4MPI.
         """
-        log.info("Generation of interface C file.")
+        log.info("Generation of interface C files.")
         self.output_file = "mpi_translation_c.c"
         self.interface_file = "interface_c.c"
         self.mpi_norm = mpi_norm
@@ -43,8 +43,8 @@ class CInterfaceGenerator(CodeGenerator):
         self.interface_file = os.path.join(dir_output, self.interface_file)
 
     def generate(self):
-        self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "INTERF"
-        self.apply_jinja_dict["app_dict"]["decl_ext"] = "extern"
+        self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "CC"
+        self.apply_jinja_dict["app_dict"]["decl_ext"] = ""
         self.apply_jinja_dict["dlsym_dict"]["mpi_libraries"] = ["OMPI", "INTEL"]
         # Warning: Do not use 'apply_jinja' before 'super().generate()'.
         #          dico_jinja_env is a prerequisite that is defined in

@@ -26,6 +26,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "fort_common.h"
+#include <stdbool.h>
 #ifndef EXTERN_ALLOCATED
 #if defined(OMPI_INTEL) || defined(_INTEL)
 extern char ompi_mpi_comm_null[];
@@ -992,7 +994,7 @@ static inline void reduce_user_fn_a2r(A_MPI_User_function **fa,R_MPI_User_functi
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),&user_fn_wrapper_template,0x100);
+    memcpy(((char *)ptr+0x10),(char*)&user_fn_wrapper_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
@@ -1011,7 +1013,7 @@ static inline void datarep_extent_function_converter_a2r(A_MPI_Datarep_extent_fu
     void* ptr = mmap(0, 1024,
             PROT_READ | PROT_WRITE | PROT_EXEC,
             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    memcpy(((char *)ptr+0x10),&user_datarep_extent_function_template,0x100);
+    memcpy(((char *)ptr+0x10),(char *)&user_datarep_extent_function_template,0x100);
 
     ((void **)ptr)[0]=*fa;
 
@@ -1583,5 +1585,35 @@ static inline void length_max_conv_r2a(int *length, int *length_tmp, int app_max
         *length = *length_tmp;
     }
 }
+static inline void indx_r2a(int *ia,int *ir){
+    if (*ir==R_MPI_UNDEFINED)
+        *ia=A_MPI_UNDEFINED;
+    else
+        *ia=*ir;
+}
+static inline void fstring_max_conv_r2a(char *name, char *name_tmp, fort_string_length app_size, int resultlen) {
+    if (resultlen < app_size) {
+        strncpy(name, name_tmp, resultlen);
+        memset(name+resultlen, ' ', app_size-resultlen);
+    } else {
+        strncpy(name, name_tmp, app_size);
+    }
+}
 
+// spaces in keys and values for MPI_Info are ignored, but not in other strings.
+// remove_leading allow to ignore leading spaces for key/value, in case the actual string fit in the runtime when ignoring leading spaces but not with them.
+static inline void fstring_max_conv_a2r(char *name, char *name_tmp, fort_string_length app_size, fort_string_length run_size, bool remove_leading) {
+    if (remove_leading) {
+        int i=0;
+        while (i < app_size && name[i] == ' ') i++;
+        name+=i;
+        app_size-=i;
+    }
+    if (run_size <= app_size) {
+        strncpy(name_tmp, name, run_size);
+    } else {
+        strncpy(name_tmp, name, app_size);
+        memset(name_tmp+app_size, ' ', run_size-app_size);
+    }
+}
 #endif /*MAPPERS_HEADERS */

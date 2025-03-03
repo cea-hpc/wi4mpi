@@ -3,6 +3,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -54,7 +57,6 @@
     "Application": {
       "C": {
         "generated": "False"
-      }
     },
     "ASM": {
       "C": {
@@ -65,6 +67,7 @@
       "C": {
         "generated": "False"
       }
+    }
     }
   },
   "MPI_Conversion_fn_null": {
@@ -105,6 +108,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -122,6 +128,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -138,6 +147,9 @@
   "MPI_File_c2f": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -190,6 +202,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -206,6 +221,9 @@
   "MPI_Group_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -224,6 +242,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -240,6 +261,9 @@
   "MPI_Info_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -258,6 +282,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -274,6 +301,9 @@
   "MPI_Message_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -292,6 +322,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -308,6 +341,9 @@
   "MPI_Op_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -326,6 +362,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -342,6 +381,9 @@
   "MPI_Request_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -360,6 +402,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -371,11 +416,15 @@
       "C": {
         "generated": "False"
       }
-    }
+    } 
+    
   },
   "MPI_Status_c2f08": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -394,6 +443,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -410,6 +462,9 @@
   "MPI_Status_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -428,6 +483,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -444,6 +502,9 @@
   "MPI_T_pvar_handle_free": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -462,6 +523,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -478,6 +542,9 @@
   "MPI_T_pvar_readreset": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -496,6 +563,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -513,6 +583,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -526,9 +599,20 @@
       }
     }
   },
+  "MPI_Error_string": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Error_string.c",
+        "generated": "False"
+      }
+    }
+  },
   "MPI_T_pvar_session_free": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -547,6 +631,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -563,6 +650,9 @@
   "MPI_T_pvar_stop": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -581,6 +671,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -597,6 +690,9 @@
   "MPI_Type_c2f": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -615,6 +711,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -631,6 +730,9 @@
   "MPI_Type_f2c": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -683,6 +785,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -734,6 +839,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -781,9 +889,12 @@
       }
     }
   },
-  "PI_T_category_changed": {
+  "MPI_T_category_changed": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -803,6 +914,9 @@
       "C": {
         "generated": "False",
         "file": "A_MPIX_Query_cuda_support.c"
+      },
+      "fortran": {
+        "generated": "False"
       }
     }
   },
@@ -853,16 +967,13 @@
         "file": "A_MPI_Pcontrol.c"
       }
     },
-    "ASM": {
-      "C": {
-        "generated": "False",
-        "file": "asm_MPI_Pcontrol.c"
-      }
-    },
     "Runtime": {
       "C": {
         "generated": "False",
         "file": "R_MPI_Pcontrol.c"
+      },
+      "fortran": {
+        "generated": "False"
       }
     }
   },
@@ -887,6 +998,54 @@
       "C": {
         "generated": "False",
         "file": "A_MPI_Errhandler_create.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_create.c"
+      }
+    }
+  },
+  "MPI_Errhandler_free": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Errhandler_free.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_free.c"
+      }
+    }
+  },
+  "MPI_Errhandler_get": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Errhandler_get.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_get.c"
+      }
+    }
+  },
+  "MPI_Errhandler_set": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Errhandler_set.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Errhandler_set.c"
+      }
+    }
+  },
+  "MPI_Info_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Info_free.c"
       }
     }
   },
@@ -895,14 +1054,49 @@
       "C": {
         "generated": "False",
         "file": "A_MPI_Comm_create_errhandler.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Comm_create_errhandler.c"
       }
+   
+    }
+  },
+  "MPI_Comm_get_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Comm_get_errhandler.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Comm_get_errhandler.c"
+      }
+   
+    }
+  },
+  "MPI_Comm_set_errhandler": {
+    "Application": {
+      "C": {
+        "generated": "False",
+        "file": "A_MPI_Comm_set_errhandler.c"
+      },
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Comm_set_errhandler.c"
+      }
+   
     }
   },
   "MPI_File_f2c": {
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
+
     },
     "Runtime": {
       "C": {
@@ -918,6 +1112,9 @@
   "MPI_Status_f2f08": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -936,6 +1133,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "Runtime": {
@@ -953,6 +1153,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "Runtime": {
@@ -961,6 +1164,552 @@
       }
     },
     "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Init": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Init.c",
+        "declare": "False"
+      }
+    }
+  },
+  "MPI_Init_thread": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Init_thread.c",
+        "declare": "False"
+      }
+    }
+  },
+  "MPI_T_init_thread": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_enum_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_enum_get_item": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_get_num": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_handle_alloc": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_handle_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_read": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_write": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_get_num": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_create": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_alloc": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_free": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_start": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_stop": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_read": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_write": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_reset": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_readreset": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_num": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_info": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_finalize": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_cvars": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_pvars": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_categories": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_get_index": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_cvar_get_index": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_get_index": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_category_changed": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Lookup_name": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Publish_name": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Unpublish_name": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_create_errhandler": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Register_datarep": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_spawn_multiple": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Pack_external": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Unpack_external": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_dup_fn": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_null_delete_fn": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_null_copy_fn": {
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+ "MPI_Pack_external_size":{
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPIX_query_cuda_support":{
+    "Application": {
+      "fortran": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_create_errhandler":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_create":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_session_free":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_alloc":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_start":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_handle_free":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_stop":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_read":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_write":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_reset":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_T_pvar_readreset":{
+      "Application": {
+      "C": {
+        "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
+    },
+    "ASM": {
+      "C": {
+        "generated": "False"
+      }
+    },
+    "Runtime": {
       "C": {
         "generated": "False"
       }

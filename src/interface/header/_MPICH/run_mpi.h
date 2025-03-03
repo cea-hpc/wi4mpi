@@ -485,7 +485,7 @@ typedef int R_MPI_Errhandler;
 /* MPI 1 names */
 #define R_MPI_NULL_COPY_FN   ((R_MPI_Copy_function *)0)
 #define R_MPI_NULL_DELETE_FN ((R_MPI_Delete_function *)0)
-//#define R_MPI_DUP_FN         MPIR_Dup_fn
+#define R_MPI_DUP_FN         MPIR_Dup_fn
 /* MPI 2 names */
 #define R_MPI_COMM_NULL_COPY_FN ((R_MPI_Comm_copy_attr_function*)0)
 #define R_MPI_COMM_NULL_DELETE_FN ((R_MPI_Comm_delete_attr_function*)0)
@@ -1170,8 +1170,8 @@ int R_MPI_Abort(R_MPI_Comm comm, int errorcode);
 /* Note that we may need to define a @PCONTROL_LIST@ depending on whether
    stdargs are supported */
 int R_MPI_Pcontrol(int level, ...);
-int R_MPI_DUP_FN(R_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
-               void *attribute_val_out, int *flag);
+//int R_MPI_DUP_FN(R_MPI_Comm oldcomm, int keyval, void *extra_state, void *attribute_val_in,
+  //             void *attribute_val_out, int *flag);
 
 /* Process Creation and Management */
 int R_MPI_Close_port(char *port_name);
