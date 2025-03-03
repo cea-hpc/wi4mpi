@@ -20,7 +20,6 @@ file(GLOB_RECURSE SOURCE_WI4MPI_INTERFACE
     common/mpi_translation_c2f_f2c_init.c
     common/engine.c      
     common/engine_fn.c 
-    common/func_char_fort.c
     common/asm_jit.c
     interface/manual/dlsym_global.c
 )
@@ -42,7 +41,6 @@ file(GLOB SOURCE_WI4MPI_PRELOAD
     common/mpi_translation_c2f_f2c_init.c
     common/engine.c
     common/engine_fn.c
-    common/func_char_fort.c
     common/asm_jit.c
 )
 
@@ -373,7 +371,6 @@ endforeach()
 
 # Listing headers to be installed
 #COMMON
-list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/func_char_fort.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/manual_wrapper.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/mappers.h")
 list(APPEND LIST_INTERNAL_COMMON_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/common/engine_fn.h")

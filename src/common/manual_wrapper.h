@@ -26,7 +26,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "wrapper_f.h"
-#include "func_char_fort.h"
 extern __thread int in_w;
 
 //#ifndef IFORT_CALL

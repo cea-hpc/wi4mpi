@@ -599,10 +599,154 @@
       }
     }
   },
+  "MPI_Get_library_version": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Get_library_version.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Get_processor_name": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Get_processor_name.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Add_error_string": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Add_error_string.c",
+        "generated": "False"
+      }
+    }
+  },
   "MPI_Error_string": {
     "Application":{
       "fortran": {
         "file": "A_f_MPI_Error_string.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_open": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_File_open.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Open_port": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Open_port.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Close_port": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Close_port.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_accept": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Comm_accept.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_connect": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Comm_connect.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_spawn": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Comm_spawn.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_get_name": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Win_get_name.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Win_set_name": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Win_set_name.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Type_get_name": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Type_get_name.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Type_set_name": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Type_set_name.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_get_name": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Comm_get_name.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Comm_set_name": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_Comm_set_name.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_delete": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_File_delete.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_get_view": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_File_get_view.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_File_set_view": {
+    "Application":{
+      "fortran": {
+        "file": "A_f_MPI_File_set_view.c",
         "generated": "False"
       }
     }
@@ -1041,6 +1185,46 @@
       }
     }
   },
+  "MPI_Info_get": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Info_get.c"
+      }
+    }
+  },
+  "MPI_Info_set": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Info_set.c"
+      }
+    }
+  },
+  "MPI_Info_get_valuen": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Info_get_valuen.c"
+      }
+    }
+  },
+  "MPI_Info_get_nthkey": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Info_get_nthkey.c"
+      }
+    }
+  },
+  "MPI_Info_delete": {
+    "Application": {
+      "fortran": {
+        "generated": "False",
+        "file": "A_f_MPI_Info_delete.c"
+      }
+    }
+  },
   "MPI_Info_free": {
     "Application": {
       "fortran": {
@@ -1330,6 +1514,7 @@
   "MPI_Lookup_name": {
     "Application": {
       "fortran": {
+        "file": "A_f_MPI_Lookup_name.c",
         "generated": "False"
       }
     }
@@ -1337,6 +1522,7 @@
   "MPI_Publish_name": {
     "Application": {
       "fortran": {
+        "file": "A_f_MPI_Publish_name.c",
         "generated": "False"
       }
     }
@@ -1344,6 +1530,7 @@
   "MPI_Unpublish_name": {
     "Application": {
       "fortran": {
+        "file": "A_f_MPI_Unpublish_name.c",
         "generated": "False"
       }
     }
@@ -1372,6 +1559,15 @@
   "MPI_Pack_external": {
     "Application": {
       "fortran": {
+        "file": "A_f_MPI_Pack_external.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Pack_external_size": {
+    "Application": {
+      "fortran": {
+        "file": "A_f_MPI_Pack_external_size.c",
         "generated": "False"
       }
     }
@@ -1379,6 +1575,7 @@
   "MPI_Unpack_external": {
     "Application": {
       "fortran": {
+        "file": "A_f_MPI_Unpack_external.c",
         "generated": "False"
       }
     }
