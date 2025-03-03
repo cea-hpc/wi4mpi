@@ -1,0 +1,44 @@
+[
+  {
+    "args": [
+      {
+        "var": "file",
+        "arg_dep": "",
+        "Out": 0,
+        "name": "fint_converter",
+        "In": 1
+      }
+    ],
+    "name": "MPI_File_f2c",
+    "ret": {
+      "var": "ret",
+      "arg_dep": "",
+      "Out": 1,
+      "name": "file_converter",
+      "In": 0
+    },
+    "MPImin": 2.0,
+    "MPImax": 3.1
+  },
+  {
+    "args": [
+      {
+        "var": "stamp",
+        "arg_dep": "",
+        "Out": 1,
+        "name": "int_ptr_mapper",
+        "In": 0
+      }
+    ],
+    "name": "MPI_T_category_changed",
+    "ret": {
+      "var": "ret",
+      "arg_dep": "",
+      "Out": 1,
+      "name": "error_converter",
+      "In": 0
+    },
+    "MPImin": 3.0,
+    "MPImax": 4.0
+  }
+]

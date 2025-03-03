@@ -18,7 +18,7 @@ class CPreloadGenerator(CodeGenerator):
     CPreloadGenerator class for generating MPI translation C file.
     """
 
-    def __init__(self, dir_input="lib/etc/code", dir_output="src/preload/new_gen"):
+    def __init__(self, dir_input="lib/etc/code", dir_output="src/preload/new_gen", mpi_norm=None):
         """
         json_files:
             functions_definitions (str): Name of the json file which describes all MPI functions as
@@ -32,6 +32,7 @@ class CPreloadGenerator(CodeGenerator):
         """
         log.info("Generation of preload C file.")
         self.output_file = "mpi_translation_c.c"
+        self.mpi_norm = mpi_norm
         self.set_directories(dir_input, dir_output)
 
     def generate(self):

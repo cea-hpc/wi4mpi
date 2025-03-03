@@ -52,6 +52,7 @@ class CodeGenerator(ABC):
         "run_dict": {},
         "dlsym_dict": {},
     }
+    mpi_norm = None
     dico_jinja_env = dict()
 
     def set_directories(self, dir_input, dir_output):
@@ -69,6 +70,9 @@ class CodeGenerator(ABC):
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
         self.output_file = os.path.join(dir_output, self.output_file)
+        self.schema_files = {
+            "functions_definitions": os.path.join(dir_input, "../common/jsons/schemas/schema_functions.json"),
+        }
         self.json_files = {
             "functions_definitions": os.path.join(dir_input, "../common/jsons/functions.json"),
             "functions_mappers": os.path.join(dir_input, "jsons/mappers.json"),
@@ -76,7 +80,7 @@ class CodeGenerator(ABC):
             "exceptions": os.path.join(dir_input, "../common/jsons/exceptions.json"),
         }
         self.data = {
-            "functions": load_json_file(self.json_files["functions_definitions"]),
+            "functions": load_json_file(self.json_files["functions_definitions"], mpi_norm=self.mpi_norm, schema_path=self.schema_files["functions_definitions"]),
             "mappers": load_json_file(self.json_files["functions_mappers"]),
             "types": load_json_file(self.json_files["types"]),
             "exceptions": load_json_file(self.json_files["exceptions"]),

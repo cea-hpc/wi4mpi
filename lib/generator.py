@@ -155,12 +155,16 @@ class Generator:
         "20": "20.0.0",
         "24": "24.0.0",
     }
+    mpi_norm = "3.1"
+    mpi_availabe_norm = [ "1.0", "1.1", "1.2", "2.0", "2.1", "2.2", "3.0", "3.1", "4.0"]
 
     def __init__(self, **kwargs):
         self.set_directories(**kwargs)
         bool_openmpi_version = False
         bool_mpich_version = False
         bool_intelmpi_version = False
+        bool_mpi_norm = False
+        self.mpi_norm = kwargs.get("mpi_norm", self.mpi_norm)
         self.mpi_target_version["openmpi"] = kwargs.get(
             "openmpi_version",
             self.mpi_target_version["openmpi"],
@@ -194,9 +198,19 @@ class Generator:
         else:
             _msg = f"Intel MPI {self.mpi_target_version['intelmpi']} is not available."
             log.error(_msg)
-        if not (bool_openmpi_version and bool_mpich_version and bool_intelmpi_version):
+        if self.mpi_norm in self.mpi_availabe_norm:
+            bool_mpi_norm = True
+        else:
+            _msg = f"MPI {self.mpi_norm} is not supported."
+            log.error(_msg)
+        bool_exit = True
+        bool_exit &= bool_openmpi_version
+        bool_exit &= bool_mpich_version
+        bool_exit &= bool_intelmpi_version
+        bool_exit &= bool_mpi_norm
+        if not (bool_exit):
             log.error("MPI configuration not available.")
-            sys.exit()
+            sys.exit(1)
 
     def set_directories(self, **kwargs):
         """
@@ -324,11 +338,13 @@ class Generator:
         gencpreload = CPreloadGenerator(
             dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
             dir_output=self.c_preload_gen_dir,
+            mpi_norm=self.mpi_norm,
         )
         gencpreload.generate()
         gencinterface = CInterfaceGenerator(
             dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
             dir_output=self.c_interface_gen_dir,
+            mpi_norm=self.mpi_norm,
         )
         gencinterface.generate()
         genfortpreload = FortranPreloadGenerator(
@@ -373,6 +389,7 @@ if "__main__" == __name__:
                    [--openmpi_version=<openmpi_version>]
                    [--mpich_version=<mpich_version>]
                    [--intelmpi_version=<intelmpi_version>]
+                   [--mpi_norm=<mpi_norm>]
       generator.py (-h | --help)
 
     Examples:
@@ -404,16 +421,23 @@ if "__main__" == __name__:
                             Supported versions:
                                 * 20.0.0 (alias: 20)
                                 * 24.0.0 (alias: 24)
+      mpi_norm              Version of the MPI norm to use
+                            Supported versions:
+                                * 1.0 1.1
+                                * 2.0 2.1 2.2
+                                * 3.0 3.1
+                                * 4.0
 
     Options:
       -h --help                                                          Show this helper.
-      --interface_header_dir=<interface_header_dir>                      Set interface_header_dir
-      --preload_header_dir=<preload_header_dir>                          Set preload_header_dir
-      --c_preload_gen_dir=<c_preload_gen_dir>                            Set c_preload_gen_dir
-      --c_interface_gen_dir=<c_interface_gen_dir>                        Set c_interface_gen_dir
-      --openmpi_version=<openmpi_version>                                Set openmpi_version
-      --mpich_version=<mpich_version>                                    Set mpich_version
-      --intelmpi_version=<intelmpi_version>                              Set intelmpi_version
+      --interface_header_dir=<interface_header_dir>                      Path to header interface generation folder.
+      --preload_header_dir=<preload_header_dir>                          Path to header preload generation folder.
+      --c_preload_gen_dir=<c_preload_gen_dir>                            Path to C preload generation folder.
+      --c_interface_gen_dir=<c_interface_gen_dir>                        Path to C interface generation folder.
+      --openmpi_version=<openmpi_version>                                Version of the target OpenMPI
+      --mpich_version=<mpich_version>                                    Version of the target MPICH
+      --intelmpi_version=<intelmpi_version>                              Version of the target IntelMPI
+      --mpi_norm=<mpi_norm>                                              Version of MPI norm to use
     """  # noqa: E501
     arguments = docopt(USAGE)
     log.info("Starting to generate.")
@@ -425,6 +449,7 @@ if "__main__" == __name__:
         "openmpi_version": arguments["--openmpi_version"],
         "mpich_version": arguments["--mpich_version"],
         "intelmpi_version": arguments["--intelmpi_version"],
+        "mpi_norm": arguments["--mpi_norm"],
     }
     # Delete keys that have a value of None
     none_list = []

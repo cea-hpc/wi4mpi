@@ -1,3 +1,0 @@
-    /* A_MPI_Handler_function is deprecated, but we don't mark it as
-       such because otherwise the A_MPI_Errhandler_create() declaration
-       would cause a warning to be issued */
