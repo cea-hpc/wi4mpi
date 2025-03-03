@@ -1,7 +1,7 @@
     
     {%- macro type_prefix(prefix,type) -%}
             {% set stype=type|trim %}
-            {%- if stype == 'int' or stype == 'void' or stype == 'char' -%}
+            {%- if stype == 'int' or stype == 'void' or stype == 'char' or stype =='size_t' -%}
             {{stype}} *
             {%- else -%}
             {{type}}
