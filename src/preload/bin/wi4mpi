@@ -26,7 +26,7 @@ Options:
     -h, --help           Display the help message.
     -f FROM, --from FROM Specify the MPI implementation from which PROGRAM was compiled with.
     -t TARGET, --to TARGET   Specify the MPI implementation to which PROGRAM will be run.
-    -v                  Controls the verbosity.
+    -v                  Control the verbosity.
     --env               Display all exported environment variables on standard output.  
 
 Supported values:
@@ -124,19 +124,19 @@ wi4mpi_check_target_lib() {
 		wi4mpi_error=1
 	}
 	[[ ! -e ${WI4MPI_RUN_MPI_C_LIB} ]] && {
-		echo "Error: could not find the C target mpi library. You might want to set WI4MPI_RUN_MPI_C_LIB such as /path/to/libmpi.so" >&2
+		echo "Error: could not find the C target MPI library. You might want to set WI4MPI_RUN_MPI_C_LIB such as /path/to/libmpi.so" >&2
 		wi4mpi_error=1
 	}
 	[[ ! -e ${WI4MPI_RUN_MPI_F_LIB} ]] && {
-		echo "Error: could not find the FORTRAN target mpi library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2
+		echo "Error: could not find the FORTRAN target MPI library. You might want to set WI4MPI_RUN_MPI_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2
 		wi4mpi_error=1
 	}
 	[[ ! -e ${WI4MPI_RUN_MPIIO_C_LIB} ]] && {
-		echo "Error: could not find the C target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2
+		echo "Error: could not find the C target MPI-IO library. You might want to set WI4MPI_RUN_MPIIO_C_LIB such as /path/to/libmpi.so" >&2
 		wi4mpi_error=1
 	}
 	[[ ! -e ${WI4MPI_RUN_MPIIO_F_LIB} ]] && {
-		echo "Error: could not find the FORTRAN target mpi-io library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2
+		echo "Error: could not find the FORTRAN target MPI-IO library. You might want to set WI4MPI_RUN_MPIIO_F_LIB such as /path/to/libmpifort.so or libmpifh.so" >&2
 		wi4mpi_error=1
 	}
 	[[ -v WI4MPI_MPC_HOOK_MAIN_LIB && ! -e ${WI4MPI_MPC_HOOK_MAIN_LIB} ]] && {
