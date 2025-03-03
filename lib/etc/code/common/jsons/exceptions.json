@@ -1264,76 +1264,6 @@
       }
     }
   },
-  "MPI_T_pvar_session_create": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_session_free": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_handle_alloc": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_handle_free": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_start": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_stop": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_read": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_write": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_reset": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_pvar_readreset": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
   "MPI_T_category_get_num": {
     "Application": {
       "fortran": {
@@ -1391,13 +1321,6 @@
     }
   },
   "MPI_T_pvar_get_index": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_T_category_changed": {
     "Application": {
       "fortran": {
         "generated": "False"

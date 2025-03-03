@@ -8,6 +8,10 @@
         "name": "int_mapper",
         "Out": 0
       },
+<<<<<<< HEAD
+      {
+        "variadic": "True"
+=======
       { 
         "var":"none",
         "variadic": "True",
@@ -15,6 +19,7 @@
         "name":"int_mapper",
         "Out": 0
 
+>>>>>>> delivery-2024
       }
     ],
     "name": "MPI_Pcontrol",
@@ -17503,6 +17508,7 @@
   {
     "args": [
       {
+<<<<<<< HEAD
         "var": "oldcomm",
         "arg_dep": "",
         "Out": 0,
@@ -17601,6 +17607,8 @@
   {
     "args": [
       {
+=======
+>>>>>>> delivery-2024
         "var": "userbuf",
         "arg_dep": "",
         "Out": 0,
@@ -17858,6 +17866,27 @@
       "In": 0
     },
     "MPImin": 3.1,
+    "MPImax": 4.0
+  },
+  {
+    "args": [
+      {
+        "var": "stamp",
+        "arg_dep": "",
+        "Out": 1,
+        "name": "int_ptr_mapper",
+        "In": 0
+      }
+    ],
+    "name": "MPI_T_category_changed",
+    "ret": {
+      "var": "ret",
+      "arg_dep": "",
+      "Out": 1,
+      "name": "error_converter",
+      "In": 0
+    },
+    "MPImin": 3.0,
     "MPImax": 4.0
   },
   {
