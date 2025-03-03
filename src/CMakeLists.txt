@@ -616,7 +616,8 @@ endif()
 #Wi4mpi config
 #-------------
 
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/resources/etc/wi4mpi.cfg.in ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg)
 install(FILES
-                ${CMAKE_CURRENT_BINARY_DIR}/../wi4mpi.cfg DESTINATION etc
+                ${CMAKE_CURRENT_BINARY_DIR}/wi4mpi.cfg DESTINATION etc
                 PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_READ OWNER_EXECUTE OWNER_WRITE GROUP_WRITE GROUP_READ GROUP_EXECUTE
 )
