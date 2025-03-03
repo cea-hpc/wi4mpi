@@ -3,10 +3,15 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include "fort_common.h"
 __thread int debug_act;
 unsigned int WI4MPI_debug_max_array_elt;
 void print_status(A_MPI_Status);
 void print_status_f(int *stat);
+void _MPI_Comm_get_name(int *comm, char *comm_name, int *resultlen, int *ret,
+                        fort_string_length len_comm_name);
+void _MPI_Type_get_name(int *datatype, char *type_name, int *resultlen,
+                        int *ret, fort_string_length len_type_name);
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define eprintf(...) printf(__VA_ARGS__)
 #define print_array(nb_elt, print_function)                                    \
@@ -206,7 +211,7 @@ void debug_printer_f(const char *ctr_str, ...) {
             // print_type(int,%d)
             break;
           case 'D':
-            print_named_type_f(int, % d, A_f_MPI_Type_get_name);
+            print_named_type_f(int, % d, _MPI_Type_get_name);
             break;
           case 'a':
             nb_elt = va_arg(ap, int);
@@ -215,7 +220,7 @@ void debug_printer_f(const char *ctr_str, ...) {
           case 's':
             print_type(char *, % s) break;
           case 'C':
-            print_named_type_f(int, % d, A_f_MPI_Comm_get_name) break;
+            print_named_type_f(int, % d, _MPI_Comm_get_name) break;
           case 'p':
             print_type(void *, % p) break;
           default:
