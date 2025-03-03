@@ -1,43 +1,28 @@
 cmake_minimum_required(VERSION 3.1.0)
-#Default compiler for wi4mpi
-if(WI4MPI_COMPILER)
-    message(DEPRECATION "WI4MPI_COMPILER is deprecated. Set environment variables CC, CXX and FC, or use CMAKE_<lang>_COMPILER cmake's option instead.")
-endif()
-#Define common options according to the selected compiler
-if(WI4MPI_COMPILER MATCHES GCC OR WI4MPI_COMPILER MATCHES GNU)
-    # GNU value is deprecated
-    set(CMAKE_C_COMPILER "gcc")
-    set(CMAKE_CXX_COMPILER "g++")
-    set(CMAKE_Fortran_COMPILER "gfortran")
-elseif(WI4MPI_COMPILER MATCHES INTEL)
-    set(CMAKE_C_COMPILER "icc")
-    set(CMAKE_CXX_COMPILER "icpc")
-    set(CMAKE_Fortran_COMPILER "ifort")
-elseif(WI4MPI_COMPILER MATCHES PGI)
-    set(CMAKE_C_COMPILER "pgcc")
-    set(CMAKE_CXX_COMPILER "pgc++")
-    set(CMAKE_Fortran_COMPILER "pgfortran")
-elseif(WI4MPI_COMPILER MATCHES LLVM)
-    set(CMAKE_C_COMPILER "clang")
-    set(CMAKE_CXX_COMPILER "clang++")
-    set(CMAKE_Fortran_COMPILER "flang")
-elseif(WI4MPI_COMPILER MATCHES ARMCLANG)
-    set(CMAKE_C_COMPILER "armclang")
-    set(CMAKE_CXX_COMPILER "armclang++")
-    set(CMAKE_Fortran_COMPILER "armflang")
-elseif(WI4MPI_COMPILER MATCHES FUJITSU)
-    set(CMAKE_C_COMPILER "fcc")
-    set(CMAKE_CXX_COMPILER "FCC")
-    set(CMAKE_Fortran_COMPILER "frt")
-    # Force CMake to detect Fujitsu MPI Library, must be called BEFORE Find MPI
-    set(MPI_C_COMPILER "mpifcc" CACHE STRING "" FORCE)
-    set(MPI_CXX_COMPILER "mpiFCC" CACHE STRING "" FORCE)
-    set(MPI_Fortran_COMPILER "mpifrt" CACHE STRING "" FORCE)
+
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.17")
+# Specifies the logging level used by the message() command.
+# The valid log levels are ERROR, WARNING, NOTICE, STATUS (default), VERBOSE, DEBUG, or TRACE.
+set(CMAKE_MESSAGE_LOG_LEVEL WARNING CACHE STRING "Specifies the logging level used by the message() command.")
 endif()
 
-if(WI4MPI_RELEASE)
-    message(DEPRECATION "WI4MPI_REALESE is deprecated. Use CMAKE_BUILD_TYPE, and options WI4MPI_DEBUG and WI4MPI_JIT instead.")
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.13")
+# Remove all progress messages regarding rules: example "[ x%] Built C object ..."
+set(CMAKE_RULE_MESSAGES OFF CACHE STRING "Remove all progress messages regarding rules.")
+else()
+set(RULE_MESSAGES OFF)
 endif()
+
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.4")
+# Remove all progress messages regarding targets: example "[ x%] Built target ..."
+set(CMAKE_TARGET_MESSAGES OFF CACHE STRING "Remove all progress messages regarding targets.")
+endif()
+
+# NEVER: Removes all progress messages regarding installed files
+# LAZY: Removes all progress messages regarding updated installed files
+# ALWAYS: Displays all progress messages regarding installed files
+set(CMAKE_INSTALL_MESSAGE NEVER CACHE STRING "Manage progres messages regarding installed files. Values are: NEVER, LAZY, ALWAYS")
+
 if(POLICY CMP0054)
     cmake_policy(SET CMP0054 NEW)
 endif()
@@ -121,23 +106,19 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang")
 endif()
 
 #Define the compiling option according to the chosen release
-if(WI4MPI_RELEASE MATCHES DEBUG)
-   set(CMAKE_BUILD_TYPE "RelWithDebInfo")
-   set(WI4MPI_DEBUG ON)
-elseif(WI4MPI_RELEASE MATCHES RELEASE)
-    set(CMAKE_BUILD_TYPE "Release")
-elseif(WI4MPI_RELEASE MATCHES GCC_JIT)
-    set(CMAKE_BUILD_TYPE "RelWithDebInfo")
-    set(WI4MPI_JIT ON)
-elseif(WI4MPI_RELEASE MATCHES NORMAL)
+if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "RelWithDebInfo")
 endif()
-if(NOT CMAKE_BUILD_TYPE)
+if(CMAKE_BUILD_TYPE MATCHES RelWithDebInfo)
+    set(WI4MPI_DEBUG ON)
+endif()
+if(WI4MPI_JIT)
     set(CMAKE_BUILD_TYPE "RelWithDebInfo")
 endif()
 
 set(CMAKE_C_FLAGS_RELWITHDEBINFO  "-g -O3")
-set(CMAKE_C_FLAGS_RELEASE "-O3")
+set(CMAKE_C_FLAGS_RELEASE "-w -O3")
+
 if(WI4MPI_DEBUG)
     add_definitions(-DDEBUG)
 endif()
@@ -148,7 +129,7 @@ endif()
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
 find_program(BASHPATH bash NO_DEFAULT_PATH PATHS /bin /usr/bin /usr/local/bin)
-if(BATHPATH STREQUAL "BATHPATH-NOTFOUND")
+if(BASHPATH STREQUAL "BASHPATH-NOTFOUND")
     message(FATAL_ERROR "Bash shell not found. It is required for running wi4mpi.")
 endif()
 if(${CMAKE_VERSION} VERSION_LESS "3.17.0")
