@@ -164,7 +164,7 @@ if(WI4MPI_GENERATOR)
   message(STATUS "Option: set WI4MPI_GENERATOR_OPENMPI_VERSION to an OpenMPI available version: 1.8.8 2.1.6 4.1.6 5.0.3")
   message(STATUS "Option: set WI4MPI_GENERATOR_INTELMPI_VERSION to an IntelMPI available version: 20.0.0 24.0.0")
   message(STATUS "Option: set WI4MPI_GENERATOR_MPICH_VERSION to an MPICH available version: 3.1.2 3.4.3 4.2.0")
-  message(STATUS "Option: set WI4MPI_GENERATOR_MPI_NORM to an available version: 1.0, 1.1, 1.2, 2.0, 2.1, 2.2, 3.0, 3.1, 4.0"
+  message(STATUS "Option: set WI4MPI_GENERATOR_MPI_NORM to an available version: 1.0, 1.1, 1.2, 2.0, 2.1, 2.2, 3.0, 3.1, 4.0")
   execute_process(
       COMMAND python3 ${CMAKE_SOURCE_DIR}/lib/generator.py
                 --interface_header_dir="${dir_gen_interface}"
