@@ -208,7 +208,7 @@ The idea is to propagate the host environment into the container. One should the
 Using Wi4MPI Interface mode with Podman
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's take the following Dockerfile, which contains osu-microbenchmarks compiled with Wi4MPI:
+Let's take the following Dockerfile, which contains Gromacs compiled with Wi4MPI:
 
 .. code-block:: dockerfile
 

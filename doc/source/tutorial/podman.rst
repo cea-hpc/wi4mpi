@@ -158,7 +158,7 @@ Let's take the following Dockerfile, which contains osu-microbenchmarks compiled
    # and execute:
    #
    #   podman run omb-openmpi mpirun -n 2 osu_bw
-   
+
    FROM ubuntu:20.04
 
    # Set the timezone to Paris
@@ -269,12 +269,72 @@ Below is a Dockerfile containing osu-microbenchmarks, compiled with Wi4MPI:
    # and execute:
    #
    #   podman run omb-wi4mpi mpirun -n 2 -- osu_bw
-   
+
    FROM ubuntu:20.04
 
    ARG OSU_VERSION=5.6.2
-   ...
-   [Rest of the Dockerfile as you provided]
+
+   # Enable bash "source" in RUN Docker instruction
+   RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+   # Install Spack dependencies
+   RUN apt-get update && apt-get install -y \
+       build-essential git gfortran \
+       curl wget \
+       python3-pip
+
+   # Install Spack
+   RUN git clone https://github.com/spack/spack.git /opt/spack
+   RUN /opt/spack/bin/spack compiler find
+
+   # Set up Spack environment
+   ENV SPACK_ROOT=/opt/spack
+   ENV PATH=${SPACK_ROOT}/bin:${PATH}
+   ENV MANPATH=${SPACK_ROOT}/share/man:${MANPATH}
+
+   # Install Wi4MPI
+   RUN spack install wi4mpi
+
+   # Download and extract osu-benchmarks
+   RUN wget https://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-${OSU_VERSION}.tar.gz && \
+       tar xzf osu-micro-benchmarks-${OSU_VERSION}.tar.gz && \
+       rm osu-micro-benchmarks-${OSU_VERSION}.tar.gz
+
+   # Build osu-benchmarks with Wi4MPI
+   WORKDIR /osu-micro-benchmarks-${OSU_VERSION}
+
+   ## Workaround patch mpicc for configure in interface mode (issue #45) ## [BEGIN] ##
+   RUN source /opt/spack/share/spack/setup-env.sh && \
+       spack load wi4mpi && \
+       sed -i 's@WI4MPI_LDFLAGS="-L${WI4MPI_ROOT}/lib -lmpi"@WI4MPI_LDFLAGS="-L${WI4MPI_ROOT}/lib -Wl,--push-state,--as-needed -lmpi -Wl,--pop-state"@' $(which mpicc)
+   ## [END] ##
+
+   ## See github issue #46 for more details about ld "--no-as-needed" option
+   RUN source /opt/spack/share/spack/setup-env.sh && \
+       spack load wi4mpi && \
+       ./configure CC=mpicc CXX=mpicxx LDFLAGS="-Wl,--no-as-needed" && \
+       make
+
+   # Install osu-benchmarks
+   RUN make install && \
+       ln -s /usr/local/libexec/osu-micro-benchmarks/mpi/*/* /usr/bin/
+
+   # Source Spack and Wi4MPI before any command
+   RUN echo "#!/bin/bash" > /entrypoint.sh
+   RUN echo "source /opt/spack/share/spack/setup-env.sh" >> /entrypoint.sh
+   RUN echo "spack load wi4mpi" >> /entrypoint.sh
+   RUN echo '$@' >> /entrypoint.sh
+   RUN chmod +x /entrypoint.sh
+   ENTRYPOINT ["/entrypoint.sh"]
+
+   # Create a non-root user named "poduser"
+   RUN useradd --create-home --shell /bin/bash poduser
+
+   # Set the working directory to the installation directory
+   WORKDIR /
+
+   # Run the container as the "poduser" user
+   USER poduser
 
 .. note::
    If you encounter the error `undefined reference to dlopen`, add `LDFLAGS=-Wl,--no-as-needed` (see issue #46 for details).
