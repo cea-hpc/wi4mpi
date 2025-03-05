@@ -28,7 +28,7 @@ Usage: $0 [-g <GENERATOR_RUN>]
           [-c <GENERATOR_BUILD_WITH_GENERATED_CODE>]
 
 Options:
-  -g <GENERATOR_RUN>: Boolean (1)/0. Execute ./lib/generator.py; copies the generated files
+  -g <GENERATOR_RUN>: Boolean (1)/0. Execute ./src/generator/generator.py; copies the generated files
   -b <GENERATOR_TEST_BUILD>: Boolean (1)/0. Compile Wi4MPI
   -d <GENERATOR_TEST_HEADER>: Boolean 1/(0). Compare the generated headers to the references
   -o <GENERATOR_OPENMPI_VERSION>: String number version of Open MPI base header to use in the generator. Default: 5.0.3. Available: 1.8.8, 2.1.6, 4.1.6, 5.0.3
@@ -84,7 +84,7 @@ shift $((OPTIND -1))
 
 ## Script settings
 
-export GENERATOR_RUN=${GENERATOR_RUN-1} # Execute ./lib/generator.py
+export GENERATOR_RUN=${GENERATOR_RUN-1} # Execute ./src/generator/generator.py
 export GENERATOR_TEST_BUILD=${GENERATOR_TEST_BUILD-1} # Compile Wi4mpi
 export GENERATOR_TEST_HEADER=${GENERATOR_TEST_HEADER-0} # Compare the interface headers, preload to the references
 export GENERATOR_OPENMPI_VERSION=${GENERATOR_OPENMPI_VERSION-5.0.3}

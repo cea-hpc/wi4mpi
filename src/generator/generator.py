@@ -114,7 +114,7 @@ fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.con
 log = getLogger("generator_logger")
 
 # Absolute path of this script
-wi4mpi_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+wi4mpi_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class Generator:
@@ -349,24 +349,24 @@ class Generator:
         Launches the generation process for various code files.
         """
         gencpreload = CPreloadGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
+            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/C"),
             dir_output=self.c_preload_gen_dir,
             mpi_norm=self.mpi_norm,
         )
         gencpreload.generate()
         gencinterface = CInterfaceGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/C"),
+            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/C"),
             dir_output=self.c_interface_gen_dir,
             mpi_norm=self.mpi_norm,
         )
         gencinterface.generate()
         genfortpreload = FortranPreloadGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/fortran"),
+            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/fortran"),
             dir_output=self.c_preload_gen_dir,
         )
         genfortpreload.generate()
         genfortinterface = FortranInterfaceGenerator(
-            dir_input=os.path.join(wi4mpi_root, "lib/etc/code/fortran"),
+            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/fortran"),
             dir_output=self.c_interface_gen_dir,
         )
         genfortinterface.generate()
@@ -407,7 +407,7 @@ if "__main__" == __name__:
 
     Examples:
         Here is an example of use if you do not want to overwrite the files already present:
-        $ ./lib/generator.py --interface_header_dir=interface_header_gen
+        $ ./src/generator/generator.py --interface_header_dir=interface_header_gen
         $                    --preload_header_dir=preload_header_gen
         $                    --c_preload_gen_dir=c_preload_gen_dir
 

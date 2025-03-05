@@ -146,7 +146,7 @@ endif()
 if(WI4MPI_GENERATOR)
   message(STATUS "Header and code generator is enabled.")
   find_package(Python3 COMPONENTS Interpreter REQUIRED)
-  set(PYTHONPATH "${CMAKE_SOURCE_DIR}/lib:$ENV{PYTHONPATH}")
+  set(PYTHONPATH "${CMAKE_SOURCE_DIR}/src/generator:$ENV{PYTHONPATH}")
   message(STATUS "Updated PYTHONPATH: ${PYTHONPATH}")
   set(dir_gen_c_interface "${CMAKE_BINARY_DIR}/src/interface/gen")
   set(dir_gen_c_preload "${CMAKE_BINARY_DIR}/src/preload/gen")
@@ -166,7 +166,7 @@ if(WI4MPI_GENERATOR)
   message(STATUS "Option: set WI4MPI_GENERATOR_MPICH_VERSION to an MPICH available version: 3.1.2 3.4.3 4.2.0")
   message(STATUS "Option: set WI4MPI_GENERATOR_MPI_NORM to an available version: 1.0, 1.1, 1.2, 2.0, 2.1, 2.2, 3.0, 3.1, 4.0")
   execute_process(
-      COMMAND python3 ${CMAKE_SOURCE_DIR}/lib/generator.py
+      COMMAND python3 ${CMAKE_SOURCE_DIR}/src/generator/generator.py
                 --interface_header_dir="${dir_gen_interface}"
                 --preload_header_dir="${dir_gen_preload}"
                 --c_preload_gen_dir="${dir_gen_c_preload}"

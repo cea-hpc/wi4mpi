@@ -26,7 +26,7 @@ fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.con
 log = getLogger("header_logger")
 
 # Absolute path of this script
-wi4mpi_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+wi4mpi_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class HeaderGenerator(ABC):
@@ -99,7 +99,7 @@ class HeaderGenerator(ABC):
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
         print(self.wi4mpi_root)
-        self.etc_dir = os.path.join(self.wi4mpi_root, "lib/etc/headers")
+        self.etc_dir = os.path.join(self.wi4mpi_root, "src/generator/etc/headers")
 
     def __init__(self, dir_input="", dir_output="", mpi_target_version=None):
         _msg = f"{self.__class__.__name__} in progress."

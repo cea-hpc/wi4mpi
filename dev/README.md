@@ -14,7 +14,7 @@ By default, it triggers all the following scripts:
 
 `launcher.sh -g 1`
 
-The script `run_generator.sh` executes `<wi4mpi_root>/lib/generator.py` to generate headers and code for interface and preload.
+The script `run_generator.sh` executes `<wi4mpi_root>/src/generator/generator.py` to generate headers and code for interface and preload.
 Files are written in temporary directories.
 
 ## Comparison of headers

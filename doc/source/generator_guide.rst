@@ -9,9 +9,9 @@ Introduction to the generators
 The main generator within WI4MPI is responsible of the MPI functions generation used to pass the appropriate arguments to the underlying runtime MPI function.
 It handle the generation of MPI C routines for the interface and preload version of WI4MPI.
 
-These file generations are driven by the python command :file:`<wi4mpi_dir>/lib/generator.py`.
+These file generations are driven by the python command :file:`<wi4mpi_dir>/src/generator/generator.py`.
 This contains the :code:`Generator` class that will generate the C code files and headers.
-The different generation tasks have been organized in several python modules and submodules all present in the 'lib' folder.
+The different generation tasks have been organized in several python modules and submodules all present in the 'src/generator' folder.
 The python command has several options such as target versions of OpenMPI, MPICH and IntelMPI or the target MPI norm.
 
 Some functions are not implemented yet due to their complexity, but in order to have a :ref:`frozen_api`, they have to be added to the generated files. Those functions trigger an MPI_Abort when they are used.
@@ -24,14 +24,14 @@ Quick generation
 Requirements
 ============
 
-- Prepend :file:`{wi4mpi_dir}/lib` in your :envvar:`PYTHONPATH`
+- Prepend :file:`{wi4mpi_dir}/src/generator` in your :envvar:`PYTHONPATH`
 - The generator uses ``clang-format -style=LLVM`` to format C files. So you must have ``clang-format`` in your :envvar:`PATH`
 - The generator needs following python modules: ``docopt jsonschema logging jinja2``
 
 Execution
 =========
 
-:file:`{wi4mpi_dir}/lib/generate.py` will print in the standard output the following lines:
+:file:`{wi4mpi_dir}/src/generator/generate.py` will print in the standard output the following lines:
 
 .. code-block:: console
 
@@ -754,7 +754,7 @@ They are placed in the :file:`<wi4mpi_dir>/src/interface/header/scripts/` tree f
 
 .. topic:: Example in preload mode with MPICH in application side and OpenMPI in runtime side:
 
-   The command :code:`<wi4mpi_dir>/lib/generator.py --openmpi_version=2 --mpich_version=3` will take in input the following files:
+   The command :code:`<wi4mpi_dir>/src/generator/generator.py --openmpi_version=2 --mpich_version=3` will take in input the following files:
 
    - :file:`<wi4mpi_dir>/src/preload/header/scripts/mpich_ompi_headers/ompi-2.1.6_mpi.h`
    - :file:`<wi4mpi_dir>/src/preload/header/scripts/mpich_ompi_headers/mpich-3.4.3_mpi.h`
@@ -790,9 +790,9 @@ Below is the procedure to follow to add a base header for the implementation <im
     - :file:`mpio.h` (IntelMPI, MPICH)
     - :file:`mpi_proto.h` (MPICH since 4.2.2)
 
-#. [:file:`lib/generator.py`]: Add the :code:`<version>` into the available versions dictionary: :code:`mpi_availabe_target_version`
-#. [:file:`lib/generator.py`]: Update the default version of the implementation by editing the dictionary :code:`mpi_target_version`.
-#. [:file:`lib/generator.py`]: Complete the helpers in the module description and in the docopt strings (below the :code:`__main__` check)
+#. [:file:`src/generator/generator.py`]: Add the :code:`<version>` into the available versions dictionary: :code:`mpi_availabe_target_version`
+#. [:file:`src/generator/generator.py`]: Update the default version of the implementation by editing the dictionary :code:`mpi_target_version`.
+#. [:file:`src/generator/generator.py`]: Complete the helpers in the module description and in the docopt strings (below the :code:`__main__` check)
 #. **[global]**: Go to the :file:`src/interface/header/scripts/<implementation_name>_headers` directory
 #. **[global]**: Create a symbolic link from the new header in :file:`../../../../../src/common/<implementation_name>/<version>`. The current nomenclature for link naming is as follows:
 
@@ -896,7 +896,7 @@ Files for regular expression
 The :code:`re` module is used to perform line-by-line or block-by-block replacements.
 The :code:`re.sub` command is used directly in the code for small replacements.
 
-For larger replacements, lists of commands are written in files placed in `lib/etc/headers`.
+For larger replacements, lists of commands are written in files placed in `src/resources/generator_data/headers`.
 Here is the exhaustive list of these files:
 
 - :file:`header._common_generate_app_mpih.replace`
@@ -1049,5 +1049,5 @@ Log file
 ========
 
 Warning, debug, info, error messages are written in file :file:`generator.log`.
-They are managed by the python module :code:`logging` and configured by :file:`<wi4mpi_dir>/lib/logging.conf`.
+They are managed by the python module :code:`logging` and configured by :file:`<wi4mpi_dir>/src/generator/logging.conf`.
 

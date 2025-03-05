@@ -28,7 +28,7 @@ Overall, the combination of code generation and Jinja templating streamlines the
 The generator is coded in Python and a linter is used.
 Linter usage: 
     
-    $ <wi4mpi_root>/scripts/python_linter/linter.sh lib
+    $ <wi4mpi_root>/scripts/python_linter/linter.sh src/generator
 
 To use it you need:
 
@@ -43,25 +43,25 @@ This test will also copy the generated file `translation_mpi_c.c` in `<wi4mpi_ro
 
 ### Logger
 
-The configuration of the logger is in `<wi4mpi_root>/lib/logging.conf`.
+The configuration of the logger is in `<wi4mpi_root>/src/generator/logging.conf`.
 During the run of the generator, info and warning will be printed in the standard output. Additional messages will be printed inside `<wi4mpi_root>/generator.log`.
 
 # Generator Structure
 
-The generator files are in directory `lib`.
-The inputs for the code generator are in `<wi4mpi_root>lib/code_generation_input/C`
+The generator files are in directory `src/generator`.
+The inputs for the code generator are in `<wi4mpi_root>src/generator/code_generation_input/C`
 
 ## Generator organization
 
 ### Generator
 
-The command `<wi4mpi_root>/lib/generator.py` launch the generation of header and code files.
+The command `<wi4mpi_root>/src/generator/generator.py` launch the generation of header and code files.
 Example of use:
 
     $ dir_gen_interface=$(mktemp -d)
     $ dir_gen_preload=$(mktemp -d)
     $ dir_gen_c_preload=$(mktemp -d)
-    $ ./lib/generator.py --interface_header_dir=$dir_gen_interface --preload_header_dir=$dir_gen_preload --c_preload_gen_dir=$dir_gen_c_preload
+    $ ./src/generator/generator.py --interface_header_dir=$dir_gen_interface --preload_header_dir=$dir_gen_preload --c_preload_gen_dir=$dir_gen_c_preload
 
 It will instantiate a Generator object which will launch the `generate` method associated to each file.
 
@@ -97,7 +97,7 @@ The following methods have to be overridden:
 
 Some functions used to manipulate strings are in `textoperator.py`
 
-The files `<wi4mpi_root>/lib/etc/*.replace` are used to patch header files
+The files `<wi4mpi_root>/src/generator/etc/*.replace` are used to patch header files
 They are used by the following methods of `textoperator.py`:
 
   * `replacement_from_conf_file`
