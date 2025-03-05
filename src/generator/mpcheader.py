@@ -56,9 +56,9 @@ class MpcHeaderGenerator(HeaderGenerator):
             return f"Using {wrapper_f} (MpcHeaderGenerator)"
 
         if not os.path.exists(os.path.join(self.dir_output, "wrapper_f.h")):
-            wrapper_f = os.path.join(self.dir_input, "wrapper_f.h")
+            wrapper_f = os.path.join(self.dir_input, "wrapperf/interface_mpc.h")
             log.warning(_msg(wrapper_f))
-            shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), gen_file)
+            shutil.copy2(wrapper_f, gen_file)
 
     def _mpc_exceptions_run_mpih(self, text):
         """
@@ -396,19 +396,19 @@ class MpcHeaderGenerator(HeaderGenerator):
         """
         list_of_files_to_copy = [
             (
-                os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),
+                os.path.join(self.dir_input, f"openmpi/{self.mpi_target_version['openmpi']}/mpi.h"),
                 os.path.join(self.dir_output, self._app_mpi_header_file),
             ),
             (
-                os.path.join(self.dir_input, "mpc_mpi.h"),
+                os.path.join(self.dir_input, "mpc/mpc_mpi.h"),
                 os.path.join(self.dir_output, self._run_mpi_header_file),
             ),
             (
-                os.path.join(self.dir_input, "mpio.h"),
+                os.path.join(self.dir_input, "mpc/mpio.h"),
                 os.path.join(self.dir_output, self._run_mpio_header_file),
             ),
-            (os.path.join(self.dir_input, "mpcmp.h"), self.dir_output),
-            (os.path.join(self.dir_input, "sctk_types.h"), self.dir_output),
+            (os.path.join(self.dir_input, "mpc/mpcmp.h"), self.dir_output),
+            (os.path.join(self.dir_input, "mpc/sctk_types.h"), self.dir_output),
         ]
         for input_file, output_file in list_of_files_to_copy:
             shutil.copy2(input_file, output_file)

@@ -48,11 +48,19 @@ class OmpiHeaderGenerator(HeaderGenerator):
         """
         def _msg(wrapper_f):
             return f"Using {wrapper_f} (OmpiHeaderGenerator)"
+        def get_name_for_wrapper(mpi_name):
+            if not mpi_name:
+                return "interface"
+            if mpi_name == "intelmpi":
+                return "mpich"
+            return mpi_name
 
-        if not os.path.exists(os.path.join(self.dir_output, "wrapper_f.h")):
-            wrapper_f = os.path.join(self.dir_input, "wrapper_f.h")
+        if not os.path.exists(gen_file):
+            app_name = get_name_for_wrapper(self.app)
+            run_name = get_name_for_wrapper(self.run)
+            wrapper_f = os.path.join(self.dir_input, f"wrapperf/{app_name}_{run_name}.h")
             log.warning(_msg(wrapper_f))
-            shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), self.dir_output)
+            shutil.copy2(wrapper_f, gen_file)
 
     def ompi_replace_mpi_with_rmpi(self, text: str) -> str:
         """

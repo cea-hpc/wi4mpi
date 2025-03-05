@@ -255,91 +255,91 @@ class Generator:
         """
         log.debug("Launching the MPC header generator.")
         genmpc = MpcHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/mpc_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers"),
             dir_output=os.path.join(self.interface_header_dir, "_MPC"),
             mpi_target_version=self.mpi_target_version,
         )
         genmpc.generate()
 
         genintel = IntelHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.interface_header_dir, "_INTEL"),
             mpi_target_version=self.mpi_target_version,
         )
         genintel.generate()
 
         genmpich = MpichHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/mpich_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.interface_header_dir, "_MPICH"),
             mpi_target_version=self.mpi_target_version,
         )
         genmpich.generate()
 
         genompi = OmpiHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/interface/header/scripts/ompi_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.interface_header_dir, "_OMPI"),
             mpi_target_version=self.mpi_target_version,
         )
         genompi.generate()
 
         genintelintel = IntelIntelHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "INTEL_INTEL"),
             mpi_target_version=self.mpi_target_version,
         )
         genintelintel.generate()
 
         genintelmpich = IntelMpichHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_mpich_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "INTEL_MPICH"),
             mpi_target_version=self.mpi_target_version,
         )
         genintelmpich.generate()
 
         genmpichintel = MpichIntelHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/mpich_intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_INTEL"),
             mpi_target_version=self.mpi_target_version,
         )
         genmpichintel.generate()
 
         genmpichmpich = MpichMpichHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/mpich_mpich_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_MPICH"),
             mpi_target_version=self.mpi_target_version,
         )
         genmpichmpich.generate()
 
         genintelompi = IntelOmpiHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/intel_ompi_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "INTEL_OMPI"),
             mpi_target_version=self.mpi_target_version,
         )
         genintelompi.generate()
 
         genmpichompi = MpichOmpiHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/mpich_ompi_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "MPICH_OMPI"),
             mpi_target_version=self.mpi_target_version,
         )
         genmpichompi.generate()
 
         genompiintel = OmpiIntelHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_intel_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "OMPI_INTEL"),
             mpi_target_version=self.mpi_target_version,
         )
         genompiintel.generate()
 
         genompimpich = OmpiMpichHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_mpich_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "OMPI_MPICH"),
             mpi_target_version=self.mpi_target_version,
         )
         genompimpich.generate()
 
         genompiompi = OmpiOmpiHeaderGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/preload/header/scripts/ompi_ompi_headers"),
+            dir_input=os.path.join(wi4mpi_root, "src/resources/MPI_headers/"),
             dir_output=os.path.join(self.preload_header_dir, "OMPI_OMPI"),
             mpi_target_version=self.mpi_target_version,
         )

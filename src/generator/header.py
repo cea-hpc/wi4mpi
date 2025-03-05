@@ -439,33 +439,30 @@ class HeaderGenerator(ABC):
         """
         log.debug("Running copy_files (HeaderGenerator)")
         if self.app in (None, "openmpi"):
-            input_file_name = f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"
+            input_file_name = f"openmpi/{self.mpi_target_version['openmpi']}/mpi.h"
             self.copy_file(input_file_name, "app_mpi.h")
 
         if self.app in ("intelmpi", "mpich"):
-            input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpio.h"
+            input_file_name = f"{self.app}/{self.mpi_target_version[f'{self.app}']}/mpio.h"
             self.copy_file(input_file_name, "app_mpio.h")
-            input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpi.h"
+            input_file_name = f"{self.app}/{self.mpi_target_version[f'{self.app}']}/mpi.h"
             self.copy_file(input_file_name, "app_mpi.h")
 
         if self.app == "mpich" and "4.2.0" == self.mpi_target_version["mpich"]:
-            input_file_name = f"{self.app}-{self.mpi_target_version[f'{self.app}']}_mpi_proto.h"
+            input_file_name = f"{self.app}/{self.mpi_target_version[f'{self.app}']}/mpi_proto.h"
             self.copy_file(input_file_name, "app_mpi_proto.h")
 
-        if self.run == "openmpi":
-            input_file_name = f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"
-        else:
-            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpi.h"
+        input_file_name = f"{self.run}/{self.mpi_target_version[f'{self.run}']}/mpi.h"
         self.copy_file(input_file_name, "run_mpi.h")
 
         if self.run in ("intelmpi", "mpich"):
-            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpio.h"
+            input_file_name = f"{self.run}/{self.mpi_target_version[f'{self.run}']}/mpio.h"
             self.copy_file(input_file_name, "run_mpio.h")
-            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpi.h"
+            input_file_name = f"{self.run}/{self.mpi_target_version[f'{self.run}']}/mpi.h"
             self.copy_file(input_file_name, "run_mpi.h")
 
         if self.run == "mpich" and "4.2.0" == self.mpi_target_version["mpich"]:
-            input_file_name = f"{self.run}-{self.mpi_target_version[f'{self.run}']}_mpi_proto.h"
+            input_file_name = f"{self.run}/{self.mpi_target_version[f'{self.run}']}/mpi_proto.h"
             self.copy_file(input_file_name, "run_mpi_proto.h")
 
     def _generate_app_mpioh(self, _):
