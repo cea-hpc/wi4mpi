@@ -115,6 +115,7 @@ log = getLogger("generator_logger")
 
 # Absolute path of this script
 wi4mpi_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+generator_resources_path = os.path.join(wi4mpi_root, "src/resources/generator_data/")
 
 
 class Generator:
@@ -349,24 +350,24 @@ class Generator:
         Launches the generation process for various code files.
         """
         gencpreload = CPreloadGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/C"),
+            dir_input=os.path.join(generator_resources_path, "code/C"),
             dir_output=self.c_preload_gen_dir,
             mpi_norm=self.mpi_norm,
         )
         gencpreload.generate()
         gencinterface = CInterfaceGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/C"),
+            dir_input=os.path.join(generator_resources_path, "code/C"),
             dir_output=self.c_interface_gen_dir,
             mpi_norm=self.mpi_norm,
         )
         gencinterface.generate()
         genfortpreload = FortranPreloadGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/fortran"),
+            dir_input=os.path.join(generator_resources_path, "code/fortran"),
             dir_output=self.c_preload_gen_dir,
         )
         genfortpreload.generate()
         genfortinterface = FortranInterfaceGenerator(
-            dir_input=os.path.join(wi4mpi_root, "src/generator/etc/code/fortran"),
+            dir_input=os.path.join(generator_resources_path, "code/fortran"),
             dir_output=self.c_interface_gen_dir,
         )
         genfortinterface.generate()

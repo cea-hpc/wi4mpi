@@ -99,7 +99,7 @@ class HeaderGenerator(ABC):
         self.dir_output = dir_output
         os.makedirs(self.dir_output, exist_ok=True)
         print(self.wi4mpi_root)
-        self.etc_dir = os.path.join(self.wi4mpi_root, "src/generator/etc/headers")
+        self.etc_dir = os.path.join(self.wi4mpi_root, "src/resources/generator_data/headers")
 
     def __init__(self, dir_input="", dir_output="", mpi_target_version=None):
         _msg = f"{self.__class__.__name__} in progress."

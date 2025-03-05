@@ -283,7 +283,7 @@ Preload mode: IntelMPI application side -- IntelMPI runtime side
     Celle-ci va successivement appeler :code:`intel_generate_run_mpih` (de la classe :code:`IntelHeaderGenerator`) et :code:`intel_preload_exception_header_run_mpih`.
     La première méthode applique les modifications communes apportées par :code:`_replace_mpi_with_rmpi` de la classe :code:`HeaderGenerator` et celles de :code:`intel_exceptions_run_mpih`.
     Les modifications sont ensuite enregistrés dans :file:`run_mpi.h`.
-    Enfin, :code:`intel_preload_exception_header_run_mpih` applique les dernières modifications. Pour cela, un fichier de :file:`etc/header` contenant des instructions de substitution est passé à la fonction :code:`replacement_from_conf_file` et des lignes sont supprimées par la fonction :code:`delete_lines`. Ces deux fonctions appartiennent au module :code:`textoperator`.
+    Enfin, :code:`intel_preload_exception_header_run_mpih` applique les dernières modifications. Pour cela, un fichier de :file:`src/resources/generator_datader` contenant des instructions de substitution est passé à la fonction :code:`replacement_from_conf_file` et des lignes sont supprimées par la fonction :code:`delete_lines`. Ces deux fonctions appartiennent au module :code:`textoperator`.
 
 The generation of the header :file:`run_mpi.h` in the Intel-Intel case is illustrated in the :ref:`graph below <graph_header_files_workflow_generate_intel_intel_run_mpi>`.
 An object of the class :code:`IntelIntelHeaderGenerator` is initialized in the method :code:`generate_header` of the class :code:`Generator`.
@@ -292,7 +292,7 @@ We find there the call to the method dedicated to the generation of the file :fi
 This will successively call :code:`intel_generate_run_mpih` (from the :code:`IntelHeaderGenerator` class) and :code:`intel_preload_exception_header_run_mpih`.
 The first method applies the common modifications made by :code:`_replace_mpi_with_rmpi` from the :code:`HeaderGenerator` class and those of :code:`intel_exceptions_run_mpih`.
 The modifications are then saved in :file:`run_mpi.h`.
-Finally, :code:`intel_preload_exception_header_run_mpih` applies the latest modifications. To do this, a file from :file:`etc/header` containing substitution instructions is passed to the :code:`replacement_from_conf_file` function and lines are deleted by the :code:`delete_lines` function. These two functions belong to the :code:`textoperator` module.
+Finally, :code:`intel_preload_exception_header_run_mpih` applies the latest modifications. To do this, a file from :file:`src/resources/generator_datader` containing substitution instructions is passed to the :code:`replacement_from_conf_file` function and lines are deleted by the :code:`delete_lines` function. These two functions belong to the :code:`textoperator` module.
 
 
 .. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_run_mpi.dot
@@ -425,7 +425,7 @@ This value is used to select the functions implemented in the chosen standard.
 To do this, :code:`mpi_norm` traverses the generator following the path of :numref:`graph_mpi_norm`.
 Its value is transmitted to the header and code generator at the initialisation of a `Generator` object.
 It is compared to the :code:`MPImin` and :code:`MPImax` values of each object of the  JSON file
-:file:`<wi4mpi_dir>/lib/etc/code/common/jsons/functions.json` (see :ref:`functions_json_example`)
+:file:`<wi4mpi_dir>/src/resources/generator_data/code/common/jsons/functions.json` (see :ref:`functions_json_example`)
 This comparison is performed when the JSON is loaded in :code:`load_json_file`.
 The result is a dictionary :code:`data["function"]` containing all the functions of the standard.
 
@@ -440,7 +440,7 @@ The result is a dictionary :code:`data["function"]` containing all the functions
    If a json schema is given as an argument to the :code:`load_json_file` function then the python :code:`jsonschema` module will be used to validate the json file given for reading.
 
    Currently the schema used to validate the previous :file:`functions.json` is
-   :file:`<wi4mpi_dir>/lib/etc/code/common/jsons/schemas/schema_functions.json`
+   :file:`<wi4mpi_dir>/src/resources/generator_data/code/common/jsons/schemas/schema_functions.json`
    In particular, it requires the presence of the keyword :code:`MPImin`.
 
 
