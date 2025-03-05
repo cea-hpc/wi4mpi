@@ -51,7 +51,7 @@ endif()
 
 #empty
 file(GLOB SOURCE_WI4MPI_EMPTY
-    preload/gen/lib_empty.c
+    common/lib_empty.c
 )
 
 #wi4mpi_preload_profiling
