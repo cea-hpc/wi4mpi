@@ -24,18 +24,68 @@ Version).
 Installation
 ============
 
-The installation procedure is simply consists of a CMake make install
-sequence.
+The installation process consists of a standard CMake build and installation sequence.
+The release archive contains pre-generated code to simplify the build process.
 
-.. code-block:: console
+.. code-block:: bash
 
-    mkdir BUILD ; cd BUILD
+    tar xf wi4mpi-x.y.z.tar
+    cd wi4mpi/build
     cmake -DCMAKE_INSTALL_PREFIX=/path/to/install/dir ..
     make
     make install
 
-CMAKE specific variables
--------------------------
+If you are building from the Git repository or need to regenerate the code,
+enable the `WI4MPI_GENERATOR` option as follows:
+
+.. code-block:: bash
+
+    git clone https://github.com/cea-hpc/wi4mpi.git
+    mkdir -p wi4mpi/build
+    cd wi4mpi/build
+    cmake -DWI4MPI_GENERATOR=ON \
+          -DCMAKE_INSTALL_PREFIX=/path/to/install/dir ..
+    make
+    make install
+
+CMake Configuration Options
+---------------------------
+
+The following CMake variables can be used to configure the build:
+
+- **WI4MPI_GENERATOR** (*boolean*)
+
+  Enables code generation before building.
+
+  **Default:** `OFF`
+
+- **WI4MPI_GENERATOR_MPI_NORM** (*string*)
+
+  Specifies the MPI standard version for the generated code.
+  
+  **Default:** `3.1`
+  **Supported versions:** `1.0`, `1.1`, `1.2`, `2.0`, `2.1`, `2.2`, `3.0`, `3.1`, `4.0`
+
+- **WI4MPI_GENERATOR_OPENMPI_VERSION** (*string*)
+
+  Specifies the Open MPI header version used during code generation.
+  
+  **Default:** `1.8.8`
+  **Supported versions:** `1.8.8`, `2.1.6`, `4.1.6`, `5.0.3`
+
+- **WI4MPI_GENERATOR_MPICH_VERSION** (*string*)
+
+  Specifies the MPICH header version used during code generation.
+
+  **Default:** `3.1.2`
+  **Supported versions:** `3.1.2`, `3.4.3`, `4.2.0`
+
+- **WI4MPI_GENERATOR_INTELMPI_VERSION** (*string*)
+
+  Specifies the Intel MPI header version used during code generation.
+  
+  **Default:** `20.0.0`
+  **Supported versions:** `20.0.0`, `24.0.0`
 
 - WI4MPI\_DEBUG:boolean
 
