@@ -105,3 +105,14 @@
 
         {% endif %}
     {% endmacro %}
+    {%- macro generate_arg_list(mappers, func, ret_type, count_char) -%}
+      {%-  for arg in func['args']-%}
+        {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%}
+        {%- if arg["variadic"]!= "True" -%}
+          {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}}
+        {%- endif -%}
+      {%-  endfor-%}
+    {%- if ret_type == "int " %}
+      {%- if func['args']|count != 0 -%}, {%- endif -%}
+      int *ret {%- endif -%}{{count_char.value}}
+    {% endmacro %}

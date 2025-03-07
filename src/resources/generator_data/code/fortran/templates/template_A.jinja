@@ -1,7 +1,7 @@
 
 {#this template use the func dictionary (extrated from functions.json) and the mappers_X.json dict as input #}
 {%- from 'out_function.jinja' import convert_out -%} 
-{%- from 'in_functions.jinja' import type_prefix,convert_in,tmp_decl,handle_local_var,tmp_free -%} 
+{%- from 'in_functions.jinja' import type_prefix,convert_in,tmp_decl,handle_local_var,tmp_free,generate_arg_list -%} 
 {%-  set ret_type = mappers[func['ret']['name']]['type']-%} 
 {%-  set ret_run_type = mappers[func['ret']['name']]['type']-%}
 {% set variadic =0 %}
@@ -10,19 +10,20 @@
 {% if  conf[func['name']] is defined and  conf[func['name']]['Application'] is defined and conf[func['name']]['Application']['fortran'] is defined and conf[func['name']]['Application']['fortran']['generated'] == "False" -%}
 {%-if conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] == "True"  -%}
 {% for arg in func['args'] %} {% if mappers[arg['name']]['type'].split('*')|first|trim == "char" %} {%set count_char.value=count_char.value ~ ", fort_string_length len_" ~ arg['var'].split('[')|first %} {%endif%} {%endfor %}
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{func['name']|lower}}__({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
+  {%- for prefix in ["", "p"] -%}
+    {%- for suffix in ["_", "__"] -%}
+    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{prefix}}{{func['name']|lower}}{{suffix}}({{generate_arg_list(mappers, func, ret_type, count_char)}});
+    {%- endfor -%}
+  {%- endfor -%}
 #define A_f_{{func['name']}} _{{func['name']}}
 
-    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
+    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({{generate_arg_list(mappers, func, ret_type, count_char)}});
 
 #pragma weak {{func['name']|lower}}_ = _{{func['name']}}
 #pragma weak {{func['name']|lower}}__ = _{{func['name']}}
 #pragma weak p{{func['name']|lower}}__ = _{{func['name']}}
 
-    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({{generate_arg_list(mappers, func, ret_type, count_char)}});
 {%- endif %}
 
  {%-  if conf[func['name']]['Application']['fortran']['file'] is defined -%}
@@ -38,7 +39,7 @@
 
 #ifndef __F_{{func['name']}}
 #ifndef {{func['name']|upper}}_OVERRIDE
-    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}})
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({{generate_arg_list(mappers, func, ret_type, count_char)}})
 
 {   
    fprintf(stderr,"{{func['name']}} is not implemented yet in fortran\n");
@@ -51,26 +52,26 @@
 #endif
  {% endif %}
 {%  else-%} 
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{func['name']|lower}}__({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
-    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
+    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{func['name']|lower}}_({{generate_arg_list(mappers, func, ret_type, count_char)}});
+    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{func['name']|lower}}__({{generate_arg_list(mappers, func, ret_type, count_char)}});
+    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({{generate_arg_list(mappers, func, ret_type, count_char)}});
+    {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({{generate_arg_list(mappers, func, ret_type, count_char)}});
 
 #define A_f_{{func['name']}} _{{func['name']}}
 
-    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
+    {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({{generate_arg_list(mappers, func, ret_type, count_char)}});
 
 #pragma weak {{func['name']|lower}}_ = _{{func['name']}}
 #pragma weak {{func['name']|lower}}__ = _{{func['name']}}
 #pragma weak p{{func['name']|lower}}__ = _{{func['name']}}
 
 
-    {% if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}});
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_run_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({{generate_arg_list(mappers, func, ret_type, count_char)}});
 #define __F_{{func['name']}}__GEN__
 #ifndef __F_{{func['name']}}
 #ifndef {{func['name']|upper}}_OVERRIDE
 
-    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({%-  for arg in func['args']-%}  {%-  if loop.index > 1 and arg["variadic"]!= "True" -%}  , {%-  endif-%} {%if arg["variadic"]!= "True" %} {{ type_prefix('A_',mappers[arg['name']]['type']) }} {{arg['var'].split('[')|first}} {%endif %}{%-  endfor-%} {%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} int *ret {%- endif -%}{{count_char.value}})
+    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({{generate_arg_list(mappers, func, ret_type, count_char)}})
     {
     #ifdef TIMEOUT_SUPPORT
     wi4mpi_set_timeout(WI4{{func['name']}}_timeout);
