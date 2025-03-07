@@ -371,6 +371,14 @@ def clang_format(file_to_format):
     Returns:
         None
     """
+    from shutil import which
+    from logging import getLogger
+    from logging.config import fileConfig
+    fileConfig(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logging.conf"))
+    log = getLogger("code_logger")
+    if not which("clang-format"):
+        log.warning("clang-format not found, code formatting will not be done")
+        return
     call(["clang-format", "-style=LLVM", "-i", file_to_format])
 
 
