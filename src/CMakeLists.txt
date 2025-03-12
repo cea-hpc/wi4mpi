@@ -137,7 +137,7 @@ add_dependencies(mpi_a wi4mpi_MPC_a)
 #Headers
 #-------
 
-target_include_directories(mpi PRIVATE interface/manual)
+target_include_directories(mpi PRIVATE interface/manual PRIVATE common)
 target_include_directories(wi4mpi_OMPI
                            PRIVATE common
                            PRIVATE ${WI4MPI_GENDIR}/interface/header/_OMPI
@@ -159,7 +159,7 @@ target_include_directories(wi4mpi_MPC
                            PRIVATE interface/gen
                           )
 
-target_include_directories(mpi_a PRIVATE interface/manual)
+target_include_directories(mpi_a PRIVATE interface/manual PRIVATE common)
 target_include_directories(wi4mpi_OMPI_a
                            PRIVATE common
                            PRIVATE ${WI4MPI_GENDIR}/interface/header/_OMPI

@@ -3,8 +3,9 @@
 {% if  conf[func['name']] is not defined or  conf[func['name']]['Application'] is not defined or conf[func['name']]['Application']['fortran'] is not defined or conf[func['name']]['Application']['fortran']['generated'] != "False" or ( conf[func['name']]['Application']['fortran']['file'] is defined ) and ( conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] != "False" ) -%}
 
     {%-  set ret_type = mappers[func['ret']['name']]['type']-%} 
-{% set count_char=namespace(value="") %}
+{% set count_char=namespace(value="",vars="") %}
 {% for arg in func['args'] %} {% if mappers[arg['name']]['type'].split('*')|first|trim == "char" %} {% set count_char.value=count_char.value ~ ", fort_string_length len_" ~ arg['var'].split('[')|first -%}
+{% set count_char.vars = count_char.vars ~ ", len_" ~ arg['var'].split('[')|first -%}
  {%endif%} {%endfor %}
 #ifndef IF_{{func['name']}}
     {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({{ generate_arg_list(mappers, func, ret_type, count_char) }});
@@ -25,7 +26,7 @@
 
     {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} p{{func['name']|lower}}_({{ generate_arg_list(mappers, func, ret_type, count_char) }})
     {
-        return INTERFACE_F_LOCAL_{{func['name']}}({%-  for arg in func['args']-%} {%if arg["variadic"]!= "True" %} {%- if 'var' in arg -%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {{ arg["var"].split('[')|first }}{%- endif -%}{%- endif -%}{%- endfor -%}{%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} ret {%- endif -%});
+        return INTERFACE_F_LOCAL_{{func['name']}}({%-  for arg in func['args']-%} {%if arg["variadic"]!= "True" %} {%- if 'var' in arg -%}  {%-  if loop.index > 1-%}  , {%-  endif-%} {{ arg["var"].split('[')|first }}{%- endif -%}{%- endif -%}{%- endfor -%}{%- if ret_type == "int " %}{%- if func['args']|count != 0 -%}, {%- endif -%} ret {%- endif -%}{{count_char.vars}});
     }
 
 #endif
