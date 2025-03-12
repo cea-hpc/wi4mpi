@@ -23,6 +23,9 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
       }
     },
     "ASM": {
@@ -39,6 +42,9 @@
   "MPI_Comm_null_copy_fn": {
     "Application": {
       "C": {
+        "generated": "False"
+      },
+      "fortran": {
         "generated": "False"
       }
     },
@@ -57,6 +63,10 @@
     "Application": {
       "C": {
         "generated": "False"
+      },
+      "fortran": {
+        "generated": "False"
+      }
     },
     "ASM": {
       "C": {
@@ -67,7 +77,6 @@
       "C": {
         "generated": "False"
       }
-    }
     }
   },
   "MPI_Conversion_fn_null": {
@@ -1572,27 +1581,6 @@
     "Application": {
       "fortran": {
         "file": "A_f_MPI_Unpack_external.c",
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_Comm_dup_fn": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_Comm_null_delete_fn": {
-    "Application": {
-      "fortran": {
-        "generated": "False"
-      }
-    }
-  },
-  "MPI_Comm_null_copy_fn": {
-    "Application": {
-      "fortran": {
         "generated": "False"
       }
     }
