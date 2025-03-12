@@ -130,6 +130,20 @@ COPYRIGHT_MPICH_MPIOH = """
 class MpichHeaderGenerator(IntelHeaderGenerator):
     """
     MpichHeaderGenerator class for generating Mpich interface header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _generate_wrapper_fh: Generate wrapper header file.
+        mpich_copyright: Add the copyright in Mpich header.
+        mpich_generate_run_mpih: Generates the run_mpi.h file with Intel-specific modifications.
+        _generate_run_mpih: Generates the run_mpi.h file.
+        mpich_exceptions_run_mpioh: Applies MPICH-specific exceptions for run_mpioh file.
+        _generate_run_mpioh: Generates the run_mpio.h file with Intel-specific modifications.
+        _mpich_exception_run_mpi_protoh: Applies MPICH-specific exceptions for run_mpi_proto.h file.
+        _generate_run_mpi_protoh: Generate the run_mpi_proto.h header file.
     """
 
     app = None
@@ -155,6 +169,12 @@ class MpichHeaderGenerator(IntelHeaderGenerator):
     def mpich_copyright(self, text):
         """
         Add the copyright in Mpich header.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
         """
         _pattern_block = """
 /*  
@@ -229,6 +249,15 @@ class MpichHeaderGenerator(IntelHeaderGenerator):
             _file.write(_new_content)
 
     def _mpich_exception_run_mpi_protoh(self, text):
+        """
+        Applies MPICH-specific exceptions for run_mpi_proto.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _mpich_exception_run_mpi_protoh (IntelHeaderGenerator).")
         text = re.sub(r"const ", "", text)
         text = re.sub(r"R_MPIX_Iov", "MPIX_Iov", text)
@@ -244,6 +273,12 @@ class MpichHeaderGenerator(IntelHeaderGenerator):
         return text
 
     def _generate_run_mpi_protoh(self, gen_file):
+        """
+        Generate the run_mpi_proto.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         if "4.2.0" == self.mpi_target_version["mpich"]:
             log.debug("Running _generate_run_mpi_protoh (IntelGenerator)")
             with open(gen_file, "r", encoding="utf-8") as _file:

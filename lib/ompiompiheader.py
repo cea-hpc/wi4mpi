@@ -19,12 +19,32 @@ log = getLogger("header_logger")
 class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
     """
     OmpiOmpiHeader class for generating Ompi-Ompi preload header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _ompi_ompi_run_exception: Applies exceptions for run_mpi.h file.
+        _generate_run_mpih: Generate the run_mpi.h header file.
+        _run_to_app: Helper function involved in converting run_mpi.h to app_mpi.h
+        ompi_generate_app_mpih: Generate the app_mpi.h header file.
+        _generate_app_mpih: Generate the app_mpi.h header file.
     """
 
     app = "openmpi"
     run = "openmpi"
 
     def _ompi_ompi_run_exception(self, text):
+        """
+        Applies exceptions for run_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         pattern = []
         replacement = []
         decalage = 0
@@ -78,6 +98,12 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
         return text
 
     def _generate_run_mpih(self, gen_file: str) -> None:
+        """
+        Generate the run_mpi.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         super()._generate_run_mpih(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
@@ -87,6 +113,15 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
             _file.write(_new_content)
 
     def _run_to_app(self, text: str) -> str:
+        """
+        Helper function involved in converting run_mpi.h to app_mpi.h
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         pattern = []
         replacement = []
         decalage = 0
@@ -122,7 +157,10 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
 
     def ompi_generate_app_mpih(self, gen_file: str) -> None:
         """
-        Generate ompi app_mpi.h
+        Generate the app_mpi.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
         """
         self._generate_run_mpih(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
@@ -133,4 +171,10 @@ class OmpiOmpiHeaderGenerator(OmpiHeaderGenerator):
             _file.write(_new_content)
 
     def _generate_app_mpih(self, gen_file: str) -> None:
+        """
+        Generate the app_mpi.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         self.ompi_generate_app_mpih(gen_file)

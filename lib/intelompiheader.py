@@ -27,6 +27,15 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
     run = "openmpi"
 
     def _common_generate_app_mpih(self, text):
+        """
+        Applies exceptions for app_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _common_generate_app_mpih (IntelOmpiHeaderGenerator).")
         pattern = []
         replacement = []
@@ -104,6 +113,13 @@ class IntelOmpiHeaderGenerator(IntelHeaderGenerator):
         return text
 
     def _generate_app_mpih(self, gen_file):
+        """
+        Generates the app_mpi.h file.
+        To do this, applies intel_generate_run_mpih and _common_generate_app_mpih.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug(
             lambda: f"Running __generate_app_mpih (IntelOmpiHeaderGenerator). File: {gen_file}."
         )
@@ -153,10 +169,9 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
         and then saves the modified content to the same file. If the input file does not exist or if there
         is an error during the file I/O operations, appropriate error messages are displayed.
 
-        :param gen_file: A string representing the path to the input file.
-        :type gen_file: str
-        :return: None
-        """  # noqa: E501
+        Args:
+            gen_file (str): The path to the generated file.
+        """# noqa: E501
         log.debug("Running _generate_run_mpih (HeaderGenerator).")
         try:
             with open(gen_file, "r", encoding="utf-8") as _file:
@@ -170,6 +185,15 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
             log.error("An error occurred in _generate_run_mpih.")
 
     def _common_generate_app_mpioh(self, text):
+        """
+        Applies exceptions for app_mpio.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _common_generate_app_mpioh (IntelIntelHeaderGenerator).")
         pattern = []
         replacement = []
@@ -187,6 +211,13 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
         return text
 
     def _generate_app_mpioh(self, gen_file):
+        """
+        Generates the app_mpio.h file.
+        To do this, applies IntelHeaderGenerator._generate_run_mpioh and _common_generate_app_mpioh.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug(
             lambda: f"Running _generate_app_mpioh (IntelOmpiHeaderGenerator). File: {gen_file}."
         )
@@ -199,4 +230,11 @@ OMPI_DECLSPEC extern struct ompi_predefined_datatype_t ompi_mpi_packed;
             _file.write(_new_content)
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Override this method to prevent generation of the run_mpio.h file.
+        Indeed, there is no run_mpio.h with Open MPI on the runtime side.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         pass

@@ -54,18 +54,18 @@ def delete_lines(lines_to_delete, text):
     """
     Delete specified lines from the given text.
 
-    Parameters:
-    - lines_to_delete (int, str, list): Line numbers (int), line content (str), or a list
+    Example:
+        >>> original_text = "Line 1\nLine 2\nLine 3\nLine 4\n"
+        >>> delete_lines([2, "Line 4"], original_text)
+        'Line 1\nLine 3\n'
+
+    Args:
+        lines_to_delete (str | int | list[int] | list[str]): Line numbers (int), line content (str), or a list
       of line numbers or contents to be deleted from the text.
-    - text (str): The input text from which lines are to be deleted.
+        text (str): The input text from which lines are to be deleted.
 
     Returns:
-    str: The modified text after deleting the specified lines.
-
-    Example:
-    >>> original_text = "Line 1\nLine 2\nLine 3\nLine 4\n"
-    >>> delete_lines([2, "Line 4"], original_text)
-    'Line 1\nLine 3\n'
+        str: The modified text after deleting the specified lines.
     """
     lines = text.split("\n")
     if isinstance(lines_to_delete, (int, str)):
@@ -87,17 +87,17 @@ def delete_line_from_pattern(pattern, text):
     """
     Delete lines containing the specified pattern from the given text.
 
-    Parameters:
-    - pattern (str): The pattern to match for deleting lines.
-    - text (str): The input text from which lines are to be deleted.
+    Example:
+        >>> original_text = "Line 1\nLine with pattern ABC\nLine 3\n"
+        >>> delete_line_from_pattern("ABC", original_text)
+        'Line 1\nLine 3\n'
+
+    Args:
+        pattern (str): The pattern to match for deleting lines.
+        text (str): The input text from which lines are to be deleted.
 
     Returns:
-    str: The modified text after deleting lines containing the specified pattern.
-
-    Example:
-    >>> original_text = "Line 1\nLine with pattern ABC\nLine 3\n"
-    >>> delete_line_from_pattern("ABC", original_text)
-    'Line 1\nLine 3\n'
+        str: The modified text after deleting lines containing the specified pattern.
     """
     lines = text.split("\n")
     if isinstance(pattern, str):
@@ -116,7 +116,7 @@ def insert_lines(lines_to_insert, line_number, text):
 
     Args:
         text (str): The original text.
-        lines_to_insert (list): List of lines to insert.
+        lines_to_insert (list[int]): List of lines to insert.
         line_number (int): The line number where to insert the new lines.
 
     Returns:
@@ -169,8 +169,8 @@ def list_pattern_replacement(pattern, replacement, text, shift=False):
     Replace patterns with corresponding replacements in a given text.
 
     Args:
-        pattern (list): List of patterns to search for in the text.
-        replacement (list): List of replacement strings corresponding to the patterns.
+        pattern (list[str]): List of patterns to search for in the text.
+        replacement (list[str]): List of replacement strings corresponding to the patterns.
         text (str): The text in which to perform the replacements.
         shift (bool, optional): Indicates whether line shift should be returned. Defaults to False.
 
@@ -248,8 +248,8 @@ def write_conf_file(pattern, replacement, path_file):
     Write pattern-replacement configurations to a file.
 
     Args:
-        pattern (list): List of patterns to write to the file.
-        replacement (list): List of corresponding replacements.
+        pattern (list[str]): List of patterns to write to the file.
+        replacement (list[str]): List of corresponding replacements.
         path_file (str): The path to the file to write the configurations.
     """
     with open(path_file, "w", encoding="utf-8") as file_descriptor:
@@ -306,10 +306,10 @@ def load_json_file(file_path, mpi_norm=None, schema_path=None):
         file_path (str): The path to the JSON file.
         mpi_norm (float, optional): The MPI version to filter by.
                                   If None, all data is returned.
-        schema_path (str): Path to the JSON schema file.
+        schema_path (str, optional): Path to the JSON schema file.
 
     Returns:
-        list or dict: The JSON data loaded from the file, filtered
+        (list|dict): The JSON data loaded from the file, filtered
                       by MPI_norm if specified.
 
     Raises:

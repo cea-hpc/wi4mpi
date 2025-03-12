@@ -22,12 +22,30 @@ log = getLogger("header_logger")
 class OmpiHeaderGenerator(HeaderGenerator):
     """
     OmpiHeaderGenerator class for generating Ompi-specific header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _generate_wrapper_fh: Generates the wrapper_f.h file.
+        ompi_replace_mpi_with_rmpi: Manage exceptions for openmpi header.
+        _generate_run_mpih: Generate the run_mpi.h header file.
+        _generate_run_mpioh: Generate the run_mpio.h header file.
+        _generate_run_mpi_protoh: Override this method to prevent generation of the run_mpi_proto.h file.
+        _generate_app_mpi_protoh: Override this method to prevent generation of the app_mpi_proto.h file.
     """
 
     app = None
     run = "openmpi"
 
     def _generate_wrapper_fh(self, gen_file):
+        """
+        Generates the wrapper_f.h file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         def _msg(wrapper_f):
             return f"Using {wrapper_f} (OmpiHeaderGenerator)"
 
@@ -38,7 +56,13 @@ class OmpiHeaderGenerator(HeaderGenerator):
 
     def ompi_replace_mpi_with_rmpi(self, text: str) -> str:
         """
-        Manage execptions for openmpi header.
+        Manage exceptions for openmpi header.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
         """
         log.debug("Running ompi_replace_mpi_with_rmpi (OmpiHeaderGenerator).")
         if "5.0.3" == self.mpi_target_version["openmpi"]:
@@ -217,10 +241,11 @@ int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
 
     def _generate_run_mpih(self, gen_file: str) -> None:
         """
-        :param gen_file: A string representing the path to the input file.
-        :type gen_file: str
-        :return: None
-        """  # noqa: E501
+        Generate the run_mpi.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpih (OmpiHeaderGenerator).")
         try:
             with open(gen_file, "r", encoding="utf-8") as _file:
@@ -234,12 +259,24 @@ int (*ccc_OMPI_C_MPI_COMM_DUP_FN)( R_MPI_Comm comm, int comm_keyval,
             log.error("An error occurred during _generate_run_mpih.")
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Generate the run_mpio.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpioh (OmpiHeaderGenerator).")
         if self.__class__.__name__ in ("OmpiIntelHeaderGenerator", "OmpiMpichHeaderGenerator"):
             super()._generate_run_mpioh(gen_file)
 
     def _generate_run_mpi_protoh(self, _):
+        """
+        Override this method to prevent generation of the run_mpi_proto.h file.
+        """
         log.debug("Running _generate_run_mpi_protoh (OmpiHeaderGenerator).")
 
     def _generate_app_mpi_protoh(self, _):
+        """
+        Override this method to prevent generation of the app_mpi_proto.h file.
+        """
         log.debug("Running _generate_app_mpi_protoh (OmpiHeaderGenerator).")

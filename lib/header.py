@@ -3,7 +3,6 @@
 Module for generating MPI header files.
 
 This module provides classes and methods for generating MPI header files.
-
 """
 
 
@@ -43,8 +42,14 @@ class HeaderGenerator(ABC):
         _app_mpi_header_file (str): Name of the app MPI header file.
         _app_mpio_header_file (str): Name of the app MPIO header file.
         _wrapper_f_header_file (str): Name of the wrapper F header file.
+        _run_mpi_proto_header_file (str): Name of the run MPI proto header file (MPICH).
+        app_mpi_proto_header_file (str): Name of the app MPI proto header file (MPICH).
         dir_output (str): Output directory path.
         dir_input (str): Input directory path.
+        etc_dir (str): Configuration files directory path.
+        mpi_target_version (str): Version of the selected MPI standard.
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
 
     Methods:
         set_directories: Set input and output directories for header generation.
@@ -54,9 +59,14 @@ class HeaderGenerator(ABC):
         _generate_run_mpih: Generate run MPI header file.
         _common_generate_app_mpih: Generate common app MPI header content.
         _generate_app_mpih: Generate app MPI header file.
+        intel_exceptions_run_mpioh:
         _generate_run_mpioh: Generate run MPIO header file.
+        copy_file: Performs the copy from dir_input to dir_output.
+        copy_files: Copy target headers
+        _generate_app_mpioh: Method to be defined in subclasse.
+        _generate_run_mpi_protoh: Method to be defined in subclasse.
+        _generate_app_mpi_protoh: Method to be defined in subclasse.
         generate: Generate MPI header files.
-
     """
 
     wi4mpi_root = wi4mpi_root
@@ -103,6 +113,9 @@ class HeaderGenerator(ABC):
         Abstract method, must be implemented by a subclass.
 
         Generate the wrapper_f.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
         """
 
     def _replace_mpi_with_rmpi(self, text: str) -> str:
@@ -112,8 +125,11 @@ class HeaderGenerator(ABC):
         This method replaces all occurrences of MPI_ with R_MPI_ in the provided text.
         It's typically used to modify the content of a file.
 
-        :param text: A string, typically the content of a file, in which MPI_ should be replaced.
-        :return: A modified string with MPI_ replaced by R_MPI_.
+        Args:
+            text (str): A string, typically the content of a file, in which MPI_ should be replaced.
+        
+        Returns:
+            str: A modified string with MPI_ replaced by R_MPI_.
         """
         log.debug("Running _replace_mpi_with_rmpi (HeaderGenerator)")
         # Replace MPI with R_MPI
@@ -155,9 +171,24 @@ class HeaderGenerator(ABC):
         return text
 
     def _generate_run_mpih(self, gen_file):
+        """
+        Generates the 'run_mpi.h' file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         pass
 
     def _common_generate_app_mpih(self, text):
+        """
+        Manage common generation for app_mpi.h.
+
+        Args:
+            text (str): Text to be processed.
+
+        Returns:
+            str: The processed text.
+        """
         log.debug("Running _common_generate_app_mpih (HeaderGenerator)")
         # Delete lines from the beginning of the file
         line_idx = len(text[: text.index("\ntypedef ")].split("\n"))
@@ -345,6 +376,12 @@ class HeaderGenerator(ABC):
         return text
 
     def _generate_app_mpih(self, gen_file):
+        """
+        Generates the 'app_mpi.h' file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_app_mpih (HeaderGenerator)")
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
@@ -357,10 +394,22 @@ class HeaderGenerator(ABC):
         """
         Manage execptions for intel run_mpio.h.
         This function is overloaded inside subclasses.
+
+        Args:
+            text (str): Text to be processed.
+
+        Returns:
+            str: The processed text.
         """
         return text
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Generates the 'run_mpio.h' file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpioh (HeaderGenerator)")
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
@@ -373,6 +422,10 @@ class HeaderGenerator(ABC):
     def copy_file(self, input_file_name, output_file_name):
         """
         Performs the copy from dir_input to dir_output.
+
+        Args:
+            input_file_name (str): Name of the file to copy.
+            output_file_name (str): Name of the copied file.
         """
         shutil.copy2(
             os.path.join(self.dir_input, input_file_name),
@@ -381,7 +434,8 @@ class HeaderGenerator(ABC):
 
     def copy_files(self):
         """
-        Copy target headers
+        Copy target headers.
+	This method mutualizes the copying of the product header files.
         """
         log.debug("Running copy_files (HeaderGenerator)")
         if self.app in (None, "openmpi"):
@@ -421,9 +475,15 @@ class HeaderGenerator(ABC):
         log.debug("Running copy_files (HeaderGenerator)")
 
     def _generate_run_mpi_protoh(self, _):
+        """
+        Method to be defined in subclasse.
+        """
         log.debug("Running _generate_run_mpi_protoh (HeaderGenerator)")
 
     def _generate_app_mpi_protoh(self, _):
+        """
+        Method to be defined in subclasse.
+        """
         log.debug("Running _generate_app_mpi_protoh (HeaderGenerator)")
 
     def generate(self):

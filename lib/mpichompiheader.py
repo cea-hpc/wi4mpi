@@ -16,13 +16,27 @@ log = getLogger("header_logger")
 class MpichOmpiHeaderGenerator(IntelOmpiHeaderGenerator, MpichMpichHeaderGenerator):
     """
     MpichOmpiHeaderGenerator class for generating Mpich-Ompi preload header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _generate_run_mpioh: Override this method to prevent generation of the run_mpio.h file.
+        _generate_run_mpi_protoh: Override this method to prevent generation of the run_mpi_proto.h file.
     """
 
     app = "mpich"
     run = "openmpi"
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Override this method to prevent generation of the run_mpio.h file.
+        """
         pass
 
     def _generate_run_mpi_protoh(self, gen_file):
+        """
+        Override this method to prevent generation of the run_mpi_proto.h file.
+        """
         pass

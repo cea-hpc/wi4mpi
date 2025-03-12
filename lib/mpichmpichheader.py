@@ -22,12 +22,33 @@ log = getLogger("header_logger")
 class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator):
     """
     MpichMpichHeaderGenerator class for generating Mpich-Mpich preload header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _generate_run_mpih: Generate the run_mpi.h header file.
+        _common_generate_app_mpih: Applies exceptions for app_mpi.h file.
+        _generate_app_mpioh: Generate the app_mpio.h header file.
+        __aux_generate_run_mpioh: Applies exceptions for run_mpio.h file.
+        _generate_run_mpioh: Generate the run_mpio.h header file.
+        _preload_exception_header_app_mpi_protoh: Applies exceptions for app_mpi_proto.h file.
+        _generate_app_mpi_protoh: Manage the generation of app_mpi_proto.h app_mpi.h file.
+        _preload_exception_header_run_mpi_protoh: Applies exceptions for run_mpi.h file.
+        _generate_run_mpi_protoh: Manage the generation of run_mpi_proto.h app_mpi.h file.
     """
 
     app = "mpich"
     run = "mpich"
 
     def _generate_run_mpih(self, gen_file):
+        """
+        Generate the run_mpi.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpih (MpichMpichHeaderGenerator).")
         self.intel_generate_run_mpih(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
@@ -39,6 +60,15 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
             _file.write(_new_content)
 
     def _common_generate_app_mpih(self, text):
+        """
+        Applies exceptions for app_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _common_generate_app_mpih (MpichMpichHeaderGenerator).")
         text = super()._common_generate_app_mpih(text)
         # MPICH 4.2.0
@@ -49,6 +79,12 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
         return text
 
     def _generate_app_mpioh(self, gen_file):
+        """
+        Generate the app_mpio.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug(
             lambda: f"Running _generate_app_mpioh (MpichMpichHeaderGenerator). File: {gen_file}."
         )
@@ -61,6 +97,15 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
             _file.write(_new_content)
 
     def __aux_generate_run_mpioh(self, text):
+        """
+        Applies exceptions for run_mpio.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running __aux_generate_run_mpioh (MpichMpichHeaderGenerator).")
         text = delete_line_from_pattern(
             "/* Also rename the MPIO routines to get the MPI versions */", text
@@ -80,6 +125,12 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
         return text
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Generate the run_mpio.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug(
             lambda: f"Running __generate_run_mpioh (MpichMpichHeaderGenerator). File: {gen_file}."
         )
@@ -92,6 +143,15 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
             _file.write(_new_content)
 
     def _preload_exception_header_app_mpi_protoh(self, text):
+        """
+        Applies exceptions for app_mpi_proto.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         text = re.sub(r"R_MPI", r"A_MPI", text)
         text = re.sub(r"R_QMPI", r"A_QMPI", text)
         text = re.sub(r"R_PMPIX", r"A_PMPIX", text)
@@ -101,6 +161,15 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
         return text
 
     def _generate_app_mpi_protoh(self, gen_file):
+        """
+        Manage the generation of app_mpi_proto.h app_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         if "4.2.0" == self.mpi_target_version["mpich"]:
             log.debug("Running _generate_app_mpi_protoh (IntelIntelGenerator)")
             with open(gen_file, "r", encoding="utf-8") as _file:
@@ -114,6 +183,15 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
             pass
 
     def _preload_exception_header_run_mpi_protoh(self, text):
+        """
+        Applies exceptions for run_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         text = re.sub(r"A_MPI", r"R_MPI", text)
         text = re.sub(r"A_QMPI", r"R_QMPI", text)
         text = re.sub(r"A_PMPI", r"R_PMPI", text)
@@ -121,6 +199,15 @@ class MpichMpichHeaderGenerator(IntelIntelHeaderGenerator, MpichHeaderGenerator)
         return text
 
     def _generate_run_mpi_protoh(self, gen_file):
+        """
+        Manage the generation of run_mpi_proto.h app_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         if "4.2.0" == self.mpi_target_version["mpich"]:
             log.debug("Running _generate_run_mpi_protoh (MpichMpichGenerator)")
             with open(gen_file, "r", encoding="utf-8") as _file:

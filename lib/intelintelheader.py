@@ -20,6 +20,19 @@ log = getLogger("header_logger")
 class IntelIntelHeaderGenerator(IntelHeaderGenerator):
     """
     IntelIntelHeader class for generating Intel-Intel preload header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        intel_preload_exception_header_run_mpih: Exception dedicated to Intel run_mpi.h
+        _generate_run_mpih: Generates the run_mpi.h file.
+        _common_generate_app_mpih: Applies MPICH-specific exceptions for run_mpioh file.
+        _generate_app_mpih: Generates the app_mpi.h file.
+        _common_generate_app_mpioh: Applies IntelIntel exceptions for app_mpioh file.
+        _generate_app_mpioh: Generates the app_mpio.h file.
+        _generate_run_mpioh: Generates the run_mpio.h file.
     """
 
     app = "intelmpi"
@@ -28,6 +41,12 @@ class IntelIntelHeaderGenerator(IntelHeaderGenerator):
     def intel_preload_exception_header_run_mpih(self, text):
         """
         Exception dedicated to Intel run_mpi.h
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
         """
         log.debug("Running intel_preload_exception_header_run_mpih (IntelIntelHeaderGenerator).")
         _conf_file = os.path.join(
@@ -67,6 +86,12 @@ int R_MPI_DUP_FN(R_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
         return text
 
     def _generate_run_mpih(self, gen_file):
+        """
+        Generates the run_mpi.h file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpih (IntelIntelHeaderGenerator).")
         self.intel_generate_run_mpih(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
@@ -77,6 +102,15 @@ int R_MPI_DUP_FN(R_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
             _file.write(_new_content)
 
     def _common_generate_app_mpih(self, text):
+        """
+        Applies MPICH-specific exceptions for run_mpioh file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _common_generate_app_mpih (IntelIntelHeaderGenerator).")
         text = replacement_from_conf_file(
             os.path.join(
@@ -111,6 +145,12 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
         return text
 
     def _generate_app_mpih(self, gen_file):
+        """
+        Generates the app_mpi.h file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_app_mpih (IntelIntelHeaderGenerator).")
         self._generate_run_mpih(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
@@ -121,6 +161,15 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
             _file.write(_new_content)
 
     def _common_generate_app_mpioh(self, text):
+        """
+        Applies IntelIntel exceptions for app_mpioh file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _common_generate_app_mpioh (IntelIntelHeaderGenerator).")
         text = replacement_from_conf_file(
             os.path.join(
@@ -145,6 +194,12 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
         return text
 
     def _generate_app_mpioh(self, gen_file):
+        """
+        Generates the app_mpio.h file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_app_mpioh (IntelIntelHeaderGenerator).")
         self._generate_run_mpioh(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
@@ -155,5 +210,11 @@ int A_MPI_DUP_FN(A_MPI_Comm oldcomm, int keyval, void *extra_state, void *attrib
             _file.write(_new_content)
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Generates the run_mpio.h file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpioh (IntelIntelGenerator)")
         super()._generate_run_mpioh(gen_file)

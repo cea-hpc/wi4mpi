@@ -125,6 +125,19 @@ class Generator:
         interface_header_dir (str, optional): Directory for interface headers.
         preload_header_dir (str, optional): Directory for preload headers.
         c_preload_gen_dir (str, optional): Directory for preload C code.
+        c_interface_gen_dir (str,optional): Directory for interface C code.
+        mpi_target_version (dict): Contains selected versions of MPI implementations.
+        mpi_available_target_version (dict): Contains available versions of MPI implementations.
+        alias_openmpi (dict): Contains available aliases for Open MPI
+        alias_mpich (dict): Contains available aliases for MPIC
+        alias_intelmpi (dict): Contains available aliases for Intel MPI
+
+    Methods:
+        __init__: Call set_directories and set mpi_target_version
+        set_directories: Sets the directory parameters for the Generator.
+        generate_header: Launches the generation process for various header files.
+        generate_code: Launches the generation process for various code files.
+        generate: Launches the generation process for header and code files.
     """
 
     interface_header_dir = "src/interface/header"
