@@ -15,10 +15,21 @@ log = getLogger("header_logger")
 class MpichIntelHeaderGenerator(MpichMpichHeaderGenerator):
     """
     MpichIntelHeaderGenerator class for generating Mpich-Intel preload header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _generate_run_mpi_protoh: Override this method to prevent generation of the run_mpi_proto.h file.
     """
 
     app = "mpich"
     run = "intelmpi"
 
     def _generate_run_mpi_protoh(self, gen_file):
+        """
+        Override this method to prevent generation of the run_mpi_proto.h file.
+        Indeed, there is no run_mpi_proto.h with Intel MPI on the runtime side.
+        """
         pass

@@ -21,9 +21,30 @@ log = getLogger("header_logger")
 class MpcHeaderGenerator(HeaderGenerator):
     """
     MpcHeaderGenerator class for generating Mpc-specific header files.
+
+    Methods:
+        _generate_wrapper_fh: Generate the wrapper_f.h header file.
+        _mpc_exceptions_run_mpih: Applies exceptions for MPC's run_mpi.h file.
+        _generate_run_mpih: Generate the run_mpi.h header file.
+        _mpc_exceptions_app_mpih: Applies exceptions for MPC's run_mpi.h file.
+        _generate_app_mpih: Generate the app_mpi.h header file.
+        _mpc_exceptions_run_mpioh: Applies MPC-specific exceptions for run_mpio.h file.
+        _generate_run_mpioh: Generate the run_mpio.h header file.
+        _generate_run_mpi_protoh: Generate the run_mpi_proto.h header file.
+        _generate_app_mpi_protoh: Generate the app_mpi_proto.h header file.
+        copy_files: Copy target headers.
     """
 
     def _generate_wrapper_fh(self, gen_file):
+        """
+        Generate the wrapper_f.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+
+        Returns:
+            str: Message indicating the wrapper.h file used.
+        """
         wrapper_warning = (
             f"The generation of '{gen_file}' have to be done locally.\n\tA MPC program has to be e"
             "xecuted in order to catch MPI_MODE_XXX values.\n\tHave a look to generator/FORTRAN/MP"
@@ -40,6 +61,15 @@ class MpcHeaderGenerator(HeaderGenerator):
             shutil.copy2(os.path.join(self.dir_input, "wrapper_f.h"), gen_file)
 
     def _mpc_exceptions_run_mpih(self, text):
+        """
+        Applies exceptions for MPC's run_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _mpc_exceptions_run_mpih")
 
         # Define the lines to insert
@@ -106,6 +136,12 @@ class MpcHeaderGenerator(HeaderGenerator):
         return text
 
     def _generate_run_mpih(self, gen_file):
+        """
+        Generate the run_mpi.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
 
@@ -115,6 +151,15 @@ class MpcHeaderGenerator(HeaderGenerator):
             _file.write(_new_content)
 
     def _mpc_exceptions_app_mpih(self, text):
+        """
+        Applies MPC-specific exceptions for app_mpi.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _mpc_exceptions_app_mpih")
         # Replace missing values with A_MPI_ERR_UNKNOWN
         pattern = r"(#define.*A_MPI_ERR_RMA_RANGE).*"
@@ -127,6 +172,12 @@ class MpcHeaderGenerator(HeaderGenerator):
         return text
 
     def _generate_app_mpih(self, gen_file):
+        """
+        Generate the app_mpi.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         super()._generate_app_mpih(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
@@ -136,6 +187,15 @@ class MpcHeaderGenerator(HeaderGenerator):
             _file.write(_new_content)
 
     def _mpc_exceptions_run_mpioh(self, text):
+        """
+        Applies MPC-specific exceptions for run_mpio.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         log.debug("Running _mpc_exceptions_run_mpio")
         pattern = []
         replacement = []
@@ -295,6 +355,12 @@ class MpcHeaderGenerator(HeaderGenerator):
         return text
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Generate the run_mpio.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         super()._generate_run_mpioh(gen_file)
         with open(gen_file, "r", encoding="utf-8") as _file:
             _content = _file.read()
@@ -304,12 +370,30 @@ class MpcHeaderGenerator(HeaderGenerator):
             _file.write(_new_content)
 
     def _generate_run_mpi_protoh(self, gen_file):
+        """
+        Override this method to prevent generation of the run_mpi_proto.h file.
+        Indeed, there is no run_mpi_proto.h with MPC.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         pass
 
     def _generate_app_mpi_protoh(self, gen_file):
+        """
+        Override this method to prevent generation of the run_mpi_proto.h file.
+        Indeed, there is no app_mpi_proto.h with MPC.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         pass
 
     def copy_files(self):
+        """
+        Copy target headers.
+        Override of the copy_files function to copy MPC-specific headers.
+        """
         list_of_files_to_copy = [
             (
                 os.path.join(self.dir_input, f"ompi-{self.mpi_target_version['openmpi']}_mpi.h"),

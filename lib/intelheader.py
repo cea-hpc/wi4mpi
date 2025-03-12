@@ -22,6 +22,18 @@ log = getLogger("header_logger")
 class IntelHeaderGenerator(HeaderGenerator):
     """
     IntelHeaderGenerator class for generating Intel-specific header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _generate_wrapper_fh: Generate wrapper header file.
+        intel_exceptions_run_mpih: Applies MPICH-specific exceptions for run_mpih file.
+        intel_generate_run_mpih: Generates the run_mpi.h file with Intel-specific modifications.
+        _generate_run_mpih: Generate run MPI header file.
+        intel_exceptions_run_mpioh: Applies MPICH-specific exceptions for run_mpioh file.
+        _generate_run_mpioh: Generate run MPI IO header file.
     """
 
     app = None
@@ -232,5 +244,11 @@ int * MPI_WEIGHTS_EMPTY;
         return text
 
     def _generate_run_mpioh(self, gen_file):
+        """
+        Generate run_mpio.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         log.debug("Running _generate_run_mpioh (IntelHeaderGenerator)")
         super()._generate_run_mpioh(gen_file)

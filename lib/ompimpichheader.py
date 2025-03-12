@@ -17,12 +17,30 @@ log = getLogger("header_logger")
 class OmpiMpichHeaderGenerator(OmpiIntelHeaderGenerator):
     """
     OmpiMpichHeaderGenerator class for generating Ompi-Mpich preload header files.
+
+    Attributes:
+        app (str): Used in copy_files to select file names to copy.
+        run (str): Used in copy_files to select file names to copy.
+
+    Methods:
+        _preload_exception_header_run_mpi_protoh: Applies exceptions for run_mpi_proto.h file.
+        _generate_app_mpi_protoh: Override this method to prevent generation of the app_mpi_proto.h file.
+        _generate_run_mpi_protoh: Generate the run_mpi_proto.h header file.
     """
 
     app = "openmpi"
     run = "mpich"
 
     def _preload_exception_header_run_mpi_protoh(self, text):
+        """
+        Applies exceptions for run_mpi_proto.h file.
+
+        Args:
+            text (str): The content of the file.
+
+        Returns:
+            str: The modified content.
+        """
         text = re.sub(r"A_MPI", r"R_MPI", text)
         text = re.sub(r"A_QMPI", r"R_QMPI", text)
         text = re.sub(r"A_PMPI", r"R_PMPI", text)
@@ -144,9 +162,18 @@ class OmpiMpichHeaderGenerator(OmpiIntelHeaderGenerator):
         return text
 
     def _generate_app_mpi_protoh(self, gen_file):
+        """
+        Override this method to prevent generation of the app_mpi_proto.h file.
+        """
         pass
 
     def _generate_run_mpi_protoh(self, gen_file):
+        """
+        Generate the run_mpi_proto.h header file.
+
+        Args:
+            gen_file (str): The path to the generated file.
+        """
         if "4.2.0" == self.mpi_target_version["mpich"]:
             log.debug("Running _generate_run_mpi_protoh (IntelIntelGenerator)")
             with open(gen_file, "r", encoding="utf-8") as _file:

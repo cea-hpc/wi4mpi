@@ -28,16 +28,28 @@ class CodeGenerator(ABC):
     This class contains methods for generating MPI translation code files.
 
     Attributes:
-        json_files (dict): json file path.
-        jinja_files (dict): Template file path.
-        data (dict): Load of json file.
+        json_files (dict): json file path:
+            functions_definitions (str): Name of the json file which describes all MPI functions as
+            defined in the MPI norm, including function name, arguments, local variables, and 
+            return values.
+            functions_mappers_json (str): Name of the json file which describes each translation 
+            mapper, controlling code generation and translation of MPI function parameters.
+            types (str): Name of the json which describes translated types and their constant 
+            values as defined in the MPI norm.
+            exceptions (str): Name of the json which describes non-generated functions in Wi4MPI.
+        data (dict): The contents of the read JSON files are stored in this dictionary.
         output_file (str): Output file path.
         dir_input (str): Input directory path.
+        static_sources_dir (str): The sources directory contains C files.
+        dir_output (str): Output directory path.
+        apply_jinja_dict (dict): Contains parameters used by apply_jinja.
 
     Methods:
         set_directories: Set input and output directories for code generation.
+        typevar: Generate a type declaration string based on the variable name and type.
+        apply_jinja: Generate the code correponding to the application of the dictionary on a jinja template.
+        generate: Common code between classes CPreloadGenerator and CInterfaceGenerator.
         __init__: Initialize the CodeGenerator object.
-
     """  # noqa: E501
 
     json_files = None
@@ -90,17 +102,17 @@ class CodeGenerator(ABC):
         """
         Generate a type declaration string based on the variable name and type.
 
+        Example:
+            >>> obj = YourClassName()
+            >>> obj.typevar("arr[10]", "int")
+            'int **********arr'
+
         Args:
             var (str): The variable name with potential array brackets.
             typename (str): The type name.
 
         Returns:
             str: The type declaration string.
-
-        Example:
-            >>> obj = YourClassName()
-            >>> obj.typevar("arr[10]", "int")
-            'int **********arr'
         """
         pattern = r"\[[0-9]*\]"
         sub = re.split(pattern, var)

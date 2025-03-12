@@ -20,22 +20,33 @@ log = getLogger("code_logger")
 
 class CInterfaceGenerator(CodeGenerator):
     """
-    CPreloadGenerator class for generating MPI translation C file.
+    CInterfaceGenerator class for generating MPI translation C file.
     """
 
     def __init__(self, dir_input="lib/etc/code", dir_output="src/interface/new_gen", mpi_norm=None):
         """
-        json_files:
-            functions_definitions (str): Name of the json file which describes all MPI functions as
-            defined in the MPI norm, including function name, arguments, local variables, and 
-            return values.
-            functions_mappers_json (str): Name of the json file which describes each translation 
-            mapper, controlling code generation and translation of MPI function parameters.
-            types (str): Name of the json which describes translated types and their constant 
-            values as defined in the MPI norm.
-            exceptions (str): Name of the json which describes non-generated functions in Wi4MPI.
+        Initialization of the code generator for interface mode.
+
+        Here is the structure of the input folder tree:
+        <dir_input>
+        ├── C
+        │   ├── jsons
+        │   │   ├── exceptions.json
+        │   │   └── mappers.json
+        │   ├── static_sources: C files
+        │   └── templates: jinja templates
+        └── common
+            └── jsons
+                ├── functions.json
+                └── types.json
+
+        Args:
+            dir_input (str, optional): Path to the input directory. Defaults to "lib/etc/code".
+            dir_output (str, optional): Path to the output directory. Defaults to "src/interface/new_gen".
+            mpi_norm (str, optional): Version of the selected MPI standard.
         """
-        log.info("Generation of interface C files.")
+
+        log.info("Generation of interface C file.")
         self.output_file = "mpi_translation_c.c"
         self.interface_file = "interface_c.c"
         self.mpi_norm = mpi_norm
@@ -43,6 +54,9 @@ class CInterfaceGenerator(CodeGenerator):
         self.interface_file = os.path.join(dir_output, self.interface_file)
 
     def generate(self):
+        """
+        Generates mpi_translation_c.c and interface_c.c
+        """
         self.apply_jinja_dict["asm_dict"]["caller_prefix"] = "CC"
         self.apply_jinja_dict["app_dict"]["decl_ext"] = ""
         self.apply_jinja_dict["dlsym_dict"]["mpi_libraries"] = ["OMPI", "INTEL"]
