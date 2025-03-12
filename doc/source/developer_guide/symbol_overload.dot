@@ -1,0 +1,21 @@
+digraph G {
+  // Nodes
+  node [shape=box];
+  Application [label="Application: MPI_File_open (OpenMPI)"];
+  Runtime [label="Runtime: MPI_File_open (IntelMPI)"];
+  node [shape=box, style=filled, fillcolor=red];
+  Crash;
+  node [shape=ellipse, style="filled", fillcolor=orange];
+  Translation;
+  Translation_phase_3 [label="Translation"];
+  node [shape=box, style="rounded,filled", fillcolor=lightblue];
+  WI4MPI [label="WI4MPI: A_MPI_File_open"];
+  WI4MPI_phase_3 [label="WI4MPI: A_MPI_Allreduce but with runtime arguments\n instead of application arguments (R_ instead of A_)"];
+  // Links
+  Application -> WI4MPI [label="Phase 1"];
+  Translation -> WI4MPI [label="Phase 2", dir=both];
+  WI4MPI -> Runtime [label="Phase 3"];
+  Runtime -> WI4MPI_phase_3;
+  WI4MPI_phase_3 -> Translation_phase_3;
+  Translation_phase_3 -> Crash;
+}

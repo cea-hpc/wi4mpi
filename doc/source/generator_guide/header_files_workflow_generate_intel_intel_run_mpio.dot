@@ -1,0 +1,125 @@
+
+
+digraph G {
+
+    rankdir=TB;  // Orientation from top to bottom
+    // rankdir=LB;  // Orientation from Rleft to right
+
+    //
+    // Classes definition:
+    //
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator_generate [label="generate"];
+            Generator_generate_header [label="generate_header"];
+            // Links
+            Generator_generate -> Generator_generate_header;
+    }
+    subgraph cluster_class_IntelIntelHeaderGenerator {
+            label=<<B>IntelIntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            node [shape=parallelogram, style=filled, fillcolor=green];
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelIntelHeaderGenerator_generate [label="generate"];
+            IntelIntelHeaderGenerator__generate_run_mpioh [label="_generate_run_mpioh"];
+            // Links
+    }
+    subgraph cluster_class_IntelHeaderGenerator {
+            label=<<B>IntelHeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            IntelHeaderGenerator_generate [label="generate"];
+            IntelHeaderGenerator__generate_run_mpioh [label="_generate_run_mpioh"];
+            IntelHeaderGenerator_intel_exceptions_run_mpioh [label="intel_exceptions_run_mpioh"]
+            // Links
+    }
+    subgraph cluster_class_HeaderGenerator {
+            label=<<B>HeaderGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            HeaderGenerator_generate [label="generate"];
+            HeaderGenerator__generate_run_mpioh [label="_generate_run_mpioh"];
+            HeaderGenerator__replace_mpi_with_rmpi [label="_replace_mpi_with_rmpi"];
+            HeaderGenerator_intel_exceptions_run_mpioh [label="intel_exceptions_run_mpioh"]
+            // Output: parallelogram
+            // Links
+            HeaderGenerator__generate_run_mpioh -> HeaderGenerator__replace_mpi_with_rmpi;
+            HeaderGenerator__generate_run_mpioh -> HeaderGenerator_intel_exceptions_run_mpioh;
+
+    }
+
+    // Module definition: rectangle
+    subgraph cluster_module_textoperator {
+            label=<<B>textoperator</B>>;
+            labeljust="l";
+            color=red;
+            style=rounded;
+            bgcolor=lightsalmon;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            textoperator_replacement_from_conf_file [label="replacement_from_conf_file"];
+            textoperator_delete_lines [label="delete_lines"];
+    }
+
+    node [shape=ellipse, style=filled, fillcolor=orange];
+    resub [label="re.sub"];
+
+
+    //
+    node [shape=folder, style=filled, fillcolor=red];
+    INTEL_INTEL [label="<preload_header_dir>/INTEL_INTEL"]
+//    node [shape=folder, style=filled, fillcolor=green];
+//    etc [label="etc/header"];
+    //
+
+    //
+    // Functionnal relationship
+    //
+    Generator_generate_header -> IntelIntelHeaderGenerator_generate;
+    IntelIntelHeaderGenerator_generate -> IntelHeaderGenerator_generate;
+    IntelHeaderGenerator_generate -> HeaderGenerator_generate;
+    //
+//    HeaderGenerator_generate -> IntelIntelHeaderGenerator__generate_run_mpih;
+    HeaderGenerator_generate -> IntelIntelHeaderGenerator__generate_run_mpioh;
+    IntelIntelHeaderGenerator__generate_run_mpioh -> IntelHeaderGenerator__generate_run_mpioh;
+    IntelHeaderGenerator__generate_run_mpioh -> HeaderGenerator__generate_run_mpioh;
+//    IntelHeaderGenerator_intel_generate_run_mpih -> HeaderGenerator__replace_mpi_with_rmpi;
+    HeaderGenerator__replace_mpi_with_rmpi -> resub;
+    HeaderGenerator_intel_exceptions_run_mpioh -> IntelHeaderGenerator_intel_exceptions_run_mpioh;
+    IntelHeaderGenerator_intel_exceptions_run_mpioh -> resub;
+    IntelHeaderGenerator_intel_exceptions_run_mpioh -> textoperator_delete_lines;
+    IntelHeaderGenerator_intel_exceptions_run_mpioh -> textoperator_replacement_from_conf_file;
+
+    //
+    // Data Flow
+    //
+    HeaderGenerator__generate_run_mpioh -> INTEL_INTEL [label="run_mpio.h"];
+//    IntelHeaderGenerator_intel_generate_run_mpih -> INTEL_INTEL;
+//    etc -> IntelIntelHeaderGenerator_intel_preload_exception_header_run_mpih;
+//    IntelIntelHeaderGenerator_intel_preload_exception_header_run_mpih -> textoperator_delete_lines;
+//    IntelIntelHeaderGenerator_intel_preload_exception_header_run_mpih -> resub;
+}
+

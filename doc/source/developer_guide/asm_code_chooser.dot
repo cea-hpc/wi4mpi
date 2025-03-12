@@ -1,0 +1,18 @@
+digraph G {
+  // Nodes
+  node [shape=box];
+  Application [label="Application: MPI_File_open (OpenMPI)"];
+  Runtime [label=" MPI_File_open (IntelMPI)"];
+  No_translation [label="R_MPI_Allreduce: No Translation"];
+  node [shape=ellipse, style="filled", fillcolor=orange];
+  Translation [label="A_MPI_File_open: Translation"];
+  node [shape=box, style="rounded,filled", fillcolor=lightblue];
+  WI4MPI [label="WI4MPI: PMPI_File_open\n Testing in_w: in_w=0"];
+  WI4MPI_phase_3 [label="WI4MPI: PMPI_Allreduce\n Testing in_w: in_w=1"];
+  // Links
+  Application -> WI4MPI [label="Phase 1"];
+  Translation -> WI4MPI [label="Phase 2", dir=both];
+  WI4MPI -> Runtime [label="Phase 3"];
+  Runtime -> WI4MPI_phase_3;
+  WI4MPI_phase_3 -> No_translation;
+}

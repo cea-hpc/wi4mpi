@@ -1,0 +1,101 @@
+digraph mpi_norm_workflow {
+
+    rankdir=TB;  // Orientation from top to bottom
+
+    // Classes definition:
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Test
+            node [shape=parallelogram, style=filled, fillcolor=grey];
+            Generator_mpi_norm [label="mpi_norm"];
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator__init__ [label="__init__"];
+            Generator_generate [label="generate"];
+            Generator_generate_code [label="generate_code"];
+            Generator__init__ -> Generator_mpi_norm [label="If mpi_norm in\n mpi_available_norm"];
+            Generator_mpi_norm -> Generator_generate;
+            Generator_generate -> Generator_generate_code;
+    }
+
+    subgraph cluster_class_CodeGenerator {
+            label=<<B>CodeGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            CodeGenerator_set_directories [label="set_directories"];
+            CodeGenerator__init__ [label="__init__"];
+            // Output: parallelogram
+            node [shape=parallelogram, style=filled, fillcolor=red];
+            CodeGenerator_data_functions [label="data[\"functions\"]"];
+    subgraph cluster_class_CPreloadGenerator {
+            label=<<B>CPreloadGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            CPreloadGenerator__init__ [label="__init__"];
+    }
+
+    subgraph cluster_class_CInterfaceGenerator {
+            label=<<B>CInterfaceGenerator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            CInterfaceGenerator__init__ [label="__init__"];
+    }
+    }
+
+    // Module definition: rectangle
+    subgraph cluster_module_textoperator {
+            label=<<B>textoperator</B>>;
+            labeljust="l";
+            color=red;
+            style=rounded;
+            bgcolor=lightsalmon;
+
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            textoperator_load_json_file [label="load_json_file"];
+            textoperator_is_block_valid_for_mpi [label="_is_block_valid_for_mpi"];
+    }
+
+    // Input: parallelogram
+    node [shape=parallelogram, style=filled, fillcolor=green];
+    functions_json [label="functions.json"];
+    mpi_norm [shape=parallelogram];
+
+    // Functionnal relationship
+    Generator_generate_code -> CPreloadGenerator__init__;
+    Generator_generate_code -> CInterfaceGenerator__init__;
+    CPreloadGenerator__init__ -> CodeGenerator__init__;
+    CInterfaceGenerator__init__ -> CodeGenerator__init__;
+    CodeGenerator__init__ -> CodeGenerator_set_directories;
+    CodeGenerator_set_directories ->  textoperator_load_json_file;
+    textoperator_load_json_file -> textoperator_is_block_valid_for_mpi [label=mpi_norm];
+    textoperator_is_block_valid_for_mpi -> textoperator_load_json_file [label="<bool>"];
+
+    // Data Flow
+    mpi_norm -> Generator__init__;
+    Generator_generate_code -> functions_json  [label="<dir_input>", style=dashed];
+    functions_json -> CodeGenerator_set_directories [style=dashed];
+    textoperator_load_json_file   -> CodeGenerator_set_directories [label="data"];
+    CodeGenerator_set_directories -> CodeGenerator_data_functions;
+
+}

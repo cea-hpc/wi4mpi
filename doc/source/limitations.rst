@@ -40,13 +40,13 @@ Other constants
 
 Since other constants are either for information (type, window and communicator's name, processor name and library version string) or with only a portable subset (datarep of file views), their truncation is less at risk of provoking issues in their uses.
 
-Support of MPIX_ Functions
-==========================
+Support of ``MPIX_`` Functions
+==============================
 
-MPIX_ functions represent experimental or extended features that are not part of the
+``MPIX_`` functions represent experimental or extended features that are not part of the
 official MPI standard. These functions are provided by some MPI implementations to explore
 new capabilities or optimizations that may be considered for future inclusion in the MPI
-standard. However, the availability and behavior of MPIX_ functions can vary significantly
+standard. However, the availability and behavior of ``MPIX_`` functions can vary significantly
 between different MPI implementations, leading to potential portability and compatibility
 issues.
 
@@ -54,7 +54,7 @@ Wi4MPI is designed to provide a high degree of portability and interoperability 
 different MPI implementations, facilitating the development and execution of MPI
 applications across a diverse range of HPC environments. To maintain this level of
 compatibility and to ensure a stable and predictable behavior of MPI applications, **Wi4MPI
-does not fully support MPIX_ functions**; this support is provided on a case-by-case basis.
+does not fully support ``MPIX_`` functions**; this support is provided on a case-by-case basis.
 At momment, **MPIX_Query_cuda_support** is supported. The support of other functions will
 be evaluated on demand.
 

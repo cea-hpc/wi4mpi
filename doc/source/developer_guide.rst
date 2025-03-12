@@ -34,19 +34,24 @@ prefixed by :code:`R_`. To perform a translation, all original MPI calls from
 the application are intercepted by WI4MPI and replaced by the same call
 prefixed by :code:`A_`. For example, with an OpenMPI ---> IntelMPI conversion.
 
-.. code-block::
+.. graphviz:: developer_guide/how_it_works.dot
+    :caption: How it works
+    :name: how_it_works
 
-    Application: MPI_Init (OpenMPI)                         MPI_Init (IntelMPI)
-                                  \                         ^
-                          Phase 1  \                       /  Phase 3
-                                    v                     /
-                                    |--------------------|
-                                    | WI4MPI: A_MPI_Init |
-                                    |--------------------|
-                                              ^
-                                              | Phase 2 
-                                              v
-                                          Translation
+..
+    .. code-block::
+    
+        Application: MPI_Init (OpenMPI)                         MPI_Init (IntelMPI)
+                                      \                         ^
+                              Phase 1  \                       /  Phase 3
+                                        v                     /
+                                        |--------------------|
+                                        | WI4MPI: A_MPI_Init |
+                                        |--------------------|
+                                                  ^
+                                                  | Phase 2 
+                                                  v
+                                              Translation
 
 Implementation
 --------------
@@ -94,22 +99,28 @@ the symbols overload protocol. This implies that during the runtime (phase
 3 and above), some MPI calls are made triggering WI4MPI to re-intercept them
 and crash the application. The crash is the result of WI4MPI trying to convert
 arguments from the runtime version to the runtime version.
+An :ref:`example <symbol_overload_example>` is illustrated below.
 
-Example:
+.. graphviz:: developer_guide/symbol_overload.dot
+    :caption: Example: symbol overload
+    :name: symbol_overload_example
 
-.. code-block::
-
-    Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
-                                 \                               ^                      \
-                  Phase 1         \                             /         Phase 3        \
-                                   v                           /                          v
-                                    |-------------------------|                      |----------------------------------------------------|
-                                    | WI4MPI: A_MPI_File_open |                      | WI4MPI: A_MPI_Allreduce but with runtime arguments |
-                                    |-------------------------|                      | instead of application arguments (R_ instead of A_)|
-                                                ^                                    |----------------------------------------------------|
-                                                |   Phase 2                                                     |
-                                                v                                                               v
-                                           Translation                                                     Translation ----> Crash
+..
+    Example:
+    
+    .. code-block::
+    
+        Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
+                                     \                               ^                      \
+                      Phase 1         \                             /         Phase 3        \
+                                       v                           /                          v
+                                        |-------------------------|                      |----------------------------------------------------|
+                                        | WI4MPI: A_MPI_File_open |                      | WI4MPI: A_MPI_Allreduce but with runtime arguments |
+                                        |-------------------------|                      | instead of application arguments (R_ instead of A_)|
+                                                    ^                                    |----------------------------------------------------|
+                                                    |   Phase 2                                                     |
+                                                    v                                                               v
+                                               Translation                                                     Translation ----> Crash
 
 To overcome this issue, we used an assembly code router.
 
@@ -179,20 +190,25 @@ ASM Code chooser implementation (generated for each function):
     ; ------------ Calculate symbol size
     .size PMPI_Function,.-PMPI_Function     # Declares symbol size to be the size of the above
 
-.. code-block::
+.. graphviz:: developer_guide/asm_code_chooser.dot
+    :caption: ASM Code chooser
+    :name: asm_code_chooser
 
-    Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
-                                 \                               ^                      \
-                  Phase 1         \                             /         Phase 3        \
-                                   v                           /                          v
-                                    |-------------------------|                     |-------------------------|
-                                    | WI4MPI: PMPI_File_open  |                     | WI4MPI: PMPI_Allreduce  |
-                                    | Testing in_w: in_w=0    |                     | Testing in_w: in_w=1    |
-                                    |-------------------------|                     | ------------------------|
-                                               ^    Phase 2                                      |
-                                               |                                                 |
-                                               v                                                 v
-                                    A_MPI_File_open:Translation                     R_MPI_Allreduce:No Translation
+..
+    .. code-block::
+    
+        Application:MPI_File_open (OpenMPI)                           MPI_File_open(IntelMPI)
+                                     \                               ^                      \
+                      Phase 1         \                             /         Phase 3        \
+                                       v                           /                          v
+                                        |-------------------------|                     |-------------------------|
+                                        | WI4MPI: PMPI_File_open  |                     | WI4MPI: PMPI_Allreduce  |
+                                        | Testing in_w: in_w=0    |                     | Testing in_w: in_w=1    |
+                                        |-------------------------|                     | ------------------------|
+                                                   ^    Phase 2                                      |
+                                                   |                                                 |
+                                                   v                                                 v
+                                        A_MPI_File_open:Translation                     R_MPI_Allreduce:No Translation
 
 :code:`A_MPI_Function`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -300,23 +316,28 @@ version (one compilation, several run over different MPI
 implementation), but this time WI4MPI had to be seen as a fully MPI
 Library. All the previously section are still relevant for the
 interface, the only things that changed is the new level name INTERFACE
-(see the schema below). This level has to be considered as a "libmpi.so"
+(see the :ref:`schema below <developer_guide_interface>`). This level has to be considered as a "libmpi.so"
 which is linked to the user application.
 
-.. code-block::
+.. graphviz:: developer_guide/interface.dot
+    :caption: Interface
+    :name: developer_guide_interface
 
-              dlopen|----------|  dlopen       |---------|
-                   /| Lib_OMPI | ----------- > | OpenMPI |
-                  / |----------|               |---------|
-   |-----------| /
-   |           |/
-   | INTERFACE |
-   | libmpi.so |\
-   |-----------| \
-                  \
-                   \|----------|  dlopen       |----------|
-                    | Lib_IMPI | ----------- > | IntelMPI |
-              dlopen|----------|               |----------|
+..
+    .. code-block::
+    
+                  dlopen|----------|  dlopen       |---------|
+                       /| Lib_OMPI | ----------- > | OpenMPI |
+                      / |----------|               |---------|
+       |-----------| /
+       |           |/
+       | INTERFACE |
+       | libmpi.so |\
+       |-----------| \
+                      \
+                       \|----------|  dlopen       |----------|
+                        | Lib_IMPI | ----------- > | IntelMPI |
+                  dlopen|----------|               |----------|
 
 
 The files :code:`interface_test.c` and :code:`interface_fort.c`, deal with the

@@ -1,0 +1,43 @@
+digraph G {
+
+    rankdir=TB;  // Orientation from top to bottom
+    // rankdir=LB;  // Orientation from Rleft to right
+
+    //
+    // Classes definition:
+    //
+    subgraph cluster_class_Generator {
+            label=<<B>Generator</B>>;
+            labeljust="l";
+            color=blue;
+            style=rounded;
+            bgcolor=lightblue;
+
+            // Output: parallelogram
+            node [shape=parallelogram, style=filled, fillcolor=red];
+            preload_header_dir;
+            interface_header_dir;
+            // Method definition: ellipse
+            node [shape=ellipse, style=filled, fillcolor=orange];
+            Generator__init__ [label="__init__"];
+            Generator_set_directories [label="set_directories"];
+            // Links
+            Generator__init__ -> Generator_set_directories;
+            Generator_set_directories -> interface_header_dir;
+            Generator_set_directories -> preload_header_dir;
+    }
+
+    //
+    // Input: parallelogram
+    //
+    node [shape=parallelogram, style=filled, fillcolor=green];
+    option_preload_dir [label="--preload_header_dir", shape=parallelogram];
+    option_interface_dir [label="--interface_header_dir", shape=parallelogram];
+
+
+    //
+    // Data Flow
+    //
+    option_preload_dir -> Generator__init__;
+    option_interface_dir -> Generator__init__;
+}
