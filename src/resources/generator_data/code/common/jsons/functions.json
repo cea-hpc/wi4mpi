@@ -17862,7 +17862,7 @@
   },
   {
     "args": [],
-    "name": "MPIX_query_cuda_support",
+    "name": "MPIX_Query_cuda_support",
     "ret": {
       "var": "ret",
       "arg_dep": "",
