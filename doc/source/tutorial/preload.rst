@@ -1,3 +1,5 @@
+.. _tutorial_preload:
+
 Translating MPI dynamically using Preload mode
 ==============================================
 

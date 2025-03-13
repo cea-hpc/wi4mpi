@@ -1,3 +1,5 @@
+.. _tutorial_interface:
+
 Translating MPI dynamically using Interface mode
 ================================================
 
