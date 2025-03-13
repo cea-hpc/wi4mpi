@@ -12,9 +12,9 @@ Welcome to Wi4MPI's documentation!
 
    user_guide
    tutorial
+   limitations
    developer_guide
    generator_guide
-   limitations
 
 .. ifconfig:: WI4MPI_DOC_TODOLIST
 
