@@ -8,18 +8,33 @@ User Guide
 Introduction
 ============
 
-MPI is a standard in HPC community which allows a simple use of
-clusters. Nowadays, there are several implementation (OpenMPI, BullxMPI,
-MPT, IntelMPI, MPC, ...) each of which involves a specific ABI
-(Application Binary Interface) for an application compiled with a
-specific MPI implementation. With wi4mpi, an application compiled with
-an alpha MPI implementation can be run under a beta MPI implementation
-without any compilation protocol and any concern about the ABI (Preload
-version). WI4MPI can also be seen as a dedicated MPI implementation;
-This time, the application is compiled against the wi4mpi library
-(libmpi.so) with the dedicated wrapper (mpicc,mpif90...) meant for that
-purpose, and can be run under any other MPI implementation (Interface
+MPI (Message Passing Interface) is a widely used standard in the HPC community
+that enables efficient communication in distributed computing environments.
+Today, multiple MPI implementations exist, including Open MPI, MPICH, IntelMPI,
+or MPC, each with its own Application Binary Interface (ABI). As a result, an
+application compiled with one MPI implementation is not directly compatible
+with another without recompilation.
+
+WI4MPI addresses this limitation by allowing an application compiled with an
+"alpha" MPI implementation to run seamlessly under a "beta" MPI implementation—
+without requiring recompilation or ABI compatibility adjustments (Preload
 Version).
+
+Preload Mode illustration:
+
+.. image:: ../img/Preload.png
+   :alt: Preload Mode Illustration
+
+Additionally, WI4MPI can function as a dedicated MPI implementation. In this
+mode, applications are compiled against the WI4MPI library (`libmpi.so`) using
+its dedicated wrappers (e.g., `mpicc`, `mpif90`). These applications can then
+run on any MPI implementation, ensuring broader compatibility (Interface
+Version).
+
+Interface Mode illustration:
+
+.. image:: ../img/Interface.png
+   :alt: Interface Mode Illustration
 
 Installation
 ============
