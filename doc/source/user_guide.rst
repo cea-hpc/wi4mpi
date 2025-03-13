@@ -406,14 +406,13 @@ Examples:
     Wi4MPI error: process 25572 on host r0login has reached a timeout!
     Aborted
 
-Developers words
+Developers' Note
 ================
 
-First of all thanks a lot for using the wi4mpi software. Nevertheless be
-aware that this software is still under development and that some bugs
-may remain. If you encounter one of them, don't hesitate to contact one
-of the authors and so to participate to the software robustness. Second,
-wi4mpi is compatible with the 3.1 MPI norm. Don't hesitate to
-participate :-)
+Thank you for using WI4MPI! This software is actively developed and maintained,
+but you might still encounter some issues. If you find any bugs or have suggestions,
+please feel free to contact us or contribute directly via our GitHub repository.
+Your feedback and contributions greatly help us improve the robustness and usability of WI4MPI.
 
-https://github.com/cea-hpc/wi4mpi
+Contribute here: https://github.com/cea-hpc/wi4mpi
+
