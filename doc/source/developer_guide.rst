@@ -319,6 +319,8 @@ interface, the only things that changed is the new level name INTERFACE
 (see the :ref:`schema below <developer_guide_interface>`). This level has to be considered as a "libmpi.so"
 which is linked to the user application.
 
+.. todo:: Update with relevant changes of the jinja generator
+
 .. graphviz:: developer_guide/interface.dot
     :caption: Interface
     :name: developer_guide_interface

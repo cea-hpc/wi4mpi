@@ -60,13 +60,13 @@ All log messages are written in :file:`generator.log`.
 
 Without any options, the generator will overwrite the header files in directories
 
-- :file:`<wi4mpi_dir>/src/interface/header/_*`
-- :file:`<wi4mpi_dir>/src/preload/header/*_*`
+- :file:`<build_dir>/src/interface/header/_*`
+- :file:`<build_dir>/src/preload/header/*_*`
 
 and generated code files in directories
 
-- :file:`<wi4mpi_dir>/src/interface/gen/`
-- :file:`<wi4mpi_dir>/src/preload/gen/`
+- :file:`<build_dir>/src/interface/gen/`
+- :file:`<build_dir>/src/preload/gen/`
 
 
 Header generator
@@ -736,7 +736,7 @@ Headers generator inputs
 Base headers
 ------------
 
-The headers of each supported implementation are in :file:`<wi4mpi_dir>/src/common` folder.
+The headers of each supported implementation are in :file:`<wi4mpi_dir>/src/resources/MPI_headers/` folder.
 Here is an overview of the tree structure:
 
 .. code-block::
@@ -748,42 +748,15 @@ Here is an overview of the tree structure:
 with :code:`<implementation_name>` equal to :code:`openmpi`, :code:`mpich` or :code:`intelmpi`.
 
 These files are used as a base from which Wi4MPI's own headers will be generated.
-However, the generator will not open them directly in :file:`<wi4mpi_dir>/src/common`.
-Instead, symbolic links will be opened.
-They are placed in the :file:`<wi4mpi_dir>/src/interface/header/scripts/` tree for interface mode and in :file:`<wi4mpi_dir>/src/preload/header/scripts/` tree for preload mode.
 
-.. topic:: Example in preload mode with MPICH in application side and OpenMPI in runtime side:
-
-   The command :code:`<wi4mpi_dir>/src/generator/generator.py --openmpi_version=2 --mpich_version=3` will take in input the following files:
-
-   - :file:`<wi4mpi_dir>/src/preload/header/scripts/mpich_ompi_headers/ompi-2.1.6_mpi.h`
-   - :file:`<wi4mpi_dir>/src/preload/header/scripts/mpich_ompi_headers/mpich-3.4.3_mpi.h`
-   - :file:`<wi4mpi_dir>/src/preload/header/scripts/mpich_ompi_headers/mpich-3.4.3_mpio.h`
-
-   :file:`mpich_ompi_headers` tree:
-
-   .. code-block::
-
-      src/preload/header/scripts/mpich_ompi_headers/
-      ├── mpich-3.1.2_mpi.h -> ../../../../../src/common/mpich/3.1.2/mpi.h
-      ├── mpich-3.1.2_mpio.h -> ../../../../../src/common/mpich/3.1.2/mpio.h
-      ├── mpich-3.4.3_mpi.h -> ../../../../../src/common/mpich/3.4.3/mpi.h
-      ├── mpich-3.4.3_mpio.h -> ../../../../../src/common/mpich/3.4.3/mpio.h
-      ├── mpich-4.2.0_mpi.h -> ../../../../../src/common/mpich/4.2.0/mpi.h
-      ├── mpich-4.2.0_mpio.h -> ../../../../../src/common/mpich/4.2.0/mpio.h
-      ├── mpich-4.2.0_mpi_proto.h -> ../../../../../src/common/mpich/4.2.0/mpi_proto.h
-      ├── ompi-1.8.8_mpi.h -> ../../../../../src/common/openmpi/1.8.8/mpi.h
-      ├── ompi-2.1.6_mpi.h -> ../../../../../src/common/openmpi/2.1.6/mpi.h
-      ├── ompi-4.1.6_mpi.h -> ../../../../../src/common/openmpi/4.1.6/mpi.h
-      ├── ompi-5.0.3_mpi.h -> ../../../../../src/common/openmpi/5.0.3/mpi.h
-      └── wrapper_f.h
+.. todo:: Explain how to produce the input for `wrapper_f.h`
 
 How to add a new base header
 ----------------------------
 
 Below is the procedure to follow to add a base header for the implementation <implementation_name> in the version <version>.
 
-#. **[global]**: Create the folder :file:`src/common/<implementation_name>/<version>`
+#. **[global]**: Create the folder :file:`src/resources/MPI_headers/<implementation_name>/<version>`
 #. **[global]**: Copy the headers inside the previous folder. The existing names are:
 
     - :file:`mpi.h`
@@ -793,14 +766,7 @@ Below is the procedure to follow to add a base header for the implementation <im
 #. [:file:`src/generator/generator.py`]: Add the :code:`<version>` into the available versions dictionary: :code:`mpi_availabe_target_version`
 #. [:file:`src/generator/generator.py`]: Update the default version of the implementation by editing the dictionary :code:`mpi_target_version`.
 #. [:file:`src/generator/generator.py`]: Complete the helpers in the module description and in the docopt strings (below the :code:`__main__` check)
-#. **[global]**: Go to the :file:`src/interface/header/scripts/<implementation_name>_headers` directory
-#. **[global]**: Create a symbolic link from the new header in :file:`../../../../../src/common/<implementation_name>/<version>`. The current nomenclature for link naming is as follows:
-
-    - OpenMPI: :file:`ompi-<version>_mpi.h`
-    - IntelMPI: :file:`intelmpi-<version>_mpi.h`
-    - MPICH: :file:`mpich-<version>_mpi.h`
-
-#. **[global]**: Repeat the previous step for each subdirectories inside :file:`src/preload/header/scripts` which match with the :code:`<implementation_name>`
+#. **[global]**: If the implementation is new, create a file in the :file:`src/resources/MPI_headers/wrapperf/` directory similar to those existing
 
 Now the new header is ready to be processed by the generator.
 
@@ -815,41 +781,12 @@ Now the new header is ready to be processed by the generator.
         #
         # New folder
         #
-        mkdir -p src/common/intelmpi/24.0.0
+        mkdir -p src/resources/MPI_headers/intelmpi/24.0.0
         #
         # Copy files
         #
-        cp <path_to>/mpi.h src/common/intelmpi/24.0.0/.
-        cp <path_to>/mpio.h src/common/intelmpi/24.0.0/.
-        #
-        # Interface links
-        #
-        cd src/interface/header/scripts/intel_headers
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpi.h intelmpi-24.0.0_mpi.h
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpio.h intelmpi-24.0.0_mpio.h
-        cd ${wi4mpi_dir}
-        #
-        # Preload links
-        #
-        cd src/preload/header/scripts/intel_intel_headers
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpi.h intelmpi-24.0.0_mpi.h
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpio.h intelmpi-24.0.0_mpio.h
-        cd ..
-        cd src/preload/header/scripts/intel_mpich_headers
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpi.h intelmpi-24.0.0_mpi.h
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpio.h intelmpi-24.0.0_mpio.h
-        cd ..
-        cd src/preload/header/scripts/intel_ompi_headers
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpi.h intelmpi-24.0.0_mpi.h
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpio.h intelmpi-24.0.0_mpio.h
-        cd ..
-        cd src/preload/header/scripts/mpich_intel_headers
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpi.h intelmpi-24.0.0_mpi.h
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpio.h intelmpi-24.0.0_mpio.h
-        cd ..
-        cd src/preload/header/scripts/ompi_intel_headers
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpi.h intelmpi-24.0.0_mpi.h
-        ln -s ../../../../../src/common/intelmpi/24.0.0/mpio.h intelmpi-24.0.0_mpio.h
+        cp <path_to>/mpi.h src/resources/MPI_headers/intelmpi/24.0.0/.
+        cp <path_to>/mpio.h src/resources/MPI_headers/intelmpi/24.0.0/.
         cd ${wi4mpi_dir}
 
     Updating module description and helper in :file:`generator.py`:
