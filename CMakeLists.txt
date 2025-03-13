@@ -187,6 +187,78 @@ if(WI4MPI_GENERATOR)
 else()
     message(STATUS "Header and code generator is disabled. Set WI4MPI_GENERATOR to ON to activate it.")
   set(WI4MPI_GENDIR "${CMAKE_SOURCE_DIR}/build/src")
+  if (NOT "${CMAKE_SOURCE_DIR}/build" STREQUAL "${CMAKE_BINARY_DIR}")
+    message(FATAL_ERROR "Building without using the generator is only supported in the build directory inside the source directory")
+  endif()
+  set(GENERATED_FILES
+    src/interface/gen/interface_c.c
+    src/interface/gen/mpi_translation_c.c
+    src/interface/gen/interface_fort.c
+    src/interface/gen/mpi_translation_fort.c
+    src/interface/header/_INTEL/run_mpi.h
+    src/interface/header/_INTEL/run_mpio.h
+    src/interface/header/_INTEL/wrapper_f.h
+    src/interface/header/_INTEL/app_mpi.h
+    src/interface/header/_MPC/run_mpi.h
+    src/interface/header/_MPC/mpcmp.h
+    src/interface/header/_MPC/run_mpio.h
+    src/interface/header/_MPC/wrapper_f.h
+    src/interface/header/_MPC/sctk_types.h
+    src/interface/header/_MPC/app_mpi.h
+    src/interface/header/_OMPI/run_mpi.h
+    src/interface/header/_OMPI/wrapper_f.h
+    src/interface/header/_OMPI/app_mpi.h
+    src/interface/header/_MPICH/run_mpi.h
+    src/interface/header/_MPICH/run_mpio.h
+    src/interface/header/_MPICH/wrapper_f.h
+    src/interface/header/_MPICH/app_mpi.h
+    src/preload/gen/mpi_translation_c.c
+    src/preload/gen/mpi_translation_fort.c
+    src/preload/header/MPICH_INTEL/run_mpi.h
+    src/preload/header/MPICH_INTEL/app_mpio.h
+    src/preload/header/MPICH_INTEL/run_mpio.h
+    src/preload/header/MPICH_INTEL/wrapper_f.h
+    src/preload/header/MPICH_INTEL/app_mpi.h
+    src/preload/header/OMPI_INTEL/run_mpi.h
+    src/preload/header/OMPI_INTEL/run_mpio.h
+    src/preload/header/OMPI_INTEL/wrapper_f.h
+    src/preload/header/OMPI_INTEL/app_mpi.h
+    src/preload/header/MPICH_OMPI/run_mpi.h
+    src/preload/header/MPICH_OMPI/app_mpio.h
+    src/preload/header/MPICH_OMPI/wrapper_f.h
+    src/preload/header/MPICH_OMPI/app_mpi.h
+    src/preload/header/OMPI_OMPI/run_mpi.h
+    src/preload/header/OMPI_OMPI/wrapper_f.h
+    src/preload/header/OMPI_OMPI/app_mpi.h
+    src/preload/header/INTEL_OMPI/run_mpi.h
+    src/preload/header/INTEL_OMPI/app_mpio.h
+    src/preload/header/INTEL_OMPI/wrapper_f.h
+    src/preload/header/INTEL_OMPI/app_mpi.h
+    src/preload/header/INTEL_MPICH/run_mpi.h
+    src/preload/header/INTEL_MPICH/app_mpio.h
+    src/preload/header/INTEL_MPICH/run_mpio.h
+    src/preload/header/INTEL_MPICH/wrapper_f.h
+    src/preload/header/INTEL_MPICH/app_mpi.h
+    src/preload/header/INTEL_INTEL/run_mpi.h
+    src/preload/header/INTEL_INTEL/app_mpio.h
+    src/preload/header/INTEL_INTEL/run_mpio.h
+    src/preload/header/INTEL_INTEL/wrapper_f.h
+    src/preload/header/INTEL_INTEL/app_mpi.h
+    src/preload/header/OMPI_MPICH/run_mpi.h
+    src/preload/header/OMPI_MPICH/run_mpio.h
+    src/preload/header/OMPI_MPICH/wrapper_f.h
+    src/preload/header/OMPI_MPICH/app_mpi.h
+    src/preload/header/MPICH_MPICH/run_mpi.h
+    src/preload/header/MPICH_MPICH/app_mpio.h
+    src/preload/header/MPICH_MPICH/run_mpio.h
+    src/preload/header/MPICH_MPICH/wrapper_f.h
+    src/preload/header/MPICH_MPICH/app_mpi.h
+  )
+  foreach(gen_file ${GENERATED_FILES})
+    if (NOT EXISTS "${gen_file}")
+      message(FATAL_ERROR "Some generated files are missing, consider using the generator")
+    endif()
+  endforeach()
 endif()
 
 #Copy share
