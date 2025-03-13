@@ -45,19 +45,6 @@ html_static_path = ['_static']
 # Figures, tables and code-blocks are automatically numbered if they have a caption.
 numfig = True
 
-WI4MPI_DOC_TODOLIST = bool(os.getenv("WI4MPI_DOC_TODOLIST", False))
 extensions = [
-    'sphinx.ext.todo',
-    'sphinx.ext.ifconfig',
     'sphinx.ext.graphviz',
 ]
-
-if WI4MPI_DOC_TODOLIST:
-    todo_include_todos = True
-    todo_link_only = True
-else:
-    exclude_patterns.append("TODO_list.rst") 
-
-
-def setup(app):
-    app.add_config_value('WI4MPI_DOC_TODOLIST', False, False)

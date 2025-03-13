@@ -182,8 +182,6 @@ Aliases
 
     The option :code:`--openmpi_version=4.1.6` is equivalent to :code:`--openmpi_version=4`.
 
-.. todo:: Worflow header input and output
-
 Workflow
 ========
 
@@ -208,7 +206,7 @@ The value of :code:`preload_header_dir` previously defined during the initializa
     :name: graph_header_dir_workflow_create
 
 Once the folders are created, it is the turn of the header files.
-The actions concerning them, illustrated on the graph :ref:``, are also triggered by the :code:`generate` method of each generation class.
+The actions concerning them, illustrated on the :ref:`graph <graph_header_files_workflow_copy>`, are also triggered by the :code:`generate` method of each generation class.
 The basic headers are first copied from :code:`<dir_input>` to :code:`<dir_output>`.
 To do this, the :code:`app` and :code:`run` attributes are used to form the strings of the file names to be copied.
 This excerpt from the code of the :code:`copy_files` method illustrates the Intel-Intel case:
@@ -258,12 +256,6 @@ Then the copied files are modified by the following methods:
     _generate_app_mpi_protoh
     _generate_wrapper_fh
 
-..
-    Toutes ces méthodes sont définies dans la classe principale :code:`HeaderGenerator`.
-    Elles peuvent ensuite être surchargées dans les sous-classes dédiées à chaque combinaisons :code:`<APP>-<RUN>` d'implémentation MPI.
-    Diverses méthodes sont utilisées afin de mutualiser les modifications de fichier.
-    Ainsi, la description complète du workflow de la génération de chaque header peut s'avérer complexe.
-
 All these methods are defined in the main class :code:`HeaderGenerator`.
 They can then be overridden in subclasses dedicated to each combination :code:`<APP>-<RUN>` of MPI implementation.
 Various methods are used to pool file modifications.
@@ -273,17 +265,7 @@ Preload mode: IntelMPI application side -- IntelMPI runtime side
 ----------------------------------------------------------------
 
 :file:`run_mpi.h`
-~~~~~~~~~~~~~~~~
-
-..
-    La génération du header :file:`run_mpi.h` dans le cas Intel-Intel est illustré dans le graphique :ref:`graph_header_files_workflow_generate_intel_intel_run_mpi`.
-    Un objet de la classe :code:`IntelIntelHeaderGenerator` est initialisé dans la méthode :code:`generate_header` de la classe :code:`Generator`.
-    La méthode :code:`generate` de :code:`IntelIntelHeaderGenerator` est héritée de la classe :code:`HeaderGenerator` par la classe :code:`IntelHeaderGenerator`.
-    On y trouve l'appel à la méthode dédiée à la génération du fichier :file:`run_mpi.h`: :code:`_generate_run_mpih`.
-    Celle-ci va successivement appeler :code:`intel_generate_run_mpih` (de la classe :code:`IntelHeaderGenerator`) et :code:`intel_preload_exception_header_run_mpih`.
-    La première méthode applique les modifications communes apportées par :code:`_replace_mpi_with_rmpi` de la classe :code:`HeaderGenerator` et celles de :code:`intel_exceptions_run_mpih`.
-    Les modifications sont ensuite enregistrés dans :file:`run_mpi.h`.
-    Enfin, :code:`intel_preload_exception_header_run_mpih` applique les dernières modifications. Pour cela, un fichier de :file:`src/resources/generator_datader` contenant des instructions de substitution est passé à la fonction :code:`replacement_from_conf_file` et des lignes sont supprimées par la fonction :code:`delete_lines`. Ces deux fonctions appartiennent au module :code:`textoperator`.
+~~~~~~~~~~~~~~~~~
 
 The generation of the header :file:`run_mpi.h` in the Intel-Intel case is illustrated in the :ref:`graph below <graph_header_files_workflow_generate_intel_intel_run_mpi>`.
 An object of the class :code:`IntelIntelHeaderGenerator` is initialized in the method :code:`generate_header` of the class :code:`Generator`.
@@ -300,21 +282,21 @@ Finally, :code:`intel_preload_exception_header_run_mpih` applies the latest modi
     :name: graph_header_files_workflow_generate_intel_intel_run_mpi
 
 :file:`app_mpi.h`
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_app_mpi.dot
     :caption: Generating ``app_mpi.h`` for IntelMPI application side -- IntelMPI runtime side
     :name: graph_header_files_workflow_generate_intel_intel_app_mpi
 
 :file:`run_mpio.h`
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_run_mpio.dot
     :caption: Generating ``run_mpio.h`` for IntelMPI application side -- IntelMPI runtime side
     :name: graph_header_files_workflow_generate_intel_intel_run_mpio
 
 :file:`app_mpio.h`
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_intel_intel_app_mpio__short.dot
     :caption: Generating ``app_mpio.h`` for IntelMPI application side -- IntelMPI runtime side (short workflow)
@@ -328,21 +310,21 @@ IntelMPI interface mode
 -----------------------
 
 :file:`run_mpi.h`
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_intel_run_mpi.dot
     :caption: Generating ``run_mpi.h`` for IntelMPI
     :name: graph_header_files_workflow_generate_intel_run_mpi
 
 :file:`app_mpi.h`
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_intel_app_mpi.dot
     :caption: Generating ``app_mpi.h`` for IntelMPI
     :name: graph_header_files_workflow_generate_intel_app_mpi
 
 :file:`run_mpio.h`
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_intel_run_mpio.dot
     :caption: Generating ``run_mpio.h`` for IntelMPI
@@ -352,14 +334,14 @@ OpenMPI interface mode
 ----------------------
 
 :file:`run_mpi.h`
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_ompi_run_mpi.dot
     :caption: Generating ``run_mpi.h`` for OpenMPI
     :name: graph_header_files_workflow_generate_ompi_run_mpi
 
 :file:`app_mpi.h`
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_ompi_app_mpi.dot
     :caption: Generating ``app_mpi.h`` for OpenMPI
@@ -369,7 +351,7 @@ MPICH interface mode
 --------------------
 
 :file:`run_mpi.h`
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. graphviz:: generator_guide/header_files_workflow_generate_mpich_run_mpi.dot
     :caption: Generating ``run_mpi.h`` for MPICH

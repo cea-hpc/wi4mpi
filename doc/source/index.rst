@@ -16,15 +16,6 @@ Welcome to Wi4MPI's documentation!
    developer_guide
    generator_guide
 
-.. ifconfig:: WI4MPI_DOC_TODOLIST
-
-   .. toctree::
-      :maxdepth: 2
-      :caption: Dev contents:
-
-      TODO_list
-
-
 Indices and tables
 ==================
 
