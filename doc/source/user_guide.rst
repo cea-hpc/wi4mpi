@@ -102,59 +102,73 @@ The following CMake variables can be used to configure the build:
   **Default:** `20.0.0`
   **Supported versions:** `20.0.0`, `24.0.0`
 
-- WI4MPI\_DEBUG:boolean
+- **WI4MPI_DEBUG** (*boolean*)
 
-  | Activate some debug information. Useful for WI4MPI and applications developer.
-  | Replace deprecated use of WI4MPI\_RELEASE=DEBUG.
+  Activates debug information. Useful for WI4MPI and application developers.
 
--  WI4MPI\_COMPILER:string (deprecated)
+  **Default:** `OFF`
 
-   Indicate which compiler is used to compiled WI4MPI. Possible
-   options: GCC(default), INTEL, PGI, LLVM, ARMCLANG, FUJITSU.
+- **WI4MPI_COMPILER** (*string, deprecated*)
 
-   This option is deprecated. Standard CMake procedure for compiler detection can
-   now be used, by setting environment variable CC, CXX and FC or
-   by using CMake's CMAKE\_<lang>\_COMPILER options.
+  Indicates which compiler is used to compile WI4MPI.
 
--  OPENMPI\_ROOT
-   
-   Open MPI root dir, put in wi4mpi.cfg, could be added
-   manually, optional value. This variable is required for Testing, one
-   must add -DOPENMPI\_ROOT=/path/to/openmpi option.
+  **Default:** `GCC`
+  **Supported options:** `GCC`, `INTEL`, `PGI`, `LLVM`, `ARMCLANG`, `FUJITSU`
 
--  INTELMPI\_ROOT
-   
-   Intel MPI root dir, put in wi4mpi.cfg, could be added
-   manually, optional value.
+  This option is deprecated. Use standard CMake compiler detection instead by
+  setting environment variables `CC`, `CXX`, and `FC`, or by using `CMAKE_<lang>_COMPILER`.
 
--  MPC\_ROOT
-   
-   MPC root dir, put in wi4mpi.cfg, could be added manually,
-   optional value.
+- **OPENMPI_ROOT** (*path*)
 
--  MPICH\_ROOT
-   
-   MPICH root dir, put in wi4mpi.cfg, could be added
-   manually, optional value.
+  Specifies the Open MPI root directory.
 
--  WI4MPI\_RELEASE (deprecated)
+  **Default:** *(none)*
 
-   Indicate the Wi4MPI state set for the installation:
+  Optional value, manually added to `wi4mpi.cfg`. Required for testing.
 
-    - DEBUG: -DDEBUG is provided to activate some debug information. Useful for WI4MPI and applications developer.
-    - NORMAL: -g is provided
-    - RELEASE: -g is not provided
+- **INTELMPI_ROOT** (*path*)
 
-   This option is deprecated. Use of standard cmake build types and WI4MPI\_DEBUG option supersede this.
-   Here is the equivalent usage:
+  Specifies the Intel MPI root directory.
 
-        - DEBUG: ``-DWI4MPI_DEBUG=ON``
-        - NORMAL: default, equivalent to ``-DCMAKE_BUILD_TYPE=RelWithDebInfo``
-        - RELEASE: ``-DCMAKE_BUILD_TYPE=Release``
+  **Default:** *(none)*
 
-Both version (interface and preload) of wi4mpi are compiled and
-installed into the CMAKE\_INSTALL\_PREFIX directory provided during the
-CMake initialisation.
+  Optional value, manually added to `wi4mpi.cfg`.
+
+- **MPC_ROOT** (*path*)
+
+  Specifies the MPC root directory.
+
+  **Default:** *(none)*
+
+  Optional value, manually added to `wi4mpi.cfg`.
+
+- **MPICH_ROOT** (*path*)
+
+  Specifies the MPICH root directory.
+
+  **Default:** *(none)*
+
+  Optional value, manually added to `wi4mpi.cfg`.
+
+- **WI4MPI_RELEASE** (*string*)
+
+  Indicates the build state of WI4MPI.
+
+  **Default:** `NORMAL`
+  **Supported options:**
+
+  - `DEBUG`: Adds `-DDEBUG` to activate debug information.
+  - `NORMAL`: Adds `-g`.
+  - `RELEASE`: Does not add `-g`.
+
+  This option is deprecated. Use standard CMake build types or the `WI4MPI_DEBUG` option instead:
+
+  - `DEBUG`: `-DWI4MPI_DEBUG=ON`
+  - `NORMAL`: Default, equivalent to `-DCMAKE_BUILD_TYPE=RelWithDebInfo`
+  - `RELEASE`: `-DCMAKE_BUILD_TYPE=Release`
+
+Both interface and preload versions of WI4MPI are compiled and installed into the
+`CMAKE_INSTALL_PREFIX` directory provided during CMake initialization.
 
 Usage
 =====
