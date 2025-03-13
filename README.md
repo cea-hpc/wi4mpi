@@ -2,43 +2,65 @@
 
 ![alt tag](doc/img/logo-full-blue.png)
 
-This is **WI4MPI**, Wrapper Interface For MPI performing a light translation between MPI constants and MPI objects from an MPI implementation to another one.
+**WI4MPI** is an MPI wrapper and interoperability library that enables seamless runtime conversions between
+various MPI implementations. Easily switch between MPI libraries without recompiling your applications!
 
-WI4MPI provides two different mode:
+Key Features:
 
-Preload :
+- 🚀 **Compile Once, Run Anywhere**: Compile your application once using WI4MPI's MPI interface wrappers,
+and transparently execute it with different MPI implementations at runtime, including OpenMPI, IntelMPI,
+MPICH, MVAPICH, and MPC.
+
+- 🔄 **Dynamic MPI Conversion**: Seamlessly switch between MPI implementations (e.g., OpenMPI ↔ IntelMPI)
+without recompiling.
+
+- 🐳 **Container-friendly**: Easily replace containerized MPI stacks with optimized MPI libraries available
+on your HPC cluster.
+
+- 🌐 **Flexible HPC Integration**: Ideal for configuring environment modules or Slurm scripts to maximize
+portability and performance across various HPC environments.
+
+With WI4MPI, achieve seamless interoperability, optimized performance, and simplified management of MPI
+applications across diverse computing environments.
+
+Check the full documentation here: https://wi4mpi.readthedocs.io/en/latest/
+
+Two modes are provided:
+
+Preload, for dynamic conversion:
 ![alt tag](doc/img/Preload.png)
 
-Interface :
+Interface, for building an universal MPI code:
 ![alt tag](doc/img/Interface.png)
 
 ## Installation
 
 ### Prerequisites
 
-* C and Fortran compiler
+* **GNU/Linux OS**
+* **Mandatory**: C and Fortran compilers
+* **Optionnal**: Python3 and Jinja2
 
-WI4MPI has been tested on GNU/Linux only
+### Spack
 
-### Compilation
+WI4MPI is available on Spack:
 
 ```
-$ mkdir BUILD ; cd BUILD
-$ cmake -DCMAKE_INSTALL_PREFIX=/path-install/wi4mpi-%version /path/to/wi4mpi/source/root
-$ make -j 4 && make install
+$ spack install wi4mpi
 ```
 
-You may use the following environment variables to customize the configure and build steps :
-* `CC` or `CMAKE_C_COMPILER`       : C compiler
-* `CXX` or `CMAKE_CXX_COMPILER`    : C++ compiler
-* `FC` or `CMAKE_Fortran_COMPILER` : Fortran compiler
-* `CMAKE_BUILD_TYPE`               : `<RelWithDebInfo, Release>`
-* `WI4MPI_DEBUG`                   : option to activate debug printing in the wrapped calls
-* `WI4MPI_JIT`                     : option to activate JIT compilation for user-provided stuff
-* `OPENMPI_ROOT`                   : path to the openmpi installation root
-* `INTELMPI_ROOT`                  : path to the intelmpi installation root
-* `MPC_ROOT`                       : path to the mpc installation root
-* `MPICH_ROOT`                     : path to the mpich installation root
+Check the WI4MPI Spack tutorial here: [Installalling Wi4MPI using Spack](https://wi4mpi.readthedocs.io/en/latest/tutorial/building-wi4mpi.html#installing-wi4mpi-using-spack)
+
+### Compiling with CMAKE
+
+Here is a quick introduction to WI4MPI compiling, please check the full documentation to see other options.
+
+```
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/path-install/wi4mpi-%version ..
+$ make -j 16
+$ make install
+```
 
 ### Documentation
 
@@ -51,145 +73,41 @@ $ make html
 $ firefox build/html/index.html
 ```
 
+The full documentation in hosted by `readthedocs`: https://wi4mpi.readthedocs.io/en/latest/
+
 ## Quick start
 
-WI4MPI dedicated launcher available in /path-install/wi4mpi-%version/bin/mpirun allow an easy use of the
- library. To work, users only have to set the path to the different MPI implementation installation in /
-path-install/wi4mpi-%version/etc/wi4mpi.cfg configuration file. This stage could be perform during the b
-uild (cf. the section **Installation/Compilation**).
-
-```
-Usage: mpirun [MPIRUN_TARGET_OPTIONS] -- [PROGRAM] [PROGRAM_OPTIONS]
-Advanced options:
-    -F | -from | --from {FROM}      The MPI implementation from which PROGRAM was compiled with
-    -T | -to | --to {TARGET}        The MPI implementation to which PROGRAM will be run
-
-The -F FROM option is optional. If not provided, the interface mode is chosen.
-```
+Source the setup env bash file:
 
 ```
 $ source share/wi4mpi/setup-env.sh
 ```
 
+Run `mpirun` wrapper command:
+
 ```
 $ mpirun -np 4 -F openmpi -T intelmpi ./mpi_hello.exe
+
 You are using Wi4MPI-%version with the mode preload From OMPI To INTEL
+
 Hello_world 0
 Hello_world 2
 Hello_world 3
 Hello_world 1
-
-$ mpirun -np 4 -T intelmpi ./mpi_hello.exe
-You are using Wi4MPI-%version with the mode interface From Interface To INTEL
-Hello_world 0
-Hello_world 1
-Hello_world 2
-Hello_world 3
 ```
 
-## Features
+## MPI containers translation
 
-With the Interface mode a default conversion can be set during the compilation of the user application:
+WI4MPI supports transparent MPI translation within containerized environments. This feature allows applications
+using MPI inside containers (e.g., Docker, Podman, Singularity) to leverage optimized MPI libraries provided by
+HPC centers, without modifying the container itself.
 
-```
--wi4mpi_default_run_path    set a default MPI conversion
-                            for the user application.
-                            accepted values :
-                              - OMPI
-                              - INTEL
-                              - MPC
-                              - MPICH
-```
-To set the conversion Interface to OpenMPI please proceed as follow:
+Currently, a detailed tutorial is available for using WI4MPI with OpenMPI and IntelMPI inside Podman containers:
 
-```
-$ WI4MPI_CC=icc/gcc WI4MPI_ROOT=/path/to/wi4mpi/root mpicc -wi4mpi_default_run_path OMPI test.c -o init
+* [Applying Wi4MPI to Podman](https://wi4mpi.readthedocs.io/en/latest/tutorial/podman.html)
 
-mpirun -np 4 ./init
-```
+If you need assistance or examples for other container technologies, feel free to reach out or contribute.
 
-With the interface mode, wi4mpi provide an embedded mode where the binary file can be moved from a cluster to another one without compilation process. The only rule is to have IntelMPI, MPICH/MVAPICH or OpenMPI available the system
-
-## Configuration
-
-All variable used by WI4MPI to configure the library according to the different modes and conversions:
-
-WI4MPI environment variables:
-
-* **WI4MPI_ROOT**             : reference to root wi4mpi installation
-* **WI4MPI_CC**               : reference C compiler used by wi4mpi
-* **WI4MPI_FC**               : reference Fortran compiler used by wi4mpi
-* **WI4MPI_CXX**              : reference C++ compiler used by wi4mpi
-* **WI4MPI_RUN_MPI_C_LIB**    : reference the path to the underlying run MPI implementation path C library
-* **WI4MPI_RUN_MPI_F_LIB**    : reference the path to the underlying run MPI implementation path Fortran library
-* **WI4MPI_RUN_MPIIO_C_LIB**  : reference the path to the underlying run MPI-IO implementation path C library
-* **WI4MPI_RUN_MPIIO_F_LIB**  : reference the path to the underlying run MPI-IO implementation path Fortran library
-* **WI4MPI_WRAPPER_LIB**      : reference the path to the wrapper library call by the interface
-* **WI4MPI_APP_INCLUDES**     : reference the path to the internal include used by the jit trick to handle user function
-* **WI4MPI_COMPILE_OPT**      : reference the option passed during jit compilation
-* **WI4MPI_INTERNAL_INCLUDE** : reference the path to the internal include necessary to jit
-* **WI4MPI_FROM**             : reference FROM which MPI implementation the application has been compiled
-* **WI4MPI_TO**               : reference the desired Runtime MPI implementation
-* **LD_PRELOAD**              : see [`man 8 ld.so`][MANLDSO]
-* **LD_LIBRARY_PATH**         : see [`man 8 ld.so`][MANLDSO]
-
-  [MANLDSO]: https://man7.org/linux/man-pages/man8/ld.so.8.html
-
-Preload settings:
-
-{FROM} and {TO} can take as value OMPI or INTEL depending on the chosen conversion.
-
-```
-export WI4MPI_RUN_MPI_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
-export WI4MPI_RUN_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
-export WI4MPI_RUN_MPIIO_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
-export WI4MPI_RUN_MPIIO_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
-export LD_PRELOAD="path_to_wi4mpi_install/libexec/libwi4mpi_{FROM}_{TO}.so $WI4MPI_RUN_MPI_F_LIB $WI4MPI
-_RUN_MPI_C_LIB"
-export WI4MPI_APP_INCLUDES="/path/to/wi4mpi/INTERNAL/preload/include/{FROM}_{TO}"
-if OpenMPI --> OpenMPI
-  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
-  WI4MPI_COMPILE_OPT "-DOMPI_OMPI"
-else if OpenMPI --> IntelMPI
-  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakel
-ibOMPI:$LD_LIBRARY_PATH"
-  WI4MPI_COMPILE_OPT "-DOMPI_INTEL"
-else if IntelMPI --> IntelMPI
-  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:$LD_LIBRARY_PATH"
-  WI4MPI_COMPILE_OPT "-DINTEL_INTEL"
-else if IntelMPI --> OpenMPI
-  export LD_LIBRARY_PATH="path_to_wi4mpi_install/libexec/fakelibCXX:path_to_wi4mpi_install/libexec/fakel
-ibINTEL:$LD_LIBRARY_PATH"
-  WI4MPI_COMPILE_OPT "-DINTEL_OMPI"
-```
-
-Interface settings:
-
-{FROM} and {TO} can take as value OMPI, INTEL or MPC depending on the chosen conversion.
-
-```
-export WI4MPI_INTERNAL_INCLUDES="path_to_install/INTERNAL/include"
-export WI4MPI_ROOT="/path_to_wi4mpi_install_root"
-export WI4MPI_CC=icc
-export WI4MPI_FC=ifort
-export WI4MPI_CXX=icpc
-export WI4MPI_RUN_MPI_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
-export WI4MPI_RUN_MPI_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
-export WI4MPI_RUN_MPIIO_C_LIB="/path/to/MPI-runtime-implementation/libmpi.so"
-export WI4MPI_RUN_MPIIO_F_LIB="/path/to/MPI-runtime-implementation/libmpi_mpifh.so"
-export WI4MPI_WRAPPER_LIB="path_to_wi4mpi_install/lib_INTEL/libwi4mpi_{TO}.so"
-export WI4MPI_APP_INCLUDES="path_to_install/INTERNAL/interface/include/{FROM}_{TO}"
-export LD_LIBRARY_PATH="path_to_install/lib:$LD_LIBRARY_PATH"
-if Interface --> IntelMPI
-  export WI4MPI_COMPILE_OPT="-D_OMPI"
-else if Interface --> OpenMPI
-  export WI4MPI_COMPILE_OPT="-D_INTEL"
-else if Interface --> MPC
-  export WI4MPI_COMPILE_OPT="-D_MPC"
-```
-
-
-## Contributing
 ## Authors/contributors
 
 * vincent.ducrot.tgcc@cea.fr
