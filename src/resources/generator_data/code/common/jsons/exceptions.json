@@ -1584,5 +1584,45 @@
         "generated": "False"
       }
     }
+  },
+  "MPI_Aint_add": {
+    "ASM": {
+      "C": {
+        "file": "asm_MPI_Aint_add.c",
+        "generated": "False"
+      }
+    },
+    "Application": {
+      "C": {
+        "file": "A_MPI_Aint_add.c",
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "file": "R_MPI_Aint_add.c",
+        "generated": "False"
+      }
+    }
+  },
+  "MPI_Aint_diff": {
+    "ASM": {
+      "C": {
+        "file": "asm_MPI_Aint_diff.c",
+        "generated": "False"
+      }
+    },
+    "Application": {
+      "C": {
+        "file": "A_MPI_Aint_diff.c",
+        "generated": "False"
+      }
+    },
+    "Runtime": {
+      "C": {
+        "file": "R_MPI_Aint_diff.c",
+        "generated": "False"
+      }
+    }
   }
 }
