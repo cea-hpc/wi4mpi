@@ -166,6 +166,145 @@ printf("sort : R_MPI_File_c2f\n");
 return ret;
 }
 
+__asm__(
+".global PMPI_Errhandler_f2c\n"
+".weak MPI_Errhandler_f2c\n"
+".set MPI_Errhandler_f2c,PMPI_Errhandler_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Errhandler_f2c\n"
+".extern R_MPI_Errhandler_f2c\n"
+".type PMPI_Errhandler_f2c,@function\n"
+".text\n"
+"PMPI_Errhandler_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_f2c\n"
+"b A_MPI_Errhandler_f2c\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"b R_MPI_Errhandler_f2c\n"
+#else
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Errhandler_f2c\n"
+"jmp *A_MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"jmp *R_MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+#endif
+".size PMPI_Errhandler_f2c,.-PMPI_Errhandler_f2c\n"
+);
+
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
+A_MPI_Errhandler A_MPI_Errhandler_f2c(A_MPI_Fint op)
+{
+#ifdef DEBUG
+printf("entre : A_MPI_Errhandler_f2c\n");
+#endif
+in_w=1;
+fprintf(stderr, "A_MPI_Errhandler_f2c Not implemented yet\n");
+int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_MPI_Errhandler_f2c\n");
+#endif
+return A_MPI_ERRHANDLER_NULL;
+}
+
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
+R_MPI_Errhandler R_MPI_Errhandler_f2c(R_MPI_Fint op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Errhandler_f2c\n");
+#endif
+R_MPI_Errhandler ret=LOCAL_MPI_Errhandler_f2c(op);
+#ifdef DEBUG
+printf("sort : R_MPI_Errhandler_f2c\n");
+#endif
+return ret;
+}
+
+__asm__(
+".global PMPI_Errhandler_c2f\n"
+".weak MPI_Errhandler_c2f\n"
+".set MPI_Errhandler_c2f,PMPI_Errhandler_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Errhandler_c2f\n"
+".extern R_MPI_Errhandler_c2f\n"
+".type PMPI_Errhandler_c2f,@function\n"
+".text\n"
+"PMPI_Errhandler_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_c2f\n"
+"b A_MPI_Errhandler_c2f\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"b R_MPI_Errhandler_c2f\n"
+#else
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Errhandler_c2f\n"
+"jmp *A_MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"jmp *R_MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+#endif
+".size PMPI_Errhandler_c2f,.-PMPI_Errhandler_c2f\n"
+);
+
+R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
+A_MPI_Fint A_MPI_Errhandler_c2f(A_MPI_Errhandler op)
+{
+#ifdef DEBUG
+printf("entre : A_MPI_Errhandler_c2f\n");
+#endif
+in_w=1;
+fprintf(stderr, "A_MPI_Errhandler_c2f Not implemented yet\n");
+int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_MPI_Errhandler_c2f\n");
+#endif
+return ret_tmp;
+}
+
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
+R_MPI_Fint R_MPI_Errhandler_c2f(R_MPI_Errhandler op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Errhandler_c2f\n");
+#endif
+in_w=1;
+R_MPI_Fint ret=LOCAL_MPI_Errhandler_c2f(op);
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Errhandler_c2f\n");
+#endif
+return ret;
+}
 
 __asm__(
 ".global PMPI_Op_f2c\n"
@@ -1774,6 +1913,145 @@ printf("sort : R_MPI_File_c2f\n");
 return ret;
 }
 
+__asm__(
+".global PMPI_Errhandler_f2c\n"
+".weak MPI_Errhandler_f2c\n"
+".set MPI_Errhandler_f2c,PMPI_Errhandler_f2c\n"
+".extern in_w\n"
+".extern A_MPI_Errhandler_f2c\n"
+".extern R_MPI_Errhandler_f2c\n"
+".type PMPI_Errhandler_f2c,@function\n"
+".text\n"
+"PMPI_Errhandler_f2c:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_f2c\n"
+"b A__MPI_Errhandler_f2c\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"b R__MPI_Errhandler_f2c\n"
+#else
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Errhandler_f2c\n"
+"jmp *A__MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+"inwrap_MPI_Errhandler_f2c:\n"
+"jmp *R__MPI_Errhandler_f2c@GOTPCREL(%rip)\n"
+#endif
+".size PMPI_Errhandler_f2c,.-PMPI_Errhandler_f2c\n"
+);
+
+A_MPI_Errhandler A__MPI_Errhandler_f2c(A_MPI_Fint op)
+{
+#ifdef DEBUG
+printf("entre : A_MPI_Errhandler_f2c\n");
+#endif
+in_w=1;
+fprintf(stderr, "A_MPI_Errhandler_f2c Not implemented yet\n");
+int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_MPI_Errhandler_f2c\n");
+#endif
+return (A_MPI_Errhandler)ret_tmp;
+}
+R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
+R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
+
+
+R_MPI_Errhandler R__MPI_Errhandler_f2c(R_MPI_Fint op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Errhandler_f2c\n");
+#endif
+R_MPI_Errhandler ret=LOCAL_MPI_Errhandler_f2c(op);
+#ifdef DEBUG
+printf("sort : R_MPI_Errhandler_f2c\n");
+#endif
+return ret;
+}
+
+__asm__(
+".global PMPI_Errhandler_c2f\n"
+".weak MPI_Errhandler_c2f\n"
+".set MPI_Errhandler_c2f,PMPI_Errhandler_c2f\n"
+".extern in_w\n"
+".extern A_MPI_Errhandler_c2f\n"
+".extern R_MPI_Errhandler_c2f\n"
+".type PMPI_Errhandler_c2f,@function\n"
+".text\n"
+"PMPI_Errhandler_c2f:\n"
+#ifdef __aarch64__
+"adrp x8, :gottprel:in_w\n"
+"ldr x8, [x8, :gottprel_lo12:in_w]\n"
+"mrs x9, TPIDR_EL0\n"
+"ldr w8, [x9, x8]\n"
+"cbnz w8, inwrap_MPI_Errhandler_c2f\n"
+"b A__MPI_Errhandler_c2f\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"b R__MPI_Errhandler_c2f\n"
+#else
+"push %rbp\n"
+"mov %rsp, %rbp\n"
+"sub $0x10, %rsp\n"
+"mov %rdi, -0x8(%rbp)\n"
+".byte 0x66\n"
+"leaq in_w@tlsgd(%rip), %rdi\n"
+".value 0x6666\n"
+"rex64\n"
+"call __tls_get_addr@PLT\n"
+"mov -0x8(%rbp), %rdi\n"
+"leave\n"
+"cmpl $0x0, 0x0(%rax)\n"
+"jne inwrap_MPI_Errhandler_c2f\n"
+"jmp *A__MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+"inwrap_MPI_Errhandler_c2f:\n"
+"jmp *R__MPI_Errhandler_c2f@GOTPCREL(%rip)\n"
+#endif
+".size PMPI_Errhandler_c2f,.-PMPI_Errhandler_c2f\n"
+);
+
+int A__MPI_Errhandler_c2f(A_MPI_Errhandler op)
+{
+#ifdef DEBUG
+printf("entre : A_MPI_Errhandler_c2f\n");
+#endif
+in_w=1;
+fprintf(stderr, "A_MPI_Errhandler_c2f Not implemented yet\n");
+int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
+in_w=0;
+#ifdef DEBUG
+printf("sort : A_MPI_Errhandler_c2f\n");
+#endif
+return ret_tmp;
+}
+
+
+int R__MPI_Errhandler_c2f(R_MPI_Errhandler op)
+{
+#ifdef DEBUG
+printf("entre : R_MPI_Errhandler_c2f\n");
+#endif
+in_w=1;
+R_MPI_Fint ret=LOCAL_MPI_Errhandler_c2f(op);
+in_w=0;
+#ifdef DEBUG
+printf("sort : R_MPI_Errhandler_c2f\n");
+#endif
+return ret;
+}
 
 __asm__(
 ".global PMPI_Op_f2c\n"
