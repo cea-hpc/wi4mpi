@@ -10,11 +10,12 @@
 {% if  conf[func['name']] is defined and  conf[func['name']]['Application'] is defined and conf[func['name']]['Application']['fortran'] is defined and conf[func['name']]['Application']['fortran']['generated'] == "False" -%}
 {%-if conf[func['name']]['Application']['fortran']['declare'] is not defined or conf[func['name']]['Application']['fortran']['declare'] == "True"  -%}
 {% for arg in func['args'] %} {% if mappers[arg['name']]['type'].split('*')|first|trim == "char" %} {%set count_char.value=count_char.value ~ ", fort_string_length len_" ~ arg['var'].split('[')|first %} {%endif%} {%endfor %}
-  {%- for prefix in ["", "p"] -%}
-    {%- for suffix in ["_", "__"] -%}
+  {%- for prefix in ["", "p"] %}
+    {%- for suffix in ["_", "__"] %}
     {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} {{prefix}}{{func['name']|lower}}{{suffix}}({{generate_arg_list(mappers, func, ret_type, count_char)}});
-    {%- endfor -%}
-  {%- endfor -%}
+    {%- endfor %}
+  {%- endfor %}
+
 #define A_f_{{func['name']}} _{{func['name']}}
 
     {{decl_ext}} {%- if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} A_f_{{func['name']}}({{generate_arg_list(mappers, func, ret_type, count_char)}});
@@ -23,15 +24,15 @@
 #pragma weak {{func['name']|lower}}__ = _{{func['name']}}
 #pragma weak p{{func['name']|lower}}__ = _{{func['name']}}
 
-    {% if ret_type == "int " %} void {%-else -%}{{ ret_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({{generate_arg_list(mappers, func, ret_type, count_char)}});
+    {% if ret_type == "int " %} void {% else %}{{ ret_type }} {%-endif%} (*LOCAL_f_{{func['name']}})({{generate_arg_list(mappers, func, ret_type, count_char)}});
 {%- endif %}
 
- {%-  if conf[func['name']]['Application']['fortran']['file'] is defined -%}
+ {%  if conf[func['name']]['Application']['fortran']['file'] is defined %}
 #define __F_{{func['name']}}__GEN__
 #ifndef __F_{{func['name']}}
 #ifndef {{func['name']|upper}}_OVERRIDE
 
-    {%  include conf[func['name']]['Application']['fortran']['file']-%} 
+    {%  include conf[func['name']]['Application']['fortran']['file'] %} 
 
 #endif
 #endif

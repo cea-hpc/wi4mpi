@@ -33,9 +33,9 @@ endif()
 enable_language(C CXX Fortran)
 project(wi4mpi)
 
-set(VERSION_MAJOR 3)
-set(VERSION_MINOR 7)
-set(VERSION_PATCH 1)
+set(VERSION_MAJOR 4)
+set(VERSION_MINOR 0)
+set(VERSION_PATCH 0)
 
 set(WI4MPI_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
@@ -49,9 +49,9 @@ option(WI4MPI_DEBUG "Add debug printing in the wrapped calls")
 option(WI4MPI_JIT "Use JIT compilation for user-provided stuff (required gcc in the PATH at run time")
 option(WI4MPI_TIMEOUT "Activate timeout")
 option(WI4MPI_GENERATOR "Enable generation of sources (headers and code)" OFF)
-set(WI4MPI_GENERATOR_OPENMPI_VERSION "1.8.8" CACHE STRING "Version number of OpenMPI")
+set(WI4MPI_GENERATOR_OPENMPI_VERSION "4.1.6" CACHE STRING "Version number of OpenMPI")
 set(WI4MPI_GENERATOR_INTELMPI_VERSION "20.0.0" CACHE STRING "Version number of IntelMPI")
-set(WI4MPI_GENERATOR_MPICH_VERSION "3.1.2" CACHE STRING "Version number of MPICH")
+set(WI4MPI_GENERATOR_MPICH_VERSION "4.2.0" CACHE STRING "Version number of MPICH")
 set(WI4MPI_GENERATOR_MPI_NORM "3.1" CACHE STRING "Version number of MPI norm to use")
 
 #The Rpath Strikes Back
