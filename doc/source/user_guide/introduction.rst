@@ -15,7 +15,7 @@ Version).
 
 Preload Mode illustration:
 
-.. image:: ../../img/Preload.png
+.. image:: ../../img/preload.png
    :alt: Preload Mode Illustration
 
 Additionally, WI4MPI can function as a dedicated MPI implementation. In this
@@ -26,6 +26,6 @@ Version).
 
 Interface Mode illustration:
 
-.. image:: ../../img/Interface.png
+.. image:: ../../img/interface.png
    :alt: Interface Mode Illustration
 
