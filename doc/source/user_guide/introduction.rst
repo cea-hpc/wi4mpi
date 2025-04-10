@@ -17,7 +17,9 @@ Preload Mode illustration:
 
 .. image:: ../../img/preload.png
    :alt: Preload Mode Illustration
-
+   :width: 600px
+   :align: center
+	   
 Additionally, WI4MPI can function as a dedicated MPI implementation. In this
 mode, applications are compiled against the WI4MPI library (`libmpi.so`) using
 its dedicated wrappers (e.g., `mpicc`, `mpif90`). These applications can then
@@ -28,4 +30,5 @@ Interface Mode illustration:
 
 .. image:: ../../img/interface.png
    :alt: Interface Mode Illustration
-
+   :width: 450px
+   :align: center
