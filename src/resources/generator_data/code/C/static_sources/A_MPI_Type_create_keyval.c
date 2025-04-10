@@ -23,9 +23,9 @@ int A_MPI_Type_create_keyval(
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Type_create_keyval_print)
-    debug_printer("MPI_Type_create_keyval : \n{\ntype_copy_attr_fn : "
-                  "%p,\ntype_delete_attr_fn : %p,\ntype_keyval : "
-                  "%*d,\nextra_state : %p,\nerror/return : %d\n}\n",
+    debug_printer("MPI_Type_create_keyval: \n{\ntype_copy_attr_fn: "
+                  "%p,\ntype_delete_attr_fn: %p,\ntype_keyval: "
+                  "%*d,\nextra_state: %p,\nerror/return: %d\n}\n",
                   type_copy_attr_fn, type_delete_attr_fn, type_keyval,
                   extra_state, ret);
 #endif

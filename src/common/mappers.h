@@ -647,7 +647,7 @@ static void status_prt_conv_r2a(A_MPI_Status **status, R_MPI_Status **status_tmp
 {
     if(*status == (A_MPI_Status*)A_MPI_STATUS_IGNORE) //here: status and not status_tmp
     {                                                 //evenif r2a; otherwise segfault for
-        //obvious reasons : tying to acces to  
+        //obvious reasons: trying to access  
         *status = (A_MPI_Status*)A_MPI_STATUS_IGNORE;   // non allocated struct in the else
     }
     else 

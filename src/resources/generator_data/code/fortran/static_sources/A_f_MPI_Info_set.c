@@ -1,7 +1,7 @@
 void  A_f_MPI_Info_set(int * info,char * key,char * value,int * ret,fort_string_length keylen,fort_string_length valuelen)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Info_set\n");
+printf("input: A_f_MPI_Info_set\n");
 #endif
 in_w=1;
 
@@ -15,7 +15,7 @@ info_a2r(info,&info_tmp);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Info_set\n");
+printf("output: A_f_MPI_Info_set\n");
 #endif
 
 }

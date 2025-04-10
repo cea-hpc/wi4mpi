@@ -67,7 +67,7 @@ R_MPI_File (*LOCAL_MPI_File_f2c)(R_MPI_Fint);
 A_MPI_File A_MPI_File_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_File_f2c\n");
+printf("input: A_MPI_File_f2c\n");
 #endif
 in_w=1;
 A_MPI_File ret;
@@ -75,7 +75,7 @@ R_MPI_File ret_tmp=LOCAL_MPI_File_f2c(op);
 file_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_File_f2c\n");
+printf("output: A_MPI_File_f2c\n");
 #endif
 return ret;
 }
@@ -84,11 +84,11 @@ return ret;
 R_MPI_File R_MPI_File_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_File_f2c\n");
+printf("input: R_MPI_File_f2c\n");
 #endif
 R_MPI_File ret=LOCAL_MPI_File_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_File_f2c\n");
+printf("output: R_MPI_File_f2c\n");
 #endif
 return ret;
 }
@@ -139,7 +139,7 @@ R_MPI_Fint (*LOCAL_MPI_File_c2f)(R_MPI_File);
 A_MPI_Fint A_MPI_File_c2f(A_MPI_File op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_File_c2f\n");
+printf("input: A_MPI_File_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -148,7 +148,7 @@ file_conv_a2r(&op,&op_tmp);
 ret=LOCAL_MPI_File_c2f(op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_File_c2f\n");
+printf("output: A_MPI_File_c2f\n");
 #endif
 return ret;
 }
@@ -157,11 +157,11 @@ return ret;
 R_MPI_Fint R_MPI_File_c2f(R_MPI_File op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_File_c2f\n");
+printf("input: R_MPI_File_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_File_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_File_c2f\n");
+printf("output: R_MPI_File_c2f\n");
 #endif
 return ret;
 }
@@ -210,14 +210,14 @@ R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(R_MPI_Fint);
 A_MPI_Errhandler A_MPI_Errhandler_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Errhandler_f2c\n");
+printf("input: A_MPI_Errhandler_f2c\n");
 #endif
 in_w=1;
 fprintf(stderr, "A_MPI_Errhandler_f2c Not implemented yet\n");
 int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Errhandler_f2c\n");
+printf("output: A_MPI_Errhandler_f2c\n");
 #endif
 return A_MPI_ERRHANDLER_NULL;
 }
@@ -226,11 +226,11 @@ R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 R_MPI_Errhandler R_MPI_Errhandler_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Errhandler_f2c\n");
+printf("input: R_MPI_Errhandler_f2c\n");
 #endif
 R_MPI_Errhandler ret=LOCAL_MPI_Errhandler_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Errhandler_f2c\n");
+printf("output: R_MPI_Errhandler_f2c\n");
 #endif
 return ret;
 }
@@ -279,14 +279,14 @@ R_MPI_Fint (*LOCAL_MPI_Errhandler_c2f)(R_MPI_Errhandler);
 A_MPI_Fint A_MPI_Errhandler_c2f(A_MPI_Errhandler op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Errhandler_c2f\n");
+printf("input: A_MPI_Errhandler_c2f\n");
 #endif
 in_w=1;
 fprintf(stderr, "A_MPI_Errhandler_c2f Not implemented yet\n");
 int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Errhandler_c2f\n");
+printf("output: A_MPI_Errhandler_c2f\n");
 #endif
 return ret_tmp;
 }
@@ -295,13 +295,13 @@ R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 R_MPI_Fint R_MPI_Errhandler_c2f(R_MPI_Errhandler op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Errhandler_c2f\n");
+printf("input: R_MPI_Errhandler_c2f\n");
 #endif
 in_w=1;
 R_MPI_Fint ret=LOCAL_MPI_Errhandler_c2f(op);
 in_w=0;
 #ifdef DEBUG
-printf("sort : R_MPI_Errhandler_c2f\n");
+printf("output: R_MPI_Errhandler_c2f\n");
 #endif
 return ret;
 }
@@ -351,7 +351,7 @@ R_MPI_Op (*LOCAL_MPI_Op_f2c)(R_MPI_Fint);
 A_MPI_Op A_MPI_Op_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Op_f2c\n");
+printf("input: A_MPI_Op_f2c\n");
 #endif
 in_w=1;
 A_MPI_Op ret;
@@ -361,7 +361,7 @@ R_MPI_Op ret_tmp=LOCAL_MPI_Op_f2c(op_tmp);
 op_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Op_f2c\n");
+printf("output: A_MPI_Op_f2c\n");
 #endif
 return ret;
 }
@@ -370,11 +370,11 @@ return ret;
 R_MPI_Op R_MPI_Op_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Op_f2c\n");
+printf("input: R_MPI_Op_f2c\n");
 #endif
 R_MPI_Op ret=LOCAL_MPI_Op_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Op_f2c\n");
+printf("output: R_MPI_Op_f2c\n");
 #endif
 return ret;
 }
@@ -425,7 +425,7 @@ R_MPI_Fint (*LOCAL_MPI_Op_c2f)(R_MPI_Op);
 A_MPI_Fint A_MPI_Op_c2f(A_MPI_Op op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Op_c2f\n");
+printf("input: A_MPI_Op_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -435,7 +435,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Op_c2f(op_tmp);
 operator_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Op_c2f\n");
+printf("output: A_MPI_Op_c2f\n");
 #endif
 return ret;
 }
@@ -444,11 +444,11 @@ return ret;
 R_MPI_Fint R_MPI_Op_c2f(R_MPI_Op op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Op_c2f\n");
+printf("input: R_MPI_Op_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Op_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Op_c2f\n");
+printf("output: R_MPI_Op_c2f\n");
 #endif
 return ret;
 }
@@ -499,7 +499,7 @@ R_MPI_Info (*LOCAL_MPI_Info_f2c)(R_MPI_Fint);
 A_MPI_Info A_MPI_Info_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Info_f2c\n");
+printf("input: A_MPI_Info_f2c\n");
 #endif
 in_w=1;
 A_MPI_Info ret;
@@ -509,7 +509,7 @@ R_MPI_Info ret_tmp=LOCAL_MPI_Info_f2c(op_tmp);
 info_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Info_f2c\n");
+printf("output: A_MPI_Info_f2c\n");
 #endif
 return ret;
 }
@@ -518,11 +518,11 @@ return ret;
 R_MPI_Info R_MPI_Info_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Info_f2c\n");
+printf("input: R_MPI_Info_f2c\n");
 #endif
 R_MPI_Info ret=LOCAL_MPI_Info_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Info_f2c\n");
+printf("output: R_MPI_Info_f2c\n");
 #endif
 return ret;
 }
@@ -573,7 +573,7 @@ R_MPI_Fint (*LOCAL_MPI_Info_c2f)(R_MPI_Info);
 A_MPI_Fint A_MPI_Info_c2f(A_MPI_Info op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Info_c2f\n");
+printf("input: A_MPI_Info_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -583,7 +583,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Info_c2f(op_tmp);
 info_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Info_c2f\n");
+printf("output: A_MPI_Info_c2f\n");
 #endif
 return ret;
 }
@@ -592,11 +592,11 @@ return ret;
 R_MPI_Fint R_MPI_Info_c2f(R_MPI_Info op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Info_c2f\n");
+printf("input: R_MPI_Info_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Info_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Info_c2f\n");
+printf("output: R_MPI_Info_c2f\n");
 #endif
 return ret;
 }
@@ -647,7 +647,7 @@ R_MPI_Group (*LOCAL_MPI_Group_f2c)(R_MPI_Fint);
 A_MPI_Group A_MPI_Group_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Group_f2c\n");
+printf("input: A_MPI_Group_f2c\n");
 #endif
 in_w=1;
 A_MPI_Group ret;
@@ -657,7 +657,7 @@ R_MPI_Group ret_tmp=LOCAL_MPI_Group_f2c(op_tmp);
 group_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Group_f2c\n");
+printf("output: A_MPI_Group_f2c\n");
 #endif
 return ret;
 }
@@ -666,11 +666,11 @@ return ret;
 R_MPI_Group R_MPI_Group_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Group_f2c\n");
+printf("input: R_MPI_Group_f2c\n");
 #endif
 R_MPI_Group ret=LOCAL_MPI_Group_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Group_f2c\n");
+printf("output: R_MPI_Group_f2c\n");
 #endif
 return ret;
 }
@@ -721,7 +721,7 @@ R_MPI_Fint (*LOCAL_MPI_Group_c2f)(R_MPI_Group);
 A_MPI_Fint A_MPI_Group_c2f(A_MPI_Group op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Group_c2f\n");
+printf("input: A_MPI_Group_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -731,7 +731,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Group_c2f(op_tmp);
 group_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Group_c2f\n");
+printf("output: A_MPI_Group_c2f\n");
 #endif
 return ret;
 }
@@ -740,11 +740,11 @@ return ret;
 R_MPI_Fint R_MPI_Group_c2f(R_MPI_Group op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Group_c2f\n");
+printf("input: R_MPI_Group_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Group_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Group_c2f\n");
+printf("output: R_MPI_Group_c2f\n");
 #endif
 return ret;
 }
@@ -795,7 +795,7 @@ R_MPI_Request (*LOCAL_MPI_Request_f2c)(R_MPI_Fint);
 A_MPI_Request A_MPI_Request_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Request_f2c\n");
+printf("input: A_MPI_Request_f2c\n");
 #endif
 in_w=1;
 A_MPI_Request ret;
@@ -805,7 +805,7 @@ R_MPI_Request ret_tmp=LOCAL_MPI_Request_f2c(op_tmp);
 request_tab_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Request_f2c\n");
+printf("output: A_MPI_Request_f2c\n");
 #endif
 return ret;
 }
@@ -814,11 +814,11 @@ return ret;
 R_MPI_Request R_MPI_Request_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Request_f2c\n");
+printf("input: R_MPI_Request_f2c\n");
 #endif
 R_MPI_Request ret=LOCAL_MPI_Request_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Request_f2c\n");
+printf("output: R_MPI_Request_f2c\n");
 #endif
 return ret;
 }
@@ -869,7 +869,7 @@ R_MPI_Fint (*LOCAL_MPI_Request_c2f)(R_MPI_Request);
 A_MPI_Fint A_MPI_Request_c2f(A_MPI_Request op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Request_c2f\n");
+printf("input: A_MPI_Request_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -879,7 +879,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Request_c2f(op_tmp);
 request_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Request_c2f\n");
+printf("output: A_MPI_Request_c2f\n");
 #endif
 return ret;
 }
@@ -888,11 +888,11 @@ return ret;
 R_MPI_Fint R_MPI_Request_c2f(R_MPI_Request op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Request_c2f\n");
+printf("input: R_MPI_Request_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Request_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Request_c2f\n");
+printf("output: R_MPI_Request_c2f\n");
 #endif
 return ret;
 }
@@ -943,7 +943,7 @@ R_MPI_Datatype (*LOCAL_MPI_Type_f2c)(R_MPI_Fint);
 A_MPI_Datatype A_MPI_Type_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Type_f2c\n");
+printf("input: A_MPI_Type_f2c\n");
 #endif
 in_w=1;
 A_MPI_Datatype ret;
@@ -953,7 +953,7 @@ R_MPI_Datatype ret_tmp=LOCAL_MPI_Type_f2c(op_tmp);
 datatype_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Type_f2c\n");
+printf("output: A_MPI_Type_f2c\n");
 #endif
 return ret;
 }
@@ -962,11 +962,11 @@ return ret;
 R_MPI_Datatype R_MPI_Type_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Type_f2c\n");
+printf("input: R_MPI_Type_f2c\n");
 #endif
 R_MPI_Datatype ret=LOCAL_MPI_Type_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Type_f2c\n");
+printf("output: R_MPI_Type_f2c\n");
 #endif
 return ret;
 }
@@ -1017,7 +1017,7 @@ R_MPI_Fint (*LOCAL_MPI_Type_c2f)(R_MPI_Datatype);
 A_MPI_Fint A_MPI_Type_c2f(A_MPI_Datatype op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Type_c2f\n");
+printf("input: A_MPI_Type_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -1027,7 +1027,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Type_c2f(op_tmp);
 datatype_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Type_c2f\n");
+printf("output: A_MPI_Type_c2f\n");
 #endif
 return ret;
 }
@@ -1036,11 +1036,11 @@ return ret;
 R_MPI_Fint R_MPI_Type_c2f(R_MPI_Datatype op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Type_c2f\n");
+printf("input: R_MPI_Type_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Type_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Type_c2f\n");
+printf("output: R_MPI_Type_c2f\n");
 #endif
 return ret;
 }
@@ -1091,7 +1091,7 @@ R_MPI_Comm (*LOCAL_MPI_Comm_f2c)(R_MPI_Fint);
 A_MPI_Comm A_MPI_Comm_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Comm_f2c\n");
+printf("input: A_MPI_Comm_f2c\n");
 #endif
 in_w=1;
 A_MPI_Comm ret;
@@ -1101,7 +1101,7 @@ R_MPI_Comm ret_tmp=LOCAL_MPI_Comm_f2c(op_tmp);
 comm_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Comm_f2c\n");
+printf("output: A_MPI_Comm_f2c\n");
 #endif
 return ret;
 }
@@ -1110,11 +1110,11 @@ return ret;
 R_MPI_Comm R_MPI_Comm_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Comm_f2c\n");
+printf("input: R_MPI_Comm_f2c\n");
 #endif
 R_MPI_Comm ret=LOCAL_MPI_Comm_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Comm_f2c\n");
+printf("output: R_MPI_Comm_f2c\n");
 #endif
 return ret;
 }
@@ -1165,7 +1165,7 @@ R_MPI_Fint (*LOCAL_MPI_Comm_c2f)(R_MPI_Comm);
 A_MPI_Fint A_MPI_Comm_c2f(A_MPI_Comm op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Comm_c2f\n");
+printf("input: A_MPI_Comm_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -1175,7 +1175,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Comm_c2f(op_tmp);
 comm_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Comm_c2f\n");
+printf("output: A_MPI_Comm_c2f\n");
 #endif
 return ret;
 }
@@ -1184,11 +1184,11 @@ return ret;
 R_MPI_Fint R_MPI_Comm_c2f(R_MPI_Comm op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Comm_c2f\n");
+printf("input: R_MPI_Comm_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Comm_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Comm_c2f\n");
+printf("output: R_MPI_Comm_c2f\n");
 #endif
 return ret;
 }
@@ -1239,7 +1239,7 @@ R_MPI_Win (*LOCAL_MPI_Win_f2c)(R_MPI_Fint);
 A_MPI_Win A_MPI_Win_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Win_f2c\n");
+printf("input: A_MPI_Win_f2c\n");
 #endif
 in_w=1;
 A_MPI_Win ret;
@@ -1249,7 +1249,7 @@ R_MPI_Win ret_tmp=LOCAL_MPI_Win_f2c(op_tmp);
 win_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Win_f2c\n");
+printf("output: A_MPI_Win_f2c\n");
 #endif
 return ret;
 }
@@ -1258,11 +1258,11 @@ return ret;
 R_MPI_Win R_MPI_Win_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Win_f2c\n");
+printf("input: R_MPI_Win_f2c\n");
 #endif
 R_MPI_Win ret=LOCAL_MPI_Win_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Win_f2c\n");
+printf("output: R_MPI_Win_f2c\n");
 #endif
 return ret;
 }
@@ -1313,7 +1313,7 @@ R_MPI_Fint (*LOCAL_MPI_Win_c2f)(R_MPI_Win);
 A_MPI_Fint A_MPI_Win_c2f(A_MPI_Win op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Win_c2f\n");
+printf("input: A_MPI_Win_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -1323,7 +1323,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Win_c2f(op_tmp);
 fwin_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Win_c2f\n");
+printf("output: A_MPI_Win_c2f\n");
 #endif
 return ret;
 }
@@ -1332,11 +1332,11 @@ return ret;
 R_MPI_Fint R_MPI_Win_c2f(R_MPI_Win op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Win_c2f\n");
+printf("input: R_MPI_Win_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Win_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Win_c2f\n");
+printf("output: R_MPI_Win_c2f\n");
 #endif
 return ret;
 }
@@ -1387,7 +1387,7 @@ R_MPI_Message (*LOCAL_MPI_Message_f2c)(R_MPI_Fint);
 A_MPI_Message A_MPI_Message_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Message_f2c\n");
+printf("input: A_MPI_Message_f2c\n");
 #endif
 in_w=1;
 A_MPI_Message ret;
@@ -1397,7 +1397,7 @@ R_MPI_Message ret_tmp=LOCAL_MPI_Message_f2c(op_tmp);
 message_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Message_f2c\n");
+printf("output: A_MPI_Message_f2c\n");
 #endif
 return ret;
 }
@@ -1406,11 +1406,11 @@ return ret;
 R_MPI_Message R_MPI_Message_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Message_f2c\n");
+printf("input: R_MPI_Message_f2c\n");
 #endif
 R_MPI_Message ret=LOCAL_MPI_Message_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Message_f2c\n");
+printf("output: R_MPI_Message_f2c\n");
 #endif
 return ret;
 }
@@ -1461,7 +1461,7 @@ R_MPI_Fint (*LOCAL_MPI_Message_c2f)(R_MPI_Message);
 A_MPI_Fint A_MPI_Message_c2f(A_MPI_Message op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Message_c2f\n");
+printf("input: A_MPI_Message_c2f\n");
 #endif
 in_w=1;
 A_MPI_Fint ret;
@@ -1471,7 +1471,7 @@ R_MPI_Fint ret_tmp=LOCAL_MPI_Message_c2f(op_tmp);
 message_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Message_c2f\n");
+printf("output: A_MPI_Message_c2f\n");
 #endif
 return ret;
 }
@@ -1480,11 +1480,11 @@ return ret;
 R_MPI_Fint R_MPI_Message_c2f(R_MPI_Message op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Message_c2f\n");
+printf("input: R_MPI_Message_c2f\n");
 #endif
 R_MPI_Fint ret=LOCAL_MPI_Message_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Message_c2f\n");
+printf("output: R_MPI_Message_c2f\n");
 #endif
 return ret;
 }
@@ -1560,7 +1560,7 @@ __asm__(
 int A_MPI_Status_c2f(A_MPI_Status *in, A_MPI_Fint *op)
 { 
 #ifdef DEBUG
-printf("entre : A_MPI_Status_c2f\n");
+printf("input: A_MPI_Status_c2f\n");
 #endif
 in_w=1;
 int tmp[R_f_MPI_STATUS_SIZE];
@@ -1571,18 +1571,18 @@ int ret=LOCAL_MPI_Status_c2f(tmp2,tmp);
 status_r2a(tmp,op);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Status_c2f\n");
+printf("output: A_MPI_Status_c2f\n");
 #endif
 return ret;
 }
 int R_MPI_Status_c2f(R_MPI_Status *in,R_MPI_Fint *op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Status_c2f\n");
+printf("input: R_MPI_Status_c2f\n");
 #endif
 int ret=LOCAL_MPI_Status_c2f(in,op);
 #ifdef DEBUG
-printf("sort : R_MPI_Status_c2f\n");
+printf("output: R_MPI_Status_c2f\n");
 #endif
 return ret;
 }
@@ -1630,7 +1630,7 @@ __asm__(
 int A_MPI_Status_f2c(A_MPI_Fint *in,A_MPI_Status *op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Status_f2c\n");
+printf("input: A_MPI_Status_f2c\n");
 #endif
 in_w=1;
 int tmp[R_f_MPI_STATUS_SIZE];
@@ -1642,18 +1642,18 @@ int ret=LOCAL_MPI_Status_f2c(tmp,&tmp2);
 status_tab_conv_r2a(op,&tmp2);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Status_f2c\n");
+printf("output: A_MPI_Status_f2c\n");
 #endif
 return ret;
 }
 int R_MPI_Status_f2c(R_MPI_Fint *in,R_MPI_Status *op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Status_f2c\n");
+printf("input: R_MPI_Status_f2c\n");
 #endif
 int ret=LOCAL_MPI_Status_f2c(in,op);
 #ifdef DEBUG
-printf("sort : R_MPI_Status_f2c\n");
+printf("output: R_MPI_Status_f2c\n");
 #endif
 return ret;
 }
@@ -1814,7 +1814,7 @@ R_MPI_File (*LOCAL_MPI_File_f2c)(R_MPI_Fint);
 A_MPI_File A__MPI_File_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_File_f2c\n");
+printf("input: A_MPI_File_f2c\n");
 #endif
 in_w=1;
 A_MPI_File ret;
@@ -1822,7 +1822,7 @@ R_MPI_File ret_tmp=LOCAL_MPI_File_f2c(op);
 file_conv_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_File_f2c\n");
+printf("output: A_MPI_File_f2c\n");
 #endif
 return ret;
 }
@@ -1831,11 +1831,11 @@ return ret;
 R_MPI_File R_MPI_File_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_File_f2c\n");
+printf("input: R_MPI_File_f2c\n");
 #endif
 R_MPI_File ret=LOCAL_MPI_File_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_File_f2c\n");
+printf("output: R_MPI_File_f2c\n");
 #endif
 return ret;
 }
@@ -1886,7 +1886,7 @@ int (*LOCAL_MPI_File_c2f)(R_MPI_File);
 int A__MPI_File_c2f(A_MPI_File op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_File_c2f\n");
+printf("input: A_MPI_File_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -1895,7 +1895,7 @@ file_conv_a2r(&op,&op_tmp);
 int ret_tmp=LOCAL_MPI_File_c2f(op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_File_c2f\n");
+printf("output: A_MPI_File_c2f\n");
 #endif
 return ret_tmp;
 }
@@ -1904,11 +1904,11 @@ return ret_tmp;
 int R_MPI_File_c2f(R_MPI_File op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_File_c2f\n");
+printf("input: R_MPI_File_c2f\n");
 #endif
 int ret=LOCAL_MPI_File_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_File_c2f\n");
+printf("output: R_MPI_File_c2f\n");
 #endif
 return ret;
 }
@@ -1956,14 +1956,14 @@ __asm__(
 A_MPI_Errhandler A__MPI_Errhandler_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Errhandler_f2c\n");
+printf("input: A_MPI_Errhandler_f2c\n");
 #endif
 in_w=1;
 fprintf(stderr, "A_MPI_Errhandler_f2c Not implemented yet\n");
 int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Errhandler_f2c\n");
+printf("output: A_MPI_Errhandler_f2c\n");
 #endif
 return (A_MPI_Errhandler)ret_tmp;
 }
@@ -1974,11 +1974,11 @@ R_MPI_Errhandler (*LOCAL_MPI_Errhandler_f2c)(int);
 R_MPI_Errhandler R__MPI_Errhandler_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Errhandler_f2c\n");
+printf("input: R_MPI_Errhandler_f2c\n");
 #endif
 R_MPI_Errhandler ret=LOCAL_MPI_Errhandler_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Errhandler_f2c\n");
+printf("output: R_MPI_Errhandler_f2c\n");
 #endif
 return ret;
 }
@@ -2026,14 +2026,14 @@ __asm__(
 int A__MPI_Errhandler_c2f(A_MPI_Errhandler op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Errhandler_c2f\n");
+printf("input: A_MPI_Errhandler_c2f\n");
 #endif
 in_w=1;
 fprintf(stderr, "A_MPI_Errhandler_c2f Not implemented yet\n");
 int ret_tmp= LOCAL_MPI_Abort(R_MPI_COMM_WORLD,7);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Errhandler_c2f\n");
+printf("output: A_MPI_Errhandler_c2f\n");
 #endif
 return ret_tmp;
 }
@@ -2042,13 +2042,13 @@ return ret_tmp;
 int R__MPI_Errhandler_c2f(R_MPI_Errhandler op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Errhandler_c2f\n");
+printf("input: R_MPI_Errhandler_c2f\n");
 #endif
 in_w=1;
 R_MPI_Fint ret=LOCAL_MPI_Errhandler_c2f(op);
 in_w=0;
 #ifdef DEBUG
-printf("sort : R_MPI_Errhandler_c2f\n");
+printf("output: R_MPI_Errhandler_c2f\n");
 #endif
 return ret;
 }
@@ -2097,7 +2097,7 @@ __asm__(
 A_MPI_Op A__MPI_Op_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Op_f2c\n");
+printf("input: A_MPI_Op_f2c\n");
 #endif
 in_w=1;
 A_MPI_Op op_ret;
@@ -2106,7 +2106,7 @@ operator_a2r(&op,&op_tmp);
 op_conv_r2a(&op_ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Op_f2c\n");
+printf("output: A_MPI_Op_f2c\n");
 #endif
 return op_ret;
 }
@@ -2115,10 +2115,10 @@ return op_ret;
 R_MPI_Op R__MPI_Op_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Op_f2c\n");
+printf("input: R_MPI_Op_f2c\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Op_f2c\n");
+printf("output: R_MPI_Op_f2c\n");
 #endif
 return op;
 }
@@ -2168,7 +2168,7 @@ __asm__(
 int A__MPI_Op_c2f(A_MPI_Op op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Op_c2f\n");
+printf("input: A_MPI_Op_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -2177,7 +2177,7 @@ op_conv_a2r(&op,&op_tmp);
 operator_r2a(&ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Op_c2f\n");
+printf("output: A_MPI_Op_c2f\n");
 #endif
 return ret;
 }
@@ -2186,10 +2186,10 @@ return ret;
 int R__MPI_Op_c2f(R_MPI_Op op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Op_c2f\n");
+printf("input: R_MPI_Op_c2f\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Op_c2f\n");
+printf("output: R_MPI_Op_c2f\n");
 #endif
 return op;
 }
@@ -2240,7 +2240,7 @@ R_MPI_Info (*LOCAL_MPI_Info_f2c)(R_MPI_Fint);
 A_MPI_Info A__MPI_Info_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Info_f2c\n");
+printf("input: A_MPI_Info_f2c\n");
 #endif
 in_w=1;
 A_MPI_Info op_ret;
@@ -2250,7 +2250,7 @@ R_MPI_Info ret_tmp=LOCAL_MPI_Info_f2c(op_tmp);
 info_conv_r2a(&op_ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Info_f2c\n");
+printf("output: A_MPI_Info_f2c\n");
 #endif
 return op_ret;
 }
@@ -2259,11 +2259,11 @@ return op_ret;
 R_MPI_Info R__MPI_Info_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Info_f2c\n");
+printf("input: R_MPI_Info_f2c\n");
 #endif
 R_MPI_Info ret_tmp=LOCAL_MPI_Info_f2c(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Info_f2c\n");
+printf("output: R_MPI_Info_f2c\n");
 #endif
 return op;
 }
@@ -2314,7 +2314,7 @@ R_MPI_Fint (*LOCAL_MPI_Info_c2f)(R_MPI_Info);
 int A__MPI_Info_c2f(A_MPI_Info op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Info_c2f\n");
+printf("input: A_MPI_Info_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -2324,7 +2324,7 @@ int ret_tmp=LOCAL_MPI_Info_c2f(op_tmp);
 info_r2a(&ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Info_c2f\n");
+printf("output: A_MPI_Info_c2f\n");
 #endif
 return ret;
 }
@@ -2333,11 +2333,11 @@ return ret;
 int R__MPI_Info_c2f(R_MPI_Info op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Info_c2f\n");
+printf("input: R_MPI_Info_c2f\n");
 #endif
 int ret=LOCAL_MPI_Info_c2f(op);
 #ifdef DEBUG
-printf("sort : R_MPI_Info_c2f\n");
+printf("output: R_MPI_Info_c2f\n");
 #endif
 return ret;
 }
@@ -2387,7 +2387,7 @@ __asm__(
 A_MPI_Group A__MPI_Group_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Group_f2c\n");
+printf("input: A_MPI_Group_f2c\n");
 #endif
 in_w=1;
 A_MPI_Group op_ret;
@@ -2396,7 +2396,7 @@ group_a2r(&op,&op_tmp);
 group_conv_r2a(&op_ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Group_f2c\n");
+printf("output: A_MPI_Group_f2c\n");
 #endif
 return op_ret;
 }
@@ -2405,10 +2405,10 @@ return op_ret;
 R_MPI_Group R__MPI_Group_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Group_f2c\n");
+printf("input: R_MPI_Group_f2c\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Group_f2c\n");
+printf("output: R_MPI_Group_f2c\n");
 #endif
 return op;
 }
@@ -2458,7 +2458,7 @@ __asm__(
 int A__MPI_Group_c2f(A_MPI_Group op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Group_c2f\n");
+printf("input: A_MPI_Group_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -2467,7 +2467,7 @@ group_conv_a2r(&op,&op_tmp);
 group_r2a(&ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Group_c2f\n");
+printf("output: A_MPI_Group_c2f\n");
 #endif
 return ret;
 }
@@ -2476,10 +2476,10 @@ return ret;
 int R__MPI_Group_c2f(R_MPI_Group op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Group_c2f\n");
+printf("input: R_MPI_Group_c2f\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Group_c2f\n");
+printf("output: R_MPI_Group_c2f\n");
 #endif
 return op;
 }
@@ -2529,7 +2529,7 @@ __asm__(
 A_MPI_Request A__MPI_Request_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Request_f2c\n");
+printf("input: A_MPI_Request_f2c\n");
 #endif
 in_w=1;
 A_MPI_Request op_ret;
@@ -2538,7 +2538,7 @@ request_a2r(&op,&op_tmp);
 request_tab_conv_r2a(&op_ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Request_f2c\n");
+printf("output: A_MPI_Request_f2c\n");
 #endif
 return op_ret;
 }
@@ -2547,10 +2547,10 @@ return op_ret;
 R_MPI_Request R__MPI_Request_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Request_f2c\n");
+printf("input: R_MPI_Request_f2c\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Request_f2c\n");
+printf("output: R_MPI_Request_f2c\n");
 #endif
 return op;
 }
@@ -2600,7 +2600,7 @@ __asm__(
 int A__MPI_Request_c2f(A_MPI_Request op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Request_c2f\n");
+printf("input: A_MPI_Request_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -2609,7 +2609,7 @@ request_tab_conv_a2r(&op,&op_tmp);
 request_r2a(&ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Request_c2f\n");
+printf("output: A_MPI_Request_c2f\n");
 #endif
 return ret;
 }
@@ -2618,10 +2618,10 @@ return ret;
 int R__MPI_Request_c2f(R_MPI_Request op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Request_c2f\n");
+printf("input: R_MPI_Request_c2f\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Request_c2f\n");
+printf("output: R_MPI_Request_c2f\n");
 #endif
 return op;
 }
@@ -2671,7 +2671,7 @@ __asm__(
 A_MPI_Datatype A__MPI_Type_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Type_f2c\n");
+printf("input: A_MPI_Type_f2c\n");
 #endif
 in_w=1;
 A_MPI_Datatype op_ret;
@@ -2680,7 +2680,7 @@ datatype_a2r(&op,&op_tmp);
 datatype_conv_r2a(&op_ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Type_f2c\n");
+printf("output: A_MPI_Type_f2c\n");
 #endif
 return op_ret;
 }
@@ -2689,10 +2689,10 @@ return op_ret;
 R_MPI_Datatype R__MPI_Type_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Type_f2c\n");
+printf("input: R_MPI_Type_f2c\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Type_f2c\n");
+printf("output: R_MPI_Type_f2c\n");
 #endif
 return op;
 }
@@ -2742,7 +2742,7 @@ __asm__(
 int A__MPI_Type_c2f(A_MPI_Datatype op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Type_c2f\n");
+printf("input: A_MPI_Type_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -2751,7 +2751,7 @@ datatype_conv_a2r(&op,&op_tmp);
 datatype_r2a(&ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Type_c2f\n");
+printf("output: A_MPI_Type_c2f\n");
 #endif
 return ret;
 }
@@ -2760,10 +2760,10 @@ return ret;
 int R__MPI_Type_c2f(R_MPI_Datatype op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Type_c2f\n");
+printf("input: R_MPI_Type_c2f\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Type_c2f\n");
+printf("output: R_MPI_Type_c2f\n");
 #endif
 return op;
 }
@@ -2813,7 +2813,7 @@ __asm__(
 A_MPI_Comm A__MPI_Comm_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Comm_f2c\n");
+printf("input: A_MPI_Comm_f2c\n");
 #endif
 in_w=1;
 A_MPI_Comm op_ret;
@@ -2822,7 +2822,7 @@ comm_a2r(&op,&op_tmp);
 comm_conv_r2a(&op_ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Comm_f2c\n");
+printf("output: A_MPI_Comm_f2c\n");
 #endif
 return op_ret;
 }
@@ -2831,10 +2831,10 @@ return op_ret;
 R_MPI_Comm R__MPI_Comm_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Comm_f2c\n");
+printf("input: R_MPI_Comm_f2c\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Comm_f2c\n");
+printf("output: R_MPI_Comm_f2c\n");
 #endif
 return op;
 }
@@ -2884,7 +2884,7 @@ __asm__(
 int A__MPI_Comm_c2f(A_MPI_Comm op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Comm_c2f\n");
+printf("input: A_MPI_Comm_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -2893,7 +2893,7 @@ comm_conv_a2r(&op,&op_tmp);
 comm_r2a(&ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Comm_c2f\n");
+printf("output: A_MPI_Comm_c2f\n");
 #endif
 return ret;
 }
@@ -2902,10 +2902,10 @@ return ret;
 int R__MPI_Comm_c2f(R_MPI_Comm op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Comm_c2f\n");
+printf("input: R_MPI_Comm_c2f\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Comm_c2f\n");
+printf("output: R_MPI_Comm_c2f\n");
 #endif
 return op;
 }
@@ -2955,7 +2955,7 @@ __asm__(
 A_MPI_Win A__MPI_Win_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Win_f2c\n");
+printf("input: A_MPI_Win_f2c\n");
 #endif
 in_w=1;
 A_MPI_Win op_ret;
@@ -2964,7 +2964,7 @@ fwin_a2r(&op,&op_tmp);
 win_conv_r2a(&op_ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Win_f2c\n");
+printf("output: A_MPI_Win_f2c\n");
 #endif
 return op_ret;
 }
@@ -2973,10 +2973,10 @@ return op_ret;
 R_MPI_Win R__MPI_Win_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Win_f2c\n");
+printf("input: R_MPI_Win_f2c\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Win_f2c\n");
+printf("output: R_MPI_Win_f2c\n");
 #endif
 return op;
 }
@@ -3026,7 +3026,7 @@ __asm__(
 int A__MPI_Win_c2f(A_MPI_Win op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Win_c2f\n");
+printf("input: A_MPI_Win_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -3035,7 +3035,7 @@ win_conv_a2r(&op,&op_tmp);
 fwin_r2a(&ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Win_c2f\n");
+printf("output: A_MPI_Win_c2f\n");
 #endif
 return ret;
 }
@@ -3044,10 +3044,10 @@ return ret;
 int R__MPI_Win_c2f(R_MPI_Win op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Win_c2f\n");
+printf("input: R_MPI_Win_c2f\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Win_c2f\n");
+printf("output: R_MPI_Win_c2f\n");
 #endif
 return op;
 }
@@ -3097,7 +3097,7 @@ __asm__(
 A_MPI_Message A__MPI_Message_f2c(A_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Message_f2c\n");
+printf("input: A_MPI_Message_f2c\n");
 #endif
 in_w=1;
 A_MPI_Message op_ret;
@@ -3106,7 +3106,7 @@ message_a2r(&op,&op_tmp);
 message_conv_r2a(&op_ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Message_f2c\n");
+printf("output: A_MPI_Message_f2c\n");
 #endif
 return op_ret;
 }
@@ -3115,10 +3115,10 @@ return op_ret;
 R_MPI_Message R__MPI_Message_f2c(R_MPI_Fint op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Message_f2c\n");
+printf("input: R_MPI_Message_f2c\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Message_f2c\n");
+printf("output: R_MPI_Message_f2c\n");
 #endif
 return op;
 }
@@ -3168,7 +3168,7 @@ __asm__(
 int A__MPI_Message_c2f(A_MPI_Message op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Message_c2f\n");
+printf("input: A_MPI_Message_c2f\n");
 #endif
 in_w=1;
 int ret;
@@ -3177,7 +3177,7 @@ message_conv_a2r(&op,&op_tmp);
 message_r2a(&ret,&op_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Message_c2f\n");
+printf("output: A_MPI_Message_c2f\n");
 #endif
 return ret;
 }
@@ -3186,10 +3186,10 @@ return ret;
 int R__MPI_Message_c2f(R_MPI_Message op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Message_c2f\n");
+printf("input: R_MPI_Message_c2f\n");
 #endif
 #ifdef DEBUG
-printf("sort : R_MPI_Message_c2f\n");
+printf("output: R_MPI_Message_c2f\n");
 #endif
 return op;
 }
@@ -3251,7 +3251,7 @@ __asm__(
 int A__MPI_Status_c2f(A_MPI_Status *in, A_MPI_Fint *op)
 { 
 #ifdef DEBUG
-printf("entre : A_MPI_Status_c2f\n");
+printf("input: A_MPI_Status_c2f\n");
 #endif
 in_w=1;
 int tmp[R_f_MPI_STATUS_SIZE];
@@ -3262,18 +3262,18 @@ int ret=LOCAL_MPI_Status_c2f(tmp2,tmp);
 status_r2a(tmp,op);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Status_c2f\n");
+printf("output: A_MPI_Status_c2f\n");
 #endif
 return ret;
 }
 int R__MPI_Status_c2f(R_MPI_Status *in,R_MPI_Fint *op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Status_c2f\n");
+printf("input: R_MPI_Status_c2f\n");
 #endif
 int ret=LOCAL_MPI_Status_c2f(in,op);
 #ifdef DEBUG
-printf("sort : R_MPI_Status_c2f\n");
+printf("output: R_MPI_Status_c2f\n");
 #endif
 return ret;
 }
@@ -3321,7 +3321,7 @@ __asm__(
 int A__MPI_Status_f2c(A_MPI_Fint *in,A_MPI_Status *op)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Status_f2c\n");
+printf("input: A_MPI_Status_f2c\n");
 #endif
 in_w=1;
 int tmp[R_f_MPI_STATUS_SIZE];
@@ -3332,18 +3332,18 @@ int ret=LOCAL_MPI_Status_f2c(tmp,&tmp2);
 status_tab_conv_r2a(op,&tmp2);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Status_f2c\n");
+printf("output: A_MPI_Status_f2c\n");
 #endif
 return ret;
 }
 int R__MPI_Status_f2c(R_MPI_Fint *in,R_MPI_Status *op)
 {
 #ifdef DEBUG
-printf("entre : R_MPI_Status_f2c\n");
+printf("input: R_MPI_Status_f2c\n");
 #endif
 int ret=LOCAL_MPI_Status_f2c(in,op);
 #ifdef DEBUG
-printf("sort : R_MPI_Status_f2c\n");
+printf("output: R_MPI_Status_f2c\n");
 #endif
 return ret;
 }

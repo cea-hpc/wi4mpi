@@ -1,7 +1,7 @@
 
 void A_f_MPI_Keyval_free(int *keyval, int *ret) {
 #ifdef DEBUG
-  printf("entre : A_f_MPI_Keyval_free\n");
+  printf("input: A_f_MPI_Keyval_free\n");
 #endif
   in_w = 1;
   int ret_tmp = 0;
@@ -10,6 +10,6 @@ void A_f_MPI_Keyval_free(int *keyval, int *ret) {
 
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_f_MPI_Keyval_free\n");
+  printf("output: A_f_MPI_Keyval_free\n");
 #endif
 }

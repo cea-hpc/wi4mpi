@@ -17,8 +17,8 @@ int A_MPI_Errhandler_get(A_MPI_Comm comm, A_MPI_Errhandler *errhandler) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Errhandler_get_print)
-    debug_printer("MPI_Errhandler_get : \n{\ncomm : %C,\nerrhandler : "
-                  "%p,\nerror/return : %d\n}\n",
+    debug_printer("MPI_Errhandler_get: \n{\ncomm: %C,\nerrhandler: "
+                  "%p,\nerror/return: %d\n}\n",
                   comm, errhandler, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

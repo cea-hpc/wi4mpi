@@ -1,7 +1,7 @@
 void  A_f_MPI_Pack_external_size(char *datarep, int *count, int *datatype, size_t *size, int *ret, fort_string_length datarep_len)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Pack_external_size\n");
+printf("input: A_f_MPI_Pack_external_size\n");
 #endif
 in_w=1;
 
@@ -13,7 +13,7 @@ datatype_a2r(datatype, &datatype_tmp);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Pack_external_size\n");
+printf("output: A_f_MPI_Pack_external_size\n");
 #endif
 
 }

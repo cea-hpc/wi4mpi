@@ -2,7 +2,7 @@
 int A_MPI_Win_get_attr(A_MPI_Win win, int win_keyval, void *attribute_val,
                        int *flag) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Win_get_attr\n");
+  printf("input: A_MPI_Win_get_attr\n");
 #endif
   in_w = 1;
 
@@ -28,7 +28,7 @@ int A_MPI_Win_get_attr(A_MPI_Win win, int win_keyval, void *attribute_val,
   }
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_MPI_Win_get_attr\n");
+  printf("output: A_MPI_Win_get_attr\n");
 #endif
   return error_code_conv_r2a(ret_tmp);
 }

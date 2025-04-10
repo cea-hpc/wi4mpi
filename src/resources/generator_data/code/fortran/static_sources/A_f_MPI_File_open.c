@@ -1,7 +1,7 @@
 void A_f_MPI_File_open(int* comm, char *filename, int* amode,int* info, int *fh,int *ret, fort_string_length filenamelen)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_File_open\n");
+printf("input: A_f_MPI_File_open\n");
 #endif
 in_w=1;
 
@@ -18,7 +18,7 @@ error_r2a(ret,&ret_tmp);
 //printf("sort: MPI_File_open\n");
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_File_open\n");
+printf("output: A_f_MPI_File_open\n");
 #endif
 
 }

@@ -28,7 +28,7 @@ void A_f_MPI_Pcontrol(int *level,int *ret) {
 
 #ifdef DEBUG
   if (WI4MPI_Pcontrol_print)
-    debug_printer("MPI_Pcontrol : \n{\nerror/return : %*d\n}\n", ret);
+    debug_printer("MPI_Pcontrol: \n{\nerror/return: %*d\n}\n", ret);
 #endif
 #ifdef TIMEOUT_SUPPORT
   wi4mpi_unset_timeout();

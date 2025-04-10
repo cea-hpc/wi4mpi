@@ -33,11 +33,11 @@ void (*INTERFACE_F_LOCAL_MPI_Init)(int *);
 void  IF_MPI_Init(int *ret)
 {
 #ifdef DEBUG
-printf("entre : f_MPI_Init (interface) \n");
+printf("input: f_MPI_Init (interface) \n");
 #endif
 INTERFACE_F_LOCAL_MPI_Init(ret);
 #ifdef DEBUG
-printf("sort : f_MPI_Init (interface) \n");
+printf("output: f_MPI_Init (interface) \n");
 #endif
 }
 void mpi_init_thread_(int *);
@@ -55,11 +55,11 @@ void (*INTERFACE_F_LOCAL_MPI_Init_thread)(int *);
 void  IF_MPI_Init_thread(int *ret)
 {
 #ifdef DEBUG
-printf("entre : f_MPI_Init_thread (interface) \n");
+printf("input: f_MPI_Init_thread (interface) \n");
 #endif
 INTERFACE_F_LOCAL_MPI_Init_thread(ret);
 #ifdef DEBUG
-printf("sort : f_MPI_Init_thread (interface) \n");
+printf("output: f_MPI_Init_thread (interface) \n");
 #endif
 }
 #endif /*MANUAL_WRAPPER_H*/

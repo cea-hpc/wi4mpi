@@ -26,7 +26,7 @@ extern __thread int in_w;
 int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
                   A_MPI_Status *status) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Waitany\n");
+  printf("input: A_MPI_Waitany\n");
 #endif
   in_w = 1;
 
@@ -77,7 +77,7 @@ int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
   wi4mpi_free(array_of_requests_tmp);
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_MPI_Waitany\n");
+  printf("output: A_MPI_Waitany\n");
 #endif
   return error_code_conv_r2a(ret_tmp);
 }
@@ -87,7 +87,7 @@ int A_MPI_Waitany(int count, A_MPI_Request array_of_requests[], int *indx,
 int A_MPI_Waitall(int count, A_MPI_Request array_of_requests[],
                   A_MPI_Status array_of_statuses[]) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Waitall\n");
+  printf("input: A_MPI_Waitall\n");
 #endif
   in_w = 1;
 
@@ -148,7 +148,7 @@ int A_MPI_Waitall(int count, A_MPI_Request array_of_requests[],
   wi4mpi_free(offset_tmp);
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_MPI_Waitall\n");
+  printf("output: A_MPI_Waitall\n");
 #endif
   return error_code_conv_r2a(ret_tmp);
 }
@@ -159,7 +159,7 @@ int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
                    int *outcount, int array_of_indices[],
                    A_MPI_Status array_of_statuses[]) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Waitsome\n");
+  printf("input: A_MPI_Waitsome\n");
 #endif
   in_w = 1;
 
@@ -197,7 +197,7 @@ int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
     wi4mpi_free(array_of_statuses_tmp);
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_MPI_Waitsome\n");
+  printf("output: A_MPI_Waitsome\n");
 #endif
   return error_code_conv_r2a(ret_tmp);
 }
@@ -207,7 +207,7 @@ int A_MPI_Waitsome(int incount, A_MPI_Request array_of_requests[],
 int A_MPI_Testany(int count, A_MPI_Request array_of_requests[], int *indx,
                   int *flag, A_MPI_Status *status) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Testany\n");
+  printf("input: A_MPI_Testany\n");
 #endif
   in_w = 1;
   int i1, test;
@@ -243,7 +243,7 @@ int A_MPI_Testany(int count, A_MPI_Request array_of_requests[], int *indx,
 int A_MPI_Testall(int count, A_MPI_Request array_of_requests[], int *flag,
                   A_MPI_Status array_of_statuses[]) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Testall\n");
+  printf("input: A_MPI_Testall\n");
 #endif
   in_w = 1;
 
@@ -282,7 +282,7 @@ int A_MPI_Testall(int count, A_MPI_Request array_of_requests[], int *flag,
     wi4mpi_free(array_of_statuses_tmp);
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_MPI_Testall\n");
+  printf("output: A_MPI_Testall\n");
 #endif
   return error_code_conv_r2a(ret_tmp);
 }
@@ -293,7 +293,7 @@ int A_MPI_Testsome(int incount, A_MPI_Request array_of_requests[],
                    int *outcount, int array_of_indices[],
                    A_MPI_Status array_of_statuses[]) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Testsome\n");
+  printf("input: A_MPI_Testsome\n");
 #endif
   in_w = 1;
 
@@ -331,7 +331,7 @@ int A_MPI_Testsome(int incount, A_MPI_Request array_of_requests[],
     wi4mpi_free(array_of_statuses_tmp);
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_MPI_Testsome\n");
+  printf("output: A_MPI_Testsome\n");
 #endif
   return error_code_conv_r2a(ret_tmp);
 }

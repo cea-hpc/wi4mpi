@@ -1,7 +1,7 @@
 void  A_f_MPI_File_get_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * ret,fort_string_length datareplen)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_File_get_view\n");
+printf("input: A_f_MPI_File_get_view\n");
 #endif
 in_w=1;
 
@@ -17,7 +17,7 @@ datatype_r2a(filetype,&filetype_tmp);
  error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_File_get_view\n");
+printf("output: A_f_MPI_File_get_view\n");
 #endif
 
 }

@@ -1,7 +1,7 @@
 void  A_f_MPI_Comm_set_name(int * comm,char * comm_name, int *ret, fort_string_length comm_name_len)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Comm_set_name\n");
+printf("input: A_f_MPI_Comm_set_name\n");
 #endif
 in_w=1;
 
@@ -15,7 +15,7 @@ fstring_max_conv_a2r(comm_name, tmp_name, comm_name_len, R_MPI_MAX_OBJECT_NAME-1
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Comm_set_name\n");
+printf("output: A_f_MPI_Comm_set_name\n");
 #endif
 
 }

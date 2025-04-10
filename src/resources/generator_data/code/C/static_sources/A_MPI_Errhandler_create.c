@@ -16,8 +16,8 @@ int A_MPI_Errhandler_create(A_MPI_Handler_function *function,
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Errhandler_create_print)
-    debug_printer("MPI_Errhandler_create : \n{\nfunction : %p,\nerrhandler : "
-                  "%p,\nerror/return : %d\n}\n",
+    debug_printer("MPI_Errhandler_create: \n{\nfunction: %p,\nerrhandler: "
+                  "%p,\nerror/return: %d\n}\n",
                   function, errhandler, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

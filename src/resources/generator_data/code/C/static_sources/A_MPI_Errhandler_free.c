@@ -1,7 +1,7 @@
 int A_MPI_Errhandler_free(A_MPI_Errhandler * errhandler)
 {
 #ifdef DEBUG
-printf("entre : A_MPI_Errhandler_free\n");
+printf("input: A_MPI_Errhandler_free\n");
 #endif
 in_w=1;
 
@@ -15,7 +15,7 @@ errhandler_del(errhandler,errhandler_tmp);
 *errhandler=A_MPI_ERRHANDLER_NULL;
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_MPI_Errhandler_free\n");
+printf("output: A_MPI_Errhandler_free\n");
 #endif
 return error_code_conv_r2a(ret_tmp);
 }

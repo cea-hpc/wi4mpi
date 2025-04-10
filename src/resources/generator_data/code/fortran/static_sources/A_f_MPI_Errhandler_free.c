@@ -19,7 +19,7 @@ void A_f_MPI_Errhandler_free(int *errhandler, int *ret) {
 #ifdef DEBUG
   if (WI4MPI_Errhandler_free_print)
     debug_printer(
-        "MPI_Errhandler_free : \n{\nerrhandler : %*d,\nerror/return : %*d\n}\n",
+        "MPI_Errhandler_free: \n{\nerrhandler: %*d,\nerror/return: %*d\n}\n",
         errhandler, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

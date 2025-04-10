@@ -55,7 +55,7 @@ case $progname in
         COMPILER_LANG=Fortran
         WI4MPI_FLAGS=${WI4MPI_FCFLAGS}
         # Check if an Intel family compiler is used. If so, add its specific headers, else use GNU ones
-        # Reason : 'intel' headers features Fortran 2008 characteristics,
+        # Reason: 'intel' headers features Fortran 2008 characteristics,
         # that are not handled by GCC (up to 6.x) or PGI compilers.
         if [ `basename $COMPILER` == 'ifort' ]; then
             WI4MPI_FLAGS="-I${WI4MPI_ROOT}/include/intel $WI4MPI_FLAGS"
@@ -93,7 +93,7 @@ Option:
     -wi4mpi_static              Use this option to link the MPI Library statically.
                                 This option does not affect the default linkage method for other libraries.
     -wi4mpi_default_run_path    Set a default MPI conversion for the user application.
-                                Accepted values :
+                                Accepted values:
                                   - OMPI
                                   - INTEL
                                   - MPICH

@@ -18,8 +18,8 @@ A_MPI_Aint A__MPI_Aint_diff(A_MPI_Aint addr1, A_MPI_Aint addr2) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Aint_diff_print)
-    debug_printer("MPI_Aint_diff :\n{\naddr1 : %ld,\naddr2 : "
-                  "%ld,\nerror/return : %ld\n}\n",
+    debug_printer("MPI_Aint_diff:\n{\naddr1: %ld,\naddr2: "
+                  "%ld,\nerror/return: %ld\n}\n",
                   addr1, addr2, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

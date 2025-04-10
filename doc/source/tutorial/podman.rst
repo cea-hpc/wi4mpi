@@ -136,7 +136,7 @@ a similar output:
 
 .. code-block:: bash
 
-   You are using Wi4MPI-3.6.0 with the mode preload From MPICH To OMPI
+   You are using Wi4MPI-4.0.0 in the preload mode from MPICH to OMPI
    # OSU MPI Bandwidth Test v5.6.2
    # Size      Bandwidth (MB/s)
    1                       6.50
@@ -243,7 +243,7 @@ The goal is to propagate the host environment variables into the container's env
 
 .. code-block:: bash
 
-   You are using Wi4MPI-3.6.0 with the mode preload From OMPI To MPICH
+   You are using Wi4MPI-4.0.0 in the preload mode from OMPI to MPICH
    # OSU MPI Bandwidth Test v5.6.2
    # Size      Bandwidth (MB/s)
    1                       2.60
@@ -369,7 +369,7 @@ a similar output:
 
 .. code-block:: bash
 
-   You are using Wi4MPI-3.6.4 with the mode interface From Interface To MPICH
+   You are using Wi4MPI-4.0.0 in the  interface mode from Interface to MPICH
    # OSU MPI Bandwidth Test v5.6.2
    # Size      Bandwidth (MB/s)
    1                       2.49
@@ -399,7 +399,7 @@ With the above configuration, expect an output similar to:
 
 .. code-block:: bash
 
-   You are using Wi4MPI-3.6.4 with the mode interface From Interface To OMPI
+   You are using Wi4MPI-4.0.0 in the interface mode from Interface to OMPI
    # OSU MPI Bandwidth Test v5.6.2
    # Size      Bandwidth (MB/s)
    1                       3.66

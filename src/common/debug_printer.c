@@ -31,11 +31,11 @@ void _MPI_Type_get_name(int *datatype, char *type_name, int *resultlen,
 
 #define print_named(elt, name_function, print_str)                             \
   name_function(elt, cname, &namelen);                                         \
-  eprintf("{ value: " #print_str ",name :%s}", elt, cname);
+  eprintf("{ value: " #print_str ",name: %s}", elt, cname);
 #define print_named_f(elt, name_function, print_str)                           \
   name_function(&elt, cname, &namelen, &err, 2048);                             \
   cname[namelen] = '\0';                                                       \
-  eprintf("{ value: " #print_str ",name :%s}", elt, cname);
+  eprintf("{ value: " #print_str ",name: %s}", elt, cname);
 
 #define print_type(type, printf_string)                                        \
   if (nb_elt == 0)                                                             \
@@ -247,12 +247,12 @@ __attribute__((constructor)) void init_debug(void) {
     WI4MPI_debug_max_array_elt = strtol(tmp, NULL, 10);
 }
 void print_status(A_MPI_Status stat) {
-  eprintf("{ source :%d, tag : %d ,error :%d}", stat.A_MPI_SOURCE,
+  eprintf("{ source: %d, tag: %d ,error: %d}", stat.A_MPI_SOURCE,
           stat.A_MPI_TAG, stat.A_MPI_ERROR);
 }
 
 void print_status_f(int *stat) {
 
-  eprintf("{ source :%d, tag : %d ,error :%d}", stat[A_f_MPI_SOURCE],
+  eprintf("{ source: %d, tag: %d ,error: %d}", stat[A_f_MPI_SOURCE],
           stat[A_f_MPI_TAG], stat[A_f_MPI_ERROR]);
 }

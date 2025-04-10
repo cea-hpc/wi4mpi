@@ -4,7 +4,7 @@ int A_MPI_Comm_create_keyval(A_MPI_Comm_copy_attr_function *copy_fn,
                              int *keyval, void *extra_state) {
   in_w = 1;
 #ifdef DEBUG
-  printf("entre : A_MPI_Comm_create_keyval\n");
+  printf("input: A_MPI_Comm_create_keyval\n");
 #endif
   myKeyval_functions_t *functions = NULL;
   R_MPI_Copy_function *copy_fn_tmp;
@@ -30,7 +30,7 @@ int A_MPI_Comm_create_keyval(A_MPI_Comm_copy_attr_function *copy_fn,
   functions->del_function = delete_fn;
   myKeyval_translation_add(*keyval, functions);
 #ifdef DEBUG
-  printf("sort : A_MPI_Comm_create_keyval\n");
+  printf("output: A_MPI_Comm_create_keyval\n");
 #endif
   in_w = 0;
   return error_code_conv_r2a(ret_tmp);

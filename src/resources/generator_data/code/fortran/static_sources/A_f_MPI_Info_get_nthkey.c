@@ -1,7 +1,7 @@
 void  A_f_MPI_Info_get_nthkey(int * info,int * n,char * key,int * ret,fort_string_length keylen)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Info_get_nthkey\n");
+printf("input: A_f_MPI_Info_get_nthkey\n");
 #endif
 in_w=1;
 
@@ -16,7 +16,7 @@ info_a2r(info,&info_tmp);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Info_get_nthkey\n");
+printf("output: A_f_MPI_Info_get_nthkey\n");
 #endif
 
 }

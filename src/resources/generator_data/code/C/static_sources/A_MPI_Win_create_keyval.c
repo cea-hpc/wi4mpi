@@ -23,8 +23,8 @@ int A_MPI_Win_create_keyval(A_MPI_Win_copy_attr_function *win_copy_attr_fn,
 #ifdef DEBUG
   if (WI4MPI_Win_create_keyval_print)
     debug_printer(
-        "MPI_Win_create_keyval : \n{\nwin_copy_attr_fn : %p,\nwin_keyval : "
-        "%*d,\nextra_state : %p,\nerror/return : %d\n}\n",
+        "MPI_Win_create_keyval: \n{\nwin_copy_attr_fn: %p,\nwin_keyval: "
+        "%*d,\nextra_state: %p,\nerror/return: %d\n}\n",
         win_copy_attr_fn, win_keyval, extra_state, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

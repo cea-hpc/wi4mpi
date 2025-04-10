@@ -1,7 +1,7 @@
 void  A_f_MPI_File_set_view(int * fh,int* disp,int * etype,int * filetype,char *datarep,int * info,int * ret,fort_string_length datareplen)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_File_set_view\n");
+printf("input: A_f_MPI_File_set_view\n");
 #endif
 in_w=1;
 
@@ -19,7 +19,7 @@ fstring_max_conv_a2r(datarep, tmp_name, datareplen, R_MPI_MAX_DATAREP_STRING-1, 
  error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_File_set_view\n");
+printf("output: A_f_MPI_File_set_view\n");
 #endif
 
 }

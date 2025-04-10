@@ -60,7 +60,7 @@ int req_size;
 int *counter_##varname=NULL;\
 int *p_##varname;\
 int varname##_size;
-#define stat_string_builder(type,varname) wi4mpi leaked :%d \n /* ## type :%d \n*/
+#define stat_string_builder(type,varname) wi4mpi leaked:%d \n /* ## type: %d \n*/
 #define str(x) strh(x)
 #define strh(x) #x
 #define stat_string_printer_inter(type,varname,string) printf(str(string), varname##_size-(p_##varname-counter_##varname+1))
@@ -86,7 +86,7 @@ __attribute__((destructor))
 void wi4mpi_debug_finalize(void)
 {
     printf("wi4mpi leaked temporary %ld byte \n",__wi4mpi__temporary__allocated__size);
-    printf("wi4mpi leaked requests : %d requests not waited, not tested (non bloquing request) or released (presistent request)\n",req_size-(p_req-counter_request+1));
+    printf("wi4mpi leaked requests: %d requests not waited, not tested (non bloquing request) or released (presistent request)\n",req_size-(p_req-counter_request+1));
 stat_string_printer(MPI_Type,datatype);
 
 /* Errhandler */

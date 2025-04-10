@@ -1,7 +1,7 @@
 get_filename_component(C_COMPILER_NAME ${CMAKE_C_COMPILER} NAME)
 get_filename_component(CXX_COMPILER_NAME ${CMAKE_CXX_COMPILER} NAME)
 get_filename_component(FC_COMPILER_NAME ${CMAKE_Fortran_COMPILER} NAME)
-message(STATUS "Project compiler C/C++ : ${C_COMPILER_NAME}/${CXX_COMPILER_NAME} && Fortran: ${FC_COMPILER_NAME}")
+message(STATUS "Project compiler C/C++: ${C_COMPILER_NAME}/${CXX_COMPILER_NAME} && Fortran: ${FC_COMPILER_NAME}")
 
 #Sources list
 #------------

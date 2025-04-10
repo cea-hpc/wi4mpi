@@ -11,7 +11,7 @@ int A_MPIX_Query_cuda_support() {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPIX_Query_cuda_support_print)
-    debug_printer("MPIX_Query_cuda_support : \n{\nerror/return : %lf\n}\n",
+    debug_printer("MPIX_Query_cuda_support: \n{\nerror/return: %lf\n}\n",
                   ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

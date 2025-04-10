@@ -88,15 +88,15 @@
   R_MPI_Comm_rank(R_MPI_COMM_WORLD, &wi4mpi_rank);
   if (wi4mpi_rank == 0)
     fprintf(
-        stdout, "You are using Wi4MPI-%s with the mode preload From %s To %s\n",
+        stdout, "You are using Wi4MPI-%s in the preload mode from %s to %s\n",
         getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
     {%- endif -%}
     in_w=0;
-    {# le code de construction des parametre dans debug_printer est faux mais laissé tel quel tant que la refonte du générateur est pas finie pour ne pas modifier le code généré: on tient compte d'arg_dep dans les argments à afficher mais pas dans le code de construction de la string de contrôle #}
+    {# the code used in debug_printer to build parameters is wrong but lets as it is while the work on the generator is not done, to avoid modifing the generated code: we take into account arg_dep in the arguments to print but not in the control string construction code #}
     #ifdef DEBUG
         if (WI4{{func['name']}}_print)
             debug_printer(
-                "{{func['name']}} :\n{\n{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var']|replace('[]','') }} : {{mappers[arg['name']]['debug_type']}},\n{%- endif-%} {%- endfor%}error/return : {{mappers[func['ret']['name']]['debug_type']}}\n}\n",{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var'].split('[')|first}},{%- endif -%}  {%- endfor -%}ret);
+                "{{func['name']}}:\n{\n{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var']|replace('[]','') }}: {{mappers[arg['name']]['debug_type']}},\n{%- endif-%} {%- endfor%}error/return: {{mappers[func['ret']['name']]['debug_type']}}\n}\n",{%-  for arg in func['args']-%} {%-  if mappers[arg['name']]['debug_type'] is defined-%} {{arg['var'].split('[')|first}},{%- endif -%}  {%- endfor -%}ret);
     #endif
     #ifdef TIMEOUT_SUPPORT
         wi4mpi_unset_timeout();

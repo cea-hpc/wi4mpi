@@ -17,7 +17,7 @@ def validate_json(schema_path, file_path):
         with open(schema_path, 'r') as schema_file:
             schema = json.load(schema_file)
     except Exception as e:
-        print(f"Error while loading the JSON schema : {e}")
+        print(f"Error while loading the JSON schema: {e}")
         sys.exit(1)
         return
 
@@ -26,7 +26,7 @@ def validate_json(schema_path, file_path):
         with open(file_path, 'r') as json_file:
             data = json.load(json_file)
     except Exception as e:
-        print(f"Error while loading the JSON file : {e}")
+        print(f"Error while loading the JSON file: {e}")
         sys.exit(1)
         return
 
@@ -35,10 +35,10 @@ def validate_json(schema_path, file_path):
         validate(instance=data, schema=schema)
         print(f"The JSON file '{file_path}' is compliant with the schema '{schema_path}'.")
     except ValidationError as e:
-        print(f"Validation failed : {e.message}")
+        print(f"Validation failed: {e.message}")
         sys.exit(1)
     except Exception as e:
-        print(f"Unknown error : {e}")
+        print(f"Unknown error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":

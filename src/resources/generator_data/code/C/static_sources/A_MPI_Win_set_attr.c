@@ -1,7 +1,7 @@
 );
 int A_MPI_Win_set_attr(A_MPI_Win win, int win_keyval, void *attribute_val) {
 #ifdef DEBUG
-  printf("entre : A_MPI_Win_set_attr\n");
+  printf("input: A_MPI_Win_set_attr\n");
 #endif
   in_w = 1;
 
@@ -27,7 +27,7 @@ int A_MPI_Win_set_attr(A_MPI_Win win, int win_keyval, void *attribute_val) {
   win_conv_r2a(&win, &win_tmp);
   in_w = 0;
 #ifdef DEBUG
-  printf("sort : A_MPI_Win_set_attr\n");
+  printf("output: A_MPI_Win_set_attr\n");
 #endif
   return error_code_conv_r2a(ret_tmp);
 }

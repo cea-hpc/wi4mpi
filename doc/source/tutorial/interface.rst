@@ -171,7 +171,7 @@ If the translation works, you should have this kind of output:
 
 .. code-block:: bash
 
-    You are using Wi4MPI-3.6.4 with the mode interface From Interface To OMPI
+    You are using Wi4MPI-4.0.0 in the interface mode from Interface to OMPI
     # OSU MPI Hello World Test v7.0
     This is a test with 4 processes
 
@@ -202,7 +202,7 @@ If the translation works, you should have this kind of output:
 
 .. code-block:: bash
 
-    You are using Wi4MPI-3.6.4 with the mode interface From Interface To MPICH
+    You are using Wi4MPI-4.0.0 in the interface mode from Interface to MPICH
     # OSU MPI Hello World Test v7.0
     This is a test with 4 processes
 

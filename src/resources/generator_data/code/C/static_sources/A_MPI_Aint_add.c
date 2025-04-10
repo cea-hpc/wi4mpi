@@ -19,7 +19,7 @@ A_MPI_Aint A__MPI_Aint_add(A_MPI_Aint base, A_MPI_Aint disp) {
 #ifdef DEBUG
   if (WI4MPI_Aint_add_print)
     debug_printer(
-        "MPI_Aint_add :\n{\nbase : %ld,\ndisp : %ld,\nerror/return : %ld\n}\n",
+        "MPI_Aint_add:\n{\nbase: %ld,\ndisp: %ld,\nerror/return: %ld\n}\n",
         base, disp, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

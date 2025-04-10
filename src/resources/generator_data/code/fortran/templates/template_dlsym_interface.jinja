@@ -36,7 +36,7 @@ else
 }
 if(!interface_handle_f)
 {
-	printf("Dlopen failed to open WI4MPI librarie.\nerror :%s\n",dlerror());
+	printf("Dlopen failed to open WI4MPI library.\nerror: %s\n",dlerror());
 	exit(1);
 }
 {% for func in funcs %} 

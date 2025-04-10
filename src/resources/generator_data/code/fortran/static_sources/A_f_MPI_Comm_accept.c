@@ -1,7 +1,7 @@
 void A_f_MPI_Comm_accept(char *port_name, int *info, int *root, int *comm,
                          int *newcomm, int *ret, fort_string_length port_name_len) {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Comm_accept\n");
+printf("input: A_f_MPI_Comm_accept\n");
 #endif
   in_w = 1;
   int ret_tmp = 0;
@@ -23,7 +23,7 @@ printf("entre : A_f_MPI_Comm_accept\n");
 
   in_w = 0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Comm_accept\n");
+printf("output: A_f_MPI_Comm_accept\n");
 #endif
 }
 

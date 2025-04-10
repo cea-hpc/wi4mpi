@@ -1,7 +1,7 @@
 void  A_f_MPI_Info_get_valuelen(int * info,char * key,int * valuelen,int * flag,int * ret,fort_string_length keylen)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Info_get_valuelen\n");
+printf("input: A_f_MPI_Info_get_valuelen\n");
 #endif
 in_w=1;
 
@@ -15,7 +15,7 @@ fstring_max_conv_a2r(key, key_tmp, keylen, R_MPI_MAX_INFO_KEY-1, true);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Info_get_valuelen\n");
+printf("output: A_f_MPI_Info_get_valuelen\n");
 #endif
 
 }

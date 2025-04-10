@@ -1,7 +1,7 @@
 void  A_f_MPI_File_delete(char * filename,int * info,int * ret,fort_string_length filenamelen)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_File_delete\n");
+printf("input: A_f_MPI_File_delete\n");
 #endif
 in_w=1;
 
@@ -13,7 +13,7 @@ info_a2r(info,&info_tmp);
  error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_File_delete\n");
+printf("output: A_f_MPI_File_delete\n");
 #endif
 
 }

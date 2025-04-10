@@ -1,7 +1,7 @@
 void  A_f_MPI_Pack_external(char *datarep, void *inbuf, int *count, int *datatype, void *outbuf, size_t *outsize, size_t *position, int *ret, fort_string_length datarep_len)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Pack_external\n");
+printf("input: A_f_MPI_Pack_external\n");
 #endif
 in_w=1;
 
@@ -13,7 +13,7 @@ datatype_a2r(datatype, &datatype_tmp);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Pack_external\n");
+printf("output: A_f_MPI_Pack_external\n");
 #endif
 
 }

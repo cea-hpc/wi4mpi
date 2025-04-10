@@ -22,8 +22,8 @@ void A_f_MPI_Keyval_create(void *copy_fn, void *delete_fn, int *keyval,
 #ifdef DEBUG
   if (WI4MPI_Keyval_create_print)
     debug_printer(
-        "MPI_Keyval_create : \n{\ncopy_fn : %p,\ndelete_fn : %p,\nkeyval : "
-        "%*d,\nextra_state : %p,\nerror/return : %*d\n}\n",
+        "MPI_Keyval_create: \n{\ncopy_fn: %p,\ndelete_fn: %p,\nkeyval: "
+        "%*d,\nextra_state: %p,\nerror/return: %*d\n}\n",
         copy_fn, delete_fn, keyval, extra_state, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

@@ -15,7 +15,7 @@ void A_f_MPI_Info_free(int *info, int *ret) {
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Info_free_print)
-    debug_printer("MPI_Info_free : \n{\ninfo : %*d,\nerror/return : %*d\n}\n",
+    debug_printer("MPI_Info_free: \n{\ninfo: %*d,\nerror/return: %*d\n}\n",
                   info, ret);
 #endif
 #ifdef TIMEOUT_SUPPORT

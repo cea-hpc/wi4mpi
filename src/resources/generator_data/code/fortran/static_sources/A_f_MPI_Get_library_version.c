@@ -1,7 +1,7 @@
 void  A_f_MPI_Get_library_version(char * version, int *resultlen, int *ret, fort_string_length version_len)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Get_library_version\n");
+printf("input: A_f_MPI_Get_library_version\n");
 #endif
 in_w=1;
 
@@ -17,7 +17,7 @@ error_r2a(ret,&ret_tmp);
 
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Get_library_version\n");
+printf("output: A_f_MPI_Get_library_version\n");
 #endif
 
 }

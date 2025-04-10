@@ -159,7 +159,7 @@ If the translation works, you should have this kind of output:
 
 .. code-block:: bash
 
-    You are using Wi4MPI-3.6.4 with the mode preload From MPICH To OMPI
+    You are using Wi4MPI-4.0.0 in the preload mode from MPICH to OMPI
     # OSU MPI Hello World Test v7.0
     This is a test with 4 processes
 
@@ -192,7 +192,7 @@ If the translation works, you should have this kind of output:
 
 .. code-block:: bash
 
-    You are using Wi4MPI-3.6.4 with the mode preload From OMPI To MPICH
+    You are using Wi4MPI-4.0.0 in the preload mode from OMPI to MPICH
     # OSU MPI Hello World Test v7.0
     This is a test with 4 processes
 

@@ -21,17 +21,17 @@
  * and user functions for MPI_Op.
  * For each entry in these hashtables, key is
  * application side MPI structure corresponding
- * to the function (e.g. : A_MPI_Op for user operation
+ * to the function (e.g.: A_MPI_Op for user operation
  * function) and value is the corresponding function
  * pointer.
  *
  * name##_fn_translation_get
- * Args :
- *   keytype key : Application corresponding structure
+ * Args:
+ *   keytype key: Application corresponding structure
  *   (input)
- *   valuetype* value : Corresponding user function
+ *   valuetype* value: Corresponding user function
  *   (output)
- * Return : void
+ * Return: void
  * This function will search key in the hashtable and
  * set value to the corresponding value. An assert is
  * made if key is not found.
@@ -39,23 +39,23 @@
  * wrapper function is made.
  *
  * name##_fn_translation_update
- * Args :
- *   keytype key : Application corresponding structure
+ * Args:
+ *   keytype key: Application corresponding structure
  *   (input)
- *   valuetype value : Corresponding user function
+ *   valuetype value: Corresponding user function
  *   (input)
- * Return : void
+ * Return: void
  * This function will update the entry specified by
  * key argument. If no entry exists for this argument,
  * a new entry is created.
  * This function should be called when user specifies
- * a user function (e.g. : MPI_Op_create)
+ * a user function (e.g.: MPI_Op_create)
  *
  * name##_fn_translation_del
- * Args :
- *   keytype key : Application corresponding structure
+ * Args:
+ *   keytype key: Application corresponding structure
  *   (input)
- * Return : void
+ * Return: void
  * This function will delete entry specified by key.
  *
  * name##_fn_free_all

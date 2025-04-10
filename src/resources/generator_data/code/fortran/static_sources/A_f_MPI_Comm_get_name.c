@@ -1,7 +1,7 @@
 void  A_f_MPI_Comm_get_name(int * comm,char * comm_name, int *resultlen, int *ret, fort_string_length comm_name_len)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Comm_get_name\n");
+printf("input: A_f_MPI_Comm_get_name\n");
 #endif
 in_w=1;
 
@@ -19,7 +19,7 @@ length_max_conv_r2a(resultlen, &resultlen_tmp, A_MPI_MAX_OBJECT_NAME, R_MPI_MAX_
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Comm_get_name\n");
+printf("output: A_f_MPI_Comm_get_name\n");
 #endif
 
 }

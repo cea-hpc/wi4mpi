@@ -68,7 +68,7 @@ Example usage:
 
 .. code-block:: console
 
-    You are using Wi4MPI-3.3.0a with the mode interface From Interface To OpenMPI-2.0.4
+    You are using Wi4MPI-4.0.0 in the interface mode from Interface to OpenMPI-2.0.4
 
     MPI_Init :
     {

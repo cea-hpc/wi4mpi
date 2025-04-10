@@ -1,7 +1,7 @@
 void  A_f_MPI_Comm_spawn(char *command, char *argv, int *maxprocs, int *info, int *root, int *comm, int *intercomm, int *array_of_errcodes, int *ret,size_t command_len, fort_string_length argv_len)
 {
 #ifdef DEBUG
-printf("entre : A_f_MPI_Comm_spawn\n");
+printf("input: A_f_MPI_Comm_spawn\n");
 #endif
 in_w=1;
 
@@ -20,7 +20,7 @@ comm_r2a(intercomm,&intercomm_tmp);
 error_r2a(ret,&ret_tmp);
 in_w=0;
 #ifdef DEBUG
-printf("sort : A_f_MPI_Comm_spawn\n");
+printf("output: A_f_MPI_Comm_spawn\n");
 #endif
 
 }
