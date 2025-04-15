@@ -108,7 +108,7 @@ endif()
 
 #Define the compiling option according to the chosen release
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "RelWithDebInfo")
+    set(CMAKE_BUILD_TYPE "Release")
 endif()
 if(CMAKE_BUILD_TYPE MATCHES RelWithDebInfo)
     set(WI4MPI_DEBUG ON)
