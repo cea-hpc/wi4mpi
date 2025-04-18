@@ -58,3 +58,9 @@ does not fully support ``MPIX_`` functions**; this support is provided on a case
 At momment, **MPIX_Query_cuda_support** is supported. The support of other functions will
 be evaluated on demand.
 
+MPI norm support and consequences
+=================================
+
+Wi4MPI supports MPI 3.1 at the moment. This means that functions introduced in later versions are not supported.
+
+It also has an impact on the supported MPICH versions, in particular with Fortran: `f2c/f2c` functions implementation requirements changed in MPI 4.1 and this creates incompatibilities with MPICH 4.x or higher. Since MPICH versions are ABI compatible, a reasonable workaround is to generate sources for MPICH/3.x -- that is what is done at the moment.

@@ -51,7 +51,7 @@ option(WI4MPI_TIMEOUT "Activate timeout")
 option(WI4MPI_GENERATOR "Enable sources generation (headers and code)" OFF)
 set(WI4MPI_GENERATOR_OPENMPI_VERSION "4.1.6" CACHE STRING "Open MPI version")
 set(WI4MPI_GENERATOR_INTELMPI_VERSION "20.0.0" CACHE STRING "Intel MPI version")
-set(WI4MPI_GENERATOR_MPICH_VERSION "4.2.0" CACHE STRING "MPICH version")
+set(WI4MPI_GENERATOR_MPICH_VERSION "3.4.3" CACHE STRING "MPICH version")
 set(WI4MPI_GENERATOR_MPI_NORM "3.1" CACHE STRING "MPI norm version")
 
 #The Rpath Strikes Back
