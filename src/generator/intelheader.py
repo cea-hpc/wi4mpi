@@ -143,6 +143,26 @@ int * R_MPI_WEIGHTS_EMPTY;
         text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
 
         _pattern_block = """
+extern int * const R_MPI_UNWEIGHTED MPICH_API_PUBLIC;
+extern int * const R_MPI_WEIGHTS_EMPTY MPICH_API_PUBLIC;
+"""
+        _replacement_block = """
+int * R_MPI_UNWEIGHTED;
+int * R_MPI_WEIGHTS_EMPTY;
+"""
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+
+        _pattern_block = """
+extern int * R_MPI_UNWEIGHTED MPICH_API_PUBLIC;
+extern int * R_MPI_WEIGHTS_EMPTY MPICH_API_PUBLIC;
+"""
+        _replacement_block = """
+int * R_MPI_UNWEIGHTED;
+int * R_MPI_WEIGHTS_EMPTY;
+"""
+        text = re.sub(re.escape(_pattern_block), _replacement_block, text, flags=re.DOTALL)
+
+        _pattern_block = """
 /* See 4.12.5 for R_MPI_F_STATUS(ES)_IGNORE */
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUS_IGNORE MPICH_API_PUBLIC;
 extern MPIU_DLL_SPEC R_MPI_Fint * R_MPI_F_STATUSES_IGNORE MPICH_API_PUBLIC;
