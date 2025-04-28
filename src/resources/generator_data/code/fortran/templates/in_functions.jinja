@@ -52,7 +52,9 @@
         {%  if map['no_map']|default("") == "" -%}
         {%- if 'status_size' in map -%}
             {%- if 'arg_dep' in arg and arg['arg_dep'] != '' -%}
-                wi4mpi_free({{var}}_tmp);
+                if ({{var}} != A_f_MPI_STATUSES_IGNORE) {
+                    wi4mpi_free({{var}}_tmp);
+                }
             {%- endif -%}
         {%- else -%}
             {%- if 'arg_dep' in arg and arg['arg_dep']!='' -%}
