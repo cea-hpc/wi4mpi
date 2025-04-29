@@ -28,10 +28,10 @@ Check the full documentation here: https://wi4mpi.readthedocs.io/en/latest/
 Two modes are provided:
 
 Preload, for dynamic conversion:
-![alt tag](doc/img/Preload.png)
+![alt tag](doc/img/preload.png)
 
 Interface, for building an universal MPI code:
-![alt tag](doc/img/Interface.png)
+![alt tag](doc/img/interface.png)
 
 ## Installation
 
