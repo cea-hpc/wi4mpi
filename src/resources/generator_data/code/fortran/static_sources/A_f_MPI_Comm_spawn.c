@@ -1,4 +1,4 @@
-void  A_f_MPI_Comm_spawn(char *command, char *argv, int *maxprocs, int *info, int *root, int *comm, int *intercomm, int *array_of_errcodes, int *ret,size_t command_len, fort_string_length argv_len)
+void  A_f_MPI_Comm_spawn(char *command, char *argv, int *maxprocs, int *info, int *root, int *comm, int *intercomm, int *array_of_errcodes, int *ret, fort_string_length command_len, fort_string_length argv_len)
 {
 #ifdef DEBUG
 printf("input: A_f_MPI_Comm_spawn\n");
