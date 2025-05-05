@@ -2,7 +2,7 @@ Installation
 ============
 
 The installation process consists of a standard CMake build and installation sequence.
-The release archive contains pre-generated code to simplify the build process.
+The release archive contains pre-generated code (`wi4mpi-x.y.z.tar.gz` archive, containing the generated code in `build/`) to simplify the build process. By default, the build process expects this generated sources to be there (`WI4MPI_GENERATOR` is set to `OFF`).
 
 .. code-block:: bash
 
@@ -47,14 +47,14 @@ The following CMake variables can be used to configure the build:
 
   Specifies the Open MPI header version used during code generation.
   
-  **Default:** `1.8.8`
+  **Default:** `4.1.6`
   **Supported versions:** `1.8.8`, `2.1.6`, `4.1.6`, `5.0.3`
 
 - **WI4MPI_GENERATOR_MPICH_VERSION** (*string*)
 
   Specifies the MPICH header version used during code generation.
 
-  **Default:** `3.1.2`
+  **Default:** `3.4.3`
   **Supported versions:** `3.1.2`, `3.4.3`, `4.2.0`
 
 - **WI4MPI_GENERATOR_INTELMPI_VERSION** (*string*)

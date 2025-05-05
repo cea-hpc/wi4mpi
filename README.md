@@ -39,7 +39,9 @@ Interface, for building an universal MPI code:
 
 * **GNU/Linux OS**
 * **Mandatory**: C and Fortran compilers
-* **Optionnal**: Python3 and Jinja2
+* **Optional**: Python 3 and Jinja 2
+
+Python 3 is mandatory if you need to generate Wi4MPI code. As specified in the [generator requirements](src/generator/requirements.txt), it depends on `logging`, `colorlog` & `docopts` Python packages.
 
 ### Spack
 
@@ -53,7 +55,8 @@ Check the WI4MPI Spack tutorial here: [Installalling Wi4MPI using Spack](https:/
 
 ### Compiling with CMAKE
 
-Here is a quick introduction to WI4MPI compiling, please check the full documentation to see other options.
+Here is a quick introduction to compile WI4MPI with pre-generated sources (using `wi4mpi-x.y.z.tar.gz` archive 
+provided with releases, starting with Wi4MPI 4.0):
 
 ```
 $ cd build
@@ -61,6 +64,8 @@ $ cmake -DCMAKE_INSTALL_PREFIX=/path-install/wi4mpi-%version ..
 $ make -j 16
 $ make install
 ```
+
+For more details (and in particular if you need to regenerate the sources) please check the full documentation.
 
 ### Documentation
 
