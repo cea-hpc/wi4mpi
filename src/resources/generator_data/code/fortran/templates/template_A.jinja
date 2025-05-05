@@ -78,14 +78,6 @@
     wi4mpi_set_timeout(WI4{{func['name']}}_timeout);
     #endif
     in_w=1;
-    {%- if func['name'] == 'MPI_Init' or func['name'] == 'MPI_Init_thread' -%}
-  int wi4mpi_rank;
-  R_MPI_Comm_rank(R_MPI_COMM_WORLD, &wi4mpi_rank);
-  if (wi4mpi_rank == 0)
-    fprintf(
-        stdout, "You are using Wi4MPI-%s in the preload mode from %s to %s\n",
-        getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
-    {%- endif -%}
     {% if func['heading']|default("") != "" %}
         {{func['heading']}}
     {% endif %}

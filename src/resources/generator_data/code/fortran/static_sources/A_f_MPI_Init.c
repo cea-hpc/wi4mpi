@@ -29,9 +29,15 @@ void A_f_MPI_Init(int *ret) {
   int wi4mpi_rank;
   R_MPI_Comm_rank(R_MPI_COMM_WORLD, &wi4mpi_rank);
   if (wi4mpi_rank == 0)
+#if  defined(_MPC) || defined(_OMPI) || defined(_INTEL)
+    fprintf(
+        stdout, "You are using Wi4MPI-%s in the interface mode to %s\n",
+        getenv("WI4MPI_VERSION"), getenv("WI4MPI_TO"));
+#else
     fprintf(
         stdout, "You are using Wi4MPI-%s in the preload mode from %s to %s\n",
         getenv("WI4MPI_VERSION"), getenv("WI4MPI_FROM"), getenv("WI4MPI_TO"));
+#endif
   in_w = 0;
 #ifdef DEBUG
   if (WI4MPI_Init_print)
