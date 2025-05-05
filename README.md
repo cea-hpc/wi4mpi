@@ -88,7 +88,7 @@ Run `mpirun` wrapper command:
 ```
 $ mpirun -np 4 -F openmpi -T intelmpi ./mpi_hello.exe
 
-You are using Wi4MPI-%version with the mode preload From OMPI To INTEL
+You are using Wi4MPI-%version in preload mode from OMPI to INTEL
 
 Hello_world 0
 Hello_world 2
