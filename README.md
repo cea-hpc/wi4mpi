@@ -23,7 +23,9 @@ portability and performance across various HPC environments.
 With WI4MPI, achieve seamless interoperability, optimized performance, and simplified management of MPI
 applications across diverse computing environments.
 
-Check the full documentation here: https://wi4mpi.readthedocs.io/en/latest/
+Check the [full documentation](https://wi4mpi.readthedocs.io/en/latest/) to know more about the project.
+
+**New!** Join us on [Slack](https://wi4mpi.slack.com) to discuss with the team!
 
 Two modes are provided:
 
