@@ -22,10 +22,6 @@ following roles defined:
 * Marc Joos (@marc-joos)
 * Adrien Cotte (@adrien-cotte)
 
-.. note::
-   Wi4MPI project is currently looking for additional Maintainers.
-
-
 ## Collaborators
 
 *Collaborators* are irregular contributors to Wi4MPI. They are
